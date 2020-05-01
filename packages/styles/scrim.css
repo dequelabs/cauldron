@@ -1,0 +1,36 @@
+.dqpl-scrim {
+  background-color: var(--scrim);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  display: none;
+  z-index: var(--z-index-scrim);
+  transition: opacity 300ms;
+}
+
+.dqpl-scrim-light {
+  background-color: rgba(255, 255, 255, 0.75);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  display: none;
+  z-index: var(--z-index-scrim);
+  transition: opacity 300ms;
+  z-index: var(--z-index-scrim-action-needed);
+}
+.dqpl-scrim.dqpl-scrim-show,
+.dqpl-scrim-light.dqpl-scrim-show {
+  display: block;
+}
+
+.dqpl-scrim.dqpl-scrim-fade-in,
+.dqpl-scrim-light.dqpl-scrim-fade-in {
+  opacity: 1;
+  transition: opacity 300ms;
+}

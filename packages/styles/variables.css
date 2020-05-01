@@ -1,0 +1,118 @@
+:root {
+  /* background colours */
+  --top-bar-bg: #283640;
+  --top-bar-bg-active: #0b0e11;
+  --top-bar-bg-active-scrim: rgba(11, 14, 17, 0.9);
+  --workspace-bg: #fdfdfe;
+  --tile-bg: #ffffff;
+  --bg-light: #e6e6e6;
+  --scrim: rgba(0, 0, 0, 0.5);
+  --top-bar-divider: #5a6268;
+  --bg-light-grey: #f2f2f2;
+
+  /* text colours */
+  --text-base: #666666;
+  --header-dark: #333333;
+  --header: #4d4d4d;
+  --disabled: #cccccc;
+  --link: #3c7aae;
+  --link-light: rgba(60, 122, 174, 0.1);
+  --error: #d93251;
+  --top-bar-text: #d4dde0;
+  --text-light: #ffffff;
+  --text-light-disabled: rgba(255, 255, 255, 0.5);
+
+  /* fields */
+  --field-bg: #ffffff;
+  --field-border: #cccccc;
+  --field-hover-border: #b3b3b3;
+  --field-focus-border: #3c7aae;
+  --field-error-border: #d93251;
+  --field-error-hover-border: #b6223d;
+  --field-disabled: #f2f2f2;
+
+  /* buttons */
+  --button-primary: #3c7aae;
+  --button-secondary: #f2f2f2;
+  --button-text-dark: #5a6268;
+  --button-text-light: #ffffff;
+  --button-text-disabled: #cccccc;
+
+  /* tables */
+  --table-text: #4d4d4d;
+  --table-header: #f2f2f2;
+  --table-selected: --link;
+  --table-hover: #ffffff;
+  --table-hover-link: #283640;
+
+  /* accents */
+  --focus: #d71ef7;
+  --focus-active: rgba(215, 30, 247, 0.25);
+  --focus-glow: rgba(193, 27, 222, 0.75);
+  --metric-accent-low: #f7846c;
+  --metric-accent-mid: #8ba6c5;
+  --metric-accent-full: #a5db75;
+  --top-bar-accent-primary: #6cdaf2;
+  --top-bar-accent-warning: #ffdd75;
+  --top-bar-accent-error: #fe6d6b;
+  --top-bar-accent-success: #62e86b;
+  --top-bar-accent-warning-other: #f7846c;
+
+  /* spacing (padding/margin) */
+  --space-smallest: 8px;
+  --space-small: 16px;
+  --space-medium: 18px;
+  --space-large: 24px;
+  --space-largest: 29px;
+  --space-half: 4px;
+  --space-three-quarters: 6px;
+  --space-quarter: 2px;
+  --space-large-with-underborder: 18px 24px;
+  --space-gutter: 40px;
+
+  /* text size */
+  --text-largest: 112px;
+  --text-larger: 56px;
+  --text-large: 45px;
+  --text-large-medium: 34px;
+  --text-medium: 24px;
+  --text-small-medium: 20px;
+  --text-normal: 18px;
+  --text-small: 15px;
+  --text-smaller: 13px;
+  --text-smallest: 12px;
+
+  /* font weight */
+  --weight-thin: 100;
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-ultra-bold: 900;
+
+  /* specfic dimensions */
+  --top-bar-height: 50px;
+  --menu-width: 257px;
+  --input-min-width: 250px;
+  --border-width: 6px;
+  --layout-padding: 9px;
+  --content-max-width: 1000px;
+
+  /* z-index */
+  --z-index-tooltip: 9;
+  --z-index-scrim: 7;
+  --z-index-modal: 21;
+  --z-index-modal-scrim: 20;
+  --z-index-scrim-action-needed: 23;
+  --z-index-side-bar: 9;
+  --z-index-toast: 8;
+  --z-index-toast-action-needed: 24;
+  --z-index-listbox: 6;
+  /* ensure this is a higher value than the rest (above)! */
+  --z-index-top-bar: 25;
+  /* ensure this is 1 higher than the top bar z-index */
+  --z-index-skip-container: 26;
+
+  /* list */
+  --list-separator: rgba(153, 153, 153, 0.15);
+}

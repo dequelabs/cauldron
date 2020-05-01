@@ -1,0 +1,56 @@
+.dqpl-tooltip {
+  width: 145px;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border: 1px solid #999999;
+  border-radius: 2px;
+  font-size: var(--text-smallest);
+  position: absolute;
+  display: none;
+  background: var(--button-secondary);
+  padding: var(--space-smallest);
+  bottom: 45px;
+  right: -28px;
+  z-index: var(--z-index-tooltip);
+  pointer-events: none;
+}
+
+.dqpl-tooltip:after {
+  position: absolute;
+  bottom: -14px;
+  right: 32px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15.6px 9px 0 9px;
+  border-color: var(--button-secondary) transparent transparent transparent;
+}
+
+.dqpl-tooltip:before {
+  position: absolute;
+  bottom: -16px;
+  right: 32px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15.6px 9px 0 9px;
+  border-color: var(--header) transparent transparent transparent;
+}
+
+.dqpl-tooltip.dqpl-tip-active {
+  display: block;
+}
+
+.dqpl-definition-button-wrap .dqpl-tooltip {
+  bottom: 30px;
+  right: 50%;
+  margin-right: -72.5px;
+}
+
+.dqpl-definition-button-wrap .dqpl-tooltip:before,
+.dqpl-definition-button-wrap .dqpl-tooltip:after {
+  right: 50%;
+  margin-right: -9px;
+}

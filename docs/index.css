@@ -1,0 +1,18 @@
+.dqpl-top-bar li a {
+  font-weight: 100;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+}
+
+code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+/* adjust ftpo positioning for demo layout */
+.dqpl-pointer-wrap:not(.dqpl-ftpo-auto) {
+  position: relative;
+}

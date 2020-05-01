@@ -1,0 +1,96 @@
+.dqpl-tile {
+  box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.39);
+  max-width: 476px;
+}
+
+.dqpl-tile .dqpl-row {
+  align-items: center;
+}
+
+.dqpl-tile .dqpl-tile-header {
+  color: var(--tile-bg);
+  background-color: var(--top-bar-bg);
+  padding: var(--space-three-quarters) var(--space-three-quarters)
+    var(--space-three-quarters) var(--space-large);
+}
+
+.dqpl-tile .dqpl-tile-header h2,
+.dqpl-tile .dqpl-tile-header h3,
+.dqpl-tile .dqpl-tile-header h4,
+.dqpl-tile .dqpl-tile-header h5,
+.dqpl-tile .dqpl-tile-header h6 {
+  font-size: var(--text-small-medium);
+  font-weight: var(--weight-light);
+  color: var(--tile-bg);
+  margin: 0;
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-options-menu-wrap {
+  margin-left: auto;
+}
+
+.dqpl-tile
+  .dqpl-tile-header
+  .dqpl-options-menu-wrap
+  .dqpl-options-menu-trigger {
+  background: var(--top-bar-bg);
+  color: var(--tile-bg);
+  border: none;
+  height: auto;
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-label {
+  font-size: var(--text-smaller);
+  font-weight: var(--weight-light);
+  color: var(--tile-bg);
+  margin-left: 0;
+  margin-bottom: 0;
+  padding: 0 0 5px 0;
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox {
+  width: auto;
+  background: transparent;
+  font-size: var(--text-smaller);
+  color: var(--tile-bg);
+  border: none;
+  margin: 0 0 0 2px;
+  padding: 0 16px 5px 4px;
+  height: auto;
+  cursor: default;
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox:focus {
+  box-shadow: none;
+  outline: 2px solid var(--focus);
+  outline-offset: var(--space-quarter);
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox .dqpl-pseudo-value {
+  font-size: var(--text-smaller);
+  min-height: 18px;
+  font-weight: var(--weight-normal);
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox:after {
+  top: -1px;
+  right: 1px;
+  color: var(--tile-bg);
+}
+
+.dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-listbox {
+  color: var(--text-base);
+}
+
+.dqpl-tile .dqpl-tile-content ul {
+  box-sizing: border-box;
+}
+
+.dqpl-tile .dqpl-tile-content ul li {
+  border-bottom: 1px solid var(--list-separator);
+}
+
+.dqpl-tile .dqpl-tile-footer {
+  padding: var(--space-small);
+  text-align: center;
+}

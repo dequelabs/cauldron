@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "lib": ["es6", "dom", "ES2017"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "typeRoots": ["node_modules/@types"],
+    "jsx": "react",
+    "declaration": true
+  },
+  "exclude": ["node_modules"]
+}

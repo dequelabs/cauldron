@@ -1,0 +1,12 @@
+.select-demo .select-demo-button.dqpl-button-secondary {
+  margin: 5px 0;
+}
+
+/*
+  TODO peel this back when this gets resolved
+  https://github.com/dequelabs/pattern-library/issues/59
+ */
+.select-demo [role='textbox'],
+.select-demo [role='textbox']:hover {
+  border: 0;
+}

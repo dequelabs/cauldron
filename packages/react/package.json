@@ -1,0 +1,72 @@
+{
+  "name": "cauldron-react",
+  "version": "0.0.1",
+  "description": "Fully accessible react components library for Deque Cauldron",
+  "main": "lib/index.js",
+  "style": "lib/cauldron.css",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "npm run build:types && npm run build:lib && npm run build:css",
+    "build:lib": "babel --out-dir=lib src --extensions '.ts,.tsx'",
+    "build:css": "postcss --output=lib/cauldron.css src/index.css",
+    "build:types": "tsc --emitDeclarationOnly --outDir lib && mv lib/src/* lib && rmdir lib/src",
+    "dev": "npm-run-all dev:*",
+    "dev:css": "npm run build:css -- --watch",
+    "dev:lib": "npm run build:lib -- --dev",
+    "prepublishOnly": "NODE_ENV=production npm run build",
+    "test": "jest --maxWorkers=1 --coverage",
+    "test:ts": "tsc --noEmit"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "focus-trap-react": "^3.0.5",
+    "focusable": "^2.3.0",
+    "keyname": "^0.1.0",
+    "prop-types": "^15.6.0",
+    "rc-tooltip": "^3.7.2",
+    "react-syntax-highlighter": "^6.1.1",
+    "unique-string": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "typescript": "^3.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dequelabs/cauldron-react.git"
+  },
+  "peerDependencies": {
+    "react": "^16.6.0"
+  },
+  "nyc": {
+    "checkCoverage": true,
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "statements": 85,
+    "branches": 78,
+    "functions": 85,
+    "lines": 85,
+    "exclude": [
+      "dist",
+      "coverage",
+      "test/**/*.js"
+    ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>__tests__/setupTests.js"
+    ],
+    "testMatch": [
+      "**/__tests__/src/**/*.js",
+      "**/__tests__/demo/**/*.js"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.tsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js"
+    }
+  }
+}
