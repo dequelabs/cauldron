@@ -83,11 +83,12 @@
     ]
   },
   "scripts": {
-    "build": "yarn build && webpack --bail",
-    "dev": "yarn dev & webpack-dev-server",
+    "build": "lerna run build && webpack --bail",
+    "dev": "lerna run dev & webpack-dev-server",
     "fmt": "prettier --write 'docs/**/*.{css,js}' 'packages/rect/**/*.{js,ts,tsx}' *.{js,json,md,ts}",
     "lint": "eslint .",
     "postbuild:demo": "cp docs/_redirects docs/dist/",
-    "test": "npm run --prefix=packages/react test"
+    "test": "npm run --prefix=packages/react test",
+    "postinstall": "lerna bootstrap"
   }
 }
