@@ -16,7 +16,6 @@ jobs:
             - v1-react-yarn-
       - run: NODE_ENV=production yarn --cwd=packages/react build
       - run: yarn --cwd=packages/react test
-      - run: yarn --cwd=packages/react test:ts
   styles:
     <<: *defaults
     steps:
