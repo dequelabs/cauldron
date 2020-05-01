@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "deque cauldron pattern library styles",
   "repository": "https://github.com/dequelabs/cauldron",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MPL-2.0",
   "devDependencies": {
     "autoprefixer": "^9.7.6",
@@ -13,6 +16,7 @@
   "style": "dist/index.css",
   "scripts": {
     "build": "postcss index.css --dir ./dist",
-    "dev": "npm run build -- --watch"
+    "dev": "npm run build -- --watch",
+    "prepublishOnly": "NODE_ENV=production yarn build"
   }
 }

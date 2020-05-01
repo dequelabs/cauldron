@@ -5,6 +5,9 @@ defaults: &defaults
     - image: circleci/node:10
   working_directory: ~/cauldron
 
+set_npm_auth: &set_npm_auth
+  run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+
 jobs:
   react:
     <<: *defaults
@@ -62,6 +65,30 @@ jobs:
       - restore_cache:
           key: v1-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
+  # Release a "canary" version
+  canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *set_npm_auth
+      - restore_cache:
+          keys:
+            - v1-yarn-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-cache-
+      - restore_cache:
+          keys:
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
+      - restore_cache:
+          keys:
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
+      - run: npx lerna publish \
+          --skip-git \
+          --canary \
+          --preid next \
+          --pre-dist-tag next \
+          --yes
 
 workflows:
   version: 2

@@ -2,6 +2,9 @@
   "name": "@deque/cauldron-react",
   "version": "0.0.1",
   "description": "Fully accessible react components library for Deque Cauldron",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/index.js",
   "style": "lib/cauldron.css",
   "types": "lib/index.d.ts",
