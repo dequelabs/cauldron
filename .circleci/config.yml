@@ -86,8 +86,8 @@ jobs:
       - run: npx lerna publish \
           --skip-git \
           --canary \
-          --preid next \
-          --pre-dist-tag next \
+          --preid=next \
+          --pre-dist-tag=next \
           --yes
 
 workflows:
