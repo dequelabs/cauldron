@@ -1,5 +1,5 @@
 {
-  "name": "cauldron-react",
+  "name": "@deque/cauldron-react",
   "version": "0.0.1",
   "description": "Fully accessible react components library for Deque Cauldron",
   "main": "lib/index.js",
