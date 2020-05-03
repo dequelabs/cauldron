@@ -19,19 +19,19 @@ export default class Demo extends Component {
 
     return (
       <div>
-        <h1>{'Alert'}</h1>
-        <h2>{'Demo'}</h2>
-        <Button onClick={this.toggleSimpleAlert}>{'Simple Alert'}</Button>
+        <h1>Alert</h1>
+        <h2>Demo</h2>
+        <Button onClick={this.toggleSimpleAlert}>Simple Alert</Button>
         <Alert onClose={this.toggleSimpleAlert} show={showSimpleAlert}>
-          {'Simple dismissable alert'}
+          Simple dismissable alert
           <AlertActions>
-            <Button onClick={this.toggleSimpleAlert}>{'Ok'}</Button>
+            <Button onClick={this.toggleSimpleAlert}>Ok</Button>
             <Button secondary={true} onClick={this.toggleSimpleAlert}>
-              {'Cancel'}
+              Cancel
             </Button>
           </AlertActions>
         </Alert>
-        <h2>{'Code Sample'}</h2>
+        <h2>Code Sample</h2>
         <Code langauge="javascript">
           {`
 import React, { Component } from 'react';
