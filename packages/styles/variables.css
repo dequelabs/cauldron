@@ -111,7 +111,7 @@
   /* ensure this is a higher value than the rest (above)! */
   --z-index-top-bar: 25;
   /* ensure this is 1 higher than the top bar z-index */
-  --z-index-skip-container: 26;
+  --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
 
   /* list */
   --list-separator: rgba(153, 153, 153, 0.15);

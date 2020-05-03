@@ -6,12 +6,12 @@
   padding: var(--space-quarter);
 }
 
-.dqpl-link&:hover {
+.dqpl-link:hover {
   text-decoration: underline;
   color: var(--link);
 }
 
-.dqpl-link&:focus {
+.dqpl-link:focus {
   text-decoration: underline;
   outline-offset: 0;
 }

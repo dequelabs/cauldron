@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body.dqpl-modal-open {
+  overflow: hidden;
+}
+
 .dqpl-modal.dqpl-dialog-show {
   display: block;
 }
@@ -29,30 +33,30 @@
   border-top-right-radius: 3px;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h1,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h2,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h3,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h4,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h5,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h6,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header .dqpl-close,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header .dqpl-header-item {
+.dqpl-modal-header h1,
+.dqpl-modal-header h2,
+.dqpl-modal-header h3,
+.dqpl-modal-header h4,
+.dqpl-modal-header h5,
+.dqpl-modal-header h6,
+.dqpl-modal-header .dqpl-close,
+.dqpl-modal-header .dqpl-header-item {
   border-bottom: 4px solid transparent;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h1:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h2:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h3:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h4:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h5:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h6:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header .dqpl-close:focus,
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header .dqpl-header-item:focus {
+.dqpl-modal-header h1:focus,
+.dqpl-modal-header h2:focus,
+.dqpl-modal-header h3:focus,
+.dqpl-modal-header h4:focus,
+.dqpl-modal-header h5:focus,
+.dqpl-modal-header h6:focus,
+.dqpl-modal-header .dqpl-close:focus,
+.dqpl-modal-header .dqpl-header-item:focus {
   outline: 0;
   border-bottom: 4px solid var(--text-base);
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header h2 {
+.dqpl-modal-header h2 {
   font-size: var(--text-normal);
   color: var(--text-base);
   font-weight: var(--weight-normal);
@@ -61,7 +65,7 @@
   border-bottom: 4px solid transparent;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-header .dqpl-close {
+.dqpl-modal-header .dqpl-close {
   background-color: transparent;
   color: var(--text-base);
   font-size: var(--text-normal);
@@ -71,24 +75,24 @@
   height: 100%;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-content {
+.dqpl-modal .dqpl-content {
   padding: 0 var(--space-large) 0 var(--space-large);
   margin-bottom: 60px;
   overflow-y: auto;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-content .dqpl-text-input,
-.dqpl-modal .dqpl-dialog-inner .dqpl-content .dqpl-textarea {
+.dqpl-modal .dqpl-content .dqpl-text-input,
+.dqpl-modal .dqpl-content .dqpl-textarea {
   width: 100%;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-content h3 {
+.dqpl-modal .dqpl-content h3 {
   font-weight: var(--weight-light);
   margin: var(--space-large) 0 12px 0;
   padding: 0;
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-footer {
+.dqpl-modal-footer {
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -101,7 +105,7 @@
   background: var(--tile-bg);
 }
 
-.dqpl-modal .dqpl-dialog-inner .dqpl-modal-footer button {
+.dqpl-modal-footer button {
   margin: 0 var(--space-small) 0 0;
 }
 
