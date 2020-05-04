@@ -45,6 +45,9 @@
   --table-hover: #ffffff;
   --table-hover-link: #283640;
 
+  /* tooltips */
+  --tooltip-border: #999999;
+
   /* accents */
   --focus: #d71ef7;
   --focus-active: rgba(215, 30, 247, 0.25);
