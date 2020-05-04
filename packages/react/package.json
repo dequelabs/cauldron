@@ -10,7 +10,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "yarn build:lib && yarn build:css",
-    "build:lib": "tsc --outDir lib",
+    "build:lib": "tsc",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "dev": "npm-run-all dev:*",
     "dev:css": "yarn build:css -- --watch",
