@@ -1,0 +1,25 @@
+.dqpl-link {
+  text-decoration: none;
+  color: var(--link);
+  font-weight: var(--weight-medium);
+  display: inline-block;
+  padding: var(--space-quarter);
+}
+
+.dqpl-link:hover {
+  text-decoration: underline;
+  color: var(--link);
+}
+
+.dqpl-link:focus {
+  text-decoration: underline;
+  outline-offset: 0;
+}
+
+p .dqpl-link {
+  margin: 0 2px;
+  display: inline;
+  text-decoration: underline;
+  color: var(--header-dark);
+  font-weight: var(--weight-normal);
+}

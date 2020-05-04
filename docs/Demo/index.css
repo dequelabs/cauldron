@@ -1,0 +1,25 @@
+.Demo pre {
+  max-width: 600px;
+  padding: 15px;
+}
+
+.Demo-props table {
+  border-collapse: collapse;
+  border: 1px solid;
+  margin: 10px 0;
+}
+
+.Demo-props table td,
+.Demo-props table th {
+  border: 1px solid;
+  padding: 15px;
+  text-align: left;
+}
+
+.Demo-props tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.Demo-props tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

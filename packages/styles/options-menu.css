@@ -1,0 +1,68 @@
+.dqpl-options-menu-wrap {
+  position: relative;
+  width: 34px;
+  color: var(--text-base);
+}
+
+.dqpl-options-menu-wrap .dqpl-options-menu-trigger {
+  font-size: var(--text-small-medium);
+  color: var(--header-dark);
+  border-radius: 3px;
+  background-color: var(--tile-bg);
+  border: 1px solid var(--field-border);
+  box-sizing: border-box;
+  height: 34px;
+  width: 34px;
+  text-align: center;
+}
+
+.dqpl-options-menu-wrap .dqpl-options-menu {
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--tile-bg);
+  top: 33px;
+  right: 0;
+  left: auto;
+  border: 1px solid var(--field-border);
+  z-index: var(--z-index-listbox);
+  min-width: 150px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.dqpl-options-menu-wrap .dqpl-options-menu[aria-expanded='true'] {
+  display: block;
+}
+
+.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem {
+  font-size: var(--text-small);
+  font-weight: var(--weight-normal);
+  padding: 2px var(--space-smallest);
+  cursor: default;
+}
+
+.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:hover,
+.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:focus {
+  background-color: var(--link-light);
+  outline: 0;
+}
+
+.dqpl-options-menu-wrap
+  .dqpl-options-menu
+  .dqpl-options-menuitem[aria-disabled='true'] {
+  color: var(--disabled);
+}
+
+.dqpl-options-menu-wrap
+  .dqpl-options-menu
+  .dqpl-options-menuitem[aria-disabled='true']:hover {
+  background-color: transparent;
+}
+
+.dqpl-options-menu-wrap.dqpl-align-left .dqpl-options-menu {
+  left: 0;
+  right: auto;
+}

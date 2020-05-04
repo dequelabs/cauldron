@@ -1,0 +1,19 @@
+.dqpl-radio-wrap input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  top: 8px;
+  left: 8px;
+}
+
+.dqpl-radio-wrap .dqpl-overlay-radio.dqpl-radio-focused {
+  border: 1px solid #d71ef7;
+}
+
+.dqpl-overlay-radio.fa-dot-circle-o {
+  color: #3c7aae;
+}
+
+.dqpl-overlay-radio.dqpl-radio-disabled.fa-dot-circle-o,
+.dqpl-overlay-radio.dqpl-radio-disabled.fa-circle-o {
+  color: #ccc;
+}

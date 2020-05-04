@@ -1,0 +1,189 @@
+.dqpl-button-primary,
+.dqpl-button-secondary,
+.dqpl-button-clear,
+.dqpl-button-error {
+  min-width: 110px;
+  border-radius: 18px;
+  border: none;
+  padding: var(--space-smallest);
+  font-size: var(--text-small);
+  box-sizing: border-box;
+  padding: var(--space-smallest) var(--space-medium);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  height: 36px;
+  text-transform: uppercase;
+}
+
+.dqpl-button-primary:before,
+.dqpl-button-secondary:before,
+.dqpl-button-clear:before,
+.dqpl-button-error:before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: -4px 0 transparent;
+  top: 3px;
+  left: 8px;
+}
+
+.dqpl-button-primary:after,
+.dqpl-button-secondary:after,
+.dqpl-button-clear:after,
+.dqpl-button-error:after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 4px 0 transparent;
+  top: 3px;
+  right: 8px;
+}
+
+.dqpl-button-primary:hover,
+.dqpl-button-secondary:hover,
+.dqpl-button-clear:hover,
+.dqpl-button-error:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.dqpl-button-primary:focus,
+.dqpl-button-secondary:focus,
+.dqpl-button-clear:focus,
+.dqpl-button-error:focus {
+  outline: 0;
+}
+
+.dqpl-button-primary:active,
+.dqpl-button-secondary:active,
+.dqpl-button-clear:active,
+.dqpl-button-error:active {
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.dqpl-button-primary {
+  background-color: var(--button-primary);
+  color: var(--button-text-light);
+}
+
+.dqpl-button-primary.dqpl-disabled,
+.dqpl-button-primary[aria-disabled='true'],
+.dqpl-button-primary[disabled] {
+  color: var(--text-light-disabled);
+}
+
+.dqpl-button-primary:focus:after {
+  box-shadow: 4px 0 var(--text-light);
+}
+
+.dqpl-button-primary:focus:before {
+  box-shadow: -4px 0 var(--text-light);
+}
+
+.dqpl-button-secondary {
+  background-color: var(--button-secondary);
+  color: var(--button-text-dark);
+}
+
+.dqpl-button-secondary.dqpl-disabled,
+.dqpl-button-secondary[aria-disabled='true'],
+.dqpl-button-secondary[disabled] {
+  color: var(--disabled);
+}
+
+.dqpl-button-secondary:focus:after {
+  box-shadow: 4px 0 var(--button-text-dark);
+}
+
+.dqpl-button-secondary:focus:before {
+  box-shadow: -4px 0 var(--button-text-dark);
+}
+
+.dqpl-button-error {
+  background-color: var(--error);
+  box-shadow: none;
+  color: var(--button-text-light);
+}
+
+.dqpl-button-error.dqpl-disabled,
+.dqpl-button-error[aria-disabled='true'],
+.dqpl-button-error[disabled] {
+  color: var(--text-light-disabled);
+}
+
+.dqpl-button-error:hover {
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.dqpl-button-error:focus {
+  outline: 0;
+}
+
+.dqpl-button-error:active {
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.dqpl-button-error:focus:after {
+  box-shadow: 4px 0 var(--text-light);
+}
+
+.dqpl-button-error:focus:before {
+  box-shadow: -4px 0 var(--text-light);
+}
+
+.dqpl-button-clear {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.dqpl-button-clear:hover {
+  background-color: var(--button-secondary);
+  box-shadow: none;
+}
+
+.dqpl-button-clear:focus {
+  background-color: var(--button-secondary);
+}
+
+.dqpl-button-clear:focus:after {
+  box-shadow: 4px 0 var(--button-text-dark);
+}
+
+.dqpl-button-clear:focus:before {
+  box-shadow: -4px 0 var(--button-text-dark);
+}
+
+.dqpl-buttons-inline {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+
+.dqpl-buttons-inline button {
+  margin: 0 0 0 10px;
+}
+
+.dqpl-definition-button-wrap {
+  display: inline;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.dqpl-button-definition {
+  background-color: transparent;
+  color: var(--text-base);
+  font-weight: var(--weight-normal);
+  border-bottom: 1px dotted;
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0;
+  font-size: inherit;
+  vertical-align: baseline;
+  cursor: auto;
+  user-select: text;
+}

@@ -1,0 +1,78 @@
+.dqpl-pointer-wrap {
+  display: inline-block;
+}
+
+/* TODO: this should probably live in pattern-library */
+.dqpl-focus-active {
+  outline: #d71ef7 solid 2px;
+  outline-offset: 2px;
+}
+
+/* TODO: this should probably live in pattern-library */
+.dqpl-content-focus-active:before {
+  background: #283640;
+}
+
+.dqpl-ftpo-auto[class*='top-'] {
+  margin-top: 42px;
+}
+
+.dqpl-ftpo-auto[class*='bottom-'] {
+  margin-top: -44px;
+}
+
+.dqpl-ftpo-auto[class*='left-'] {
+  margin-left: 44px;
+}
+
+.dqpl-ftpo-auto[class*='right-'] {
+  margin-left: -44px;
+}
+
+.dqpl-ftpo-auto.top-left {
+  transform: translateX(-5px);
+}
+
+.dqpl-ftpo-auto.top-middle {
+  transform: translateX(-50%) translateX(2px);
+}
+
+.dqpl-ftpo-auto.top-right {
+  transform: translateX(-100%) translateX(5px);
+}
+
+.dqpl-ftpo-auto.left-top {
+  transform: translateY(-5px);
+}
+
+.dqpl-ftpo-auto.left-middle {
+  transform: translateY(-50%) translateY(-2px);
+}
+
+.dqpl-ftpo-auto.left-bottom {
+  transform: translateY(-100%) translateY(5px);
+}
+
+.dqpl-ftpo-auto.bottom-left {
+  transform: translateY(-100%) translateX(-5px);
+}
+
+.dqpl-ftpo-auto.bottom-middle {
+  transform: translateY(-100%) translateX(-50%) translateX(-2px);
+}
+
+.dqpl-ftpo-auto.bottom-right {
+  transform: translateY(-100%) translateX(-100%) translateX(5px);
+}
+
+.dqpl-ftpo-auto.right-top {
+  transform: translateX(-100%) translateY(-5px);
+}
+
+.dqpl-ftpo-auto.right-middle {
+  transform: translateX(-100%) translateY(-50%) translateY(2px);
+}
+
+.dqpl-ftpo-auto.right-bottom {
+  transform: translateX(-100%) translateY(-100%) translateY(5px);
+}

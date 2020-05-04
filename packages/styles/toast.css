@@ -1,0 +1,72 @@
+.dqpl-toast {
+  top: var(--top-bar-height);
+  position: fixed;
+  color: var(--top-bar-bg-active);
+  font-size: var(--text-small);
+  z-index: var(--z-index-toast);
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  padding: 7.5px 15px;
+  right: 0;
+  left: 0;
+}
+
+.dqpl-toast.dqpl-toast-success {
+  background-color: rgba(209, 255, 164, 0.95);
+}
+
+.dqpl-toast.dqpl-toast-warning {
+  background-color: rgba(255, 230, 159, 0.95);
+}
+
+.dqpl-toast.dqpl-toast-error {
+  background-color: rgba(255, 161, 161, 0.95);
+  z-index: var(--z-index-toast-action-needed);
+}
+
+.dqpl-toast .dqpl-toast-dismiss {
+  background: transparent;
+  border: 0;
+}
+
+.dqpl-toast .dqpl-toast-dismiss:focus {
+  outline: 2px solid;
+}
+
+.dqpl-toast .dqpl-toast-message {
+  margin: 0 auto;
+}
+
+.dqpl-toast .dqpl-toast-message:before {
+  font-family: 'FontAwesome';
+  content: '\f0da';
+  margin: 0 2px;
+  display: inline-block;
+  color: transparent;
+  margin-right: var(--space-smallest);
+}
+
+.dqpl-toast .dqpl-toast-message .fa {
+  margin-right: 3px;
+}
+
+.dqpl-toast .dqpl-toast-message .dqpl-link {
+  color: var(--top-bar-bg-active);
+  font-size: var(--text-small);
+  font-weight: var(--weight-light);
+  text-decoration: underline;
+}
+
+.dqpl-toast .dqpl-toast-message .dqpl-link:focus {
+  outline: 2px solid;
+  outline-offset: var(--space-quarter);
+}
+
+.dqpl-toast:focus {
+  outline: 0;
+}
+
+.dqpl-toast:focus .dqpl-toast-message:before {
+  color: var(--top-bar-bg-active);
+}

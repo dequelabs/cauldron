@@ -1,0 +1,6 @@
+dist
+node_modules
+coverage
+packages/react/lib
+.DS_Store
+yarn-error.log

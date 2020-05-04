@@ -1,0 +1,49 @@
+body {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-base);
+  margin: 0;
+  padding: 0;
+  background-color: var(--workspace-bg);
+  font-size: var(--text-small);
+}
+
+:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: var(--space-quarter);
+}
+
+h1 {
+  margin: 0;
+  padding: 18px 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+[role='button'] {
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  box-sizing: border-box;
+  border: 0;
+}
+
+a {
+  color: var(--link);
+  font-weight: var(--weight-medium);
+}
+
+p {
+  line-height: 1.618;
+}

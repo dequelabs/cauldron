@@ -1,0 +1,140 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:10
+  working_directory: ~/cauldron
+
+set_npm_auth: &set_npm_auth
+  run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+
+jobs:
+  react:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
+      - run: NODE_ENV=production yarn --cwd=packages/react build
+      - run: yarn --cwd=packages/react test
+  styles:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
+      - run: npx lerna bootstrap
+      - run: NODE_ENV=production yarn --cwd=packages/styles build
+  dependencies:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-yarn-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-cache-
+      - restore_cache:
+          keys:
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
+      - restore_cache:
+          keys:
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
+      - run: yarn
+      - save_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - save_cache:
+          paths:
+            - packages/react/node_modules
+          key: v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+      - save_cache:
+          paths:
+            - packages/styles/node_modules
+          key: v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+  checks:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: yarn lint
+  canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *set_npm_auth
+      - restore_cache:
+          keys:
+            - v1-yarn-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-cache-
+      - restore_cache:
+          keys:
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
+      - restore_cache:
+          keys:
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
+      - run: npx lerna publish prepatch \
+              --no-git-tag-version \
+              --force-publish='*' \
+              --skip-git \
+              --preid=next \
+              --pre-dist-tag=next \
+              --yes
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *set_npm_auth
+      - restore_cache:
+          keys:
+            - v1-yarn-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-cache-
+      - restore_cache:
+          keys:
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
+      - restore_cache:
+          keys:
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
+      - run: npx lerna publish --force-publish='*' --yes
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - dependencies
+      - checks:
+          requires:
+            - dependencies
+      - react:
+          requires:
+            - dependencies
+            - checks
+      - styles:
+          requires:
+            - dependencies
+            - checks
+      - canary_release:
+          requires:
+            - react
+            - styles
+          filters:
+            branches:
+              only: develop
+      - canary_release:
+          requires:
+            - react
+            - styles
+          filters:
+            branches:
+              only: master

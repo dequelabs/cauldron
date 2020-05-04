@@ -1,0 +1,57 @@
+.dqpl-loader {
+  font-size: 10px;
+  margin: 50px auto;
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  background: #666;
+  background: linear-gradient(to right, #666 10%, rgba(255, 255, 255, 0) 42%);
+  transform: translateZ(0);
+  position: relative;
+  animation: load 1.4s linear infinite;
+}
+
+.dqpl-loader:before {
+  width: 50%;
+  height: 50%;
+  background: #666;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+
+.dqpl-loader:after {
+  background: var(--workspace-bg);
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@-webkit-keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

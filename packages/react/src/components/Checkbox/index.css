@@ -1,0 +1,19 @@
+.dqpl-checkbox-wrap input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  top: 8px;
+  left: 8px;
+}
+
+.dqpl-checkbox-wrap .dqpl-overlay-checkbox.dqpl-checkbox-focused {
+  border: 1px solid #d71ef7;
+}
+
+.dqpl-overlay-checkbox.fa-check-square {
+  color: #3c7aae;
+}
+
+.dqpl-overlay-checkbox.dqpl-checkbox-disabled.fa-square-o,
+.dqpl-overlay-checkbox.dqpl-checkbox-disabled.fa-check-square {
+  color: #ccc;
+}
