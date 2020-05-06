@@ -18,7 +18,7 @@ test('properly handles viewport resize', () => {
   const wrapper = mountWrapper();
   wrapper.setState({ wide: false });
   // TODO: make this less fragile by mocking the isWide function
-  wrapper.instance().onResize();
+  wrapper.instance().handleResize();
   expect(wrapper.state('wide')).toBe(true);
 });
 

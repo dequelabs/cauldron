@@ -19,15 +19,15 @@ test('renders', () => {
 });
 
 test('supports falsy children', () => {
-  expect.assertions(1);
-  expect(
-    shallow(
-      <TopBar>
-        <div />
-        {false && <div />}
-      </TopBar>
-    )
-  ).toBeTruthy();
+  expect.assertions(2);
+  const wrapper = shallow(
+    <TopBar>
+      <div />
+      {false && <div />}
+    </TopBar>
+  );
+  expect(wrapper).toBeTruthy();
+  expect(wrapper.children().length).toBe(1);
 });
 
 test('handles left arrow', () => {

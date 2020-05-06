@@ -33,11 +33,13 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   };
 
   private navList = React.createRef<HTMLUListElement>();
+  private resizeDebounceId: number;
+  private resizeDebounce: () => void;
 
   constructor(props: SideBarProps) {
     super(props);
     this.onKeyDown = this.onKeyDown.bind(this);
-    this.onResize = this.onResize.bind(this);
+    this.handleResize = this.handleResize.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       wide: isWide()
@@ -45,14 +47,22 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.onResize);
+    this.resizeDebounce = () => {
+      if (this.resizeDebounceId) {
+        cancelAnimationFrame(this.resizeDebounceId);
+      }
+      this.resizeDebounceId = requestAnimationFrame(() => {
+        this.handleResize();
+      });
+    };
+    window.addEventListener('resize', this.resizeDebounce);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('resize', this.resizeDebounce);
   }
 
-  private onResize() {
+  private handleResize() {
     const wide = isWide();
 
     if (wide === this.state.wide) {
