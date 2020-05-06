@@ -16,3 +16,28 @@ code {
 .dqpl-pointer-wrap:not(.dqpl-ftpo-auto) {
   position: relative;
 }
+
+.dqpl-logo-item {
+  padding: 0;
+}
+
+.dqpl-logo-item img {
+  width: 38px;
+}
+
+[role='menubar'] .dqpl-options-menu {
+  width: 140px;
+  top: calc(var(--top-bar-height) - 6px);
+}
+
+.dqpl-top-bar-thin [role='menubar'] .dqpl-options-menu {
+  top: calc(var(--top-bar-height-thin) - 6px);
+}
+
+.dropdown-arrow-down::after {
+  content: '';
+  border: 6px solid transparent;
+  border-top: 7px solid;
+  border-bottom: 0 none;
+  margin-left: 5px;
+}

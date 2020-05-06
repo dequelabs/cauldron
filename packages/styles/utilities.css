@@ -113,3 +113,13 @@ body .row {
 .align-self-center {
   align-self: center;
 }
+
+.dqpl-logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dqpl-separator {
+  border-left: 1px solid var(--top-bar-menuitem-separator);
+}

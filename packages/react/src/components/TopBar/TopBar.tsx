@@ -5,24 +5,26 @@ import keyname from 'keyname';
 import { isWide } from '../../utils/viewport';
 
 export interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  thin?: boolean;
   hasTrigger?: boolean;
 }
 
 interface TopBarState {
   wide: boolean;
-  focusIndex: number;
 }
 
 export default class TopBar extends React.Component<TopBarProps, TopBarState> {
-  static defaultProps = {
-    className: '',
-    hasTrigger: false
-  };
-
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    thin: PropTypes.bool,
     hasTrigger: PropTypes.bool
+  };
+
+  static defaultProps = {
+    thin: false,
+    hasTrigger: false
   };
 
   private menuItems: HTMLLIElement[] = [];
@@ -31,15 +33,14 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
     super(props);
     const wide = isWide();
     this.state = {
-      wide,
-      focusIndex: this.props.hasTrigger && wide ? 1 : 0
+      wide
     };
 
     this.onKeyDown = this.onKeyDown.bind(this);
-    this.onResize = this.onResize.bind(this);
   }
 
   componentDidMount() {
+    this.handleThin();
     window.addEventListener('resize', this.onResize);
   }
 
@@ -47,9 +48,15 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
     window.removeEventListener('resize', this.onResize);
   }
 
-  private onResize() {
-    const { hasTrigger } = this.props;
-    const { focusIndex } = this.state;
+  componentDidUpdate(prevProps: TopBarProps) {
+    if (prevProps.thin === this.props.thin) {
+      return;
+    }
+
+    this.handleThin();
+  }
+
+  private onResize = () => {
     const wide = isWide();
 
     if (wide === this.state.wide) {
@@ -57,62 +64,21 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
     }
 
     this.setState({
-      wide,
-      focusIndex: wide && focusIndex === 0 && hasTrigger ? 1 : focusIndex
+      wide
     });
-  }
+  };
 
-  onKeyDown(e: React.KeyboardEvent<HTMLElement>) {
-    const { hasTrigger } = this.props;
-    const { focusIndex, wide } = this.state;
-    const key = keyname(e.which);
-    const beginning = wide && hasTrigger ? 1 : 0;
-
-    switch (key) {
-      case 'left': {
-        const newFocusIndex =
-          focusIndex === beginning ? this.menuItems.length - 1 : focusIndex - 1;
-        e.preventDefault();
-        this.setState({ focusIndex: newFocusIndex });
-        this.menuItems[newFocusIndex].focus();
-
-        break;
-      }
-
-      case 'right': {
-        const newFocusIndex =
-          focusIndex === this.menuItems.length - 1 ? beginning : focusIndex + 1;
-        e.preventDefault();
-
-        this.setState({ focusIndex: newFocusIndex });
-        this.menuItems[newFocusIndex].focus();
-
-        break;
-      }
+  private handleThin = () => {
+    const { thin } = this.props;
+    if (thin) {
+      document.body.classList.add('dqpl-top-bar-thin');
+      return;
     }
-  }
 
-  render() {
-    this.menuItems = [];
-    // disabling no-unused-vars to prevent hasTrigger from being passed through to div
-    // eslint-disable-next-line no-unused-vars
-    const { children, className, hasTrigger, ...other } = this.props;
-
-    return (
-      <div className={classNames('dqpl-top-bar', className)} {...other}>
-        <ul role="menubar">
-          {Children.map(
-            children as React.ReactElement<HTMLLIElement>,
-            this.renderChild
-          )}
-        </ul>
-      </div>
-    );
-  }
+    document.body.classList.remove('dqpl-top-bar-thin');
+  };
 
   private renderChild = (child: React.ReactElement<any>, index: number) => {
-    const { focusIndex } = this.state;
-
     if (!child) {
       return null;
     }
@@ -127,7 +93,7 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
           child.props.onKeyDown(...args);
         }
       },
-      tabIndex: focusIndex === index ? 0 : -1,
+      tabIndex: 0,
       menuItemRef: (menuItem: HTMLLIElement) => {
         if (menuItem) {
           this.menuItems.push(menuItem);
@@ -139,4 +105,51 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
       }
     });
   };
+
+  onKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+    const key = keyname(e.which);
+    const menuItems = [...this.menuItems];
+
+    // account for hidden side bar trigger (hamburger)
+    if (this.state.wide && this.props.hasTrigger) {
+      menuItems.shift();
+    }
+
+    const currentIndex = menuItems.findIndex(menuitem => menuitem === e.target);
+    if (currentIndex === -1 || (key !== 'left' && key !== 'right')) {
+      return;
+    }
+
+    e.preventDefault();
+
+    let adjacentIndex = key === 'left' ? currentIndex - 1 : currentIndex + 1;
+    // circular arrow focus
+    if (adjacentIndex === -1) {
+      // first to last
+      adjacentIndex = menuItems.length - 1;
+    } else if (adjacentIndex === menuItems.length) {
+      // last to first
+      adjacentIndex = 0;
+    }
+
+    menuItems[adjacentIndex].focus();
+  }
+
+  render() {
+    this.menuItems = [];
+    // disabling no-unused-vars to prevent thin/hasTrigger from being passed through to div
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { children, className, thin, hasTrigger, ...other } = this.props;
+
+    return (
+      <div className={classNames('dqpl-top-bar', className)} {...other}>
+        <ul role="menubar">
+          {Children.map(
+            children as React.ReactElement<HTMLLIElement>,
+            this.renderChild
+          )}
+        </ul>
+      </div>
+    );
+  }
 }

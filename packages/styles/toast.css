@@ -12,6 +12,10 @@
   left: 0;
 }
 
+.dqpl-top-bar-thin .dqpl-toast {
+  top: var(--top-bar-height-thin);
+}
+
 .dqpl-toast.dqpl-toast-success {
   background-color: rgba(209, 255, 164, 0.95);
 }
