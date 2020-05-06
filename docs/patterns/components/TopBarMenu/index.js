@@ -5,7 +5,7 @@ class TopBarMenuDemo extends React.Component {
   buttonRef = React.createRef();
 
   handleClick = () => {
-    const event = new Event('topbarmenutoggle', { bubbles: true });
+    const event = new Event('focusTopBarMenu', { bubbles: true });
     this.buttonRef.current.dispatchEvent(event);
   };
 
@@ -21,7 +21,7 @@ class TopBarMenuDemo extends React.Component {
         </p>
         <h2>Demo</h2>
         <Button buttonRef={buttonRef} onClick={handleClick}>
-          Toggle TopBar Menu
+          Focus TopBar Menu
         </Button>
         <h2>Code Sample</h2>
         <Code language="javascript">

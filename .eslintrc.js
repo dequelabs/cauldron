@@ -25,7 +25,8 @@ module.exports = {
         allowChildren: true
       }
     ],
-    '@typescript-eslint/camelcase': 'off'
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off'
   },
   settings: {
     react: {

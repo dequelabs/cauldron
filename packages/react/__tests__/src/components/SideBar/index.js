@@ -1,15 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import SideBar from 'src/components/SideBar';
-import MenuItem from 'src/components/MenuItem';
+import SideBar, { SideBarItem } from 'src/components/SideBar';
 import axe from '../../../axe';
 
 const mountWrapper = (onDismiss = () => {}) =>
   mount(
     <SideBar onDismiss={onDismiss}>
-      <MenuItem>a</MenuItem>
-      <MenuItem>b</MenuItem>
-      <MenuItem>c</MenuItem>
+      <SideBarItem>a</SideBarItem>
+      <SideBarItem>b</SideBarItem>
+      <SideBarItem>c</SideBarItem>
     </SideBar>
   );
 const noop = () => {};
@@ -21,36 +20,6 @@ test('properly handles viewport resize', () => {
   // TODO: make this less fragile by mocking the isWide function
   wrapper.instance().onResize();
   expect(wrapper.state('wide')).toBe(true);
-});
-
-test('handles UP arrow', () => {
-  expect.assertions(2);
-  const wrapper = mountWrapper();
-  const e = { which: 38, preventDefault: noop };
-
-  // from 2nd to 1st
-  wrapper.setState({ focusIndex: 1 });
-  wrapper.instance().onKeyDown(e);
-  expect(wrapper.state('focusIndex')).toBe(0);
-  // from 1st to 3rd
-  wrapper.setState({ focusIndex: 0 });
-  wrapper.instance().onKeyDown(e);
-  expect(wrapper.state('focusIndex')).toBe(2);
-});
-
-test('handles DOWN arrow', () => {
-  expect.assertions(2);
-  const wrapper = mountWrapper();
-  const e = { which: 40, preventDefault: noop };
-
-  // from 1st to 2nd
-  wrapper.setState({ focusIndex: 0 });
-  wrapper.instance().onKeyDown(e);
-  expect(wrapper.state('focusIndex')).toBe(1);
-  // from 3rd to 1st
-  wrapper.setState({ focusIndex: 2 });
-  wrapper.instance().onKeyDown(e);
-  expect(wrapper.state('focusIndex')).toBe(0);
 });
 
 test('handles escape (calls onDismiss)', () => {
@@ -74,7 +43,7 @@ test('calls onDismiss when clicked outside', () => {
   expect(onDismiss).toBeCalled();
 });
 
-test.only('animates / toggles display given a show prop change', done => {
+test('animates / toggles display given a show prop change', done => {
   const wrapper = mountWrapper();
   wrapper.setProps({ show: true });
 
@@ -86,15 +55,15 @@ test.only('animates / toggles display given a show prop change', done => {
       expect(wrapper.state('animateClass')).toBe('');
       done();
     }, 101);
-  }, 101); // wait for animation classes to get added
+  }, 100); // wait for animation classes to get added
 });
 
 test('should return no axe violations', async () => {
   const sidebar = mount(
     <SideBar onDismiss={noop}>
-      <MenuItem>Item 1</MenuItem>
-      <MenuItem>Item 2</MenuItem>
-      <MenuItem>Item 3</MenuItem>
+      <SideBarItem>Item 1</SideBarItem>
+      <SideBarItem>Item 2</SideBarItem>
+      <SideBarItem>Item 3</SideBarItem>
     </SideBar>
   );
   expect(await axe(sidebar.html())).toHaveNoViolations();

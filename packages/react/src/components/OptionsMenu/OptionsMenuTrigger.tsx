@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { OptionsMenu } from '../..';
 
 export interface OptionsMenuTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {

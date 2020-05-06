@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, createRef, Fragment } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import classNames from 'classnames';
 import Home from './Home';
 import {
   TopBar,
-  Workspace,
   TopBarTrigger,
+  TopBarItem,
+  Workspace,
   SideBar,
+  SideBarItem,
   SkipLink,
-  MenuItem,
   OptionsMenuList,
-  TopBarMenu
+  TopBarMenu,
+  Icon
 } from '../packages/react/src';
+import logo from './assets/img/logo.svg';
 
 // styles
 import '../packages/styles';
@@ -41,11 +45,28 @@ const componentsList = [
 ].sort();
 
 class App extends Component {
-  state = { show: false };
+  state = { show: false, thin: false };
   constructor() {
     super();
     this.onTriggerClick = this.onTriggerClick.bind(this);
+    this.topBarTrigger = createRef();
   }
+
+  componentDidMount() {
+    document.addEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+  }
+
+  focusTopBarMenuItem = () => {
+    if (!this.topBarMenuItem) {
+      return;
+    }
+
+    this.topBarMenuItem.focus();
+  };
 
   onTriggerClick(e) {
     const { show } = this.state;
@@ -54,8 +75,8 @@ class App extends Component {
       e.preventDefault();
     }
 
-    if (show && this.topBarTrigger) {
-      this.topBarTrigger.focus();
+    if (show && this.topBarTrigger.current) {
+      this.topBarTrigger.current.focus();
     }
 
     this.setState({ show: !show });
@@ -71,21 +92,13 @@ class App extends Component {
     this.setState({ menuOpen: false });
   };
 
-  toggleTopBarMenu = () => {
-    this.setState(({ showTopBarMenu }) => ({
-      showTopBarMenu: !showTopBarMenu
-    }));
+  onSettingsSelect = e => {
+    this.setState({
+      thin: e.target.innerText === 'Thin top bar'
+    });
   };
 
-  componentDidMount() {
-    document.addEventListener('topbarmenutoggle', this.toggleTopBarMenu);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('topbarmenutoggle', this.toggleTopBarMenu);
-  }
-
-  renderSideBarLink(pathname, text) {
+  renderSideBarLink(pathname, text, isCurrent) {
     return (
       <Link
         to={{
@@ -96,7 +109,7 @@ class App extends Component {
           this.setState({ show: false });
           this.workspace.focus();
         }}
-        tabIndex={-1}
+        aria-current={isCurrent ? 'page' : null}
       >
         {text}
       </Link>
@@ -104,7 +117,7 @@ class App extends Component {
   }
 
   render() {
-    const { showTopBarMenu } = this.state;
+    const { show, thin } = this.state;
 
     /* eslint-disable jsx-a11y/anchor-has-content */
     return (
@@ -115,45 +128,72 @@ class App extends Component {
             defaultTitle="Deque Cauldron React"
           />
           <SkipLink target={'#main-content'} />
-          <TopBar hasTrigger={true}>
-            <TopBarTrigger
-              onClick={this.onTriggerClick}
-              menuItemRef={el => (this.topBarTrigger = el)}
-            />
-            <MenuItem>
-              <Link tabIndex={-1} to="/">
-                Cauldron
+          <TopBar thin={thin} hasTrigger>
+            <TopBarTrigger onClick={this.onTriggerClick}>
+              <button
+                tabIndex={-1}
+                aria-label="Menu"
+                aria-haspopup="true"
+                ref={this.topBarTrigger}
+                aria-expanded={show}
+              >
+                <Icon type="fa-bars" />
+              </button>
+            </TopBarTrigger>
+            <TopBarItem>
+              <Link to="/" className="dqpl-logo-item" tabIndex={-1}>
+                <img src={logo} alt="" /> <span>Cauldron</span>
               </Link>
-            </MenuItem>
+            </TopBarItem>
 
             {/* The below line demonstrates the ability to conditionally include menu item children. */}
-            {false && <MenuItem>Potato</MenuItem>}
+            {false && <TopBarItem>Potato</TopBarItem>}
 
-            {showTopBarMenu && (
-              <TopBarMenu id="topbar-menu" className="dqpl-right-aligned">
-                {`I'm a menu thingy`}
-                <OptionsMenuList>
-                  <li>Item 1</li>
-                  <li>Item 2</li>
-                </OptionsMenuList>
-              </TopBarMenu>
-            )}
+            <TopBarMenu
+              id="topbar-menu"
+              className="dqpl-right-aligned dqpl-separator dropdown-arrow-down"
+              menuItemRef={el => (this.topBarMenuItem = el)}
+            >
+              <div className="dqpl-top-bar-icon-item">
+                {thin ? (
+                  <Icon type="fa-cog" label="Settings" />
+                ) : (
+                  <Fragment>
+                    <Icon type="fa-cog" />
+                    <div>Settings</div>
+                  </Fragment>
+                )}
+              </div>
+              <OptionsMenuList onSelect={this.onSettingsSelect}>
+                <li>Default top bar</li>
+                <li>Thin top bar</li>
+              </OptionsMenuList>
+            </TopBarMenu>
 
-            <MenuItem className={showTopBarMenu ? '' : 'dqpl-right-aligned'}>
+            <TopBarItem className="dqpl-separator">
               <a
-                tabIndex={-1}
                 href="https://github.com/dequelabs/cauldron-react"
                 className="fa fa-github"
                 aria-label="Cauldron React on GitHub"
+                tabIndex={-1}
               />
-            </MenuItem>
+            </TopBarItem>
           </TopBar>
           <SideBar show={this.state.show} onDismiss={this.onTriggerClick}>
-            {componentsList.map(name => (
-              <MenuItem key={name}>
-                {this.renderSideBarLink(`/components/${name}`, name)}
-              </MenuItem>
-            ))}
+            {componentsList.map(name => {
+              const pathname = `/components/${name}`;
+              const isActive = pathname === location.pathname;
+              return (
+                <SideBarItem
+                  key={name}
+                  className={classNames({
+                    'dqpl-menuitem-selected': isActive
+                  })}
+                >
+                  {this.renderSideBarLink(pathname, name, isActive)}
+                </SideBarItem>
+              );
+            })}
           </SideBar>
           <Workspace
             id="main-content"

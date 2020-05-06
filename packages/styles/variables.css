@@ -1,6 +1,6 @@
 :root {
   /* background colours */
-  --top-bar-bg: #283640;
+  --top-bar-bg: #02101a;
   --top-bar-bg-active: #0b0e11;
   --top-bar-bg-active-scrim: rgba(11, 14, 17, 0.9);
   --workspace-bg: #fdfdfe;
@@ -48,6 +48,9 @@
   /* tooltips */
   --tooltip-border: #999999;
 
+  /* borders */
+  --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
+
   /* accents */
   --focus: #d71ef7;
   --focus-active: rgba(215, 30, 247, 0.25);
@@ -94,7 +97,8 @@
   --weight-ultra-bold: 900;
 
   /* specfic dimensions */
-  --top-bar-height: 50px;
+  --top-bar-height: 69px;
+  --top-bar-height-thin: 43px;
   --menu-width: 257px;
   --input-min-width: 250px;
   --border-width: 6px;

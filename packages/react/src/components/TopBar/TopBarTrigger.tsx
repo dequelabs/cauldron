@@ -1,56 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import keyname from 'keyname';
+import classNames from 'classnames';
 import MenuItem from '../MenuItem';
-import Icon from '../Icon';
 
-const noop = () => {};
-
-interface TopBarTriggerProps {
-  onClick: (e: React.MouseEvent<HTMLLIElement>) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLLIElement>) => void;
-  menuItemRef?: React.Ref<HTMLLIElement>;
+interface TopBarTriggerProps extends React.HTMLAttributes<HTMLLIElement> {
+  children: React.ReactNode;
 }
 
-export default class TopBarTrigger extends React.Component<TopBarTriggerProps> {
-  static defaultProps = {
-    onClick: noop,
-    onKeyDown: noop
-  };
+const TopBarTrigger: React.ComponentType<TopBarTriggerProps> = ({
+  children,
+  className,
+  ...other
+}) => (
+  <MenuItem
+    aria-haspopup="true"
+    className={classNames('dqpl-menu-trigger', className)}
+    {...other}
+  >
+    {children}
+  </MenuItem>
+);
+TopBarTrigger.displayName = 'TopBarTrigger';
+TopBarTrigger.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string
+};
 
-  static propTypes = {
-    onClick: PropTypes.func,
-    onKeyDown: PropTypes.func
-  };
-
-  constructor(props: TopBarTriggerProps) {
-    super(props);
-    this.onKeyDown = this.onKeyDown.bind(this);
-  }
-
-  private onKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
-    const key = keyname(e.which);
-
-    if (!['enter', 'space'].includes(key)) {
-      return;
-    }
-
-    e.preventDefault();
-    this.props.onClick((e as unknown) as React.MouseEvent<HTMLLIElement>);
-    this.props.onKeyDown(e);
-  }
-
-  render() {
-    return (
-      <MenuItem
-        className="dqpl-menu-trigger"
-        aria-label="Menu"
-        aria-haspopup="true"
-        onKeyDown={this.onKeyDown}
-        {...this.props}
-      >
-        <Icon type="fa-bars" />
-      </MenuItem>
-    );
-  }
-}
+export default TopBarTrigger;

@@ -23,6 +23,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
+    "classnames": "^2.2.6",
     "closest": "0.0.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.2.0",

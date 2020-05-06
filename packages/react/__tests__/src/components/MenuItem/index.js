@@ -56,9 +56,9 @@ test('supports menuItemRef props', () => {
 
 test('should return no axe violations', async () => {
   const item = mount(
-    <SideBar onDismiss={() => {}}>
+    <ul role="menubar">
       <MenuItem>Foo</MenuItem>
-    </SideBar>
+    </ul>
   );
   expect(await axe(item.html())).toHaveNoViolations();
 });

@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+.dqpl-top-bar-thin .dqpl-layout {
+  top: var(--top-bar-height-thin);
+}
+
 .dqpl-layout .dqpl-main-content {
   padding: var(--layout-padding) var(--layout-padding) 0 var(--layout-padding);
   border-left: var(--border-width) solid transparent;

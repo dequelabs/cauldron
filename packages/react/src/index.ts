@@ -12,7 +12,8 @@ export { default as MenuItem } from './components/MenuItem';
 export {
   default as TopBar,
   TopBarTrigger,
-  TopBarMenu
+  TopBarMenu,
+  TopBarItem
 } from './components/TopBar';
 export { default as SideBar } from './components/SideBar';
 export { default as Alert, Actions as AlertActions } from './components/Alert';
@@ -50,7 +51,7 @@ export {
   default as ExpandCollapsePanel,
   PanelTrigger
 } from './components/ExpandCollapsePanel';
-export { default as Sidebar } from './components/SideBar';
+export { default as Sidebar, SideBarItem } from './components/SideBar';
 export { default as Code } from './components/Code';
 
 /**
