@@ -82,13 +82,7 @@ jobs:
           keys:
             - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
             - v1-styles-yarn-
-      - run: npx lerna publish prepatch \
-          --no-git-tag-version \
-          --force-publish='*' \
-          --skip-git \
-          --preid=next \
-          --pre-dist-tag=next \
-          --yes
+      - run: npx lerna publish prepatch --no-git-tag-version --force-publish='*' --skip-git --preid=next --pre-dist-tag=next --yes
   release:
     <<: *defaults
     steps:
