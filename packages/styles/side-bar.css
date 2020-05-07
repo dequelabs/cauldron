@@ -4,7 +4,7 @@
   top: var(--top-bar-height);
   bottom: 0;
   overflow: auto;
-  background-color: var(--top-bar-bg-active);
+  background-color: var(--top-bar-background-color-active);
   width: var(--menu-width);
   left: calc(-1 * var(--menu-width));
   box-sizing: border-box;
@@ -56,14 +56,14 @@
 .dqpl-side-bar .dqpl-item-text:hover,
 .dqpl-side-bar .dqpl-item-text:focus-within {
   outline: 0;
-  border-left: var(--border-width) solid var(--top-bar-text);
+  border-left: var(--border-width) solid var(--top-bar-text-color);
 }
 
 .dqpl-side-bar li:not([aria-controls]):hover .dqpl-item-text,
 .dqpl-side-bar li:not([aria-controls]):focus-within .dqpl-item-text,
 .dqpl-side-bar .dqpl-item-text:hover .dqpl-item-text,
 .dqpl-side-bar .dqpl-item-text:focus .dqpl-item-text {
-  border-left: var(--border-width) solid var(--top-bar-text);
+  border-left: var(--border-width) solid var(--top-bar-text-color);
 }
 
 .dqpl-side-bar li:not([aria-controls]).dqpl-menuitem-selected,
@@ -77,8 +77,8 @@
 .dqpl-side-bar
   .dqpl-item-text.dqpl-menuitem-selected:not(.dqpl-account):not(.dqpl-branding)
   a {
-  color: var(--text-light);
-  font-weight: var(--weight-medium);
+  color: var(--text-color-light);
+  font-weight: var(--font-weight-medium);
 }
 
 .dqpl-side-bar li:not([aria-controls]).dqpl-menuitem-selected a:focus:before,
@@ -86,7 +86,7 @@
   content: '';
   width: var(--border-width);
   height: 100%;
-  background-color: var(--top-bar-text);
+  background-color: var(--top-bar-text-color);
   position: absolute;
   top: 0;
   left: 2px;
@@ -95,14 +95,14 @@
 .dqpl-side-bar li:not([aria-controls]).dqpl-branding,
 .dqpl-side-bar .dqpl-item-text.dqpl-branding {
   padding: 11px 16px 18px 16px;
-  border-bottom: 1px solid var(--top-bar-divider);
+  border-bottom: 1px solid var(--top-bar-menuitem-separator);
 }
 
 .dqpl-side-bar li:not([aria-controls]).dqpl-branding a,
 .dqpl-side-bar .dqpl-item-text.dqpl-branding a {
   text-decoration: none;
-  color: var(--text-light);
-  font-weight: var(--weight-light);
+  color: var(--text-color-light);
+  font-weight: var(--font-weight-light);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -111,7 +111,7 @@
 .dqpl-side-bar li:not([aria-controls]).dqpl-branding a .dqpl-name,
 .dqpl-side-bar .dqpl-item-text.dqpl-branding a .dqpl-name {
   margin-top: var(--space-quarter);
-  color: var(--text-light);
+  color: var(--text-color-light);
 }
 
 .dqpl-side-bar
@@ -120,8 +120,8 @@
   .dqpl-name
   .dqpl-name-primary,
 .dqpl-side-bar .dqpl-item-text.dqpl-branding a .dqpl-name .dqpl-name-primary {
-  font-size: var(--text-medium);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-medium);
+  font-weight: var(--font-weight-normal);
 }
 
 .dqpl-side-bar
@@ -130,8 +130,8 @@
   .dqpl-name
   .dqpl-name-secondary,
 .dqpl-side-bar .dqpl-item-text.dqpl-branding a .dqpl-name .dqpl-name-secondary {
-  font-size: var(--text-smaller);
-  font-weight: var(--weight-light);
+  font-size: var(--text-size-smaller);
+  font-weight: var(--font-weight-light);
   margin-top: 3px;
 }
 
@@ -143,13 +143,13 @@
 }
 
 .dqpl-side-bar .dqpl-weight-bold .dqpl-item-text {
-  font-weight: var(--weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 
 .dqpl-side-bar > li {
-  color: var(--top-bar-text);
-  font-size: var(--text-small);
-  font-weight: var(--weight-light);
+  color: var(--top-bar-text-color);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-light);
   cursor: pointer;
 }
 
@@ -158,14 +158,14 @@
 }
 
 .dqpl-side-bar > li:focus-within .dqpl-item-text {
-  border-left: var(--border-width) solid var(--top-bar-text);
+  border-left: var(--border-width) solid var(--top-bar-text-color);
 }
 
 .dqpl-side-bar > li a {
   text-decoration: none;
-  color: var(--top-bar-text);
-  font-size: var(--text-small);
-  font-weight: var(--weight-light);
+  color: var(--top-bar-text-color);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-light);
 }
 
 .dqpl-side-bar > li a:focus {
@@ -176,24 +176,24 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border-top: 1px solid var(--top-bar-divider);
+  border-top: 1px solid var(--top-bar-menuitem-separator);
 }
 
 .dqpl-side-bar > li > ul > li {
-  background-color: var(--top-bar-bg);
+  background-color: var(--top-bar-background-color);
   cursor: pointer;
-  border-bottom: 1px solid var(--top-bar-divider);
+  border-bottom: 1px solid var(--top-bar-menuitem-separator);
 }
 
 .dqpl-side-bar > li > ul > li a {
   margin-left: var(--space-small);
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
 }
 
 .dqpl-side-bar .dqpl-account {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--top-bar-divider);
+  border-bottom: 1px solid var(--top-bar-menuitem-separator);
 }
 
 .dqpl-side-bar .dqpl-account .dqpl-account-image img {
@@ -207,16 +207,16 @@
 }
 
 .dqpl-side-bar .dqpl-account .dqpl-account-info h2 {
-  color: var(--text-light);
-  font-weight: var(--weight-medium);
-  font-size: var(--text-normal);
+  color: var(--text-color-light);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-normal);
   padding: 0;
   margin: 0;
 }
 
 .dqpl-side-bar .dqpl-account .dqpl-account-info .dqpl-account-title,
 .dqpl-side-bar .dqpl-account .dqpl-account-info .dqpl-account-org {
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
   padding: var(--space-quarter);
 }
 

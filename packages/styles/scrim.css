@@ -1,5 +1,5 @@
 .dqpl-scrim {
-  background-color: var(--scrim);
+  background-color: var(--scrim-background-color);
   position: fixed;
   top: 0;
   bottom: 0;

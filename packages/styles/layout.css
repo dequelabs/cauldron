@@ -23,7 +23,7 @@
 
 .dqpl-layout .dqpl-main-content:focus {
   outline: 0;
-  border-left-color: var(--top-bar-bg);
+  border-left-color: var(--top-bar-background-color);
 }
 
 .dqpl-layout .dqpl-main-content.dqpl-collapsed {
@@ -35,25 +35,25 @@
   align-items: baseline;
   flex-wrap: wrap;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--field-disabled);
+  border-bottom: 1px solid var(--field-background-color-disabled);
   margin-bottom: var(--space-small);
 }
 
 .dqpl-layout .dqpl-main-content .dqpl-content-header h1 {
   margin: 0 20px 0 0;
   padding: 0;
-  font-size: var(--text-larger);
-  color: var(--top-bar-bg-active);
-  font-weight: var(--weight-light);
+  font-size: var(--text-size-larger);
+  color: var(--top-bar-background-color-active);
+  font-weight: var(--font-weight-light);
 }
 
 .dqpl-layout .dqpl-main-content .dqpl-content-header h2,
 .dqpl-layout .dqpl-main-content .dqpl-content-header h3 {
   padding: 0;
   margin: 0;
-  color: var(--text-base);
-  font-weight: var(--weight-light);
-  font-size: var(--text-large-medium);
+  color: var(--text-color-base);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-size-large-medium);
 }
 
 .dqpl-layout .dqpl-main-content .dqpl-content-body {
@@ -93,7 +93,7 @@
 
 .dqpl-content-block:focus::before,
 [data-skip-target='true']:focus::before {
-  background-color: var(--top-bar-bg);
+  background-color: var(--top-bar-background-color);
 }
 
 @media (min-width: 1024px) {

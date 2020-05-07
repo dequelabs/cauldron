@@ -1,14 +1,14 @@
 .dqpl-link {
   text-decoration: none;
-  color: var(--link);
-  font-weight: var(--weight-medium);
+  color: var(--link-text-color);
+  font-weight: var(--font-weight-medium);
   display: inline-block;
   padding: var(--space-quarter);
 }
 
 .dqpl-link:hover {
   text-decoration: underline;
-  color: var(--link);
+  color: var(--link-text-color);
 }
 
 .dqpl-link:focus {
@@ -20,6 +20,6 @@ p .dqpl-link {
   margin: 0 2px;
   display: inline;
   text-decoration: underline;
-  color: var(--header-dark);
-  font-weight: var(--weight-normal);
+  color: var(--header-text-color-dark);
+  font-weight: var(--font-weight-normal);
 }

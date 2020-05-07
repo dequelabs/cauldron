@@ -20,12 +20,12 @@ body.dqpl-modal-open {
   z-index: var(--z-index-modal);
   transform: translate(-50%, 0);
   border-radius: 3px;
-  background: var(--tile-bg);
+  background: var(--tile-background-color);
   box-shadow: 0px 5px 18px 2px rgba(0, 0, 0, 0.35);
 }
 
 .dqpl-modal .dqpl-dialog-inner .dqpl-modal-header {
-  background-color: var(--button-secondary);
+  background-color: var(--button-background-color-secondary);
   position: relative;
   display: flex;
   height: 48px;
@@ -53,13 +53,13 @@ body.dqpl-modal-open {
 .dqpl-modal-header .dqpl-close:focus,
 .dqpl-modal-header .dqpl-header-item:focus {
   outline: 0;
-  border-bottom: 4px solid var(--text-base);
+  border-bottom: 4px solid var(--text-color-base);
 }
 
 .dqpl-modal-header h2 {
-  font-size: var(--text-normal);
-  color: var(--text-base);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-normal);
+  color: var(--text-color-base);
+  font-weight: var(--font-weight-normal);
   align-self: center;
   padding: 8px 24px;
   border-bottom: 4px solid transparent;
@@ -67,8 +67,8 @@ body.dqpl-modal-open {
 
 .dqpl-modal-header .dqpl-close {
   background-color: transparent;
-  color: var(--text-base);
-  font-size: var(--text-normal);
+  color: var(--text-color-base);
+  font-size: var(--text-size-normal);
   align-self: center;
   margin-left: auto;
   padding: 8px 10px;
@@ -87,7 +87,7 @@ body.dqpl-modal-open {
 }
 
 .dqpl-modal .dqpl-content h3 {
-  font-weight: var(--weight-light);
+  font-weight: var(--font-weight-light);
   margin: var(--space-large) 0 12px 0;
   padding: 0;
 }
@@ -99,10 +99,10 @@ body.dqpl-modal-open {
   height: 60px;
   display: flex;
   align-items: center;
-  border-top: 1px solid var(--field-disabled);
+  border-top: 1px solid var(--field-background-color-disabled);
   padding: 0 var(--space-large);
   box-sizing: border-box;
-  background: var(--tile-bg);
+  background: var(--tile-background-color);
 }
 
 .dqpl-modal-footer button {
@@ -114,7 +114,7 @@ body.dqpl-modal-open {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--scrim);
+  background: var(--scrim-background-color);
   position: fixed;
   z-index: var(--z-index-modal-scrim);
 }

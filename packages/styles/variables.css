@@ -1,57 +1,50 @@
+/*
+ * variable naming convention:
+ * --{component name (if applicable)}-{style property}-{...modifiers (if applicable, hypen separated)}
+ * example: --foo-background-color-light
+ */
+
 :root {
   /* background colours */
-  --top-bar-bg: #02101a;
-  --top-bar-bg-active: #0b0e11;
-  --top-bar-bg-active-scrim: rgba(11, 14, 17, 0.9);
-  --workspace-bg: #fdfdfe;
-  --tile-bg: #ffffff;
-  --bg-light: #e6e6e6;
-  --scrim: rgba(0, 0, 0, 0.5);
-  --top-bar-divider: #5a6268;
-  --bg-light-grey: #f2f2f2;
+  --top-bar-background-color: #02101a;
+  --top-bar-background-color-active: #0b0e11;
+  --skip-link-background-color: rgba(11, 14, 17, 0.9);
+  --workspace-background-color: #fdfdfe;
+  --tile-background-color: #ffffff;
+  --scrim-background-color: rgba(0, 0, 0, 0.5);
 
   /* text colours */
-  --text-base: #666666;
-  --header-dark: #333333;
-  --header: #4d4d4d;
-  --disabled: #cccccc;
-  --link: #3c7aae;
-  --link-light: rgba(60, 122, 174, 0.1);
-  --error: #d93251;
-  --top-bar-text: #d4dde0;
-  --text-light: #ffffff;
-  --text-light-disabled: rgba(255, 255, 255, 0.5);
+  --text-color-base: #666666;
+  --text-color-light: #ffffff;
+  --text-color-light-disabled: rgba(255, 255, 255, 0.5);
+  --header-text-color: #4d4d4d;
+  --header-text-color-dark: #333333;
+  --link-text-color: #3c7aae;
+  --link-text-color-light: rgba(60, 122, 174, 0.1);
+  --top-bar-text-color: #d4dde0;
 
   /* fields */
-  --field-bg: #ffffff;
-  --field-border: #cccccc;
-  --field-hover-border: #b3b3b3;
-  --field-focus-border: #3c7aae;
-  --field-error-border: #d93251;
-  --field-error-hover-border: #b6223d;
-  --field-disabled: #f2f2f2;
+  --field-border-color: #cccccc;
+  --field-border-color-hover: #b3b3b3;
+  --field-border-color-error: #d93251;
+  --field-border-color-error-hover: #b6223d;
+  --field-background-color-disabled: #f2f2f2;
 
   /* buttons */
-  --button-primary: #3c7aae;
-  --button-secondary: #f2f2f2;
-  --button-text-dark: #5a6268;
-  --button-text-light: #ffffff;
-  --button-text-disabled: #cccccc;
-
-  /* tables */
-  --table-text: #4d4d4d;
-  --table-header: #f2f2f2;
-  --table-selected: --link;
-  --table-hover: #ffffff;
-  --table-hover-link: #283640;
+  --button-background-color-primary: #3c7aae;
+  --button-background-color-secondary: #f2f2f2;
+  --button-text-color-dark: #5a6268;
+  --button-text-color-light: #ffffff;
 
   /* tooltips */
-  --tooltip-border: #999999;
+  --tooltip-border-color: #999999;
 
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
 
   /* accents */
+  --error: #d93251;
+  --disabled: #cccccc;
   --focus: #d71ef7;
   --focus-active: rgba(215, 30, 247, 0.25);
   --focus-glow: rgba(193, 27, 222, 0.75);
@@ -77,24 +70,24 @@
   --space-gutter: 40px;
 
   /* text size */
-  --text-largest: 112px;
-  --text-larger: 56px;
-  --text-large: 45px;
-  --text-large-medium: 34px;
-  --text-medium: 24px;
+  --text-size-largest: 112px;
+  --text-size-larger: 56px;
+  --text-size-large: 45px;
+  --text-size-large-medium: 34px;
+  --text-size-medium: 24px;
   --text-small-medium: 20px;
-  --text-normal: 18px;
-  --text-small: 15px;
-  --text-smaller: 13px;
-  --text-smallest: 12px;
+  --text-size-normal: 18px;
+  --text-size-small: 15px;
+  --text-size-smaller: 13px;
+  --text-size-smallest: 12px;
 
   /* font weight */
-  --weight-thin: 100;
-  --weight-light: 300;
-  --weight-normal: 400;
-  --weight-medium: 500;
-  --weight-bold: 700;
-  --weight-ultra-bold: 900;
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-ultra-bold: 900;
 
   /* specfic dimensions */
   --top-bar-height: 69px;
