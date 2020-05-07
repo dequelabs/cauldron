@@ -132,7 +132,7 @@ workflows:
             branches:
               only:
                 - develop
-      - canary_release:
+      - release:
           requires:
             - react
             - styles
