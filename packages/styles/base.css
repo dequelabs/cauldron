@@ -12,11 +12,11 @@ body {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
-  color: var(--text-base);
+  color: var(--text-color-base);
   margin: 0;
   padding: 0;
-  background-color: var(--workspace-bg);
-  font-size: var(--text-small);
+  background-color: var(--workspace-background-color);
+  font-size: var(--text-size-small);
 }
 
 :focus {
@@ -50,8 +50,8 @@ button,
 }
 
 a {
-  color: var(--link);
-  font-weight: var(--weight-medium);
+  color: var(--link-text-color);
+  font-weight: var(--font-weight-medium);
 }
 
 p {

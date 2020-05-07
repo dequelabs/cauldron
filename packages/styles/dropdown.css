@@ -1,10 +1,10 @@
 .dqpl-dropdown {
   position: absolute;
   padding: 8px;
-  background-color: var(--tile-bg);
+  background-color: var(--tile-background-color);
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--field-border);
-  color: var(--text-base);
+  border: 1px solid var(--field-border-color);
+  color: var(--text-color-base);
   display: none;
   list-style: none;
 }
@@ -15,19 +15,19 @@
 
 .dqpl-dropdown:focus {
   outline: 0;
-  border: 1px solid var(--text-base);
+  border: 1px solid var(--text-color-base);
 }
 
 .dqpl-dropdown [role='menuitem'] {
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   padding: 2px var(--space-smallest);
   cursor: default;
 }
 
 .dqpl-dropdown [role='menuitem']:hover,
 .dqpl-dropdown [role='menuitem']:focus {
-  background-color: var(--link-light);
+  background-color: var(--link-text-color-light);
   outline: 0;
 }
 

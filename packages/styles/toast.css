@@ -1,9 +1,9 @@
 .dqpl-toast {
   top: var(--top-bar-height);
   position: fixed;
-  color: var(--top-bar-bg-active);
-  font-size: var(--text-small);
-  z-index: var(--z-index-toast);
+  color: var(--top-bar-background-color-active);
+  font-size: var(--text-size-small);
+  z-index: var(--toast-z-index);
   align-items: center;
   box-sizing: border-box;
   display: flex;
@@ -26,7 +26,7 @@
 
 .dqpl-toast.dqpl-toast-error {
   background-color: rgba(255, 161, 161, 0.95);
-  z-index: var(--z-index-toast-action-needed);
+  z-index: var(--toast-z-index-action-needed);
 }
 
 .dqpl-toast .dqpl-toast-dismiss {
@@ -56,9 +56,9 @@
 }
 
 .dqpl-toast .dqpl-toast-message .dqpl-link {
-  color: var(--top-bar-bg-active);
-  font-size: var(--text-small);
-  font-weight: var(--weight-light);
+  color: var(--top-bar-background-color-active);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-light);
   text-decoration: underline;
 }
 
@@ -72,5 +72,5 @@
 }
 
 .dqpl-toast:focus .dqpl-toast-message:before {
-  color: var(--top-bar-bg-active);
+  color: var(--top-bar-background-color-active);
 }

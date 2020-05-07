@@ -2,16 +2,16 @@
   width: 145px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  border: 1px solid var(--tooltip-border);
+  border: 1px solid var(--tooltip-border-color);
   border-radius: 2px;
-  font-size: var(--text-smallest);
+  font-size: var(--text-size-smallest);
   position: absolute;
   display: none;
-  background: var(--button-secondary);
+  background: var(--button-background-color-secondary);
   padding: var(--space-smallest);
   bottom: 45px;
   right: -28px;
-  z-index: var(--z-index-tooltip);
+  z-index: var(--tooltip-z-index);
   pointer-events: none;
 }
 
@@ -24,7 +24,8 @@
   height: 0;
   border-style: solid;
   border-width: 15.6px 9px 0 9px;
-  border-color: var(--button-secondary) transparent transparent transparent;
+  border-color: var(--button-background-color-secondary) transparent transparent
+    transparent;
 }
 
 .dqpl-tooltip:before {
@@ -36,7 +37,7 @@
   height: 0;
   border-style: solid;
   border-width: 15.6px 9px 0 9px;
-  border-color: var(--header) transparent transparent transparent;
+  border-color: var(--header-text-color) transparent transparent transparent;
 }
 
 .dqpl-tooltip.dqpl-tip-active {

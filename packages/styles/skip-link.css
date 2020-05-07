@@ -1,7 +1,7 @@
 .dqpl-skip-container {
   min-width: 173px;
   height: 58px;
-  background-color: var(--top-bar-bg-active-scrim);
+  background-color: var(--skip-link-background-color);
   position: absolute;
   box-sizing: border-box;
   padding: var(--space-half);
@@ -10,7 +10,7 @@
   opacity: 0;
   transition: 250ms opacity;
   border-radius: 2px;
-  z-index: var(--z-index-skip-container);
+  z-index: var(--skip-container-z-index);
 }
 
 .dqpl-skip-container.dqpl-skip-container-active {
@@ -24,7 +24,7 @@
 
 .dqpl-skip-container a {
   display: block;
-  color: var(--text-light);
+  color: var(--text-color-light);
   text-decoration: none;
   padding: var(--space-three-quarters);
 }
@@ -34,15 +34,15 @@
 }
 
 .dqpl-skip-container .dqpl-skip-one {
-  font-size: var(--text-small);
-  font-weight: var(--weight-light);
-  color: var(--text-light);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-light);
+  color: var(--text-color-light);
 }
 
 .dqpl-skip-container .dqpl-skip-two {
-  font-size: var(--text-normal);
-  font-weight: var(--weight-medium);
-  color: var(--text-light);
+  font-size: var(--text-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-color-light);
 }
 
 .dqpl-skip-container.dqpl-child-focused {
@@ -91,5 +91,5 @@
 
 .dqpl-skip-container ul li a:focus:before,
 .dqpl-skip-container ul li a:focus:after {
-  color: var(--text-light);
+  color: var(--text-color-light);
 }

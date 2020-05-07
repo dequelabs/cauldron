@@ -8,8 +8,8 @@
 }
 
 .dqpl-tile .dqpl-tile-header {
-  color: var(--tile-bg);
-  background-color: var(--top-bar-bg);
+  color: var(--tile-background-color);
+  background-color: var(--top-bar-background-color);
   padding: var(--space-three-quarters) var(--space-three-quarters)
     var(--space-three-quarters) var(--space-large);
 }
@@ -20,8 +20,8 @@
 .dqpl-tile .dqpl-tile-header h5,
 .dqpl-tile .dqpl-tile-header h6 {
   font-size: var(--text-small-medium);
-  font-weight: var(--weight-light);
-  color: var(--tile-bg);
+  font-weight: var(--font-weight-light);
+  color: var(--tile-background-color);
   margin: 0;
 }
 
@@ -33,16 +33,16 @@
   .dqpl-tile-header
   .dqpl-options-menu-wrap
   .dqpl-options-menu-trigger {
-  background: var(--top-bar-bg);
-  color: var(--tile-bg);
+  background: var(--top-bar-background-color);
+  color: var(--tile-background-color);
   border: none;
   height: auto;
 }
 
 .dqpl-tile .dqpl-tile-header .dqpl-label {
-  font-size: var(--text-smaller);
-  font-weight: var(--weight-light);
-  color: var(--tile-bg);
+  font-size: var(--text-size-smaller);
+  font-weight: var(--font-weight-light);
+  color: var(--tile-background-color);
   margin-left: 0;
   margin-bottom: 0;
   padding: 0 0 5px 0;
@@ -51,8 +51,8 @@
 .dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox {
   width: auto;
   background: transparent;
-  font-size: var(--text-smaller);
-  color: var(--tile-bg);
+  font-size: var(--text-size-smaller);
+  color: var(--tile-background-color);
   border: none;
   margin: 0 0 0 2px;
   padding: 0 16px 5px 4px;
@@ -67,19 +67,19 @@
 }
 
 .dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox .dqpl-pseudo-value {
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
   min-height: 18px;
-  font-weight: var(--weight-normal);
+  font-weight: var(--font-weight-normal);
 }
 
 .dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-combobox:after {
   top: -1px;
   right: 1px;
-  color: var(--tile-bg);
+  color: var(--tile-background-color);
 }
 
 .dqpl-tile .dqpl-tile-header .dqpl-select .dqpl-listbox {
-  color: var(--text-base);
+  color: var(--text-color-base);
 }
 
 .dqpl-tile .dqpl-tile-content ul {

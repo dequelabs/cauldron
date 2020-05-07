@@ -1,15 +1,15 @@
 .dqpl-options-menu-wrap {
   position: relative;
   width: 34px;
-  color: var(--text-base);
+  color: var(--text-color-base);
 }
 
 .dqpl-options-menu-wrap .dqpl-options-menu-trigger {
   font-size: var(--text-small-medium);
-  color: var(--header-dark);
+  color: var(--header-text-color-dark);
   border-radius: 3px;
-  background-color: var(--tile-bg);
-  border: 1px solid var(--field-border);
+  background-color: var(--tile-background-color);
+  border: 1px solid var(--field-border-color);
   box-sizing: border-box;
   height: 34px;
   width: 34px;
@@ -22,12 +22,12 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: var(--tile-bg);
+  background-color: var(--tile-background-color);
   top: 33px;
   right: 0;
   left: auto;
-  border: 1px solid var(--field-border);
-  z-index: var(--z-index-listbox);
+  border: 1px solid var(--field-border-color);
+  z-index: var(--listbox-z-index);
   min-width: 150px;
   max-height: 140px;
   overflow-y: auto;
@@ -38,15 +38,15 @@
 }
 
 .dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem {
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   padding: 2px var(--space-smallest);
   cursor: default;
 }
 
 .dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:hover,
 .dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:focus {
-  background-color: var(--link-light);
+  background-color: var(--link-text-color-light);
   outline: 0;
 }
 

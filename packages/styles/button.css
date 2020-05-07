@@ -6,7 +6,7 @@
   border-radius: 18px;
   border: none;
   padding: var(--space-smallest);
-  font-size: var(--text-small);
+  font-size: var(--text-size-small);
   box-sizing: border-box;
   padding: var(--space-smallest) var(--space-medium);
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
@@ -67,27 +67,27 @@
 }
 
 .dqpl-button-primary {
-  background-color: var(--button-primary);
-  color: var(--button-text-light);
+  background-color: var(--button-background-color-primary);
+  color: var(--button-text-color-light);
 }
 
 .dqpl-button-primary.dqpl-disabled,
 .dqpl-button-primary[aria-disabled='true'],
 .dqpl-button-primary[disabled] {
-  color: var(--text-light-disabled);
+  color: var(--text-color-light-disabled);
 }
 
 .dqpl-button-primary:focus:after {
-  box-shadow: 4px 0 var(--text-light);
+  box-shadow: 4px 0 var(--text-color-light);
 }
 
 .dqpl-button-primary:focus:before {
-  box-shadow: -4px 0 var(--text-light);
+  box-shadow: -4px 0 var(--text-color-light);
 }
 
 .dqpl-button-secondary {
-  background-color: var(--button-secondary);
-  color: var(--button-text-dark);
+  background-color: var(--button-background-color-secondary);
+  color: var(--button-text-color-dark);
 }
 
 .dqpl-button-secondary.dqpl-disabled,
@@ -97,23 +97,23 @@
 }
 
 .dqpl-button-secondary:focus:after {
-  box-shadow: 4px 0 var(--button-text-dark);
+  box-shadow: 4px 0 var(--button-text-color-dark);
 }
 
 .dqpl-button-secondary:focus:before {
-  box-shadow: -4px 0 var(--button-text-dark);
+  box-shadow: -4px 0 var(--button-text-color-dark);
 }
 
 .dqpl-button-error {
   background-color: var(--error);
   box-shadow: none;
-  color: var(--button-text-light);
+  color: var(--button-text-color-light);
 }
 
 .dqpl-button-error.dqpl-disabled,
 .dqpl-button-error[aria-disabled='true'],
 .dqpl-button-error[disabled] {
-  color: var(--text-light-disabled);
+  color: var(--text-color-light-disabled);
 }
 
 .dqpl-button-error:hover {
@@ -129,11 +129,11 @@
 }
 
 .dqpl-button-error:focus:after {
-  box-shadow: 4px 0 var(--text-light);
+  box-shadow: 4px 0 var(--text-color-light);
 }
 
 .dqpl-button-error:focus:before {
-  box-shadow: -4px 0 var(--text-light);
+  box-shadow: -4px 0 var(--text-color-light);
 }
 
 .dqpl-button-clear {
@@ -142,20 +142,20 @@
 }
 
 .dqpl-button-clear:hover {
-  background-color: var(--button-secondary);
+  background-color: var(--button-background-color-secondary);
   box-shadow: none;
 }
 
 .dqpl-button-clear:focus {
-  background-color: var(--button-secondary);
+  background-color: var(--button-background-color-secondary);
 }
 
 .dqpl-button-clear:focus:after {
-  box-shadow: 4px 0 var(--button-text-dark);
+  box-shadow: 4px 0 var(--button-text-color-dark);
 }
 
 .dqpl-button-clear:focus:before {
-  box-shadow: -4px 0 var(--button-text-dark);
+  box-shadow: -4px 0 var(--button-text-color-dark);
 }
 
 .dqpl-buttons-inline {
@@ -176,8 +176,8 @@
 
 .dqpl-button-definition {
   background-color: transparent;
-  color: var(--text-base);
-  font-weight: var(--weight-normal);
+  color: var(--text-color-base);
+  font-weight: var(--font-weight-normal);
   border-bottom: 1px dotted;
   display: inline-block;
   margin: 0 2px;

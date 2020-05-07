@@ -1,25 +1,25 @@
 .dqpl-text-largest {
-  font-size: var(--text-largest);
+  font-size: var(--text-size-largest);
 }
 
 .dqpl-text-larger {
-  font-size: var(--text-larger);
+  font-size: var(--text-size-larger);
 }
 
 .dqpl-text-large {
-  font-size: var(--text-large);
+  font-size: var(--text-size-large);
 }
 
 .dqpl-text-large-medium {
-  font-size: var(--text-large-medium);
+  font-size: var(--text-size-large-medium);
 }
 
 .dqpl-text-medium {
-  font-size: var(--text-medium);
+  font-size: var(--text-size-medium);
 }
 
 .dqpl-text-normal {
-  font-size: var(--text-normal);
+  font-size: var(--text-size-normal);
 }
 
 .dqpl-text-small-medium {
@@ -27,39 +27,39 @@
 }
 
 .dqpl-text-small {
-  font-size: var(--text-small);
+  font-size: var(--text-size-small);
 }
 
 .dqpl-text-smaller {
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
 }
 
 .dqpl-text-smallest {
-  font-size: var(--text-smallest);
+  font-size: var(--text-size-smallest);
 }
 
 .dqpl-weight-thin {
-  font-weight: var(--weight-thin);
+  font-weight: var(--font-weight-thin);
 }
 
 .dqpl-weight-light {
-  font-weight: var(--weight-light);
+  font-weight: var(--font-weight-light);
 }
 
 .dqpl-weight-normal {
-  font-weight: var(--weight-normal);
+  font-weight: var(--font-weight-normal);
 }
 
 .dqpl-weight-medium {
-  font-weight: var(--weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 
 .dqpl-weight-bold {
-  font-weight: var(--weight-bold);
+  font-weight: var(--font-weight-bold);
 }
 
 .dqpl-weight-ultra-bold {
-  font-weight: var(--weight-ultra-bold);
+  font-weight: var(--font-weight-ultra-bold);
 }
 
 .dqpl-inline {

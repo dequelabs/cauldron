@@ -135,7 +135,7 @@
 }
 
 .dqpl-pointer-wrap .dqpl-arrow .dqpl-arrow-neck {
-  background: var(--tile-bg);
+  background: var(--tile-background-color);
   width: 10px;
   height: 27px;
   position: relative;
@@ -149,7 +149,7 @@
 }
 
 .dqpl-pointer-wrap .dqpl-box {
-  background: var(--tile-bg);
+  background: var(--tile-background-color);
   padding: 12px;
   max-width: 300px;
   border-radius: 3px;
@@ -162,7 +162,7 @@
   position: absolute;
   right: 15px;
   z-index: 1;
-  background: var(--tile-bg);
+  background: var(--tile-background-color);
 }
 
 .dqpl-pointer-wrap .dqpl-box .dqpl-ftpo-dismiss:hover {
@@ -176,16 +176,16 @@
 .dqpl-pointer-wrap .dqpl-box .dqpl-content h4 {
   margin: 0 0 5px 0;
   padding: 0;
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
-  color: var(--header-dark);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
+  color: var(--header-text-color-dark);
 }
 
 .dqpl-pointer-wrap .dqpl-box .dqpl-content p {
   margin: 0;
-  font-size: var(--text-smaller);
-  font-weight: var(--weight-light);
-  color: var(--text-base);
+  font-size: var(--text-size-smaller);
+  font-weight: var(--font-weight-light);
+  color: var(--text-color-base);
 }
 
 .dqpl-pointer-wrap .dqpl-box .dqpl-content:focus {
@@ -193,7 +193,7 @@
 }
 
 .dqpl-pointer-wrap .dqpl-box .dqpl-content:focus:before {
-  background: var(--top-bar-bg);
+  background: var(--top-bar-background-color);
 }
 
 .dqpl-pointer-wrap .dqpl-box .dqpl-content:before {

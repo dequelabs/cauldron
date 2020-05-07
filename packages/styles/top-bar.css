@@ -1,6 +1,6 @@
 .dqpl-top-bar {
-  background-color: var(--top-bar-bg);
-  color: var(--top-bar-text);
+  background-color: var(--top-bar-background-color);
+  color: var(--top-bar-text-color);
   position: fixed;
   width: 100%;
   height: var(--top-bar-height);
@@ -9,7 +9,7 @@
   flex-direction: row;
   box-sizing: border-box;
   box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.5);
-  z-index: var(--z-index-top-bar);
+  z-index: var(--top-bar-z-index);
 }
 
 .dqpl-top-bar-thin .dqpl-top-bar {
@@ -42,7 +42,7 @@
 
 .dqpl-top-bar > ul > li:not(.dqpl-menu-trigger) {
   padding: 0 var(--space-medium);
-  font-size: var(--text-small);
+  font-size: var(--text-size-small);
   height: var(--top-bar-height);
   display: flex;
   align-items: center;
@@ -58,26 +58,26 @@
 }
 
 .dqpl-top-bar > ul > li.dqpl-account-item .dqpl-avatar {
-  border: 1px solid var(--tile-bg);
+  border: 1px solid var(--tile-background-color);
   background-color: var(--disabled);
-  color: var(--header);
+  color: var(--header-text-color);
   width: 32px;
   height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: var(--text-medium);
+  font-size: var(--text-size-medium);
   margin-right: 14px;
 }
 
 .dqpl-top-bar > ul > li.dqpl-account-item .dqpl-account-info .dqpl-name {
-  font-size: var(--text-small);
-  color: var(--tile-bg);
+  font-size: var(--text-size-small);
+  color: var(--tile-background-color);
 }
 
 .dqpl-top-bar > ul > li.dqpl-account-item .dqpl-account-info .dqpl-company {
-  font-size: var(--text-smaller);
-  color: var(--top-bar-text);
+  font-size: var(--text-size-smaller);
+  color: var(--top-bar-text-color);
 }
 
 .dqpl-top-bar > ul > li.dqpl-account-item .fa-caret-down {
@@ -95,7 +95,7 @@
 
 .dqpl-top-bar > ul > li:focus-within,
 .dqpl-top-bar > ul > li:hover {
-  border-bottom: var(--border-width) solid var(--top-bar-text);
+  border-bottom: var(--border-width) solid var(--top-bar-text-color);
   outline: 0;
 }
 
@@ -109,7 +109,7 @@
 }
 
 .dqpl-top-bar a {
-  color: var(--top-bar-text);
+  color: var(--top-bar-text-color);
   text-decoration: none;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .dqpl-top-bar li.dqpl-active {
-  background-color: var(--top-bar-bg-active);
+  background-color: var(--top-bar-background-color-active);
 }
 
 .dqpl-top-bar li.dqpl-active:hover {
@@ -128,9 +128,9 @@
 .dqpl-top-bar .dqpl-menu-trigger {
   display: flex;
   align-items: center;
-  background-color: var(--top-bar-bg);
-  color: var(--top-bar-text);
-  font-size: var(--text-medium);
+  background-color: var(--top-bar-background-color);
+  color: var(--top-bar-text-color);
+  font-size: var(--text-size-medium);
   padding: 0 var(--space-small);
   align-self: flex-start;
   box-sizing: border-box;

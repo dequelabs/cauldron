@@ -7,7 +7,7 @@ textarea,
 [aria-haspopup='listbox'],
 [role='listbox'],
 [role='spinbutton'] {
-  border: 1px solid var(--field-border);
+  border: 1px solid var(--field-border-color);
   margin-bottom: var(--space-half);
 }
 
@@ -21,7 +21,7 @@ textarea:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
-  border: 1px solid var(--link);
+  border: 1px solid var(--link-text-color);
   box-shadow: 0px 0px 8px 1px #3c7aae;
 }
 
@@ -34,7 +34,7 @@ textarea:hover,
 [aria-haspopup='listbox']:hover,
 [role='listbox']:hover,
 [role='spinbutton']:hover {
-  border: 1px solid var(--field-hover-border);
+  border: 1px solid var(--field-border-color-hover);
 }
 
 input.dqpl-error,
@@ -46,8 +46,8 @@ textarea.dqpl-error,
 [aria-haspopup='listbox'].dqpl-error,
 [role='listbox'].dqpl-error,
 [role='spinbutton'].dqpl-error {
-  border: 1px solid var(--field-error-border);
-  outline: 2px solid var(--field-error-border);
+  border: 1px solid var(--field-border-color-error);
+  outline: 2px solid var(--field-border-color-error);
 }
 
 input.dqpl-error:focus,
@@ -72,7 +72,7 @@ textarea.dqpl-error:hover,
 [aria-haspopup='listbox'].dqpl-error:hover,
 [role='listbox'].dqpl-error:hover,
 [role='spinbutton'].dqpl-error:hover {
-  border: 1px solid var(--field-error-hover-border);
+  border: 1px solid var(--field-border-color-error-hover);
 }
 
 .dqpl-error-wrap {
@@ -80,8 +80,8 @@ textarea.dqpl-error:hover,
   color: var(--error);
   text-align: left;
   margin-bottom: var(--space-smallest);
-  font-size: var(--text-smallest);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-smallest);
+  font-weight: var(--font-weight-normal);
   padding-left: var(--space-half);
 }
 
@@ -114,8 +114,8 @@ textarea.dqpl-error:hover,
 .dqpl-label {
   display: block;
   text-align: left;
-  font-size: var(--text-smaller);
-  font-weight: var(--weight-light);
+  font-size: var(--text-size-smaller);
+  font-weight: var(--font-weight-light);
   margin-bottom: var(--space-half);
   cursor: default;
 }
@@ -128,7 +128,7 @@ textarea.dqpl-error:hover,
   display: inline-block;
   margin-left: var(--space-large);
   font-style: italic;
-  font-weight: var(--weight-normal);
+  font-weight: var(--font-weight-normal);
 }
 
 .dqpl-label.dqpl-required .dqpl-required-text::before {
@@ -142,27 +142,27 @@ textarea.dqpl-error:hover,
 .dqpl-label-inline {
   display: inline-block;
   text-align: left;
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
 }
 
 .dqpl-text-input {
   padding: var(--space-half);
   box-sizing: border-box;
-  font-size: var(--text-small);
-  color: var(--text-base);
+  font-size: var(--text-size-small);
+  color: var(--text-color-base);
   min-width: var(--input-min-width);
 }
 
 .dqpl-text-input[disabled],
 .dqpl-text-input[aria-disabled='true'] {
-  background-color: var(--field-disabled);
-  border: 1px solid var(--field-disabled);
+  background-color: var(--field-background-color-disabled);
+  border: 1px solid var(--field-background-color-disabled);
 }
 
 .dqpl-textarea {
   display: block;
   min-height: 56px;
-  font-size: var(--text-smaller);
+  font-size: var(--text-size-smaller);
   min-width: var(--input-min-width);
   padding: var(--space-half);
   max-width: 500px;
@@ -190,7 +190,7 @@ textarea.dqpl-error:hover,
 
 .dqpl-radio[aria-checked='true'],
 .dqpl-checkbox[aria-checked='true'] {
-  color: var(--link);
+  color: var(--link-text-color);
 }
 
 .dqpl-radio[aria-disabled='true'] .dqpl-inner-checkbox,
@@ -234,8 +234,8 @@ textarea.dqpl-error:hover,
     var(--space-smallest);
   border: 0;
   margin: 0;
-  color: var(--link);
-  font-size: var(--text-small);
+  color: var(--link-text-color);
+  font-size: var(--text-size-small);
   background-color: transparent;
   box-sizing: border-box;
   position: relative;

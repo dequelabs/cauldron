@@ -23,7 +23,7 @@
 }
 
 .dqpl-loader:after {
-  background: var(--workspace-bg);
+  background: var(--workspace-background-color);
   width: 75%;
   height: 75%;
   border-radius: 50%;

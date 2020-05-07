@@ -13,8 +13,8 @@
 .dqpl-select [aria-haspopup='listbox'] {
   padding: var(--space-half) var(--space-smallest);
   box-sizing: border-box;
-  font-size: var(--text-small);
-  color: var(--text-base);
+  font-size: var(--text-size-small);
+  color: var(--text-color-base);
   width: var(--input-min-width);
   height: var(--space-largest);
   display: inline-block;
@@ -30,15 +30,15 @@
   position: absolute;
   right: var(--space-smallest);
   top: 2.5px;
-  font-size: var(--text-small);
-  color: var(--text-base);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-small);
+  color: var(--text-color-base);
+  font-weight: var(--font-weight-normal);
 }
 
 .dqpl-select [aria-haspopup='listbox'][disabled],
 .dqpl-select [aria-haspopup='listbox'][aria-disabled='true'] {
-  background-color: var(--field-disabled);
-  border: 1px solid var(--field-disabled);
+  background-color: var(--field-background-color-disabled);
+  border: 1px solid var(--field-background-color-disabled);
 }
 
 .dqpl-select [role='listbox'] {
@@ -47,11 +47,11 @@
   padding: 0;
   box-sizing: border-box;
   overflow-y: auto;
-  background-color: var(--tile-bg);
+  background-color: var(--tile-background-color);
   width: var(--input-min-width);
   position: absolute;
   list-style-type: none;
-  z-index: var(--z-index-listbox);
+  z-index: var(--listbox-z-index);
   max-height: 200px;
   top: 28px;
 }
@@ -61,8 +61,8 @@
 }
 
 .dqpl-select [role='listbox'] [role='option'] {
-  font-size: var(--text-small);
-  font-weight: var(--weight-normal);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   padding: 2px var(--space-large);
   top: 28px;
   text-overflow: ellipsis;
@@ -73,7 +73,7 @@
 
 .dqpl-select [role='listbox'] [role='option']:hover,
 .dqpl-select [role='listbox'] [role='option'].dqpl-option-active {
-  background-color: var(--link-light);
+  background-color: var(--link-text-color-light);
 }
 
 .dqpl-select [role='listbox'] [role='option'][aria-disabled='true'] {
@@ -88,8 +88,8 @@
 .dqpl-select
   [role='listbox']
   [role='option'].dqpl-option-selected.dqpl-option-active {
-  background-color: var(--link);
-  color: var(--text-light);
+  background-color: var(--link-text-color);
+  color: var(--text-color-light);
 }
 
 .dqpl-select [role='listbox'] [role='option'].dqpl-option-selected:before,
