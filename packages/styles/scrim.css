@@ -7,7 +7,7 @@
   right: 0;
   opacity: 0;
   display: none;
-  z-index: var(--scrim-z-index);
+  z-index: var(--z-index-scrim);
   transition: opacity 300ms;
 }
 
@@ -20,9 +20,9 @@
   right: 0;
   opacity: 0;
   display: none;
-  z-index: var(--scrim-z-index);
+  z-index: var(--z-index-scrim);
   transition: opacity 300ms;
-  z-index: var(--scrim-z-index-action-needed);
+  z-index: var(--z-index-scrim-action-needed);
 }
 .dqpl-scrim.dqpl-scrim-show,
 .dqpl-scrim-light.dqpl-scrim-show {

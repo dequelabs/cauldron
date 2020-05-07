@@ -51,7 +51,7 @@
   width: var(--input-min-width);
   position: absolute;
   list-style-type: none;
-  z-index: var(--listbox-z-index);
+  z-index: var(--z-index-listbox);
   max-height: 200px;
   top: 28px;
 }

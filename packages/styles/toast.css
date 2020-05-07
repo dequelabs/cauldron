@@ -3,7 +3,7 @@
   position: fixed;
   color: var(--top-bar-background-color-active);
   font-size: var(--text-size-small);
-  z-index: var(--toast-z-index);
+  z-index: var(--z-index-toast);
   align-items: center;
   box-sizing: border-box;
   display: flex;
@@ -26,7 +26,7 @@
 
 .dqpl-toast.dqpl-toast-error {
   background-color: rgba(255, 161, 161, 0.95);
-  z-index: var(--toast-z-index-action-needed);
+  z-index: var(--z-index-toast-action-needed);
 }
 
 .dqpl-toast .dqpl-toast-dismiss {

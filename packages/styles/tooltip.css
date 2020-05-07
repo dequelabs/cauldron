@@ -11,7 +11,7 @@
   padding: var(--space-smallest);
   bottom: 45px;
   right: -28px;
-  z-index: var(--tooltip-z-index);
+  z-index: var(--z-index-tooltip);
   pointer-events: none;
 }
 

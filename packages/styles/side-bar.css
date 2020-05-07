@@ -9,7 +9,7 @@
   left: calc(-1 * var(--menu-width));
   box-sizing: border-box;
   transition: left 0.3s;
-  z-index: var(--size-bar-z-index);
+  z-index: var(--z-index-side-bar);
 }
 
 .dqpl-top-bar-thin .dqpl-side-bar {

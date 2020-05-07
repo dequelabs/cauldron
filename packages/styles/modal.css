@@ -17,7 +17,7 @@ body.dqpl-modal-open {
   left: 50%;
   top: 100px;
   position: fixed;
-  z-index: var(--modal-z-index);
+  z-index: var(--z-index-modal);
   transform: translate(-50%, 0);
   border-radius: 3px;
   background: var(--tile-background-color);
@@ -116,5 +116,5 @@ body.dqpl-modal-open {
   bottom: 0;
   background: var(--scrim-background-color);
   position: fixed;
-  z-index: var(--modal-z-index-scrim);
+  z-index: var(--z-index-modal-scrim);
 }

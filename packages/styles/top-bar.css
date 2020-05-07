@@ -9,7 +9,7 @@
   flex-direction: row;
   box-sizing: border-box;
   box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.5);
-  z-index: var(--top-bar-z-index);
+  z-index: var(--z-index-top-bar);
 }
 
 .dqpl-top-bar-thin .dqpl-top-bar {

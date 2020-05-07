@@ -27,7 +27,7 @@
   right: 0;
   left: auto;
   border: 1px solid var(--field-border-color);
-  z-index: var(--listbox-z-index);
+  z-index: var(--z-index-listbox);
   min-width: 150px;
   max-height: 140px;
   overflow-y: auto;

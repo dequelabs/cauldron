@@ -99,19 +99,19 @@
   --content-max-width: 1000px;
 
   /* z-index */
-  --tooltip-z-index: 9;
-  --scrim-z-index: 7;
-  --modal-z-index: 21;
-  --modal-z-index-scrim: 20;
-  --scrim-z-index-action-needed: 23;
-  --size-bar-z-index: 9;
-  --toast-z-index: 8;
-  --toast-z-index-action-needed: 24;
-  --listbox-z-index: 6;
+  --z-index-tooltip: 9;
+  --z-index-scrim: 7;
+  --z-index-modal: 21;
+  --z-index-modal-scrim: 20;
+  --z-index-scrim-action-needed: 23;
+  --z-index-side-bar: 9;
+  --z-index-toast: 8;
+  --z-index-toast-action-needed: 24;
+  --z-index-listbox: 6;
   /* ensure this is a higher value than the rest (above)! */
-  --top-bar-z-index: 25;
+  --z-index-top-bar: 25;
   /* ensure this is 1 higher than the top bar z-index */
-  --skip-container-z-index: calc(var(--top-bar-z-index) + 1);
+  --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
 
   /* list */
   --list-separator: rgba(153, 153, 153, 0.15);

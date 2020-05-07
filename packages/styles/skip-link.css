@@ -10,7 +10,7 @@
   opacity: 0;
   transition: 250ms opacity;
   border-radius: 2px;
-  z-index: var(--skip-container-z-index);
+  z-index: var(--z-index-skip-container);
 }
 
 .dqpl-skip-container.dqpl-skip-container-active {
