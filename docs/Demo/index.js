@@ -17,7 +17,7 @@ class Demo extends Component {
     return (
       <div className="Demo">
         <h1>{displayName}</h1>
-        <Code>{`import { ${displayName} } from 'cauldron-react'`}</Code>
+        <Code>{`import { ${displayName} } from '@deque/cauldron-react'`}</Code>
         {states.length ? (
           <div className="Demo-states">
             <h2>Examples</h2>

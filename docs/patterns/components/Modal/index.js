@@ -42,7 +42,7 @@ export default class Demo extends Component {
         <Code langauge="javascript">
           {`
 import React, { Component } from 'react';
-import { Button, Modal, ModalContent, ModalFooter } from 'cauldron-react';
+import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react';
 
 class Demo extends Component {
   constructor() {

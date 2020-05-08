@@ -26,7 +26,7 @@ class TopBarMenuDemo extends React.Component {
         <h2>Code Sample</h2>
         <Code language="javascript">
           {`import React from 'react';
-import { TopBar, TopBarMenu, OptionsMenu } from 'cauldron-react';
+import { TopBar, TopBarMenu, OptionsMenu } from '@deque/cauldron-react';
 
 const Demo = () => (
   <TopBar>

@@ -22,7 +22,7 @@ export default class Demo extends Component {
         <Code language="javascript">
           {`
   import React from 'react';
-  import { RadioGroup } from 'cauldron-react';
+  import { RadioGroup } from '@deque/cauldron-react';
 
   const Demo = () => (
     <div>
