@@ -16,7 +16,7 @@ const Demo = () => (
     <Code language="javascript">
       {`
 import React from 'react';
-import { ClickOutsideListener } from 'cauldron-react';
+import { ClickOutsideListener } from '@deque/cauldron-react';
 
 const Demo = () => (
   <ClickOutsideListener onClickOutside={() => alert('You clicked outside of me.')}>

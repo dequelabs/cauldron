@@ -5,11 +5,15 @@ const Home = () => (
   <div>
     <h1>Cauldron React</h1>
     <h2>Installation</h2>
-    <Code language="shell">{'$ npm install cauldron-react'}</Code>
+    <Code language="shell">
+      {'$ npm install --save @deque/cauldron-react @deque/cauldron-styles'}
+    </Code>
     <h2>Usage</h2>
     <Code language="javascript">
       {`
-import { Workspace, Button } from 'cauldron-react';
+import { Workspace, Button } from '@deque/cauldron-react';
+import '@deque/cauldron-styles'; // or in your css you can: @import '@deque/cauldron-styles'
+import '@deque/cauldron-react/lib/cauldron.css';
 
 const Foo = () => (
   <Workspace>

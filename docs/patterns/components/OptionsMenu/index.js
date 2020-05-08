@@ -52,7 +52,7 @@ import {
   OptionsMenuItem,
   OptionsMenuTrigger,
   Icon
-} from 'cauldron-react';
+} from '@deque/cauldron-react';
 
 class Demo extends Component {
 

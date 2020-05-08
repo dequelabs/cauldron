@@ -64,7 +64,7 @@ const Demo = () => (
     <Code language="javascript">
       {`
 import React from 'react';
-import { Tooltip, Button } from 'cauldron-react';
+import { Tooltip, Button } from '@deque/cauldron-react';
 
 const Demo = () => (
   <Tooltip

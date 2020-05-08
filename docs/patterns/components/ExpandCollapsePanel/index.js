@@ -42,7 +42,7 @@ export default class Demo extends Component {
         <h2>Code Sample</h2>
         <Code language="javascript">{`
 import React, { useState } from 'react';
-import { ExpandCollapsePanel, PanelTrigger } from 'cauldron-react';
+import { ExpandCollapsePanel, PanelTrigger } from '@deque/cauldron-react';
 
 const ControlledExpandCollapsePanel = () => {
   const [ open, setOpen ] = useState(false)

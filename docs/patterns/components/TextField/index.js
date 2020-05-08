@@ -50,7 +50,7 @@ export default class Demo extends Component {
 import React from 'react';
 import {
   TextField, Button
-} from 'cauldron-react';
+} from '@deque/cauldron-react';
 
 export default class Demo extends Component {
   state = {
