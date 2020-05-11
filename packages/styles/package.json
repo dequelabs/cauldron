@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-styles",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "deque cauldron pattern library styles",
   "repository": "https://github.com/dequelabs/cauldron",
   "publishConfig": {
