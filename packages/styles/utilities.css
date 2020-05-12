@@ -66,15 +66,6 @@ body .Hidden {
   display: none;
 }
 
-.Offscreen {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  margin-top: -1px;
-}
-
 .Flexr {
   display: flex;
   align-items: center;
