@@ -1,4 +1,5 @@
-.FadeIn {
+.FadeIn,
+.FadeIn--flex.FadeIn {
   opacity: 1;
   transition: opacity 400ms;
 }

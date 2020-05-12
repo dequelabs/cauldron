@@ -26,12 +26,12 @@
 }
 
 .Scrim.Scrim--show,
-.Scrimt--light.Scrim--show {
+.Scrim--light.Scrim--show {
   display: block;
 }
 
 .Scrim.Scrim--fade-in,
-.Scrimt--light.Scrim--fade-in {
+.Scrim--light.Scrim--fade-in {
   opacity: 1;
   transition: opacity 300ms;
 }
