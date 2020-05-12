@@ -99,7 +99,10 @@ export default class Checkbox extends React.Component<
     } = this.props;
 
     return (
-      <div className={classNames('Checkbox Flexr', className)} {...others}>
+      <div
+        className={classNames('Checkbox is--flex-row', className)}
+        {...others}
+      >
         <input
           type="checkbox"
           checked={checked}

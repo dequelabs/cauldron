@@ -5,7 +5,7 @@ import {
   AlertActions,
   Button,
   Checkbox,
-  FirstTimePointOut,
+  Pointout,
   Icon,
   Link,
   Loader,
@@ -89,7 +89,7 @@ const checkbox = () => (
 );
 
 const ftpo = () => (
-  <FirstTimePointOut
+  <Pointout
     dismissText="dismiss"
     ftpRef={noopRef}
     headerId="id"
@@ -99,7 +99,7 @@ const ftpo = () => (
     portal={document.body}
   >
     hi
-  </FirstTimePointOut>
+  </Pointout>
 );
 
 const icon = () => <Icon label="icon" type="type" />;

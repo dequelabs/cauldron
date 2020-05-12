@@ -1,4 +1,4 @@
-import React, { StyleHTMLAttributes } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -6,7 +6,7 @@ import focusable from 'focusable';
 import rndid from '../../utils/rndid';
 import removeIds from '../../utils/remove-ids';
 
-export interface FirstTimePointOutProps {
+export interface PointoutProps {
   arrowPosition:
     | 'top-left'
     | 'top-middle'
@@ -32,16 +32,16 @@ export interface FirstTimePointOutProps {
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
-interface FirstTimePointOutState {
+interface PointoutState {
   show: boolean;
   style: React.CSSProperties;
   headingId?: string;
   offscreenContentFocus?: boolean;
 }
 
-export default class FirstTimePointOut extends React.Component<
-  FirstTimePointOutProps,
-  FirstTimePointOutState
+export default class Pointout extends React.Component<
+  PointoutProps,
+  PointoutState
 > {
   static defaultProps = {
     ftpoRef: () => {},
@@ -58,10 +58,7 @@ export default class FirstTimePointOut extends React.Component<
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
-    noArrow: function(
-      props: FirstTimePointOutProps,
-      propName: keyof FirstTimePointOutProps
-    ) {
+    noArrow: function(props: PointoutProps, propName: keyof PointoutProps) {
       if (props[propName] === true && typeof props['target'] !== 'undefined') {
         return new Error(
           'A "target" prop with "noArrow=true" is not currently supported.'
@@ -85,7 +82,7 @@ export default class FirstTimePointOut extends React.Component<
   private offscreenContentRef: HTMLElement | null;
   private visibleRef: HTMLElement | null;
 
-  constructor(props: FirstTimePointOutProps) {
+  constructor(props: PointoutProps) {
     super(props);
     this.state = { show: true, style: {} };
     this.onCloseClick = this.onCloseClick.bind(this);
@@ -306,7 +303,7 @@ export default class FirstTimePointOut extends React.Component<
     this.setState({ style });
   };
 
-  componentDidUpdate(nextProps: FirstTimePointOutProps) {
+  componentDidUpdate(nextProps: PointoutProps) {
     const { props, attachOffscreenListeners, positionRelativeToTarget } = this;
     if (
       props.arrowPosition !== nextProps.arrowPosition ||

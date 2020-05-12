@@ -91,11 +91,11 @@ textarea.Field--has-error:hover,
   margin-bottom: var(--space-large);
 }
 
-.Field.Flexr {
+.Field.is--flex-row {
   align-items: center;
 }
 
-.Field.Flexr .Field__label {
+.Field.is--flex-row .Field__label {
   margin-bottom: 0;
 }
 

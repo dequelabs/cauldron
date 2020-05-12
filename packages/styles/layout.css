@@ -26,6 +26,33 @@
   border-left-color: var(--top-bar-background-color);
 }
 
+/* the left-bar style focus indication */
+.Content--focus-target,
+[data-skip-target='true'] {
+  position: relative;
+}
+
+.Content--focus-target::before,
+[data-skip-target='true']::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  background-color: transparent;
+  top: 0;
+  bottom: 0;
+  width: var(--border-width);
+}
+
+.Content--focus-target:focus,
+[data-skip-target='true']:focus {
+  outline: 0;
+}
+
+.Content--focus-target:focus::before,
+[data-skip-target='true']:focus::before {
+  background-color: var(--top-bar-background-color);
+}
+
 @media (min-width: 1024px) {
   body .SideBar {
     display: block;

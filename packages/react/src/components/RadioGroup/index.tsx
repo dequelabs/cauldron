@@ -94,7 +94,7 @@ export default class RadioGroup extends React.Component<
       const isFocused = this.state.focusIndex === index;
 
       return (
-        <div className={classNames('Radio Flexr', className)} key={id}>
+        <div className={classNames('Radio is--flex-row', className)} key={id}>
           <input
             type="radio"
             name={name}

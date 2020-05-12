@@ -1,109 +1,72 @@
-.Text--largest {
+.text--largest {
   font-size: var(--text-size-largest);
 }
 
-.Text--larger {
+.text--larger {
   font-size: var(--text-size-larger);
 }
 
-.Text--large {
+.text--large {
   font-size: var(--text-size-large);
 }
 
-.Text--large-medium {
+.text--large-medium {
   font-size: var(--text-size-large-medium);
 }
 
-.Text--medium {
+.text--medium {
   font-size: var(--text-size-medium);
 }
 
-.Text--normal {
+.text--normal {
   font-size: var(--text-size-normal);
 }
 
-.Text--small-medium {
+.text--small-medium {
   font-size: var(--text-small-medium);
 }
 
-.Text--small {
+.text--small {
   font-size: var(--text-size-small);
 }
 
-.Text--smaller {
+.text--smaller {
   font-size: var(--text-size-smaller);
 }
 
-.Text--smallest {
+.text--smallest {
   font-size: var(--text-size-smallest);
 }
 
-.Weight--thin {
+.weight--thin {
   font-weight: var(--font-weight-thin);
 }
 
-.Weight--light {
+.weight--light {
   font-weight: var(--font-weight-light);
 }
 
-.Weight--normal {
+.weight--normal {
   font-weight: var(--font-weight-normal);
 }
 
-.Weight--medium {
+.weight--medium {
   font-weight: var(--font-weight-medium);
 }
 
-.Weight--bold {
+.weight--bold {
   font-weight: var(--font-weight-bold);
 }
 
-.Weight--ultra-bold {
+.weight--ultra-bold {
   font-weight: var(--font-weight-ultra-bold);
 }
 
-body .Hidden {
+body .is--hidden {
   display: none;
 }
 
-.Flexr {
+.is--flex-row {
   display: flex;
   align-items: center;
-}
-
-.MenuItem__logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.MenuItem--separator {
-  border-left: 1px solid var(--top-bar-menuitem-separator);
-}
-
-/* utility for using the left-bar style focus indication */
-.Block,
-[data-skip-target='true'] {
-  position: relative;
-}
-
-.Block::before,
-[data-skip-target='true']::before {
-  content: '';
-  position: absolute;
-  left: -15px;
-  background-color: transparent;
-  top: 0;
-  bottom: 0;
-  width: var(--border-width);
-}
-
-.Block:focus,
-[data-skip-target='true']:focus {
-  outline: 0;
-}
-
-.Block:focus::before,
-[data-skip-target='true']:focus::before {
-  background-color: var(--top-bar-background-color);
 }

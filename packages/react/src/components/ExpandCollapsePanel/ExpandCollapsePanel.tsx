@@ -200,7 +200,7 @@ export default class ExpandCollapsePanel extends React.Component<
         <div
           {...other}
           className={classnames(animationClass, className, {
-            Hidden: !isOpen && !isAnimating
+            'is--hidden': !isOpen && !isAnimating
           })}
           ref={this.panel}
         >

@@ -102,3 +102,13 @@
 .TopBar__item--icon {
   text-align: center;
 }
+
+.MenuItem__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MenuItem--separator {
+  border-left: 1px solid var(--top-bar-menuitem-separator);
+}

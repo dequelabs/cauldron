@@ -61,7 +61,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     super(props);
 
     this.state = {
-      animationClass: props.show ? 'FadeIn--flex' : 'Hidden'
+      animationClass: props.show ? 'FadeIn--flex' : 'is--hidden'
     };
 
     this.dismissToast = this.dismissToast.bind(this);
@@ -152,7 +152,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             isolator?.deactivate();
           }
 
-          this.setState({ animationClass: 'Hidden' }, onDismiss);
+          this.setState({ animationClass: 'is--hidden' }, onDismiss);
         });
       }
     );

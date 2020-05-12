@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import FirstTimePointOut from 'src/components/FirstTimePointOut';
+import Pointout from 'src/components/Pointout';
 import axe from '../../../axe';
 
 const defaults = {};
@@ -8,9 +8,9 @@ const defaults = {};
 test('handles "noArrow" prop properly', () => {
   expect.assertions(1);
   const ftpo = shallow(
-    <FirstTimePointOut noArrow={true} {...defaults}>
+    <Pointout noArrow={true} {...defaults}>
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   expect(ftpo.hasClass('Pointout--no-arrow')).toBeTruthy();
@@ -18,9 +18,9 @@ test('handles "noArrow" prop properly', () => {
 
 test('handles "arrowPosition" prop', () => {
   const ftpo = shallow(
-    <FirstTimePointOut arrowPosition="top-right" {...defaults}>
+    <Pointout arrowPosition="top-right" {...defaults}>
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   expect(ftpo.find('.Pointout__arrow.Pointout__arrow--top-right')).toBeTruthy();
@@ -28,9 +28,7 @@ test('handles "arrowPosition" prop', () => {
 
 test('returns null given a falsey "show" state', () => {
   expect.assertions(1);
-  const ftpo = mount(
-    <FirstTimePointOut {...defaults}>{'hello'}</FirstTimePointOut>
-  );
+  const ftpo = mount(<Pointout {...defaults}>{'hello'}</Pointout>);
 
   ftpo.setState(
     {
@@ -46,9 +44,9 @@ test('calls onClose prop when close is clicked', () => {
   let called = false;
   const onClose = () => (called = true);
   const ftpo = mount(
-    <FirstTimePointOut {...defaults} onClose={onClose}>
+    <Pointout {...defaults} onClose={onClose}>
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   ftpo.find('.Pointout__dismiss').simulate('click');
@@ -58,9 +56,9 @@ test('calls onClose prop when close is clicked', () => {
 test('accepts the dismissText prop', () => {
   expect.assertions(1);
   const ftpo = mount(
-    <FirstTimePointOut {...defaults} dismissText={'Fred'}>
+    <Pointout {...defaults} dismissText={'Fred'}>
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   expect(
@@ -70,9 +68,9 @@ test('accepts the dismissText prop', () => {
 
 test('accepts className prop', () => {
   const ftpo = mount(
-    <FirstTimePointOut {...defaults} dismissText={'Fred'} className="foo">
+    <Pointout {...defaults} dismissText={'Fred'} className="foo">
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   expect(ftpo.find('.Pointout.foo').exists()).toBeTruthy();
@@ -80,7 +78,7 @@ test('accepts className prop', () => {
 
 test('renders to portal when using a target', () => {
   const ftpo = mount(
-    <FirstTimePointOut
+    <Pointout
       {...defaults}
       target={{
         getBoundingClientRect() {
@@ -89,14 +87,14 @@ test('renders to portal when using a target', () => {
       }}
     >
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
   expect(ftpo.find('Portal').exists()).toBeTruthy();
 });
 
 test('should be positioned relative to target', () => {
   const ftpo = mount(
-    <FirstTimePointOut
+    <Pointout
       {...defaults}
       arrowPosition="top-left"
       target={{
@@ -106,7 +104,7 @@ test('should be positioned relative to target', () => {
       }}
     >
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
   const { top, left } = ftpo
     .find('Portal')
@@ -118,9 +116,9 @@ test('should be positioned relative to target', () => {
 
 test('should associate FTPO with heading id', () => {
   const ftpo = mount(
-    <FirstTimePointOut heading={<h4>heading</h4>} {...defaults}>
+    <Pointout heading={<h4>heading</h4>} {...defaults}>
       {'hello'}
-    </FirstTimePointOut>
+    </Pointout>
   );
   ftpo.update();
 
@@ -133,7 +131,7 @@ test('should associate FTPO with heading id', () => {
 
 test('should mirror focus to visual FTPO', () => {
   const ftpo = mount(
-    <FirstTimePointOut
+    <Pointout
       {...defaults}
       arrowPosition="top-left"
       target={{
@@ -143,7 +141,7 @@ test('should mirror focus to visual FTPO', () => {
       }}
     >
       Hello <a href="#foo">Cruel World</a>
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   const offscreenFTPO = ftpo.find('.Offscreen');
@@ -181,7 +179,7 @@ test('should mirror focus to visual FTPO', () => {
 
 test('should remove tabindex from focusable elements on visual FTPO with target', () => {
   const ftpo = mount(
-    <FirstTimePointOut
+    <Pointout
       {...defaults}
       arrowPosition="top-left"
       target={{
@@ -191,7 +189,7 @@ test('should remove tabindex from focusable elements on visual FTPO with target'
       }}
     >
       Hello <a href="#foo">Cruel World</a>
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   const offscreenFTPO = ftpo.find('.Offscreen');
@@ -225,7 +223,7 @@ test('should clean ids from portal FTPO', () => {
         <button type="button" ref={elementRef}>
           Button
         </button>
-        <FirstTimePointOut
+        <Pointout
           {...defaults}
           heading={<h4>heading</h4>}
           target={elementRef}
@@ -233,7 +231,7 @@ test('should clean ids from portal FTPO', () => {
         >
           Body
           <p id="foo" />
-        </FirstTimePointOut>
+        </Pointout>
       </React.Fragment>
     );
   };
@@ -247,13 +245,9 @@ test('should clean ids from portal FTPO', () => {
 
 test('should return no axe violations', async () => {
   const ftpo = mount(
-    <FirstTimePointOut
-      {...defaults}
-      heading={<h4>heading</h4>}
-      dismissText={'Dismiss'}
-    >
+    <Pointout {...defaults} heading={<h4>heading</h4>} dismissText={'Dismiss'}>
       Body
-    </FirstTimePointOut>
+    </Pointout>
   );
 
   expect(await axe(ftpo.html())).toHaveNoViolations();
@@ -267,14 +261,14 @@ test('should return no axe violations when rendering via a portal', async () => 
         <button type="button" ref={elementRef}>
           Button
         </button>
-        <FirstTimePointOut
+        <Pointout
           {...defaults}
           heading={<h4>heading</h4>}
           target={elementRef}
           dismissText={'Dismiss'}
         >
           Body
-        </FirstTimePointOut>
+        </Pointout>
       </React.Fragment>
     );
   };

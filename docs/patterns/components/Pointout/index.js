@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FirstTimePointOut, Code } from '../../../../packages/react/src/';
+import { Pointout, Code } from '../../../../packages/react/src';
 
 const Demo = () => {
   const buttonRef = React.createRef();
@@ -22,45 +22,42 @@ const Demo = () => {
       <h2>Demo</h2>
 
       <h3>With Default Arrow</h3>
-      <FirstTimePointOut
-        heading={<h4>First time point out!</h4>}
-        dismissText="Close"
-      >
+      <Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
         <p>This is a first time point out with a pointer</p>
-      </FirstTimePointOut>
+      </Pointout>
       <Code language="javascript">
-        {`<FirstTimePointOut heading={<h4>First time point out!</h4>} dismissText="Close">
+        {`<Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
   <p>This is a first time point out with a pointer</p>
-</FirstTimePointOut>`}
+</Pointout>`}
       </Code>
 
       <h3>With Positioned Arrow</h3>
-      <FirstTimePointOut
+      <Pointout
         heading={<h4>First time point out!</h4>}
         dismissText="Close"
         arrowPosition="top-right"
       >
         <p>This is a first time point out with a positioned pointer</p>
-      </FirstTimePointOut>
+      </Pointout>
       <Code language="javascript">
-        {`<FirstTimePointOut
+        {`<Pointout
   heading={<h4>First time point out!</h4>}
   dismissText="Close"
   arrowPosition="top-right"
 >
   <p>This is a first time point out with a positioned pointer</p>
-</FirstTimePointOut>`}
+</Pointout>`}
       </Code>
 
       <h3>Without Arrow</h3>
-      <FirstTimePointOut noArrow={true}>
+      <Pointout noArrow={true}>
         <p>This is a first time point out without a pointer</p>
-      </FirstTimePointOut>
+      </Pointout>
       <Code language="javascript">
-        {`<FirstTimePointOut noArrow={true}>
+        {`<Pointout noArrow={true}>
   <h4>First time point out!</h4>
   <p>This is a first time point out without a pointer</p>
-</FirstTimePointOut>`}
+</Pointout>`}
       </Code>
 
       <h3>Targeted First Time Point Outs</h3>
@@ -104,7 +101,7 @@ const Demo = () => {
       >
         Change My Position
       </button>
-      <FirstTimePointOut
+      <Pointout
         ref={ftpoRef}
         heading={<h4>Targeted FTPO</h4>}
         dismissText="Close"
@@ -112,16 +109,16 @@ const Demo = () => {
         portal={portal}
       >
         <p>This is a first time point out pointing to an element target.</p>
-      </FirstTimePointOut>
+      </Pointout>
       <Code language="javascript">
         {`function TargetedFTPO() {
   const buttonRef = React.createRef();
   return (
     <div>
       <button type="button" ref={buttonRef}>Button</button>
-      <FirstTimePointOut heading={<h4>Targeted FTPO</h4>} dismissText="Close" target={buttonRef}
+      <Pointout heading={<h4>Targeted FTPO</h4>} dismissText="Close" target={buttonRef}
         <p>This is a first time point out pointing to an element target.</p>
-      </FirstTimePointOut>
+      </Pointout>
     </div>
   );
 }`}

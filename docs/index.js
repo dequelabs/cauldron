@@ -25,7 +25,7 @@ import './index.css';
 
 const componentsList = [
   'Button',
-  'FirstTimePointOut',
+  'Pointout',
   'Alert',
   'Modal',
   'TopBarMenu',

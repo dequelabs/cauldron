@@ -59,7 +59,7 @@ test('handles transition from truthy show to falsey show prop', done => {
       {'hi'}
     </Toast>
   );
-  expect(wrapper.find('.Toast').hasClass('Hidden')).toBeFalsy();
+  expect(wrapper.find('.Toast').hasClass('is--hidden')).toBeFalsy();
   wrapper.setProps({ show: false });
 
   setTimeout(() => {
@@ -69,7 +69,7 @@ test('handles transition from truthy show to falsey show prop', done => {
       wrapper
         .find('.Toast')
         .getDOMNode()
-        .classList.contains('Hidden')
+        .classList.contains('is--hidden')
     ).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
