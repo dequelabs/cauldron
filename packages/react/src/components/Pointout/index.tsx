@@ -1,4 +1,4 @@
-import React, { StyleHTMLAttributes } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -6,7 +6,7 @@ import focusable from 'focusable';
 import rndid from '../../utils/rndid';
 import removeIds from '../../utils/remove-ids';
 
-export interface FirstTimePointOutProps {
+export interface PointoutProps {
   arrowPosition:
     | 'top-left'
     | 'top-middle'
@@ -32,16 +32,16 @@ export interface FirstTimePointOutProps {
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
-interface FirstTimePointOutState {
+interface PointoutState {
   show: boolean;
   style: React.CSSProperties;
   headingId?: string;
   offscreenContentFocus?: boolean;
 }
 
-export default class FirstTimePointOut extends React.Component<
-  FirstTimePointOutProps,
-  FirstTimePointOutState
+export default class Pointout extends React.Component<
+  PointoutProps,
+  PointoutState
 > {
   static defaultProps = {
     ftpoRef: () => {},
@@ -58,10 +58,7 @@ export default class FirstTimePointOut extends React.Component<
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
-    noArrow: function(
-      props: FirstTimePointOutProps,
-      propName: keyof FirstTimePointOutProps
-    ) {
+    noArrow: function(props: PointoutProps, propName: keyof PointoutProps) {
       if (props[propName] === true && typeof props['target'] !== 'undefined') {
         return new Error(
           'A "target" prop with "noArrow=true" is not currently supported.'
@@ -85,7 +82,7 @@ export default class FirstTimePointOut extends React.Component<
   private offscreenContentRef: HTMLElement | null;
   private visibleRef: HTMLElement | null;
 
-  constructor(props: FirstTimePointOutProps) {
+  constructor(props: PointoutProps) {
     super(props);
     this.state = { show: true, style: {} };
     this.onCloseClick = this.onCloseClick.bind(this);
@@ -226,12 +223,12 @@ export default class FirstTimePointOut extends React.Component<
     }
 
     // Tag focusable elements
-    for (var element of visibleFocusable) {
+    for (const element of visibleFocusable) {
       element.setAttribute('data-focusable', 'true');
       element.setAttribute('tabindex', '-1');
     }
 
-    visibleFocusable[elementIndex].classList.add('dqpl-focus-active');
+    visibleFocusable[elementIndex].classList.add('Pointout--focus-active');
   };
 
   handleOffscreenFocusOut = ({ target }: FocusEvent) => {
@@ -246,7 +243,7 @@ export default class FirstTimePointOut extends React.Component<
       return;
     }
 
-    visibleFocusable[elementIndex].classList.remove('dqpl-focus-active');
+    visibleFocusable[elementIndex].classList.remove('Pointout--focus-active');
   };
 
   positionRelativeToTarget = () => {
@@ -267,7 +264,7 @@ export default class FirstTimePointOut extends React.Component<
     if (portalNode && portalNode !== document.body) {
       // If the portal is not placed on document.body
       // position the FTPO relative to the portal
-      let rect = portalNode.getBoundingClientRect();
+      const rect = portalNode.getBoundingClientRect();
       top -= rect.top - portalNode.scrollTop;
       left -= rect.left - portalNode.scrollLeft;
     }
@@ -306,7 +303,7 @@ export default class FirstTimePointOut extends React.Component<
     this.setState({ style });
   };
 
-  componentDidUpdate(nextProps: FirstTimePointOutProps) {
+  componentDidUpdate(nextProps: PointoutProps) {
     const { props, attachOffscreenListeners, positionRelativeToTarget } = this;
     if (
       props.arrowPosition !== nextProps.arrowPosition ||
@@ -338,10 +335,10 @@ export default class FirstTimePointOut extends React.Component<
 
     const FTPO = (
       <div
-        className={classNames(className, 'dqpl-pointer-wrap', {
-          'dqpl-no-arrow': noArrow,
-          'dqpl-ftpo-auto': !!target,
-          [arrowPosition]: !!arrowPosition && !noArrow
+        className={classNames(className, 'Pointout', {
+          'Pointout--no-arrow': noArrow,
+          'Pointout--auto': !!target,
+          [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow
         })}
         style={style}
         role={target ? undefined : 'region'}
@@ -351,17 +348,17 @@ export default class FirstTimePointOut extends React.Component<
       >
         {noArrow ? null : (
           <div
-            className={classNames('dqpl-arrow', {
-              [arrowPosition]: !!arrowPosition && !noArrow
+            className={classNames('Pointout__arrow', {
+              [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow
             })}
           >
-            <div className="dqpl-arrow-pointer" />
-            <div className="dqpl-arrow-neck" />
+            <div className="Pointout__arrow-pointer" />
+            <div className="Pointout__arrow-neck" />
           </div>
         )}
-        <div className="dqpl-box">
+        <div className="Pointout__box">
           <button
-            className="dqpl-ftpo-dismiss fa fa-close"
+            className="Pointout__dismiss fa fa-close"
             type="button"
             aria-label={dismissText}
             onClick={this.onCloseClick}
@@ -369,8 +366,8 @@ export default class FirstTimePointOut extends React.Component<
           />
           {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
           <div
-            className={classNames('dqpl-content', {
-              'dqpl-content-focus-active': offscreenContentFocus
+            className={classNames('Pointout__content', {
+              'Pointout__content--focus-active': offscreenContentFocus
             })}
             tabIndex={!target ? -1 : undefined}
             ref={ftpoRef}
@@ -390,7 +387,7 @@ export default class FirstTimePointOut extends React.Component<
       return (
         <React.Fragment>
           <div
-            className="dqpl-offscreen"
+            className="Offscreen"
             role="region"
             aria-labelledby={heading ? headingId : undefined}
             ref={el => (this.offscreenRef = el)}
@@ -401,7 +398,7 @@ export default class FirstTimePointOut extends React.Component<
               onClick={this.onCloseClick}
             />
             <div
-              className="dqpl-content"
+              className="Pointout__content"
               tabIndex={-1}
               ref={el => (this.offscreenContentRef = el)}
             >

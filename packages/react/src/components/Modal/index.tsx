@@ -101,11 +101,7 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
     }
 
     const close = !forceAction ? (
-      <button
-        className="dqpl-close dqpl-icon"
-        type="button"
-        onClick={this.close}
-      >
+      <button className="Modal__close" type="button" onClick={this.close}>
         <div className="fa fa-close" aria-hidden="true" />
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
@@ -117,14 +113,14 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
         focusTrapOptions={{
           onDeactivate: this.close,
           escapeDeactivates: !forceAction,
-          fallbackFocus: '.dqpl-modal-heading'
+          fallbackFocus: '.Modal__heading'
         }}
       >
         <ClickOutsideListener onClickOutside={this.handleClickOutside}>
           <div
             role="dialog"
-            className={classNames('dqpl-modal', className, {
-              'dqpl-dialog-show': show
+            className={classNames('Modal', className, {
+              'Modal--show': show
             })}
             ref={el => {
               this.element = el;
@@ -132,10 +128,10 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
             }}
             {...other}
           >
-            <div className="dqpl-dialog-inner">
-              <div className="dqpl-modal-header">
+            <div className="Modal__inner">
+              <div className="Modal__header">
                 <Heading
-                  className="dqpl-modal-heading"
+                  className="Modal__heading"
                   ref={(el: HTMLHeadingElement) => (this.heading = el)}
                   tabIndex={-1}
                 >
@@ -176,7 +172,7 @@ const ModalContent = ({
   children,
   ...other
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className="dqpl-content" {...other}>
+  <div className="Modal__content" {...other}>
     {children}
   </div>
 );
@@ -186,7 +182,7 @@ const ModalFooter = ({
   children,
   ...other
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className="dqpl-modal-footer" {...other}>
+  <div className="Modal__footer" {...other}>
     {children}
   </div>
 );

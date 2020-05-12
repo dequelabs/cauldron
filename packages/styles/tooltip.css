@@ -1,57 +1,95 @@
-.dqpl-tooltip {
-  width: 145px;
+.Tooltip {
+  opacity: 1;
+}
+
+/* NOTE: the rc-tooltip-* classes come from the
+ * rc-tooltip module that is used under-the-hood
+ */
+
+.Tooltip .rc-tooltip-inner {
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  min-width: 145px;
+  max-width: 200px;
   box-sizing: border-box;
-  border: 1px solid var(--tooltip-border-color);
+  border: 1px solid #999999;
   border-radius: 2px;
-  font-size: var(--text-size-smallest);
-  position: absolute;
-  display: none;
-  background: var(--button-background-color-secondary);
-  padding: var(--space-smallest);
-  bottom: 45px;
-  right: -28px;
-  z-index: var(--z-index-tooltip);
-  pointer-events: none;
+  font-size: 12px;
+  background: #f2f2f2;
+  padding: 8px;
+  z-index: 9;
+  word-break: break-all;
 }
 
-.dqpl-tooltip:after {
-  position: absolute;
-  bottom: -14px;
-  right: 32px;
+.Tooltip .rc-tooltip-arrow {
+  z-index: 10;
+}
+
+.Tooltip .rc-tooltip-arrow::before {
   content: '';
+  position: absolute;
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 15.6px 9px 0 9px;
-  border-color: var(--button-background-color-secondary) transparent transparent
-    transparent;
 }
 
-.dqpl-tooltip:before {
-  position: absolute;
-  bottom: -16px;
-  right: 32px;
-  content: '';
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 15.6px 9px 0 9px;
-  border-color: var(--header-text-color) transparent transparent transparent;
+/* ALIGNED TOP */
+.Tooltip.rc-tooltip-placement-top .rc-tooltip-arrow {
+  border-width: 7.8px 4.5px 0 4.5px;
+  margin-left: -4.5px;
+  bottom: -6px;
+  border-top-color: #4d4d4d;
 }
 
-.dqpl-tooltip.dqpl-tip-active {
-  display: block;
+.Tooltip.rc-tooltip-placement-top .rc-tooltip-arrow::before {
+  left: 50%;
+  bottom: 1px;
+  margin-left: -4.5px;
+  border-width: 7.8px 4.5px 0 4.5px;
+  border-color: #f2f2f2 transparent transparent transparent;
 }
 
-.dqpl-definition-button-wrap .dqpl-tooltip {
-  bottom: 30px;
-  right: 50%;
-  margin-right: -72.5px;
+/* ALIGNED LEFT */
+.Tooltip.rc-tooltip-placement-left .rc-tooltip-arrow {
+  border-width: 4.5px 0 4.5px 7.8px;
+  right: -6px;
+  border-left-color: #4d4d4d;
 }
 
-.dqpl-definition-button-wrap .dqpl-tooltip:before,
-.dqpl-definition-button-wrap .dqpl-tooltip:after {
-  right: 50%;
-  margin-right: -9px;
+.Tooltip.rc-tooltip-placement-left .rc-tooltip-arrow::before {
+  left: 50%;
+  bottom: -4.5px;
+  margin-left: -8.5px;
+  border-width: 4.5px 0 4.5px 7.8px;
+  border-color: transparent transparent transparent #f2f2f2;
+}
+
+/* ALIGNED RIGHT */
+.Tooltip.rc-tooltip-placement-right .rc-tooltip-arrow {
+  border-width: 4.5px 7.8px 4.5px 0;
+  margin-left: -1px;
+  margin-top: -4.5px;
+  border-right-color: #4d4d4d;
+}
+
+.Tooltip.rc-tooltip-placement-right .rc-tooltip-arrow::before {
+  left: 50%;
+  bottom: -4.5px;
+  margin-left: 1.5px;
+  border-width: 4.5px 7.8px 4.5px 0;
+  border-color: transparent #f2f2f2 transparent transparent;
+}
+
+/* ALIGNED BOTTOM */
+.Tooltip.rc-tooltip-placement-bottom .rc-tooltip-arrow {
+  border-width: 0 4.5px 7.8px 4.5px;
+  border-bottom-color: #4d4d4d;
+  margin-top: -1px;
+}
+
+.Tooltip.rc-tooltip-placement-bottom .rc-tooltip-arrow::before {
+  left: 50%;
+  margin-left: -4.5px;
+  margin-top: 0.5px;
+  border-width: 0 4.5px 7.8px 4.5px;
+  border-color: transparent transparent #f2f2f2 transparent;
 }

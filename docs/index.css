@@ -1,4 +1,4 @@
-.dqpl-top-bar li a {
+.TopBar li a {
   font-weight: 100;
 }
 
@@ -14,28 +14,28 @@ code {
 }
 
 /* adjust ftpo positioning for demo layout */
-.dqpl-pointer-wrap:not(.dqpl-ftpo-auto) {
+.Pointout:not(.Pointout--auto) {
   position: relative;
 }
 
-.dqpl-logo-item {
+.MenuItem__logo {
   padding: 0;
 }
 
-.dqpl-logo-item img {
+.MenuItem__logo img {
   width: 38px;
 }
 
-[role='menubar'] .dqpl-options-menu {
+[role='menubar'] .OptionsMenu__list {
   width: 140px;
   top: calc(var(--top-bar-height) - 6px);
 }
 
-.dqpl-top-bar-thin [role='menubar'] .dqpl-options-menu {
+.TopBar--thin [role='menubar'] .OptionsMenu__list {
   top: calc(var(--top-bar-height-thin) - 6px);
 }
 
-.dropdown-arrow-down::after {
+.MenuItem--arrow-down::after {
   content: '';
   border: 6px solid transparent;
   border-top: 7px solid;

@@ -25,7 +25,7 @@ import './index.css';
 
 const componentsList = [
   'Button',
-  'FirstTimePointOut',
+  'Pointout',
   'Alert',
   'Modal',
   'TopBarMenu',
@@ -141,7 +141,7 @@ class App extends Component {
               </button>
             </TopBarTrigger>
             <TopBarItem>
-              <Link to="/" className="dqpl-logo-item" tabIndex={-1}>
+              <Link to="/" className="MenuItem__logo" tabIndex={-1}>
                 <img src={logo} alt="" /> <span>Cauldron</span>
               </Link>
             </TopBarItem>
@@ -151,10 +151,10 @@ class App extends Component {
 
             <TopBarMenu
               id="topbar-menu"
-              className="dqpl-right-aligned dqpl-separator dropdown-arrow-down"
+              className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
               menuItemRef={el => (this.topBarMenuItem = el)}
             >
-              <div className="dqpl-top-bar-icon-item">
+              <div className="TopBar__item--icon">
                 {thin ? (
                   <Icon type="fa-cog" label="Settings" />
                 ) : (
@@ -170,7 +170,7 @@ class App extends Component {
               </OptionsMenuList>
             </TopBarMenu>
 
-            <TopBarItem className="dqpl-separator">
+            <TopBarItem className="MenuItem--separator">
               <a
                 href="https://github.com/dequelabs/cauldron-react"
                 className="fa fa-github"
@@ -187,7 +187,7 @@ class App extends Component {
                 <SideBarItem
                   key={name}
                   className={classNames({
-                    'dqpl-menuitem-selected': isActive
+                    'MenuItem--active': isActive
                   })}
                 >
                   {this.renderSideBarLink(pathname, name, isActive)}

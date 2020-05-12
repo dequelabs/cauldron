@@ -139,7 +139,7 @@ export default class OptionsMenuList extends React.Component<
 
   render() {
     const { props, handleClick } = this;
-    /* eslint-disable no-unused-vars */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       children,
       menuRef,
@@ -150,13 +150,13 @@ export default class OptionsMenuList extends React.Component<
       closeOnSelect,
       ...other
     } = props;
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     const items = React.Children.toArray(children).map((child, i) => {
       const { className, ...other } = (child as React.ReactElement<any>).props;
       return React.cloneElement(child as React.ReactElement<any>, {
         key: `list-item-${i}`,
-        className: classnames('dqpl-options-menuitem', className),
+        className: classnames('OptionsMenu__list-item', className),
         tabIndex: -1,
         role: 'menuitem',
         ref: (el: HTMLLIElement) => (this.itemRefs[i] = el),
@@ -170,7 +170,7 @@ export default class OptionsMenuList extends React.Component<
       <ClickOutsideListener onClickOutside={this.handleClickOutside}>
         <ul
           {...other}
-          className={classnames('dqpl-options-menu', className)}
+          className={classnames('OptionsMenu__list', className)}
           /* aria-expanded is not correct usage here, but the pattern library
              currently styles the open state of the menu. based on this attribute */
           aria-expanded={show}

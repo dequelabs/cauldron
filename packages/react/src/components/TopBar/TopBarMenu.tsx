@@ -100,8 +100,8 @@ export default class TopBarMenu extends React.Component<
         {otherChildren}
         {React.cloneElement(menu as React.ReactElement<any>, {
           id,
-          className: classnames('dqpl-dropdown', {
-            'dqpl-dropdown-active': open
+          className: classnames('Dropdown', {
+            'Dropdown--active': open
           }),
           menuRef: (el: HTMLUListElement | null) => (this.optionsMenuRef = el),
           show: open,

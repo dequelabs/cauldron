@@ -1,4 +1,4 @@
-.dqpl-toast {
+.Toast {
   top: var(--top-bar-height);
   position: fixed;
   color: var(--top-bar-background-color-active);
@@ -12,37 +12,37 @@
   left: 0;
 }
 
-.dqpl-top-bar-thin .dqpl-toast {
+.TopBar--thin .Toast {
   top: var(--top-bar-height-thin);
 }
 
-.dqpl-toast.dqpl-toast-success {
+.Toast.Toast--success {
   background-color: rgba(209, 255, 164, 0.95);
 }
 
-.dqpl-toast.dqpl-toast-warning {
+.Toast.Toast--warning {
   background-color: rgba(255, 230, 159, 0.95);
 }
 
-.dqpl-toast.dqpl-toast-error {
+.Toast.Toast--error {
   background-color: rgba(255, 161, 161, 0.95);
   z-index: var(--z-index-toast-action-needed);
 }
 
-.dqpl-toast .dqpl-toast-dismiss {
+.Toast__dismiss {
   background: transparent;
   border: 0;
 }
 
-.dqpl-toast .dqpl-toast-dismiss:focus {
+.Toast__dismiss:focus {
   outline: 2px solid;
 }
 
-.dqpl-toast .dqpl-toast-message {
+.Toast__message {
   margin: 0 auto;
 }
 
-.dqpl-toast .dqpl-toast-message:before {
+.Toast__message:before {
   font-family: 'FontAwesome';
   content: '\f0da';
   margin: 0 2px;
@@ -51,26 +51,26 @@
   margin-right: var(--space-smallest);
 }
 
-.dqpl-toast .dqpl-toast-message .fa {
+.Toast__message .fa {
   margin-right: 3px;
 }
 
-.dqpl-toast .dqpl-toast-message .dqpl-link {
+.Toast__message .Link {
   color: var(--top-bar-background-color-active);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   text-decoration: underline;
 }
 
-.dqpl-toast .dqpl-toast-message .dqpl-link:focus {
+.Toast__message .Link:focus {
   outline: 2px solid;
   outline-offset: var(--space-quarter);
 }
 
-.dqpl-toast:focus {
+.Toast:focus {
   outline: 0;
 }
 
-.dqpl-toast:focus .dqpl-toast-message:before {
+.Toast:focus .Toast__message:before {
   color: var(--top-bar-background-color-active);
 }

@@ -9,7 +9,7 @@ import {
 import './index.css';
 
 const Demo = () => (
-  <div className="Card">
+  <div className="CardDemo">
     <h1>Card</h1>
     <h2>Demo</h2>
     <Card>

@@ -14,9 +14,11 @@ test('handles checked prop', () => {
   const wrapper = mount(<Checkbox {...defaultProps} checked />);
 
   expect(
-    wrapper.find('.dqpl-checkbox').hasClass('fa-check-square')
+    wrapper.find('.Checkbox__overlay').hasClass('fa-check-square')
   ).toBeTruthy();
-  expect(wrapper.find('.dqpl-checkbox').hasClass('fa-square-o')).toBeFalsy();
+  expect(
+    wrapper.find('.Checkbox__overlay').hasClass('fa-square-o')
+  ).toBeFalsy();
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
 });
 
@@ -32,13 +34,13 @@ test('toggles checked state properly', () => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
   const checkbox = wrapper.find('[type="checkbox"]');
   expect(checkbox.getDOMNode().checked).toBeFalsy();
-  expect(wrapper.find('.dqpl-checkbox').hasClass('fa-check-o')).toBeFalsy();
+  expect(wrapper.find('.Checkbox__overlay').hasClass('fa-check-o')).toBeFalsy();
 
   checkbox.simulate('change');
 
   expect(checkbox.getDOMNode().checked).toBeTruthy();
   expect(
-    wrapper.find('.dqpl-checkbox').hasClass('fa-check-square')
+    wrapper.find('.Checkbox__overlay').hasClass('fa-check-square')
   ).toBeTruthy();
 });
 
@@ -51,7 +53,7 @@ test('clicks the checkbox when the overlay is clicked', () => {
     .addEventListener('click', () => {
       clicked = true;
     });
-  wrapper.find('.dqpl-overlay-checkbox').simulate('click');
+  wrapper.find('.Checkbox__overlay').simulate('click');
   expect(clicked).toBeTruthy();
 });
 
@@ -59,7 +61,7 @@ test('handles disabled prop', () => {
   const wrapper = mount(<Checkbox {...defaultProps} disabled />);
 
   expect(wrapper.find('[type="checkbox"]').getDOMNode().disabled).toBeTruthy();
-  expect(wrapper.find('.dqpl-checkbox-disabled').exists()).toBeTruthy();
+  expect(wrapper.find('.Field__label--disabled').exists()).toBeTruthy();
 });
 
 test('handles focus/blur', () => {
@@ -68,12 +70,12 @@ test('handles focus/blur', () => {
   wrapper.find('[type="checkbox"]').simulate('focus');
 
   expect(wrapper.state('focused')).toBeTruthy();
-  expect(wrapper.find('.dqpl-checkbox-focused').exists()).toBeTruthy();
+  expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeTruthy();
 
   wrapper.find('[type="checkbox"]').simulate('blur');
 
   expect(wrapper.state('focused')).toBeFalsy();
-  expect(wrapper.find('.dqpl-checkbox-focused').exists()).toBeFalsy();
+  expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeFalsy();
 });
 
 test('call onChange when checked state changes', done => {

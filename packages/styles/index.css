@@ -5,7 +5,7 @@
 @import './animation.css';
 @import './button.css';
 @import './dropdown.css';
-@import './first-time-pointout.css';
+@import './pointout.css';
 @import './utilities.css';
 @import './forms.css';
 @import './link.css';
@@ -14,9 +14,10 @@
 @import './scrim.css';
 @import './select.css';
 @import './side-bar.css';
-@import './tile.css';
+@import './card.css';
 @import './toast.css';
 @import './tooltip.css';
 @import './top-bar.css';
 @import './skip-link.css';
 @import './loader.css';
+@import './offscreen.css';

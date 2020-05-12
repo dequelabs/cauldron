@@ -34,7 +34,7 @@ export default class Workspace extends React.Component<WorkspaceProps> {
   };
 
   componentDidMount() {
-    document.body.classList.toggle('dqpl-no-sidebar', this.props.noSideBar);
+    document.body.classList.toggle('Page--no-sidebar', this.props.noSideBar);
   }
 
   componentDidUpdate(prevProps: WorkspaceProps) {
@@ -42,17 +42,17 @@ export default class Workspace extends React.Component<WorkspaceProps> {
       return;
     }
 
-    document.body.classList.toggle('dqpl-no-sidebar', this.props.noSideBar);
+    document.body.classList.toggle('Page--no-sidebar', this.props.noSideBar);
   }
 
   componentWillUnmount() {
-    document.body.classList.remove('dqpl-no-sidebar');
+    document.body.classList.remove('Page--no-sidebar');
   }
 
   render() {
     const {
       // defining `noSideBar` to prevent it from being passed through to Main
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       noSideBar,
       children,
       workspaceRef,

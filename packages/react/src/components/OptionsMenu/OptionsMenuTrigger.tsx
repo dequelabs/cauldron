@@ -21,7 +21,7 @@ function OptionsMenuTriggerComponent({
       type="button"
       ref={triggerRef}
       {...other}
-      className={classNames('dqpl-options-menu-trigger', className)}
+      className={classNames('OptionsMenu__trigger', className)}
     />
   );
 }

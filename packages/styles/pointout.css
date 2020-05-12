@@ -1,0 +1,287 @@
+.Pointout {
+  position: absolute;
+  display: inline-block;
+}
+
+.Pointout__arrow {
+  position: absolute;
+  display: block;
+  width: 33px;
+  left: -10px;
+  top: 4px;
+  transform: translateY(-100%);
+}
+
+.Pointout__arrow--top-left + .Pointout__box {
+  border-top-left-radius: 0;
+}
+
+.Pointout__arrow--top-middle {
+  left: 50%;
+  transform: translateY(-100%) translateX(-50%);
+}
+
+.Pointout__arrow--top-right {
+  right: -13px;
+  left: auto;
+}
+
+.Pointout__arrow--top-right + .Pointout__box {
+  border-top-right-radius: 0;
+}
+
+.Pointout__arrow--bottom,
+.Pointout__arrow--bottom-left,
+.Pointout__arrow--bottom-middle,
+.Pointout__arrow--bottom-right {
+  bottom: 2px;
+  top: auto;
+  transform: rotate(180deg) translateY(-100%);
+}
+
+.Pointout__arrow--bottom,
+.Pointout__arrow--bottom-left {
+  left: -13px;
+}
+
+.Pointout__arrow--bottom + .Pointout__box,
+.Pointout__arrow--bottom-left + .Pointout__box {
+  border-bottom-left-radius: 0;
+}
+
+.Pointout__arrow--bottom-middle {
+  left: 50%;
+  transform: rotate(180deg) translateY(-100%) translateX(50%);
+}
+
+.Pointout__arrow--bottom-right {
+  right: -10px;
+  left: auto;
+}
+
+.Pointout__arrow--bottom-right + .Pointout__box {
+  border-bottom-right-radius: 0;
+}
+
+.Pointout__arrow--left-top,
+.Pointout__arrow--left-middle,
+.Pointout__arrow--left-bottom {
+  transform: rotate(-90deg);
+  left: -38px;
+}
+
+.Pointout__arrow--left,
+.Pointout__arrow--left-top {
+  top: -20px;
+}
+
+.Pointout__arrow--left + .Pointout__box,
+.Pointout__arrow--left-top + .Pointout__box {
+  border-top-left-radius: 0;
+}
+
+.Pointout__arrow--left-middle {
+  transform: translateY(-50%) rotate(-90deg);
+  top: 50%;
+}
+
+.Pointout__arrow--left-bottom {
+  top: auto;
+  bottom: -17px;
+}
+
+.Pointout__arrow--left-bottom + .Pointout__box {
+  border-bottom-left-radius: 0;
+}
+
+.Pointout__arrow--right-top,
+.Pointout__arrow--right-middle,
+.Pointout__arrow--right-bottom {
+  right: -38px;
+  left: auto;
+  transform: rotate(90deg);
+}
+
+.Pointout__arrow--right,
+.Pointout__arrow--right-top {
+  top: -17px;
+}
+
+.Pointout__arrow--right + .Pointout__box,
+.Pointout__arrow--right-top + .Pointout__box {
+  border-top-right-radius: 0;
+}
+
+.Pointout__arrow--right-middle {
+  transform: translateY(-50%) rotate(90deg);
+  top: 50%;
+}
+
+.Pointout__arrow--right-bottom {
+  top: auto;
+  bottom: -20px;
+}
+
+.Pointout__arrow--right-bottom + .Pointout__box {
+  border-bottom-right-radius: 0;
+}
+
+.Pointout__arrow-pointer {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='33' height='22'%3E%3Cpath d='M13 5c2-2 3-2 5 0l10 11c2 2 2 4 0 4H3c-2 0-2-2 0-4z' fill='%23fff' stroke='rgba(193, 27, 222, 0.75)' stroke-linejoin='round' stroke-width='3'/%3E%3C/svg%3E");
+  width: 33px;
+  height: 22px;
+  filter: drop-shadow(0 0 8px var(--focus-glow));
+  position: relative;
+  z-index: 1;
+}
+
+.Pointout__arrow-neck {
+  background: var(--tile-background-color);
+  width: 10px;
+  height: 27px;
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  transform: translateX(10px) translateY(-3px);
+  box-shadow: 6px 0px 0 -3px var(--focus-glow),
+    -6px 0px 0 -3px var(--focus-glow), 10px 0 10px -4px var(--focus-glow),
+    -10px 0 10px -4px var(--focus-glow);
+}
+
+.Pointout__box {
+  background: var(--tile-background-color);
+  padding: 12px;
+  max-width: 300px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 3px var(--focus-glow),
+    0px 0px 12px 4px var(--focus-glow);
+  z-index: 9;
+}
+
+.Pointout__dismiss {
+  position: absolute;
+  right: 15px;
+  z-index: 1;
+  background: var(--tile-background-color);
+}
+
+.Pointout__dismiss:hover {
+  cursor: pointer;
+}
+
+.Pointout__content {
+  position: relative;
+}
+
+.Pointout__content h4 {
+  margin: 0 0 5px 0;
+  padding: 0;
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
+  color: var(--header-text-color-dark);
+}
+
+.Pointout__content p {
+  margin: 0;
+  font-size: var(--text-size-smaller);
+  font-weight: var(--font-weight-light);
+  color: var(--text-color-base);
+}
+
+.Pointout__content:focus {
+  outline: none;
+}
+
+.Pointout__content:focus:before {
+  background: var(--top-bar-background-color);
+}
+
+.Pointout__content:before {
+  content: '';
+  height: 100%;
+  width: 3px;
+  position: absolute;
+  left: -8px;
+}
+
+.Pointout--no-arrow .Pointout__arrow {
+  display: none;
+}
+
+.Pointout--no-arrow .Pointout__box {
+  border-top-left-radius: 3px;
+}
+
+.Pointout--focus-active {
+  outline: #d71ef7 solid 2px;
+  outline-offset: 2px;
+}
+
+.Pointout__content--focus-active:before {
+  background: #283640;
+}
+
+.Pointout--auto[class*='top-'] {
+  margin-top: 42px;
+}
+
+.Pointout--auto[class*='bottom-'] {
+  margin-top: -44px;
+}
+
+.Pointout--auto[class*='left-'] {
+  margin-left: 44px;
+}
+
+.Pointout--auto[class*='right-'] {
+  margin-left: -44px;
+}
+
+.Pointout--auto.Pointout__arrow--top-left {
+  transform: translateX(-5px);
+}
+
+.Pointout--auto.Pointout__arrow--top-middle {
+  transform: translateX(-50%) translateX(2px);
+}
+
+.Pointout--auto.Pointout__arrow--top-right {
+  transform: translateX(-100%) translateX(5px);
+}
+
+.Pointout--auto.Pointout__arrow--left-top {
+  transform: translateY(-5px);
+}
+
+.Pointout--auto.Pointout__arrow--left-middle {
+  transform: translateY(-50%) translateY(-2px);
+}
+
+.Pointout--auto.Pointout__arrow--left-bottom {
+  transform: translateY(-100%) translateY(5px);
+}
+
+.Pointout--auto.Pointout__arrow--bottom-left {
+  transform: translateY(-100%) translateX(-5px);
+}
+
+.Pointout--auto.Pointout__arrow--bottom-middle {
+  transform: translateY(-100%) translateX(-50%) translateX(-2px);
+}
+
+.Pointout--auto.Pointout__arrow--bottom-right {
+  transform: translateY(-100%) translateX(-100%) translateX(5px);
+}
+
+.Pointout--auto.Pointout__arrow--right-top {
+  transform: translateX(-100%) translateY(-5px);
+}
+
+.Pointout--auto.Pointout__arrow--right-middle {
+  transform: translateX(-100%) translateY(-50%) translateY(2px);
+}
+
+.Pointout--auto.Pointout__arrow--right-bottom {
+  transform: translateX(-100%) translateY(-100%) translateY(5px);
+}

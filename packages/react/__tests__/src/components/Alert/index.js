@@ -7,7 +7,7 @@ let fallback;
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 beforeAll(() => {
   fallback = document.createElement('div');
-  fallback.className = 'dqpl-dialog-inner';
+  fallback.className = 'Alert__inner';
   document.body.appendChild(fallback);
 });
 

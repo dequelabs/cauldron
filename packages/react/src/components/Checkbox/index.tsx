@@ -100,7 +100,7 @@ export default class Checkbox extends React.Component<
 
     return (
       <div
-        className={classNames('dqpl-checkbox-wrap dqpl-flexr', className)}
+        className={classNames('Checkbox is--flex-row', className)}
         {...others}
       >
         <input
@@ -120,17 +120,17 @@ export default class Checkbox extends React.Component<
         />
         <div
           aria-hidden="true"
-          className={classNames('dqpl-checkbox dqpl-overlay-checkbox fa', {
+          className={classNames('Checkbox__overlay fa', {
             'fa-square-o': !checked,
             'fa-check-square': checked,
-            'dqpl-checkbox-disabled': disabled,
-            'dqpl-checkbox-focused': focused
+            'Checkbox__overlay--disabled': disabled,
+            'Checkbox__overlay--focused': focused
           })}
           onClick={this.onOverlayClick}
         />
         <label
-          className={classNames('dqpl-label', {
-            'dqpl-label-disabled': disabled
+          className={classNames('Field__label', {
+            'Field__label--disabled': disabled
           })}
           htmlFor={id}
         >

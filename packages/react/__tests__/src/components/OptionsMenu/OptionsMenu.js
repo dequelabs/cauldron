@@ -98,7 +98,5 @@ test('should pass className through to OptionsMenuWrapper', () => {
     </OptionsMenu>
   );
 
-  expect(optionsMenu.find('.dqpl-options-menu-wrap.foo.bar').exists()).toBe(
-    true
-  );
+  expect(optionsMenu.find('.OptionsMenu.foo.bar').exists()).toBe(true);
 });
