@@ -34,15 +34,15 @@ const basicSelect = (otherProps = {}) => {
 test('renders the expected UI', () => {
   const wrapper = withDefaultSelected();
 
-  expect(wrapper.find('.dqpl-field-wrap').exists()).toBeTruthy();
-  expect(wrapper.find('.dqpl-label')).toBeTruthy();
-  expect(wrapper.find('.dqpl-listbox-button')).toBeTruthy();
-  expect(wrapper.find('.dqpl-listbox')).toBeTruthy();
+  expect(wrapper.find('.Field').exists()).toBeTruthy();
+  expect(wrapper.find('.Field__label')).toBeTruthy();
+  expect(wrapper.find('.Field__listbox-button')).toBeTruthy();
+  expect(wrapper.find('.Field__listbox')).toBeTruthy();
 });
 
 test('clicking the label, focuses the listbox button', () => {
   const wrapper = withDefaultSelected();
-  wrapper.find('.dqpl-label').simulate('click');
+  wrapper.find('.Field__label').simulate('click');
 
   expect(wrapper.instance().select).toBe(document.activeElement);
 });
@@ -52,7 +52,7 @@ test('handles initially selected option', () => {
 
   expect(select.state('activeIndex')).toBe(1);
   expect(select.state('selectedIndex')).toBe(1);
-  expect(select.find('.dqpl-listbox-button').text()).toBe('Bill');
+  expect(select.find('.Field__listbox-button').text()).toBe('Bill');
 });
 
 test('handles programmatically selecting an option (via the `value` prop)', () => {
@@ -77,10 +77,10 @@ test('sets option attributes properly', () => {
       options={[{ value: 'a' }, { disabled: true, value: 'b' }, { value: 'c' }]}
     />
   );
-  const opts = select.find('.dqpl-option[role="option"]');
+  const opts = select.find('.Field__option[role="option"]');
   expect(opts.length).toBe(3);
   opts.forEach((opt, i) => {
-    expect(opt.hasClass('dqpl-option-active')).toBe(i == 0);
+    expect(opt.hasClass('Field__option--active')).toBe(i == 0);
     expect(opt.is({ 'aria-selected': i === 0 })).toBeTruthy();
     expect(opt.is({ 'aria-disabled': true })).toBe(i == 1);
   });
@@ -108,7 +108,7 @@ test('handles clicks on options', () => {
     onSelect: () => (called = true)
   });
   select
-    .find('.dqpl-option')
+    .find('.Field__option')
     .at(3)
     .simulate('click');
 

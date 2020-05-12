@@ -13,7 +13,7 @@ test('handles "noArrow" prop properly', () => {
     </FirstTimePointOut>
   );
 
-  expect(ftpo.hasClass('dqpl-no-arrow')).toBeTruthy();
+  expect(ftpo.hasClass('Pointout--no-arrow')).toBeTruthy();
 });
 
 test('handles "arrowPosition" prop', () => {
@@ -23,7 +23,7 @@ test('handles "arrowPosition" prop', () => {
     </FirstTimePointOut>
   );
 
-  expect(ftpo.find('.dqpl-arrow.top-right')).toBeTruthy();
+  expect(ftpo.find('.Pointout__arrow.Pointout__arrow--top-right')).toBeTruthy();
 });
 
 test('returns null given a falsey "show" state', () => {
@@ -51,7 +51,7 @@ test('calls onClose prop when close is clicked', () => {
     </FirstTimePointOut>
   );
 
-  ftpo.find('.dqpl-ftpo-dismiss').simulate('click');
+  ftpo.find('.Pointout__dismiss').simulate('click');
   expect(called).toBe(true);
 });
 
@@ -64,7 +64,7 @@ test('accepts the dismissText prop', () => {
   );
 
   expect(
-    ftpo.find('.dqpl-ftpo-dismiss[aria-label="Fred"]').exists()
+    ftpo.find('.Pointout__dismiss[aria-label="Fred"]').exists()
   ).toBeTruthy();
 });
 
@@ -75,7 +75,7 @@ test('accepts className prop', () => {
     </FirstTimePointOut>
   );
 
-  expect(ftpo.find('.dqpl-pointer-wrap.foo').exists()).toBeTruthy();
+  expect(ftpo.find('.Pointout.foo').exists()).toBeTruthy();
 });
 
 test('renders to portal when using a target', () => {
@@ -110,7 +110,7 @@ test('should be positioned relative to target', () => {
   );
   const { top, left } = ftpo
     .find('Portal')
-    .find('.dqpl-pointer-wrap')
+    .find('.Pointout')
     .prop('style');
   expect(top).toEqual('323px');
   expect(left).toEqual('506px');
@@ -125,7 +125,7 @@ test('should associate FTPO with heading id', () => {
   ftpo.update();
 
   const heading = ftpo.find('h4');
-  const wrap = ftpo.find('.dqpl-pointer-wrap');
+  const wrap = ftpo.find('.Pointout');
 
   expect(typeof heading.prop('id') === 'string').toBeTruthy();
   expect(heading.prop('id')).toEqual(wrap.prop('aria-labelledby'));
@@ -146,8 +146,8 @@ test('should mirror focus to visual FTPO', () => {
     </FirstTimePointOut>
   );
 
-  const offscreenFTPO = ftpo.find('.dqpl-offscreen');
-  const visibleFTPO = ftpo.find('.dqpl-pointer-wrap');
+  const offscreenFTPO = ftpo.find('.Offscreen');
+  const visibleFTPO = ftpo.find('.Pointout');
   const [
     offscreenFocusableButton,
     offscreenFocusableAnchor
@@ -159,23 +159,23 @@ test('should mirror focus to visual FTPO', () => {
     visibleFTPO
       .getDOMNode()
       .querySelector('button')
-      .classList.contains('dqpl-focus-active')
+      .classList.contains('Pointout--focus-active')
   ).toBeTruthy();
   expect(
     visibleFTPO
       .getDOMNode()
       .querySelector('a')
-      .classList.contains('dqpl-focus-active')
+      .classList.contains('Pointout--focus-active')
   ).toBeTruthy();
 
-  const hiddenContent = ftpo.find('.dqpl-content').at(0);
+  const hiddenContent = ftpo.find('.Pointout__content').at(0);
   hiddenContent.getDOMNode().dispatchEvent(new Event('focusin'));
   ftpo.update();
   expect(
     ftpo
-      .find('.dqpl-content')
+      .find('.Pointout__content')
       .at(1)
-      .hasClass('dqpl-content-focus-active')
+      .hasClass('Pointout__content--focus-active')
   ).toBeTruthy();
 });
 
@@ -194,8 +194,8 @@ test('should remove tabindex from focusable elements on visual FTPO with target'
     </FirstTimePointOut>
   );
 
-  const offscreenFTPO = ftpo.find('.dqpl-offscreen');
-  const visibleFTPO = ftpo.find('.dqpl-pointer-wrap');
+  const offscreenFTPO = ftpo.find('.Offscreen');
+  const visibleFTPO = ftpo.find('.Pointout');
   const [
     offscreenFocusableButton,
     offscreenFocusableAnchor
@@ -238,8 +238,8 @@ test('should clean ids from portal FTPO', () => {
     );
   };
   const ftpo = mount(<FTPOWithTarget />);
-  const offscreenFtpo = ftpo.find('.dqpl-offscreen .dqpl-content');
-  const portalFtpo = ftpo.find('Portal .dqpl-content');
+  const offscreenFtpo = ftpo.find('.Offscreen .Pointout__content');
+  const portalFtpo = ftpo.find('Portal .Pointout__content');
 
   expect(offscreenFtpo.exists('#foo')).toBeTruthy();
   expect(portalFtpo.exists('#foo')).toBeFalsy();

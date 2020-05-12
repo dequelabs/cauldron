@@ -7,7 +7,7 @@ import setRef from '../../utils/setRef';
 
 const noop = () => {};
 export const Actions = ({ children }: PropsWithChildren<{}>) => (
-  <div className="dqpl-buttons">{children}</div>
+  <div className="Alert__buttons">{children}</div>
 );
 
 export interface AlertProps {
@@ -107,7 +107,7 @@ export default class Alert extends React.Component<AlertProps, AlertState> {
     const { show } = this.state;
     const { alertRef, contentRef, forceAction, className } = this.props;
     const cl = className || '';
-    const alertClass = show ? 'dqpl-dialog-show' : '';
+    const alertClass = show ? 'Dialog--show' : '';
 
     if (!show) {
       return null;
@@ -118,11 +118,11 @@ export default class Alert extends React.Component<AlertProps, AlertState> {
         focusTrapOptions={{
           onDeactivate: this.close,
           escapeDeactivates: !forceAction,
-          fallbackFocus: '.dqpl-dialog-inner'
+          fallbackFocus: '.Alert__inner'
         }}
       >
         <div
-          className={['dqpl-alert', alertClass, cl].join(' ')}
+          className={['Alert', alertClass, cl].join(' ')}
           role="alertdialog"
           ref={el => {
             this.element = el;
@@ -130,14 +130,14 @@ export default class Alert extends React.Component<AlertProps, AlertState> {
           }}
         >
           <div
-            className="dqpl-dialog-inner"
+            className="Alert__inner"
             ref={el => {
               this.content = el;
               setRef(contentRef, el);
             }}
             tabIndex={-1}
           >
-            <div className="dqpl-content">{this.props.children}</div>
+            <div className="Alert__content">{this.props.children}</div>
           </div>
           <Scrim show={show} />
         </div>

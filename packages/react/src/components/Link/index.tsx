@@ -18,8 +18,8 @@ const Link = ({
   <a
     ref={linkRef}
     className={classNames(className, {
-      'dqpl-link': !variant,
-      'dqpl-button-primary': variant === 'button'
+      Link: !variant,
+      'Button--primary': variant === 'button'
     })}
     {...other}
   >

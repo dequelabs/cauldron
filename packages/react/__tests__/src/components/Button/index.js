@@ -6,23 +6,23 @@ import axe from '../../../axe';
 test('should render primary button', () => {
   const defaultButton = shallow(<Button>primary</Button>);
   const button = shallow(<Button variant="primary">primary</Button>);
-  expect(defaultButton.hasClass('dqpl-button-primary'));
-  expect(button.hasClass('dqpl-button-primary'));
+  expect(defaultButton.hasClass('Button--primary'));
+  expect(button.hasClass('Button--primary'));
 });
 
 test('should render secondary button', () => {
   const button = shallow(<Button variant="secondary">secondary</Button>);
-  expect(button.hasClass('dqpl-button-secondary'));
+  expect(button.hasClass('Button--secondary'));
 });
 
 test('should render error button', () => {
   const button = shallow(<Button variant="error">error</Button>);
-  expect(button.hasClass('dqpl-button-error'));
+  expect(button.hasClass('Button--error'));
 });
 
 test('should render button as link', () => {
   const button = shallow(<Button variant="link">link</Button>);
-  expect(button.hasClass('dqpl-link'));
+  expect(button.hasClass('Link'));
 });
 
 test('should return no axe violations', async () => {

@@ -7,7 +7,7 @@ const Demo = () => {
 
   const [portal, setPortal] = useState(null);
   useEffect(() => {
-    setPortal(document.querySelector('.dqpl-layout'));
+    setPortal(document.querySelector('.Layout'));
   });
 
   const [position, setPosition] = useState(0);
@@ -99,7 +99,7 @@ const Demo = () => {
         style={{ marginLeft: `${position}%`, marginBottom: '171px' }}
         ref={buttonRef}
         type="button"
-        className="dqpl-button-primary"
+        className="Button--primary"
         onClick={togglePosition}
       >
         Change My Position

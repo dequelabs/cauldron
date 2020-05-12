@@ -71,11 +71,11 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
   private handleThin = () => {
     const { thin } = this.props;
     if (thin) {
-      document.body.classList.add('dqpl-top-bar-thin');
+      document.body.classList.add('TopBar--thin');
       return;
     }
 
-    document.body.classList.remove('dqpl-top-bar-thin');
+    document.body.classList.remove('TopBar--thin');
   };
 
   private renderChild = (child: React.ReactElement<any>, index: number) => {
@@ -142,7 +142,7 @@ export default class TopBar extends React.Component<TopBarProps, TopBarState> {
     const { children, className, thin, hasTrigger, ...other } = this.props;
 
     return (
-      <div className={classNames('dqpl-top-bar', className)} {...other}>
+      <div className={classNames('TopBar', className)} {...other}>
         <ul role="menubar">
           {Children.map(
             children as React.ReactElement<HTMLLIElement>,

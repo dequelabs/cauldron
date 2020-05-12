@@ -1,4 +1,4 @@
-.dqpl-loader {
+.Loader {
   font-size: 10px;
   margin: 50px auto;
   width: 7em;
@@ -11,7 +11,7 @@
   animation: load 1.4s linear infinite;
 }
 
-.dqpl-loader:before {
+.Loader:before {
   width: 50%;
   height: 50%;
   background: #666;
@@ -22,7 +22,7 @@
   content: '';
 }
 
-.dqpl-loader:after {
+.Loader:after {
   background: var(--workspace-background-color);
   width: 75%;
   height: 75%;

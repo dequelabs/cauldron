@@ -48,7 +48,7 @@ test('animates / toggles display given a show prop change', done => {
   wrapper.setProps({ show: true });
 
   setTimeout(() => {
-    expect(wrapper.state('animateClass')).toBe('dqpl-show dqpl-active');
+    expect(wrapper.state('animateClass')).toBe('SideBar--show SideBar--active');
     wrapper.setProps({ show: false });
 
     setTimeout(() => {

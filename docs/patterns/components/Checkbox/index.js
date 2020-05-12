@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Demo from '../../../Demo';
 import { className } from '../../../props';
 import { Checkbox } from '../../../../packages/react/src/';
-import './index.css';
 
 export default class CheckboxDemo extends Component {
   state = {

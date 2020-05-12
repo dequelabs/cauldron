@@ -14,7 +14,7 @@ const TopBarTrigger: React.ComponentType<TopBarTriggerProps> = ({
 }) => (
   <MenuItem
     aria-haspopup="true"
-    className={classNames('dqpl-menu-trigger', className)}
+    className={classNames('TopBar__menu-trigger', className)}
     {...other}
   >
     {children}

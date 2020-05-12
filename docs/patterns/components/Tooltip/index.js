@@ -49,13 +49,8 @@ const Demo = () => (
         }
         id="tool-definition"
       >
-        <span className="dqpl-definition-button-wrap">
-          <button
-            className="dqpl-button-definition"
-            aria-describedby="tool-definition"
-          >
-            auto-adjust
-          </button>
+        <span className="DefinitionButton">
+          <button aria-describedby="tool-definition">auto-adjust</button>
         </span>
       </Tooltip>
       , so you do not have to worry about offscreen tooltips!

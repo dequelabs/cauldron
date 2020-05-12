@@ -1,4 +1,4 @@
-.dqpl-skip-container {
+.SkipLink {
   min-width: 173px;
   height: 58px;
   background-color: var(--skip-link-background-color);
@@ -13,63 +13,58 @@
   z-index: var(--z-index-skip-container);
 }
 
-.dqpl-skip-container.dqpl-skip-container-active {
+.SkipLink.SkipLink--active {
   top: 11px;
 }
 
-.dqpl-skip-container.dqpl-skip-fade {
+.SkipLink.SkipLink--fade {
   opacity: 1;
   transition: 250ms opacity;
 }
 
-.dqpl-skip-container a {
+.SkipLink a {
   display: block;
   color: var(--text-color-light);
   text-decoration: none;
   padding: var(--space-three-quarters);
 }
 
-.dqpl-skip-container span {
+.SkipLink span {
   display: block;
 }
 
-.dqpl-skip-container .dqpl-skip-one {
+.SkipLink .SkipLink__item--first {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   color: var(--text-color-light);
 }
 
-.dqpl-skip-container .dqpl-skip-two {
+.SkipLink .SkipLink__item--second {
   font-size: var(--text-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--text-color-light);
 }
 
-.dqpl-skip-container.dqpl-child-focused {
-  outline: 2px solid var(--focus);
-  outline-offset: var(--space-quarter);
-}
-
-.dqpl-skip-container ul {
+.SkipLink ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.dqpl-skip-container ul li {
+.SkipLink ul li {
   padding: var(--space-quarter);
 }
 
-.dqpl-skip-container ul li a {
+.SkipLink ul li a {
   padding: 0;
 }
 
-.dqpl-skip-container ul li a span {
+.SkipLink ul li a span {
   display: inline-block;
   margin-right: 3px;
 }
 
-.dqpl-skip-container ul li a:before {
+.SkipLink ul li a:before {
   font-family: 'FontAwesome';
   content: '\f0da';
   margin: 0 2px;
@@ -77,7 +72,7 @@
   color: transparent;
 }
 
-.dqpl-skip-container ul li a:after {
+.SkipLink ul li a:after {
   font-family: 'FontAwesome';
   content: '\f0d9';
   margin: 0 2px;
@@ -85,11 +80,11 @@
   color: transparent;
 }
 
-.dqpl-skip-container ul li a:focus {
+.SkipLink ul li a:focus {
   outline: 0;
 }
 
-.dqpl-skip-container ul li a:focus:before,
-.dqpl-skip-container ul li a:focus:after {
+.SkipLink ul li a:focus:before,
+.SkipLink ul li a:focus:after {
   color: var(--text-color-light);
 }

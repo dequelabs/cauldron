@@ -20,7 +20,7 @@ export default function Tooltip({
       placement={placement}
       trigger={['hover', 'focus']}
       overlay={overlay}
-      overlayClassName="dqpl-rc-tooltip"
+      overlayClassName="Tooltip"
       id={id}
     >
       {children}

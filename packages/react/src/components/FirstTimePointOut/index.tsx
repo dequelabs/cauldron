@@ -226,12 +226,12 @@ export default class FirstTimePointOut extends React.Component<
     }
 
     // Tag focusable elements
-    for (var element of visibleFocusable) {
+    for (const element of visibleFocusable) {
       element.setAttribute('data-focusable', 'true');
       element.setAttribute('tabindex', '-1');
     }
 
-    visibleFocusable[elementIndex].classList.add('dqpl-focus-active');
+    visibleFocusable[elementIndex].classList.add('Pointout--focus-active');
   };
 
   handleOffscreenFocusOut = ({ target }: FocusEvent) => {
@@ -246,7 +246,7 @@ export default class FirstTimePointOut extends React.Component<
       return;
     }
 
-    visibleFocusable[elementIndex].classList.remove('dqpl-focus-active');
+    visibleFocusable[elementIndex].classList.remove('Pointout--focus-active');
   };
 
   positionRelativeToTarget = () => {
@@ -267,7 +267,7 @@ export default class FirstTimePointOut extends React.Component<
     if (portalNode && portalNode !== document.body) {
       // If the portal is not placed on document.body
       // position the FTPO relative to the portal
-      let rect = portalNode.getBoundingClientRect();
+      const rect = portalNode.getBoundingClientRect();
       top -= rect.top - portalNode.scrollTop;
       left -= rect.left - portalNode.scrollLeft;
     }
@@ -338,10 +338,10 @@ export default class FirstTimePointOut extends React.Component<
 
     const FTPO = (
       <div
-        className={classNames(className, 'dqpl-pointer-wrap', {
-          'dqpl-no-arrow': noArrow,
-          'dqpl-ftpo-auto': !!target,
-          [arrowPosition]: !!arrowPosition && !noArrow
+        className={classNames(className, 'Pointout', {
+          'Pointout--no-arrow': noArrow,
+          'Pointout--auto': !!target,
+          [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow
         })}
         style={style}
         role={target ? undefined : 'region'}
@@ -351,17 +351,17 @@ export default class FirstTimePointOut extends React.Component<
       >
         {noArrow ? null : (
           <div
-            className={classNames('dqpl-arrow', {
-              [arrowPosition]: !!arrowPosition && !noArrow
+            className={classNames('Pointout__arrow', {
+              [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow
             })}
           >
-            <div className="dqpl-arrow-pointer" />
-            <div className="dqpl-arrow-neck" />
+            <div className="Pointout__arrow-pointer" />
+            <div className="Pointout__arrow-neck" />
           </div>
         )}
-        <div className="dqpl-box">
+        <div className="Pointout__box">
           <button
-            className="dqpl-ftpo-dismiss fa fa-close"
+            className="Pointout__dismiss fa fa-close"
             type="button"
             aria-label={dismissText}
             onClick={this.onCloseClick}
@@ -369,8 +369,8 @@ export default class FirstTimePointOut extends React.Component<
           />
           {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
           <div
-            className={classNames('dqpl-content', {
-              'dqpl-content-focus-active': offscreenContentFocus
+            className={classNames('Pointout__content', {
+              'Pointout__content--focus-active': offscreenContentFocus
             })}
             tabIndex={!target ? -1 : undefined}
             ref={ftpoRef}
@@ -390,7 +390,7 @@ export default class FirstTimePointOut extends React.Component<
       return (
         <React.Fragment>
           <div
-            className="dqpl-offscreen"
+            className="Offscreen"
             role="region"
             aria-labelledby={heading ? headingId : undefined}
             ref={el => (this.offscreenRef = el)}
@@ -401,7 +401,7 @@ export default class FirstTimePointOut extends React.Component<
               onClick={this.onCloseClick}
             />
             <div
-              className="dqpl-content"
+              className="Pointout__content"
               tabIndex={-1}
               ref={el => (this.offscreenContentRef = el)}
             >

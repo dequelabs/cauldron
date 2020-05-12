@@ -16,12 +16,8 @@ test('handles initial show prop on mount', done => {
   );
 
   setTimeout(() => {
-    expect(document.activeElement).toBe(
-      wrapper.find('.dqpl-toast').getDOMNode()
-    );
-    expect(
-      wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')
-    ).toBeTruthy();
+    expect(document.activeElement).toBe(wrapper.find('.Toast').getDOMNode());
+    expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
@@ -46,15 +42,13 @@ test('handles autoHide properly', done => {
 
 test('handles transition from falsey show to truthy show prop', done => {
   const wrapper = mount(<Toast {...defaultProps}>{'hi'}</Toast>);
-  expect(wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')).toBeFalsy();
+  expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeFalsy();
 
   wrapper.setProps({ show: true });
 
   setTimeout(() => {
     wrapper.update();
-    expect(
-      wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')
-    ).toBeTruthy();
+    expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
@@ -65,7 +59,7 @@ test('handles transition from truthy show to falsey show prop', done => {
       {'hi'}
     </Toast>
   );
-  expect(wrapper.find('.dqpl-toast').hasClass('dqpl-hidden')).toBeFalsy();
+  expect(wrapper.find('.Toast').hasClass('Hidden')).toBeFalsy();
   wrapper.setProps({ show: false });
 
   setTimeout(() => {
@@ -73,9 +67,9 @@ test('handles transition from truthy show to falsey show prop', done => {
     // see https://github.com/airbnb/enzyme/issues/1170
     expect(
       wrapper
-        .find('.dqpl-toast')
+        .find('.Toast')
         .getDOMNode()
-        .classList.contains('dqpl-hidden')
+        .classList.contains('Hidden')
     ).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
@@ -89,9 +83,7 @@ test('renders the expected UI (icons classNames etc)', () => {
       {'hi'}
     </Toast>
   );
-  expect(
-    confirmation.find('.dqpl-toast.dqpl-toast-success').exists()
-  ).toBeTruthy();
+  expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
   expect(confirmation.find('.fa-info-circle').exists()).toBeTruthy();
 
   const caution = mount(
@@ -99,7 +91,7 @@ test('renders the expected UI (icons classNames etc)', () => {
       {'hi'}
     </Toast>
   );
-  expect(caution.find('.dqpl-toast.dqpl-toast-warning').exists()).toBeTruthy();
+  expect(caution.find('.Toast.Toast--warning').exists()).toBeTruthy();
   expect(caution.find('.fa-warning').exists()).toBeTruthy();
 
   const actionNeeded = mount(
@@ -107,9 +99,7 @@ test('renders the expected UI (icons classNames etc)', () => {
       {'hi'}
     </Toast>
   );
-  expect(
-    actionNeeded.find('.dqpl-toast.dqpl-toast-error').exists()
-  ).toBeTruthy();
+  expect(actionNeeded.find('.Toast.Toast--error').exists()).toBeTruthy();
   expect(actionNeeded.find('.fa-minus-circle').exists()).toBeTruthy();
 });
 
@@ -121,8 +111,8 @@ test('handles "action-needed" type', done => {
   );
 
   setTimeout(() => {
-    expect(wrapper.find('.dqpl-toast-dismiss').exists()).toBeFalsy();
-    expect(wrapper.find('.dqpl-scrim-light').exists()).toBeTruthy();
+    expect(wrapper.find('.Toast__dismiss').exists()).toBeFalsy();
+    expect(wrapper.find('.Scrim--light').exists()).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
@@ -134,7 +124,7 @@ test('clicking the dismiss button properly dismisses toast', done => {
       {'hi'}
     </Toast>
   );
-  wrapper.find('.dqpl-toast-dismiss').simulate('click');
+  wrapper.find('.Toast__dismiss').simulate('click');
   setTimeout(() => {
     expect(called).toBe(true);
     done();

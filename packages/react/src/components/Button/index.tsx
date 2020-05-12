@@ -9,14 +9,6 @@ export interface ButtonProps
   disabled?: boolean; // todo, investigate why disabled is needed
 }
 
-/**
- * The dqpl button component
- * @prop {String}       variant  visual appearance of the button
- * @prop {String|Object} children   Any desired child content of the button (a string of text or node(s))
- *
- * NOTE: All other props (i.e. onClick) passed will be applied to the dqpl button element
- * NOTE: to support stuff like refs, avoiding a stateless component
- */
 export default class Button extends React.Component<ButtonProps> {
   static defaultProps = {
     variant: 'primary',
@@ -41,10 +33,10 @@ export default class Button extends React.Component<ButtonProps> {
       <button
         type={'button'}
         className={classNames(className, {
-          'dqpl-button-primary': variant === 'primary',
-          'dqpl-button-secondary': variant === 'secondary',
-          'dqpl-button-error': variant === 'error',
-          'dqpl-link': variant === 'link'
+          'Button--primary': variant === 'primary',
+          'Button--secondary': variant === 'secondary',
+          'Button--error': variant === 'error',
+          Link: variant === 'link'
         })}
         ref={buttonRef}
         {...other}

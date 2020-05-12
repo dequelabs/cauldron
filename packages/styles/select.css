@@ -1,16 +1,16 @@
-.dqpl-select {
+.Field__select {
   position: relative;
 }
 
-.dqpl-select [role='textbox'] {
+.Field__select [role='textbox'] {
   border: 0;
 }
 
-.dqpl-select [role='textbox']:hover {
+.Field__select [role='textbox']:hover {
   border: 0;
 }
 
-.dqpl-select [aria-haspopup='listbox'] {
+.Field__select [aria-haspopup='listbox'] {
   padding: var(--space-half) var(--space-smallest);
   box-sizing: border-box;
   font-size: var(--text-size-small);
@@ -24,7 +24,7 @@
   text-align: left;
 }
 
-.dqpl-select [aria-haspopup='listbox']:after {
+.Field__select [aria-haspopup='listbox']:after {
   font-family: 'FontAwesome';
   content: '\f0d7';
   position: absolute;
@@ -35,13 +35,13 @@
   font-weight: var(--font-weight-normal);
 }
 
-.dqpl-select [aria-haspopup='listbox'][disabled],
-.dqpl-select [aria-haspopup='listbox'][aria-disabled='true'] {
+.Field__select [aria-haspopup='listbox'][disabled],
+.Field__select [aria-haspopup='listbox'][aria-disabled='true'] {
   background-color: var(--field-background-color-disabled);
   border: 1px solid var(--field-background-color-disabled);
 }
 
-.dqpl-select [role='listbox'] {
+.Field__select [role='listbox'] {
   display: none;
   margin: 0;
   padding: 0;
@@ -56,11 +56,11 @@
   top: 28px;
 }
 
-.dqpl-select [role='listbox'].dqpl-listbox-show {
+.Field__select [role='listbox'].Field__listbox--show {
   display: block;
 }
 
-.dqpl-select [role='listbox'] [role='option'] {
+.Field__select [role='listbox'] [role='option'] {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   padding: 2px var(--space-large);
@@ -71,31 +71,31 @@
   cursor: default;
 }
 
-.dqpl-select [role='listbox'] [role='option']:hover,
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-active {
+.Field__select [role='listbox'] [role='option']:hover,
+.Field__select [role='listbox'] [role='option'].Field__option--active {
   background-color: var(--link-text-color-light);
 }
 
-.dqpl-select [role='listbox'] [role='option'][aria-disabled='true'] {
+.Field__select [role='listbox'] [role='option'][aria-disabled='true'] {
   color: var(--disabled);
 }
 
-.dqpl-select [role='listbox'] [role='option'][aria-disabled='true']:hover {
+.Field__select [role='listbox'] [role='option'][aria-disabled='true']:hover {
   background-color: transparent;
 }
 
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-selected,
-.dqpl-select
+.Field__select [role='listbox'] [role='option'].Field__option--selected,
+.Field__select
   [role='listbox']
-  [role='option'].dqpl-option-selected.dqpl-option-active {
+  [role='option'].Field__option--selected.Field__option--active {
   background-color: var(--link-text-color);
   color: var(--text-color-light);
 }
 
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-selected:before,
-.dqpl-select
+.Field__select [role='listbox'] [role='option'].Field__option--selected:before,
+.Field__select
   [role='listbox']
-  [role='option'].dqpl-option-selected.dqpl-option-active:before {
+  [role='option'].Field__option--selected.Field__option--active:before {
   font-family: 'FontAwesome';
   content: '\f00c';
   position: absolute;

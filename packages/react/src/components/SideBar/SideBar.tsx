@@ -102,8 +102,8 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   private animate() {
     const { show } = this.props;
     const [first, second] = show
-      ? ['dqpl-show', 'dqpl-show dqpl-active']
-      : ['dqpl-show', ''];
+      ? ['SideBar--show', 'SideBar--show SideBar--active']
+      : ['SideBar--show', ''];
 
     this.setState({ animateClass: first });
     // css3 animations require transition classes to be added on separate tics
@@ -130,7 +130,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
         <ClickOutsideListener onClickOutside={this.handleClickOutside}>
           <nav>
             <ul
-              className={classNames('dqpl-side-bar', className, animateClass)}
+              className={classNames('SideBar', className, animateClass)}
               {...other}
               ref={this.navList}
               onKeyDown={this.onKeyDown}

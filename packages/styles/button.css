@@ -1,7 +1,7 @@
-.dqpl-button-primary,
-.dqpl-button-secondary,
-.dqpl-button-clear,
-.dqpl-button-error {
+.Button--primary,
+.Button--secondary,
+.Button--clear,
+.Button--error {
   min-width: 110px;
   border-radius: 18px;
   border: none;
@@ -17,10 +17,10 @@
   text-transform: uppercase;
 }
 
-.dqpl-button-primary:before,
-.dqpl-button-secondary:before,
-.dqpl-button-clear:before,
-.dqpl-button-error:before {
+.Button--primary:before,
+.Button--secondary:before,
+.Button--clear:before,
+.Button--error:before {
   content: '';
   position: absolute;
   width: 30px;
@@ -31,10 +31,10 @@
   left: 8px;
 }
 
-.dqpl-button-primary:after,
-.dqpl-button-secondary:after,
-.dqpl-button-clear:after,
-.dqpl-button-error:after {
+.Button--primary:after,
+.Button--secondary:after,
+.Button--clear:after,
+.Button--error:after {
   content: '';
   position: absolute;
   width: 30px;
@@ -45,136 +45,123 @@
   right: 8px;
 }
 
-.dqpl-button-primary:hover,
-.dqpl-button-secondary:hover,
-.dqpl-button-clear:hover,
-.dqpl-button-error:hover {
+.Button--primary:hover,
+.Button--secondary:hover,
+.Button--clear:hover,
+.Button--error:hover {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
-.dqpl-button-primary:focus,
-.dqpl-button-secondary:focus,
-.dqpl-button-clear:focus,
-.dqpl-button-error:focus {
+.Button--primary:focus,
+.Button--secondary:focus,
+.Button--clear:focus,
+.Button--error:focus {
   outline: 0;
 }
 
-.dqpl-button-primary:active,
-.dqpl-button-secondary:active,
-.dqpl-button-clear:active,
-.dqpl-button-error:active {
+.Button--primary:active,
+.Button--secondary:active,
+.Button--clear:active,
+.Button--error:active {
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
-.dqpl-button-primary {
+.Button--primary {
   background-color: var(--button-background-color-primary);
   color: var(--button-text-color-light);
 }
 
-.dqpl-button-primary.dqpl-disabled,
-.dqpl-button-primary[aria-disabled='true'],
-.dqpl-button-primary[disabled] {
+.Button--primary[aria-disabled='true'],
+.Button--primary[disabled] {
   color: var(--text-color-light-disabled);
 }
 
-.dqpl-button-primary:focus:after {
+.Button--primary:focus:after {
   box-shadow: 4px 0 var(--text-color-light);
 }
 
-.dqpl-button-primary:focus:before {
+.Button--primary:focus:before {
   box-shadow: -4px 0 var(--text-color-light);
 }
 
-.dqpl-button-secondary {
+.Button--secondary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
 }
 
-.dqpl-button-secondary.dqpl-disabled,
-.dqpl-button-secondary[aria-disabled='true'],
-.dqpl-button-secondary[disabled] {
+.Button--secondary[aria-disabled='true'],
+.Button--secondary[disabled] {
   color: var(--disabled);
 }
 
-.dqpl-button-secondary:focus:after {
+.Button--secondary:focus:after {
   box-shadow: 4px 0 var(--button-text-color-dark);
 }
 
-.dqpl-button-secondary:focus:before {
+.Button--secondary:focus:before {
   box-shadow: -4px 0 var(--button-text-color-dark);
 }
 
-.dqpl-button-error {
+.Button--error {
   background-color: var(--error);
   box-shadow: none;
   color: var(--button-text-color-light);
 }
 
-.dqpl-button-error.dqpl-disabled,
-.dqpl-button-error[aria-disabled='true'],
-.dqpl-button-error[disabled] {
+.Button--error[aria-disabled='true'],
+.Button--error[disabled] {
   color: var(--text-color-light-disabled);
 }
 
-.dqpl-button-error:hover {
+.Button--error:hover {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
-.dqpl-button-error:focus {
+.Button--error:focus {
   outline: 0;
 }
 
-.dqpl-button-error:active {
+.Button--error:active {
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
-.dqpl-button-error:focus:after {
+.Button--error:focus:after {
   box-shadow: 4px 0 var(--text-color-light);
 }
 
-.dqpl-button-error:focus:before {
+.Button--error:focus:before {
   box-shadow: -4px 0 var(--text-color-light);
 }
 
-.dqpl-button-clear {
+.Button--clear {
   background-color: transparent;
   box-shadow: none;
 }
 
-.dqpl-button-clear:hover {
+.Button--clear:hover {
   background-color: var(--button-background-color-secondary);
   box-shadow: none;
 }
 
-.dqpl-button-clear:focus {
+.Button--clear:focus {
   background-color: var(--button-background-color-secondary);
 }
 
-.dqpl-button-clear:focus:after {
+.Button--clear:focus:after {
   box-shadow: 4px 0 var(--button-text-color-dark);
 }
 
-.dqpl-button-clear:focus:before {
+.Button--clear:focus:before {
   box-shadow: -4px 0 var(--button-text-color-dark);
 }
 
-.dqpl-buttons-inline {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-}
-
-.dqpl-buttons-inline button {
-  margin: 0 0 0 10px;
-}
-
-.dqpl-definition-button-wrap {
+.DefinitionButton {
   display: inline;
   vertical-align: baseline;
   position: relative;
 }
 
-.dqpl-button-definition {
+.DefinitionButton button {
   background-color: transparent;
   color: var(--text-color-base);
   font-weight: var(--font-weight-normal);

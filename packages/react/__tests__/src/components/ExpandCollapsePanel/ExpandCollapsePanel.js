@@ -12,9 +12,9 @@ afterEach(() => {
 
 const isVisible = element => {
   const node = element.getDOMNode().parentNode;
-  // Ideally we would test against actual DOM, but short-cutting to use `dqpl-hidden`
+  // Ideally we would test against actual DOM, but short-cutting to use `Hidden`
   // which should have the appropriate styles to be actually hidden
-  return !node.classList.contains('dqpl-hidden');
+  return !node.classList.contains('Hidden');
 };
 
 test('should render children', () => {

@@ -111,24 +111,24 @@ export default class TextField extends React.Component<
     };
 
     return (
-      <div className="dqpl-field-wrap">
+      <div className="Field">
         <label
-          className={classNames('dqpl-label', {
-            'dqpl-required': isRequired,
-            'dqpl-error': error
+          className={classNames('Field__label', {
+            'Field__label--is-required': isRequired,
+            'Field__label--has-error': error
           })}
           htmlFor={this.inputId}
         >
           <span>{label}</span>
           {isRequired && (
-            <span className="dqpl-required-text">{requiredText}</span>
+            <span className="Field__required-text">{requiredText}</span>
           )}
         </label>
         <Field
           className={classNames({
-            'dqpl-text-input': !multiline,
-            'dqpl-textarea': multiline,
-            'dqpl-error': error
+            'Field__text-input': !multiline,
+            Field__textarea: multiline,
+            'Field--has-error': error
           })}
           id={this.inputId}
           value={this.state.value}
@@ -141,7 +141,7 @@ export default class TextField extends React.Component<
           {...other}
           {...inputProps}
         />
-        <div className="dqpl-error-wrap" id={this.errorId}>
+        <div className="Error" id={this.errorId}>
           {error}
         </div>
       </div>

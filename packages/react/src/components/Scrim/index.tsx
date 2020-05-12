@@ -35,7 +35,7 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
   fadeIn() {
     this.setState({ destroy: false }, () => {
       this.setState({
-        animationClass: 'dqpl-scrim-show'
+        animationClass: 'Scrim--show'
       });
 
       // using setTimeout because css transitions require us to add the classes separately
@@ -45,14 +45,14 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
         }
 
         this.setState({
-          animationClass: 'dqpl-scrim-show dqpl-scrim-fade-in'
+          animationClass: 'Scrim--show Scrim--fade-in'
         });
       });
     });
   }
 
   fadeOut() {
-    this.setState({ animationClass: 'dqpl-scrim-show' }, () => {
+    this.setState({ animationClass: 'Scrim--show' }, () => {
       // using setTimeout because css transitions require us to add the classes separately
       setTimeout(() => {
         this.setState({ animationClass: '' }, () => {
@@ -83,10 +83,7 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
     }
 
     return (
-      <div
-        ref={el => (this.el = el)}
-        className={`dqpl-scrim ${animationClass}`}
-      />
+      <div ref={el => (this.el = el)} className={`Scrim ${animationClass}`} />
     );
   }
 }

@@ -1,49 +1,10 @@
-/* slide down/up
-// going from display none (presumably)
-// to display block w/ 0 height breifly
-//
-// NOTE: CSS slide down animation requires use of max-height
-// rather than height and the final value (see dqpl-slidedown
-// below) needs to be a real value (not "auto")
-*/
-.dqpl-slidedown-setup {
-  display: block;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 400ms;
-}
-
-.dqpl-slidedown {
-  max-height: 1000px; /* TODO: this is dangerous */
-  overflow: auto;
-  transition: max-height 400ms;
-}
-
-/* fade in/out */
-.dqpl-fadein-setup {
-  display: block;
-  opacity: 0;
+.FadeIn {
+  opacity: 1;
   transition: opacity 400ms;
 }
 
-.dqpl-fadein-flex {
+.FadeIn--flex {
   display: flex;
   opacity: 0;
   transition: opacity 400ms;
-}
-
-.dqpl-fadein {
-  opacity: 1;
-  transition: opacity 400ms;
-}
-
-.dqpl-fadein-fast-setup {
-  display: block;
-  opacity: 0;
-  transition: opacity 250ms;
-}
-
-.dqpl-fadein-fast {
-  opacity: 1;
-  transition: opacity 250ms;
 }

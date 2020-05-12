@@ -1,84 +1,72 @@
-.dqpl-text-largest {
+.Text--largest {
   font-size: var(--text-size-largest);
 }
 
-.dqpl-text-larger {
+.Text--larger {
   font-size: var(--text-size-larger);
 }
 
-.dqpl-text-large {
+.Text--large {
   font-size: var(--text-size-large);
 }
 
-.dqpl-text-large-medium {
+.Text--large-medium {
   font-size: var(--text-size-large-medium);
 }
 
-.dqpl-text-medium {
+.Text--medium {
   font-size: var(--text-size-medium);
 }
 
-.dqpl-text-normal {
+.Text--normal {
   font-size: var(--text-size-normal);
 }
 
-.dqpl-text-small-medium {
+.Text--small-medium {
   font-size: var(--text-small-medium);
 }
 
-.dqpl-text-small {
+.Text--small {
   font-size: var(--text-size-small);
 }
 
-.dqpl-text-smaller {
+.Text--smaller {
   font-size: var(--text-size-smaller);
 }
 
-.dqpl-text-smallest {
+.Text--smallest {
   font-size: var(--text-size-smallest);
 }
 
-.dqpl-weight-thin {
+.Weight--thin {
   font-weight: var(--font-weight-thin);
 }
 
-.dqpl-weight-light {
+.Weight--light {
   font-weight: var(--font-weight-light);
 }
 
-.dqpl-weight-normal {
+.Weight--normal {
   font-weight: var(--font-weight-normal);
 }
 
-.dqpl-weight-medium {
+.Weight--medium {
   font-weight: var(--font-weight-medium);
 }
 
-.dqpl-weight-bold {
+.Weight--bold {
   font-weight: var(--font-weight-bold);
 }
 
-.dqpl-weight-ultra-bold {
+.Weight--ultra-bold {
   font-weight: var(--font-weight-ultra-bold);
 }
 
-.dqpl-inline {
-  display: inline;
-}
-
-.dqpl-hide {
+body .Hidden {
   display: none;
 }
 
-.dqpl-pointer {
-  cursor: pointer;
-}
-
-body .dqpl-hidden {
-  display: none;
-}
-
-.dqpl-offscreen {
+.Offscreen {
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -87,39 +75,44 @@ body .dqpl-hidden {
   margin-top: -1px;
 }
 
-.flexr,
-.dqpl-flexr {
+.Flexr {
   display: flex;
   align-items: center;
 }
 
-body .row {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.flex-1 {
-  flex: 1 0 auto;
-}
-
-.flex-1-1 {
-  flex: 1;
-}
-
-.flex-none {
-  flex: none;
-}
-
-.align-self-center {
-  align-self: center;
-}
-
-.dqpl-logo-item {
+.MenuItem__logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dqpl-separator {
+.MenuItem--separator {
   border-left: 1px solid var(--top-bar-menuitem-separator);
+}
+
+/* utility for using the left-bar style focus indication */
+.Block,
+[data-skip-target='true'] {
+  position: relative;
+}
+
+.Block::before,
+[data-skip-target='true']::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  background-color: transparent;
+  top: 0;
+  bottom: 0;
+  width: var(--border-width);
+}
+
+.Block:focus,
+[data-skip-target='true']:focus {
+  outline: 0;
+}
+
+.Block:focus::before,
+[data-skip-target='true']:focus::before {
+  background-color: var(--top-bar-background-color);
 }

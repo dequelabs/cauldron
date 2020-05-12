@@ -94,10 +94,7 @@ export default class RadioGroup extends React.Component<
       const isFocused = this.state.focusIndex === index;
 
       return (
-        <div
-          className={classNames('dqpl-radio-wrap dqpl-flexr', className)}
-          key={id}
-        >
+        <div className={classNames('Radio Flexr', className)} key={id}>
           <input
             type="radio"
             name={name}
@@ -116,18 +113,18 @@ export default class RadioGroup extends React.Component<
           />
           <div
             aria-hidden="true"
-            className={classNames('dqpl-radio dqpl-overlay-radio fa', {
+            className={classNames('Radio__overlay fa', {
               'fa-dot-circle-o': isChecked,
               'fa-circle-o': !isChecked,
-              'dqpl-radio-focused': isFocused,
-              'dqpl-radio-disabled': disabled
+              'Radio__overlay--focused': isFocused,
+              'Radio__overlay--disabled': disabled
             })}
             onClick={() => this.onRadioClick(index)}
           />
           <label
             htmlFor={id}
-            className={classNames('dqpl-label', {
-              'dqpl-label-disabled': disabled
+            className={classNames('Field__label', {
+              'Field__label--disabled': disabled
             })}
           >
             {label}
@@ -137,11 +134,7 @@ export default class RadioGroup extends React.Component<
     });
 
     return (
-      <div
-        className={classNames('dqpl-radio-group', className)}
-        role="radiogroup"
-        {...other}
-      >
+      <div className={className} role="radiogroup" {...other}>
         {radioButtons}
       </div>
     );

@@ -21,7 +21,7 @@ export default class Layout extends React.Component<LayoutProps> {
   render() {
     const { layoutRef, children, ...other } = this.props;
     return (
-      <div className="dqpl-layout" ref={layoutRef} {...other}>
+      <div className="Layout" ref={layoutRef} {...other}>
         {children}
       </div>
     );

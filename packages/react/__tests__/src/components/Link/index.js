@@ -22,7 +22,7 @@ test('passes arbitrary props through', () => {
 
 test('handles variant="button"', () => {
   const link = shallow(<Link variant="button">hi</Link>);
-  expect(link.is('.dqpl-button-primary')).toBe(true);
+  expect(link.is('.Button--primary')).toBe(true);
 });
 
 test('should return no axe violations', async () => {

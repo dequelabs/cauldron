@@ -3,7 +3,7 @@ import React from 'react';
 export interface OffscreenProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Offscreen = (props: OffscreenProps) => (
-  <div className="dqpl-offscreen" {...props} />
+  <div className="Offscreen" {...props} />
 );
 
 export default Offscreen;

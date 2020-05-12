@@ -99,7 +99,7 @@ test('does not render the close button given a thruthy "forceAction" prop', () =
     </Modal>
   );
 
-  expect(modal.find('.dqpl-close').exists()).toBeFalsy();
+  expect(modal.find('.Modal__close').exists()).toBeFalsy();
   modal.unmount();
 });
 

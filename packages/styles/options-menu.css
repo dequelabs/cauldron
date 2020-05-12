@@ -1,10 +1,10 @@
-.dqpl-options-menu-wrap {
+.OptionsMenu {
   position: relative;
   width: 34px;
   color: var(--text-color-base);
 }
 
-.dqpl-options-menu-wrap .dqpl-options-menu-trigger {
+.OptionsMenu__trigger {
   font-size: var(--text-small-medium);
   color: var(--header-text-color-dark);
   border-radius: 3px;
@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-.dqpl-options-menu-wrap .dqpl-options-menu {
+.OptionsMenu__list {
   display: none;
   position: absolute;
   list-style-type: none;
@@ -33,36 +33,36 @@
   overflow-y: auto;
 }
 
-.dqpl-options-menu-wrap .dqpl-options-menu[aria-expanded='true'] {
+.OptionsMenu__list[aria-expanded='true'] {
   display: block;
 }
 
-.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem {
+.OptionsMenu__list-item {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   padding: 2px var(--space-smallest);
   cursor: default;
 }
 
-.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:hover,
-.dqpl-options-menu-wrap .dqpl-options-menu .dqpl-options-menuitem:focus {
+.OptionsMenu__list-item:hover,
+.OptionsMenu__list-item:focus {
   background-color: var(--link-text-color-light);
   outline: 0;
 }
 
-.dqpl-options-menu-wrap
-  .dqpl-options-menu
-  .dqpl-options-menuitem[aria-disabled='true'] {
+.OptionsMenu__list-item[aria-disabled='true'] {
   color: var(--disabled);
 }
 
-.dqpl-options-menu-wrap
-  .dqpl-options-menu
-  .dqpl-options-menuitem[aria-disabled='true']:hover {
+.OptionsMenu__list-item[aria-disabled='true']:hover {
   background-color: transparent;
 }
 
-.dqpl-options-menu-wrap.dqpl-align-left .dqpl-options-menu {
+.OptionsMenu.OptionsMenu--align-left .OptionsMenu__list {
   left: 0;
   right: auto;
+}
+
+.OptionsMenu .OptionsMenu__list {
+  top: 100%;
 }

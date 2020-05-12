@@ -157,9 +157,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return (
         <li
           key={id}
-          className={classNames('dqpl-option', {
-            'dqpl-option-active': hasActiveOption ? activeIndex === i : i === 0,
-            'dqpl-option-selected': selectedIndex === i
+          className={classNames('Field__option', {
+            'Field__option--active': hasActiveOption
+              ? activeIndex === i
+              : i === 0,
+            'Field__option--selected': selectedIndex === i
           })}
           role="option"
           aria-selected={hasActiveOption && activeIndex === i}
@@ -182,7 +184,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         </li>
       );
     });
-    // to make the "dqpl-label" div behave like a native label,
+    // to make the "Field__label" div behave like a native label,
     // here we add a click listener which focuses the combobox
     /* eslint-disable jsx-a11y/no-static-element-interactions */
 
@@ -191,15 +193,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // (see https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html)
     /* eslint-disable jsx-a11y/aria-activedescendant-has-tabindex */
     return (
-      <div className="dqpl-field-wrap">
-        <div className="dqpl-label" id={labelId} onClick={this.focusSelect}>
+      <div className="Field">
+        <div className="Field__label" id={labelId} onClick={this.focusSelect}>
           {label}
         </div>
-        <div className="dqpl-select">
+        <div className="Field__select">
           <button
             {...other}
             aria-haspopup="listbox"
-            className={classNames('dqpl-listbox-button', className)}
+            className={classNames('Field__listbox-button', className)}
             id={buttonId}
             aria-labelledby={`${labelId} ${buttonId}`}
             aria-expanded={expanded}
@@ -215,8 +217,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             aria-labelledby={buttonId}
             tabIndex={-1}
             aria-required={required}
-            className={classNames('dqpl-listbox', {
-              'dqpl-listbox-show': expanded
+            className={classNames('Field__listbox', {
+              'Field__listbox--show': expanded
             })}
             role="listbox"
             aria-activedescendant={

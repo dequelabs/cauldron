@@ -61,7 +61,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     super(props);
 
     this.state = {
-      animationClass: props.show ? 'dqpl-fadein-flex' : 'dqpl-hidden'
+      animationClass: props.show ? 'FadeIn--flex' : 'Hidden'
     };
 
     this.dismissToast = this.dismissToast.bind(this);
@@ -86,7 +86,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const { show } = this.props;
     if (prevProps.show !== show) {
       if (show) {
-        this.setState({ animationClass: 'dqpl-fadein-flex' }, () => {
+        this.setState({ animationClass: 'FadeIn--flex' }, () => {
           setTimeout(this.showToast);
         });
       } else {
@@ -100,27 +100,27 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const { type, children, dismissText, toastRef, show } = this.props;
     const scrim =
       type === 'action-needed' && show ? (
-        <div className="dqpl-scrim-light dqpl-scrim-show dqpl-scrim-fade-in" />
+        <div className="Scrim--light Scrim--show Scrim--fade-in" />
       ) : null;
 
     return (
       <React.Fragment>
         <div
           tabIndex={-1}
-          className={`dqpl-toast dqpl-toast-${typeMap[type].className} ${animationClass}`}
+          className={`Toast Toast--${typeMap[type].className} ${animationClass}`}
           ref={el => {
             this.el = el;
             setRef(toastRef, el);
           }}
         >
-          <div className="dqpl-toast-message">
+          <div className="Toast__message">
             <div className={`fa ${typeMap[type].icon}`} aria-hidden="true" />
             <span>{children}</span>
           </div>
           {type !== 'action-needed' && (
             <button
               type="button"
-              className={'dqpl-toast-dismiss fa fa-close'}
+              className={'Toast__dismiss fa fa-close'}
               aria-label={dismissText}
               onClick={this.dismissToast}
             />
@@ -140,7 +140,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
     this.setState(
       {
-        animationClass: 'dqpl-fadein-flex'
+        animationClass: 'FadeIn--flex'
       },
       () => {
         // Timeout because CSS display: none/block and opacity:
@@ -152,7 +152,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             isolator?.deactivate();
           }
 
-          this.setState({ animationClass: 'dqpl-hidden' }, onDismiss);
+          this.setState({ animationClass: 'Hidden' }, onDismiss);
         });
       }
     );
@@ -163,7 +163,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
     this.setState(
       {
-        animationClass: 'dqpl-fadein-flex dqpl-fadein'
+        animationClass: 'FadeIn--flex FadeIn'
       },
       () => {
         if (type === 'action-needed') {
