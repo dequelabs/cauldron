@@ -30,7 +30,7 @@ import {
   CardHeader,
   CardContent,
   CardFooter
-} from 'cauldron-react';
+} from '@deque/cauldron-react';
 
 const Demo = () => (
   <Card>

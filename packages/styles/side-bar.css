@@ -4,7 +4,7 @@
   top: var(--top-bar-height);
   bottom: 0;
   overflow: auto;
-  background-color: var(--top-bar-background-color-active);
+  background-color: var(--top-bar-background-color);
   width: var(--menu-width);
   left: calc(-1 * var(--menu-width));
   box-sizing: border-box;

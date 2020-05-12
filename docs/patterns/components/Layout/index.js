@@ -18,7 +18,7 @@ export default function Layout() {
       <h3>Code sample</h3>
       <Code language="javascript">
         {`
-import { Workspace, Sidebar, TopBar } from 'cauldron-react';
+import { Workspace, Sidebar, TopBar } from '@deque/cauldron-react';
 
 const App = () => (
   <div class="App">
@@ -42,7 +42,7 @@ const App = () => (
       <h3>Code sample</h3>
       <Code language="javascript">
         {`
-import { Layout, Main, TopBar, SideBar } from 'cauldron-react';
+import { Layout, Main, TopBar, SideBar } from '@deque/cauldron-react';
 
 const App = () => (
   <div class="App">
