@@ -15,8 +15,8 @@ const Select = ({
     'You may only nest children or use the options prop, not both.'
   );
   return (
-    <select className={`${className} Field__listbox-button`} {...rest}>
-      {options
+    <select className={`${className} Field__select`} {...rest}>
+      {options?.length
         ? options.map(
             (
               option: SelectOption,
@@ -25,6 +25,7 @@ const Select = ({
               // TODO: possibly create an Deque option component
               return (
                 <option
+                  className="Field__option"
                   key={index}
                   value={option.value}
                   disabled={option.disabled}

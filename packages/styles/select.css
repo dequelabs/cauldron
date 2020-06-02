@@ -1,16 +1,16 @@
-.Field__select {
+select.Field__select {
   position: relative;
 }
 
-.Field__select [role='textbox'] {
+select.Field__select [role='textbox'] {
   border: 0;
 }
 
-.Field__select [role='textbox']:hover {
+select.Field__select [role='textbox']:hover {
   border: 0;
 }
 
-.Field__select [aria-haspopup='listbox'] {
+select.Field__select {
   padding: var(--space-half) var(--space-smallest);
   box-sizing: border-box;
   font-size: var(--text-size-small);
@@ -24,7 +24,7 @@
   text-align: left;
 }
 
-.Field__select [aria-haspopup='listbox']:after {
+select.Field__select:after {
   font-family: 'FontAwesome';
   content: '\f0d7';
   position: absolute;
@@ -35,13 +35,12 @@
   font-weight: var(--font-weight-normal);
 }
 
-.Field__select [aria-haspopup='listbox'][disabled],
-.Field__select [aria-haspopup='listbox'][aria-disabled='true'] {
+select.Field__select:disabled {
   background-color: var(--field-background-color-disabled);
   border: 1px solid var(--field-background-color-disabled);
 }
 
-.Field__select [role='listbox'] {
+select.Field__select [role='listbox'] {
   display: none;
   margin: 0;
   padding: 0;
@@ -56,11 +55,11 @@
   top: 28px;
 }
 
-.Field__select [role='listbox'].Field__listbox--show {
+select.Field__select [role='listbox'].Field__listbox--show {
   display: block;
 }
 
-.Field__select [role='listbox'] [role='option'] {
+select.Field__select option.Field__option {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   padding: 2px var(--space-large);
@@ -71,31 +70,25 @@
   cursor: default;
 }
 
-.Field__select [role='listbox'] [role='option']:hover,
-.Field__select [role='listbox'] [role='option'].Field__option--active {
+select.Field__select option.Field__option:hover,
+select.Field__select option.Field__option:active {
   background-color: var(--link-text-color-light);
 }
 
-.Field__select [role='listbox'] [role='option'][aria-disabled='true'] {
+select.Field__select option.Field__option:disabled {
   color: var(--disabled);
 }
 
-.Field__select [role='listbox'] [role='option'][aria-disabled='true']:hover {
+select.Field__select option.Field__option:disabled:hover {
   background-color: transparent;
 }
 
-.Field__select [role='listbox'] [role='option'].Field__option--selected,
-.Field__select
-  [role='listbox']
-  [role='option'].Field__option--selected.Field__option--active {
+select.Field__select option.Field__option:active {
   background-color: var(--link-text-color);
   color: var(--text-color-light);
 }
 
-.Field__select [role='listbox'] [role='option'].Field__option--selected:before,
-.Field__select
-  [role='listbox']
-  [role='option'].Field__option--selected.Field__option--active:before {
+select.Field__select option.Field__option:active:before {
   font-family: 'FontAwesome';
   content: '\f00c';
   position: absolute;
