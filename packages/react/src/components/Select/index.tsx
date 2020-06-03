@@ -21,7 +21,6 @@ const Select = ({
   options,
   children,
   disabled,
-  className = '',
   ...rest
 }: SelectProps): React.ReactElement<HTMLSelectElement> => {
   if (options && children) {
@@ -35,7 +34,7 @@ const Select = ({
         'Field__select--disabled': disabled
       })}
     >
-      <select className={className} disabled={disabled} {...rest}>
+      <select disabled={disabled} {...rest}>
         {options?.length
           ? options.map(
               (
