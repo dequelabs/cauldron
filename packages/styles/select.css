@@ -24,6 +24,7 @@
   color: var(--text-color-base);
   width: var(--input-min-width);
   height: var(--space-largest);
+  border-radius: 0;
   display: inline-block;
   position: relative;
   line-height: 1.4;
