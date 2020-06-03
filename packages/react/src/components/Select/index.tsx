@@ -12,7 +12,7 @@ const Select = ({
 }: SelectProps): React.ReactElement<HTMLSelectElement> => {
   if (options && children) {
     console.error(
-      'You may only nest children or use the options prop, not both.'
+      'The Select component only takes the options props or child option elements, not both.'
     );
   }
   return (

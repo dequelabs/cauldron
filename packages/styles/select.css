@@ -2,14 +2,6 @@
   position: relative;
 }
 
-/* .Field__select [role='textbox'] {
-  border: 0;
-}
-
-.Field__select [role='textbox']:hover {
-  border: 0;
-} */
-
 .Field__select--disabled {
   opacity: 0.45;
 }
@@ -18,7 +10,7 @@
   font-family: 'FontAwesome';
   content: '\f0d7';
   position: relative;
-  right: 15px;
+  right: var(--space-small);
   font-size: var(--text-size-small);
   color: var(--text-color-base);
   font-weight: var(--font-weight-normal);
@@ -55,71 +47,5 @@
 
 .Field__select select:invalid {
   border-width: 2px;
-  border-color: rgb(217, 50, 81);
+  border-color: var(--field-border-color-error);
 }
-
-/* .Field__select select:disabled {
-  background-color: var(--field-background-color-disabled);
-  border: 1px solid var(--field-background-color-disabled);
-} */
-
-/* .Field__select [role='listbox'] {
-  display: none;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background-color: var(--tile-background-color);
-  width: var(--input-min-width);
-  position: absolute;
-  list-style-type: none;
-  z-index: var(--z-index-listbox);
-  max-height: 200px;
-  top: 28px;
-}
-
-.Field__select [role='listbox'].Field__listbox--show {
-  display: block;
-}
-
-.Field__select [role='listbox'] [role='option'] {
-  font-size: var(--text-size-small);
-  font-weight: var(--font-weight-normal);
-  padding: 2px var(--space-large);
-  top: 28px;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  white-space: nowrap;
-  cursor: default;
-}
-
-.Field__select [role='listbox'] [role='option']:hover,
-.Field__select [role='listbox'] [role='option'].Field__option--active {
-  background-color: var(--link-text-color-light);
-}
-
-.Field__select [role='listbox'] [role='option'][aria-disabled='true'] {
-  color: var(--disabled);
-}
-
-.Field__select [role='listbox'] [role='option'][aria-disabled='true']:hover {
-  background-color: transparent;
-}
-
-.Field__select [role='listbox'] [role='option'].Field__option--selected,
-.Field__select
-  [role='listbox']
-  [role='option'].Field__option--selected.Field__option--active {
-  background-color: var(--link-text-color);
-  color: var(--text-color-light);
-}
-
-.Field__select [role='listbox'] [role='option'].Field__option--selected:before,
-.Field__select
-  [role='listbox']
-  [role='option'].Field__option--selected.Field__option--active:before {
-  font-family: 'FontAwesome';
-  content: '\f00c';
-  position: absolute;
-  left: 5px;
-} */
