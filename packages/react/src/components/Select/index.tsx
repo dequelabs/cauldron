@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { SelectOption, SelectProps } from './interfaces';
 
 export { SelectProps };
@@ -17,9 +18,11 @@ const Select = ({
   }
   return (
     <div
-      className={`Field__select ${disabled ? 'Field__select--disabled' : ''}`}
+      className={classNames('Field__select', {
+        'Field__select--disabled': disabled
+      })}
     >
-      <select className={`${className}`} disabled={disabled} {...rest}>
+      <select className={className} disabled={disabled} {...rest}>
         {options?.length
           ? options.map(
               (

@@ -6,7 +6,7 @@ export default class Demo extends Component {
   constructor() {
     super();
     this.state = {
-      defaultValue: 'Saturday',
+      defaultValue: 'Tuesday',
       current: 'Tuesday',
       options: [
         { value: 'Monday' },
