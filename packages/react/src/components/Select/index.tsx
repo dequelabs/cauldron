@@ -26,7 +26,6 @@ const Select = ({
                 option: SelectOption,
                 index: number
               ): React.ReactElement<HTMLOptionElement> => {
-                // TODO: possibly create an Deque option component
                 return (
                   <option
                     className="Field__option"

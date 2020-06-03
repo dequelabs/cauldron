@@ -15,6 +15,7 @@ const withCustomOptions = (otherProps = {}) => {
         {...defaultProps}
         {...otherProps}
         defaultValue="Bill"
+        onChange={() => {}}
         options={[
           { value: 'Fred' },
           { value: 'Bill' },
@@ -26,21 +27,19 @@ const withCustomOptions = (otherProps = {}) => {
   );
 };
 
-// TODO: work on this when classes are added
-test.skip('renders the expected UI', () => {
+test('renders the expected UI', () => {
   const wrapper = withCustomOptions();
 
-  expect(wrapper.find('.Field').exists()).toBeTruthy();
-  expect(wrapper.find('.Field__label')).toBeTruthy();
-  expect(wrapper.find('.Field__listbox-button')).toBeTruthy();
-  expect(wrapper.find('.Field__listbox')).toBeTruthy();
+  expect(wrapper.find('.Field__select')).toBeTruthy();
+  expect(wrapper.find('.Field__option')).toBeTruthy();
 });
 
 test('sets option attributes properly', () => {
   const select = mount(
     <Select
       {...defaultProps}
-      value="a"
+      defaultValue="a"
+      onChange={() => {}}
       options={[{ value: 'a' }, { disabled: true, value: 'b' }, { value: 'c' }]}
     />
   );
@@ -52,7 +51,7 @@ test('sets option attributes properly', () => {
 
 test('passes children properly', () => {
   const select = mount(
-    <Select {...defaultProps} value="a">
+    <Select {...defaultProps} defaultValue="a">
       <option>a</option>
       <option disabled>b</option>
       <option>c</option>
@@ -70,7 +69,8 @@ test('should return no axe violations', async () => {
       <label htmlFor="test-select">Test Select</label>
       <Select
         {...defaultProps}
-        value="Bar"
+        defaultValue="Bar"
+        onChange={() => {}}
         options={[
           { value: 'Bar' },
           { value: 'Foo' },
