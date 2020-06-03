@@ -6,7 +6,7 @@ export default class Demo extends Component {
   constructor() {
     super();
     this.state = {
-      defaultValue: 'Tuesday',
+      defaultValue: 'Saturday',
       current: 'Tuesday',
       options: [
         { value: 'Monday' },
@@ -56,7 +56,7 @@ export default class Demo extends Component {
         <Code language="javascript">
           {`
     import React from 'react';
-    import { Select, SelectOption } from '@deque/cauldron-react';
+    import { Select } from '@deque/cauldron-react';
 
     const Demo = () => (
       <label htmlFor="select-demo">Day</label>
