@@ -6,8 +6,8 @@ export default class Demo extends Component {
   constructor() {
     super();
     this.state = {
-      value: 'Monday',
-      current: 'Monday',
+      defaultValue: 'Tuesday',
+      current: 'Tuesday',
       options: [
         { value: 'Monday' },
         { value: 'Tuesday' },
@@ -18,18 +18,13 @@ export default class Demo extends Component {
         { value: 'Sunday' }
       ]
     };
-    this.onClick = this.onClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  onClick() {
-    this.setState({ value: 'Sunday' });
-  }
-
-  onSelect(option) {
+  onChange(e) {
+    console.log('Selected: ', e.target.value);
     this.setState({
-      current: option.value,
-      value: null
+      current: e.target.value
     });
   }
 
@@ -39,29 +34,17 @@ export default class Demo extends Component {
         <h1>Select</h1>
         <h2>Demo</h2>
         <form onSubmit={this.handleSubmit}>
+          <label htmlFor="select-demo">Day</label>
           <Select
-            label="Day"
-            value={this.state.value}
-            onSelect={this.onSelect}
+            id="select-demo"
+            required
+            defaultValue={this.state.defaultValue}
+            onChange={this.onChange}
             options={this.state.options}
           />
           <p>
-            <span>
-              To programmatically select an option, simply update the{' '}
-            </span>
-            <code>value</code>
-            <span> prop.</span>
-          </p>
-          <Button
-            className="select-demo-button"
-            variant="secondary"
-            onClick={this.onClick}
-          >
-            Select Sunday
-          </Button>
-          <p>
             <span>Using the </span>
-            <code>onSelect</code>
+            <code>onChange</code>
             <span> prop, we can easily handle changes in the select list</span>
           </p>
           <div className="current-value">
@@ -76,10 +59,11 @@ export default class Demo extends Component {
     import { Select, SelectOption } from '@deque/cauldron-react';
 
     const Demo = () => (
+      <label htmlFor="select-demo">Day</label>
       <Select
-        label='Day'
-        value='Monday'
-        onSelect={selected => console.log('Selected: ', selected)}
+        id="select-demo"
+        defaultValue='Tuesday'
+        onChange={e => console.log('Selected: ', e.target.value)}
         options={[
           { label: 'Monday' },
           { label: 'Tuesday' },

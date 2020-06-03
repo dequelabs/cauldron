@@ -7,7 +7,7 @@ const defaultProps = {
   id: 'test-select',
   name: 'Test Select'
 };
-const withDefaultSelected = (otherProps = {}) => {
+const withCustomOptions = (otherProps = {}) => {
   return mount(
     <div>
       <label htmlFor="test-select">Test Select</label>
@@ -28,7 +28,7 @@ const withDefaultSelected = (otherProps = {}) => {
 
 // TODO: work on this when classes are added
 test.skip('renders the expected UI', () => {
-  const wrapper = withDefaultSelected();
+  const wrapper = withCustomOptions();
 
   expect(wrapper.find('.Field').exists()).toBeTruthy();
   expect(wrapper.find('.Field__label')).toBeTruthy();
@@ -44,6 +44,22 @@ test('sets option attributes properly', () => {
       options={[{ value: 'a' }, { disabled: true, value: 'b' }, { value: 'c' }]}
     />
   );
+  const opts = select.find('option');
+  expect(opts.length).toBe(3);
+  const disabledOpt = select.find('[disabled]');
+  expect(disabledOpt.text()).toBe('b');
+});
+
+test('passes children properly', () => {
+  const select = mount(
+    <Select {...defaultProps} value="a">
+      <option>a</option>
+      <option disabled>b</option>
+      <option>c</option>
+    </Select>
+  );
+  const opts = select.find('option');
+  expect(opts.length).toBe(3);
   const disabledOpt = select.find('[disabled]');
   expect(disabledOpt.text()).toBe('b');
 });

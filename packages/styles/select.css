@@ -1,16 +1,31 @@
-select.Field__select {
+.Field__select {
   position: relative;
 }
 
-select.Field__select [role='textbox'] {
+/* .Field__select [role='textbox'] {
   border: 0;
 }
 
-select.Field__select [role='textbox']:hover {
+.Field__select [role='textbox']:hover {
   border: 0;
+} */
+
+.Field__select--disabled {
+  opacity: 0.45;
 }
 
-select.Field__select {
+.Field__select:after {
+  font-family: 'FontAwesome';
+  content: '\f0d7';
+  position: relative;
+  right: 15px;
+  font-size: var(--text-size-small);
+  color: var(--text-color-base);
+  font-weight: var(--font-weight-normal);
+  z-index: -1;
+}
+
+.Field__select select {
   padding: var(--space-half) var(--space-smallest);
   box-sizing: border-box;
   font-size: var(--text-size-small);
@@ -22,25 +37,33 @@ select.Field__select {
   line-height: 1.4;
   background: transparent;
   text-align: left;
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
 }
 
-select.Field__select:after {
-  font-family: 'FontAwesome';
-  content: '\f0d7';
-  position: absolute;
-  right: var(--space-smallest);
-  top: 2.5px;
-  font-size: var(--text-size-small);
-  color: var(--text-color-base);
-  font-weight: var(--font-weight-normal);
+.Field__select select:hover {
+  border-color: rgb(60, 122, 174);
 }
 
-select.Field__select:disabled {
+.Field__select select:focus {
+  border-color: rgb(60, 122, 174);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
+    rgba(60, 122, 174, 0.7) 0px 0px 4px 0px;
+}
+
+.Field__select select:invalid {
+  border-width: 2px;
+  border-color: rgb(217, 50, 81);
+}
+
+/* .Field__select select:disabled {
   background-color: var(--field-background-color-disabled);
   border: 1px solid var(--field-background-color-disabled);
-}
+} */
 
-select.Field__select [role='listbox'] {
+/* .Field__select [role='listbox'] {
   display: none;
   margin: 0;
   padding: 0;
@@ -55,11 +78,11 @@ select.Field__select [role='listbox'] {
   top: 28px;
 }
 
-select.Field__select [role='listbox'].Field__listbox--show {
+.Field__select [role='listbox'].Field__listbox--show {
   display: block;
 }
 
-select.Field__select option.Field__option {
+.Field__select [role='listbox'] [role='option'] {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   padding: 2px var(--space-large);
@@ -70,27 +93,33 @@ select.Field__select option.Field__option {
   cursor: default;
 }
 
-select.Field__select option.Field__option:hover,
-select.Field__select option.Field__option:active {
+.Field__select [role='listbox'] [role='option']:hover,
+.Field__select [role='listbox'] [role='option'].Field__option--active {
   background-color: var(--link-text-color-light);
 }
 
-select.Field__select option.Field__option:disabled {
+.Field__select [role='listbox'] [role='option'][aria-disabled='true'] {
   color: var(--disabled);
 }
 
-select.Field__select option.Field__option:disabled:hover {
+.Field__select [role='listbox'] [role='option'][aria-disabled='true']:hover {
   background-color: transparent;
 }
 
-select.Field__select option.Field__option:active {
+.Field__select [role='listbox'] [role='option'].Field__option--selected,
+.Field__select
+  [role='listbox']
+  [role='option'].Field__option--selected.Field__option--active {
   background-color: var(--link-text-color);
   color: var(--text-color-light);
 }
 
-select.Field__select option.Field__option:active:before {
+.Field__select [role='listbox'] [role='option'].Field__option--selected:before,
+.Field__select
+  [role='listbox']
+  [role='option'].Field__option--selected.Field__option--active:before {
   font-family: 'FontAwesome';
   content: '\f00c';
   position: absolute;
   left: 5px;
-}
+} */
