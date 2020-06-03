@@ -9,13 +9,13 @@ export default class Demo extends Component {
       defaultValue: 'Tuesday',
       current: 'Tuesday',
       options: [
-        { value: 'Monday' },
-        { value: 'Tuesday' },
-        { value: 'Wednesday' },
-        { value: 'Thursday' },
-        { value: 'Friday' },
-        { value: 'Saturday', disabled: true },
-        { value: 'Sunday' }
+        { key: 'monday', value: 'Monday' },
+        { key: 'tuesday', value: 'Tuesday' },
+        { key: 'wednesday', value: 'Wednesday' },
+        { key: 'thursday', value: 'Thursday' },
+        { key: 'friday', value: 'Friday' },
+        { key: 'saturday', value: 'Saturday', disabled: true },
+        { key: 'sunday', value: 'Sunday' }
       ]
     };
     this.onChange = this.onChange.bind(this);
@@ -34,9 +34,8 @@ export default class Demo extends Component {
         <h1>Select</h1>
         <h2>Demo</h2>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="select-demo">Day</label>
           <Select
-            id="select-demo"
+            label="Day"
             required
             defaultValue={this.state.defaultValue}
             onChange={this.onChange}
@@ -59,19 +58,20 @@ export default class Demo extends Component {
     import { Select } from '@deque/cauldron-react';
 
     const Demo = () => (
-      <label htmlFor="select-demo">Day</label>
       <Select
         id="select-demo"
+        label="Day"
+        required
         defaultValue='Tuesday'
         onChange={e => console.log('Selected: ', e.target.value)}
         options={[
-          { label: 'Monday' },
-          { label: 'Tuesday' },
-          { label: 'Wednesday' },
-          { label: 'Thursday' },
-          { label: 'Friday' },
-          { label: 'Saturday', disabled: true },
-          { label: 'Sunday' }
+          { key: 'monday', value: 'Monday' },
+          { key: 'tuesday', value: 'Tuesday' },
+          { key: 'wednesday', value: 'Wednesday' },
+          { key: 'thursday', value: 'Thursday' },
+          { key: 'friday', value: 'Friday' },
+          { key: 'saturday', value: 'Saturday', disabled: true },
+          { key: 'sunday', value: 'Sunday' }
         ]}
       />
     );

@@ -4,23 +4,22 @@ import Select from 'src/components/Select';
 import axe from '../../../axe';
 
 const defaultProps = {
-  id: 'test-select',
   name: 'Test Select'
 };
 const withCustomOptions = (otherProps = {}) => {
   return mount(
     <div>
-      <label htmlFor="test-select">Test Select</label>
       <Select
         {...defaultProps}
         {...otherProps}
+        label="Test Select"
         defaultValue="Bill"
         onChange={() => {}}
         options={[
-          { value: 'Fred' },
-          { value: 'Bill' },
-          { value: 'Ted' },
-          { value: 'Bob' }
+          { key: '1', value: 'Fred' },
+          { key: '2', value: 'Bill' },
+          { key: '3', value: 'Ted' },
+          { key: '4', value: 'Bob' }
         ]}
       />
     </div>
@@ -40,7 +39,11 @@ test('sets option attributes properly', () => {
       {...defaultProps}
       defaultValue="a"
       onChange={() => {}}
-      options={[{ value: 'a' }, { disabled: true, value: 'b' }, { value: 'c' }]}
+      options={[
+        { key: '1', value: 'a' },
+        { disabled: true, key: '2', value: 'b' },
+        { key: '3', value: 'c' }
+      ]}
     />
   );
   const opts = select.find('option');
@@ -66,17 +69,17 @@ test('passes children properly', () => {
 test('should return no axe violations', async () => {
   const select = mount(
     <div>
-      <label htmlFor="test-select">Test Select</label>
       <Select
         {...defaultProps}
+        label="axe test"
         defaultValue="Bar"
         onChange={() => {}}
         options={[
-          { value: 'Bar' },
-          { value: 'Foo' },
-          { value: 'Far' },
-          { value: 'Fan' },
-          { value: 'Fun' }
+          { key: '1', value: 'Bar' },
+          { key: '2', value: 'Foo' },
+          { key: '3', value: 'Far' },
+          { key: '4', value: 'Fan' },
+          { key: '5', value: 'Fun' }
         ]}
       />
     </div>

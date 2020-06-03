@@ -29,10 +29,7 @@
   line-height: 1.4;
   background: transparent;
   text-align: left;
-  /* for Firefox */
-  -moz-appearance: none;
-  /* for Chrome */
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 .Field__select select:hover {
