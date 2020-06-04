@@ -15,8 +15,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v1-react-yarn-
+            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v2-react-yarn-
       - run: NODE_ENV=production yarn --cwd=packages/react build
       - run: yarn --cwd=packages/react test
   styles:
@@ -25,8 +25,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v1-styles-yarn-
+            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v2-styles-yarn-
       - run: npx lerna bootstrap
       - run: NODE_ENV=production yarn --cwd=packages/styles build
   dependencies:
@@ -35,35 +35,35 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-yarn-cache-{{ checksum "yarn.lock" }}
-            - v1-yarn-cache-
+            - v2-yarn-cache-{{ checksum "yarn.lock" }}
+            - v2-yarn-cache-
       - restore_cache:
           keys:
-            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v1-react-yarn-
+            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v2-react-yarn-
       - restore_cache:
           keys:
-            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v1-styles-yarn-
+            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v2-styles-yarn-
       - run: yarn
       - save_cache:
-          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - save_cache:
           paths:
             - packages/react/node_modules
-          key: v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+          key: v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
       - save_cache:
           paths:
             - packages/styles/node_modules
-          key: v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+          key: v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
   checks:
     <<: *defaults
     steps:
       - checkout
       - restore_cache:
-          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
   canary_release:
     <<: *defaults
@@ -72,16 +72,16 @@ jobs:
       - <<: *set_npm_auth
       - restore_cache:
           keys:
-            - v1-yarn-cache-{{ checksum "yarn.lock" }}
-            - v1-yarn-cache-
+            - v2-yarn-cache-{{ checksum "yarn.lock" }}
+            - v2-yarn-cache-
       - restore_cache:
           keys:
-            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v1-react-yarn-
+            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v2-react-yarn-
       - restore_cache:
           keys:
-            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v1-styles-yarn-
+            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v2-styles-yarn-
       - run: npx lerna publish prepatch --no-verify-access --no-git-tag-version --no-push --dist-tag=next --pre-dist-tag=next --exact --preid=${CIRCLE_SHA1:0:8} --force-publish --yes
   release:
     <<: *defaults
@@ -90,16 +90,16 @@ jobs:
       - <<: *set_npm_auth
       - restore_cache:
           keys:
-            - v1-yarn-cache-{{ checksum "yarn.lock" }}
-            - v1-yarn-cache-
+            - v2-yarn-cache-{{ checksum "yarn.lock" }}
+            - v2-yarn-cache-
       - restore_cache:
           keys:
-            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v1-react-yarn-
+            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v2-react-yarn-
       - restore_cache:
           keys:
-            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v1-styles-yarn-
+            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v2-styles-yarn-
       - run: npx lerna publish --force-publish='*' --yes
 
 workflows:
