@@ -22,7 +22,6 @@ export default class Demo extends Component {
   }
 
   onChange(e) {
-    console.log('Selected: ', e.target.value);
     this.setState({
       current: e.target.value
     });
