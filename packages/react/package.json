@@ -19,7 +19,6 @@
     "test": "jest --maxWorkers=1 --coverage"
   },
   "dependencies": {
-    "@types/unique-string": "^2.0.0",
     "classnames": "^2.2.6",
     "focus-trap-react": "^3.0.5",
     "focusable": "^2.3.0",

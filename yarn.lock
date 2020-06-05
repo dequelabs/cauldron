@@ -1998,13 +1998,6 @@
   dependencies:
     source-map "^0.6.1"
 
-"@types/unique-string@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/unique-string/-/unique-string-2.0.0.tgz#14191b7a73ab4da2d218c3c7f7da2a7143b8984c"
-  integrity sha512-v+wjWF7NPzxL5HIm0mHonjcEvnMdSPUK1QmrS1ti3nPWS3fBN81cjp8Ue7rgucyMzQ/+yltBgjmR1b0V01QZnw==
-  dependencies:
-    unique-string "*"
-
 "@types/webpack-dev-server@^3.10.1":
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/@types/webpack-dev-server/-/webpack-dev-server-3.10.1.tgz#93b7133cc9dab1ca1b76659f5ef8b763ad54c28a"
@@ -4193,11 +4186,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-crypto-random-string@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
-  integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
 css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"
@@ -12489,13 +12477,6 @@ unique-slug@^2.0.0:
   integrity sha512-zoWr9ObaxALD3DOPfjPSqxt4fnZiWblxHIgeWqW8x7UqDzEtHEQLzji2cuJYQFCU6KmoJikOYAZlrTHHebjx2w==
   dependencies:
     imurmurhash "^0.1.4"
-
-unique-string@*:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/unique-string/-/unique-string-2.0.0.tgz#39c6451f81afb2749de2b233e3f7c5e8843bd89d"
-  integrity sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==
-  dependencies:
-    crypto-random-string "^2.0.0"
 
 universal-user-agent@^4.0.0:
   version "4.0.1"

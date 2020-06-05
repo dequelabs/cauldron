@@ -1,5 +1,5 @@
 import React from 'react';
-import uniqueString from 'unique-string';
+import uid from '../../utils/rndid';
 import classNames from 'classnames';
 
 interface SelectOption {
@@ -29,7 +29,7 @@ const Select = ({
       'The Select component only takes the options props or child option elements, not both.'
     );
   }
-  const selectId = id || uniqueString();
+  const selectId = id || uid();
   return (
     <>
       {label ? <label htmlFor={selectId}>{label}</label> : ''}
