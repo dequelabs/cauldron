@@ -19,6 +19,7 @@
     "test": "jest --maxWorkers=1 --coverage"
   },
   "dependencies": {
+    "@types/unique-string": "^2.0.0",
     "classnames": "^2.2.6",
     "focus-trap-react": "^3.0.5",
     "focusable": "^2.3.0",
@@ -43,7 +44,6 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-syntax-highlighter": "^11.0.4",
-    "@types/unique-string": "^2.0.0",
     "autoprefixer": "^9.7.6",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
