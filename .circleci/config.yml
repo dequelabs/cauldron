@@ -73,15 +73,15 @@ jobs:
       - restore_cache:
           keys:
             - v1-yarn-cache-{{ checksum "yarn.lock" }}
-            - v2-yarn-cache-
+            - v1-yarn-cache-
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
       - run: npx lerna publish prepatch --no-verify-access --no-git-tag-version --no-push --dist-tag=next --pre-dist-tag=next --exact --preid=${CIRCLE_SHA1:0:8} --force-publish --yes
   release:
     <<: *defaults
@@ -90,16 +90,16 @@ jobs:
       - <<: *set_npm_auth
       - restore_cache:
           keys:
-            - v2-yarn-cache-{{ checksum "yarn.lock" }}
-            - v2-yarn-cache-
+            - v1-yarn-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-cache-
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v1-react-yarn-
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v1-styles-yarn-
       - run: npx lerna publish --force-publish='*' --yes
 
 workflows:
