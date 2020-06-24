@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import MenuItem from 'src/components/MenuItem';
 import TopBar from 'src/components/TopBar/TopBar';
 import TopBarMenu from 'src/components/TopBar/TopBarMenu';
+import MenuBar from 'src/components/MenuBar';
 import { OptionsMenuList } from 'src/components/OptionsMenu';
 import axe from '../../../axe';
 
@@ -38,11 +39,11 @@ test('should pass-through props', () => {
 
 test('should open menu with down key', () => {
   const wrapper = mount(
-    <TopBar>
+    <MenuBar>
       <MenuItem>a</MenuItem>
       <TopBarMenu {...defaultProps}>{optionsMenu}</TopBarMenu>
       <MenuItem>b</MenuItem>
-    </TopBar>
+    </MenuBar>
   );
   wrapper.setState({ focusIndex: 1 });
   const topBarMenu = wrapper.find('TopBarMenu');
@@ -54,13 +55,13 @@ test('should open menu with down key', () => {
 test('should call onKeyDown with down key', () => {
   const handleKeyDown = jest.fn();
   const wrapper = mount(
-    <TopBar>
+    <MenuBar>
       <MenuItem>a</MenuItem>
       <TopBarMenu {...defaultProps} onKeyDown={handleKeyDown}>
         {optionsMenu}
       </TopBarMenu>
       <MenuItem>b</MenuItem>
-    </TopBar>
+    </MenuBar>
   );
   wrapper.setState({ focusIndex: 1 });
   const topBarMenu = wrapper.find('TopBarMenu');
@@ -71,11 +72,11 @@ test('should call onKeyDown with down key', () => {
 
 test('should close menu with left key', () => {
   const wrapper = mount(
-    <TopBar>
+    <MenuBar>
       <MenuItem>a</MenuItem>
       <TopBarMenu {...defaultProps}>{optionsMenu}</TopBarMenu>
       <MenuItem>b</MenuItem>
-    </TopBar>
+    </MenuBar>
   );
   wrapper.setState({ focusIndex: 1 });
   const topBarMenu = wrapper.find('TopBarMenu');
@@ -87,11 +88,11 @@ test('should close menu with left key', () => {
 
 test('should close menu with right key', () => {
   const wrapper = mount(
-    <TopBar>
+    <MenuBar>
       <MenuItem>a</MenuItem>
       <TopBarMenu {...defaultProps}>{optionsMenu}</TopBarMenu>
       <MenuItem>b</MenuItem>
-    </TopBar>
+    </MenuBar>
   );
   wrapper.setState({ focusIndex: 1 });
   const topBarMenu = wrapper.find('TopBarMenu');
@@ -104,9 +105,11 @@ test('should close menu with right key', () => {
 test('should return no axe violations', async () => {
   const topbar = mount(
     <TopBar>
-      <MenuItem>a</MenuItem>
-      <TopBarMenu {...defaultProps}>{optionsMenu}</TopBarMenu>
-      <MenuItem>b</MenuItem>
+      <MenuBar>
+        <MenuItem>a</MenuItem>
+        <TopBarMenu {...defaultProps}>{optionsMenu}</TopBarMenu>
+        <MenuItem>b</MenuItem>
+      </MenuBar>
     </TopBar>
   );
 

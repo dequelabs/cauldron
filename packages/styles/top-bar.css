@@ -9,6 +9,8 @@
   flex-direction: row;
   box-sizing: border-box;
   z-index: var(--z-index-top-bar);
+  display: flex;
+  align-items: center;
 }
 
 .TopBar--thin .TopBar {
@@ -19,6 +21,7 @@
   list-style-type: none;
   display: flex;
   align-items: center;
+  flex: auto;
 }
 
 .TopBar li button {

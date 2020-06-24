@@ -9,6 +9,7 @@ export { default as Icon } from './components/Icon';
 export { default as Offscreen } from './components/Offscreen';
 export { default as Scrim } from './components/Scrim';
 export { default as MenuItem } from './components/MenuItem';
+export { default as MenuBar } from './components/MenuBar';
 export {
   default as TopBar,
   TopBarTrigger,
