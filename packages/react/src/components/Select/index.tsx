@@ -11,7 +11,7 @@ interface SelectOption {
 
 export interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'children'> {
-  label?: string;
+  label: string;
   options?: SelectOption[];
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
 }
@@ -22,6 +22,7 @@ const Select = ({
   disabled,
   label,
   id,
+  required,
   ...rest
 }: SelectProps): React.ReactElement<HTMLSelectElement> => {
   if (options && children) {
@@ -29,16 +30,21 @@ const Select = ({
       'The Select component only takes the options props or child option elements, not both.'
     );
   }
+  // const [isError, setIsError] = useState<boolean>(false);
   const selectId = id || uid();
   return (
-    <>
-      {label ? <label htmlFor={selectId}>{label}</label> : ''}
+    <div className="Field__select">
+      <div className="Field__select--label-wrapper">
+        <label htmlFor={selectId} className="Field__select--label">
+          {label}
+        </label>
+      </div>
       <div
-        className={classNames('Field__select', {
+        className={classNames('Field__select--wrapper', {
           'Field__select--disabled': disabled
         })}
       >
-        <select id={selectId} disabled={disabled} {...rest}>
+        <select id={selectId} disabled={disabled} required={required} {...rest}>
           {options?.length
             ? options.map(
                 (
@@ -58,8 +64,9 @@ const Select = ({
               )
             : children}
         </select>
+        <div className="arrow-down"></div>
       </div>
-    </>
+    </div>
   );
 };
 

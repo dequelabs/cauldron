@@ -4,7 +4,8 @@ import Select from 'src/components/Select';
 import axe from '../../../axe';
 
 const defaultProps = {
-  name: 'Test Select'
+  name: 'Test Select',
+  label: 'Test Select'
 };
 const withCustomOptions = (otherProps = {}) => {
   return mount(
@@ -12,7 +13,6 @@ const withCustomOptions = (otherProps = {}) => {
       <Select
         {...defaultProps}
         {...otherProps}
-        label="Test Select"
         defaultValue="Bill"
         onChange={() => {}}
         options={[
@@ -29,6 +29,8 @@ const withCustomOptions = (otherProps = {}) => {
 test('renders the expected UI', () => {
   const wrapper = withCustomOptions();
 
+  expect(wrapper.find('.Field__select--label')).toBeTruthy();
+  expect(wrapper.find('.Field__select--required')).toBeTruthy();
   expect(wrapper.find('.Field__select')).toBeTruthy();
   expect(wrapper.find('.Field__option')).toBeTruthy();
 });
@@ -71,7 +73,6 @@ test('should return no axe violations', async () => {
     <div>
       <Select
         {...defaultProps}
-        label="axe test"
         defaultValue="Bar"
         onChange={() => {}}
         options={[
