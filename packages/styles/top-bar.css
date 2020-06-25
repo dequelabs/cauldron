@@ -31,8 +31,6 @@
 
 .TopBar > ul > li {
   box-sizing: border-box;
-  border-top: none;
-  border-bottom: none;
   height: var(--top-bar-height);
   cursor: pointer;
   position: relative;
