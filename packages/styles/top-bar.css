@@ -31,8 +31,8 @@
 
 .TopBar > ul > li {
   box-sizing: border-box;
-  border-top: var(--border-width) solid transparent;
-  border-bottom: var(--border-width) solid transparent;
+  border-top: none;
+  border-bottom: none;
   height: var(--top-bar-height);
   cursor: pointer;
   position: relative;
@@ -56,8 +56,18 @@
 
 .TopBar > ul > li:focus-within,
 .TopBar > ul > li:hover {
-  border-bottom: var(--border-width) solid var(--top-bar-text-color);
   outline: 0;
+}
+
+.TopBar > ul > li:focus-within:before,
+.TopBar > ul > li:hover:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--top-bar-text-color);
+  height: var(--border-width);
 }
 
 .TopBar > ul > li .fa {
@@ -97,8 +107,6 @@
   padding: 0 var(--space-small);
   align-self: flex-start;
   box-sizing: border-box;
-  border-top: var(--border-width) solid transparent;
-  border-bottom: var(--border-width) solid transparent;
 }
 
 .TopBar__item--icon {
