@@ -30,7 +30,6 @@ const Select = ({
       'The Select component only takes the options props or child option elements, not both.'
     );
   }
-  // const [isError, setIsError] = useState<boolean>(false);
   const selectId = id || uid();
   return (
     <div className="Field__select">
