@@ -20,7 +20,7 @@
 
 .Field__select--wrapper {
   position: relative;
-  width: 300px;
+  width: var(--select-width);
 }
 
 .arrow-down {
