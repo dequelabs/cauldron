@@ -92,9 +92,12 @@
   /* specfic dimensions */
   --top-bar-height: 69px;
   --top-bar-height-thin: 43px;
+  --select-min-height: 33px;
   --menu-width: 257px;
   --input-min-width: 250px;
+  --select-width: 300px;
   --border-width: 6px;
+  --select-arrow-spacing: 10px;
   --layout-padding: 9px;
   --content-max-width: 1000px;
 
