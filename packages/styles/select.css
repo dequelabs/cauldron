@@ -12,12 +12,6 @@
   justify-content: space-between;
 }
 
-.Field__select--label {
-  font-family: Roboto;
-  color: #333333;
-  text-decoration: rgb(51, 51, 51);
-}
-
 .Field__select--wrapper {
   position: relative;
   width: var(--select-width);

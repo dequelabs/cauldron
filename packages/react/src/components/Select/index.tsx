@@ -34,7 +34,7 @@ const Select = ({
   return (
     <div className="Field__select">
       <div className="Field__select--label-wrapper">
-        <label htmlFor={selectId} className="Field__label Field__select--label">
+        <label htmlFor={selectId} className="Field__label">
           {label}
         </label>
       </div>
