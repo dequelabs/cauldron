@@ -114,6 +114,7 @@ textarea.Field--has-error:hover,
 .Field__label {
   display: block;
   text-align: left;
+  color: #333333;
   font-size: var(--text-size-smaller);
   font-weight: var(--font-weight-light);
   margin-bottom: var(--space-half);

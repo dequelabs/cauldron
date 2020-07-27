@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-import { Select, Button, Code } from '../../../../packages/react/src/';
+import { Select, Code } from '../../../../packages/react/lib/';
+import '../../../../packages/styles/select.css';
 import './index.css';
 
 export default class Demo extends Component {
   constructor() {
     super();
     this.state = {
-      value: 'Monday',
-      current: 'Monday',
+      defaultValue: 'Tuesday',
+      current: 'Tuesday',
       options: [
-        { value: 'Monday' },
-        { value: 'Tuesday' },
-        { value: 'Wednesday' },
-        { value: 'Thursday' },
-        { value: 'Friday' },
-        { value: 'Saturday', disabled: true },
-        { value: 'Sunday' }
+        { key: 'monday', value: 'Monday' },
+        { key: 'tuesday', value: 'Tuesday' },
+        { key: 'wednesday', value: 'Wednesday' },
+        { key: 'thursday', value: 'Thursday' },
+        { key: 'friday', value: 'Friday' },
+        { key: 'saturday', value: 'Saturday', disabled: true },
+        { key: 'sunday', value: 'Sunday' }
       ]
     };
-    this.onClick = this.onClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  onClick() {
-    this.setState({ value: 'Sunday' });
-  }
-
-  onSelect(option) {
+  onChange(e) {
     this.setState({
-      current: option.value,
-      value: null
+      current: e.target.value
     });
   }
 
@@ -41,27 +36,14 @@ export default class Demo extends Component {
         <form onSubmit={this.handleSubmit}>
           <Select
             label="Day"
-            value={this.state.value}
-            onSelect={this.onSelect}
+            required
+            defaultValue={this.state.defaultValue}
+            onChange={this.onChange}
             options={this.state.options}
           />
           <p>
-            <span>
-              To programmatically select an option, simply update the{' '}
-            </span>
-            <code>value</code>
-            <span> prop.</span>
-          </p>
-          <Button
-            className="select-demo-button"
-            variant="secondary"
-            onClick={this.onClick}
-          >
-            Select Sunday
-          </Button>
-          <p>
             <span>Using the </span>
-            <code>onSelect</code>
+            <code>onChange</code>
             <span> prop, we can easily handle changes in the select list</span>
           </p>
           <div className="current-value">
@@ -73,21 +55,23 @@ export default class Demo extends Component {
         <Code language="javascript">
           {`
     import React from 'react';
-    import { Select, SelectOption } from '@deque/cauldron-react';
+    import { Select } from '@deque/cauldron-react';
 
     const Demo = () => (
       <Select
-        label='Day'
-        value='Monday'
-        onSelect={selected => console.log('Selected: ', selected)}
+        id="select-demo"
+        label="Day"
+        required
+        defaultValue='Tuesday'
+        onChange={e => console.log('Selected: ', e.target.value)}
         options={[
-          { label: 'Monday' },
-          { label: 'Tuesday' },
-          { label: 'Wednesday' },
-          { label: 'Thursday' },
-          { label: 'Friday' },
-          { label: 'Saturday', disabled: true },
-          { label: 'Sunday' }
+          { key: 'monday', value: 'Monday' },
+          { key: 'tuesday', value: 'Tuesday' },
+          { key: 'wednesday', value: 'Wednesday' },
+          { key: 'thursday', value: 'Thursday' },
+          { key: 'friday', value: 'Friday' },
+          { key: 'saturday', value: 'Saturday', disabled: true },
+          { key: 'sunday', value: 'Sunday' }
         ]}
       />
     );
