@@ -10,7 +10,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps
-  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'children'> {
+  extends Omit<React.HTMLProps<HTMLSelectElement>, 'children'> {
   label: string;
   options?: SelectOption[];
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
