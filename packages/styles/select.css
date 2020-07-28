@@ -26,7 +26,7 @@
   border-left: var(--space-half) solid transparent;
   border-right: var(--space-half) solid transparent;
   border-top: var(--space-three-quarters) solid #6a6a6a;
-  z-index: -1;
+  pointer-events: none;
 }
 
 .Field__select--wrapper select {
