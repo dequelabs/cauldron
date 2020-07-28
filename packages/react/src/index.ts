@@ -36,7 +36,11 @@ export {
   OptionsMenuTrigger,
   OptionsMenuWrapper
 } from './components/OptionsMenu';
-export { default as Select } from './components/Select';
+export {
+  default as Select,
+  SelectOption,
+  SelectProps
+} from './components/Select';
 export { default as RadioGroup } from './components/RadioGroup';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Tooltip } from './components/Tooltip';

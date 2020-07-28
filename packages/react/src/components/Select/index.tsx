@@ -2,7 +2,7 @@ import React from 'react';
 import uid from '../../utils/rndid';
 import classNames from 'classnames';
 
-interface SelectOption {
+export interface SelectOption {
   key: string;
   value: string;
   disabled?: boolean;
