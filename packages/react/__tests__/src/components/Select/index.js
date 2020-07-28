@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Select from 'src/components/Select';
 import axe from '../../../axe';
 
@@ -36,7 +36,7 @@ test('renders the expected UI', () => {
 });
 
 test('sets option attributes properly', () => {
-  const select = shallow(
+  const select = mount(
     <Select
       {...defaultProps}
       defaultValue="a"
