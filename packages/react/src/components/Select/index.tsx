@@ -20,7 +20,7 @@ const Select = React.forwardRef(
   (
     { options, children, disabled, label, id, required, ...rest }: SelectProps,
     ref: Ref<HTMLSelectElement>
-  ): JSX.Element => {
+  ): React.ReactElement<HTMLSelectElement> => {
     if (options && children) {
       console.error(
         'The Select component only takes the options props or child option elements, not both.'
