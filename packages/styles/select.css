@@ -30,7 +30,7 @@
 }
 
 .Field__select--wrapper select {
-  width: var(--select-width);
+  width: inherit;
   min-height: var(--select-min-height);
   padding: var(--space-three-quarters) var(--space-smallest);
   border: 1px solid var(--field-border-color);
