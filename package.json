@@ -89,7 +89,7 @@
     "dev": "lerna run dev & webpack-dev-server",
     "fmt": "prettier --write 'docs/**/*.{css,js}' 'packages/rect/**/*.{js,ts,tsx}' *.{js,json,md,ts}",
     "lint": "eslint .",
-    "postbuild:demo": "cp docs/_redirects docs/dist/",
+    "postbuild": "cp docs/_redirects docs/dist/",
     "test": "npm run --prefix=packages/react test",
     "postinstall": "lerna bootstrap"
   }
