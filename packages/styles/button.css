@@ -174,3 +174,15 @@
   cursor: auto;
   user-select: text;
 }
+
+.Button--thin {
+  height: 19px;
+  font-size: var(--text-size-smallest);
+  padding: 0 var(--space-large);
+}
+
+.Button--thin::before,
+.Button--thin::after {
+  width: 14px;
+  height: 14px;
+}
