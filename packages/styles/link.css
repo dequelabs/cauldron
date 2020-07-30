@@ -4,6 +4,8 @@
   font-weight: var(--font-weight-medium);
   display: inline-block;
   padding: var(--space-quarter);
+  background: transparent;
+  vertical-align: baseline;
 }
 
 .Link:hover {
