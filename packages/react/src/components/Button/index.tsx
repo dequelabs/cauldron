@@ -7,6 +7,7 @@ export interface ButtonProps
   variant?: 'primary' | 'secondary' | 'error' | 'link';
   buttonRef?: React.Ref<HTMLButtonElement>;
   disabled?: boolean; // todo, investigate why disabled is needed
+  thin?: boolean;
 }
 
 export default class Button extends React.Component<ButtonProps> {
@@ -28,7 +29,14 @@ export default class Button extends React.Component<ButtonProps> {
   static displayName = 'Button';
 
   render() {
-    const { variant, children, className, buttonRef, ...other } = this.props;
+    const {
+      variant,
+      children,
+      className,
+      buttonRef,
+      thin,
+      ...other
+    } = this.props;
     return (
       <button
         type={'button'}
@@ -36,7 +44,8 @@ export default class Button extends React.Component<ButtonProps> {
           'Button--primary': variant === 'primary',
           'Button--secondary': variant === 'secondary',
           'Button--error': variant === 'error',
-          Link: variant === 'link'
+          Link: variant === 'link',
+          'Button--thin': thin
         })}
         ref={buttonRef}
         {...other}
