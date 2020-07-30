@@ -9,17 +9,33 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Icon = ({ label, type, className, ...other }: IconProps) => {
+  let IconSVG = () => null;
+  const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
+    '',
+    type
+  ];
+  try {
+    IconSVG = require(`./icons/${name}.svg`).default;
+  } catch (ex) {
+    console.error(`Could not find icon type "${type}".`);
+  }
   const data = {
     ...other,
     'aria-hidden': !label,
-    className: classNames('fa', type, className)
+    className: classNames('Icon', `Icon--${type}`, className, {
+      [`Icon__${direction}`]: !!direction
+    })
   };
 
   if (label) {
     data['aria-label'] = label;
   }
 
-  return <div {...data} />;
+  return (
+    <div {...data}>
+      <IconSVG />
+    </div>
+  );
 };
 
 Icon.propTypes = {
@@ -27,5 +43,7 @@ Icon.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string.isRequired
 };
+
+Icon.displayName = 'Icon';
 
 export default Icon;

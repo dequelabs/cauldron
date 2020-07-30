@@ -1,0 +1,19 @@
+.Icon {
+  display: inline-block;
+}
+
+/* Icon--right is the default orientation */
+.Icon__right {
+}
+
+.Icon__left {
+  transform: scaleX(-1);
+}
+
+.Icon__up {
+  transform: rotate(-90deg);
+}
+
+.Icon__down {
+  transform: rotate(90deg);
+}

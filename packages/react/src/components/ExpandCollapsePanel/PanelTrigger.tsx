@@ -26,7 +26,7 @@ function PanelTrigger({
       onClick={onClick}
     >
       {typeof children === 'function' ? children({ open: !!open }) : children}{' '}
-      <Icon type={`fa-chevron-${open ? 'down' : 'right'}`} />
+      <Icon type={`chevron-${open ? 'down' : 'right'}`} />
     </button>
   );
 }

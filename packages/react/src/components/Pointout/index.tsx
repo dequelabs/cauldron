@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import focusable from 'focusable';
+import Icon from '../Icon';
 import rndid from '../../utils/rndid';
 import removeIds from '../../utils/remove-ids';
 
@@ -358,12 +359,14 @@ export default class Pointout extends React.Component<
         )}
         <div className="Pointout__box">
           <button
-            className="Pointout__dismiss fa fa-close"
+            className="Pointout__dismiss"
             type="button"
             aria-label={dismissText}
             onClick={this.onCloseClick}
             tabIndex={target ? -1 : 0}
-          />
+          >
+            <Icon type="close" aria-hidden="true" />
+          </button>
           {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
           <div
             className={classNames('Pointout__content', {

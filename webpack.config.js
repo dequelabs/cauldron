@@ -44,6 +44,10 @@ const config = {
         loader: 'ts-loader'
       },
       {
+        test: /\.svg$/,
+        use: ['@svgr/webpack']
+      },
+      {
         test: /\.css$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -55,7 +59,7 @@ const config = {
         ]
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'file-loader?name=public/fonts/[name].[ext]'
       }
     ]

@@ -42,7 +42,8 @@ const componentsList = [
   'Card',
   'ExpandCollapsePanel',
   'TextField',
-  'Link'
+  'Link',
+  'Icon'
 ].sort();
 
 class App extends Component {
@@ -139,7 +140,7 @@ class App extends Component {
                   ref={this.topBarTrigger}
                   aria-expanded={show}
                 >
-                  <Icon type="fa-bars" />
+                  <Icon type="bolt" />
                 </button>
               </TopBarTrigger>
               <TopBarItem>
@@ -158,10 +159,10 @@ class App extends Component {
               >
                 <div className="TopBar__item--icon">
                   {thin ? (
-                    <Icon type="fa-cog" label="Settings" />
+                    <Icon type="bolt" label="Settings" />
                   ) : (
                     <Fragment>
-                      <Icon type="fa-cog" />
+                      <Icon type="bolt" />
                       <div>Settings</div>
                     </Fragment>
                   )}

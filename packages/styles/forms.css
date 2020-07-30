@@ -198,12 +198,12 @@ textarea.Field--has-error:hover,
   border: 1px solid #d71ef7;
 }
 
-.Radio__overlay.fa-dot-circle-o {
+.Radio__overlay.Icon--radio-checked {
   color: #3c7aae;
 }
 
-.Radio__overlay--disabled.fa-dot-circle-o,
-.Radio__overlay--disabled.fa-circle-o {
+.Radio__overlay--disabled.Icon--radio-checked,
+.Radio__overlay--disabled.Icon--radio-unchecked {
   color: #ccc;
 }
 
@@ -218,11 +218,11 @@ textarea.Field--has-error:hover,
   border: 1px solid #d71ef7;
 }
 
-.Checkbox__overlay.fa-check-square {
+.Checkbox__overlay.Icon--checkbox-checked {
   color: #3c7aae;
 }
 
-.Checkbox__overlay.Field__label--disabled.fa-square-o,
-.Checkbox__overlay.Field__label--disabled.fa-check-square {
+.Checkbox__overlay.Field__label--disabled.Icon--checkbox-checked,
+.Checkbox__overlay.Field__label--disabled.Icon--checkbox-unchecked {
   color: #ccc;
 }

@@ -23,9 +23,9 @@ test('handles `defaultValue`', () => {
     wrapper
       .find('.Radio__overlay')
       .at(2)
-      .hasClass('fa-dot-circle-o')
+      .hasClass('Icon--radio-checked')
   ).toBeTruthy();
-  expect(wrapper.find('.fa-dot-circle-o').length).toBe(1);
+  expect(wrapper.find('.Icon--radio-checked').length).toBe(1);
   expect(
     wrapper
       .find('[type="radio"]')

@@ -14,10 +14,10 @@ test('handles checked prop', () => {
   const wrapper = mount(<Checkbox {...defaultProps} checked />);
 
   expect(
-    wrapper.find('.Checkbox__overlay').hasClass('fa-check-square')
+    wrapper.find('.Checkbox__overlay').hasClass('Icon--checkbox-checked')
   ).toBeTruthy();
   expect(
-    wrapper.find('.Checkbox__overlay').hasClass('fa-square-o')
+    wrapper.find('.Checkbox__overlay').hasClass('Icon--checkbox-unchecked')
   ).toBeFalsy();
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
 });
@@ -34,13 +34,15 @@ test('toggles checked state properly', () => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
   const checkbox = wrapper.find('[type="checkbox"]');
   expect(checkbox.getDOMNode().checked).toBeFalsy();
-  expect(wrapper.find('.Checkbox__overlay').hasClass('fa-check-o')).toBeFalsy();
+  expect(
+    wrapper.find('.Checkbox__overlay').hasClass('Icon--checkbox-unchecked')
+  ).toBeFalsy();
 
   checkbox.simulate('change');
 
   expect(checkbox.getDOMNode().checked).toBeTruthy();
   expect(
-    wrapper.find('.Checkbox__overlay').hasClass('fa-check-square')
+    wrapper.find('.Checkbox__overlay').hasClass('Icon--checkbox-checked')
   ).toBeTruthy();
 });
 
