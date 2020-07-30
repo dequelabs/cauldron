@@ -15,7 +15,8 @@ const Icon = ({ label, type, className, ...other }: IconProps) => {
     type
   ];
   try {
-    IconSVG = require(`./icons/${name}.svg`).default;
+    // TODO: fix require
+    IconSVG = (require as any)(`./icons/${name}.svg`).default;
   } catch (ex) {
     console.error(`Could not find icon type "${type}".`);
   }

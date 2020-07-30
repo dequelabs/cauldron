@@ -1,3 +1,5 @@
 .ExpandCollapse__trigger {
   font-size: inherit;
+  display: flex;
+  align-items: center;
 }
