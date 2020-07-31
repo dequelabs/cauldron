@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -9,16 +9,22 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Icon = ({ label, type, className, ...other }: IconProps) => {
-  let IconSVG = null;
+  const [IconSVG, setIcon] = useState<React.ComponentType<any>>(() => null);
   const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
     '',
     type
   ];
-  try {
-    IconSVG = require(`./icons/${name}.svg`).default;
-  } catch (ex) {
-    console.error(`Could not find icon type "${type}".`);
-  }
+
+  // Dynamically import the requested icon
+  import(`./icons/${name}.svg`)
+    .then(icon => {
+      setIcon(icon);
+    })
+    .catch(ex => {
+      // eslint-disable-next-line no-console
+      console.error(`Could not find icon type "${type}".`);
+    });
+
   const data = {
     ...other,
     'aria-hidden': !label,
