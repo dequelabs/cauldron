@@ -18,10 +18,9 @@ test('handles `defaultValue`', () => {
   const wrapper = mount(
     <RadioGroup {...defaultProps} defaultValue={defaultProps.radios[2].value} />
   );
-
   expect(
     wrapper
-      .find('.Radio__overlay')
+      .find('.Icon.Radio__overlay')
       .at(2)
       .hasClass('Icon--radio-checked')
   ).toBeTruthy();
@@ -38,7 +37,7 @@ test('handles `disabled` radio prop', () => {
   const wrapper = mount(<RadioGroup {...defaultProps} />);
   expect(
     wrapper
-      .find('.Radio__overlay')
+      .find('.Icon.Radio__overlay')
       .at(1)
       .hasClass('Radio__overlay--disabled')
   ).toBeTruthy();
@@ -65,7 +64,7 @@ test('handles focus', () => {
       .at(0)
       .hasClass('Radio__overlay--focused')
   ).toBeTruthy();
-  expect(wrapper.find('.Radio__overlay--focused').length).toBe(1);
+  expect(wrapper.find('.Icon.Radio__overlay--focused').length).toBe(1);
 });
 
 test('handles blur', () => {

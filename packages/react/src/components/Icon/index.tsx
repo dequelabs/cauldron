@@ -9,7 +9,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Icon = ({ label, type, className, ...other }: IconProps) => {
-  let IconSVG = () => null;
+  let IconSVG = null;
   const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
     '',
     type
@@ -31,11 +31,7 @@ const Icon = ({ label, type, className, ...other }: IconProps) => {
     data['aria-label'] = label;
   }
 
-  return (
-    <div {...data}>
-      <IconSVG />
-    </div>
-  );
+  return <div {...data}>{IconSVG && <IconSVG />}</div>;
 };
 
 Icon.propTypes = {

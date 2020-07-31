@@ -94,6 +94,7 @@ export default class Checkbox extends React.Component<
       className,
       // eslint-disable-next-line no-unused-vars
       onChange,
+      checked: notUsed,
       // eslint-disable-next-line no-unused-vars
       checkboxRef,
       ...others
