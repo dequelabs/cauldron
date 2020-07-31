@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { mount } from 'enzyme';
 import Select from 'src/components/Select';
 import axe from '../../../axe';
@@ -52,6 +52,36 @@ test('sets option attributes properly', () => {
   expect(opts.length).toBe(3);
   const disabledOpt = select.find('[disabled]');
   expect(disabledOpt.text()).toBe('b');
+});
+
+test('passes ref properly', () => {
+  const TestElement = () => {
+    const selectRef = useRef(null);
+    return (
+      <>
+        <Select
+          {...defaultProps}
+          id="test-id"
+          ref={selectRef}
+          defaultValue="a"
+          onChange={() => {}}
+          options={[{ key: '1', value: 'a' }]}
+        />
+        <button
+          id="test-button"
+          onClick={() => {
+            selectRef.current.focus();
+          }}
+        >
+          Test
+        </button>
+      </>
+    );
+  };
+
+  const mountedElement = mount(<TestElement />);
+  mountedElement.find('#test-button').simulate('click');
+  expect(document.activeElement.id).toBe('test-id');
 });
 
 test('passes children properly', () => {
