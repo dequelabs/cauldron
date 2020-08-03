@@ -140,7 +140,7 @@ class App extends Component {
                   ref={this.topBarTrigger}
                   aria-expanded={show}
                 >
-                  <Icon type="gear" />
+                  <Icon type="gears" />
                 </button>
               </TopBarTrigger>
               <TopBarItem>
@@ -159,10 +159,10 @@ class App extends Component {
               >
                 <div className="TopBar__item--icon">
                   {thin ? (
-                    <Icon type="gear" label="Settings" />
+                    <Icon type="gears" label="Settings" />
                   ) : (
                     <Fragment>
-                      <Icon type="gear" />
+                      <Icon type="gears" />
                       <div>Settings</div>
                     </Fragment>
                   )}
