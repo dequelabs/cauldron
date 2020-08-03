@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, Button, Code } from '../../../../packages/react/src/';
+import { Tooltip, Button, Code } from '@deque/cauldron-react/';
 import './index.css';
 
 const Demo = () => (

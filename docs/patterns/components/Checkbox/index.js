@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
 import { className } from '../../../props';
-import { Checkbox } from '../../../../packages/react/src/';
+import { Checkbox } from '@deque/cauldron-react/';
 
 export default class CheckboxDemo extends Component {
   state = {

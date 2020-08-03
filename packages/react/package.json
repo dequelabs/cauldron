@@ -9,10 +9,11 @@
   "style": "lib/cauldron.css",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "yarn build:lib && yarn build:css",
+    "build": "yarn build:lib && yarn build:css && yarn build:icons",
     "build:lib": "tsc",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
-    "dev": "npm-run-all dev:*",
+    "build:icons": "svgr ./src/components/Icon/icons --out-dir ./src/components/Icon/icons --typescript --ignore-existing --filename-case kebab",
+    "dev": "npm-run-all build:icons dev:*",
     "dev:css": "yarn build:css -- --watch",
     "dev:lib": "yarn build:lib -- --dev",
     "prepublishOnly": "NODE_ENV=production yarn build",
@@ -38,6 +39,7 @@
     "@babel/preset-stage-0": "^7.8.3",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "@svgr/cli": "^5.4.0",
     "@types/classnames": "^2.2.10",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.34",
@@ -107,7 +109,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
-      "\\.svg$": "<rootDir>/__tests__/svgMock.js"
+      "\\./icons/\\.*$$": "<rootDir>/__tests__/svgMock.js"
     }
   }
 }

@@ -44,10 +44,6 @@ const config = {
         loader: 'ts-loader'
       },
       {
-        test: /\.svg$/,
-        use: ['@svgr/webpack']
-      },
-      {
         test: /\.css$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -59,13 +55,18 @@ const config = {
         ]
       },
       {
-        test: /\.(eot|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file-loader?name=public/fonts/[name].[ext]'
       }
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+      '@deque/cauldron-react': path.resolve(__dirname, './packages/react/lib')
+    }
   },
   devServer: {
     port: 8000,

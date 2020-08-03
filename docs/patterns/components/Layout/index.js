@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code } from '../../../../packages/react/src/';
+import { Code } from '@deque/cauldron-react/';
 
 export default function Layout() {
   return (

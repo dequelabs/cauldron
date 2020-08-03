@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RadioGroup, Code } from '../../../../packages/react/src/';
+import { RadioGroup, Code } from '@deque/cauldron-react/';
 
 export default class Demo extends Component {
   render() {

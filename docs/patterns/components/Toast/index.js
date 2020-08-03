@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Toast, Link } from '../../../../packages/react/src/';
+import { Button, Toast, Link } from '@deque/cauldron-react/';
 import DemoComponent from '../../../Demo';
 import { children } from '../../../props';
 

@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   Code
-} from '../../../../packages/react/src/';
+} from '@deque/cauldron-react/';
 
 export default class Demo extends Component {
   constructor() {

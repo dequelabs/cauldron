@@ -16,12 +16,12 @@ import {
   OptionsMenuList,
   TopBarMenu,
   Icon
-} from '../packages/react/src';
+} from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 
 // styles
 import '../packages/styles';
-import '../packages/react/src/index.css';
+import '@deque/cauldron-react/cauldron.css';
 import './index.css';
 
 const componentsList = [

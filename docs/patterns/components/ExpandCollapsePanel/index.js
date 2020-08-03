@@ -3,7 +3,7 @@ import {
   ExpandCollapsePanel,
   PanelTrigger,
   Code
-} from '../../../../packages/react/src/';
+} from '@deque/cauldron-react/';
 
 const ControlledExpandCollapse = () => {
   const [open, setOpen] = useState(false);

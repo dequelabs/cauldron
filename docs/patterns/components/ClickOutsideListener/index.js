@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ClickOutsideListener,
-  Code,
-  Button
-} from '../../../../packages/react/src/';
+import { ClickOutsideListener, Code, Button } from '@deque/cauldron-react/';
 
 const Demo = () => (
   <div>

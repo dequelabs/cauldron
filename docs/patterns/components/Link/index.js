@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { Link, Code } from '../../../../packages/react/src/';
+import { Link, Code } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 export default class LinkDemo extends Component {

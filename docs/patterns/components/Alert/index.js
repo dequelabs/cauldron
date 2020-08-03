@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Alert,
-  AlertActions,
-  Code
-} from '../../../../packages/react/src/';
+import { Button, Alert, AlertActions, Code } from '@deque/cauldron-react/';
 
 export default class Demo extends Component {
   constructor() {

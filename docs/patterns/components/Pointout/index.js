@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pointout, Code } from '../../../../packages/react/src';
+import { Pointout, Code } from '@deque/cauldron-react';
 
 const Demo = () => {
   const buttonRef = React.createRef();

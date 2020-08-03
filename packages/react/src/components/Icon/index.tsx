@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { render } from 'react-dom';
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
@@ -28,7 +27,7 @@ class Icon extends React.Component<IconProps, IconState> {
 
   private loadIcon(type: string) {
     const [, name] = type.match(/(.*)-(right|left|up|down)$/) || ['', type];
-    import(`./icons/${name}.svg`)
+    import(`./icons/${name}`)
       .then(({ default: IconSVG }) => {
         this.setState({ IconSVG });
       })

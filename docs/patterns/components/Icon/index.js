@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { Icon, Code } from '../../../../packages/react/src/';
+import { Icon, Code } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 export default class IconDemo extends Component {

@@ -5,7 +5,7 @@ import {
   CardContent,
   CardFooter,
   Code
-} from '../../../../packages/react/src/';
+} from '@deque/cauldron-react/';
 import './index.css';
 
 const Demo = () => (
