@@ -106,7 +106,8 @@
       "**/src/**/*.tsx"
     ],
     "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js"
+      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
+      "\\.svg$": "<rootDir>/__tests__/svgMock.js"
     }
   }
 }

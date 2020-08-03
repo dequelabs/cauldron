@@ -27,10 +27,7 @@ class Icon extends React.Component<IconProps, IconState> {
   };
 
   private loadIcon(type: string) {
-    const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
-      '',
-      type
-    ];
+    const [, name] = type.match(/(.*)-(right|left|up|down)$/) || ['', type];
     import(`./icons/${name}.svg`)
       .then(({ default: IconSVG }) => {
         this.setState({ IconSVG });
