@@ -12,7 +12,7 @@
     "build": "yarn build:icons && yarn build:lib && yarn build:css",
     "build:lib": "tsc",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
-    "build:icons": "svgr ./src/components/Icon/icons --out-dir ./src/components/Icon/icons --typescript --ignore-existing --filename-case kebab && rm ./src/components/Icon/icons/index.tsx",
+    "build:icons": "svgr ./src/components/Icon/icons --out-dir ./src/components/Icon/icons --typescript --ignore-existing --filename-case kebab",
     "dev": "npm-run-all build:icons dev:*",
     "dev:css": "yarn build:css -- --watch",
     "dev:lib": "yarn build:lib -- --dev",
