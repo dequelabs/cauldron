@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,68 +8,46 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   type: string;
 }
 
-export interface IconState {
-  IconSVG: React.ComponentType<any> | null;
-}
+function Icon({ label, className, type, ...other }: IconProps) {
+  const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
+    '',
+    type
+  ];
+  const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
-class Icon extends React.Component<IconProps, IconState> {
-  static propTypes = {
-    label: PropTypes.string,
-    className: PropTypes.string,
-    type: PropTypes.string.isRequired
-  };
-
-  static displayName = 'Icon';
-
-  state: IconState = {
-    IconSVG: null
-  };
-
-  private loadIcon(type: string) {
-    const [, name] = type.match(/(.*)-(right|left|up|down)$/) || ['', type];
-    import(`./icons/${name}`)
-      .then(({ default: IconSVG }) => {
-        this.setState({ IconSVG });
+  useEffect(() => {
+    // .js extension is needed to specify exact files for dynamic requires
+    import(`./icons/${name}.js`)
+      .then(icon => {
+        setIcon(() => icon.default);
       })
       .catch(ex => {
         console.error(`Could not find icon type "${type}".`);
-        this.setState({ IconSVG: null });
+        setIcon(null);
       });
+  }, [type]);
+
+  const data = {
+    ...other,
+    'aria-hidden': !label,
+    className: classNames('Icon', `Icon--${type}`, className, {
+      [`Icon__${direction}`]: !!direction
+    })
+  };
+
+  if (label) {
+    data['aria-label'] = label;
   }
 
-  componentDidMount() {
-    this.loadIcon(this.props.type);
-  }
-
-  componentDidUpdate(prevProps: IconProps) {
-    const { type } = this.props;
-    if (prevProps.type !== type) {
-      this.loadIcon(type);
-    }
-  }
-
-  render() {
-    const { label, type, className, ...other } = this.props;
-    const { IconSVG } = this.state;
-    const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
-      '',
-      type
-    ];
-
-    const data = {
-      ...other,
-      'aria-hidden': !label,
-      className: classNames('Icon', `Icon--${type}`, className, {
-        [`Icon__${direction}`]: !!direction
-      })
-    };
-
-    if (label) {
-      data['aria-label'] = label;
-    }
-
-    return <div {...data}>{IconSVG && <IconSVG />}</div>;
-  }
+  return <div {...data}>{IconSVG && <IconSVG />}</div>;
 }
+
+Icon.propTypes = {
+  label: PropTypes.string,
+  className: PropTypes.string,
+  type: PropTypes.string.isRequired
+};
+
+Icon.displayName = 'Icon';
 
 export default Icon;
