@@ -65,10 +65,16 @@ export default class IconDemo extends Component {
               type: 'eye'
             },
             {
+              type: 'exchange'
+            },
+            {
               type: 'external-link'
             },
             {
               type: 'flag'
+            },
+            {
+              type: 'gear'
             },
             {
               type: 'gears'
@@ -99,9 +105,6 @@ export default class IconDemo extends Component {
             },
             {
               type: 'star'
-            },
-            {
-              type: 'save-results'
             },
             {
               type: 'trash'
