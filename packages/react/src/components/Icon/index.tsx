@@ -11,6 +11,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
     | 'arrow-right'
     | 'bolt'
     | 'checkbox-checked'
+    | 'checkbox-unchecked'
     | 'chevron-up'
     | 'chevron-down'
     | 'chevron-left'
