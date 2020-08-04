@@ -114,7 +114,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
-      "\\./icons/\\.*$$": "<rootDir>/__tests__/svgMock.js"
+      "\\.svg$": "<rootDir>/__tests__/svgMock.js"
     }
   }
 }
