@@ -4,8 +4,40 @@ import classNames from 'classnames';
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
-  // TODO: allowed "types" should be defined here (intellisense, etc)
-  type: string;
+  type:
+    | 'arrow-up'
+    | 'arrow-down'
+    | 'arrow-left'
+    | 'arrow-right'
+    | 'bolt'
+    | 'checkbox-checked'
+    | 'chevron-up'
+    | 'chevron-down'
+    | 'chevron-left'
+    | 'chevron-right'
+    | 'chevron-double-up'
+    | 'chevron-double-down'
+    | 'chevron-double-left'
+    | 'chevron-double-right'
+    | 'close'
+    | 'code'
+    | 'exchange'
+    | 'external-link'
+    | 'eye'
+    | 'flag'
+    | 'gears'
+    | 'info-circle'
+    | 'kabob'
+    | 'menu'
+    | 'plus'
+    | 'question-circle'
+    | 'radio-checked'
+    | 'radio-unchecked'
+    | 'run-again'
+    | 'star'
+    | 'sun'
+    | 'target'
+    | 'trash';
 }
 
 function Icon({ label, className, type, ...other }: IconProps) {
