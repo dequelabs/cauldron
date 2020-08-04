@@ -16,8 +16,7 @@ function Icon({ label, className, type, ...other }: IconProps) {
   const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
   useEffect(() => {
-    // .js extension is needed to specify exact files for dynamic requires
-    import(`./icons/${name}.js`)
+    import(`./icons/${name}.svg`)
       .then(icon => {
         setIcon(() => icon.default);
       })
