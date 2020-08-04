@@ -13,7 +13,9 @@
   box-sizing: border-box;
   height: 34px;
   width: 34px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .OptionsMenu__list {

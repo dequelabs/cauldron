@@ -74,9 +74,6 @@ export default class IconDemo extends Component {
               type: 'flag'
             },
             {
-              type: 'gear'
-            },
-            {
               type: 'gears'
             },
             {
@@ -105,6 +102,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'star'
+            },
+            {
+              type: 'sun'
             },
             {
               type: 'trash'
