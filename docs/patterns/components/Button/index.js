@@ -18,7 +18,9 @@ const ButtonDemo = () => (
         },
         { children: 'Error', variant: 'error' },
         { children: 'Error Disabled', variant: 'error', disabled: true },
-        { children: 'Link', variant: 'link' }
+        { children: 'Link', variant: 'link' },
+        { children: 'Primary thin', thin: true },
+        { children: 'Secondary thin', variant: 'secondary', thin: true }
       ]}
       propDocs={{
         variant: {
@@ -32,7 +34,12 @@ const ButtonDemo = () => (
           description: 'Ref function for the button element'
         },
         children,
-        className
+        className,
+        thin: {
+          type: 'boolean',
+          description:
+            'render button with "thin" modifier (reduces height of button)'
+        }
       }}
     />
   </div>
