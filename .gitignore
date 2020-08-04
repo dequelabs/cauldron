@@ -2,6 +2,5 @@ dist
 node_modules
 coverage
 packages/react/lib
-packages/react/src/components/Icon/icons/*.tsx
 .DS_Store
 yarn-error.log
