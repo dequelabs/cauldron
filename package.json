@@ -85,7 +85,7 @@
     ]
   },
   "scripts": {
-    "build": "lerna run build && webpack --bail",
+    "build": "NODE_ENV=production lerna run build && NODE_ENV=production webpack --bail",
     "dev": "lerna run dev & webpack-dev-server",
     "fmt": "prettier --write 'docs/**/*.{css,js}' 'packages/rect/**/*.{js,ts,tsx}' *.{js,json,md,ts}",
     "lint": "eslint .",
