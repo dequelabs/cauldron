@@ -77,10 +77,16 @@ export default class IconDemo extends Component {
               type: 'gears'
             },
             {
+              type: 'hamburger-menu'
+            },
+            {
               type: 'info-circle'
             },
             {
               type: 'kabob'
+            },
+            {
+              type: 'list'
             },
             {
               type: 'menu'
