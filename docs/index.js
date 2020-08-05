@@ -140,7 +140,7 @@ class App extends Component {
                   ref={this.topBarTrigger}
                   aria-expanded={show}
                 >
-                  <Icon type="gears" />
+                  <Icon type="hamburger-menu" />
                 </button>
               </TopBarTrigger>
               <TopBarItem>
