@@ -175,6 +175,7 @@ textarea.Field--has-error:hover,
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 3px;
+  color: #333;
 }
 
 .Radio__overlay {
