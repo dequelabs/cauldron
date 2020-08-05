@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select, Code } from '../../../../packages/react/lib/';
+import { Select, Code } from '@deque/cauldron-react/';
 import '../../../../packages/styles/select.css';
 import './index.css';
 

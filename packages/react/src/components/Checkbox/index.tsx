@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import setRef from '../../utils/setRef';
+import Icon from '../Icon';
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -93,6 +94,7 @@ export default class Checkbox extends React.Component<
       className,
       // eslint-disable-next-line no-unused-vars
       onChange,
+      checked: notUsed,
       // eslint-disable-next-line no-unused-vars
       checkboxRef,
       ...others
@@ -118,14 +120,13 @@ export default class Checkbox extends React.Component<
             setRef(this.props.checkboxRef, checkbox);
           }}
         />
-        <div
-          aria-hidden="true"
-          className={classNames('Checkbox__overlay fa', {
-            'fa-square-o': !checked,
-            'fa-check-square': checked,
+        <Icon
+          className={classNames('Checkbox__overlay', {
             'Checkbox__overlay--disabled': disabled,
             'Checkbox__overlay--focused': focused
           })}
+          type={checked ? 'checkbox-checked' : 'checkbox-unchecked'}
+          aria-hidden="true"
           onClick={this.onOverlayClick}
         />
         <label

@@ -10,7 +10,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "yarn build:lib && yarn build:css",
-    "build:lib": "tsc",
+    "build:lib": "rollup -c && tsc --declaration --emitDeclarationOnly --outDir lib",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "dev": "npm-run-all dev:*",
     "dev:css": "yarn build:css -- --watch",
@@ -26,6 +26,7 @@
     "prop-types": "^15.6.0",
     "rc-tooltip": "^3.7.2",
     "react-syntax-highlighter": "^6.1.1",
+    "tslib": "^2.0.0",
     "unique-string": "^1.0.0"
   },
   "devDependencies": {
@@ -38,6 +39,9 @@
     "@babel/preset-stage-0": "^7.8.3",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-typescript": "^5.0.2",
+    "@svgr/rollup": "^5.4.0",
     "@types/classnames": "^2.2.10",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.34",
@@ -68,15 +72,18 @@
     "react-element-to-jsx-string": "^14.3.1",
     "react-helmet": "^6.0.0",
     "react-router-dom": "^5.1.2",
+    "rollup": "^2.23.0",
+    "rollup-plugin-dynamic-import-variables": "^1.1.0",
     "ts-node": "^8.9.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.7"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dequelabs/cauldron-react.git"
   },
   "peerDependencies": {
-    "react": "^16.6.0"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "nyc": {
     "checkCoverage": true,
@@ -106,7 +113,8 @@
       "**/src/**/*.tsx"
     ],
     "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js"
+      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
+      "\\.svg$": "<rootDir>/__tests__/svgMock.js"
     }
   }
 }

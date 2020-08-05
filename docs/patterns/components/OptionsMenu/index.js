@@ -5,7 +5,7 @@ import {
   OptionsMenuTrigger,
   Icon,
   Code
-} from '../../../../packages/react/src/';
+} from '@deque/cauldron-react/';
 
 export default class Demo extends Component {
   render() {
@@ -18,7 +18,7 @@ export default class Demo extends Component {
           align="left"
           trigger={triggerProps => (
             <OptionsMenuTrigger {...triggerProps}>
-              <Icon type="fa-ellipsis-v" label="Options" />
+              <Icon type="kabob" label="Options" />
             </OptionsMenuTrigger>
           )}
         >
@@ -66,7 +66,7 @@ class Demo extends Component {
           align="left"
           trigger={triggerProps => (
             <OptionsMenuTrigger {...triggerProps}>
-              <Icon type="fa-ellipsis-v" label="Options" />
+              <Icon type="kabob" label="Options" />
             </OptionsMenuTrigger>
           )}
         >

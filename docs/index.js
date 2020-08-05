@@ -16,12 +16,12 @@ import {
   OptionsMenuList,
   TopBarMenu,
   Icon
-} from '../packages/react/src';
+} from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 
 // styles
 import '../packages/styles';
-import '../packages/react/src/index.css';
+import '@deque/cauldron-react/cauldron.css';
 import './index.css';
 
 const componentsList = [
@@ -42,7 +42,8 @@ const componentsList = [
   'Card',
   'ExpandCollapsePanel',
   'TextField',
-  'Link'
+  'Link',
+  'Icon'
 ].sort();
 
 class App extends Component {
@@ -139,7 +140,7 @@ class App extends Component {
                   ref={this.topBarTrigger}
                   aria-expanded={show}
                 >
-                  <Icon type="fa-bars" />
+                  <Icon type="gears" />
                 </button>
               </TopBarTrigger>
               <TopBarItem>
@@ -158,10 +159,10 @@ class App extends Component {
               >
                 <div className="TopBar__item--icon">
                   {thin ? (
-                    <Icon type="fa-cog" label="Settings" />
+                    <Icon type="gears" label="Settings" />
                   ) : (
                     <Fragment>
-                      <Icon type="fa-cog" />
+                      <Icon type="gears" />
                       <div>Settings</div>
                     </Fragment>
                   )}

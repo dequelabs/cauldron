@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
@@ -120,10 +121,12 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           {type !== 'action-needed' && (
             <button
               type="button"
-              className={'Toast__dismiss fa fa-close'}
+              className={'Toast__dismiss'}
               aria-label={dismissText}
               onClick={this.dismissToast}
-            />
+            >
+              <Icon type="close" />
+            </button>
           )}
         </div>
         {scrim}

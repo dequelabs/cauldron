@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextField, Button, Code } from '../../../../packages/react/src/';
+import { TextField, Button, Code } from '@deque/cauldron-react/';
 import './index.css';
 
 export default class Demo extends Component {

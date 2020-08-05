@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
+import Icon from '../Icon';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
@@ -102,7 +103,7 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
 
     const close = !forceAction ? (
       <button className="Modal__close" type="button" onClick={this.close}>
-        <div className="fa fa-close" aria-hidden="true" />
+        <Icon type="close" aria-hidden="true" />
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
     ) : null;

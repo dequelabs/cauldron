@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Icon from '../Icon';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -111,14 +112,13 @@ export default class RadioGroup extends React.Component<
             checked={isChecked}
             {...other}
           />
-          <div
-            aria-hidden="true"
-            className={classNames('Radio__overlay fa', {
-              'fa-dot-circle-o': isChecked,
-              'fa-circle-o': !isChecked,
+          <Icon
+            className={classNames('Radio__overlay', {
               'Radio__overlay--focused': isFocused,
               'Radio__overlay--disabled': disabled
             })}
+            type={isChecked ? 'radio-checked' : 'radio-unchecked'}
+            aria-hidden="true"
             onClick={() => this.onRadioClick(index)}
           />
           <label

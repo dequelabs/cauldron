@@ -39,11 +39,6 @@ const config = {
         loader: 'babel-loader'
       },
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader'
-      },
-      {
         test: /\.css$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -61,7 +56,12 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.js'],
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+      '@deque/cauldron-react': path.resolve(__dirname, './packages/react/lib')
+    }
   },
   devServer: {
     port: 8000,
