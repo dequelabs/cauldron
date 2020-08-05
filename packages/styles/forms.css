@@ -171,20 +171,24 @@ textarea.Field--has-error:hover,
 
 .Radio__overlay,
 .Checkbox__overlay {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
   border: 1px solid transparent;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
+  border-radius: 3px;
 }
 
-.Radio__overlay:active:not([aria-disabled='true']),
-.Checkbox__overlay:active:not([aria-disabled='true']) {
-  background-color: var(--focus-active);
+.Radio__overlay {
+  border-radius: 50%;
+}
+
+.Radio__overlay svg,
+.Checkbox__overlay svg {
+  pointer-events: none;
+}
+
+.Radio__overlay:active:not(.Radio__overlay--disabled),
+.Checkbox__overlay:active:not(.Checkbox__overlay--disabled) {
+  background-color: rgba(60, 122, 174, 0.25);
 }
 
 .Radio input[type='radio'] {
@@ -192,10 +196,13 @@ textarea.Field--has-error:hover,
   opacity: 0;
   top: 8px;
   left: 8px;
+  appearance: none;
 }
 
+.Checkbox__overlay.Checkbox__overlay--focused,
 .Radio__overlay.Radio__overlay--focused {
-  border: 1px solid #d71ef7;
+  border: 1px solid var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus), 0 0 4px 2px var(--focus-glow);
 }
 
 .Radio__overlay.Icon--radio-checked {
@@ -207,22 +214,27 @@ textarea.Field--has-error:hover,
   color: #ccc;
 }
 
+.Radio__overlay:hover:not(.Radio__overlay--disabled) {
+  border: 1px solid currentColor;
+}
+
 .Checkbox input[type='checkbox'] {
   position: absolute;
   opacity: 0;
   top: 8px;
   left: 8px;
-}
-
-.Checkbox__overlay.Checkbox__overlay--focused {
-  border: 1px solid #d71ef7;
+  appearance: none;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {
   color: #3c7aae;
 }
 
-.Checkbox__overlay.Field__label--disabled.Icon--checkbox-checked,
-.Checkbox__overlay.Field__label--disabled.Icon--checkbox-unchecked {
+.Checkbox__overlay--disabled.Icon--checkbox-checked,
+.Checkbox__overlay--disabled.Icon--checkbox-unchecked {
   color: #ccc;
+}
+
+.Checkbox__overlay:hover:not(.Checkbox__overlay--disabled) {
+  border: 1px solid currentColor;
 }
