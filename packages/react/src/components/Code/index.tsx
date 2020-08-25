@@ -4,33 +4,31 @@ import {
   Light as SyntaxHighlighter,
   SyntaxHighlighterProps
 } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/languages/hljs/javascript';
-import bash from 'react-syntax-highlighter/dist/languages/hljs/bash';
-import css from 'react-syntax-highlighter/dist/languages/hljs/css';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
+import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
-SyntaxHighlighter.registerLanguage('bash', bash);
 SyntaxHighlighter.registerLanguage('css', css);
+SyntaxHighlighter.registerLanguage('xml', xml);
+SyntaxHighlighter.registerLanguage('html', xml);
 
 interface Props extends SyntaxHighlighterProps {
   children: React.ReactNode;
+  language?: 'javascript' | 'css' | 'xml' | 'html';
 }
 
 const Code: React.ComponentType<Props> = ({ children, ...props }) => (
-  <div>
-    <SyntaxHighlighter {...props} useInlineStyles={false}>
-      {children}
-    </SyntaxHighlighter>
-  </div>
+  <SyntaxHighlighter {...props} useInlineStyles={false}>
+    {children}
+  </SyntaxHighlighter>
 );
 
 Code.displayName = 'Code';
 
-Code.defaultProps = { language: 'javascript' };
-
 Code.propTypes = {
   children: PropTypes.string.isRequired,
-  language: PropTypes.string
+  language: PropTypes.oneOf(['javascript', 'css', 'xml', 'html'])
 };
 
 export default Code;
