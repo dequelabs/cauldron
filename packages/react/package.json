@@ -13,8 +13,6 @@
     "build:lib": "rollup -c && tsc --declaration --emitDeclarationOnly --outDir lib",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
-    "dev:css": "yarn build:css --watch",
-    "dev:lib": "rollup -c --watch",
     "prepublishOnly": "NODE_ENV=production yarn build",
     "test": "jest --maxWorkers=1 --coverage"
   },
