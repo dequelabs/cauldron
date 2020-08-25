@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SyntaxHighlighter, {
+import {
+  Light as SyntaxHighlighter,
   SyntaxHighlighterProps
 } from 'react-syntax-highlighter';
-import theme from './theme';
+import js from 'react-syntax-highlighter/dist/languages/hljs/javascript';
+import bash from 'react-syntax-highlighter/dist/languages/hljs/bash';
+import css from 'react-syntax-highlighter/dist/languages/hljs/css';
+
+SyntaxHighlighter.registerLanguage('javascript', js);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('css', css);
 
 interface Props extends SyntaxHighlighterProps {
   children: React.ReactNode;
 }
 
 const Code: React.ComponentType<Props> = ({ children, ...props }) => (
-  <SyntaxHighlighter {...props} style={theme}>
-    {children}
-  </SyntaxHighlighter>
+  <div>
+    <SyntaxHighlighter {...props} useInlineStyles={false}>
+      {children}
+    </SyntaxHighlighter>
+  </div>
 );
 
 Code.displayName = 'Code';
