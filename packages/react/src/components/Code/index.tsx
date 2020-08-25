@@ -10,12 +10,11 @@ import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
-SyntaxHighlighter.registerLanguage('xml', xml);
 SyntaxHighlighter.registerLanguage('html', xml);
 
 interface Props extends SyntaxHighlighterProps {
   children: React.ReactNode;
-  language?: 'javascript' | 'css' | 'xml' | 'html';
+  language?: 'javascript' | 'css' | 'html';
 }
 
 const Code: React.ComponentType<Props> = ({ children, ...props }) => (
@@ -28,7 +27,7 @@ Code.displayName = 'Code';
 
 Code.propTypes = {
   children: PropTypes.string.isRequired,
-  language: PropTypes.oneOf(['javascript', 'css', 'xml', 'html'])
+  language: PropTypes.oneOf(['javascript', 'css', 'html'])
 };
 
 export default Code;
