@@ -1,24 +1,37 @@
 import React from 'react';
 import { Code } from '@deque/cauldron-react/';
+import Demo from '../../../Demo';
 
-const Demo = () => (
-  <div>
-    <h1>Code</h1>
-    <h2>Demo</h2>
-    <Code language="javascript">{'var foo = true'}</Code>
-    <Code language="html">{'<span>hey</span>'}</Code>
-    <Code>{'$ npm install @deque/cauldron-react'}</Code>
-    <h2>Code Sample</h2>
-    <Code language="javascript">
-      {`
-import React from 'react';
-import { Code } from '@deque/cauldron-react';
-<Code language="javascript">{'var foo = true'}</Code>
-<Code language="html">{'<span>hey</span>'}</Code>
-<Code>{'$ npm install @deque/cauldron-react'}</Code>
-      `}
-    </Code>
-  </div>
+const CodeDemo = () => (
+  <Demo
+    component={Code}
+    states={[
+      {
+        children: 'var foo = true;',
+        language: 'javascript',
+        DEMO_renderBefore: <h3>javascript</h3>
+      },
+      {
+        children: '<span class="foo">Hello world!</span>',
+        language: 'html',
+        DEMO_renderBefore: <h3>html</h3>
+      },
+      {
+        children: '$ npm install --save @deque/cauldron-react',
+        DEMO_renderBefore: <h3>(no language prop)</h3>
+      }
+    ]}
+    propDocs={{
+      children: {
+        type: 'string',
+        description: 'code to be syntax highlighted and rendered in code block'
+      },
+      language: {
+        type: 'string',
+        description: '"javascript", "css" or "html"'
+      }
+    }}
+  />
 );
 
-export default Demo;
+export default CodeDemo;
