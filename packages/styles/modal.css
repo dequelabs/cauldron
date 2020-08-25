@@ -2,6 +2,7 @@
   display: none;
   width: 100%;
   box-sizing: border-box;
+  --modal-header-height: 48px;
 }
 
 .Modal.Modal--show {
@@ -24,7 +25,7 @@
   background-color: var(--button-background-color-secondary);
   position: relative;
   display: flex;
-  height: 48px;
+  height: var(--modal-header-height);
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -36,6 +37,10 @@
 .Modal__header h5,
 .Modal__header h6,
 .Modal__header .Modal__close {
+  margin: 0;
+  height: var(--modal-header-height);
+  display: flex;
+  align-items: center;
   border-bottom: 4px solid transparent;
 }
 
