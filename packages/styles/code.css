@@ -66,12 +66,12 @@
 
 .hljs-name {
   color: #b5bd68;
-  fontweight: bold;
+  font-weight: bold;
 }
 
 .hljs-section {
   color: #b5bd68;
-  fontweight: bold;
+  font-weight: bold;
 }
 
 .hljs-built_in {
@@ -95,7 +95,7 @@
 }
 
 .hljs-strong {
-  fontweight: bold;
+  font-weight: bold;
 }
 
 .hljs-symbol {
