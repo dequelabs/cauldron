@@ -1,0 +1,139 @@
+.Code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000;
+  color: #d1d9e1;
+}
+
+.Code .hljs-comment {
+  color: #969896;
+  font-style: italic;
+}
+
+.Code .hljs-quote {
+  color: #969896;
+  font-style: italic;
+}
+
+.Code .hljs-keyword {
+  color: #cc99cc;
+}
+
+.Code .hljs-selector-tag {
+  color: #cc99cc;
+}
+
+.Code .hljs-literal {
+  color: #cc99cc;
+}
+
+.Code .hljs-type {
+  color: #cc99cc;
+}
+
+.Code .hljs-addition {
+  color: #cc99cc;
+}
+
+.Code .hljs-number {
+  color: #f99157;
+}
+
+.Code .hljs-selector-attr {
+  color: #f99157;
+}
+
+.Code .hljs-selector-pseudo {
+  color: #f99157;
+}
+
+.Code .hljs-string {
+  color: #8abeb7;
+}
+
+.Code .hljs-doctag {
+  color: #8abeb7;
+}
+
+.Code .hljs-regexp {
+  color: #8abeb7;
+}
+
+.Code .hljs-title {
+  color: #b5bd68;
+}
+
+.Code .hljs-name {
+  color: #b5bd68;
+  font-weight: bold;
+}
+
+.Code .hljs-section {
+  color: #b5bd68;
+  font-weight: bold;
+}
+
+.Code .hljs-built_in {
+  color: #b5bd68;
+}
+
+.Code .hljs-variable {
+  color: #ffcc66;
+}
+
+.Code .hljs-template-variable {
+  color: #ffcc66;
+}
+
+.Code .hljs-selector-id {
+  color: #ffcc66;
+}
+
+.Code .hljs-class .hljs-title {
+  color: #ffcc66;
+}
+
+.Code .hljs-strong {
+  font-weight: bold;
+}
+
+.Code .hljs-symbol {
+  color: #f99157;
+}
+
+.Code .hljs-bullet {
+  color: #f99157;
+}
+
+.Code .hljs-subst {
+  color: #f99157;
+}
+
+.Code .hljs-meta {
+  color: #f99157;
+}
+
+.Code .hljs-link {
+  color: #f99157;
+}
+
+.Code .hljs-deletion {
+  color: #dc322f;
+}
+
+.Code .hljs-formula {
+  background: #eee8d5;
+}
+
+.Code .hljs-attr {
+  color: #81a2be;
+}
+
+.Code .hljs-attribute {
+  color: #81a2be;
+}
+
+.Code .hljs-emphasis {
+  font-style: italic;
+}

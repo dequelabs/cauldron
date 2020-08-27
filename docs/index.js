@@ -43,7 +43,8 @@ const componentsList = [
   'ExpandCollapsePanel',
   'TextField',
   'Link',
-  'Icon'
+  'Icon',
+  'Code'
 ].sort();
 
 class App extends Component {
