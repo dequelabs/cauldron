@@ -1,6 +1,6 @@
 [build]
   command = "npx lerna bootstrap && yarn build"
-  publish = "dist"
+  publish = "docs/dist"
 
 [[redirects]]
   from = "/*"
