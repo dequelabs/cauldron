@@ -1,4 +1,4 @@
-.hljs {
+.Code.hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -6,134 +6,134 @@
   color: #d1d9e1;
 }
 
-.hljs-comment {
+.Code .hljs-comment {
   color: #969896;
   font-style: italic;
 }
 
-.hljs-quote {
+.Code .hljs-quote {
   color: #969896;
   font-style: italic;
 }
 
-.hljs-keyword {
+.Code .hljs-keyword {
   color: #cc99cc;
 }
 
-.hljs-selector-tag {
+.Code .hljs-selector-tag {
   color: #cc99cc;
 }
 
-.hljs-literal {
+.Code .hljs-literal {
   color: #cc99cc;
 }
 
-.hljs-type {
+.Code .hljs-type {
   color: #cc99cc;
 }
 
-.hljs-addition {
+.Code .hljs-addition {
   color: #cc99cc;
 }
 
-.hljs-number {
+.Code .hljs-number {
   color: #f99157;
 }
 
-.hljs-selector-attr {
+.Code .hljs-selector-attr {
   color: #f99157;
 }
 
-.hljs-selector-pseudo {
+.Code .hljs-selector-pseudo {
   color: #f99157;
 }
 
-.hljs-string {
+.Code .hljs-string {
   color: #8abeb7;
 }
 
-.hljs-doctag {
+.Code .hljs-doctag {
   color: #8abeb7;
 }
 
-.hljs-regexp {
+.Code .hljs-regexp {
   color: #8abeb7;
 }
 
-.hljs-title {
+.Code .hljs-title {
   color: #b5bd68;
 }
 
-.hljs-name {
+.Code .hljs-name {
   color: #b5bd68;
   font-weight: bold;
 }
 
-.hljs-section {
+.Code .hljs-section {
   color: #b5bd68;
   font-weight: bold;
 }
 
-.hljs-built_in {
+.Code .hljs-built_in {
   color: #b5bd68;
 }
 
-.hljs-variable {
+.Code .hljs-variable {
   color: #ffcc66;
 }
 
-.hljs-template-variable {
+.Code .hljs-template-variable {
   color: #ffcc66;
 }
 
-.hljs-selector-id {
+.Code .hljs-selector-id {
   color: #ffcc66;
 }
 
-.hljs-class .hljs-title {
+.Code .hljs-class .hljs-title {
   color: #ffcc66;
 }
 
-.hljs-strong {
+.Code .hljs-strong {
   font-weight: bold;
 }
 
-.hljs-symbol {
+.Code .hljs-symbol {
   color: #f99157;
 }
 
-.hljs-bullet {
+.Code .hljs-bullet {
   color: #f99157;
 }
 
-.hljs-subst {
+.Code .hljs-subst {
   color: #f99157;
 }
 
-.hljs-meta {
+.Code .hljs-meta {
   color: #f99157;
 }
 
-.hljs-link {
+.Code .hljs-link {
   color: #f99157;
 }
 
-.hljs-deletion {
+.Code .hljs-deletion {
   color: #dc322f;
 }
 
-.hljs-formula {
+.Code .hljs-formula {
   background: #eee8d5;
 }
 
-.hljs-attr {
+.Code .hljs-attr {
   color: #81a2be;
 }
 
-.hljs-attribute {
+.Code .hljs-attribute {
   color: #81a2be;
 }
 
-.hljs-emphasis {
+.Code .hljs-emphasis {
   font-style: italic;
 }
