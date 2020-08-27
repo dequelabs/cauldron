@@ -13,7 +13,7 @@ export default {
   output: {
     dir: 'lib',
     format: 'cjs',
-    preserveModules: true,
+    // preserveModules: true,
     exports: 'auto'
   },
   plugins: [typescript(), commonjs(), svgr(), dynamicImportVar()]
