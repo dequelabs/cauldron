@@ -16,9 +16,12 @@ function Icon({ label, className, type, ...other }: IconProps) {
   const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
   useEffect(() => {
-    if (process.env.JEST_WORKER_ID !== undefined) {
+    // NOTE: we don't want to pollute test output with
+    //  console.errors as a result of the dynamic imports
+    if (process.env.NODE_ENV === 'test') {
       return;
     }
+
     import(`./icons/${name}.svg`)
       .then(icon => {
         setIcon(() => icon.default);
