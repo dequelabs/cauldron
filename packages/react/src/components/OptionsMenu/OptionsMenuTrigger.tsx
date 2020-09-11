@@ -19,6 +19,7 @@ function OptionsMenuTriggerComponent({
   return (
     <button
       type="button"
+      aria-haspopup="true"
       ref={triggerRef}
       {...other}
       className={classNames('OptionsMenu__trigger', className)}
