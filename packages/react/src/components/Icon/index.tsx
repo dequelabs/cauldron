@@ -16,6 +16,9 @@ function Icon({ label, className, type, ...other }: IconProps) {
   const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
   useEffect(() => {
+    if (process.env.JEST_WORKER_ID !== undefined) {
+      return;
+    }
     import(`./icons/${name}.svg`)
       .then(icon => {
         setIcon(() => icon.default);
