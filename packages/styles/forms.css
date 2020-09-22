@@ -7,7 +7,9 @@ textarea,
 [aria-haspopup='listbox'],
 [role='listbox'],
 [role='spinbutton'] {
+  width: 100%;
   border: 1px solid var(--field-border-color);
+  border-bottom: 1px solid var(--field-border-color-underline);
   margin-bottom: var(--space-half);
 }
 
@@ -21,8 +23,9 @@ textarea:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
-  border: 1px solid var(--link-text-color);
-  box-shadow: 0px 0px 8px 1px #3c7aae;
+  border: 1px solid var(--field-border-color-focus);
+  box-shadow: inset 0 0 0 1px var(--field-border-color-focus),
+    0px 0px 4px var(--field-border-color-focus-glow);
 }
 
 input:hover,
@@ -47,7 +50,7 @@ textarea.Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
-  outline: 2px solid var(--field-border-color-error);
+  box-shadow: inset 0 0 0 1px var(--field-border-color-error);
 }
 
 input.Field--has-error:focus,
@@ -59,20 +62,8 @@ textarea.Field--has-error:focus,
 [aria-haspopup='listbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
-  box-shadow: 0px 0px 8px 1px var(--error);
-  outline: 0;
-}
-
-input.Field--has-error:hover,
-select.Field--has-error:hover,
-textarea.Field--has-error:hover,
-[role='menuitemcheckbox'].Field--has-error:hover,
-[role='menuitemradio'].Field--has-error:hover,
-[role='textbox'].Field--has-error:hover,
-[aria-haspopup='listbox'].Field--has-error:hover,
-[role='listbox'].Field--has-error:hover,
-[role='spinbutton'].Field--has-error:hover {
-  border: 1px solid var(--field-border-color-error-hover);
+  box-shadow: inset 0 0 0 1px var(--field-border-color-error),
+    0px 0px 4px 0 var(--field-border-color-error-focus-glow);
 }
 
 .Error {
@@ -86,6 +77,7 @@ textarea.Field--has-error:hover,
 }
 
 .Field {
+  display: block;
   position: relative;
   box-sizing: border-box;
   margin-bottom: var(--space-large);
@@ -112,12 +104,12 @@ textarea.Field--has-error:hover,
 }
 
 .Field__label {
-  display: block;
+  display: flex;
   text-align: left;
   color: #333333;
   font-size: var(--text-size-smaller);
   font-weight: var(--font-weight-light);
-  margin-bottom: var(--space-half);
+  padding-bottom: var(--space-half);
   cursor: default;
 }
 
@@ -126,10 +118,12 @@ textarea.Field--has-error:hover,
 }
 
 .Field__required-text {
-  display: inline-block;
+  flex: 1;
+  text-align: right;
   margin-left: var(--space-large);
   font-style: italic;
   font-weight: var(--font-weight-normal);
+  color: var(--field-required-text-color);
 }
 
 .Field__required-text::before {
@@ -147,17 +141,17 @@ textarea.Field--has-error:hover,
 }
 
 .Field__text-input {
-  padding: var(--space-half);
+  padding: var(--space-smallest);
   box-sizing: border-box;
-  font-size: var(--text-size-small);
+  font-size: var(--text-size-smaller);
   color: var(--text-color-base);
   min-width: var(--input-min-width);
 }
 
 .Field__text-input[disabled],
 .Field__text-input[aria-disabled='true'] {
+  border: 1px solid var(--field-border-color-disabled);
   background-color: var(--field-background-color-disabled);
-  border: 1px solid var(--field-background-color-disabled);
 }
 
 .Field__textarea {

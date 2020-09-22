@@ -25,10 +25,17 @@
 
   /* fields */
   --field-border-color: #cccccc;
-  --field-border-color-hover: #b3b3b3;
+  --field-border-color-underline: #4d4d4d;
+  --field-border-color-hover: #4d4d4d;
+  --field-border-color-focus: #3c7aae;
+  --field-border-color-focus-glow: rgba(60, 122, 174, 0.7);
   --field-border-color-error: #d93251;
-  --field-border-color-error-hover: #b6223d;
-  --field-background-color-disabled: #f2f2f2;
+  --field-border-color-error-hover: #c42f41;
+  --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
+  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
+  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
+  --field-background-color-disabled: #f7f7f7;
+  --field-required-text-color: #666666;
 
   /* buttons */
   --button-background-color-primary: #3c7aae;
