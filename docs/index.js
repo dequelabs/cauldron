@@ -176,9 +176,9 @@ class App extends Component {
 
               <TopBarItem className="MenuItem--separator">
                 <a
-                  href="https://github.com/dequelabs/cauldron-react"
+                  href="https://github.com/dequelabs/cauldron"
                   className="fa fa-github"
-                  aria-label="Cauldron React on GitHub"
+                  aria-label="Cauldron on GitHub"
                   tabIndex={-1}
                 />
               </TopBarItem>
