@@ -41,6 +41,12 @@ export default class Demo extends Component {
             error={this.state.error}
             fieldRef={el => (this.input = el)}
           />
+          <TextField
+            id="favorite-color"
+            label="Favorite Color"
+            value="green"
+            disabled
+          />
           <TextField multiline label="Comment" />
           <Button type="submit">Submit</Button>
         </form>
@@ -80,6 +86,12 @@ export default class Demo extends Component {
           aria-describedby="text-field-help"
           error={this.state.error}
           fieldRef={el => this.input = el}
+        />
+        <TextField
+          id="favorite-color"
+          label="Favorite Color"
+          value="green"
+          disabled
         />
         <TextField multiline label="Comment" />
         <Button type="submit">Submit</Button>
