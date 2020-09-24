@@ -7,7 +7,6 @@
   padding: var(--space-smallest);
   font-size: var(--text-size-small);
   box-sizing: border-box;
-  /* TODO: Update the padding to match the width/height dimensions in uxpin? */
   padding: var(--space-smallest) var(--space-medium);
   position: relative;
   text-align: center;
