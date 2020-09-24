@@ -4,13 +4,14 @@
 .Button--error {
   border-radius: 3px;
   border: none;
-  padding: var(--space-smallest);
   font-size: var(--text-size-small);
   box-sizing: border-box;
-  padding: var(--space-smallest) var(--space-medium);
+  padding: 0 16px;
   position: relative;
   text-align: center;
   text-transform: uppercase;
+  height: 36px;
+  min-width: 100px;
   --button-hover-outline-color: var(--button-background-color-primary);
 }
 
@@ -97,6 +98,7 @@
 
 .Button--thin {
   height: 23px;
+  min-width: 100px;
   font-size: var(--text-size-smallest);
-  padding: 0 var(--space-large);
+  padding: 0 16px;
 }
