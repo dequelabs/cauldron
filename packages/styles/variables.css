@@ -39,9 +39,16 @@
 
   /* buttons */
   --button-background-color-primary: #3c7aae;
+  --button-background-color-primary-disabled: #79a7d9;
+  --button-background-color-primary-active: #316091;
   --button-background-color-secondary: #f2f2f2;
-  --button-text-color-dark: #5a6268;
+  --button-background-color-secondary-disabled: #e0e0e0;
+  --button-background-color-secondary-active: #e0e0e0;
+  --button-background-color-error-disabled: #db6379;
+  --button-background-color-error-active: #c92e40;
+  --button-text-color-dark: #333333;
   --button-text-color-light: #ffffff;
+  --button-focus-ring-color: #c11bde;
 
   /* tooltips */
   --tooltip-border-color: #999999;

@@ -2,68 +2,30 @@
 .Button--secondary,
 .Button--clear,
 .Button--error {
-  min-width: 110px;
-  border-radius: 18px;
+  border-radius: 3px;
   border: none;
   padding: var(--space-smallest);
   font-size: var(--text-size-small);
   box-sizing: border-box;
+  /* TODO: Update the padding to match the width/height dimensions in uxpin? */
   padding: var(--space-smallest) var(--space-medium);
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
   position: relative;
-  margin: 0 auto;
   text-align: center;
-  height: 36px;
   text-transform: uppercase;
+  --button-hover-outline-color: var(--button-background-color-primary);
 }
 
-.Button--primary:before,
-.Button--secondary:before,
-.Button--clear:before,
-.Button--error:before {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow: -4px 0 transparent;
-  top: 3px;
-  left: 8px;
-}
-
-.Button--primary:after,
-.Button--secondary:after,
-.Button--clear:after,
-.Button--error:after {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow: 4px 0 transparent;
-  top: 3px;
-  right: 8px;
-}
-
-.Button--primary:hover,
-.Button--secondary:hover,
-.Button--clear:hover,
-.Button--error:hover {
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+.Button--primary:not([disabled]):not([aria-disabled='true']):hover,
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover,
+.Button--error:not([disabled]):not([aria-disabled='true']):hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--button-hover-outline-color);
 }
 
 .Button--primary:focus,
 .Button--secondary:focus,
-.Button--clear:focus,
 .Button--error:focus {
   outline: 0;
-}
-
-.Button--primary:active,
-.Button--secondary:active,
-.Button--clear:active,
-.Button--error:active {
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px #fff, 0 0 1px 3px var(--button-focus-ring-color);
 }
 
 .Button--primary {
@@ -73,86 +35,45 @@
 
 .Button--primary[aria-disabled='true'],
 .Button--primary[disabled] {
-  color: var(--text-color-light-disabled);
+  background-color: var(--button-background-color-primary-disabled);
 }
 
-.Button--primary:focus:after {
-  box-shadow: 4px 0 var(--text-color-light);
-}
-
-.Button--primary:focus:before {
-  box-shadow: -4px 0 var(--text-color-light);
+.Button--primary:active {
+  background: var(--button-background-color-primary-active);
 }
 
 .Button--secondary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
+  border: 1px solid var(--field-border-color);
+  --button-hover-outline-color: var(--header-text-color-dark);
 }
 
 .Button--secondary[aria-disabled='true'],
 .Button--secondary[disabled] {
   color: var(--disabled);
+  background-color: var(--button-background-color-secondary-disabled);
 }
 
-.Button--secondary:focus:after {
-  box-shadow: 4px 0 var(--button-text-color-dark);
-}
-
-.Button--secondary:focus:before {
-  box-shadow: -4px 0 var(--button-text-color-dark);
+.Button--secondary:active {
+  background-color: var(--button-background-color-secondary-active);
 }
 
 .Button--error {
   background-color: var(--error);
   box-shadow: none;
   color: var(--button-text-color-light);
+  --button-hover-outline-color: var(--error);
 }
 
 .Button--error[aria-disabled='true'],
 .Button--error[disabled] {
-  color: var(--text-color-light-disabled);
-}
-
-.Button--error:hover {
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
-}
-
-.Button--error:focus {
-  outline: 0;
+  color: var(--button-text-color-light);
+  background-color: var(--button-background-color-error-disabled);
 }
 
 .Button--error:active {
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
-}
-
-.Button--error:focus:after {
-  box-shadow: 4px 0 var(--text-color-light);
-}
-
-.Button--error:focus:before {
-  box-shadow: -4px 0 var(--text-color-light);
-}
-
-.Button--clear {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.Button--clear:hover {
-  background-color: var(--button-background-color-secondary);
-  box-shadow: none;
-}
-
-.Button--clear:focus {
-  background-color: var(--button-background-color-secondary);
-}
-
-.Button--clear:focus:after {
-  box-shadow: 4px 0 var(--button-text-color-dark);
-}
-
-.Button--clear:focus:before {
-  box-shadow: -4px 0 var(--button-text-color-dark);
+  background-color: var(--button-background-color-error-active);
 }
 
 .DefinitionButton {
@@ -179,10 +100,4 @@
   height: 23px;
   font-size: var(--text-size-smallest);
   padding: 0 var(--space-large);
-}
-
-.Button--thin::before,
-.Button--thin::after {
-  width: 17px;
-  height: 17px;
 }

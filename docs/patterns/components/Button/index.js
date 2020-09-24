@@ -10,17 +10,18 @@ const ButtonDemo = () => (
       states={[
         { children: 'Primary' },
         { children: 'Primary Disabled', disabled: true },
+        { children: 'Primary thin', thin: true },
         { children: 'Secondary', variant: 'secondary' },
         {
           children: 'Secondary Disabled',
           variant: 'secondary',
           disabled: true
         },
+        { children: 'Secondary thin', variant: 'secondary', thin: true },
         { children: 'Error', variant: 'error' },
         { children: 'Error Disabled', variant: 'error', disabled: true },
-        { children: 'Link', variant: 'link' },
-        { children: 'Primary thin', thin: true },
-        { children: 'Secondary thin', variant: 'secondary', thin: true }
+        { children: 'Error thin', variant: 'error', thin: true },
+        { children: 'Link', variant: 'link' }
       ]}
       propDocs={{
         variant: {
