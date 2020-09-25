@@ -17,7 +17,8 @@ export {
   TopBarItem
 } from './components/TopBar';
 export { default as SideBar } from './components/SideBar';
-export { default as Alert, Actions as AlertActions } from './components/Alert';
+export { Alert, AlertContent, AlertActions } from './components/Alert';
+export { Dialog, DialogContent, DialogFooter } from './components/Dialog';
 export {
   default as Modal,
   ModalContent,
