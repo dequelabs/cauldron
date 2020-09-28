@@ -17,7 +17,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   dialogRef: React.Ref<HTMLDivElement>;
   onClose: () => void;
   forceAction?: boolean;
-  heading?:
+  heading:
     | React.ReactElement<any>
     | {
         text: React.ReactElement<any>;
@@ -113,7 +113,9 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       </button>
     ) : null;
     const Heading = `h${
-      typeof heading === 'object' && 'level' in heading ? heading.level : 2
+      typeof heading === 'object' && 'level' in heading && !!heading.level
+        ? heading.level
+        : 2
     }` as 'h1';
 
     const Dialog = (
@@ -159,7 +161,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
 
     return createPortal(
       Dialog,
-      ('current' in portal ? portal.current : portal) as HTMLElement
+      ('current' in portal ? portal.current : portal) || document.body
     );
   }
 
