@@ -26,6 +26,9 @@ export default class IconDemo extends Component {
               type: 'bolt'
             },
             {
+              type: 'caution'
+            },
+            {
               type: 'checkbox-checked'
             },
             {
@@ -81,6 +84,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'info-circle'
+            },
+            {
+              type: 'info-alt'
             },
             {
               type: 'kabob'
