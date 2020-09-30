@@ -53,7 +53,8 @@
 }
 
 .Dialog__heading:focus,
-.Dialog__close:focus {
+.Dialog__close:focus,
+.Dialog__close:hover {
   border-bottom-color: var(--text-color-base);
   outline: none;
 }
