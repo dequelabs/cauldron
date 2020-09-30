@@ -93,6 +93,7 @@
 }
 
 .Dialog__footer {
+  background-color: #fff;
   border-top: 1px solid var(--dialog-border-color);
   padding: calc(var(--space-small) - 4px) var(--dialog-padding);
 }
