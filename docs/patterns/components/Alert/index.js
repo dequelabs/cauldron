@@ -64,22 +64,43 @@ class Demo extends Component {
   constructor() {
     super();
 
-    this.state = { showDefaultAlert: false };
+    this.state = { showDefaultAlert: false, showWarningAlert: false };
     this.toggleDefaultAlert = this.toggleDefaultAlert.bind(this);
+    this.toggleWarningAlert = this.toggleWarningAlert.bind(this);
   }
 
   render() {
     return (
       <div>
-        <Button onClick={this.toggleDefaultAlert}>{'Simple Alert'}</Button>
+        <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
+        <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
         <Alert
+          heading="Default Alert"
           onClose={this.toggleDefaultAlert}
           show={showDefaultAlert}
         >
-          {'Simple dismissable alert'}
+          <AlertContent>Dismissable alert</AlertContent>
           <AlertActions>
-            <Button onClick={this.toggleDefaultAlert}>{'Ok'}</Button>
-            <Button secondary={true} onClick={this.toggleDefaultAlert}>{'Cancel'}</Button>
+            <Button onClick={this.toggleDefaultAlert}>Ok</Button>
+            <Button variant="secondary" onClick={this.toggleDefaultAlert}>
+              Cancel
+            </Button>
+          </AlertActions>
+        </Alert>
+        <Alert
+          variant="warning"
+          heading="Danger Zone"
+          onClose={this.toggleWarningAlert}
+          show={showWarningAlert}
+        >
+          <AlertContent>Welcome to the danger zone</AlertContent>
+          <AlertActions>
+            <Button variant="error" onClick={this.toggleWarningAlert}>
+              Let's get dangerous
+            </Button>
+            <Button variant="secondary" onClick={this.toggleWarningAlert}>
+              Nevermind
+            </Button>
           </AlertActions>
         </Alert>
       </div>
@@ -87,8 +108,14 @@ class Demo extends Component {
   }
 
   toggleDefaultAlert() {
-    this.setState(({showDefaultAlert}) => {
+    this.setState(({ showDefaultAlert }) => {
       return { showDefaultAlert: !showDefaultAlert };
+    });
+  }
+
+  toggleWarningAlert() {
+    this.setState(({ showWarningAlert }) => {
+      return { showWarningAlert: !showWarningAlert };
     });
   }
 }

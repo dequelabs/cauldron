@@ -3,7 +3,7 @@
   --dialog-border-color: #ccc;
   --dialog-header-background-color: var(--button-background-color-secondary);
   --dialog-padding: var(--space-small);
-  --dialog-header-height: 50px;
+  --dialog-header-height: 42px;
 }
 
 .Dialog {
@@ -63,8 +63,9 @@
 }
 
 .Dialog__heading {
+  display: flex;
   flex: 1;
-  line-height: calc(var(--dialog-header-height) - 12px);
+  align-items: center;
   padding-left: var(--dialog-padding);
 }
 
@@ -80,7 +81,7 @@
 }
 
 .Dialog__content {
-  padding: var(--dialog-padding);
+  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
 }
 
 .Dialog__content p:first-child {
@@ -93,9 +94,5 @@
 
 .Dialog__footer {
   border-top: 1px solid var(--dialog-border-color);
-  padding: var(--dialog-padding);
-}
-
-.Dialog__footer button + button {
-  margin-left: var(--dialog-padding);
+  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
 }
