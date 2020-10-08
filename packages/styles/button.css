@@ -102,3 +102,7 @@
   font-size: var(--text-size-smallest);
   padding: 0 16px;
 }
+
+[class*='Button--'] + [class*='Button--'] {
+  margin-left: var(--space-smallest);
+}

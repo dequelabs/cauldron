@@ -1,90 +1,31 @@
-.Alert {
-  display: none;
-  width: 100%;
-  box-sizing: border-box;
+:root {
+  --alert-warning-background-color: #d93251;
+  --alert-warning-header-text-color: #fff;
 }
 
-.Alert.Dialog--show {
-  display: block;
+.Alert .Dialog__header .Icon {
+  padding-right: var(--space-smallest);
 }
 
-.Alert__inner {
-  width: 399px;
-  padding: 24px;
-  left: 50%;
-  top: 100px;
-  position: fixed;
-  text-align: center;
-  z-index: var(--z-index-modal);
-  transform: translate(-50%, 0);
-  border-radius: 3px;
-  background: var(--tile-background-color);
-  box-shadow: 0px 5px 18px 2px rgba(0, 0, 0, 0.35);
+.Alert__warning .Dialog__inner {
+  border: 3px solid var(--alert-warning-background-color);
 }
 
-.Alert__content {
-  border-left: 3px solid transparent;
+.Alert__warning .Dialog__header {
+  background-color: var(--alert-warning-background-color);
 }
 
-.Alert__content p {
-  margin: 0;
+.Alert__warning .Dialog__heading {
+  color: var(--alert-warning-header-text-color);
 }
 
-.Alert__inner:focus {
-  outline: none;
-}
-
-.Alert__inner:focus .Alert__content {
-  border-left: 3px solid var(--text-color-base);
-}
-
-.Alert__buttons {
-  margin-top: 24px;
+.Alert .Dialog__footer {
+  border-top: none;
+  padding-top: 0;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
-.Alert__buttons button {
-  margin: 0 16px 0 0;
-}
-
-.Alert .Loader {
-  display: none;
-  font-size: 10px;
-  margin: 50px auto;
-  width: 7em;
-  height: 7em;
-  border-radius: 50%;
-  background: #666;
-  background: linear-gradient(to right, #666 10%, rgba(255, 255, 255, 0) 42%);
-  transform: translateZ(0);
-  position: relative;
-}
-
-.Alert .Loader:before {
-  width: 50%;
-  height: 50%;
-  background: #666;
-  border-radius: 100% 0 0 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: '';
-}
-
-.Alert .Loader:after {
-  content: '';
-  background: var(--color);
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.Alert__warning .Dialog__heading:focus {
+  border-bottom-color: var(--alert-warning-header-text-color);
 }

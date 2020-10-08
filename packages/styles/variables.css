@@ -118,8 +118,8 @@
   /* z-index */
   --z-index-tooltip: 9;
   --z-index-scrim: 7;
-  --z-index-modal: 21;
-  --z-index-modal-scrim: 20;
+  --z-index-dialog: 21;
+  --z-index-dialog-scrim: 20;
   --z-index-scrim-action-needed: 23;
   --z-index-side-bar: 9;
   --z-index-toast: 8;

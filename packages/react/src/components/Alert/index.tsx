@@ -1,160 +1,61 @@
-import React, { PropsWithChildren } from 'react';
-import PropTypes from 'prop-types';
-import FocusTrap from 'focus-trap-react';
-import Scrim from '../Scrim';
-import AriaIsolate from '../../utils/aria-isolate';
-import setRef from '../../utils/setRef';
+import React from 'react';
+import classnames from 'classnames';
+import Icon from '../Icon';
+import { Dialog, DialogContent, DialogFooter, DialogProps } from '../Dialog';
 
-const noop = () => {};
-export const Actions = ({ children }: PropsWithChildren<{}>) => (
-  <div className="Alert__buttons">{children}</div>
+interface AlertProps extends Omit<DialogProps, 'forceAction'> {
+  variant?: 'default' | 'warning';
+}
+
+const Alert = ({
+  children,
+  className,
+  variant = 'default',
+  heading,
+  ...other
+}: AlertProps) => (
+  <Dialog
+    className={classnames(
+      { Alert__warning: variant === 'warning' },
+      'Alert',
+      className
+    )}
+    heading={{
+      text: (
+        <React.Fragment>
+          <Icon type={variant === 'default' ? 'info-circle-alt' : 'caution'} />
+          {typeof heading === 'object' && 'text' in heading
+            ? heading.text
+            : heading}
+        </React.Fragment>
+      ),
+      level:
+        typeof heading === 'object' && 'level' in heading
+          ? heading.level
+          : undefined
+    }}
+    forceAction={true}
+    {...other}
+  >
+    {children}
+  </Dialog>
 );
 
-export interface AlertProps {
-  children: React.ReactNode;
-  className?: string;
-  show?: boolean;
-  contentRef: React.Ref<HTMLDivElement>;
-  alertRef: React.Ref<HTMLDivElement>;
-  onClose: () => void;
-  forceAction: boolean;
-}
+const AlertContent = ({
+  children,
+  className,
+  ...other
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <DialogContent {...other}>{children}</DialogContent>
+);
 
-interface AlertState {
-  show: boolean;
-  isolator?: AriaIsolate;
-}
+const AlertActions = ({
+  children,
+  className,
+  ...other
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <DialogFooter {...other}>{children}</DialogFooter>
+);
 
-/**
- * Cauldron <Alert /> component
- */
-export default class Alert extends React.Component<AlertProps, AlertState> {
-  static defaultProps = {
-    onClose: noop,
-    forceAction: false,
-    alertRef: noop,
-    contentRef: noop
-  };
-
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.object
-    ]).isRequired,
-    show: PropTypes.bool,
-    contentRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    alertRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    onClose: PropTypes.func,
-    forceAction: PropTypes.bool
-  };
-
-  private content: HTMLDivElement | null;
-  private element: HTMLDivElement | null;
-
-  state: AlertState;
-
-  constructor(props: AlertProps) {
-    super(props);
-
-    this.state = {
-      show: props.show || false
-    };
-
-    this.close = this.close.bind(this);
-    this.focusContent = this.focusContent.bind(this);
-  }
-
-  componentDidMount() {
-    if (this.props.show) {
-      this.attachIsolator(() => setTimeout(this.focusContent));
-    }
-  }
-
-  componentDidUpdate(prevProps: AlertProps) {
-    const showChange = prevProps.show !== this.props.show;
-
-    if (!showChange) {
-      return;
-    }
-
-    this.setState({ show: this.props.show || false }, () => {
-      if (this.props.show) {
-        this.attachIsolator(this.focusContent);
-      } else {
-        this.close();
-      }
-    });
-  }
-
-  private attachIsolator(done: () => void) {
-    this.setState(
-      {
-        isolator: new AriaIsolate(this.element as HTMLElement)
-      },
-      done
-    );
-  }
-
-  render() {
-    const { show } = this.state;
-    const { alertRef, contentRef, forceAction, className } = this.props;
-    const cl = className || '';
-    const alertClass = show ? 'Dialog--show' : '';
-
-    if (!show) {
-      return null;
-    }
-
-    return (
-      <FocusTrap
-        focusTrapOptions={{
-          onDeactivate: this.close,
-          escapeDeactivates: !forceAction,
-          fallbackFocus: '.Alert__inner'
-        }}
-      >
-        <div
-          className={['Alert', alertClass, cl].join(' ')}
-          role="alertdialog"
-          ref={el => {
-            this.element = el;
-            setRef(alertRef, el);
-          }}
-        >
-          <div
-            className="Alert__inner"
-            ref={el => {
-              this.content = el;
-              setRef(contentRef, el);
-            }}
-            tabIndex={-1}
-          >
-            <div className="Alert__content">{this.props.children}</div>
-          </div>
-          <Scrim show={show} />
-        </div>
-      </FocusTrap>
-    );
-  }
-
-  close() {
-    this.state.isolator?.deactivate();
-    this.setState({ show: false });
-    this.props.onClose();
-  }
-
-  focusContent() {
-    if (this.content) {
-      this.content.focus();
-    }
-    this.state.isolator?.activate();
-  }
-}
+export default Alert;
+export { Alert, AlertContent, AlertActions };
