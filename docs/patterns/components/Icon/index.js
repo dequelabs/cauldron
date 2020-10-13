@@ -95,6 +95,9 @@ export default class IconDemo extends Component {
               type: 'list'
             },
             {
+              type: 'lock'
+            },
+            {
               type: 'menu'
             },
             {
