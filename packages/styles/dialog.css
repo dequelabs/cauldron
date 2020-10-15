@@ -12,6 +12,7 @@
   height: 100vh;
   overflow-x: auto;
   position: fixed;
+  top: 0;
 }
 
 .Dialog.Dialog--show {
