@@ -64,9 +64,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     this.close = this.close.bind(this);
     this.focusHeading = this.focusHeading.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.state = {
-      isolator: null
-    };
+    this.state = {};
   }
 
   componentDidMount() {
