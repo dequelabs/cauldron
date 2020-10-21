@@ -6,9 +6,8 @@ import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
 
 export interface ToastProps {
-  type: 'confirmation' | 'caution' | 'action-needed';
+  type: 'confirmation' | 'caution' | 'action-needed' | 'info';
   onDismiss: () => void;
-  autoHide?: number;
   dismissText?: string;
   toastRef: React.Ref<HTMLDivElement>;
   show?: boolean;
@@ -41,8 +40,6 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     type: PropTypes.string.isRequired,
     // function to be exectued when toast is dismissed
     onDismiss: PropTypes.func,
-    // if provided, should be a number in ms
-    autoHide: PropTypes.number,
     // text to be added as the aria-label of the "x" dismiss button (default: "Dismiss")
     dismissText: PropTypes.string,
     // an optional ref function to get a handle on the toast element
@@ -70,16 +67,13 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
   }
 
   componentDidMount() {
-    const { autoHide, show } = this.props;
+    const { show } = this.props;
 
     if (show) {
       // Timeout because CSS display: none/block and opacity:
       // 0/1 properties cannot be toggled in the same tick
       // see: https://codepen.io/isnerms/pen/eyQaLP
       setTimeout(this.showToast);
-      if (autoHide) {
-        setTimeout(this.dismissToast, autoHide);
-      }
     }
   }
 
@@ -115,7 +109,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           }}
         >
           <div className="Toast__message">
-            <div className={`fa ${typeMap[type].icon}`} aria-hidden="true" />
+            <Icon type={typeMap[type].icon} />
             <span>{children}</span>
           </div>
           {type !== 'action-needed' && (
