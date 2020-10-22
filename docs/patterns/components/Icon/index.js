@@ -23,6 +23,18 @@ export default class IconDemo extends Component {
               type: 'arrow-down'
             },
             {
+              type: 'arrow-circle-left'
+            },
+            {
+              type: 'arrow-circle-right'
+            },
+            {
+              type: 'arrow-circle-up'
+            },
+            {
+              type: 'arrow-circle-down'
+            },
+            {
               type: 'bolt'
             },
             {
@@ -107,6 +119,9 @@ export default class IconDemo extends Component {
               type: 'no'
             },
             {
+              type: 'pencil'
+            },
+            {
               type: 'plus'
             },
             {
@@ -120,6 +135,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'run-again'
+            },
+            {
+              type: 'save'
             },
             {
               type: 'star'
