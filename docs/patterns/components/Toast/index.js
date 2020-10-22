@@ -42,7 +42,6 @@ export default class Demo extends Component {
             type: 'confirmation',
             children: 'Your toast is ready!',
             show: type === 'confirmation',
-            autoHide: 5000,
             onDismiss: () => this.onToastDismiss('confirmation'),
             DEMO_renderAfter: (
               <Button
@@ -82,6 +81,21 @@ export default class Demo extends Component {
                 Action Needed
               </Button>
             )
+          },
+          {
+            type: 'info',
+            children: 'It is getting toasty in here!',
+            show: type === 'info',
+            onDismiss: () => this.onToastDismiss('info'),
+            DEMO_renderAfter: (
+              <Button
+                variant="secondary"
+                onClick={() => this.onTriggerClick('info')}
+                buttonRef={el => (this.info = el)}
+              >
+                Info
+              </Button>
+            )
           }
         ]}
         propDocs={{
@@ -98,11 +112,6 @@ export default class Demo extends Component {
           onDismiss: {
             type: 'function',
             description: 'function to be executed when toast is dismissed'
-          },
-          autoHide: {
-            type: 'number',
-            description:
-              'optional timeout (ms) before automatically hiding the toast'
           },
           dismissText: {
             type: 'string',

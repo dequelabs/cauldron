@@ -60,6 +60,10 @@
   --error: #d93251;
   --disabled: #cccccc;
   --focus: #d71ef7;
+  --warning: #ffe69f;
+  --error-alt: #ffa1a1;
+  --info: #83e4fa;
+  --success: #d1ffa4;
   --focus-active: rgba(215, 30, 247, 0.25);
   --focus-glow: rgba(193, 27, 222, 0.75);
   --metric-accent-low: #f7846c;

@@ -7,7 +7,7 @@
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  padding: 7.5px 15px;
+  padding: 4px 15px;
   right: 0;
   left: 0;
 }
@@ -17,16 +17,20 @@
 }
 
 .Toast.Toast--success {
-  background-color: rgba(209, 255, 164, 0.95);
+  background-color: var(--success);
 }
 
 .Toast.Toast--warning {
-  background-color: rgba(255, 230, 159, 0.95);
+  background-color: var(--warning);
 }
 
 .Toast.Toast--error {
-  background-color: rgba(255, 161, 161, 0.95);
+  background-color: var(--error-alt);
   z-index: var(--z-index-toast-action-needed);
+}
+
+.Toast.Toast--info {
+  background-color: var(--info);
 }
 
 .Toast__dismiss {
@@ -40,14 +44,17 @@
 
 .Toast__message {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Toast__message:before {
-  font-family: 'FontAwesome';
-  content: '\f0da';
-  margin: 0 2px;
-  display: inline-block;
-  color: transparent;
+.Toast__message > span {
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.Toast__message .Icon {
   margin-right: var(--space-smallest);
 }
 
@@ -71,6 +78,6 @@
   outline: 0;
 }
 
-.Toast:focus .Toast__message:before {
-  color: var(--top-bar-background-color-active);
+.Toast:focus .Toast__message > span {
+  border-bottom-color: var(--top-bar-background-color-active);
 }

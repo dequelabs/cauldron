@@ -22,24 +22,6 @@ test('handles initial show prop on mount', done => {
   }); // wait for animation timeouts / async setState calls
 });
 
-test('handles autoHide properly', done => {
-  let called = false;
-  mount(
-    <Toast
-      {...defaultProps}
-      show={true}
-      autoHide={10}
-      onDismiss={() => (called = true)}
-    >
-      {'hi'}
-    </Toast>
-  );
-  setTimeout(() => {
-    expect(called).toBe(true);
-    done();
-  }, 100);
-});
-
 test('handles transition from falsey show to truthy show prop', done => {
   const wrapper = mount(<Toast {...defaultProps}>{'hi'}</Toast>);
   expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeFalsy();
@@ -75,35 +57,67 @@ test('handles transition from truthy show to falsey show prop', done => {
   }); // wait for animation timeouts / async setState calls
 });
 
-test('renders the expected UI (icons classNames etc)', () => {
-  expect.assertions(6);
-
+test('confirmation renders the expected UI and icon', () => {
   const confirmation = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
     </Toast>
   );
   expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
-  expect(confirmation.find('.fa-info-circle').exists()).toBeTruthy();
+  expect(
+    confirmation
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle');
+});
 
+test('confirmation renders the expected UI and icon', () => {
+  const confirmation = mount(
+    <Toast {...defaultProps} show={true}>
+      {'hi'}
+    </Toast>
+  );
+  expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
+  expect(
+    confirmation
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle');
+});
+
+test('caution renders the expected UI and icon', () => {
   const caution = mount(
-    <Toast {...defaultProps} type={'caution'} show={true}>
+    <Toast {...defaultProps} show type="caution">
       {'hi'}
     </Toast>
   );
   expect(caution.find('.Toast.Toast--warning').exists()).toBeTruthy();
-  expect(caution.find('.fa-warning').exists()).toBeTruthy();
+  expect(
+    caution
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('caution');
+});
 
-  const actionNeeded = mount(
-    <Toast {...defaultProps} type={'action-needed'} show={true}>
+test('info renders the expected UI and icon', () => {
+  const info = mount(
+    <Toast {...defaultProps} show type="info">
       {'hi'}
     </Toast>
   );
-  expect(actionNeeded.find('.Toast.Toast--error').exists()).toBeTruthy();
-  expect(actionNeeded.find('.fa-minus-circle').exists()).toBeTruthy();
+  expect(info.find('.Toast.Toast--info').exists()).toBeTruthy();
+  expect(
+    info
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle-alt');
 });
 
-test('handles "action-needed" type', done => {
+test('action-needed renders epxected UI, icon, and scrim (no close)', done => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true} type={'action-needed'}>
       {'hi'}
@@ -111,6 +125,13 @@ test('handles "action-needed" type', done => {
   );
 
   setTimeout(() => {
+    expect(wrapper.find('.Toast.Toast--error').exists()).toBeTruthy();
+    expect(
+      wrapper
+        .find('Icon')
+        .at(0)
+        .prop('type')
+    ).toBe('no');
     expect(wrapper.find('.Toast__dismiss').exists()).toBeFalsy();
     expect(wrapper.find('.Scrim--light').exists()).toBeTruthy();
     done();
