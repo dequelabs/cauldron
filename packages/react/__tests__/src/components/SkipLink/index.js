@@ -48,3 +48,15 @@ test('should return no axe violations', async () => {
   const skiplink = mount(<SkipLink target="#skip-target" />);
   expect(await axe(skiplink.html())).toHaveNoViolations();
 });
+
+test('passes props through to the nav element', () => {
+  const skipLink = mount(
+    <SkipLink target="#skip-target" aria-label="Skip to my lou" />
+  );
+  expect(
+    skipLink
+      .find('nav')
+      .getDOMNode()
+      .getAttribute('aria-label')
+  ).toBe('Skip to my lou');
+});
