@@ -54,10 +54,10 @@ export default class SkipLink extends React.Component<
 
   render() {
     const { currentClass } = this.state;
-    const { target, skipText, targetText } = this.props;
+    const { target, skipText, targetText, ...other } = this.props;
 
     return (
-      <nav className={classNames('SkipLink', currentClass)}>
+      <nav className={classNames('SkipLink', currentClass)} {...other}>
         <a
           href={target}
           className="SkipLink__link"
