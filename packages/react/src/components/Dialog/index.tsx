@@ -14,7 +14,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   show?: boolean;
-  dialogRef: React.Ref<HTMLDivElement>;
+  dialogRef?: React.Ref<HTMLDivElement>;
   onClose: () => void;
   forceAction?: boolean;
   heading:
