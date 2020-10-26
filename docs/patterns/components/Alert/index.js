@@ -58,7 +58,7 @@ export default class Demo extends Component {
         <Code langauge="javascript">
           {`
 import React, { Component } from 'react';
-import { Button, Alert, AlertActions } from '@deque/cauldron-react';
+import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react';
 
 class Demo extends Component {
   constructor() {
