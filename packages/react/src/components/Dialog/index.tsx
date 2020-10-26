@@ -14,7 +14,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   show?: boolean;
-  dialogRef: React.Ref<HTMLDivElement>;
+  dialogRef?: React.Ref<HTMLDivElement>;
   onClose: () => void;
   forceAction?: boolean;
   heading:
@@ -37,8 +37,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
     onClose: noop,
     forceAction: false,
-    closeButtonText: 'Close',
-    dialogRef: noop
+    closeButtonText: 'Close'
   };
 
   static propTypes = {
@@ -135,6 +134,9 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             })}
             ref={el => {
               this.element = el;
+              if (!dialogRef) {
+                return;
+              }
               setRef(dialogRef, el);
             }}
             {...other}
