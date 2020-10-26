@@ -41,21 +41,8 @@ const Alert = ({
   </Dialog>
 );
 
-const AlertContent = ({
-  children,
-  className,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <DialogContent {...other}>{children}</DialogContent>
-);
-
-const AlertActions = ({
-  children,
-  className,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <DialogFooter {...other}>{children}</DialogFooter>
-);
+const AlertContent = DialogContent;
+const AlertActions = DialogFooter;
 
 export default Alert;
 export { Alert, AlertContent, AlertActions };

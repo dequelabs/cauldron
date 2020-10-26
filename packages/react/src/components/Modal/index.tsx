@@ -14,19 +14,8 @@ const Modal = ({ children, className, ...other }: ModalProps) => (
   </Dialog>
 );
 
-const ModalContent = ({
-  children,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <DialogContent {...other}>{children}</DialogContent>
-);
-
-const ModalFooter = ({
-  children,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <DialogFooter {...other}>{children}</DialogFooter>
-);
+const ModalContent = DialogContent;
+const ModalFooter = DialogFooter;
 
 export default Modal;
 export { Modal, ModalContent, ModalFooter };
