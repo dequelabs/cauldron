@@ -103,7 +103,7 @@ test('does not render the close button given a thruthy "forceAction" prop', () =
   dialog.unmount();
 });
 
-test('supports heading from text', async () => {
+test('supports heading from text', () => {
   const dialog = mount(
     <Dialog {...defaults} heading={'hello title'} show={true}>
       {'body'}
@@ -113,9 +113,13 @@ test('supports heading from text', async () => {
   expect(dialog.find('h2').text()).toEqual('hello title');
 });
 
-test('supports heading from options', async () => {
+test('supports heading from options', () => {
   const dialog = mount(
-    <Dialog {...defaults} heading={{ text: 'hello title', level: 3 }} show={true}>
+    <Dialog
+      {...defaults}
+      heading={{ text: 'hello title', level: 3 }}
+      show={true}
+    >
       {'body'}
     </Dialog>
   );
@@ -130,4 +134,14 @@ test('should return no axe violations', async () => {
     </Dialog>
   );
   expect(await axe(dialog.html())).toHaveNoViolations();
+});
+
+test('allows className to be added to dialog header', () => {
+  const dialog = mount(
+    <Dialog {...defaults} headerClassName="Foo" show={true}>
+      {'body'}
+    </Dialog>
+  );
+
+  expect(dialog.find('.Dialog__header.Foo').exists()).toBe(true);
 });

@@ -13,6 +13,7 @@ import setRef from '../../utils/setRef';
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
+  headerClassName?: string;
   show?: boolean;
   dialogRef?: React.Ref<HTMLDivElement>;
   onClose: () => void;
@@ -42,6 +43,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
 
   static propTypes = {
     className: PropTypes.string,
+    headerClassName: PropTypes.string,
     show: PropTypes.bool,
     dialogRef: PropTypes.oneOfType([
       PropTypes.func,
@@ -99,6 +101,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       heading,
       show,
       portal = document.body,
+      headerClassName,
       ...other
     } = this.props;
 
@@ -143,7 +146,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
           >
             <Scrim show={show} />
             <div className="Dialog__inner">
-              <div className="Dialog__header">
+              <div className={classNames('Dialog__header', headerClassName)}>
                 <Heading
                   className="Dialog__heading"
                   ref={(el: HTMLHeadingElement) => (this.heading = el)}
