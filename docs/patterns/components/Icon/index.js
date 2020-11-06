@@ -146,10 +146,13 @@ export default class IconDemo extends Component {
               type: 'sun'
             },
             {
-              type: 'trash'
+              type: 'tag'
             },
             {
               type: 'target'
+            },
+            {
+              type: 'trash'
             }
           ].sort((a, b) => a.type.localeCompare(b.type))}
           propDocs={{
