@@ -113,6 +113,10 @@ textarea.Field--has-error:focus,
   cursor: default;
 }
 
+.Radio .Field__label {
+  padding-bottom: 0;
+}
+
 .Field__label.Field__label--disabled {
   color: var(--disabled);
 }
@@ -174,6 +178,7 @@ textarea.Field--has-error:focus,
 
 .Radio__overlay {
   border-radius: 50%;
+  margin-right: var(--space-quarter);
 }
 
 .Radio__overlay svg,
