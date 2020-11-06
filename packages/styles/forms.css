@@ -100,6 +100,7 @@ textarea.Field--has-error:focus,
 .Checkbox .Field__label,
 .Radio .Field__label {
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .Field__label {
@@ -110,10 +111,6 @@ textarea.Field--has-error:focus,
   font-weight: var(--font-weight-bold);
   padding-bottom: var(--space-half);
   cursor: default;
-}
-
-.Radio .Field__label {
-  padding-bottom: 0;
 }
 
 .Field__label.Field__label--disabled {
@@ -174,11 +171,11 @@ textarea.Field--has-error:focus,
   cursor: pointer;
   border-radius: 3px;
   color: #333;
+  margin-right: var(--space-half);
 }
 
 .Radio__overlay {
   border-radius: 50%;
-  margin-right: var(--space-quarter);
 }
 
 .Radio__overlay svg,
