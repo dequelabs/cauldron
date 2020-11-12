@@ -80,7 +80,6 @@ textarea.Field--has-error:focus,
   display: block;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: var(--space-large);
 }
 
 .Field.is--flex-row {
@@ -101,6 +100,7 @@ textarea.Field--has-error:focus,
 .Checkbox .Field__label,
 .Radio .Field__label {
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .Field__label {
@@ -108,7 +108,7 @@ textarea.Field--has-error:focus,
   text-align: left;
   color: #333333;
   font-size: var(--text-size-smaller);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-bold);
   padding-bottom: var(--space-half);
   cursor: default;
 }
@@ -128,6 +128,7 @@ textarea.Field--has-error:focus,
 
 .Field__required-text::before {
   content: ' ';
+  color: var(--text-color-base);
 }
 
 .Field__label--has-error .Field__required-text {
@@ -170,6 +171,7 @@ textarea.Field--has-error:focus,
   cursor: pointer;
   border-radius: 3px;
   color: #333;
+  margin-right: var(--space-half);
 }
 
 .Radio__overlay {

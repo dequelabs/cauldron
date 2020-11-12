@@ -18,6 +18,7 @@ import {
   Icon
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
+import 'fontsource-roboto';
 
 // styles
 import '../packages/styles';
