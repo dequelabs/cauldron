@@ -7,5 +7,3 @@ declare module 'focusable' {
   function focusable(): string;
   export = focusable;
 }
-
-declare module 'rc-tooltip';

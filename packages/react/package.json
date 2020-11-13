@@ -17,15 +17,16 @@
     "test": "jest --maxWorkers=1 --coverage"
   },
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "focus-trap-react": "^3.0.5",
     "focusable": "^2.3.0",
     "keyname": "^0.1.0",
     "prop-types": "^15.6.0",
-    "rc-tooltip": "^3.7.2",
+    "react-id-generator": "^3.0.1",
+    "react-popper": "^2.2.4",
     "react-syntax-highlighter": "^13.5.1",
-    "tslib": "^2.0.0",
-    "unique-string": "^1.0.0"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

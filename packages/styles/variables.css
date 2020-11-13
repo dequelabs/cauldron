@@ -51,7 +51,11 @@
   --button-focus-ring-color: #c11bde;
 
   /* tooltips */
-  --tooltip-border-color: #999999;
+  --tooltip-background-color: #333;
+  --tooltip-text-color: #f2f2f2;
+  --tooltip-info-background-color: #f2f2f2;
+  --tooltip-info-border-color: #333;
+  --tooltip-info-text-color: #333;
 
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
