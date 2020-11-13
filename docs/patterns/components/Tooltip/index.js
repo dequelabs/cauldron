@@ -44,14 +44,14 @@ const DemoTooltip = () => {
         <Button secondary buttonRef={left}>
           Left
         </Button>
-        <Tooltip target={left} placement="left">
+        <Tooltip target={left} placement="left" show>
           On your left
         </Tooltip>
 
         <Button secondary buttonRef={right}>
           Right
         </Button>
-        <Tooltip target={right} placement="right">
+        <Tooltip target={right} placement="right" show>
           On your right
         </Tooltip>
       </div>

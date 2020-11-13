@@ -52,6 +52,7 @@
 
   /* tooltips */
   --tooltip-background-color: #333;
+  --tooltip-border-color: #fff;
   --tooltip-text-color: #f2f2f2;
   --tooltip-info-background-color: #f2f2f2;
   --tooltip-info-border-color: #333;
