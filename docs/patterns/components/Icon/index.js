@@ -95,6 +95,9 @@ export default class IconDemo extends Component {
               type: 'gears'
             },
             {
+              type: 'grid'
+            },
+            {
               type: 'hamburger-menu'
             },
             {
@@ -138,6 +141,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'save'
+            },
+            {
+              type: 'sort'
             },
             {
               type: 'star'
