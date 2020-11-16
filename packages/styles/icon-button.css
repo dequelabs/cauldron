@@ -1,0 +1,26 @@
+.IconButton {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 18px;
+  width: 18px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  background-color: var(--icon-button-background-color);
+  color: var(--icon-button-icon-color);
+}
+
+.IconButton svg {
+  height: 14px;
+  width: 14px;
+}
+
+.IconButton:hover {
+  box-shadow: 0 0 0 1px var(--icon-button-background-color);
+}
+
+.IconButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--focus), 0 0 4px 3px var(--focus-glow);
+}

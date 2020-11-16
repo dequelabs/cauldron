@@ -8,11 +8,13 @@ import { usePopper } from 'react-popper';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  target: React.RefObject<HTMLElement> | HTMLElement;
   variant?: 'text' | 'info';
+  association?: 'aria-labelledby' | 'aria-describedby';
   show?: boolean | undefined;
   placement?: Placement;
-  target: React.RefObject<HTMLElement> | HTMLElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  hideElementOnHidden?: boolean;
 }
 
 export default function Tooltip({
@@ -21,8 +23,10 @@ export default function Tooltip({
   children,
   portal,
   target,
+  association = 'aria-describedby',
   variant = 'text',
   show: showProp = false,
+  hideElementOnHidden = false,
   ...props
 }: TooltipProps) {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
@@ -83,21 +87,22 @@ export default function Tooltip({
   }, [targetElement, show]);
 
   useEffect(() => {
-    const ariaDescription = targetElement?.getAttribute('aria-describedby');
-    if (!ariaDescription?.includes(id || '')) {
+    const attrText = targetElement?.getAttribute(association);
+    if (!attrText?.includes(id || '')) {
       targetElement?.setAttribute(
-        'aria-describedby',
-        [id, ariaDescription].filter(Boolean).join(' ')
+        association,
+        [id, attrText].filter(Boolean).join(' ')
       );
     }
   }, [targetElement, id]);
 
-  return showTooltip
+  return showTooltip || hideElementOnHidden
     ? createPortal(
         <div
           id={id}
           className={classnames('Tooltip', `Tooltip--${placement}`, {
-            TooltipInfo: variant === 'info'
+            TooltipInfo: variant === 'info',
+            'Tooltip--hidden': !showTooltip && hideElementOnHidden
           })}
           ref={setTooltipElement}
           role="tooltip"
@@ -122,9 +127,10 @@ Tooltip.displayName = 'Tooltip';
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
+  target: PropTypes.any.isRequired,
+  association: PropTypes.oneOf(['aria-labelledby', 'aria-describedby']),
   show: PropTypes.bool,
   placement: PropTypes.string,
   variant: PropTypes.string,
-  target: PropTypes.any.isRequired,
   portal: PropTypes.any
 };
