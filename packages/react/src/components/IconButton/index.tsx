@@ -26,6 +26,7 @@ export default function IconButton({
         type={'button'}
         className={classnames('IconButton', className)}
         ref={buttonRef}
+        aria-label={label}
         {...other}
       >
         <Icon type={icon} />
