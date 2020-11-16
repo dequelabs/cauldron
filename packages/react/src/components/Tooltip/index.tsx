@@ -8,8 +8,8 @@ import { usePopper } from 'react-popper';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  variant: 'text' | 'info';
-  show: boolean | undefined;
+  variant?: 'text' | 'info';
+  show?: boolean | undefined;
   placement?: Placement;
   target: React.RefObject<HTMLElement> | HTMLElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
