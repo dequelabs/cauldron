@@ -4,7 +4,7 @@
   color: var(--tooltip-text-color);
   font-size: var(--text-size-smaller);
   padding: var(--space-half) var(--space-small);
-  border-radius: 3px;
+  border-radius: 4px;
   pointer-events: none;
   z-index: var(--z-index-tooltip);
 }
