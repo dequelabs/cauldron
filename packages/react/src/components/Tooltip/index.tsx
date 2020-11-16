@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
-import { Placement, Modifier, popper } from '@popperjs/core';
+import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
