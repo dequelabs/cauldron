@@ -8,7 +8,6 @@ import {
   Code
 } from '@deque/cauldron-react/';
 import { className, children } from '../../../props';
-import './index.css';
 
 const LOADING_DURATION = 5000;
 
