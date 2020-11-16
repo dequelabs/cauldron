@@ -59,6 +59,7 @@ export {
 } from './components/ExpandCollapsePanel';
 export { default as Sidebar, SideBarItem } from './components/SideBar';
 export { default as Code } from './components/Code';
+export { default as LoaderOverlay } from './components/LoaderOverlay';
 
 /**
  * Helpers / Utils

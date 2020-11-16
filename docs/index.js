@@ -45,7 +45,8 @@ const componentsList = [
   'TextField',
   'Link',
   'Icon',
-  'Code'
+  'Code',
+  'LoaderOverlay'
 ].sort();
 
 class App extends Component {

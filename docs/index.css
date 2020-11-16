@@ -42,3 +42,7 @@ code {
   border-bottom: 0 none;
   margin-left: 5px;
 }
+
+.Demo ul {
+  margin: var(--space-large);
+}
