@@ -121,6 +121,7 @@
 
   /* z-index */
   --z-index-tooltip: 9;
+  --z-index-loader: 8;
   --z-index-scrim: 7;
   --z-index-dialog: 21;
   --z-index-dialog-scrim: 20;

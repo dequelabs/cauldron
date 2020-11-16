@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const LoaderScrim = React.forwardRef<
+const LoaderOverlay = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...other }, ref) => (
   <div
-    className={classNames('Loader__scrim', className)}
+    className={classNames('Loader__overlay', className)}
     ref={ref}
     {...other}
   />
 ));
 
-LoaderScrim.propTypes = {
+LoaderOverlay.propTypes = {
   className: PropTypes.string
 };
 
-LoaderScrim.displayName = 'LoaderScrim';
+LoaderOverlay.displayName = 'LoaderOverlay';
 
-export default LoaderScrim;
+export default LoaderOverlay;
