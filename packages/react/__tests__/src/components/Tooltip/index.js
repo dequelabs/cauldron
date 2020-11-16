@@ -1,30 +1,67 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import React, { useRef } from 'react';
+import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 import Tooltip from 'src/components/Tooltip';
 import axe from '../../../axe';
 
-test('renders without blowing up', () => {
-  const tip = shallow(
-    <Tooltip id="foo" overlay={<span>boognish</span>}>
-      <button className="bar" aria-describedby="foo">
-        bar
+const update = async wrapper => {
+  await act(async () => {
+    await new Promise(resolve => setImmediate(resolve));
+    wrapper.update();
+  });
+};
+
+// eslint-disable-next-line react/prop-types
+const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
+  const ref = useRef();
+  return (
+    <React.Fragment>
+      <button ref={ref} {...buttonProps}>
+        button
       </button>
-    </Tooltip>
+      <Tooltip target={ref} {...tooltipProps} show>
+        Hello Word
+      </Tooltip>
+    </React.Fragment>
   );
-  expect(tip.find('.bar').exists()).toBeTruthy();
+};
+
+test('renders without blowing up', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(wrapper.find('Tooltip').exists()).toBeTruthy();
 });
 
-// I think this is returning a violation because the tooltip is dynamically
-// positioned within the dom, so `tooltip.html()` only returns the button content
-// that does not have the target node in aria-describedby
-test.skip('should return no axe violations', async () => {
-  const tooltip = mount(
-    <Tooltip id="foo" overlay={<span>boognish</span>}>
-      <button className="bar" aria-describedby="foo">
-        bar
-      </button>
-    </Tooltip>
+test('should auto-generate id', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  const id = wrapper.find('.Tooltip').props().id;
+  expect(id).toBeTruthy();
+  expect(id).toEqual(
+    wrapper
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-describedby')
   );
+});
 
-  expect(await axe(tooltip.html())).toHaveNoViolations();
+test('should not overwrite user provided id and aria-describedby', async () => {
+  const buttonProps = { [`aria-describedby`]: 'foo tooltipid' };
+  const tooltipProps = { id: 'tooltipid' };
+  const props = { buttonProps, tooltipProps };
+  const wrapper = mount(<Wrapper {...props} />);
+  await update(wrapper);
+  expect(wrapper.find('.Tooltip').props().id).toEqual('tooltipid');
+  expect(
+    wrapper
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-describedby')
+  ).toEqual('foo tooltipid');
+});
+
+test('should return no axe violations', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(await axe(wrapper.html())).toHaveNoViolations();
 });
