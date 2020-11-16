@@ -92,30 +92,30 @@ export default function Tooltip({
     }
   }, [targetElement, id]);
 
-  return (
-    showTooltip &&
-    createPortal(
-      <div
-        id={id}
-        className={classnames('Tooltip', `Tooltip--${placement}`, {
-          TooltipInfo: variant === 'info'
-        })}
-        ref={setTooltipElement}
-        role="tooltip"
-        style={styles.popper}
-        {...attributes.popper}
-        {...props}
-      >
+  return showTooltip
+    ? createPortal(
         <div
-          className="TooltipArrow"
-          ref={setArrowElement}
-          style={styles.arrow}
-        />
-        {children}
-      </div>,
-      (portal && 'current' in portal ? portal.current : portal) || document.body
-    )
-  );
+          id={id}
+          className={classnames('Tooltip', `Tooltip--${placement}`, {
+            TooltipInfo: variant === 'info'
+          })}
+          ref={setTooltipElement}
+          role="tooltip"
+          style={styles.popper}
+          {...attributes.popper}
+          {...props}
+        >
+          <div
+            className="TooltipArrow"
+            ref={setArrowElement}
+            style={styles.arrow}
+          />
+          {children}
+        </div>,
+        (portal && 'current' in portal ? portal.current : portal) ||
+          document.body
+      )
+    : null;
 }
 
 Tooltip.displayName = 'Tooltip';
