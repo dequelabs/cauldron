@@ -45,6 +45,7 @@ const componentsList = [
   'TextField',
   'Link',
   'Icon',
+  'IconButton',
   'Code'
 ].sort();
 

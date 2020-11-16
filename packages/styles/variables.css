@@ -50,6 +50,10 @@
   --button-text-color-light: #ffffff;
   --button-focus-ring-color: #c11bde;
 
+  /* icon buttons */
+  --icon-button-background-color: #dadada;
+  --icon-button-icon-color: #283640;
+
   /* tooltips */
   --tooltip-background-color: #333;
   --tooltip-border-color: #fff;
