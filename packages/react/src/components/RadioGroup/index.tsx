@@ -8,7 +8,7 @@ export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface RadioGroupProps {
-  name: string;
+  name?: string;
   className?: string;
   radios: RadioItem[];
   defaultValue?: string;
@@ -31,7 +31,7 @@ export default class RadioGroup extends React.Component<
   };
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     radios: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.string.isRequired,

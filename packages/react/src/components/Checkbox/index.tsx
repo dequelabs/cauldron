@@ -7,10 +7,10 @@ import Icon from '../Icon';
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
-  name: string;
+  name?: string;
   label: React.ReactNode;
-  value: string;
-  checked: boolean;
+  value?: string;
+  checked?: boolean;
   onChange: (e: React.FormEvent<HTMLInputElement>, checked: boolean) => void;
   checkboxRef: React.Ref<HTMLInputElement>;
 }
@@ -35,9 +35,9 @@ export default class Checkbox extends React.Component<
 
   static propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     label: PropTypes.node.isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
     className: PropTypes.string,
