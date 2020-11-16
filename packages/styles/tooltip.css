@@ -9,6 +9,10 @@
   z-index: var(--z-index-tooltip);
 }
 
+.Tooltip--hidden {
+  visibility: hidden;
+}
+
 .TooltipInfo {
   background-color: var(--tooltip-info-background-color);
   border: 2px solid var(--tooltip-info-border-color);

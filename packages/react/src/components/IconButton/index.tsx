@@ -26,12 +26,16 @@ export default function IconButton({
         type={'button'}
         className={classnames('IconButton', className)}
         ref={buttonRef}
-        aria-label={label}
         {...other}
       >
         <Icon type={icon} />
       </button>
-      <Tooltip target={buttonRef} placement={tooltipPlacement}>
+      <Tooltip
+        target={buttonRef}
+        placement={tooltipPlacement}
+        association="aria-labelledby"
+        hideElementOnHidden
+      >
         {label}
       </Tooltip>
     </React.Fragment>
