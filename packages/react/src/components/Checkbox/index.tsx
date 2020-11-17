@@ -52,7 +52,7 @@ export default class Checkbox extends React.Component<
 
   constructor(props: CheckboxProps) {
     super(props);
-    this.state = { checked: this.props.checked, focused: false };
+    this.state = { checked: !!this.props.checked, focused: false };
     this.toggleFocus = this.toggleFocus.bind(this);
     this.onCheckboxClick = this.onCheckboxClick.bind(this);
     this.onOverlayClick = this.onOverlayClick.bind(this);
@@ -62,7 +62,7 @@ export default class Checkbox extends React.Component<
     const { checked } = this.props;
 
     if (checked !== prevProps.checked) {
-      this.setState({ checked });
+      this.setState({ checked: !!checked });
     }
   }
 
