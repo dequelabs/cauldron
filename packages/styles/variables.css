@@ -49,6 +49,7 @@
   --button-text-color-dark: #333333;
   --button-text-color-light: #ffffff;
   --button-focus-ring-color: #c11bde;
+  --button-thin-height: 23px;
 
   /* icon buttons */
   --icon-button-background-color: #dadada;

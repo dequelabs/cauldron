@@ -97,7 +97,7 @@
 }
 
 .Button--thin {
-  height: 23px;
+  height: var(--button-thin-height);
   min-width: 100px;
   font-size: var(--text-size-smallest);
   padding: 0 16px;
