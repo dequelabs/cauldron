@@ -22,13 +22,14 @@ export default class OptionsMenuList extends React.Component<
 > {
   static defaultProps = {
     closeOnSelect: true,
-    onSelect: () => {}
+    onSelect: () => {},
+    onClose: () => {}
   };
 
   static propTypes = {
     show: PropTypes.bool,
     children: PropTypes.node.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
     className: PropTypes.string,
     onSelect: PropTypes.func,
     closeOnSelect: PropTypes.bool,
@@ -65,7 +66,7 @@ export default class OptionsMenuList extends React.Component<
   }
 
   private handleKeyDown = (e: KeyboardEvent) => {
-    const { onClose } = this.props;
+    const { onClose = OptionsMenuList.defaultProps.onClose } = this.props;
     const { which, target } = e;
     switch (which) {
       case up:
@@ -106,7 +107,7 @@ export default class OptionsMenuList extends React.Component<
 
   private handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { menuRef, props } = this;
-    const { onSelect, onClose } = props;
+    const { onSelect, onClose = OptionsMenuList.defaultProps.onClose } = props;
     if (menuRef && menuRef.contains(e.target as HTMLElement)) {
       if (!e.defaultPrevented && props.closeOnSelect) {
         onClose();
@@ -122,7 +123,7 @@ export default class OptionsMenuList extends React.Component<
   };
 
   private handleClickOutside = () => {
-    const { onClose, show } = this.props;
+    const { onClose = OptionsMenuList.defaultProps.onClose, show } = this.props;
     if (show) {
       onClose();
     }

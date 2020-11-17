@@ -422,6 +422,6 @@ export default class Pointout extends React.Component<
 
   onCloseClick() {
     this.setState({ show: false });
-    this.props.onClose();
+    this.props?.onClose();
   }
 }

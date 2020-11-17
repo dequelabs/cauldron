@@ -20,8 +20,8 @@ export interface OptionsMenuRenderTriggerProps {
 export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   id?: string;
   menuRef?: React.Ref<HTMLUListElement>;
-  trigger: (props: OptionsMenuRenderTriggerProps) => React.ReactNode;
-  onClose: () => void;
+  trigger?: (props: OptionsMenuRenderTriggerProps) => React.ReactNode;
+  onClose?: () => void;
   onSelect: (e: React.MouseEvent<HTMLElement>) => void;
   closeOnSelect?: boolean;
   show?: boolean;
@@ -72,8 +72,9 @@ export default class OptionsMenu extends Component<
   };
 
   handleClose = () => {
+    const { onClose = OptionsMenu.defaultProps.onClose } = this.props;
     this.setState({ show: false });
-    this.props.onClose();
+    onClose();
     this.triggerRef.current?.focus();
   };
 
@@ -87,7 +88,7 @@ export default class OptionsMenu extends Component<
 
   render() {
     const { toggleMenu, triggerRef, handleTriggerKeyDown } = this;
-    /* eslint-disable no-unused-vars */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       children,
       className,
@@ -99,17 +100,18 @@ export default class OptionsMenu extends Component<
       ...other
     } = this.props;
 
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     const { show } = this.state;
 
     return (
       <OptionsMenuWrapper align={align} className={className}>
-        {trigger({
-          onClick: toggleMenu,
-          'aria-expanded': show,
-          ref: triggerRef,
-          onKeyDown: handleTriggerKeyDown
-        })}
+        {trigger &&
+          trigger({
+            onClick: toggleMenu,
+            'aria-expanded': show,
+            ref: triggerRef,
+            onKeyDown: handleTriggerKeyDown
+          })}
         <OptionsMenuList
           show={show}
           menuRef={el => {
