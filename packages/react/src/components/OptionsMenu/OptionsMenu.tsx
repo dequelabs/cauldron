@@ -45,7 +45,7 @@ export default class OptionsMenu extends Component<
   };
 
   static propTypes = {
-    trigger: PropTypes.func.isRequired,
+    trigger: PropTypes.func,
     children: PropTypes.node.isRequired,
     onClose: PropTypes.func,
     className: PropTypes.string,
