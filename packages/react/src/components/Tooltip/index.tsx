@@ -38,17 +38,26 @@ export default function Tooltip({
   );
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
 
-  const { styles, attributes } = usePopper(targetElement, tooltipElement, {
-    placement: initialPlacement,
-    modifiers: [
-      { name: 'preventOverflow', options: { padding: 8 } },
-      { name: 'flip' },
-      { name: 'offset', options: { offset: [0, 8] } },
-      { name: 'arrow', options: { padding: 5, element: arrowElement } }
-    ]
-  });
+  const { styles, attributes, update } = usePopper(
+    targetElement,
+    tooltipElement,
+    {
+      placement: initialPlacement,
+      modifiers: [
+        { name: 'preventOverflow', options: { padding: 8 } },
+        { name: 'flip' },
+        { name: 'offset', options: { offset: [0, 8] } },
+        { name: 'arrow', options: { padding: 5, element: arrowElement } }
+      ]
+    }
+  );
 
-  const show = () => setShowTooltip(true);
+  const show = async () => {
+    if (update) {
+      await update();
+    }
+    setShowTooltip(true);
+  };
   const hide = ({ target }: FocusEvent | MouseEvent) => {
     if (document.activeElement !== target) {
       setShowTooltip(false);
