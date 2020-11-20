@@ -5,6 +5,33 @@
  */
 
 :root {
+  /* color palette */
+  --gray-10: #fdfdfe;
+  --gray-20: #f2f2f2;
+  --gray-30: #e0e0e0;
+  /* TODO: update extension's gray-20 to be gray-40 (namespace collision) */
+  --gray-40: #cccccc;
+  --gray-60: #666666;
+  --gray-80: #4d4d4d;
+  --gray-90: #333333;
+  --accent-dark: #02101a;
+  --accent-medium: #283640;
+  --accent-lite: #d4dde0;
+  --accent-success: #d1ffa4;
+  --accent-error: #d93251;
+  --accent-error-active: #c92e40;
+  --accent-danger: #fe6d6b;
+  --accent-danger-lite: #f7846c;
+  --accent-warning: #ffdd75;
+  --accent-warning-lite: #ffa1a1;
+  --accent-caution: #ffe69f;
+  --accent-info: #6cdaf2;
+  --accent-info-lite: #83e4fa;
+  --accent-primary: #3c7aae;
+  --accent-primary-active: #316091;
+  --accent-secondary: var(--gray-20);
+  --accent-secondary-active: var(--gray-30);
+
   /* background colours */
   --top-bar-background-color: #02101a;
   --top-bar-background-color-active: #0b0e11;
