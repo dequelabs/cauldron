@@ -57,6 +57,16 @@ test('handles transition from truthy show to falsey show prop', done => {
   }); // wait for animation timeouts / async setState calls
 });
 
+test('renders children within the "Toast__message-content" div', () => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true}>
+      <strong>YO!</strong>
+    </Toast>
+  );
+
+  expect(wrapper.find('.Toast__message-content strong').text()).toBe('YO!');
+});
+
 test('confirmation renders the expected UI and icon', () => {
   const confirmation = mount(
     <Toast {...defaultProps} show={true}>

@@ -31,11 +31,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
   static propTypes = {
     // the ui to be added as the message of the toast
-    children: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.array
-    ]).isRequired,
+    children: PropTypes.node.isRequired,
     // "confirmation", "caution", or "action-needed"
     type: PropTypes.string.isRequired,
     // function to be exectued when toast is dismissed
@@ -110,7 +106,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
         >
           <div className="Toast__message">
             <Icon type={typeMap[type].icon} />
-            <span>{children}</span>
+            <div className="Toast__message-content">{children}</div>
           </div>
           {type !== 'action-needed' && (
             <button

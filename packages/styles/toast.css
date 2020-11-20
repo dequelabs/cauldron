@@ -49,7 +49,7 @@
   align-items: center;
 }
 
-.Toast__message > span {
+.Toast__message .Toast__message-content {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
 }
@@ -78,6 +78,6 @@
   outline: 0;
 }
 
-.Toast:focus .Toast__message > span {
+.Toast:focus .Toast__message > .Toast__message-content {
   border-bottom-color: var(--top-bar-background-color-active);
 }
