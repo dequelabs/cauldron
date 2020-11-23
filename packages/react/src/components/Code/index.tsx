@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Light as SyntaxHighlighter,
-  SyntaxHighlighterProps
-} from 'react-syntax-highlighter';
+import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/light';
 import classNames from 'classnames';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
