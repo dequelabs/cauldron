@@ -114,6 +114,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
+      "react-syntax-highlighter/dist/esm/light": "<rootDir>/__tests__/reactSyntaxHighlighterMock.js",
       "react-syntax-highlighter/dist/esm/languages/hljs/(.*)": "<rootDir>/__tests__/hljsMock.js",
       "\\.svg$": "<rootDir>/__tests__/svgMock.js"
     }
