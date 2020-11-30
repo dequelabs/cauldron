@@ -4,7 +4,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid var(--gray-90);
+  border: 2px solid #02101a;
   border-radius: 3px;
   top: 50%;
   left: 50%;
