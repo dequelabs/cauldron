@@ -81,6 +81,24 @@ export default function Tooltip({
   }, [popperPlacement]);
 
   useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowTooltip(false);
+      }
+    };
+
+    if (showTooltip) {
+      document.body.addEventListener('keyup', handleEscape);
+    } else {
+      document.body.removeEventListener('keyup', handleEscape);
+    }
+
+    return () => {
+      document.body.removeEventListener('keyup', handleEscape);
+    };
+  }, [show]);
+
+  useEffect(() => {
     if (typeof show !== undefined) {
       targetElement?.addEventListener('mouseenter', show);
       targetElement?.addEventListener('mouseleave', hide);
