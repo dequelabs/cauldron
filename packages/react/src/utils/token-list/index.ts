@@ -8,7 +8,7 @@ const tokenList = (id: string, currentVal = '') => {
   }
 
   values.push(id);
-  return values.join(' ');
+  return values.join(' ').trim();
 };
 
 export default tokenList;

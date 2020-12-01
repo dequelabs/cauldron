@@ -43,6 +43,13 @@ export default class CheckboxDemo extends Component {
             label: 'Demo checkbox 3 (disabled)',
             value: '3',
             disabled: true
+          },
+          {
+            id: 'demo-checkbox-4',
+            name: 'demo-checkbox-4',
+            label: 'Demo checkbox 4',
+            value: '4',
+            error: 'The fourth chekbox is required!'
           }
         ]}
         propDocs={{

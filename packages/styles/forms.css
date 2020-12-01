@@ -53,6 +53,10 @@ textarea.Field--has-error,
   box-shadow: inset 0 0 0 1px var(--field-border-color-error);
 }
 
+.Checkbox__overlay.Field--has-error {
+  color: var(--field-border-color-error);
+}
+
 input.Field--has-error:focus,
 select.Field--has-error:focus,
 textarea.Field--has-error:focus,

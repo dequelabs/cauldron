@@ -1,14 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import nextId from 'react-id-generator';
 import setRef from '../../utils/setRef';
 import Icon from '../Icon';
+import tokenList from '../../utils/token-list';
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
   name?: string;
   label: React.ReactNode;
+  error?: React.ReactNode;
   value?: string;
   checked?: boolean;
   onChange: (e: React.FormEvent<HTMLInputElement>, checked: boolean) => void;
@@ -27,6 +30,7 @@ export default class Checkbox extends React.Component<
   private checkbox: HTMLInputElement | null;
 
   static defaultProps = {
+    error: null,
     checked: false,
     disabled: false,
     onChange: () => {},
@@ -37,6 +41,7 @@ export default class Checkbox extends React.Component<
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
     label: PropTypes.node.isRequired,
+    error: PropTypes.node,
     value: PropTypes.string,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -49,6 +54,8 @@ export default class Checkbox extends React.Component<
   };
 
   static displayName = 'Checkbox';
+
+  private errorId = nextId();
 
   constructor(props: CheckboxProps) {
     super(props);
@@ -97,47 +104,62 @@ export default class Checkbox extends React.Component<
       checked: notUsed,
       // eslint-disable-next-line no-unused-vars
       checkboxRef,
+      error,
+      'aria-describedby': ariaDescribedby,
       ...others
     } = this.props;
 
+    const checkboxProps = {
+      'aria-describedby': error
+        ? tokenList(this.errorId, ariaDescribedby)
+        : ariaDescribedby
+    };
+
     return (
-      <div
-        className={classNames('Checkbox is--flex-row', className)}
-        {...others}
-      >
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={this.onCheckboxClick}
-          disabled={disabled}
-          name={name}
-          id={id}
-          value={value}
-          onFocus={this.toggleFocus}
-          onBlur={this.toggleFocus}
-          ref={checkbox => {
-            this.checkbox = checkbox;
-            setRef(this.props.checkboxRef, checkbox);
-          }}
-        />
-        <Icon
-          className={classNames('Checkbox__overlay', {
-            'Checkbox__overlay--disabled': disabled,
-            'Checkbox__overlay--focused': focused
-          })}
-          type={checked ? 'checkbox-checked' : 'checkbox-unchecked'}
-          aria-hidden="true"
-          onClick={this.onOverlayClick}
-        />
-        <label
-          className={classNames('Field__label', {
-            'Field__label--disabled': disabled
-          })}
-          htmlFor={id}
+      <>
+        <div
+          className={classNames('Checkbox is--flex-row', className)}
+          {...others}
         >
-          {label}
-        </label>
-      </div>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={this.onCheckboxClick}
+            disabled={disabled}
+            name={name}
+            id={id}
+            value={value}
+            onFocus={this.toggleFocus}
+            onBlur={this.toggleFocus}
+            ref={checkbox => {
+              this.checkbox = checkbox;
+              setRef(this.props.checkboxRef, checkbox);
+            }}
+            {...checkboxProps}
+          />
+          <Icon
+            className={classNames('Checkbox__overlay', {
+              'Checkbox__overlay--disabled': disabled,
+              'Checkbox__overlay--focused': focused,
+              'Field--has-error': error
+            })}
+            type={checked ? 'checkbox-checked' : 'checkbox-unchecked'}
+            aria-hidden="true"
+            onClick={this.onOverlayClick}
+          />
+          <label
+            className={classNames('Field__label', {
+              'Field__label--disabled': disabled
+            })}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+        </div>
+        <div className="Error" id={this.errorId}>
+          {error}
+        </div>
+      </>
     );
   }
 }
