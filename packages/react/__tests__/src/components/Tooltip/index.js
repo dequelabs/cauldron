@@ -60,6 +60,22 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   ).toEqual('foo tooltipid');
 });
 
+test('should hide tooltip on escape keypress', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(wrapper.find('.Tooltip').exists).toBeTruthy();
+  await act(async () => {
+    document.body.dispatchEvent(
+      new KeyboardEvent('keyup', {
+        bubbles: true,
+        key: 'Escape'
+      })
+    );
+  });
+  await update(wrapper);
+  expect(wrapper.find('.Tooltip').exists()).toBeFalsy();
+});
+
 test('should return no axe violations', async () => {
   const wrapper = mount(<Wrapper />);
   await update(wrapper);
