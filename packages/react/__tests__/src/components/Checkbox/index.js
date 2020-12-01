@@ -105,3 +105,11 @@ test('should return no axe violations', async () => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });
+
+test('handles error prop', async () => {
+  const wrapper = mount(<Checkbox {...defaultProps} error={'/giphy bears'} />);
+  expect(await axe(wrapper.html())).toHaveNoViolations();
+  const errorMessage = wrapper.find('.Error').getDOMNode();
+  const input = wrapper.find('input').getDOMNode();
+  expect(input.getAttribute('aria-describedby')).toBe(errorMessage.id);
+});
