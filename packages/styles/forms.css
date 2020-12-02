@@ -80,6 +80,10 @@ textarea.Field--has-error:focus,
   padding-left: var(--space-half);
 }
 
+.TextFieldContainer {
+  width: 300px;
+}
+
 .Field {
   display: block;
   position: relative;
