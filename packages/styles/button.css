@@ -106,3 +106,7 @@
 [class*='Button--'] + [class*='Button--'] {
   margin-left: var(--space-smallest);
 }
+
+.Button--link {
+  cursor: pointer;
+}
