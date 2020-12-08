@@ -148,7 +148,7 @@ textarea.Field--has-error:focus,
 .Field__text-input {
   padding: var(--space-smallest);
   box-sizing: border-box;
-  font-size: var(--text-size-smaller);
+  font-size: var(--text-size-small);
   color: var(--text-color-base);
   min-width: var(--input-min-width);
 }
