@@ -15,7 +15,7 @@
   --button-hover-outline-color: var(--button-background-color-primary);
 }
 
-.Link {
+button.Link {
   cursor: pointer;
 }
 
