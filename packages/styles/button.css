@@ -15,6 +15,10 @@
   --button-hover-outline-color: var(--button-background-color-primary);
 }
 
+button.Link {
+  cursor: pointer;
+}
+
 .Button--primary:not([disabled]):not([aria-disabled='true']):hover,
 .Button--secondary:not([disabled]):not([aria-disabled='true']):hover,
 .Button--error:not([disabled]):not([aria-disabled='true']):hover {
