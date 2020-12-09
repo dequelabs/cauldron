@@ -2,6 +2,6 @@
   margin: 0;
 }
 
-.TextField .TextFieldContainer {
-  width: 300px;
+.TextField form {
+  max-width: 300px;
 }

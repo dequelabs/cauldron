@@ -111,40 +111,38 @@ export default class TextField extends React.Component<
     };
 
     return (
-      <div className="TextFieldContainer">
-        <div className="Field">
-          <label
-            className={classNames('Field__label', {
-              'Field__label--is-required': isRequired,
-              'Field__label--has-error': error
-            })}
-            htmlFor={this.inputId}
-          >
-            <span>{label}</span>
-            {isRequired && (
-              <span className="Field__required-text">{requiredText}</span>
-            )}
-          </label>
-          <Field
-            className={classNames({
-              'Field__text-input': !multiline,
-              Field__textarea: multiline,
-              'Field--has-error': error
-            })}
-            id={this.inputId}
-            value={this.state.value}
-            onChange={this.onChange}
-            aria-invalid={!!error}
-            ref={(input: HTMLInputElement | HTMLTextAreaElement | null) => {
-              this.input = input;
-              setRef(fieldRef, input);
-            }}
-            {...other}
-            {...inputProps}
-          />
-          <div className="Error" id={this.errorId}>
-            {error}
-          </div>
+      <div className="Field">
+        <label
+          className={classNames('Field__label', {
+            'Field__label--is-required': isRequired,
+            'Field__label--has-error': error
+          })}
+          htmlFor={this.inputId}
+        >
+          <span>{label}</span>
+          {isRequired && (
+            <span className="Field__required-text">{requiredText}</span>
+          )}
+        </label>
+        <Field
+          className={classNames({
+            'Field__text-input': !multiline,
+            Field__textarea: multiline,
+            'Field--has-error': error
+          })}
+          id={this.inputId}
+          value={this.state.value}
+          onChange={this.onChange}
+          aria-invalid={!!error}
+          ref={(input: HTMLInputElement | HTMLTextAreaElement | null) => {
+            this.input = input;
+            setRef(fieldRef, input);
+          }}
+          {...other}
+          {...inputProps}
+        />
+        <div className="Error" id={this.errorId}>
+          {error}
         </div>
       </div>
     );
