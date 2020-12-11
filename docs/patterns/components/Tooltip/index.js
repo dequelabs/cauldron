@@ -1,6 +1,14 @@
 import React, { useRef } from 'react';
 import Demo from '../../../Demo';
-import { Tooltip, Button, Code } from '@deque/cauldron-react/';
+import {
+  Tooltip,
+  TooltipHead,
+  TooltipContent,
+  Button,
+  Code,
+  TextField,
+  Line
+} from '@deque/cauldron-react/';
 import './index.css';
 
 const DemoTooltip = () => {
@@ -12,6 +20,7 @@ const DemoTooltip = () => {
   const bottomInfo = useRef();
   const leftInfo = useRef();
   const rightInfo = useRef();
+  const password = useRef();
 
   return (
     <div className="tooltip-demo">
@@ -27,28 +36,28 @@ const DemoTooltip = () => {
       <h3>Text Tooltips</h3>
 
       <div>
-        <Button secondary buttonRef={top}>
+        <Button variant="secondary" buttonRef={top}>
           Top
         </Button>
         <Tooltip target={top} placement="top">
           On top
         </Tooltip>
 
-        <Button secondary buttonRef={bottom}>
+        <Button variant="secondary" buttonRef={bottom}>
           Bottom
         </Button>
         <Tooltip target={bottom} placement="bottom">
           On bottom
         </Tooltip>
 
-        <Button secondary buttonRef={left}>
+        <Button variant="secondary" buttonRef={left}>
           Left
         </Button>
         <Tooltip target={left} placement="left">
           On your left
         </Tooltip>
 
-        <Button secondary buttonRef={right}>
+        <Button variant="secondary" buttonRef={right}>
           Right
         </Button>
         <Tooltip target={right} placement="right">
@@ -59,32 +68,55 @@ const DemoTooltip = () => {
       <h3>Info Tooltips</h3>
 
       <div>
-        <Button secondary buttonRef={topInfo}>
+        <Button variant="secondary" buttonRef={topInfo}>
           Top
         </Button>
         <Tooltip variant="info" target={topInfo} placement="top">
           Here's an informational tooltip with more content on top.
         </Tooltip>
 
-        <Button secondary buttonRef={bottomInfo}>
+        <Button variant="secondary" buttonRef={bottomInfo}>
           Bottom
         </Button>
         <Tooltip variant="info" target={bottomInfo} placement="bottom">
           Here's an informational tooltip with more content on bottom.
         </Tooltip>
 
-        <Button secondary buttonRef={leftInfo}>
+        <Button variant="secondary" buttonRef={leftInfo}>
           Left
         </Button>
         <Tooltip variant="info" target={leftInfo} placement="left">
           Here's an informational tooltip with more content on your left.
         </Tooltip>
 
-        <Button secondary buttonRef={rightInfo}>
+        <Button variant="secondary" buttonRef={rightInfo}>
           Right
         </Button>
         <Tooltip variant="info" target={rightInfo} placement="right">
           Here's an informational tooltip with more content on your right.
+        </Tooltip>
+      </div>
+
+      <h3>Big tooltips</h3>
+      <p>Used for more verbose tooltips</p>
+      <div className="Form">
+        <TextField fieldRef={password} label="Password" />
+        <Tooltip variant="big" target={password} placement="auto">
+          <TooltipHead>Password requirements</TooltipHead>
+          <Line />
+          <TooltipContent>
+            <ul>
+              <li>The character length should be long or whatever.</li>
+              <li>
+                You need Lower-case, Upper-case, Super-case, and Basket-case.
+              </li>
+              <li>
+                Special characters are good, but remember all characters are
+                special in their own way
+              </li>
+              <li>Make sure your passwords match...that should be obvious.</li>
+            </ul>
+          </TooltipContent>
         </Tooltip>
       </div>
 
@@ -121,8 +153,8 @@ const Demo = () => {
       </p>
 
       <Code language="javascript">
-        {`<Button 
-  aria-describedby="tooltip someotherid" 
+        {`<Button
+  aria-describedby="tooltip someotherid"
   buttonRef={ref}
 >
   Tooltip trigger

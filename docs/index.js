@@ -47,7 +47,8 @@ const componentsList = [
   'Icon',
   'IconButton',
   'Code',
-  'LoaderOverlay'
+  'LoaderOverlay',
+  'Line'
 ].sort();
 
 class App extends Component {

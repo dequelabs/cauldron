@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import Tooltip from 'src/components/Tooltip';
+import Tooltip, { TooltipHead, TooltipContent } from 'src/components/Tooltip';
 import axe from '../../../axe';
 
 const update = async wrapper => {
@@ -21,6 +21,25 @@ const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
       </button>
       <Tooltip target={ref} {...tooltipProps} show>
         Hello Word
+      </Tooltip>
+    </React.Fragment>
+  );
+};
+
+const BigWrapper = () => {
+  const buttonRef = useRef();
+  return (
+    <React.Fragment>
+      <button ref={buttonRef}>button</button>
+      <Tooltip target={buttonRef} show>
+        <TooltipHead>Hello world</TooltipHead>
+        <TooltipContent>
+          <ul>
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+          </ul>
+        </TooltipContent>
       </Tooltip>
     </React.Fragment>
   );
@@ -74,6 +93,18 @@ test('should hide tooltip on escape keypress', async () => {
   });
   await update(wrapper);
   expect(wrapper.find('.Tooltip').exists()).toBeFalsy();
+});
+
+test('does not render an arrow given variant="big"', async () => {
+  const wrapper = mount(<Wrapper tooltipProps={{ variant: 'big' }} />);
+  await update(wrapper);
+  expect(wrapper.find('.TooltipArrow').exists()).toBe(false);
+});
+
+test('variant="big" should return no axe violations', async () => {
+  const wrapper = mount(<BigWrapper />);
+  await update(wrapper);
+  expect(await axe(wrapper.html())).toHaveNoViolations();
 });
 
 test('should return no axe violations', async () => {

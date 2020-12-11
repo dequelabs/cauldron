@@ -45,7 +45,11 @@ export {
 } from './components/Select';
 export { default as RadioGroup } from './components/RadioGroup';
 export { default as Checkbox } from './components/Checkbox';
-export { default as Tooltip } from './components/Tooltip';
+export {
+  default as Tooltip,
+  TooltipHead,
+  TooltipContent
+} from './components/Tooltip';
 export {
   default as Card,
   CardHeader,
@@ -61,6 +65,7 @@ export {
 export { default as Sidebar, SideBarItem } from './components/SideBar';
 export { default as Code } from './components/Code';
 export { default as LoaderOverlay } from './components/LoaderOverlay';
+export { default as Line } from './components/Line';
 
 /**
  * Helpers / Utils

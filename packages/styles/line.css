@@ -1,0 +1,21 @@
+.Line {
+  border: none;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  margin: 26px auto;
+  max-width: 300px;
+}
+
+.Line::after {
+  content: '';
+  display: inline-block;
+  margin-top: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fdfdfe;
+  border: 1px solid #ccc;
+}
