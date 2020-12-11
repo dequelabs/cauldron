@@ -161,3 +161,7 @@
 .Tooltip--big ul {
   margin: 10px 15px 10px 28px;
 }
+
+.Tooltip--big li {
+  margin: 6px 0;
+}
