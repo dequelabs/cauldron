@@ -127,3 +127,41 @@
 .TooltipInfo[class*='Tooltip--right'] .TooltipArrow:before {
   transform: rotate(90deg) translateY(6px);
 }
+
+/*
+ * "rich" tooltip with heading-like element and content
+ */
+
+.Tooltip--big {
+  border: 1px solid var(--field-border-color);
+  border-radius: 0;
+  padding: 0;
+  background: #fff;
+  color: var(--text-base);
+  width: 247px;
+}
+
+.Tooltip--big .Line {
+  margin: 0;
+}
+
+.TooltipHead {
+  background: var(--tooltip-info-background-color);
+  font-size: 16px;
+  color: var(--header-text-color-dark);
+  padding: 16px 28px;
+  text-align: center;
+}
+
+.TooltipContent {
+  background: #fff;
+  font-size: var(--font-size-smaller);
+}
+
+.Tooltip--big ul {
+  margin: 10px 15px 10px 28px;
+}
+
+.Tooltip--big li {
+  margin: 6px 0;
+}

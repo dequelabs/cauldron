@@ -1,3 +1,7 @@
 .tooltip-demo .Button--secondary {
   margin: 15px auto;
 }
+
+.Form {
+  max-width: 300px;
+}

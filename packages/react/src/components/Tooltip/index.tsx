@@ -9,7 +9,7 @@ import { usePopper } from 'react-popper';
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   target: React.RefObject<HTMLElement> | HTMLElement;
-  variant?: 'text' | 'info';
+  variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby';
   show?: boolean | undefined;
   placement?: Placement;
@@ -134,7 +134,8 @@ export default function Tooltip({
           id={id}
           className={classnames('Tooltip', `Tooltip--${placement}`, {
             TooltipInfo: variant === 'info',
-            'Tooltip--hidden': !showTooltip && hideElementOnHidden
+            'Tooltip--hidden': !showTooltip && hideElementOnHidden,
+            'Tooltip--big': variant === 'big'
           })}
           ref={setTooltipElement}
           role="tooltip"
@@ -142,11 +143,13 @@ export default function Tooltip({
           {...attributes.popper}
           {...props}
         >
-          <div
-            className="TooltipArrow"
-            ref={setArrowElement}
-            style={styles.arrow}
-          />
+          {variant !== 'big' && (
+            <div
+              className="TooltipArrow"
+              ref={setArrowElement}
+              style={styles.arrow}
+            />
+          )}
           {children}
         </div>,
         (portal && 'current' in portal ? portal.current : portal) ||
@@ -166,3 +169,17 @@ Tooltip.propTypes = {
   variant: PropTypes.string,
   portal: PropTypes.any
 };
+
+export const TooltipHead = ({
+  className,
+  ...other
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={classnames('TooltipHead', className)} {...other} />
+);
+
+export const TooltipContent = ({
+  className,
+  ...other
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={classnames('TooltipContent', className)} {...other} />
+);
