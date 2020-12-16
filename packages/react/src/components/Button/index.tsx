@@ -1,42 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import classNames from 'classnames';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'error' | 'link';
-  buttonRef?: React.Ref<HTMLButtonElement>;
-  disabled?: boolean; // todo, investigate why disabled is needed
   thin?: boolean;
 }
 
-export default class Button extends React.Component<ButtonProps> {
-  static defaultProps = {
-    variant: 'primary',
-    buttonRef: () => {}
-  };
-
-  static propTypes = {
-    variant: PropTypes.oneOf(['primary', 'secondary', 'error', 'link']),
-    children: PropTypes.node,
-    className: PropTypes.string,
-    buttonRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ])
-  };
-
-  static displayName = 'Button';
-
-  render() {
-    const {
-      variant,
-      children,
-      className,
-      buttonRef,
-      thin,
-      ...other
-    } = this.props;
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { variant = 'primary', thin, children, className, ...other }: ButtonProps,
+    buttonRef
+  ) => {
     return (
       <button
         type={'button'}
@@ -54,4 +28,8 @@ export default class Button extends React.Component<ButtonProps> {
       </button>
     );
   }
-}
+);
+
+Button.displayName = 'Button';
+
+export default Button;

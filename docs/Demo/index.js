@@ -65,7 +65,8 @@ class Demo extends Component {
             </thead>
             <tbody>
               {Object.entries(propDocs).map(([name, data]) => {
-                const defaultProp = data.defaultValue || defaultProps[name];
+                const defaultProp =
+                  data.defaultValue || defaultProps[name] || data.default;
 
                 return (
                   <tr key={name}>
