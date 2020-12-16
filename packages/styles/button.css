@@ -12,6 +12,9 @@
   text-transform: uppercase;
   height: 36px;
   min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   --button-hover-outline-color: var(--button-background-color-primary);
 }
 
@@ -78,6 +81,24 @@ button.Link {
 
 .Button--error:active {
   background-color: var(--button-background-color-error-active);
+}
+
+.Button--start-icon {
+  display: inherit;
+  margin-right: 4px;
+  margin-left: -4px;
+}
+
+.Button--end-icon {
+  display: inherit;
+  margin-right: -4px;
+  margin-left: 4px;
+}
+
+.Button--thin .Button--start-icon svg,
+.Button--thin .Button--end-icon svg {
+  width: 15px;
+  height: 15px;
 }
 
 .DefinitionButton {
