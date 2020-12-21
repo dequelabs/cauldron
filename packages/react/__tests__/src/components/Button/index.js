@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { shallow } from 'enzyme';
 import Button from 'src/components/Button';
 import Icon from 'src/components/Icon';
@@ -26,30 +26,32 @@ test('should render button as link', () => {
   expect(button.hasClass('Link')).toBe(true);
 });
 
-test('should handle "startIcon" modifier', () => {
+test('should handle <Icon /> as child', () => {
   const button = shallow(
-    <Button startIcon={<Icon type="trash" />}>Delete</Button>
+    <Button>
+      <Icon type="trash" />
+      Delete
+    </Button>
   );
-  expect(
-    button.contains(
-      <span className="Button--start-icon">
-        <Icon type="trash" />
-      </span>
-    )
-  ).toBe(true);
+  expect(button.contains(<Icon type="trash" />)).toBe(true);
 });
 
-test('should handle "endIcon" modifier', () => {
-  const button = shallow(
-    <Button endIcon={<Icon type="trash" />}>Delete</Button>
+test('should console.warn if buttonRef prop is used', () => {
+  const originalWarn = console.warn;
+  const consoleOutput = [];
+  const mockedWarn = jest.fn(output => consoleOutput.push(output));
+  const btnRef = createRef();
+  console.warn = mockedWarn;
+
+  shallow(<Button buttonRef={btnRef}>Delete</Button>);
+
+  expect(mockedWarn).toBeCalledTimes(1);
+  expect(consoleOutput[0]).toBe(
+    "%c Warning: 'buttonRef' prop is deprecated, please use 'ref'. "
   );
-  expect(
-    button.contains(
-      <span className="Button--end-icon">
-        <Icon type="trash" />
-      </span>
-    )
-  ).toBe(true);
+
+  // reset
+  console.warn = originalWarn;
 });
 
 test('should handle "thin" modifier', () => {
@@ -62,7 +64,10 @@ test('should return no axe violations', async () => {
   const button = shallow(<Button variant="primary">primary</Button>);
   const buttonLink = shallow(<Button variant="link">link</Button>);
   const iconButton = shallow(
-    <Button startIcon={<Icon type="bolt" />}>scan</Button>
+    <Button>
+      <Icon type="bolt" />
+      scan
+    </Button>
   );
 
   expect(await axe(defaultButton.html())).toHaveNoViolations();

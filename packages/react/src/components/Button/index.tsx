@@ -1,11 +1,10 @@
-import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef, Ref } from 'react';
 import classNames from 'classnames';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonRef?: Ref<HTMLButtonElement>;
   variant?: 'primary' | 'secondary' | 'error' | 'link';
   thin?: boolean;
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -15,25 +14,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       thin,
       children,
       className,
-      startIcon,
-      endIcon,
+      buttonRef,
       ...other
     }: ButtonProps,
-    buttonRef
+    ref
   ) => {
-    const leftIcon = startIcon && (
-      <span
-        className={classNames({ 'Button--start-icon': Boolean(startIcon) })}
-      >
-        {startIcon}
-      </span>
-    );
-
-    const rightIcon = endIcon && (
-      <span className={classNames({ 'Button--end-icon': Boolean(endIcon) })}>
-        {endIcon}
-      </span>
-    );
+    if (buttonRef) {
+      console.warn(
+        "%c Warning: 'buttonRef' prop is deprecated, please use 'ref'. ",
+        'background: #222; color: #bada44'
+      );
+    }
 
     return (
       <button
@@ -45,12 +36,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           Link: variant === 'link',
           'Button--thin': thin
         })}
-        ref={buttonRef}
+        ref={ref || buttonRef}
         {...other}
       >
-        {leftIcon}
         {children}
-        {rightIcon}
       </button>
     );
   }

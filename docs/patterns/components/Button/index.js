@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import Demo from '../../../Demo';
 import { Button, Icon } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
@@ -11,11 +11,22 @@ const ButtonDemo = () => (
         { children: 'Primary' },
         { children: 'Primary Disabled', disabled: true },
         { children: 'Primary thin', thin: true },
-        { children: 'Primary Icon', startIcon: <Icon type="plus" /> },
         {
-          children: 'Primary Icon thin',
-          thin: true,
-          startIcon: <Icon type="plus" />
+          children: (
+            <>
+              <Icon type="plus" />
+              Primary Icon
+            </>
+          )
+        },
+        {
+          children: (
+            <>
+              <Icon type="plus" />
+              Primary Icon thin
+            </>
+          ),
+          thin: true
         },
         { children: 'Secondary', variant: 'secondary' },
         {
@@ -25,15 +36,23 @@ const ButtonDemo = () => (
         },
         { children: 'Secondary thin', variant: 'secondary', thin: true },
         {
-          children: 'Secondary Icon',
-          variant: 'secondary',
-          endIcon: <Icon type="plus" style={{ fill: '#222' }} />
+          children: (
+            <>
+              Secondary Icon
+              <Icon type="plus" style={{ fill: '#222' }} />
+            </>
+          ),
+          variant: 'secondary'
         },
         {
-          children: 'Secondary Icon thin',
+          children: (
+            <>
+              Secondary Icon thin
+              <Icon type="plus" style={{ fill: '#222' }} />
+            </>
+          ),
           thin: true,
-          variant: 'secondary',
-          endIcon: <Icon type="plus" style={{ fill: '#222' }} />
+          variant: 'secondary'
         },
         { children: 'Error', variant: 'error' },
         { children: 'Error Disabled', variant: 'error', disabled: true },
@@ -57,16 +76,6 @@ const ButtonDemo = () => (
           type: 'boolean',
           description:
             'render button with "thin" modifier (reduces height of button)'
-        },
-        startIcon: {
-          type: 'node',
-          description:
-            'Add an <Icon type="plus"/> to be displayed before the button text'
-        },
-        endIcon: {
-          type: 'node',
-          description:
-            'Add an <Icon type="pencil"/> to be displayed after the button text'
         }
       }}
     />
