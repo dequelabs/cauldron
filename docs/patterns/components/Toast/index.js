@@ -104,6 +104,10 @@ export default class Demo extends Component {
             type: 'boolean',
             description: 'whether or not to show the toast'
           },
+          focus: {
+            type: 'boolean',
+            description: 'whether or not to focus the toast'
+          },
           type: {
             type: 'string',
             required: true,

@@ -10,6 +10,7 @@ export interface ToastProps {
   onDismiss: () => void;
   dismissText?: string;
   toastRef: React.Ref<HTMLDivElement>;
+  focus?: boolean;
   show?: boolean;
 }
 
@@ -26,6 +27,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     dismissText: 'Dismiss',
     onDismiss: () => {},
     toastRef: () => {},
+    focus: true,
     show: false
   };
 
@@ -43,6 +45,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
+    // whether or not to focus the toast
+    focus: PropTypes.bool,
     // whether or not to show the toast
     show: PropTypes.bool
   };
@@ -88,21 +92,38 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
   render() {
     const { animationClass } = this.state;
-    const { type, children, dismissText, toastRef, show } = this.props;
+    const {
+      type,
+      children,
+      dismissText,
+      toastRef,
+      focus,
+      show,
+      ...otherProps
+    } = this.props;
     const scrim =
       type === 'action-needed' && show ? (
         <div className="Scrim--light Scrim--show Scrim--fade-in" />
       ) : null;
 
+    const defaultProps: React.HTMLAttributes<HTMLDivElement> = {
+      tabIndex: -1,
+      className: `Toast Toast--${typeMap[type].className} ${animationClass}`
+    };
+
+    if (!focus) {
+      defaultProps.role = 'alert';
+    }
+
     return (
       <React.Fragment>
         <div
-          tabIndex={-1}
-          className={`Toast Toast--${typeMap[type].className} ${animationClass}`}
           ref={el => {
             this.el = el;
             setRef(toastRef, el);
           }}
+          {...defaultProps}
+          {...otherProps}
         >
           <div className="Toast__message">
             <Icon type={typeMap[type].icon} />
@@ -152,7 +173,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
   }
 
   showToast() {
-    const { type } = this.props;
+    const { type, focus } = this.props;
 
     this.setState(
       {
@@ -166,7 +187,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           isolator.activate();
         }
 
-        if (this.el) {
+        if (this.el && !!focus) {
           // focus the toast
           this.el.focus();
         }
