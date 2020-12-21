@@ -8,6 +8,10 @@ const defaultProps = {
   show: false
 };
 
+beforeEach(() => {
+  document.activeElement.blur();
+});
+
 test('handles initial show prop on mount', done => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true}>
@@ -158,6 +162,30 @@ test('clicking the dismiss button properly dismisses toast', done => {
   wrapper.find('.Toast__dismiss').simulate('click');
   setTimeout(() => {
     expect(called).toBe(true);
+    done();
+  }, 10);
+});
+
+test('toast should be focused by default', done => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true}>
+      {'hi'}
+    </Toast>
+  );
+  setTimeout(() => {
+    expect(wrapper.getDOMNode()).toBe(document.activeElement);
+    done();
+  }, 10);
+});
+
+test('toast should not be focused with falsey focus prop', done => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true} focus={false}>
+      {'hi'}
+    </Toast>
+  );
+  setTimeout(() => {
+    expect(document.body).toBe(document.activeElement);
     done();
   }, 10);
 });

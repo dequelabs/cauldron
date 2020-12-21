@@ -187,7 +187,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           isolator.activate();
         }
 
-        if (this.el && focus) {
+        if (this.el && !!focus) {
           // focus the toast
           this.el.focus();
         }
