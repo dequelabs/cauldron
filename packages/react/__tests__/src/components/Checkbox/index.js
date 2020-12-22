@@ -21,11 +21,14 @@ test('handles checked prop', () => {
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
 });
 
-test('handles checked prop changes', () => {
+test.only('handles checked prop changes', () => {
   const wrapper = mount(<Checkbox {...defaultProps} checked />);
+  console.log('first', wrapper.find('[type="checkbox"]').getDOMNode().checked);
   wrapper.setProps({
     checked: false
   });
+  wrapper.update();
+  console.log('second', wrapper.find('[type="checkbox"]').getDOMNode().checked);
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeFalsy();
 });
 

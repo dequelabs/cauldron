@@ -1,141 +1,76 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  InputHTMLAttributes,
+  forwardRef,
+  Ref,
+  useState,
+  useRef,
+  useMemo
+} from 'react';
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
-import setRef from '../../utils/setRef';
 import Icon from '../Icon';
 import tokenList from '../../utils/token-list';
 
-export interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  name?: string;
   label: React.ReactNode;
   error?: React.ReactNode;
-  value?: string;
-  checked?: boolean;
-  onChange: (e: React.FormEvent<HTMLInputElement>, checked: boolean) => void;
-  checkboxRef: React.Ref<HTMLInputElement>;
+  checkboxRef?: Ref<HTMLInputElement>;
 }
 
-interface CheckboxState {
-  checked: boolean;
-  focused: boolean;
-}
-
-export default class Checkbox extends React.Component<
-  CheckboxProps,
-  CheckboxState
-> {
-  private checkbox: HTMLInputElement | null;
-
-  static defaultProps = {
-    error: null,
-    checked: false,
-    disabled: false,
-    onChange: () => {},
-    checkboxRef: () => {}
-  };
-
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string,
-    label: PropTypes.node.isRequired,
-    error: PropTypes.node,
-    value: PropTypes.string,
-    checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    onChange: PropTypes.func,
-    checkboxRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ])
-  };
-
-  static displayName = 'Checkbox';
-
-  private errorId = nextId();
-
-  constructor(props: CheckboxProps) {
-    super(props);
-    this.state = { checked: !!this.props.checked, focused: false };
-    this.toggleFocus = this.toggleFocus.bind(this);
-    this.onCheckboxClick = this.onCheckboxClick.bind(this);
-    this.onOverlayClick = this.onOverlayClick.bind(this);
-  }
-
-  componentDidUpdate(prevProps: CheckboxProps) {
-    const { checked } = this.props;
-
-    if (checked !== prevProps.checked) {
-      this.setState({ checked: !!checked });
-    }
-  }
-
-  toggleFocus() {
-    this.setState({ focused: !this.state.focused });
-  }
-
-  onCheckboxClick(e: React.ChangeEvent<HTMLInputElement>) {
-    const checked = !this.state.checked;
-    this.setState({ checked });
-    this.props.onChange(e, checked);
-  }
-
-  onOverlayClick() {
-    this.checkbox?.click();
-    this.checkbox?.focus();
-  }
-
-  render() {
-    const { checked, focused } = this.state;
-    // disabling no-unused-vars below to prevent specific
-    // props from being passed through to the wrapper
-    const {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  (
+    {
       id,
-      value,
-      name,
       label,
-      disabled,
-      className,
-      // eslint-disable-next-line no-unused-vars
-      onChange,
-      checked: notUsed,
-      // eslint-disable-next-line no-unused-vars
-      checkboxRef,
       error,
+      checkboxRef,
+      className,
+      onChange,
       'aria-describedby': ariaDescribedby,
-      ...others
-    } = this.props;
+      disabled = false,
+      checked,
+      ...other
+    }: CheckboxProps,
+    ref
+  ): JSX.Element => {
+    const [isChecked, setIsChecked] = useState(checked);
+    const [focused, setFocused] = useState(false);
+    const checkRef = useRef<HTMLInputElement>(null);
 
-    const checkboxProps = {
-      'aria-describedby': error
-        ? tokenList(this.errorId, ariaDescribedby)
-        : ariaDescribedby
-    };
+    const refProp = ref || checkboxRef;
+    const errorId = useMemo(() => nextId(), []);
+
+    const ariaDescribedbyId = error
+      ? tokenList(errorId, ariaDescribedby)
+      : ariaDescribedby;
+
+    if (checkboxRef) {
+      console.warn(
+        "%c Warning: 'checkboxRef' prop is deprecated, please use 'ref'. ",
+        'background: #222; color: #bada44'
+      );
+    }
 
     return (
       <>
-        <div
-          className={classNames('Checkbox is--flex-row', className)}
-          {...others}
-        >
+        <div className={classNames('Checkbox is--flex-row', className)}>
           <input
-            type="checkbox"
-            checked={checked}
-            onChange={this.onCheckboxClick}
-            disabled={disabled}
-            name={name}
             id={id}
-            value={value}
-            onFocus={this.toggleFocus}
-            onBlur={this.toggleFocus}
-            ref={checkbox => {
-              this.checkbox = checkbox;
-              setRef(this.props.checkboxRef, checkbox);
+            ref={typeof refProp === 'function' || !refProp ? checkRef : refProp}
+            type="checkbox"
+            checked={isChecked}
+            onFocus={(): void => setFocused(true)}
+            onBlur={(): void => setFocused(false)}
+            aria-describedby={ariaDescribedbyId}
+            onChange={(e): void => {
+              if (onChange) {
+                onChange(e);
+              }
+              console.log('clicked check', e.target.checked);
+              setIsChecked(e.target.checked);
             }}
-            {...checkboxProps}
+            {...other}
           />
           <Icon
             className={classNames('Checkbox__overlay', {
@@ -143,9 +78,18 @@ export default class Checkbox extends React.Component<
               'Checkbox__overlay--focused': focused,
               'Field--has-error': error
             })}
-            type={checked ? 'checkbox-checked' : 'checkbox-unchecked'}
+            type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
             aria-hidden="true"
-            onClick={this.onOverlayClick}
+            onClick={(): void => {
+              if (typeof refProp === 'function') {
+                refProp(checkRef.current);
+                checkRef.current?.click();
+              } else if (refProp) {
+                refProp?.current?.click();
+              } else {
+                checkRef.current?.click();
+              }
+            }}
           />
           <label
             className={classNames('Field__label', {
@@ -156,10 +100,14 @@ export default class Checkbox extends React.Component<
             {label}
           </label>
         </div>
-        <div className="Error" id={this.errorId}>
+        <div id={errorId} className="Error">
           {error}
         </div>
       </>
     );
   }
-}
+);
+
+Checkbox.displayName = 'Checkbox';
+
+export default Checkbox;
