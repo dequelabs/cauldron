@@ -95,6 +95,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const {
       type,
       children,
+      onDismiss,
       dismissText,
       toastRef,
       focus,
