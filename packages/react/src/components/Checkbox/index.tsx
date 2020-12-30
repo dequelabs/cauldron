@@ -15,6 +15,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: React.ReactNode;
   error?: React.ReactNode;
+  customIcon?: React.ReactNode;
   checkboxRef?: Ref<HTMLInputElement>;
 }
 
@@ -29,7 +30,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       onChange,
       'aria-describedby': ariaDescribedby,
       disabled = false,
-      checked,
+      checked = false,
       ...other
     }: CheckboxProps,
     ref
@@ -39,6 +40,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const checkRef = useRef<HTMLInputElement>(null);
 
     const refProp = ref || checkboxRef;
+    if (typeof refProp === 'function') {
+      refProp(checkRef.current);
+    }
+
     const errorId = useMemo(() => nextId(), []);
 
     const ariaDescribedbyId = error
@@ -60,15 +65,15 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={typeof refProp === 'function' || !refProp ? checkRef : refProp}
             type="checkbox"
             checked={isChecked}
+            disabled={disabled}
             onFocus={(): void => setFocused(true)}
             onBlur={(): void => setFocused(false)}
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
+              setIsChecked(e.target.checked);
               if (onChange) {
                 onChange(e);
               }
-              console.log('clicked check', e.target.checked);
-              setIsChecked(e.target.checked);
             }}
             {...other}
           />
@@ -81,10 +86,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
             aria-hidden="true"
             onClick={(): void => {
-              if (typeof refProp === 'function') {
-                refProp(checkRef.current);
-                checkRef.current?.click();
-              } else if (refProp) {
+              if (refProp && typeof refProp !== 'function') {
                 refProp?.current?.click();
               } else {
                 checkRef.current?.click();

@@ -84,10 +84,6 @@ export default class CheckboxDemo extends Component {
           disabled: {
             type: 'boolean',
             description: 'If the checkbox should be disabled'
-          },
-          checkboxRef: {
-            type: 'function',
-            description: 'Ref function for the input[type=checkbox] element'
           }
         }}
       />
