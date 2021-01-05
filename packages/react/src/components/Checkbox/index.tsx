@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   Ref,
   useState,
+  useEffect,
   useRef,
   useMemo
 } from 'react';
@@ -38,6 +39,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const [isChecked, setIsChecked] = useState(checked);
     const [focused, setFocused] = useState(false);
     const checkRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+      setIsChecked(checked);
+    }, [checked]);
 
     const refProp = ref || checkboxRef;
     if (typeof refProp === 'function') {
