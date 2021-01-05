@@ -76,12 +76,10 @@ test('handles focus/blur', () => {
 
   wrapper.find('[type="checkbox"]').simulate('focus');
 
-  // expect(wrapper.state('focused')).toBeTruthy();
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeTruthy();
 
   wrapper.find('[type="checkbox"]').simulate('blur');
 
-  // expect(wrapper.state('focused')).toBeFalsy();
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeFalsy();
 });
 
