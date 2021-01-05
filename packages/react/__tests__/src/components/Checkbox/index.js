@@ -32,9 +32,9 @@ test('handles checked prop changes', done => {
   }, 10);
 });
 
-test.only('toggles checked state properly', done => {
+test('toggles checked state properly', done => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
-  let checkbox = wrapper.find('[type="checkbox"]');
+  const checkbox = wrapper.find('[type="checkbox"]');
   expect(checkbox.getDOMNode().checked).toBeFalsy();
   expect(
     wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-checked')
@@ -43,8 +43,7 @@ test.only('toggles checked state properly', done => {
   checkbox.simulate('change', { target: { checked: true } });
 
   setTimeout(() => {
-    checkbox = wrapper.find('[type="checkbox"]');
-    expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
+    expect(checkbox.getDOMNode().checked).toBeTruthy();
     expect(
       wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-checked')
     ).toBeTruthy();
