@@ -1733,10 +1733,10 @@
     is-plain-object "^5.0.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/openapi-types@^2.0.1":
-  version "2.0.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@octokit/openapi-types/-/openapi-types-2.0.1.tgz#7453d8281ce66b8ed1607f7ac7d751c3baffd2cc"
-  integrity sha1-dFPYKBzma47RYH96x9dRw7r/0sw=
+"@octokit/openapi-types@^2.2.0":
+  version "2.2.0"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@octokit/openapi-types/-/openapi-types-2.2.0.tgz#123e0438a0bc718ccdac3b5a2e69b3dd00daa85b"
+  integrity sha1-Ej4EOKC8cYzNrDtaLmmz3QDaqFs=
 
 "@octokit/plugin-enterprise-rest@^6.0.1":
   version "6.0.1"
@@ -1825,11 +1825,11 @@
     "@types/node" ">= 8"
 
 "@octokit/types@^6.0.0", "@octokit/types@^6.0.3":
-  version "6.1.2"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@octokit/types/-/types-6.1.2.tgz#2b3a6ae0b8b71c27c770b4ff3e9ad8f1f538af58"
-  integrity sha1-Kzpq4Li3HCfHcLT/PprY8fU4r1g=
+  version "6.2.1"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@octokit/types/-/types-6.2.1.tgz#7f881fe44475ab1825776a4a59ca1ae082ed1043"
+  integrity sha1-f4gf5ER1qxgld2pKWcoa4ILtEEM=
   dependencies:
-    "@octokit/openapi-types" "^2.0.1"
+    "@octokit/openapi-types" "^2.2.0"
     "@types/node" ">= 8"
 
 "@samverschueren/stream-to-observable@^0.3.0":
@@ -1960,9 +1960,9 @@
   integrity sha1-KD9mn/dte4Jg34q3pCYsyD2YglY=
 
 "@types/node@*", "@types/node@>= 8", "@types/node@^14.10.1":
-  version "14.14.16"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@types/node/-/node-14.14.16.tgz#3cc351f8d48101deadfed4c9e4f116048d437b4b"
-  integrity sha1-PMNR+NSBAd6t/tTJ5PEWBI1De0s=
+  version "14.14.20"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
+  integrity sha1-95dIY+3SHR+KSUpz6OKzZYYVw0A=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -3208,7 +3208,7 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
-browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4.15.0:
+browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4.16.0:
   version "4.16.0"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/browserslist/-/browserslist-4.16.0.tgz#410277627500be3cb28a1bfe037586fbedf9488b"
   integrity sha1-QQJ3YnUAvjyyihv+A3WG++35SIs=
@@ -3454,14 +3454,14 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30001171"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/caniuse-db/-/caniuse-db-1.0.30001171.tgz#5ba336f130ff845af424dfd7f3169d24dff988e8"
-  integrity sha1-W6M28TD/hFr0JN/X8xadJN/5iOg=
+  version "1.0.30001173"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/caniuse-db/-/caniuse-db-1.0.30001173.tgz#b63067a3e1422446fbaf9e3cca109f9900d6d30f"
+  integrity sha1-tjBno+FCJEb7r548yhCfmQDW0w8=
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001165:
-  version "1.0.30001171"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/caniuse-lite/-/caniuse-lite-1.0.30001171.tgz#3291e11e02699ad0a29e69b8d407666fc843eba7"
-  integrity sha1-MpHhHgJpmtCinmm41Admb8hD66c=
+  version "1.0.30001173"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/caniuse-lite/-/caniuse-lite-1.0.30001173.tgz#3c47bbe3cd6d7a9eda7f50ac016d158005569f56"
+  integrity sha1-PEe7481tep7af1CsAW0VgAVWn1Y=
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -4191,17 +4191,17 @@ copy-descriptor@^0.1.0:
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
 core-js-compat@^3.8.0:
-  version "3.8.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/core-js-compat/-/core-js-compat-3.8.1.tgz#8d1ddd341d660ba6194cbe0ce60f4c794c87a36e"
-  integrity sha1-jR3dNB1mC6YZTL4M5g9MeUyHo24=
+  version "3.8.2"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/core-js-compat/-/core-js-compat-3.8.2.tgz#3717f51f6c3d2ebba8cbf27619b57160029d1d4c"
+  integrity sha1-Nxf1H2w9Lruoy/J2GbVxYAKdHUw=
   dependencies:
-    browserslist "^4.15.0"
+    browserslist "^4.16.0"
     semver "7.0.0"
 
 core-js-pure@^3.0.0:
-  version "3.8.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/core-js-pure/-/core-js-pure-3.8.1.tgz#23f84048f366fdfcf52d3fd1c68fec349177d119"
-  integrity sha1-I/hASPNm/fz1LT/Rxo/sNJF30Rk=
+  version "3.8.2"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/core-js-pure/-/core-js-pure-3.8.2.tgz#286f885c0dac1cdcd6d78397392abc25ddeca225"
+  integrity sha1-KG+IXA2sHNzW14OXOSq8Jd3soiU=
 
 core-js@^2.4.0:
   version "2.6.12"
@@ -4344,17 +4344,7 @@ css-select-base-adapter@^0.1.1:
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/css-select-base-adapter/-/css-select-base-adapter-0.1.1.tgz#3b2ff4972cc362ab88561507a95408a1432135d7"
   integrity sha1-Oy/0lyzDYquIVhUHqVQIoUMhNdc=
 
-css-select@^1.1.0:
-  version "1.2.0"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
-  integrity sha1-KzoRBTnFNV8c2NMUYj6HCxIeyFg=
-  dependencies:
-    boolbase "~1.0.0"
-    css-what "2.1"
-    domutils "1.5.1"
-    nth-check "~1.0.1"
-
-css-select@^2.0.0:
+css-select@^2.0.0, css-select@^2.0.2:
   version "2.1.0"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/css-select/-/css-select-2.1.0.tgz#6a34653356635934a81baca68d0255432105dbef"
   integrity sha1-ajRlM1ZjWTSoG6ymjQJVQyEF2+8=
@@ -4398,11 +4388,6 @@ css-tree@^1.1.2:
   dependencies:
     mdn-data "2.0.14"
     source-map "^0.6.1"
-
-css-what@2.1:
-  version "2.1.3"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/css-what/-/css-what-2.1.3.tgz#a6d7604573365fe74686c3f311c56513d88285f2"
-  integrity sha1-ptdgRXM2X+dGhsPzEcVlE9iChfI=
 
 css-what@^3.2.1:
   version "3.4.2"
@@ -4967,14 +4952,6 @@ domhandler@^4.0.0:
   dependencies:
     domelementtype "^2.1.0"
 
-domutils@1.5.1:
-  version "1.5.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
-  integrity sha1-3NhIiib1Y9YQeeSMn3t+Mjc2gs8=
-  dependencies:
-    dom-serializer "0"
-    domelementtype "1"
-
 domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
@@ -5050,9 +5027,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.621:
-  version "1.3.633"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/electron-to-chromium/-/electron-to-chromium-1.3.633.tgz#16dd5aec9de03894e8d14a1db4cda8a369b9b7fe"
-  integrity sha1-Ft1a7J3gOJTo0UodtM2oo2m5t/4=
+  version "1.3.634"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/electron-to-chromium/-/electron-to-chromium-1.3.634.tgz#82ea400f520f739c4f6ff00c1f7524827a917d25"
+  integrity sha1-gupAD1IPc5xPb/AMH3UkgnqRfSU=
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -6675,7 +6652,7 @@ html-webpack-plugin@^3.2.0:
     toposort "^1.0.0"
     util.promisify "1.0.0"
 
-htmlparser2@^3.3.0:
+htmlparser2@^3.10.1:
   version "3.10.1"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
   integrity sha1-vWedw/WYl7ajS7EHSchVu1OpOS8=
@@ -6740,9 +6717,9 @@ http-errors@~1.7.2:
     toidentifier "1.0.0"
 
 http-parser-js@>=0.5.1:
-  version "0.5.2"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/http-parser-js/-/http-parser-js-0.5.2.tgz#da2e31d237b393aae72ace43882dd7e270a8ff77"
-  integrity sha1-2i4x0jezk6rnKs5DiC3X4nCo/3c=
+  version "0.5.3"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/http-parser-js/-/http-parser-js-0.5.3.tgz#01d2709c79d41698bb01d4decc5e9da4e4a033d9"
+  integrity sha1-AdJwnHnUFpi7AdTezF6dpOSgM9k=
 
 http-proxy-agent@^2.1.0:
   version "2.1.0"
@@ -8559,22 +8536,17 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-mime-db@1.44.0:
-  version "1.44.0"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/mime-db/-/mime-db-1.44.0.tgz#fa11c5eb0aca1334b4233cb4d52f10c5a6272f92"
-  integrity sha1-+hHF6wrKEzS0Izy01S8QxaYnL5I=
-
-"mime-db@>= 1.43.0 < 2":
+mime-db@1.45.0, "mime-db@>= 1.43.0 < 2":
   version "1.45.0"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/mime-db/-/mime-db-1.45.0.tgz#cceeda21ccd7c3a745eba2decd55d4b73e7879ea"
   integrity sha1-zO7aIczXw6dF66LezVXUtz54eeo=
 
 mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.7:
-  version "2.1.27"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/mime-types/-/mime-types-2.1.27.tgz#47949f98e279ea53119f5722e0f34e529bec009f"
-  integrity sha1-R5SfmOJ56lMRn1ci4PNOUpvsAJ8=
+  version "2.1.28"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/mime-types/-/mime-types-2.1.28.tgz#1160c4757eab2c5363888e005273ecf79d2a0ecd"
+  integrity sha1-EWDEdX6rLFNjiI4AUnPs950qDs0=
   dependencies:
-    mime-db "1.44.0"
+    mime-db "1.45.0"
 
 mime@1.6.0, mime@^1.2.11:
   version "1.6.0"
@@ -8955,9 +8927,9 @@ node-modules-regexp@^1.0.0:
   integrity sha1-jZ2+KJZKSsVxLpExZCEHxx6Q7EA=
 
 node-releases@^1.1.67:
-  version "1.1.67"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/node-releases/-/node-releases-1.1.67.tgz#28ebfcccd0baa6aad8e8d4d8fe4cbc49ae239c12"
-  integrity sha1-KOv8zNC6pqrY6NTY/ky8Sa4jnBI=
+  version "1.1.69"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/node-releases/-/node-releases-1.1.69.tgz#3149dbde53b781610cd8b486d62d86e26c3725f6"
+  integrity sha1-MUnb3lO3gWEM2LSG1i2G4mw3JfY=
 
 nopt@^4.0.1:
   version "4.0.3"
@@ -9106,7 +9078,7 @@ npmlog@^4.1.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nth-check@^1.0.2, nth-check@~1.0.1:
+nth-check@^1.0.2:
   version "1.0.2"
   resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"
   integrity sha1-sr0pXDfj3VijvwcAN2Zjuk2c8Fw=
@@ -11177,13 +11149,13 @@ remove-trailing-separator@^1.0.1:
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
 
 renderkid@^2.0.4:
-  version "2.0.4"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/renderkid/-/renderkid-2.0.4.tgz#d325e532afb28d3f8796ffee306be8ffd6fc864c"
-  integrity sha1-0yXlMq+yjT+Hlv/uMGvo/9b8hkw=
+  version "2.0.5"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/renderkid/-/renderkid-2.0.5.tgz#483b1ac59c6601ab30a7a596a5965cabccfdd0a5"
+  integrity sha1-SDsaxZxmAaswp6WWpZZcq8z90KU=
   dependencies:
-    css-select "^1.1.0"
+    css-select "^2.0.2"
     dom-converter "^0.2"
-    htmlparser2 "^3.3.0"
+    htmlparser2 "^3.10.1"
     lodash "^4.17.20"
     strip-ansi "^3.0.0"
 
@@ -12665,9 +12637,9 @@ tslib@^1.8.1, tslib@^1.9.0:
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
 
 tsutils@^3.17.1:
-  version "3.17.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/tsutils/-/tsutils-3.17.1.tgz#ed719917f11ca0dee586272b2ac49e015a2dd759"
-  integrity sha1-7XGZF/EcoN7lhicrKsSeAVot11k=
+  version "3.18.0"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/tsutils/-/tsutils-3.18.0.tgz#38add50a28ec97e988cb43c5b32e55d1ff4a222a"
+  integrity sha1-OK3VCijsl+mIy0PFsy5V0f9KIio=
   dependencies:
     tslib "^1.8.1"
 
@@ -12752,9 +12724,9 @@ uglify-js@3.4.x:
     source-map "~0.6.1"
 
 uglify-js@^3.1.4:
-  version "3.12.3"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/uglify-js/-/uglify-js-3.12.3.tgz#bb26c4abe0e68c55e9776bca9bed99a4df73facf"
-  integrity sha1-uybEq+DmjFXpd2vKm+2ZpN9z+s8=
+  version "3.12.4"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/uglify-js/-/uglify-js-3.12.4.tgz#93de48bb76bb3ec0fc36563f871ba46e2ee5c7ee"
+  integrity sha1-k95Iu3a7PsD8NlY/hxukbi7lx+4=
 
 uid-number@0.0.6:
   version "0.0.6"
@@ -13388,9 +13360,9 @@ xtend@^4.0.0, xtend@~4.0.1:
   integrity sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=
 
 y18n@^3.2.1:
-  version "3.2.1"
-  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
-  integrity sha1-bRX7qITAhnnA136I53WegR4H+kE=
+  version "3.2.2"
+  resolved "https://agora.dequecloud.com/artifactory/api/npm/dequelabs/y18n/-/y18n-3.2.2.tgz#85c901bd6470ce71fc4bb723ad209b70f7f28696"
+  integrity sha1-hckBvWRwznH8S7cjrSCbcPfyhpY=
 
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.1"
