@@ -55,13 +55,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       ? tokenList(errorId, ariaDescribedby)
       : ariaDescribedby;
 
-    if (checkboxRef) {
-      console.warn(
-        "%c Warning: 'checkboxRef' prop is deprecated, please use 'ref'. ",
-        'background: #222; color: #bada44'
-      );
-    }
-
     return (
       <>
         <div className={classNames('Checkbox is--flex-row', className)}>

@@ -105,20 +105,6 @@ test('supports ref prop', done => {
   mount(<Checkbox {...defaultProps} ref={ref} />);
 });
 
-test('warns on checkboxRef', () => {
-  const originalWarn = console.warn;
-  const mockedWarn = jest.fn();
-  console.warn = mockedWarn;
-  const ref = () => {};
-
-  mount(<Checkbox {...defaultProps} checkboxRef={ref} />);
-  expect(console.warn).toHaveBeenCalledWith(
-    "%c Warning: 'checkboxRef' prop is deprecated, please use 'ref'. ",
-    'background: #222; color: #bada44'
-  );
-  console.warn = originalWarn;
-});
-
 test('should return no axe violations', async () => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
   expect(await axe(wrapper.html())).toHaveNoViolations();
