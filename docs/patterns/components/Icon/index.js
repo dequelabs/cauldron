@@ -35,6 +35,9 @@ export default class IconDemo extends Component {
               type: 'arrow-circle-down'
             },
             {
+              type: 'arrows-alt'
+            },
+            {
               type: 'bolt'
             },
             {
