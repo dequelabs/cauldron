@@ -4,6 +4,7 @@ import { IconButton } from '@deque/cauldron-react/';
 
 const IconButtonDemo = () => (
   <div>
+    <IconButton icon="arrow-right" label="right arrow" />
     <Demo
       component={IconButton}
       states={[
