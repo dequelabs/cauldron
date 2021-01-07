@@ -49,7 +49,7 @@ export default class CheckboxDemo extends Component {
             name: 'demo-checkbox-4',
             label: 'Demo checkbox 4',
             value: '4',
-            error: 'The fourth chekbox is required!'
+            error: 'The fourth checkbox is required!'
           }
         ]}
         propDocs={{
@@ -84,10 +84,6 @@ export default class CheckboxDemo extends Component {
           disabled: {
             type: 'boolean',
             description: 'If the checkbox should be disabled'
-          },
-          checkboxRef: {
-            type: 'function',
-            description: 'Ref function for the input[type=checkbox] element'
           }
         }}
       />

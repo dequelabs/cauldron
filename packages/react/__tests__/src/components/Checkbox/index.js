@@ -21,15 +21,18 @@ test('handles checked prop', () => {
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
 });
 
-test('handles checked prop changes', () => {
+test('handles checked prop changes', done => {
   const wrapper = mount(<Checkbox {...defaultProps} checked />);
   wrapper.setProps({
     checked: false
   });
-  expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeFalsy();
+  setTimeout(() => {
+    expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeFalsy();
+    done();
+  }, 10);
 });
 
-test('toggles checked state properly', () => {
+test('toggles checked state properly', done => {
   const wrapper = mount(<Checkbox {...defaultProps} />);
   const checkbox = wrapper.find('[type="checkbox"]');
   expect(checkbox.getDOMNode().checked).toBeFalsy();
@@ -37,12 +40,15 @@ test('toggles checked state properly', () => {
     wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-checked')
   ).toBeFalsy();
 
-  checkbox.simulate('change');
+  checkbox.simulate('change', { target: { checked: true } });
 
-  expect(checkbox.getDOMNode().checked).toBeTruthy();
-  expect(
-    wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-checked')
-  ).toBeTruthy();
+  setTimeout(() => {
+    expect(checkbox.getDOMNode().checked).toBeTruthy();
+    expect(
+      wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-checked')
+    ).toBeTruthy();
+    done();
+  }, 10);
 });
 
 test('clicks the checkbox when the overlay is clicked', () => {
@@ -70,18 +76,16 @@ test('handles focus/blur', () => {
 
   wrapper.find('[type="checkbox"]').simulate('focus');
 
-  expect(wrapper.state('focused')).toBeTruthy();
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeTruthy();
 
   wrapper.find('[type="checkbox"]').simulate('blur');
 
-  expect(wrapper.state('focused')).toBeFalsy();
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeFalsy();
 });
 
 test('call onChange when checked state changes', done => {
-  const onChange = (e, checked) => {
-    expect(checked).toBeTruthy();
+  const onChange = e => {
+    expect(e).toBeTruthy();
     done();
   };
 
@@ -92,13 +96,13 @@ test('call onChange when checked state changes', done => {
     .simulate('change');
 });
 
-test('supports checkboxRef prop', done => {
+test('supports ref prop', done => {
   const ref = checkbox => {
-    expect(checkbox instanceof HTMLElement).toBeTruthy();
+    expect(checkbox).toBeNull();
     done();
   };
 
-  mount(<Checkbox {...defaultProps} checkboxRef={ref} />);
+  mount(<Checkbox {...defaultProps} ref={ref} />);
 });
 
 test('should return no axe violations', async () => {
