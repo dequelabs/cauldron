@@ -28,7 +28,7 @@ export default function IconButton({
         ref={buttonRef}
         {...other}
       >
-        <Icon type={icon} style={{ width: '100%', height: '100%' }} />
+        <Icon type={icon} />
       </button>
       <Tooltip
         target={buttonRef}
