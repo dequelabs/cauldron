@@ -10,16 +10,12 @@ import removeIds from '../../utils/remove-ids';
 export interface PointoutProps {
   arrowPosition:
     | 'top-left'
-    | 'top-middle'
     | 'top-right'
     | 'right-top'
-    | 'right-middle'
     | 'right-bottom'
     | 'bottom-right'
-    | 'bottom-middle'
     | 'bottom-left'
     | 'left-bottom'
-    | 'left-middle'
     | 'left-top';
   heading?: React.ReactNode;
   className?: string;
@@ -354,7 +350,6 @@ export default class Pointout extends React.Component<
             })}
           >
             <div className="Pointout__arrow-pointer" />
-            <div className="Pointout__arrow-neck" />
           </div>
         )}
         <div className="Pointout__box">
@@ -377,7 +372,11 @@ export default class Pointout extends React.Component<
           >
             {heading &&
               React.cloneElement(heading as React.ReactElement<any>, {
-                id: target ? null : headingId
+                id: target ? null : headingId,
+                className: classNames(
+                  'Pointout__heading',
+                  (heading as React.ReactElement<any>).props?.className
+                )
               })}
             {target ? removeIds(children) : children}
           </div>

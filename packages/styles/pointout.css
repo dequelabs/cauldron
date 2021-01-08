@@ -1,14 +1,18 @@
 .Pointout {
+  --pointout-padding: var(--space-smallest);
+  --pointout-arrow-width: 38px;
+  --pointout-arrow-height: 60px;
+  --pointout-dismiss-button-color: #f7846c;
+  --pointout-border-width: 3px;
   position: absolute;
   display: inline-block;
+  max-width: 300px;
 }
 
 .Pointout__arrow {
   position: absolute;
   display: block;
-  width: 33px;
-  left: -10px;
-  top: 4px;
+  width: var(--pointout-arrow-width);
   transform: translateY(-100%);
 }
 
@@ -16,154 +20,105 @@
   border-top-left-radius: 0;
 }
 
-.Pointout__arrow--top-middle {
-  left: 50%;
-  transform: translateY(-100%) translateX(-50%);
-}
-
-.Pointout__arrow--top-right {
-  right: -13px;
+.Pointout__arrow--top-right .Pointout__arrow {
+  right: 0;
   left: auto;
 }
 
-.Pointout__arrow--top-right + .Pointout__box {
-  border-top-right-radius: 0;
-}
-
-.Pointout__arrow--bottom,
-.Pointout__arrow--bottom-left,
-.Pointout__arrow--bottom-middle,
-.Pointout__arrow--bottom-right {
+.Pointout__arrow--bottom .Pointout__arrow,
+.Pointout__arrow--bottom-left .Pointout__arrow,
+.Pointout__arrow--bottom-right .Pointout__arrow {
   bottom: 2px;
   top: auto;
   transform: rotate(180deg) translateY(-100%);
 }
 
-.Pointout__arrow--bottom,
-.Pointout__arrow--bottom-left {
+.Pointout__arrow--bottom .Pointout__arrow,
+.Pointout__arrow--bottom-left .Pointout__arrow {
   left: -13px;
 }
 
-.Pointout__arrow--bottom + .Pointout__box,
-.Pointout__arrow--bottom-left + .Pointout__box {
-  border-bottom-left-radius: 0;
-}
-
-.Pointout__arrow--bottom-middle {
-  left: 50%;
-  transform: rotate(180deg) translateY(-100%) translateX(50%);
-}
-
-.Pointout__arrow--bottom-right {
-  right: -10px;
+.Pointout__arrow--bottom-right .Pointout__arrow {
+  right: calc(var(--pointout-padding) * -1);
   left: auto;
 }
 
-.Pointout__arrow--bottom-right + .Pointout__box {
-  border-bottom-right-radius: 0;
-}
-
-.Pointout__arrow--left-top,
-.Pointout__arrow--left-middle,
-.Pointout__arrow--left-bottom {
+.Pointout__arrow--left-top .Pointout__arrow,
+.Pointout__arrow--left-bottom .Pointout__arrow {
   transform: rotate(-90deg);
-  left: -38px;
+  left: -46px;
 }
 
-.Pointout__arrow--left,
-.Pointout__arrow--left-top {
-  top: -20px;
+.Pointout__arrow--left .Pointout__arrow,
+.Pointout__arrow--left-top .Pointout__arrow {
+  top: -14px;
 }
 
-.Pointout__arrow--left + .Pointout__box,
-.Pointout__arrow--left-top + .Pointout__box {
-  border-top-left-radius: 0;
-}
-
-.Pointout__arrow--left-middle {
-  transform: translateY(-50%) rotate(-90deg);
-  top: 50%;
-}
-
-.Pointout__arrow--left-bottom {
+.Pointout__arrow--left-bottom .Pointout__arrow {
   top: auto;
-  bottom: -17px;
+  bottom: -14px;
 }
 
-.Pointout__arrow--left-bottom + .Pointout__box {
-  border-bottom-left-radius: 0;
-}
-
-.Pointout__arrow--right-top,
-.Pointout__arrow--right-middle,
-.Pointout__arrow--right-bottom {
-  right: -38px;
+.Pointout__arrow--right-top .Pointout__arrow,
+.Pointout__arrow--right-bottom .Pointout__arrow {
+  right: -46px;
   left: auto;
   transform: rotate(90deg);
 }
 
-.Pointout__arrow--right,
-.Pointout__arrow--right-top {
-  top: -17px;
+.Pointout__arrow--right .Pointout__arrow,
+.Pointout__arrow--right-top .Pointout__arrow {
+  top: -14px;
 }
 
-.Pointout__arrow--right + .Pointout__box,
-.Pointout__arrow--right-top + .Pointout__box {
-  border-top-right-radius: 0;
-}
-
-.Pointout__arrow--right-middle {
-  transform: translateY(-50%) rotate(90deg);
-  top: 50%;
-}
-
-.Pointout__arrow--right-bottom {
+.Pointout__arrow--right-bottom .Pointout__arrow {
   top: auto;
   bottom: -20px;
 }
 
-.Pointout__arrow--right-bottom + .Pointout__box {
-  border-bottom-right-radius: 0;
-}
-
 .Pointout__arrow-pointer {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='33' height='22'%3E%3Cpath d='M13 5c2-2 3-2 5 0l10 11c2 2 2 4 0 4H3c-2 0-2-2 0-4z' fill='%23fff' stroke='rgba(193, 27, 222, 0.75)' stroke-linejoin='round' stroke-width='3'/%3E%3C/svg%3E");
-  width: 33px;
-  height: 22px;
-  filter: drop-shadow(0 0 8px var(--focus-glow));
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg version='1.2' xmlns='http://www.w3.org/2000/svg' overflow='visible' preserveAspectRatio='none' viewBox='0 0 53.75 70.97' width='51' height='68'%3E%3Cg transform='translate(1 1)'%3E%3Cdefs%3E%3CclipPath id='a' vector-effect='non-scaling-stroke'%3E%3Cpath vector-effect='non-scaling-stroke' fill='none' d='M0 0h51.75v68.97H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cimage href='data:image/png;base64,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' transform='translate(-7.35 -16.35)' height='114' width='67' vector-effect='non-scaling-stroke' style='mix-blend-mode:multiply' opacity='.75'/%3E%3Cpath d='M32.88 69.49l-3-26 3-2-7-20-7 20 3 2-3 26 7 10z' vector-effect='non-scaling-stroke' fill='%23283640' stroke='%23a5db75' stroke-width='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-position-x: center;
+  background-position-y: -6px;
+  width: var(--pointout-arrow-width);
+  height: var(--pointout-arrow-height);
+  filter: drop-shadow(0 0 8px var(--pointout-border-color));
   position: relative;
+  top: 1px;
   z-index: 1;
 }
 
-.Pointout__arrow-neck {
-  background: var(--tile-background-color);
-  width: 10px;
-  height: 27px;
-  position: relative;
-  z-index: 2;
-  margin-top: -1px;
-  margin-bottom: -1px;
-  transform: translateX(10px) translateY(-3px);
-  box-shadow: 6px 0px 0 -3px var(--focus-glow),
-    -6px 0px 0 -3px var(--focus-glow), 10px 0 10px -4px var(--focus-glow),
-    -10px 0 10px -4px var(--focus-glow);
-}
-
 .Pointout__box {
-  background: var(--tile-background-color);
-  padding: 12px;
-  max-width: 300px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 0px 3px var(--focus-glow),
-    0px 0px 12px 4px var(--focus-glow);
+  box-shadow: 0px 0px 0px var(--pointout-border-width)
+      var(--pointout-border-color),
+    0px 0px 12px 4px var(--pointout-border-color);
   z-index: 9;
 }
 
 .Pointout__dismiss {
   position: absolute;
-  right: 15px;
-  z-index: 1;
-  background: var(--tile-background-color);
+  right: 0;
+  top: calc(var(--pointout-border-width) * -1);
+  transform: translateY(-100%);
+  height: 34px;
+  width: 34px;
+  background-color: var(--pointout-dismiss-button-color);
+}
+
+.Pointout__dismiss:focus,
+.Pointout--focus-active {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--pointout-dismiss-button-color),
+    inset 0 0 0 4px currentColor;
+}
+
+.Pointout__arrow--top-right .Pointout__dismiss {
+  right: var(--pointout-arrow-width);
+}
+
+.Pointout__dismiss svg {
+  height: 24px;
+  width: 24px;
 }
 
 .Pointout__dismiss:hover {
@@ -172,21 +127,26 @@
 
 .Pointout__content {
   position: relative;
+  background: var(--pointout-background-color);
+  color: var(--pointout-text-color);
+  padding: var(--pointout-padding);
 }
 
-.Pointout__content h4 {
-  margin: 0 0 5px 0;
+.Pointout__content .Pointout__heading {
+  color: var(--pointout-text-color);
+  margin: 0;
   padding: 0;
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
-  color: var(--header-text-color-dark);
+  padding-bottom: var(--space-smallest);
+  margin-bottom: var(--space-smallest);
+  border-bottom: 1px solid #fff;
 }
 
 .Pointout__content p {
   margin: 0;
   font-size: var(--text-size-smaller);
   font-weight: var(--font-weight-light);
-  color: var(--text-color-base);
 }
 
 .Pointout__content:focus {
@@ -209,65 +169,40 @@
   display: none;
 }
 
-.Pointout--no-arrow .Pointout__box {
-  border-top-left-radius: 3px;
-}
-
-.Pointout--focus-active {
-  outline: #d71ef7 solid 2px;
-  outline-offset: 2px;
-}
-
-.Pointout__content--focus-active:before {
-  background: #283640;
-}
-
 .Pointout--auto[class*='top-'] {
-  margin-top: 42px;
+  margin-top: 50px;
 }
 
 .Pointout--auto[class*='bottom-'] {
-  margin-top: -44px;
+  margin-top: -45px;
 }
 
 .Pointout--auto[class*='left-'] {
-  margin-left: 44px;
+  margin-left: 45px;
 }
 
 .Pointout--auto[class*='right-'] {
-  margin-left: -44px;
+  margin-left: -45px;
 }
 
 .Pointout--auto.Pointout__arrow--top-left {
-  transform: translateX(-5px);
-}
-
-.Pointout--auto.Pointout__arrow--top-middle {
-  transform: translateX(-50%) translateX(2px);
+  transform: translateX(-28px);
 }
 
 .Pointout--auto.Pointout__arrow--top-right {
-  transform: translateX(-100%) translateX(5px);
+  transform: translateX(-100%) translateX(12px);
 }
 
 .Pointout--auto.Pointout__arrow--left-top {
-  transform: translateY(-5px);
-}
-
-.Pointout--auto.Pointout__arrow--left-middle {
-  transform: translateY(-50%) translateY(-2px);
+  transform: translateY(-16px);
 }
 
 .Pointout--auto.Pointout__arrow--left-bottom {
-  transform: translateY(-100%) translateY(5px);
+  transform: translateY(-100%) translateY(16px);
 }
 
 .Pointout--auto.Pointout__arrow--bottom-left {
   transform: translateY(-100%) translateX(-5px);
-}
-
-.Pointout--auto.Pointout__arrow--bottom-middle {
-  transform: translateY(-100%) translateX(-50%) translateX(-2px);
 }
 
 .Pointout--auto.Pointout__arrow--bottom-right {
@@ -275,13 +210,9 @@
 }
 
 .Pointout--auto.Pointout__arrow--right-top {
-  transform: translateX(-100%) translateY(-5px);
-}
-
-.Pointout--auto.Pointout__arrow--right-middle {
-  transform: translateX(-100%) translateY(-50%) translateY(2px);
+  transform: translateX(-100%) translateY(-17px);
 }
 
 .Pointout--auto.Pointout__arrow--right-bottom {
-  transform: translateX(-100%) translateY(-100%) translateY(5px);
+  transform: translateX(-100%) translateY(-100%) translateY(10px);
 }

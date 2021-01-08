@@ -63,6 +63,11 @@
   --tooltip-info-border-color: #333;
   --tooltip-info-text-color: #333;
 
+  /* poinout */
+  --pointout-border-color: #a5db75;
+  --pointout-background-color: #283640;
+  --pointout-text-color: #d4dde0;
+
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
 
