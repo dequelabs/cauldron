@@ -103,7 +103,7 @@ const Demo = () => {
       </button>
       <Pointout
         ref={ftpoRef}
-        arrowPosition="left-top"
+        arrowPosition="top-left"
         heading={<h4>Targeted FTPO</h4>}
         dismissText="Close"
         target={buttonRef}

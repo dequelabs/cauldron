@@ -24,7 +24,13 @@ export interface PointoutProps {
   ftpoRef: React.Ref<HTMLDivElement>;
   noArrow?: boolean;
   onClose: () => void;
+  onNext: () => void;
+  onPrevious: () => void;
   dismissText?: string;
+  nextText?: string;
+  previousText?: string;
+  showNext?: boolean;
+  showPrevious?: boolean;
   target?: React.RefObject<HTMLElement> | HTMLElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -45,6 +51,8 @@ export default class Pointout extends React.Component<
     noArrow: false,
     onClose: () => {},
     dismissText: 'dismiss',
+    previousText: 'previous',
+    nextText: 'next',
     arrowPosition: 'top-left'
   };
 
@@ -320,6 +328,10 @@ export default class Pointout extends React.Component<
       children,
       noArrow,
       dismissText,
+      previousText,
+      nextText,
+      showNext,
+      showPrevious,
       arrowPosition,
       className,
       target,
@@ -353,6 +365,28 @@ export default class Pointout extends React.Component<
           </div>
         )}
         <div className="Pointout__box">
+          {showNext && (
+            <button
+              className="Pointout__previous"
+              type="button"
+              aria-label={previousText}
+              onClick={this.onPreviousClick}
+              tabIndex={target ? -1 : 0}
+            >
+              <Icon type="arrow-left" aria-hidden="true" />
+            </button>
+          )}
+          {showPrevious && (
+            <button
+              className="Pointout__next"
+              type="button"
+              aria-label={nextText}
+              onClick={this.onNextClick}
+              tabIndex={target ? -1 : 0}
+            >
+              <Icon type="arrow-right" aria-hidden="true" />
+            </button>
+          )}
           <button
             className="Pointout__dismiss"
             type="button"
@@ -396,6 +430,16 @@ export default class Pointout extends React.Component<
           >
             <button
               type="button"
+              aria-label={previousText}
+              onClick={this.onPreviousClick}
+            />
+            <button
+              type="button"
+              aria-label={nextText}
+              onClick={this.onNextClick}
+            />
+            <button
+              type="button"
               aria-label={dismissText}
               onClick={this.onCloseClick}
             />
@@ -417,6 +461,14 @@ export default class Pointout extends React.Component<
     }
 
     return FTPO;
+  }
+
+  onPreviousClick() {
+    this.props?.onPrevious();
+  }
+
+  onNextClick() {
+    this.props?.onNext();
   }
 
   onCloseClick() {
