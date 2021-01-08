@@ -36,24 +36,6 @@ test('should handle <Icon /> as child', () => {
   expect(button.contains(<Icon type="trash" />)).toBe(true);
 });
 
-test('should console.warn if buttonRef prop is used', () => {
-  const originalWarn = console.warn;
-  const consoleOutput = [];
-  const mockedWarn = jest.fn(output => consoleOutput.push(output));
-  const btnRef = createRef();
-  console.warn = mockedWarn;
-
-  shallow(<Button buttonRef={btnRef}>Delete</Button>);
-
-  expect(mockedWarn).toBeCalledTimes(1);
-  expect(consoleOutput[0]).toBe(
-    "%c Warning: 'buttonRef' prop is deprecated, please use 'ref'. "
-  );
-
-  // reset
-  console.warn = originalWarn;
-});
-
 test('should handle "thin" modifier', () => {
   const button = shallow(<Button thin>link</Button>);
   expect(button.hasClass('Button--thin')).toBe(true);
