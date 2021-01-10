@@ -10,7 +10,7 @@
   color: var(--icon-button-icon-color);
   margin: 2px;
   padding: 0;
-  --button-hover-outline-color: var(--header-text-color-dark);
+  --button-hover-outline-color: var(--top-bar-text-color);
 }
 
 .IconButton div {
