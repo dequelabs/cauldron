@@ -11,7 +11,6 @@
   color: var(--icon-button-icon-color);
   margin: 2px;
   padding: 0;
-  --button-hover-outline-color: var(--top-bar-text-color);
 }
 
 .IconButton div {
@@ -31,6 +30,7 @@
   bottom: -2px;
   left: -2px;
   border-radius: 3px;
+  pointer-events: none;
 }
 
 .IconButton:focus:before {
@@ -38,5 +38,5 @@
 }
 
 .IconButton:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--button-hover-outline-color);
+  box-shadow: 0 0 0 1px var(--top-bar-text-color);
 }
