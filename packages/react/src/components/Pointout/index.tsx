@@ -365,7 +365,7 @@ export default class Pointout extends React.Component<
           </div>
         )}
         <div className="Pointout__box">
-          {showNext && (
+          {showPrevious && (
             <button
               className="Pointout__previous"
               type="button"
@@ -376,7 +376,7 @@ export default class Pointout extends React.Component<
               <Icon type="arrow-left" aria-hidden="true" />
             </button>
           )}
-          {showPrevious && (
+          {showNext && (
             <button
               className="Pointout__next"
               type="button"

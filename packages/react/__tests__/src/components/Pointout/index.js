@@ -243,6 +243,48 @@ test('should clean ids from portal FTPO', () => {
   expect(portalFtpo.exists('#foo')).toBeFalsy();
 });
 
+test.only('should show next button when `showNext` prop is truthy', () => {
+  const ftpo = mount(
+    <Pointout {...defaults} showNext={true}>
+      {'hello'}
+    </Pointout>
+  );
+  expect(ftpo.find('.Pointout__next').exists()).toBeTruthy();
+});
+
+test('should show previous button when `showPrevious` prop is truthy', () => {
+  const ftpo = mount(
+    <Pointout {...defaults} showPrevious={true}>
+      {'hello'}
+    </Pointout>
+  );
+  expect(ftpo.find('.Pointout__previous').exists()).toBeTruthy();
+});
+
+test('should call onNext function when next button is clicked', () => {
+  let called = false;
+  const handleNext = () => (called = true);
+  const ftpo = mount(
+    <Pointout {...defaults} showNext={true} onNext={handleNext}>
+      {'hello'}
+    </Pointout>
+  );
+  ftpo.find('.Pointout__next').simulate('click');
+  expect(called).toBeTruthy();
+});
+
+test('should call onPrevious function when previous button is clicked', () => {
+  let called = false;
+  const handlePrevious = () => (called = true);
+  const ftpo = mount(
+    <Pointout {...defaults} showNext={true} onPrevious={handlePrevious}>
+      {'hello'}
+    </Pointout>
+  );
+  ftpo.find('.Pointout__previous').simulate('click');
+  expect(called).toBeTruthy();
+});
+
 test('should return no axe violations', async () => {
   const ftpo = mount(
     <Pointout {...defaults} heading={<h4>heading</h4>} dismissText={'Dismiss'}>
