@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import Demo from '../../../Demo';
-import { Button } from '@deque/cauldron-react/';
+import { Button, Icon } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 const ButtonDemo = () => (
@@ -11,6 +11,23 @@ const ButtonDemo = () => (
         { children: 'Primary' },
         { children: 'Primary Disabled', disabled: true },
         { children: 'Primary thin', thin: true },
+        {
+          children: (
+            <>
+              <Icon type="plus" />
+              Primary Icon
+            </>
+          )
+        },
+        {
+          children: (
+            <>
+              <Icon type="plus" />
+              Primary Icon thin
+            </>
+          ),
+          thin: true
+        },
         { children: 'Secondary', variant: 'secondary' },
         {
           children: 'Secondary Disabled',
@@ -18,6 +35,25 @@ const ButtonDemo = () => (
           disabled: true
         },
         { children: 'Secondary thin', variant: 'secondary', thin: true },
+        {
+          children: (
+            <>
+              Secondary Icon
+              <Icon type="plus" style={{ fill: '#222' }} />
+            </>
+          ),
+          variant: 'secondary'
+        },
+        {
+          children: (
+            <>
+              Secondary Icon thin
+              <Icon type="plus" style={{ fill: '#222' }} />
+            </>
+          ),
+          thin: true,
+          variant: 'secondary'
+        },
         { children: 'Error', variant: 'error' },
         { children: 'Error Disabled', variant: 'error', disabled: true },
         { children: 'Error thin', variant: 'error', thin: true },

@@ -12,6 +12,11 @@
   text-transform: uppercase;
   height: 36px;
   min-width: 100px;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
   --button-hover-outline-color: var(--button-background-color-primary);
 }
 
@@ -80,6 +85,18 @@ button.Link {
   background-color: var(--button-background-color-error-active);
 }
 
+.Button--primary .Icon,
+.Button--secondary .Icon,
+.Button--clear .Icon,
+.Button--error .Icon {
+  margin: 0 -4px;
+}
+
+.Button--thin .Icon svg {
+  width: calc(var(--button-thin-height) - 8px);
+  height: calc(var(--button-thin-height) - 8px);
+}
+
 .DefinitionButton {
   display: inline;
   vertical-align: baseline;
@@ -104,6 +121,7 @@ button.Link {
   height: var(--button-thin-height);
   min-width: 100px;
   font-size: var(--text-size-smallest);
+  line-height: var(--text-size-smallest);
   padding: 0 16px;
 }
 
