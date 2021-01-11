@@ -122,6 +122,9 @@ export default class IconDemo extends Component {
               type: 'menu'
             },
             {
+              type: 'new'
+            },
+            {
               type: 'no'
             },
             {
