@@ -91,6 +91,8 @@ export default class Pointout extends React.Component<
     super(props);
     this.state = { show: true, style: {} };
     this.onCloseClick = this.onCloseClick.bind(this);
+    this.onPreviousClick = this.onPreviousClick.bind(this);
+    this.onNextClick = this.onNextClick.bind(this);
   }
 
   getFocusableElements(root: HTMLElement | null) {

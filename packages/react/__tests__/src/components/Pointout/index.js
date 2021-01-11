@@ -243,7 +243,7 @@ test('should clean ids from portal FTPO', () => {
   expect(portalFtpo.exists('#foo')).toBeFalsy();
 });
 
-test.only('should show next button when `showNext` prop is truthy', () => {
+test('should show next button when `showNext` prop is truthy', () => {
   const ftpo = mount(
     <Pointout {...defaults} showNext={true}>
       {'hello'}
@@ -277,7 +277,7 @@ test('should call onPrevious function when previous button is clicked', () => {
   let called = false;
   const handlePrevious = () => (called = true);
   const ftpo = mount(
-    <Pointout {...defaults} showNext={true} onPrevious={handlePrevious}>
+    <Pointout {...defaults} showPrevious={true} onPrevious={handlePrevious}>
       {'hello'}
     </Pointout>
   );
