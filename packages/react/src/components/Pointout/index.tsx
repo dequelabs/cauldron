@@ -10,16 +10,12 @@ import removeIds from '../../utils/remove-ids';
 export interface PointoutProps {
   arrowPosition:
     | 'top-left'
-    | 'top-middle'
     | 'top-right'
     | 'right-top'
-    | 'right-middle'
     | 'right-bottom'
     | 'bottom-right'
-    | 'bottom-middle'
     | 'bottom-left'
     | 'left-bottom'
-    | 'left-middle'
     | 'left-top';
   heading?: React.ReactNode;
   className?: string;
@@ -28,7 +24,13 @@ export interface PointoutProps {
   ftpoRef: React.Ref<HTMLDivElement>;
   noArrow?: boolean;
   onClose: () => void;
+  onNext: () => void;
+  onPrevious: () => void;
   dismissText?: string;
+  nextText?: string;
+  previousText?: string;
+  showNext?: boolean;
+  showPrevious?: boolean;
   target?: React.RefObject<HTMLElement> | HTMLElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -49,6 +51,8 @@ export default class Pointout extends React.Component<
     noArrow: false,
     onClose: () => {},
     dismissText: 'dismiss',
+    previousText: 'previous',
+    nextText: 'next',
     arrowPosition: 'top-left'
   };
 
@@ -87,6 +91,8 @@ export default class Pointout extends React.Component<
     super(props);
     this.state = { show: true, style: {} };
     this.onCloseClick = this.onCloseClick.bind(this);
+    this.onPreviousClick = this.onPreviousClick.bind(this);
+    this.onNextClick = this.onNextClick.bind(this);
   }
 
   getFocusableElements(root: HTMLElement | null) {
@@ -324,6 +330,10 @@ export default class Pointout extends React.Component<
       children,
       noArrow,
       dismissText,
+      previousText,
+      nextText,
+      showNext,
+      showPrevious,
       arrowPosition,
       className,
       target,
@@ -354,10 +364,31 @@ export default class Pointout extends React.Component<
             })}
           >
             <div className="Pointout__arrow-pointer" />
-            <div className="Pointout__arrow-neck" />
           </div>
         )}
         <div className="Pointout__box">
+          {showPrevious && (
+            <button
+              className="Pointout__previous"
+              type="button"
+              aria-label={previousText}
+              onClick={this.onPreviousClick}
+              tabIndex={target ? -1 : 0}
+            >
+              <Icon type="arrow-left" aria-hidden="true" />
+            </button>
+          )}
+          {showNext && (
+            <button
+              className="Pointout__next"
+              type="button"
+              aria-label={nextText}
+              onClick={this.onNextClick}
+              tabIndex={target ? -1 : 0}
+            >
+              <Icon type="arrow-right" aria-hidden="true" />
+            </button>
+          )}
           <button
             className="Pointout__dismiss"
             type="button"
@@ -377,7 +408,11 @@ export default class Pointout extends React.Component<
           >
             {heading &&
               React.cloneElement(heading as React.ReactElement<any>, {
-                id: target ? null : headingId
+                id: target ? null : headingId,
+                className: classNames(
+                  'Pointout__heading',
+                  (heading as React.ReactElement<any>).props?.className
+                )
               })}
             {target ? removeIds(children) : children}
           </div>
@@ -395,6 +430,16 @@ export default class Pointout extends React.Component<
             aria-labelledby={heading ? headingId : undefined}
             ref={el => (this.offscreenRef = el)}
           >
+            <button
+              type="button"
+              aria-label={previousText}
+              onClick={this.onPreviousClick}
+            />
+            <button
+              type="button"
+              aria-label={nextText}
+              onClick={this.onNextClick}
+            />
             <button
               type="button"
               aria-label={dismissText}
@@ -418,6 +463,14 @@ export default class Pointout extends React.Component<
     }
 
     return FTPO;
+  }
+
+  onPreviousClick() {
+    this.props?.onPrevious();
+  }
+
+  onNextClick() {
+    this.props?.onNext();
   }
 
   onCloseClick() {
