@@ -44,6 +44,12 @@ export default class IconDemo extends Component {
               type: 'caution'
             },
             {
+              type: 'check'
+            },
+            {
+              type: 'check-solid'
+            },
+            {
               type: 'check-circle'
             },
             {
