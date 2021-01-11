@@ -1,42 +1,42 @@
 .IconButton {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-content: center;
   height: var(--button-thin-height);
   width: var(--button-thin-height);
-  border: 1px solid transparent;
   border-radius: 3px;
+  border: none;
   background-color: var(--icon-button-background-color);
   color: var(--icon-button-icon-color);
   margin: 2px;
+  padding: 0;
 }
 
-.IconButton svg {
-  height: calc(var(--button-thin-height) - 4px);
-  width: calc(var(--button-thin-height) - 4px);
-}
-
-.IconButton:before {
-  content: '';
-  position: absolute;
-  height: calc(var(--button-thin-height) + 4px);
-  width: calc(var(--button-thin-height) + 4px);
-  transform: translateY(-4px);
-  border-radius: 3px;
-}
-
-.IconButton:hover:before {
-  border: 1px solid var(--icon-button-background-color);
+.IconButton .Icon {
+  width: 100%;
+  height: 100%;
 }
 
 .IconButton:focus {
   outline: none;
 }
 
+.IconButton:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
 .IconButton:focus:before {
-  border: 2px solid var(--button-focus-ring-color);
-  height: calc(var(--button-thin-height) + 6px);
-  width: calc(var(--button-thin-height) + 6px);
-  transform: translateX(-1px) translateY(-5px);
-  box-shadow: 0 0 1px var(--button-focus-ring-color);
+  box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
+}
+
+.IconButton:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--top-bar-text-color);
 }
