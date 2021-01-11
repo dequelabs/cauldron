@@ -22,3 +22,12 @@ test('sets aria-label to the value of the label prop', () => {
   const icon = mount(<Icon type="foo" label="Fred" />);
   expect(icon.getDOMNode().getAttribute('aria-label')).toBe('Fred');
 });
+
+test('supports ref prop', done => {
+  const ref = icon => {
+    expect(icon).toBeTruthy();
+    done();
+  };
+
+  mount(<Icon type="foo" ref={ref} />);
+});
