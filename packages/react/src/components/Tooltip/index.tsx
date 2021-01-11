@@ -17,6 +17,23 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   hideElementOnHidden?: boolean;
 }
 
+// fires a custom "cauldron:tooltip:show" / "cauldron:tooltip:hide" event
+// to allow projects using cauldron to hook into when a tooltip is shown/hidden
+const fireCustomEvent = (show: boolean, button?: HTMLElement | null) => {
+  if (!button) {
+    return;
+  }
+
+  const event = new Event(
+    show ? 'cauldron:tooltip:show' : 'cauldron:tooltip:hide',
+    {
+      bubbles: true
+    }
+  );
+
+  button.dispatchEvent(event);
+};
+
 export default function Tooltip({
   id: propId,
   placement: initialPlacement = 'auto',
@@ -57,10 +74,12 @@ export default function Tooltip({
       await update();
     }
     setShowTooltip(true);
+    fireCustomEvent(true, targetElement);
   };
   const hide = ({ target }: FocusEvent | MouseEvent) => {
     if (document.activeElement !== target) {
       setShowTooltip(false);
+      fireCustomEvent(false, targetElement);
     }
   };
 
