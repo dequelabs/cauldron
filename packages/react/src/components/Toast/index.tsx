@@ -4,6 +4,7 @@ import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
+import cauldronEvent from '../../utils/cauldron-event';
 
 export interface ToastProps {
   type: 'confirmation' | 'caution' | 'action-needed' | 'info';
@@ -95,6 +96,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const {
       type,
       children,
+      // prevent onDismiss from being spread (`otherProps`) to the toast div
+      // eslint-disable-next-line
       onDismiss,
       dismissText,
       toastRef,
@@ -166,7 +169,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             tabIndexHandler(true, this.el);
             isolator?.deactivate();
           }
-
+          this.el?.dispatchEvent(cauldronEvent('toast:hide'));
           this.setState({ animationClass: 'is--hidden' }, onDismiss);
         });
       }
@@ -192,6 +195,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           // focus the toast
           this.el.focus();
         }
+
+        this.el?.dispatchEvent(cauldronEvent('toast:show'));
       }
     );
   }

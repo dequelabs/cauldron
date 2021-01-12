@@ -7,6 +7,7 @@ import {
   setStyle,
   removeStyleTag
 } from '../../utils/stylesheets';
+import cauldronEvent from '../../utils/cauldron-event';
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -96,6 +97,7 @@ export default class ExpandCollapsePanel extends React.Component<
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
         setStyle(this.styleTag, '');
+        panel?.dispatchEvent(cauldronEvent('expandcollapsepanel:expand'));
       }, animationTiming as number);
     });
   };
@@ -136,6 +138,7 @@ export default class ExpandCollapsePanel extends React.Component<
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
         setStyle(this.styleTag, '');
+        panel?.dispatchEvent(cauldronEvent('expandcollapsepanel:collapse'));
       }, animationTiming as number);
     });
   };

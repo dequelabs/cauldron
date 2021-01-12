@@ -9,6 +9,7 @@ import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
+import cauldronEvent from '../../utils/cauldron-event';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -75,8 +76,10 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   componentDidUpdate(prevProps: DialogProps) {
     if (!prevProps.show && this.props.show) {
       this.attachIsolator(this.focusHeading);
+      this.element?.dispatchEvent(cauldronEvent('dialog:show'));
     } else if (prevProps.show && !this.props.show) {
       this.close();
+      this.element?.dispatchEvent(cauldronEvent('dialog:hide'));
     }
   }
 
