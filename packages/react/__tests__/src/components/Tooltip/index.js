@@ -101,6 +101,46 @@ test('does not render an arrow given variant="big"', async () => {
   expect(wrapper.find('.TooltipArrow').exists()).toBe(false);
 });
 
+test('should fire the "cauldron:tooltip:show" custom event when tooltip is shown', async () => {
+  let fired = false;
+  const onShow = () => {
+    fired = true;
+  };
+  const wrapper = mount(<Wrapper />);
+  const button = wrapper.find('button').getDOMNode();
+
+  button.addEventListener('cauldron:tooltip:show', onShow);
+
+  await update(wrapper);
+  await act(async () => {
+    const e = new Event('mouseenter', { bubbles: true });
+    button.dispatchEvent(e);
+  });
+  await update(wrapper);
+  button.removeEventListener('cauldron:tooltip:show', onShow);
+
+  expect(fired).toBe(true);
+});
+
+test('should fire the "cauldron:tooltip:hide" custom event when tooltip is hidden', async () => {
+  let fired = false;
+  const onHide = () => (fired = true);
+  const wrapper = mount(<Wrapper />);
+  const button = wrapper.find('button').getDOMNode();
+
+  button.addEventListener('cauldron:tooltip:hide', onHide);
+
+  await update(wrapper);
+  await act(async () => {
+    const e = new Event('mouseleave', { bubbles: true });
+    button.dispatchEvent(e);
+  });
+  await update(wrapper);
+  button.removeEventListener('cauldron:tooltip:hide', onHide);
+
+  expect(fired).toBe(true);
+});
+
 test('variant="big" should return no axe violations', async () => {
   const wrapper = mount(<BigWrapper />);
   await update(wrapper);
