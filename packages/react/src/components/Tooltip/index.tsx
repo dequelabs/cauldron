@@ -115,13 +115,13 @@ export default function Tooltip({
 
     const targetElement = document.body;
     if (showTooltip) {
-      targetElement.addEventListener('keyup', handleEscape);
+      targetElement.addEventListener('keydown', handleEscape);
     } else {
-      targetElement.removeEventListener('keyup', handleEscape);
+      targetElement.removeEventListener('keydown', handleEscape);
     }
 
     return () => {
-      targetElement.removeEventListener('keyup', handleEscape);
+      targetElement.removeEventListener('keydown', handleEscape);
     };
   }, [show]);
 
