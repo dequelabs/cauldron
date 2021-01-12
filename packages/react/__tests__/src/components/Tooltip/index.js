@@ -85,7 +85,7 @@ test('should hide tooltip on escape keypress', async () => {
   expect(wrapper.find('.Tooltip').exists).toBeTruthy();
   await act(async () => {
     document.body.dispatchEvent(
-      new KeyboardEvent('keyup', {
+      new KeyboardEvent('keydown', {
         bubbles: true,
         key: 'Escape'
       })
