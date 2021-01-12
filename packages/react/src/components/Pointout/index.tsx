@@ -381,7 +381,7 @@ export default class Pointout extends React.Component<
               className="Pointout__previous"
               type="button"
               aria-label={previousText}
-              tabIndex={target ? -1 : 0}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
               {...previousButtonProps}
             >
               <Icon type="arrow-left" aria-hidden="true" />
@@ -392,7 +392,7 @@ export default class Pointout extends React.Component<
               className="Pointout__next"
               type="button"
               aria-label={nextText}
-              tabIndex={target ? -1 : 0}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
               {...nextButtonProps}
             >
               <Icon type="arrow-right" aria-hidden="true" />
@@ -403,7 +403,7 @@ export default class Pointout extends React.Component<
             type="button"
             aria-label={dismissText}
             onClick={this.onCloseClick}
-            tabIndex={target ? -1 : 0}
+            tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
             {...closeButtonProps}
           >
             <Icon type="close" aria-hidden="true" />
