@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -24,15 +24,17 @@ export interface PointoutProps {
   ftpoRef: React.Ref<HTMLDivElement>;
   noArrow?: boolean;
   onClose: () => void;
-  onNext: () => void;
-  onPrevious: () => void;
   dismissText?: string;
   nextText?: string;
   previousText?: string;
   showNext?: boolean;
   showPrevious?: boolean;
+  disableOffscreenPointout?: boolean;
   target?: React.RefObject<HTMLElement> | HTMLElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  previousButtonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  nextButtonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  closeButtonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 interface PointoutState {
@@ -78,7 +80,11 @@ export default class Pointout extends React.Component<
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
-    portal: PropTypes.any
+    disableOffscreenPointout: PropTypes.bool,
+    portal: PropTypes.any,
+    previousButtonProps: PropTypes.any,
+    nextButtonProps: PropTypes.any,
+    closeButtonProps: PropTypes.any
   };
 
   private resizeDebounceId: number;
@@ -91,8 +97,6 @@ export default class Pointout extends React.Component<
     super(props);
     this.state = { show: true, style: {} };
     this.onCloseClick = this.onCloseClick.bind(this);
-    this.onPreviousClick = this.onPreviousClick.bind(this);
-    this.onNextClick = this.onNextClick.bind(this);
   }
 
   getFocusableElements(root: HTMLElement | null) {
@@ -315,7 +319,8 @@ export default class Pointout extends React.Component<
     if (
       props.arrowPosition !== nextProps.arrowPosition ||
       props.portal !== nextProps.portal ||
-      props.target !== nextProps.target
+      props.target !== nextProps.target ||
+      props.disableOffscreenPointout !== nextProps.disableOffscreenPointout
     ) {
       attachOffscreenListeners();
       positionRelativeToTarget();
@@ -337,7 +342,11 @@ export default class Pointout extends React.Component<
       arrowPosition,
       className,
       target,
-      portal = document.body
+      disableOffscreenPointout,
+      portal = document.body,
+      previousButtonProps,
+      nextButtonProps,
+      closeButtonProps
     } = this.props;
 
     if (!show) {
@@ -354,7 +363,7 @@ export default class Pointout extends React.Component<
         style={style}
         role={target ? undefined : 'region'}
         aria-labelledby={heading ? headingId : undefined}
-        aria-hidden={!!target}
+        aria-hidden={!!target && !disableOffscreenPointout}
         ref={el => (this.visibleRef = el)}
       >
         {noArrow ? null : (
@@ -372,8 +381,8 @@ export default class Pointout extends React.Component<
               className="Pointout__previous"
               type="button"
               aria-label={previousText}
-              onClick={this.onPreviousClick}
-              tabIndex={target ? -1 : 0}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
+              {...previousButtonProps}
             >
               <Icon type="arrow-left" aria-hidden="true" />
             </button>
@@ -383,8 +392,8 @@ export default class Pointout extends React.Component<
               className="Pointout__next"
               type="button"
               aria-label={nextText}
-              onClick={this.onNextClick}
-              tabIndex={target ? -1 : 0}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
+              {...nextButtonProps}
             >
               <Icon type="arrow-right" aria-hidden="true" />
             </button>
@@ -394,7 +403,8 @@ export default class Pointout extends React.Component<
             type="button"
             aria-label={dismissText}
             onClick={this.onCloseClick}
-            tabIndex={target ? -1 : 0}
+            tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
+            {...closeButtonProps}
           >
             <Icon type="close" aria-hidden="true" />
           </button>
@@ -421,7 +431,7 @@ export default class Pointout extends React.Component<
       </div>
     );
 
-    if (target && portal) {
+    if (target && portal && !disableOffscreenPointout) {
       return (
         <React.Fragment>
           <div
@@ -433,17 +443,14 @@ export default class Pointout extends React.Component<
             <button
               type="button"
               aria-label={previousText}
-              onClick={this.onPreviousClick}
+              {...previousButtonProps}
             />
-            <button
-              type="button"
-              aria-label={nextText}
-              onClick={this.onNextClick}
-            />
+            <button type="button" aria-label={nextText} {...nextButtonProps} />
             <button
               type="button"
               aria-label={dismissText}
               onClick={this.onCloseClick}
+              {...closeButtonProps}
             />
             <div
               className="Pointout__content"
@@ -463,14 +470,6 @@ export default class Pointout extends React.Component<
     }
 
     return FTPO;
-  }
-
-  onPreviousClick() {
-    this.props?.onPrevious();
-  }
-
-  onNextClick() {
-    this.props?.onNext();
   }
 
   onCloseClick() {

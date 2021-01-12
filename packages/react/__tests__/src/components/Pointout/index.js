@@ -261,11 +261,15 @@ test('should show previous button when `showPrevious` prop is truthy', () => {
   expect(ftpo.find('.Pointout__previous').exists()).toBeTruthy();
 });
 
-test('should call onNext function when next button is clicked', () => {
+test('should pass props to next button', () => {
   let called = false;
   const handleNext = () => (called = true);
   const ftpo = mount(
-    <Pointout {...defaults} showNext={true} onNext={handleNext}>
+    <Pointout
+      {...defaults}
+      showNext={true}
+      nextButtonProps={{ onClick: handleNext }}
+    >
       {'hello'}
     </Pointout>
   );
@@ -273,11 +277,15 @@ test('should call onNext function when next button is clicked', () => {
   expect(called).toBeTruthy();
 });
 
-test('should call onPrevious function when previous button is clicked', () => {
+test('should pass props to previous button', () => {
   let called = false;
   const handlePrevious = () => (called = true);
   const ftpo = mount(
-    <Pointout {...defaults} showPrevious={true} onPrevious={handlePrevious}>
+    <Pointout
+      {...defaults}
+      showPrevious={true}
+      previousButtonProps={{ onClick: handlePrevious }}
+    >
       {'hello'}
     </Pointout>
   );
