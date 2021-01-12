@@ -106,7 +106,10 @@ export default function Tooltip({
         event.key === 'Esc' ||
         event.keyCode === 27
       ) {
-        setShowTooltip(false);
+        if (showTooltip) {
+          setShowTooltip(false);
+          event.stopPropagation();
+        }
       }
     };
 
