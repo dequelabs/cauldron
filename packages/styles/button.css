@@ -12,7 +12,7 @@
   text-transform: uppercase;
   height: 36px;
   min-width: 100px;
-  display: grid;
+  display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
