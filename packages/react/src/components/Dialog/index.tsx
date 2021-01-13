@@ -170,7 +170,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
 
   close() {
     this.state.isolator?.deactivate();
-    this.props?.onClose();
+    this.props.onClose?.();
   }
 
   handleClickOutside() {
