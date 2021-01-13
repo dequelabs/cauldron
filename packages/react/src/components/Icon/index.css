@@ -1,7 +1,6 @@
 .Icon {
   display: inline-block;
   vertical-align: middle;
-  pointer-events: none;
 }
 
 .Icon svg {
