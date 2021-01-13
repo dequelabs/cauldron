@@ -376,28 +376,6 @@ export default class Pointout extends React.Component<
           </div>
         )}
         <div className="Pointout__box">
-          {showPrevious && (
-            <button
-              className="Pointout__previous"
-              type="button"
-              aria-label={previousText}
-              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
-              {...previousButtonProps}
-            >
-              <Icon type="arrow-left" aria-hidden="true" />
-            </button>
-          )}
-          {showNext && (
-            <button
-              className="Pointout__next"
-              type="button"
-              aria-label={nextText}
-              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
-              {...nextButtonProps}
-            >
-              <Icon type="arrow-right" aria-hidden="true" />
-            </button>
-          )}
           <button
             className="Pointout__dismiss"
             type="button"
@@ -426,6 +404,28 @@ export default class Pointout extends React.Component<
               })}
             {target ? removeIds(children) : children}
           </div>
+          {showPrevious && (
+            <button
+              className="Pointout__previous"
+              type="button"
+              aria-label={previousText}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
+              {...previousButtonProps}
+            >
+              <Icon type="arrow-left" aria-hidden="true" />
+            </button>
+          )}
+          {showNext && (
+            <button
+              className="Pointout__next"
+              type="button"
+              aria-label={nextText}
+              tabIndex={!!target && !disableOffscreenPointout ? -1 : 0}
+              {...nextButtonProps}
+            >
+              <Icon type="arrow-right" aria-hidden="true" />
+            </button>
+          )}
           {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
         </div>
       </div>
@@ -440,12 +440,6 @@ export default class Pointout extends React.Component<
             aria-labelledby={heading ? headingId : undefined}
             ref={el => (this.offscreenRef = el)}
           >
-            <button
-              type="button"
-              aria-label={previousText}
-              {...previousButtonProps}
-            />
-            <button type="button" aria-label={nextText} {...nextButtonProps} />
             <button
               type="button"
               aria-label={dismissText}
@@ -463,13 +457,27 @@ export default class Pointout extends React.Component<
                 })}
               {children}
             </div>
+            {showPrevious && (
+              <button
+                type="button"
+                aria-label={previousText}
+                {...previousButtonProps}
+              />
+            )}
+            {showNext && (
+              <button
+                type="button"
+                aria-label={nextText}
+                {...nextButtonProps}
+              />
+            )}
           </div>
           {createPortal(FTPO, portal as HTMLElement)}
         </React.Fragment>
       );
     }
 
-    return FTPO;
+    return target && portal ? createPortal(FTPO, portal as HTMLElement) : FTPO;
   }
 
   onCloseClick() {
