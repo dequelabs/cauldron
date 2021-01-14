@@ -5,8 +5,6 @@
 
 .Icon svg {
   display: block;
-  width: inherit;
-  height: inherit;
 }
 
 /* Icon--right is the default orientation */
