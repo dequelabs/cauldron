@@ -44,5 +44,5 @@
 }
 
 .IconButton:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--top-bar-text-color);
+  box-shadow: 0 0 0 1px var(--icon-button-background-color);
 }
