@@ -171,6 +171,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'trash'
+            },
+            {
+              type: 'upload'
             }
           ].sort((a, b) => a.type.localeCompare(b.type))}
           propDocs={{
