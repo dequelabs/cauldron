@@ -10,6 +10,7 @@ export interface IconButtonProps
   icon: string;
   label: string;
   tooltipPlacement?: Placement;
+  variant?: 'light' | 'dark' | 'primary' | 'secondary' | 'error';
 }
 
 export default function IconButton({
@@ -17,6 +18,7 @@ export default function IconButton({
   label,
   tooltipPlacement = 'auto',
   className,
+  variant = 'secondary',
   ...other
 }: IconButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -24,7 +26,14 @@ export default function IconButton({
     <React.Fragment>
       <button
         type={'button'}
-        className={classnames('IconButton', className)}
+        className={classnames(className, {
+          IconButton: true,
+          'IconButton--light': variant === 'light',
+          'IconButton--dark': variant === 'dark',
+          'IconButton--primary': variant === 'primary',
+          'IconButton--secondary': variant === 'secondary',
+          'IconButton--error': variant === 'error'
+        })}
         ref={buttonRef}
         {...other}
       >
@@ -48,5 +57,6 @@ IconButton.propTypes = {
   icon: PropTypes.string,
   label: PropTypes.string,
   tooltipPlayemnt: PropTypes.string,
-  buttonRef: PropTypes.any
+  buttonRef: PropTypes.any,
+  variant: PropTypes.string
 };
