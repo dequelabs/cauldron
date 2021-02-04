@@ -131,6 +131,9 @@ export default class IconDemo extends Component {
               type: 'new'
             },
             {
+              type: 'new-releases'
+            },
+            {
               type: 'no'
             },
             {
