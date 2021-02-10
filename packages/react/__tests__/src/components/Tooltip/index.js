@@ -11,6 +11,8 @@ const update = async wrapper => {
   });
 };
 
+const sleep = (ms = 100) => new Promise(r => setTimeout(r, ms));
+
 // eslint-disable-next-line react/prop-types
 const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
   const ref = useRef();
@@ -136,9 +138,52 @@ test('should fire the "cauldron:tooltip:hide" custom event when tooltip is hidde
     button.dispatchEvent(e);
   });
   await update(wrapper);
+  await act(async () => {
+    await sleep();
+  });
   button.removeEventListener('cauldron:tooltip:hide', onHide);
 
   expect(fired).toBe(true);
+});
+
+test('should handle hovering the tooltip', async () => {
+  const wrapper = mount(<Wrapper />);
+  const button = wrapper.find('button').getDOMNode();
+
+  await update(wrapper);
+  // display the tooltip
+  await act(async () => {
+    const e = new Event('mouseenter', { bubbles: true });
+    button.dispatchEvent(e);
+  });
+  const tooltip = wrapper.find('Tooltip').getDOMNode();
+  // move mouse from trigger to tip
+  await act(async () => {
+    const triggerEvent = new Event('mouseleave', { bubbles: true });
+    const tipEvent = new Event('mouseenter', { bubbles: true });
+    button.dispatchEvent(triggerEvent);
+    tooltip.dispatchEvent(tipEvent);
+  });
+
+  // wait for the tip hide delay
+  await act(async () => {
+    await sleep();
+  });
+  await update(wrapper);
+  // confirm tooltip is still displayed
+  expect(tooltip.isConnected).toBeTruthy();
+  // mouseout of tip
+  await act(async () => {
+    const tipEvent = new Event('mouseleave', { bubbles: true });
+    tooltip.dispatchEvent(tipEvent);
+  });
+  // wait for the tip hide delay
+  await act(async () => {
+    await sleep();
+  });
+  await update(wrapper);
+  // confirm tooltip is now hidden
+  expect(tooltip.isConnected).toBeFalsy();
 });
 
 test('variant="big" should return no axe violations', async () => {
