@@ -6,7 +6,6 @@
   line-height: var(--text-size-normal);
   padding: var(--space-half) var(--space-small);
   border-radius: 4px;
-  pointer-events: none;
   z-index: var(--z-index-tooltip);
 }
 
