@@ -152,4 +152,9 @@
 
   /* list */
   --list-separator: rgba(153, 153, 153, 0.15);
+
+  /* tags */
+  --tag-text-color: #333333;
+  --tag-label-text-color: #666666;
+  --tag-background-color: #f2f2f2;
 }
