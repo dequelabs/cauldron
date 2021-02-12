@@ -1,0 +1,17 @@
+.Tag {
+  color: var(--tag-text-color);
+  background-color: var(--tag-background-color);
+  font-size: var(--text-size-smaller);
+  border: 1px solid currentColor;
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+  width: 90px;
+}
+
+.Tag__label {
+  color: var(--tag-label-text-color);
+  margin-right: 3px;
+}
