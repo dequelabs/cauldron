@@ -101,6 +101,9 @@ export default class IconDemo extends Component {
               type: 'flag'
             },
             {
+              type: 'filter'
+            },
+            {
               type: 'gears'
             },
             {
