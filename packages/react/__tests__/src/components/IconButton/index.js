@@ -17,8 +17,17 @@ test('should render button', async () => {
   expect(wrapper.find('button').exists()).toBe(true);
 });
 
-test.only('should return no axe violations', async () => {
+test('should return no axe violations', async () => {
   const wrapper = mount(<IconButton icon="pencil" label="Edit" />);
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
+});
+
+test('supports ref prop', done => {
+  const ref = iconBtn => {
+    iconBtn.expect(iconBtn).toBeNull();
+    done();
+  };
+
+  mount(<IconButton icon="pencil" label="Edit" ref={ref} />);
 });
