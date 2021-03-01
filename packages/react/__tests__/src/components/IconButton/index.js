@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import IconButton from 'src/components/IconButton';
@@ -23,11 +23,26 @@ test('should return no axe violations', async () => {
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });
 
-test('supports ref prop', done => {
-  const ref = iconBtn => {
-    iconBtn.expect(iconBtn).toBeNull();
-    done();
+test('supports ref prop', async () => {
+  const TestElement = () => {
+    const ref = useRef(null);
+    return (
+      <>
+        <IconButton id="test-id" icon="pencil" label="Edit" ref={ref} />
+        <button
+          id="test-button"
+          onClick={() => {
+            ref.current.focus();
+          }}
+        >
+          Test
+        </button>
+      </>
+    );
   };
 
-  mount(<IconButton icon="pencil" label="Edit" ref={ref} />);
+  const mountedElement = mount(<TestElement />);
+  await update(mountedElement);
+  mountedElement.find('#test-button').simulate('click');
+  expect(document.activeElement.id).toBe('test-id');
 });
