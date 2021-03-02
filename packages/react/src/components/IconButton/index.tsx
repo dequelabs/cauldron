@@ -1,4 +1,9 @@
-import React, { useRef, forwardRef } from 'react';
+import React, {
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+  MutableRefObject
+} from 'react';
 import classnames from 'classnames';
 import { Placement } from '@popperjs/core';
 import Icon from '../Icon';
@@ -9,6 +14,7 @@ export interface IconButtonProps
   label: string;
   tooltipPlacement?: Placement;
 }
+
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
@@ -20,22 +26,21 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     }: IconButtonProps,
     ref
   ): JSX.Element => {
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    if (typeof ref === 'function') {
-      ref(buttonRef.current);
-    }
+    const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
+    useImperativeHandle(ref, () => buttonRef.current);
+
     return (
       <React.Fragment>
         <button
           type={'button'}
           className={classnames('IconButton', className)}
-          ref={typeof ref === 'function' || !ref ? buttonRef : ref}
+          ref={buttonRef}
           {...other}
         >
           <Icon type={icon} />
         </button>
         <Tooltip
-          target={typeof ref === 'function' || !ref ? buttonRef : ref}
+          target={buttonRef}
           placement={tooltipPlacement}
           association="aria-labelledby"
           hideElementOnHidden
