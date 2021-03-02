@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   MutableRefObject
 } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Placement } from '@popperjs/core';
 import Icon from '../Icon';
@@ -51,5 +52,13 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     );
   }
 );
+
+IconButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  tooltipPlacement: PropTypes.any
+};
+
 IconButton.displayName = 'IconButton';
+
 export default IconButton;
