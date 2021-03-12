@@ -101,6 +101,9 @@ export default class IconDemo extends Component {
               type: 'flag'
             },
             {
+              type: 'filter'
+            },
+            {
               type: 'gears'
             },
             {
@@ -129,6 +132,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'new'
+            },
+            {
+              type: 'new-releases'
             },
             {
               type: 'no'

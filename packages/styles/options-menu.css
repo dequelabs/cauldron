@@ -52,6 +52,10 @@
   outline: 0;
 }
 
+.OptionsMenu__list-item:focus {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
+
 .OptionsMenu__list-item[aria-disabled='true'] {
   color: var(--disabled);
 }

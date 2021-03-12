@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -10,6 +10,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Icon = forwardRef<HTMLDivElement, IconProps>(
   ({ label, className, type, ...other }: IconProps, ref) => {
+    const isMounted = useRef(true);
     const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
       '',
       type
@@ -25,12 +26,16 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
       import(`./icons/${name}.svg`)
         .then(icon => {
-          setIcon(() => icon.default);
+          isMounted.current && setIcon(() => icon.default);
         })
         .catch(ex => {
           console.error(`Could not find icon type "${type}".`);
-          setIcon(null);
+          isMounted.current && setIcon(null);
         });
+
+      return () => {
+        isMounted.current = false;
+      };
     }, [type]);
 
     const data = {

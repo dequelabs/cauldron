@@ -261,3 +261,35 @@
 .Pointout--auto.Pointout__arrow--right-bottom {
   transform: translateX(-100%) translateY(-100%) translateY(10px);
 }
+
+.Pointout--auto.Pointout--start[class*='top-'] {
+  transform: none;
+}
+
+.Pointout--auto.Pointout--start[class*='bottom-'] {
+  transform: translateY(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='top-'] {
+  transform: translateX(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='bottom-'] {
+  transform: translateY(-100%) translateX(-100%);
+}
+
+.Pointout--auto.Pointout--start[class*='left-'] {
+  transform: none;
+}
+
+.Pointout--auto.Pointout--start[class*='right-'] {
+  transform: translateX(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='left-'] {
+  transform: translateY(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='right-'] {
+  transform: translateX(-100%) translateY(-100%);
+}

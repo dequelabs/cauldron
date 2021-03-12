@@ -3,6 +3,7 @@ import { Pointout, Code } from '@deque/cauldron-react';
 
 const Demo = () => {
   const buttonRef = React.createRef();
+  const longButtonRef = React.createRef();
   const ftpoRef = React.createRef();
 
   const [portal, setPortal] = useState(null);
@@ -60,6 +61,35 @@ const Demo = () => {
 </Pointout>`}
       </Code>
 
+      <h3>With Position</h3>
+      <button
+        className="Button--primary"
+        ref={longButtonRef}
+        style={{ marginBottom: '171px' }}
+      >
+        I'm a really big button with lots of text
+      </button>
+      <Pointout
+        target={longButtonRef}
+        heading={<h4>First time point out!</h4>}
+        dismissText="Close"
+        arrowPosition="top-right"
+        position="end"
+        portal={portal}
+      >
+        <p>This is a first time point out with a positioned pointout box</p>
+      </Pointout>
+      <Code language="javascript">
+        {`<Pointout
+  heading={<h4>First time point out!</h4>}
+  dismissText="Close"
+  arrowPosition="top-right"
+  position="end"
+>
+  <p>This is a first time point out with a positioned pointout box</p>
+</Pointout>`}
+      </Code>
+
       <h3>Targeted First Time Point Outs</h3>
       <p>
         First time point outs can specify a <code>target</code> prop that will
@@ -104,6 +134,7 @@ const Demo = () => {
       <Pointout
         ref={ftpoRef}
         arrowPosition="top-left"
+        position="center"
         heading={<h4>Targeted FTPO</h4>}
         dismissText="Close"
         target={buttonRef}
