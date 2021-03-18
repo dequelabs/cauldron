@@ -179,6 +179,18 @@ export default class IconDemo extends Component {
               type: 'trash'
             },
             {
+              type: 'triangle-up'
+            },
+            {
+              type: 'triangle-down'
+            },
+            {
+              type: 'triangle-left'
+            },
+            {
+              type: 'triangle-right'
+            },
+            {
               type: 'upload'
             }
           ].sort((a, b) => a.type.localeCompare(b.type))}
