@@ -18,6 +18,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
     useEffect(() => {
+      isMounted.current = true;
       // NOTE: we don't want to pollute test output with
       //  console.errors as a result of the dynamic imports
       if (process.env.NODE_ENV === 'test') {
@@ -28,7 +29,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
         .then(icon => {
           isMounted.current && setIcon(() => icon.default);
         })
-        .catch(ex => {
+        .catch(() => {
           console.error(`Could not find icon type "${type}".`);
           isMounted.current && setIcon(null);
         });
