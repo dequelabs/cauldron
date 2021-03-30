@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
 
 export interface ToastProps {
-  type: 'confirmation' | 'caution' | 'action-needed';
+  type: 'confirmation' | 'caution' | 'action-needed' | 'info';
   onDismiss: () => void;
-  autoHide?: number;
   dismissText?: string;
   toastRef: React.Ref<HTMLDivElement>;
+  focus?: boolean;
   show?: boolean;
 }
 
@@ -26,22 +27,17 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     dismissText: 'Dismiss',
     onDismiss: () => {},
     toastRef: () => {},
+    focus: true,
     show: false
   };
 
   static propTypes = {
     // the ui to be added as the message of the toast
-    children: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.array
-    ]).isRequired,
+    children: PropTypes.node.isRequired,
     // "confirmation", "caution", or "action-needed"
     type: PropTypes.string.isRequired,
     // function to be exectued when toast is dismissed
     onDismiss: PropTypes.func,
-    // if provided, should be a number in ms
-    autoHide: PropTypes.number,
     // text to be added as the aria-label of the "x" dismiss button (default: "Dismiss")
     dismissText: PropTypes.string,
     // an optional ref function to get a handle on the toast element
@@ -49,6 +45,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any })
     ]),
+    // whether or not to focus the toast
+    focus: PropTypes.bool,
     // whether or not to show the toast
     show: PropTypes.bool
   };
@@ -61,7 +59,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     super(props);
 
     this.state = {
-      animationClass: props.show ? 'dqpl-fadein-flex' : 'dqpl-hidden'
+      animationClass: props.show ? 'FadeIn--flex' : 'is--hidden'
     };
 
     this.dismissToast = this.dismissToast.bind(this);
@@ -69,16 +67,13 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
   }
 
   componentDidMount() {
-    const { autoHide, show } = this.props;
+    const { show } = this.props;
 
     if (show) {
       // Timeout because CSS display: none/block and opacity:
       // 0/1 properties cannot be toggled in the same tick
       // see: https://codepen.io/isnerms/pen/eyQaLP
       setTimeout(this.showToast);
-      if (autoHide) {
-        setTimeout(this.dismissToast, autoHide);
-      }
     }
   }
 
@@ -86,7 +81,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const { show } = this.props;
     if (prevProps.show !== show) {
       if (show) {
-        this.setState({ animationClass: 'dqpl-fadein-flex' }, () => {
+        this.setState({ animationClass: 'FadeIn--flex' }, () => {
           setTimeout(this.showToast);
         });
       } else {
@@ -97,33 +92,53 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
   render() {
     const { animationClass } = this.state;
-    const { type, children, dismissText, toastRef, show } = this.props;
+    const {
+      type,
+      children,
+      onDismiss,
+      dismissText,
+      toastRef,
+      focus,
+      show,
+      ...otherProps
+    } = this.props;
     const scrim =
       type === 'action-needed' && show ? (
-        <div className="dqpl-scrim-light dqpl-scrim-show dqpl-scrim-fade-in" />
+        <div className="Scrim--light Scrim--show Scrim--fade-in" />
       ) : null;
+
+    const defaultProps: React.HTMLAttributes<HTMLDivElement> = {
+      tabIndex: -1,
+      className: `Toast Toast--${typeMap[type].className} ${animationClass}`
+    };
+
+    if (!focus) {
+      defaultProps.role = 'alert';
+    }
 
     return (
       <React.Fragment>
         <div
-          tabIndex={-1}
-          className={`dqpl-toast dqpl-toast-${typeMap[type].className} ${animationClass}`}
           ref={el => {
             this.el = el;
             setRef(toastRef, el);
           }}
+          {...defaultProps}
+          {...otherProps}
         >
-          <div className="dqpl-toast-message">
-            <div className={`fa ${typeMap[type].icon}`} aria-hidden="true" />
-            <span>{children}</span>
+          <div className="Toast__message">
+            <Icon type={typeMap[type].icon} />
+            <div className="Toast__message-content">{children}</div>
           </div>
           {type !== 'action-needed' && (
             <button
               type="button"
-              className={'dqpl-toast-dismiss fa fa-close'}
+              className={'Toast__dismiss'}
               aria-label={dismissText}
               onClick={this.dismissToast}
-            />
+            >
+              <Icon type="close" />
+            </button>
           )}
         </div>
         {scrim}
@@ -140,7 +155,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
     this.setState(
       {
-        animationClass: 'dqpl-fadein-flex'
+        animationClass: 'FadeIn--flex'
       },
       () => {
         // Timeout because CSS display: none/block and opacity:
@@ -152,18 +167,18 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             isolator?.deactivate();
           }
 
-          this.setState({ animationClass: 'dqpl-hidden' }, onDismiss);
+          this.setState({ animationClass: 'is--hidden' }, onDismiss);
         });
       }
     );
   }
 
   showToast() {
-    const { type } = this.props;
+    const { type, focus } = this.props;
 
     this.setState(
       {
-        animationClass: 'dqpl-fadein-flex dqpl-fadein'
+        animationClass: 'FadeIn--flex FadeIn'
       },
       () => {
         if (type === 'action-needed') {
@@ -173,7 +188,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           isolator.activate();
         }
 
-        if (this.el) {
+        if (this.el && !!focus) {
           // focus the toast
           this.el.focus();
         }

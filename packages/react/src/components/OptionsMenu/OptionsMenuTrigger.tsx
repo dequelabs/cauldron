@@ -19,9 +19,10 @@ function OptionsMenuTriggerComponent({
   return (
     <button
       type="button"
+      aria-haspopup="menu"
       ref={triggerRef}
       {...other}
-      className={classNames('dqpl-options-menu-trigger', className)}
+      className={classNames('OptionsMenu__trigger', className)}
     />
   );
 }

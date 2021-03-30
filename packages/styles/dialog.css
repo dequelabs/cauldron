@@ -1,0 +1,101 @@
+:root {
+  --dialog-background-color: var(--tile-background-color);
+  --dialog-border-color: #ccc;
+  --dialog-header-background-color: var(--button-background-color-secondary);
+  --dialog-padding: var(--space-small);
+  --dialog-header-height: 42px;
+}
+
+.Dialog {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto;
+  position: fixed;
+  top: 0;
+}
+
+.Dialog.Dialog--show {
+  display: block;
+}
+
+.Dialog__inner {
+  width: 400px;
+  max-width: 90%;
+  left: 50%;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-50%);
+  background-color: var(--dialog-background-color);
+  border: 1px solid var(--dialog-border-color);
+  z-index: var(--z-index-dialog);
+  position: relative;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.Dialog__header {
+  display: flex;
+  background-color: var(--dialog-header-background-color);
+  border-bottom: 1px solid var(--dialog-border-color);
+  align-items: center;
+  justify-content: space-between;
+  height: var(--dialog-header-height);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+}
+
+.Dialog__heading,
+.Dialog__close {
+  margin: 0;
+  font-size: var(--text-size-small);
+  height: calc(var(--dialog-header-height) - 8px);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.Dialog__heading:focus,
+.Dialog__close:focus,
+.Dialog__close:hover {
+  border-bottom-color: var(--text-color-base);
+  outline: none;
+}
+
+.Dialog__close:focus {
+  border-top: 4px solid transparent;
+}
+
+.Dialog__heading {
+  display: flex;
+  align-items: center;
+  margin-left: var(--dialog-padding);
+}
+
+.Dialog__close {
+  color: var(--text-color-base);
+  width: var(--dialog-header-height);
+  background-color: initial;
+}
+
+.Dialog__close svg {
+  height: 24px;
+  width: 24px;
+}
+
+.Dialog__content {
+  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
+}
+
+.Dialog__content p:first-child {
+  margin-top: 0;
+}
+
+.Dialog__content p:last-child {
+  margin-bottom: 0;
+}
+
+.Dialog__footer {
+  background-color: #fff;
+  border-top: 1px solid var(--dialog-border-color);
+  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
+}

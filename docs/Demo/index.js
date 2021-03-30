@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import jsxStringify from 'react-element-to-jsx-string';
-import { Code } from '../../packages/react/src';
+import { Code } from '@deque/cauldron-react';
 import './index.css';
 
 const stringifyConfig = {
@@ -65,7 +65,8 @@ class Demo extends Component {
             </thead>
             <tbody>
               {Object.entries(propDocs).map(([name, data]) => {
-                const defaultProp = defaultProps[name];
+                const defaultProp =
+                  data.defaultValue || defaultProps[name] || data.default;
 
                 return (
                   <tr key={name}>

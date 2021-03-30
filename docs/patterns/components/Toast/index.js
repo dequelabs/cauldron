@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Toast, Link } from '../../../../packages/react/src/';
+import { Button, Toast, Link } from '@deque/cauldron-react/';
 import DemoComponent from '../../../Demo';
 import { children } from '../../../props';
 
@@ -42,7 +42,6 @@ export default class Demo extends Component {
             type: 'confirmation',
             children: 'Your toast is ready!',
             show: type === 'confirmation',
-            autoHide: 5000,
             onDismiss: () => this.onToastDismiss('confirmation'),
             DEMO_renderAfter: (
               <Button
@@ -82,6 +81,21 @@ export default class Demo extends Component {
                 Action Needed
               </Button>
             )
+          },
+          {
+            type: 'info',
+            children: 'It is getting toasty in here!',
+            show: type === 'info',
+            onDismiss: () => this.onToastDismiss('info'),
+            DEMO_renderAfter: (
+              <Button
+                variant="secondary"
+                onClick={() => this.onTriggerClick('info')}
+                buttonRef={el => (this.info = el)}
+              >
+                Info
+              </Button>
+            )
           }
         ]}
         propDocs={{
@@ -89,6 +103,10 @@ export default class Demo extends Component {
           show: {
             type: 'boolean',
             description: 'whether or not to show the toast'
+          },
+          focus: {
+            type: 'boolean',
+            description: 'whether or not to focus the toast'
           },
           type: {
             type: 'string',
@@ -98,11 +116,6 @@ export default class Demo extends Component {
           onDismiss: {
             type: 'function',
             description: 'function to be executed when toast is dismissed'
-          },
-          autoHide: {
-            type: 'number',
-            description:
-              'optional timeout (ms) before automatically hiding the toast'
           },
           dismissText: {
             type: 'string',

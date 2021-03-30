@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Home from './Home';
 import {
   TopBar,
+  MenuBar,
   TopBarTrigger,
   TopBarItem,
   Workspace,
@@ -15,17 +16,18 @@ import {
   OptionsMenuList,
   TopBarMenu,
   Icon
-} from '../packages/react/src';
+} from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
+import 'fontsource-roboto';
 
 // styles
 import '../packages/styles';
-import '../packages/react/src/index.css';
+import '@deque/cauldron-react/cauldron.css';
 import './index.css';
 
 const componentsList = [
   'Button',
-  'FirstTimePointOut',
+  'Pointout',
   'Alert',
   'Modal',
   'TopBarMenu',
@@ -41,7 +43,13 @@ const componentsList = [
   'Card',
   'ExpandCollapsePanel',
   'TextField',
-  'Link'
+  'Link',
+  'Icon',
+  'IconButton',
+  'Code',
+  'LoaderOverlay',
+  'Line',
+  'Tag'
 ].sort();
 
 class App extends Component {
@@ -128,56 +136,58 @@ class App extends Component {
             defaultTitle="Deque Cauldron React"
           />
           <SkipLink target={'#main-content'} />
-          <TopBar thin={thin} hasTrigger>
-            <TopBarTrigger onClick={this.onTriggerClick}>
-              <button
-                tabIndex={-1}
-                aria-label="Menu"
-                aria-haspopup="true"
-                ref={this.topBarTrigger}
-                aria-expanded={show}
+          <TopBar>
+            <MenuBar thin={thin} hasTrigger>
+              <TopBarTrigger onClick={this.onTriggerClick}>
+                <button
+                  tabIndex={-1}
+                  aria-label="Menu"
+                  aria-haspopup="true"
+                  ref={this.topBarTrigger}
+                  aria-expanded={show}
+                >
+                  <Icon type="hamburger-menu" />
+                </button>
+              </TopBarTrigger>
+              <TopBarItem>
+                <Link to="/" className="MenuItem__logo" tabIndex={-1}>
+                  <img src={logo} alt="" /> <span>Cauldron</span>
+                </Link>
+              </TopBarItem>
+
+              {/* The below line demonstrates the ability to conditionally include menu item children. */}
+              {false && <TopBarItem>Potato</TopBarItem>}
+
+              <TopBarMenu
+                id="topbar-menu"
+                className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
+                menuItemRef={el => (this.topBarMenuItem = el)}
               >
-                <Icon type="fa-bars" />
-              </button>
-            </TopBarTrigger>
-            <TopBarItem>
-              <Link to="/" className="dqpl-logo-item" tabIndex={-1}>
-                <img src={logo} alt="" /> <span>Cauldron</span>
-              </Link>
-            </TopBarItem>
+                <div className="TopBar__item--icon">
+                  {thin ? (
+                    <Icon type="gears" label="Settings" />
+                  ) : (
+                    <Fragment>
+                      <Icon type="gears" />
+                      <div>Settings</div>
+                    </Fragment>
+                  )}
+                </div>
+                <OptionsMenuList onSelect={this.onSettingsSelect}>
+                  <li>Default top bar</li>
+                  <li>Thin top bar</li>
+                </OptionsMenuList>
+              </TopBarMenu>
 
-            {/* The below line demonstrates the ability to conditionally include menu item children. */}
-            {false && <TopBarItem>Potato</TopBarItem>}
-
-            <TopBarMenu
-              id="topbar-menu"
-              className="dqpl-right-aligned dqpl-separator dropdown-arrow-down"
-              menuItemRef={el => (this.topBarMenuItem = el)}
-            >
-              <div className="dqpl-top-bar-icon-item">
-                {thin ? (
-                  <Icon type="fa-cog" label="Settings" />
-                ) : (
-                  <Fragment>
-                    <Icon type="fa-cog" />
-                    <div>Settings</div>
-                  </Fragment>
-                )}
-              </div>
-              <OptionsMenuList onSelect={this.onSettingsSelect}>
-                <li>Default top bar</li>
-                <li>Thin top bar</li>
-              </OptionsMenuList>
-            </TopBarMenu>
-
-            <TopBarItem className="dqpl-separator">
-              <a
-                href="https://github.com/dequelabs/cauldron-react"
-                className="fa fa-github"
-                aria-label="Cauldron React on GitHub"
-                tabIndex={-1}
-              />
-            </TopBarItem>
+              <TopBarItem className="MenuItem--separator">
+                <a
+                  href="https://github.com/dequelabs/cauldron"
+                  className="fa fa-github"
+                  aria-label="Cauldron on GitHub"
+                  tabIndex={-1}
+                />
+              </TopBarItem>
+            </MenuBar>
           </TopBar>
           <SideBar show={this.state.show} onDismiss={this.onTriggerClick}>
             {componentsList.map(name => {
@@ -187,7 +197,7 @@ class App extends Component {
                 <SideBarItem
                   key={name}
                   className={classNames({
-                    'dqpl-menuitem-selected': isActive
+                    'MenuItem--active': isActive
                   })}
                 >
                   {this.renderSideBarLink(pathname, name, isActive)}

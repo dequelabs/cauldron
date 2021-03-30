@@ -1,22 +1,24 @@
-.dqpl-link {
+.Link {
   text-decoration: none;
   color: var(--link-text-color);
   font-weight: var(--font-weight-medium);
   display: inline-block;
   padding: var(--space-quarter);
+  background: transparent;
+  vertical-align: baseline;
 }
 
-.dqpl-link:hover {
+.Link:hover {
   text-decoration: underline;
   color: var(--link-text-color);
 }
 
-.dqpl-link:focus {
+.Link:focus {
   text-decoration: underline;
   outline-offset: 0;
 }
 
-p .dqpl-link {
+p .Link {
   margin: 0 2px;
   display: inline;
   text-decoration: underline;

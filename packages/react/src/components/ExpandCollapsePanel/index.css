@@ -1,3 +1,5 @@
-.dqpl-expand-collapse-trigger {
+.ExpandCollapse__trigger {
   font-size: inherit;
+  display: flex;
+  align-items: center;
 }

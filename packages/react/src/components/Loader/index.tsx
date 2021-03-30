@@ -9,7 +9,7 @@ export interface LoaderProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Loader({ label, className, ...other }: LoaderProps) {
   const props = {
     ...other,
-    className: classNames('dqpl-loader', className),
+    className: classNames('Loader', className),
     'aria-label': label,
     'aria-hidden': label ? false : true
   };

@@ -4,12 +4,10 @@ import Scrim from '../../../../src/components/Scrim';
 
 test('given a initial truthy `show` prop, fades scrim in', done => {
   const scrim = mount(<Scrim show={true} />);
-  expect(scrim.state('animationClass')).toBe('dqpl-scrim-show');
+  expect(scrim.state('animationClass')).toBe('Scrim--show');
   setTimeout(() => {
     // wait for setState to complete
-    expect(scrim.state('animationClass')).toBe(
-      'dqpl-scrim-show dqpl-scrim-fade-in'
-    );
+    expect(scrim.state('animationClass')).toBe('Scrim--show Scrim--fade-in');
     done();
   });
 });
@@ -19,12 +17,10 @@ test('given a `show` prop update from falsey to truthy, calls fadeIn', done => {
   expect(scrim.state('animationClass')).toBe('');
 
   scrim.setProps({ show: true });
-  expect(scrim.state('animationClass')).toBe('dqpl-scrim-show');
+  expect(scrim.state('animationClass')).toBe('Scrim--show');
   setTimeout(() => {
     // wait for setState to complete
-    expect(scrim.state('animationClass')).toBe(
-      'dqpl-scrim-show dqpl-scrim-fade-in'
-    );
+    expect(scrim.state('animationClass')).toBe('Scrim--show Scrim--fade-in');
     done();
   });
 });
@@ -33,9 +29,7 @@ test('given a `show` props update from truthy to falsey, calls fadeOut', done =>
   const scrim = mount(<Scrim show={true} />);
   setTimeout(() => {
     // wait for setState to complete
-    expect(scrim.state('animationClass')).toBe(
-      'dqpl-scrim-show dqpl-scrim-fade-in'
-    );
+    expect(scrim.state('animationClass')).toBe('Scrim--show Scrim--fade-in');
 
     scrim.setProps({ show: false });
 

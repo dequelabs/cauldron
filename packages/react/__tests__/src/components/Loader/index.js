@@ -5,7 +5,7 @@ import Loader from '../../../../src/components/Loader';
 
 test('handles classNames properly', () => {
   const icon = shallow(<Loader className="baz" />);
-  expect(icon.is('.dqpl-loader.baz')).toBe(true);
+  expect(icon.is('.Loader.baz')).toBe(true);
 });
 
 test('sets aria-hidden if no label is provided', () => {

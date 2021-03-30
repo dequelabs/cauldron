@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Card = ({ className, ...other }: CardProps) => (
-  <div className={classNames('dqpl-tile', className)} {...other} />
+  <div className={classNames('Card', className)} {...other} />
 );
 
 Card.displayName = 'Card';

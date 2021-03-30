@@ -29,6 +29,16 @@ h1 {
   padding: 18px 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[role='heading'] {
+  color: var(--header-text-color-dark);
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -42,7 +52,6 @@ button,
   white-space: nowrap;
   vertical-align: middle;
   text-align: center;
-  cursor: pointer;
   user-select: none;
   -webkit-user-drag: none;
   box-sizing: border-box;

@@ -7,15 +7,19 @@ import queryAll from '../../utils/query-all';
 export const typeMap = {
   confirmation: {
     className: 'success',
-    icon: 'fa-info-circle'
+    icon: 'info-circle'
   },
   caution: {
     className: 'warning',
-    icon: 'fa-warning'
+    icon: 'caution'
   },
   'action-needed': {
     className: 'error',
-    icon: 'fa-minus-circle'
+    icon: 'no'
+  },
+  info: {
+    className: 'info',
+    icon: 'info-circle-alt'
   }
 };
 

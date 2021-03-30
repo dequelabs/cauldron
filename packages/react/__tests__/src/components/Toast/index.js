@@ -8,6 +8,10 @@ const defaultProps = {
   show: false
 };
 
+beforeEach(() => {
+  document.activeElement.blur();
+});
+
 test('handles initial show prop on mount', done => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true}>
@@ -16,45 +20,21 @@ test('handles initial show prop on mount', done => {
   );
 
   setTimeout(() => {
-    expect(document.activeElement).toBe(
-      wrapper.find('.dqpl-toast').getDOMNode()
-    );
-    expect(
-      wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')
-    ).toBeTruthy();
+    expect(document.activeElement).toBe(wrapper.find('.Toast').getDOMNode());
+    expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
 
-test('handles autoHide properly', done => {
-  let called = false;
-  mount(
-    <Toast
-      {...defaultProps}
-      show={true}
-      autoHide={10}
-      onDismiss={() => (called = true)}
-    >
-      {'hi'}
-    </Toast>
-  );
-  setTimeout(() => {
-    expect(called).toBe(true);
-    done();
-  }, 100);
-});
-
 test('handles transition from falsey show to truthy show prop', done => {
   const wrapper = mount(<Toast {...defaultProps}>{'hi'}</Toast>);
-  expect(wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')).toBeFalsy();
+  expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeFalsy();
 
   wrapper.setProps({ show: true });
 
   setTimeout(() => {
     wrapper.update();
-    expect(
-      wrapper.find('.dqpl-toast').hasClass('dqpl-fadein-flex')
-    ).toBeTruthy();
+    expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
@@ -65,7 +45,7 @@ test('handles transition from truthy show to falsey show prop', done => {
       {'hi'}
     </Toast>
   );
-  expect(wrapper.find('.dqpl-toast').hasClass('dqpl-hidden')).toBeFalsy();
+  expect(wrapper.find('.Toast').hasClass('is--hidden')).toBeFalsy();
   wrapper.setProps({ show: false });
 
   setTimeout(() => {
@@ -73,47 +53,85 @@ test('handles transition from truthy show to falsey show prop', done => {
     // see https://github.com/airbnb/enzyme/issues/1170
     expect(
       wrapper
-        .find('.dqpl-toast')
+        .find('.Toast')
         .getDOMNode()
-        .classList.contains('dqpl-hidden')
+        .classList.contains('is--hidden')
     ).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
 
-test('renders the expected UI (icons classNames etc)', () => {
-  expect.assertions(6);
+test('renders children within the "Toast__message-content" div', () => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true}>
+      <strong>YO!</strong>
+    </Toast>
+  );
 
+  expect(wrapper.find('.Toast__message-content strong').text()).toBe('YO!');
+});
+
+test('confirmation renders the expected UI and icon', () => {
   const confirmation = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
     </Toast>
   );
+  expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
   expect(
-    confirmation.find('.dqpl-toast.dqpl-toast-success').exists()
-  ).toBeTruthy();
-  expect(confirmation.find('.fa-info-circle').exists()).toBeTruthy();
-
-  const caution = mount(
-    <Toast {...defaultProps} type={'caution'} show={true}>
-      {'hi'}
-    </Toast>
-  );
-  expect(caution.find('.dqpl-toast.dqpl-toast-warning').exists()).toBeTruthy();
-  expect(caution.find('.fa-warning').exists()).toBeTruthy();
-
-  const actionNeeded = mount(
-    <Toast {...defaultProps} type={'action-needed'} show={true}>
-      {'hi'}
-    </Toast>
-  );
-  expect(
-    actionNeeded.find('.dqpl-toast.dqpl-toast-error').exists()
-  ).toBeTruthy();
-  expect(actionNeeded.find('.fa-minus-circle').exists()).toBeTruthy();
+    confirmation
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle');
 });
 
-test('handles "action-needed" type', done => {
+test('confirmation renders the expected UI and icon', () => {
+  const confirmation = mount(
+    <Toast {...defaultProps} show={true}>
+      {'hi'}
+    </Toast>
+  );
+  expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
+  expect(
+    confirmation
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle');
+});
+
+test('caution renders the expected UI and icon', () => {
+  const caution = mount(
+    <Toast {...defaultProps} show type="caution">
+      {'hi'}
+    </Toast>
+  );
+  expect(caution.find('.Toast.Toast--warning').exists()).toBeTruthy();
+  expect(
+    caution
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('caution');
+});
+
+test('info renders the expected UI and icon', () => {
+  const info = mount(
+    <Toast {...defaultProps} show type="info">
+      {'hi'}
+    </Toast>
+  );
+  expect(info.find('.Toast.Toast--info').exists()).toBeTruthy();
+  expect(
+    info
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('info-circle-alt');
+});
+
+test('action-needed renders epxected UI, icon, and scrim (no close)', done => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true} type={'action-needed'}>
       {'hi'}
@@ -121,8 +139,15 @@ test('handles "action-needed" type', done => {
   );
 
   setTimeout(() => {
-    expect(wrapper.find('.dqpl-toast-dismiss').exists()).toBeFalsy();
-    expect(wrapper.find('.dqpl-scrim-light').exists()).toBeTruthy();
+    expect(wrapper.find('.Toast.Toast--error').exists()).toBeTruthy();
+    expect(
+      wrapper
+        .find('Icon')
+        .at(0)
+        .prop('type')
+    ).toBe('no');
+    expect(wrapper.find('.Toast__dismiss').exists()).toBeFalsy();
+    expect(wrapper.find('.Scrim--light').exists()).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
@@ -134,9 +159,33 @@ test('clicking the dismiss button properly dismisses toast', done => {
       {'hi'}
     </Toast>
   );
-  wrapper.find('.dqpl-toast-dismiss').simulate('click');
+  wrapper.find('.Toast__dismiss').simulate('click');
   setTimeout(() => {
     expect(called).toBe(true);
+    done();
+  }, 10);
+});
+
+test('toast should be focused by default', done => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true}>
+      {'hi'}
+    </Toast>
+  );
+  setTimeout(() => {
+    expect(wrapper.getDOMNode()).toBe(document.activeElement);
+    done();
+  }, 10);
+});
+
+test('toast should not be focused with falsey focus prop', done => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true} focus={false}>
+      {'hi'}
+    </Toast>
+  );
+  setTimeout(() => {
+    expect(document.body).toBe(document.activeElement);
     done();
   }, 10);
 });

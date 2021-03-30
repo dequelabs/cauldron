@@ -9,6 +9,7 @@ export { default as Icon } from './components/Icon';
 export { default as Offscreen } from './components/Offscreen';
 export { default as Scrim } from './components/Scrim';
 export { default as MenuItem } from './components/MenuItem';
+export { default as MenuBar } from './components/MenuBar';
 export {
   default as TopBar,
   TopBarTrigger,
@@ -16,7 +17,8 @@ export {
   TopBarItem
 } from './components/TopBar';
 export { default as SideBar } from './components/SideBar';
-export { default as Alert, Actions as AlertActions } from './components/Alert';
+export { Alert, AlertContent, AlertActions } from './components/Alert';
+export { Dialog, DialogContent, DialogFooter } from './components/Dialog';
 export {
   default as Modal,
   ModalContent,
@@ -24,7 +26,8 @@ export {
 } from './components/Modal';
 export { default as SkipLink } from './components/SkipLink';
 export { default as Button } from './components/Button';
-export { default as FirstTimePointOut } from './components/FirstTimePointOut';
+export { default as IconButton } from './components/IconButton';
+export { default as Pointout } from './components/Pointout';
 export { default as Toast } from './components/Toast';
 export { default as Link } from './components/Link';
 export { default as Loader } from './components/Loader';
@@ -35,10 +38,18 @@ export {
   OptionsMenuTrigger,
   OptionsMenuWrapper
 } from './components/OptionsMenu';
-export { default as Select } from './components/Select';
+export {
+  default as Select,
+  SelectOption,
+  SelectProps
+} from './components/Select';
 export { default as RadioGroup } from './components/RadioGroup';
 export { default as Checkbox } from './components/Checkbox';
-export { default as Tooltip } from './components/Tooltip';
+export {
+  default as Tooltip,
+  TooltipHead,
+  TooltipContent
+} from './components/Tooltip';
 export {
   default as Card,
   CardHeader,
@@ -53,6 +64,9 @@ export {
 } from './components/ExpandCollapsePanel';
 export { default as Sidebar, SideBarItem } from './components/SideBar';
 export { default as Code } from './components/Code';
+export { default as LoaderOverlay } from './components/LoaderOverlay';
+export { default as Line } from './components/Line';
+export { default as Tag, TagLabel } from './components/Tag';
 
 /**
  * Helpers / Utils

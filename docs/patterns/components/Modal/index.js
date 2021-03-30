@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   Code
-} from '../../../../packages/react/src/';
+} from '@deque/cauldron-react/';
 
 export default class Demo extends Component {
   constructor() {
@@ -33,7 +33,7 @@ export default class Demo extends Component {
           </ModalContent>
           <ModalFooter>
             <Button onClick={this.toggleSimpleModal}>Save</Button>
-            <Button secondary={true} onClick={this.toggleSimpleModal}>
+            <Button variant="secondary" onClick={this.toggleSimpleModal}>
               Cancel
             </Button>
           </ModalFooter>

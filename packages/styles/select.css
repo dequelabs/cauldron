@@ -1,103 +1,68 @@
-.dqpl-select {
+.Field__select {
+  display: flex;
+  flex-direction: column;
+}
+
+.Field__select--disabled {
+  opacity: 0.45;
+}
+
+.Field__select--label-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Field__select--wrapper {
   position: relative;
+  width: var(--select-width);
 }
 
-.dqpl-select [role='textbox'] {
-  border: 0;
+.arrow-down {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 40%;
+  right: var(--select-arrow-spacing);
+  border-left: var(--space-half) solid transparent;
+  border-right: var(--space-half) solid transparent;
+  border-top: var(--space-three-quarters) solid #6a6a6a;
+  pointer-events: none;
 }
 
-.dqpl-select [role='textbox']:hover {
-  border: 0;
-}
-
-.dqpl-select [aria-haspopup='listbox'] {
-  padding: var(--space-half) var(--space-smallest);
-  box-sizing: border-box;
-  font-size: var(--text-size-small);
+.Field__select--wrapper select {
+  width: inherit;
+  min-height: var(--select-min-height);
+  padding: var(--space-three-quarters) var(--space-smallest);
+  border: 1px solid var(--field-border-color);
+  font-family: Roboto;
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--text-size-smaller);
   color: var(--text-color-base);
-  width: var(--input-min-width);
-  height: var(--space-largest);
-  display: inline-block;
-  position: relative;
-  line-height: 1.4;
+  text-decoration: rgb(102, 102, 102);
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.05);
   background: transparent;
-  text-align: left;
+  appearance: none;
 }
 
-.dqpl-select [aria-haspopup='listbox']:after {
-  font-family: 'FontAwesome';
-  content: '\f0d7';
-  position: absolute;
-  right: var(--space-smallest);
-  top: 2.5px;
-  font-size: var(--text-size-small);
-  color: var(--text-color-base);
-  font-weight: var(--font-weight-normal);
+.Field__select--wrapper select:hover {
+  border-color: rgb(60, 122, 174);
 }
 
-.dqpl-select [aria-haspopup='listbox'][disabled],
-.dqpl-select [aria-haspopup='listbox'][aria-disabled='true'] {
-  background-color: var(--field-background-color-disabled);
-  border: 1px solid var(--field-background-color-disabled);
+.Field__select--wrapper select:focus {
+  border-color: rgb(60, 122, 174);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
+    rgba(60, 122, 174, 0.7) 0px 0px 4px 0px;
 }
 
-.dqpl-select [role='listbox'] {
-  display: none;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background-color: var(--tile-background-color);
-  width: var(--input-min-width);
-  position: absolute;
-  list-style-type: none;
-  z-index: var(--z-index-listbox);
-  max-height: 200px;
-  top: 28px;
+.Field__select--wrapper select:invalid {
+  border-width: var(--space-quarter);
+  border-color: var(--field-border-color-error);
 }
 
-.dqpl-select [role='listbox'].dqpl-listbox-show {
-  display: block;
-}
-
-.dqpl-select [role='listbox'] [role='option'] {
-  font-size: var(--text-size-small);
-  font-weight: var(--font-weight-normal);
-  padding: 2px var(--space-large);
-  top: 28px;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  white-space: nowrap;
-  cursor: default;
-}
-
-.dqpl-select [role='listbox'] [role='option']:hover,
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-active {
-  background-color: var(--link-text-color-light);
-}
-
-.dqpl-select [role='listbox'] [role='option'][aria-disabled='true'] {
-  color: var(--disabled);
-}
-
-.dqpl-select [role='listbox'] [role='option'][aria-disabled='true']:hover {
-  background-color: transparent;
-}
-
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-selected,
-.dqpl-select
-  [role='listbox']
-  [role='option'].dqpl-option-selected.dqpl-option-active {
-  background-color: var(--link-text-color);
-  color: var(--text-color-light);
-}
-
-.dqpl-select [role='listbox'] [role='option'].dqpl-option-selected:before,
-.dqpl-select
-  [role='listbox']
-  [role='option'].dqpl-option-selected.dqpl-option-active:before {
-  font-family: 'FontAwesome';
-  content: '\f00c';
-  position: absolute;
-  left: 5px;
+.Field__select--wrapper select:invalid:focus {
+  border-width: var(--space-quarter);
+  border-color: var(--field-border-color-error);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
+    rgba(217, 50, 81, 0.7) 0px 0px 4px 0px;
 }

@@ -313,7 +313,7 @@ test('should passthrough classname to menuitem', () => {
   );
   const menuItem = optionsMenu.find('li');
   expect(menuItem.hasClass('foo')).toBeTruthy();
-  expect(menuItem.hasClass('dqpl-options-menuitem')).toBeTruthy();
+  expect(menuItem.hasClass('OptionsMenu__list-item')).toBeTruthy();
 });
 
 test('handles updates to `itemIndex` state', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClickOutsideListener, Code } from '../../../../packages/react/src/';
+import { ClickOutsideListener, Code, Button } from '@deque/cauldron-react/';
 
 const Demo = () => (
   <div>
@@ -8,19 +8,21 @@ const Demo = () => (
     <ClickOutsideListener
       onClickOutside={() => alert('You clicked outside of me.')}
     >
-      <button type="button" className="dqpl-button-primary">
-        Click Inside
-      </button>
+      <Button variant="primary">Click Inside</Button>
     </ClickOutsideListener>
     <h2>Code Sample</h2>
     <Code language="javascript">
       {`
 import React from 'react';
-import { ClickOutsideListener } from '@deque/cauldron-react';
+import {
+  ClickOutsideListener,
+  Code,
+  Button
+} from '@deque/cauldron-react';
 
 const Demo = () => (
   <ClickOutsideListener onClickOutside={() => alert('You clicked outside of me.')}>
-    <button type="button" className="dqpl-button-primary">Click Inside</button>
+    <Button variant="primary">Click Inside</Button>
   </ClickOutsideListener>
 );
       `}

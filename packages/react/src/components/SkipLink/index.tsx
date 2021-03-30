@@ -54,19 +54,19 @@ export default class SkipLink extends React.Component<
 
   render() {
     const { currentClass } = this.state;
-    const { target, skipText, targetText } = this.props;
+    const { target, skipText, targetText, ...other } = this.props;
 
     return (
-      <nav className={classNames('dqpl-skip-container', currentClass)}>
+      <nav className={classNames('SkipLink', currentClass)} {...other}>
         <a
           href={target}
-          className="dqpl-skip-link"
+          className="SkipLink__link"
           onClick={this.onClick}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         >
-          <span className="dqpl-skip-one">{skipText}</span>
-          <span className="dqpl-skip-two">{targetText}</span>
+          <span className="SkipLink__item--first">{skipText}</span>
+          <span className="SkipLink__item--second">{targetText}</span>
         </a>
       </nav>
     );
@@ -82,17 +82,17 @@ export default class SkipLink extends React.Component<
   }
 
   private onFocus() {
-    this.setState({ currentClass: 'dqpl-skip-container-active' });
+    this.setState({ currentClass: 'SkipLink--active' });
 
     setTimeout(() => {
       this.setState({
-        currentClass: 'dqpl-skip-container-active dqpl-skip-fade'
+        currentClass: 'SkipLink--active SkipLink--fade'
       });
     });
   }
 
   private onBlur() {
-    this.setState({ currentClass: 'dqpl-skip-container-active' });
+    this.setState({ currentClass: 'SkipLink--active' });
 
     setTimeout(() => {
       this.setState({ currentClass: '' });

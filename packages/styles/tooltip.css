@@ -1,57 +1,166 @@
-.dqpl-tooltip {
-  width: 145px;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  border: 1px solid var(--tooltip-border-color);
-  border-radius: 2px;
-  font-size: var(--text-size-smallest);
-  position: absolute;
-  display: none;
-  background: var(--button-background-color-secondary);
-  padding: var(--space-smallest);
-  bottom: 45px;
-  right: -28px;
+.Tooltip {
+  background-color: var(--tooltip-background-color);
+  border: 2px solid var(--tooltip-border-color);
+  color: var(--tooltip-text-color);
+  font-size: var(--text-size-smaller);
+  line-height: var(--text-size-normal);
+  padding: var(--space-half) var(--space-small);
+  border-radius: 4px;
   z-index: var(--z-index-tooltip);
-  pointer-events: none;
 }
 
-.dqpl-tooltip:after {
-  position: absolute;
-  bottom: -14px;
-  right: 32px;
+.Tooltip--hidden {
+  visibility: hidden;
+}
+
+.TooltipInfo {
+  background-color: var(--tooltip-info-background-color);
+  border: 2px solid var(--tooltip-info-border-color);
+  color: var(--tooltip-info-text-color);
+  max-width: 12.5rem;
+}
+
+/* TooltipArrow needs some dimensions to accurately calculate its positioning */
+.TooltipArrow {
+  height: 0.1px;
+  width: 0.1px;
+}
+
+[class*='Tooltip--top'] .TooltipArrow {
+  bottom: 0;
+}
+
+[class*='Tooltip--bottom'] .TooltipArrow {
+  top: 0;
+}
+
+[class*='Tooltip--left'] .TooltipArrow {
+  right: 0;
+}
+
+[class*='Tooltip--right'] .TooltipArrow {
+  left: 0;
+}
+
+/*
+ * Default tooltip arrow styles
+ */
+
+.TooltipArrow:before {
   content: '';
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 15.6px 9px 0 9px;
-  border-color: var(--button-background-color-secondary) transparent transparent
-    transparent;
-}
-
-.dqpl-tooltip:before {
   position: absolute;
-  bottom: -16px;
-  right: 32px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--tooltip-border-color);
+  border-bottom: none;
+  transform: translateX(-50%);
+  transform-origin: top;
+}
+
+.TooltipArrow:after {
   content: '';
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 15.6px 9px 0 9px;
-  border-color: var(--header-text-color) transparent transparent transparent;
+  position: absolute;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--tooltip-background-color);
+  border-bottom: none;
+  z-index: 1;
+  transform: translateX(-50%);
+  transform-origin: top;
 }
 
-.dqpl-tooltip.dqpl-tip-active {
-  display: block;
+[class*='Tooltip--bottom'] .TooltipArrow:after,
+[class*='Tooltip--bottom'] .TooltipArrow:before {
+  transform: translateX(-50%) rotate(180deg);
 }
 
-.dqpl-definition-button-wrap .dqpl-tooltip {
-  bottom: 30px;
-  right: 50%;
-  margin-right: -72.5px;
+[class*='Tooltip--left'] .TooltipArrow:after {
+  transform: rotate(-90deg) translateY(-5px);
 }
 
-.dqpl-definition-button-wrap .dqpl-tooltip:before,
-.dqpl-definition-button-wrap .dqpl-tooltip:after {
-  right: 50%;
-  margin-right: -9px;
+[class*='Tooltip--left'] .TooltipArrow:before {
+  transform: rotate(-90deg) translateY(-6px);
+}
+
+[class*='Tooltip--right'] .TooltipArrow:after {
+  transform: rotate(90deg) translateY(4px);
+}
+
+[class*='Tooltip--right'] .TooltipArrow:before {
+  transform: rotate(90deg) translateY(100%);
+}
+
+/*
+ * Info tooltip arrow styles
+ */
+
+.TooltipInfo .TooltipArrow:before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--tooltip-info-border-color);
+}
+
+.TooltipInfo .TooltipArrow:after {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid var(--tooltip-info-background-color);
+}
+
+.TooltipInfo[class*='Tooltip--bottom'] .TooltipArrow:after,
+.TooltipInfo[class*='Tooltip--bottom'] .TooltipArrow:before {
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.TooltipInfo[class*='Tooltip--left'] .TooltipArrow:after {
+  transform: rotate(-90deg) translateY(-3px);
+}
+
+.TooltipInfo[class*='Tooltip--left'] .TooltipArrow:before {
+  transform: rotate(-90deg) translateY(-6px);
+}
+
+.TooltipInfo[class*='Tooltip--right'] .TooltipArrow:after {
+  transform: rotate(90deg) translateY(3px);
+}
+
+.TooltipInfo[class*='Tooltip--right'] .TooltipArrow:before {
+  transform: rotate(90deg) translateY(6px);
+}
+
+/*
+ * "rich" tooltip with heading-like element and content
+ */
+
+.Tooltip--big {
+  border: 1px solid var(--field-border-color);
+  border-radius: 0;
+  padding: 0;
+  background: #fff;
+  color: var(--text-base);
+  width: 247px;
+}
+
+.Tooltip--big .Line {
+  margin: 0;
+}
+
+.TooltipHead {
+  background: var(--tooltip-info-background-color);
+  font-size: 16px;
+  color: var(--header-text-color-dark);
+  padding: 16px 28px;
+  text-align: center;
+}
+
+.TooltipContent {
+  background: #fff;
+  font-size: var(--font-size-smaller);
+}
+
+.Tooltip--big ul {
+  margin: 10px 15px 10px 28px;
+}
+
+.Tooltip--big li {
+  margin: 6px 0;
 }

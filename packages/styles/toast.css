@@ -1,4 +1,4 @@
-.dqpl-toast {
+.Toast {
   top: var(--top-bar-height);
   position: fixed;
   color: var(--top-bar-background-color-active);
@@ -7,70 +7,77 @@
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  padding: 7.5px 15px;
+  padding: 4px 15px;
   right: 0;
   left: 0;
 }
 
-.dqpl-top-bar-thin .dqpl-toast {
+.TopBar--thin .Toast {
   top: var(--top-bar-height-thin);
 }
 
-.dqpl-toast.dqpl-toast-success {
-  background-color: rgba(209, 255, 164, 0.95);
+.Toast.Toast--success {
+  background-color: var(--success);
 }
 
-.dqpl-toast.dqpl-toast-warning {
-  background-color: rgba(255, 230, 159, 0.95);
+.Toast.Toast--warning {
+  background-color: var(--warning);
 }
 
-.dqpl-toast.dqpl-toast-error {
-  background-color: rgba(255, 161, 161, 0.95);
+.Toast.Toast--error {
+  background-color: var(--error-alt);
   z-index: var(--z-index-toast-action-needed);
 }
 
-.dqpl-toast .dqpl-toast-dismiss {
+.Toast.Toast--info {
+  background-color: var(--info);
+}
+
+.Toast__dismiss {
   background: transparent;
   border: 0;
 }
 
-.dqpl-toast .dqpl-toast-dismiss:focus {
+.Toast__dismiss:focus {
   outline: 2px solid;
 }
 
-.dqpl-toast .dqpl-toast-message {
+.Toast__message {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.dqpl-toast .dqpl-toast-message:before {
-  font-family: 'FontAwesome';
-  content: '\f0da';
-  margin: 0 2px;
-  display: inline-block;
-  color: transparent;
+.Toast__message .Toast__message-content {
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.Toast__message .Icon {
   margin-right: var(--space-smallest);
 }
 
-.dqpl-toast .dqpl-toast-message .fa {
+.Toast__message .fa {
   margin-right: 3px;
 }
 
-.dqpl-toast .dqpl-toast-message .dqpl-link {
+.Toast__message .Link {
   color: var(--top-bar-background-color-active);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   text-decoration: underline;
 }
 
-.dqpl-toast .dqpl-toast-message .dqpl-link:focus {
+.Toast__message .Link:focus {
   outline: 2px solid;
   outline-offset: var(--space-quarter);
 }
 
-.dqpl-toast:focus {
+.Toast:focus {
   outline: 0;
 }
 
-.dqpl-toast:focus .dqpl-toast-message:before {
-  color: var(--top-bar-background-color-active);
+.Toast:focus .Toast__message > .Toast__message-content {
+  border-bottom-color: var(--top-bar-background-color-active);
 }

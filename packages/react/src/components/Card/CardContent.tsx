@@ -6,7 +6,7 @@ export interface CardContentProps
   extends React.HTMLAttributes<HTMLDivElement> {}
 
 const CardContent = ({ className, ...other }: CardContentProps) => (
-  <div className={classNames('dqpl-tile-content', className)} {...other} />
+  <div className={classNames('Card__content', className)} {...other} />
 );
 
 CardContent.displayName = 'CardContent';

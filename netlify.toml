@@ -1,0 +1,8 @@
+[build]
+  command = "npx lerna bootstrap && yarn build"
+  publish = "docs/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

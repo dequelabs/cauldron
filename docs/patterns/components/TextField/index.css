@@ -2,6 +2,6 @@
   margin: 0;
 }
 
-.TextField .dqpl-field-wrap {
-  margin-bottom: 0;
+.TextField form {
+  max-width: 300px;
 }

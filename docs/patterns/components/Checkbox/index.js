@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
 import { className } from '../../../props';
-import { Checkbox } from '../../../../packages/react/src/';
-import './index.css';
+import { Checkbox } from '@deque/cauldron-react/';
 
 export default class CheckboxDemo extends Component {
   state = {
@@ -44,6 +43,13 @@ export default class CheckboxDemo extends Component {
             label: 'Demo checkbox 3 (disabled)',
             value: '3',
             disabled: true
+          },
+          {
+            id: 'demo-checkbox-4',
+            name: 'demo-checkbox-4',
+            label: 'Demo checkbox 4',
+            value: '4',
+            error: 'The fourth checkbox is required!'
           }
         ]}
         propDocs={{
@@ -78,10 +84,6 @@ export default class CheckboxDemo extends Component {
           disabled: {
             type: 'boolean',
             description: 'If the checkbox should be disabled'
-          },
-          checkboxRef: {
-            type: 'function',
-            description: 'Ref function for the input[type=checkbox] element'
           }
         }}
       />

@@ -10,7 +10,7 @@
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react",
-    "declaration": true
+    "types": ["node"]
   },
   "exclude": ["node_modules"]
 }

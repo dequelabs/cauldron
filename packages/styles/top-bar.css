@@ -1,4 +1,4 @@
-.dqpl-top-bar {
+.TopBar {
   background-color: var(--top-bar-background-color);
   color: var(--top-bar-text-color);
   position: fixed;
@@ -8,39 +8,39 @@
   flex: none;
   flex-direction: row;
   box-sizing: border-box;
-  box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.5);
   z-index: var(--z-index-top-bar);
-}
-
-.dqpl-top-bar-thin .dqpl-top-bar {
-  height: var(--top-bar-height-thin);
-}
-
-.dqpl-top-bar > ul {
-  list-style-type: none;
   display: flex;
   align-items: center;
 }
 
-.dqpl-top-bar li button {
+.TopBar--thin .TopBar {
+  height: var(--top-bar-height-thin);
+}
+
+.TopBar > ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  flex: auto;
+}
+
+.TopBar li button {
   background: transparent;
   color: inherit;
 }
 
-.dqpl-top-bar > ul > li {
+.TopBar > ul > li {
   box-sizing: border-box;
-  border-top: var(--border-width) solid transparent;
-  border-bottom: var(--border-width) solid transparent;
   height: var(--top-bar-height);
   cursor: pointer;
   position: relative;
 }
 
-.dqpl-top-bar-thin .dqpl-top-bar > ul > li {
+.TopBar--thin .TopBar > ul > li {
   height: var(--top-bar-height-thin);
 }
 
-.dqpl-top-bar > ul > li:not(.dqpl-menu-trigger) {
+.TopBar > ul > li:not(.TopBar__menu-trigger) {
   padding: 0 var(--space-medium);
   font-size: var(--text-size-small);
   height: var(--top-bar-height);
@@ -48,84 +48,55 @@
   align-items: center;
 }
 
-.dqpl-top-bar-thin .dqpl-top-bar > ul > li:not(.dqpl-menu-trigger) {
+.TopBar--thin .TopBar > ul > li:not(.TopBar__menu-trigger) {
   height: var(--top-bar-height-thin);
 }
 
-.dqpl-top-bar > ul > li.dqpl-account-item {
-  display: flex;
-  padding: 0 var(--space-small);
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item .dqpl-avatar {
-  border: 1px solid var(--tile-background-color);
-  background-color: var(--disabled);
-  color: var(--header-text-color);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--text-size-medium);
-  margin-right: 14px;
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item .dqpl-account-info .dqpl-name {
-  font-size: var(--text-size-small);
-  color: var(--tile-background-color);
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item .dqpl-account-info .dqpl-company {
-  font-size: var(--text-size-smaller);
-  color: var(--top-bar-text-color);
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item .fa-caret-down {
-  margin-left: var(--space-small);
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item .dqpl-dropdown {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.dqpl-top-bar > ul > li.dqpl-account-item[data-dropdown-expanded='true']:hover {
-  border-bottom: var(--border-width) solid transparent;
-}
-
-.dqpl-top-bar > ul > li:focus-within,
-.dqpl-top-bar > ul > li:hover {
-  border-bottom: var(--border-width) solid var(--top-bar-text-color);
+.TopBar > ul > li:focus-within,
+.TopBar > ul > li:hover {
   outline: 0;
 }
 
-.dqpl-top-bar > ul > li .fa {
+.TopBar > ul > li:focus-within:before,
+.TopBar > ul > li:hover:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--top-bar-text-color);
+  height: var(--border-width);
+}
+
+.TopBar > ul > li .fa {
   font-size: var(--text-small-medium);
 }
 
-.dqpl-top-bar > ul > li a:focus,
-.dqpl-top-bar > ul > li button:focus {
+.TopBar > ul > li a:focus,
+.TopBar > ul > li button:focus {
   outline: 0;
 }
 
-.dqpl-top-bar a {
+.TopBar a {
   color: var(--top-bar-text-color);
   text-decoration: none;
 }
 
-.dqpl-top-bar .dqpl-right-aligned {
+.TopBar .MenuItem--align-right {
   margin-left: auto;
 }
 
-.dqpl-top-bar li.dqpl-active {
+.TopBar li.MenuItem--active,
+.TopBar [aria-current='page'] {
   background-color: var(--top-bar-background-color-active);
 }
 
-.dqpl-top-bar li.dqpl-active:hover {
+.TopBar li.MenuItem--active:hover,
+.TopBar [aria-current='page'] {
   border-bottom: var(--border-width) solid transparent !important;
 }
 
-.dqpl-top-bar .dqpl-menu-trigger {
+.TopBar .TopBar__menu-trigger {
   display: flex;
   align-items: center;
   background-color: var(--top-bar-background-color);
@@ -134,10 +105,18 @@
   padding: 0 var(--space-small);
   align-self: flex-start;
   box-sizing: border-box;
-  border-top: var(--border-width) solid transparent;
-  border-bottom: var(--border-width) solid transparent;
 }
 
-.dqpl-top-bar-icon-item {
+.TopBar__item--icon {
   text-align: center;
+}
+
+.MenuItem__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MenuItem--separator {
+  border-left: 1px solid var(--top-bar-menuitem-separator);
 }

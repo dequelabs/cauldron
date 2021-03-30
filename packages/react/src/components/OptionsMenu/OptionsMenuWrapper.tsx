@@ -6,9 +6,9 @@ import { OptionsMenuAlignmentProps } from './OptionsMenu';
 const menuAlignment = (type: OptionsMenuWrapperProps['align']) => {
   switch (type) {
     case 'left':
-      return 'dqpl-align-left';
+      return 'OptionsMenu--align-left';
     case 'right':
-      return 'dqpl-align-right';
+      return 'OptionsMenu--align-right';
   }
 };
 
@@ -25,11 +25,7 @@ const OptionsMenuWrapper = ({
   ...other
 }: OptionsMenuWrapperProps) => (
   <div
-    className={classNames(
-      'dqpl-options-menu-wrap',
-      menuAlignment(align),
-      className
-    )}
+    className={classNames('OptionsMenu', menuAlignment(align), className)}
     {...other}
   />
 );

@@ -1,180 +1,129 @@
-.dqpl-button-primary,
-.dqpl-button-secondary,
-.dqpl-button-clear,
-.dqpl-button-error {
-  min-width: 110px;
-  border-radius: 18px;
+.Button--primary,
+.Button--secondary,
+.Button--clear,
+.Button--error {
+  border-radius: 3px;
   border: none;
-  padding: var(--space-smallest);
   font-size: var(--text-size-small);
   box-sizing: border-box;
-  padding: var(--space-smallest) var(--space-medium);
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  padding: 0 16px;
   position: relative;
-  margin: 0 auto;
   text-align: center;
-  height: 36px;
   text-transform: uppercase;
+  height: 36px;
+  min-width: 100px;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  --button-hover-outline-color: var(--button-background-color-primary);
 }
 
-.dqpl-button-primary:before,
-.dqpl-button-secondary:before,
-.dqpl-button-clear:before,
-.dqpl-button-error:before {
+button.Link {
+  cursor: pointer;
+}
+
+.Button--primary:focus,
+.Button--secondary:focus,
+.Button--clear:focus,
+.Button--error:focus {
+  outline: none;
+}
+
+.Button--primary:before,
+.Button--secondary:before,
+.Button--clear:before,
+.Button--error:before {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow: -4px 0 transparent;
-  top: 3px;
-  left: 8px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: 3px;
+  pointer-events: none;
 }
 
-.dqpl-button-primary:after,
-.dqpl-button-secondary:after,
-.dqpl-button-clear:after,
-.dqpl-button-error:after {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow: 4px 0 transparent;
-  top: 3px;
-  right: 8px;
+.Button--primary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--button-hover-outline-color);
 }
 
-.dqpl-button-primary:hover,
-.dqpl-button-secondary:hover,
-.dqpl-button-clear:hover,
-.dqpl-button-error:hover {
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+.Button--primary:focus:before,
+.Button--secondary:focus:before,
+.Button--error:focus:before {
+  box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
 }
 
-.dqpl-button-primary:focus,
-.dqpl-button-secondary:focus,
-.dqpl-button-clear:focus,
-.dqpl-button-error:focus {
-  outline: 0;
-}
-
-.dqpl-button-primary:active,
-.dqpl-button-secondary:active,
-.dqpl-button-clear:active,
-.dqpl-button-error:active {
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
-}
-
-.dqpl-button-primary {
+.Button--primary {
   background-color: var(--button-background-color-primary);
   color: var(--button-text-color-light);
 }
 
-.dqpl-button-primary.dqpl-disabled,
-.dqpl-button-primary[aria-disabled='true'],
-.dqpl-button-primary[disabled] {
-  color: var(--text-color-light-disabled);
+.Button--primary[aria-disabled='true'],
+.Button--primary[disabled] {
+  background-color: var(--button-background-color-primary-disabled);
 }
 
-.dqpl-button-primary:focus:after {
-  box-shadow: 4px 0 var(--text-color-light);
+.Button--primary:active {
+  background: var(--button-background-color-primary-active);
 }
 
-.dqpl-button-primary:focus:before {
-  box-shadow: -4px 0 var(--text-color-light);
-}
-
-.dqpl-button-secondary {
+.Button--secondary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
+  border: 1px solid var(--field-border-color);
+  --button-hover-outline-color: var(--header-text-color-dark);
 }
 
-.dqpl-button-secondary.dqpl-disabled,
-.dqpl-button-secondary[aria-disabled='true'],
-.dqpl-button-secondary[disabled] {
+.Button--secondary[aria-disabled='true'],
+.Button--secondary[disabled] {
   color: var(--disabled);
+  background-color: var(--button-background-color-secondary-disabled);
 }
 
-.dqpl-button-secondary:focus:after {
-  box-shadow: 4px 0 var(--button-text-color-dark);
+.Button--secondary:active {
+  background-color: var(--button-background-color-secondary-active);
 }
 
-.dqpl-button-secondary:focus:before {
-  box-shadow: -4px 0 var(--button-text-color-dark);
-}
-
-.dqpl-button-error {
+.Button--error {
   background-color: var(--error);
   box-shadow: none;
   color: var(--button-text-color-light);
+  --button-hover-outline-color: var(--error);
 }
 
-.dqpl-button-error.dqpl-disabled,
-.dqpl-button-error[aria-disabled='true'],
-.dqpl-button-error[disabled] {
-  color: var(--text-color-light-disabled);
+.Button--error[aria-disabled='true'],
+.Button--error[disabled] {
+  color: var(--button-text-color-light);
+  background-color: var(--button-background-color-error-disabled);
 }
 
-.dqpl-button-error:hover {
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+.Button--error:active {
+  background-color: var(--button-background-color-error-active);
 }
 
-.dqpl-button-error:focus {
-  outline: 0;
+.Button--primary .Icon,
+.Button--secondary .Icon,
+.Button--clear .Icon,
+.Button--error .Icon {
+  margin: 0 -4px;
 }
 
-.dqpl-button-error:active {
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
+.Button--thin .Icon svg {
+  width: calc(var(--button-thin-height) - 8px);
+  height: calc(var(--button-thin-height) - 8px);
 }
 
-.dqpl-button-error:focus:after {
-  box-shadow: 4px 0 var(--text-color-light);
-}
-
-.dqpl-button-error:focus:before {
-  box-shadow: -4px 0 var(--text-color-light);
-}
-
-.dqpl-button-clear {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.dqpl-button-clear:hover {
-  background-color: var(--button-background-color-secondary);
-  box-shadow: none;
-}
-
-.dqpl-button-clear:focus {
-  background-color: var(--button-background-color-secondary);
-}
-
-.dqpl-button-clear:focus:after {
-  box-shadow: 4px 0 var(--button-text-color-dark);
-}
-
-.dqpl-button-clear:focus:before {
-  box-shadow: -4px 0 var(--button-text-color-dark);
-}
-
-.dqpl-buttons-inline {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-}
-
-.dqpl-buttons-inline button {
-  margin: 0 0 0 10px;
-}
-
-.dqpl-definition-button-wrap {
+.DefinitionButton {
   display: inline;
   vertical-align: baseline;
   position: relative;
 }
 
-.dqpl-button-definition {
+.DefinitionButton button {
   background-color: transparent;
   color: var(--text-color-base);
   font-weight: var(--font-weight-normal);
@@ -186,4 +135,16 @@
   vertical-align: baseline;
   cursor: auto;
   user-select: text;
+}
+
+.Button--thin {
+  height: var(--button-thin-height);
+  min-width: 100px;
+  font-size: var(--text-size-smallest);
+  line-height: var(--text-size-smallest);
+  padding: 0 16px;
+}
+
+[class*='Button--'] + [class*='Button--'] {
+  margin-left: var(--space-smallest);
 }

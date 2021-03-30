@@ -22,13 +22,14 @@ export default class OptionsMenuList extends React.Component<
 > {
   static defaultProps = {
     closeOnSelect: true,
-    onSelect: () => {}
+    onSelect: () => {},
+    onClose: () => {}
   };
 
   static propTypes = {
     show: PropTypes.bool,
     children: PropTypes.node.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
     className: PropTypes.string,
     onSelect: PropTypes.func,
     closeOnSelect: PropTypes.bool,
@@ -65,7 +66,7 @@ export default class OptionsMenuList extends React.Component<
   }
 
   private handleKeyDown = (e: KeyboardEvent) => {
-    const { onClose } = this.props;
+    const { onClose = OptionsMenuList.defaultProps.onClose } = this.props;
     const { which, target } = e;
     switch (which) {
       case up:
@@ -106,7 +107,7 @@ export default class OptionsMenuList extends React.Component<
 
   private handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { menuRef, props } = this;
-    const { onSelect, onClose } = props;
+    const { onSelect, onClose = OptionsMenuList.defaultProps.onClose } = props;
     if (menuRef && menuRef.contains(e.target as HTMLElement)) {
       if (!e.defaultPrevented && props.closeOnSelect) {
         onClose();
@@ -122,7 +123,7 @@ export default class OptionsMenuList extends React.Component<
   };
 
   private handleClickOutside = () => {
-    const { onClose, show } = this.props;
+    const { onClose = OptionsMenuList.defaultProps.onClose, show } = this.props;
     if (show) {
       onClose();
     }
@@ -139,7 +140,7 @@ export default class OptionsMenuList extends React.Component<
 
   render() {
     const { props, handleClick } = this;
-    /* eslint-disable no-unused-vars */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       children,
       menuRef,
@@ -150,13 +151,13 @@ export default class OptionsMenuList extends React.Component<
       closeOnSelect,
       ...other
     } = props;
-    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     const items = React.Children.toArray(children).map((child, i) => {
       const { className, ...other } = (child as React.ReactElement<any>).props;
       return React.cloneElement(child as React.ReactElement<any>, {
         key: `list-item-${i}`,
-        className: classnames('dqpl-options-menuitem', className),
+        className: classnames('OptionsMenu__list-item', className),
         tabIndex: -1,
         role: 'menuitem',
         ref: (el: HTMLLIElement) => (this.itemRefs[i] = el),
@@ -170,7 +171,7 @@ export default class OptionsMenuList extends React.Component<
       <ClickOutsideListener onClickOutside={this.handleClickOutside}>
         <ul
           {...other}
-          className={classnames('dqpl-options-menu', className)}
+          className={classnames('OptionsMenu__list', className)}
           /* aria-expanded is not correct usage here, but the pattern library
              currently styles the open state of the menu. based on this attribute */
           aria-expanded={show}

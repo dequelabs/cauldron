@@ -21,9 +21,9 @@ export default class Main extends Component<MainProps> {
   render() {
     const { mainRef, children, ...other } = this.props;
     return (
-      <div className="dqpl-main-content" role="main" ref={mainRef} {...other}>
+      <main className="Main" ref={mainRef} {...other}>
         {children}
-      </div>
+      </main>
     );
   }
 }

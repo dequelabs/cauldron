@@ -20,16 +20,13 @@ function PanelTrigger({
   return (
     <button
       {...other}
-      className={classnames(
-        'dqpl-icon dqpl-expand-collapse-trigger',
-        className
-      )}
+      className={classnames('ExpandCollapse__trigger', className)}
       type="button"
       aria-expanded={open}
       onClick={onClick}
     >
       {typeof children === 'function' ? children({ open: !!open }) : children}{' '}
-      <Icon type={`fa-chevron-${open ? 'down' : 'right'}`} />
+      <Icon type={`chevron-${open ? 'down' : 'right'}`} />
     </button>
   );
 }

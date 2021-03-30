@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Icon from '../Icon';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
 export interface RadioGroupProps {
-  name: string;
+  name?: string;
   className?: string;
   radios: RadioItem[];
   defaultValue?: string;
@@ -30,7 +31,7 @@ export default class RadioGroup extends React.Component<
   };
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     radios: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.string.isRequired,
@@ -94,10 +95,7 @@ export default class RadioGroup extends React.Component<
       const isFocused = this.state.focusIndex === index;
 
       return (
-        <div
-          className={classNames('dqpl-radio-wrap dqpl-flexr', className)}
-          key={id}
-        >
+        <div className={classNames('Radio is--flex-row', className)} key={id}>
           <input
             type="radio"
             name={name}
@@ -114,20 +112,19 @@ export default class RadioGroup extends React.Component<
             checked={isChecked}
             {...other}
           />
-          <div
-            aria-hidden="true"
-            className={classNames('dqpl-radio dqpl-overlay-radio fa', {
-              'fa-dot-circle-o': isChecked,
-              'fa-circle-o': !isChecked,
-              'dqpl-radio-focused': isFocused,
-              'dqpl-radio-disabled': disabled
+          <Icon
+            className={classNames('Radio__overlay', {
+              'Radio__overlay--focused': isFocused,
+              'Radio__overlay--disabled': disabled
             })}
+            type={isChecked ? 'radio-checked' : 'radio-unchecked'}
+            aria-hidden="true"
             onClick={() => this.onRadioClick(index)}
           />
           <label
             htmlFor={id}
-            className={classNames('dqpl-label', {
-              'dqpl-label-disabled': disabled
+            className={classNames('Field__label', {
+              'Field__label--disabled': disabled
             })}
           >
             {label}
@@ -137,11 +134,7 @@ export default class RadioGroup extends React.Component<
     });
 
     return (
-      <div
-        className={classNames('dqpl-radio-group', className)}
-        role="radiogroup"
-        {...other}
-      >
+      <div className={className} role="radiogroup" {...other}>
         {radioButtons}
       </div>
     );

@@ -1,125 +1,72 @@
-.dqpl-text-largest {
+.text--largest {
   font-size: var(--text-size-largest);
 }
 
-.dqpl-text-larger {
+.text--larger {
   font-size: var(--text-size-larger);
 }
 
-.dqpl-text-large {
+.text--large {
   font-size: var(--text-size-large);
 }
 
-.dqpl-text-large-medium {
+.text--large-medium {
   font-size: var(--text-size-large-medium);
 }
 
-.dqpl-text-medium {
+.text--medium {
   font-size: var(--text-size-medium);
 }
 
-.dqpl-text-normal {
+.text--normal {
   font-size: var(--text-size-normal);
 }
 
-.dqpl-text-small-medium {
+.text--small-medium {
   font-size: var(--text-small-medium);
 }
 
-.dqpl-text-small {
+.text--small {
   font-size: var(--text-size-small);
 }
 
-.dqpl-text-smaller {
+.text--smaller {
   font-size: var(--text-size-smaller);
 }
 
-.dqpl-text-smallest {
+.text--smallest {
   font-size: var(--text-size-smallest);
 }
 
-.dqpl-weight-thin {
+.weight--thin {
   font-weight: var(--font-weight-thin);
 }
 
-.dqpl-weight-light {
+.weight--light {
   font-weight: var(--font-weight-light);
 }
 
-.dqpl-weight-normal {
+.weight--normal {
   font-weight: var(--font-weight-normal);
 }
 
-.dqpl-weight-medium {
+.weight--medium {
   font-weight: var(--font-weight-medium);
 }
 
-.dqpl-weight-bold {
+.weight--bold {
   font-weight: var(--font-weight-bold);
 }
 
-.dqpl-weight-ultra-bold {
+.weight--ultra-bold {
   font-weight: var(--font-weight-ultra-bold);
 }
 
-.dqpl-inline {
-  display: inline;
-}
-
-.dqpl-hide {
+body .is--hidden {
   display: none;
 }
 
-.dqpl-pointer {
-  cursor: pointer;
-}
-
-body .dqpl-hidden {
-  display: none;
-}
-
-.dqpl-offscreen {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  margin-top: -1px;
-}
-
-.flexr,
-.dqpl-flexr {
+.is--flex-row {
   display: flex;
   align-items: center;
-}
-
-body .row {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.flex-1 {
-  flex: 1 0 auto;
-}
-
-.flex-1-1 {
-  flex: 1;
-}
-
-.flex-none {
-  flex: none;
-}
-
-.align-self-center {
-  align-self: center;
-}
-
-.dqpl-logo-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dqpl-separator {
-  border-left: 1px solid var(--top-bar-menuitem-separator);
 }
