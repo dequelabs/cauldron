@@ -83,8 +83,8 @@ jobs:
             - v1-styles-yarn-
       - run: npm whoami
       - run: .circleci/canary-version.js
-      - run: npm publish --tag=next --prefix=packages/styles
-      - run: npm publish --tag=next --prefix=packages/react
+      - run: npm publish --tag=testing --prefix=packages/styles
+      - run: npm publish --tag=testing --prefix=packages/react
   release:
     <<: *defaults
     steps:
@@ -130,6 +130,7 @@ workflows:
             branches:
               only:
                 - develop
+                - goodbye-lerna # TODO: remove when done testing
       - release:
           requires:
             - react
