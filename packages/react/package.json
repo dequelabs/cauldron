@@ -26,6 +26,7 @@
     "react-id-generator": "^3.0.1",
     "react-popper": "^2.2.4",
     "react-syntax-highlighter": "^13.5.1",
+    "react-wai-accordion": "^0.0.0-canary.e95720b5",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

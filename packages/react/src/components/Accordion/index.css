@@ -1,0 +1,67 @@
+.Accordion {
+  margin: 35px auto;
+}
+
+.Accordion-item {
+  margin: 12px 0;
+}
+
+.Accordion-item-open {
+  border: 2px solid rgb(40, 54, 64);
+  border-radius: 3px;
+}
+
+.Accordion-item-open .Accordion-item-title button {
+  border: 0;
+  border-radius: 0;
+}
+
+.Accordion-item-title button {
+  width: 100%;
+  font-size: 20px;
+  text-align: left;
+  padding: 22px 33px;
+  background: #fff;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  display: flex;
+  color: var(--header-text-color);
+  outline: 0;
+}
+
+.Accordion-item-title button:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: var(--space-quarter);
+}
+
+.Accordion-item-title button .Icon {
+  margin-left: auto;
+}
+
+.Accordion-item-title button span {
+  white-space: normal;
+}
+
+.Accordion-item-title button[aria-expanded='true'] {
+  background: rgb(40, 54, 64);
+  color: #fff;
+  box-shadow: none;
+  border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.Accordion-item-title button[aria-expanded='true'] .Icon {
+  transform: rotate(90deg);
+}
+
+.Accordion-item-content {
+  border: 1px solid #ddd;
+  border-top: 0;
+  padding-top: var(--space-medium);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  background: #fff;
+}

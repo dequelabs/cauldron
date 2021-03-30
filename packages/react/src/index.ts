@@ -68,6 +68,10 @@ export { default as LoaderOverlay } from './components/LoaderOverlay';
 export { default as Line } from './components/Line';
 export { default as Tag, TagLabel } from './components/Tag';
 
+// Simply re-export our React WAI Accordion as-is.
+export { default as Accordion } from 'react-wai-accordion';
+export { AccordionItem } from 'react-wai-accordion';
+
 /**
  * Helpers / Utils
  */

@@ -49,7 +49,8 @@ const componentsList = [
   'Code',
   'LoaderOverlay',
   'Line',
-  'Tag'
+  'Tag',
+  'Accordion'
 ].sort();
 
 class App extends Component {
