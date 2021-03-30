@@ -83,8 +83,8 @@ jobs:
             - v1-styles-yarn-
       - run: npm whoami
       - run: .circleci/canary-version.js
-      - run: npm publish --tag=testing --prefix=packages/styles
-      - run: npm publish --tag=testing --prefix=packages/react
+      - run: cd packages/styles && npm publish --tag=testing
+      - run: cd packages/react && npm publish --tag=testing
   release:
     <<: *defaults
     steps:
@@ -103,8 +103,8 @@ jobs:
             - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
             - v1-styles-yarn-
       - run: npm whoami
-      - run: npm publish --prefix=packages/styles
-      - run: npm publish --prefix=packages/react
+      - run: cd packages/styles && npm publish
+      - run: cd packages/react && npm publish
 
 workflows:
   version: 2
