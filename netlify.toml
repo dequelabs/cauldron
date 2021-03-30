@@ -1,5 +1,5 @@
 [build]
-  command = "npx lerna bootstrap && yarn build"
+  command = "yarn build"
   publish = "docs/dist"
 
 [[redirects]]
