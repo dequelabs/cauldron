@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn build:react && yarn build:styles && yarn build:docs"
   publish = "docs/dist"
 
 [[redirects]]
