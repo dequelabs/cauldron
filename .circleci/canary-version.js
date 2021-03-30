@@ -20,11 +20,11 @@ fs.writeFileSync('./package.json', JSON.stringify(root, null, 2));
 styles.version = version;
 fs.writeFileSync(
   './packages/styles/package.json',
-  JSON.stringify(root, null, 2)
+  JSON.stringify(styles, null, 2)
 );
 
 react.version = version;
 fs.writeFileSync(
   './packages/react/package.json',
-  JSON.stringify(root, null, 2)
+  JSON.stringify(react, null, 2)
 );
