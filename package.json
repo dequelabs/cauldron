@@ -1,8 +1,42 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.1",
   "license": "MPL-2.0",
+  "scripts": {
+    "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:docs\"",
+    "build:react": "NODE_ENV=production yarn --cwd=packages/react build",
+    "build:styles": "NODE_ENV=production yarn --cwd=packages/styles build",
+    "build:docs": "NODE_ENV=production webpack --bail",
+    "dev": "concurrently \"yarn dev:styles\" \"yarn dev:react\" \"yarn dev:docs\"",
+    "dev:react": "yarn --cwd=packages/react dev",
+    "dev:styles": "yarn --cwd=packages/styles dev",
+    "dev:docs": "webpack-dev-server",
+    "fmt": "prettier --write \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
+    "lint": "eslint .",
+    "test": "yarn --cwd=packages/react test",
+    "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react",
+    "release": "standard-version"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,css,md,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
@@ -26,6 +60,7 @@
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "classnames": "^2.2.6",
     "closest": "0.0.1",
+    "concurrently": "^6.0.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.11.2",
@@ -40,7 +75,6 @@
     "jest-axe": "^3.1.1",
     "jsdom": "^15.2.1",
     "jsdom-global": "^3.0.2",
-    "lerna": "^3.20.2",
     "less": "^2.7.3",
     "lint-staged": "^7.2.2",
     "mini-css-extract-plugin": "^0.9.0",
@@ -56,7 +90,7 @@
     "react-element-to-jsx-string": "^14.0.2",
     "react-helmet": "^5.2.1",
     "react-router-dom": "^4.2.2",
-    "standard-version": "^8.0.1",
+    "standard-version": "^9.1.1",
     "style-loader": "^0.19.0",
     "terser-webpack-plugin": "^2.3.5",
     "ts-node": "^8.9.1",
@@ -64,32 +98,5 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
-  },
-  "prettier": {
-    "singleQuote": true
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{json,css,md,ts,tsx}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "scripts": {
-    "build": "NODE_ENV=production lerna run build && NODE_ENV=production webpack --bail",
-    "dev": "lerna run dev --stream & webpack-dev-server",
-    "fmt": "prettier --write 'docs/**/*.{css,js}' 'packages/react/**/*.{js,ts,tsx}' *.{js,json,md,ts}",
-    "lint": "eslint .",
-    "test": "npm run --prefix=packages/react test",
-    "postinstall": "lerna bootstrap"
   }
 }
