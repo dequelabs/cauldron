@@ -130,7 +130,7 @@ export default function Tooltip({
       ) {
         if (showTooltip) {
           setShowTooltip(false);
-          event.stopPropagation();
+          event.preventDefault();
         }
       }
     };
