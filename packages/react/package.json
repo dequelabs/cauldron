@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "publishConfig": {
     "access": "public"
@@ -8,6 +8,9 @@
   "main": "lib/index.js",
   "style": "lib/cauldron.css",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "yarn build:lib && yarn build:css",
     "build:lib": "rollup -c && tsc --declaration --emitDeclarationOnly --outDir lib",

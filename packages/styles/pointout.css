@@ -146,9 +146,9 @@
   right: var(--pointout-arrow-width);
 }
 
-.Pointout__dismiss svg,
-.Pointout__next svg,
-.Pointout__previous svg {
+.Pointout__dismiss .Icon svg,
+.Pointout__next .Icon svg,
+.Pointout__previous .Icon svg {
   height: 24px;
   width: 24px;
 }
@@ -172,7 +172,19 @@
   font-weight: var(--font-weight-normal);
   padding-bottom: var(--space-smallest);
   margin-bottom: var(--space-smallest);
-  border-bottom: 1px solid #fff;
+}
+
+.Pointout__content .Pointout__heading:after {
+  display: block;
+  content: '';
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--pointout-text-color),
+    var(--pointout-background-color)
+  );
+  transform: translateY(var(--space-smallest));
 }
 
 .Pointout__content p {
@@ -186,15 +198,16 @@
 }
 
 .Pointout__content:focus:before {
-  background: var(--top-bar-background-color);
+  background: #fff;
 }
 
 .Pointout__content:before {
   content: '';
-  height: 100%;
-  width: 3px;
+  height: calc(100% - 12px);
+  width: 2px;
   position: absolute;
-  left: -8px;
+  left: 3px;
+  top: 6px;
 }
 
 .Pointout--no-arrow .Pointout__arrow {
@@ -247,4 +260,36 @@
 
 .Pointout--auto.Pointout__arrow--right-bottom {
   transform: translateX(-100%) translateY(-100%) translateY(10px);
+}
+
+.Pointout--auto.Pointout--start[class*='top-'] {
+  transform: none;
+}
+
+.Pointout--auto.Pointout--start[class*='bottom-'] {
+  transform: translateY(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='top-'] {
+  transform: translateX(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='bottom-'] {
+  transform: translateY(-100%) translateX(-100%);
+}
+
+.Pointout--auto.Pointout--start[class*='left-'] {
+  transform: none;
+}
+
+.Pointout--auto.Pointout--start[class*='right-'] {
+  transform: translateX(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='left-'] {
+  transform: translateY(-100%);
+}
+
+.Pointout--auto.Pointout--end[class*='right-'] {
+  transform: translateX(-100%) translateY(-100%);
 }

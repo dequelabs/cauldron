@@ -15,7 +15,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   show?: boolean;
   dialogRef?: React.Ref<HTMLDivElement>;
-  onClose: () => void;
+  onClose?: () => void;
   forceAction?: boolean;
   heading:
     | React.ReactElement<any>
@@ -170,7 +170,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
 
   close() {
     this.state.isolator?.deactivate();
-    this.props?.onClose();
+    this.props.onClose?.();
   }
 
   handleClickOutside() {

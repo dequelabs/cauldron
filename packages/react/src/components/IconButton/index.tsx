@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
+import React, {
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+  MutableRefObject
+} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Placement } from '@popperjs/core';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
-
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
@@ -12,41 +16,49 @@ export interface IconButtonProps
   tooltipPlacement?: Placement;
 }
 
-export default function IconButton({
-  icon,
-  label,
-  tooltipPlacement = 'auto',
-  className,
-  ...other
-}: IconButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  return (
-    <React.Fragment>
-      <button
-        type={'button'}
-        className={classnames('IconButton', className)}
-        ref={buttonRef}
-        {...other}
-      >
-        <Icon type={icon} />
-      </button>
-      <Tooltip
-        target={buttonRef}
-        placement={tooltipPlacement}
-        association="aria-labelledby"
-        hideElementOnHidden
-      >
-        {label}
-      </Tooltip>
-    </React.Fragment>
-  );
-}
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  (
+    {
+      icon,
+      label,
+      tooltipPlacement = 'auto',
+      className,
+      ...other
+    }: IconButtonProps,
+    ref
+  ): JSX.Element => {
+    const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
+    useImperativeHandle(ref, () => buttonRef.current);
+
+    return (
+      <React.Fragment>
+        <button
+          type={'button'}
+          className={classnames('IconButton', className)}
+          ref={buttonRef}
+          {...other}
+        >
+          <Icon type={icon} />
+        </button>
+        <Tooltip
+          target={buttonRef}
+          placement={tooltipPlacement}
+          association="aria-labelledby"
+          hideElementOnHidden
+        >
+          {label}
+        </Tooltip>
+      </React.Fragment>
+    );
+  }
+);
+
+IconButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  tooltipPlacement: PropTypes.any
+};
 
 IconButton.displayName = 'IconButton';
 
-IconButton.propTypes = {
-  icon: PropTypes.string,
-  label: PropTypes.string,
-  tooltipPlayemnt: PropTypes.string,
-  buttonRef: PropTypes.any
-};
+export default IconButton;

@@ -1,10 +1,12 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
+
+const TIP_HIDE_DELAY = 100;
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -47,6 +49,7 @@ export default function Tooltip({
   ...props
 }: TooltipProps) {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
+  const hovering = useRef(false);
   const [placement, setPlacement] = useState(initialPlacement);
   const [showTooltip, setShowTooltip] = useState(!!showProp);
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
@@ -78,9 +81,28 @@ export default function Tooltip({
   };
   const hide = ({ target }: FocusEvent | MouseEvent) => {
     if (document.activeElement !== target) {
-      setShowTooltip(false);
-      fireCustomEvent(false, targetElement);
+      setTimeout(() => {
+        if (!hovering.current) {
+          setShowTooltip(false);
+          fireCustomEvent(false, targetElement);
+        }
+      }, TIP_HIDE_DELAY);
     }
+  };
+  const handleTriggerMouseEnter = () => {
+    hovering.current = true;
+    show();
+  };
+  const handleTriggerMouseLeave = (e: MouseEvent) => {
+    hovering.current = false;
+    hide(e);
+  };
+  const handleTipMouseEnter = () => {
+    hovering.current = true;
+  };
+  const handleTipMouseLeave = (e: MouseEvent) => {
+    hovering.current = false;
+    hide(e);
   };
 
   useEffect(() => {
@@ -127,8 +149,8 @@ export default function Tooltip({
 
   useEffect(() => {
     if (typeof show !== undefined) {
-      targetElement?.addEventListener('mouseenter', show);
-      targetElement?.addEventListener('mouseleave', hide);
+      targetElement?.addEventListener('mouseenter', handleTriggerMouseEnter);
+      targetElement?.addEventListener('mouseleave', handleTriggerMouseLeave);
       targetElement?.addEventListener('focusin', show);
       targetElement?.addEventListener('focusout', hide);
     }
@@ -139,6 +161,18 @@ export default function Tooltip({
       targetElement?.removeEventListener('focusout', hide);
     };
   }, [targetElement, show]);
+
+  useEffect(() => {
+    if (tooltipElement) {
+      tooltipElement?.addEventListener('mouseenter', handleTipMouseEnter);
+      tooltipElement?.addEventListener('mouseleave', handleTipMouseLeave);
+    }
+
+    return () => {
+      tooltipElement?.removeEventListener('mouseenter', handleTipMouseEnter);
+      tooltipElement?.removeEventListener('mouseleave', handleTipMouseLeave);
+    };
+  }, [tooltipElement]);
 
   useEffect(() => {
     const attrText = targetElement?.getAttribute(association);

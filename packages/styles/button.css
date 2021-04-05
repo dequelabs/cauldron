@@ -12,7 +12,7 @@
   text-transform: uppercase;
   height: 36px;
   min-width: 100px;
-  display: grid;
+  display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
@@ -24,17 +24,37 @@ button.Link {
   cursor: pointer;
 }
 
-.Button--primary:not([disabled]):not([aria-disabled='true']):hover,
-.Button--secondary:not([disabled]):not([aria-disabled='true']):hover,
-.Button--error:not([disabled]):not([aria-disabled='true']):hover {
-  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--button-hover-outline-color);
-}
-
 .Button--primary:focus,
 .Button--secondary:focus,
+.Button--clear:focus,
 .Button--error:focus {
-  outline: 0;
-  box-shadow: 0 0 0 1px #fff, 0 0 1px 3px var(--button-focus-ring-color);
+  outline: none;
+}
+
+.Button--primary:before,
+.Button--secondary:before,
+.Button--clear:before,
+.Button--error:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.Button--primary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--button-hover-outline-color);
+}
+
+.Button--primary:focus:before,
+.Button--secondary:focus:before,
+.Button--error:focus:before {
+  box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
 }
 
 .Button--primary {
