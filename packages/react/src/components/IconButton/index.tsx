@@ -27,7 +27,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       variant = 'secondary',
       ...other
     }: IconButtonProps,
-    ref: any
+    ref
   ): JSX.Element => {
     const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
     useImperativeHandle(ref, () => buttonRef.current);
