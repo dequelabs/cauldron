@@ -64,7 +64,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 IconButton.propTypes = {
   icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  tooltipPlayemnt: PropTypes.string,
+  // @ts-ignore
+  tooltipPlacement: PropTypes.string,
   // @ts-ignore
   variant: PropTypes.string
 };
