@@ -91,11 +91,12 @@
   );
   --icon-button-outline-color-error: var(--button-outline-color-error);
 
+  --icon-button-content-color-light-disabled: #ccc;
   --icon-button-background-color-light: #dadada;
-  --icon-button-background-color-light-disabled: #ccc;
   --icon-button-background-color-light-active: #c2c2c2;
   --icon-button-outline-color-light: var(--icon-button-background-color-light);
 
+  --icon-button-content-color-dark-disabled: #fff;
   --icon-button-background-color-dark: #283640;
   --icon-button-background-color-dark-disabled: #283640;
   --icon-button-background-color-dark-active: #02101a;
