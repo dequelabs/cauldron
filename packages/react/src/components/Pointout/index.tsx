@@ -17,6 +17,7 @@ export interface PointoutProps {
     | 'bottom-left'
     | 'left-bottom'
     | 'left-top';
+  position: 'start' | 'center' | 'end';
   heading?: React.ReactNode;
   className?: string;
   headerId: string;
@@ -55,7 +56,8 @@ export default class Pointout extends React.Component<
     dismissText: 'dismiss',
     previousText: 'previous',
     nextText: 'next',
-    arrowPosition: 'top-left'
+    arrowPosition: 'top-left',
+    position: 'center'
   };
 
   static propTypes = {
@@ -258,7 +260,7 @@ export default class Pointout extends React.Component<
   };
 
   positionRelativeToTarget = () => {
-    const { target, portal, arrowPosition } = this.props;
+    const { target, portal, arrowPosition, position } = this.props;
 
     if (!target) {
       return;
@@ -287,26 +289,50 @@ export default class Pointout extends React.Component<
       case 'right':
         style = {
           left: `${left}px`,
-          top: `${top + height / 2}px`
+          top: `${
+            position === 'center'
+              ? top + height / 2
+              : position === 'start'
+              ? top
+              : top + height
+          }px`
         };
         break;
       case 'bottom':
         style = {
           top: `${top}px`,
-          left: `${left + width / 2}px`
+          left: `${
+            position === 'center'
+              ? left + width / 2
+              : position === 'start'
+              ? left
+              : left + width
+          }px`
         };
         break;
       case 'left':
         style = {
           left: `${left + width}px`,
-          top: `${top + height / 2}px`
+          top: `${
+            position === 'center'
+              ? top + height / 2
+              : position === 'start'
+              ? top
+              : top + height
+          }px`
         };
         break;
       case 'top':
       default:
         style = {
           top: `${top + height}px`,
-          left: `${left + width / 2}px`
+          left: `${
+            position === 'center'
+              ? left + width / 2
+              : position === 'start'
+              ? left
+              : left + width
+          }px`
         };
         break;
     }
@@ -340,6 +366,7 @@ export default class Pointout extends React.Component<
       showNext,
       showPrevious,
       arrowPosition,
+      position,
       className,
       target,
       disableOffscreenPointout,
@@ -358,7 +385,8 @@ export default class Pointout extends React.Component<
         className={classNames(className, 'Pointout', {
           'Pointout--no-arrow': noArrow,
           'Pointout--auto': !!target,
-          [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow
+          [`Pointout__arrow--${arrowPosition}`]: !!arrowPosition && !noArrow,
+          [`Pointout--${position}`]: !!target
         })}
         style={style}
         role={target ? undefined : 'region'}
