@@ -68,7 +68,7 @@
 
 .IconButton--dark[aria-disabled='true'],
 .IconButton--dark[disabled] {
-  color: var(--icon-button-content-color-dark-disabled) 40%;
+  color: var(--icon-button-content-color-dark-disabled);
   background-color: var(--icon-button-background-color-dark);
   cursor: default;
 }
