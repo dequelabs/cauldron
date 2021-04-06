@@ -40,20 +40,66 @@
   /* buttons */
   --button-background-color-primary: #3c7aae;
   --button-background-color-primary-disabled: #79a7d9;
+  --button-outline-color-primary: var(--button-background-color-primary);
   --button-background-color-primary-active: #316091;
+
   --button-background-color-secondary: #f2f2f2;
   --button-background-color-secondary-disabled: #e0e0e0;
+  --button-outline-color-secondary: #333;
   --button-background-color-secondary-active: #e0e0e0;
+
+  --button-background-color-error: var(--error);
   --button-background-color-error-disabled: #db6379;
   --button-background-color-error-active: #c92e40;
+  --button-outline-color-error: var(--error);
+
   --button-text-color-dark: #333333;
   --button-text-color-light: #ffffff;
   --button-focus-ring-color: #c11bde;
   --button-thin-height: 23px;
 
   /* icon buttons */
-  --icon-button-background-color: #dadada;
-  --icon-button-icon-color: #283640;
+  --icon-button-background-color-primary: var(
+    --button-background-color-primary
+  );
+  --icon-button-background-color-primary-disabled: var(
+    --button-background-color-primary-disabled
+  );
+  --icon-button-background-color-primary-active: var(
+    --button-background-color-primary-active
+  );
+  --icon-button-outline-color-primary: var(--button-outline-color-primary);
+
+  --icon-button-background-color-secondary: var(
+    --button-background-color-secondary
+  );
+  --icon-button-background-color-secondary-disabled: var(
+    --button-background-color-secondary-disabled
+  );
+  --icon-button-background-color-secondary-active: var(
+    --button-background-color-secondary-active
+  );
+  --icon-button-outline-color-secondary: var(--button-outline-color-secondary);
+  --icon-button-border-color-secondary: #dadada;
+
+  --icon-button-background-color-error: var(--button-background-color-error);
+  --icon-button-background-color-error-disabled: var(
+    --button-background-color-error-disabled
+  );
+  --icon-button-background-color-error-active: var(
+    --button-background-color-error-active
+  );
+  --icon-button-outline-color-error: var(--button-outline-color-error);
+
+  --icon-button-background-color-light: #dadada;
+  --icon-button-background-color-light-disabled: #ccc;
+  --icon-button-background-color-light-active: #c2c2c2;
+  --icon-button-outline-color-light: var(--icon-button-background-color-light);
+
+  --icon-button-background-color-dark: #283640;
+  --icon-button-background-color-dark-disabled: #283640;
+  --icon-button-background-color-dark-active: #02101a;
+  --icon-button-outline-color-dark: var(--icon-button-background-color-dark);
 
   /* tooltips */
   --tooltip-background-color: #333;
