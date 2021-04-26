@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import Offscreen from '../Offscreen';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -47,12 +48,9 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       })
     };
 
-    if (label) {
-      data['aria-label'] = label;
-    }
-
     return (
       <div ref={ref} {...data}>
+        {label && <Offscreen>{label}</Offscreen>}
         {IconSVG && <IconSVG />}
       </div>
     );
