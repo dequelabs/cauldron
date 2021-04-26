@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/dequelabs/cauldron/compare/v0.1.1...v0.1.2) (2021-04-26)
+
+### Features
+
+- **react:** implement icon button variants ([#181](https://github.com/dequelabs/cauldron/issues/181)) ([20ca9b2](https://github.com/dequelabs/cauldron/commit/20ca9b2add710024dc7b25a3acde58e50d6d50cf))
+
+### Bug Fixes
+
+- **react:** use offscreen container instead of aria-label for icon elements ([#228](https://github.com/dequelabs/cauldron/issues/228)) ([07d748d](https://github.com/dequelabs/cauldron/commit/07d748d895bc805dd958dcdff35d5ce0a74e27cf))
+
 ### [0.1.1](https://github.com/dequelabs/cauldron/compare/v0.1.0...v0.1.1) (2021-03-31)
 
 # [0.1.0](https://github.com/dequelabs/cauldron/compare/v0.0.0...v0.1.0) (2021-03-30)
