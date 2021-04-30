@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  value?: string;
 }
 
 export interface RadioGroupProps {
@@ -12,131 +13,146 @@ export interface RadioGroupProps {
   className?: string;
   radios: RadioItem[];
   defaultValue?: string;
+  value: any;
   onChange: (radio: RadioItem, input: HTMLElement) => void;
 }
 
-interface RadioGroupState {
-  value: any;
-  focusIndex?: number | null;
-}
+const RadioGroup = ({
+  name,
+  radios,
+  defaultValue,
+  value,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange = () => {},
+  className,
+  ...other
+}: RadioGroupProps) => {
+  const [currentValue, setCurrentValue] = useState<string | null>(
+    value || defaultValue || null
+  );
+  const [focusIndex, setFocusIndex] = useState<number | null>(null);
+  const inputs = useRef<HTMLInputElement[]>([]);
+  const handleChange = (value: any) => setCurrentValue(value);
+  const onRadioFocus = (index: number) => setFocusIndex(index);
+  const onRadioBlur = () => setFocusIndex(null);
+  const onRadioClick = (index: number) => {
+    const radio = inputs.current?.[index];
 
-export default class RadioGroup extends React.Component<
-  RadioGroupProps,
-  RadioGroupState
-> {
-  static defaultProps = {
-    className: '',
-    defaultValue: null,
-    onChange: () => {}
-  };
-
-  static propTypes = {
-    name: PropTypes.string,
-    radios: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    hasLabel: (
-      props: { [key: string]: string },
-      propName: string,
-      componentName: string
-    ) => {
-      if (!props['aria-label'] && !props['aria-labelledby']) {
-        return new Error(
-          `${componentName} must have an "aria-label" or "aria-labelledby" prop`
-        );
-      }
-    },
-    className: PropTypes.string,
-    defaultValue: PropTypes.string,
-    onChange: PropTypes.func
-  };
-
-  private inputs: HTMLInputElement[] = [];
-  private handleChange = (value: any) => this.setState({ value });
-  private onRadioFocus = (focusIndex: number) => this.setState({ focusIndex });
-  private onRadioBlur = () => this.setState({ focusIndex: null });
-  private onRadioClick = (i: number) => {
-    const radio = this.inputs[i];
     if (!radio) {
       return;
     }
+
     radio.click();
     radio.focus();
   };
 
-  constructor(props: RadioGroupProps) {
-    super(props);
-    this.state = { value: this.props.defaultValue };
-  }
+  useEffect(() => {
+    if (typeof value === 'undefined') {
+      return;
+    }
 
-  render() {
-    this.inputs = [];
+    setCurrentValue(value);
+  }, [value]);
+
+  const radioButtons = radios.map((radio, index) => {
     const {
-      name,
+      label,
+      disabled,
+      value: radioValue,
+      id,
       className,
-      defaultValue,
-      onChange,
-      radios,
       ...other
-    } = this.props;
-
-    // Hack to prevent ESLint from erroring about this variable not
-    // being used. We want to pull it from `props` to ensure it's
-    // not passed through to the `<input/>`.
-    void defaultValue;
-
-    const radioButtons = radios.map((radio, index) => {
-      const { label, disabled, value, id, className, ...other } = radio;
-      const isChecked = this.state.value === value;
-      const isFocused = this.state.focusIndex === index;
-
-      return (
-        <div className={classNames('Radio is--flex-row', className)} key={id}>
-          <input
-            type="radio"
-            name={name}
-            value={value}
-            id={id}
-            ref={input => (this.inputs[index] = input as HTMLInputElement)}
-            onFocus={() => this.onRadioFocus(index)}
-            onBlur={() => this.onRadioBlur()}
-            onChange={() => {
-              this.handleChange(value);
-              onChange(radio, this.inputs[index]);
-            }}
-            disabled={disabled}
-            checked={isChecked}
-            {...other}
-          />
-          <Icon
-            className={classNames('Radio__overlay', {
-              'Radio__overlay--focused': isFocused,
-              'Radio__overlay--disabled': disabled
-            })}
-            type={isChecked ? 'radio-checked' : 'radio-unchecked'}
-            aria-hidden="true"
-            onClick={() => this.onRadioClick(index)}
-          />
-          <label
-            htmlFor={id}
-            className={classNames('Field__label', {
-              'Field__label--disabled': disabled
-            })}
-          >
-            {label}
-          </label>
-        </div>
-      );
-    });
+    } = radio;
+    const isChecked = currentValue === radioValue;
+    const isFocused = focusIndex === index;
 
     return (
-      <div className={className} role="radiogroup" {...other}>
-        {radioButtons}
+      <div className={classNames('Radio is--flex-row', className)} key={id}>
+        <input
+          type="radio"
+          name={name}
+          value={radioValue}
+          id={id}
+          ref={input => {
+            if (!input) {
+              return;
+            }
+
+            inputs.current.push(input);
+          }}
+          onFocus={() => onRadioFocus(index)}
+          onBlur={() => onRadioBlur()}
+          onChange={() => {
+            handleChange(radioValue);
+            onChange(radio, inputs.current?.[index]);
+          }}
+          disabled={disabled}
+          checked={isChecked}
+          {...other}
+        />
+        <Icon
+          className={classNames('Radio__overlay', {
+            'Radio__overlay--focused': isFocused,
+            'Radio__overlay--disabled': disabled
+          })}
+          type={isChecked ? 'radio-checked' : 'radio-unchecked'}
+          aria-hidden="true"
+          onClick={() => onRadioClick(index)}
+        />
+        <label
+          htmlFor={id}
+          className={classNames('Field__label', {
+            'Field__label--disabled': disabled
+          })}
+        >
+          {label}
+        </label>
       </div>
     );
-  }
-}
+  });
+
+  // Hack to prevent ESLint from erroring about this variable not
+  // being used. We want to pull it from `props` to ensure it's
+  // not passed through to the radiogroup element.
+  void defaultValue;
+
+  // reset the input refs array
+  // refs get clobbered every re-render anyway and this supports "dynamic" radios
+  // (changing the number of radio buttons for example)
+  inputs.current = [];
+
+  return (
+    <div className={className} role="radiogroup" {...other}>
+      {radioButtons}
+    </div>
+  );
+};
+
+RadioGroup.propTypes = {
+  name: PropTypes.string,
+  radios: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  hasLabel: (
+    props: { [key: string]: string },
+    propName: string,
+    componentName: string
+  ) => {
+    if (!props['aria-label'] && !props['aria-labelledby']) {
+      return new Error(
+        `${componentName} must have an "aria-label" or "aria-labelledby" prop`
+      );
+    }
+  },
+  className: PropTypes.string,
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func
+};
+
+RadioGroup.displayName = 'RadioGroup';
+
+export default RadioGroup;

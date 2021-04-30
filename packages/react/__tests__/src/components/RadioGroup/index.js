@@ -33,6 +33,45 @@ test('handles `defaultValue`', () => {
   ).toBeTruthy();
 });
 
+test('supports "controlled" radiogroups', () => {
+  const wrapper = mount(
+    <RadioGroup {...defaultProps} value={defaultProps.radios[2].value} />
+  );
+  expect(
+    wrapper
+      .find('.Icon.Radio__overlay')
+      .at(2)
+      .hasClass('Icon--radio-checked')
+  ).toBeTruthy();
+  expect(wrapper.find('.Icon--radio-checked').length).toBe(1);
+  expect(
+    wrapper
+      .find('[type="radio"]')
+      .at(2)
+      .getDOMNode().checked
+  ).toBeTruthy();
+
+  wrapper.setProps({
+    value: defaultProps.radios[1].value
+  });
+
+  wrapper.update();
+
+  expect(
+    wrapper
+      .find('.Icon.Radio__overlay')
+      .at(1)
+      .hasClass('Icon--radio-checked')
+  ).toBeTruthy();
+  expect(wrapper.find('.Icon--radio-checked').length).toBe(1);
+  expect(
+    wrapper
+      .find('[type="radio"]')
+      .at(1)
+      .getDOMNode().checked
+  ).toBeTruthy();
+});
+
 test('handles `disabled` radio prop', () => {
   const wrapper = mount(<RadioGroup {...defaultProps} />);
   expect(
@@ -52,12 +91,20 @@ test('handles `disabled` radio prop', () => {
 
 test('handles focus', () => {
   const wrapper = mount(<RadioGroup {...defaultProps} />);
-  expect(wrapper.state('focusIndex')).toBeFalsy();
+
+  expect(
+    wrapper
+      .find('.Radio__overlay')
+      .at(0)
+      .hasClass('Radio__overlay--focused')
+  ).toBeFalsy();
+  expect(wrapper.find('.Icon.Radio__overlay--focused').length).toBe(0);
+
   wrapper
     .find('[type="radio"]')
     .at(0)
     .simulate('focus');
-  expect(wrapper.state('focusIndex')).toBe(0);
+
   expect(
     wrapper
       .find('.Radio__overlay')
@@ -73,12 +120,11 @@ test('handles blur', () => {
     .find('[type="radio"]')
     .at(0)
     .simulate('focus');
-  expect(wrapper.state('focusIndex')).toBe(0);
+  expect(wrapper.find('.Radio__overlay--focused').length).toBeTruthy();
   wrapper
     .find('[type="radio"]')
     .at(0)
     .simulate('blur');
-  expect(wrapper.state('focusIndex')).toBeFalsy();
   expect(wrapper.find('.Radio__overlay--focused').length).toBe(0);
 });
 
@@ -91,7 +137,6 @@ test('handles change', () => {
     .at(0)
     .simulate('change');
   expect(called).toBeTruthy();
-  expect(wrapper.state('value')).toBe(defaultProps.radios[0].value);
 });
 
 test('handles clicks on the radio overlay element', () => {
