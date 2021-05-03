@@ -79,6 +79,8 @@ const Select = React.forwardRef(
       dynamicProps.defaultValue = defaultValue;
     }
 
+    // In order to support controlled selects, we
+    // have to attach an `onChange` to the select.
     /* eslint-disable jsx-a11y/no-onchange */
     return (
       <div className="Field__select">
