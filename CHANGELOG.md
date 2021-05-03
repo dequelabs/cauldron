@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.2.0 (2021-05-03)
+
+### Features
+
+- **react:** allows select component to be controlled ([#234](https://github.com/dequelabs/cauldron/pull/232)) ([3e7de22](https://github.com/dequelabs/cauldron/commit/3e7de22e8dda98ac36978570103dcc840e888c8e))
+- **react:** Allow RadioGroup component to be 'controlled' ([#232](https://github.com/dequelabs/cauldron/pull/232)) ([baf02d9](https://github.com/dequelabs/cauldron/commit/baf02d9a3b877e27a92d8f17aa41838728a78534))
+
 ### [0.1.2](https://github.com/dequelabs/cauldron/compare/v0.1.1...v0.1.2) (2021-04-26)
 
 ### Features

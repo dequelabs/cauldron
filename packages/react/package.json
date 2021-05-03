@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "publishConfig": {
     "access": "public"
@@ -77,6 +77,7 @@
     "react-router-dom": "^5.1.2",
     "rollup": "^2.23.0",
     "rollup-plugin-dynamic-import-variables": "^1.1.0",
+    "sinon": "^10.0.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.9.7"
   },

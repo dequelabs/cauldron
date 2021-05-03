@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { mount } from 'enzyme';
+import { spy } from 'sinon';
 import Select from 'src/components/Select';
 import axe from '../../../axe';
 
@@ -116,4 +117,46 @@ test('should return no axe violations', async () => {
     </div>
   );
   expect(await axe(select.html())).toHaveNoViolations();
+});
+
+test('supports "controlled" select', () => {
+  const select = mount(
+    <Select
+      {...defaultProps}
+      value="Far"
+      onChange={() => {}}
+      options={[
+        { key: '1', value: 'Bar' },
+        { key: '2', value: 'Foo' },
+        { key: '3', value: 'Far' },
+        { key: '4', value: 'Fan' },
+        { key: '5', value: 'Fun' }
+      ]}
+    />
+  );
+
+  expect(select.find('select').getDOMNode().value).toBe('Far');
+
+  select.setProps({
+    value: 'Bar'
+  });
+
+  expect(select.find('select').getDOMNode().value).toBe('Bar');
+});
+
+test('fires onChange when change occurs', () => {
+  const onChange = spy();
+  const select = mount(
+    <Select
+      {...defaultProps}
+      onChange={onChange}
+      options={[
+        { key: '1', value: 'Bar' },
+        { key: '2', value: 'Foo' }
+      ]}
+    />
+  );
+
+  select.find('select').simulate('change');
+  expect(onChange.called).toBe(true);
 });
