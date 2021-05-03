@@ -1,88 +1,90 @@
-import React, { Component } from 'react';
-import { Select, Code } from '@deque/cauldron-react/';
-import '../../../../packages/styles/select.css';
+import React, { useState } from 'react';
+import { Select } from '@deque/cauldron-react/';
 import './index.css';
+import Demo from '../../../Demo';
 
-export default class Demo extends Component {
-  constructor() {
-    super();
-    this.state = {
-      defaultValue: 'Tuesday',
-      current: 'Tuesday',
-      options: [
-        { key: 'monday', value: 'Monday' },
-        { key: 'tuesday', value: 'Tuesday' },
-        { key: 'wednesday', value: 'Wednesday' },
-        { key: 'thursday', value: 'Thursday' },
-        { key: 'friday', value: 'Friday' },
-        { key: 'saturday', value: 'Saturday', disabled: true },
-        { key: 'sunday', value: 'Sunday' }
-      ]
-    };
-    this.onChange = this.onChange.bind(this);
-  }
+const options = [
+  { key: 'monday', value: 'Monday' },
+  { key: 'tuesday', value: 'Tuesday' },
+  { key: 'wednesday', value: 'Wednesday' },
+  { key: 'thursday', value: 'Thursday' },
+  { key: 'friday', value: 'Friday' },
+  { key: 'saturday', value: 'Saturday', disabled: true },
+  { key: 'sunday', value: 'Sunday' }
+];
 
-  onChange(e) {
-    this.setState({
-      current: e.target.value
-    });
-  }
+const SelectDemo = () => {
+  const [currentValue, setCurrentValue] = useState('Maybe');
 
-  render() {
-    return (
-      <div className="select-demo">
-        <h1>Select</h1>
-        <h2>Demo</h2>
-        <form onSubmit={this.handleSubmit}>
-          <Select
-            label="Day"
-            required
-            defaultValue={this.state.defaultValue}
-            onChange={this.onChange}
-            options={this.state.options}
-          />
-          <p>
-            <span>Using the </span>
-            <code>onChange</code>
-            <span> prop, we can easily handle changes in the select list</span>
-          </p>
-          <div className="current-value">
-            <strong>Current value: </strong>
-            <span>{this.state.current}</span>
-          </div>
-        </form>
-        <h2>Code Sample</h2>
-        <Code language="javascript">
-          {`
-    import React from 'react';
-    import { Select } from '@deque/cauldron-react';
+  return (
+    <Demo
+      component={Select}
+      states={[
+        {
+          label: 'Do you like yogurt?',
+          options: [
+            { key: 'yes', value: 'Yes' },
+            { key: 'no', value: 'No' },
+            { key: 'maybe', value: 'Maybe' }
+          ],
+          value: currentValue,
+          onChange: e => setCurrentValue(e.target.value),
+          DEMO_renderBefore: <h3>Controlled select</h3>
+        },
+        {
+          label: 'Day',
+          options,
+          defaultValue: 'Friday',
+          DEMO_renderBefore: <h3>Uncontrolled select</h3>
+        },
+        {
+          label: 'How many things do you want?',
+          children: (
+            <>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </>
+          ),
+          defaultValue: 2,
+          DEMO_renderBefore: <h3>With jsx option children (uncontrolled)</h3>
+        }
+      ]}
+      propDocs={{
+        options: {
+          type: 'array',
+          required: true,
+          description:
+            'Array of objects containing: key, value, disabled (optional), and label (optional).'
+        },
+        defaultValue: {
+          type: 'any',
+          required: false,
+          description:
+            'The default element value. Use when the component is not controlled.'
+        },
+        value: {
+          type: 'any',
+          required: false,
+          description:
+            'Use for "controlled" selects. Caller is responsible for managing the value of the select element.'
+        },
+        onChange: {
+          type: 'function',
+          required: false,
+          description:
+            'This is required if using "controlled" input; otherwise it is optional',
+          defaultValue: '() => {}'
+        },
+        children: {
+          type: 'node',
+          description: 'the <option> or <optgroup> children'
+        }
+      }}
+    />
+  );
+};
 
-    const Demo = () => (
-      <Select
-        id="select-demo"
-        label="Day"
-        required
-        defaultValue='Tuesday'
-        onChange={e => console.log('Selected: ', e.target.value)}
-        options={[
-          { key: 'monday', value: 'Monday' },
-          { key: 'tuesday', value: 'Tuesday' },
-          { key: 'wednesday', value: 'Wednesday' },
-          { key: 'thursday', value: 'Thursday' },
-          { key: 'friday', value: 'Friday' },
-          { key: 'saturday', value: 'Saturday', disabled: true },
-          { key: 'sunday', value: 'Sunday' }
-        ]}
-      />
-    );
-          `}
-        </Code>
-      </div>
-    );
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    alert('form submitted');
-  };
-}
+export default SelectDemo;
