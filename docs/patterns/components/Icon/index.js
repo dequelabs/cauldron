@@ -161,9 +161,6 @@ export default class IconDemo extends Component {
               type: 'save'
             },
             {
-              type: 'share'
-            },
-            {
               type: 'sort'
             },
             {

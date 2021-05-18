@@ -80,15 +80,6 @@ test('handles right arrow', () => {
   expect(document.activeElement).toBe(menuItems.at(0).getDOMNode());
 });
 
-test('should pass-through classname', () => {
-  const wrapper = mount(
-    <MenuBar className="test">
-      <TopBarItem>1</TopBarItem>
-    </MenuBar>
-  );
-  expect(wrapper.children().props().className).toBe('test');
-});
-
 test('should return no axe violations', async () => {
   const topbar = mount(
     <MenuBar>
