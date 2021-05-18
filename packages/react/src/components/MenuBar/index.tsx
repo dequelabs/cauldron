@@ -144,7 +144,7 @@ export default class TopBar extends React.Component<
     const { children, className, thin, hasTrigger, ...other } = this.props;
 
     return (
-      <ul role="menubar">
+      <ul role="menubar" className={className}>
         {Children.map(
           children as React.ReactElement<HTMLLIElement>,
           this.renderChild
