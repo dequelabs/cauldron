@@ -44,7 +44,7 @@ $ yarn test
 ## adding a new component
 
 ```sh
-$ ./add-component foo
+$ ./add-component.sh foo
 # - creates new `packages/styles/foo.css` file
 # - adds "@import ./foo.css" to the end of packages/styles.index.css
 # - creates new `packages/react/src/Foo/index.ts` file
