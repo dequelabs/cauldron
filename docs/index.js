@@ -19,6 +19,7 @@ import {
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import 'fontsource-roboto';
+import 'fontsource-lato';
 
 // styles
 import '../packages/styles';
@@ -49,7 +50,8 @@ const componentsList = [
   'Code',
   'LoaderOverlay',
   'Line',
-  'Tag'
+  'Tag',
+  'Table'
 ].sort();
 
 class App extends Component {

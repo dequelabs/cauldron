@@ -203,4 +203,11 @@
   --tag-text-color: #333333;
   --tag-label-text-color: #666666;
   --tag-background-color: #f2f2f2;
+
+  /* tables */
+  --table-header-text-color: #333333;
+  --table-header-background-color: #f2f2f2;
+  --table-cell-text-color: #666666;
+  --table-cell-background-color: #ffffff;
+  --table-row-border-color: #cccccc;
 }
