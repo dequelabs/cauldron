@@ -9,4 +9,4 @@ component=$1
 # first char to upper case
 componentName="$(tr '[:lower:]' '[:upper:]' <<< ${component:0:1})${component:1}"
 mkdir packages/react/src/components/$componentName
-touch packages/react/src/components/$componentName/index.ts
+touch packages/react/src/components/$componentName/index.tsx
