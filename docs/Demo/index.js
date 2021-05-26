@@ -11,13 +11,22 @@ const stringifyConfig = {
 
 class Demo extends Component {
   render() {
-    const { states, component: Component, propDocs, children } = this.props;
+    const {
+      states,
+      component: Component,
+      propDocs,
+      children,
+      customImport
+    } = this.props;
     const { displayName, defaultProps = {} } = Component;
 
     return (
       <div className="Demo">
         <h1>{displayName}</h1>
-        <Code>{`import { ${displayName} } from '@deque/cauldron-react'`}</Code>
+        <Code>
+          {customImport ||
+            `import { ${displayName} } from '@deque/cauldron-react'`}
+        </Code>
         {states.length ? (
           <div className="Demo-states">
             <h2>Examples</h2>
@@ -106,7 +115,8 @@ Demo.propTypes = {
   propDocs: PropTypes.object.isRequired,
   states: PropTypes.arrayOf(PropTypes.object).isRequired,
   component: PropTypes.func.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
+  customImport: PropTypes.string
 };
 
 export default Demo;

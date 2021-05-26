@@ -1,0 +1,27 @@
+.Table {
+  font-size: var(--text-size-small);
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+}
+
+.TableHeader {
+  background: var(--table-header-background-color);
+  font-family: 'Lato', sans-serif;
+  font-weight: var(--font-weight-bold);
+  color: var(--table-header-text-color);
+  border-bottom: 2px solid var(--table-row-border-color);
+}
+
+.TableCell {
+  background: var(--table-cell-background-color);
+  color: var(--table-cell-text-color);
+  border-bottom: 1px solid var(--table-row-border-color);
+}
+
+.TableCell,
+.TableHeader {
+  padding: var(--space-small);
+}
