@@ -210,4 +210,12 @@
   --table-cell-text-color: #666666;
   --table-cell-background-color: #ffffff;
   --table-row-border-color: #cccccc;
+
+  /* data lists */
+  --data-list-value-background-color: #f2f2f2;
+  --data-list-border-color: #cccccc;
+  --data-list-text-color: #333333;
+  --data-list-value-text-color: #666666;
+  --data-list-space: 11px;
+  --data-list-value-width: 187px;
 }

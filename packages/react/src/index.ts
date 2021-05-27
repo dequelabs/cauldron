@@ -75,6 +75,12 @@ export {
   TableHeader,
   TableRow
 } from './components/Table';
+export {
+  DataList,
+  DataListItem,
+  DataKey,
+  DataValue
+} from './components/DataList';
 
 /**
  * Helpers / Utils

@@ -51,7 +51,8 @@ const componentsList = [
   'LoaderOverlay',
   'Line',
   'Tag',
-  'Table'
+  'Table',
+  'DataList'
 ].sort();
 
 class App extends Component {

@@ -225,6 +225,7 @@ textarea.Field--has-error:focus,
   top: 8px;
   left: 8px;
   appearance: none;
+  width: 2px;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {

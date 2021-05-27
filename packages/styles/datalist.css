@@ -1,0 +1,75 @@
+.DataList {
+  color: var(--data-list-text-color);
+  font-size: var(--text-size-small);
+  border-radius: 3px;
+  border: 1px solid var(--data-list-border-color);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+  margin-bottom: var(--space-small) 0;
+}
+
+.DataList.DataList--collapsed {
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  text-align: left;
+  font-size: var(--text-size-smaller);
+  padding: var(--data-list-space);
+  border-top: 1px solid var(--data-list-border-color);
+  border-bottom: 1px solid var(--data-list-border-color);
+}
+
+.DataList__item {
+  display: flex;
+  border-top: 1px solid var(--data-list-border-color);
+}
+
+.DataList--collapsed .DataList__item {
+  border: 0;
+  margin-bottom: var(--space-small);
+  display: block;
+}
+
+.DataList__item:first-child {
+  border-top: none;
+}
+
+.DataList--collapsed .DataList__item:last-child {
+  margin-bottom: 0;
+}
+
+.DataList__item:first-child .DataList__item-key {
+  border-top-left-radius: 3px;
+}
+
+.DataList__item:last-child .DataList__item-key {
+  border-bottom-left-radius: 3px;
+}
+
+.DataList__item-key {
+  background-color: var(--data-list-value-background-color);
+  width: var(--data-list-value-width);
+  font-weight: var(--font-weight-bold);
+  border-right: 1px solid var(--data-list-border-color);
+  flex: 0 0 auto;
+}
+
+.DataList--collapsed .DataList__item-key {
+  background-color: transparent;
+  width: auto;
+  border-right: none;
+}
+
+.DataList__item-value {
+  color: var(--data-list-value-text-color);
+}
+
+.DataList__item-key,
+.DataList__item-value {
+  padding: var(--data-list-space);
+  margin: 0;
+}
+
+.DataList--collapsed .DataList__item-key,
+.DataList--collapsed .DataList__item-value {
+  padding: 0;
+}

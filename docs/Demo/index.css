@@ -3,23 +3,30 @@
   padding: 15px;
 }
 
-.Demo-props table {
-  border-collapse: collapse;
-  border: 1px solid;
-  margin: 10px 0;
+.Demo-props .DataList {
+  display: none;
 }
 
-.Demo-props table td,
-.Demo-props table th {
-  border: 1px solid;
-  padding: 15px;
-  text-align: left;
+@media (max-width: 630px) {
+  .Demo-props .not-collapsed .DataList {
+    display: block;
+  }
+
+  .Demo-props .Table {
+    display: none;
+  }
 }
 
-.Demo-props tbody tr:nth-child(odd) {
-  background-color: #fff;
-}
+@media (max-width: 450px) {
+  .Demo-props .not-collapsed .DataList {
+    display: none;
+  }
 
-.Demo-props tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  .Demo-props .collapsed .DataList {
+    display: block;
+  }
+
+  .Demo-props .Table {
+    display: none;
+  }
 }
