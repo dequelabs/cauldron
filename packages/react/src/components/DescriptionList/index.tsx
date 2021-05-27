@@ -7,12 +7,12 @@ const commonPropTypes = {
   className: PropTypes.string
 };
 
-interface DataProps {
+interface DescriptionProps {
   children: React.ReactNode;
   className?: string;
 }
 
-interface DescriptionListProps extends DataProps {
+interface DescriptionListProps extends DescriptionProps {
   collapsed?: boolean;
 }
 
@@ -39,7 +39,7 @@ export const DescriptionListItem = ({
   children,
   className,
   ...other
-}: DataProps) => (
+}: DescriptionProps) => (
   <div className={classNames('DescriptionList__item', className)} {...other}>
     {children}
   </div>
@@ -52,7 +52,7 @@ export const DescriptionTerm = ({
   children,
   className,
   ...other
-}: DataProps) => (
+}: DescriptionProps) => (
   <dt className={classNames('DescriptionList__term', className)} {...other}>
     {children}
   </dt>
@@ -65,7 +65,7 @@ export const DescriptionDetails = ({
   children,
   className,
   ...other
-}: DataProps) => (
+}: DescriptionProps) => (
   <dd className={classNames('DescriptionList__details', className)} {...other}>
     {children}
   </dd>
