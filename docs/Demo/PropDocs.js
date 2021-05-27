@@ -7,10 +7,10 @@ import {
   TableHeader,
   TableHead,
   TableCell,
-  DataList,
-  DataListItem,
-  DataKey,
-  DataValue
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
 } from '@deque/cauldron-react';
 
 const defaultPropTypes = {
@@ -18,7 +18,11 @@ const defaultPropTypes = {
   defaultProps: PropTypes.object
 };
 
-const DataListDocs = ({ docs, defaultProps = {}, collapsed = false }) => (
+const DescriptionListDocs = ({
+  docs,
+  defaultProps = {},
+  collapsed = false
+}) => (
   <ul className="semantic-only">
     {Object.entries(docs).map(([name, data]) => {
       const defaultProp =
@@ -26,33 +30,33 @@ const DataListDocs = ({ docs, defaultProps = {}, collapsed = false }) => (
 
       return (
         <li key={`${name}-datalist`}>
-          <DataList collapsed={collapsed}>
-            <DataListItem>
-              <DataKey>Name</DataKey>
-              <DataValue>{name}</DataValue>
-            </DataListItem>
-            <DataListItem>
-              <DataKey>Type</DataKey>
-              <DataValue>{data.type}</DataValue>
-            </DataListItem>
-            <DataListItem>
-              <DataKey>Required</DataKey>
-              <DataValue>{`${!!data.required}`}</DataValue>
-            </DataListItem>
-            <DataListItem>
-              <DataKey>Description</DataKey>
-              <DataValue>{data.description}</DataValue>
-            </DataListItem>
-            <DataListItem>
-              <DataKey>Default</DataKey>
-              <DataValue>
+          <DescriptionList collapsed={collapsed}>
+            <DescriptionListItem>
+              <DescriptionTerm>Name</DescriptionTerm>
+              <DescriptionDetails>{name}</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Type</DescriptionTerm>
+              <DescriptionDetails>{data.type}</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Required</DescriptionTerm>
+              <DescriptionDetails>{`${!!data.required}`}</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Description</DescriptionTerm>
+              <DescriptionDetails>{data.description}</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Default</DescriptionTerm>
+              <DescriptionDetails>
                 {typeof defaultProp !== 'undefined' &&
                   (typeof defaultProp === 'object'
                     ? JSON.stringify(defaultProp)
                     : `${defaultProp}`)}
-              </DataValue>
-            </DataListItem>
-          </DataList>
+              </DescriptionDetails>
+            </DescriptionListItem>
+          </DescriptionList>
         </li>
       );
     })}
@@ -94,10 +98,10 @@ const PropDocs = ({ docs, defaultProps = {} }) => (
       </TableBody>
     </Table>
     <div className="not-collapsed">
-      <DataListDocs docs={docs} defaultProp={defaultProps} />
+      <DescriptionListDocs docs={docs} defaultProp={defaultProps} />
     </div>
     <div className="collapsed">
-      <DataListDocs docs={docs} defaultProp={defaultProps} collapsed />
+      <DescriptionListDocs docs={docs} defaultProp={defaultProps} collapsed />
     </div>
   </>
 );

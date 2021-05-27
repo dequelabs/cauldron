@@ -3,12 +3,12 @@
   padding: 15px;
 }
 
-.Demo-props .DataList {
+.Demo-props .DescriptionList {
   display: none;
 }
 
-@media (max-width: 630px) {
-  .Demo-props .not-collapsed .DataList {
+@media (max-width: 730px) {
+  .Demo-props .not-collapsed .DescriptionList {
     display: block;
   }
 
@@ -18,11 +18,11 @@
 }
 
 @media (max-width: 450px) {
-  .Demo-props .not-collapsed .DataList {
+  .Demo-props .not-collapsed .DescriptionList {
     display: none;
   }
 
-  .Demo-props .collapsed .DataList {
+  .Demo-props .collapsed .DescriptionList {
     display: block;
   }
 

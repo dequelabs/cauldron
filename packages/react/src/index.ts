@@ -76,11 +76,11 @@ export {
   TableRow
 } from './components/Table';
 export {
-  DataList,
-  DataListItem,
-  DataKey,
-  DataValue
-} from './components/DataList';
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
+} from './components/DescriptionList';
 
 /**
  * Helpers / Utils

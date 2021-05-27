@@ -1,4 +1,4 @@
-.DataList {
+.DescriptionList {
   color: var(--data-list-text-color);
   font-size: var(--text-size-small);
   border-radius: 3px;
@@ -7,7 +7,7 @@
   margin-bottom: var(--space-small) 0;
 }
 
-.DataList.DataList--collapsed {
+.DescriptionList.DescriptionList--collapsed {
   width: 100%;
   border-radius: 0;
   border: none;
@@ -18,34 +18,34 @@
   border-bottom: 1px solid var(--data-list-border-color);
 }
 
-.DataList__item {
+.DescriptionList__item {
   display: flex;
   border-top: 1px solid var(--data-list-border-color);
 }
 
-.DataList--collapsed .DataList__item {
+.DescriptionList--collapsed .DescriptionList__item {
   border: 0;
   margin-bottom: var(--space-small);
   display: block;
 }
 
-.DataList__item:first-child {
+.DescriptionList__item:first-child {
   border-top: none;
 }
 
-.DataList--collapsed .DataList__item:last-child {
+.DescriptionList--collapsed .DescriptionList__item:last-child {
   margin-bottom: 0;
 }
 
-.DataList__item:first-child .DataList__item-key {
+.DescriptionList__item:first-child .DescriptionList__term {
   border-top-left-radius: 3px;
 }
 
-.DataList__item:last-child .DataList__item-key {
+.DescriptionList__item:last-child .DescriptionList__term {
   border-bottom-left-radius: 3px;
 }
 
-.DataList__item-key {
+.DescriptionList__term {
   background-color: var(--data-list-value-background-color);
   width: var(--data-list-value-width);
   font-weight: var(--font-weight-bold);
@@ -53,23 +53,23 @@
   flex: 0 0 auto;
 }
 
-.DataList--collapsed .DataList__item-key {
+.DescriptionList--collapsed .DescriptionList__term {
   background-color: transparent;
   width: auto;
   border-right: none;
 }
 
-.DataList__item-value {
+.DescriptionList__details {
   color: var(--data-list-value-text-color);
 }
 
-.DataList__item-key,
-.DataList__item-value {
+.DescriptionList__term,
+.DescriptionList__details {
   padding: var(--data-list-space);
   margin: 0;
 }
 
-.DataList--collapsed .DataList__item-key,
-.DataList--collapsed .DataList__item-value {
+.DescriptionList--collapsed .DescriptionList__term,
+.DescriptionList--collapsed .DescriptionList__details {
   padding: 0;
 }

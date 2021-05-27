@@ -52,7 +52,7 @@ const componentsList = [
   'Line',
   'Tag',
   'Table',
-  'DataList'
+  'DescriptionList'
 ].sort();
 
 class App extends Component {
