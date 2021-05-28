@@ -23,5 +23,9 @@
 
 .TableCell,
 .TableHeader {
-  padding: var(--space-small);
+  padding: var(--table-space) var(--space-smallest);
+}
+
+.TableRow:last-child .TableCell {
+  border: none;
 }

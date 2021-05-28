@@ -3,7 +3,7 @@
   font-size: var(--text-size-small);
   border-radius: 3px;
   border: 1px solid var(--data-list-border-color);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   margin-bottom: var(--space-small) 0;
 }
 
@@ -51,6 +51,7 @@
   font-weight: var(--font-weight-bold);
   border-right: 1px solid var(--data-list-border-color);
   flex: 0 0 auto;
+  font-family: 'Lato', sans-serif;
 }
 
 .DescriptionList--collapsed .DescriptionList__term {
@@ -65,11 +66,15 @@
 
 .DescriptionList__term,
 .DescriptionList__details {
-  padding: var(--data-list-space);
+  padding: var(--data-list-space) var(--space-small);
   margin: 0;
 }
 
 .DescriptionList--collapsed .DescriptionList__term,
 .DescriptionList--collapsed .DescriptionList__details {
   padding: 0;
+}
+
+.DescriptionList--collapsed .DescriptionList__details {
+  font-size: var(--text-size-small);
 }
