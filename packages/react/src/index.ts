@@ -75,6 +75,12 @@ export {
   TableHeader,
   TableRow
 } from './components/Table';
+export {
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
+} from './components/DescriptionList';
 
 /**
  * Helpers / Utils

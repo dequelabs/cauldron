@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import jsxStringify from 'react-element-to-jsx-string';
 import { Code } from '@deque/cauldron-react';
+import PropDocs from './PropDocs';
 import './index.css';
 
 const stringifyConfig = {
@@ -62,38 +63,7 @@ class Demo extends Component {
         )}
         <div className="Demo-props">
           <h2>Props</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Description</th>
-                <th>Default</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(propDocs).map(([name, data]) => {
-                const defaultProp =
-                  data.defaultValue || defaultProps[name] || data.default;
-
-                return (
-                  <tr key={name}>
-                    <td>{name}</td>
-                    <td>{data.type}</td>
-                    <td>{`${!!data.required}`}</td>
-                    <td>{data.description}</td>
-                    <td>
-                      {defaultProp &&
-                        (typeof defaultProp === 'object'
-                          ? JSON.stringify(defaultProp)
-                          : `${defaultProp}`)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <PropDocs docs={propDocs} defaultProps={defaultProps} />
         </div>
       </div>
     );

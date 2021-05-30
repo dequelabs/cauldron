@@ -70,3 +70,9 @@ body .is--hidden {
   display: flex;
   align-items: center;
 }
+
+ul.semantic-only {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
