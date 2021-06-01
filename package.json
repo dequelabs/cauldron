@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MPL-2.0",
   "scripts": {
     "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:docs\"",
@@ -69,6 +69,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.5.1",
     "file-loader": "^1.1.5",
+    "fontsource-lato": "^4.0.0",
     "fontsource-roboto": "^3.0.3",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.0.0-rc.14",

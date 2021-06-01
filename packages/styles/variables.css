@@ -91,11 +91,12 @@
   );
   --icon-button-outline-color-error: var(--button-outline-color-error);
 
+  --icon-button-content-color-light-disabled: #ccc;
   --icon-button-background-color-light: #dadada;
-  --icon-button-background-color-light-disabled: #ccc;
   --icon-button-background-color-light-active: #c2c2c2;
   --icon-button-outline-color-light: var(--icon-button-background-color-light);
 
+  --icon-button-content-color-dark-disabled: #fff 40%;
   --icon-button-background-color-dark: #283640;
   --icon-button-background-color-dark-disabled: #283640;
   --icon-button-background-color-dark-active: #02101a;
@@ -203,4 +204,20 @@
   --tag-text-color: #333333;
   --tag-label-text-color: #666666;
   --tag-background-color: #f2f2f2;
+
+  /* tables */
+  --table-header-text-color: #333333;
+  --table-header-background-color: #f2f2f2;
+  --table-cell-text-color: #666666;
+  --table-cell-background-color: #ffffff;
+  --table-row-border-color: #cccccc;
+  --table-space: 11px;
+
+  /* data lists */
+  --data-list-value-background-color: #f2f2f2;
+  --data-list-border-color: #cccccc;
+  --data-list-text-color: #333333;
+  --data-list-value-text-color: #666666;
+  --data-list-space: 11px;
+  --data-list-value-width: 187px;
 }

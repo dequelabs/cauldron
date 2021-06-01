@@ -67,6 +67,20 @@ export { default as Code } from './components/Code';
 export { default as LoaderOverlay } from './components/LoaderOverlay';
 export { default as Line } from './components/Line';
 export { default as Tag, TagLabel } from './components/Tag';
+export {
+  default as Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from './components/Table';
+export {
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
+} from './components/DescriptionList';
 
 /**
  * Helpers / Utils
