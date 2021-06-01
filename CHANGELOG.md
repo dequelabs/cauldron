@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.2) (2021-06-01)
+
+### Features
+
+- add disabled styles to IconButtons ([#184](https://github.com/dequelabs/cauldron/issues/184)) ([4fef23f](https://github.com/dequelabs/cauldron/commit/4fef23f76efa410cc0319664a1bbaf70a5571195))
+- Adds DescriptionList components ([#258](https://github.com/dequelabs/cauldron/issues/258)) ([ab5bf6c](https://github.com/dequelabs/cauldron/commit/ab5bf6c4ef58b2c0b2a8e2e0b1f431bf1bc2ee9a))
+- Adds simple table ([#255](https://github.com/dequelabs/cauldron/issues/255)) ([02b4f1b](https://github.com/dequelabs/cauldron/commit/02b4f1b0c600d71bb106af2c46667660b92a1b29))
+- **icons:** Add a share icon ([#249](https://github.com/dequelabs/cauldron/issues/249)) ([5af005d](https://github.com/dequelabs/cauldron/commit/5af005dda138c374475c2c47c68c90d529d05620))
+- **react:** Support YAML highlighint in Code component ([#247](https://github.com/dequelabs/cauldron/issues/247)) ([d71003d](https://github.com/dequelabs/cauldron/commit/d71003d23267eae8081196672bfa7f4d29d9feb3))
+
+### Bug Fixes
+
+- pass classnames from menubar to rendered ul ([#241](https://github.com/dequelabs/cauldron/issues/241)) ([cffd938](https://github.com/dequelabs/cauldron/commit/cffd9389450465827ad6622d99de0e75ec61ed10))
+
 ### [0.2.1](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.1) (2021-05-17)
 
 ### Features
