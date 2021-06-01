@@ -53,6 +53,9 @@ export default class IconDemo extends Component {
               type: 'check-circle'
             },
             {
+              type: 'check-shield'
+            },
+            {
               type: 'checkbox-checked'
             },
             {
