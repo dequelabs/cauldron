@@ -11,6 +11,9 @@ export default class IconDemo extends Component {
           component={Icon}
           states={[
             {
+              type: 'add-user'
+            },
+            {
               type: 'arrow-left'
             },
             {
@@ -51,6 +54,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'check-circle'
+            },
+            {
+              type: 'check-shield'
             },
             {
               type: 'checkbox-checked'
