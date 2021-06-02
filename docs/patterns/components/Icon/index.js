@@ -11,6 +11,9 @@ export default class IconDemo extends Component {
           component={Icon}
           states={[
             {
+              type: 'add-user'
+            },
+            {
               type: 'arrow-left'
             },
             {
