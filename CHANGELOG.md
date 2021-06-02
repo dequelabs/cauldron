@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/dequelabs/cauldron/compare/v0.2.2...v0.2.3) (2021-06-02)
+
+### Features
+
+- adds 'add-user' icon ([#263](https://github.com/dequelabs/cauldron/issues/263)) ([051de48](https://github.com/dequelabs/cauldron/commit/051de4848237b548293255f69a141b5daecbe6ec))
+- adds 'check-shield' icon ([#262](https://github.com/dequelabs/cauldron/issues/262)) ([fc8727d](https://github.com/dequelabs/cauldron/commit/fc8727d828593bbed428254f6bd8e6f2f8d15c83))
+
 ### [0.2.2](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.2) (2021-06-01)
 
 ### Features
