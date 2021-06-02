@@ -13,7 +13,7 @@ export interface RadioGroupProps {
   className?: string;
   radios: RadioItem[];
   defaultValue?: string;
-  value: any;
+  value?: any;
   onChange: (radio: RadioItem, input: HTMLElement) => void;
 }
 
