@@ -119,6 +119,9 @@ export default class IconDemo extends Component {
               type: 'hamburger-menu'
             },
             {
+              type: 'highlight'
+            },
+            {
               type: 'info-circle'
             },
             {
