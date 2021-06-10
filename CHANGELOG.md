@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/dequelabs/cauldron/compare/v0.2.3...v0.2.4) (2021-06-10)
+
+### Features
+
+- **icons:** Adds highlight icon ([#269](https://github.com/dequelabs/cauldron/issues/269)) ([8a2e2ff](https://github.com/dequelabs/cauldron/commit/8a2e2ffdbb3fc65522cec8b4d77908814b6b09df))
+
+### Bug Fixes
+
+- **react:** Makes "value" optional in RadioGroup ([#268](https://github.com/dequelabs/cauldron/issues/268)) ([62fed42](https://github.com/dequelabs/cauldron/commit/62fed4293ac6093fa17db6a41cbc2e5f96985cb1))
+
 ### [0.2.3](https://github.com/dequelabs/cauldron/compare/v0.2.2...v0.2.3) (2021-06-02)
 
 ### Features
