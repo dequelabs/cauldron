@@ -6,12 +6,20 @@ import { isWide } from '../../utils/viewport';
 
 export interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  variant?: 'light' | 'dark';
 }
 
 const TopBar = (props: TopBarProps) => {
-  const { children, className, ...other } = props;
+  const { children, className, variant, ...other } = props;
   return (
-    <div className={classNames('TopBar', className)} {...other}>
+    <div
+      className={classNames(className, {
+        TopBar: true,
+        'TopBar--light': variant === 'light',
+        'TopBar--dark': variant === 'dark'
+      })}
+      {...other}
+    >
       {children}
     </div>
   );
