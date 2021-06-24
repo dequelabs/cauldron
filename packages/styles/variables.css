@@ -8,6 +8,7 @@
   /* background colours */
   --top-bar-background-color: #02101a;
   --top-bar-background-color-active: #0b0e11;
+  --top-bar-background-color-light: #fff;
   --skip-link-background-color: rgba(11, 14, 17, 0.9);
   --workspace-background-color: #fdfdfe;
   --tile-background-color: #ffffff;
@@ -22,6 +23,7 @@
   --link-text-color: #3c7aae;
   --link-text-color-light: rgba(60, 122, 174, 0.1);
   --top-bar-text-color: #d4dde0;
+  --top-bar-text-color-light: #02101a;
 
   /* fields */
   --field-border-color: #cccccc;

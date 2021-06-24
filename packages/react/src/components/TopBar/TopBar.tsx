@@ -10,13 +10,12 @@ export interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TopBar = (props: TopBarProps) => {
-  const { children, className, variant, ...other } = props;
+  const { children, className, variant = 'dark', ...other } = props;
   return (
     <div
       className={classNames(className, {
-        TopBar: true,
-        'TopBar--light': variant === 'light',
-        'TopBar--dark': variant === 'dark'
+        TopBar: variant === 'dark',
+        'TopBar--light': variant === 'light'
       })}
       {...other}
     >

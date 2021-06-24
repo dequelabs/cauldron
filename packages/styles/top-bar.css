@@ -13,6 +13,11 @@
   align-items: center;
 }
 
+.TopBar--light {
+  background-color: var(--top-bar-background-color-light);
+  color: var(--top-bar-text-color-light);
+}
+
 .TopBar--thin .TopBar {
   height: var(--top-bar-height-thin);
 }
