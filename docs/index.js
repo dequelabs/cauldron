@@ -78,7 +78,6 @@ class App extends Component {
   }
 
   toggleTopBarVariant = e => {
-    console.log(e);
     const nextTheme = this.state.variant === 'dark' ? 'light' : 'dark';
     this.setState({ variant: nextTheme });
   };
