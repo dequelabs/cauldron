@@ -14,6 +14,7 @@ const TopBar = (props: TopBarProps) => {
   return (
     <div
       className={classNames(className, {
+        // TopBar's default style is dark mode
         TopBar: true,
         'TopBar--light': variant === 'light'
       })}
