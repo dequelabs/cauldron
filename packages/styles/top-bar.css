@@ -144,3 +144,7 @@
 .MenuItem--separator {
   border-left: 1px solid var(--top-bar-menuitem-separator);
 }
+
+.TopBar--light .MenuItem--separator {
+  border-left: 1px solid var(--top-bar-menuitem-separator-light);
+}
