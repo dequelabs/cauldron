@@ -49,7 +49,6 @@ test('renders TopBar and TopBar--dark className when no variant passed or varian
     </TopBar>
   );
   expect(topbar.find('.TopBar').length).toBe(1);
-  expect(topbar.find('.TopBar--dark').length).toBe(1);
 });
 
 test('renders TopBar--light className when variant is light', () => {
