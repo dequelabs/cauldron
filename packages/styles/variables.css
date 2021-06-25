@@ -120,6 +120,7 @@
 
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
+  --top-bar-menuitem-separator-light: #cccccc;
 
   /* accents */
   --error: #d93251;
