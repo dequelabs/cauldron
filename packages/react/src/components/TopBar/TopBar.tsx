@@ -1,8 +1,5 @@
-import React, { Children, cloneElement } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
-import keyname from 'keyname';
-import { isWide } from '../../utils/viewport';
 
 export interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
