@@ -41,3 +41,21 @@ test('should return no axe violations', async () => {
   );
   expect(await axe(topbar.html())).toHaveNoViolations();
 });
+
+test('renders TopBar className when no variant passed or variant is dark', () => {
+  const topbar = mount(
+    <TopBar variant="dark">
+      <div />
+    </TopBar>
+  );
+  expect(topbar.find('.TopBar').length).toBe(1);
+});
+
+test('renders TopBar--light className when variant is light', () => {
+  const topbar = mount(
+    <TopBar variant="light">
+      <div />
+    </TopBar>
+  );
+  expect(topbar.find('.TopBar--light').length).toBe(1);
+});
