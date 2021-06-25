@@ -15,7 +15,6 @@ const TopBar = (props: TopBarProps) => {
     <div
       className={classNames(className, {
         TopBar: true,
-        'TopBar--dark': variant === 'dark',
         'TopBar--light': variant === 'light'
       })}
       {...other}
