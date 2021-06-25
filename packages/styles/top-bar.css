@@ -16,6 +16,7 @@
 .TopBar--light {
   background-color: var(--top-bar-background-color-light);
   color: var(--top-bar-text-color-light);
+  border-bottom: solid 1px var(--top-bar-border-bottom-color-light);
 }
 
 .TopBar--thin .TopBar {
@@ -55,6 +56,10 @@
 
 .TopBar--thin .TopBar > ul > li:not(.TopBar__menu-trigger) {
   height: var(--top-bar-height-thin);
+}
+
+.TopBar--light > ul > .TopBar__menu-trigger {
+  border-bottom: solid 1px var(--top-bar-border-bottom-color-light);
 }
 
 .TopBar > ul > li:focus-within,
