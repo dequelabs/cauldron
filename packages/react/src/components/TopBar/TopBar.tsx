@@ -1,17 +1,22 @@
-import React, { Children, cloneElement } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
-import keyname from 'keyname';
-import { isWide } from '../../utils/viewport';
 
 export interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  variant?: 'light' | 'dark';
 }
 
 const TopBar = (props: TopBarProps) => {
-  const { children, className, ...other } = props;
+  const { children, className, variant = 'dark', ...other } = props;
   return (
-    <div className={classNames('TopBar', className)} {...other}>
+    <div
+      className={classNames(className, {
+        // TopBar's default style is dark mode
+        TopBar: true,
+        'TopBar--light': variant === 'light'
+      })}
+      {...other}
+    >
       {children}
     </div>
   );
