@@ -58,4 +58,5 @@ test('renders TopBar--light className when variant is light', () => {
     </TopBar>
   );
   expect(topbar.find('.TopBar--light').length).toBe(1);
+  expect(topbar.find('.TopBar').length).toBe(0);
 });
