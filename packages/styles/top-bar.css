@@ -1,6 +1,4 @@
 .TopBar {
-  background-color: var(--top-bar-background-color);
-  color: var(--top-bar-text-color);
   position: fixed;
   width: 100%;
   height: var(--top-bar-height);
@@ -11,6 +9,11 @@
   z-index: var(--z-index-top-bar);
   display: flex;
   align-items: center;
+}
+
+.TopBar--dark {
+  background-color: var(--top-bar-background-color);
+  color: var(--top-bar-text-color);
 }
 
 .TopBar--light {
@@ -69,8 +72,17 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: var(--top-bar-text-color);
   height: var(--border-width);
+}
+
+.TopBar--dark > ul > li:focus-within:before,
+.TopBar--dark > ul > li:hover:before {
+  background-color: var(--top-bar-text-color);
+}
+
+.TopBar--light > ul > li:focus-within:before,
+.TopBar--light > ul > li:hover:before {
+  background-color: var(--top-bar-text-color-light);
 }
 
 .TopBar > ul > li .fa {
@@ -83,17 +95,29 @@
 }
 
 .TopBar a {
-  color: var(--top-bar-text-color);
   text-decoration: none;
+}
+
+.TopBar--dark .TopBar a {
+  color: var(--top-bar-text-color);
+}
+
+.TopBar--light .TopBar a {
+  color: var(--top-bar-text-color-light);
 }
 
 .TopBar .MenuItem--align-right {
   margin-left: auto;
 }
 
-.TopBar li.MenuItem--active,
-.TopBar [aria-current='page'] {
+.TopBar--dark li.MenuItem--active,
+.TopBar--dark [aria-current='page'] {
   background-color: var(--top-bar-background-color-active);
+}
+
+.TopBar--light li.MenuItem--active,
+.TopBar--light [aria-current='page'] {
+  background-color: var(--top-bar-background-color-light-active);
 }
 
 .TopBar li.MenuItem--active:hover,
@@ -104,12 +128,20 @@
 .TopBar .TopBar__menu-trigger {
   display: flex;
   align-items: center;
-  background-color: var(--top-bar-background-color);
-  color: var(--top-bar-text-color);
   font-size: var(--text-size-medium);
   padding: 0 var(--space-small);
   align-self: flex-start;
   box-sizing: border-box;
+}
+
+.TopBar--dark .TopBar__menu-trigger {
+  background-color: var(--top-bar-background-color);
+  color: var(--top-bar-text-color);
+}
+
+.TopBar--light .TopBar__menu-trigger {
+  background-color: var(--top-bar-background-color-light);
+  color: var(--top-bar-text-color-light);
 }
 
 .TopBar__item--icon {
