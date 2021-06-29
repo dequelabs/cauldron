@@ -8,6 +8,8 @@
   /* background colours */
   --top-bar-background-color: #02101a;
   --top-bar-background-color-active: #0b0e11;
+  --top-bar-background-color-light: #fff;
+  --top-bar-background-color-light-active: #fff;
   --skip-link-background-color: rgba(11, 14, 17, 0.9);
   --workspace-background-color: #fdfdfe;
   --tile-background-color: #ffffff;
@@ -22,6 +24,7 @@
   --link-text-color: #3c7aae;
   --link-text-color-light: rgba(60, 122, 174, 0.1);
   --top-bar-text-color: #d4dde0;
+  --top-bar-text-color-light: #02101a;
 
   /* fields */
   --field-border-color: #cccccc;
@@ -113,10 +116,12 @@
   /* poinout */
   --pointout-border-color: #a5db75;
   --pointout-background-color: #283640;
-  --pointout-text-color: #d4dde0;
+  --pointout-text-color-light: #d4dde0;
 
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
+  --top-bar-menuitem-separator-light: #cccccc;
+  --top-bar-border-bottom-color-light: #cccccc;
 
   /* accents */
   --error: #d93251;
