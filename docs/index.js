@@ -41,6 +41,7 @@ const componentsList = [
   'Checkbox',
   'ClickOutsideListener',
   'Tooltip',
+  'TooltipTabstop',
   'Card',
   'ExpandCollapsePanel',
   'TextField',

@@ -50,6 +50,7 @@ export {
   TooltipHead,
   TooltipContent
 } from './components/Tooltip';
+export { default as TooltipTabstop } from './components/TooltipTabstop';
 export {
   default as Card,
   CardHeader,
