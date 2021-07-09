@@ -30,7 +30,7 @@ const Alert = ({
         </React.Fragment>
       ),
       level:
-        typeof heading === 'object' && 'level' in heading
+        heading !== null && typeof heading === 'object' && 'level' in heading
           ? heading.level
           : undefined
     }}
