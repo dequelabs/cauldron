@@ -24,7 +24,7 @@ const Alert = ({
       text: (
         <React.Fragment>
           <Icon type={variant === 'default' ? 'info-circle-alt' : 'caution'} />
-          {typeof heading === 'object' && 'text' in heading
+          {heading !== null && typeof heading === 'object' && 'text' in heading
             ? heading.text
             : heading}
         </React.Fragment>
