@@ -3,5 +3,5 @@ button.TooltipTabstop {
   background-color: transparent;
   border: none;
   color: inherit;
-  -webkit-appearance: button;
+  -webkit-appearance: none;
 }
