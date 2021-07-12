@@ -11,7 +11,7 @@ type TooltipTabstopProps = Omit<TooltipProps, 'target'> & {
  * The button's sole purpose is to provide an interactive tabstop for a tooltip. aria-disabled is used to:
  *   - Allow the button to be keyboard focusable
  *   - Inform AT users that clicking the button does not perform any action
- *   - Is prevented as a focusable control to trigger the associated tooltip
+ *   - Is presented as a focusable control to trigger the associated tooltip
  */
 function TooltipTabstop({
   children,
