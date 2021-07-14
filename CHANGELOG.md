@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.5) (2021-06-28)
+
+### Features
+
+- **components:** Apply light/dark theme to TopBar ([#279](https://github.com/dequelabs/cauldron/issues/279)) ([e753f30](https://github.com/dequelabs/cauldron/commit/e753f30bf0a22065292da7832c0bdb625c73680d))
+- **icons:** Adds highlight icon ([#269](https://github.com/dequelabs/cauldron/issues/269)) ([8a2e2ff](https://github.com/dequelabs/cauldron/commit/8a2e2ffdbb3fc65522cec8b4d77908814b6b09df))
+- add disabled styles to IconButtons ([#184](https://github.com/dequelabs/cauldron/issues/184)) ([4fef23f](https://github.com/dequelabs/cauldron/commit/4fef23f76efa410cc0319664a1bbaf70a5571195))
+- adds 'add-user' icon ([#263](https://github.com/dequelabs/cauldron/issues/263)) ([051de48](https://github.com/dequelabs/cauldron/commit/051de4848237b548293255f69a141b5daecbe6ec))
+- adds 'check-shield' icon ([#262](https://github.com/dequelabs/cauldron/issues/262)) ([fc8727d](https://github.com/dequelabs/cauldron/commit/fc8727d828593bbed428254f6bd8e6f2f8d15c83))
+- Adds DescriptionList components ([#258](https://github.com/dequelabs/cauldron/issues/258)) ([ab5bf6c](https://github.com/dequelabs/cauldron/commit/ab5bf6c4ef58b2c0b2a8e2e0b1f431bf1bc2ee9a))
+- Adds simple table ([#255](https://github.com/dequelabs/cauldron/issues/255)) ([02b4f1b](https://github.com/dequelabs/cauldron/commit/02b4f1b0c600d71bb106af2c46667660b92a1b29))
+- **icons:** Add a share icon ([#249](https://github.com/dequelabs/cauldron/issues/249)) ([5af005d](https://github.com/dequelabs/cauldron/commit/5af005dda138c374475c2c47c68c90d529d05620))
+- **react:** Support YAML highlighint in Code component ([#247](https://github.com/dequelabs/cauldron/issues/247)) ([d71003d](https://github.com/dequelabs/cauldron/commit/d71003d23267eae8081196672bfa7f4d29d9feb3))
+
+### Bug Fixes
+
+- **react:** Makes "value" optional in RadioGroup ([#268](https://github.com/dequelabs/cauldron/issues/268)) ([62fed42](https://github.com/dequelabs/cauldron/commit/62fed4293ac6093fa17db6a41cbc2e5f96985cb1))
+- pass classnames from menubar to rendered ul ([#241](https://github.com/dequelabs/cauldron/issues/241)) ([cffd938](https://github.com/dequelabs/cauldron/commit/cffd9389450465827ad6622d99de0e75ec61ed10))
+
+### [0.2.4](https://github.com/dequelabs/cauldron/compare/v0.2.3...v0.2.4) (2021-06-10)
+
+### Features
+
+- **icons:** Adds highlight icon ([#269](https://github.com/dequelabs/cauldron/issues/269)) ([8a2e2ff](https://github.com/dequelabs/cauldron/commit/8a2e2ffdbb3fc65522cec8b4d77908814b6b09df))
+
+### Bug Fixes
+
+- **react:** Makes "value" optional in RadioGroup ([#268](https://github.com/dequelabs/cauldron/issues/268)) ([62fed42](https://github.com/dequelabs/cauldron/commit/62fed4293ac6093fa17db6a41cbc2e5f96985cb1))
+
+### [0.2.3](https://github.com/dequelabs/cauldron/compare/v0.2.2...v0.2.3) (2021-06-02)
+
+### Features
+
+- adds 'add-user' icon ([#263](https://github.com/dequelabs/cauldron/issues/263)) ([051de48](https://github.com/dequelabs/cauldron/commit/051de4848237b548293255f69a141b5daecbe6ec))
+- adds 'check-shield' icon ([#262](https://github.com/dequelabs/cauldron/issues/262)) ([fc8727d](https://github.com/dequelabs/cauldron/commit/fc8727d828593bbed428254f6bd8e6f2f8d15c83))
+
 ### [0.2.2](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.2) (2021-06-01)
 
 ### Features

@@ -41,6 +41,7 @@ const componentsList = [
   'Checkbox',
   'ClickOutsideListener',
   'Tooltip',
+  'TooltipTabstop',
   'Card',
   'ExpandCollapsePanel',
   'TextField',
@@ -52,11 +53,12 @@ const componentsList = [
   'Line',
   'Tag',
   'Table',
-  'DescriptionList'
+  'DescriptionList',
+  'TopBar'
 ].sort();
 
 class App extends Component {
-  state = { show: false, thin: false };
+  state = { show: false, thin: false, variant: 'dark' };
   constructor() {
     super();
     this.onTriggerClick = this.onTriggerClick.bind(this);
@@ -65,11 +67,21 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+    document.addEventListener('toggleTopBarVariant', this.toggleTopBarVariant);
   }
 
   componentWillUnmount() {
     document.removeEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+    document.removeEventListener(
+      'toggleTopBarVariant',
+      this.toggleTopBarVariant
+    );
   }
+
+  toggleTopBarVariant = e => {
+    const nextTheme = this.state.variant === 'dark' ? 'light' : 'dark';
+    this.setState({ variant: nextTheme });
+  };
 
   focusTopBarMenuItem = () => {
     if (!this.topBarMenuItem) {
@@ -139,7 +151,7 @@ class App extends Component {
             defaultTitle="Deque Cauldron React"
           />
           <SkipLink target={'#main-content'} />
-          <TopBar>
+          <TopBar variant={this.state.variant}>
             <MenuBar thin={thin} hasTrigger>
               <TopBarTrigger onClick={this.onTriggerClick}>
                 <button

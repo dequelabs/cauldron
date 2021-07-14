@@ -38,6 +38,8 @@
   /* background colours */
   --top-bar-background-color: var(--accent-dark);
   --top-bar-background-color-active: #0b0e11;
+  --top-bar-background-color-light: #fff;
+  --top-bar-background-color-light-active: #fff;
   --skip-link-background-color: rgba(11, 14, 17, 0.9);
   --workspace-background-color: var(--gray-10);
   --tile-background-color: var(--white);
@@ -52,6 +54,7 @@
   --link-text-color: var(--accent-primary);
   --link-text-color-light: rgba(60, 122, 174, 0.1);
   --top-bar-text-color: var(--accent-light);
+  --top-bar-text-color-light: var(--accent-dark);
 
   /* fields */
   --field-border-color: var(--gray-40);
@@ -147,6 +150,8 @@
 
   /* borders */
   --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
+  --top-bar-menuitem-separator-light: #cccccc;
+  --top-bar-border-bottom-color-light: #cccccc;
 
   /* accents */
   --error: var(--accent-error);
