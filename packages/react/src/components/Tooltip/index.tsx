@@ -128,19 +128,22 @@ export default function Tooltip({
         event.key === 'Esc' ||
         event.keyCode === 27
       ) {
-        setShowTooltip(false);
+        if (showTooltip) {
+          setShowTooltip(false);
+          event.preventDefault();
+        }
       }
     };
 
     const targetElement = document.body;
     if (showTooltip) {
-      targetElement.addEventListener('keyup', handleEscape);
+      targetElement.addEventListener('keydown', handleEscape);
     } else {
-      targetElement.removeEventListener('keyup', handleEscape);
+      targetElement.removeEventListener('keydown', handleEscape);
     }
 
     return () => {
-      targetElement.removeEventListener('keyup', handleEscape);
+      targetElement.removeEventListener('keydown', handleEscape);
     };
   }, [show]);
 
