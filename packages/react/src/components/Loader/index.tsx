@@ -10,9 +10,20 @@ export default function Loader({ label, className, ...other }: LoaderProps) {
   const props = {
     ...other,
     className: classNames('Loader', className),
-    'aria-label': label,
-    'aria-hidden': label ? false : true
+    'aria-hidden': !label
   };
+
+  if (label) {
+    props.role = 'progressbar';
+    props['aria-valuetext'] = label;
+    props['aria-busy'] = true;
+    props['aria-valuemin'] = 0;
+    props['aria-valuemax'] = 100;
+    // According to the  ARIA 1.2 spec (https://www.w3.org/TR/wai-aria-1.2/#progressbar),
+    // the aria-valuenow attribute SHOULD be omitted because the "value" of our progress
+    // is "indeterminate".
+  }
+
   return <div {...props} />;
 }
 
