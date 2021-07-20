@@ -69,6 +69,7 @@
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
   --field-background-color-disabled: #f7f7f7;
   --field-required-text-color: var(--gray-60);
+  --field-label-text-color: var(--gray-90);
 
   /* buttons */
   --button-background-color-primary: var(--accent-primary);
