@@ -3,6 +3,9 @@ import Demo from '../../../Demo';
 import { Link, Code } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
+// @ts-ignore
+import { BrowserRouter } from 'react-router-dom';
+
 export default class LinkDemo extends Component {
   render() {
     return (
@@ -18,6 +21,11 @@ export default class LinkDemo extends Component {
               children: 'I am a link that looks like a button',
               href: '#',
               variant: 'button'
+            },
+            {
+              children: 'React router link',
+              to: '/',
+              useRouter: true
             }
           ]}
           propDocs={{
