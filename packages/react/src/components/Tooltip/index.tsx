@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
+import cauldronEvent from '../../utils/cauldron-event';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -26,14 +27,7 @@ const fireCustomEvent = (show: boolean, button?: HTMLElement | null) => {
     return;
   }
 
-  const event = new Event(
-    show ? 'cauldron:tooltip:show' : 'cauldron:tooltip:hide',
-    {
-      bubbles: true
-    }
-  );
-
-  button.dispatchEvent(event);
+  button.dispatchEvent(cauldronEvent(show ? 'tooltip:show' : 'tooltip:hide'));
 };
 
 export default function Tooltip({

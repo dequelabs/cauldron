@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import OptionsMenuWrapper from './OptionsMenuWrapper';
 import OptionsMenuList from './OptionsMenuList';
 import setRef from '../../utils/setRef';
+import cauldronEvent from '../../utils/cauldron-event';
 
 const [down] = [40];
 
@@ -67,8 +68,14 @@ export default class OptionsMenu extends Component<
   }
 
   toggleMenu = (event: Event) => {
-    this.setState(({ show }) => ({ show: !show }));
+    const prevShow = this.state.show;
+    this.setState({
+      show: !prevShow
+    });
     event.preventDefault();
+    this.triggerRef.current?.dispatchEvent(
+      cauldronEvent(`optionsmenu:${prevShow ? 'open' : 'close'}`)
+    );
   };
 
   handleClose = () => {
