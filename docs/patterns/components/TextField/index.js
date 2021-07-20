@@ -1,107 +1,101 @@
 import React, { Component } from 'react';
 import { TextField, Button, Code } from '@deque/cauldron-react/';
+import { className } from '../../../props';
+import Demo from '../../../Demo';
 import './index.css';
 
-export default class Demo extends Component {
-  state = {
-    error: null
-  };
+const TextFieldDemo = () => {
+  return (
+    <div className="TextField">
+      <Demo
+        states={[
+          {
+            label: 'Resting'
+          },
+          {
+            disabled: true,
+            label: 'Disabled'
+          },
+          {
+            required: true,
+            label: 'Required'
+          },
+          {
+            required: true,
+            label: 'With error',
+            error: 'This field has an error!'
+          },
+          {
+            multiline: true,
+            label: 'Text area'
+          },
+          {
+            disabled: true,
+            multiline: true,
+            label: 'Text area disabled'
+          },
+          {
+            required: true,
+            multiline: true,
+            label: 'Text area required'
+          },
+          {
+            required: true,
+            multiline: true,
+            label: 'Text area with error',
+            error: 'This text area has an error!'
+          }
+        ]}
+        component={TextField}
+        propDocs={{
+          className,
+          label: {
+            type: 'ReactNode',
+            required: true,
+            description: 'The label for the field.'
+          },
+          error: {
+            type: 'string',
+            description: 'The field‘s error message.'
+          },
+          required: {
+            type: 'boolean',
+            description: 'Whether the field is required or not.'
+          },
+          defaultValue: {
+            type: 'string',
+            description:
+              'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
+          },
+          value: {
+            type: 'string',
+            description:
+              'The value to be applied to the field. Used for "controlled" fields.'
+          },
+          onChange: {
+            type: 'function',
+            description:
+              'onChange handler for the field. The field‘s value and original event object will be passed as the 2 parameters.'
+          },
+          fieldRef: {
+            type: 'ref',
+            description: 'Field element reference.'
+          },
+          requiredText: {
+            type: 'string',
+            description: 'Custom "required" text. Useful for localization.'
+          },
+          multiline: {
+            type: 'boolean',
+            description:
+              'If true, a textarea element will be rendered. Otherwise, an input[type="text"] will be rendered.'
+          }
+        }}
+      />
+    </div>
+  );
+};
 
-  validate = e => {
-    e.preventDefault();
-    const isEmpty = !this.input.value.trim();
-    this.setState({
-      error: isEmpty ? 'Name must not be blank.' : null
-    });
+TextFieldDemo.displayName = 'TextFieldDemo';
 
-    if (isEmpty) {
-      this.input.focus();
-    }
-  };
-
-  render() {
-    return (
-      <div className="TextField">
-        <h1>TextField</h1>
-        <p>
-          The TextField component can be controlled (using the <em>value</em>{' '}
-          and <em>onChange</em> props) or uncontrolled (like traditional HTML
-          inputs).
-        </p>
-        <h2>Demo</h2>
-        <form onSubmit={this.validate} noValidate>
-          <p id="text-field-help">
-            <em>Hint:</em> submit with the name field blank to trigger error!
-          </p>
-          <TextField
-            required
-            id="name"
-            label="Name"
-            aria-describedby="text-field-help"
-            error={this.state.error}
-            fieldRef={el => (this.input = el)}
-          />
-          <TextField
-            id="favorite-color"
-            label="Favorite Color"
-            value="green"
-            disabled
-          />
-          <TextField multiline label="Comment" />
-          <Button type="submit">Submit</Button>
-        </form>
-        <h2>Code Sample</h2>
-        <Code language="javascript">
-          {`
-import React from 'react';
-import {
-  TextField, Button
-} from '@deque/cauldron-react';
-
-export default class Demo extends Component {
-  state = {
-    error: null
-  };
-
-  validate = e => {
-    e.preventDefault();
-    const isEmpty = !this.input.value.trim();
-    this.setState({
-      error: isEmpty ? 'Name must not be blank.' : null
-    });
-
-    if (isEmpty) {
-      this.input.focus();
-    }
-  };
-
-  render() {
-    return (
-      <form onSubmit={this.validate} noValidate>
-        <p id="text-field-help"><em>Hint:</em> submit with the field blank to trigger error!</p>
-        <TextField
-          required
-          id="name"
-          label="Name"
-          aria-describedby="text-field-help"
-          error={this.state.error}
-          fieldRef={el => this.input = el}
-        />
-        <TextField
-          id="favorite-color"
-          label="Favorite Color"
-          value="green"
-          disabled
-        />
-        <TextField multiline label="Comment" />
-        <Button type="submit">Submit</Button>
-      </form>
-    );
-  }
-}
-      `}
-        </Code>
-      </div>
-    );
-  }
-}
+export default TextFieldDemo;
