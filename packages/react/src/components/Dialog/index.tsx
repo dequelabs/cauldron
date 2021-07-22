@@ -107,7 +107,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       return null;
     }
 
-    console.log('heading in Dialog', heading);
+    console.log('removed');
 
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
@@ -138,8 +138,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         </Heading>
       ) : null;
 
-    console.log('added classname');
-
     const Dialog = (
       <FocusTrap
         focusTrapOptions={{
@@ -152,8 +150,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
           <div
             role="dialog"
             className={classNames('Dialog', className, {
-              'Dialog--show': show,
-              'plain-mode': !heading
+              'Dialog--show': show
             })}
             ref={el => {
               this.element = el;
