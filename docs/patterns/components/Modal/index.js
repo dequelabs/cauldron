@@ -6,6 +6,7 @@ import {
   ModalFooter,
   Code
 } from '@deque/cauldron-react/';
+import './index.css';
 
 export default class Demo extends Component {
   constructor() {
@@ -26,9 +27,15 @@ export default class Demo extends Component {
         <Button onClick={this.toggleSimpleModal}>Simple Modal</Button>
         <Button onClick={this.togglePlainModal}>Plain Modal</Button>
 
-        <Modal show={showPlainModal} onClose={this.togglePlainModal}>
+        <Modal
+          show={showPlainModal}
+          onClose={this.togglePlainModal}
+          className="plain-modal"
+        >
           <ModalContent>
-            <p>This is a plain modal and stuff</p>
+            <div className="plain-modal-content">
+              <p>This is a plain modal and stuff</p>
+            </div>
           </ModalContent>
         </Modal>
 

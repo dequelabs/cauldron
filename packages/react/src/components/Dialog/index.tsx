@@ -38,7 +38,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     onClose: noop,
     forceAction: false,
     closeButtonText: 'Close',
-    heading: null
+    heading: null,
+    className: null
   };
 
   static propTypes = {
@@ -107,6 +108,12 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       return null;
     }
 
+    // Resets border, shadow, background-color for plain dialogs
+    const resetClassName =
+      className && className.indexOf('Plain__Dialog') > -1
+        ? 'Dialog__reset'
+        : '';
+
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
         <Icon type="close" aria-hidden="true" />
@@ -115,7 +122,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ) : null;
 
     const Heading = `h${
-      heading !== null &&
+      heading &&
       typeof heading === 'object' &&
       'level' in heading &&
       !!heading.level
@@ -123,18 +130,17 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         : 2
     }` as 'h1';
 
-    const header =
-      heading !== null ? (
-        <Heading
-          className="Dialog__heading"
-          ref={(el: HTMLHeadingElement) => (this.heading = el)}
-          tabIndex={-1}
-        >
-          {typeof heading === 'object' && 'text' in heading
-            ? heading.text
-            : heading}
-        </Heading>
-      ) : null;
+    const header = heading ? (
+      <Heading
+        className="Dialog__heading"
+        ref={(el: HTMLHeadingElement) => (this.heading = el)}
+        tabIndex={-1}
+      >
+        {typeof heading === 'object' && 'text' in heading
+          ? heading.text
+          : heading}
+      </Heading>
+    ) : null;
 
     const Dialog = (
       <FocusTrap
@@ -147,7 +153,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         <ClickOutsideListener onClickOutside={this.handleClickOutside}>
           <div
             role="dialog"
-            className={classNames('Dialog', className, {
+            className={classNames('Dialog', {
               'Dialog--show': show
             })}
             ref={el => {
@@ -160,11 +166,14 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             {...other}
           >
             <Scrim show={show} />
-            <div className="Dialog__inner">
+            <div
+              className={classNames('Dialog__inner', resetClassName, className)}
+            >
               <div className="Dialog__header">
                 {header}
                 {close}
               </div>
+              <div className="Plain__Dialog__header">{close}</div>
               {children}
             </div>
           </div>

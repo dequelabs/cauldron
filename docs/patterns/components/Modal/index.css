@@ -1,0 +1,10 @@
+.plain-modal {
+  width: 800px;
+  z-index: 10;
+}
+
+.plain-modal-content {
+  border: 3px solid black;
+  background-color: yellow;
+  min-height: 300px;
+}
