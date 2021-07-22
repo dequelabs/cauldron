@@ -26,10 +26,7 @@ export default class Demo extends Component {
         <Button onClick={this.toggleSimpleModal}>Simple Modal</Button>
         <Button onClick={this.togglePlainModal}>Plain Modal</Button>
 
-        <Modal
-          show={showPlainModal}
-          onClose={this.togglePlainModal}
-        >
+        <Modal show={showPlainModal} onClose={this.togglePlainModal}>
           <ModalContent>
             <p>This is a plain modal and stuff</p>
           </ModalContent>

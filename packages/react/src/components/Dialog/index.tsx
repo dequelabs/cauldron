@@ -17,12 +17,13 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   dialogRef?: React.Ref<HTMLDivElement>;
   onClose?: () => void;
   forceAction?: boolean;
-  heading?:
+  heading:
     | React.ReactElement<any>
     | {
         text: React.ReactElement<any>;
         level: number | undefined;
-      };
+      }
+    | null;
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -37,8 +38,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
     onClose: noop,
     forceAction: false,
-    closeButtonText: 'Close',
-    heading: null
+    closeButtonText: 'Close'
   };
 
   static propTypes = {
@@ -50,7 +50,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ]),
     onClose: PropTypes.func,
     forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
+    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
     closeButtonText: PropTypes.string,
     portal: PropTypes.any
   };
@@ -115,20 +115,30 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ) : null;
 
     const Heading = `h${
-      heading !== null && typeof heading === 'object' && 'level' in heading && !!heading.level
+      heading !== null &&
+      typeof heading === 'object' &&
+      'level' in heading &&
+      !!heading.level
         ? heading.level
         : 2
-      }` as 'h1'
+    }` as 'h1';
 
-    const header = heading !== null ? (<Heading
-      className="Dialog__heading"
-      ref={(el: HTMLHeadingElement) => (this.heading = el)}
-      tabIndex={-1}
-    >
-      {typeof heading === 'object' && 'text' in heading
-        ? heading.text
-        : heading}
-    </Heading>) : null;
+    // console.log('how about this?', Heading, heading)
+
+    const header =
+      heading !== null ? (
+        <Heading
+          className="Dialog__heading"
+          ref={(el: HTMLHeadingElement) => (this.heading = el)}
+          tabIndex={-1}
+        >
+          {typeof heading === 'object' && 'text' in heading
+            ? heading.text
+            : heading}
+        </Heading>
+      ) : null;
+
+    // console.log("and this?", header)
 
     const Dialog = (
       <FocusTrap
