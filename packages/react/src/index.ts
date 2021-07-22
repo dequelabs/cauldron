@@ -89,3 +89,8 @@ export {
 
 export { default as AriaIsolate } from './utils/aria-isolate';
 export { default as focusableSelector } from './utils/focusable-selector';
+
+/**
+ * Contexts
+ */
+export { ThemeContext, ThemeProvider, useThemeContext } from './contexts/theme';
