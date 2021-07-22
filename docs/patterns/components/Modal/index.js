@@ -11,18 +11,30 @@ export default class Demo extends Component {
   constructor() {
     super();
 
-    this.state = { showSimpleModal: false };
+    this.state = { showSimpleModal: false, showPlainModal: false };
     this.toggleSimpleModal = this.toggleSimpleModal.bind(this);
+    this.togglePlainModal = this.togglePlainModal.bind(this);
   }
 
   render() {
-    const { showSimpleModal } = this.state;
+    const { showSimpleModal, showPlainModal } = this.state;
 
     return (
       <div>
         <h1>Modal</h1>
         <h2>Demo</h2>
         <Button onClick={this.toggleSimpleModal}>Simple Modal</Button>
+        <Button onClick={this.togglePlainModal}>Plain Modal</Button>
+
+        <Modal
+          show={showPlainModal}
+          onClose={this.togglePlainModal}
+        >
+          <ModalContent>
+            <p>This is a plain modal and stuff</p>
+          </ModalContent>
+        </Modal>
+
         <Modal
           show={showSimpleModal}
           heading={{ text: 'Simple Modal' }}
@@ -89,6 +101,12 @@ class Demo extends Component {
   toggleSimpleModal() {
     this.setState(({ showSimpleModal }) => {
       return { showSimpleModal: !showSimpleModal };
+    });
+  }
+
+  togglePlainModal() {
+    this.setState(({ showPlainModal }) => {
+      return { showPlainModal: !showPlainModal };
     });
   }
 }

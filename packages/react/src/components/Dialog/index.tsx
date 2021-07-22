@@ -17,7 +17,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   dialogRef?: React.Ref<HTMLDivElement>;
   onClose?: () => void;
   forceAction?: boolean;
-  heading:
+  heading?:
     | React.ReactElement<any>
     | {
         text: React.ReactElement<any>;
@@ -37,7 +37,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
     onClose: noop,
     forceAction: false,
-    closeButtonText: 'Close'
+    closeButtonText: 'Close',
+    heading: null
   };
 
   static propTypes = {
@@ -49,7 +50,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ]),
     onClose: PropTypes.func,
     forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
+    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
     closeButtonText: PropTypes.string,
     portal: PropTypes.any
   };
@@ -112,11 +113,22 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
     ) : null;
+
     const Heading = `h${
-      typeof heading === 'object' && 'level' in heading && !!heading.level
+      heading !== null && typeof heading === 'object' && 'level' in heading && !!heading.level
         ? heading.level
         : 2
-    }` as 'h1';
+      }` as 'h1'
+
+    const header = heading !== null ? (<Heading
+      className="Dialog__heading"
+      ref={(el: HTMLHeadingElement) => (this.heading = el)}
+      tabIndex={-1}
+    >
+      {typeof heading === 'object' && 'text' in heading
+        ? heading.text
+        : heading}
+    </Heading>) : null;
 
     const Dialog = (
       <FocusTrap
@@ -144,15 +156,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             <Scrim show={show} />
             <div className="Dialog__inner">
               <div className="Dialog__header">
-                <Heading
-                  className="Dialog__heading"
-                  ref={(el: HTMLHeadingElement) => (this.heading = el)}
-                  tabIndex={-1}
-                >
-                  {typeof heading === 'object' && 'text' in heading
-                    ? heading.text
-                    : heading}
-                </Heading>
+                {header}
                 {close}
               </div>
               {children}
