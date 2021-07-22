@@ -38,6 +38,19 @@ const mountWrapper = (themeProviderProps = {}) => {
 test('it exposes the current theme (defaulting to light)', () => {
   mountWrapper();
   expect(theme).toBe('light');
+  expect(document.body.classList.contains('cauldron--theme-light')).toBe(true);
+});
+
+test('it handles alternate contexts and initial themes', () => {
+  const div = document.createElement('div');
+  document.body.appendChild(div);
+
+  mountWrapper({
+    context: div,
+    initialTheme: 'dark'
+  });
+
+  expect(div.classList.contains('cauldron--theme-dark')).toBe(true);
 });
 
 test('it provides toggleTheme functionality', () => {
@@ -51,6 +64,7 @@ test('it provides toggleTheme functionality', () => {
 
 test('handles mutations', () => {
   mountWrapper();
+  expect(observe.called).toBe(true);
   act(() => {
     document.body.classList.add('cauldron--theme-dark');
   });
