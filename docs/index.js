@@ -15,7 +15,8 @@ import {
   SkipLink,
   OptionsMenuList,
   TopBarMenu,
-  Icon
+  Icon,
+  ThemeProvider
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import 'fontsource-roboto';
@@ -253,4 +254,9 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
