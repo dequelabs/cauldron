@@ -107,8 +107,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       return null;
     }
 
-    console.log('removed');
-
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
         <Icon type="close" aria-hidden="true" />
