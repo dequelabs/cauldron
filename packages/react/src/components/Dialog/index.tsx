@@ -17,13 +17,12 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   dialogRef?: React.Ref<HTMLDivElement>;
   onClose?: () => void;
   forceAction?: boolean;
-  heading:
+  heading?:
     | React.ReactElement<any>
     | {
         text: React.ReactElement<any>;
         level: number | undefined;
-      }
-    | null;
+      };
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -38,7 +37,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
     onClose: noop,
     forceAction: false,
-    closeButtonText: 'Close'
+    closeButtonText: 'Close',
+    heading: null
   };
 
   static propTypes = {
@@ -50,7 +50,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ]),
     onClose: PropTypes.func,
     forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
+    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
     closeButtonText: PropTypes.string,
     portal: PropTypes.any
   };
@@ -107,6 +107,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       return null;
     }
 
+    console.log('heading in Dialog', heading);
+
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
         <Icon type="close" aria-hidden="true" />
@@ -123,8 +125,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         : 2
     }` as 'h1';
 
-    // console.log('how about this?', Heading, heading)
-
     const header =
       heading !== null ? (
         <Heading
@@ -138,7 +138,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         </Heading>
       ) : null;
 
-    // console.log("and this?", header)
+    console.log('added classname');
 
     const Dialog = (
       <FocusTrap
@@ -152,7 +152,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
           <div
             role="dialog"
             className={classNames('Dialog', className, {
-              'Dialog--show': show
+              'Dialog--show': show,
+              'plain-mode': !heading
             })}
             ref={el => {
               this.element = el;

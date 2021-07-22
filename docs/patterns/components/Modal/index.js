@@ -34,8 +34,8 @@ export default class Demo extends Component {
 
         <Modal
           show={showSimpleModal}
-          heading={{ text: 'Simple Modal' }}
           onClose={this.toggleSimpleModal}
+          heading={{ text: 'Simple Modal' }}
         >
           <ModalContent>
             <p>This is a simple modal and stuff</p>
