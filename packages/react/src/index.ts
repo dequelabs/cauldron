@@ -50,6 +50,7 @@ export {
   TooltipHead,
   TooltipContent
 } from './components/Tooltip';
+export { default as TooltipTabstop } from './components/TooltipTabstop';
 export {
   default as Card,
   CardHeader,
@@ -88,3 +89,8 @@ export {
 
 export { default as AriaIsolate } from './utils/aria-isolate';
 export { default as focusableSelector } from './utils/focusable-selector';
+
+/**
+ * Contexts
+ */
+export { ThemeContext, ThemeProvider, useThemeContext } from './contexts/theme';

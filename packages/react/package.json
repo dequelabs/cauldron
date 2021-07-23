@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Fully accessible react components library for Deque Cauldron",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "prop-types": "^15.6.0",
     "react-id-generator": "^3.0.1",
     "react-popper": "^2.2.4",
-    "react-syntax-highlighter": "^13.5.1",
+    "react-syntax-highlighter": "^15.4.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
-    "@types/react-syntax-highlighter": "^11.0.4",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "autoprefixer": "^9.7.6",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",

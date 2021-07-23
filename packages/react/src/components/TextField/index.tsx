@@ -10,7 +10,7 @@ export interface TextFieldProps
   label: React.ReactNode;
   error?: React.ReactNode;
   defaultValue?: string;
-  onChange: (
+  onChange?: (
     value: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -27,11 +27,14 @@ export default class TextField extends React.Component<
   TextFieldProps,
   TextFieldState
 > {
+  static displayName = 'TextField';
   static defaultProps = {
     error: null,
     required: false,
     defaultValue: null,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onChange: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     fieldRef: () => {},
     requiredText: 'Required',
     multiline: false
@@ -88,11 +91,11 @@ export default class TextField extends React.Component<
     const {
       label,
       fieldRef,
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       value,
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       defaultValue,
       error = null,
       requiredText,
@@ -149,7 +152,10 @@ export default class TextField extends React.Component<
   }
 
   onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    this.props.onChange(this.input?.value || '', e);
+    if (this.props.onChange) {
+      this.props.onChange(this.input?.value || '', e);
+    }
+
     if (typeof this.props.value !== 'undefined') {
       return;
     }

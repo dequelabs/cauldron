@@ -141,7 +141,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             }}
             {...other}
           >
-            <Scrim show={show} />
             <div className="Dialog__inner">
               <div className="Dialog__header">
                 <Heading

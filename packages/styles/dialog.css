@@ -13,6 +13,7 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
+  background-color: var(--scrim-background-color);
 }
 
 .Dialog.Dialog--show {
