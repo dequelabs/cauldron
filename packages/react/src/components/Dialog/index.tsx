@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
-import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
@@ -165,7 +164,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             }}
             {...other}
           >
-            <Scrim show={show} />
             <div
               className={classNames('Dialog__inner', resetClassName, className)}
             >

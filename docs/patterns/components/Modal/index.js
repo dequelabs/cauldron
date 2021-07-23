@@ -32,11 +32,9 @@ export default class Demo extends Component {
           onClose={this.togglePlainModal}
           className="plain-modal"
         >
-          <ModalContent>
-            <div className="plain-modal-content">
-              <p>This is a plain modal and stuff</p>
-            </div>
-          </ModalContent>
+          <div className="plain-modal-content">
+            <p>This is a plain modal and stuff</p>
+          </div>
         </Modal>
 
         <Modal
@@ -68,12 +66,12 @@ class Demo extends Component {
   }
 
   render() {
-    const { showSimpleModal } = this.state;
+    const { showSimpleModal, showPlainModal } = this.state;
 
     return (
-      <Button onClick={this.toggleSimpleModal}>
-        Simple Modal
-      </Button>
+      <Button onClick={this.toggleSimpleModal}>Simple Modal</Button>
+      <Button onClick={this.togglePlainModal}>Plain Modal</Button>
+
       <Modal
         show={showSimpleModal}
         heading={{ text: 'Simple Modal' }}
@@ -87,12 +85,29 @@ class Demo extends Component {
           <Button secondary={true} onClick={this.toggleSimpleModal}>Cancel</Button>
         </ModalFooter>
       </Modal>
-    );
+
+      <Modal
+        show={showPlainModal}
+        onClose={this.togglePlainModal}
+        className="plain-modal"
+      >
+        <div className="plain-modal-content">
+          <p>This is a plain modal and stuff</p>
+        </div>
+      </Modal>
+
+      );
   }
 
   toggleSimpleModal() {
     this.setState(({showSimpleModal}) => {
       return { showSimpleModal: !showSimpleModal };
+    });
+  }
+
+  togglePlainModal() {
+    this.setState(({ showPlainModal }) => {
+      return { showPlainModal: !showPlainModal };
     });
   }
 }

@@ -4,7 +4,6 @@
 }
 
 .plain-modal-content {
-  border: 3px solid black;
   background-color: yellow;
   min-height: 300px;
 }
