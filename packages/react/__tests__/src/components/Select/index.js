@@ -34,6 +34,7 @@ test('renders the expected UI', () => {
   expect(wrapper.find('.Field__select--required')).toBeTruthy();
   expect(wrapper.find('.Field__select')).toBeTruthy();
   expect(wrapper.find('.Field__option')).toBeTruthy();
+  expect(wrapper.find('.Field__required-text').exists()).toBe(false);
 });
 
 test('sets option attributes properly', () => {
@@ -97,6 +98,38 @@ test('passes children properly', () => {
   expect(opts.length).toBe(3);
   const disabledOpt = select.find('[disabled]');
   expect(disabledOpt.text()).toBe('b');
+});
+
+test('renders required text', () => {
+  const selectWithDefaultRequiredText = withCustomOptions({ required: true });
+  const selectWithCustomRequiredText = withCustomOptions({
+    requiredText: 'Bananas',
+    required: true
+  });
+
+  expect(
+    selectWithDefaultRequiredText.find('.Field__required-text').text()
+  ).toBe('Required');
+  expect(
+    selectWithCustomRequiredText.find('.Field__required-text').text()
+  ).toBe('Bananas');
+});
+
+test('handles errors', () => {
+  const errorText = 'ErR0r';
+  const select = withCustomOptions({
+    error: errorText
+  });
+  const error = select.find('.Error');
+
+  expect(error.text()).toBe(errorText);
+  expect(select.find('select').prop('aria-describedby')).toBe(error.prop('id'));
+  expect(
+    select.find('.Field__label--has-error').hasClass('Field__label--has-error')
+  ).toBe(true);
+  expect(
+    select.find('.Field__select--wrapper').hasClass('Field--has-error')
+  ).toBe(true);
 });
 
 test('should return no axe violations', async () => {

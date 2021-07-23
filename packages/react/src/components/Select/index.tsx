@@ -1,6 +1,7 @@
 import React, { Ref, useEffect, useState } from 'react';
 import uid from '../../utils/rndid';
 import classNames from 'classnames';
+import tokenList from '../../utils/token-list';
 
 export interface SelectOption {
   key: string;
@@ -12,6 +13,8 @@ export interface SelectOption {
 export interface SelectProps
   extends Omit<React.HTMLProps<HTMLSelectElement>, 'children'> {
   label: string;
+  requiredText?: string;
+  error?: string;
   options?: SelectOption[];
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
   value?: any;
@@ -28,7 +31,10 @@ const Select = React.forwardRef(
       label,
       id,
       required,
+      requiredText = 'Required',
+      error,
       value,
+      'aria-describedby': ariaDescribedby,
       defaultValue,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onChange = () => {},
@@ -67,10 +73,12 @@ const Select = React.forwardRef(
     }, [value]);
 
     const selectId = id || uid();
+    const errorId = uid();
 
     const dynamicProps: {
       value?: any;
       defaultValue?: any;
+      'aria-describedby'?: string;
     } = {};
 
     if (isControlled) {
@@ -79,19 +87,31 @@ const Select = React.forwardRef(
       dynamicProps.defaultValue = defaultValue;
     }
 
+    if (error) {
+      dynamicProps['aria-describedby'] = tokenList(errorId, ariaDescribedby);
+    }
+
     // In order to support controlled selects, we
     // have to attach an `onChange` to the select.
     /* eslint-disable jsx-a11y/no-onchange */
     return (
       <div className="Field__select">
-        <div className="Field__select--label-wrapper">
-          <label htmlFor={selectId} className="Field__label">
-            {label}
-          </label>
-        </div>
+        <label
+          htmlFor={selectId}
+          className={classNames('Field__label', {
+            'Field__label--is-required': !!required,
+            'Field__label--has-error': !!error
+          })}
+        >
+          <span>{label}</span>
+          {required && (
+            <span className="Field__required-text">{requiredText}</span>
+          )}
+        </label>
         <div
           className={classNames('Field__select--wrapper', {
-            'Field__select--disabled': disabled
+            'Field__select--disabled': disabled,
+            'Field--has-error': !!error
           })}
         >
           <select
@@ -123,6 +143,9 @@ const Select = React.forwardRef(
               : children}
           </select>
           <div className="arrow-down" />
+        </div>
+        <div className="Error" id={errorId}>
+          {error}
         </div>
       </div>
     );
