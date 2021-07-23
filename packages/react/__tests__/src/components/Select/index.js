@@ -133,23 +133,64 @@ test('handles errors', () => {
 });
 
 test('should return no axe violations', async () => {
+  const opts = [
+    { key: '1', value: 'Bar' },
+    { key: '2', value: 'Foo' },
+    { key: '3', value: 'Far' },
+    { key: '4', value: 'Fan' },
+    { key: '5', value: 'Fun' }
+  ];
   const select = mount(
     <div>
       <Select
         {...defaultProps}
         defaultValue="Bar"
         onChange={() => {}}
-        options={[
-          { key: '1', value: 'Bar' },
-          { key: '2', value: 'Foo' },
-          { key: '3', value: 'Far' },
-          { key: '4', value: 'Fan' },
-          { key: '5', value: 'Fun' }
-        ]}
+        options={opts}
       />
     </div>
   );
   expect(await axe(select.html())).toHaveNoViolations();
+
+  const disabledSelect = mount(
+    <div>
+      <Select
+        {...defaultProps}
+        disabled
+        defaultValue="Bar"
+        onChange={() => {}}
+        options={opts}
+      />
+    </div>
+  );
+  expect(await axe(disabledSelect.html())).toHaveNoViolations();
+
+  const requiredSelect = mount(
+    <div>
+      <Select
+        {...defaultProps}
+        required
+        defaultValue="Bar"
+        onChange={() => {}}
+        options={opts}
+      />
+    </div>
+  );
+  expect(await axe(requiredSelect.html())).toHaveNoViolations();
+
+  const errorSelect = mount(
+    <div>
+      <Select
+        {...defaultProps}
+        required
+        error="Bananananas"
+        defaultValue="Bar"
+        onChange={() => {}}
+        options={opts}
+      />
+    </div>
+  );
+  expect(await axe(errorSelect.html())).toHaveNoViolations();
 });
 
 test('supports "controlled" select', () => {
