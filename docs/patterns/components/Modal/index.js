@@ -99,12 +99,24 @@ class Demo extends Component {
 
       <Modal
         show={showPlainModal}
+        variant={'info'}
         onClose={this.togglePlainModal}
-        className="plain-modal"
+        heading={{ text: 'Plain Modal', level: 1 }}
       >
-        <div className="plain-modal-content">
+        <ModalContent>
           <p>This is a plain modal and stuff</p>
-        </div>
+          <ul>
+            <li>List 1</li>
+            <li>List 2</li>
+            <li>List 3</li>
+            <li>List 4</li>
+          </ul>
+        </ModalContent>
+        <ModalFooter>
+          <Button variant="secondary" onClick={this.togglePlainModal}>
+            CLOSE
+          </Button>
+        </ModalFooter>
       </Modal>
 
       );
