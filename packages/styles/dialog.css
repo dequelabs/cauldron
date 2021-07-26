@@ -110,10 +110,13 @@
   justify-content: center;
   border: none;
   background-color: white;
+  height: fit-content;
 }
 
 .Plain__Dialog .Dialog__heading {
   padding-top: 24px;
+  height: fit-content;
+  margin-left: 0;
 }
 
 .Plain__Dialog .Dialog__content {
