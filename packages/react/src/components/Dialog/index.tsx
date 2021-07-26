@@ -37,8 +37,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
     onClose: noop,
     forceAction: false,
-    closeButtonText: 'Close',
-    className: null
+    closeButtonText: 'Close'
   };
 
   static propTypes = {
@@ -95,6 +94,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     const {
       dialogRef,
       forceAction,
+      className,
       children,
       closeButtonText,
       heading,
@@ -131,7 +131,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         <ClickOutsideListener onClickOutside={this.handleClickOutside}>
           <div
             role="dialog"
-            className={classNames('Dialog', {
+            className={classNames('Dialog', className, {
               'Dialog--show': show
             })}
             ref={el => {
