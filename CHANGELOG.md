@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/dequelabs/cauldron/compare/v0.2.5...v0.2.6) (2021-07-23)
+
+### Features
+
+- style updates to TextFields (and better docs) ([#290](https://github.com/dequelabs/cauldron/issues/290)) ([b2de8e0](https://github.com/dequelabs/cauldron/commit/b2de8e0dc34236e9ca701bd98d565b15ffa04d0e)), closes [#102](https://github.com/dequelabs/cauldron/issues/102) [#87](https://github.com/dequelabs/cauldron/issues/87) [#175](https://github.com/dequelabs/cauldron/issues/175)
+- **react:** add TooltipTabstop component ([#284](https://github.com/dequelabs/cauldron/issues/284)) ([183af54](https://github.com/dequelabs/cauldron/commit/183af54415c452e7c9412933485c138df5b93b7f))
+- **react:** Adds theme provider ([#292](https://github.com/dequelabs/cauldron/issues/292)) ([d34ee25](https://github.com/dequelabs/cauldron/commit/d34ee2518d52336b3c548c497b9253da689e4869)), closes [#283](https://github.com/dequelabs/cauldron/issues/283)
+- **styles:** Adds full color palette ([#265](https://github.com/dequelabs/cauldron/issues/265)) ([f1f02ff](https://github.com/dequelabs/cauldron/commit/f1f02ff765224af74e0c9c4f630334e81480ec69))
+
+### Bug Fixes
+
+- **react:** use background color instead of scrim for proper scrolling with dialogs ([#293](https://github.com/dequelabs/cauldron/issues/293)) ([471280a](https://github.com/dequelabs/cauldron/commit/471280adb0235a2f4e7ddda7aaeee6c3182a4576))
+
 ### [0.2.5](https://github.com/dequelabs/cauldron/compare/v0.2.0...v0.2.5) (2021-06-28)
 
 ### Features
