@@ -107,9 +107,13 @@
 
 .Plain__Dialog .Dialog__header {
   display: flex;
-  flex-direction: column-reverse;
+  justify-content: center;
   border: none;
   background-color: white;
+}
+
+.Plain__Dialog .Dialog__heading {
+  padding-top: 24px;
 }
 
 .Plain__Dialog .Dialog__content {
