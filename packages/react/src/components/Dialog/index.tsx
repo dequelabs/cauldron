@@ -16,7 +16,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   dialogRef?: React.Ref<HTMLDivElement>;
   onClose?: () => void;
   forceAction?: boolean;
-  heading?:
+  heading:
     | React.ReactElement<any>
     | {
         text: React.ReactElement<any>;
@@ -24,6 +24,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
       };
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  variant?: string;
 }
 
 interface DialogState {
@@ -37,7 +38,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     onClose: noop,
     forceAction: false,
     closeButtonText: 'Close',
-    heading: null,
     className: null
   };
 
@@ -50,9 +50,10 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ]),
     onClose: PropTypes.func,
     forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
+    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
     closeButtonText: PropTypes.string,
-    portal: PropTypes.any
+    portal: PropTypes.any,
+    variant: PropTypes.string
   };
 
   private element: HTMLDivElement | null;
@@ -94,7 +95,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     const {
       dialogRef,
       forceAction,
-      className,
       children,
       closeButtonText,
       heading,
@@ -107,12 +107,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       return null;
     }
 
-    // Resets border, shadow, background-color for plain dialogs
-    const resetClassName =
-      className && className.indexOf('Plain__Dialog') > -1
-        ? 'Dialog__reset'
-        : '';
-
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
         <Icon type="close" aria-hidden="true" />
@@ -121,25 +115,10 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     ) : null;
 
     const Heading = `h${
-      heading &&
-      typeof heading === 'object' &&
-      'level' in heading &&
-      !!heading.level
+      typeof heading === 'object' && 'level' in heading && !!heading.level
         ? heading.level
         : 2
     }` as 'h1';
-
-    const header = heading ? (
-      <Heading
-        className="Dialog__heading"
-        ref={(el: HTMLHeadingElement) => (this.heading = el)}
-        tabIndex={-1}
-      >
-        {typeof heading === 'object' && 'text' in heading
-          ? heading.text
-          : heading}
-      </Heading>
-    ) : null;
 
     const Dialog = (
       <FocusTrap
@@ -164,14 +143,19 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             }}
             {...other}
           >
-            <div
-              className={classNames('Dialog__inner', resetClassName, className)}
-            >
+            <div className="Dialog__inner">
               <div className="Dialog__header">
-                {header}
+                <Heading
+                  className="Dialog__heading"
+                  ref={(el: HTMLHeadingElement) => (this.heading = el)}
+                  tabIndex={-1}
+                >
+                  {typeof heading === 'object' && 'text' in heading
+                    ? heading.text
+                    : heading}
+                </Heading>
                 {close}
               </div>
-              <div className="Plain__Dialog__header">{close}</div>
               {children}
             </div>
           </div>

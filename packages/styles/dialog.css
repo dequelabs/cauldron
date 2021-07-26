@@ -100,3 +100,33 @@
   border-top: 1px solid var(--dialog-border-color);
   padding: calc(var(--space-small) - 4px) var(--dialog-padding);
 }
+
+/**
+* style for plain dialog
+*/
+
+.Plain__Dialog .Dialog__header {
+  display: flex;
+  flex-direction: column-reverse;
+  border: none;
+  background-color: white;
+}
+
+.Plain__Dialog .Dialog__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Plain__Dialog .Dialog__close {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.Plain__Dialog .Dialog__footer {
+  display: flex;
+  justify-content: center;
+  border-top: none;
+}

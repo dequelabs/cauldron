@@ -1,9 +1,0 @@
-.plain-modal {
-  width: 800px;
-  z-index: 10;
-}
-
-.plain-modal-content {
-  background-color: yellow;
-  min-height: 300px;
-}

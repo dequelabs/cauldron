@@ -4,12 +4,11 @@ import { Dialog, DialogContent, DialogFooter, DialogProps } from '../Dialog';
 
 interface ModalProps extends Omit<DialogProps, 'forceAction'> {}
 
-const Modal = ({ children, className, heading, ...other }: ModalProps) => (
+const Modal = ({ children, className, variant, ...other }: ModalProps) => (
   <Dialog
     className={classnames('Modal', className, {
-      Plain__Dialog: !heading
+      Plain__Dialog: variant === 'info'
     })}
-    heading={heading}
     {...other}
     forceAction={false}
   >
