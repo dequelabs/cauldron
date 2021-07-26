@@ -116,6 +116,21 @@ test('caution renders the expected UI and icon', () => {
   ).toBe('caution');
 });
 
+test('error renders the expected UI and icon', () => {
+  const caution = mount(
+    <Toast {...defaultProps} show type="error">
+      {'hi'}
+    </Toast>
+  );
+  expect(caution.find('.Toast.Toast--error').exists()).toBeTruthy();
+  expect(
+    caution
+      .find('Icon')
+      .at(0)
+      .prop('type')
+  ).toBe('caution');
+});
+
 test('info renders the expected UI and icon', () => {
   const info = mount(
     <Toast {...defaultProps} show type="info">
@@ -179,7 +194,7 @@ test('toast should be focused by default', done => {
 });
 
 test('toast should not be focused with falsey focus prop', done => {
-  const wrapper = mount(
+  mount(
     <Toast {...defaultProps} show={true} focus={false}>
       {'hi'}
     </Toast>
@@ -191,11 +206,35 @@ test('toast should not be focused with falsey focus prop', done => {
 });
 
 test('should return no axe violations', async () => {
-  const toast = mount(
+  const confirmation = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
     </Toast>
   );
+  const caution = mount(
+    <Toast {...defaultProps} type="caution" show={true}>
+      {'hi'}
+    </Toast>
+  );
+  const error = mount(
+    <Toast {...defaultProps} type="error" show={true}>
+      {'hi'}
+    </Toast>
+  );
+  const actionNeeded = mount(
+    <Toast {...defaultProps} type="action-needed" show={true}>
+      {'hi'}
+    </Toast>
+  );
+  const info = mount(
+    <Toast {...defaultProps} type="info" show={true}>
+      {'hi'}
+    </Toast>
+  );
 
-  expect(await axe(toast.html())).toHaveNoViolations();
+  expect(await axe(confirmation.html())).toHaveNoViolations();
+  expect(await axe(caution.html())).toHaveNoViolations();
+  expect(await axe(error.html())).toHaveNoViolations();
+  expect(await axe(actionNeeded.html())).toHaveNoViolations();
+  expect(await axe(info.html())).toHaveNoViolations();
 });
