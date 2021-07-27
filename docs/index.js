@@ -55,7 +55,8 @@ const componentsList = [
   'Tag',
   'Table',
   'DescriptionList',
-  'TopBar'
+  'TopBar',
+  'Stepper'
 ].sort();
 
 class App extends Component {

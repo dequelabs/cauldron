@@ -19,6 +19,7 @@ class Demo extends Component {
       children,
       customImport
     } = this.props;
+    console.log(Component);
     const { displayName, defaultProps = {} } = Component;
 
     return (

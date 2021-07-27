@@ -82,6 +82,7 @@ export {
   DescriptionTerm,
   DescriptionDetails
 } from './components/DescriptionList';
+export { default as Stepper, Step } from './components/Stepper';
 
 /**
  * Helpers / Utils
