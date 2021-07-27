@@ -106,17 +106,19 @@
 */
 
 .Modal--info .Dialog__header {
-  display: flex;
-  justify-content: center;
   border: none;
-  background-color: white;
+  background-color: transparent;
   height: auto;
+  align-items: flex-start;
 }
 
 .Modal--info .Dialog__heading {
-  padding-top: 24px;
+  flex: 1;
+  justify-content: center;
   height: auto;
-  margin-right: 16px;
+  padding-top: var(--space-large);
+  /* set left margin the total of .Dialog.close's width and margins so that heading can be symmetrical */
+  margin-left: 42px;
   text-align: center;
 }
 
@@ -127,10 +129,9 @@
 }
 
 .Modal--info .Dialog__close {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
+  padding: 0;
+  width: 30px;
+  margin: var(--space-three-quarters);
 }
 
 .Modal--info .Dialog__footer {

@@ -30,10 +30,15 @@ export default class Demo extends Component {
           show={showPlainModal}
           variant={'info'}
           onClose={this.togglePlainModal}
-          heading={{
-            text: 'plain modal',
-            level: 1
-          }}
+          // heading={{
+          //   text: 'plain modal',
+          //   level: 1
+          // }}
+          heading={
+            <h1 style={{ size: 500 }}>
+              <span>Plain Modal Plain Modal Plain Modal Plain Modal</span>
+            </h1>
+          }
         >
           <ModalContent>
             <p>This is a plain modal and stuff</p>
