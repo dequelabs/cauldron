@@ -7,7 +7,7 @@ interface ModalProps extends Omit<DialogProps, 'forceAction'> {}
 const Modal = ({ children, className, variant, ...other }: ModalProps) => (
   <Dialog
     className={classnames('Modal', className, {
-      Plain__Dialog: variant === 'info'
+      'Modal--info': variant === 'info'
     })}
     {...other}
     forceAction={false}
