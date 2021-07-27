@@ -6,7 +6,6 @@ import {
   ModalFooter,
   Code
 } from '@deque/cauldron-react/';
-import dequeLogo from './Deque_Logo_White.svg';
 
 export default class Demo extends Component {
   constructor() {
@@ -31,7 +30,10 @@ export default class Demo extends Component {
           show={showPlainModal}
           variant={'info'}
           onClose={this.togglePlainModal}
-          heading={{ text: 'plain modal', level: 1 }}
+          heading={{
+            text: 'plain modal',
+            level: 1
+          }}
         >
           <ModalContent>
             <p>This is a plain modal and stuff</p>
@@ -39,6 +41,11 @@ export default class Demo extends Component {
               <li>List 1</li>
               <li>List 2</li>
               <li>List 3</li>
+              <li>List 4</li>
+              <li>List 4</li>
+              <li>List 4</li>
+              <li>List 4</li>
+              <li>List 4</li>
               <li>List 4</li>
             </ul>
           </ModalContent>
