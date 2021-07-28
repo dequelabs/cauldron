@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import jsxStringify from 'react-element-to-jsx-string';
 import { Code } from '@deque/cauldron-react';
+import PropDocs from './PropDocs';
 import './index.css';
 
 const stringifyConfig = {
@@ -11,13 +12,22 @@ const stringifyConfig = {
 
 class Demo extends Component {
   render() {
-    const { states, component: Component, propDocs, children } = this.props;
+    const {
+      states,
+      component: Component,
+      propDocs,
+      children,
+      customImport
+    } = this.props;
     const { displayName, defaultProps = {} } = Component;
 
     return (
       <div className="Demo">
         <h1>{displayName}</h1>
-        <Code>{`import { ${displayName} } from '@deque/cauldron-react'`}</Code>
+        <Code>
+          {customImport ||
+            `import { ${displayName} } from '@deque/cauldron-react'`}
+        </Code>
         {states.length ? (
           <div className="Demo-states">
             <h2>Examples</h2>
@@ -53,38 +63,7 @@ class Demo extends Component {
         )}
         <div className="Demo-props">
           <h2>Props</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Description</th>
-                <th>Default</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(propDocs).map(([name, data]) => {
-                const defaultProp =
-                  data.defaultValue || defaultProps[name] || data.default;
-
-                return (
-                  <tr key={name}>
-                    <td>{name}</td>
-                    <td>{data.type}</td>
-                    <td>{`${!!data.required}`}</td>
-                    <td>{data.description}</td>
-                    <td>
-                      {defaultProp &&
-                        (typeof defaultProp === 'object'
-                          ? JSON.stringify(defaultProp)
-                          : `${defaultProp}`)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <PropDocs docs={propDocs} defaultProps={defaultProps} />
         </div>
       </div>
     );
@@ -106,7 +85,8 @@ Demo.propTypes = {
   propDocs: PropTypes.object.isRequired,
   states: PropTypes.arrayOf(PropTypes.object).isRequired,
   component: PropTypes.func.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
+  customImport: PropTypes.string
 };
 
 export default Demo;

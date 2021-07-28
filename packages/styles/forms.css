@@ -11,6 +11,7 @@ textarea,
   border: 1px solid var(--field-border-color);
   border-bottom: 1px solid var(--field-border-color-underline);
   margin-bottom: var(--space-half);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input:focus,
@@ -50,7 +51,6 @@ textarea.Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
-  box-shadow: inset 0 0 0 1px var(--field-border-color-error);
 }
 
 .Checkbox__overlay.Field--has-error {
@@ -109,9 +109,10 @@ textarea.Field--has-error:focus,
 
 .Field__label {
   display: flex;
+  align-items: center;
   text-align: left;
-  color: #333333;
-  font-size: var(--text-size-smaller);
+  color: var(--field-label-text-color);
+  font-size: var(--text-size-small);
   font-weight: var(--font-weight-bold);
   padding-bottom: var(--space-half);
   cursor: default;
@@ -126,8 +127,9 @@ textarea.Field--has-error:focus,
   text-align: right;
   margin-left: var(--space-large);
   font-style: italic;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
+  font-size: var(--text-size-smaller);
 }
 
 .Field__required-text::before {
@@ -162,10 +164,16 @@ textarea.Field--has-error:focus,
 .Field__textarea {
   display: block;
   min-height: 56px;
-  font-size: var(--text-size-smaller);
+  font-size: var(--text-size-small);
   min-width: var(--input-min-width);
   padding: var(--space-half);
   max-width: 500px;
+}
+
+.Field__textarea[disabled],
+.Field__textarea[aria-disabled='true'] {
+  background: var(--field-background-color-disabled);
+  border: 1px solid var(--field-border-color);
 }
 
 .Radio__overlay,
@@ -225,6 +233,7 @@ textarea.Field--has-error:focus,
   top: 8px;
   left: 8px;
   appearance: none;
+  width: 2px;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {

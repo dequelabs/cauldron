@@ -3,7 +3,7 @@
 .Button--clear,
 .Button--error {
   border-radius: 3px;
-  border: none;
+  border: 1px solid transparent;
   font-size: var(--text-size-small);
   box-sizing: border-box;
   padding: 0 16px;
@@ -17,7 +17,6 @@
   align-items: center;
   justify-items: center;
   gap: 8px;
-  --button-hover-outline-color: var(--button-background-color-primary);
 }
 
 button.Link {
@@ -45,10 +44,16 @@ button.Link {
   pointer-events: none;
 }
 
-.Button--primary:not([disabled]):not([aria-disabled='true']):hover:before,
-.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--button-outline-color-primary);
+}
+
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--button-outline-color-secondary);
+}
+
 .Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--button-hover-outline-color);
+  box-shadow: 0 0 0 1px var(--button-outline-color-error);
 }
 
 .Button--primary:focus:before,

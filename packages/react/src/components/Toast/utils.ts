@@ -17,6 +17,10 @@ export const typeMap = {
     className: 'error',
     icon: 'no'
   },
+  error: {
+    className: 'error',
+    icon: 'caution'
+  },
   info: {
     className: 'info',
     icon: 'info-circle-alt'

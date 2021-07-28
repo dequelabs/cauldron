@@ -11,6 +11,9 @@ export default class IconDemo extends Component {
           component={Icon}
           states={[
             {
+              type: 'add-user'
+            },
+            {
               type: 'arrow-left'
             },
             {
@@ -51,6 +54,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'check-circle'
+            },
+            {
+              type: 'check-shield'
             },
             {
               type: 'checkbox-checked'
@@ -101,6 +107,9 @@ export default class IconDemo extends Component {
               type: 'flag'
             },
             {
+              type: 'filter'
+            },
+            {
               type: 'gears'
             },
             {
@@ -108,6 +117,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'hamburger-menu'
+            },
+            {
+              type: 'highlight'
             },
             {
               type: 'info-circle'
@@ -129,6 +141,9 @@ export default class IconDemo extends Component {
             },
             {
               type: 'new'
+            },
+            {
+              type: 'new-releases'
             },
             {
               type: 'no'
@@ -155,6 +170,9 @@ export default class IconDemo extends Component {
               type: 'save'
             },
             {
+              type: 'share'
+            },
+            {
               type: 'sort'
             },
             {
@@ -173,7 +191,22 @@ export default class IconDemo extends Component {
               type: 'trash'
             },
             {
+              type: 'triangle-up'
+            },
+            {
+              type: 'triangle-down'
+            },
+            {
+              type: 'triangle-left'
+            },
+            {
+              type: 'triangle-right'
+            },
+            {
               type: 'upload'
+            },
+            {
+              type: 'download'
             }
           ].sort((a, b) => a.type.localeCompare(b.type))}
           propDocs={{

@@ -6,7 +6,7 @@
   height: var(--button-thin-height);
   width: var(--button-thin-height);
   border-radius: 3px;
-  border: none;
+  border: 1px solid transparent;
   background-color: var(--icon-button-background-color);
   color: var(--icon-button-icon-color);
   margin: 2px;
@@ -39,10 +39,106 @@
   pointer-events: none;
 }
 
+.IconButton--secondary[aria-disabled='true'],
+.IconButton--secondary[disabled] {
+  color: var(--disabled);
+  background-color: var(--button-background-color-secondary-disabled);
+  cursor: default;
+}
+
+.IconButton--primary[aria-disabled='true'],
+.IconButton--primary[disabled] {
+  background-color: var(--button-background-color-primary-disabled);
+  cursor: default;
+}
+
+.IconButton--error[aria-disabled='true'],
+.IconButton--error[disabled] {
+  color: var(--button-text-color-light);
+  background-color: var(--button-background-color-error-disabled);
+  cursor: default;
+}
+
+.IconButton--light[aria-disabled='true'],
+.IconButton--light[disabled] {
+  color: var(--icon-button-content-color-light-disabled);
+  background-color: var(--icon-button-background-color-light);
+  cursor: default;
+}
+
+.IconButton--dark[aria-disabled='true'],
+.IconButton--dark[disabled] {
+  color: var(--icon-button-content-color-dark-disabled);
+  background-color: var(--icon-button-background-color-dark);
+  cursor: default;
+}
+
 .IconButton:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
 }
 
-.IconButton:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-background-color);
+.IconButton--primary {
+  background-color: var(--icon-button-background-color-primary);
+  color: var(--button-text-color-light);
+}
+
+.IconButton--primary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-color-primary);
+}
+
+.IconButton--primary:active {
+  background-color: var(--icon-button-background-color-primary-active);
+}
+
+.IconButton--secondary {
+  border: 1px solid var(--icon-button-border-color-secondary);
+  background-color: var(--icon-button-background-color-secondary);
+  color: var(--button-text-color-dark);
+}
+
+.IconButton--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-color-secondary);
+}
+
+.IconButton--secondary:active {
+  background-color: var(--icon-button-background-color-secondary-active);
+}
+
+.IconButton--error {
+  background-color: var(--icon-button-background-color-error);
+  color: var(--button-text-color-light);
+}
+
+.IconButton--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-color-error);
+}
+
+.IconButton--error:active {
+  background-color: var(--icon-button-background-color-error-active);
+}
+
+.IconButton--light {
+  background-color: var(--icon-button-background-color-light);
+  color: var(--button-text-color-dark);
+}
+
+.IconButton--light:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-color-light);
+}
+
+.IconButton--light:active {
+  background-color: var(--icon-button-background-color-light-active);
+}
+
+.IconButton--dark {
+  background-color: var(--icon-button-background-color-dark);
+  color: var(--button-text-color-light);
+}
+
+.IconButton--dark:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-color-dark);
+}
+
+.IconButton--dark:active {
+  background-color: var(--icon-button-background-color-dark-active);
 }

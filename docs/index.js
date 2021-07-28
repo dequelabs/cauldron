@@ -15,10 +15,12 @@ import {
   SkipLink,
   OptionsMenuList,
   TopBarMenu,
-  Icon
+  Icon,
+  ThemeProvider
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import 'fontsource-roboto';
+import 'fontsource-lato';
 
 // styles
 import '../packages/styles';
@@ -40,6 +42,7 @@ const componentsList = [
   'Checkbox',
   'ClickOutsideListener',
   'Tooltip',
+  'TooltipTabstop',
   'Card',
   'ExpandCollapsePanel',
   'TextField',
@@ -48,11 +51,15 @@ const componentsList = [
   'IconButton',
   'Code',
   'LoaderOverlay',
-  'Line'
+  'Line',
+  'Tag',
+  'Table',
+  'DescriptionList',
+  'TopBar'
 ].sort();
 
 class App extends Component {
-  state = { show: false, thin: false };
+  state = { show: false, thin: false, variant: 'dark' };
   constructor() {
     super();
     this.onTriggerClick = this.onTriggerClick.bind(this);
@@ -61,11 +68,21 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+    document.addEventListener('toggleTopBarVariant', this.toggleTopBarVariant);
   }
 
   componentWillUnmount() {
     document.removeEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
+    document.removeEventListener(
+      'toggleTopBarVariant',
+      this.toggleTopBarVariant
+    );
   }
+
+  toggleTopBarVariant = e => {
+    const nextTheme = this.state.variant === 'dark' ? 'light' : 'dark';
+    this.setState({ variant: nextTheme });
+  };
 
   focusTopBarMenuItem = () => {
     if (!this.topBarMenuItem) {
@@ -135,7 +152,7 @@ class App extends Component {
             defaultTitle="Deque Cauldron React"
           />
           <SkipLink target={'#main-content'} />
-          <TopBar>
+          <TopBar variant={this.state.variant}>
             <MenuBar thin={thin} hasTrigger>
               <TopBarTrigger onClick={this.onTriggerClick}>
                 <button
@@ -237,4 +254,9 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>,
+  document.getElementById('root')
+);

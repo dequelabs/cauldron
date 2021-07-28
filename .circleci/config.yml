@@ -27,7 +27,6 @@ jobs:
           keys:
             - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
             - v1-styles-yarn-
-      - run: npx lerna bootstrap
       - run: NODE_ENV=production yarn --cwd=packages/styles build
   dependencies:
     <<: *defaults
@@ -82,7 +81,10 @@ jobs:
           keys:
             - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
             - v1-styles-yarn-
-      - run: npx lerna publish prepatch --no-verify-access --no-git-tag-version --no-push --dist-tag=next --pre-dist-tag=next --exact --preid=${CIRCLE_SHA1:0:8} --force-publish --yes
+      - run: npm whoami
+      - run: .circleci/canary-version.js
+      - run: cd packages/styles && npm publish --tag=next
+      - run: cd packages/react && npm publish --tag=next
   release:
     <<: *defaults
     steps:
@@ -100,7 +102,9 @@ jobs:
           keys:
             - v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
             - v1-styles-yarn-
-      - run: npx lerna publish --force-publish='*' --yes
+      - run: npm whoami
+      - run: cd packages/styles && npm publish
+      - run: cd packages/react && npm publish
 
 workflows:
   version: 2

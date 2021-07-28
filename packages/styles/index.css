@@ -18,9 +18,13 @@
 @import './card.css';
 @import './toast.css';
 @import './tooltip.css';
+@import './tooltip-tabstop.css';
 @import './top-bar.css';
 @import './skip-link.css';
 @import './loader.css';
 @import './offscreen.css';
 @import './code.css';
 @import './line.css';
+@import './tag.css';
+@import './table.css';
+@import './description-list.css';

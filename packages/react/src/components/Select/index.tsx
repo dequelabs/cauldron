@@ -1,6 +1,7 @@
-import React, { Ref } from 'react';
+import React, { Ref, useEffect, useState } from 'react';
 import uid from '../../utils/rndid';
 import classNames from 'classnames';
+import tokenList from '../../utils/token-list';
 
 export interface SelectOption {
   key: string;
@@ -12,13 +13,33 @@ export interface SelectOption {
 export interface SelectProps
   extends Omit<React.HTMLProps<HTMLSelectElement>, 'children'> {
   label: string;
+  requiredText?: string;
+  error?: string;
   options?: SelectOption[];
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
+  value?: any;
+  defaultValue?: any;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Select = React.forwardRef(
   (
-    { options, children, disabled, label, id, required, ...rest }: SelectProps,
+    {
+      options,
+      children,
+      disabled,
+      label,
+      id,
+      required,
+      requiredText = 'Required',
+      error,
+      value,
+      'aria-describedby': ariaDescribedby,
+      defaultValue,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onChange = () => {},
+      ...rest
+    }: SelectProps,
     ref: Ref<HTMLSelectElement>
   ): React.ReactElement<HTMLSelectElement> => {
     if (options && children) {
@@ -26,17 +47,71 @@ const Select = React.forwardRef(
         'The Select component only takes the options props or child option elements, not both.'
       );
     }
+
+    const isControlled = typeof value !== 'undefined';
+    const [currentValue, setCurrentValue] = useState(
+      value || defaultValue || ''
+    );
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      onChange(e);
+
+      if (isControlled) {
+        return;
+      }
+
+      setCurrentValue(e.target.value);
+    };
+
+    useEffect(() => {
+      if (typeof value === 'undefined') {
+        return;
+      }
+
+      // handle the incoming value change for controlled <Selects />
+      setCurrentValue(value);
+    }, [value]);
+
     const selectId = id || uid();
+    const errorId = uid();
+
+    const dynamicProps: {
+      value?: any;
+      defaultValue?: any;
+      'aria-describedby'?: string;
+    } = {};
+
+    if (isControlled) {
+      dynamicProps.value = currentValue;
+    } else if (typeof defaultValue !== 'undefined') {
+      dynamicProps.defaultValue = defaultValue;
+    }
+
+    if (error) {
+      dynamicProps['aria-describedby'] = tokenList(errorId, ariaDescribedby);
+    }
+
+    // In order to support controlled selects, we
+    // have to attach an `onChange` to the select.
+    /* eslint-disable jsx-a11y/no-onchange */
     return (
       <div className="Field__select">
-        <div className="Field__select--label-wrapper">
-          <label htmlFor={selectId} className="Field__label">
-            {label}
-          </label>
-        </div>
+        <label
+          htmlFor={selectId}
+          className={classNames('Field__label', {
+            'Field__label--is-required': !!required,
+            'Field__label--has-error': !!error
+          })}
+        >
+          <span>{label}</span>
+          {required && (
+            <span className="Field__required-text">{requiredText}</span>
+          )}
+        </label>
         <div
           className={classNames('Field__select--wrapper', {
-            'Field__select--disabled': disabled
+            'Field__select--disabled': disabled,
+            'Field--has-error': !!error
           })}
         >
           <select
@@ -44,6 +119,8 @@ const Select = React.forwardRef(
             id={selectId}
             disabled={disabled}
             required={required}
+            onChange={handleChange}
+            {...dynamicProps}
             {...rest}
           >
             {options?.length
@@ -65,10 +142,14 @@ const Select = React.forwardRef(
                 )
               : children}
           </select>
-          <div className="arrow-down"></div>
+          <div className="arrow-down" />
+        </div>
+        <div className="Error" id={errorId}>
+          {error}
         </div>
       </div>
     );
+    /* eslint-disable jsx-a11y/no-onchange */
   }
 );
 
