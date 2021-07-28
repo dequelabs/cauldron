@@ -25,11 +25,7 @@ export default class Demo extends Component {
         <h2>Demo</h2>
         <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
         <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
-        <Alert
-          heading="Default Alert"
-          onClose={this.toggleDefaultAlert}
-          show={showDefaultAlert}
-        >
+        <Alert heading="Default Alert" show={showDefaultAlert}>
           <AlertContent>Dismissable alert</AlertContent>
           <AlertActions>
             <Button onClick={this.toggleDefaultAlert}>Ok</Button>
@@ -38,12 +34,7 @@ export default class Demo extends Component {
             </Button>
           </AlertActions>
         </Alert>
-        <Alert
-          variant="warning"
-          heading="Danger Zone"
-          onClose={this.toggleWarningAlert}
-          show={showWarningAlert}
-        >
+        <Alert variant="warning" heading="Danger Zone" show={showWarningAlert}>
           <AlertContent>Welcome to the danger zone</AlertContent>
           <AlertActions>
             <Button variant="error" onClick={this.toggleWarningAlert}>
@@ -76,7 +67,6 @@ class Demo extends Component {
         <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
         <Alert
           heading="Default Alert"
-          onClose={this.toggleDefaultAlert}
           show={showDefaultAlert}
         >
           <AlertContent>Dismissable alert</AlertContent>
@@ -90,7 +80,6 @@ class Demo extends Component {
         <Alert
           variant="warning"
           heading="Danger Zone"
-          onClose={this.toggleWarningAlert}
           show={showWarningAlert}
         >
           <AlertContent>Welcome to the danger zone</AlertContent>

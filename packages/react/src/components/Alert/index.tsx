@@ -4,7 +4,7 @@ import Icon from '../Icon';
 import { Dialog, DialogContent, DialogFooter, DialogProps } from '../Dialog';
 
 interface AlertProps
-  extends Omit<DialogProps, 'forceAction' | 'onClose' | 'closeButtonText'> {
+  extends Omit<DialogProps, 'forceAction' | 'closeButtonText'> {
   variant?: 'default' | 'warning';
 }
 
