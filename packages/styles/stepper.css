@@ -1,7 +1,7 @@
 .Stepper {
-  --step-indicator-size: 25px;
-  --step-line-height: 8px;
-  --step-line-offset: 18px;
+  --step-indicator-size: 2em;
+  --step-line-height: 0.53em;
+  --step-line-offset: 1.33em;
 
   display: flex;
   padding: var(--space-medium);
@@ -42,7 +42,6 @@
   height: var(--step-indicator-size);
   border-radius: 50%;
   background: var(--accent-light);
-  font-size: var(--text-size-smallest);
   color: var(--gray-90);
   display: flex;
   align-items: center;
@@ -51,6 +50,7 @@
 }
 
 .Stepper__step-indicator::before {
+  font-size: var(--text-size-smallest);
   counter-increment: stepper;
   content: counter(stepper);
 }
