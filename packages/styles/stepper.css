@@ -1,71 +1,87 @@
 .Stepper {
+  --step-indicator-size: 25px;
+  --step-line-height: 8px;
+  --step-line-offset: 18px;
+
   display: flex;
+  padding: var(--space-medium);
+  align-items: flex-start;
+  color: var(--gray-90);
+  counter-reset: stepper;
   list-style-type: none;
-  justify-content: space-between;
-  margin: 0;
-  padding: var(--space-large);
-  background: var(--top-bar-background-color-active);
-  color: #fff;
+  margin: 0 auto;
 }
 
 .Stepper__step {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex: 1;
+  position: relative;
+  padding: 0 var(--space-smallest);
 }
 
-.Stepper__step::after {
-  content: '';
-  height: 8px;
-  display: block;
-  flex: 1;
-  background: var(--accent-primary);
+.Stepper__step-line {
+  position: absolute;
+  top: calc((var(--step-indicator-size) - var(--step-line-height)) / 2);
+  left: calc(-50% + var(--step-line-offset));
+  right: calc(50% + var(--step-line-offset));
+  flex: 1 1 auto;
+  border-top: var(--step-line-height) solid var(--accent-light);
 }
 
-.Stepper__step:last-child {
-  flex: 0;
-}
-
-.Stepper__step:last-child::after {
+.Stepper__step:first-child .Stepper__step-line {
   display: none;
 }
 
-.Stepper__step--complete::after {
-  background: var(--accent-info);
-}
-
-.Stepper__step--current::after {
-  background: var(--accent-medium);
+.Stepper__step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Stepper__step-indicator {
-  width: 21px;
-  height: 21px;
+  width: var(--step-indicator-size);
+  height: var(--step-indicator-size);
   border-radius: 50%;
-  background: var(--accent-medium);
-  color: #fff;
+  background: var(--accent-light);
+  font-size: var(--text-size-smallest);
+  color: var(--gray-90);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 4px var(--top-bar-background-color-active);
-  position: relative;
+  flex-shrink: 0;
 }
 
-.Stepper__step--complete .Stepper__step-indicator {
-  background-color: var(--accent-info);
-}
-
-.Stepper__step--current .Stepper__step-indicator {
-  background-color: #fff;
-  color: var(--top-bar-background-color-active);
-  box-shadow: 0 0 0 2px var(--top-bar-background-color-active),
-    0 0 0 4px var(--accent-info),
-    0 0 0 8px var(--top-bar-background-color-active);
+.Stepper__step-indicator::before {
+  counter-increment: stepper;
+  content: counter(stepper);
 }
 
 .Stepper__step-label {
-  position: absolute;
-  width: 100%;
-  margin-left: calc(-50% + 10.5px);
   text-align: center;
-  padding: 5px 0;
+  width: 100%;
+  padding-top: var(--space-smallest);
+  font-size: var(--text-size-smaller);
+}
+
+/*
+  status-specific styles
+*/
+
+.Stepper__step--current .Stepper__step-indicator {
+  background: var(--white);
+  color: var(--accent-dark);
+  box-shadow: 0 0 0 2px var(--accent-dark);
+}
+
+.Stepper__step--current .Stepper__step-label {
+  font-weight: var(--font-weight-bold);
+}
+
+.Stepper__step--current .Stepper__step-line,
+.Stepper__step--complete .Stepper__step-line {
+  border-color: var(--accent-dark);
+}
+
+.Stepper__step--complete .Stepper__step-indicator {
+  background: var(--accent-dark);
+  color: var(--white);
 }

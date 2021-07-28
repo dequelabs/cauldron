@@ -19,7 +19,6 @@ class Demo extends Component {
       children,
       customImport
     } = this.props;
-    console.log(Component);
     const { displayName, defaultProps = {} } = Component;
 
     return (
@@ -37,11 +36,13 @@ class Demo extends Component {
               const {
                 DEMO_renderAfter,
                 DEMO_renderBefore,
+                DEMO_hide_renderAfterBefore = false,
                 ...thinState
               } = state;
               const componentMarkup = this.renderState(thinState);
               const afterMarkup =
                 DEMO_renderAfter &&
+                !DEMO_hide_renderAfterBefore &&
                 jsxStringify(DEMO_renderAfter, stringifyConfig);
 
               return (
