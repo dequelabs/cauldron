@@ -117,8 +117,7 @@
   justify-content: center;
   height: auto;
   padding-top: var(--space-large);
-  /* set left margin the total of .Dialog.close's width and margins so that heading can be symmetrical */
-  margin-left: 42px;
+  margin-left: var(--target-size);
 }
 
 .Modal--info .Dialog__content {
@@ -128,9 +127,10 @@
 }
 
 .Modal--info .Dialog__close {
-  padding: 0;
-  width: 30px;
-  margin: var(--space-three-quarters);
+  padding: var(--space-three-quarters);
+  --target-size: 44px;
+  height: var(--target-size);
+  width: var(--target-size);
 }
 
 .Modal--info .Dialog__footer {
