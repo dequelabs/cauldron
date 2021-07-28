@@ -59,7 +59,6 @@ const StepperDemo = () => {
                 <Step status={getStatus(1, currentStepper1Index)}>
                   Analyze the stuff
                 </Step>
-                {/* <Step status="current" tooltip={<span>I am a tooltip</span>} /> */}
                 <Step status={getStatus(2, currentStepper1Index)}>
                   Review all of the things, stuff, such and etc.
                 </Step>
