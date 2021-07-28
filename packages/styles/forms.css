@@ -1,3 +1,20 @@
+:root {
+  --field-border-color: var(--gray-40);
+  --field-border-color-underline: var(--gray-80);
+  --field-border-color-hover: var(--gray-80);
+  --field-border-color-focus: var(--accent-primary);
+  --field-border-color-focus-glow: rgba(60, 122, 174, 0.7);
+  --field-border-color-error: var(--accent-error);
+  --field-border-color-error-hover: #c42f41;
+  --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
+  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
+  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
+  --field-background-color-disabled: #f7f7f7;
+  --field-required-text-color: var(--gray-60);
+  --field-label-text-color: var(--gray-90);
+  --input-min-width: 250px;
+}
+
 input,
 select,
 textarea,

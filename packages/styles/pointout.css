@@ -1,3 +1,9 @@
+:root {
+  --pointout-border-color: var(--accent-success);
+  --pointout-background-color: var(--accent-medium);
+  --pointout-text-color: var(--accent-light);
+}
+
 .Pointout {
   --pointout-padding: var(--space-smallest);
   --pointout-arrow-width: 38px;

@@ -1,3 +1,7 @@
+:root {
+  --menu-width: 257px;
+}
+
 .SideBar {
   display: none;
   position: fixed;

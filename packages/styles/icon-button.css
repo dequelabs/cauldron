@@ -1,3 +1,48 @@
+:root {
+  --icon-button-background-color-primary: var(
+    --button-background-color-primary
+  );
+  --icon-button-background-color-primary-disabled: var(
+    --button-background-color-primary-disabled
+  );
+  --icon-button-background-color-primary-active: var(
+    --button-background-color-primary-active
+  );
+  --icon-button-outline-color-primary: var(--button-outline-color-primary);
+
+  --icon-button-background-color-secondary: var(
+    --button-background-color-secondary
+  );
+  --icon-button-background-color-secondary-disabled: var(
+    --button-background-color-secondary-disabled
+  );
+  --icon-button-background-color-secondary-active: var(
+    --button-background-color-secondary-active
+  );
+  --icon-button-outline-color-secondary: var(--button-outline-color-secondary);
+  --icon-button-border-color-secondary: #dadada;
+
+  --icon-button-background-color-error: var(--button-background-color-error);
+  --icon-button-background-color-error-disabled: var(
+    --button-background-color-error-disabled
+  );
+  --icon-button-background-color-error-active: var(
+    --button-background-color-error-active
+  );
+  --icon-button-outline-color-error: var(--button-outline-color-error);
+
+  --icon-button-content-color-light-disabled: #ccc;
+  --icon-button-background-color-light: #dadada;
+  --icon-button-background-color-light-active: #c2c2c2;
+  --icon-button-outline-color-light: var(--icon-button-background-color-light);
+
+  --icon-button-content-color-dark-disabled: #fff 40%;
+  --icon-button-background-color-dark: var(--accent-medium);
+  --icon-button-background-color-dark-disabled: var(--accent-medium);
+  --icon-button-background-color-dark-active: var(--accent-dark);
+  --icon-button-outline-color-dark: var(--icon-button-background-color-dark);
+}
+
 .IconButton {
   position: relative;
   display: inline-flex;
