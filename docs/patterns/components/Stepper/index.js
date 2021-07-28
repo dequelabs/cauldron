@@ -1,6 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Demo from '../../../Demo';
-import { Stepper, Step, Button } from '@deque/cauldron-react/';
+import {
+  Stepper,
+  Step,
+  Button,
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableBody
+} from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 import './index.css';
 
@@ -130,6 +140,64 @@ const StepperDemo = () => {
           className
         }}
       />
+      <h2>{'<Step /> props'}</h2>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeader scope="col">Name</TableHeader>
+            <TableHeader scope="col">Type</TableHeader>
+            <TableHeader scope="col">Required</TableHeader>
+            <TableHeader scope="col">Description</TableHeader>
+            <TableHeader scope="col">Default</TableHeader>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>children</TableCell>
+            <TableCell>react node</TableCell>
+            <TableCell>false</TableCell>
+            <TableCell>
+              children to be rendered as the step&apos;s visible label (if not
+              visible label is desired, use the "tooltip" prop instead)
+            </TableCell>
+            <TableCell>
+              <code>null</code>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>className</TableCell>
+            <TableCell>string</TableCell>
+            <TableCell>false</TableCell>
+            <TableCell>
+              className to be added to the {'<li />'} element
+            </TableCell>
+            <TableCell>
+              <code>''</code>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>status</TableCell>
+            <TableCell>string</TableCell>
+            <TableCell>true</TableCell>
+            <TableCell>'current', 'complete', or 'future'</TableCell>
+            <TableCell>
+              <span />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>tooltip</TableCell>
+            <TableCell>react node</TableCell>
+            <TableCell>false</TableCell>
+            <TableCell>
+              tooltip content to be rendered with the tooltip tabstop on the
+              step (no visible label will be rendered)
+            </TableCell>
+            <TableCell>
+              <code>null</code>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
   );
 };
