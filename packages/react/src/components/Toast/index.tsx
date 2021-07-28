@@ -6,7 +6,7 @@ import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
 
 export interface ToastProps {
-  type: 'confirmation' | 'caution' | 'action-needed' | 'info';
+  type: 'confirmation' | 'caution' | 'error' | 'action-needed' | 'info';
   onDismiss: () => void;
   dismissText?: string;
   toastRef: React.Ref<HTMLDivElement>;
@@ -25,7 +25,9 @@ interface ToastState {
 export default class Toast extends React.Component<ToastProps, ToastState> {
   static defaultProps = {
     dismissText: 'Dismiss',
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onDismiss: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     toastRef: () => {},
     focus: true,
     show: false
@@ -95,6 +97,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     const {
       type,
       children,
+      // prevent `onDismiss` from being passed-through to DOM
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onDismiss,
       dismissText,
       toastRef,

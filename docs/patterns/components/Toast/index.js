@@ -96,6 +96,21 @@ export default class Demo extends Component {
                 Info
               </Button>
             )
+          },
+          {
+            type: 'error',
+            children: 'This toast tastes like toast!',
+            show: type === 'error',
+            onDismiss: () => this.onToastDismiss('error'),
+            DEMO_renderAfter: (
+              <Button
+                variant="error"
+                onClick={() => this.onTriggerClick('error')}
+                buttonRef={el => (this.error = el)}
+              >
+                Error
+              </Button>
+            )
           }
         ]}
         propDocs={{

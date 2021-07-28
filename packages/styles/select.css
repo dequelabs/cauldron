@@ -7,14 +7,9 @@
   opacity: 0.45;
 }
 
-.Field__select--label-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
 .Field__select--wrapper {
   position: relative;
-  width: var(--select-width);
+  min-width: var(--select-width);
 }
 
 .arrow-down {
@@ -30,14 +25,14 @@
 }
 
 .Field__select--wrapper select {
-  width: inherit;
+  width: 100%;
   min-height: var(--select-min-height);
   padding: var(--space-three-quarters) var(--space-smallest);
   border: 1px solid var(--field-border-color);
   font-family: Roboto;
   font-weight: normal;
   font-style: normal;
-  font-size: var(--text-size-smaller);
+  font-size: var(--text-size-small);
   color: var(--text-color-base);
   text-decoration: rgb(102, 102, 102);
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.05);
@@ -45,8 +40,8 @@
   appearance: none;
 }
 
-.Field__select--wrapper select:hover {
-  border-color: rgb(60, 122, 174);
+.Field__select--wrapper select:not([disabled]):hover {
+  border-color: var(--gray-90);
 }
 
 .Field__select--wrapper select:focus {
@@ -55,12 +50,15 @@
     rgba(60, 122, 174, 0.7) 0px 0px 4px 0px;
 }
 
-.Field__select--wrapper select:invalid {
+.Field__select--wrapper select:invalid,
+.Field--has-error select {
   border-width: var(--space-quarter);
   border-color: var(--field-border-color-error);
 }
 
-.Field__select--wrapper select:invalid:focus {
+.Field__select--wrapper select:invalid:focus,
+.Field__select--wrapper.Field--has-error select:focus,
+.Field__select--wrapper.Field--has-error select:hover {
   border-width: var(--space-quarter);
   border-color: var(--field-border-color-error);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
