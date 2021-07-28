@@ -119,7 +119,6 @@
   padding-top: var(--space-large);
   /* set left margin the total of .Dialog.close's width and margins so that heading can be symmetrical */
   margin-left: 42px;
-  text-align: center;
 }
 
 .Modal--info .Dialog__content {
