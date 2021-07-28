@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/dequelabs/cauldron/compare/v0.2.6...v1.0.0) (2021-07-28)
+
+### ⚠ BREAKING CHANGES
+
+- **react:** Loader component now set role, aria-valuetext, aria-busy, aria-valuemin, and aria-valuemax instead of making a generic role (div) have an aria-label
+- **Select:** selects now have parity with <TextField /> s in that they always render an .Error div. This causes a slight layout difference with more space below each <Select />. The text "Required" will now show up with any <Select /> who is passed a true required prop.
+
+### Features
+
+- **react:** Sets progressbar attributes on Loader ([#289](https://github.com/dequelabs/cauldron/issues/289)) ([f865166](https://github.com/dequelabs/cauldron/commit/f8651666a321fa02a418152e97ad908cd429f3e4)), closes [#53](https://github.com/dequelabs/cauldron/issues/53)
+- **Select:** Adds support for required/error ([#296](https://github.com/dequelabs/cauldron/issues/296)) ([4b0dfec](https://github.com/dequelabs/cauldron/commit/4b0dfecfa295a550e27ced833e97dabf7ea9eb1c)), closes [#89](https://github.com/dequelabs/cauldron/issues/89)
+- **Toast:** Adds support for error type ([#297](https://github.com/dequelabs/cauldron/issues/297)) ([10d3089](https://github.com/dequelabs/cauldron/commit/10d308976042cc48100ca7e7d4994cba59801583)), closes [#106](https://github.com/dequelabs/cauldron/issues/106)
+- add download icon ([77f186d](https://github.com/dequelabs/cauldron/commit/77f186dbc6c24fd13071e5b40cfd0f2964bbc97d))
+
+### Bug Fixes
+
+- **react:** remove unsupported props for alert component ([#180](https://github.com/dequelabs/cauldron/issues/180)) ([f5bf264](https://github.com/dequelabs/cauldron/commit/f5bf264dc33bf62fa59f2ceae6ac0106ce161677))
+
 ### [0.2.6](https://github.com/dequelabs/cauldron/compare/v0.2.5...v0.2.6) (2021-07-23)
 
 ### Features
