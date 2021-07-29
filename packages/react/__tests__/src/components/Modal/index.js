@@ -21,7 +21,7 @@ test('shows modal if passed a truthy "show" prop', () => {
 
 test('shows info-modal if passed variant of info', () => {
   const modal = mount(
-    <Modal {...defaults} variant="info">
+    <Modal {...defaults} show={true} variant="info">
       {'hello'}
     </Modal>
   );
@@ -30,7 +30,7 @@ test('shows info-modal if passed variant of info', () => {
 
 test('should return no axe violations', async () => {
   const modal = mount(
-    <Modal show={true} heading={'title'}>
+    <Modal show={true} heading={'title'} variant="info">
       Hello!
     </Modal>
   );
