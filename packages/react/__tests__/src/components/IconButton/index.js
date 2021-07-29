@@ -46,3 +46,11 @@ test('supports ref prop', async () => {
   mountedElement.find('#test-button').simulate('click');
   expect(document.activeElement.id).toBe('test-id');
 });
+
+test('should not render tooltip when disabled prop is true', async () => {
+  const wrapper = mount(
+    <IconButton icon="pencil" label="Edit" disabled={true} />
+  );
+  await update(wrapper);
+  expect(wrapper.find('Tooltip').exists()).toBe(false);
+});
