@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
-import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
@@ -25,6 +24,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
       };
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  variant?: string;
 }
 
 interface DialogState {
@@ -51,7 +51,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     forceAction: PropTypes.bool,
     heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
     closeButtonText: PropTypes.string,
-    portal: PropTypes.any
+    portal: PropTypes.any,
+    variant: PropTypes.string
   };
 
   private element: HTMLDivElement | null;
@@ -112,6 +113,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
     ) : null;
+
     const Heading = `h${
       typeof heading === 'object' && 'level' in heading && !!heading.level
         ? heading.level

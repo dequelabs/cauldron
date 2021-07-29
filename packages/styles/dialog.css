@@ -100,3 +100,41 @@
   border-top: 1px solid var(--dialog-border-color);
   padding: calc(var(--space-small) - 4px) var(--dialog-padding);
 }
+
+/**
+* style for plain dialog
+*/
+
+.Modal--info .Dialog__header {
+  border: none;
+  background-color: transparent;
+  height: auto;
+  align-items: flex-start;
+}
+
+.Modal--info .Dialog__heading {
+  flex: 1;
+  justify-content: center;
+  height: auto;
+  padding-top: var(--space-large);
+  margin-left: var(--target-size);
+}
+
+.Modal--info .Dialog__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Modal--info .Dialog__close {
+  padding: var(--space-three-quarters);
+  --target-size: 44px;
+  height: var(--target-size);
+  width: var(--target-size);
+}
+
+.Modal--info .Dialog__footer {
+  display: flex;
+  justify-content: center;
+  border-top: none;
+}
