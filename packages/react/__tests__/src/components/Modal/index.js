@@ -30,9 +30,16 @@ test('shows info-modal if passed variant of info', () => {
 
 test('should return no axe violations', async () => {
   const modal = mount(
-    <Modal show={true} heading={'title'} variant="info">
+    <Modal show={true} heading={'title'}>
       Hello!
     </Modal>
   );
+  const infoModal = mount(
+    <Modal {...defaults} show={true} variant="info">
+      {'hello'}
+    </Modal>
+  );
+
   expect(await axe(modal.html())).toHaveNoViolations();
+  expect(await axe(infoModal.html())).toHaveNoViolations();
 });
