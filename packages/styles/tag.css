@@ -1,3 +1,9 @@
+:root {
+  --tag-text-color: var(--gray-90);
+  --tag-label-text-color: var(--gray-60);
+  --tag-background-color: var(--gray-20);
+}
+
 .Tag {
   color: var(--tag-text-color);
   background-color: var(--tag-background-color);
