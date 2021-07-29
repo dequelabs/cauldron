@@ -1,3 +1,7 @@
+:root {
+  --skip-link-background-color: rgba(11, 14, 17, 0.9);
+}
+
 .SkipLink {
   min-width: 173px;
   height: 58px;

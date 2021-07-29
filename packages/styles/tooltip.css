@@ -1,3 +1,12 @@
+:root {
+  --tooltip-background-color: var(--gray-90);
+  --tooltip-border-color: #fff;
+  --tooltip-text-color: var(--gray-20);
+  --tooltip-info-background-color: var(--gray-20);
+  --tooltip-info-border-color: var(--gray-90);
+  --tooltip-info-text-color: var(--gray-90);
+}
+
 .Tooltip {
   background-color: var(--tooltip-background-color);
   border: 2px solid var(--tooltip-border-color);

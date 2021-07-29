@@ -1,3 +1,7 @@
+:root {
+  --workspace-background-color: var(--gray-10);
+}
+
 html {
   box-sizing: border-box;
 }
