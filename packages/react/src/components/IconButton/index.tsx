@@ -25,6 +25,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       tooltipPlacement = 'auto',
       className,
       variant = 'secondary',
+      disabled,
       ...other
     }: IconButtonProps,
     ref
@@ -44,18 +45,21 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
             'IconButton--error': variant === 'error'
           })}
           ref={buttonRef}
+          disabled={disabled}
           {...other}
         >
           <Icon type={icon} />
         </button>
-        <Tooltip
-          target={buttonRef}
-          placement={tooltipPlacement}
-          association="aria-labelledby"
-          hideElementOnHidden
-        >
-          {label}
-        </Tooltip>
+        {!disabled && (
+          <Tooltip
+            target={buttonRef}
+            placement={tooltipPlacement}
+            association="aria-labelledby"
+            hideElementOnHidden
+          >
+            {label}
+          </Tooltip>
+        )}
       </React.Fragment>
     );
   }
