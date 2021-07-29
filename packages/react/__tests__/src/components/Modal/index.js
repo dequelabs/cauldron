@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Modal from 'src/components/Modal';
-// import axe from '../../../axe';
+import axe from '../../../axe';
 
 const defaults = { show: false, heading: { text: 'hi' } };
 
