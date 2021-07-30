@@ -4,6 +4,7 @@
   --dialog-header-background-color: var(--button-background-color-secondary);
   --dialog-padding: var(--space-small);
   --dialog-header-height: 42px;
+  --target-size: 44px;
 }
 
 .Dialog {
@@ -102,7 +103,7 @@
 }
 
 /**
-* style for plain dialog
+* style for info modal
 */
 
 .Modal--info .Dialog__header {
@@ -110,6 +111,12 @@
   background-color: transparent;
   height: auto;
   align-items: flex-start;
+}
+
+.Modal--info .Dialog__close {
+  padding: var(--space-three-quarters);
+  height: var(--target-size);
+  width: var(--target-size);
 }
 
 .Modal--info .Dialog__heading {
@@ -124,13 +131,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.Modal--info .Dialog__close {
-  padding: var(--space-three-quarters);
-  --target-size: 44px;
-  height: var(--target-size);
-  width: var(--target-size);
 }
 
 .Modal--info .Dialog__footer {

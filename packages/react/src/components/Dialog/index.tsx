@@ -24,7 +24,6 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
       };
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
-  variant?: string;
 }
 
 interface DialogState {
@@ -51,8 +50,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     forceAction: PropTypes.bool,
     heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
     closeButtonText: PropTypes.string,
-    portal: PropTypes.any,
-    variant: PropTypes.string
+    portal: PropTypes.any
   };
 
   private element: HTMLDivElement | null;
