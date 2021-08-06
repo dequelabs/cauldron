@@ -46,6 +46,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           })}
           ref={buttonRef}
           disabled={disabled}
+          aria-label={disabled ? label : undefined}
           {...other}
         >
           <Icon type={icon} />

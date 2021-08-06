@@ -47,10 +47,11 @@ test('supports ref prop', async () => {
   expect(document.activeElement.id).toBe('test-id');
 });
 
-test('should not render tooltip when disabled prop is true', async () => {
+test('should not render tooltip when disabled prop is true and render label as aria-label', async () => {
   const wrapper = mount(
     <IconButton icon="pencil" label="Edit" disabled={true} />
   );
   await update(wrapper);
   expect(wrapper.find('Tooltip').exists()).toBe(false);
+  expect(wrapper.find('button').prop('aria-label')).toBe('Edit');
 });

@@ -13,12 +13,15 @@ const IconButtonDemo = () => (
         { icon: 'pencil', label: 'Edit', variant: 'error' },
         { icon: 'pencil', label: 'Edit', variant: 'light' },
         { icon: 'pencil', label: 'Edit', variant: 'dark' },
+        { icon: 'pencil', label: 'Edit', disabled: true },
         { icon: 'trash', label: 'Delete', tooltipPlacement: 'bottom' }
       ]}
       propDocs={{
         label: {
           type: 'string',
-          required: true
+          required: true,
+          description:
+            'Label to be rendered as tooltip unless disabled in which case it is set as the button‘s aria-label'
         },
         icon: {
           type: 'string',
