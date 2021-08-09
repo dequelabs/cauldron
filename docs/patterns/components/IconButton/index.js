@@ -26,6 +26,12 @@ const IconButtonDemo = () => (
         },
         tooltipPlacement: {
           type: 'string'
+        },
+        tooltipVariant: {
+          type: 'string'
+        },
+        tooltipPortal: {
+          type: 'HTMLElement | RefObject<HTMLElement>'
         }
       }}
     />
