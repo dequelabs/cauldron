@@ -13,10 +13,10 @@ interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   label: string;
-  tooltipPlacement: TooltipProps['placement'];
-  tooltipVariant: TooltipProps['variant'];
-  tooltipPortal: TooltipProps['portal'];
-  variant: 'light' | 'dark' | 'primary' | 'secondary' | 'error';
+  tooltipPlacement?: TooltipProps['placement'];
+  tooltipVariant?: TooltipProps['variant'];
+  tooltipPortal?: TooltipProps['portal'];
+  variant?: 'light' | 'dark' | 'primary' | 'secondary' | 'error';
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
