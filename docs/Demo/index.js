@@ -4,8 +4,6 @@ import jsxStringify from 'react-element-to-jsx-string';
 import { Code } from '@deque/cauldron-react';
 import PropDocs from './PropDocs';
 import './index.css';
-import { ThemeProvider } from '../../packages/react/lib';
-import ThemeSelector from './ThemeSelector';
 
 const stringifyConfig = {
   showDefaultProps: false,
@@ -35,55 +33,50 @@ const Demo = props => {
   };
 
   return (
-    <ThemeProvider>
-      <div className="Demo">
-        <h1>{displayName}</h1>
-        <ThemeSelector />
-        <Code>
-          {customImport ||
-            `import { ${displayName} } from '@deque/cauldron-react'`}
-        </Code>
-        {states.length ? (
-          <div className="Demo-states">
-            <h2>Examples</h2>
-            {/* setting children to null in the key to avoid stringify choking on potential jsx children */}
-            {states.map(state => {
-              const {
-                DEMO_renderAfter,
-                DEMO_renderBefore,
-                DEMO_hide_renderAfterBefore = false,
-                ...thinState
-              } = state;
-              const componentMarkup = renderState(thinState);
-              const afterMarkup =
-                DEMO_renderAfter &&
-                !DEMO_hide_renderAfterBefore &&
-                jsxStringify(DEMO_renderAfter, stringifyConfig);
+    <div className="Demo">
+      <h1>{displayName}</h1>
+      <Code>
+        {customImport ||
+          `import { ${displayName} } from '@deque/cauldron-react'`}
+      </Code>
+      {states.length ? (
+        <div className="Demo-states">
+          <h2>Examples</h2>
+          {/* setting children to null in the key to avoid stringify choking on potential jsx children */}
+          {states.map(state => {
+            const {
+              DEMO_renderAfter,
+              DEMO_renderBefore,
+              DEMO_hide_renderAfterBefore = false,
+              ...thinState
+            } = state;
+            const componentMarkup = renderState(thinState);
+            const afterMarkup =
+              DEMO_renderAfter &&
+              !DEMO_hide_renderAfterBefore &&
+              jsxStringify(DEMO_renderAfter, stringifyConfig);
 
-              return (
-                <div key={componentMarkup}>
-                  {DEMO_renderBefore}
-                  <Component {...thinState} />
-                  {DEMO_renderAfter}
-                  <Code>
-                    {`${componentMarkup}${
-                      afterMarkup ? `\n${afterMarkup}` : ''
-                    }`}
-                  </Code>
-                </div>
-              );
-            })}
-            {children}
-          </div>
-        ) : (
-          children
-        )}
-        <div className="Demo-props">
-          <h2>Props</h2>
-          <PropDocs docs={propDocs} defaultProps={defaultProps} />
+            return (
+              <div key={componentMarkup}>
+                {DEMO_renderBefore}
+                <Component {...thinState} />
+                {DEMO_renderAfter}
+                <Code>
+                  {`${componentMarkup}${afterMarkup ? `\n${afterMarkup}` : ''}`}
+                </Code>
+              </div>
+            );
+          })}
+          {children}
         </div>
+      ) : (
+        children
+      )}
+      <div className="Demo-props">
+        <h2>Props</h2>
+        <PropDocs docs={propDocs} defaultProps={defaultProps} />
       </div>
-    </ThemeProvider>
+    </div>
   );
 };
 
