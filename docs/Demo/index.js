@@ -1,29 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import jsxStringify from 'react-element-to-jsx-string';
 import { Code } from '@deque/cauldron-react';
 import PropDocs from './PropDocs';
 import './index.css';
+import { ThemeProvider } from '../../packages/react/lib';
+import ThemeSelector from './ThemeSelector';
 
 const stringifyConfig = {
   showDefaultProps: false,
   showFunctions: true
 };
 
-class Demo extends Component {
-  render() {
-    const {
-      states,
-      component: Component,
-      propDocs,
-      children,
-      customImport
-    } = this.props;
-    const { displayName, defaultProps = {} } = Component;
+const Demo = props => {
+  const {
+    states,
+    component: Component,
+    propDocs,
+    children,
+    customImport
+  } = props;
 
-    return (
+  const { displayName, defaultProps = {} } = Component;
+
+  const renderState = state => {
+    const { displayName } = Component;
+
+    if (!displayName) {
+      throw new Error('Component missing displayName');
+    }
+
+    const Tag = displayName;
+    return jsxStringify(<Tag {...state} />, stringifyConfig);
+  };
+
+  return (
+    <ThemeProvider>
       <div className="Demo">
         <h1>{displayName}</h1>
+        <ThemeSelector />
         <Code>
           {customImport ||
             `import { ${displayName} } from '@deque/cauldron-react'`}
@@ -39,7 +54,7 @@ class Demo extends Component {
                 DEMO_hide_renderAfterBefore = false,
                 ...thinState
               } = state;
-              const componentMarkup = this.renderState(thinState);
+              const componentMarkup = renderState(thinState);
               const afterMarkup =
                 DEMO_renderAfter &&
                 !DEMO_hide_renderAfterBefore &&
@@ -68,25 +83,14 @@ class Demo extends Component {
           <PropDocs docs={propDocs} defaultProps={defaultProps} />
         </div>
       </div>
-    );
-  }
-
-  renderState = state => {
-    const { displayName } = this.props.component;
-
-    if (!displayName) {
-      throw new Error('Component missing displayName');
-    }
-
-    const Tag = displayName;
-    return jsxStringify(<Tag {...state} />, stringifyConfig);
-  };
-}
+    </ThemeProvider>
+  );
+};
 
 Demo.propTypes = {
   propDocs: PropTypes.object.isRequired,
   states: PropTypes.arrayOf(PropTypes.object).isRequired,
-  component: PropTypes.func.isRequired,
+  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   children: PropTypes.node,
   customImport: PropTypes.string
 };

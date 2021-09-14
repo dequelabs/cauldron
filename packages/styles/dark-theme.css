@@ -1,0 +1,77 @@
+.cauldron--theme-dark,
+.theme-dark {
+  --button-background-color-primary: var(--accent-medium);
+  --button-background-color-primary-disabled: var(--accent-medium);
+  --button-background-color-secondary: var(--accent-medium);
+  --button-background-color-secondary-disabled: var(--accent-medium);
+  --button-background-color-error-disabled: var(--accent-medium);
+  --header-text-color-dark: var(--white);
+
+  --button-background-color-primary-active: #a7e9f7;
+  --button-background-color-secondary-active: var(--accent-light);
+  --button-background-color-error-active: #fea7a6;
+
+  --header-text-color-dark: var(--white);
+}
+
+.cauldron--theme-dark .Layout,
+.theme-dark .Layout {
+  background-color: #53636e;
+  color: var(--white);
+}
+
+.cauldron--theme-dark .Button--primary,
+.theme-dark .Button--primary {
+  border: 2px solid var(--accent-info);
+}
+
+.cauldron--theme-dark .Button--secondary,
+.theme-dark .Button--secondary {
+  color: var(--accent-light);
+  border: 2px solid var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--error,
+.theme-dark .Button--error {
+  background-color: var(--accent-medium);
+  color: var(--white);
+  border: 2px solid var(--accent-danger);
+}
+
+.cauldron--theme-dark .Button--primary[aria-disabled='true'],
+.cauldron--theme-dark .Button--primary[disabled],
+.cauldron--theme-dark .Button--secondary[aria-disabled='true'],
+.cauldron--theme-dark .Button--secondary[disabled],
+.cauldron--theme-dark .Button--error[aria-disabled='true'],
+.cauldron--theme-dark .Button--error[disabled],
+.theme-dark .Button--primary[aria-disabled='true'],
+.theme-dark .Button--primary[disabled],
+.theme-dark .Button--secondary[aria-disabled='true'],
+.theme-dark .Button--secondary[disabled],
+.theme-dark .Button--error[aria-disabled='true'],
+.theme-dark .Button--error[disabled] {
+  color: #53636e;
+}
+
+.cauldron--theme-dark .Button--primary:active,
+.cauldron--theme-dark .Button--secondary:active,
+.theme-dark .Button--primary:active,
+.theme-dark .Button--secondary:active {
+  color: var(--accent-medium);
+}
+
+.cauldron--theme-dark .Button--error:active,
+.theme-dark .Button--error:active {
+  background-color: #fea7a6;
+  color: var(--accent-medium);
+}
+
+.cauldron--theme-dark button.Link,
+.theme-dark button.Link {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark button.Link:hover,
+.theme-dark button.Link:hover {
+  color: var(--white);
+}
