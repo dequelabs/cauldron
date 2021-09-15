@@ -138,3 +138,42 @@
   justify-content: center;
   border-top: none;
 }
+
+/* Dark Theme */
+.cauldron--theme-dark .Dialog__inner {
+  background-color: var(--accent-medium);
+  color: var(--white);
+  border: 1px solid var(--gray-70);
+}
+
+.cauldron--theme-dark .Dialog__header {
+  border-bottom: 1px solid var(--gray-70);
+}
+
+.cauldron--theme-dark .Dialog__footer {
+  border-top: 1px solid var(--gray-70);
+}
+
+.cauldron--theme-dark .Dialog__header,
+.cauldron--theme-dark .Dialog__footer {
+  background-color: var(--accent-dark);
+  color: var(--gray-20);
+}
+
+.cauldron--theme-dark .Dialog__close {
+  color: var(--gray-20);
+}
+
+.cauldron--theme-dark .Modal--info .Dialog__header,
+.cauldron--theme-dark .Modal--info .Dialog__content,
+.cauldron--theme-dark .Modal--info .Dialog__footer {
+  background-color: var(--accent-medium);
+}
+
+.cauldron--theme-dark .Modal--info .Dialog__header {
+  border-bottom: none;
+}
+
+.cauldron--theme-dark .Modal--info .Dialog__footer {
+  border-top: none;
+}
