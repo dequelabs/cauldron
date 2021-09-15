@@ -1,20 +1,27 @@
 import React from 'react';
-import { Checkbox } from '@deque/cauldron-react/';
+import { Code } from '@deque/cauldron-react/';
 
 const Demo = () => {
   return (
     <>
       <h1>TopBar</h1>
-      <Checkbox
-        label="Light Mode"
-        id="toggle-dark-light-theme"
-        onChange={() => {
-          const event = new Event('toggleTopBarVariant', {
-            bubbles: true
-          });
-          document.body.dispatchEvent(event);
-        }}
-      />
+      <h2>Code Sample</h2>
+      <Code language="javascript">
+        {`import React from 'react';
+import { TopBar, TopBarMenu, OptionsMenu } from '@deque/cauldron-react';
+
+const Demo = () => (
+  <TopBar>
+    <TopBarMenu id="top-bar-menu">
+      I'm a menu thingy
+      <OptionsMenu>
+        <li>Item 1</li>
+        <li>Item 2</li>
+      </OptionsMenu>
+    </TopBarMenu>
+  </TopBar>
+);`}
+      </Code>
     </>
   );
 };

@@ -187,3 +187,40 @@
 .IconButton--dark:active {
   background-color: var(--icon-button-background-color-dark-active);
 }
+
+/* Dark Theme */
+
+.cauldron--theme-dark {
+  --icon-button-border-color-secondary: var(--accent-medium);
+  --icon-button-background-color-secondary: var(--accent-medium);
+  --icon-button-background-color-primary: var(--gray-20);
+  --icon-button-icon-color: var(--white);
+}
+
+.cauldron--theme-dark .IconButton--error {
+  background-color: var(--accent-dark);
+  color: var(--white);
+}
+
+.cauldron--theme-dark .IconButton--primary {
+  color: var(--gray-90);
+}
+
+.cauldron--theme-dark .IconButton--primary[aria-disabled='true'],
+.cauldron--theme-dark .IconButton--primary[disabled] {
+  background-color: var(--gray-20);
+  color: var(--gray-40);
+}
+
+.cauldron--theme-dark .IconButton--secondary[aria-disabled='true'],
+.cauldron--theme-dark .IconButton--secondary[disabled] {
+  color: #5d676f;
+}
+
+.cauldron--theme-dark .IconButton--secondary {
+  color: var(--white);
+}
+
+.cauldron--theme-dark .IconButton--error {
+  background-color: var(--accent-danger);
+}
