@@ -104,20 +104,6 @@
   cursor: default;
 }
 
-.IconButton--light[aria-disabled='true'],
-.IconButton--light[disabled] {
-  color: var(--icon-button-content-color-light-disabled);
-  background-color: var(--icon-button-background-color-light);
-  cursor: default;
-}
-
-.IconButton--dark[aria-disabled='true'],
-.IconButton--dark[disabled] {
-  color: var(--icon-button-content-color-dark-disabled);
-  background-color: var(--icon-button-background-color-dark);
-  cursor: default;
-}
-
 .IconButton:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
 }
@@ -162,32 +148,6 @@
   background-color: var(--icon-button-background-color-error-active);
 }
 
-.IconButton--light {
-  background-color: var(--icon-button-background-color-light);
-  color: var(--button-text-color-dark);
-}
-
-.IconButton--light:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-color-light);
-}
-
-.IconButton--light:active {
-  background-color: var(--icon-button-background-color-light-active);
-}
-
-.IconButton--dark {
-  background-color: var(--icon-button-background-color-dark);
-  color: var(--button-text-color-light);
-}
-
-.IconButton--dark:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-color-dark);
-}
-
-.IconButton--dark:active {
-  background-color: var(--icon-button-background-color-dark-active);
-}
-
 /* Dark Theme */
 
 .cauldron--theme-dark {
@@ -223,4 +183,22 @@
 
 .cauldron--theme-dark .IconButton--error {
   background-color: var(--accent-danger);
+}
+
+.cauldron--theme-dark .IconButton--primary:active {
+  background-color: #e5ebec;
+}
+
+.cauldron--theme-dark .IconButton--secondary:active {
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark
+  .IconButton--primary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--accent-light);
+}
+
+.cauldron--theme-dark
+  .IconButton--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--white);
 }
