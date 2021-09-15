@@ -4,6 +4,7 @@ import TopBar from 'src/components/TopBar';
 import MenuBar from 'src/components/MenuBar';
 import { TopBarItem } from 'src/';
 import axe from '../../../axe';
+import { ThemeProvider } from '../../../../lib';
 
 test('renders', () => {
   expect.assertions(1);
@@ -65,12 +66,26 @@ test('renders TopBar className when no variant passed or variant is dark', () =>
   expect(topbar.find('.TopBar').length).toBe(1);
 });
 
-test('renders TopBar--light className when variant is light', () => {
+test('renders light TopBar by default', () => {
   const topbar = mount(
-    <TopBar variant="light">
-      <div />
-    </TopBar>
+    <ThemeProvider>
+      <TopBar>
+        <div />
+      </TopBar>
+    </ThemeProvider>
   );
   expect(topbar.find('.TopBar').length).toBe(1);
-  expect(topbar.find('.TopBar--light').length).toBe(1);
+  expect(topbar.find('.cauldron--theme-light .TopBar').length).toBe(1);
+});
+
+test('renders dark TopBar for dark theme', () => {
+  const topbar = mount(
+    <ThemeProvider initialTheme="dark">
+      <TopBar>
+        <div />
+      </TopBar>
+    </ThemeProvider>
+  );
+  expect(topbar.find('.TopBar').length).toBe(1);
+  expect(topbar.find('.cauldron--theme-dark .TopBar').length).toBe(1);
 });
