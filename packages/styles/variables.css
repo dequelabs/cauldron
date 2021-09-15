@@ -109,21 +109,3 @@
   /* ensure this is 1 higher than the top bar z-index */
   --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
 }
-
-.cauldron--theme-dark {
-  --button-background-color-primary: var(--accent-medium);
-  --button-background-color-primary-disabled: var(--accent-medium);
-  --button-background-color-secondary: var(--accent-medium);
-  --button-background-color-secondary-disabled: var(--accent-medium);
-  --button-background-color-error-disabled: var(--accent-medium);
-  --header-text-color-dark: var(--white);
-
-  --button-background-color-primary-active: #a7e9f7;
-  --button-background-color-secondary-active: var(--accent-light);
-  --button-background-color-error-active: #fea7a6;
-
-  --header-text-color-dark: var(--white);
-  --field-label-text-color: var(--accent-light);
-  --field-border-color-error: var(--accent-danger);
-  --error: var(--accent-danger);
-}
