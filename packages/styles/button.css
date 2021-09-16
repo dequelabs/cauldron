@@ -190,6 +190,8 @@ button.Link {
   --button-background-color-secondary-active: var(--accent-light);
   --button-background-color-error-active: #fea7a6;
 
+  --button-focus-ring-color: var(--focus-dark);
+
   --header-text-color-dark: var(--white);
   --field-label-text-color: var(--accent-light);
   --field-border-color-error: var(--accent-danger);
@@ -217,7 +219,7 @@ button.Link {
 .cauldron--theme-dark .Button--secondary[disabled],
 .cauldron--theme-dark .Button--error[aria-disabled='true'],
 .cauldron--theme-dark .Button--error[disabled] {
-  color: #53636e;
+  color: var(--gray);
 }
 
 .cauldron--theme-dark .Button--primary:active,
@@ -236,4 +238,19 @@ button.Link {
 
 .cauldron--theme-dark button.Link:hover {
   color: var(--white);
+}
+
+.cauldron--theme-dark
+  .Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--gray), 0 0 0 2px var(--accent-info);
+}
+
+.cauldron--theme-dark
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--gray), 0 0 0 2px var(--accent-light);
+}
+
+.cauldron--theme-dark
+  .Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--gray), 0 0 0 2px var(--accent-danger);
 }
