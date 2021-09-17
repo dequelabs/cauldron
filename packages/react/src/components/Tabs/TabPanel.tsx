@@ -11,14 +11,14 @@ interface TabPanelProps {
 }
 
 const TabPanel = (props: TabPanelProps) => {
-  const { id, children, hidden, className } = props;
+  const { id, children, labelledBy, hidden, className } = props;
 
   return (
     <div
       tabIndex={0}
       role="tabpanel"
-      id={`${id}-panel`}
-      aria-labelledby={id}
+      id={id}
+      aria-labelledby={labelledBy}
       hidden={hidden}
       className={classNames('TabPanel', className)}
     >

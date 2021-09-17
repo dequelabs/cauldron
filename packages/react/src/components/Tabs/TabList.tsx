@@ -9,7 +9,7 @@ interface TabListProps {
 const TabList = (props: TabListProps) => {
   const { children } = props;
   return (
-    <div role="tablist" className="Tablist" aria-label="Entertainment">
+    <div role="tablist" className="Tablist" aria-label="Tablist">
       {children}
     </div>
   );

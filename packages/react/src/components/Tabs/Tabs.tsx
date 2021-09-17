@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,8 +8,9 @@ interface TabsProps {
   className?: string;
 }
 
-const Tabs = (props: TabsProps): JSX.Element => {
-  const { thin, children, className } = props;
+const Tabs = ({ thin, children, className }: TabsProps): JSX.Element => {
+  const tabs = useRef<HTMLButtonElement[]>([]);
+  const onTabButtonClick = () => null;
 
   return (
     <div
