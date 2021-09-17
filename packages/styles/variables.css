@@ -7,13 +7,12 @@
 :root {
   /* color palette */
   --white: #ffffff;
+  --dark-workspace-color: #53636e;
   --gray-10: #fdfdfe;
   --gray-20: #f2f2f2;
   --gray-30: #e0e0e0;
   --gray-40: #cccccc;
-  --gray-50: #b3bfc6;
   --gray-60: #666666;
-  --gray-70: #5d676f;
   --gray-80: #4d4d4d;
   --gray-90: #333333;
   --accent-dark: #02101a;

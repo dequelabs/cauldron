@@ -81,6 +81,6 @@
 
 /* Dark Theme */
 .cauldron--theme-dark .Layout {
-  background-color: #53636e;
+  background-color: var(--dark-workspace-color);
   color: var(--white);
 }
