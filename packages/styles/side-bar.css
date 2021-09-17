@@ -8,7 +8,7 @@
   top: var(--top-bar-height);
   bottom: 0;
   overflow: auto;
-  background-color: var(--top-bar-background-color);
+  background-color: var(--white);
   width: var(--menu-width);
   left: calc(-1 * var(--menu-width));
   box-sizing: border-box;
@@ -45,11 +45,11 @@
 }
 
 .SideBar li:not([aria-controls]).MenuItem--active {
-  border-left: var(--border-width) solid var(--top-bar-accent-primary);
+  border-left: var(--border-width) solid var(--accent-primary);
 }
 
 .SideBar li:not([aria-controls]).MenuItem--active a {
-  color: var(--text-color-light);
+  color: var(--gray-90);
   font-weight: var(--font-weight-medium);
 }
 
@@ -64,10 +64,12 @@
 }
 
 .SideBar > li {
-  color: var(--top-bar-text-color);
+  color: var(--gray-60);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   cursor: pointer;
+  border-right: 1px solid #b3bfc6;
+  border-bottom: 1px solid#b3bfc6;
 }
 
 .SideBar > li:focus {
@@ -76,11 +78,36 @@
 
 .SideBar > li a {
   text-decoration: none;
-  color: var(--top-bar-text-color);
+  color: var(--gray-60);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
 }
 
 .SideBar > li a:focus {
   outline: 0;
+}
+
+/* Dark Theme */
+.cauldron--theme-dark .SideBar {
+  background-color: var(--accent-medium);
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .SideBar > li a {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .SideBar > li {
+  color: var(--accent-light);
+  border-right: 2px solid #5d676f;
+  border-bottom: 2px solid #5d676f;
+}
+
+.cauldron--theme-dark .SideBar li:not([aria-controls]).MenuItem--active {
+  border-left: var(--border-width) solid var(--accent-info);
+}
+
+.cauldron--theme-dark .SideBar li:not([aria-controls]).MenuItem--active a {
+  color: var(--white);
+  font-weight: var(--font-weight-medium);
 }

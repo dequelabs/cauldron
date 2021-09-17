@@ -19,6 +19,7 @@ import {
   ThemeProvider
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
+import darkLogo from './assets/img/dark-logo.svg';
 import 'fontsource-roboto';
 import 'fontsource-lato';
 
@@ -63,18 +64,12 @@ const componentsList = [
 const App = () => {
   const [state, setState] = useState({
     show: false,
-    thin: false,
-    variant: 'dark'
+    thin: false
   });
   const [topBarMenuItem, setTopBarMenuItem] = useState(null);
   const [workspace, setWorkspace] = useState(null);
   const topBarTrigger = useRef();
   const { theme, toggleTheme } = useThemeContext();
-
-  const toggleTopBarVariant = e => {
-    const nextTheme = state.variant === 'dark' ? 'light' : 'dark';
-    setState({ variant: nextTheme });
-  };
 
   const focusTopBarMenuItem = () => {
     if (!topBarMenuItem) {
@@ -138,11 +133,9 @@ const App = () => {
 
   useEffect(() => {
     document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
-    document.addEventListener('toggleTopBarVariant', toggleTopBarVariant);
 
     return () => {
       document.removeEventListener('focusTopBarMenu', focusTopBarMenuItem);
-      document.removeEventListener('toggleTopBarVariant', toggleTopBarVariant);
     };
   }, []);
 
@@ -157,7 +150,7 @@ const App = () => {
           defaultTitle="Deque Cauldron React"
         />
         <SkipLink target={'#main-content'} />
-        <TopBar variant={state.variant}>
+        <TopBar>
           <MenuBar thin={thin} hasTrigger>
             <TopBarTrigger onClick={onTriggerClick}>
               <button
@@ -172,7 +165,8 @@ const App = () => {
             </TopBarTrigger>
             <TopBarItem>
               <Link to="/" className="MenuItem__logo" tabIndex={-1}>
-                <img src={logo} alt="" /> <span>Cauldron</span>
+                <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '}
+                <span>Cauldron</span>
               </Link>
             </TopBarItem>
 
