@@ -68,8 +68,8 @@
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   cursor: pointer;
-  border-right: 1px solid var(--gray-50);
-  border-bottom: 1px solid var(--gray-50);
+  border-right: 1px solid #b3bfc6;
+  border-bottom: 1px solid#b3bfc6;
 }
 
 .SideBar > li:focus {
@@ -99,8 +99,8 @@
 
 .cauldron--theme-dark .SideBar > li {
   color: var(--accent-light);
-  border-right: 2px solid var(--gray-70);
-  border-bottom: 2px solid var(--gray-70);
+  border-right: 2px solid #5d676f;
+  border-bottom: 2px solid #5d676f;
 }
 
 .cauldron--theme-dark .SideBar li:not([aria-controls]).MenuItem--active {
