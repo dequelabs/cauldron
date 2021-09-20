@@ -1,5 +1,5 @@
 .Loader__overlay {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--workspace-background-color);
   position: absolute;
   display: inline-flex;
   flex-direction: column;
@@ -17,14 +17,22 @@
   z-index: var(--z-index-loader);
 }
 
+.cauldron--theme-dark .Loader__overlay {
+  border: 2px solid #fff;
+}
+
 .Loader {
   font-size: 10px;
   margin: 50px auto;
   width: 7em;
   height: 7em;
   border-radius: 50%;
-  background: #666;
-  background: linear-gradient(to right, #666 10%, rgba(255, 255, 255, 0) 42%);
+  background: var(--gray-60);
+  background: linear-gradient(
+    to right,
+    var(--gray-60) 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
   transform: translateZ(0);
   position: relative;
   animation: load 1.4s linear infinite;
@@ -33,7 +41,7 @@
 .Loader:before {
   width: 50%;
   height: 50%;
-  background: #666;
+  background: var(--gray-60);
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
@@ -53,6 +61,18 @@
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+.cauldron--theme-dark .Loader {
+  background: linear-gradient(
+    to right,
+    #fff 10%,
+    var(--workspace-background-color) 45%
+  );
+}
+
+.cauldron--theme-dark .Loader:before {
+  background: #fff;
 }
 
 @-webkit-keyframes load {
