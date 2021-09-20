@@ -18,7 +18,7 @@
 }
 
 .cauldron--theme-dark .Loader__overlay {
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
 }
 
 .Loader {
@@ -66,13 +66,13 @@
 .cauldron--theme-dark .Loader {
   background: linear-gradient(
     to right,
-    #fff 10%,
+    var(--white) 10%,
     var(--workspace-background-color) 45%
   );
 }
 
 .cauldron--theme-dark .Loader:before {
-  background: #fff;
+  background: var(--white);
 }
 
 @-webkit-keyframes load {
