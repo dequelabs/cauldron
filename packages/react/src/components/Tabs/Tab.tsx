@@ -3,31 +3,20 @@ import PropTypes from 'prop-types';
 
 interface TabProps {
   label: string;
-  controlPanelId: string;
-  tabRef: React.Ref<HTMLButtonElement>;
-  selected: boolean;
-  onClick: () => void;
-  children?: React.ReactNode;
+  index: number;
+  children: React.ReactNode;
 }
 
-const Tab = ({
-  controlPanelId,
-  tabRef,
-  selected,
-  onClick = () => null,
-  children
-}: TabProps) => {
+const Tab = ({ label, index, children }: TabProps) => {
   return (
-    <button
+    <div
       role="tab"
       className="Tab"
-      aria-selected={selected}
-      aria-controls={controlPanelId}
-      onClick={onClick}
-      ref={tabRef}
+      id={`tab-${index}`}
+      aria-controls={`tabpanel-${index}`}
     >
       {children}
-    </button>
+    </div>
   );
 };
 
