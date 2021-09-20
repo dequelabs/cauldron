@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface TabPanelProps {
-  id: string;
-  labelledBy: string;
-  children: React.ReactNode;
-  hidden: boolean;
+  index: number;
+  value: number;
+  children?: React.ReactNode;
   className?: string;
 }
 
 const TabPanel = (props: TabPanelProps) => {
-  const { id, children, labelledBy, hidden, className } = props;
+  const { children, index, value, className, ...other } = props;
 
   return (
     <div
       tabIndex={0}
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       role="tabpanel"
-      id={id}
-      aria-labelledby={labelledBy}
-      hidden={hidden}
       className={classNames('TabPanel', className)}
+      {...other}
     >
-      {children}
+      {value === index && children}
     </div>
   );
 };

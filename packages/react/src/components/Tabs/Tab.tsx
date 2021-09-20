@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-interface TabButtonProps {
-  id: string;
-  name: string;
+interface TabProps {
+  label: string;
   controlPanelId: string;
   tabRef: React.Ref<HTMLButtonElement>;
   selected: boolean;
@@ -11,28 +10,25 @@ interface TabButtonProps {
   children?: React.ReactNode;
 }
 
-const TabButton = ({
-  id,
-  name,
+const Tab = ({
   controlPanelId,
   tabRef,
   selected,
   onClick = () => null,
   children
-}: TabButtonProps) => {
+}: TabProps) => {
   return (
     <button
       role="tab"
-      className="TabButton"
-      id={id}
+      className="Tab"
       aria-selected={selected}
       aria-controls={controlPanelId}
       onClick={onClick}
       ref={tabRef}
     >
-      {name || children}
+      {children}
     </button>
   );
 };
 
-export default TabButton;
+export default Tab;
