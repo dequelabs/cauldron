@@ -85,3 +85,34 @@
   background: var(--accent-dark);
   color: var(--white);
 }
+
+/* Dark Theme */
+.cauldron--theme-dark .Stepper {
+  color: var(--accent-light);
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark .Stepper__step-line {
+  border-top: var(--step-line-height) solid var(--accent-medium);
+}
+
+.cauldron--theme-dark .Stepper__step-indicator {
+  color: var(--white);
+  background: var(--accent-medium);
+}
+
+.cauldron--theme-dark .Stepper__step--current .Stepper__step-indicator {
+  background: var(--white);
+  color: var(--accent-dark);
+  box-shadow: 0 0 0 2px var(--accent-dark), 0 0 0 4px var(--accent-info);
+}
+
+.cauldron--theme-dark .Stepper__step--current .Stepper__step-line,
+.cauldron--theme-dark .Stepper__step--complete .Stepper__step-line {
+  border-color: var(--accent-info);
+}
+
+.cauldron--theme-dark .Stepper__step--complete .Stepper__step-indicator {
+  background: var(--accent-info);
+  color: var(--accent-dark);
+}
