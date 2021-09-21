@@ -32,10 +32,6 @@
   margin-right: var(--space-smallest);
 }
 
-.Panel__Header-actions button {
-  margin-bottom: var(--space-smallest);
-}
-
 .Panel__Content {
   font-size: var(--text-size-smaller);
   background-color: var(--panel-content-background-color);
