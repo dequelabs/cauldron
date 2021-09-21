@@ -5,18 +5,21 @@ import IconButton from '../IconButton';
 
 const Panel = ({
   className,
-  title,
+  title = '',
   actions,
   children
 }: {
-  className: string;
-  title: string;
+  className?: string;
+  title?: string;
   actions?: typeof IconButton[];
   children: React.ReactNode;
 }) => {
   return (
     <div className={classNames('Panel', className)}>
-      <div className="Panel__Header">{title}</div>
+      <div className="Panel__Header">
+        {title && <div className="Panel__Header-title">{title}</div>}
+        {actions && <div className="Panel__Header-actions">{actions}</div>}
+      </div>
       <div className="Panel__Content">{children}</div>
     </div>
   );

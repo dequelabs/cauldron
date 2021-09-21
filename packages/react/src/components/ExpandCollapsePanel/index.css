@@ -1,5 +1,35 @@
+:root {
+  --expandcollapse-trigger-background-color: var(--gray-10);
+  --expandcollapse-trigger-color: var(--gray-90);
+  --expandcollapse-panel-background-color: var(--gray-10);
+  --expandcollapse-panel-color: var(--gray-90);
+}
+
 .ExpandCollapse__trigger {
   font-size: inherit;
   display: flex;
   align-items: center;
+  background-color: var(--expandcollapse-trigger-background-color);
+  color: var(--expandcollapse-trigger-color);
+  width: 100%;
+  display: flex;
+}
+
+.ExpandCollapse__trigger-title {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.ExpandCollapse__panel {
+  padding: var(--space-smallest) 0;
+  background-color: var(--expandcollapse-panel-background-color);
+  color: var(--expandcollapse-panel-color);
+}
+
+/* Dark Theme */
+.cauldron--theme-dark {
+  --expandcollapse-trigger-background-color: var(--accent-medium);
+  --expandcollapse-trigger-color: var(--white);
+  --expandcollapse-panel-background-color: var(--accent-medium);
+  --expandcollapse-panel-color: var(--accent-light);
 }

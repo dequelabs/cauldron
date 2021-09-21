@@ -2,8 +2,9 @@
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #000;
-  color: #d1d9e1;
+  background: var(--gray-20);
+  color: var(--gray-90);
+  border: 1px solid var(--gray-40);
 }
 
 .Code .hljs-comment {
@@ -136,4 +137,11 @@
 
 .Code .hljs-emphasis {
   font-style: italic;
+}
+
+/* Dark Theme */
+.cauldron--theme-dark .Code.hljs {
+  background: var(--accent-dark);
+  color: var(--accent-light);
+  border: 1px solid transparent;
 }

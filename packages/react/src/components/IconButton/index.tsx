@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import Icon from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
 
-interface IconButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   label: string;

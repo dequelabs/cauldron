@@ -25,7 +25,9 @@ function PanelTrigger({
       aria-expanded={open}
       onClick={onClick}
     >
-      {typeof children === 'function' ? children({ open: !!open }) : children}{' '}
+      <div className="ExpandCollapse__trigger-title">
+        {typeof children === 'function' ? children({ open: !!open }) : children}
+      </div>
       <Icon type={`chevron-${open ? 'down' : 'right'}`} />
     </button>
   );
