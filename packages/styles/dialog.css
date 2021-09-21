@@ -168,7 +168,7 @@
 .cauldron--theme-dark .Dialog__heading:focus,
 .cauldron--theme-dark .Dialog__close:focus,
 .cauldron--theme-dark .Dialog__close:hover {
-  border-bottom-color: #fff;
+  border-bottom-color: var(--white);
 }
 
 .cauldron--theme-dark .Modal--info .Dialog__header,

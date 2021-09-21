@@ -39,6 +39,7 @@ const componentsList = [
   'Loader',
   'Layout',
   'OptionsMenu',
+  'Panel',
   'Select',
   'RadioGroup',
   'Checkbox',
