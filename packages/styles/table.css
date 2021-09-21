@@ -1,3 +1,12 @@
+:root {
+  --table-header-text-color: var(--gray-90);
+  --table-header-background-color: var(--gray-20);
+  --table-cell-text-color: var(--gray-60);
+  --table-cell-background-color: var(--white);
+  --table-row-border-color: var(--gray-40);
+  --table-space: 11px;
+}
+
 .Table {
   font-size: var(--text-size-small);
   border-collapse: collapse;

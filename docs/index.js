@@ -1,4 +1,4 @@
-import React, { Component, createRef, Fragment } from 'react';
+import React, { useRef, Fragment, useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -19,6 +19,7 @@ import {
   ThemeProvider
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
+import darkLogo from './assets/img/dark-logo.svg';
 import 'fontsource-roboto';
 import 'fontsource-lato';
 
@@ -26,6 +27,7 @@ import 'fontsource-lato';
 import '../packages/styles';
 import '@deque/cauldron-react/cauldron.css';
 import './index.css';
+import { useThemeContext } from '../packages/react/lib';
 
 const componentsList = [
   'Button',
@@ -55,74 +57,63 @@ const componentsList = [
   'Tag',
   'Table',
   'DescriptionList',
-  'TopBar'
+  'TopBar',
+  'Stepper'
 ].sort();
 
-class App extends Component {
-  state = { show: false, thin: false, variant: 'dark' };
-  constructor() {
-    super();
-    this.onTriggerClick = this.onTriggerClick.bind(this);
-    this.topBarTrigger = createRef();
-  }
+const App = () => {
+  const [state, setState] = useState({
+    show: false,
+    thin: false
+  });
+  const [topBarMenuItem, setTopBarMenuItem] = useState(null);
+  const [workspace, setWorkspace] = useState(null);
+  const topBarTrigger = useRef();
+  const { theme, toggleTheme } = useThemeContext();
 
-  componentDidMount() {
-    document.addEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
-    document.addEventListener('toggleTopBarVariant', this.toggleTopBarVariant);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('focusTopBarMenu', this.focusTopBarMenuItem);
-    document.removeEventListener(
-      'toggleTopBarVariant',
-      this.toggleTopBarVariant
-    );
-  }
-
-  toggleTopBarVariant = e => {
-    const nextTheme = this.state.variant === 'dark' ? 'light' : 'dark';
-    this.setState({ variant: nextTheme });
-  };
-
-  focusTopBarMenuItem = () => {
-    if (!this.topBarMenuItem) {
+  const focusTopBarMenuItem = () => {
+    if (!topBarMenuItem) {
       return;
     }
 
-    this.topBarMenuItem.focus();
+    topBarMenuItem?.focus();
   };
 
-  onTriggerClick(e) {
-    const { show } = this.state;
+  const onTriggerClick = e => {
+    const { show } = state;
 
     if (e) {
       e.preventDefault();
     }
 
-    if (show && this.topBarTrigger.current) {
-      this.topBarTrigger.current.focus();
+    if (show && topBarTrigger?.current) {
+      topBarTrigger?.current?.focus();
     }
 
-    this.setState({ show: !show });
-  }
+    setState({ show: !show });
+  };
 
-  toggleMenu = () => {
-    this.setState(({ menuOpen }) => ({
+  const toggleMenu = () => {
+    setState(({ menuOpen }) => ({
       menuOpen: !menuOpen
     }));
   };
 
-  handleClose = () => {
-    this.setState({ menuOpen: false });
+  const handleClose = () => {
+    setState({ menuOpen: false });
   };
 
-  onSettingsSelect = e => {
-    this.setState({
-      thin: e.target.innerText === 'Thin top bar'
-    });
+  const onSettingsSelect = e => {
+    if (e.target.id === 'theme') {
+      toggleTheme();
+    } else {
+      setState({
+        thin: e.target.innerText === 'Thin top bar'
+      });
+    }
   };
 
-  renderSideBarLink(pathname, text, isCurrent) {
+  const renderSideBarLink = (pathname, text, isCurrent) => {
     return (
       <Link
         to={{
@@ -130,129 +121,136 @@ class App extends Component {
           state: { title: `${text} | Component demo` }
         }}
         onClick={() => {
-          this.setState({ show: false });
-          this.workspace.focus();
+          setState({ show: false });
+          workspace?.focus();
         }}
         aria-current={isCurrent ? 'page' : null}
       >
         {text}
       </Link>
     );
-  }
+  };
 
-  render() {
-    const { show, thin } = this.state;
+  useEffect(() => {
+    document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
 
-    /* eslint-disable jsx-a11y/anchor-has-content */
-    return (
-      <Router>
-        <div>
-          <Helmet
-            titleTemplate="%s | Deque Cauldron React"
-            defaultTitle="Deque Cauldron React"
-          />
-          <SkipLink target={'#main-content'} />
-          <TopBar variant={this.state.variant}>
-            <MenuBar thin={thin} hasTrigger>
-              <TopBarTrigger onClick={this.onTriggerClick}>
-                <button
-                  tabIndex={-1}
-                  aria-label="Menu"
-                  aria-haspopup="true"
-                  ref={this.topBarTrigger}
-                  aria-expanded={show}
-                >
-                  <Icon type="hamburger-menu" />
-                </button>
-              </TopBarTrigger>
-              <TopBarItem>
-                <Link to="/" className="MenuItem__logo" tabIndex={-1}>
-                  <img src={logo} alt="" /> <span>Cauldron</span>
-                </Link>
-              </TopBarItem>
+    return () => {
+      document.removeEventListener('focusTopBarMenu', focusTopBarMenuItem);
+    };
+  }, []);
 
-              {/* The below line demonstrates the ability to conditionally include menu item children. */}
-              {false && <TopBarItem>Potato</TopBarItem>}
+  const { show, thin } = state;
 
-              <TopBarMenu
-                id="topbar-menu"
-                className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
-                menuItemRef={el => (this.topBarMenuItem = el)}
+  /* eslint-disable jsx-a11y/anchor-has-content */
+  return (
+    <Router>
+      <div>
+        <Helmet
+          titleTemplate="%s | Deque Cauldron React"
+          defaultTitle="Deque Cauldron React"
+        />
+        <SkipLink target={'#main-content'} />
+        <TopBar>
+          <MenuBar thin={thin} hasTrigger>
+            <TopBarTrigger onClick={onTriggerClick}>
+              <button
+                tabIndex={-1}
+                aria-label="Menu"
+                aria-haspopup="true"
+                ref={topBarTrigger}
+                aria-expanded={show}
               >
-                <div className="TopBar__item--icon">
-                  {thin ? (
-                    <Icon type="gears" label="Settings" />
-                  ) : (
-                    <Fragment>
-                      <Icon type="gears" />
-                      <div>Settings</div>
-                    </Fragment>
-                  )}
-                </div>
-                <OptionsMenuList onSelect={this.onSettingsSelect}>
-                  <li>Default top bar</li>
-                  <li>Thin top bar</li>
-                </OptionsMenuList>
-              </TopBarMenu>
+                <Icon type="hamburger-menu" />
+              </button>
+            </TopBarTrigger>
+            <TopBarItem>
+              <Link to="/" className="MenuItem__logo" tabIndex={-1}>
+                <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '}
+                <span>Cauldron</span>
+              </Link>
+            </TopBarItem>
 
-              <TopBarItem className="MenuItem--separator">
-                <a
-                  href="https://github.com/dequelabs/cauldron"
-                  className="fa fa-github"
-                  aria-label="Cauldron on GitHub"
-                  tabIndex={-1}
-                />
-              </TopBarItem>
-            </MenuBar>
-          </TopBar>
-          <SideBar show={this.state.show} onDismiss={this.onTriggerClick}>
-            {componentsList.map(name => {
-              const pathname = `/components/${name}`;
-              const isActive = pathname === location.pathname;
-              return (
-                <SideBarItem
-                  key={name}
-                  className={classNames({
-                    'MenuItem--active': isActive
-                  })}
-                >
-                  {this.renderSideBarLink(pathname, name, isActive)}
-                </SideBarItem>
-              );
-            })}
-          </SideBar>
-          <Workspace
-            id="main-content"
-            workspaceRef={el => (this.workspace = el)}
-            tabIndex={-1}
-          >
-            <Route exact path="/" component={Home} />
-            {componentsList.map(name => {
-              const DemoComponent = require(`./patterns/components/${name}`)
-                .default;
-              return (
-                <Route
-                  key={name}
-                  exact
-                  path={`/components/${name}`}
-                  component={DemoComponent}
-                />
-              );
-            })}
-            <Route
-              component={({ location }) =>
-                location.state && location.state.title ? (
-                  <Helmet title={location.state.title} />
-                ) : null
-              }
-            />
-          </Workspace>
-        </div>
-      </Router>
-    );
-    /* eslint-enable jsx-a11y/anchor-has-content */
-  }
-}
+            {/* The below line demonstrates the ability to conditionally include menu item children. */}
+            {false && <TopBarItem>Potato</TopBarItem>}
+
+            <TopBarMenu
+              id="topbar-menu"
+              className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
+              menuItemRef={el => setTopBarMenuItem}
+            >
+              <div className="TopBar__item--icon">
+                {thin ? (
+                  <Icon type="gears" label="Settings" />
+                ) : (
+                  <Fragment>
+                    <Icon type="gears" />
+                    <div>Settings</div>
+                  </Fragment>
+                )}
+              </div>
+              <OptionsMenuList onSelect={onSettingsSelect}>
+                <li>Default top bar</li>
+                <li>Thin top bar</li>
+                <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
+              </OptionsMenuList>
+            </TopBarMenu>
+            <TopBarItem className="MenuItem--separator">
+              <a
+                href="https://github.com/dequelabs/cauldron"
+                className="fa fa-github"
+                aria-label="Cauldron on GitHub"
+                tabIndex={-1}
+              />
+            </TopBarItem>
+          </MenuBar>
+        </TopBar>
+        <SideBar show={state.show} onDismiss={onTriggerClick}>
+          {componentsList.map(name => {
+            const pathname = `/components/${name}`;
+            const isActive = pathname === location.pathname;
+            return (
+              <SideBarItem
+                key={name}
+                className={classNames({
+                  'MenuItem--active': isActive
+                })}
+              >
+                {renderSideBarLink(pathname, name, isActive)}
+              </SideBarItem>
+            );
+          })}
+        </SideBar>
+        <Workspace
+          id="main-content"
+          workspaceRef={el => setWorkspace}
+          tabIndex={-1}
+        >
+          <Route exact path="/" component={Home} />
+          {componentsList.map(name => {
+            const DemoComponent = require(`./patterns/components/${name}`)
+              .default;
+            return (
+              <Route
+                key={name}
+                exact
+                path={`/components/${name}`}
+                component={DemoComponent}
+              />
+            );
+          })}
+          <Route
+            component={({ location }) =>
+              location.state && location.state.title ? (
+                <Helmet title={location.state.title} />
+              ) : null
+            }
+          />
+        </Workspace>
+      </div>
+    </Router>
+  );
+  /* eslint-enable jsx-a11y/anchor-has-content */
+};
 
 render(
   <ThemeProvider>

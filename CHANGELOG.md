@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/dequelabs/cauldron/compare/v1.0.0...v2.0.0) (2021-09-20)
+
+### ⚠ BREAKING CHANGES
+
+- This pr removes the light/dark variant options for IconButton and TopBar.
+
+### Features
+
+- Adds stepper (progress) component ([#301](https://github.com/dequelabs/cauldron/issues/301)) ([a980190](https://github.com/dequelabs/cauldron/commit/a9801907229337c137b1668019fcd15aa37e81fb))
+- apply themes to Loader and LoaderOverlay ([#342](https://github.com/dequelabs/cauldron/issues/342)) ([52d4a1a](https://github.com/dequelabs/cauldron/commit/52d4a1aeef1a2e3172c1136114b818450a976887))
+- Dark theme support for modals ([#329](https://github.com/dequelabs/cauldron/issues/329)) ([5aade53](https://github.com/dequelabs/cauldron/commit/5aade5339c562c7f029e35753a457688e73732fd)), closes [#325](https://github.com/dequelabs/cauldron/issues/325)
+- support for dark theme buttons and links ([#321](https://github.com/dequelabs/cauldron/issues/321)) ([f787364](https://github.com/dequelabs/cauldron/commit/f78736437aae8277d90b04b564884da1cd0289b8))
+- supports dark/light theme for topbar & icon buttons ([#326](https://github.com/dequelabs/cauldron/issues/326)) ([d331084](https://github.com/dequelabs/cauldron/commit/d33108416f12356d7cf97ccddf18a1c1a00045e7))
+- **react:** add "info" variant for modal that uses an unstyled heading ([#298](https://github.com/dequelabs/cauldron/issues/298)) ([c83d642](https://github.com/dequelabs/cauldron/commit/c83d64288752da52e09e886f288f01e5c6e5bff0))
+
+### Bug Fixes
+
+- optional icon button props ([413ccbc](https://github.com/dequelabs/cauldron/commit/413ccbc675fd483a86efef5602705008e873765f))
+- skip link text missing space ([0dcee61](https://github.com/dequelabs/cauldron/commit/0dcee61c9da3900128da0cee4c9b84dd4ada43e0))
+- **IconButton:** include additional tooltip props for IconButton ([#311](https://github.com/dequelabs/cauldron/issues/311)) ([97cc094](https://github.com/dequelabs/cauldron/commit/97cc094fbf0e99c4c8ae9958fd5c7472492c26e9))
+- make Info modal heading symmetrical ([#304](https://github.com/dequelabs/cauldron/issues/304)) ([84c28a0](https://github.com/dequelabs/cauldron/commit/84c28a068ef30eee7222c2de7c7996effc3b968c))
+- make variant optional for Modal ([#305](https://github.com/dequelabs/cauldron/issues/305)) ([3ad6ac9](https://github.com/dequelabs/cauldron/commit/3ad6ac953a2f500dfe63d9592d962af80f5438f5))
+- **performance:** do not render tooltip when an icon button is disabled ([#303](https://github.com/dequelabs/cauldron/issues/303)) ([d3c0fb4](https://github.com/dequelabs/cauldron/commit/d3c0fb49fecd44e7526a052520abd52e7ba607ba))
+
 ## [1.0.0](https://github.com/dequelabs/cauldron/compare/v0.2.6...v1.0.0) (2021-07-28)
 
 ### ⚠ BREAKING CHANGES

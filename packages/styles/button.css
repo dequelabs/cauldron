@@ -1,3 +1,25 @@
+:root {
+  --button-background-color-primary: var(--accent-primary);
+  --button-background-color-primary-disabled: #79a7d9;
+  --button-outline-color-primary: var(--button-background-color-primary);
+  --button-background-color-primary-active: var(--accent-primary-active);
+
+  --button-background-color-secondary: var(--gray-20);
+  --button-background-color-secondary-disabled: var(--gray-30);
+  --button-outline-color-secondary: var(--gray-90);
+  --button-background-color-secondary-active: var(--gray-30);
+
+  --button-background-color-error: var(--error);
+  --button-background-color-error-disabled: #db6379;
+  --button-background-color-error-active: var(--accent-error-active);
+  --button-outline-color-error: var(--error);
+
+  --button-text-color-dark: var(--gray-90);
+  --button-text-color-light: var(--white);
+  --button-focus-ring-color: var(--focus-light);
+  --button-thin-height: 23px;
+}
+
 .Button--primary,
 .Button--secondary,
 .Button--clear,
@@ -152,4 +174,86 @@ button.Link {
 
 [class*='Button--'] + [class*='Button--'] {
   margin-left: var(--space-smallest);
+}
+
+/* Dark Theme */
+
+.cauldron--theme-dark {
+  --button-background-color-primary: var(--accent-medium);
+  --button-background-color-primary-disabled: var(--accent-medium);
+  --button-background-color-secondary: var(--accent-medium);
+  --button-background-color-secondary-disabled: var(--accent-medium);
+  --button-background-color-error-disabled: var(--accent-medium);
+  --header-text-color-dark: var(--white);
+
+  --button-background-color-primary-active: #a7e9f7;
+  --button-background-color-secondary-active: var(--accent-light);
+  --button-background-color-error-active: #fea7a6;
+
+  --button-focus-ring-color: var(--focus-dark);
+
+  --header-text-color-dark: var(--white);
+  --field-label-text-color: var(--accent-light);
+  --field-border-color-error: var(--accent-danger);
+  --error: var(--accent-danger);
+}
+
+.cauldron--theme-dark .Button--primary {
+  border: 2px solid var(--accent-info);
+}
+
+.cauldron--theme-dark .Button--secondary {
+  color: var(--accent-light);
+  border: 2px solid var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--error {
+  background-color: var(--accent-medium);
+  color: var(--white);
+  border: 2px solid var(--accent-danger);
+}
+
+.cauldron--theme-dark .Button--primary[aria-disabled='true'],
+.cauldron--theme-dark .Button--primary[disabled],
+.cauldron--theme-dark .Button--secondary[aria-disabled='true'],
+.cauldron--theme-dark .Button--secondary[disabled],
+.cauldron--theme-dark .Button--error[aria-disabled='true'],
+.cauldron--theme-dark .Button--error[disabled] {
+  color: var(--dark-workspace-color);
+}
+
+.cauldron--theme-dark .Button--primary:active,
+.cauldron--theme-dark .Button--secondary:active {
+  color: var(--accent-medium);
+}
+
+.cauldron--theme-dark .Button--error:active {
+  background-color: #fea7a6;
+  color: var(--accent-medium);
+}
+
+.cauldron--theme-dark button.Link {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark button.Link:hover {
+  color: var(--white);
+}
+
+.cauldron--theme-dark
+  .Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+    0 0 0 2px var(--accent-info);
+}
+
+.cauldron--theme-dark
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+    0 0 0 2px var(--accent-light);
+}
+
+.cauldron--theme-dark
+  .Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+    0 0 0 2px var(--accent-danger);
 }

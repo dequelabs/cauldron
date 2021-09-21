@@ -9,10 +9,10 @@ const IconButtonDemo = () => (
       states={[
         { icon: 'pencil', label: 'Edit' },
         { icon: 'pencil', label: 'Edit', variant: 'primary' },
+        { icon: 'pencil', label: 'Edit', variant: 'primary', disabled: true },
         { icon: 'pencil', label: 'Edit', variant: 'secondary' },
+        { icon: 'pencil', label: 'Edit', variant: 'secondary', disabled: true },
         { icon: 'pencil', label: 'Edit', variant: 'error' },
-        { icon: 'pencil', label: 'Edit', variant: 'light' },
-        { icon: 'pencil', label: 'Edit', variant: 'dark' },
         { icon: 'trash', label: 'Delete', tooltipPlacement: 'bottom' }
       ]}
       propDocs={{
@@ -26,6 +26,12 @@ const IconButtonDemo = () => (
         },
         tooltipPlacement: {
           type: 'string'
+        },
+        tooltipVariant: {
+          type: 'string'
+        },
+        tooltipPortal: {
+          type: 'HTMLElement | RefObject<HTMLElement>'
         }
       }}
     />

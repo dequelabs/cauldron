@@ -1,3 +1,9 @@
+:root {
+  --select-min-height: 33px;
+  --select-width: 300px;
+  --select-arrow-spacing: 10px;
+}
+
 .Field__select {
   display: flex;
   flex-direction: column;

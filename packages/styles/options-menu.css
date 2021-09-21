@@ -8,7 +8,7 @@
   font-size: var(--text-small-medium);
   color: var(--header-text-color-dark);
   border-radius: 3px;
-  background-color: var(--tile-background-color);
+  background-color: var(--white);
   border: 1px solid var(--field-border-color);
   box-sizing: border-box;
   height: 34px;
@@ -24,7 +24,7 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: var(--tile-background-color);
+  background-color: var(--white);
   top: 33px;
   right: 0;
   left: auto;

@@ -1,0 +1,87 @@
+.Stepper {
+  --step-indicator-size: 2em;
+  --step-line-height: 0.53em;
+  --step-line-offset: 1.33em;
+
+  display: flex;
+  padding: var(--space-medium);
+  align-items: flex-start;
+  color: var(--gray-90);
+  counter-reset: stepper;
+  list-style-type: none;
+  margin: 0 auto;
+}
+
+.Stepper__step {
+  flex: 1;
+  position: relative;
+  padding: 0 var(--space-smallest);
+}
+
+.Stepper__step-line {
+  position: absolute;
+  top: calc((var(--step-indicator-size) - var(--step-line-height)) / 2);
+  left: calc(-50% + var(--step-line-offset));
+  right: calc(50% + var(--step-line-offset));
+  flex: 1 1 auto;
+  border-top: var(--step-line-height) solid var(--accent-light);
+}
+
+.Stepper__step:first-child .Stepper__step-line {
+  display: none;
+}
+
+.Stepper__step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Stepper__step-indicator {
+  width: var(--step-indicator-size);
+  height: var(--step-indicator-size);
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--gray-90);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.Stepper__step-indicator::before {
+  font-size: var(--text-size-smallest);
+  counter-increment: stepper;
+  content: counter(stepper);
+}
+
+.Stepper__step-label {
+  text-align: center;
+  width: 100%;
+  padding-top: var(--space-smallest);
+  font-size: var(--text-size-smaller);
+}
+
+/*
+  status-specific styles
+*/
+
+.Stepper__step--current .Stepper__step-indicator {
+  background: var(--white);
+  color: var(--accent-dark);
+  box-shadow: 0 0 0 2px var(--accent-dark);
+}
+
+.Stepper__step--current .Stepper__step-label {
+  font-weight: var(--font-weight-bold);
+}
+
+.Stepper__step--current .Stepper__step-line,
+.Stepper__step--complete .Stepper__step-line {
+  border-color: var(--accent-dark);
+}
+
+.Stepper__step--complete .Stepper__step-indicator {
+  background: var(--accent-dark);
+  color: var(--white);
+}

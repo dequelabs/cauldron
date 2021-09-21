@@ -65,7 +65,7 @@ export default class SkipLink extends React.Component<
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         >
-          <span className="SkipLink__item--first">{skipText}</span>
+          <span className="SkipLink__item--first">{skipText}</span>&nbsp;
           <span className="SkipLink__item--second">{targetText}</span>
         </a>
       </nav>

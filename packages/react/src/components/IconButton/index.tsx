@@ -6,15 +6,17 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Placement } from '@popperjs/core';
 import Icon from '../Icon';
-import Tooltip from '../Tooltip';
-export interface IconButtonProps
+import Tooltip, { TooltipProps } from '../Tooltip';
+
+interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   label: string;
-  tooltipPlacement?: Placement;
-  variant?: 'light' | 'dark' | 'primary' | 'secondary' | 'error';
+  tooltipPlacement?: TooltipProps['placement'];
+  tooltipVariant?: TooltipProps['variant'];
+  tooltipPortal?: TooltipProps['portal'];
+  variant?: 'primary' | 'secondary' | 'error';
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -23,8 +25,11 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       icon,
       label,
       tooltipPlacement = 'auto',
+      tooltipVariant,
+      tooltipPortal,
       className,
       variant = 'secondary',
+      disabled,
       ...other
     }: IconButtonProps,
     ref
@@ -37,25 +42,28 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           type={'button'}
           className={classnames(className, {
             IconButton: true,
-            'IconButton--light': variant === 'light',
-            'IconButton--dark': variant === 'dark',
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
             'IconButton--error': variant === 'error'
           })}
           ref={buttonRef}
+          disabled={disabled}
           {...other}
         >
           <Icon type={icon} />
         </button>
-        <Tooltip
-          target={buttonRef}
-          placement={tooltipPlacement}
-          association="aria-labelledby"
-          hideElementOnHidden
-        >
-          {label}
-        </Tooltip>
+        {!disabled && (
+          <Tooltip
+            target={buttonRef}
+            placement={tooltipPlacement}
+            variant={tooltipVariant}
+            portal={tooltipPortal}
+            association="aria-labelledby"
+            hideElementOnHidden
+          >
+            {label}
+          </Tooltip>
+        )}
       </React.Fragment>
     );
   }
@@ -66,6 +74,9 @@ IconButton.propTypes = {
   label: PropTypes.string.isRequired,
   // @ts-ignore
   tooltipPlacement: PropTypes.string,
+  // @ts-ignore
+  tooltipVariant: PropTypes.string,
+  tooltipPortal: PropTypes.any,
   // @ts-ignore
   variant: PropTypes.string
 };

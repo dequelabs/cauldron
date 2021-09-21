@@ -2,11 +2,15 @@ import React from 'react';
 import classnames from 'classnames';
 import { Dialog, DialogContent, DialogFooter, DialogProps } from '../Dialog';
 
-interface ModalProps extends Omit<DialogProps, 'forceAction'> {}
+interface ModalProps extends Omit<DialogProps, 'forceAction'> {
+  variant?: 'info';
+}
 
-const Modal = ({ children, className, ...other }: ModalProps) => (
+const Modal = ({ children, className, variant, ...other }: ModalProps) => (
   <Dialog
-    className={classnames('Modal', className)}
+    className={classnames('Modal', className, {
+      'Modal--info': variant === 'info'
+    })}
     {...other}
     forceAction={false}
   >

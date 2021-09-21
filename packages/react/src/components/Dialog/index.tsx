@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
-import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
@@ -112,6 +111,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
     ) : null;
+
     const Heading = `h${
       typeof heading === 'object' && 'level' in heading && !!heading.level
         ? heading.level

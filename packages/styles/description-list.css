@@ -1,3 +1,12 @@
+:root {
+  --data-list-value-background-color: var(--gray-20);
+  --data-list-border-color: var(--gray-40);
+  --data-list-text-color: var(--gray-90);
+  --data-list-value-text-color: var(--gray-60);
+  --data-list-space: 11px;
+  --data-list-value-width: 187px;
+}
+
 .DescriptionList {
   color: var(--data-list-text-color);
   font-size: var(--text-size-small);
