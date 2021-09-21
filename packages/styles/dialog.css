@@ -144,15 +144,15 @@
 .cauldron--theme-dark .Dialog__inner {
   background-color: var(--accent-medium);
   color: var(--white);
-  border: 1px solid var(--gray-70);
+  border: 4px solid var(--gray-20);
 }
 
 .cauldron--theme-dark .Dialog__header {
-  border-bottom: 1px solid var(--gray-70);
+  border-bottom: 1px solid #5d676f;
 }
 
 .cauldron--theme-dark .Dialog__footer {
-  border-top: 1px solid var(--gray-70);
+  border-top: 1px solid #5d676f;
 }
 
 .cauldron--theme-dark .Dialog__header,

@@ -183,6 +183,7 @@
 
 .cauldron--theme-dark .IconButton--error {
   background-color: var(--accent-danger);
+  color: var(--accent-dark);
 }
 
 .cauldron--theme-dark .IconButton--primary:active {
