@@ -23,7 +23,6 @@
 }
 
 .ExpandCollapse__panel {
-  padding: var(--space-smallest) 0;
   background-color: var(--expandcollapse-panel-background-color);
   color: var(--expandcollapse-panel-color);
 }
