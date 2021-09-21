@@ -28,7 +28,6 @@
 .Panel__Header-actions {
   flex-grow: 1;
   text-align: right;
-  line-height: var(--space-gutter);
   margin-right: var(--space-smallest);
 }
 
