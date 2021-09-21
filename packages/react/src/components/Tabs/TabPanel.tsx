@@ -27,4 +27,12 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
+TabPanel.displayName = 'TabPanel';
+TabPanel.Proptypes = {
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  children: PropTypes.node,
+  className: PropTypes.string
+};
+
 export default TabPanel;

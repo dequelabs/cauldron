@@ -15,7 +15,7 @@ const Tab = ({ label, index, children }: TabProps) => {
       id={`tab-${index}`}
       aria-controls={`tabpanel-${index}`}
     >
-      {children}
+      {label || children}
     </div>
   );
 };

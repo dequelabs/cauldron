@@ -6,21 +6,29 @@ interface TabsProps {
   children: React.ReactNode;
   thin?: boolean;
   className?: string;
+  onChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
 
 const Tabs = ({ children, className, thin }: TabsProps): JSX.Element => {
   const [value, setValue] = useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) =>
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event);
     setValue(newValue);
+  };
 
   return (
     <div
-      // onChange={handleChange}
       className={classNames('Tabs', className, {
         'Tabs--thin': thin
       })}
     >
-      <div role="tablist" className="Tablist" aria-label="Tablist">
+      <div
+        value={value}
+        onChange={handleChange}
+        role="tablist"
+        className="Tablist"
+        aria-label="Tablist"
+      >
         {children}
       </div>
     </div>
