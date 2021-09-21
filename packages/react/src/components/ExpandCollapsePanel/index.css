@@ -1,7 +1,7 @@
 :root {
-  --expandcollapse-trigger-background-color: var(--gray-10);
+  --expandcollapse-trigger-background-color: transparent;
   --expandcollapse-trigger-color: var(--gray-90);
-  --expandcollapse-panel-background-color: var(--gray-10);
+  --expandcollapse-panel-background-color: transparent;
   --expandcollapse-panel-color: var(--gray-90);
 }
 
