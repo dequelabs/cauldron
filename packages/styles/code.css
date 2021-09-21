@@ -2,12 +2,13 @@
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #000;
-  color: #d1d9e1;
+  background: var(--gray-20);
+  color: var(--gray-90);
+  border: 1px solid var(--gray-40);
 }
 
 .Code .hljs-comment {
-  color: #969896;
+  color: #575957;
   font-style: italic;
 }
 
@@ -16,24 +17,12 @@
   font-style: italic;
 }
 
-.Code .hljs-keyword {
-  color: #cc99cc;
-}
-
-.Code .hljs-selector-tag {
-  color: #cc99cc;
-}
-
-.Code .hljs-literal {
-  color: #cc99cc;
-}
-
-.Code .hljs-type {
-  color: #cc99cc;
-}
-
+.Code .hljs-keyword,
+.Code .hljs-selector-tag,
+.Code .hljs-literal,
+.Code .hljs-type,
 .Code .hljs-addition {
-  color: #cc99cc;
+  color: #b366b3;
 }
 
 .Code .hljs-number {
@@ -49,7 +38,7 @@
 }
 
 .Code .hljs-string {
-  color: #8abeb7;
+  color: #197367;
 }
 
 .Code .hljs-doctag {
@@ -136,4 +125,27 @@
 
 .Code .hljs-emphasis {
   font-style: italic;
+}
+
+/* Dark Theme */
+.cauldron--theme-dark .Code.hljs {
+  background: var(--accent-dark);
+  color: var(--accent-light);
+  border: 1px solid transparent;
+}
+
+.cauldron--theme-dark .Code .hljs-string {
+  color: #8abeb7;
+}
+
+.cauldron--theme-dark .Code .hljs-keyword,
+.cauldron--theme-dark .Code .hljs-selector-tag,
+.cauldron--theme-dark .Code .hljs-literal,
+.cauldron--theme-dark .Code .hljs-type,
+.cauldron--theme-dark .Code .hljs-addition {
+  color: #cc99cc;
+}
+
+.cauldron--theme-dark .Code .hljs-comment {
+  color: #969896;
 }

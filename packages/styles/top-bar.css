@@ -162,7 +162,6 @@
   color: var(--top-bar-text-color);
 }
 
-.cauldron--theme-dark li.MenuItem--active,
 .cauldron--theme-dark .TopBar [aria-current='page'] {
   background-color: var(--top-bar-background-color-active);
 }
