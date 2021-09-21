@@ -15,7 +15,6 @@
   color: var(--panel-header-color);
   font-size: var(--text-size-normal);
   display: flex;
-  height: 35px;
   border-bottom: 1px solid var(--panel-border-color);
 }
 
