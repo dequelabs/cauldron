@@ -2,6 +2,10 @@
   --workspace-background-color: #f0f2f5;
 }
 
+.cauldron--theme-dark {
+  --workspace-background-color: var(--dark-workspace-color);
+}
+
 html {
   box-sizing: border-box;
 }
