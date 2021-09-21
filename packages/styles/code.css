@@ -5,6 +5,7 @@
   background: var(--gray-20);
   color: var(--gray-90);
   border: 1px solid var(--gray-40);
+  color: var(--accent-primary-active);
 }
 
 .Code .hljs-comment {
@@ -38,7 +39,7 @@
 }
 
 .Code .hljs-string {
-  color: #3c7aae;
+  color: var(--gray-60);
 }
 
 .Code .hljs-doctag {
@@ -56,7 +57,7 @@
 
 .Code .hljs-name,
 .Code .hljs-section {
-  color: var(--accent-dark);
+  color: var(--accent-primary-active);
   font-weight: bold;
 }
 
@@ -89,7 +90,7 @@
 
 .Code .hljs-attr,
 .Code .hljs-attribute {
-  color: #278408;
+  color: var(--accent-error);
 }
 
 .Code .hljs-emphasis {
