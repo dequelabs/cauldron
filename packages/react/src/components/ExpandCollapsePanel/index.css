@@ -11,8 +11,10 @@
   align-items: center;
   background-color: var(--expandcollapse-trigger-background-color);
   color: var(--expandcollapse-trigger-color);
+}
+
+.fullWidth {
   width: 100%;
-  display: flex;
 }
 
 .ExpandCollapse__trigger-title {
@@ -28,8 +30,6 @@
 
 /* Dark Theme */
 .cauldron--theme-dark {
-  --expandcollapse-trigger-background-color: var(--accent-medium);
   --expandcollapse-trigger-color: var(--white);
-  --expandcollapse-panel-background-color: var(--accent-medium);
   --expandcollapse-panel-color: var(--accent-light);
 }
