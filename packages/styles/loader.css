@@ -19,6 +19,7 @@
 
 .cauldron--theme-dark .Loader__overlay {
   border: 2px solid var(--white);
+  background: var(--dark-workspace-color);
 }
 
 .Loader {
@@ -63,11 +64,15 @@
   right: 0;
 }
 
+.cauldron--theme-dark .Loader:after {
+  background: var(--dark-workspace-color);
+}
+
 .cauldron--theme-dark .Loader {
   background: linear-gradient(
     to right,
     var(--white) 10%,
-    var(--workspace-background-color) 45%
+    var(--dark-workspace-color) 45%
   );
 }
 
