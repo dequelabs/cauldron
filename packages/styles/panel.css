@@ -22,8 +22,7 @@
 .Panel__Header-title {
   flex-grow: 1;
   display: flex;
-  line-height: var(--space-gutter);
-  margin-left: var(--space-small);
+  padding: var(--space-half) 0;
 }
 
 .Panel__Header-actions {
