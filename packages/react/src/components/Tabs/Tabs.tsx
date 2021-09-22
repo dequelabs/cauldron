@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const left: number = 37,
-  right: number = 39,
-  home: number = 36,
-  end: number = 35;
+const [left, right, home, end] = [37, 39, 36, 35];
 
 interface TargetElement extends EventTarget {
   id?: string;
@@ -22,9 +19,9 @@ interface TabsProps {
 const Tabs = ({
   value,
   children,
-  className,
+  handleChange,
   thin,
-  handleChange
+  className
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(value);
   const tabCount = React.Children.toArray(children).length;
@@ -33,7 +30,8 @@ const Tabs = ({
     const eventTarget: TargetElement = event.target;
     if (eventTarget.id?.includes('tab-')) {
       const newIndex = Number(eventTarget.id.split('-')[1]);
-      return handleChange(newIndex);
+      setActiveIndex(newIndex);
+      handleChange(newIndex);
     }
   };
 
@@ -92,6 +90,15 @@ const Tabs = ({
       </ul>
     </div>
   );
+};
+
+Tabs.displayName = 'Tabs';
+Tabs.propTypes = {
+  value: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  thin: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default Tabs;

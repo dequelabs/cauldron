@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface TabProps {
-  index: number;
   value: number;
+  index: number;
   label?: string;
   children?: React.ReactNode;
 }
