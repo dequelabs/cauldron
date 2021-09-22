@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import {
   Tabs,
   Tab,
-  TabPanel
-} from '../../../../packages/react/src/components/Tabs';
-import { Card, CardHeader, CardContent, Code } from '@deque/cauldron-react';
+  TabPanel,
+  Card,
+  CardHeader,
+  CardContent,
+  Code
+} from '@deque/cauldron-react';
 
 const Demo = () => {
   const [value, setValue] = useState(0);
-  const handleChange = event => {
-    console.log(event);
+  const handleChange = newValue => {
+    setValue(newValue);
   };
 
   return (
@@ -17,10 +20,10 @@ const Demo = () => {
       <h1>Tabs</h1>
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
-      <Tabs handleChange={handleChange}>
-        <Tab label="Tab 1" index={0} />
-        <Tab label="Tab 1" index={1} />
-        <Tab label="Tab 1" index={2} />
+      <Tabs value={value} handleChange={handleChange}>
+        <Tab label="Tab 1" index={0} value={value} />
+        <Tab label="Tab 2" index={1} value={value} />
+        <Tab label="Tab 3" index={2} value={value} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Card>
@@ -53,7 +56,20 @@ const Demo = () => {
         </Card>
       </TabPanel>
       <h2>Code Sample</h2>
-      <Code language="javascript"></Code>
+      <Code language="javascript">
+        {`
+import React, { useState } from 'react';
+import {
+  Tabs,
+  Tab,
+  TabPanel,
+  Card,
+  CardHeader,
+  CardContent,
+  Code
+} from '@deque/cauldron-react';
+        `}
+      </Code>
     </div>
   );
 };

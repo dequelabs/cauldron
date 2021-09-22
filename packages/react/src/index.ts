@@ -76,6 +76,7 @@ export {
   TableHeader,
   TableRow
 } from './components/Table';
+export { default as Tabs, Tab, TabPanel } from './components/Tabs';
 export {
   DescriptionList,
   DescriptionListItem,

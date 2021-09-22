@@ -52,6 +52,7 @@ const componentsList = [
   'Code',
   'LoaderOverlay',
   'Line',
+  'Tabs',
   'Tag',
   'Table',
   'DescriptionList',
