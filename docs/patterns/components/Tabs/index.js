@@ -7,7 +7,7 @@ const Demo = () => {
   const handleChange = newValue => setValue(newValue);
 
   return (
-    <div className="TabDemo">
+    <div className="TabsDemo">
       <h1>Tabs</h1>
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
