@@ -35,7 +35,7 @@ const Tab = ({ value, label, index, children }: TabProps) => {
 };
 
 Tab.displayName = 'Tab';
-Tab.PropTypes = {
+Tab.propTypes = {
   value: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   children: PropTypes.node,

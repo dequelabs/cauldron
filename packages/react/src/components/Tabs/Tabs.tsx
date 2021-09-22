@@ -4,10 +4,8 @@ import classNames from 'classnames';
 
 const left: number = 37,
   right: number = 39,
-  tab: number = 9,
   home: number = 36,
-  end: number = 35,
-  deleteKey: number = 46;
+  end: number = 35;
 
 interface TargetElement extends EventTarget {
   id?: string;
@@ -30,20 +28,50 @@ const Tabs = ({
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(value);
   const tabCount = React.Children.toArray(children).length;
+
   const handleClick = (event: React.MouseEvent) => {
     const eventTarget: TargetElement = event.target;
     if (eventTarget.id?.includes('tab-')) {
-      const index = Number(eventTarget.id.split('-')[1]);
-      return handleChange(index);
+      const newIndex = Number(eventTarget.id.split('-')[1]);
+      return handleChange(newIndex);
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    const { which, target } = event;
+    const { which } = event;
+    let newIndex: number = activeIndex;
+
     switch (which) {
       case left: {
+        newIndex = activeIndex - 1;
+
+        // circularity
+        if (newIndex === -1) {
+          newIndex = tabCount - 1;
+        }
+        break;
+      }
+      case right: {
+        newIndex = activeIndex + 1;
+
+        // circularity
+        if (newIndex === tabCount) {
+          newIndex = 0;
+        }
+        break;
+      }
+      case home: {
+        newIndex = 0;
+        break;
+      }
+      case end: {
+        newIndex = tabCount - 1;
+        break;
       }
     }
+
+    setActiveIndex(newIndex);
+    handleChange(newIndex);
   };
 
   return (
