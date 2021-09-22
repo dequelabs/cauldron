@@ -9,14 +9,14 @@ interface TabProps {
 
 const Tab = ({ label, index, children }: TabProps) => {
   return (
-    <div
+    <li
       role="tab"
       className="Tab"
       id={`tab-${index}`}
       aria-controls={`tabpanel-${index}`}
     >
       {label || children}
-    </div>
+    </li>
   );
 };
 
