@@ -28,8 +28,8 @@
 }
 
 .Tab {
-  width: 120px;
-  height: 46px;
+  width: 7.5rem;
+  height: 2.875rem;
   list-style-type: none;
   border-right: 1px solid var(--tabs-border-color);
   text-align: center;
@@ -55,14 +55,14 @@
 }
 
 .TabPanel {
-  width: 480px;
-  min-height: 150px;
+  width: 30rem;
+  min-height: 9.375rem;
   color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
   border: 1px solid var(--tabs-border-color);
 }
 
 .Tabs--thin .Tab {
-  height: 34px;
+  height: 2.125rem;
   padding-top: var(--space-smallest);
 }
