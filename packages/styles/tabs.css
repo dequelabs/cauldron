@@ -1,0 +1,68 @@
+:root {
+  --tabs-border-color: #b3bfc6;
+  --tab-shadow-color: var(--accent-primary);
+  --tab-inactive-background-color: var(--gray-20);
+  --tab-inactive-text-color: var(--gray-60);
+  --tab-active-background-color: var(--white);
+  --tabs-active-text-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --tabs-border-color: #5d676f;
+  --tab-shadow-color: var(--accent-info);
+  --tab-inactive-background-color: var(--accent-medium);
+  --tab-inactive-text-color: var(--accent-light);
+  --tab-active-background-color: var(--accent-dark);
+  --tabs-active-text-color: var(--white);
+}
+
+.Tabs {
+  width: fit-content;
+}
+
+.Tablist {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid var(--tabs-border-color);
+  border-left: 1px solid var(--tabs-border-color);
+}
+
+.Tab {
+  width: 120px;
+  height: 46px;
+  list-style-type: none;
+  border-right: 1px solid var(--tabs-border-color);
+  text-align: center;
+  padding-top: 14px;
+  text-decoration: underline;
+  background-color: var(--tab-inactive-background-color);
+  color: var(--tab-inactive-text-color);
+}
+
+.Tab:hover {
+  cursor: pointer;
+  background-color: var(--tab-active-background-color);
+  color: var(--tabs-active-text-color);
+}
+
+.Tab--active {
+  color: var(--tabs-active-text-color);
+  background-color: var(--tab-active-background-color);
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: inset 0px 4px 0px var(--tab-shadow-color);
+  outline-offset: -1px;
+}
+
+.TabPanel {
+  width: 480px;
+  min-height: 150px;
+  color: var(--tabs-active-text-color);
+  background-color: var(--tab-active-background-color);
+  border: 1px solid var(--tabs-border-color);
+}
+
+.Tabs--thin .Tab {
+  height: 34px;
+  padding-top: var(--space-smallest);
+}
