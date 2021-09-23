@@ -56,7 +56,6 @@
 
 .TabPanel {
   width: 34.68rem;
-  min-height: 9.375rem;
   overflow-wrap: break-word;
   color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
