@@ -47,6 +47,8 @@ const Tabs = ({
         if (newIndex === -1) {
           newIndex = tabCount - 1;
         }
+        setActiveIndex(newIndex);
+        handleChange(newIndex);
         break;
       }
       case right: {
@@ -56,20 +58,23 @@ const Tabs = ({
         if (newIndex === tabCount) {
           newIndex = 0;
         }
+        setActiveIndex(newIndex);
+        handleChange(newIndex);
         break;
       }
       case home: {
         newIndex = 0;
+        setActiveIndex(newIndex);
+        handleChange(newIndex);
         break;
       }
       case end: {
         newIndex = tabCount - 1;
+        setActiveIndex(newIndex);
+        handleChange(newIndex);
         break;
       }
     }
-
-    setActiveIndex(newIndex);
-    handleChange(newIndex);
   };
 
   return (
