@@ -23,27 +23,10 @@ test('renders className props', () => {
 
 test('displays TabPanel according to whether value and index match', async () => {
   const MountedTabPanel = mount(<TabPanel value={initialValue} index={0} />);
-
-  expect(MountedTabPanel.find('#tabpanel-0').prop('hidden')).toBe(false);
+  expect(MountedTabPanel.find('.TabPanel--hidden').exists()).toBe(false);
 });
 
 test('hides TabPanel according to whether value and index match', () => {
   const MountedTabPanel = mount(<TabPanel value={initialValue} index={1} />);
-
-  expect(MountedTabPanel.find('#tabpanel-1').prop('hidden')).toBe(true);
-});
-
-test('hides or displays TabPanel children according to whether value and index match', () => {
-  const MountedTabPanel = mount(
-    <>
-      <TabPanel value={initialValue} index={0}>
-        <button>first child</button>
-      </TabPanel>
-      <TabPanel value={initialValue} index={1}>
-        <p>second child</p>
-      </TabPanel>
-    </>
-  );
-  expect(MountedTabPanel.find('p')).toHaveLength(0);
-  expect(MountedTabPanel.find('button')).toHaveLength(1);
+  expect(MountedTabPanel.find('.TabPanel--hidden').exists());
 });
