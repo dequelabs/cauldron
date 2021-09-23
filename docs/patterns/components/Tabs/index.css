@@ -1,3 +1,12 @@
 .TabsDemo p {
   padding: 1em;
 }
+
+.TabsDemo .Tab {
+  width: 7.5rem;
+}
+
+.TabPanel {
+  width: 34.68rem;
+  height: 12.125rem;
+}

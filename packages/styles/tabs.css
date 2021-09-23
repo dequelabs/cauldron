@@ -28,7 +28,6 @@
 }
 
 .Tab {
-  width: 7.5rem;
   height: 2.875rem;
   list-style-type: none;
   border-right: 1px solid var(--tabs-border-color);
@@ -55,7 +54,6 @@
 }
 
 .TabPanel {
-  width: 34.68rem;
   overflow-wrap: break-word;
   color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
