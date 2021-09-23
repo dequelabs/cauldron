@@ -36,13 +36,3 @@ test('renders aria-selected properly', async () => {
   expect(TabWithFocus.find('#tab-0').prop('aria-selected')).toEqual(true);
   expect(TabWithoutFocus.find('#tab-1').prop('aria-selected')).toEqual(false);
 });
-
-test('focuses the tab whose value matches its index', async () => {
-  mount(
-    <>
-      <Tab value={initialValue} index={0} />
-      <Tab value={initialValue} index={1} />
-    </>
-  );
-  expect(document.activeElement.id).toEqual('tab-0');
-});
