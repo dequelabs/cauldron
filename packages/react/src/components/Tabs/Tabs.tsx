@@ -14,6 +14,7 @@ interface TabsProps {
   handleChange: (newValue: number) => void;
   thin?: boolean;
   className?: string;
+  ariaLabelForTablist?: string;
 }
 
 const Tabs = ({
@@ -21,7 +22,8 @@ const Tabs = ({
   children,
   handleChange,
   thin,
-  className
+  className,
+  ariaLabelForTablist
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(value);
   const tabCount = React.Children.toArray(children).length;
@@ -86,7 +88,7 @@ const Tabs = ({
       <ul
         role="tablist"
         className="Tablist"
-        aria-label="Tablist"
+        aria-label={ariaLabelForTablist || 'Tablist'}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
