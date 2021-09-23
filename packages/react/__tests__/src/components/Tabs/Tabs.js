@@ -50,42 +50,57 @@ test('calls handleChange when clicking a tab', async () => {
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={handleChangeSpy}>
       <Tab label="Tab 1" index={0} value={initialValue}></Tab>
+      <Tab label="Tab 2" index={1} value={initialValue}></Tab>
     </Tabs>
   );
 
   expect(handleChangeSpy).toBeCalledTimes(0);
 
-  MountedTabs.find('.Tab').simulate('click');
+  MountedTabs.find('#tab-0').simulate('click');
   await sleep();
 
   expect(handleChangeSpy).toBeCalledTimes(1);
+  expect(handleChangeSpy).toBeCalledWith(0);
+
+  MountedTabs.find('#tab-1').simulate('click');
+  await sleep();
+
+  expect(handleChangeSpy).toBeCalledTimes(2);
+  expect(handleChangeSpy).toBeCalledWith(1);
 });
 
 test('calls handleChange when pressing left, right, home, or end keys', async () => {
   const handleChangeSpy = jest.fn();
+  const chosenValue = 1;
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={handleChangeSpy}>
-      <Tab label="Tab 1" index={0} value={initialValue}></Tab>
+    <Tabs value={chosenValue} handleChange={handleChangeSpy}>
+      <Tab label="Tab 1" index={0} value={chosenValue}></Tab>
+      <Tab label="Tab 2" index={1} value={chosenValue}></Tab>
+      <Tab label="Tab 3" index={2} value={chosenValue}></Tab>
     </Tabs>
   );
 
   expect(handleChangeSpy).toBeCalledTimes(0);
 
-  MountedTabs.find('.Tab').simulate('keydown', { which: left });
+  MountedTabs.find('#tab-0').simulate('keydown', { which: left });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(1);
+  expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('.Tab').simulate('keydown', { which: right });
+  MountedTabs.find('#tab-0').simulate('keydown', { which: right });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(2);
+  expect(handleChangeSpy).toBeCalledWith(1);
 
-  MountedTabs.find('.Tab').simulate('keydown', { which: home });
+  MountedTabs.find('#tab-0').simulate('keydown', { which: home });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(3);
+  expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('.Tab').simulate('keydown', { which: end });
+  MountedTabs.find('#tab-0').simulate('keydown', { which: end });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(4);
+  expect(handleChangeSpy).toBeCalledWith(2);
 });
 
 test('does not call handleChange when pressing keys other than left, right, home, or end', async () => {
