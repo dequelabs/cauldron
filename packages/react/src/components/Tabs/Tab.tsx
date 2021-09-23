@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useDidUpdate } from '../../index';
 
 interface TabProps {
   value: number;
@@ -13,7 +14,7 @@ const Tab = ({ value, index, children }: TabProps) => {
   const tabIndex = index === value ? 0 : -1;
   const selected = tabIndex === 0;
 
-  useEffect(() => {
+  useDidUpdate(() => {
     if (index !== value) {
       return;
     }
