@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useDidUpdate } from '../../index';
 
-interface TabProps {
+interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
   value: number;
   index: number;
   children?: React.ReactNode;

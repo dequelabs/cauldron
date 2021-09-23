@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-interface TabPanelProps {
+interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   index: number;
   value: number;
   children?: React.ReactNode;
