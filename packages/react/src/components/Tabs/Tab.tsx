@@ -1,21 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface TabProps {
   value: number;
   index: number;
-  label?: string;
   children?: React.ReactNode;
 }
 
-const Tab = ({ value, label, index, children }: TabProps) => {
+const Tab = ({ value, index, children }: TabProps) => {
   const tabRef = useRef<HTMLLIElement>(null);
   const tabIndex = index === value ? 0 : -1;
   const selected = tabIndex === 0;
-  if (selected) {
+
+  useEffect(() => {
+    if (index !== value) {
+      return;
+    }
+
     tabRef?.current?.focus();
-  }
+  }, [value]);
 
   return (
     <li
@@ -29,7 +33,7 @@ const Tab = ({ value, label, index, children }: TabProps) => {
       aria-selected={selected}
       ref={tabRef}
     >
-      {label || children}
+      {children}
     </li>
   );
 };

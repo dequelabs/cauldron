@@ -89,7 +89,6 @@ const Tabs = ({
         aria-label="Tablist"
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={0}
       >
         {children}
       </ul>
