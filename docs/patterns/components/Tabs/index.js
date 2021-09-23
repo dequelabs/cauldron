@@ -12,9 +12,15 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
       <Tabs value={value} handleChange={handleChange}>
-        <Tab label="Tab 1" index={0} value={value} />
-        <Tab label="Tab 2" index={1} value={value} />
-        <Tab label="Tab 3" index={2} value={value} />
+        <Tab index={0} value={value}>
+          Tab 1
+        </Tab>
+        <Tab index={1} value={value}>
+          Tab 2
+        </Tab>
+        <Tab index={2} value={value}>
+          Tab 3
+        </Tab>
       </Tabs>
       <TabPanel value={value} index={0}>
         <p>Insert content for tab panle 1 here...</p>
@@ -49,9 +55,15 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
       <Tabs value={value} handleChange={handleChange}>
-        <Tab label="Tab 1" index={0} value={value} />
-        <Tab label="Tab 2" index={1} value={value} />
-        <Tab label="Tab 3" index={2} value={value} />
+      <Tab index={0} value={value}>
+        Tab 1
+      </Tab>
+      <Tab index={1} value={value}>
+        Tab 2
+      </Tab>
+      <Tab index={2} value={value}>
+        Tab 3
+      </Tab>
       </Tabs>
       <TabPanel value={value} index={0}>
         <p>Insert content for tab panle 1 here...</p>
