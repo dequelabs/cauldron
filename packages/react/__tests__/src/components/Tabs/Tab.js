@@ -13,15 +13,6 @@ test('renders children', () => {
   expect(MountedTab.find('p')).toHaveLength(1);
 });
 
-test('renders label', () => {
-  const MountedTab = mount(
-    <Tab value={initialValue} index={0} label="hey there">
-      <p>a simple paragraph</p>
-    </Tab>
-  );
-  expect(MountedTab.find('li').text()).toEqual('hey there');
-});
-
 test('renders className Tab--active properly', () => {
   const TabWithFocus = mount(<Tab value={initialValue} index={0} />);
   const TabWithoutFocus = mount(<Tab value={initialValue} index={1} />);
