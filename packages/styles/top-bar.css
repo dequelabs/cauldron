@@ -1,13 +1,9 @@
 :root {
   --top-bar-background-color: var(--accent-dark);
-  --top-bar-background-color-active: #0b0e11;
-  --top-bar-background-color-light: var(--white);
-  --top-bar-background-color-light-active: var(--white);
-  --top-bar-text-color: var(--accent-light);
-  --top-bar-text-color-light: var(--accent-dark);
-  --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
-  --top-bar-menuitem-separator-light: var(--gray-40);
-  --top-bar-border-bottom-color-light: var(--gray-40);
+  --top-bar-background-color-active: var(--white);
+  --top-bar-text-color: var(--accent-dark);
+  --top-bar-menuitem-separator: var(--gray-40);
+  --top-bar-border-bottom-color: var(--gray-40);
   --top-bar-accent-primary: var(--accent-info);
   --top-bar-accent-warning: var(--accent-warning);
   --top-bar-accent-error: var(--accent-danger);
@@ -142,15 +138,21 @@
 }
 
 .MenuItem--separator {
-  border-left: 1px solid var(--top-bar-menuitem-separator-light);
+  border-left: 1px solid var(--top-bar-menuitem-separator);
 }
 
 /* Dark Theme */
+.cauldron--theme-dark {
+  --top-bar-menuitem-separator: rgba(255, 255, 255, 0.4);
+  --top-bar-border-bottom-color: var(--gray-70);
+  --top-bar-text-color: var(--accent-light);
+  --top-bar-background-color-active: #0b0e11;
+}
 
 .cauldron--theme-dark .TopBar {
   background-color: var(--top-bar-background-color);
   color: var(--top-bar-text-color);
-  border-bottom: solid 1px var(--gray-70);
+  border-bottom: solid 1px var(--top-bar-border-bottom-color);
 }
 
 .cauldron--theme-dark .MenuItem--separator {
