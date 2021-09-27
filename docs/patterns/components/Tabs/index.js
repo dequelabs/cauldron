@@ -16,13 +16,13 @@ const Demo = () => {
         <Tab>Tab 2</Tab>
         <Tab>Tab 3</Tab>
         <TabPanel>
-          <p>Insert content for tab panle 1 here...</p>
+          <p>Insert content for tab panel 1 here...</p>
         </TabPanel>
         <TabPanel>
-          <p>Insert content for tab panle 2 here...</p>
+          <p>Insert content for tab panel 2 here...</p>
         </TabPanel>
         <TabPanel>
-          <p>Insert content for tab panle 3 here...</p>
+          <p>Insert content for tab panel 3 here...</p>
         </TabPanel>
       </Tabs>
       <h2>Code Sample</h2>
