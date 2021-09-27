@@ -2,11 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Tab } from 'src/components/Tabs';
 
-const initialValue = 0;
-
 test('renders children', () => {
   const MountedTab = mount(
-    <Tab value={initialValue} index={0}>
+    <Tab>
       <p>a simple paragraph</p>
     </Tab>
   );
@@ -14,7 +12,7 @@ test('renders children', () => {
 });
 
 test('renders className Tab--active properly', () => {
-  const TabWithFocus = mount(<Tab value={initialValue} index={0} />);
+  const TabWithFocus = mount(<Tab />);
   const TabWithoutFocus = mount(<Tab value={initialValue} index={1} />);
 
   expect(TabWithFocus.find('.Tab--active')).toHaveLength(1);

@@ -16,17 +16,38 @@ const sleep = ms => {
 test('renders children', () => {
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={initialHandleChange}>
-      <li>option 1</li>
-      <li>option 2</li>
+      <Tab>option 1</Tab>
+      <Tab>option 2</Tab>
+      <TabPanel>
+        <p>Panel 1</p>
+      </TabPanel>
+      <TabPanel>
+        <p>Panel 2</p>
+      </TabPanel>
     </Tabs>
   );
-  expect(MountedTabs.find('li')).toHaveLength(2);
+
+  expect(MountedTabs.find('Tab')).toHaveLength(2);
+  expect(MountedTabs.find('TabPanel')).toHaveLength(2);
+});
+
+test('only renders Tab or TabPanel', () => {
+  const MountedTabs = mount(
+    <Tabs value={initialValue} handleChange={initialHandleChange}>
+      <li>option 1</li>
+      <button>option 2</button>
+      <div className="no-show-div">option 3</div>
+    </Tabs>
+  );
+  expect(MountedTabs.find('li')).toHaveLength(0);
+  expect(MountedTabs.find('button')).toHaveLength(0);
+  expect(MountedTabs.find('.no-show-div')).toHaveLength(0);
 });
 
 test('renders thin prop', () => {
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={initialHandleChange} thin>
-      <li>option 1</li>
+      <Tab>option 1</Tab>
     </Tabs>
   );
   expect(MountedTabs.find('Tabs--thin').exists());
@@ -39,7 +60,7 @@ test('renders className props', () => {
       handleChange={initialHandleChange}
       className="find--me"
     >
-      <li>option 1</li>
+      <Tab>option 1</Tab>
     </Tabs>
   );
   expect(MountedTabs.find('find--me').exists());
@@ -49,20 +70,23 @@ test('calls handleChange when clicking a tab', async () => {
   const handleChangeSpy = jest.fn();
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={handleChangeSpy}>
-      <Tab label="Tab 1" index={0} value={initialValue}></Tab>
-      <Tab label="Tab 2" index={1} value={initialValue}></Tab>
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
     </Tabs>
   );
 
   expect(handleChangeSpy).toBeCalledTimes(0);
-
-  MountedTabs.find('#tab-0').simulate('click');
+  MountedTabs.find('Tab')
+    .at(0)
+    .simulate('click');
   await sleep();
 
   expect(handleChangeSpy).toBeCalledTimes(1);
   expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('#tab-1').simulate('click');
+  MountedTabs.find('Tab')
+    .at(1)
+    .simulate('click');
   await sleep();
 
   expect(handleChangeSpy).toBeCalledTimes(2);
@@ -74,30 +98,38 @@ test('calls handleChange when pressing left, right, home, or end keys', async ()
   const chosenValue = 1;
   const MountedTabs = mount(
     <Tabs value={chosenValue} handleChange={handleChangeSpy}>
-      <Tab label="Tab 1" index={0} value={chosenValue}></Tab>
-      <Tab label="Tab 2" index={1} value={chosenValue}></Tab>
-      <Tab label="Tab 3" index={2} value={chosenValue}></Tab>
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
     </Tabs>
   );
 
   expect(handleChangeSpy).toBeCalledTimes(0);
 
-  MountedTabs.find('#tab-0').simulate('keydown', { which: left });
+  MountedTabs.find('Tab')
+    .at(0)
+    .simulate('keydown', { which: left });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(1);
   expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('#tab-0').simulate('keydown', { which: right });
+  MountedTabs.find('Tab')
+    .at(0)
+    .simulate('keydown', { which: right });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(2);
   expect(handleChangeSpy).toBeCalledWith(1);
 
-  MountedTabs.find('#tab-0').simulate('keydown', { which: home });
+  MountedTabs.find('Tab')
+    .at(0)
+    .simulate('keydown', { which: home });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(3);
   expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('#tab-0').simulate('keydown', { which: end });
+  MountedTabs.find('Tab')
+    .at(0)
+    .simulate('keydown', { which: end });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(4);
   expect(handleChangeSpy).toBeCalledWith(2);
@@ -107,13 +139,13 @@ test('does not call handleChange when pressing keys other than left, right, home
   const handleChangeSpy = jest.fn();
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={handleChangeSpy}>
-      <Tab label="Tab 1" index={0} value={initialValue}></Tab>
+      <Tab>Tab 1</Tab>
     </Tabs>
   );
 
   expect(handleChangeSpy).toBeCalledTimes(0);
 
-  MountedTabs.find('.Tab').simulate('keydown', { which: down });
+  MountedTabs.find('Tab').simulate('keydown', { which: down });
   await sleep();
   expect(handleChangeSpy).toBeCalledTimes(0);
 });
@@ -123,10 +155,10 @@ test('returns no axe vialation', async () => {
   axe can examine Tab and TabPanel's attributes (such as aria-controls and aria-labelledby) with each other */
   const MountedTabs = mount(
     <Tabs value={initialValue} handleChange={initialHandleChange}>
-      <Tab label="Tab 1" index={0} value={initialValue}></Tab>
-      <Tab label="Tab 2" index={1} value={initialValue}></Tab>
-      <TabPanel value={initialValue} index={0} />
-      <TabPanel value={initialValue} index={1} />
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <TabPanel />
+      <TabPanel />
     </Tabs>
   );
 

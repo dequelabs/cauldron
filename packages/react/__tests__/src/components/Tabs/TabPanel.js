@@ -2,11 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { TabPanel } from 'src/components/Tabs';
 
-const initialValue = 0;
-
 test('renders children', () => {
   const MountedTabPanel = mount(
-    <TabPanel value={initialValue} index={0}>
+    <TabPanel>
       <p>a simple paragraph</p>
       <p>a complicated paragraph</p>
     </TabPanel>
@@ -15,18 +13,16 @@ test('renders children', () => {
 });
 
 test('renders className props', () => {
-  const MountedTabPanel = mount(
-    <TabPanel value={initialValue} index={0} className="find--me" />
-  );
+  const MountedTabPanel = mount(<TabPanel className="find--me" />);
   expect(MountedTabPanel.find('find--me').exists());
 });
 
 test('displays TabPanel according to whether value and index match', async () => {
-  const MountedTabPanel = mount(<TabPanel value={initialValue} index={0} />);
+  const MountedTabPanel = mount(<TabPanel />);
   expect(MountedTabPanel.find('.TabPanel--hidden').exists()).toBe(false);
 });
 
 test('hides TabPanel according to whether value and index match', () => {
-  const MountedTabPanel = mount(<TabPanel value={initialValue} index={1} />);
+  const MountedTabPanel = mount(<TabPanel />);
   expect(MountedTabPanel.find('.TabPanel--hidden').exists());
 });
