@@ -33,9 +33,6 @@ import {
   Tabs,
   Tab,
   TabPanel,
-  Card,
-  CardHeader,
-  CardContent,
   Code
 } from '@deque/cauldron-react';
 
