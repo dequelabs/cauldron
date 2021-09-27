@@ -10,7 +10,7 @@ const Demo = () => {
     <div className="TabsDemo">
       <h1>Tabs</h1>
       <h2>Demo</h2>
-      <h3>Baisc Tabs</h3>
+      <h3>Basic Tabs</h3>
       <Tabs value={value} handleChange={handleChange}>
         <Tab>Tab 1</Tab>
         <Tab>Tab 2</Tab>
