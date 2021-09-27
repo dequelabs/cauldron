@@ -53,7 +53,7 @@ test('renders thin prop', () => {
   expect(MountedTabs.find('Tabs--thin').exists());
 });
 
-test('renders className props', () => {
+test('renders className prop', () => {
   const MountedTabs = mount(
     <Tabs
       value={initialValue}
@@ -64,6 +64,19 @@ test('renders className props', () => {
     </Tabs>
   );
   expect(MountedTabs.find('find--me').exists());
+});
+
+test('renders ariaLabelForTablist prop', () => {
+  const MountedTabs = mount(
+    <Tabs
+      value={initialValue}
+      handleChange={initialHandleChange}
+      ariaLabelForTablist="find-me"
+    >
+      <Tab>option 1</Tab>
+    </Tabs>
+  );
+  expect(MountedTabs.find('.Tablist').prop('aria-label')).toBe('find-me');
 });
 
 test('calls handleChange when clicking a tab', async () => {

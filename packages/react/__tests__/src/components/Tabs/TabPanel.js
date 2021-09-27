@@ -1,6 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { TabPanel } from 'src/components/Tabs';
+import Tabs, { TabPanel } from 'src/components/Tabs';
+
+const initialHandleChange = () => {};
 
 test('renders children', () => {
   const MountedTabPanel = mount(
@@ -17,12 +19,20 @@ test('renders className props', () => {
   expect(MountedTabPanel.find('find--me').exists());
 });
 
-test('displays TabPanel according to whether value and index match', async () => {
-  const MountedTabPanel = mount(<TabPanel />);
-  expect(MountedTabPanel.find('.TabPanel--hidden').exists()).toBe(false);
+test('displays TabPanel when value and index match', async () => {
+  const MountedTabs = mount(
+    <Tabs value={0} handleChange={initialHandleChange}>
+      <TabPanel />
+    </Tabs>
+  );
+  expect(MountedTabs.find('.TabPanel--hidden').exists()).toBe(false);
 });
 
-test('hides TabPanel according to whether value and index match', () => {
-  const MountedTabPanel = mount(<TabPanel />);
-  expect(MountedTabPanel.find('.TabPanel--hidden').exists());
+test('hides TabPanel when value and index do not match', () => {
+  const MountedTabs = mount(
+    <Tabs value={1} handleChange={initialHandleChange}>
+      <TabPanel />
+    </Tabs>
+  );
+  expect(MountedTabs.find('.TabPanel--hidden').exists()).toBe(true);
 });
