@@ -12,25 +12,19 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
       <Tabs value={value} handleChange={handleChange}>
-        <Tab index={0} value={value}>
-          Tab 1
-        </Tab>
-        <Tab index={1} value={value}>
-          Tab 2
-        </Tab>
-        <Tab index={2} value={value}>
-          Tab 3
-        </Tab>
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <TabPanel>
+          <p>Insert content for tab panle 1 here...</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Insert content for tab panle 2 here...</p>
+        </TabPanel>
+        <TabPanel>
+          <p>Insert content for tab panle 3 here...</p>
+        </TabPanel>
       </Tabs>
-      <TabPanel value={value} index={0}>
-        <p>Insert content for tab panle 1 here...</p>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <p>Insert content for tab panle 2 here...</p>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <p>Insert content for tab panle 3 here...</p>
-      </TabPanel>
       <h2>Code Sample</h2>
       <Code language="javascript">
         {`
@@ -55,25 +49,19 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Baisc Tabs</h3>
       <Tabs value={value} handleChange={handleChange}>
-      <Tab index={0} value={value}>
-        Tab 1
-      </Tab>
-      <Tab index={1} value={value}>
-        Tab 2
-      </Tab>
-      <Tab index={2} value={value}>
-        Tab 3
-      </Tab>
-      </Tabs>
-      <TabPanel value={value} index={0}>
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <TabPanel>
         <p>Insert content for tab panle 1 here...</p>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel>
         <p>Insert content for tab panle 2 here...</p>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel>
         <p>Insert content for tab panle 3 here...</p>
       </TabPanel>
+    </Tabs>
     </div>
   );
 };
