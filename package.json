@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MPL-2.0",
   "scripts": {
     "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:docs\"",

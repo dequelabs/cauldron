@@ -135,10 +135,6 @@ textarea.Field--has-error:focus,
   cursor: default;
 }
 
-.Field__label.Field__label--disabled {
-  color: var(--disabled);
-}
-
 .Field__required-text {
   flex: 1;
   text-align: right;
@@ -264,4 +260,28 @@ textarea.Field--has-error:focus,
 
 .Checkbox__overlay:hover:not(.Checkbox__overlay--disabled) {
   border: 1px solid currentColor;
+}
+
+/* Dark Theme */
+.cauldron--theme-dark {
+  --field-label-text-color: var(--white);
+}
+
+.cauldron--theme-dark .Radio__overlay,
+.cauldron--theme-dark .Checkbox__overlay {
+  color: var(--white);
+}
+
+.cauldron--theme-dark .Checkbox__overlay.Icon--checkbox-checked {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Checkbox__overlay.Field--has-error {
+  color: var(--accent-danger);
+}
+
+.cauldron--theme-dark .Radio__overlay--disabled,
+.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-checked,
+.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-unchecked {
+  color: #4c99a9;
 }

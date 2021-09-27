@@ -84,6 +84,7 @@ export {
   DescriptionDetails
 } from './components/DescriptionList';
 export { default as Stepper, Step } from './components/Stepper';
+export { default as Panel } from './components/Panel';
 
 /**
  * Helpers / Utils

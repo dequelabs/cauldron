@@ -1,5 +1,9 @@
 :root {
-  --workspace-background-color: var(--gray-10);
+  --workspace-background-color: #f0f2f5;
+}
+
+.cauldron--theme-dark {
+  --workspace-background-color: var(--dark-workspace-color);
 }
 
 html {

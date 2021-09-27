@@ -78,3 +78,9 @@
     width: 301px;
   }
 }
+
+/* Dark Theme */
+.cauldron--theme-dark .Layout {
+  background-color: var(--dark-workspace-color);
+  color: var(--white);
+}

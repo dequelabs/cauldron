@@ -9,14 +9,14 @@ import classnames from 'classnames';
 import Icon from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
 
-interface IconButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   label: string;
   tooltipPlacement?: TooltipProps['placement'];
   tooltipVariant?: TooltipProps['variant'];
   tooltipPortal?: TooltipProps['portal'];
-  variant?: 'light' | 'dark' | 'primary' | 'secondary' | 'error';
+  variant?: 'primary' | 'secondary' | 'error';
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -42,8 +42,6 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           type={'button'}
           className={classnames(className, {
             IconButton: true,
-            'IconButton--light': variant === 'light',
-            'IconButton--dark': variant === 'dark',
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
             'IconButton--error': variant === 'error'
