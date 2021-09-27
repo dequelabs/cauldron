@@ -32,8 +32,7 @@ import React, { useState } from 'react';
 import {
   Tabs,
   Tab,
-  TabPanel,
-  Code
+  TabPanel
 } from '@deque/cauldron-react';
 
 const Demo = () => {
