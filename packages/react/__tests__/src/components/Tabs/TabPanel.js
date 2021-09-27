@@ -19,20 +19,24 @@ test('renders className props', () => {
   expect(MountedTabPanel.find('find--me').exists());
 });
 
-test('displays TabPanel when value and index match', async () => {
+test('handles TabPanel--hidden properly', async () => {
   const MountedTabs = mount(
     <Tabs value={0} handleChange={initialHandleChange}>
       <TabPanel />
-    </Tabs>
-  );
-  expect(MountedTabs.find('.TabPanel--hidden').exists()).toBe(false);
-});
-
-test('hides TabPanel when value and index do not match', () => {
-  const MountedTabs = mount(
-    <Tabs value={1} handleChange={initialHandleChange}>
       <TabPanel />
     </Tabs>
   );
-  expect(MountedTabs.find('.TabPanel--hidden').exists()).toBe(true);
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
 });
