@@ -27,12 +27,13 @@
 }
 
 .Tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 2.875rem;
   list-style-type: none;
   border-top: 1px solid var(--tabs-border-color);
   border-right: 1px solid var(--tabs-border-color);
-  text-align: center;
-  padding-top: 14px;
   text-decoration: underline;
   background-color: var(--tab-inactive-background-color);
   color: var(--tab-inactive-text-color);
