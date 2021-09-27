@@ -50,6 +50,7 @@
   font-weight: bold;
   text-decoration: none;
   box-shadow: inset 0px 4px 0px var(--tab-shadow-color);
+  /* prevent hightlight outline from being partially blocked */
   outline-offset: -1px;
 }
 
