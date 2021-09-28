@@ -19,7 +19,7 @@ test('renders className props', () => {
   expect(MountedTabPanel.find('find--me').exists());
 });
 
-test('handles TabPanel--hidden properly', async () => {
+test('handles TabPanel--hidden properly', () => {
   const MountedTabs = mount(
     <Tabs label={ariaLabel}>
       <TabPanel />

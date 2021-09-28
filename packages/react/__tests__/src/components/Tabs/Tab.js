@@ -34,7 +34,7 @@ test('renders className Tab--active properly', () => {
   ).toHaveLength(0);
 });
 
-test('renders tabIndex properly', async () => {
+test('renders tabIndex properly', () => {
   const MountedTabs = mount(
     <Tabs label={ariaLabel} initialActiveIndex={1}>
       <Tab>Tab 1</Tab>
@@ -54,7 +54,7 @@ test('renders tabIndex properly', async () => {
   ).toEqual(-1);
 });
 
-test('renders aria-selected properly', async () => {
+test('renders aria-selected properly', () => {
   const MountedTabs = mount(
     <Tabs label={ariaLabel} initialActiveIndex={1}>
       <Tab>Tab 1</Tab>
