@@ -76,6 +76,7 @@ export {
   TableHeader,
   TableRow
 } from './components/Table';
+export { default as Tabs, Tab, TabPanel } from './components/Tabs';
 export {
   DescriptionList,
   DescriptionListItem,
@@ -91,6 +92,7 @@ export { default as Panel } from './components/Panel';
 
 export { default as AriaIsolate } from './utils/aria-isolate';
 export { default as focusableSelector } from './utils/focusable-selector';
+export { default as useDidUpdate } from './utils/use-did-update';
 
 /**
  * Contexts

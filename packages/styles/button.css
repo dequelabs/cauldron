@@ -191,8 +191,6 @@ button.Link {
   --button-background-color-error-active: #fea7a6;
 
   --button-focus-ring-color: var(--focus-dark);
-
-  --header-text-color-dark: var(--white);
   --field-label-text-color: var(--accent-light);
   --field-border-color-error: var(--accent-danger);
   --error: var(--accent-danger);
