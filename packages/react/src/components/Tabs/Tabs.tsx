@@ -8,10 +8,6 @@ import Tab from './Tab';
 
 const [left, right, home, end] = [37, 39, 36, 35];
 
-interface TargetElement extends EventTarget {
-  id?: string;
-}
-
 interface TabsProps {
   children: React.ReactNode;
   label: string;
@@ -42,12 +38,8 @@ const Tabs = ({
 
   const tabCount = tabs.length;
 
-  const handleClick = (event: React.MouseEvent) => {
-    const eventTarget: TargetElement = event.target;
-    if (eventTarget.id?.includes(id)) {
-      const newIndex = Number(eventTarget.id.split('-')[1]);
-      setActiveIndex(newIndex);
-    }
+  const handleClick = (index: number) => {
+    setActiveIndex(index);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -101,6 +93,7 @@ const Tabs = ({
       ['aria-controls']: `${id}-panel-${index}`,
       ['aria-selected']: selected,
       ref: index === activeIndex ? focusedTabRef : null,
+      onClick: () => handleClick(index),
       ...other
     };
 
@@ -134,7 +127,6 @@ const Tabs = ({
         role="tablist"
         className="Tablist"
         aria-label={label}
-        onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
         {tabComponents}

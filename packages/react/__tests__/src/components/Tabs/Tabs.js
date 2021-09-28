@@ -131,6 +131,35 @@ test('displays correct tabpanel when clicking a tab', async () => {
   ).toBe(false);
 });
 
+test('displays correct tabpanel when clicking a tab with a customized id', async () => {
+  const MountedTabs = mount(
+    <Tabs label={ariaLabel} id="customized-id">
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <TabPanel>TabPanel 1</TabPanel>
+      <TabPanel>TabPanel 2</TabPanel>
+    </Tabs>
+  );
+
+  MountedTabs.find('Tab')
+    .at(1)
+    .simulate('click');
+  await sleep();
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+});
+
 test('displays correct tabpanel when pressing left, right, home, or end keys', async () => {
   const MountedTabs = mount(
     <Tabs label={ariaLabel}>
