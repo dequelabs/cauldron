@@ -182,7 +182,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
     </Tabs>
   );
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
+  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
   await sleep();
 
   expect(
@@ -196,15 +196,15 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(false);
+  ).toBe(true);
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  ).toBe(false);
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
+  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
   await sleep();
 
   expect(
@@ -282,6 +282,49 @@ test('does not do anything when pressing keys other than left, right, home, or e
   );
 
   MountedTabs.find('.Tablist').simulate('keydown', { which: down });
+  await sleep();
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+});
+
+test('displays correct tabpanel when pressing left, right, home, or end keys with customized id', async () => {
+  const MountedTabs = mount(
+    <Tabs label={ariaLabel} id="customized-id">
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <TabPanel>TabPanel 1</TabPanel>
+      <TabPanel>TabPanel 2</TabPanel>
+    </Tabs>
+  );
+
+  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
+  await sleep();
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+
+  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
   await sleep();
 
   expect(
