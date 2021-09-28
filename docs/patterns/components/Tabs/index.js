@@ -7,7 +7,7 @@ const Demo = () => (
     <h1>Tabs</h1>
     <h2>Demo</h2>
     <h3>Basic Tabs</h3>
-    <Tabs>
+    <Tabs aria-label="Basic Tabs">
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <Tab>Tab 3</Tab>
