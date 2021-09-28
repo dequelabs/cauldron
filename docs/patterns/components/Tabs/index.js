@@ -35,7 +35,7 @@ const Demo = () => (
     <h2>Code Sample</h2>
     <Code language="javascript">
       {`
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Tabs,
   Tab,
