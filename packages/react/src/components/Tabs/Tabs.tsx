@@ -8,6 +8,8 @@ import Tab from './Tab';
 
 const [left, right, home, end] = [37, 39, 36, 35];
 
+type TabsVariant = 'full-width';
+
 interface TabsProps {
   children: React.ReactNode;
   label: string;
@@ -15,6 +17,7 @@ interface TabsProps {
   id?: string;
   thin?: boolean;
   className?: string;
+  variant?: TabsVariant;
 }
 
 const Tabs = ({
@@ -23,6 +26,7 @@ const Tabs = ({
   thin,
   id: propId,
   initialActiveIndex = 0,
+  variant,
   className
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
@@ -87,7 +91,8 @@ const Tabs = ({
     const config = {
       id: `${id}-${index}`,
       className: classNames('Tab', {
-        'Tab--active': selected
+        'Tab--active': selected,
+        'Tab--full-width': variant === 'full-width'
       }),
       tabIndex: index === activeIndex ? 0 : -1,
       ['aria-controls']: `${id}-panel-${index}`,
@@ -125,7 +130,9 @@ const Tabs = ({
     >
       <ul
         role="tablist"
-        className="Tablist"
+        className={classNames('Tablist', {
+          'Tablist--full-width': variant === 'full-width'
+        })}
         aria-label={label}
         onKeyDown={handleKeyDown}
       >

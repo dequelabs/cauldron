@@ -27,16 +27,20 @@
 }
 
 .Tab {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
   height: 2.875rem;
+  width: 9.375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   list-style-type: none;
   border-top: 1px solid var(--tabs-border-color);
   border-right: 1px solid var(--tabs-border-color);
   text-decoration: underline;
   background-color: var(--tab-inactive-background-color);
   color: var(--tab-inactive-text-color);
+  padding: var(--space-small);
 }
 
 .Tab:hover {
@@ -59,6 +63,11 @@
   color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
   border: 1px solid var(--tabs-border-color);
+  padding: 1rem;
+}
+
+.TabPanel > * {
+  margin-top: 0;
 }
 
 .TabPanel--hidden {
@@ -67,5 +76,14 @@
 
 .Tabs--thin .Tab {
   height: 2.125rem;
-  padding-top: var(--space-smallest);
+  padding: var(--space-smallest);
+}
+
+/* variant */
+.Tablist--full-width {
+  justify-content: space-evenly;
+}
+
+.Tab--full-width {
+  width: 100%;
 }
