@@ -15,6 +15,7 @@ interface TargetElement extends EventTarget {
 interface TabsProps {
   children: React.ReactNode;
   label: string;
+  initialActiveIndex?: number;
   id?: string;
   thin?: boolean;
   className?: string;
@@ -25,9 +26,10 @@ const Tabs = ({
   label,
   thin,
   id: propId,
+  initialActiveIndex = 0,
   className
 }: TabsProps): JSX.Element => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [id] = propId ? [propId] : useId(1, 'tabs');
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
@@ -147,6 +149,7 @@ Tabs.propTypes = {
   children: PropTypes.node.isRequired,
   label: PropTypes.string.isRequired,
   id: PropTypes.string,
+  initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
   className: PropTypes.string
 };
