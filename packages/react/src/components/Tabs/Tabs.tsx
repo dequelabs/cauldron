@@ -13,25 +13,21 @@ interface TargetElement extends EventTarget {
 }
 
 interface TabsProps {
-  value: number;
   children: React.ReactNode;
-  handleChange: (newValue: number) => void;
+  ariaLabelForTablist: string;
   id?: string;
   thin?: boolean;
   className?: string;
-  ariaLabelForTablist?: string;
 }
 
 const Tabs = ({
   id: propId,
-  value,
   children,
-  handleChange,
   thin,
   className,
   ariaLabelForTablist
 }: TabsProps): JSX.Element => {
-  const [activeIndex, setActiveIndex] = useState(value);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [id] = propId ? [propId] : useId(1, 'tabs');
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
@@ -49,7 +45,6 @@ const Tabs = ({
     if (eventTarget.id?.includes(id)) {
       const newIndex = Number(eventTarget.id.split('-')[1]);
       setActiveIndex(newIndex);
-      handleChange(newIndex);
     }
   };
 
@@ -66,7 +61,6 @@ const Tabs = ({
           newIndex = tabCount - 1;
         }
         setActiveIndex(newIndex);
-        handleChange(newIndex);
         break;
       }
       case right: {
@@ -77,19 +71,16 @@ const Tabs = ({
           newIndex = 0;
         }
         setActiveIndex(newIndex);
-        handleChange(newIndex);
         break;
       }
       case home: {
         newIndex = 0;
         setActiveIndex(newIndex);
-        handleChange(newIndex);
         break;
       }
       case end: {
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
-        handleChange(newIndex);
         break;
       }
     }
@@ -97,17 +88,17 @@ const Tabs = ({
 
   const tabComponents = tabs.map((child, index) => {
     const { ...other } = (child as React.ReactElement<any>).props;
-    const selected = index === value;
+    const selected = index === activeIndex;
 
     const config = {
       id: `${id}-${index}`,
       className: classNames('Tab', {
         'Tab--active': selected
       }),
-      tabIndex: index === value ? 0 : -1,
+      tabIndex: index === activeIndex ? 0 : -1,
       ['aria-controls']: `${id}-panel-${index}`,
       ['aria-selected']: selected,
-      ref: index === value ? focusedTabRef : null,
+      ref: index === activeIndex ? focusedTabRef : null,
       ...other
     };
 
@@ -121,7 +112,7 @@ const Tabs = ({
       id: panelId,
       ['aria-labelledby']: `${id}-${index}`,
       className: classNames('TabPanel', className, {
-        'TabPanel--hidden': value !== index
+        'TabPanel--hidden': activeIndex !== index
       }),
       ...other
     });
@@ -129,7 +120,7 @@ const Tabs = ({
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
-  }, [value]);
+  }, [activeIndex]);
 
   return (
     <div
@@ -140,7 +131,7 @@ const Tabs = ({
       <ul
         role="tablist"
         className="Tablist"
-        aria-label={ariaLabelForTablist || 'Tablist'}
+        aria-label={ariaLabelForTablist}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
@@ -153,13 +144,11 @@ const Tabs = ({
 
 Tabs.displayName = 'Tabs';
 Tabs.propTypes = {
-  value: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  ariaLabelForTablist: PropTypes.string.isRequired,
   id: PropTypes.string,
   thin: PropTypes.bool,
-  className: PropTypes.string,
-  ariaLabelForTablist: PropTypes.string
+  className: PropTypes.string
 };
 
 export default Tabs;

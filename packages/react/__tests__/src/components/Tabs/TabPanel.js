@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Tabs, { TabPanel } from 'src/components/Tabs';
 
-const initialHandleChange = () => {};
+const ariaLabel = 'I am a label';
 
 test('renders children', () => {
   const MountedTabPanel = mount(
@@ -21,7 +21,7 @@ test('renders className props', () => {
 
 test('handles TabPanel--hidden properly', async () => {
   const MountedTabs = mount(
-    <Tabs value={0} handleChange={initialHandleChange}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <TabPanel />
       <TabPanel />
     </Tabs>

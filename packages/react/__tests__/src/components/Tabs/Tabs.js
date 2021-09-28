@@ -3,9 +3,8 @@ import { mount } from 'enzyme';
 import Tabs, { Tab, TabPanel } from 'src/components/Tabs';
 import axe from '../../../axe';
 
-const initialValue = 0;
-const initialHandleChange = () => {};
 const [left, right, home, end, down] = [37, 39, 36, 35, 40];
+const ariaLabel = 'I am a label';
 
 const sleep = ms => {
   return new Promise(resolve => {
@@ -15,7 +14,7 @@ const sleep = ms => {
 
 test('renders children', () => {
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={initialHandleChange}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <Tab>option 1</Tab>
       <Tab>option 2</Tab>
       <TabPanel>
@@ -33,7 +32,7 @@ test('renders children', () => {
 
 test('only renders Tab or TabPanel', () => {
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={initialHandleChange}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <li>option 1</li>
       <button>option 2</button>
       <div className="no-show-div">option 3</div>
@@ -46,7 +45,7 @@ test('only renders Tab or TabPanel', () => {
 
 test('renders thin prop', () => {
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={initialHandleChange} thin>
+    <Tabs ariaLabelForTablist={ariaLabel} thin>
       <Tab>option 1</Tab>
     </Tabs>
   );
@@ -55,11 +54,7 @@ test('renders thin prop', () => {
 
 test('renders className prop', () => {
   const MountedTabs = mount(
-    <Tabs
-      value={initialValue}
-      handleChange={initialHandleChange}
-      className="find--me"
-    >
+    <Tabs ariaLabelForTablist={ariaLabel} className="find--me">
       <Tab>option 1</Tab>
     </Tabs>
   );
@@ -68,106 +63,207 @@ test('renders className prop', () => {
 
 test('renders ariaLabelForTablist prop', () => {
   const MountedTabs = mount(
-    <Tabs
-      value={initialValue}
-      handleChange={initialHandleChange}
-      ariaLabelForTablist="find-me"
-    >
+    <Tabs ariaLabelForTablist="find-me">
       <Tab>option 1</Tab>
     </Tabs>
   );
   expect(MountedTabs.find('.Tablist').prop('aria-label')).toBe('find-me');
 });
 
-test('calls handleChange when clicking a tab', async () => {
-  const handleChangeSpy = jest.fn();
+test('displays correct tabpanel when clicking a tab', async () => {
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={handleChangeSpy}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <TabPanel>TabPanel 1</TabPanel>
+      <TabPanel>TabPanel 2</TabPanel>
+      <TabPanel>TabPanel 3</TabPanel>
     </Tabs>
   );
-
-  expect(handleChangeSpy).toBeCalledTimes(0);
-  MountedTabs.find('Tab')
-    .at(0)
-    .simulate('click');
-  await sleep();
-
-  expect(handleChangeSpy).toBeCalledTimes(1);
-  expect(handleChangeSpy).toBeCalledWith(0);
 
   MountedTabs.find('Tab')
     .at(1)
     .simulate('click');
   await sleep();
 
-  expect(handleChangeSpy).toBeCalledTimes(2);
-  expect(handleChangeSpy).toBeCalledWith(1);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+
+  MountedTabs.find('Tab')
+    .at(2)
+    .simulate('click');
+  await sleep();
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
 });
 
-test('calls handleChange when pressing left, right, home, or end keys', async () => {
-  const handleChangeSpy = jest.fn();
-  const chosenValue = 1;
+test('displays correct tabpanel when pressing left, right, home, or end keys', async () => {
   const MountedTabs = mount(
-    <Tabs value={chosenValue} handleChange={handleChangeSpy}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <Tab>Tab 3</Tab>
+      <TabPanel>TabPanel 1</TabPanel>
+      <TabPanel>TabPanel 2</TabPanel>
+      <TabPanel>TabPanel 3</TabPanel>
     </Tabs>
   );
 
-  expect(handleChangeSpy).toBeCalledTimes(0);
-
-  MountedTabs.find('Tab')
-    .at(0)
-    .simulate('keydown', { which: left });
+  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
   await sleep();
-  expect(handleChangeSpy).toBeCalledTimes(1);
-  expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('Tab')
-    .at(0)
-    .simulate('keydown', { which: right });
-  await sleep();
-  expect(handleChangeSpy).toBeCalledTimes(2);
-  expect(handleChangeSpy).toBeCalledWith(1);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
 
-  MountedTabs.find('Tab')
-    .at(0)
-    .simulate('keydown', { which: home });
+  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
   await sleep();
-  expect(handleChangeSpy).toBeCalledTimes(3);
-  expect(handleChangeSpy).toBeCalledWith(0);
 
-  MountedTabs.find('Tab')
-    .at(0)
-    .simulate('keydown', { which: end });
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+
+  MountedTabs.find('.Tablist').simulate('keydown', { which: end });
   await sleep();
-  expect(handleChangeSpy).toBeCalledTimes(4);
-  expect(handleChangeSpy).toBeCalledWith(2);
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+
+  MountedTabs.find('.Tablist').simulate('keydown', { which: home });
+  await sleep();
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(2)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
 });
 
-test('does not call handleChange when pressing keys other than left, right, home, or end', async () => {
-  const handleChangeSpy = jest.fn();
+test('does not do anything when pressing keys other than left, right, home, or end', async () => {
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={handleChangeSpy}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <TabPanel>TabPanel 1</TabPanel>
+      <TabPanel>TabPanel 2</TabPanel>
     </Tabs>
   );
 
-  expect(handleChangeSpy).toBeCalledTimes(0);
-
-  MountedTabs.find('Tab').simulate('keydown', { which: down });
+  MountedTabs.find('.Tablist').simulate('keydown', { which: down });
   await sleep();
-  expect(handleChangeSpy).toBeCalledTimes(0);
+
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(0)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(false);
+  expect(
+    MountedTabs.find('TabPanel')
+      .at(1)
+      .find('.TabPanel--hidden')
+      .exists()
+  ).toBe(true);
 });
 
 test('returns no axe vialation', async () => {
   /* TabPanel is placed inside Tabs only for testing. In this way
   axe can examine Tab and TabPanel's attributes (such as aria-controls and aria-labelledby) with each other */
   const MountedTabs = mount(
-    <Tabs value={initialValue} handleChange={initialHandleChange}>
+    <Tabs ariaLabelForTablist={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <TabPanel />
