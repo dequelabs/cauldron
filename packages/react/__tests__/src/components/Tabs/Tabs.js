@@ -52,6 +52,16 @@ test('renders thin prop', () => {
   expect(MountedTabs.find('Tabs--thin').exists());
 });
 
+test('renders variant prop', () => {
+  const MountedTabs = mount(
+    <Tabs label={ariaLabel} variant="full-width">
+      <Tab>option 1</Tab>
+    </Tabs>
+  );
+  expect(MountedTabs.find('Tablist--full-width').exists());
+  expect(MountedTabs.find('Tab--full-width').exists());
+});
+
 test('renders className prop', () => {
   const MountedTabs = mount(
     <Tabs label={ariaLabel} className="find--me">
