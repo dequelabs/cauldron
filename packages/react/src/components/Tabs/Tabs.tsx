@@ -9,25 +9,25 @@ import Tab from './Tab';
 const [left, right, home, end] = [37, 39, 36, 35];
 
 type TabsVariant = 'full-width';
+type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
 
-interface TabsProps {
+type TabsProps = {
   children: React.ReactNode;
-  label: string;
   initialActiveIndex?: number;
   id?: string;
   thin?: boolean;
   className?: string;
   variant?: TabsVariant;
-}
+} & LabelProps;
 
 const Tabs = ({
   children,
-  label,
   thin,
   id: propId,
   initialActiveIndex = 0,
   variant,
-  className
+  className,
+  ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [id] = propId ? [propId] : useId(1, 'tabs');
@@ -133,7 +133,7 @@ const Tabs = ({
         className={classNames('Tablist', {
           'Tablist--full-width': variant === 'full-width'
         })}
-        aria-label={label}
+        {...labelProp}
         onKeyDown={handleKeyDown}
       >
         {tabComponents}
@@ -146,7 +146,8 @@ const Tabs = ({
 Tabs.displayName = 'Tabs';
 Tabs.propTypes = {
   children: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  labelledby: PropTypes.string,
   id: PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,

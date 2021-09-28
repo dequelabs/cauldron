@@ -71,13 +71,22 @@ test('renders className prop', () => {
   expect(MountedTabs.find('find--me').exists());
 });
 
-test('renders label prop', () => {
+test('renders aria-label prop', () => {
   const MountedTabs = mount(
-    <Tabs label="find-me">
+    <Tabs aria-label="find-me">
       <Tab>option 1</Tab>
     </Tabs>
   );
   expect(MountedTabs.find('.Tablist').prop('aria-label')).toBe('find-me');
+});
+
+test('renders aria-labelledby prop', () => {
+  const MountedTabs = mount(
+    <Tabs aria-labelledby="find-me">
+      <Tab>option 1</Tab>
+    </Tabs>
+  );
+  expect(MountedTabs.find('.Tablist').prop('aria-labelledby')).toBe('find-me');
 });
 
 test('displays correct tabpanel when clicking a tab', async () => {
