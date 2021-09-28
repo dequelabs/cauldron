@@ -31,7 +31,6 @@ const Demo = () => (
       <TabPanel>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel></TabPanel>
     </Tabs>
     <h2>Code Sample</h2>
     <Code language="javascript">
@@ -72,7 +71,6 @@ const Demo = () => (
       <TabPanel>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel></TabPanel>
     </Tabs>
   </div>
 );
