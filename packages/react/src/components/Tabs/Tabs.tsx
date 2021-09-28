@@ -150,7 +150,8 @@ Tabs.propTypes = {
   id: PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  variant: PropTypes.string
 };
 
 export default Tabs;
