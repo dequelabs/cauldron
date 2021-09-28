@@ -1,7 +1,7 @@
 .Toast {
   top: var(--top-bar-height);
   position: fixed;
-  color: var(--top-bar-background-color-active);
+  color: #0b0e11;
   font-size: var(--text-size-small);
   z-index: var(--z-index-toast);
   align-items: center;

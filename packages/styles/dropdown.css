@@ -40,6 +40,6 @@
 }
 
 .TopBar .Dropdown {
-  top: 42px;
+  top: var(--top-bar-height);
   right: 0;
 }
