@@ -14,18 +14,18 @@ interface TargetElement extends EventTarget {
 
 interface TabsProps {
   children: React.ReactNode;
-  ariaLabelForTablist: string;
+  label: string;
   id?: string;
   thin?: boolean;
   className?: string;
 }
 
 const Tabs = ({
-  id: propId,
   children,
+  label,
   thin,
-  className,
-  ariaLabelForTablist
+  id: propId,
+  className
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [id] = propId ? [propId] : useId(1, 'tabs');
@@ -131,7 +131,7 @@ const Tabs = ({
       <ul
         role="tablist"
         className="Tablist"
-        aria-label={ariaLabelForTablist}
+        aria-label={label}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
@@ -145,7 +145,7 @@ const Tabs = ({
 Tabs.displayName = 'Tabs';
 Tabs.propTypes = {
   children: PropTypes.node.isRequired,
-  ariaLabelForTablist: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   id: PropTypes.string,
   thin: PropTypes.bool,
   className: PropTypes.string

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tabs, Tab, TabPanel, Code } from '@deque/cauldron-react';
 import './index.css';
 
@@ -35,21 +35,21 @@ const Demo = () => (
   <div>
     <h1>Tabs</h1>
     <h2>Demo</h2>
-    <h3>Baisc Tabs</h3>
-    <Tabs value={value} handleChange={handleChange}>
-    <Tab>Tab 1</Tab>
-    <Tab>Tab 2</Tab>
-    <Tab>Tab 3</Tab>
-    <TabPanel>
-      <p>Insert content for tab panle 1 here...</p>
-    </TabPanel>
-    <TabPanel>
-      <p>Insert content for tab panle 2 here...</p>
-    </TabPanel>
-    <TabPanel>
-      <p>Insert content for tab panle 3 here...</p>
-    </TabPanel>
-  </Tabs>
+    <h3>Basic Tabs</h3>
+    <Tabs>
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <TabPanel>
+        <p>Insert content for tab panel 1 here...</p>
+      </TabPanel>
+      <TabPanel>
+        <p>Insert content for tab panel 2 here...</p>
+      </TabPanel>
+      <TabPanel>
+        <p>Insert content for tab panel 3 here...</p>
+      </TabPanel>
+    </Tabs>
   </div>
 );
       `}

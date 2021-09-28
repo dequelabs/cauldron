@@ -15,7 +15,7 @@ test('renders children', () => {
 
 test('renders className Tab--active properly', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
     </Tabs>
@@ -36,7 +36,7 @@ test('renders className Tab--active properly', () => {
 
 test('renders tabIndex properly', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
     </Tabs>
@@ -56,7 +56,7 @@ test('renders tabIndex properly', async () => {
 
 test('renders aria-selected properly', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
     </Tabs>

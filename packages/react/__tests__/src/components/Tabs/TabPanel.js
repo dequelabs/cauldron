@@ -21,7 +21,7 @@ test('renders className props', () => {
 
 test('handles TabPanel--hidden properly', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <TabPanel />
       <TabPanel />
     </Tabs>

@@ -14,7 +14,7 @@ const sleep = ms => {
 
 test('renders children', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>option 1</Tab>
       <Tab>option 2</Tab>
       <TabPanel>
@@ -32,7 +32,7 @@ test('renders children', () => {
 
 test('only renders Tab or TabPanel', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <li>option 1</li>
       <button>option 2</button>
       <div className="no-show-div">option 3</div>
@@ -45,7 +45,7 @@ test('only renders Tab or TabPanel', () => {
 
 test('renders thin prop', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel} thin>
+    <Tabs label={ariaLabel} thin>
       <Tab>option 1</Tab>
     </Tabs>
   );
@@ -54,16 +54,16 @@ test('renders thin prop', () => {
 
 test('renders className prop', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel} className="find--me">
+    <Tabs label={ariaLabel} className="find--me">
       <Tab>option 1</Tab>
     </Tabs>
   );
   expect(MountedTabs.find('find--me').exists());
 });
 
-test('renders ariaLabelForTablist prop', () => {
+test('renders label prop', () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist="find-me">
+    <Tabs label="find-me">
       <Tab>option 1</Tab>
     </Tabs>
   );
@@ -72,7 +72,7 @@ test('renders ariaLabelForTablist prop', () => {
 
 test('displays correct tabpanel when clicking a tab', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <Tab>Tab 3</Tab>
@@ -133,7 +133,7 @@ test('displays correct tabpanel when clicking a tab', async () => {
 
 test('displays correct tabpanel when pressing left, right, home, or end keys', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <Tab>Tab 3</Tab>
@@ -234,7 +234,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
 
 test('does not do anything when pressing keys other than left, right, home, or end', async () => {
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <TabPanel>TabPanel 1</TabPanel>
@@ -263,7 +263,7 @@ test('returns no axe vialation', async () => {
   /* TabPanel is placed inside Tabs only for testing. In this way
   axe can examine Tab and TabPanel's attributes (such as aria-controls and aria-labelledby) with each other */
   const MountedTabs = mount(
-    <Tabs ariaLabelForTablist={ariaLabel}>
+    <Tabs label={ariaLabel}>
       <Tab>Tab 1</Tab>
       <Tab>Tab 2</Tab>
       <TabPanel />
