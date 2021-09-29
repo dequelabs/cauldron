@@ -22,7 +22,7 @@
 .Panel__Header-title {
   flex-grow: 1;
   display: flex;
-  padding: var(--space-half) 0;
+  padding: var(--space-half) var(--space-small);
 }
 
 .Panel__Header-actions {
