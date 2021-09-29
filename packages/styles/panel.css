@@ -39,7 +39,7 @@
 }
 
 /* Dark Theme */
-.cauldron--theme-dark .Panel {
+.cauldron--theme-dark {
   --panel-border-color: #5d676f;
   --panel-header-background-color: var(--accent-dark);
   --panel-header-color: var(--white);
