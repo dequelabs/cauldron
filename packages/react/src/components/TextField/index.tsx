@@ -74,16 +74,6 @@ export default class TextField extends React.Component<
     this.onChange = this.onChange.bind(this);
   }
 
-  componentDidUpdate(prevProps: TextFieldProps) {
-    const { value } = this.props;
-
-    if (value === prevProps.value) {
-      return;
-    }
-
-    this.setState({ value });
-  }
-
   render() {
     const isRequired = !!this.props.required;
     // disabling `no-unused-vars` to prevent specific
@@ -91,7 +81,6 @@ export default class TextField extends React.Component<
     const {
       label,
       fieldRef,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
@@ -134,7 +123,7 @@ export default class TextField extends React.Component<
             'Field--has-error': error
           })}
           id={this.inputId}
-          value={this.state.value}
+          value={typeof value !== 'undefined' ? value : this.state.value}
           onChange={this.onChange}
           aria-invalid={!!error}
           ref={(input: HTMLInputElement | HTMLTextAreaElement | null) => {
