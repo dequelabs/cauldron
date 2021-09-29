@@ -17,12 +17,14 @@
   display: flex;
   border-bottom: 1px solid var(--panel-border-color);
   align-items: center;
+  padding: var(--space-half) 0;
 }
 
 .Panel__Header-title {
   flex-grow: 1;
   display: flex;
-  padding: var(--space-half) var(--space-small);
+  font-weight: var(--font-weight-bold);
+  padding-left: var(--space-small);
 }
 
 .Panel__Header-actions {
