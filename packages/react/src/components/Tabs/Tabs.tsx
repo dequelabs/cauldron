@@ -6,8 +6,6 @@ import { useDidUpdate } from '../../index';
 import TabPanel from './TabPanel';
 import Tab from './Tab';
 
-const [left, right, home, end] = [37, 39, 36, 35];
-
 type TabsVariant = 'full-width';
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
 
@@ -47,11 +45,11 @@ const Tabs = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    const { which } = event;
+    const { key } = event;
     let newIndex: number = activeIndex;
 
-    switch (which) {
-      case left: {
+    switch (key) {
+      case 'ArrowLeft': {
         newIndex = activeIndex - 1;
 
         // circularity
@@ -61,7 +59,7 @@ const Tabs = ({
         setActiveIndex(newIndex);
         break;
       }
-      case right: {
+      case 'ArrowRight': {
         newIndex = activeIndex + 1;
 
         // circularity
@@ -71,12 +69,12 @@ const Tabs = ({
         setActiveIndex(newIndex);
         break;
       }
-      case home: {
+      case 'Home': {
         newIndex = 0;
         setActiveIndex(newIndex);
         break;
       }
-      case end: {
+      case 'End': {
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
         break;

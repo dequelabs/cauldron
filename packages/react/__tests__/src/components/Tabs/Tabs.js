@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import Tabs, { Tab, TabPanel } from 'src/components/Tabs';
 import axe from '../../../axe';
 
-const [left, right, home, end, down] = [37, 39, 36, 35, 40];
 const ariaLabel = 'I am a label';
 
 const sleep = ms => {
@@ -191,7 +190,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
     </Tabs>
   );
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
   await sleep();
 
   expect(
@@ -213,7 +212,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .exists()
   ).toBe(false);
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
   await sleep();
 
   expect(
@@ -235,7 +234,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .exists()
   ).toBe(true);
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: end });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'End' });
   await sleep();
 
   expect(
@@ -257,7 +256,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .exists()
   ).toBe(false);
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: home });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'Home' });
   await sleep();
 
   expect(
@@ -290,7 +289,7 @@ test('does not do anything when pressing keys other than left, right, home, or e
     </Tabs>
   );
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: down });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowDown' });
   await sleep();
 
   expect(
@@ -317,7 +316,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
     </Tabs>
   );
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: right });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
   await sleep();
 
   expect(
@@ -333,7 +332,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
       .exists()
   ).toBe(false);
 
-  MountedTabs.find('.Tablist').simulate('keydown', { which: left });
+  MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
   await sleep();
 
   expect(
