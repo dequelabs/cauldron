@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useDidUpdate } from '../../index';
 import TabPanel from './TabPanel';
 import Tab from './Tab';
+import { useEffect } from 'react';
 
 type TabsVariant = 'full-width';
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
@@ -76,8 +77,14 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { targetref, ...other } = (child as React.ReactElement<any>).props;
+    const { targetref, id, ...other } = (child as React.ReactElement<
+      any
+    >).props;
     const selected = index === activeIndex;
+
+    useEffect(() => {
+      targetref.current.setAttribute('aria-controlledby', id);
+    }, [targetref]);
 
     const config = {
       className: classNames('Tab', {
