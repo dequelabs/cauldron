@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 
 interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  ref: React.RefObject<HTMLDivElement>;
+  panelref: React.RefObject<HTMLDivElement>;
   id?: string;
   children?: React.ReactNode;
   className?: string;
 }
 
-const TabPanel = ({ children, id: propId, ...other }: TabPanelProps) => {
+const TabPanel = ({
+  children,
+  id: propId,
+  panelref,
+  ...other
+}: TabPanelProps) => {
   const [id] = propId ? [propId] : useId(1, 'tabpanel');
   return (
-    <div role="tabpanel" id={id} {...other}>
+    <div role="tabpanel" id={id} ref={panelref} {...other}>
       {children}
     </div>
   );

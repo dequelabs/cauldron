@@ -15,29 +15,29 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Basic Tabs</h3>
       <Tabs aria-label="Basic Tabs">
-        <Tab target={tabPanel1}>Tab 1</Tab>
-        <Tab target={tabPanel2}>Tab 2</Tab>
-        <Tab target={tabPanel3}>Tab 3</Tab>
+        <Tab targetref={tabPanel1}>Tab 1</Tab>
+        <Tab targetref={tabPanel2}>Tab 2</Tab>
+        <Tab targetref={tabPanel3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={tabPanel1}>
+      <TabPanel panelref={tabPanel1}>
         <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
-      <TabPanel ref={tabPanel2}>
+      <TabPanel panelref={tabPanel2}>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel ref={tabPanel3}>
+      <TabPanel panelref={tabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
       </TabPanel>
 
       <h3 id="tabs-variant">Full-width Tabs</h3>
       <Tabs variant="full-width" aria-labelledby="tabs-variant">
-        <Tab target={tabPanel5}>Tab 1</Tab>
-        <Tab target={tabPanel4}>Tab 2</Tab>
+        <Tab targetref={tabPanel5}>Tab 1</Tab>
+        <Tab targetref={tabPanel4}>Tab 2</Tab>
       </Tabs>
-      <TabPanel ref={tabPanel4}>
+      <TabPanel panelref={tabPanel4}>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel ref={tabPanel5}>
+      <TabPanel panelref={tabPanel5}>
         <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
       <h2>Code Sample</h2>

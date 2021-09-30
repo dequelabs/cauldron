@@ -76,10 +76,8 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { target, ...other } = (child as React.ReactElement<any>).props;
+    const { targetref, ...other } = (child as React.ReactElement<any>).props;
     const selected = index === activeIndex;
-
-    console.log(target);
 
     const config = {
       className: classNames('Tab', {
@@ -87,7 +85,7 @@ const Tabs = ({
         'Tab--full-width': variant === 'full-width'
       }),
       tabIndex: index === activeIndex ? 0 : -1,
-      ['aria-controls']: target.current?.id,
+      ['aria-controls']: targetref.current?.id,
       ['aria-selected']: selected,
       ref: index === activeIndex ? focusedTabRef : null,
       onClick: () => handleClick(index),
