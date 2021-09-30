@@ -84,6 +84,11 @@ const Tabs = ({
 
     useEffect(() => {
       targetref.current.setAttribute('aria-controlledby', id);
+      const allClassNames = [...targetref.current.className];
+      if (index === activeIndex) {
+        allClassNames.push('TabPanel--hidden');
+      }
+      targetref.current.setAttribute(className, allClassNames);
     }, [targetref]);
 
     const config = {
