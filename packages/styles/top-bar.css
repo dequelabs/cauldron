@@ -153,7 +153,7 @@
 .cauldron--theme-dark .TopBar {
   background-color: var(--top-bar-background-color);
   color: var(--top-bar-text-color);
-  border-bottom: solid 1px var(--top-bar-border-bottom-color);
+  border-bottom: none;
 }
 
 .cauldron--theme-dark .MenuItem--separator {
