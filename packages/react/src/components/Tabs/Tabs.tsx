@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useId } from 'react-id-generator';
 import { useDidUpdate } from '../../index';
 import TabPanel from './TabPanel';
 import Tab from './Tab';
@@ -12,7 +11,6 @@ type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
 type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
-  id?: string;
   thin?: boolean;
   className?: string;
   variant?: TabsVariant;
@@ -21,21 +19,16 @@ type TabsProps = {
 const Tabs = ({
   children,
   thin,
-  id: propId,
   initialActiveIndex = 0,
   variant,
   className,
   ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
-  const [id] = propId ? [propId] : useId(1, 'tabs');
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === Tab
-  );
-  const panels = React.Children.toArray(children).filter(
-    child => (child as React.ReactElement<any>).type === TabPanel
   );
 
   const tabCount = tabs.length;
@@ -83,17 +76,18 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { ...other } = (child as React.ReactElement<any>).props;
+    const { target, ...other } = (child as React.ReactElement<any>).props;
     const selected = index === activeIndex;
 
+    console.log(target);
+
     const config = {
-      id: `${id}-${index}`,
       className: classNames('Tab', {
         'Tab--active': selected,
         'Tab--full-width': variant === 'full-width'
       }),
       tabIndex: index === activeIndex ? 0 : -1,
-      ['aria-controls']: `${id}-panel-${index}`,
+      ['aria-controls']: target.current?.id,
       ['aria-selected']: selected,
       ref: index === activeIndex ? focusedTabRef : null,
       onClick: () => handleClick(index),
@@ -103,18 +97,18 @@ const Tabs = ({
     return React.cloneElement(child as React.ReactElement<any>, config);
   });
 
-  const tabPanelComponents = panels.map((child, index) => {
-    const { className, ...other } = (child as React.ReactElement<any>).props;
-    const panelId = `${id}-panel-${index}`;
-    return React.cloneElement(child as React.ReactElement<any>, {
-      id: panelId,
-      ['aria-labelledby']: `${id}-${index}`,
-      className: classNames('TabPanel', className, {
-        'TabPanel--hidden': activeIndex !== index
-      }),
-      ...other
-    });
-  });
+  // const tabPanelComponents = panels.map((child, index) => {
+  //   const { className, ...other } = (child as React.ReactElement<any>).props;
+  //   const panelId = `${id}-panel-${index}`;
+  //   return React.cloneElement(child as React.ReactElement<any>, {
+  //     id: panelId,
+  //     ['aria-labelledby']: `${id}-${index}`,
+  //     className: classNames('TabPanel', className, {
+  //       'TabPanel--hidden': activeIndex !== index
+  //     }),
+  //     ...other
+  //   });
+  // });
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
@@ -136,7 +130,6 @@ const Tabs = ({
       >
         {tabComponents}
       </ul>
-      {tabPanelComponents}
     </div>
   );
 };
