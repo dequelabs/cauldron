@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useDidUpdate } from '../../index';
-import TabPanel from './TabPanel';
 import Tab from './Tab';
 import { useEffect } from 'react';
 
@@ -69,6 +68,7 @@ const Tabs = ({
         break;
       }
       case 'End': {
+        event.preventDefault();
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
         break;
