@@ -12,7 +12,8 @@ const CodeDemo = () => (
         DEMO_renderBefore: <h3>javascript</h3>
       },
       {
-        children: '<span class="foo">Hello world!</span>',
+        children:
+          '<div class="foo" aria-label="grammarly-integration" tabindex="-1" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}">Hello World!</div>',
         language: 'html',
         DEMO_renderBefore: <h3>html</h3>
       },

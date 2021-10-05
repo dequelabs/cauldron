@@ -2,7 +2,7 @@
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: var(--gray-20);
+  background: #f0f2f5;
   color: var(--gray-90);
   border: 1px solid var(--gray-40);
   color: var(--accent-primary-active);
@@ -26,16 +26,10 @@
   color: #8a0c8a;
 }
 
-.Code .hljs-number {
-  color: #f99157;
-}
-
-.Code .hljs-selector-attr {
-  color: #f99157;
-}
-
+.Code .hljs-number,
+.Code .hljs-selector-attr,
 .Code .hljs-selector-pseudo {
-  color: #f99157;
+  color: #bd1a38;
 }
 
 .Code .hljs-string {
@@ -65,11 +59,15 @@
 .Code .hljs-template-variable,
 .Code .hljs-selector-id,
 .Code .hljs-class .hljs-title {
-  color: #ffcc66;
+  color: #a46e01;
 }
 
 .Code .hljs-strong {
   font-weight: bold;
+}
+
+.Code .hljs-tag {
+  color: var(--accent-primar);
 }
 
 .Code .hljs-symbol,
@@ -77,7 +75,7 @@
 .Code .hljs-subst,
 .Code .hljs-meta,
 .Code .hljs-link {
-  color: #f99157;
+  color: #b64709;
 }
 
 .Code .hljs-deletion {
@@ -90,7 +88,7 @@
 
 .Code .hljs-attr,
 .Code .hljs-attribute {
-  color: var(--accent-error);
+  color: var(--accent-error-active);
 }
 
 .Code .hljs-emphasis {
