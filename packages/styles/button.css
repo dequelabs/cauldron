@@ -102,7 +102,6 @@ button.Link {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
   border: 1px solid var(--field-border-color);
-  --button-hover-outline-color: var(--header-text-color-dark);
 }
 
 .Button--secondary[aria-disabled='true'],
@@ -184,7 +183,6 @@ button.Link {
   --button-background-color-secondary: var(--accent-medium);
   --button-background-color-secondary-disabled: var(--accent-medium);
   --button-background-color-error-disabled: var(--accent-medium);
-  --header-text-color-dark: var(--white);
 
   --button-background-color-primary-active: #a7e9f7;
   --button-background-color-secondary-active: var(--accent-light);

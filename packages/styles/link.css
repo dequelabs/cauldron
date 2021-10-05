@@ -27,6 +27,14 @@ p .Link {
   margin: 0 2px;
   display: inline;
   text-decoration: underline;
-  color: var(--header-text-color-dark);
+  color: var(--gray-90);
   font-weight: var(--font-weight-normal);
+}
+
+.cauldron--theme-dark .Link {
+  --link-text-color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Link:hover {
+  --link-text-color: var(--white);
 }
