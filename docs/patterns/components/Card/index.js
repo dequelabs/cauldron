@@ -4,8 +4,7 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardFooter,
-  Code
+  CardFooter
 } from '@deque/cauldron-react/';
 import './index.css';
 
