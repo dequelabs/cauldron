@@ -151,8 +151,6 @@
 }
 
 .cauldron--theme-dark .TopBar {
-  background-color: var(--top-bar-background-color);
-  color: var(--top-bar-text-color);
   border-bottom: none;
 }
 
