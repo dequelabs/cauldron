@@ -22,13 +22,13 @@
   background-color: var(--top-bar-background-color);
   padding: var(--space-three-quarters) var(--space-three-quarters)
     var(--space-three-quarters) var(--space-large);
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
 }
 
 .Card--simple .Card__header {
   border-bottom: 1px solid var(--gray-40);
   padding: var(--space-small);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .Card__header h2,
