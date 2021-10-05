@@ -169,7 +169,7 @@
   background-color: var(--top-bar-background-color-active);
 }
 
-.cauldron--theme-dark a {
+.cauldron--theme-dark .TopBar a {
   color: var(--top-bar-text-color);
 }
 
