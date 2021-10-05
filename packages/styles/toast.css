@@ -63,7 +63,7 @@
 }
 
 .Toast__message .Link {
-  color: var(--top-bar-background-color-active);
+  color: #0b0e11;
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   text-decoration: underline;
