@@ -156,7 +156,7 @@
 .TooltipHead {
   background: var(--tooltip-info-background-color);
   font-size: 16px;
-  color: var(--header-text-color-dark);
+  color: var(--gray-90);
   padding: 16px 28px;
   text-align: center;
 }
