@@ -63,7 +63,7 @@
 }
 
 .Toast__message .Link {
-  color: #0b0e11;
+  color: var(--accent-dark);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   text-decoration: underline;
@@ -79,5 +79,5 @@
 }
 
 .Toast:focus .Toast__message > .Toast__message-content {
-  border-bottom-color: var(--top-bar-background-color-active);
+  border-bottom-color: var(--accent-dark);
 }
