@@ -154,21 +154,8 @@
   border-bottom: none;
 }
 
-.cauldron--theme-dark .MenuItem--separator {
-  border-left: 1px solid var(--top-bar-menuitem-separator);
-}
-
-.cauldron--theme-dark .TopBar__menu-trigger {
-  background-color: var(--top-bar-background-color);
-  color: var(--top-bar-text-color);
-}
-
 .cauldron--theme-dark .TopBar [aria-current='page'] {
   background-color: var(--top-bar-background-color-active);
-}
-
-.cauldron--theme-dark .TopBar a {
-  color: var(--top-bar-text-color);
 }
 
 .cauldron--theme-dark .TopBar > ul > .TopBar__menu-trigger {
