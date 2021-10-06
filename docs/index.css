@@ -6,7 +6,7 @@ h1,
 h2,
 h3 {
   font-weight: 300;
-  color: var(--header-text-color-dark);
+  color: var(--heading-text-color);
 }
 
 code {

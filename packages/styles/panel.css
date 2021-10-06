@@ -17,12 +17,14 @@
   display: flex;
   border-bottom: 1px solid var(--panel-border-color);
   align-items: center;
+  padding: var(--space-half) 0;
 }
 
 .Panel__Header-title {
   flex-grow: 1;
   display: flex;
-  padding: var(--space-half) 0;
+  font-weight: var(--font-weight-bold);
+  padding-left: var(--space-small);
 }
 
 .Panel__Header-actions {
@@ -39,7 +41,7 @@
 }
 
 /* Dark Theme */
-.cauldron--theme-dark .Panel {
+.cauldron--theme-dark {
   --panel-border-color: #5d676f;
   --panel-header-background-color: var(--accent-dark);
   --panel-header-color: var(--white);
