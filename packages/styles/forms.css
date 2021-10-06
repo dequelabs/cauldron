@@ -1,18 +1,33 @@
 :root {
+  --field-background-color: var(--white);
+  --field-content-color: var(--text-color-base);
   --field-border-color: var(--gray-40);
   --field-border-color-underline: var(--gray-80);
-  --field-border-color-hover: var(--gray-80);
+  --field-border-color-hover: var(--gray-90);
   --field-border-color-focus: var(--accent-primary);
+  --field-border-color-focus-hover: var(--accent-primary-active);
   --field-border-color-focus-glow: rgba(60, 122, 174, 0.7);
   --field-border-color-error: var(--accent-error);
   --field-border-color-error-hover: #c42f41;
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
-  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
   --field-background-color-disabled: #f7f7f7;
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
   --input-min-width: 250px;
+}
+
+.cauldron--theme-dark {
+  --field-background-color: var(--accent-medium);
+  --field-content-color: var(--white);
+  --field-border-color-hover: var(--accent-info-light);
+  --field-border-color-focus: var(--accent-info);
+  --field-border-color-focus-hover: var(--accent-info-light);
+  --field-border-color-error: var(--accent-danger);
+  --field-border-color-error-hover: #fea7a6;
+  --field-background-color-disabled: #5d676f;
+  --field-required-text-color: var(--white);
+  --field-label-text-color: var(--white);
 }
 
 input,

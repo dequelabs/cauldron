@@ -46,7 +46,7 @@
   right: var(--select-arrow-spacing);
   border-left: var(--space-half) solid transparent;
   border-right: var(--space-half) solid transparent;
-  border-top: var(--space-three-quarters) solid var(--select-content-color);
+  border-top: var(--space-three-quarters) solid var(--field-content-color);
   pointer-events: none;
 }
 
@@ -59,7 +59,7 @@
   font-weight: normal;
   font-style: normal;
   font-size: var(--text-size-small);
-  color: var(--select-content-color);
+  color: var(--field-content-color);
   text-decoration: rgb(102, 102, 102);
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.05);
   background: var(--select-background-color);
