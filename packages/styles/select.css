@@ -7,6 +7,7 @@
   --select-content-color: var(--text-color-base);
   --select-border-hover-color: var(--gray-90);
   --select-border-focus-color: var(--accent-primary);
+  --select-border-focus-hover-color: var(--accent-primary-active);
   --select-error-border-color: var(--accent-error);
   --select-error-border-hover-color: #c42f41;
 }
@@ -16,6 +17,7 @@
   --select-disabled-background-color: #5d676f;
   --select-content-color: var(--white);
   --select-border-hover-color: var(--accent-info-light);
+  --select-border-focus-hover-color: var(--accent-info-light);
   --select-border-focus-color: var(--accent-info);
   --select-error-border-color: var(--accent-danger);
   --select-error-border-hover-color: #fea7a6;
@@ -75,7 +77,7 @@
 }
 
 .Field__select--wrapper select:focus:hover {
-  border: 2px solid var(--select-border-focus-color);
+  border: 2px solid var(--select-border-focus-hover-color);
 }
 
 .Field__select--wrapper select:invalid,
