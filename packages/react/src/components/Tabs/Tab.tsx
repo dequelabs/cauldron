@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
-  id?: string;
   targetref: React.RefObject<HTMLDivElement>;
+  id?: string;
   children?: React.ReactNode;
 }
 
@@ -19,6 +19,8 @@ const Tab = React.forwardRef<HTMLLIElement, TabProps>(
 
 Tab.displayName = 'Tab';
 Tab.propTypes = {
+  targetref: PropTypes.any.isRequired,
+  id: PropTypes.string,
   children: PropTypes.node
 };
 

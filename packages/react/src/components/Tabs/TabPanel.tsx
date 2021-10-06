@@ -33,6 +33,8 @@ const TabPanel = ({
 
 TabPanel.displayName = 'TabPanel';
 TabPanel.Proptypes = {
+  panelref: PropTypes.instanceOf(HTMLDivElement).isRequired,
+  id: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string
 };
