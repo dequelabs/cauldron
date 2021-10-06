@@ -3,6 +3,7 @@
   --select-width: 300px;
   --select-arrow-spacing: 10px;
   --select-background-color: var(--white);
+  --select-disabled-background-color: #f7f7f7;
   --select-content-color: var(--text-color-base);
   --select-border-hover-color: var(--gray-90);
   --select-border-focus-color: var(--accent-primary);
@@ -12,6 +13,7 @@
 
 .cauldron--theme-dark {
   --select-background-color: var(--accent-medium);
+  --select-disabled-background-color: #5d676f;
   --select-content-color: var(--white);
   --select-border-hover-color: var(--accent-info-light);
   --select-border-focus-color: var(--accent-info);
@@ -25,7 +27,8 @@
 }
 
 .Field__select--disabled {
-  opacity: 0.45;
+  background: var(--select-disabled-background-color);
+  opacity: 0.65;
 }
 
 .Field__select--wrapper {
@@ -71,6 +74,10 @@
     inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+.Field__select--wrapper select:focus:hover {
+  border: 2px solid var(--select-border-focus-color);
+}
+
 .Field__select--wrapper select:invalid,
 .Field--has-error select {
   border-width: var(--space-quarter);
@@ -95,10 +102,6 @@
 }
 
 /* dark theme */
-.cauldron--theme-dark .Field__select--wrapper select {
-  box-shadow: inset 0px 1px 2px rgba(242, 242, 242, 0.05);
-}
-
 .cauldron--theme-dark .Field__select--wrapper select:focus {
   box-shadow: 0px 0px 4px var(--accent-info),
     inset 0px 1px 2px rgba(242, 242, 242, 0.05);
