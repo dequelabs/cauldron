@@ -23,6 +23,7 @@
   --field-border-color-hover: var(--accent-info-light);
   --field-border-color-focus: var(--accent-info);
   --field-border-color-focus-hover: var(--accent-info-light);
+  --field-border-color-focus-glow: var(--accent-info);
   --field-border-color-error: var(--accent-danger);
   --field-border-color-error-hover: #fea7a6;
   --field-background-color-disabled: #5d676f;
@@ -44,6 +45,19 @@ textarea,
   border-bottom: 1px solid var(--field-border-color-underline);
   margin-bottom: var(--space-half);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--field-background-color);
+}
+
+.cauldron--theme-dark input,
+select,
+textarea,
+[role='menuitemcheckbox'],
+[role='menuitemradio'],
+[role='textbox'],
+[aria-haspopup='listbox'],
+[role='listbox'],
+[role='spinbutton'] {
+  border: 1px solid var(--field-border-color);
 }
 
 input:focus,
@@ -56,9 +70,9 @@ textarea:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
-  border: 1px solid var(--field-border-color-focus);
-  box-shadow: inset 0 0 0 1px var(--field-border-color-focus),
-    0px 0px 4px var(--field-border-color-focus-glow);
+  border: 2px solid var(--field-border-color-focus);
+  box-shadow: 0px 0px 4px var(--field-border-color-focus-glow),
+    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input:hover,
@@ -71,6 +85,18 @@ textarea:hover,
 [role='listbox']:hover,
 [role='spinbutton']:hover {
   border: 1px solid var(--field-border-color-hover);
+}
+
+input:focus:hover,
+select:focus:hover,
+textarea:focus:hover,
+[role='menuitemcheckbox']:focus:hover,
+[role='menuitemradio']:focus:hover,
+[role='textbox']:focus:hover,
+[aria-haspopup='listbox']:focus:hover,
+[role='listbox']:focus:hover,
+[role='spinbutton']:focus:hover {
+  border: 2px solid var(--field-border-color-focus-hover);
 }
 
 input.Field--has-error,
@@ -89,6 +115,18 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
+input.Field--has-error:hover,
+select.Field--has-error:hover,
+textarea.Field--has-error:hover,
+[role='menuitemcheckbox'].Field--has-error:hover,
+[role='menuitemradio'].Field--has-error:hover,
+[role='textbox'].Field--has-error:hover,
+[aria-haspopup='listbox'].Field--has-error:hover,
+[role='listbox'].Field--has-error:hover,
+[role='spinbutton'].Field--has-error:hover {
+  border-color: var(--field-border-color-error-hover);
+}
+
 input.Field--has-error:focus,
 select.Field--has-error:focus,
 textarea.Field--has-error:focus,
@@ -98,8 +136,21 @@ textarea.Field--has-error:focus,
 [aria-haspopup='listbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
-  box-shadow: inset 0 0 0 1px var(--field-border-color-error),
-    0px 0px 4px 0 var(--field-border-color-error-focus-glow);
+  border: 2px solid var(--field-border-color-error);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
+    var(--field-border-color-error-focus-glow) 0px 0px 4px 0px;
+}
+
+input.Field--has-error:focus:hover,
+select.Field--has-error:focus:hover,
+textarea.Field--has-error:focus:hover,
+[role='menuitemcheckbox'].Field--has-error:focus:hover,
+[role='menuitemradio'].Field--has-error:focus:hover,
+[role='textbox'].Field--has-error:focus:hover,
+[aria-haspopup='listbox'].Field--has-error:focus:hover,
+[role='listbox'].Field--has-error:focus:hover,
+[role='spinbutton'].Field--has-error:focus:hover {
+  border-color: var(--field-border-color-error-hover);
 }
 
 .Error {
