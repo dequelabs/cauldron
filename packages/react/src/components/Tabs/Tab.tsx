@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useId } from 'react-id-generator';
 
 interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
   id?: string;
