@@ -19,24 +19,24 @@ test('renders className props', () => {
   expect(MountedTabPanel.find('find--me').exists());
 });
 
-test('handles TabPanel--hidden properly', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <TabPanel />
-      <TabPanel />
-    </Tabs>
-  );
+// test('handles TabPanel--hidden properly', () => {
+//   const MountedTabs = mount(
+//     <Tabs aria-label={ariaLabel}>
+//       <TabPanel />
+//       <TabPanel />
+//     </Tabs>
+//   );
 
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  ).toBe(true);
-});
+//   expect(
+//     MountedTabs.find('TabPanel')
+//       .at(0)
+//       .find('.TabPanel--hidden')
+//       .exists()
+//   ).toBe(false);
+//   expect(
+//     MountedTabs.find('TabPanel')
+//       .at(1)
+//       .find('.TabPanel--hidden')
+//       .exists()
+//   ).toBe(true);
+// });
