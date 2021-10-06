@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useDidUpdate } from '../../index';
 import Tab from './Tab';
 import { useEffect } from 'react';
+import { useId } from 'react-id-generator';
 
 type TabsVariant = 'full-width';
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
@@ -77,10 +78,11 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { targetref, id, ...other } = (child as React.ReactElement<
+    const { targetref, id: propId, ...other } = (child as React.ReactElement<
       any
     >).props;
     const selected = index === activeIndex;
+    const [id] = propId ? [propId] : useId(1, 'tab');
 
     useEffect(() => {
       targetref.current.setAttribute('aria-controlledby', id);
@@ -107,19 +109,6 @@ const Tabs = ({
 
     return React.cloneElement(child as React.ReactElement<any>, config);
   });
-
-  // const tabPanelComponents = panels.map((child, index) => {
-  //   const { className, ...other } = (child as React.ReactElement<any>).props;
-  //   const panelId = `${id}-panel-${index}`;
-  //   return React.cloneElement(child as React.ReactElement<any>, {
-  //     id: panelId,
-  //     ['aria-labelledby']: `${id}-${index}`,
-  //     className: classNames('TabPanel', className, {
-  //       'TabPanel--hidden': activeIndex !== index
-  //     }),
-  //     ...other
-  //   });
-  // });
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
