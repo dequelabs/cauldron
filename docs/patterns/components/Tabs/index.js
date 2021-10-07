@@ -12,7 +12,7 @@ const Demo = () => {
       <h1>Tabs</h1>
       <h2>Demo</h2>
       <h3>Basic Tabs</h3>
-      <Tabs aria-label="Basic Tabs" thin>
+      <Tabs aria-label="Basic Tabs">
         <Tab targetref={tabPanel1}>Tab 1</Tab>
         <Tab targetref={tabPanel2}>Tab 2</Tab>
         <Tab targetref={tabPanel3}>Tab 3</Tab>
