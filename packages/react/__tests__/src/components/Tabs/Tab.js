@@ -8,7 +8,7 @@ test('renders children', () => {
   const TabswithRef = () => {
     const tabPanel1 = useRef(null);
     return (
-      <Tab targetref={tabPanel1} id={'I am a tabId'}>
+      <Tab target={tabPanel1} id={'I am a tabId'}>
         <p>a simple paragraph</p>
       </Tab>
     );
@@ -21,7 +21,7 @@ test('renders id prop properly', () => {
   const TabswithRef = () => {
     const tabPanel1 = useRef(null);
     return (
-      <Tab targetref={tabPanel1} id={'I am a tabId'}>
+      <Tab target={tabPanel1} id={'I am a tabId'}>
         option 1
       </Tab>
     );
@@ -38,8 +38,8 @@ test('renders className Tab--active properly', async () => {
     return (
       <>
         <Tabs aria-label={ariaLabel}>
-          <Tab targetref={tabPanel1}>option 1</Tab>
-          <Tab targetref={tabPanel2}>option 2</Tab>
+          <Tab target={tabPanel1}>option 1</Tab>
+          <Tab target={tabPanel2}>option 2</Tab>
         </Tabs>
       </>
     );
@@ -68,8 +68,8 @@ test('renders aria-selected properly', async () => {
     return (
       <>
         <Tabs aria-label={ariaLabel} initialActiveIndex={1}>
-          <Tab targetref={tabPanel1}>option 1</Tab>
-          <Tab targetref={tabPanel2}>option 2</Tab>
+          <Tab target={tabPanel1}>option 1</Tab>
+          <Tab target={tabPanel2}>option 2</Tab>
         </Tabs>
       </>
     );
