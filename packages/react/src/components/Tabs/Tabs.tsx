@@ -6,7 +6,6 @@ import Tab from './Tab';
 import { useEffect } from 'react';
 import { useId } from 'react-id-generator';
 
-type TabsVariant = 'full-width';
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
 
 type TabsProps = {
@@ -14,14 +13,12 @@ type TabsProps = {
   initialActiveIndex?: number;
   thin?: boolean;
   className?: string;
-  variant?: TabsVariant;
 } & LabelProps;
 
 const Tabs = ({
   children,
   thin,
   initialActiveIndex = 0,
-  variant,
   className,
   ...labelProp
 }: TabsProps): JSX.Element => {
@@ -85,19 +82,18 @@ const Tabs = ({
     const [id] = propId ? [propId] : useId(1, 'tab');
 
     useEffect(() => {
-      targetref.current.setAttribute('aria-controlledby', id);
+      targetref.current?.setAttribute('aria-controlledby', id);
     }, [targetref]);
 
     useEffect(() => {
       index === activeIndex
-        ? targetref.current.classList.remove('TabPanel--hidden')
-        : targetref.current.classList.add('TabPanel--hidden');
+        ? targetref.current?.classList.remove('TabPanel--hidden')
+        : targetref.current?.classList.add('TabPanel--hidden');
     }, [activeIndex]);
 
     const config = {
       className: classNames('Tab', {
-        'Tab--active': selected,
-        'Tab--full-width': variant === 'full-width'
+        'Tab--active': selected
       }),
       tabIndex: index === activeIndex ? 0 : -1,
       ['aria-controls']: targetref.current?.id,
@@ -122,9 +118,7 @@ const Tabs = ({
     >
       <ul
         role="tablist"
-        className={classNames('Tablist', {
-          'Tablist--full-width': variant === 'full-width'
-        })}
+        className="Tablist"
         {...labelProp}
         onKeyDown={handleKeyDown}
       >
@@ -137,13 +131,12 @@ const Tabs = ({
 Tabs.displayName = 'Tabs';
 Tabs.propTypes = {
   children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  labelledby: PropTypes.string,
+  'aria-label': PropTypes.string,
+  'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
-  className: PropTypes.string,
-  variant: PropTypes.string
+  className: PropTypes.string
 };
 
 export default Tabs;

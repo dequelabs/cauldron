@@ -6,8 +6,6 @@ const Demo = () => {
   const tabPanel1 = useRef(null);
   const tabPanel2 = useRef(null);
   const tabPanel3 = useRef(null);
-  const tabPanel4 = useRef(null);
-  const tabPanel5 = useRef(null);
 
   return (
     <div className="TabsDemo">
@@ -27,18 +25,6 @@ const Demo = () => {
       </TabPanel>
       <TabPanel panelref={tabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
-      </TabPanel>
-
-      <h3 id="tabs-variant">Full-width Tabs</h3>
-      <Tabs variant="full-width" aria-labelledby="tabs-variant">
-        <Tab targetref={tabPanel5}>Tab 1</Tab>
-        <Tab targetref={tabPanel4}>Tab 2</Tab>
-      </Tabs>
-      <TabPanel panelref={tabPanel4}>
-        <p>Insert content for tab panel 2 here...</p>
-      </TabPanel>
-      <TabPanel panelref={tabPanel5}>
-        <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
       <h2>Code Sample</h2>
       <Code language="javascript">
@@ -72,18 +58,6 @@ const Demo = () => {
       </TabPanel>
       <TabPanel panelref={tabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
-      </TabPanel>
-
-      <h3 id="tabs-variant">Full-width Tabs</h3>
-      <Tabs variant="full-width" aria-labelledby="tabs-variant">
-        <Tab targetref={tabPanel5}>Tab 1</Tab>
-        <Tab targetref={tabPanel4}>Tab 2</Tab>
-      </Tabs>
-      <TabPanel panelref={tabPanel4}>
-        <p>Insert content for tab panel 2 here...</p>
-      </TabPanel>
-      <TabPanel panelref={tabPanel5}>
-        <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
     </div>
   );

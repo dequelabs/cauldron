@@ -1,35 +1,50 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { mount } from 'enzyme';
 import Tabs, { Tab, TabPanel } from 'src/components/Tabs';
 import axe from '../../../axe';
+import { act } from 'react-dom/test-utils';
 
 const ariaLabel = 'I am a label';
 
-const sleep = ms => {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
+const update = async wrapper => {
+  await act(async () => {
+    await new Promise(resolve => setImmediate(resolve));
+    wrapper.update();
   });
 };
 
-test('renders children', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <Tab>option 1</Tab>
-      <Tab>option 2</Tab>
-      <TabPanel>
-        <p>Panel 1</p>
-      </TabPanel>
-      <TabPanel>
-        <p>Panel 2</p>
-      </TabPanel>
-    </Tabs>
-  );
-
-  expect(MountedTabs.find('Tab')).toHaveLength(2);
-  expect(MountedTabs.find('TabPanel')).toHaveLength(2);
+test('mounts without error', () => {
+  expect(() =>
+    mount(
+      <Tabs aria-label={ariaLabel}>
+        <div />
+      </Tabs>
+    )
+  ).not.toThrow();
 });
 
-test('only renders Tab or TabPanel', () => {
+test('renders children', async () => {
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
+
+  expect(MountedTabs.find('Tab')).toHaveLength(1);
+});
+
+test('only renders Tab', () => {
   const MountedTabs = mount(
     <Tabs aria-label={ariaLabel}>
       <li>option 1</li>
@@ -42,75 +57,126 @@ test('only renders Tab or TabPanel', () => {
   expect(MountedTabs.find('.no-show-div')).toHaveLength(0);
 });
 
-test('renders thin prop', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel} thin>
-      <Tab>option 1</Tab>
-    </Tabs>
-  );
+test('renders thin prop', async () => {
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel} thin>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
   expect(MountedTabs.find('Tabs--thin').exists());
 });
 
-test('renders variant prop', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel} variant="full-width">
-      <Tab>option 1</Tab>
-    </Tabs>
-  );
-  expect(MountedTabs.find('Tablist--full-width').exists());
-  expect(MountedTabs.find('Tab--full-width').exists());
-});
+test('renders className prop', async () => {
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel} className="find--me">
+          <Tab targetref={tabPanel1}>option 1</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+      </>
+    );
+  };
 
-test('renders className prop', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel} className="find--me">
-      <Tab>option 1</Tab>
-    </Tabs>
-  );
+  const MountedTabs = mount(<TabswithRef />);
+  await MountedTabs.update();
+
   expect(MountedTabs.find('find--me').exists());
 });
 
-test('renders aria-label prop', () => {
-  const MountedTabs = mount(
-    <Tabs aria-label="find-me">
-      <Tab>option 1</Tab>
-    </Tabs>
-  );
+test('renders aria-label prop', async () => {
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label="find-me">
+          <Tab targetref={tabPanel1}>option 1</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
   expect(MountedTabs.find('.Tablist').prop('aria-label')).toBe('find-me');
 });
 
-test('renders aria-labelledby prop', () => {
-  const MountedTabs = mount(
-    <Tabs aria-labelledby="find-me">
-      <Tab>option 1</Tab>
-    </Tabs>
-  );
+test('renders aria-labelledby prop', async () => {
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    return (
+      <>
+        <Tabs aria-labelledby="find-me">
+          <Tab targetref={tabPanel1}>option 1</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
   expect(MountedTabs.find('.Tablist').prop('aria-labelledby')).toBe('find-me');
 });
 
 test('displays correct tabpanel when clicking a tab', async () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <Tab>Tab 3</Tab>
-      <TabPanel>TabPanel 1</TabPanel>
-      <TabPanel>TabPanel 2</TabPanel>
-      <TabPanel>TabPanel 3</TabPanel>
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    const tabPanel3 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+          <Tab targetref={tabPanel3}>option 3</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel3}>
+          <p>Panel 3</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   MountedTabs.find('Tab')
     .at(1)
     .simulate('click');
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
@@ -122,25 +188,25 @@ test('displays correct tabpanel when clicking a tab', async () => {
       .at(2)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
 
   MountedTabs.find('Tab')
     .at(2)
     .simulate('click');
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
@@ -150,26 +216,40 @@ test('displays correct tabpanel when clicking a tab', async () => {
 });
 
 test('displays correct tabpanel when clicking a tab with a customized id', async () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel} id="customized-id">
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <TabPanel>TabPanel 1</TabPanel>
-      <TabPanel>TabPanel 2</TabPanel>
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+
+    return (
+      <>
+        <Tabs aria-label={ariaLabel} id="customized-id">
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   MountedTabs.find('Tab')
     .at(1)
     .simulate('click');
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
@@ -179,32 +259,48 @@ test('displays correct tabpanel when clicking a tab with a customized id', async
 });
 
 test('displays correct tabpanel when pressing left, right, home, or end keys', async () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <Tab>Tab 3</Tab>
-      <TabPanel>TabPanel 1</TabPanel>
-      <TabPanel>TabPanel 2</TabPanel>
-      <TabPanel>TabPanel 3</TabPanel>
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    const tabPanel3 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+          <Tab targetref={tabPanel3}>option 3</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel3}>
+          <p>Panel 3</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
@@ -213,7 +309,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
@@ -226,29 +322,29 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'End' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
@@ -257,7 +353,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'Home' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
@@ -270,27 +366,40 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(2)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
 });
 
 test('does not do anything when pressing keys other than left, right, home, or end', async () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <TabPanel>TabPanel 1</TabPanel>
-      <TabPanel>TabPanel 2</TabPanel>
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowDown' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
@@ -303,28 +412,41 @@ test('does not do anything when pressing keys other than left, right, home, or e
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
 });
 
 test('displays correct tabpanel when pressing left, right, home, or end keys with customized id', async () => {
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel} id="customized-id">
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <TabPanel>TabPanel 1</TabPanel>
-      <TabPanel>TabPanel 2</TabPanel>
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel} id="I am a customized-id">
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+        </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
       .at(0)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
   expect(
     MountedTabs.find('TabPanel')
       .at(1)
@@ -333,7 +455,7 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
-  await sleep();
+  await update(MountedTabs);
 
   expect(
     MountedTabs.find('TabPanel')
@@ -346,20 +468,33 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
       .at(1)
       .find('.TabPanel--hidden')
       .exists()
-  ).toBe(true);
+  );
 });
 
 test('returns no axe vialation', async () => {
   /* TabPanel is placed inside Tabs only for testing. In this way
   axe can examine Tab and TabPanel's attributes (such as aria-controls and aria-labelledby) with each other */
-  const MountedTabs = mount(
-    <Tabs aria-label={ariaLabel}>
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <TabPanel />
-      <TabPanel />
-    </Tabs>
-  );
+  const TabswithRef = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab targetref={tabPanel1}>option 1</Tab>
+          <Tab targetref={tabPanel2}>option 2</Tab>
+          <TabPanel panelref={tabPanel1}>
+            <p>Panel 1</p>
+          </TabPanel>
+          <TabPanel panelref={tabPanel2}>
+            <p>Panel 2</p>
+          </TabPanel>
+        </Tabs>
+      </>
+    );
+  };
+
+  const MountedTabs = mount(<TabswithRef />);
+  await update(MountedTabs);
 
   expect(await axe(MountedTabs.html())).toHaveNoViolations();
 });
