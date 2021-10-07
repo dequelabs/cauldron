@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useDidUpdate } from '../../index';
 import Tab from './Tab';
-import { useEffect } from 'react';
 import { useId } from 'react-id-generator';
 
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
