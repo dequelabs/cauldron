@@ -17,13 +17,13 @@ const Demo = () => {
         <Tab target={tabPanel2}>Tab 2</Tab>
         <Tab target={tabPanel3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel panelref={tabPanel1}>
+      <TabPanel ref={tabPanel1}>
         <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
-      <TabPanel panelref={tabPanel2}>
+      <TabPanel ref={tabPanel2}>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel panelref={tabPanel3}>
+      <TabPanel ref={tabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
       </TabPanel>
       <h2>Code Sample</h2>
@@ -48,13 +48,13 @@ const Demo = () => {
         <Tab targetref={tabPanel2}>Tab 2</Tab>
         <Tab targetref={tabPanel3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel panelref={tabPanel1}>
+      <TabPanel ref={tabPanel1}>
         <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
-      <TabPanel panelref={tabPanel2}>
+      <TabPanel ref={tabPanel2}>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel panelref={tabPanel3}>
+      <TabPanel ref={tabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
       </TabPanel>
     </div>

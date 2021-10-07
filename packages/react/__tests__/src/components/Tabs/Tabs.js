@@ -482,13 +482,13 @@ test('returns no axe vialation', async () => {
         <Tabs aria-label={ariaLabel}>
           <Tab target={tabPanel1}>option 1</Tab>
           <Tab target={tabPanel2}>option 2</Tab>
-          <TabPanel panelref={tabPanel1}>
-            <p>Panel 1</p>
-          </TabPanel>
-          <TabPanel panelref={tabPanel2}>
-            <p>Panel 2</p>
-          </TabPanel>
         </Tabs>
+        <TabPanel panelref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel panelref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
       </>
     );
   };

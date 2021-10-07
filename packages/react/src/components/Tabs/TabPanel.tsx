@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useId } from 'react-id-generator';
 
 interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  panelref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement>;
   id?: string;
   children?: React.ReactNode;
   className?: string;
@@ -13,7 +13,7 @@ interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 const TabPanel = ({
   children,
   id: propId,
-  panelref,
+  ref,
   className,
   ...other
 }: TabPanelProps) => {
@@ -23,7 +23,7 @@ const TabPanel = ({
       role="tabpanel"
       className={classNames('TabPanel', className)}
       id={id}
-      ref={panelref}
+      ref={ref}
       {...other}
     >
       {children}
@@ -33,7 +33,7 @@ const TabPanel = ({
 
 TabPanel.displayName = 'TabPanel';
 TabPanel.Proptypes = {
-  panelref: PropTypes.instanceOf(HTMLDivElement).isRequired,
+  ref: PropTypes.instanceOf(HTMLDivElement).isRequired,
   id: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string

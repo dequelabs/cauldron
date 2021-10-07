@@ -81,7 +81,7 @@ const Tabs = ({
     const [id] = propId ? [propId] : useId(1, 'tab');
 
     useEffect(() => {
-      target.current?.setAttribute('aria-controlledby', id);
+      target.current?.setAttribute('aria-labelledby', id);
     }, [target]);
 
     useEffect(() => {
