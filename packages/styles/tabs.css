@@ -26,7 +26,6 @@
   border-left: 1px solid var(--tabs-border-color);
 }
 
-/* Texts that are longer the Tab's width will be filtered by design group */
 .Tab {
   display: flex;
   justify-content: center;

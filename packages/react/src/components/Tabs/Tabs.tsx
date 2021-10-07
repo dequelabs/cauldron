@@ -74,20 +74,20 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { targetref, id: propId, ...other } = (child as React.ReactElement<
+    const { target, id: propId, ...other } = (child as React.ReactElement<
       any
     >).props;
     const selected = index === activeIndex;
     const [id] = propId ? [propId] : useId(1, 'tab');
 
     useEffect(() => {
-      targetref.current?.setAttribute('aria-controlledby', id);
-    }, [targetref]);
+      target.current?.setAttribute('aria-controlledby', id);
+    }, [target]);
 
     useEffect(() => {
       index === activeIndex
-        ? targetref.current?.classList.remove('TabPanel--hidden')
-        : targetref.current?.classList.add('TabPanel--hidden');
+        ? target.current?.classList.remove('TabPanel--hidden')
+        : target.current?.classList.add('TabPanel--hidden');
     }, [activeIndex]);
 
     const config = {
@@ -95,7 +95,7 @@ const Tabs = ({
         'Tab--active': selected
       }),
       tabIndex: index === activeIndex ? 0 : -1,
-      ['aria-controls']: targetref.current?.id,
+      ['aria-controls']: target.current?.id,
       ['aria-selected']: selected,
       ref: index === activeIndex ? focusedTabRef : null,
       onClick: () => handleClick(index),
