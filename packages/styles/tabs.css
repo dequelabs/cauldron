@@ -26,6 +26,7 @@
   border-left: 1px solid var(--tabs-border-color);
 }
 
+/* Texts that are longer the Tab's width will be filtered by design group */
 .Tab {
   display: block;
   text-align: center;
@@ -78,14 +79,4 @@
 .Tabs--thin .Tab {
   height: 2.125rem;
   padding: var(--space-smallest);
-}
-
-/* variant */
-.Tablist--full-width {
-  width: 34.68rem;
-  justify-content: space-evenly;
-}
-
-.Tab--full-width {
-  width: 100%;
 }

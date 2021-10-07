@@ -37,8 +37,6 @@ const Demo = () => {
   const tabPanel1 = useRef(null);
   const tabPanel2 = useRef(null);
   const tabPanel3 = useRef(null);
-  const tabPanel4 = useRef(null);
-  const tabPanel5 = useRef(null);
 
   return (
     <div className="TabsDemo">
