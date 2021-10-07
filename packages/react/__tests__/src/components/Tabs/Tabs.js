@@ -31,7 +31,7 @@ test('renders children', async () => {
         <Tabs aria-label={ariaLabel}>
           <Tab target={tabPanel1}>option 1</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
       </>
@@ -65,7 +65,7 @@ test('renders thin prop', async () => {
         <Tabs aria-label={ariaLabel} thin>
           <Tab target={tabPanel1}>option 1</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
       </>
@@ -85,7 +85,7 @@ test('renders className prop', async () => {
         <Tabs aria-label={ariaLabel} className="find--me">
           <Tab target={tabPanel1}>option 1</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
       </>
@@ -106,7 +106,7 @@ test('renders aria-label prop', async () => {
         <Tabs aria-label="find-me">
           <Tab target={tabPanel1}>option 1</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
       </>
@@ -126,7 +126,7 @@ test('renders aria-labelledby prop', async () => {
         <Tabs aria-labelledby="find-me">
           <Tab target={tabPanel1}>option 1</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
       </>
@@ -150,13 +150,13 @@ test('displays correct tabpanel when clicking a tab', async () => {
           <Tab target={tabPanel2}>option 2</Tab>
           <Tab target={tabPanel3}>option 3</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel3}>
+        <TabPanel ref={tabPanel3}>
           <p>Panel 3</p>
         </TabPanel>
       </>
@@ -226,10 +226,10 @@ test('displays correct tabpanel when clicking a tab with a customized id', async
           <Tab target={tabPanel1}>option 1</Tab>
           <Tab target={tabPanel2}>option 2</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
       </>
@@ -270,13 +270,13 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
           <Tab target={tabPanel2}>option 2</Tab>
           <Tab target={tabPanel3}>option 3</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel3}>
+        <TabPanel ref={tabPanel3}>
           <p>Panel 3</p>
         </TabPanel>
       </>
@@ -385,10 +385,10 @@ test('does not do anything when pressing keys other than left, right, home, or e
           <Tab target={tabPanel1}>option 1</Tab>
           <Tab target={tabPanel2}>option 2</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
       </>
@@ -425,10 +425,10 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
           <Tab target={tabPanel1}>option 1</Tab>
           <Tab target={tabPanel2}>option 2</Tab>
         </Tabs>
-        <TabPanel panelref={tabPanel1}>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
       </>
@@ -478,18 +478,16 @@ test('returns no axe vialation', async () => {
     const tabPanel1 = useRef(null);
     const tabPanel2 = useRef(null);
     return (
-      <>
-        <Tabs aria-label={ariaLabel}>
-          <Tab target={tabPanel1}>option 1</Tab>
-          <Tab target={tabPanel2}>option 2</Tab>
-        </Tabs>
-        <TabPanel panelref={tabPanel1}>
+      <Tabs aria-label={ariaLabel}>
+        <Tab target={tabPanel1}>option 1</Tab>
+        <Tab target={tabPanel2}>option 2</Tab>
+        <TabPanel ref={tabPanel1}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel panelref={tabPanel2}>
+        <TabPanel ref={tabPanel2}>
           <p>Panel 2</p>
         </TabPanel>
-      </>
+      </Tabs>
     );
   };
 

@@ -6,7 +6,7 @@ test('renders children', () => {
   const TabPanelwithRef = () => {
     const tabPanel1 = useRef(null);
     return (
-      <TabPanel panelref={tabPanel1}>
+      <TabPanel ref={tabPanel1}>
         <p>a simple paragraph</p>
         <p>a complicated paragraph</p>
       </TabPanel>
@@ -20,7 +20,7 @@ test('renders children', () => {
 test('renders className prop', () => {
   const TabPanelwithRef = () => {
     const tabPanel1 = useRef(null);
-    return <TabPanel panelref={tabPanel1} className="find--me" />;
+    return <TabPanel ref={tabPanel1} className="find--me" />;
   };
   const MountedTabPanel = mount(<TabPanelwithRef />);
   expect(MountedTabPanel.find('find--me').exists());
@@ -29,7 +29,7 @@ test('renders className prop', () => {
 test('renders id prop', () => {
   const TabPanelwithRef = () => {
     const tabPanel1 = useRef(null);
-    return <TabPanel panelref={tabPanel1} id="I am a panelId" />;
+    return <TabPanel ref={tabPanel1} id="I am a panelId" />;
   };
   const MountedTabPanel = mount(<TabPanelwithRef />);
   expect(MountedTabPanel.find('I am a panelId').exists());
