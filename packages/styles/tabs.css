@@ -28,13 +28,11 @@
 
 /* Texts that are longer the Tab's width will be filtered by design group */
 .Tab {
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 2.875rem;
-  width: 9.375rem;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   list-style-type: none;
   border-top: 1px solid var(--tabs-border-color);
   border-right: 1px solid var(--tabs-border-color);
