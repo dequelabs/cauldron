@@ -213,7 +213,7 @@ textarea.Field--has-error:focus:hover,
 
 .Field__required-text::before {
   content: ' ';
-  color: var(--text-color-base);
+  color: var(--field-content-color);
 }
 
 .Field__label--has-error .Field__required-text {
@@ -230,7 +230,7 @@ textarea.Field--has-error:focus:hover,
   padding: var(--space-smallest);
   box-sizing: border-box;
   font-size: var(--text-size-small);
-  color: var(--text-color-base);
+  color: var(--field-content-color);
   min-width: var(--input-min-width);
 }
 
@@ -247,6 +247,7 @@ textarea.Field--has-error:focus:hover,
   min-width: var(--input-min-width);
   padding: var(--space-half);
   max-width: 500px;
+  color: var(--field-content-color);
 }
 
 .Field__textarea[disabled],
