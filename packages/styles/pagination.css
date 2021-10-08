@@ -1,0 +1,77 @@
+.Pagination {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.Page_Size_Selector {
+  width: 150px;
+  height: 33px;
+  padding-top: 13px;
+  font-family: var(--monitor-font-family);
+  font-size: var(--text-size-small);
+  color: #666666;
+  text-decoration: none solid rgb(102, 102, 102);
+  --select-width: 160px;
+}
+
+.Page_Size_Selector > div:first-of-type {
+  flex-direction: row;
+}
+
+.Page_Size_Selector label {
+  padding-right: 8px;
+  margin: 6px;
+  font-family: var(--monitor-font-family);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-medium);
+}
+
+.Page_Size_Options {
+  width: 150px;
+}
+
+.Page_Index_Wrapper {
+  margin-left: auto;
+  font-family: var(--monitor-font-family);
+  --button-thin-height: 32px;
+}
+
+.Page_Index_Wrapper p {
+  display: inline-flex;
+  padding: 0 16px 0 16px;
+  vertical-align: middle;
+}
+
+.Pagination nav button {
+  --button-text-color-dark: #283640;
+}
+
+.pagination p span {
+  font-weight: var(--font-weight-medium);
+  padding: 0 2px 0 2px;
+}
+
+.Pagination_Sm nav {
+  margin: 15px auto 0px auto;
+}
+
+.Page_Size_Selector_Sm {
+  margin: auto;
+  width: auto;
+}
+
+.Page_Index_Sm {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 576px) {
+  .Pagination {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .Page_Index_Wrapper {
+    margin-top: 10px;
+  }
+}
