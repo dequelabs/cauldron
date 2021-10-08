@@ -133,7 +133,6 @@ Tabs.propTypes = {
   children: PropTypes.node.isRequired,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
-  id: PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
   className: PropTypes.string
