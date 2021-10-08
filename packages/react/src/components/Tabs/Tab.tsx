@@ -8,7 +8,7 @@ interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 const Tab = React.forwardRef<HTMLLIElement, TabProps>(
-  ({ children, id: propId, ...other }: TabProps, ref) => {
+  ({ children, id: propId, target, ...other }: TabProps, ref) => {
     return (
       <li id={propId} ref={ref} role="tab" {...other}>
         {children}
