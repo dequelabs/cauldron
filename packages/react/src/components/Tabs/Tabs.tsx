@@ -91,6 +91,7 @@ const Tabs = ({
     }, [activeIndex]);
 
     const config = {
+      id,
       className: classNames('Tab', {
         'Tab--active': selected
       }),
