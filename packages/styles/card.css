@@ -13,8 +13,12 @@
   border: 1px solid var(--gray-40);
   border-radius: 3px;
   background-color: var(--tile-background-color);
-  color: var(--gray-90);
+  color: var(--heading-text-color);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cauldron--theme-dark .Card--simple {
+  background-color: var(--dark-workspace-color);
 }
 
 .Card__header {
@@ -38,7 +42,7 @@
 .Card__header h6 {
   font-size: var(--text-small-medium);
   font-weight: var(--font-weight-light);
-  color: var(--tile-background-color);
+  color: var(--heading-text-color);
   margin: 0;
 }
 
@@ -49,7 +53,7 @@
 .Card--simple .Card__header h6 {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-bold);
-  color: var(--gray-90);
+  color: var(--heading-text-color);
 }
 
 .Card__header .OptionsMenu {
