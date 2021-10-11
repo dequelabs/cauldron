@@ -1,43 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useId } from 'react-id-generator';
 import { useDidUpdate } from '../../index';
-import TabPanel from './TabPanel';
 import Tab from './Tab';
+import { useId } from 'react-id-generator';
 
-const [left, right, home, end] = [37, 39, 36, 35];
-
-type TabsVariant = 'full-width';
 type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
 
 type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
-  id?: string;
   thin?: boolean;
   className?: string;
-  variant?: TabsVariant;
 } & LabelProps;
 
 const Tabs = ({
   children,
   thin,
-  id: propId,
   initialActiveIndex = 0,
-  variant,
   className,
   ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
-  const [id] = propId ? [propId] : useId(1, 'tabs');
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === Tab
-  );
-  const panels = React.Children.toArray(children).filter(
-    child => (child as React.ReactElement<any>).type === TabPanel
   );
 
   const tabCount = tabs.length;
@@ -47,11 +35,11 @@ const Tabs = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    const { which } = event;
+    const { key } = event;
     let newIndex: number = activeIndex;
 
-    switch (which) {
-      case left: {
+    switch (key) {
+      case 'ArrowLeft': {
         newIndex = activeIndex - 1;
 
         // circularity
@@ -61,7 +49,7 @@ const Tabs = ({
         setActiveIndex(newIndex);
         break;
       }
-      case right: {
+      case 'ArrowRight': {
         newIndex = activeIndex + 1;
 
         // circularity
@@ -71,12 +59,13 @@ const Tabs = ({
         setActiveIndex(newIndex);
         break;
       }
-      case home: {
+      case 'Home': {
         newIndex = 0;
         setActiveIndex(newIndex);
         break;
       }
-      case end: {
+      case 'End': {
+        event.preventDefault();
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
         break;
@@ -85,17 +74,29 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { ...other } = (child as React.ReactElement<any>).props;
+    const { target, id: propId, ...other } = (child as React.ReactElement<
+      any
+    >).props;
     const selected = index === activeIndex;
+    const [id] = propId ? [propId] : useId(1, 'tab');
+
+    useEffect(() => {
+      target.current?.setAttribute('aria-labelledby', id);
+    }, [target]);
+
+    useEffect(() => {
+      index === activeIndex
+        ? target.current?.classList.remove('TabPanel--hidden')
+        : target.current?.classList.add('TabPanel--hidden');
+    }, [activeIndex]);
 
     const config = {
-      id: `${id}-${index}`,
+      id,
       className: classNames('Tab', {
-        'Tab--active': selected,
-        'Tab--full-width': variant === 'full-width'
+        'Tab--active': selected
       }),
       tabIndex: index === activeIndex ? 0 : -1,
-      ['aria-controls']: `${id}-panel-${index}`,
+      ['aria-controls']: target.current?.id,
       ['aria-selected']: selected,
       ref: index === activeIndex ? focusedTabRef : null,
       onClick: () => handleClick(index),
@@ -103,19 +104,6 @@ const Tabs = ({
     };
 
     return React.cloneElement(child as React.ReactElement<any>, config);
-  });
-
-  const tabPanelComponents = panels.map((child, index) => {
-    const { className, ...other } = (child as React.ReactElement<any>).props;
-    const panelId = `${id}-panel-${index}`;
-    return React.cloneElement(child as React.ReactElement<any>, {
-      id: panelId,
-      ['aria-labelledby']: `${id}-${index}`,
-      className: classNames('TabPanel', className, {
-        'TabPanel--hidden': activeIndex !== index
-      }),
-      ...other
-    });
   });
 
   useDidUpdate(() => {
@@ -130,15 +118,12 @@ const Tabs = ({
     >
       <ul
         role="tablist"
-        className={classNames('Tablist', {
-          'Tablist--full-width': variant === 'full-width'
-        })}
+        className="Tablist"
         {...labelProp}
         onKeyDown={handleKeyDown}
       >
         {tabComponents}
       </ul>
-      {tabPanelComponents}
     </div>
   );
 };
@@ -146,13 +131,11 @@ const Tabs = ({
 Tabs.displayName = 'Tabs';
 Tabs.propTypes = {
   children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  labelledby: PropTypes.string,
-  id: PropTypes.string,
+  'aria-label': PropTypes.string,
+  'aria-labelledby': PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
-  className: PropTypes.string,
-  variant: PropTypes.string
+  className: PropTypes.string
 };
 
 export default Tabs;
