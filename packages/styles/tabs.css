@@ -4,7 +4,7 @@
   --tab-inactive-background-color: var(--gray-20);
   --tab-inactive-text-color: var(--gray-60);
   --tab-active-background-color: var(--white);
-  --tab-active-text-color: var(--gray-90);
+  --tabs-active-text-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
@@ -13,7 +13,7 @@
   --tab-inactive-background-color: var(--accent-medium);
   --tab-inactive-text-color: var(--accent-light);
   --tab-active-background-color: var(--accent-dark);
-  --tab-active-text-color: var(--white);
+  --tabs-active-text-color: var(--white);
 }
 
 .Tabs {
@@ -44,11 +44,11 @@
 .Tab:hover {
   cursor: pointer;
   background-color: var(--tab-active-background-color);
-  color: var(--tab-active-text-color);
+  color: var(--tabs-active-text-color);
 }
 
 .Tab--active {
-  color: var(--tab-active-text-color);
+  color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
   font-weight: bold;
   text-decoration: none;
@@ -58,7 +58,7 @@
 
 .TabPanel {
   overflow-wrap: break-word;
-  color: var(--tab-active-text-color);
+  color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
   border: 1px solid var(--tabs-border-color);
   padding: 1rem;
