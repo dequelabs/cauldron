@@ -5,7 +5,7 @@
 export { default as Workspace } from './components/Workspace';
 export { default as Main } from './components/Main';
 export { default as Layout } from './components/Layout';
-export { default as Icon } from './components/Icon';
+export { default as Icon, IconType, iconTypes } from './components/Icon';
 export { default as Offscreen } from './components/Offscreen';
 export { default as Scrim } from './components/Scrim';
 export { default as MenuItem } from './components/MenuItem';
