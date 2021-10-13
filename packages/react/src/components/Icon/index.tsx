@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import Offscreen from '../Offscreen';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { IconType, iconTypes } from './types';
+
+export { IconType, iconTypes };
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
-  // TODO: allowed "types" should be defined here (intellisense, etc)
-  type: string;
+  type: IconType;
 }
 
 const Icon = forwardRef<HTMLDivElement, IconProps>(
@@ -60,6 +62,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 Icon.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
+  // @ts-expect-error
   type: PropTypes.string.isRequired
 };
 

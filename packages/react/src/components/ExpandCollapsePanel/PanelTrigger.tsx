@@ -34,7 +34,7 @@ function PanelTrigger({
       <div className="ExpandCollapse__trigger-title">
         {typeof children === 'function' ? children({ open: !!open }) : children}
       </div>
-      <Icon type={`chevron-${open ? 'down' : 'right'}`} />
+      <Icon type={open ? 'chevron-down' : 'chevron-right'} />
     </button>
   );
 }

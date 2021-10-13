@@ -6,12 +6,12 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Icon from '../Icon';
+import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: string;
+  icon: IconType;
   label: string;
   tooltipPlacement?: TooltipProps['placement'];
   tooltipVariant?: TooltipProps['variant'];
@@ -70,14 +70,15 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 
 IconButton.propTypes = {
+  // @ts-expect-error
   icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  // @ts-ignore
+  // @ts-expect-error
   tooltipPlacement: PropTypes.string,
-  // @ts-ignore
+  // @ts-expect-error
   tooltipVariant: PropTypes.string,
   tooltipPortal: PropTypes.any,
-  // @ts-ignore
+  // @ts-expect-error
   variant: PropTypes.string
 };
 
