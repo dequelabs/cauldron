@@ -207,6 +207,12 @@ export default class IconDemo extends Component {
             },
             {
               type: 'download'
+            },
+            {
+              type: 'recycle'
+            },
+            {
+              type: 'info-square'
             }
           ].sort((a, b) => a.type.localeCompare(b.type))}
           propDocs={{
