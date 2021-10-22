@@ -265,7 +265,6 @@ const initialTheme =
     ? 'dark'
     : 'light');
 
-console.log(localStorage.getItem(CAULDRON_THEME_STORAGE_KEY));
 render(
   <ThemeProvider initialTheme={initialTheme}>
     <App />
