@@ -259,10 +259,15 @@ const App = () => {
   /* eslint-enable jsx-a11y/anchor-has-content */
 };
 
+const initialTheme =
+  localStorage.getItem(CAULDRON_THEME_STORAGE_KEY) ||
+  (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+    ? 'dark'
+    : 'light');
+
+console.log(localStorage.getItem(CAULDRON_THEME_STORAGE_KEY));
 render(
-  <ThemeProvider
-    initialTheme={localStorage.getItem(CAULDRON_THEME_STORAGE_KEY) || 'light'}
-  >
+  <ThemeProvider initialTheme={initialTheme}>
     <App />
   </ThemeProvider>,
   document.getElementById('root')
