@@ -9,7 +9,7 @@
 }
 
 .cauldron--theme-light .Icon--robot circle {
-  stroke: #cccccb;
+  stroke: var(--gray-40);
   stroke-width: 2px;
   color: var(--white);
 }
