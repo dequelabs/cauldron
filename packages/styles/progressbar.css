@@ -1,0 +1,14 @@
+.ProgressBar {
+  background-color: var(--accent-dark);
+  padding: 2px;
+  border-radius: calc((var(--space-small) * 0.5) + 2px);
+  margin-bottom: var(--space-smallest);
+}
+
+.ProgressBar--fill {
+  border-radius: calc(var(--space-small) * 0.5);
+  background-color: var(--accent-info-light);
+  height: var(--space-small);
+  min-width: var(--space-small);
+  transition: width linear 150ms;
+}
