@@ -49,7 +49,23 @@ const ProgressBarDemo = () => {
         happening, such as number of items completed.
       </p>
       <h2>Demo</h2>
-      <ProgressBar label="Progress" progress="75" />
+      <h3>Default Progress</h3>
+      <ProgressBar aria-label="Progress" progress={75} />
+      <Code langauge="javascript">
+        {'<ProgressBar aria-label="Progress" progress={75} />'}
+      </Code>
+      <h3>Custom Progress</h3>
+      <ProgressBar
+        aria-label="Progress"
+        progressMin={1}
+        progressMax={25}
+        progress={5}
+      />
+      <Code langauge="javascript">
+        {
+          '<ProgressBar aria-label="Progress" progress={5} progressMin={1} progressMax={25} />'
+        }
+      </Code>
       <h3>Animated</h3>
       <p>
         If the progress indicates that some activity is currently progressing,
