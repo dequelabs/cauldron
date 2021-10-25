@@ -61,7 +61,8 @@ const componentsList = [
   'Table',
   'DescriptionList',
   'TopBar',
-  'Stepper'
+  'Stepper',
+  'ProgressBar'
 ].sort();
 
 const App = () => {
