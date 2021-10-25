@@ -150,3 +150,8 @@
 .cauldron--theme-dark .Code .hljs-attribute {
   color: #81a2be;
 }
+
+.cauldron--theme-dark .Code .hljs-built_in,
+.cauldron--theme-dark .Code .hljs-title {
+  color: var(--accent-light);
+}
