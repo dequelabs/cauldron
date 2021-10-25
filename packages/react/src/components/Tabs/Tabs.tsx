@@ -5,14 +5,12 @@ import { useDidUpdate } from '../../index';
 import Tab from './Tab';
 import { useId } from 'react-id-generator';
 
-type LabelProps = { 'aria-label': string } | { 'aria-labelledby': string };
-
 type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
   className?: string;
-} & LabelProps;
+} & Cauldron.LabelProps;
 
 const Tabs = ({
   children,

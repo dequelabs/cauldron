@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-interface ProgressBar extends React.HTMLAttributes<HTMLDivElement> {
-  label: string;
+type ProgressBarProps = {
   progress: number;
-}
+  progressMax?: number;
+  progressMin?: number;
+} & Cauldron.LabelProps &
+  React.HTMLAttributes<HTMLDivElement>;
 
-function ProgressBar({
-  label,
-  progress = 0,
-  ...props
-}: ProgressBar): JSX.Element {
-  const { className, ...otherProps } = props;
-  return (
-    <div
-      className={classnames('ProgressBar', className)}
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={progress}
-      aria-label={label}
-      {...otherProps}
-    >
+const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
+  ({ progress = 0, progressMax = 100, progressMin = 0, ...props }, ref) => {
+    const { className, ...otherProps } = props;
+    return (
       <div
-        className="ProgressBar--fill"
-        style={{ width: `${Math.min(progress, 100)}%` }}
-      />
-    </div>
-  );
-}
+        className={classnames('ProgressBar', className)}
+        role="progressbar"
+        aria-valuemin={progressMin}
+        aria-valuemax={progressMax}
+        aria-valuenow={progress}
+        ref={ref}
+        {...otherProps}
+      >
+        <div
+          className="ProgressBar--fill"
+          style={{ width: `${Math.min((progress / progressMax) * 100, 100)}%` }}
+        />
+      </div>
+    );
+  }
+);
 
 ProgressBar.displayName = 'ProgressBar';
 
