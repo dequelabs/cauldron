@@ -22,12 +22,14 @@
 .Code .hljs-selector-tag,
 .Code .hljs-literal,
 .Code .hljs-type,
-.Code .hljs-addition {
+.Code .hljs-addition,
+.Code .hljs-attr,
+.Code .hljs-attribute {
   color: #8a0c8a;
 }
 
 .Code .hljs-number {
-  color: #f99157;
+  color: #115800;
 }
 
 .Code .hljs-selector-attr {
@@ -42,12 +44,9 @@
   color: var(--gray-60);
 }
 
-.Code .hljs-doctag {
-  color: #8abeb7;
-}
-
+.Code .hljs-doctag,
 .Code .hljs-regexp {
-  color: #8abeb7;
+  color: #256244;
 }
 
 .Code .hljs-built_in,
@@ -57,15 +56,16 @@
 
 .Code .hljs-name,
 .Code .hljs-section {
-  color: var(--accent-primary-active);
+  color: #113366;
   font-weight: bold;
 }
 
 .Code .hljs-variable,
 .Code .hljs-template-variable,
+.Code .hljs-tag,
 .Code .hljs-selector-id,
-.Code .hljs-class .hljs-title {
-  color: #ffcc66;
+.Code .hljs-selector-class {
+  color: #8a0c8a;
 }
 
 .Code .hljs-strong {
@@ -86,11 +86,6 @@
 
 .Code .hljs-formula {
   background: #eee8d5;
-}
-
-.Code .hljs-attr,
-.Code .hljs-attribute {
-  color: var(--accent-error);
 }
 
 .Code .hljs-emphasis {
@@ -117,14 +112,38 @@
 }
 
 .cauldron--theme-dark .Code .hljs-comment {
-  color: #969896;
+  color: #9f9f9f;
 }
 
-.cauldron--theme-dark .Code .hljs-built_in,
-.cauldron--theme-dark .Code .hljs-title,
-.cauldron--theme-dark .Code .hljs-name,
-.cauldron--theme-dark .Code .hljs-section {
+.cauldron--theme-dark .Code .hljs-quote {
+  color: orange;
+}
+
+.Code .hljs-name,
+.Code .hljs-section {
+  color: var(--accent-primary-active);
+}
+
+.cauldron--theme-dark .Code .hljs-variable,
+.cauldron--theme-dark .Code .hljs-template-variable,
+.cauldron--theme-dark .Code .hljs-tag,
+.cauldron--theme-dark .Code .hljs-selector-id,
+.cauldron--theme-dark .Code .hljs-selector-class,
+.cauldron--theme-dark .Code .hljs-deletion {
   color: #b5bd68;
+}
+
+.cauldron--theme-dark .Code .hljs-doctag,
+.cauldron--theme-dark .Code .hljs-regexp {
+  color: #f1d4a0;
+}
+
+.cauldron--theme-dark .Code .hljs-deletion {
+  color: #f37a78;
+}
+
+.cauldron--theme-dark .Code .hljs-number {
+  color: #ffb200;
 }
 
 .cauldron--theme-dark .Code .hljs-attr,
