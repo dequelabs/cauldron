@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ProgressBar, Button, Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
 
 const ProgressBarDemo = () => {
   const [animateProgress, setAnimateProgress] = useState(false);
@@ -90,6 +91,29 @@ function Component() {
   )
 }`}
       </Code>
+      <h2>Props</h2>
+      <div className="Demo-props">
+        <PropDocs
+          docs={{
+            progress: {
+              type: 'number',
+              required: true,
+              description: 'The current progress bar progress'
+            },
+            progressMin: {
+              type: 'number',
+              defaultValue: '0',
+              description: 'Minimum value of progress'
+            },
+            progressMax: {
+              type: 'number',
+              defaultValue: 100,
+              description: 'Maximum value of progress'
+            }
+          }}
+          defaultProps={{}}
+        />
+      </div>
     </div>
   );
 };
