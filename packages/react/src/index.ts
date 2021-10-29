@@ -16,6 +16,7 @@ export {
   TopBarMenu,
   TopBarItem
 } from './components/TopBar';
+export { default as Navbar, NavItem } from './components/Navbar';
 export { default as SideBar } from './components/SideBar';
 export { Alert, AlertContent, AlertActions } from './components/Alert';
 export { Dialog, DialogContent, DialogFooter } from './components/Dialog';

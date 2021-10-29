@@ -50,6 +50,7 @@ const componentsList = [
   'ExpandCollapsePanel',
   'TextField',
   'Link',
+  'Navbar',
   'Icon',
   'IconButton',
   'Code',

@@ -9,13 +9,15 @@ interface NavbarProps {
 }
 
 const Navbar = ({ children, thin, className }: NavbarProps) => {
-  <nav
-    className={classNames('Navbar', className, {
-      'Navbar--thin': thin
-    })}
-  >
-    <ul>{children}</ul>
-  </nav>;
+  return (
+    <nav
+      className={classNames('Navbar', className, {
+        'Navbar--thin': thin
+      })}
+    >
+      <ul>{children}</ul>
+    </nav>
+  );
 };
 
 Navbar.displayName = 'Navbar';

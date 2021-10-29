@@ -10,35 +10,35 @@ interface NavItemProps extends React.HTMLAttributes<HTMLLIElement> {
   className?: string;
 }
 
-const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
-  (
-    { path, children, show = true, className, ...other }: NavItemProps,
-    ref
-  ): JSX.Element => {
-    const location = useLocation();
-    const [isActive, setIsActive] = useState(false);
+const NavItem = ({
+  path,
+  children,
+  show = true,
+  className,
+  ...other
+}: NavItemProps): JSX.Element => {
+  const location = useLocation();
+  const [isActive, setIsActive] = useState(false);
 
-    useEffect(() => {
-      const { pathname } = location;
-      setIsActive(pathname === path);
-    }, [location]);
+  useEffect(() => {
+    const { pathname } = location;
+    setIsActive(pathname === path);
+  }, [location]);
 
-    return (
-      <li
-        className={classNames('NavItem', className, {
-          'NavItem--hidden': !show,
-          'NavItem--current': isActive
-        })}
-        ref={ref}
-        {...other}
-      >
-        <Link to={path} aria-current={isActive}>
-          {children}
-        </Link>
-      </li>
-    );
-  }
-);
+  return (
+    <li
+      className={classNames('NavItem', className, {
+        'NavItem--hidden': !show,
+        'NavItem--current': isActive
+      })}
+      {...other}
+    >
+      <Link to={path} aria-current={isActive}>
+        {children}
+      </Link>
+    </li>
+  );
+};
 
 NavItem.displayName = 'NavItem';
 NavItem.propTypes = {
