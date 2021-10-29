@@ -3,18 +3,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 interface NavbarProps {
+  currentPath: string;
   children: React.ReactNode;
-  thin?: boolean;
   className?: string;
 }
 
-const Navbar = ({ children, thin, className }: NavbarProps) => {
+const Navbar = ({ children, className }: NavbarProps) => {
   return (
-    <nav
-      className={classNames('Navbar', className, {
-        'Navbar--thin': thin
-      })}
-    >
+    <nav className={classNames('Navbar', className)}>
       <ul>{children}</ul>
     </nav>
   );
@@ -22,8 +18,8 @@ const Navbar = ({ children, thin, className }: NavbarProps) => {
 
 Navbar.displayName = 'Navbar';
 Navbar.propTypes = {
+  currentPath: PropTypes.string,
   children: PropTypes.node.isRequired,
-  thin: PropTypes.bool,
   className: PropTypes.string
 };
 

@@ -7,6 +7,8 @@ import Home from './Home';
 import {
   TopBar,
   MenuBar,
+  Navbar,
+  NavItem,
   TopBarTrigger,
   TopBarItem,
   Workspace,
@@ -50,7 +52,6 @@ const componentsList = [
   'ExpandCollapsePanel',
   'TextField',
   'Link',
-  'Navbar',
   'Icon',
   'IconButton',
   'Code',
@@ -207,6 +208,9 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
+        <Navbar>
+          <NavItem>Tabs</NavItem>
+        </Navbar>
         <SideBar show={state.show} onDismiss={onTriggerClick}>
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
