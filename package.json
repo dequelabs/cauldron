@@ -12,7 +12,7 @@
     "dev:react": "yarn --cwd=packages/react dev",
     "dev:styles": "yarn --cwd=packages/styles dev",
     "dev:docs": "webpack-dev-server",
-    "fmt": "prettier --write \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
+    "fmt": "prettier --write \"e2e/*.ts\" \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
     "lint": "eslint .",
     "test": "yarn --cwd=packages/react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
