@@ -1,5 +1,5 @@
 .Layout {
-  top: var(--top-bar-height);
+  top: calc(var(--top-bar-height) + var(--top-nav-height));
   padding: var(--layout-padding) var(--layout-padding) 0 var(--layout-padding);
   position: fixed;
   overflow-x: hidden;
@@ -13,7 +13,7 @@
 }
 
 .TopBar--thin .Layout {
-  top: var(--top-bar-height-thin);
+  top: calc(var(--top-bar-height-thin) + var(--top-nav-height));
 }
 
 .Layout .Main {

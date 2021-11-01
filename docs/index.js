@@ -209,7 +209,9 @@ const App = () => {
           </MenuBar>
         </TopBar>
         <Navbar>
-          <NavItem>Tabs</NavItem>
+          <NavItem>NavItem 1</NavItem>
+          <NavItem>NavItem 2</NavItem>
+          <NavItem>NavItem 3</NavItem>
         </Navbar>
         <SideBar show={state.show} onDismiss={onTriggerClick}>
           {componentsList.map(name => {

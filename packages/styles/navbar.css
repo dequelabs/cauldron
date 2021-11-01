@@ -1,0 +1,28 @@
+:root {
+  --top-nav-height: 3rem;
+}
+
+.NavBar.TopBar {
+  position: fixed;
+  top: var(--top-bar-height);
+  height: var(--top-nav-height);
+  /* allow the top bar dropdown to be higher in stacking order */
+  z-index: 1;
+}
+
+.NavBar.TopBar > ul > .NavItem {
+  border-right: 1px solid var(--top-bar-border-color);
+  height: var(--top-nav-height);
+}
+
+.NavBar.TopBar > ul > .NavItem--active {
+  background-color: var(--top-nav-background-active);
+  font-weight: bold;
+}
+
+.NavBar.TopBar > ul > .NavItem > a {
+  display: flex;
+  /* clicking anywhere in the "item" should activate the anchor */
+  height: 100%;
+  align-items: center;
+}
