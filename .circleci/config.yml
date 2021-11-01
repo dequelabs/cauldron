@@ -136,16 +136,14 @@ workflows:
             - styles
       - canary_release:
           requires:
-            - react
-            - styles
+            - a11y
           filters:
             branches:
               only:
                 - develop
       - release:
           requires:
-            - react
-            - styles
+            - a11y
           filters:
             branches:
               only:
