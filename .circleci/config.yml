@@ -64,6 +64,14 @@ jobs:
       - restore_cache:
           key: v1-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
+  a11y:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: yarn build:docs
+      - run: yarn test:a11y
   canary_release:
     <<: *defaults
     steps:
@@ -122,6 +130,10 @@ workflows:
           requires:
             - dependencies
             - checks
+      - a11y:
+          requires:
+            - react
+            - styles
       - canary_release:
           requires:
             - react
