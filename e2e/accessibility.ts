@@ -1,16 +1,16 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
-import { createServer } from 'http-server';
+import express from 'express';
 import { AxeResults } from 'axe-core';
 import logSymbols from 'log-symbols';
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
+import { AddressInfo } from 'net';
 
 const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
-const PORT = 36981;
 const IS_CI = 'CI' in process.env;
 
 const main = async (): Promise<void> => {
@@ -19,19 +19,17 @@ const main = async (): Promise<void> => {
     'Missing dist/'
   );
 
-  const server = createServer({
-    cache: -1,
-    root: DIST_PATH
-  });
-
-  server.listen(PORT);
+  const app = express();
+  app.use(express.static(DIST_PATH));
+  app.use((req, res) => res.sendFile(INDEX_HTML));
+  const server = app.listen(0);
+  const { port } = server.address() as AddressInfo;
 
   const results = new Map<string, AxeResults>();
 
   const browser = await puppeteer.launch();
-
   const page = await browser.newPage();
-  await page.goto(`http://localhost:${PORT}/`);
+  await page.goto(`http://localhost:${port}/`);
 
   const links = await page.$$('.SideBar a[href]');
   for (const link of links) {
@@ -44,10 +42,11 @@ const main = async (): Promise<void> => {
     }
 
     const p = await browser.newPage();
-
     await p.goto(url);
+
     const axe = new AxePuppeteer(p);
     results.set(url, (await axe.analyze()) as AxeResults);
+
     await p.close();
   }
 
