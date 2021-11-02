@@ -21,6 +21,15 @@ const regex = /^anything$/i;`,
         DEMO_renderBefore: <h3>html</h3>
       },
       {
+        children: `.foo,
+#foo,
+div[class="foo"] {
+  color: green;
+}`,
+        language: 'css',
+        DEMO_renderBefore: <h3>css</h3>
+      },
+      {
         children: '$ npm install --save @deque/cauldron-react',
         DEMO_renderBefore: <h3>(no language prop)</h3>
       }

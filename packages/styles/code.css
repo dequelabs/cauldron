@@ -32,12 +32,9 @@
   color: #115800;
 }
 
-.Code .hljs-selector-attr {
-  color: #f99157;
-}
-
-.Code .hljs-selector-pseudo {
-  color: #f99157;
+.Code .hljs-selector-attr,
+.Code .jljs-selector-psuedo {
+  color: var(--accent-primary-active);
 }
 
 .Code .hljs-string {
@@ -154,4 +151,9 @@
 .cauldron--theme-dark .Code .hljs-built_in,
 .cauldron--theme-dark .Code .hljs-title {
   color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Code .hljs-selector-attr,
+.cauldron--theme-dark .Code .hljs-selector-pseudo {
+  color: #f99157;
 }
