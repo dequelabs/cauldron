@@ -1,0 +1,20 @@
+:root {
+  --progress-bar-background-color: var(--accent-dark);
+  --progress-bar-fill-color: var(--accent-info-light);
+  --progress-bar-animation-timing: 150ms;
+}
+
+.ProgressBar {
+  background-color: var(--progress-bar-background-color);
+  padding: 2px;
+  border-radius: calc((var(--space-small) * 0.5) + 2px);
+  margin-bottom: var(--space-smallest);
+}
+
+.ProgressBar--fill {
+  border-radius: calc(var(--space-small) * 0.5);
+  background-color: var(--progress-bar-fill-color);
+  height: var(--space-small);
+  min-width: var(--space-small);
+  transition: width linear var(--progress-bar-animation-timing);
+}

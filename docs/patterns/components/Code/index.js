@@ -7,7 +7,11 @@ const CodeDemo = () => (
     component={Code}
     states={[
       {
-        children: 'var foo = true;',
+        children: `// here are some vars
+var foo = true;
+const number = 1234;
+const string = "hello world";
+const regex = /^anything$/i;`,
         language: 'javascript',
         DEMO_renderBefore: <h3>javascript</h3>
       },

@@ -31,6 +31,7 @@ import '@deque/cauldron-react/cauldron.css';
 import './index.css';
 import { useThemeContext } from '../packages/react/lib';
 
+const CAULDRON_THEME_STORAGE_KEY = 'cauldron_theme';
 const componentsList = [
   'Button',
   'Pointout',
@@ -62,7 +63,8 @@ const componentsList = [
   'Table',
   'DescriptionList',
   'TopBar',
-  'Stepper'
+  'Stepper',
+  'ProgressBar'
 ].sort();
 
 const App = () => {
@@ -109,6 +111,10 @@ const App = () => {
 
   const onSettingsSelect = e => {
     if (e.target.id === 'theme') {
+      localStorage.setItem(
+        CAULDRON_THEME_STORAGE_KEY,
+        theme === 'light' ? 'dark' : 'light'
+      );
       toggleTheme();
     } else {
       setState({
@@ -267,8 +273,14 @@ const App = () => {
   /* eslint-enable jsx-a11y/anchor-has-content */
 };
 
+const initialTheme =
+  localStorage.getItem(CAULDRON_THEME_STORAGE_KEY) ||
+  (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+    ? 'dark'
+    : 'light');
+
 render(
-  <ThemeProvider>
+  <ThemeProvider initialTheme={initialTheme}>
     <App />
   </ThemeProvider>,
   document.getElementById('root')

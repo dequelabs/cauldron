@@ -86,6 +86,7 @@ export {
 } from './components/DescriptionList';
 export { default as Stepper, Step } from './components/Stepper';
 export { default as Panel } from './components/Panel';
+export { default as ProgressBar } from './components/ProgressBar';
 
 /**
  * Helpers / Utils
