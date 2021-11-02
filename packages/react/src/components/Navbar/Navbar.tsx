@@ -7,16 +7,12 @@ interface NavBarProps {
   children: React.ReactNode;
   initialActiveIndex?: number;
   className?: string;
-  thin?: boolean;
-  hasTrigger?: boolean;
 }
 
 const NavBar = ({
   children,
   initialActiveIndex = 0,
-  className,
-  thin = false,
-  hasTrigger = false
+  className
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const navItems = React.Children.toArray(children).filter(
@@ -31,7 +27,6 @@ const NavBar = ({
     const { show = true, ...other } = (child as React.ReactElement<any>).props;
 
     const config = {
-      tabIndex: 0,
       className: classNames('NavItem', {
         'NavItem--hidden': !show,
         'NavItem--active': index === activeIndex
@@ -44,11 +39,7 @@ const NavBar = ({
   });
 
   return (
-    <nav
-      className={classNames('NavBar', 'TopBar', className, {
-        'NavBar--thin': thin
-      })}
-    >
+    <nav className={classNames('NavBar', className)}>
       <ul>{navItemComponents}</ul>
     </nav>
   );
@@ -57,8 +48,7 @@ const NavBar = ({
 NavBar.displayName = 'Navbar';
 NavBar.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  thin: PropTypes.bool
+  className: PropTypes.string
 };
 
 export default NavBar;

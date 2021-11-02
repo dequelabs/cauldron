@@ -209,9 +209,15 @@ const App = () => {
           </MenuBar>
         </TopBar>
         <Navbar>
-          <NavItem>NavItem 1</NavItem>
-          <NavItem>NavItem 2</NavItem>
-          <NavItem>NavItem 3</NavItem>
+          {componentsList.map(name => {
+            const pathname = `/components/${name}`;
+            const isActive = pathname === location.pathname;
+            return (
+              <NavItem key={name}>
+                {renderSideBarLink(pathname, name, isActive)}
+              </NavItem>
+            );
+          })}
         </Navbar>
         <SideBar show={state.show} onDismiss={onTriggerClick}>
           {componentsList.map(name => {

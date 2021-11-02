@@ -1,28 +1,87 @@
 :root {
   --top-nav-height: 3rem;
+  --top-nav-background-color: var(--top-bar-background-color);
+  --top-nav-background-color-hover: var(--gray-20);
+  --top-nav-text-color: var(--top-bar-text-color);
+  --top-nav-shadow-color: var(--accent-primary);
+  --top-nav-box-shadow-color: var(--gray-40);
 }
 
-.NavBar.TopBar {
+.cauldron--theme-dark {
+  --top-nav-background-color: var(--top-bar-background-color);
+  --top-nav-background-color-hover: var(--accent-medium);
+  --top-nav-text-color: var(--top-bar-text-color);
+  --top-nav-shadow-color: var(--accent-info);
+  --top-nav-box-shadow-color: #5d676f;
+}
+
+.NavBar {
   position: fixed;
   top: var(--top-bar-height);
   height: var(--top-nav-height);
   /* allow the top bar dropdown to be higher in stacking order */
   z-index: 1;
+  width: 100%;
+  flex: none;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: var(--top-nav-background-color);
+  color: var(--top-nav-text-color);
+  border-bottom: solid 1px var(--top-bar-border-bottom-color);
 }
 
-.NavBar.TopBar > ul > .NavItem {
+.TopBar--thin .NavBar {
+  top: var(--top-bar-height-thin);
+}
+
+.NavBar > ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  flex: auto;
+}
+
+.NavBar > ul > li {
+  box-sizing: border-box;
+  height: var(--top-nav-height);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 1px 0px 0px var(--top-nav-box-shadow-color),
+    -1px 0px 0px var(--top-nav-box-shadow-color);
+}
+
+.NavBar > ul > li:not(.TopBar__menu-trigger) {
+  font-size: var(--text-size-small);
+  height: var(--top-nav-height);
+  display: flex;
+  align-items: center;
+}
+
+.NavBar > ul > li {
   border-right: 1px solid var(--top-bar-border-color);
   height: var(--top-nav-height);
 }
 
-.NavBar.TopBar > ul > .NavItem--active {
-  background-color: var(--top-nav-background-active);
-  font-weight: bold;
+.NavBar > ul > li:hover {
+  background-color: var(--top-nav-background-color-hover);
 }
 
-.NavBar.TopBar > ul > .NavItem > a {
+.NavBar > ul > .NavItem--active {
+  box-shadow: inset 0px 4px 0px var(--top-nav-shadow-color);
+  z-index: 2;
+}
+
+.NavBar a {
+  color: var(--nav-bar-text-color);
+  text-decoration: none;
+}
+
+.NavBar > ul > li > a {
   display: flex;
-  /* clicking anywhere in the "item" should activate the anchor */
+  padding: 0 var(--space-medium);
   height: 100%;
+  width: 100%;
   align-items: center;
 }
