@@ -90,12 +90,13 @@
 }
 
 /* NavBar with a trigger */
-
 .NavBar--trigger > ul {
   position: fixed;
   top: var(--top-bar-height);
   flex-direction: column;
   width: 100%;
+  /* show all the nav items */
+  height: calc(100vh - 4.25rem);
   overflow: auto;
 }
 
@@ -105,6 +106,7 @@
 
 .NavBar--trigger > ul > li {
   width: 100%;
+  min-height: 3.125rem;
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);

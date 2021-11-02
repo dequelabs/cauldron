@@ -18,7 +18,7 @@ const NavBar = ({
   className
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
-  const [hasTrigger, setHasTrigger] = useState(isNarrow());
+  const [showTrigger, setShowTrigger] = useState(isNarrow());
   const [showDropdown, setShowDropdown] = useState(false);
 
   const navItems = React.Children.toArray(children).filter(
@@ -28,14 +28,14 @@ const NavBar = ({
   const handleClick = (index: number) => {
     setActiveIndex(index);
     // closes dropdown when a menu is selected
-    if (hasTrigger) {
+    if (showTrigger) {
       setShowDropdown(!showDropdown);
     }
   };
 
   const handleWindowResize = useCallback(() => {
     const narrow = isNarrow();
-    setHasTrigger(narrow);
+    setShowTrigger(narrow);
     // close dropdown when viewport is enlarged
     if (!narrow) {
       setShowDropdown(false);
@@ -84,11 +84,13 @@ const NavBar = ({
   return (
     <nav
       className={classNames('NavBar', className, {
-        'NavBar--trigger': hasTrigger
+        'NavBar--trigger': showTrigger
       })}
     >
       <Scrim show={showDropdown} />
-      <ul>{hasTrigger ? navItemComponentsWithTrigger : navItemComponents}</ul>
+      <ul ref={listRef}>
+        {showTrigger ? navItemComponentsWithTrigger : navItemComponents}
+      </ul>
     </nav>
   );
 };
