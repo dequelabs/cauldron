@@ -20,13 +20,10 @@ const NavBar = ({
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [hasTrigger, setHasTrigger] = useState(isNarrow());
   const [showDropdown, setShowDropdown] = useState(false);
+
   const navItems = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === NavItem
   );
-  const navBarTrigger = React.Children.toArray(children).filter(
-    child => (child as React.ReactElement<any>).type === NavBarTrigger
-  );
-  const navItemCount = navItems.length;
 
   const handleClick = (index: number) => {
     setActiveIndex(index);

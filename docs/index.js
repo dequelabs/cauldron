@@ -218,12 +218,8 @@ const App = () => {
           {componentsList.map((name, index) => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
-            let show = true;
-            if (index > 5) {
-              show = false;
-            }
             return (
-              <NavItem key={name} show={show}>
+              <NavItem key={name}>
                 {renderSideBarLink(pathname, name, isActive)}
               </NavItem>
             );
