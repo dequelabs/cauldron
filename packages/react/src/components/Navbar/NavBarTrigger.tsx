@@ -18,16 +18,17 @@ const NavBarTrigger: React.ComponentType<NavBarTriggerProps> = ({
 }) => (
   <li
     aria-haspopup="true"
-    className={classNames('NavBar__menu-trigger', className)}
+    className={classNames('NavBar__menu-trigger', className, {
+      'NavBar__menu-trigger--active': show
+    })}
     {...other}
   >
     <button
-      tabIndex={-1}
       aria-haspopup="true"
       aria-expanded={show}
       onClick={handleTriggerClick}
     >
-      <Icon type="hamburger-menu" />
+      <Icon type={show ? 'close' : 'hamburger-menu'} />
       {children}
     </button>
   </li>

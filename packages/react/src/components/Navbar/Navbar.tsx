@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 import NavBarTrigger from './NavBarTrigger';
 import { isNarrow } from '../../utils/viewport';
+import Scrim from '../Scrim';
 
 interface NavBarProps {
   children: React.ReactNode;
@@ -22,14 +23,26 @@ const NavBar = ({
   const navItems = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === NavItem
   );
+  const navBarTrigger = React.Children.toArray(children).filter(
+    child => (child as React.ReactElement<any>).type === NavBarTrigger
+  );
+  const navItemCount = navItems.length;
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
+    // closes dropdown when a menu is selected
+    if (hasTrigger) {
+      setShowDropdown(!showDropdown);
+    }
   };
 
   const handleWindowResize = useCallback(() => {
     const narrow = isNarrow();
     setHasTrigger(narrow);
+    // close dropdown when viewport is enlarged
+    if (!narrow) {
+      setShowDropdown(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -65,7 +78,7 @@ const NavBar = ({
         show={showDropdown}
         handleTriggerClick={handleTriggerClick}
       >
-        Main Menu
+        MAIN MENU
       </NavBarTrigger>
       {showDropdown && navItemComponents}
     </>
@@ -77,6 +90,7 @@ const NavBar = ({
         'NavBar--trigger': hasTrigger
       })}
     >
+      <Scrim show={showDropdown} />
       <ul>{hasTrigger ? navItemComponentsWithTrigger : navItemComponents}</ul>
     </nav>
   );
