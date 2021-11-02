@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
@@ -10,12 +10,14 @@ interface NavBarProps {
   children: React.ReactNode;
   initialActiveIndex?: number;
   className?: string;
+  navTriggerChildren?: string | ReactNode;
 }
 
 const NavBar = ({
   children,
   initialActiveIndex = 0,
-  className
+  className,
+  navTriggerChildren = 'MAIN MENU'
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showTrigger, setShowTrigger] = useState(isNarrow());
@@ -75,7 +77,7 @@ const NavBar = ({
         show={showDropdown}
         handleTriggerClick={handleTriggerClick}
       >
-        MAIN MENU
+        {navTriggerChildren}
       </NavBarTrigger>
       {showDropdown && navItemComponents}
     </>
@@ -88,9 +90,7 @@ const NavBar = ({
       })}
     >
       <Scrim show={showDropdown} />
-      <ul ref={listRef}>
-        {showTrigger ? navItemComponentsWithTrigger : navItemComponents}
-      </ul>
+      <ul>{showTrigger ? navItemComponentsWithTrigger : navItemComponents}</ul>
     </nav>
   );
 };
@@ -98,7 +98,8 @@ const NavBar = ({
 NavBar.displayName = 'Navbar';
 NavBar.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  navTriggerChildren: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
 export default NavBar;
