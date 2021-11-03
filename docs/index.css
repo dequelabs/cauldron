@@ -46,3 +46,8 @@ code {
 .Demo ul {
   margin: var(--space-large);
 }
+
+/* add border between topbar and navbar just in the demo */
+.cauldron--theme-dark .TopBar {
+  border-bottom: solid 1px var(--top-bar-border-bottom-color);
+}

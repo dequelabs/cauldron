@@ -68,10 +68,6 @@
   height: var(--top-bar-height-thin);
 }
 
-.TopBar > ul > .TopBar__menu-trigger {
-  border-bottom: solid 1px var(--top-bar-border-bottom-color);
-}
-
 .TopBar > ul > li:focus-within,
 .TopBar > ul > li:hover {
   outline: 0;
@@ -145,7 +141,7 @@
 .cauldron--theme-dark {
   --top-bar-background-color: var(--accent-dark);
   --top-bar-menuitem-separator: #5d676f;
-  --top-bar-border-bottom-color: var(--gray-70);
+  --top-bar-border-bottom-color: #5d676f;
   --top-bar-text-color: var(--accent-light);
   --top-bar-background-color-active: #0b0e11;
 }
@@ -156,10 +152,6 @@
 
 .cauldron--theme-dark .TopBar [aria-current='page'] {
   background-color: var(--top-bar-background-color-active);
-}
-
-.cauldron--theme-dark .TopBar > ul > .TopBar__menu-trigger {
-  border-bottom: solid 1px var(--top-bar-border-bottom-color);
 }
 
 .cauldron--theme-dark .TopBar > ul > li:focus-within:before,

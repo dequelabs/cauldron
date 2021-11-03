@@ -21,7 +21,7 @@ interface NavBarTriangleProps {
 
 const NavBar = ({
   children,
-  // no default link
+  // no initial link as default
   initialActiveIndex = -1,
   className,
   navTriggerChildren = 'MAIN MENU',
@@ -104,6 +104,7 @@ const NavBar = ({
 
   const navItemComponents = navItems
     .filter((child, index) => {
+      // use pagination when there is a limit and no trigger
       if (limit && !showTrigger) {
         const nextOffset = offset + limit;
         return index >= offset && index < nextOffset;
