@@ -37,6 +37,7 @@
 }
 
 .NavBar > ul {
+  width: 100%;
   list-style-type: none;
   display: flex;
   z-index: var(--z-index-top-nav);
@@ -47,9 +48,13 @@
   height: var(--top-nav-height);
   cursor: pointer;
   position: relative;
-  border-right: 1px solid var(--top-nav-box-shadow-color);
   display: flex;
   align-items: center;
+  border-right: 1px solid var(--top-nav-box-shadow-color);
+}
+
+.NavBar > ul > li:not(.NavItem--triangle):not(.NavBar__menu-trigger) {
+  flex-grow: 1;
 }
 
 .NavBar > ul > li:first-child:not(.NavBar__menu-trigger) {
@@ -85,6 +90,7 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 var(--space-medium);
   /* clicking anywhere in the "item" should activate the anchor */
   height: 100%;
@@ -98,7 +104,7 @@
   flex-direction: column;
   width: 100%;
   /* show all the nav items */
-  height: calc(100vh - 4.25rem);
+  height: calc(100% - var(--top-bar-height));
   overflow: auto;
 }
 

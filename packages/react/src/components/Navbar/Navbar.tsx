@@ -21,7 +21,8 @@ interface NavBarTriangleProps {
 
 const NavBar = ({
   children,
-  initialActiveIndex = 0,
+  // no default link
+  initialActiveIndex = -1,
   className,
   navTriggerChildren = 'MAIN MENU',
   limit = null
@@ -38,13 +39,6 @@ const NavBar = ({
   });
 
   const navItemCount = navItems.length;
-  console.log({
-    offset,
-    limit,
-    navItemCount,
-    showRightTriangle,
-    showLeftTriangle
-  });
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
@@ -90,15 +84,18 @@ const NavBar = ({
       setShowRightTriangle(false);
       return;
     }
-    // show right triangle when offset plus item limit does not reach item count
-    if (offset + limit < navItemCount) {
-      setShowRightTriangle(true);
-    }
 
-    // show left triangle when offset is bigger than 0
-    if (offset > 0) {
-      setShowLeftTriangle(true);
-    }
+    offset + limit < navItemCount
+      ? // show right triangle when next offest does not reach item count
+        setShowRightTriangle(true)
+      : // hide right triangle when next offest reaches item count
+        setShowRightTriangle(false);
+
+    offset > 0
+      ? // show left triangle when offset is bigger than 0
+        setShowLeftTriangle(true)
+      : // hide left triangle when offset is back to 0
+        setShowLeftTriangle(false);
   }, [limit, offset, showTrigger]);
 
   const handleTriggerClick = () => {
@@ -107,7 +104,7 @@ const NavBar = ({
 
   const navItemComponents = navItems
     .filter((child, index) => {
-      if (limit) {
+      if (limit && !showTrigger) {
         const nextOffset = offset + limit;
         return index >= offset && index < nextOffset;
       }
@@ -121,9 +118,10 @@ const NavBar = ({
       const config = {
         className: classNames('NavItem', {
           'NavItem--hidden': !show,
-          'NavItem--active': index === activeIndex
+          // calculate index in unfiltered array of nav items
+          'NavItem--active': index + offset === activeIndex
         }),
-        onClick: () => handleClick(index),
+        onClick: () => handleClick(index + offset),
         ...other
       };
 
@@ -148,13 +146,21 @@ const NavBar = ({
         return;
       }
 
-      direction === 'left'
-        ? setOffset(offset - limit)
-        : setOffset(offset + limit);
+      if (direction === 'left') {
+        // the minimum offset is 0
+        const nextOffset = offset - limit;
+        setOffset(nextOffset < 0 ? 0 : nextOffset);
+      }
+
+      if (direction === 'right') {
+        // the maximum offset is navItemCount minus limit
+        const nextOffset = offset + limit;
+        setOffset(nextOffset > navItemCount ? offset : nextOffset);
+      }
     };
 
     return (
-      <NavItem onClick={handleTriangleClick}>
+      <NavItem onClick={handleTriangleClick} className="NavItem--triangle">
         {direction === 'left' ? (
           <Icon type="triangle-left" />
         ) : (
