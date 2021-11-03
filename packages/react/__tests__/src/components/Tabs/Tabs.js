@@ -74,7 +74,7 @@ test('renders thin prop', async () => {
 
   const MountedTabs = mount(<TabswithRef />);
   await update(MountedTabs);
-  expect(MountedTabs.find('Tabs--thin').exists());
+  expect(MountedTabs.find('.Tabs--thin').exists()).toBe(true);
 });
 
 test('renders className prop', async () => {
@@ -93,9 +93,9 @@ test('renders className prop', async () => {
   };
 
   const MountedTabs = mount(<TabswithRef />);
-  await MountedTabs.update();
+  MountedTabs.update();
 
-  expect(MountedTabs.find('find--me').exists());
+  expect(MountedTabs.find('.find--me').exists()).toBe(true);
 });
 
 test('renders aria-label prop', async () => {

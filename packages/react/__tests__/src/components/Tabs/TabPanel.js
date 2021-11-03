@@ -23,7 +23,7 @@ test('renders className prop', () => {
     return <TabPanel ref={tabPanel1} className="find--me" />;
   };
   const MountedTabPanel = mount(<TabPanelwithRef />);
-  expect(MountedTabPanel.find('find--me').exists());
+  expect(MountedTabPanel.find('.find--me').exists()).toBe(true);
 });
 
 test('renders id prop', () => {

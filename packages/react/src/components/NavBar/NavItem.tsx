@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 interface NavItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
-  show?: boolean;
 }
 
 const NavItem = ({ children, ...other }: NavItemProps): JSX.Element => (
@@ -12,8 +11,7 @@ const NavItem = ({ children, ...other }: NavItemProps): JSX.Element => (
 
 NavItem.displayName = 'NavItem';
 NavItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  show: PropTypes.bool
+  children: PropTypes.node.isRequired
 };
 
 export default NavItem;

@@ -112,18 +112,13 @@ const NavBar = ({
       return child;
     })
     .map((child, index) => {
-      const { show = true, ...other } = (child as React.ReactElement<
-        any
-      >).props;
-
       const config = {
         className: classNames('NavItem', {
-          'NavItem--hidden': !show,
           // calculate index in unfiltered array of nav items
           'NavItem--active': index + offset === activeIndex
         }),
         onClick: () => handleClick(index + offset),
-        ...other
+        ...(child as React.ReactElement<any>).props
       };
 
       return React.cloneElement(child as React.ReactElement<any>, config);

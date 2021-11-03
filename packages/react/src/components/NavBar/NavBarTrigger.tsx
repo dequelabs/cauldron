@@ -12,7 +12,7 @@ interface NavBarTriggerProps extends React.HTMLAttributes<HTMLLIElement> {
 const NavBarTrigger: React.ComponentType<NavBarTriggerProps> = ({
   children,
   className,
-  show,
+  show = false,
   handleTriggerClick = () => {},
   ...other
 }) => (
