@@ -214,8 +214,8 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <Navbar>
-          {componentsList.map((name, index) => {
+        <Navbar limit={5}>
+          {componentsList.map(name => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
             return (

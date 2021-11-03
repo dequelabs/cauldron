@@ -48,6 +48,8 @@
   cursor: pointer;
   position: relative;
   border-right: 1px solid var(--top-nav-box-shadow-color);
+  display: flex;
+  align-items: center;
 }
 
 .NavBar > ul > li:first-child:not(.NavBar__menu-trigger) {
