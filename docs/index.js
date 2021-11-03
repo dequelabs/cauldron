@@ -7,7 +7,7 @@ import Home from './Home';
 import {
   TopBar,
   MenuBar,
-  Navbar,
+  NavBar,
   NavItem,
   TopBarTrigger,
   TopBarItem,
@@ -214,7 +214,7 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <Navbar limit={5}>
+        <NavBar limit={5}>
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
@@ -224,7 +224,7 @@ const App = () => {
               </NavItem>
             );
           })}
-        </Navbar>
+        </NavBar>
         <SideBar show={state.show} onDismiss={onTriggerClick}>
           {componentsList.map(name => {
             const pathname = `/components/${name}`;

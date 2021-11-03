@@ -187,7 +187,7 @@ const NavBar = ({
   );
 };
 
-NavBar.displayName = 'Navbar';
+NavBar.displayName = 'NavBar';
 NavBar.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
