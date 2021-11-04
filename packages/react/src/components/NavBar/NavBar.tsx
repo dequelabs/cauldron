@@ -16,7 +16,7 @@ interface NavBarProps {
 }
 
 interface NavBarTriangleProps {
-  direction: 'left' | 'right';
+  direction: 'previous' | 'next';
 }
 
 const NavBar = ({
@@ -31,8 +31,8 @@ const NavBar = ({
   const [showTrigger, setShowTrigger] = useState(isNarrow());
   const [showDropdown, setShowDropdown] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [showLeftTriangle, setShowLeftTriangle] = useState(false);
-  const [showRightTriangle, setShowRightTriangle] = useState(false);
+  const [showPrevious, setShowPrevious] = useState(false);
+  const [showNext, setShowNext] = useState(false);
 
   const navItems = React.Children.toArray(children).filter(child => {
     return (child as React.ReactElement<any>).type === NavItem;
@@ -68,34 +68,34 @@ const NavBar = ({
   useEffect(() => {
     // no pagination when trigger shows
     if (showTrigger) {
-      setShowLeftTriangle(false);
-      setShowRightTriangle(false);
+      setShowPrevious(false);
+      setShowNext(false);
       return;
     }
     // no pagination when no limit
     if (!limit) {
-      setShowLeftTriangle(false);
-      setShowRightTriangle(false);
+      setShowPrevious(false);
+      setShowNext(false);
       return;
     }
     // no pagination when item count is smaller than limit
     if (navItemCount <= limit) {
-      setShowLeftTriangle(false);
-      setShowRightTriangle(false);
+      setShowPrevious(false);
+      setShowNext(false);
       return;
     }
 
     offset + limit < navItemCount
-      ? // show right triangle when next offest does not reach item count
-        setShowRightTriangle(true)
-      : // hide right triangle when next offest reaches item count
-        setShowRightTriangle(false);
+      ? // show next when next offest does not reach item count
+        setShowNext(true)
+      : // hide next when next offest reaches item count
+        setShowNext(false);
 
     offset > 0
-      ? // show left triangle when offset is bigger than 0
-        setShowLeftTriangle(true)
-      : // hide left triangle when offset is back to 0
-        setShowLeftTriangle(false);
+      ? // show previous when offset is bigger than 0
+        setShowPrevious(true)
+      : // hide previous when offset is back to 0
+        setShowPrevious(false);
   }, [limit, offset, showTrigger]);
 
   const handleTriggerClick = () => {
@@ -142,13 +142,13 @@ const NavBar = ({
         return;
       }
 
-      if (direction === 'left') {
+      if (direction === 'previous') {
         // the minimum offset is 0
         const nextOffset = offset - limit;
         setOffset(nextOffset < 0 ? 0 : nextOffset);
       }
 
-      if (direction === 'right') {
+      if (direction === 'next') {
         // the maximum offset is navItemCount minus limit
         const nextOffset = offset + limit;
         setOffset(nextOffset > navItemCount ? offset : nextOffset);
@@ -156,8 +156,11 @@ const NavBar = ({
     };
 
     return (
-      <NavItem onClick={handleTriangleClick} className="NavItem--triangle">
-        {direction === 'left' ? (
+      <NavItem
+        onClick={handleTriangleClick}
+        className={`NavItem--${direction}`}
+      >
+        {direction === 'previous' ? (
           <Icon type="triangle-left" />
         ) : (
           <Icon type="triangle-right" />
@@ -174,9 +177,9 @@ const NavBar = ({
     >
       <Scrim show={showDropdown} />
       <ul>
-        {showLeftTriangle && navBarTriangle({ direction: 'left' })}
+        {showPrevious && navBarTriangle({ direction: 'previous' })}
         {showTrigger ? navItemComponentsWithTrigger : navItemComponents}
-        {showRightTriangle && navBarTriangle({ direction: 'right' })}
+        {showNext && navBarTriangle({ direction: 'next' })}
       </ul>
     </nav>
   );
