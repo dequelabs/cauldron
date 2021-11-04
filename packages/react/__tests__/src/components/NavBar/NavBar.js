@@ -98,6 +98,7 @@ test('renders pagination when limit is set', () => {
     </NavBar>
   );
 
+  expect(MountedNavBar.find('li.NavItem--paginated')).toHaveLength(2);
   expect(MountedNavBar.find('.NavItem--next').exists()).toBe(true);
   expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(false);
   // go to the next page

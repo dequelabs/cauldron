@@ -215,7 +215,7 @@ const App = () => {
           </MenuBar>
         </TopBar>
         <NavBar limit={5}>
-          {componentsList.map(name => {
+          {componentsList.map((name, index) => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
             return (

@@ -115,7 +115,8 @@ const NavBar = ({
       const config = {
         className: classNames('NavItem', {
           // calculate index in unfiltered array of nav items
-          'NavItem--active': index + offset === activeIndex
+          'NavItem--active': index + offset === activeIndex,
+          'NavItem--paginated': limit && !showTrigger && navItemCount > limit
         }),
         onClick: () => handleClick(index + offset),
         ...(child as React.ReactElement<any>).props
