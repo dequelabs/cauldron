@@ -1,11 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import NavBar, { NavItem } from 'src/components/NavBar';
-import { isNarrow } from '../../../../src/utils/viewport';
-
-jest.mock('../../../../src/utils/viewport', () => ({
-  isNarrow: jest.fn()
-}));
 
 test('mounts without error', () => {
   expect(() =>
@@ -83,82 +78,9 @@ test('activates a NavItem when it is clicked', () => {
   ).toBe(false);
 });
 
-test('renders pagination when limit is set', () => {
+test('renders NavBarTrigger when collapsed prop is true', () => {
   const MountedNavBar = mount(
-    <NavBar limit={2}>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-      <NavItem>
-        <p>second item</p>
-      </NavItem>
-      <NavItem>
-        <p>third item</p>
-      </NavItem>
-    </NavBar>
-  );
-
-  expect(MountedNavBar.find('li.NavItem--paginated')).toHaveLength(2);
-  expect(MountedNavBar.find('.NavItem--next').exists()).toBe(true);
-  expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(false);
-  // go to the next page
-  MountedNavBar.find('li.NavItem--next').simulate('click');
-  MountedNavBar.update();
-
-  expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(true);
-  expect(MountedNavBar.find('.NavItem--next').exists()).toBe(false);
-
-  MountedNavBar.find('li.NavItem--previous').simulate('click');
-  MountedNavBar.update();
-  expect(MountedNavBar.find('.NavItem--next').exists()).toBe(true);
-  expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(false);
-});
-
-test('does not render pagination when limit is bigger than NavItem count', () => {
-  isNarrow.mockImplementation(() => true);
-  const MountedNavBar = mount(
-    <NavBar limit={4}>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-      <NavItem>
-        <p>second item</p>
-      </NavItem>
-      <NavItem>
-        <p>third item</p>
-      </NavItem>
-    </NavBar>
-  );
-
-  expect(MountedNavBar.find('.NavItem--next').exists()).toBe(false);
-  expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(false);
-});
-
-test('does not render pagination when limit is set but trigger shows', () => {
-  isNarrow.mockImplementation(() => true);
-  const MountedNavBar = mount(
-    <NavBar limit={2}>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-      <NavItem>
-        <p>second item</p>
-      </NavItem>
-      <NavItem>
-        <p>third item</p>
-      </NavItem>
-    </NavBar>
-  );
-
-  expect(MountedNavBar.find('.NavItem--next').exists()).toBe(false);
-  expect(MountedNavBar.find('.NavItem--previous').exists()).toBe(false);
-});
-
-test('renders NavBarTrigger when viewport is narrow', () => {
-  isNarrow.mockImplementation(() => true);
-
-  const MountedNavBar = mount(
-    <NavBar>
+    <NavBar collapsed>
       <NavItem>
         <p>first item</p>
       </NavItem>
@@ -169,11 +91,9 @@ test('renders NavBarTrigger when viewport is narrow', () => {
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
 });
 
-test('renders navTriggerChildren properly', () => {
-  isNarrow.mockImplementation(() => true);
-
+test('renders navTriggerLabel properly', () => {
   const MountedNavBar = mount(
-    <NavBar navTriggerChildren={<p>I am a child</p>}>
+    <NavBar collapsed navTriggerLabel="I am a label">
       <NavItem>
         <p>first item</p>
       </NavItem>
@@ -183,17 +103,15 @@ test('renders navTriggerChildren properly', () => {
   expect(MountedNavBar.find('NavBarTrigger').exists()).toBe(true);
   expect(
     MountedNavBar.find('NavBarTrigger')
-      .find('p')
+      .find('button')
       .text()
-  ).toEqual('I am a child');
+  ).toEqual('I am a label');
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
 });
 
 test('shows NavItems after clicking NavBarTrigger', () => {
-  isNarrow.mockImplementation(() => true);
-
   const MountedNavBar = mount(
-    <NavBar>
+    <NavBar collapsed>
       <NavItem>
         <p>first item</p>
       </NavItem>

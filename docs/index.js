@@ -7,8 +7,6 @@ import Home from './Home';
 import {
   TopBar,
   MenuBar,
-  NavBar,
-  NavItem,
   TopBarTrigger,
   TopBarItem,
   Workspace,
@@ -64,7 +62,8 @@ const componentsList = [
   'DescriptionList',
   'TopBar',
   'Stepper',
-  'ProgressBar'
+  'ProgressBar',
+  'NavBar'
 ].sort();
 
 const App = () => {
@@ -214,17 +213,6 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <NavBar limit={5}>
-          {componentsList.map((name, index) => {
-            const pathname = `/components/${name}`;
-            const isActive = pathname === location.pathname;
-            return (
-              <NavItem key={name}>
-                {renderSideBarLink(pathname, name, isActive)}
-              </NavItem>
-            );
-          })}
-        </NavBar>
         <SideBar show={state.show} onDismiss={onTriggerClick}>
           {componentsList.map(name => {
             const pathname = `/components/${name}`;

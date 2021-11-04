@@ -18,13 +18,10 @@
 }
 
 .NavBar {
-  position: fixed;
-  top: var(--top-bar-height);
   height: var(--top-nav-height);
   /* allow the top bar dropdown to be higher in stacking order */
   z-index: 1;
   width: 100%;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   background-color: var(--top-nav-background-color);
@@ -44,8 +41,9 @@
 }
 
 .NavBar > ul > li {
-  box-sizing: border-box;
   height: var(--top-nav-height);
+  font-size: var(--text-size-normal);
+  flex: 1 0 9.375rem;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -54,17 +52,8 @@
   transition: background-color 0.3s ease;
 }
 
-.NavBar > ul > li.NavItem--paginated {
-  flex-grow: 1;
-}
-
 .NavBar > ul > li:first-child:not(.NavBar__menu-trigger) {
   border-left: 1px solid var(--top-nav-box-shadow-color);
-}
-
-.NavBar > ul > li:not(.NavBar__menu-trigger) {
-  font-size: var(--text-size-small);
-  height: var(--top-nav-height);
 }
 
 .NavBar > ul > li:hover {
@@ -82,10 +71,6 @@
   z-index: calc(var(--z-index-top-nav) + 1);
 }
 
-.NavBar > ul > li.NavItem--hidden {
-  display: none;
-}
-
 .NavBar > ul > li > a {
   color: var(--top-nav-text-color);
   text-decoration: none;
@@ -100,25 +85,19 @@
 
 /* NavBar with a trigger */
 .NavBar--trigger > ul {
-  position: fixed;
-  top: var(--top-bar-height);
   flex-direction: column;
   width: 100%;
-  /* show all the nav items */
-  height: calc(100% - var(--top-bar-height));
   overflow: auto;
 }
 
-.TopBar--thin .NavBar--trigger > ul {
-  top: var(--top-bar-height-thin);
-}
-
-.NavBar--trigger > ul > li {
+.NavBar.NavBar--trigger > ul > li {
   width: 100%;
-  min-height: 3.125rem;
+  height: var(--top-nav-height);
+  font-size: var(--text-size-small);
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
+  flex: 0 1 var(--top-nav-height);
 }
 
 .NavBar.NavBar--trigger > ul > .NavItem--active {
@@ -130,7 +109,6 @@
   display: flex;
   align-items: center;
   align-self: flex-start;
-  box-sizing: border-box;
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
 }
 
@@ -149,4 +127,14 @@
 
 .NavBar--trigger > ul > .NavBar__menu-trigger .Icon {
   margin-right: var(--space-smallest);
+}
+
+@media (max-width: 980px) and (min-width: 680px) {
+  .NavBar > ul > li {
+    font-size: var(--text-size-small);
+  }
+
+  .NavBar > ul > li:not(.NavItem--previous):not(.NavItem--next) {
+    min-width: 7.125rem;
+  }
 }
