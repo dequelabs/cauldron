@@ -54,7 +54,9 @@
   transition: background-color 0.3s ease;
 }
 
-.NavBar > ul > li:not(.NavItem--triangle):not(.NavBar__menu-trigger) {
+.NavBar
+  > ul
+  > li:not(.NavItem--previous):not(.NavItem--next):not(.NavBar__menu-trigger) {
   flex-grow: 1;
 }
 
