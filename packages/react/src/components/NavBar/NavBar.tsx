@@ -44,16 +44,22 @@ const NavBar = ({
   const handleNavBarFocus = (event: FocusEvent) => {
     const target = event.target as HTMLElement;
     if (target?.matches('li.NavItem a')) {
-      target.scrollIntoView();
+      // target.scrollIntoView();
+      const targetWidth = target.offsetWidth;
+      navRef.current?.scrollTo({
+        top: navRef.current?.scrollTop,
+        left: navRef.current?.scrollLeft + targetWidth,
+        behavior: 'smooth'
+      });
     }
   };
 
-  // const targetWidth = target.offsetWidth;
-  // navRef.current?.scrollTo({
-  //   top: navRef.current?.scrollTop,
-  //   left: navRef.current?.scrollLeft + targetWidth,
-  //   behavior: 'smooth'
-  // })
+  const targetWidth = target.offsetWidth;
+  navRef.current?.scrollTo({
+    top: navRef.current?.scrollTop,
+    left: navRef.current?.scrollLeft + targetWidth,
+    behavior: 'smooth'
+  });
 
   useEffect(() => {
     navRef.current?.addEventListener('focusin', handleNavBarFocus);
