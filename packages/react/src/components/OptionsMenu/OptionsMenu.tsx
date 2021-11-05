@@ -58,7 +58,7 @@ export default class OptionsMenu extends Component<
     align: PropTypes.oneOf(['left', 'right'])
   };
 
-  private triggerRef: React.RefObject<HTMLElement>;
+  private triggerRef: React.RefObject<HTMLButtonElement>;
 
   constructor(props: AllOptionsMenuProps) {
     super(props);
