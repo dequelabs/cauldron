@@ -5,7 +5,7 @@
 .SideBar {
   display: none;
   position: fixed;
-  top: calc(var(--top-bar-height) + var(--top-nav-height));
+  top: var(--top-bar-height);
   bottom: 0;
   overflow: auto;
   background-color: var(--white);
@@ -17,7 +17,7 @@
 }
 
 .TopBar--thin .SideBar {
-  top: calc(var(--top-bar-height-thin) + var(--top-nav-height));
+  top: var(--top-bar-height-thin);
 }
 
 .SideBar.SideBar--show {

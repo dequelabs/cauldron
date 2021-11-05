@@ -97,7 +97,7 @@
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
-  flex: 0 1 var(--top-nav-height);
+  flex: 0 1 3.125rem;
 }
 
 .NavBar.NavBar--trigger > ul > .NavItem--active {
@@ -110,6 +110,7 @@
   align-items: center;
   align-self: flex-start;
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
+  flex: 0 1 var(--top-nav-height);
 }
 
 .NavBar--trigger > ul > .NavBar__menu-trigger--active {
