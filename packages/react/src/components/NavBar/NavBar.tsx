@@ -23,7 +23,7 @@ const NavBar = ({
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showDropdown, setShowDropdown] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const ulRef = useRef<HTMLUListElement>(null);
 
   const navItems = React.Children.toArray(children).filter(child => {
     return (child as React.ReactElement<any>).type === NavItem;
@@ -43,34 +43,29 @@ const NavBar = ({
 
   const handleNavBarFocus = (event: FocusEvent) => {
     const target = event.target as HTMLElement;
-    if (target?.matches('li.NavItem a')) {
-      // target.scrollIntoView();
-      const targetWidth = target.offsetWidth;
-      console.log({ targetWidth });
-      console.log(
-        'before',
-        navRef.current?.scrollTop,
-        navRef.current?.scrollLeft
-      );
-      navRef.current?.scrollTo({
-        top: navRef.current?.scrollTop,
-        left: navRef.current?.scrollLeft + targetWidth,
-        behavior: 'smooth'
-      });
-      console.log(
-        'after',
-        navRef.current?.scrollTop,
-        navRef.current?.scrollLeft
-      );
+    if (target?.matches('.NavBar > ul > li > a')) {
+      const targetRight = target.getBoundingClientRect().right;
+      const ulRight = ulRef.current?.getBoundingClientRect().right;
+      const ulWidth = ulRef.current?.offsetWidth;
+
+      /* whenever the target's right end passes ul's, we scroll to
+      the right by half of the ul's width */
+      if (ulRight && ulWidth && targetRight >= ulRight) {
+        ulRef.current?.scrollTo({
+          top: ulRef.current?.scrollTop,
+          left: ulRef.current?.scrollLeft + Math.round(ulWidth / 2),
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
   useEffect(() => {
-    navRef.current?.addEventListener('focusin', handleNavBarFocus);
+    ulRef.current?.addEventListener('focusin', handleNavBarFocus);
     return () => {
-      navRef.current?.removeEventListener('focusin', handleNavBarFocus);
+      ulRef.current?.removeEventListener('focusin', handleNavBarFocus);
     };
-  }, [navRef.current]);
+  }, [ulRef.current]);
 
   const navItemComponents = navItems.map((child, index) => {
     const config = {
@@ -102,10 +97,11 @@ const NavBar = ({
       className={classNames('NavBar', className, {
         'NavBar--trigger': collapsed
       })}
-      ref={navRef}
     >
       <Scrim show={showDropdown} />
-      <ul>{collapsed ? navItemComponentsWithTrigger : navItemComponents}</ul>
+      <ul ref={ulRef}>
+        {collapsed ? navItemComponentsWithTrigger : navItemComponents}
+      </ul>
     </nav>
   );
 };

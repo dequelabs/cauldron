@@ -3,7 +3,7 @@ import { NavBar, NavItem, Code } from '@deque/cauldron-react';
 import './index.css';
 
 const Demo = () => {
-  const componentsList = new Array(5).fill('NavItem');
+  const componentsList = new Array(8).fill('NavItem');
 
   return (
     <div className="NavBarDemo">
