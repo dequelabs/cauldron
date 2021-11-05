@@ -11,10 +11,10 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
       <NavBar>
-        {componentsList.map(name => {
+        {componentsList.map((name, index) => {
           return (
-            <NavItem key={name}>
-              <a href="#">{name}</a>
+            <NavItem key={`${name}-${index}`}>
+              <a href="#">{`${name} ${index + 1}`}</a>
             </NavItem>
           );
         })}
@@ -22,10 +22,10 @@ const Demo = () => {
       <h3>Collapsed NavBar</h3>
       <div className="container">
         <NavBar collapsed>
-          {componentsList.map(name => {
+          {componentsList.map((name, index) => {
             return (
-              <NavItem key={name}>
-                <a href="#">{name}</a>
+              <NavItem key={`${name}-${index}`}>
+                <a href="#">{`${name} ${index + 1}`}</a>
               </NavItem>
             );
           })}
@@ -47,10 +47,10 @@ const Demo = () => {
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
       <NavBar>
-        {componentsList.map(name => {
+        {componentsList.map((name, index) => {
           return (
-            <NavItem key={name}>
-              <a href="#">{name}</a>
+            <NavItem key={\`\${name}-\${index}\`}>
+              <a href="#">{\`\${name} \${index + 1}\`}</a>
             </NavItem>
           );
         })}
@@ -58,10 +58,10 @@ const Demo = () => {
       <h3>Collapsed NavBar</h3>
       <div className="container">
         <NavBar collapsed>
-          {componentsList.map(name => {
+          {componentsList.map((name, index) => {
             return (
-              <NavItem key={name}>
-                <a href="#">{name}</a>
+              <NavItem key={\`\${name}-\${index}\`}>
+                <a href="#">{\`\${name} \${index + 1}\`}</a>
               </NavItem>
             );
           })}
