@@ -48,6 +48,13 @@ const NavBar = ({
     }
   };
 
+  // const targetWidth = target.offsetWidth;
+  // navRef.current?.scrollTo({
+  //   top: navRef.current?.scrollTop,
+  //   left: navRef.current?.scrollLeft + targetWidth,
+  //   behavior: 'smooth'
+  // })
+
   useEffect(() => {
     navRef.current?.addEventListener('focusin', handleNavBarFocus);
     return () => {
