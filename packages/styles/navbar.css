@@ -38,6 +38,11 @@
   list-style-type: none;
   display: flex;
   z-index: var(--z-index-top-nav);
+  overflow: auto;
+}
+
+.NavBar > ul::-webkit-scrollbar {
+  display: none;
 }
 
 .NavBar > ul > li {

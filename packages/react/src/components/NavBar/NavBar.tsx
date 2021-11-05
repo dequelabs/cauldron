@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
@@ -23,6 +23,7 @@ const NavBar = ({
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showDropdown, setShowDropdown] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   const navItems = React.Children.toArray(children).filter(child => {
     return (child as React.ReactElement<any>).type === NavItem;
@@ -39,6 +40,20 @@ const NavBar = ({
   const handleTriggerClick = () => {
     setShowDropdown(!showDropdown);
   };
+
+  const handleNavBarFocus = (event: FocusEvent) => {
+    const target = event.target as HTMLElement;
+    if (target?.matches('li.NavItem a')) {
+      target.scrollIntoView();
+    }
+  };
+
+  useEffect(() => {
+    navRef.current?.addEventListener('focusin', handleNavBarFocus);
+    return () => {
+      navRef.current?.removeEventListener('focusin', handleNavBarFocus);
+    };
+  }, [navRef.current]);
 
   const navItemComponents = navItems.map((child, index) => {
     const config = {
@@ -70,6 +85,7 @@ const NavBar = ({
       className={classNames('NavBar', className, {
         'NavBar--trigger': collapsed
       })}
+      ref={navRef}
     >
       <Scrim show={showDropdown} />
       <ul>{collapsed ? navItemComponentsWithTrigger : navItemComponents}</ul>
