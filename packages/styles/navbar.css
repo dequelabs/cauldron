@@ -84,6 +84,10 @@
 }
 
 /* NavBar with a trigger */
+.NavBar.NavBar--trigger {
+  align-items: flex-start;
+}
+
 .NavBar--trigger > ul {
   flex-direction: column;
   width: 100%;
@@ -126,11 +130,17 @@
   height: 100%;
 }
 
+/* make focus outline visible */
+.NavBar--trigger > ul > li > a:focus,
+.NavBar--trigger > ul > .NavBar__menu-trigger > button {
+  outline-offset: calc(var(--space-quarter) * -1);
+}
+
 .NavBar--trigger > ul > .NavBar__menu-trigger .Icon {
   margin-right: var(--space-smallest);
 }
 
-@media (max-width: 980px) and (min-width: 680px) {
+@media (max-width: 61.25rem) {
   .NavBar > ul > li {
     font-size: var(--text-size-small);
   }
