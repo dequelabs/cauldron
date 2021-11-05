@@ -132,7 +132,7 @@
 
 /* make focus outline visible */
 .NavBar--trigger > ul > li > a:focus,
-.NavBar--trigger > ul > .NavBar__menu-trigger > button {
+.NavBar--trigger > ul > .NavBar__menu-trigger > button:focus {
   outline-offset: calc(var(--space-quarter) * -1);
 }
 
