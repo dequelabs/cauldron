@@ -96,7 +96,6 @@
   width: 100%;
   height: var(--top-nav-height);
   font-size: var(--text-size-small);
-  background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
   flex: 0 1 3.125rem;
   border-right: none;
