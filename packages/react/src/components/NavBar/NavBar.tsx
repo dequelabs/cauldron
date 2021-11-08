@@ -23,6 +23,7 @@ const NavBar = ({
 }: NavBarProps) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showDropdown, setShowDropdown] = useState(false);
+  const showNavItems = !collapsed || (collapsed && showDropdown);
 
   const navItems = React.Children.toArray(children).filter(child => {
     return (child as React.ReactElement<any>).type === NavItem;
@@ -53,18 +54,6 @@ const NavBar = ({
     return React.cloneElement(child as React.ReactElement<any>, config);
   });
 
-  const navItemComponentsWithTrigger = (
-    <>
-      <NavBarTrigger
-        show={showDropdown}
-        handleTriggerClick={handleTriggerClick}
-      >
-        {navTriggerLabel}
-      </NavBarTrigger>
-      {showDropdown && navItemComponents}
-    </>
-  );
-
   return (
     <nav
       className={classNames('NavBar', className, {
@@ -72,7 +61,15 @@ const NavBar = ({
       })}
     >
       <Scrim show={showDropdown} />
-      <ul>{collapsed ? navItemComponentsWithTrigger : navItemComponents}</ul>
+      {collapsed && (
+        <NavBarTrigger
+          show={showDropdown}
+          handleTriggerClick={handleTriggerClick}
+        >
+          {navTriggerLabel}
+        </NavBarTrigger>
+      )}
+      <ul>{showNavItems && navItemComponents}</ul>
     </nav>
   );
 };

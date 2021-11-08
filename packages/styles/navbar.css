@@ -84,6 +84,8 @@
 /* NavBar with a trigger */
 .NavBar.NavBar--trigger {
   align-items: flex-start;
+  flex-direction: column;
+  height: auto;
 }
 
 .NavBar--trigger > ul {
@@ -106,33 +108,31 @@
     inset 6px 0px 0px var(--top-nav-active-shadow-color);
 }
 
-.NavBar--trigger > ul > .NavBar__menu-trigger {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-  flex: 0 1 var(--top-nav-height);
-}
-
-.NavBar.NavBar--trigger > ul > .NavBar__menu-trigger--active {
+.NavBar.NavBar--trigger > .NavBar__menu-trigger--active {
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color),
     inset 0px 4px 0px var(--top-nav-active-shadow-color);
+  z-index: calc(var(--z-index-top-nav) + 1);
 }
 
-.NavBar--trigger > ul > .NavBar__menu-trigger > button {
+.NavBar--trigger > .NavBar__menu-trigger {
   padding: 0 var(--space-small);
-  background-color: transparent;
+  background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
   width: 100%;
-  height: 100%;
+  height: 3.125rem;
+}
+
+.NavBar--trigger > .NavBar__menu-trigger:hover {
+  background-color: var(--top-nav-background-color-hover);
 }
 
 /* make focus outline visible */
 .NavBar--trigger > ul > li > a:focus,
-.NavBar--trigger > ul > .NavBar__menu-trigger > button:focus {
+.NavBar--trigger > .NavBar__menu-trigger:focus {
   outline-offset: calc(var(--space-quarter) * -1);
 }
 
-.NavBar--trigger > ul > .NavBar__menu-trigger .Icon {
+.NavBar--trigger > .NavBar__menu-trigger .Icon {
   margin-right: var(--space-smallest);
 }
 
