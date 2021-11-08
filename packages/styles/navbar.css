@@ -26,7 +26,7 @@
   align-items: center;
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
-  border-bottom: solid 1px var(--top-nav-border-bottom-color);
+  border-bottom: 1px solid var(--top-nav-border-bottom-color);
 }
 
 .NavBar > ul {
@@ -44,6 +44,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  background-color: var(--top-nav-background-color);
+  border-bottom: 1px solid var(--top-nav-border-bottom-color);
   border-right: 1px solid var(--top-nav-box-shadow-color);
   transition: background-color 0.3s ease;
 }
@@ -96,7 +98,6 @@
   font-size: var(--text-size-small);
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
-  box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
   flex: 0 1 3.125rem;
   border-right: none;
 }
@@ -110,7 +111,6 @@
   display: flex;
   align-items: center;
   align-self: flex-start;
-  box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color);
   flex: 0 1 var(--top-nav-height);
 }
 
