@@ -16,7 +16,6 @@
 
   --button-text-color-dark: var(--gray-90);
   --button-text-color-light: var(--white);
-  --button-focus-ring-color: var(--focus-light);
   --button-thin-height: 23px;
 }
 
@@ -81,7 +80,7 @@ button.Link {
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
 .Button--error:focus:before {
-  box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
+  box-shadow: 0 0 1px 2px var(--focus);
 }
 
 .Button--primary {
@@ -188,7 +187,6 @@ button.Link {
   --button-background-color-secondary-active: var(--accent-light);
   --button-background-color-error-active: #fea7a6;
 
-  --button-focus-ring-color: var(--focus-dark);
   --field-label-text-color: var(--accent-light);
   --field-border-color-error: var(--accent-danger);
   --error: var(--accent-danger);
