@@ -12,9 +12,9 @@ export interface OptionsMenuAlignmentProps {
 
 export interface OptionsMenuRenderTriggerProps {
   onClick: (event: Event) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   'aria-expanded': boolean;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLButtonElement>;
 }
 
 export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
@@ -58,7 +58,7 @@ export default class OptionsMenu extends Component<
     align: PropTypes.oneOf(['left', 'right'])
   };
 
-  private triggerRef: React.RefObject<HTMLElement>;
+  private triggerRef: React.RefObject<HTMLButtonElement>;
 
   constructor(props: AllOptionsMenuProps) {
     super(props);
