@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
@@ -21,6 +21,7 @@ const NavBar = ({
   collapsed = false,
   navTriggerLabel = 'MAIN MENU'
 }: NavBarProps) => {
+  const navRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showDropdown, setShowDropdown] = useState(false);
   const showNavItems = !collapsed || (collapsed && showDropdown);
@@ -28,6 +29,23 @@ const NavBar = ({
   const navItems = React.Children.toArray(children).filter(child => {
     return (child as React.ReactElement<any>).type === NavItem;
   });
+
+  const handleOutSideEvent = (e: FocusEvent | MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (navRef.current && !navRef.current?.contains(target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    if (collapsed && showDropdown) {
+      document.addEventListener('focusin', handleOutSideEvent);
+
+      return () => {
+        document.removeEventListener('focusin', handleOutSideEvent);
+      };
+    }
+  }, [collapsed, showDropdown]);
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
@@ -47,7 +65,7 @@ const NavBar = ({
     }
   };
 
-  const navItemComponents = navItems.map((child, index) => {
+  const NavItemComponents = navItems.map((child, index) => {
     const config = {
       className: classNames('NavItem', {
         // calculate index in unfiltered array of nav items
@@ -65,6 +83,7 @@ const NavBar = ({
       className={classNames('NavBar', className, {
         'NavBar--trigger': collapsed
       })}
+      ref={navRef}
     >
       <Scrim show={showDropdown} />
       {collapsed && (
@@ -76,7 +95,7 @@ const NavBar = ({
           {navTriggerLabel}
         </NavBarTrigger>
       )}
-      <ul>{showNavItems && navItemComponents}</ul>
+      <ul>{showNavItems && NavItemComponents}</ul>
     </nav>
   );
 };
