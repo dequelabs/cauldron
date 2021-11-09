@@ -41,6 +41,12 @@ const NavBar = ({
     setShowDropdown(!showDropdown);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Escape') {
+      setShowDropdown(false);
+    }
+  };
+
   const navItemComponents = navItems.map((child, index) => {
     const config = {
       className: classNames('NavItem', {
@@ -65,6 +71,7 @@ const NavBar = ({
         <NavBarTrigger
           show={showDropdown}
           handleTriggerClick={handleTriggerClick}
+          handleKeyDown={handleKeyDown}
         >
           {navTriggerLabel}
         </NavBarTrigger>
