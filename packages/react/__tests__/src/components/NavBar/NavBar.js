@@ -1,6 +1,26 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import NavBar, { NavItem } from 'src/components/NavBar';
+import { act } from 'react-dom/test-utils';
+
+let wrapperNode;
+let mountNode;
+
+beforeEach(() => {
+  wrapperNode = document.createElement('div');
+  wrapperNode.innerHTML = `
+    <a href="#foo" data-test>Click Me!</a>
+    <div id="#mount"></div>
+  `;
+  document.body.appendChild(wrapperNode);
+  mountNode = document.getElementById('mount');
+});
+
+afterEach(() => {
+  document.body.innerHTML = '';
+  wrapperNode = null;
+  mountNode = null;
+});
 
 test('mounts without error', () => {
   expect(() =>
@@ -118,8 +138,98 @@ test('shows NavItems after clicking NavBarTrigger', () => {
     </NavBar>
   );
 
-  MountedNavBar.find('NavBarTrigger button').simulate('click');
+  MountedNavBar.find('NavBarTrigger').simulate('click');
   MountedNavBar.update();
+  expect(MountedNavBar.find('NavItem').exists()).toBe(true);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
+});
+
+test('hides NavItems after clicking any of them', () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>
+  );
+
+  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.update();
+
+  MountedNavBar.find('NavItem')
+    .at(0)
+    .simulate('click');
+  MountedNavBar.update();
+
+  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
+});
+
+test('hides NavItems when press escape key', async () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>,
+    { attachTo: mountNode }
+  );
+
+  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.update();
+
+  MountedNavBar.find('NavBarTrigger').simulate('keydown', {
+    key: 'Escape'
+  });
+  MountedNavBar.update();
+
+  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
+});
+
+test('hides NavItems when focusing outside nav', async () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>,
+    { attachTo: mountNode }
+  );
+
+  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.update();
+
+  act(() => {
+    wrapperNode
+      .querySelector('a')
+      .dispatchEvent(new Event('focusin', { bubbles: true }));
+  });
+
+  MountedNavBar.update();
+
+  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
+});
+
+test('does not hides NavItems when focusing inside nav', async () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>,
+    { attachTo: mountNode }
+  );
+
+  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.update();
+
+  MountedNavBar.find('NavItem')
+    .at(0)
+    .simulate('focus');
+  MountedNavBar.update();
+
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
   expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
 });

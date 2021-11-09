@@ -100,7 +100,7 @@ test('evokes handleTriggerClick when clicking the button', () => {
   expect(handleTriggerClick).toBeCalled();
 });
 
-test('evokes handleKeyDown when pressing escape key', () => {
+test('evokes handleKeyDown when pressing any key', () => {
   const MountedTrigger = mount(
     <NavBarTrigger
       show={true}
