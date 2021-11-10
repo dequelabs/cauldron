@@ -11,10 +11,10 @@ export interface OptionsMenuAlignmentProps {
 }
 
 export interface OptionsMenuRenderTriggerProps {
-  onClick: (event: Event) => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   'aria-expanded': boolean;
-  ref: React.RefObject<HTMLButtonElement>;
+  ref: React.Ref<HTMLButtonElement>;
 }
 
 export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
@@ -66,7 +66,7 @@ export default class OptionsMenu extends Component<
     this.triggerRef = React.createRef();
   }
 
-  toggleMenu = (event: Event) => {
+  toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.setState(({ show }) => ({ show: !show }));
     event.preventDefault();
   };
