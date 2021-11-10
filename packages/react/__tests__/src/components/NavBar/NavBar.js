@@ -175,10 +175,10 @@ test('hides NavItems when press escape key', async () => {
     { attachTo: mountNode }
   );
 
-  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.find('NavBar').simulate('click');
   MountedNavBar.update();
 
-  MountedNavBar.find('NavBarTrigger').simulate('keydown', {
+  MountedNavBar.find('NavBar').simulate('keydown', {
     key: 'Escape'
   });
   MountedNavBar.update();

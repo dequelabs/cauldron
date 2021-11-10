@@ -3,16 +3,11 @@ import { mount } from 'enzyme';
 import { NavBarTrigger } from 'src/components/NavBar';
 
 const handleTriggerClick = jest.fn();
-const handleKeyDown = jest.fn();
 
 test('mounts without error', () => {
   expect(() =>
     mount(
-      <NavBarTrigger
-        show={true}
-        handleTriggerClick={() => {}}
-        handleKeyDown={() => {}}
-      >
+      <NavBarTrigger show={true} handleTriggerClick={() => {}}>
         <div />
       </NavBarTrigger>
     )
@@ -21,11 +16,7 @@ test('mounts without error', () => {
 
 test('renders children', () => {
   const MountedTrigger = mount(
-    <NavBarTrigger
-      show={true}
-      handleTriggerClick={() => {}}
-      handleKeyDown={() => {}}
-    >
+    <NavBarTrigger show={true} handleTriggerClick={() => {}}>
       <p>I am a child</p>
     </NavBarTrigger>
   );
@@ -39,7 +30,6 @@ test('renders classNames prop', () => {
     <NavBarTrigger
       show={true}
       handleTriggerClick={() => {}}
-      handleKeyDown={() => {}}
       className="find--me"
     >
       <div />
@@ -50,11 +40,7 @@ test('renders classNames prop', () => {
 
 test('renders properly when show is true', () => {
   const MountedTrigger = mount(
-    <NavBarTrigger
-      show={true}
-      handleTriggerClick={() => {}}
-      handleKeyDown={() => {}}
-    >
+    <NavBarTrigger show={true} handleTriggerClick={() => {}}>
       <div />
     </NavBarTrigger>
   );
@@ -68,11 +54,7 @@ test('renders properly when show is true', () => {
 
 test('renders properly when show is false', () => {
   const MountedTrigger = mount(
-    <NavBarTrigger
-      show={false}
-      handleTriggerClick={() => {}}
-      handleKeyDown={() => {}}
-    >
+    <NavBarTrigger show={false} handleTriggerClick={() => {}}>
       <div />
     </NavBarTrigger>
   );
@@ -86,11 +68,7 @@ test('renders properly when show is false', () => {
 
 test('evokes handleTriggerClick when clicking the button', () => {
   const MountedTrigger = mount(
-    <NavBarTrigger
-      show={true}
-      handleTriggerClick={handleTriggerClick}
-      handleKeyDown={() => {}}
-    >
+    <NavBarTrigger show={true} handleTriggerClick={handleTriggerClick}>
       <div />
     </NavBarTrigger>
   );
@@ -98,20 +76,4 @@ test('evokes handleTriggerClick when clicking the button', () => {
   MountedTrigger.find('button').simulate('click');
   MountedTrigger.update();
   expect(handleTriggerClick).toBeCalled();
-});
-
-test('evokes handleKeyDown when pressing any key', () => {
-  const MountedTrigger = mount(
-    <NavBarTrigger
-      show={true}
-      handleTriggerClick={() => {}}
-      handleKeyDown={handleKeyDown}
-    >
-      <div />
-    </NavBarTrigger>
-  );
-
-  MountedTrigger.find('button').simulate('keydown', { key: 'Escape' });
-  MountedTrigger.update();
-  expect(handleKeyDown).toBeCalled();
 });

@@ -37,12 +37,20 @@ const NavBar = ({
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setShowDropdown(false);
+    }
+  };
+
   useEffect(() => {
     if (collapsed && showDropdown) {
       document.addEventListener('focusin', handleOutSideEvent);
+      navRef.current?.addEventListener('keydown', handleKeyDown);
 
       return () => {
         document.removeEventListener('focusin', handleOutSideEvent);
+        navRef.current?.removeEventListener('keydown', handleKeyDown);
       };
     }
   }, [collapsed, showDropdown]);
@@ -57,12 +65,6 @@ const NavBar = ({
 
   const handleTriggerClick = () => {
     setShowDropdown(!showDropdown);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === 'Escape') {
-      setShowDropdown(false);
-    }
   };
 
   const NavItemComponents = navItems.map((child, index) => {
@@ -90,7 +92,6 @@ const NavBar = ({
         <NavBarTrigger
           show={showDropdown}
           handleTriggerClick={handleTriggerClick}
-          handleKeyDown={handleKeyDown}
         >
           {navTriggerLabel}
         </NavBarTrigger>
