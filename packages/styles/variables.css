@@ -34,7 +34,7 @@
   --accent-secondary: var(--gray-20);
   --accent-secondary-active: var(--gray-30);
   --focus-light: #c11bde;
-  --focus-dark: #e267ff;
+  --focus-dark: #eb94ff;
 
   /* text colours */
   --text-color-base: var(--gray-60);
@@ -46,7 +46,7 @@
   /* accents */
   --error: var(--accent-error);
   --disabled: var(--gray-40);
-  --focus: #d71ef7;
+  --focus: var(--focus-light);
   --warning: var(--accent-caution);
   --error-alt: var(--accent-warning-light);
   --info: var(--accent-info-light);
@@ -109,4 +109,8 @@
   --z-index-top-bar: 25;
   /* ensure this is 1 higher than the top bar z-index */
   --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
+}
+
+.cauldron--theme-dark {
+  --focus: var(--focus-dark);
 }
