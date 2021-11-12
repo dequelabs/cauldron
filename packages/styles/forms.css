@@ -182,6 +182,13 @@ textarea.Field--has-error:focus:hover,
   box-sizing: border-box;
   position: relative;
   margin-bottom: 0;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.Checkbox + .Checkbox,
+.Radio + .Radio {
+  margin-top: var(--space-smallest);
 }
 
 .Checkbox .Field__label,
@@ -286,6 +293,7 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
+  border: 0;
 }
 
 .Checkbox__overlay.Checkbox__overlay--focused,
@@ -303,6 +311,7 @@ textarea.Field--has-error:focus:hover,
   color: #ccc;
 }
 
+.Field__label:hover ~ .Radio__overlay:not(.Radio__overlay--disabled),
 .Radio__overlay:hover:not(.Radio__overlay--disabled) {
   border: 1px solid currentColor;
 }
@@ -314,6 +323,7 @@ textarea.Field--has-error:focus:hover,
   left: 8px;
   appearance: none;
   width: 2px;
+  border: 0;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {
@@ -325,6 +335,7 @@ textarea.Field--has-error:focus:hover,
   color: #ccc;
 }
 
+.Field__label:hover ~ .Checkbox__overlay:not(.Checkbox__overlay--disabled),
 .Checkbox__overlay:hover:not(.Checkbox__overlay--disabled) {
   border: 1px solid currentColor;
 }

@@ -75,6 +75,14 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }}
             {...other}
           />
+          <label
+            className={classNames('Field__label', {
+              'Field__label--disabled': disabled
+            })}
+            htmlFor={id}
+          >
+            {label}
+          </label>
           <Icon
             className={classNames('Checkbox__overlay', {
               'Checkbox__overlay--disabled': disabled,
@@ -91,14 +99,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               }
             }}
           />
-          <label
-            className={classNames('Field__label', {
-              'Field__label--disabled': disabled
-            })}
-            htmlFor={id}
-          >
-            {label}
-          </label>
         </div>
         <div id={errorId} className="Error">
           {error}
