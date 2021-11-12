@@ -2,6 +2,6 @@
   margin-top: var(--space-large);
 }
 
-.NavBar--trigger {
+.NavBar--collapsed {
   width: 20rem;
 }

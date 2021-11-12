@@ -6,6 +6,13 @@ import { act } from 'react-dom/test-utils';
 let wrapperNode;
 let mountNode;
 
+const update = async wrapper => {
+  await act(async () => {
+    await new Promise(resolve => setImmediate(resolve));
+    wrapper.update();
+  });
+};
+
 beforeEach(() => {
   wrapperNode = document.createElement('div');
   wrapperNode.innerHTML = `
@@ -51,7 +58,7 @@ test('renders propId', () => {
   expect(MountedNavBar.find('ul#someid').exists()).toBe(true);
 });
 
-test('renders NavBarTrigger when collapsed prop is true', () => {
+test('renders NavBar trigger button when collapsed prop is true', () => {
   const MountedNavBar = mount(
     <NavBar collapsed>
       <NavItem>
@@ -60,8 +67,11 @@ test('renders NavBarTrigger when collapsed prop is true', () => {
     </NavBar>
   );
 
-  expect(MountedNavBar.find('NavBarTrigger').exists()).toBe(true);
+  expect(MountedNavBar.find('.NavBar__trigger').exists()).toBe(true);
+  expect(MountedNavBar.find('.NavBar__trigger--active').exists()).toBe(false);
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
+  expect(MountedNavBar.find('button').prop('aria-expanded')).toBe(false);
+  expect(MountedNavBar.find('Icon').prop('type')).toEqual('hamburger-menu');
 });
 
 test('renders navTriggerLabel properly', () => {
@@ -73,16 +83,29 @@ test('renders navTriggerLabel properly', () => {
     </NavBar>
   );
 
-  expect(MountedNavBar.find('NavBarTrigger').exists()).toBe(true);
+  expect(MountedNavBar.find('.NavBar__trigger').exists()).toBe(true);
   expect(
-    MountedNavBar.find('NavBarTrigger')
+    MountedNavBar.find('.NavBar__trigger')
       .find('button')
       .text()
   ).toEqual('I am a label');
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
 });
 
-test('shows NavItems after clicking NavBarTrigger', () => {
+test('renders aria-controls prop on trigger button', () => {
+  const MountedTrigger = mount(
+    <NavBar collapsed propId="someid">
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>
+  );
+  expect(
+    MountedTrigger.find('button.NavBar__trigger').prop('aria-controls')
+  ).toEqual('someid');
+});
+
+test('shows NavItems after clicking NavBar trigger button', () => {
   const MountedNavBar = mount(
     <NavBar collapsed>
       <NavItem>
@@ -91,32 +114,15 @@ test('shows NavItems after clicking NavBarTrigger', () => {
     </NavBar>
   );
 
-  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.find('.NavBar__trigger').simulate('click');
   MountedNavBar.update();
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
   expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
-});
-
-test('hides NavItems when press escape key', async () => {
-  const MountedNavBar = mount(
-    <NavBar collapsed>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-    </NavBar>,
-    { attachTo: mountNode }
-  );
-
-  MountedNavBar.find('NavBar').simulate('click');
-  MountedNavBar.update();
-
-  MountedNavBar.find('NavBar').simulate('keydown', {
-    key: 'Escape'
-  });
-  MountedNavBar.update();
-
-  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
+  expect(MountedNavBar.find('.NavBar__trigger--active').exists()).toBe(true);
+  expect(
+    MountedNavBar.find('button.NavBar__trigger').prop('aria-expanded')
+  ).toBe(true);
+  expect(MountedNavBar.find('Icon').prop('type')).toEqual('close');
 });
 
 test('hides NavItems when focusing outside nav', async () => {
@@ -129,7 +135,7 @@ test('hides NavItems when focusing outside nav', async () => {
     { attachTo: mountNode }
   );
 
-  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.find('.NavBar__trigger').simulate('click');
   MountedNavBar.update();
 
   act(() => {
@@ -154,7 +160,7 @@ test('does not hides NavItems when focusing inside nav', async () => {
     { attachTo: mountNode }
   );
 
-  MountedNavBar.find('NavBarTrigger').simulate('click');
+  MountedNavBar.find('.NavBar__trigger').simulate('click');
   MountedNavBar.update();
 
   MountedNavBar.find('NavItem')

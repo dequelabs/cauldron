@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import NavBarTrigger from './NavBarTrigger';
 import Scrim from '../Scrim';
+import Icon from '../Icon';
 import { useId } from 'react-id-generator';
 
 interface NavBarProps {
@@ -22,6 +22,7 @@ const NavBar = ({
   propId
 }: NavBarProps) => {
   const navRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [menuId] = [propId] || useId(1, 'navbar');
   const showNavItems = !collapsed || (collapsed && showDropdown);
@@ -34,9 +35,13 @@ const NavBar = ({
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setShowDropdown(false);
+    console.log('is this even running?');
+    if (e.key !== 'Escape') {
+      return;
     }
+
+    setShowDropdown(false);
+    triggerRef.current?.focus();
   };
 
   useEffect(() => {
@@ -58,19 +63,25 @@ const NavBar = ({
   return (
     <nav
       className={classNames('NavBar', className, {
-        'NavBar--trigger': collapsed
+        'NavBar--collapsed': collapsed
       })}
       ref={navRef}
     >
       <Scrim show={showDropdown} />
       {collapsed && (
-        <NavBarTrigger
-          show={showDropdown}
-          handleTriggerClick={handleTriggerClick}
+        <button
+          aria-haspopup="true"
+          aria-expanded={showDropdown}
           aria-controls={menuId}
+          ref={triggerRef}
+          onClick={handleTriggerClick}
+          className={classNames('NavBar__trigger', {
+            'NavBar__trigger--active': showDropdown
+          })}
         >
+          <Icon type={showDropdown ? 'close' : 'hamburger-menu'} />
           {navTriggerLabel}
-        </NavBarTrigger>
+        </button>
       )}
       {showNavItems && <ul id={menuId}>{children}</ul>}
     </nav>

@@ -50,7 +50,7 @@
   transition: background-color 0.3s ease;
 }
 
-.NavBar > ul > li:first-child:not(.NavBar__menu-trigger) {
+.NavBar > ul > li:first-child:not(.NavBar__trigger) {
   border-left: 1px solid var(--top-nav-box-shadow-color);
 }
 
@@ -81,20 +81,20 @@
   width: 100%;
 }
 
-/* NavBar with a trigger */
-.NavBar.NavBar--trigger {
+/* NavBar collapsed */
+.NavBar.NavBar--collapsed {
   align-items: flex-start;
   flex-direction: column;
   height: auto;
 }
 
-.NavBar--trigger > ul {
+.NavBar--collapsed > ul {
   flex-direction: column;
   width: 100%;
   overflow: auto;
 }
 
-.NavBar.NavBar--trigger > ul > li {
+.NavBar.NavBar--collapsed > ul > li {
   width: 100%;
   height: var(--top-nav-height);
   font-size: var(--text-size-small);
@@ -103,18 +103,18 @@
   border-right: none;
 }
 
-.NavBar.NavBar--trigger > ul > .NavItem--active {
+.NavBar.NavBar--collapsed > ul > .NavItem--active {
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color),
     inset 6px 0px 0px var(--top-nav-active-shadow-color);
 }
 
-.NavBar.NavBar--trigger > .NavBar__menu-trigger--active {
+.NavBar.NavBar--collapsed > .NavBar__trigger--active {
   box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color),
     inset 0px 4px 0px var(--top-nav-active-shadow-color);
   z-index: calc(var(--z-index-top-nav) + 1);
 }
 
-.NavBar--trigger > .NavBar__menu-trigger {
+.NavBar--collapsed > .NavBar__trigger {
   padding: 0 var(--space-small);
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
@@ -122,17 +122,17 @@
   height: 3.125rem;
 }
 
-.NavBar--trigger > .NavBar__menu-trigger:hover {
+.NavBar--collapsed > .NavBar__trigger:hover {
   background-color: var(--top-nav-background-color-hover);
 }
 
 /* make focus outline visible */
-.NavBar--trigger > ul > li > a:focus,
-.NavBar--trigger > .NavBar__menu-trigger:focus {
+.NavBar--collapsed > ul > li > a:focus,
+.NavBar--collapsed > .NavBar__trigger:focus {
   outline-offset: calc(var(--space-quarter) * -1);
 }
 
-.NavBar--trigger > .NavBar__menu-trigger .Icon {
+.NavBar--collapsed > .NavBar__trigger .Icon {
   margin-right: var(--space-smallest);
 }
 
