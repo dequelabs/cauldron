@@ -1,3 +1,7 @@
-.container {
-  width: 30rem;
+.NavBarButton {
+  margin-top: var(--space-large);
+}
+
+.NavBar--trigger {
+  width: 20rem;
 }

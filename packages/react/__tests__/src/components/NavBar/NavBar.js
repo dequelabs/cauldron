@@ -41,61 +41,14 @@ test('renders className prop', () => {
   expect(MountedNavBar.find('.find--me').exists()).toBe(true);
 });
 
-test('handles initialActiveIndex properly', () => {
+test('renders propId', () => {
   const MountedNavBar = mount(
-    <NavBar initialActiveIndex={0}>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-      <NavItem>
-        <p>second item</p>
-      </NavItem>
+    <NavBar propId="someid">
+      <div />
     </NavBar>
   );
 
-  expect(
-    MountedNavBar.find('NavItem')
-      .at(0)
-      .find('.NavItem--active')
-      .exists()
-  ).toBe(true);
-  expect(
-    MountedNavBar.find('NavItem')
-      .at(1)
-      .find('.NavItem--active')
-      .exists()
-  ).toBe(false);
-});
-
-test('activates a NavItem when it is clicked', () => {
-  const MountedNavBar = mount(
-    <NavBar>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-      <NavItem>
-        <p>second item</p>
-      </NavItem>
-    </NavBar>
-  );
-
-  MountedNavBar.find('NavItem')
-    .at(0)
-    .simulate('click');
-  MountedNavBar.update();
-
-  expect(
-    MountedNavBar.find('NavItem')
-      .at(0)
-      .find('.NavItem--active')
-      .exists()
-  );
-  expect(
-    MountedNavBar.find('NavItem')
-      .at(1)
-      .find('.NavItem--active')
-      .exists()
-  ).toBe(false);
+  expect(MountedNavBar.find('ul#someid').exists()).toBe(true);
 });
 
 test('renders NavBarTrigger when collapsed prop is true', () => {
@@ -142,27 +95,6 @@ test('shows NavItems after clicking NavBarTrigger', () => {
   MountedNavBar.update();
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
   expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
-});
-
-test('hides NavItems after clicking any of them', () => {
-  const MountedNavBar = mount(
-    <NavBar collapsed>
-      <NavItem>
-        <p>first item</p>
-      </NavItem>
-    </NavBar>
-  );
-
-  MountedNavBar.find('NavBarTrigger').simulate('click');
-  MountedNavBar.update();
-
-  MountedNavBar.find('NavItem')
-    .at(0)
-    .simulate('click');
-  MountedNavBar.update();
-
-  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
 });
 
 test('hides NavItems when press escape key', async () => {

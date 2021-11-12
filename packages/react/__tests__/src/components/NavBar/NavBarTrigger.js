@@ -38,6 +38,21 @@ test('renders classNames prop', () => {
   expect(MountedTrigger.find('.find--me').exists()).toBe(true);
 });
 
+test('renders aria-controls prop', () => {
+  const MountedTrigger = mount(
+    <NavBarTrigger
+      show={true}
+      handleTriggerClick={() => {}}
+      aria-controls={'someid'}
+    >
+      <div />
+    </NavBarTrigger>
+  );
+  expect(
+    MountedTrigger.find('button.NavBar__menu-trigger').prop('aria-controls')
+  ).toEqual('someid');
+});
+
 test('renders properly when show is true', () => {
   const MountedTrigger = mount(
     <NavBarTrigger show={true} handleTriggerClick={() => {}}>

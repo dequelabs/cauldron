@@ -1,72 +1,60 @@
-import React from 'react';
-import { NavBar, NavItem, Code } from '@deque/cauldron-react';
+import React, { useState } from 'react';
+import { NavBar, NavItem, Code, Button } from '@deque/cauldron-react';
 import './index.css';
 
 const Demo = () => {
+  const [isMobil, setIsMobil] = useState(false);
   const componentsList = new Array(5).fill('NavItem');
-
+  const handleToggle = () => {
+    setIsMobil(!isMobil);
+  };
   return (
     <div className="NavBarDemo">
       <h1>NavBar</h1>
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
-      <NavBar>
+      <NavBar collapsed={isMobil}>
         {componentsList.map((name, index) => {
           return (
-            <NavItem key={`${name}-${index}`}>
+            <NavItem key={`${name}-${index}`} active={index === 2}>
               <a href="#">{`${name} ${index + 1}`}</a>
             </NavItem>
           );
         })}
       </NavBar>
-      <h3>Collapsed NavBar</h3>
-      <div className="container">
-        <NavBar collapsed>
-          {componentsList.map((name, index) => {
-            return (
-              <NavItem key={`${name}-${index}`}>
-                <a href="#">{`${name} ${index + 1}`}</a>
-              </NavItem>
-            );
-          })}
-        </NavBar>
-      </div>
+      <Button onClick={handleToggle} className="NavBarButton">
+        Toggle between mobil and non-mobile mode
+      </Button>
       <h2>Code Sample</h2>
       <Code language="javascript">
         {`
-import React from 'react';
-import { NavBar, NavItem, Code } from '@deque/cauldron-react';
+import React, { useState } from 'react';
+import { NavBar, NavItem, Code, Button } from '@deque/cauldron-react';
 import './index.css';
 
 const Demo = () => {
+  const [isMobil, setIsMobil] = useState(false);
   const componentsList = new Array(5).fill('NavItem');
-
+  const handleToggle = () => {
+    setIsMobil(!isMobil);
+  };
   return (
     <div className="NavBarDemo">
       <h1>NavBar</h1>
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
-      <NavBar>
+      <NavBar collapsed={isMobil}>
         {componentsList.map((name, index) => {
           return (
-            <NavItem key={\`\${name}-\${index}\`}>
+            <NavItem key={\`\${name}-\${index}\`} active={index === 2}>
               <a href="#">{\`\${name} \${index + 1}\`}</a>
             </NavItem>
           );
         })}
       </NavBar>
-      <h3>Collapsed NavBar</h3>
-      <div className="container">
-        <NavBar collapsed>
-          {componentsList.map((name, index) => {
-            return (
-              <NavItem key={\`\${name}-\${index}\`}>
-                <a href="#">{\`\${name} \${index + 1}\`}</a>
-              </NavItem>
-            );
-          })}
-        </NavBar>
-      </div>
+      <Button onClick={handleToggle} className="NavBarButton">
+        Toggle between mobil and non-mobile mode
+      </Button>
     </div>
        `}
       </Code>

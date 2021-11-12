@@ -20,3 +20,12 @@ test('renders children', () => {
   );
   expect(MountedNavItem.find('p').text()).toEqual('I am a child');
 });
+
+test('handles active prop properly', () => {
+  const MountedNavItem = mount(
+    <NavItem active>
+      <p>I am a child</p>
+    </NavItem>
+  );
+  expect(MountedNavItem.find('.NavItem--active').exists()).toBe(true);
+});

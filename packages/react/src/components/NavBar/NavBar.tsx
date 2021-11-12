@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import NavItem from './NavItem';
 import NavBarTrigger from './NavBarTrigger';
 import Scrim from '../Scrim';
+import { useId } from 'react-id-generator';
 
 interface NavBarProps {
   children: React.ReactNode;
@@ -11,24 +11,20 @@ interface NavBarProps {
   className?: string;
   collapsed?: boolean;
   navTriggerLabel?: string;
+  propId?: string;
 }
 
 const NavBar = ({
   children,
-  // no initial link as default
-  initialActiveIndex = -1,
   className,
   collapsed = false,
-  navTriggerLabel = 'MAIN MENU'
+  navTriggerLabel = 'MAIN MENU',
+  propId
 }: NavBarProps) => {
   const navRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [menuId] = [propId] || useId(1, 'navbar');
   const showNavItems = !collapsed || (collapsed && showDropdown);
-
-  const navItems = React.Children.toArray(children).filter(child => {
-    return (child as React.ReactElement<any>).type === NavItem;
-  });
 
   const handleOutSideEvent = (e: FocusEvent | MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -55,30 +51,9 @@ const NavBar = ({
     }
   }, [collapsed, showDropdown]);
 
-  const handleClick = (index: number) => {
-    setActiveIndex(index);
-    // closes dropdown when a menu is selected
-    if (collapsed) {
-      setShowDropdown(!showDropdown);
-    }
-  };
-
   const handleTriggerClick = () => {
     setShowDropdown(!showDropdown);
   };
-
-  const NavItemComponents = navItems.map((child, index) => {
-    const config = {
-      className: classNames('NavItem', {
-        // calculate index in unfiltered array of nav items
-        'NavItem--active': index === activeIndex
-      }),
-      onClick: () => handleClick(index),
-      ...(child as React.ReactElement<any>).props
-    };
-
-    return React.cloneElement(child as React.ReactElement<any>, config);
-  });
 
   return (
     <nav
@@ -92,11 +67,12 @@ const NavBar = ({
         <NavBarTrigger
           show={showDropdown}
           handleTriggerClick={handleTriggerClick}
+          aria-controls={menuId}
         >
           {navTriggerLabel}
         </NavBarTrigger>
       )}
-      <ul>{showNavItems && NavItemComponents}</ul>
+      {showNavItems && <ul id={menuId}>{children}</ul>}
     </nav>
   );
 };
@@ -106,7 +82,8 @@ NavBar.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   collapsed: PropTypes.bool,
-  navTriggerLabel: PropTypes.string
+  navTriggerLabel: PropTypes.string,
+  propId: PropTypes.string
 };
 
 export default NavBar;
