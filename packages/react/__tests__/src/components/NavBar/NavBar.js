@@ -1,17 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import NavBar, { NavItem } from 'src/components/NavBar';
-import { act } from 'react-dom/test-utils';
 
 let wrapperNode;
 let mountNode;
-
-const update = async wrapper => {
-  await act(async () => {
-    await new Promise(resolve => setImmediate(resolve));
-    wrapper.update();
-  });
-};
 
 beforeEach(() => {
   wrapperNode = document.createElement('div');
