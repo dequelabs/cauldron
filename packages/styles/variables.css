@@ -101,6 +101,7 @@
   --z-index-dialog: 21;
   --z-index-dialog-scrim: 20;
   --z-index-scrim-action-needed: 23;
+  --z-index-top-nav: 9;
   --z-index-side-bar: 9;
   --z-index-toast: 8;
   --z-index-toast-action-needed: 24;

@@ -1,0 +1,7 @@
+.NavBarButton {
+  margin-top: var(--space-large);
+}
+
+.NavBar--collapsed {
+  width: 20rem;
+}
