@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import Scrim from '../Scrim';
 import Icon from '../Icon';
 import { useId } from 'react-id-generator';
 
@@ -71,7 +70,6 @@ const NavBar = ({
       })}
       ref={navRef}
     >
-      <Scrim show={showDropdown} />
       {collapsed && (
         <button
           aria-haspopup="true"

@@ -110,7 +110,6 @@ test('shows NavItems after clicking NavBar trigger button', () => {
   MountedNavBar.find('.NavBar__trigger').simulate('click');
   MountedNavBar.update();
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
   expect(MountedNavBar.find('.NavBar__trigger--active').exists()).toBe(true);
   expect(
     MountedNavBar.find('button.NavBar__trigger').prop('aria-expanded')
@@ -134,7 +133,6 @@ test('hides NavItems after pressing escape key', () => {
   MountedNavBar.update();
 
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
 });
 
 test('does not hide NavItems after pressing other keys', () => {
@@ -153,7 +151,6 @@ test('does not hide NavItems after pressing other keys', () => {
   MountedNavBar.update();
 
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
 });
 
 test('hides NavItems when focusing outside nav', async () => {
@@ -178,7 +175,6 @@ test('hides NavItems when focusing outside nav', async () => {
   MountedNavBar.update();
 
   expect(MountedNavBar.find('NavItem').exists()).toBe(false);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
 });
 
 test('does not hides NavItems when focusing inside nav', async () => {
@@ -200,5 +196,4 @@ test('does not hides NavItems when focusing inside nav', async () => {
   MountedNavBar.update();
 
   expect(MountedNavBar.find('NavItem').exists()).toBe(true);
-  expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
 });
