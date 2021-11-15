@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import NavBar, { NavItem } from 'src/components/NavBar';
+import { act } from 'react-dom/test-utils';
 
 let wrapperNode;
 let mountNode;
