@@ -125,6 +125,44 @@ test('shows NavItems after clicking NavBar trigger button', () => {
   expect(MountedNavBar.find('Icon').prop('type')).toEqual('close');
 });
 
+test('hides NavItems after pressing escape key', () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>
+  );
+
+  MountedNavBar.find('.NavBar__trigger').simulate('click');
+  MountedNavBar.update();
+
+  MountedNavBar.find('ul').simulate('keydown', { key: 'Escape' });
+  MountedNavBar.update();
+
+  expect(MountedNavBar.find('NavItem').exists()).toBe(false);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(false);
+});
+
+test('does not hide NavItems after pressing other keys', () => {
+  const MountedNavBar = mount(
+    <NavBar collapsed>
+      <NavItem>
+        <p>first item</p>
+      </NavItem>
+    </NavBar>
+  );
+
+  MountedNavBar.find('.NavBar__trigger').simulate('click');
+  MountedNavBar.update();
+
+  MountedNavBar.find('ul').simulate('keydown', { key: 'Home' });
+  MountedNavBar.update();
+
+  expect(MountedNavBar.find('NavItem').exists()).toBe(true);
+  expect(MountedNavBar.find('Scrim').prop('show')).toBe(true);
+});
+
 test('hides NavItems when focusing outside nav', async () => {
   const MountedNavBar = mount(
     <NavBar collapsed>

@@ -1,4 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  KeyboardEventHandler
+} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Scrim from '../Scrim';
@@ -34,8 +39,9 @@ const NavBar = ({
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    console.log('is this even running?');
+  const handleKeyDown: KeyboardEventHandler<HTMLUListElement> = (
+    e: React.KeyboardEvent<HTMLUListElement>
+  ) => {
     if (e.key !== 'Escape') {
       return;
     }
@@ -47,11 +53,9 @@ const NavBar = ({
   useEffect(() => {
     if (collapsed && showDropdown) {
       document.addEventListener('focusin', handleOutSideEvent);
-      navRef.current?.addEventListener('keydown', handleKeyDown);
 
       return () => {
         document.removeEventListener('focusin', handleOutSideEvent);
-        navRef.current?.removeEventListener('keydown', handleKeyDown);
       };
     }
   }, [collapsed, showDropdown]);
@@ -83,7 +87,12 @@ const NavBar = ({
           {navTriggerLabel}
         </button>
       )}
-      {showNavItems && <ul id={menuId}>{children}</ul>}
+      {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */}
+      {showNavItems && (
+        <ul onKeyDown={handleKeyDown} id={menuId}>
+          {children}
+        </ul>
+      )}
     </nav>
   );
 };
