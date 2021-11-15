@@ -7,7 +7,11 @@ const CodeDemo = () => (
     component={Code}
     states={[
       {
-        children: 'var foo = true;',
+        children: `// here are some vars
+var foo = true;
+const number = 1234;
+const string = "hello world";
+const regex = /^anything$/i;`,
         language: 'javascript',
         DEMO_renderBefore: <h3>javascript</h3>
       },
@@ -15,6 +19,15 @@ const CodeDemo = () => (
         children: '<span class="foo">Hello world!</span>',
         language: 'html',
         DEMO_renderBefore: <h3>html</h3>
+      },
+      {
+        children: `.foo,
+#foo,
+div[class="foo"] {
+  color: green;
+}`,
+        language: 'css',
+        DEMO_renderBefore: <h3>css</h3>
       },
       {
         children: '$ npm install --save @deque/cauldron-react',

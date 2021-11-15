@@ -1,18 +1,34 @@
 :root {
+  --field-background-color: var(--white);
+  --field-content-color: var(--text-color-base);
   --field-border-color: var(--gray-40);
   --field-border-color-underline: var(--gray-80);
-  --field-border-color-hover: var(--gray-80);
+  --field-border-color-hover: var(--gray-90);
   --field-border-color-focus: var(--accent-primary);
+  --field-border-color-focus-hover: var(--accent-primary-active);
   --field-border-color-focus-glow: rgba(60, 122, 174, 0.7);
   --field-border-color-error: var(--accent-error);
   --field-border-color-error-hover: #c42f41;
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
-  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
   --field-background-color-disabled: #f7f7f7;
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
   --input-min-width: 250px;
+}
+
+.cauldron--theme-dark {
+  --field-background-color: var(--accent-medium);
+  --field-content-color: var(--white);
+  --field-border-color-hover: var(--accent-info-light);
+  --field-border-color-focus: var(--accent-info);
+  --field-border-color-focus-hover: var(--accent-info-light);
+  --field-border-color-focus-glow: var(--accent-info);
+  --field-border-color-error: var(--accent-danger);
+  --field-border-color-error-hover: #fea7a6;
+  --field-background-color-disabled: #5d676f;
+  --field-required-text-color: var(--white);
+  --field-label-text-color: var(--white);
 }
 
 input,
@@ -29,6 +45,19 @@ textarea,
   border-bottom: 1px solid var(--field-border-color-underline);
   margin-bottom: var(--space-half);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--field-background-color);
+}
+
+.cauldron--theme-dark input,
+select,
+textarea,
+[role='menuitemcheckbox'],
+[role='menuitemradio'],
+[role='textbox'],
+[aria-haspopup='listbox'],
+[role='listbox'],
+[role='spinbutton'] {
+  border: 1px solid var(--field-border-color);
 }
 
 input:focus,
@@ -41,9 +70,9 @@ textarea:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
-  border: 1px solid var(--field-border-color-focus);
-  box-shadow: inset 0 0 0 1px var(--field-border-color-focus),
-    0px 0px 4px var(--field-border-color-focus-glow);
+  border: 2px solid var(--field-border-color-focus);
+  box-shadow: 0px 0px 4px var(--field-border-color-focus-glow),
+    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input:hover,
@@ -56,6 +85,18 @@ textarea:hover,
 [role='listbox']:hover,
 [role='spinbutton']:hover {
   border: 1px solid var(--field-border-color-hover);
+}
+
+input:focus:hover,
+select:focus:hover,
+textarea:focus:hover,
+[role='menuitemcheckbox']:focus:hover,
+[role='menuitemradio']:focus:hover,
+[role='textbox']:focus:hover,
+[aria-haspopup='listbox']:focus:hover,
+[role='listbox']:focus:hover,
+[role='spinbutton']:focus:hover {
+  border: 2px solid var(--field-border-color-focus-hover);
 }
 
 input.Field--has-error,
@@ -74,6 +115,18 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
+input.Field--has-error:hover,
+select.Field--has-error:hover,
+textarea.Field--has-error:hover,
+[role='menuitemcheckbox'].Field--has-error:hover,
+[role='menuitemradio'].Field--has-error:hover,
+[role='textbox'].Field--has-error:hover,
+[aria-haspopup='listbox'].Field--has-error:hover,
+[role='listbox'].Field--has-error:hover,
+[role='spinbutton'].Field--has-error:hover {
+  border-color: var(--field-border-color-error-hover);
+}
+
 input.Field--has-error:focus,
 select.Field--has-error:focus,
 textarea.Field--has-error:focus,
@@ -83,8 +136,21 @@ textarea.Field--has-error:focus,
 [aria-haspopup='listbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
-  box-shadow: inset 0 0 0 1px var(--field-border-color-error),
-    0px 0px 4px 0 var(--field-border-color-error-focus-glow);
+  border: 2px solid var(--field-border-color-error);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
+    var(--field-border-color-error-focus-glow) 0px 0px 4px 0px;
+}
+
+input.Field--has-error:focus:hover,
+select.Field--has-error:focus:hover,
+textarea.Field--has-error:focus:hover,
+[role='menuitemcheckbox'].Field--has-error:focus:hover,
+[role='menuitemradio'].Field--has-error:focus:hover,
+[role='textbox'].Field--has-error:focus:hover,
+[aria-haspopup='listbox'].Field--has-error:focus:hover,
+[role='listbox'].Field--has-error:focus:hover,
+[role='spinbutton'].Field--has-error:focus:hover {
+  border-color: var(--field-border-color-error-hover);
 }
 
 .Error {
@@ -135,10 +201,6 @@ textarea.Field--has-error:focus,
   cursor: default;
 }
 
-.Field__label.Field__label--disabled {
-  color: var(--disabled);
-}
-
 .Field__required-text {
   flex: 1;
   text-align: right;
@@ -151,7 +213,7 @@ textarea.Field--has-error:focus,
 
 .Field__required-text::before {
   content: ' ';
-  color: var(--text-color-base);
+  color: var(--field-content-color);
 }
 
 .Field__label--has-error .Field__required-text {
@@ -168,7 +230,7 @@ textarea.Field--has-error:focus,
   padding: var(--space-smallest);
   box-sizing: border-box;
   font-size: var(--text-size-small);
-  color: var(--text-color-base);
+  color: var(--field-content-color);
   min-width: var(--input-min-width);
 }
 
@@ -185,6 +247,7 @@ textarea.Field--has-error:focus,
   min-width: var(--input-min-width);
   padding: var(--space-half);
   max-width: 500px;
+  color: var(--field-content-color);
 }
 
 .Field__textarea[disabled],
@@ -264,4 +327,28 @@ textarea.Field--has-error:focus,
 
 .Checkbox__overlay:hover:not(.Checkbox__overlay--disabled) {
   border: 1px solid currentColor;
+}
+
+/* Dark Theme */
+.cauldron--theme-dark {
+  --field-label-text-color: var(--white);
+}
+
+.cauldron--theme-dark .Radio__overlay,
+.cauldron--theme-dark .Checkbox__overlay {
+  color: var(--white);
+}
+
+.cauldron--theme-dark .Checkbox__overlay.Icon--checkbox-checked {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Checkbox__overlay.Field--has-error {
+  color: var(--accent-danger);
+}
+
+.cauldron--theme-dark .Radio__overlay--disabled,
+.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-checked,
+.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-unchecked {
+  color: #4c99a9;
 }

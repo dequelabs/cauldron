@@ -43,6 +43,12 @@ test('Step: renders li and children', () => {
 test('Step: renders tooltip tabstops', () => {
   const stepper = mount(<Step status="current" tooltip="bananas" />);
   expect(stepper.find('TooltipTabstop').exists()).toBe(true);
+  expect(
+    stepper
+      .find('li')
+      .getDOMNode()
+      .getAttribute('aria-current')
+  ).toBe('step');
 });
 
 test('Step: manages aria-current attribute', () => {

@@ -44,7 +44,8 @@ h4,
 h5,
 h6,
 [role='heading'] {
-  color: var(--header-text-color-dark);
+  --heading-text-color: var(--header-text-color-dark);
+  color: var(--heading-text-color);
 }
 
 ul {
@@ -73,4 +74,14 @@ a {
 
 p {
   line-height: 1.618;
+}
+
+.cauldron--theme-dark h1,
+.cauldron--theme-dark h2,
+.cauldron--theme-dark h3,
+.cauldron--theme-dark h4,
+.cauldron--theme-dark h5,
+.cauldron--theme-dark h6,
+.cauldron--theme-dark [role='heading'] {
+  --heading-text-color: white;
 }

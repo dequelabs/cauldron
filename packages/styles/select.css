@@ -10,7 +10,8 @@
 }
 
 .Field__select--disabled {
-  opacity: 0.45;
+  background: var(--field-background-color-disabled);
+  opacity: 0.65;
 }
 
 .Field__select--wrapper {
@@ -26,7 +27,7 @@
   right: var(--select-arrow-spacing);
   border-left: var(--space-half) solid transparent;
   border-right: var(--space-half) solid transparent;
-  border-top: var(--space-three-quarters) solid #6a6a6a;
+  border-top: var(--space-three-quarters) solid var(--field-content-color);
   pointer-events: none;
 }
 
@@ -39,21 +40,25 @@
   font-weight: normal;
   font-style: normal;
   font-size: var(--text-size-small);
-  color: var(--text-color-base);
+  color: var(--field-content-color);
   text-decoration: rgb(102, 102, 102);
-  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.05);
-  background: transparent;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   appearance: none;
 }
 
 .Field__select--wrapper select:not([disabled]):hover {
-  border-color: var(--gray-90);
+  border-color: var(--field-border-color-hover);
 }
 
 .Field__select--wrapper select:focus {
-  border-color: rgb(60, 122, 174);
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
-    rgba(60, 122, 174, 0.7) 0px 0px 4px 0px;
+  border-color: var(--field-border-color-focus);
+  box-shadow: 0 0 0 1px var(--field-border-color-focus),
+    0 0 5px var(--field-border-color-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.Field__select--wrapper select:focus:hover {
+  border-color: var(--field-border-color-focus-hover);
 }
 
 .Field__select--wrapper select:invalid,
@@ -62,11 +67,19 @@
   border-color: var(--field-border-color-error);
 }
 
-.Field__select--wrapper select:invalid:focus,
-.Field__select--wrapper.Field--has-error select:focus,
 .Field__select--wrapper.Field--has-error select:hover {
+  border-color: var(--field-border-color-error-hover);
+}
+
+.Field__select--wrapper select:invalid:focus,
+.Field__select--wrapper.Field--has-error select:focus {
   border-width: var(--space-quarter);
   border-color: var(--field-border-color-error);
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px inset,
-    rgba(217, 50, 81, 0.7) 0px 0px 4px 0px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0 inset,
+    var(--field-border-color-error-focus-glow) 0 0 4px 0;
+}
+
+.Field__select--wrapper select:invalid:focus:hover,
+.Field__select--wrapper.Field--has-error select:focus:hover {
+  border-color: var(--field-border-color-error-hover);
 }

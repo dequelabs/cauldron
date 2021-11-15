@@ -1,0 +1,19 @@
+.cauldron--theme-dark .Icon--robot circle {
+  stroke: var(--accent-light);
+  stroke-width: 2px;
+  color: #0b141c;
+}
+
+.cauldron--theme-dark .Icon--robot path {
+  color: #76cfe8;
+}
+
+.cauldron--theme-light .Icon--robot circle {
+  stroke: var(--gray-40);
+  stroke-width: 2px;
+  color: var(--white);
+}
+
+.cauldron--theme-light .Icon--robot path {
+  color: #3e7aae;
+}

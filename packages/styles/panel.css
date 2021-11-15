@@ -1,0 +1,54 @@
+:root {
+  --panel-border-color: var(--gray-40);
+  --panel-header-background-color: var(--gray-20);
+  --panel-header-color: var(--gray-90);
+  --panel-content-background-color: var(--white);
+  --panel-content-color: var(--gray-60);
+}
+
+.Panel {
+  border: 1px solid var(--panel-border-color);
+}
+
+.Panel__Header {
+  background-color: var(--panel-header-background-color);
+  color: var(--panel-header-color);
+  font-size: var(--text-size-normal);
+  display: flex;
+  border-bottom: 1px solid var(--panel-border-color);
+  align-items: center;
+  padding: var(--space-half) 0;
+}
+
+.Panel__Header-title {
+  flex-grow: 1;
+  display: flex;
+  font-weight: var(--font-weight-bold);
+  padding-left: var(--space-small);
+}
+
+.Panel__Header-actions {
+  flex-grow: 1;
+  text-align: right;
+  margin-right: var(--space-smallest);
+}
+
+.Panel__Content {
+  font-size: var(--text-size-smaller);
+  background-color: var(--panel-content-background-color);
+  color: var(--panel-content-color);
+  padding: var(--space-small);
+}
+
+/* Dark Theme */
+.cauldron--theme-dark {
+  --panel-border-color: #5d676f;
+  --panel-header-background-color: var(--accent-dark);
+  --panel-header-color: var(--white);
+  --panel-content-background-color: var(--accent-medium);
+  --panel-content-color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Panel__Header {
+  border-bottom: 1px solid var(--panel-border-color);
+}

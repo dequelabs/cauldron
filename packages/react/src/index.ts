@@ -5,7 +5,7 @@
 export { default as Workspace } from './components/Workspace';
 export { default as Main } from './components/Main';
 export { default as Layout } from './components/Layout';
-export { default as Icon } from './components/Icon';
+export { default as Icon, IconType, iconTypes } from './components/Icon';
 export { default as Offscreen } from './components/Offscreen';
 export { default as Scrim } from './components/Scrim';
 export { default as MenuItem } from './components/MenuItem';
@@ -16,6 +16,7 @@ export {
   TopBarMenu,
   TopBarItem
 } from './components/TopBar';
+export { default as NavBar, NavItem } from './components/NavBar';
 export { default as SideBar } from './components/SideBar';
 export { Alert, AlertContent, AlertActions } from './components/Alert';
 export { Dialog, DialogContent, DialogFooter } from './components/Dialog';
@@ -76,6 +77,7 @@ export {
   TableHeader,
   TableRow
 } from './components/Table';
+export { default as Tabs, Tab, TabPanel } from './components/Tabs';
 export {
   DescriptionList,
   DescriptionListItem,
@@ -83,6 +85,8 @@ export {
   DescriptionDetails
 } from './components/DescriptionList';
 export { default as Stepper, Step } from './components/Stepper';
+export { default as Panel } from './components/Panel';
+export { default as ProgressBar } from './components/ProgressBar';
 
 /**
  * Helpers / Utils
@@ -90,6 +94,7 @@ export { default as Stepper, Step } from './components/Stepper';
 
 export { default as AriaIsolate } from './utils/aria-isolate';
 export { default as focusableSelector } from './utils/focusable-selector';
+export { default as useDidUpdate } from './utils/use-did-update';
 
 /**
  * Contexts

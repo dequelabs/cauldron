@@ -7,6 +7,7 @@ export interface PanelTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ((props: { open: boolean }) => React.ReactNode) | React.ReactNode;
   open?: boolean;
+  fullWidth?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -14,19 +15,26 @@ function PanelTrigger({
   children,
   className,
   open,
+  fullWidth,
   onClick,
   ...other
 }: PanelTriggerProps) {
   return (
     <button
       {...other}
-      className={classnames('ExpandCollapse__trigger', className)}
+      className={classnames(
+        'ExpandCollapse__trigger',
+        fullWidth ? 'fullWidth' : '',
+        className
+      )}
       type="button"
       aria-expanded={open}
       onClick={onClick}
     >
-      {typeof children === 'function' ? children({ open: !!open }) : children}{' '}
-      <Icon type={`chevron-${open ? 'down' : 'right'}`} />
+      <div className="ExpandCollapse__trigger-title">
+        {typeof children === 'function' ? children({ open: !!open }) : children}
+      </div>
+      <Icon type={open ? 'chevron-down' : 'chevron-right'} />
     </button>
   );
 }

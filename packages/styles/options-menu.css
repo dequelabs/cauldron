@@ -6,7 +6,7 @@
 
 .OptionsMenu__trigger {
   font-size: var(--text-small-medium);
-  color: var(--header-text-color-dark);
+  color: var(--gray-90);
   border-radius: 3px;
   background-color: var(--white);
   border: 1px solid var(--field-border-color);

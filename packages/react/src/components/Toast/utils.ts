@@ -1,10 +1,18 @@
 import focusableSelector from '../../utils/focusable-selector';
 import queryAll from '../../utils/query-all';
+import { IconType } from '../Icon';
+
+interface TypeMap {
+  [name: string]: {
+    className: string;
+    icon: IconType;
+  };
+}
 
 /**
  * Maps toast types to their classNames and icons
  */
-export const typeMap = {
+export const typeMap: TypeMap = {
   confirmation: {
     className: 'success',
     icon: 'info-circle'

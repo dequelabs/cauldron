@@ -19,7 +19,7 @@ export interface SelectProps
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
   value?: any;
   defaultValue?: any;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Select = React.forwardRef(
@@ -36,8 +36,7 @@ const Select = React.forwardRef(
       value,
       'aria-describedby': ariaDescribedby,
       defaultValue,
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      onChange = () => {},
+      onChange,
       ...rest
     }: SelectProps,
     ref: Ref<HTMLSelectElement>
@@ -48,13 +47,15 @@ const Select = React.forwardRef(
       );
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const onChangeEvent = onChange ?? ((): void => {});
     const isControlled = typeof value !== 'undefined';
     const [currentValue, setCurrentValue] = useState(
       value || defaultValue || ''
     );
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      onChange(e);
+      onChangeEvent(e);
 
       if (isControlled) {
         return;

@@ -45,6 +45,7 @@ module.exports = {
         beforeEach: true,
         beforeAll: true
       }
-    }
+    },
+    { files: '*.js', rules: { '@typescript-eslint/no-var-requires': 'off' } }
   ]
 };

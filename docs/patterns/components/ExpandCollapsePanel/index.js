@@ -32,6 +32,18 @@ export default class Demo extends Component {
           beef tail ground round. Pancetta kevin strip steak bacon beef corned
           beef venison.
         </ExpandCollapsePanel>
+
+        <ExpandCollapsePanel>
+          <PanelTrigger fullWidth>
+            Panel trigger with fullWidth property
+          </PanelTrigger>
+          Bacon ipsum dolor amet chicken frankfurter shoulder strip steak
+          kielbasa ribeye ham hamburger. Fatback kielbasa shoulder, jowl buffalo
+          bacon jerky ham pancetta. Strip steak pig chicken, spare ribs buffalo
+          beef tail ground round. Pancetta kevin strip steak bacon beef corned
+          beef venison.
+        </ExpandCollapsePanel>
+
         <h3>Controlled Component</h3>
         <p>
           If you need to manually control the open/closed state of the panel,
@@ -48,7 +60,7 @@ const ControlledExpandCollapsePanel = () => {
   const [ open, setOpen ] = useState(false)
   return (
     <ExpandCollapsePanel open={open} onToggle={() => setOpen(!open)}>
-      <PanelTrigger>
+      <PanelTrigger fullWidth>
         More bacon info
       </PanelTrigger>
       Bacon ipsum dolor amet chicken frankfurter shoulder strip steak

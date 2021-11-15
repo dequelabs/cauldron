@@ -15,7 +15,6 @@ const withCustomOptions = (otherProps = {}) => {
         {...defaultProps}
         {...otherProps}
         defaultValue="Bill"
-        onChange={() => {}}
         options={[
           { key: '1', value: 'Fred' },
           { key: '2', value: 'Bill' },
@@ -42,7 +41,6 @@ test('sets option attributes properly', () => {
     <Select
       {...defaultProps}
       defaultValue="a"
-      onChange={() => {}}
       options={[
         { key: '1', value: 'a' },
         { disabled: true, key: '2', value: 'b' },
@@ -66,7 +64,6 @@ test('passes ref properly', () => {
           id="test-id"
           ref={selectRef}
           defaultValue="a"
-          onChange={() => {}}
           options={[{ key: '1', value: 'a' }]}
         />
         <button
@@ -142,38 +139,21 @@ test('should return no axe violations', async () => {
   ];
   const select = mount(
     <div>
-      <Select
-        {...defaultProps}
-        defaultValue="Bar"
-        onChange={() => {}}
-        options={opts}
-      />
+      <Select {...defaultProps} defaultValue="Bar" options={opts} />
     </div>
   );
   expect(await axe(select.html())).toHaveNoViolations();
 
   const disabledSelect = mount(
     <div>
-      <Select
-        {...defaultProps}
-        disabled
-        defaultValue="Bar"
-        onChange={() => {}}
-        options={opts}
-      />
+      <Select {...defaultProps} disabled defaultValue="Bar" options={opts} />
     </div>
   );
   expect(await axe(disabledSelect.html())).toHaveNoViolations();
 
   const requiredSelect = mount(
     <div>
-      <Select
-        {...defaultProps}
-        required
-        defaultValue="Bar"
-        onChange={() => {}}
-        options={opts}
-      />
+      <Select {...defaultProps} required defaultValue="Bar" options={opts} />
     </div>
   );
   expect(await axe(requiredSelect.html())).toHaveNoViolations();
@@ -185,7 +165,6 @@ test('should return no axe violations', async () => {
         required
         error="Bananananas"
         defaultValue="Bar"
-        onChange={() => {}}
         options={opts}
       />
     </div>
@@ -198,7 +177,6 @@ test('supports "controlled" select', () => {
     <Select
       {...defaultProps}
       value="Far"
-      onChange={() => {}}
       options={[
         { key: '1', value: 'Bar' },
         { key: '2', value: 'Foo' },

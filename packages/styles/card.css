@@ -8,11 +8,31 @@
   max-width: 476px;
 }
 
+.Card--simple {
+  max-width: 267px;
+  border: 1px solid var(--gray-40);
+  border-radius: 3px;
+  background-color: var(--tile-background-color);
+  color: var(--heading-text-color);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cauldron--theme-dark .Card--simple {
+  background-color: var(--dark-workspace-color);
+}
+
 .Card__header {
   color: var(--tile-background-color);
   background-color: var(--top-bar-background-color);
   padding: var(--space-three-quarters) var(--space-three-quarters)
     var(--space-three-quarters) var(--space-large);
+}
+
+.Card--simple .Card__header {
+  border-bottom: 1px solid var(--gray-40);
+  padding: var(--space-small);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .Card__header h2,
@@ -22,8 +42,18 @@
 .Card__header h6 {
   font-size: var(--text-small-medium);
   font-weight: var(--font-weight-light);
-  color: var(--tile-background-color);
+  color: var(--heading-text-color);
   margin: 0;
+}
+
+.Card--simple .Card__header h2,
+.Card--simple .Card__header h3,
+.Card--simple .Card__header h4,
+.Card--simple .Card__header h5,
+.Card--simple .Card__header h6 {
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--heading-text-color);
 }
 
 .Card__header .OptionsMenu {
@@ -35,6 +65,10 @@
   color: var(--tile-background-color);
   border: none;
   height: auto;
+}
+
+.Card--simple .Card__content {
+  padding: var(--space-small);
 }
 
 .Card__content ul {
