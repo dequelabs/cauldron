@@ -39,7 +39,7 @@
 .NavBar > ul > li {
   height: var(--top-nav-height);
   font-size: var(--text-size-normal);
-  flex: 1 0 9.375rem;
+  min-width: 9.375rem;
   cursor: pointer;
   position: relative;
   display: flex;
