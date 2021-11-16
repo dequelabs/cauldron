@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import IconButton from '../IconButton';
 import Select from '../Select';
 
@@ -10,13 +11,13 @@ export interface paginationProps {
   currentItemCount: number;
   hasPrevious: boolean;
   hasNext: boolean;
-  mobile_view?: boolean;
+  mobileView?: boolean;
   handlePageSizeChange: (pagesize: string) => void;
   handlePageChange: (pagenumber: number) => void;
 }
 
-const Pagination = (props: paginationProps): ReactElement => {
-  const mobileView = props.mobile_view ? props.mobile_view : false;
+const Pagination = (props: paginationProps) => {
+  const mobileView = props.mobileView ? props.mobileView : false;
   const previousPage = props.currentPage - 1;
   const startIndex =
     props.currentPage === 1 ? 1 : props.pageSize * previousPage + 1;
@@ -120,5 +121,20 @@ const Pagination = (props: paginationProps): ReactElement => {
     </div>
   );
 };
+
+Pagination.propTypes = {
+  pageSize: PropTypes.number,
+  totalPages: PropTypes.number,
+  currentPage: PropTypes.number,
+  totalItems: PropTypes.number,
+  currentItemCount: PropTypes.number,
+  hasPrevious: PropTypes.bool,
+  hasNext: PropTypes.bool,
+  mobileView: PropTypes.bool,
+  handlePageSizeChange: PropTypes.func,
+  handlePageChange: PropTypes.func
+};
+
+Pagination.displayName = 'Pagination';
 
 export default Pagination;
