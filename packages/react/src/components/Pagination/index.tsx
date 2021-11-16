@@ -18,18 +18,14 @@ export interface paginationProps {
 
 const Pagination = (props: paginationProps) => {
   const mobileView = props.mobileView ? props.mobileView : false;
+
   const previousPage = props.currentPage - 1;
   const startIndex =
     props.currentPage === 1 ? 1 : props.pageSize * previousPage + 1;
   const endIndex = startIndex + props.currentItemCount - 1;
   const current_page_index = (
     <p className={mobileView ? 'Page_Index_Sm' : ''}>
-      {'Showing '}{' '}
-      <span>
-        {' '}
-        {startIndex}-{endIndex}
-      </span>{' '}
-      {' of '} <span>{props.totalItems}</span>
+      Showing {startIndex}-{endIndex} of {props.totalItems}
     </p>
   );
   const changePage = (e: React.MouseEvent, pagenumber: number) => {
