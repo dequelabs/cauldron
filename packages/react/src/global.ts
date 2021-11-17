@@ -8,6 +8,7 @@ declare module 'focusable' {
   export = focusable;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cauldron {
   export type LabelProps =
     | { 'aria-label': string }
