@@ -66,3 +66,34 @@ Cauldron is an evolving project. Moving forward, it is preferred that the react 
 - `React.forwardRef` over `ref={el => ...}`
 - declaring valid typescript types for components
 - including `PropTypes` for non-typescript consumers of this project
+
+## Styles
+
+We use [BEM](http://getbem.com/introduction/) for our CSS naming conventions. Here's an example for a mythical "Calendar" component:
+
+We always start with the component name, uppercased:
+
+```css
+.Calendar {
+  ...;
+}
+```
+
+For blocks within the component, such as a date within a calendar would be delimited by two underscores: `__`
+
+```css
+.Calendar__date {
+  ...;
+}
+```
+
+For modifiers, such as variants or states, these values would be delimited by two dashes `--`
+
+```css
+.Calendar--variant-large {
+  ...;
+}
+
+.Calendar--variant-small {
+}
+```
