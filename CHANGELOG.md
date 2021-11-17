@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/dequelabs/cauldron/compare/v3.0.0...v3.0.1) (2021-11-17)
+
+### Bug Fixes
+
+- **react:** import cauldron namespace from types where needed ([#429](https://github.com/dequelabs/cauldron/issues/429)) ([400a919](https://github.com/dequelabs/cauldron/commit/400a919d600a09e233b20b245e62a1d4c5af7cd1))
+
 ## [3.0.0](https://github.com/dequelabs/cauldron/compare/v2.0.0...v3.0.0) (2021-11-15)
 
 ### ⚠ BREAKING CHANGES

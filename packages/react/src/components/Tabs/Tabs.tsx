@@ -1,3 +1,4 @@
+import { Cauldron } from '../../types';
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
