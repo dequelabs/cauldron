@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Fully accessible react components library for Deque Cauldron",
   "publishConfig": {
     "access": "public"
