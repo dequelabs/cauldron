@@ -75,7 +75,7 @@ We always start with the component name, uppercased:
 
 ```css
 .Calendar {
-  ...;
+  border: 1px solid var(--gray-90);
 }
 ```
 
@@ -83,7 +83,7 @@ For blocks within the component, such as a date within a calendar would be delim
 
 ```css
 .Calendar__date {
-  ...;
+  border: 1px solid var(--gray-90);
 }
 ```
 
@@ -91,9 +91,10 @@ For modifiers, such as variants or states, these values would be delimited by tw
 
 ```css
 .Calendar--variant-large {
-  ...;
+  font-size: var(--text-size-large);
 }
 
 .Calendar--variant-small {
+  font-size: var(--text-size-small);
 }
 ```
