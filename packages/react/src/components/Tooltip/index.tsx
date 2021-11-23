@@ -46,6 +46,7 @@ export default function Tooltip({
   variant = 'text',
   show: showProp = false,
   hideElementOnHidden = false,
+  className,
   ...props
 }: TooltipProps) {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
@@ -185,7 +186,7 @@ export default function Tooltip({
     ? createPortal(
         <div
           id={id}
-          className={classnames('Tooltip', `Tooltip--${placement}`, {
+          className={classnames('Tooltip', `Tooltip--${placement}`, className, {
             TooltipInfo: variant === 'info',
             'Tooltip--hidden': !showTooltip && hideElementOnHidden,
             'Tooltip--big': variant === 'big'

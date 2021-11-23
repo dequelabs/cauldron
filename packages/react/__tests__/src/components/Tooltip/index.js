@@ -186,6 +186,15 @@ test('should handle hovering the tooltip', async () => {
   expect(tooltip.isConnected).toBeFalsy();
 });
 
+test('should support adding className to tooltip', async () => {
+  const wrapper = mount(<Wrapper tooltipProps={{ className: 'foo' }} />);
+  await update(wrapper);
+  expect(
+    wrapper.find('Tooltip [role="tooltip"]').hasClass('Tooltip')
+  ).toBeTruthy();
+  expect(wrapper.find('Tooltip [role="tooltip"]').hasClass('foo')).toBeTruthy();
+});
+
 test('variant="big" should return no axe violations', async () => {
   const wrapper = mount(<BigWrapper />);
   await update(wrapper);
