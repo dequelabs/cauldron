@@ -42,11 +42,7 @@ class AddressDemo extends Component {
                 '<AddressCityStateZip> Only. The zip code to be combined with city and state in a single line.'
             }
           }}
-          states={[
-            {
-              label: 'Full address'
-            }
-          ]}
+          states={[]}
         >
           <h2>Examples</h2>
 
