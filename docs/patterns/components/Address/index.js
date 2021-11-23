@@ -42,51 +42,49 @@ class AddressDemo extends Component {
                 '<AddressCityStateZip> Only. The zip code to be combined with city and state in a single line.'
             }
           }}
-          states={[]}
+          states={[
+            {
+              label: 'Full address'
+            }
+          ]}
         >
           <h2>Examples</h2>
-          <ul className="semantic-only">
-            <li>
-              <Address>
-                <AddressLine>1234 Sesame Street</AddressLine>
-                <AddressCityStateZip
-                  city="Metrocity"
-                  state="AA"
-                  zip="8675309"
-                />
-              </Address>
-              <Code>
-                {`<Address>
-      <AddressLine>1234 Sesame Street</AddressLine>
-      <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
-    </Address>`}
-              </Code>
-            </li>
-            <li>
-              <Address>
-                <AddressLine>1234 Sesame Street</AddressLine>
-                <AddressCityStateZip city="Metrocity" zip="8675309" />
-              </Address>
-              <Code>
-                {`<Address>
-      <AddressLine>1234 Sesame Street</AddressLine>
-      <AddressCityStateZip city="Metrocity" zip="8675309" />
-    </Address>`}
-              </Code>
-            </li>
-            <li>
-              <Address>
-                <AddressLine>1234 Sesame Street</AddressLine>
-                <AddressCityStateZip city="Metrocity" state="AA" />
-              </Address>
-              <Code>
-                {`<Address>
-      <AddressLine>1234 Sesame Street</AddressLine>
-      <AddressCityStateZip city="Metrocity" state="AA" />
-    </Address>`}
-              </Code>
-            </li>
-          </ul>
+
+          <h3>Full address</h3>
+          <Address>
+            <AddressLine>1234 Sesame Street</AddressLine>
+            <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
+          </Address>
+          <Code>
+            {`<Address>
+  <AddressLine>1234 Sesame Street</AddressLine>
+  <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
+</Address>`}
+          </Code>
+
+          <h3>Missing state</h3>
+          <Address>
+            <AddressLine>1234 Sesame Street</AddressLine>
+            <AddressCityStateZip city="Metrocity" zip="8675309" />
+          </Address>
+          <Code>
+            {`<Address>
+  <AddressLine>1234 Sesame Street</AddressLine>
+  <AddressCityStateZip city="Metrocity" zip="8675309" />
+</Address>`}
+          </Code>
+
+          <h3>Missing zip code </h3>
+          <Address>
+            <AddressLine>1234 Sesame Street</AddressLine>
+            <AddressCityStateZip city="Metrocity" state="AA" />
+          </Address>
+          <Code>
+            {`<Address>
+  <AddressLine>1234 Sesame Street</AddressLine>
+  <AddressCityStateZip city="Metrocity" state="AA" />
+</Address>`}
+          </Code>
         </Demo>
       </div>
     );
