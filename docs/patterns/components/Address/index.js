@@ -45,16 +45,48 @@ class AddressDemo extends Component {
           states={[]}
         >
           <h2>Examples</h2>
-          <Address>
-            <AddressLine>1234 Sesame Street</AddressLine>
-            <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
-          </Address>
-          <Code>
-            {`<Address>
-  <AddressLine>1234 Sesame Street</AddressLine>
-  <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
-</Address>`}
-          </Code>
+          <ul className="semantic-only">
+            <li>
+              <Address>
+                <AddressLine>1234 Sesame Street</AddressLine>
+                <AddressCityStateZip
+                  city="Metrocity"
+                  state="AA"
+                  zip="8675309"
+                />
+              </Address>
+              <Code>
+                {`<Address>
+      <AddressLine>1234 Sesame Street</AddressLine>
+      <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
+    </Address>`}
+              </Code>
+            </li>
+            <li>
+              <Address>
+                <AddressLine>1234 Sesame Street</AddressLine>
+                <AddressCityStateZip city="Metrocity" zip="8675309" />
+              </Address>
+              <Code>
+                {`<Address>
+      <AddressLine>1234 Sesame Street</AddressLine>
+      <AddressCityStateZip city="Metrocity" zip="8675309" />
+    </Address>`}
+              </Code>
+            </li>
+            <li>
+              <Address>
+                <AddressLine>1234 Sesame Street</AddressLine>
+                <AddressCityStateZip city="Metrocity" state="AA" />
+              </Address>
+              <Code>
+                {`<Address>
+      <AddressLine>1234 Sesame Street</AddressLine>
+      <AddressCityStateZip city="Metrocity" state="AA" />
+    </Address>`}
+              </Code>
+            </li>
+          </ul>
         </Demo>
       </div>
     );
