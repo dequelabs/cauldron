@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-interface AddressProps {
+interface AddressProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
 export const Address = ({ children, className, ...other }: AddressProps) => (
@@ -19,10 +18,7 @@ Address.propTypes = {
   className: PropTypes.string
 };
 
-interface AddressLineProps {
-  children?: React.ReactNode;
-  className?: string;
-}
+type AddressLineProps = React.HTMLAttributes<HTMLElement>;
 
 export const AddressLine = ({
   children,
@@ -41,11 +37,10 @@ AddressLine.propTypes = {
   className: PropTypes.string
 };
 
-interface AddressCityStateZipProps {
+interface AddressCityStateZipProps extends React.HTMLAttributes<HTMLElement> {
   city: React.ReactNode;
   state: React.ReactNode;
   zip: React.ReactNode;
-  className?: string;
 }
 
 export const AddressCityStateZip = ({
