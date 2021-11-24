@@ -1,0 +1,7 @@
+:root {
+  --address-line-height: 1.618;
+}
+
+.Address {
+  line-height: var(--address-line-height);
+}
