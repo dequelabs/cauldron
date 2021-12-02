@@ -159,7 +159,7 @@ const App = () => {
           titleTemplate="%s | Deque Cauldron React"
           defaultTitle="Deque Cauldron React"
         />
-        <SkipLink target={'#main-content'} />
+        <SkipLink target={'#main-content'} aria-label="Skip" />
         <TopBar>
           <MenuBar thin={thin} hasTrigger>
             <TopBarTrigger onClick={onTriggerClick}>
