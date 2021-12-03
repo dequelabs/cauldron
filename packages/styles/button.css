@@ -81,7 +81,7 @@ button.Link {
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
 .Button--error:focus:before {
-  box-shadow: 0 0 1px 2px var(--button-focus-ring-color);
+  box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
 
 .Button--primary {

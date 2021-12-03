@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/dequelabs/cauldron/compare/v3.0.0...v3.0.1) (2021-11-17)
+
+### Bug Fixes
+
+- **react:** import cauldron namespace from types where needed ([#429](https://github.com/dequelabs/cauldron/issues/429)) ([400a919](https://github.com/dequelabs/cauldron/commit/400a919d600a09e233b20b245e62a1d4c5af7cd1))
+
+## [3.0.0](https://github.com/dequelabs/cauldron/compare/v2.0.0...v3.0.0) (2021-11-15)
+
+### ⚠ BREAKING CHANGES
+
+- TabPanels are no longer TabList's children
+
+### Features
+
+- Add copy Icon ([#392](https://github.com/dequelabs/cauldron/issues/392)) ([54804ad](https://github.com/dequelabs/cauldron/commit/54804ad76e21092706787092532da8aad188e976))
+- Add NavBar component ([#387](https://github.com/dequelabs/cauldron/issues/387)) ([f2f0263](https://github.com/dequelabs/cauldron/commit/f2f0263b4fc62fdf9995455d2c699ca01069922b)), closes [#388](https://github.com/dequelabs/cauldron/issues/388)
+- add ProgressBar component ([#378](https://github.com/dequelabs/cauldron/issues/378)) ([b052ac2](https://github.com/dequelabs/cauldron/commit/b052ac25b736059212d69dc924da7a28eea39308))
+- **Card:** Add simple variant. ([#365](https://github.com/dequelabs/cauldron/issues/365)) ([c59d861](https://github.com/dequelabs/cauldron/commit/c59d86102e311399a92f07a95815a6acc960765e))
+- **docs:** set theme to user's preference (based on prefers-color-scheme) and persist changes to local storage ([#381](https://github.com/dequelabs/cauldron/issues/381)) ([2844ef8](https://github.com/dequelabs/cauldron/commit/2844ef8e6c5aa137858fabdf79c3390c8725793c))
+- Add new Tabs component ([#350](https://github.com/dequelabs/cauldron/issues/350)) ([b30e4f3](https://github.com/dequelabs/cauldron/commit/b30e4f33196cffbd6edba47b46fc16e3496a5e1b))
+- Add recycle and info square icons ([#374](https://github.com/dequelabs/cauldron/issues/374)) ([6995122](https://github.com/dequelabs/cauldron/commit/6995122ff8a2ac79e53eec11cc44b719b7423263))
+- Adds robot icon (dark/light theme support) ([#376](https://github.com/dequelabs/cauldron/issues/376)) ([e2891e8](https://github.com/dequelabs/cauldron/commit/e2891e891957ed8d28ca2faabbadaf2d1e687d5d))
+- Dark theme support for checkbuttons/radios/stepper ([#328](https://github.com/dequelabs/cauldron/issues/328)) ([22e43f3](https://github.com/dequelabs/cauldron/commit/22e43f33ebe5981458ade4de27a798a529f06b7d))
+- Implement dark theme for Select and TextField ([#366](https://github.com/dequelabs/cauldron/issues/366)) ([8f02a50](https://github.com/dequelabs/cauldron/commit/8f02a508ac963edc8ff33e1ae580d2f6d55c53e4))
+- new panel component, dark/light support for expansible-panel/code ([#344](https://github.com/dequelabs/cauldron/issues/344)) ([f18f47c](https://github.com/dequelabs/cauldron/commit/f18f47cfe26f5afc15fb6666c08f6b258a603b4f))
+
+### Bug Fixes
+
+- **select:** updates onChange prop to be optional ([#390](https://github.com/dequelabs/cauldron/issues/390)) ([c149173](https://github.com/dequelabs/cauldron/commit/c14917323b44e6d77353f6d67023f05af2617b46))
+- **styles:** Adds expected dark/light theme focus rings ([#394](https://github.com/dequelabs/cauldron/issues/394)) ([2346423](https://github.com/dequelabs/cauldron/commit/234642335ce2098e72cb7313a101acb101aa8684))
+- **styles:** prevent focus ring from causing layout shift on select focus ([#385](https://github.com/dequelabs/cauldron/issues/385)) ([6f2d09f](https://github.com/dequelabs/cauldron/commit/6f2d09f0083e3f51ea361d942797703863433dcf))
+- Match types of OptionsMenuTriggerProps ([#393](https://github.com/dequelabs/cauldron/issues/393)) ([b5a4434](https://github.com/dequelabs/cauldron/commit/b5a4434215713748e058feeae50962cd7d4f8f2a))
+- remove ids from menu icon ([#375](https://github.com/dequelabs/cauldron/issues/375)) ([cd719c2](https://github.com/dequelabs/cauldron/commit/cd719c2487484525a92d33c06542df102b510600))
+- type issues of OptionsMenu ([#414](https://github.com/dequelabs/cauldron/issues/414)) ([7b517d0](https://github.com/dequelabs/cauldron/commit/7b517d0dbd1251eb16d333dbafa5143fd2f52277))
+- **Icon:** Support intellisense for `type=` prop ([#373](https://github.com/dequelabs/cauldron/issues/373)) ([6f86a1b](https://github.com/dequelabs/cauldron/commit/6f86a1be508da73a1cad8fd94b5fd9581de11530)), closes [#281](https://github.com/dequelabs/cauldron/issues/281)
+- **styles:** ensure that header-text-color-dark is not used by other components ([#360](https://github.com/dequelabs/cauldron/issues/360)) ([1066cf1](https://github.com/dequelabs/cauldron/commit/1066cf1215e289c9fae64408383d16d80e429e4f))
+- **styles:** ensure that syntax highlighting has accessible color contrast ([#380](https://github.com/dequelabs/cauldron/issues/380)) ([7061a5e](https://github.com/dequelabs/cauldron/commit/7061a5e7200acd49a393215462a4767e7668c05e))
+- **styles:** fix a11y color contrast issue with hljs-title in dark mode ([#383](https://github.com/dequelabs/cauldron/issues/383)) ([c598b99](https://github.com/dequelabs/cauldron/commit/c598b99994c7c204e5f7d8d0ecd4dbe3d7f0948d))
+- **styles:** fix issue where toast link was appearing as white ([#364](https://github.com/dequelabs/cauldron/issues/364)) ([a379427](https://github.com/dequelabs/cauldron/commit/a379427c67375fd334f05c2068b7ffcded377d6c))
+- **styles:** fix TopBar links styles applying to all anchor elements ([#362](https://github.com/dequelabs/cauldron/issues/362)) ([bc370c1](https://github.com/dequelabs/cauldron/commit/bc370c1f8a94bb5f940afdab76aca2bed05b060f))
+- **styles:** set accessible color for css selectors in light mode for syntax highlighting ([#388](https://github.com/dequelabs/cauldron/issues/388)) ([47195db](https://github.com/dequelabs/cauldron/commit/47195db0f4afa417579cf4d61ff3e7e03f0af307))
+- dark/light theme for sidebar, modal, code ([#345](https://github.com/dequelabs/cauldron/issues/345)) ([d1e71e0](https://github.com/dequelabs/cauldron/commit/d1e71e022a5f34f4dd5fda515a51033c733f7450))
+- eliminate light specific vars for topbar ([#351](https://github.com/dequelabs/cauldron/issues/351)) ([4fab7c9](https://github.com/dequelabs/cauldron/commit/4fab7c98b21ebda6e4b49e55392f6cb8666928d4))
+- more top bar and panel related styles for dark/light theme ([#357](https://github.com/dequelabs/cauldron/issues/357)) ([32ba415](https://github.com/dequelabs/cauldron/commit/32ba415dde1dae1f38c8e6cf762be41f250c2c1d))
+
+* Move TabPanels outside Tabs ([#368](https://github.com/dequelabs/cauldron/issues/368)) ([83cf46e](https://github.com/dequelabs/cauldron/commit/83cf46e8a8d4615888462276b7e95ec24b21c699))
+
 ## [2.0.0](https://github.com/dequelabs/cauldron/compare/v1.0.0...v2.0.0) (2021-09-20)
 
 ### ⚠ BREAKING CHANGES

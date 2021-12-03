@@ -79,7 +79,10 @@ const LoaderOverlayDemo = () => {
         <Button onClick={onClick} buttonRef={buttonRef}>
           Show loader for {LOADING_DURATION / 1000} seconds
         </Button>
-        <Code>{`<LoaderOverlay tabIndex={-1} ref={loaderRef}>
+        <Code
+          role="region"
+          tabIndex={0}
+        >{`<LoaderOverlay tabIndex={-1} ref={loaderRef}>
   <Loader />
   <div>Loading...</div>
 </LoaderOverlay>`}</Code>

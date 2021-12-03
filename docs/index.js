@@ -62,7 +62,9 @@ const componentsList = [
   'DescriptionList',
   'TopBar',
   'Stepper',
-  'ProgressBar'
+  'ProgressBar',
+  'NavBar',
+  'Address'
 ].sort();
 
 const App = () => {
@@ -158,7 +160,7 @@ const App = () => {
           defaultTitle="Deque Cauldron React"
         />
         <SkipLink target={'#main-content'} />
-        <TopBar>
+        <TopBar role="banner">
           <MenuBar thin={thin} hasTrigger>
             <TopBarTrigger onClick={onTriggerClick}>
               <button
