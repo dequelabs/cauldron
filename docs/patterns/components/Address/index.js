@@ -51,7 +51,7 @@ class AddressDemo extends Component {
             <AddressLine>1234 Sesame Street</AddressLine>
             <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
           </Address>
-          <Code>
+          <Code role="region" tabIndex={0}>
             {`<Address>
   <AddressLine>1234 Sesame Street</AddressLine>
   <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
@@ -63,7 +63,7 @@ class AddressDemo extends Component {
             <AddressLine>1234 Sesame Street</AddressLine>
             <AddressCityStateZip city="Metrocity" zip="8675309" />
           </Address>
-          <Code>
+          <Code role="region" tabIndex={0}>
             {`<Address>
   <AddressLine>1234 Sesame Street</AddressLine>
   <AddressCityStateZip city="Metrocity" zip="8675309" />
@@ -75,7 +75,7 @@ class AddressDemo extends Component {
             <AddressLine>1234 Sesame Street</AddressLine>
             <AddressCityStateZip city="Metrocity" state="AA" />
           </Address>
-          <Code>
+          <Code role="region" tabIndex={0}>
             {`<Address>
   <AddressLine>1234 Sesame Street</AddressLine>
   <AddressCityStateZip city="Metrocity" state="AA" />
