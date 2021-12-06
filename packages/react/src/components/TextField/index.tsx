@@ -133,9 +133,11 @@ export default class TextField extends React.Component<
           {...other}
           {...inputProps}
         />
-        <div className="Error" id={this.errorId}>
-          {error}
-        </div>
+        {error && (
+          <div className="Error" id={this.errorId}>
+            {error}
+          </div>
+        )}
       </div>
     );
   }

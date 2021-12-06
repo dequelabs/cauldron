@@ -145,9 +145,11 @@ const Select = React.forwardRef(
           </select>
           <div className="arrow-down" />
         </div>
-        <div className="Error" id={errorId}>
-          {error}
-        </div>
+        {error && (
+          <div id={errorId} className="Error">
+            {error}
+          </div>
+        )}
       </div>
     );
     /* eslint-disable jsx-a11y/no-onchange */
