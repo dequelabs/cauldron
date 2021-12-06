@@ -15,6 +15,7 @@ test('using as controlled field does not maintain own state', () => {
   });
   expect(input.value).toBe('bar');
   expect(field.state('value')).toBe('');
+  expect(field.find('.Error').exists()).toBe(false);
 });
 
 test('onChange prop', () => {

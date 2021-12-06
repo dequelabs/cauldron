@@ -163,10 +163,6 @@ textarea.Field--has-error:focus:hover,
   padding-left: var(--space-half);
 }
 
-.Error:empty {
-  min-height: unset;
-}
-
 .Field {
   display: block;
   position: relative;

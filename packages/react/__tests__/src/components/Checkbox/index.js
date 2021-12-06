@@ -19,6 +19,7 @@ test('handles checked prop', () => {
     wrapper.find('.Icon.Checkbox__overlay').hasClass('Icon--checkbox-unchecked')
   ).toBeFalsy();
   expect(wrapper.find('[type="checkbox"]').getDOMNode().checked).toBeTruthy();
+  expect(wrapper.find('.Error').exists()).toBe(false);
 });
 
 test('handles checked prop changes', done => {
