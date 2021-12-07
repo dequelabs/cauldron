@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
-import { AxeResults } from 'axe-core';
+import { AxeResults, getRules } from 'axe-core';
 import logSymbols from 'log-symbols';
 import chalk from 'chalk';
 import fs from 'fs';
@@ -12,6 +12,10 @@ import { AddressInfo } from 'net';
 const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
+
+const rules = getRules()
+  .filter(rule => !rule.tags.includes('best-practice'))
+  .map(rule => rule.ruleId);
 
 const main = async (): Promise<void> => {
   assert(
@@ -45,6 +49,7 @@ const main = async (): Promise<void> => {
     await p.goto(url);
 
     const axe = new AxePuppeteer(p);
+    axe.withRules(rules); // Disable best-practice rules.
     results.set(url, (await axe.analyze()) as AxeResults);
 
     await p.close();
