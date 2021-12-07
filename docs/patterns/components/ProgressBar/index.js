@@ -76,7 +76,7 @@ const ProgressBarDemo = () => {
       <p>
         <Button onClick={handleAnimate}>Show Animated Progress</Button>
       </p>
-      <ProgressBar label="Progress" progress={progress} />
+      <ProgressBar aria-label="Progress" progress={progress} />
       <h2>Code Sample</h2>
       <Code langauge="javascript">
         {`import React from 'react';
