@@ -100,9 +100,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }}
           />
         </div>
-        <div id={errorId} className="Error">
-          {error}
-        </div>
+        {error && (
+          <div id={errorId} className="Error">
+            {error}
+          </div>
+        )}
       </>
     );
   }
