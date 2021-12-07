@@ -69,11 +69,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
       - restore_cache:
-          key: v1-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+          key: v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
       - restore_cache:
-          key: v1-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+          key: v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
       - run: yarn build:styles
       - run: yarn build:react
       - run: yarn build:docs
