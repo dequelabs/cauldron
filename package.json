@@ -60,6 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "autoprefixer": "^9.7.6",
+    "axe-core": "^4.3.5-canary.0ddc00b",
     "babel-loader": "^8.0.5",
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",

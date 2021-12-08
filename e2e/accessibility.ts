@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
-import { AxeResults, getRules } from 'axe-core';
+import { AxeResults } from 'axe-core';
 import logSymbols from 'log-symbols';
 import chalk from 'chalk';
 import fs from 'fs';
@@ -12,10 +12,8 @@ import { AddressInfo } from 'net';
 const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
-
-const rules = getRules()
-  .filter(rule => !rule.tags.includes('best-practice'))
-  .map(rule => rule.ruleId);
+const AXE_PATH = require.resolve('axe-core');
+const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
 
 const main = async (): Promise<void> => {
   assert(
@@ -48,8 +46,12 @@ const main = async (): Promise<void> => {
     const p = await browser.newPage();
     await p.goto(url);
 
-    const axe = new AxePuppeteer(p);
-    axe.withRules(rules); // Disable best-practice rules.
+    const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
+      'wcag2a',
+      'wcag2aa',
+      'wcag21a',
+      'wcag21aa'
+    ]);
     results.set(url, (await axe.analyze()) as AxeResults);
 
     await p.close();
@@ -59,7 +61,7 @@ const main = async (): Promise<void> => {
   await page.close();
   await browser.close();
 
-  // In CI, don't try to measure; use 2x the longest template name instead.
+  // In CI, don't try to measure; use 2x the longest page name instead.
   const maxWidth = IS_CI
     ? 2 * Math.max(0, ...[...results.keys()].map(t => t.length))
     : process.stdout.columns - 8;

@@ -1943,6 +1943,11 @@ axe-core@^4.3.3:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
   integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
 
+axe-core@^4.3.5-canary.0ddc00b:
+  version "4.3.5-canary.0ddc00b"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5-canary.0ddc00b.tgz#0a47969e3239cfe8cacfabe626b1e71a9327465d"
+  integrity sha512-ErtpzmVs0VQRy9N+wMEsgbZvnJhya7iKVCQgUGeI8xAV8OalHcRj+hiPsM884v0bf9eUMGljyJRoGJES7UEn0w==
+
 axobject-query@^2.0.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.1.2.tgz#2bdffc0371e643e5f03ba99065d5179b9ca79799"
