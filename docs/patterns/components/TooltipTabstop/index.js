@@ -50,7 +50,7 @@ const DemoTooltipTabstop = () => {
       </ol>
 
       <h2>Code Samples</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { TooltipTabstop } from '@deque/cauldron-react';
 

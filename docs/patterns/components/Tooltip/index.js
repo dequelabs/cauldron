@@ -121,7 +121,7 @@ const DemoTooltip = () => {
       </div>
 
       <h2>Code Samples</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { Tooltip, Button } from '@deque/cauldron-react';
 
@@ -152,7 +152,7 @@ const Demo = () => {
         <code>aria-describedby</code> attributes.
       </p>
 
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Button
   aria-describedby="tooltip someotherid"
   buttonRef={ref}

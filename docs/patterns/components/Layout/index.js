@@ -16,7 +16,7 @@ export default function Layout() {
         Main components.
       </p>
       <h3>Code sample</h3>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`
 import { Workspace, Sidebar, TopBar } from '@deque/cauldron-react';
 
@@ -40,7 +40,7 @@ const App = () => (
         required compoents
       </p>
       <h3>Code sample</h3>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`
 import { Layout, Main, TopBar, SideBar } from '@deque/cauldron-react';
 

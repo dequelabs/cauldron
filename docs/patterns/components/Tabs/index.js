@@ -27,7 +27,7 @@ const Demo = () => {
         <p>Insert content for tab panel 3 here...</p>
       </TabPanel>
       <h2>Code Sample</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`
 import React, { useRef } from 'react';
 import { Tabs, Tab, TabPanel, Code } from '@deque/cauldron-react';

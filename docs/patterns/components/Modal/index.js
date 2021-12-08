@@ -67,7 +67,7 @@ export default class Demo extends Component {
           </ModalFooter>
         </Modal>
         <h2>Code Sample</h2>
-        <Code langauge="javascript">
+        <Code langauge="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react';

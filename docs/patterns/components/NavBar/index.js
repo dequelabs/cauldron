@@ -26,7 +26,7 @@ const Demo = () => {
         Toggle between mobil and non-mobile mode
       </Button>
       <h2>Code Sample</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`
 import React, { useState } from 'react';
 import { NavBar, NavItem, Code, Button } from '@deque/cauldron-react';
