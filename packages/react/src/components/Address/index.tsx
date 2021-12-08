@@ -25,11 +25,11 @@ export const AddressLine = ({
   className,
   ...other
 }: AddressLineProps) =>
-  !!children && (
+  children ? (
     <div className={classNames('Address__line', className)} {...other}>
       {children}
     </div>
-  );
+  ) : null;
 
 AddressLine.displayName = 'AddressLine';
 AddressLine.propTypes = {
@@ -50,7 +50,7 @@ export const AddressCityStateZip = ({
   className,
   ...other
 }: AddressCityStateZipProps) =>
-  !!(city || state || zip) && (
+  city || state || zip ? (
     <div
       className={classNames('Address__city-state-zip', className)}
       {...other}
@@ -59,7 +59,7 @@ export const AddressCityStateZip = ({
         .filter(Boolean)
         .join(' ')}
     </div>
-  );
+  ) : null;
 
 AddressCityStateZip.displayName = 'AddressCityStateZip';
 AddressCityStateZip.propTypes = {
