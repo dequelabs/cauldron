@@ -41,7 +41,9 @@ test('Step: renders li and children', () => {
 });
 
 test('Step: renders tooltip tabstops', () => {
-  const stepper = mount(<Step status="current" tooltip="bananas" />);
+  const stepper = mount(
+    <Step status="current" tooltip="bananas" tooltipText="bananas" />
+  );
   expect(stepper.find('TooltipTabstop').exists()).toBe(true);
   expect(
     stepper
@@ -83,8 +85,8 @@ test('should return no axe violations', async () => {
 
   const stepperWithTooltip = mount(
     <Stepper>
-      <Step status="complete" tooltip="bananas" />
-      <Step status="current" tooltip="mangos" />
+      <Step status="complete" tooltip="bananas" tooltipText="bananas" />
+      <Step status="current" tooltip="mangos" tooltipText="mangos" />
     </Stepper>
   );
 
