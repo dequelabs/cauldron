@@ -12,8 +12,11 @@ import { AddressInfo } from 'net';
 const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
+const MAX_WIDTH = IS_CI ? 60 : process.stdout.columns - 8;
 const AXE_PATH = require.resolve('axe-core');
 const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
+
+let foundViolations = false;
 
 const main = async (): Promise<void> => {
   assert(
@@ -27,24 +30,27 @@ const main = async (): Promise<void> => {
   const server = app.listen(0);
   const { port } = server.address() as AddressInfo;
 
-  const results = new Map<string, AxeResults>();
+  const urls = new Set<string>([`http://localhost:${port}/`]);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`http://localhost:${port}/`);
 
+  // Build a list of all URLs.
   const links = await page.$$('.SideBar a[href]');
   for (const link of links) {
     const href = await link.getProperty('href');
     const url = (await href?.jsonValue()) as string;
+    urls.add(url);
+  }
 
-    if (results.has(url)) {
-      console.warn('Already analyze page', { url });
-      return;
-    }
+  // Analyze each URL.
+  for (const url of urls) {
+    const component = (url.split('/').pop() as string) || 'Index';
 
-    const p = await browser.newPage();
-    await p.goto(url);
+    await page.goto(url);
+
+    // TODO: dark mode
 
     const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
       'wcag2a',
@@ -52,31 +58,16 @@ const main = async (): Promise<void> => {
       'wcag21a',
       'wcag21aa'
     ]);
-    results.set(url, (await axe.analyze()) as AxeResults);
+    const { violations } = (await axe.analyze()) as AxeResults;
 
-    await p.close();
-  }
-
-  server.close();
-  await page.close();
-  await browser.close();
-
-  // In CI, don't try to measure; use 2x the longest page name instead.
-  const maxWidth = IS_CI
-    ? 2 * Math.max(0, ...[...results.keys()].map(t => t.length))
-    : process.stdout.columns - 8;
-
-  let foundViolations = false;
-
-  for (const [url, { violations }] of results) {
     let symbol = logSymbols.success;
     if (violations.length) {
       symbol = logSymbols.warning;
       foundViolations = true;
     }
 
-    const file = chalk.cyan(chalk.bold(url));
-    const dots = '.'.repeat(maxWidth - url.length - symbol.length);
+    const file = chalk.cyan(chalk.bold(component));
+    const dots = '.'.repeat(MAX_WIDTH - component.length - symbol.length);
     console.log(file, dots, symbol);
 
     for (const { id, help } of violations) {
@@ -84,13 +75,19 @@ const main = async (): Promise<void> => {
     }
   }
 
-  if (foundViolations) {
-    console.log();
-    throw new Error('Found accessibility violations');
-  }
+  server.close();
+  await page.close();
+  await browser.close();
 };
 
-main().catch((error: Error) => {
-  console.error(error);
-  process.exit(1);
-});
+main()
+  .then(() => {
+    if (foundViolations) {
+      console.log();
+      throw new Error('Found accessibility violations');
+    }
+  })
+  .catch((error: Error) => {
+    console.error(error);
+    process.exit(1);
+  });

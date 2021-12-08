@@ -9,7 +9,7 @@ const Home = () => (
       {'$ npm install --save @deque/cauldron-react @deque/cauldron-styles'}
     </Code>
     <h2>Usage</h2>
-    <Code language="javascript">
+    <Code language="javascript" role="region" tabIndex={0}>
       {`
 import { Workspace, Button } from '@deque/cauldron-react';
 import '@deque/cauldron-styles'; // or in your css you can: @import '@deque/cauldron-styles'
