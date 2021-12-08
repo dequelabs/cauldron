@@ -87,3 +87,9 @@
 .DescriptionList--collapsed .DescriptionList__details {
   font-size: var(--text-size-small);
 }
+
+/* Temporary solution for insufficient color contrast until proper dark mode is implemented. */
+.cauldron--theme-dark .DescriptionList__details,
+.cauldron--theme-dark .DescriptionList--collapsed .DescriptionList__term {
+  color: var(--white);
+}

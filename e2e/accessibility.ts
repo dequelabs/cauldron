@@ -12,7 +12,7 @@ import { AddressInfo } from 'net';
 const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
-const MAX_WIDTH = IS_CI ? 60 : process.stdout.columns - 8;
+const MAX_WIDTH = IS_CI ? 80 : process.stdout.columns - 8;
 const AXE_PATH = require.resolve('axe-core');
 const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
 

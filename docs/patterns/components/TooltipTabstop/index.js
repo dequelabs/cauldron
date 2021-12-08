@@ -11,8 +11,10 @@ const DemoTooltipTabstop = () => {
 
       <p>
         <code>TooltipTabstop</code> is a composite component built on top of{' '}
-        <Link to="./Tooltip">Tooltip</Link> allowing for accessible tooltips on
-        non-interactive elements.
+        <Link to="./Tooltip" className="tooltip-link">
+          Tooltip
+        </Link>{' '}
+        allowing for accessible tooltips on non-interactive elements.
       </p>
 
       <p>Some examples of where this might be used over a standard Tooltip:</p>

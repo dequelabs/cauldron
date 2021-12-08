@@ -27,7 +27,10 @@ const DemoTooltip = () => {
       <h1>Tooltip</h1>
 
       <p>
-        Cauldron's Tooltip relies on <a href="https://popper.js.org/">Popper</a>{' '}
+        Cauldron's Tooltip relies on{' '}
+        <a href="https://popper.js.org/" className="popper-link">
+          Popper
+        </a>{' '}
         to position tooltips dynamically.
       </p>
 
