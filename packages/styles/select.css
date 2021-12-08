@@ -11,7 +11,6 @@
 }
 
 .Field__select--disabled {
-  background: var(--field-background-color-disabled);
   opacity: 0.65;
 }
 

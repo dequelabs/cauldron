@@ -85,7 +85,7 @@
 }
 
 .Dialog__content {
-  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
+  padding: var(--dialog-padding);
 }
 
 .Dialog__content p:first-child {
@@ -137,6 +137,7 @@
   display: flex;
   justify-content: center;
   border-top: none;
+  padding-top: 0;
 }
 
 /* Dark Theme */

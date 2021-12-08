@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ThHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-interface TableHeaderProps {
+interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   children: React.ReactNode;
   className?: string;
 }
