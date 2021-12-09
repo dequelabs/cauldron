@@ -14,6 +14,7 @@ interface StepWithChildren extends BaseStepProps {
 
 interface StepWithTooltip extends BaseStepProps {
   tooltip: React.ReactNode;
+  tooltipText: string;
 }
 
 type StepProps = StepWithChildren | StepWithTooltip;
@@ -46,6 +47,7 @@ export const Step = (props: StepProps) => {
             // it with the contents of the tooltip in the
             // tab stop's accessible name.
             association="aria-labelledby"
+            aria-label={isTooltip(props) ? props.tooltipText : undefined}
           >
             <div className="Stepper__step-indicator" />
           </TooltipTabstop>
@@ -67,6 +69,7 @@ Step.displayName = 'Step';
 Step.propTypes = {
   children: PropTypes.node,
   tooltip: PropTypes.node,
+  tooltipText: PropTypes.string,
   className: PropTypes.string
 };
 
