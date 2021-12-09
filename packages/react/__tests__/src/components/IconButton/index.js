@@ -17,6 +17,12 @@ test('should render button', async () => {
   expect(wrapper.find('button').exists()).toBe(true);
 });
 
+test('should render "as" an anchor', async () => {
+  const wrapper = mount(<IconButton icon="pencil" label="Edit" as="a" />);
+  await update(wrapper);
+  expect(wrapper.find('a').exists()).toBe(true);
+});
+
 test('should return no axe violations', async () => {
   const wrapper = mount(<IconButton icon="pencil" label="Edit" />);
   await update(wrapper);
