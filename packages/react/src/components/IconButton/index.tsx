@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import * as Polymorphic from '@radix-ui/react-polymorphic';
+import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
 
