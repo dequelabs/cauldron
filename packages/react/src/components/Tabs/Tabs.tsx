@@ -11,6 +11,7 @@ type TabsProps = {
   initialActiveIndex?: number;
   thin?: boolean;
   className?: string;
+  onChange?: (this: HTMLDivElement, event: Event) => void;
 } & Cauldron.LabelProps;
 
 const Tabs = ({
@@ -18,9 +19,11 @@ const Tabs = ({
   thin,
   initialActiveIndex = 0,
   className,
+  onChange,
   ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
@@ -107,13 +110,28 @@ const Tabs = ({
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
+    const event = new Event('change', { bubbles: true, cancelable: false });
+    focusedTabRef.current?.dispatchEvent(event);
   }, [activeIndex]);
+
+  useEffect(() => {
+    if (typeof onChange === 'function') {
+      tabsRef.current?.addEventListener('change', onChange);
+    }
+
+    return () => {
+      if (typeof onChange === 'function') {
+        tabsRef.current?.removeEventListener('change', onChange);
+      }
+    };
+  }, [onChange]);
 
   return (
     <div
       className={classNames('Tabs', className, {
         'Tabs--thin': thin
       })}
+      ref={tabsRef}
     >
       <ul
         role="tablist"
