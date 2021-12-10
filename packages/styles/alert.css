@@ -14,7 +14,6 @@
 
 /* override .cauldron--theme-dark .Dialog__inner */
 .Dialog.Alert .Dialog__inner {
-  width: 23rem;
   border: 4px solid var(--alert-header-border-color);
 }
 
