@@ -1,6 +1,10 @@
 :root {
-  --alert-warning-background-color: #d93251;
-  --alert-warning-header-text-color: #fff;
+  --alert-warning-header-icon-color: #d93251;
+}
+
+.Alert .Dialog__inner {
+  width: 23rem;
+  border: 4px solid var(--accent-primary);
 }
 
 .Alert .Dialog__header .Icon {
@@ -8,15 +12,19 @@
 }
 
 .Alert__warning .Dialog__inner {
-  border: 3px solid var(--alert-warning-background-color);
+  border: 4px solid var(--alert-warning-header-icon-color);
 }
 
-.Alert__warning .Dialog__header {
-  background-color: var(--alert-warning-background-color);
+.Alert .Dialog__heading .Icon {
+  color: var(--accent-primary);
 }
 
-.Alert__warning .Dialog__heading {
-  color: var(--alert-warning-header-text-color);
+.Alert__warning .Dialog__heading .Icon {
+  color: var(--alert-warning-header-icon-color);
+}
+
+.Alert .Dialog__content {
+  min-height: 5.75rem;
 }
 
 .Alert .Dialog__footer {
@@ -24,8 +32,4 @@
   padding-top: 0;
   display: flex;
   justify-content: center;
-}
-
-.Alert__warning .Dialog__heading:focus {
-  border-bottom-color: var(--alert-warning-header-text-color);
 }
