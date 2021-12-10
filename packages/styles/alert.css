@@ -1,22 +1,33 @@
-:root {
-  --alert-warning-header-icon-color: #d93251;
+.Alert {
+  --alert-warning-header-icon-color: var(--accent-error);
+  --alert-warning-header-border-color: var(--accent-error);
+  --alert-header-icon-color: var(--accent-primary);
+  --alert-header-border-color: var(--accent-primary);
 }
 
-.Alert .Dialog__inner {
+.cauldron--theme-dark .Alert {
+  --alert-warning-header-icon-color: var(--accent-danger);
+  --alert-warning-header-border-color: var(--accent-danger);
+  --alert-header-icon-color: var(--accent-info);
+  --alert-header-border-color: var(--accent-info);
+}
+
+/* override .cauldron--theme-dark .Dialog__inner */
+.Dialog.Alert .Dialog__inner {
   width: 23rem;
-  border: 4px solid var(--accent-primary);
+  border: 4px solid var(--alert-header-border-color);
 }
 
 .Alert .Dialog__header .Icon {
   padding-right: var(--space-smallest);
 }
 
-.Alert__warning .Dialog__inner {
-  border: 4px solid var(--alert-warning-header-icon-color);
+.Dialog.Alert__warning .Dialog__inner {
+  border: 4px solid var(--alert-warning-header-border-color);
 }
 
 .Alert .Dialog__heading .Icon {
-  color: var(--accent-primary);
+  color: var(--alert-header-icon-color);
 }
 
 .Alert__warning .Dialog__heading .Icon {
@@ -32,4 +43,18 @@
   padding-top: 0;
   display: flex;
   justify-content: center;
+}
+
+.cauldron--theme-dark .Dialog.Alert .Dialog__inner {
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark .Dialog.Alert .Dialog__header {
+  background: var(--accent-medium);
+  border-bottom: none;
+}
+
+.cauldron--theme-dark .Dialog.Alert .Dialog__footer {
+  background: transparent;
+  border-top: none;
 }
