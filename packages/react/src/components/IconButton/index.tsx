@@ -9,7 +9,8 @@ import React, {
   useRef,
   forwardRef,
   useImperativeHandle,
-  MutableRefObject
+  MutableRefObject,
+  HTMLProps
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -50,17 +51,32 @@ const IconButton = forwardRef(
       className,
       variant = 'secondary',
       disabled,
+      tabIndex = 0,
       ...other
-    },
+    }: any,
     ref
   ): JSX.Element => {
     const internalRef = useRef() as MutableRefObject<any>;
     useImperativeHandle(ref, () => internalRef.current);
 
+    // Configure additional properties based on the type of the Component
+    // for accessibility
+    const accessibilityProps: HTMLProps<HTMLElement> = {};
+    if (Component === 'button') {
+      accessibilityProps.type = 'button';
+    } else {
+      // We don't need to set an anchor's role, since it would be redundant
+      if (Component !== 'a') {
+        accessibilityProps.role = other.href || other.to ? 'link' : 'button';
+      }
+      if (disabled) {
+        accessibilityProps['aria-disabled'] = disabled;
+      }
+    }
+
     return (
       <React.Fragment>
         <Component
-          type={'button'}
           className={classnames(className, {
             IconButton: true,
             'IconButton--primary': variant === 'primary',
@@ -69,6 +85,8 @@ const IconButton = forwardRef(
           })}
           ref={internalRef}
           disabled={disabled}
+          tabIndex={disabled ? -1 : tabIndex}
+          {...accessibilityProps}
           {...other}
         >
           <Icon type={icon} />
