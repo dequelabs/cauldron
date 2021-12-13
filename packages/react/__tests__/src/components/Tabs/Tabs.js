@@ -495,7 +495,7 @@ test('calls onChange prop when active tab is changed', async () => {
   });
 
   expect(onChange.calledOnce).toEqual(true);
-  expect(onChange.firstCall.args[0].activeIndex).toEqual(1);
+  expect(onChange.firstCall.args[0].activeTabIndex).toEqual(1);
 });
 
 test('returns no axe vialation', async () => {

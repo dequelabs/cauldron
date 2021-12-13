@@ -12,10 +12,10 @@ type TabsProps = {
   thin?: boolean;
   className?: string;
   onChange?: ({
-    activeIndex,
+    activeTabIndex,
     target
   }: {
-    activeIndex: number;
+    activeTabIndex: number;
     target: HTMLLIElement | null;
   }) => void;
 } & Cauldron.LabelProps;
@@ -117,7 +117,7 @@ const Tabs = ({
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
     if (typeof onChange === 'function') {
-      onChange({ activeIndex, target: focusedTabRef.current });
+      onChange({ activeTabIndex: activeIndex, target: focusedTabRef.current });
     }
   }, [activeIndex]);
 
