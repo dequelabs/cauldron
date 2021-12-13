@@ -11,7 +11,13 @@ type TabsProps = {
   initialActiveIndex?: number;
   thin?: boolean;
   className?: string;
-  onChange?: (this: HTMLDivElement, event: Event) => void;
+  onChange?: ({
+    activeIndex,
+    target
+  }: {
+    activeIndex: number;
+    target: HTMLLIElement | null;
+  }) => void;
 } & Cauldron.LabelProps;
 
 const Tabs = ({
@@ -110,21 +116,10 @@ const Tabs = ({
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
-    const event = new Event('change', { bubbles: true, cancelable: false });
-    focusedTabRef.current?.dispatchEvent(event);
-  }, [activeIndex]);
-
-  useEffect(() => {
     if (typeof onChange === 'function') {
-      tabsRef.current?.addEventListener('change', onChange);
+      onChange({ activeIndex, target: focusedTabRef.current });
     }
-
-    return () => {
-      if (typeof onChange === 'function') {
-        tabsRef.current?.removeEventListener('change', onChange);
-      }
-    };
-  }, [onChange]);
+  }, [activeIndex]);
 
   return (
     <div
