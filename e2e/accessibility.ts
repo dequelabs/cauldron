@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+import puppeteer, { LaunchOptions } from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
 import { AxeResults } from 'axe-core';
@@ -13,6 +13,8 @@ const DIST_PATH = path.join(__dirname, '..', 'docs', 'dist');
 const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
 const MAX_WIDTH = IS_CI ? 80 : process.stdout.columns - 8;
+const THEMES = ['light', 'dark'];
+const THEME_KEY = 'cauldron_theme';
 const AXE_PATH = require.resolve('axe-core');
 const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
 
@@ -50,28 +52,37 @@ const main = async (): Promise<void> => {
 
     await page.goto(url);
 
-    // TODO: dark mode
+    for (const theme of THEMES) {
+      await page.evaluate(
+        (key, theme) => {
+          localStorage.setItem(key, theme);
+        },
+        THEME_KEY,
+        theme
+      );
 
-    const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
-      'wcag2a',
-      'wcag2aa',
-      'wcag21a',
-      'wcag21aa'
-    ]);
-    const { violations } = (await axe.analyze()) as AxeResults;
+      const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
+        'wcag2a',
+        'wcag2aa',
+        'wcag21a',
+        'wcag21aa'
+      ]);
+      const { violations } = (await axe.analyze()) as AxeResults;
 
-    let symbol = logSymbols.success;
-    if (violations.length) {
-      symbol = logSymbols.warning;
-      foundViolations = true;
-    }
+      let symbol = logSymbols.success;
+      if (violations.length) {
+        symbol = logSymbols.warning;
+        foundViolations = true;
+      }
 
-    const file = chalk.cyan(chalk.bold(component));
-    const dots = '.'.repeat(MAX_WIDTH - component.length - symbol.length);
-    console.log(file, dots, symbol);
+      const title =
+        chalk.cyan(chalk.bold(component)) + ' (' + chalk.italic(theme) + ')';
+      const dots = '.'.repeat(MAX_WIDTH - component.length - symbol.length);
+      console.log(title, dots, symbol);
 
-    for (const { id, help } of violations) {
-      console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
+      for (const { id, help } of violations) {
+        console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
+      }
     }
   }
 
