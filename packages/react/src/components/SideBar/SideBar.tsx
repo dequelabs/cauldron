@@ -12,6 +12,7 @@ export interface SideBarProps extends React.HTMLAttributes<HTMLUListElement> {
   onDismiss: () => void;
   className?: string;
   show: boolean;
+  navProps: React.HTMLAttributes<HTMLElement>;
 }
 
 interface SideBarState {
@@ -123,12 +124,19 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     const { animateClass, wide } = this.state;
     // disabling no-unused-vars to prevent onDismiss from being passed through to dom element
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { children, className, show, onDismiss, ...other } = this.props;
+    const {
+      children,
+      className,
+      show,
+      onDismiss,
+      navProps,
+      ...other
+    } = this.props;
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
       <Fragment>
         <ClickOutsideListener onClickOutside={this.handleClickOutside}>
-          <nav>
+          <nav {...navProps}>
             <ul
               className={classNames('SideBar', className, animateClass)}
               {...other}
