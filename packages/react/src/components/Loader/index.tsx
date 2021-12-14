@@ -1,23 +1,22 @@
 import { Cauldron } from '../../types';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Offscreen from '../Offscreen';
 import classNames from 'classnames';
 
-export type LoaderProps = React.HTMLAttributes<HTMLDivElement> &
-  Partial<Cauldron.LabelProps>;
+export interface LoaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  label?: string;
+}
 
-export default function Loader({ className, ...other }: LoaderProps) {
+export default function Loader({ className, label, ...other }: LoaderProps) {
   const props = {
     ...other,
     className: classNames('Loader', className)
   };
 
-  const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy } = props;
-  const hasLabel = ariaLabel || ariaLabelledBy;
-
-  if (hasLabel) {
+  if (label?.length) {
     props['role'] = 'alert';
-    props['aria-busy'] = true;
+    props.children = <Offscreen>{label}</Offscreen>;
   } else {
     props['aria-hidden'] = true;
   }

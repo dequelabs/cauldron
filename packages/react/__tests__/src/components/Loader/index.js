@@ -19,19 +19,10 @@ test('does not set aria-hidden if a label is provided', () => {
 });
 
 test('sets expected role attributes given an aria-label', () => {
-  const loader = mount(<Loader aria-label="bananas" />);
+  const loader = mount(<Loader label="bananas" />);
   const loaderNode = loader.getDOMNode();
 
   expect(loaderNode.getAttribute('role')).toBe('alert');
-  expect(loaderNode.getAttribute('aria-busy')).toBe('true');
-});
-
-test('sets expected role attributes given an aria-labelledby', () => {
-  const loader = mount(<Loader aria-labelledby="bananas" />);
-  const loaderNode = loader.getDOMNode();
-
-  expect(loaderNode.getAttribute('role')).toBe('alert');
-  expect(loaderNode.getAttribute('aria-busy')).toBe('true');
 });
 
 test('returns no axe violations', async () => {
