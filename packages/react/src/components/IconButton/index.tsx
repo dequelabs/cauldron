@@ -10,7 +10,8 @@ import React, {
   forwardRef,
   useImperativeHandle,
   MutableRefObject,
-  HTMLProps
+  HTMLProps,
+  useEffect
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -73,6 +74,14 @@ const IconButton = forwardRef(
         accessibilityProps['aria-disabled'] = disabled;
       }
     }
+
+    useEffect(() => {
+      if (!disabled) {
+        return;
+      }
+
+      internalRef.current?.setAttribute('aria-label', label);
+    }, disabled);
 
     return (
       <React.Fragment>
