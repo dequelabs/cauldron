@@ -18,15 +18,20 @@ test('does not set aria-hidden if a label is provided', () => {
   expect(icon.is('[aria-hidden]')).toBe(false);
 });
 
-test('sets expected progressbar attributes given a label', () => {
-  const loader = mount(<Loader label="bananas" />);
+test('sets expected role attributes given an aria-label', () => {
+  const loader = mount(<Loader aria-label="bananas" />);
   const loaderNode = loader.getDOMNode();
 
-  expect(loaderNode.getAttribute('role')).toBe('progressbar');
-  expect(loaderNode.getAttribute('aria-valuetext')).toBe('bananas');
+  expect(loaderNode.getAttribute('role')).toBe('alert');
   expect(loaderNode.getAttribute('aria-busy')).toBe('true');
-  expect(loaderNode.getAttribute('aria-valuemin')).toBe('0');
-  expect(loaderNode.getAttribute('aria-valuemax')).toBe('100');
+});
+
+test('sets expected role attributes given an aria-labelledby', () => {
+  const loader = mount(<Loader aria-labelledby="bananas" />);
+  const loaderNode = loader.getDOMNode();
+
+  expect(loaderNode.getAttribute('role')).toBe('alert');
+  expect(loaderNode.getAttribute('aria-busy')).toBe('true');
 });
 
 test('returns no axe violations', async () => {
