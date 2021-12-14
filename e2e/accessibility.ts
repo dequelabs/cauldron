@@ -1,4 +1,4 @@
-import puppeteer, { LaunchOptions } from 'puppeteer';
+import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
 import { AxeResults } from 'axe-core';
