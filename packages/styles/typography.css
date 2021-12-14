@@ -1,0 +1,36 @@
+:root {
+  --text-size-heading-1: 3.125rem;
+  --text-size-heading-2: 2rem;
+  --text-size-heading-3: 1.5rem;
+  --text-size-heading-4: 1.25rem;
+  --text-size-heading-5: 1.125rem;
+  --text-size-heading-6: 0.9375rem;
+}
+
+body {
+  font-size: var(--text-size-small);
+}
+
+h1 {
+  font-size: var(--text-size-heading-1);
+}
+
+h2 {
+  font-size: var(--text-size-heading-2);
+}
+
+h3 {
+  font-size: var(--text-size-heading-3);
+}
+
+h4 {
+  font-size: var(--text-size-heading-4);
+}
+
+h5 {
+  font-size: var(--text-size-heading-5);
+}
+
+h6 {
+  font-size: var(--text-size-heading-6);
+}
