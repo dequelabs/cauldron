@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
-import { AxeResults } from 'axe-core';
+import axe, { AxeResults } from 'axe-core';
 import logSymbols from 'log-symbols';
 import chalk from 'chalk';
 import fs from 'fs';
@@ -80,8 +80,15 @@ const main = async (): Promise<void> => {
       const dots = '.'.repeat(MAX_WIDTH - component.length - symbol.length);
       console.log(title, dots, symbol);
 
-      for (const { id, help } of violations) {
+      for (const { id, help, nodes } of violations) {
         console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
+        nodes.map(node => {
+          console.log(
+            '  ↳',
+            chalk.bgGreen(chalk.black(`${node.target}`)),
+            chalk.yellowBright(node.html)
+          );
+        });
       }
     }
   }
