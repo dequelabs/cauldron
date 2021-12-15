@@ -68,10 +68,9 @@
 .DescriptionList__term {
   background-color: var(--data-list-background-color);
   width: var(--data-list-value-width);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   border-right: 1px solid var(--data-list-border-color);
   flex: 0 0 auto;
-  font-family: 'Lato', sans-serif;
 }
 
 .DescriptionList--collapsed .DescriptionList__term {
@@ -84,6 +83,7 @@
   width: 100%;
   color: var(--data-list-value-text-color);
   background-color: var(--data-list-value-background-color);
+  font-weight: var(--font-weight-normal);
 }
 
 .DescriptionList__term,
