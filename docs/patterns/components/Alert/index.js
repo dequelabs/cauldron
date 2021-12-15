@@ -26,22 +26,30 @@ export default class Demo extends Component {
         <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
         <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
         <Alert heading="Default Alert" show={showDefaultAlert}>
-          <AlertContent>Dismissable alert</AlertContent>
+          <AlertContent>
+            Use this alert to notify a user of an important action they need to
+            take/agree to in order to progress. Alerts never have inputs. It
+            always has (2) buttons: [Action] + Cancel.
+          </AlertContent>
           <AlertActions>
-            <Button onClick={this.toggleDefaultAlert}>Ok</Button>
+            <Button onClick={this.toggleDefaultAlert}>CONTINUE</Button>
             <Button variant="secondary" onClick={this.toggleDefaultAlert}>
               Cancel
             </Button>
           </AlertActions>
         </Alert>
         <Alert variant="warning" heading="Danger Zone" show={showWarningAlert}>
-          <AlertContent>Welcome to the danger zone</AlertContent>
+          <AlertContent>
+            If a user is going to delete something or do something which will
+            irreperably change their application in a way you use this one. It
+            always has (2) buttons: [Error] + Cancel.
+          </AlertContent>
           <AlertActions>
             <Button variant="error" onClick={this.toggleWarningAlert}>
-              Let's get dangerous
+              DELETE
             </Button>
             <Button variant="secondary" onClick={this.toggleWarningAlert}>
-              Nevermind
+              CANCEL
             </Button>
           </AlertActions>
         </Alert>
