@@ -39,6 +39,13 @@ test('adds aria-disabled when disabled is passed in for something other than a b
   expect(a.prop('aria-disabled')).toBe(true);
 });
 
+test('adds aria-label when disabled is passed in', async () => {
+  const wrapper = mount(<IconButton icon="pencil" label="Edit" disabled />);
+
+  await update(wrapper);
+  expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('Edit');
+});
+
 test('should add button role when the component is not a link or a button', async () => {
   const CustomButton = React.forwardRef(function Link(props, ref) {
     return <div id="innerElement" ref={ref} {...props}></div>;
