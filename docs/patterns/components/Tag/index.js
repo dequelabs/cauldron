@@ -19,6 +19,14 @@ export default class TagDemo extends Component {
                   <TagLabel>Label: </TagLabel>value
                 </>
               )
+            },
+            {
+              variant: 'dismiss',
+              children: (
+                <>
+                  <TagLabel>Label: </TagLabel>value
+                </>
+              )
             }
           ]}
           propDocs={{
@@ -26,7 +34,15 @@ export default class TagDemo extends Component {
               ...children,
               required: true
             },
-            className
+            className,
+            variant: {
+              type: 'string'
+            },
+            onDismiss: {
+              type: 'function',
+              description:
+                'A function that allows users to take actions in addition to closing the tag'
+            }
           }}
         />
       </div>

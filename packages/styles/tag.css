@@ -14,10 +14,27 @@
   justify-content: center;
   align-items: center;
   padding: 2px 8px;
-  width: 90px;
+  width: 5.625rem;
 }
 
 .Tag__label {
   color: var(--tag-label-text-color);
   margin-right: 3px;
+}
+
+.Tag--dismiss {
+  width: 6.75rem;
+}
+
+.Tag--dismiss .Icon {
+  margin-left: 1px;
+}
+
+.Tag--dismiss svg {
+  height: 16px;
+  width: 16px;
+}
+
+.Tag--hidden {
+  display: none;
 }
