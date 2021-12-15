@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
 import express from 'express';
-import axe, { AxeResults } from 'axe-core';
+import { AxeResults } from 'axe-core';
 import logSymbols from 'log-symbols';
 import chalk from 'chalk';
 import fs from 'fs';
@@ -14,7 +14,6 @@ const INDEX_HTML = path.join(DIST_PATH, 'index.html');
 const IS_CI = 'CI' in process.env;
 const MAX_WIDTH = IS_CI ? 80 : process.stdout.columns - 8;
 const THEMES = ['light', 'dark'];
-const THEME_KEY = 'cauldron_theme';
 const AXE_PATH = require.resolve('axe-core');
 const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
 
@@ -54,12 +53,20 @@ const main = async (): Promise<void> => {
 
     for (const theme of THEMES) {
       await page.evaluate(
-        (key, theme) => {
-          localStorage.setItem(key, theme);
+        theme => {
+          document.body.className = '';
+          document.body.classList.add(`cauldron--theme-${theme}`);
         },
-        THEME_KEY,
-        theme
+        [theme]
       );
+
+      // Try to wait until there is an idle period up to a max of 5s
+      await Promise.race([
+        await page.evaluate(
+          () => new Promise(resolve => requestIdleCallback(resolve))
+        ),
+        await page.waitForTimeout(5000)
+      ]);
 
       const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
         'wcag2a',
