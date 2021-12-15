@@ -16,7 +16,7 @@ export default class TagDemo extends Component {
             {
               children: (
                 <>
-                  <TagLabel>Label: </TagLabel>value
+                  <TagLabel>Label: </TagLabel>Value
                 </>
               )
             },
@@ -24,7 +24,7 @@ export default class TagDemo extends Component {
               variant: 'dismiss',
               children: (
                 <>
-                  <TagLabel>Label: </TagLabel>value
+                  <TagLabel>Label: </TagLabel>Value
                 </>
               )
             }

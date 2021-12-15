@@ -3,6 +3,7 @@
   --tag-label-text-color: var(--gray-60);
   --tag-background-color: var(--gray-20);
   --tag-border-color: var(--gray-90);
+  --tag-icon-color: var(--gray-60);
 }
 
 .cauldron--theme-dark {
@@ -10,6 +11,7 @@
   --tag-label-text-color: var(--accent-light);
   --tag-background-color: var(--accent-medium);
   --tag-border-color: var(--accent-medium);
+  --tag-icon-color: var(--white);
 }
 
 .Tag {
@@ -33,11 +35,17 @@
 }
 
 .Tag--dismiss {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   width: 6.75rem;
 }
 
+.Tag--dismiss:hover {
+  cursor: pointer;
+}
+
 .Tag--dismiss .Icon {
-  margin-left: 1px;
+  margin-left: var(--space-half);
+  color: var(--tag-icon-color);
 }
 
 .Tag--dismiss svg {
