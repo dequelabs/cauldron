@@ -1,70 +1,27 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { Panel, IconButton } from '@deque/cauldron-react/';
+import { Panel } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 const PanelDemo = () => {
   return (
     <div>
       <Demo
-        customImport="import { Panel, IconButton } from '@deque/cauldron-react'"
         component={Panel}
         states={[
           {
-            children: (
-              <>
-                Text appears and functions like a section heading but it is nor
-                marked up as such.
-              </>
-            )
-          },
-          {
-            title: 'Issue 1',
-            children: (
-              <>
-                Text appears and functions like a section heading but it is nor
-                marked up as such.
-              </>
-            )
-          },
-          {
-            actions: [
-              <IconButton icon="pencil" label="Edit" />,
-              <IconButton icon="trash" label="Remove state" />,
-              <IconButton icon="run-again" label="Re-run automatic scan" />
-            ],
-            children: (
-              <>
-                Text appears and functions like a section heading but it is nor
-                marked up as such.
-              </>
-            )
-          },
-          {
-            title: 'Issue 1',
-            actions: [
-              <IconButton icon="pencil" label="Edit" />,
-              <IconButton icon="trash" label="Remove state" />,
-              <IconButton icon="run-again" label="Re-run automatic scan" />
-            ],
-            children: (
-              <>
-                Text appears and functions like a section heading but it is nor
-                marked up as such.
-              </>
-            )
+            heading: {
+              text: 'Panel Heading',
+              level: 2
+            },
+            children: 'Panel content.'
           }
         ]}
         propDocs={{
-          title: {
-            type: 'string',
-            required: false,
-            description: 'Title'
-          },
-          actions: {
-            type: 'typeof IconButton[]',
-            required: false,
-            description: 'Actions'
+          heading: {
+            type: 'object',
+            required: true,
+            description: 'Object containing: text, level (optional)'
           },
           children: {
             ...children,
