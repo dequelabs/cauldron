@@ -7,6 +7,13 @@
   --table-space: 11px;
 }
 
+.cauldron--theme-dark {
+  --table-header-text-color: var(--white);
+  --table-header-background-color: var(--accent-dark);
+  --table-cell-text-color: var(--accent-light);
+  --table-cell-background-color: var(--accent-medium);
+}
+
 .Table {
   font-size: var(--text-size-small);
   border-collapse: collapse;
