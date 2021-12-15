@@ -15,9 +15,11 @@
   align-items: center;
   padding: 2px 8px;
   width: 90px;
+  font-weight: var(--font-weight-medium);
 }
 
 .Tag__label {
   color: var(--tag-label-text-color);
   margin-right: 3px;
+  font-weight: var(--font-weight-normal);
 }
