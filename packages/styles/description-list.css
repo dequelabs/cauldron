@@ -1,10 +1,19 @@
 :root {
-  --data-list-value-background-color: var(--gray-20);
+  --data-list-background-color: var(--gray-20);
+  --data-list-value-background-color: var(--white);
   --data-list-border-color: var(--gray-40);
   --data-list-text-color: var(--gray-90);
-  --data-list-value-text-color: var(--gray-60);
+  --data-list-value-text-color: var(--gray-80);
   --data-list-space: 11px;
   --data-list-value-width: 187px;
+}
+
+.cauldron--theme-dark {
+  --data-list-background-color: var(--accent-dark);
+  --data-list-value-background-color: var(--accent-medium);
+  --data-list-text-color: var(--white);
+  --data-list-value-text-color: var(--accent-light);
+  --data-list-border-color: #5d676f;
 }
 
 .DescriptionList {
@@ -25,6 +34,7 @@
   padding: var(--data-list-space);
   border-top: 1px solid var(--data-list-border-color);
   border-bottom: 1px solid var(--data-list-border-color);
+  background-color: var(--data-list-value-background-color);
 }
 
 .DescriptionList__item {
@@ -36,6 +46,7 @@
   border: 0;
   margin-bottom: var(--space-small);
   display: block;
+  background-color: var(--data-list-value-background-color);
 }
 
 .DescriptionList__item:first-child {
@@ -55,7 +66,7 @@
 }
 
 .DescriptionList__term {
-  background-color: var(--data-list-value-background-color);
+  background-color: var(--data-list-background-color);
   width: var(--data-list-value-width);
   font-weight: var(--font-weight-bold);
   border-right: 1px solid var(--data-list-border-color);
@@ -70,7 +81,9 @@
 }
 
 .DescriptionList__details {
+  width: 100%;
   color: var(--data-list-value-text-color);
+  background-color: var(--data-list-value-background-color);
 }
 
 .DescriptionList__term,
