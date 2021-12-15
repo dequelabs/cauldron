@@ -31,8 +31,8 @@ test('sets loader variants', () => {
   const smallNode = small.getDOMNode();
   const largeNode = large.getDOMNode();
 
-  expect(smallNode.classList.contains('Loader__overlay--small')).toBe(true);
-  expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
+  expect(smallNode.classList.contains('Loader--small')).toBe(true);
+  expect(largeNode.classList.contains('Loader--large')).toBe(true);
 });
 
 test('returns no axe violations', async () => {
