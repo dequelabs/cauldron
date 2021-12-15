@@ -25,8 +25,7 @@
 
 .TableHeader {
   background: var(--table-header-background-color);
-  font-family: 'Lato', sans-serif;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
   border-bottom: 2px solid var(--table-row-border-color);
 }
