@@ -79,9 +79,8 @@ const IconButton = forwardRef(
       if (!disabled) {
         return;
       }
-
       internalRef.current?.setAttribute('aria-label', label);
-    }, disabled);
+    }, [disabled]);
 
     return (
       <React.Fragment>
