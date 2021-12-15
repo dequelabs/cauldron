@@ -1,34 +1,30 @@
+import { Cauldron } from '../../types';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Offscreen from '../Offscreen';
 import classNames from 'classnames';
 
 export interface LoaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  label: string;
+  label?: string;
 }
 
-export default function Loader({ label, className, ...other }: LoaderProps) {
+export default function Loader({ className, label, ...other }: LoaderProps) {
   const props = {
     ...other,
-    className: classNames('Loader', className),
-    'aria-hidden': !label
+    className: classNames('Loader', className)
   };
 
-  if (label) {
-    props.role = 'progressbar';
-    props['aria-valuetext'] = label;
-    props['aria-busy'] = true;
-    props['aria-valuemin'] = 0;
-    props['aria-valuemax'] = 100;
-    // According to the  ARIA 1.2 spec (https://www.w3.org/TR/wai-aria-1.2/#progressbar),
-    // the aria-valuenow attribute SHOULD be omitted because the "value" of our progress
-    // is "indeterminate".
+  if (label?.length) {
+    props['role'] = 'alert';
+    props.children = <Offscreen>{label}</Offscreen>;
+  } else {
+    props['aria-hidden'] = true;
   }
 
   return <div {...props} />;
 }
 
 Loader.propTypes = {
-  label: PropTypes.string,
   className: PropTypes.string
 };
 
