@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { spy } from 'sinon';
 import Tag, { TagLabel } from '../../../../src/components/Tag';
 import axe from '../../../axe';
 
@@ -25,6 +26,30 @@ test('passes arbitrary props through', () => {
   const tagLabel = shallow(<TagLabel data-bar="yes">hi</TagLabel>);
   expect(tag.is('[data-foo="true"]')).toBe(true);
   expect(tagLabel.is('[data-bar="yes"]')).toBe(true);
+});
+
+test('renders dismiss variant', () => {
+  const tag = shallow(<Tag variant="dismiss">bye</Tag>);
+
+  expect(tag.find('button').exists());
+  expect(tag.find('.Tag--dismiss').exists());
+  expect(tag.find('.Icon--close').exists());
+});
+
+test('handles onDismiss', async () => {
+  const onDismissSpy = spy();
+  const tag = mount(
+    <Tag variant="dismiss" onDismiss={onDismissSpy}>
+      bye
+    </Tag>
+  );
+
+  tag.find('button').simulate('click');
+  await new Promise(resolve => setImmediate(resolve));
+  tag.update();
+
+  expect(tag.find('Tag--hidden').exists());
+  expect(onDismissSpy.calledOnce);
 });
 
 test('should return no axe violations', async () => {
