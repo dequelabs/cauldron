@@ -63,7 +63,12 @@ const main = async (): Promise<void> => {
       // Try to wait until there is an idle period up to a max of 5s
       await Promise.race([
         await page.evaluate(
-          () => new Promise(resolve => requestIdleCallback(resolve))
+          () =>
+            new Promise(resolve =>
+              // Typescript does not implement experimental apis but this should exist within puppeteer
+              // see: https://github.com/microsoft/TypeScript/issues/21309
+              (window as any).requestIdleCallback(resolve)
+            )
         ),
         await page.waitForTimeout(5000)
       ]);
