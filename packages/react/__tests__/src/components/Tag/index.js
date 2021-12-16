@@ -57,7 +57,7 @@ test('renders toggle variant', () => {
     <Tag
       variant="toggle"
       buttonLabel="toggle tag"
-      toggleBase={true}
+      toggleValue={true}
       onToggle={() => null}
     >
       bye
@@ -78,7 +78,7 @@ test('handles onToggle', async () => {
     <Tag
       variant="toggle"
       buttonLabel="toggle tag"
-      toggleBase={true}
+      toggleValue={true}
       onToggle={onToggleSpy}
     >
       bye

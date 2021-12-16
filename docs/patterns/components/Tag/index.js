@@ -52,12 +52,36 @@ export default class TagDemo extends Component {
             },
             className,
             variant: {
-              type: 'string'
+              type: 'string',
+              description: 'Tag variants include "dismiss" and "toggle"'
             },
             onDismiss: {
               type: 'function',
               description:
                 'A function that allows users to take actions in addition to closing the tag'
+            },
+            toggleValue: {
+              type: 'boolean',
+              description:
+                'A value that determines whether the switch is on or off; required for "toggle" variant'
+            },
+            onToggle: {
+              type: 'function',
+              description:
+                'A function that toggles the value of toggleValue; required for "toggle" variant'
+            },
+            buttonLabel: {
+              type: 'string',
+              description:
+                'aria-label for toggle tag; required for "toggle" variant'
+            },
+            toggleOnText: {
+              type: 'string',
+              description: 'Customized text that replaces the default "ON"'
+            },
+            toggleOffText: {
+              type: 'string',
+              description: 'Customized text that replaces the default "OFF"'
             }
           }}
         />
