@@ -58,11 +58,6 @@
   display: none;
 }
 
-.Tag--toggle {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+.Tag--toggle span {
   text-decoration: underline;
-}
-
-.Tag--toggle .Tag__label {
-  text-decoration: none;
 }

@@ -55,6 +55,8 @@ const Tag = ({
   if (variant === 'toggle') {
     (other as any).onClick = onToggle;
     (other as any).role = 'switch';
+    (other as any).type = 'button';
+    (other as any)['aria-checked'] = !!toggleBase;
   }
 
   return (
@@ -67,7 +69,9 @@ const Tag = ({
       {...other}
     >
       {children}
-      {variant === 'toggle' && (toggleBase ? toggleOnText : toggleOffText)}
+      {variant === 'toggle' && (
+        <span>{toggleBase ? toggleOnText : toggleOffText}</span>
+      )}
       {variant === 'dismiss' && <Icon type="close" />}
     </Component>
   );
