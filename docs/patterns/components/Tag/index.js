@@ -4,6 +4,16 @@ import { Tag, TagLabel } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 export default class TagDemo extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isActive: true
+    };
+
+    this.toggleIsActive = this.toggleIsActive.bind(this);
+  }
+
   render() {
     return (
       <div>
@@ -19,6 +29,11 @@ export default class TagDemo extends Component {
                   <TagLabel>Label: </TagLabel>Value
                 </>
               )
+            },
+            {
+              variant: 'toggle',
+
+              children: <TagLabel>Label: </TagLabel>
             },
             {
               variant: 'dismiss',
@@ -47,6 +62,12 @@ export default class TagDemo extends Component {
         />
       </div>
     );
+  }
+
+  toggleIsActive() {
+    this.setState(({ isActive }) => {
+      return { isActive: !isActive };
+    });
   }
 }
 TagDemo.displayName = 'TagDemo';

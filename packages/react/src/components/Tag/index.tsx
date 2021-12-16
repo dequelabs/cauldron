@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-type Variant = 'dismiss';
+type Variant = 'dismiss' | 'toggle';
 
 interface TagProps {
   children: React.ReactNode;
   className?: string;
   variant?: Variant;
+  toggleBase?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onToggle?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  toggleOnText?: string;
+  toggleOffText?: string;
 }
 
 export const TagLabel = ({ children, className, ...other }: TagProps) => (
@@ -28,10 +32,14 @@ const Tag = ({
   className,
   variant,
   onDismiss,
+  onToggle,
+  toggleBase,
+  toggleOnText = 'ON',
+  toggleOffText = 'OFF',
   ...other
 }: TagProps) => {
   const [show, setShow] = useState(true);
-  const Component = variant === 'dismiss' ? 'button' : 'div';
+  const Component = variant === ('dismiss' || 'toggle') ? 'button' : 'div';
 
   const handleDismiss = (event: React.MouseEvent<HTMLButtonElement>) => {
     setShow(false);
@@ -40,19 +48,32 @@ const Tag = ({
     }
   };
 
+  const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (onToggle) {
+      onToggle(event);
+    }
+  };
+
   if (variant === 'dismiss') {
     (other as any).onClick = handleDismiss;
+  }
+
+  if (variant === 'toggle') {
+    (other as any).onClick = handleToggle;
+    (other as any).role = 'switch';
   }
 
   return (
     <Component
       className={classNames('Tag', className, {
         'Tag--hidden': !show,
-        'Tag--dismiss': variant === 'dismiss'
+        'Tag--dismiss': variant === 'dismiss',
+        'Tag--toggle': variant === 'toggle'
       })}
       {...other}
     >
       {children}
+      {variant === 'toggle' && toggleBase ? toggleOnText : toggleOffText}
       {variant === 'dismiss' && <Icon type="close" />}
     </Component>
   );
