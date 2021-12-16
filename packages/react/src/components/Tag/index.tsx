@@ -9,6 +9,7 @@ interface TagProps {
   children: React.ReactNode;
   className?: string;
   variant?: Variant;
+  buttonLabel?: string;
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleBase?: boolean;
   onToggle?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -32,6 +33,7 @@ const Tag = ({
   className,
   variant,
   onDismiss,
+  buttonLabel,
   toggleBase,
   toggleOnText = 'ON',
   toggleOffText = 'OFF',
@@ -50,12 +52,14 @@ const Tag = ({
 
   if (variant === 'dismiss') {
     (other as any).onClick = handleDismiss;
+    (other as any)['aria-label'] = buttonLabel;
   }
 
   if (variant === 'toggle') {
     (other as any).onClick = onToggle;
     (other as any).role = 'switch';
     (other as any).type = 'button';
+    (other as any)['aria-label'] = buttonLabel;
     (other as any)['aria-checked'] = !!toggleBase;
   }
 
