@@ -5,13 +5,14 @@ import Icon from '../Icon';
 
 type Variant = 'dismiss' | 'toggle';
 
-interface TagProps {
+interface TagProps
+  extends React.HTMLAttributes<HTMLButtonElement | HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   variant?: Variant;
-  buttonLabel?: string;
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleBase?: boolean;
+  buttonLabel?: string;
   onToggle?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleOnText?: string;
   toggleOffText?: string;
@@ -33,8 +34,8 @@ const Tag = ({
   className,
   variant,
   onDismiss,
-  buttonLabel,
   toggleBase,
+  buttonLabel,
   toggleOnText = 'ON',
   toggleOffText = 'OFF',
   onToggle,
@@ -51,16 +52,14 @@ const Tag = ({
   };
 
   if (variant === 'dismiss') {
-    (other as any).onClick = handleDismiss;
-    (other as any)['aria-label'] = buttonLabel;
+    other.onClick = handleDismiss;
   }
 
   if (variant === 'toggle') {
-    (other as any).onClick = onToggle;
-    (other as any).role = 'switch';
-    (other as any).type = 'button';
-    (other as any)['aria-label'] = buttonLabel;
-    (other as any)['aria-checked'] = !!toggleBase;
+    other.onClick = onToggle;
+    other.role = 'switch';
+    other['aria-label'] = buttonLabel;
+    other['aria-checked'] = !!toggleBase;
   }
 
   return (
@@ -85,6 +84,11 @@ Tag.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   variant: PropTypes.string,
-  onDismiss: PropTypes.func
+  buttonLabel: PropTypes.string,
+  onDismiss: PropTypes.func,
+  toggleBase: PropTypes.bool,
+  onToggle: PropTypes.func,
+  toggleOnText: PropTypes.string,
+  toggleOffText: PropTypes.string
 };
 export default Tag;

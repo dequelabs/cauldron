@@ -52,6 +52,48 @@ test('handles onDismiss', async () => {
   expect(onDismissSpy.calledOnce);
 });
 
+test('renders toggle variant', () => {
+  const tag = shallow(
+    <Tag
+      variant="toggle"
+      buttonLabel="toggle tag"
+      toggleBase={true}
+      onToggle={() => null}
+    >
+      bye
+    </Tag>
+  );
+
+  expect(tag.find('button').exists());
+  expect(tag.find('.Tag--toggle').exists());
+  expect(tag.find('.Tag--toggle').prop('aria-label')).toBe('toggle tag');
+  expect(tag.find('.Tag--toggle').prop('role')).toBe('switch');
+  expect(tag.find('.Tag--toggle').prop('aria-checked')).toBe(true);
+  expect(tag.find('.Tag--toggle span').text()).toBe('ON');
+});
+
+test('handles onToggle', async () => {
+  const onToggleSpy = spy();
+  const tag = mount(
+    <Tag
+      variant="toggle"
+      buttonLabel="toggle tag"
+      toggleBase={true}
+      onToggle={onToggleSpy}
+    >
+      bye
+    </Tag>
+  );
+
+  expect(tag.find('.Tag--toggle span').text()).toBe('ON');
+
+  tag.find('.Tag--toggle').simulate('click');
+  await new Promise(resolve => setImmediate(resolve));
+  tag.update();
+
+  expect(onToggleSpy.calledOnce);
+});
+
 test('should return no axe violations', async () => {
   const tag = shallow(
     <Tag>
