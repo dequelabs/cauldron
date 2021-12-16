@@ -39,7 +39,8 @@
   width: 6.75rem;
 }
 
-.Tag--dismiss:hover {
+.Tag--dismiss:hover,
+.Tag--toggle:hover {
   cursor: pointer;
 }
 
@@ -55,4 +56,13 @@
 
 .Tag--hidden {
   display: none;
+}
+
+.Tag--toggle {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  text-decoration: underline;
+}
+
+.Tag--toggle .Tag__label {
+  text-decoration: none;
 }

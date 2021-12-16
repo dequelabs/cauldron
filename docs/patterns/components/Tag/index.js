@@ -32,7 +32,8 @@ export default class TagDemo extends Component {
             },
             {
               variant: 'toggle',
-
+              toggleBase: this.state.isActive,
+              onToggle: this.toggleIsActive,
               children: <TagLabel>Label: </TagLabel>
             },
             {

@@ -9,8 +9,8 @@ interface TagProps {
   children: React.ReactNode;
   className?: string;
   variant?: Variant;
-  toggleBase?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  toggleBase?: boolean;
   onToggle?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleOnText?: string;
   toggleOffText?: string;
@@ -32,10 +32,10 @@ const Tag = ({
   className,
   variant,
   onDismiss,
-  onToggle,
   toggleBase,
   toggleOnText = 'ON',
   toggleOffText = 'OFF',
+  onToggle,
   ...other
 }: TagProps) => {
   const [show, setShow] = useState(true);
@@ -48,18 +48,12 @@ const Tag = ({
     }
   };
 
-  const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onToggle) {
-      onToggle(event);
-    }
-  };
-
   if (variant === 'dismiss') {
     (other as any).onClick = handleDismiss;
   }
 
   if (variant === 'toggle') {
-    (other as any).onClick = handleToggle;
+    (other as any).onClick = onToggle;
     (other as any).role = 'switch';
   }
 
@@ -73,7 +67,7 @@ const Tag = ({
       {...other}
     >
       {children}
-      {variant === 'toggle' && toggleBase ? toggleOnText : toggleOffText}
+      {variant === 'toggle' && (toggleBase ? toggleOnText : toggleOffText)}
       {variant === 'dismiss' && <Icon type="close" />}
     </Component>
   );
