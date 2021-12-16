@@ -23,7 +23,7 @@
 
 .Layout .Main:focus {
   outline: 0;
-  border-left-color: var(--top-bar-background-color);
+  border-left-color: var(--gray-90);
 }
 
 /* the left-bar style focus indication */
@@ -83,4 +83,8 @@
 .cauldron--theme-dark .Layout {
   background-color: var(--dark-workspace-color);
   color: var(--white);
+}
+
+.cauldron--theme-dark .Layout .Main:focus {
+  border-left-color: var(--white);
 }
