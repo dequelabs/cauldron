@@ -63,17 +63,17 @@ export default class TagDemo extends Component {
             toggleState: {
               type: 'boolean',
               description:
-                'Indicator of the state of the toggle; required for "toggle" variant'
+                'Indicator of the toggle state; required for "toggle" variant'
             },
             onToggle: {
               type: 'function',
               description:
-                'A function that changes the toggle state; required for "toggle" variant'
+                'A function that toggles the tag; required for "toggle" variant'
             },
             buttonLabel: {
               type: 'string',
               description:
-                'aria-label for toggle tag; required for "toggle" variant'
+                'Aria-label for toggle tag; required for "toggle" variant'
             },
             toggleOnText: {
               type: 'string',

@@ -9,6 +9,13 @@ interface SimpleTagProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: undefined;
 }
 
+interface DismissTagProps extends React.HTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  className?: string;
+  variant: 'dismiss';
+  onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
 interface ToggleTagProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
@@ -18,13 +25,6 @@ interface ToggleTagProps extends React.HTMLAttributes<HTMLButtonElement> {
   onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleOnText?: string;
   toggleOffText?: string;
-}
-
-interface DismissTagProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  className?: string;
-  variant: 'dismiss';
-  onDismiss?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 type TagProps = SimpleTagProps | ToggleTagProps | DismissTagProps;
@@ -113,9 +113,9 @@ Tag.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   variant: PropTypes.string,
-  buttonLabel: PropTypes.string,
   onDismiss: PropTypes.func,
   toggleState: PropTypes.bool,
+  buttonLabel: PropTypes.string,
   onToggle: PropTypes.func,
   toggleOnText: PropTypes.string,
   toggleOffText: PropTypes.string
