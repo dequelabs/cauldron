@@ -32,7 +32,7 @@ export default class TagDemo extends Component {
             },
             {
               variant: 'toggle',
-              toggleBase: this.state.isActive,
+              toggleState: this.state.isActive,
               onToggle: this.toggleIsActive,
               children: <TagLabel>Label: </TagLabel>
             },
@@ -60,15 +60,15 @@ export default class TagDemo extends Component {
               description:
                 'A function that allows users to take actions in addition to closing the tag'
             },
-            toggleValue: {
+            toggleState: {
               type: 'boolean',
               description:
-                'A value that determines whether the switch is on or off; required for "toggle" variant'
+                'Indicator of the state of the toggle; required for "toggle" variant'
             },
             onToggle: {
               type: 'function',
               description:
-                'A function that toggles the value of toggleValue; required for "toggle" variant'
+                'A function that changes the toggle state; required for "toggle" variant'
             },
             buttonLabel: {
               type: 'string',
