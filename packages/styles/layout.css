@@ -3,7 +3,7 @@
   padding: var(--layout-padding) var(--layout-padding) 0 var(--layout-padding);
   position: fixed;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   right: 0;
   bottom: 0;
