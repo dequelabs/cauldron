@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 8px;
+  padding: var(--space-quarter) var(--space-smallest);
   width: 5.625rem;
   font-weight: var(--font-weight-medium);
 }
