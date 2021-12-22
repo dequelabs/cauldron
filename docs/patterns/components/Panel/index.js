@@ -12,7 +12,8 @@ const PanelDemo = () => {
           {
             heading: {
               text: 'Panel Heading',
-              level: 2
+              level: 2,
+              id: 'panel_heading'
             },
             children: 'Panel content.'
           }
@@ -21,7 +22,8 @@ const PanelDemo = () => {
           heading: {
             type: 'object',
             required: true,
-            description: 'Object containing: text, level (optional)'
+            description:
+              'Object containing: text, level (optional), id (optional)'
           },
           children: {
             ...children,

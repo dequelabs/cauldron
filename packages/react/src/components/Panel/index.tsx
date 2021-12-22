@@ -1,12 +1,14 @@
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import rndid from '../../utils/rndid';
 
 interface PanelProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
   heading:
     | ReactElement<any>
     | {
+        id?: string;
         text: ReactElement<any>;
         level: number | undefined;
       };
@@ -19,10 +21,16 @@ const Panel = ({ children, className, heading, ...other }: PanelProps) => {
       ? heading.level
       : 2
   }` as 'h1';
+  const headingId =
+    typeof heading === 'object' && 'id' in heading ? heading.id : rndid();
 
   return (
-    <section className={classNames('Panel', className)} {...other}>
-      <Heading className="Panel__Heading">
+    <section
+      aria-labelledby={headingId}
+      className={classNames('Panel', className)}
+      {...other}
+    >
+      <Heading id={headingId} className="Panel__Heading">
         {typeof heading === 'object' && 'text' in heading
           ? heading.text
           : heading}
