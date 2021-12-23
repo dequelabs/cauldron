@@ -92,6 +92,7 @@ export {
   AddressLine,
   AddressCityStateZip
 } from './components/Address';
+export { default as Pagination } from './components/Pagination';
 
 /**
  * Helpers / Utils
