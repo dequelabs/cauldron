@@ -69,7 +69,8 @@ const componentsList = [
   'ProgressBar',
   'NavBar',
   'Address',
-  'Pagination'
+  'Pagination',
+  'IssuePanel'
 ].sort();
 
 const App = () => {
