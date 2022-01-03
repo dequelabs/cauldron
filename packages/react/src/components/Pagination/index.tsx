@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Placement } from '@popperjs/core';
 import IconButton from '../IconButton';
 import TooltipTabstop from '../TooltipTabstop';
 import Icon from '../Icon';
 
-type PaginationVariant = 'dark';
-
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
-  statusLabel?: React.ReactElement;
+  statusLabel?: React.ReactNode;
   firstPageLabel?: string;
   previousPageLabel?: string;
   nextPageLabel?: string;
@@ -20,8 +19,8 @@ interface Props {
   onPreviousPageClick?: () => void;
   onFirstPageClick?: () => void;
   onLastPageClick?: () => void;
+  tooltipPlacement?: Placement;
   className?: string;
-  variant?: PaginationVariant;
 }
 
 const Pagination = React.forwardRef<HTMLDivElement, Props>(
@@ -35,12 +34,12 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       previousPageLabel = 'Previous page',
       nextPageLabel = 'Next page',
       lastPageLabel = 'Last page',
+      tooltipPlacement = 'bottom',
       onNextPageClick,
       onPreviousPageClick,
       onFirstPageClick,
       onLastPageClick,
       className,
-      variant,
       ...other
     },
     ref
@@ -48,25 +47,23 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
     const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
     const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
     const isLastPage = itemEnd === totalItems;
+    const isFirstPage = currentPage === 1;
 
     return (
-      <div
-        ref={ref}
-        className={classNames('Pagination', className, {
-          'Pagination--dark': variant === 'dark'
-        })}
-        {...other}
-      >
+      <div ref={ref} className={classNames('Pagination', className)} {...other}>
         <ul>
           <li>
-            {currentPage === 1 ? (
-              <TooltipTabstop tooltip={firstPageLabel} placement="bottom">
+            {isFirstPage ? (
+              <TooltipTabstop
+                tooltip={firstPageLabel}
+                placement={tooltipPlacement}
+              >
                 <Icon type="chevron-double-left" />
               </TooltipTabstop>
             ) : (
               <IconButton
                 icon="chevron-double-left"
-                tooltipPlacement="bottom"
+                tooltipPlacement={tooltipPlacement}
                 label={firstPageLabel}
                 onClick={onFirstPageClick}
               />
@@ -74,14 +71,17 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           </li>
 
           <li>
-            {currentPage === 1 ? (
-              <TooltipTabstop tooltip={previousPageLabel} placement="bottom">
+            {isFirstPage ? (
+              <TooltipTabstop
+                tooltip={previousPageLabel}
+                placement={tooltipPlacement}
+              >
                 <Icon type="chevron-left" />
               </TooltipTabstop>
             ) : (
               <IconButton
                 icon="chevron-left"
-                tooltipPlacement="bottom"
+                tooltipPlacement={tooltipPlacement}
                 label={previousPageLabel}
                 onClick={onPreviousPageClick}
               />
@@ -101,13 +101,16 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
 
           <li>
             {isLastPage ? (
-              <TooltipTabstop tooltip={nextPageLabel} placement="bottom">
+              <TooltipTabstop
+                tooltip={nextPageLabel}
+                placement={tooltipPlacement}
+              >
                 <Icon type="chevron-right" />
               </TooltipTabstop>
             ) : (
               <IconButton
                 icon="chevron-right"
-                tooltipPlacement="bottom"
+                tooltipPlacement={tooltipPlacement}
                 label={nextPageLabel}
                 onClick={onNextPageClick}
               />
@@ -116,13 +119,16 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
 
           <li>
             {isLastPage ? (
-              <TooltipTabstop tooltip={lastPageLabel} placement="bottom">
+              <TooltipTabstop
+                tooltip={lastPageLabel}
+                placement={tooltipPlacement}
+              >
                 <Icon type="chevron-double-right" />
               </TooltipTabstop>
             ) : (
               <IconButton
                 icon="chevron-double-right"
-                tooltipPlacement="bottom"
+                tooltipPlacement={tooltipPlacement}
                 label={lastPageLabel}
                 onClick={onLastPageClick}
               />
@@ -139,19 +145,18 @@ Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   itemsPerPage: PropTypes.number,
   currentPage: PropTypes.number,
-  // TODO: why doesn't PropTypes.node work here??
-  statusLabel: PropTypes.any,
-  firstPageLabel: PropTypes.any,
-  previousPageLabel: PropTypes.any,
-  nextPageLabel: PropTypes.any,
-  lastPageLabel: PropTypes.any,
+  statusLabel: PropTypes.element,
+  firstPageLabel: PropTypes.string,
+  previousPageLabel: PropTypes.string,
+  nextPageLabel: PropTypes.string,
+  lastPageLabel: PropTypes.string,
   onNextPageClick: PropTypes.func,
   onPreviousPageClick: PropTypes.func,
   onFirstPageClick: PropTypes.func,
   onLastPageClick: PropTypes.func,
-  className: PropTypes.string,
-  // TODO: why doesn't string (without isRequired) work??
-  variant: PropTypes.any
+  // @ts-expect-error
+  tooltipPlacement: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Pagination;

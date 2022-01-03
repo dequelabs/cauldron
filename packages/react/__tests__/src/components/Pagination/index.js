@@ -185,8 +185,3 @@ test('renders the expected default status label', () => {
 
   expect(wrapper.find('[role="log"]').text()).toBe('Showing 35 of 51 of 500');
 });
-
-test('supports "dark" variant', () => {
-  const wrapper = mount(<Pagination totalItems={11} variant="dark" />);
-  expect(wrapper.find('.Pagination--dark').exists()).toBe(true);
-});

@@ -61,11 +61,3 @@
 .cauldron--theme-dark .Pagination [role='log'] strong {
   color: var(--white);
 }
-
-/*
- * dark theme + dark variant
- */
-
-.cauldron--theme-dark .Pagination.Pagination--dark button {
-  background-color: var(--accent-dark);
-}

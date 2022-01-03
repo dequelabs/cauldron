@@ -21,8 +21,6 @@ const PaginationDemo = () => {
         component={Pagination}
         states={[
           { totalItems: 15 },
-          // TODO: don't render this when in light mode?
-          { totalItems: 15, variant: 'dark' },
           {
             totalItems,
             itemsPerPage,
