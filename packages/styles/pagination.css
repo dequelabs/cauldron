@@ -2,6 +2,7 @@
   list-style-type: none;
   display: flex;
   align-items: center;
+  font-size: var(--text-size-small);
 }
 
 .Pagination > ul > li {
@@ -9,9 +10,8 @@
 }
 
 .Pagination button {
-  padding: var(--space-three-quarters);
-  height: 36px;
-  width: 36px;
+  height: 2.26rem;
+  width: 2.26rem;
   border-radius: 2px;
   display: flex;
   justify-content: center;
