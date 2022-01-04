@@ -24,6 +24,7 @@
 
 .Pagination button[aria-disabled='true'] {
   color: var(--gray-40);
+  margin: 2px;
 }
 
 .Pagination button .Icon {
