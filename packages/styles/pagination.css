@@ -57,6 +57,7 @@
 
 .cauldron--theme-dark .Pagination [role='log'] {
   color: var(--accent-light);
+  font-variant-numeric: tabular-nums;
 }
 
 .cauldron--theme-dark .Pagination [role='log'] strong {
