@@ -58,14 +58,6 @@
   justify-content: flex-start;
 }
 
-.Tabs--vertical .Tab {
-  border-right: none;
-}
-
-.cauldron--theme-light .Tabs--vertical .Tab:last-child {
-  border-bottom: 1px solid var(--tabs-border-color);
-}
-
 .Tab:hover {
   cursor: pointer;
   background-color: var(--tab-active-background-color);
