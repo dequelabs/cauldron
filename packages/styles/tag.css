@@ -2,22 +2,32 @@
   --tag-text-color: var(--gray-90);
   --tag-label-text-color: var(--gray-60);
   --tag-background-color: var(--gray-20);
+  --tag-border-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --tag-text-color: var(--white);
+  --tag-label-text-color: var(--accent-light);
+  --tag-background-color: var(--accent-medium);
+  --tag-border-color: var(--accent-medium);
 }
 
 .Tag {
   color: var(--tag-text-color);
   background-color: var(--tag-background-color);
   font-size: var(--text-size-smaller);
-  border: 1px solid currentColor;
+  border: 1px solid var(--tag-border-color);
   border-radius: 11px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2px 8px;
   width: 90px;
+  font-weight: var(--font-weight-medium);
 }
 
 .Tag__label {
   color: var(--tag-label-text-color);
   margin-right: 3px;
+  font-weight: var(--font-weight-normal);
 }

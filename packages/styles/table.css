@@ -7,6 +7,13 @@
   --table-space: 11px;
 }
 
+.cauldron--theme-dark {
+  --table-header-text-color: var(--white);
+  --table-header-background-color: var(--accent-dark);
+  --table-cell-text-color: var(--accent-light);
+  --table-cell-background-color: var(--accent-medium);
+}
+
 .Table {
   font-size: var(--text-size-small);
   border-collapse: collapse;
@@ -18,8 +25,7 @@
 
 .TableHeader {
   background: var(--table-header-background-color);
-  font-family: 'Lato', sans-serif;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
   border-bottom: 2px solid var(--table-row-border-color);
 }

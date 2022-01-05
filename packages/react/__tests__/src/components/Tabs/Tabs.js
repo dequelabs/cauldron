@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { mount } from 'enzyme';
+import { spy } from 'sinon';
 import Tabs, { Tab, TabPanel } from 'src/components/Tabs';
 import axe from '../../../axe';
 import { act } from 'react-dom/test-utils';
@@ -469,6 +470,32 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
       .find('.TabPanel--hidden')
       .exists()
   );
+});
+
+test('calls onChange prop when active tab is changed', async () => {
+  const onChange = spy();
+  const TabsWithOnChange = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+    return (
+      <Tabs aria-label={ariaLabel} onChange={onChange}>
+        <Tab target={tabPanel1}>tab 1</Tab>
+        <Tab target={tabPanel2}>tab 2</Tab>
+      </Tabs>
+    );
+  };
+
+  act(() => {
+    const wrapper = mount(<TabsWithOnChange />);
+    expect(onChange.notCalled).toEqual(true);
+    wrapper
+      .find('Tab')
+      .at(1)
+      .simulate('click');
+  });
+
+  expect(onChange.calledOnce).toEqual(true);
+  expect(onChange.firstCall.args[0].activeTabIndex).toEqual(1);
 });
 
 test('returns no axe vialation', async () => {

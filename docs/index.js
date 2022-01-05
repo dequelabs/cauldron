@@ -20,8 +20,12 @@ import {
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
-import 'fontsource-roboto';
-import 'fontsource-lato';
+import '@fontsource/roboto';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/700.css';
+import '@fontsource/lato';
+import '@fontsource/pt-mono';
 
 // styles
 import '../packages/styles';
@@ -64,7 +68,9 @@ const componentsList = [
   'Stepper',
   'ProgressBar',
   'NavBar',
-  'Address'
+  'Address',
+  'Pagination',
+  'IssuePanel'
 ].sort();
 
 const App = () => {

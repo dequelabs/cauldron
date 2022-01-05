@@ -2,15 +2,22 @@ import { Cauldron } from '../../types';
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useDidUpdate } from '../../index';
 import Tab from './Tab';
 import { useId } from 'react-id-generator';
+import useDidUpdate from '../../utils/use-did-update';
 
 type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
   className?: string;
+  onChange?: ({
+    activeTabIndex,
+    target
+  }: {
+    activeTabIndex: number;
+    target: HTMLLIElement | null;
+  }) => void;
 } & Cauldron.LabelProps;
 
 const Tabs = ({
@@ -18,9 +25,11 @@ const Tabs = ({
   thin,
   initialActiveIndex = 0,
   className,
+  onChange,
   ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
@@ -107,6 +116,9 @@ const Tabs = ({
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
+    if (typeof onChange === 'function') {
+      onChange({ activeTabIndex: activeIndex, target: focusedTabRef.current });
+    }
   }, [activeIndex]);
 
   return (
@@ -114,6 +126,7 @@ const Tabs = ({
       className={classNames('Tabs', className, {
         'Tabs--thin': thin
       })}
+      ref={tabsRef}
     >
       <ul
         role="tablist"
