@@ -58,15 +58,9 @@ const Demo = () => {
         <Tab target={verticalTabPanel2}>Tab 2</Tab>
         <Tab target={verticalTabPanel3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={verticalTabPanel1}>
-        <p>Insert content for tab panel 1 here...</p>
-      </TabPanel>
-      <TabPanel ref={verticalTabPanel2}>
-        <p>Insert content for tab panel 2 here...</p>
-      </TabPanel>
-      <TabPanel ref={verticalTabPanel3}>
-        <p>Insert content for tab panel 3 here...</p>
-      </TabPanel>
+      <TabPanel ref={verticalTabPanel1}>Panel for Tab 1</TabPanel>
+      <TabPanel ref={verticalTabPanel2}>Panel for Tab 2</TabPanel>
+      <TabPanel ref={verticalTabPanel3}>Panel for Tab 3</TabPanel>
       <h4>Example</h4>
       <Code language="javascript">
         {`function VerticalTabs() {
