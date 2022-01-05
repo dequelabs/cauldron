@@ -7,6 +7,7 @@
 .Field__select {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--space-smallest);
 }
 
 .Field__select--disabled {

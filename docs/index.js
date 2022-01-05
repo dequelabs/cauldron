@@ -68,7 +68,9 @@ const componentsList = [
   'Stepper',
   'ProgressBar',
   'NavBar',
-  'Address'
+  'Address',
+  'Pagination',
+  'IssuePanel'
 ].sort();
 
 const App = () => {
