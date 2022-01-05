@@ -86,12 +86,14 @@ export {
 } from './components/DescriptionList';
 export { default as Stepper, Step } from './components/Stepper';
 export { default as Panel } from './components/Panel';
+export { default as IssuePanel } from './components/IssuePanel';
 export { default as ProgressBar } from './components/ProgressBar';
 export {
   Address,
   AddressLine,
   AddressCityStateZip
 } from './components/Address';
+export { default as Pagination } from './components/Pagination';
 
 /**
  * Helpers / Utils
