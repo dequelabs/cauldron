@@ -1,0 +1,65 @@
+.Pagination > ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  font-size: var(--text-size-small);
+}
+
+.Pagination > ul > li {
+  margin-right: 5px;
+}
+
+.Pagination button {
+  height: 2.26rem;
+  width: 2.26rem;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* light theme-specific styles */
+  background: var(--gray-20);
+  border: 1px solid var(--gray-40);
+  color: var(--gray-90);
+}
+
+.Pagination button[aria-disabled='true'] {
+  color: var(--gray-40);
+  margin: 2px;
+}
+
+.Pagination button .Icon {
+  width: auto;
+  height: auto;
+}
+
+.Pagination [role='log'] {
+  margin-left: calc(var(--space-medium) - 5px);
+  margin-right: calc(var(--space-medium) - 5px);
+  color: var(--gray-60);
+}
+
+.Pagination [role='log'] strong {
+  color: var(--gray-90);
+}
+
+/*
+ * dark theme
+ */
+
+.cauldron--theme-dark .Pagination button {
+  background-color: var(--accent-medium);
+  border-color: transparent;
+}
+
+.cauldron--theme-dark .Pagination button[aria-disabled='true'] {
+  color: #5d676f;
+}
+
+.cauldron--theme-dark .Pagination [role='log'] {
+  color: var(--accent-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.cauldron--theme-dark .Pagination [role='log'] strong {
+  color: var(--white);
+}

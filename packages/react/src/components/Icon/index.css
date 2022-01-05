@@ -7,18 +7,18 @@
   display: block;
 }
 
-/* Icon--right is the default orientation */
-.Icon__right {
-}
-
-.Icon__left {
-  transform: scaleX(-1);
+/* Icon--down is the default orientation */
+.Icon__down {
 }
 
 .Icon__up {
-  transform: rotate(-90deg);
+  transform: scaleY(-1);
 }
 
-.Icon__down {
+.Icon__left {
   transform: rotate(90deg);
+}
+
+.Icon__right {
+  transform: rotate(-90deg);
 }
