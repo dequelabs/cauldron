@@ -1,8 +1,8 @@
-name: PR preview
+name: PR preview cleanup
 
 on:
   pull_request:
-    types: [opened]
+    types: [closed]
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
       - uses: yinlinchen/amplify-preview-actions@master
         with:
           branch_name: ${{ steps.setenv.outputs.BRANCH_NAME }}
-          amplify_command: deploy
+          amplify_command: delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
