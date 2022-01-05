@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropDocs from '../../../Demo/PropDocs';
 import { Tabs, Tab, TabPanel, Code } from '@deque/cauldron-react';
 import './index.css';
 
@@ -7,61 +8,123 @@ const Demo = () => {
   const tabPanel2 = useRef(null);
   const tabPanel3 = useRef(null);
 
+  const verticalTabPanel1 = useRef(null);
+  const verticalTabPanel2 = useRef(null);
+  const verticalTabPanel3 = useRef(null);
+
   return (
     <div className="TabsDemo">
       <h1>Tabs</h1>
       <h2>Demo</h2>
-      <h3>Basic Tabs</h3>
-      <Tabs aria-label="Basic Tabs">
+      <h3>Horizontal Tabs</h3>
+      <Tabs aria-label="Horizontal Tabs">
         <Tab target={tabPanel1}>Tab 1</Tab>
         <Tab target={tabPanel2}>Tab 2</Tab>
         <Tab target={tabPanel3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={tabPanel1}>
-        <p>Insert content for tab panel 1 here...</p>
-      </TabPanel>
-      <TabPanel ref={tabPanel2}>
-        <p>Insert content for tab panel 2 here...</p>
-      </TabPanel>
-      <TabPanel ref={tabPanel3}>
-        <p>Insert content for tab panel 3 here...</p>
-      </TabPanel>
-      <h2>Code Sample</h2>
+      <TabPanel ref={tabPanel1}>Panel for Tab 1</TabPanel>
+      <TabPanel ref={tabPanel2}>Panel for Tab 2</TabPanel>
+      <TabPanel ref={tabPanel3}>Panel for Tab 3</TabPanel>
+      <h4>Example</h4>
       <Code language="javascript">
-        {`
-import React, { useRef } from 'react';
-import { Tabs, Tab, TabPanel, Code } from '@deque/cauldron-react';
-import './index.css';
-
-const Demo = () => {
-  const tabPanel1 = useRef(null);
-  const tabPanel2 = useRef(null);
-  const tabPanel3 = useRef(null);
+        {`function HorizontalTabs() {
+  const tabRef1 = useRef()
+  const tabRef2 = useRef()
+  const tabRef3 = useRef()
 
   return (
-    <div className="TabsDemo">
-      <h1>Tabs</h1>
-      <h2>Demo</h2>
-      <h3>Basic Tabs</h3>
-      <Tabs aria-label="Basic Tabs">
-        <Tab target={tabPanel1}>Tab 1</Tab>
-        <Tab target={tabPanel2}>Tab 2</Tab>
-        <Tab target={tabPanel3}>Tab 3</Tab>
+    <>
+      <Tabs aria-label="Horizontal Tabs">
+        <Tab target={tabRef1}>Tab 1</Tab>
+        <Tab target={tabRef2}>Tab 2</Tab>
+        <Tab target={tabRef3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={tabPanel1}>
+      <TabPanel ref={tabRef1}>
+        Panel for Tab 1
+      </TabPanel>
+      <TabPanel ref={tabRef2}>
+        Panel for Tab 2
+      </TabPanel>
+      <TabPanel ref={tabRef3}>
+        Panel for Tab 3
+      </TabPanel>
+    </>
+  )
+}`}
+      </Code>
+      <h3>Vertical Tabs</h3>
+      <Tabs aria-label="Vertical Tabs" orientation="vertical">
+        <Tab target={verticalTabPanel1}>Tab 1</Tab>
+        <Tab target={verticalTabPanel2}>Tab 2</Tab>
+        <Tab target={verticalTabPanel3}>Tab 3</Tab>
+      </Tabs>
+      <TabPanel ref={verticalTabPanel1}>
         <p>Insert content for tab panel 1 here...</p>
       </TabPanel>
-      <TabPanel ref={tabPanel2}>
+      <TabPanel ref={verticalTabPanel2}>
         <p>Insert content for tab panel 2 here...</p>
       </TabPanel>
-      <TabPanel ref={tabPanel3}>
+      <TabPanel ref={verticalTabPanel3}>
         <p>Insert content for tab panel 3 here...</p>
       </TabPanel>
-    </div>
-  );
-};
-      `}
+      <h4>Example</h4>
+      <Code language="javascript">
+        {`function VerticalTabs() {
+  const tabRef1 = useRef()
+  const tabRef2 = useRef()
+  const tabRef3 = useRef()
+
+  return (
+    <>
+      <Tabs aria-label="Vertical Tabs" orientation="vertical">
+        <Tab target={tabRef1}>Tab 1</Tab>
+        <Tab target={tabRef2}>Tab 2</Tab>
+        <Tab target={tabRef3}>Tab 3</Tab>
+      </Tabs>
+      <TabPanel ref={tabRef1}>
+        Panel for Tab 1
+      </TabPanel>
+      <TabPanel ref={tabRef2}>
+        Panel for Tab 2
+      </TabPanel>
+      <TabPanel ref={tabRef3}>
+        Panel for Tab 3
+      </TabPanel>
+    </>
+  )
+}`}
       </Code>
+      <div className="Demo-props">
+        <h2>Props</h2>
+        <PropDocs
+          docs={{
+            initialActiveIndex: {
+              type: 'number',
+              description: 'The initial active tab',
+              default: 0
+            },
+            thin: {
+              type: 'boolean',
+              description: 'Thin variant of tabs',
+              default: false
+            },
+            orientation: {
+              type: 'string',
+              description: 'Vertical or horizontal orientation of tabs',
+              default: 'horizontal'
+            },
+            onChange: {
+              type: 'function',
+              description:
+                'Callback function that gets invoked when the active tab changes'
+            }
+          }}
+          defaultProps={{
+            initialActiveIndex: 0,
+            orientation: 'horizontal'
+          }}
+        />
+      </div>
     </div>
   );
 };
