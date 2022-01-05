@@ -2,9 +2,9 @@ import { Cauldron } from '../../types';
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useDidUpdate } from '../../index';
 import Tab from './Tab';
 import { useId } from 'react-id-generator';
+import useDidUpdate from '../../utils/use-did-update';
 
 type TabsProps = {
   children: React.ReactNode;

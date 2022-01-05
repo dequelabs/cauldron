@@ -87,10 +87,12 @@ const PropDocs = ({ docs, defaultProps = {} }) => (
               <TableCell>{`${!!data.required}`}</TableCell>
               <TableCell>{data.description}</TableCell>
               <TableCell>
-                {typeof defaultProp !== 'undefined' &&
-                  (typeof defaultProp === 'object'
-                    ? JSON.stringify(defaultProp)
-                    : `${defaultProp}`)}
+                <code>
+                  {typeof defaultProp !== 'undefined' &&
+                    (typeof defaultProp === 'object'
+                      ? JSON.stringify(defaultProp)
+                      : `${defaultProp}`)}
+                </code>
               </TableCell>
             </TableRow>
           );

@@ -36,6 +36,7 @@
 .Toast__dismiss {
   background: transparent;
   border: 0;
+  height: calc(var(--text-size-small) + 9px);
 }
 
 .Toast__dismiss:focus {

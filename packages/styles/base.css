@@ -4,6 +4,11 @@
 
 .cauldron--theme-dark {
   --workspace-background-color: var(--dark-workspace-color);
+  color-scheme: dark;
+}
+
+.cauldron--theme-light {
+  color-scheme: light;
 }
 
 html {
