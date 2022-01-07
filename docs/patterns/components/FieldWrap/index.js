@@ -31,8 +31,8 @@ const FieldWrapDemo = () => (
         },
         as: {
           type: 'ElementType',
-          description: 'A component to render the IconButton as',
-          default: 'button'
+          description: 'A component to render the FieldWrap as',
+          default: 'div'
         }
       }}
     />
