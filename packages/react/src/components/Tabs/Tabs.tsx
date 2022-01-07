@@ -10,6 +10,7 @@ type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
+  orientation?: 'horizontal' | 'vertical';
   className?: string;
   onChange?: ({
     activeTabIndex,
@@ -23,6 +24,7 @@ type TabsProps = {
 const Tabs = ({
   children,
   thin,
+  orientation = 'horizontal',
   initialActiveIndex = 0,
   className,
   onChange,
@@ -46,8 +48,18 @@ const Tabs = ({
     const { key } = event;
     let newIndex: number = activeIndex;
 
+    let forward: string;
+    let backward: string;
+    if (orientation === 'horizontal') {
+      forward = 'ArrowRight';
+      backward = 'ArrowLeft';
+    } else {
+      forward = 'ArrowDown';
+      backward = 'ArrowUp';
+    }
+
     switch (key) {
-      case 'ArrowLeft': {
+      case backward: {
         newIndex = activeIndex - 1;
 
         // circularity
@@ -55,9 +67,10 @@ const Tabs = ({
           newIndex = tabCount - 1;
         }
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
-      case 'ArrowRight': {
+      case forward: {
         newIndex = activeIndex + 1;
 
         // circularity
@@ -65,17 +78,20 @@ const Tabs = ({
           newIndex = 0;
         }
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
       case 'Home': {
         newIndex = 0;
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
       case 'End': {
         event.preventDefault();
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
     }
@@ -124,7 +140,9 @@ const Tabs = ({
   return (
     <div
       className={classNames('Tabs', className, {
-        'Tabs--thin': thin
+        'Tabs--thin': thin,
+        'Tabs--vertical': orientation === 'vertical',
+        'Tabs--horizontal': orientation === 'horizontal'
       })}
       ref={tabsRef}
     >
@@ -147,6 +165,7 @@ Tabs.propTypes = {
   'aria-labelledby': PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
+  orientation: PropTypes.string,
   className: PropTypes.string
 };
 
