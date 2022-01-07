@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldWrap, TextField, Button } from '@deque/cauldron-react';
 import Demo from '../../../Demo';
+import { children } from '../../../props';
 import './index.css';
 
 const FieldWrapDemo = () => (
@@ -25,13 +26,13 @@ const FieldWrapDemo = () => (
       ]}
       propDocs={{
         children: {
-          type: 'string',
-          description:
-            'code to be syntax highlighted and rendered in code block'
+          ...children,
+          required: true
         },
-        language: {
-          type: 'string',
-          description: '"javascript", "css" or "html"'
+        as: {
+          type: 'ElementType',
+          description: 'A component to render the IconButton as',
+          default: 'button'
         }
       }}
     />
