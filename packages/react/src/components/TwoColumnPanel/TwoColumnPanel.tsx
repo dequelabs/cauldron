@@ -7,6 +7,7 @@ import React, {
   useLayoutEffect,
   useEffect
 } from 'react';
+import { useId } from 'react-id-generator';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import { ColumnLeft, ColumnRight } from './';
@@ -57,7 +58,12 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       const ref = columnLeft.props.ref || columnLeftRef;
       const CloseButton = (
         <div className="TwoColumnPanel__Close">
-          <button type="button" onClick={togglePanel} ref={closeButtonRef}>
+          <button
+            type="button"
+            onClick={togglePanel}
+            ref={closeButtonRef}
+            aria-label={hideCollapsedPanelLabel}
+          >
             <Icon type="close" />
           </button>
           <Tooltip target={closeButtonRef}>{hideCollapsedPanelLabel}</Tooltip>
@@ -81,9 +87,19 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     let ColumnRightComponent;
     if (isValidElement(columnRight)) {
       const ref = columnRight.props.ref || columnRightRef;
+      const id = columnRight.props.id || useId();
       const ToggleButton = (
         <div className="TwoColumnPanel__ButtonToggle">
-          <button type="button" onClick={togglePanel} ref={toggleButtonRef}>
+          <button
+            type="button"
+            onClick={togglePanel}
+            ref={toggleButtonRef}
+            aria-label={
+              !isCollapsed ? hideCollapsedPanelLabel : showCollapsedPanelLabel
+            }
+            aria-expanded={!isCollapsed}
+            aria-controls={id}
+          >
             <Icon
               type={
                 !isCollapsed ? 'chevron-double-left' : 'chevron-double-right'
@@ -101,7 +117,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnRightComponent = cloneElement(
         columnRight,
-        { ref, tabIndex: -1 },
+        { id, ref, tabIndex: -1 },
         children
       );
     }
