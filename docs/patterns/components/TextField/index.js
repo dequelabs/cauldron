@@ -1,23 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { TextField, FieldWrap } from '@deque/cauldron-react/';
 import { className } from '../../../props';
 import Demo from '../../../Demo';
+import FieldWrapNotice from '../../../FieldWrapNotice';
 import './index.css';
 
 const TextFieldDemo = () => {
   return (
     <div className="TextField">
       <FieldWrap>
-        <p>
-          <strong>NOTE:</strong> All form fields should be rendered as children
-          of a{' '}
-          <Link className="Link" to="/components/FieldWrap">
-            <code>{`<FieldWrap />`}</code> component
-          </Link>
-          . This means ALL fields in a form should be wrapped by 1 or more (in
-          the case of "groups" of fields) FieldWrap components.
-        </p>
+        <FieldWrapNotice />
         <Demo
           states={[
             {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Select } from '@deque/cauldron-react/';
+import { Select, FieldWrap } from '@deque/cauldron-react/';
 import './index.css';
 import Demo from '../../../Demo';
+import FieldWrapNotice from '../../../FieldWrapNotice';
 
 const options = [
   { key: 'monday', value: 'Monday' },
@@ -21,7 +22,8 @@ const SelectDemo = () => {
   const [currentValue, setCurrentValue] = useState('Maybe');
 
   return (
-    <div className="SelectDemo">
+    <FieldWrap className="SelectDemo">
+      <FieldWrapNotice />
       <Demo
         component={Select}
         states={[
@@ -108,7 +110,7 @@ const SelectDemo = () => {
           }
         }}
       />
-    </div>
+    </FieldWrap>
   );
 };
 

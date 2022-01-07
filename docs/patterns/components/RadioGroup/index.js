@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { RadioGroup, Code, Button } from '@deque/cauldron-react/';
+import { RadioGroup, FieldWrap } from '@deque/cauldron-react/';
+import FieldWrapNotice from '../../../FieldWrapNotice';
 
 const labelDescription =
   'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.';
@@ -15,7 +16,8 @@ export default class RadioGroupDemo extends Component {
   render() {
     const { value } = this.state;
     return (
-      <div>
+      <FieldWrap>
+        <FieldWrapNotice />
         <Demo
           component={RadioGroup}
           states={[
@@ -91,7 +93,7 @@ export default class RadioGroupDemo extends Component {
             }
           }}
         />
-      </div>
+      </FieldWrap>
     );
   }
 }
