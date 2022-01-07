@@ -94,6 +94,7 @@ export {
   AddressCityStateZip
 } from './components/Address';
 export { default as Pagination } from './components/Pagination';
+export { default as FieldWrap } from './components/FieldWrap';
 
 /**
  * Helpers / Utils

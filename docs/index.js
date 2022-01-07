@@ -70,7 +70,8 @@ const componentsList = [
   'NavBar',
   'Address',
   'Pagination',
-  'IssuePanel'
+  'IssuePanel',
+  'FieldWrap'
 ].sort();
 
 const App = () => {

@@ -12,12 +12,24 @@
   background-color: var(--panel-background-color);
 }
 
-.Panel__Heading {
+.Panel__Heading,
+.Panel legend {
   font-size: var(--text-size-medium);
   color: var(--panel-heading-color);
   padding: 0;
   margin: 0 0 var(--space-large) 0;
   font-weight: var(--font-weight-bold);
+}
+
+fieldset.Panel {
+  position: relative;
+  padding-top: 76px;
+}
+
+/* reset absurd browser-default legend styles */
+.Panel legend {
+  position: absolute;
+  top: var(--space-large);
 }
 
 /* Dark Theme */
