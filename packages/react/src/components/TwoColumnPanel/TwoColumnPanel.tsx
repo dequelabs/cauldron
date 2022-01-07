@@ -66,7 +66,9 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           >
             <Icon type="close" />
           </button>
-          <Tooltip target={closeButtonRef}>{hideCollapsedPanelLabel}</Tooltip>
+          <Tooltip target={closeButtonRef} association="aria-labelledby">
+            {hideCollapsedPanelLabel}
+          </Tooltip>
         </div>
       );
       const children = [
@@ -106,7 +108,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
               }
             />
           </button>
-          <Tooltip target={toggleButtonRef}>
+          <Tooltip target={toggleButtonRef} association="aria-labelledby">
             {!isCollapsed ? hideCollapsedPanelLabel : showCollapsedPanelLabel}
           </Tooltip>
         </div>
