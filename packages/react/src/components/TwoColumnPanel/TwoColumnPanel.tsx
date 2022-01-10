@@ -150,7 +150,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       } else {
         columnRightRef.current?.focus();
       }
-      console.log(document.activeElement);
     }, [isCollapsed]);
 
     return (

@@ -103,8 +103,10 @@ export {
 export {
   default as TwoColumnPanel,
   ColumnHeader,
+  ColumnGroupHeader,
   ColumnLeft,
-  ColumnRight
+  ColumnRight,
+  ColumnList
 } from './components/TwoColumnPanel';
 
 /**

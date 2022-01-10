@@ -56,16 +56,13 @@
   font-size: var(--text-size-normal);
 }
 
-.TwoColumnPanel__Left > .Tabs {
+.TwoColumnPanel__Left > .TwoColumnPanel__Header ~ * {
   display: block;
   width: 100%;
 }
 
-.TwoColumnPanel__Left > .Tabs > .Tablist {
-  border: none;
-}
-
-.TwoColumnPanel__Left .Tab {
+.TwoColumnPanel__Left ul li {
+  list-style-type: none;
   color: var(--gray-90);
   font-weight: 500;
   text-decoration: none;
@@ -74,9 +71,22 @@
   height: 4.1875rem;
   flex-direction: column;
   align-items: flex-start;
+  border-top: 1px solid var(--two-column-panel-border-color);
 }
 
-.TwoColumnPanel__Left .Tab em {
+.TwoColumnPanel__Left ul li a {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-small);
+  text-decoration: none;
+  height: 100%;
+}
+
+.TwoColumnPanel__Left ul li a[aria-current]:not([aria-current='false']) {
+  box-shadow: inset 4px 0 0 var(--tab-shadow-color);
+}
+
+.TwoColumnPanel__Left ul li em {
   color: var(--text-color-base);
   font-size: var(--text-size-smaller);
   font-style: normal;
@@ -84,19 +94,34 @@
   display: block;
 }
 
-.TwoColumnPanel__Left .Tab:hover {
+.TwoColumnPanel__Left ul li:hover {
   background-color: var(--tab-inactive-background-color);
 }
 
-.TwoColumnPanel__Left .Tablist .Tab:first-child {
+.TwoColumnPanel__Left ul li:first-child {
   border-top: none;
 }
 
-.TwoColumnPanel__Left .Tablist .Tab:last-child {
+.TwoColumnPanel__Left ul li:last-child {
   border-bottom: none;
 }
 
-.TwoColumnPanel__Right > .TabPanel {
+.TwoColumnPanel__GroupHeader {
+  border-top: 1px solid var(--two-column-panel-border-color);
+  border-bottom: 1px solid var(--two-column-panel-border-color);
+  background: var(--accent-secondary);
+  text-transform: uppercase;
+  font-size: var(--text-size-smaller);
+  font-weight: 500;
+  padding: var(--space-smallest) var(--space-small);
+}
+
+.TwoColumnPanel__Header + .TwoColumnPanel__GroupHeader,
+.TwoColumnPanel__GroupHeader:first-child {
+  border-top: none;
+}
+
+.TwoColumnPanel__Right > .TwoColumnPanel__Header ~ * {
   display: flex;
   width: unset;
   min-height: unset;
