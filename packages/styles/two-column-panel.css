@@ -8,8 +8,8 @@
 }
 
 .cauldron--theme-dark {
-  --two-column-panel-border-color: red;
-  --two-column-panel-background-color: red;
+  --two-column-panel-border-color: #5d676f;
+  --two-column-panel-background-color: #283640;
 }
 
 .TwoColumnPanel {
@@ -37,6 +37,7 @@
   background-color: var(--two-column-panel-background-color);
   border-top-left-radius: var(--two-column-panel-border-radius);
   border-bottom-left-radius: var(--two-column-panel-border-radius);
+  align-content: start;
 }
 
 .TwoColumnPanel__Right {
@@ -57,8 +58,7 @@
 }
 
 .TwoColumnPanel__Left > .TwoColumnPanel__Header ~ * {
-  display: block;
-  width: 100%;
+  flex-basis: 100%;
 }
 
 .TwoColumnPanel__Left ul li {
@@ -82,8 +82,20 @@
   height: 100%;
 }
 
+.TwoColumnPanel__Left ul li a:last-child {
+  box-shadow: 0px 1px 0px 0px var(--two-column-panel-border-color);
+}
+
 .TwoColumnPanel__Left ul li a[aria-current]:not([aria-current='false']) {
   box-shadow: inset 4px 0 0 var(--tab-shadow-color);
+}
+
+.TwoColumnPanel__Left
+  ul
+  li
+  a[aria-current]:not([aria-current='false']):last-child {
+  box-shadow: inset 4px 0 0 var(--tab-shadow-color),
+    0px 1px 0px 0px var(--two-column-panel-border-color);
 }
 
 .TwoColumnPanel__Left ul li em {
@@ -114,6 +126,22 @@
   font-size: var(--text-size-smaller);
   font-weight: 500;
   padding: var(--space-smallest) var(--space-small);
+  color: var(--text-color-base);
+  position: sticky;
+  top: 0;
+}
+
+.TwoColumnPanel__GroupHeader h1,
+.TwoColumnPanel__GroupHeader h2,
+.TwoColumnPanel__GroupHeader h3,
+.TwoColumnPanel__GroupHeader h4,
+.TwoColumnPanel__GroupHeader h5,
+.TwoColumnPanel__GroupHeader h6 {
+  color: var(--text-color-base);
+  font-size: var(--text-size-smaller);
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
 }
 
 .TwoColumnPanel__Header + .TwoColumnPanel__GroupHeader,
@@ -123,11 +151,17 @@
 
 .TwoColumnPanel__Right > .TwoColumnPanel__Header ~ * {
   display: flex;
+  flex-direction: column;
   width: unset;
   min-height: unset;
   flex-basis: 100%;
   border: none;
   padding: var(--space-small);
+}
+
+.TwoColumnPanel__Right > .TwoColumnPanel__Header ~ * > :last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .TwoColumnPanel__ButtonToggle button,

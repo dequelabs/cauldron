@@ -100,18 +100,34 @@ function TwoColumnPanelDemo() {
           </nav>
         </ColumnLeft>
         <ColumnRight>
-          <ColumnHeader>Header Label</ColumnHeader>
-          <div>{selectedItem?.contents}</div>
+          <ColumnHeader>{selectedItem?.name}</ColumnHeader>
+          <div>
+            {selectedItem?.contents}
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              eu suscipit tellus. Sed ultrices pretium vulputate. Maecenas id
+              diam tortor. Integer a felis dignissim, euismod mauris a,
+              vestibulum leo. Aenean vel fringilla turpis. In magna massa,
+              lacinia quis arcu ut, tincidunt condimentum tortor. Maecenas quis
+              vestibulum libero, eget gravida tortor. Suspendisse sed mollis
+              lorem. Pellentesque nec sagittis risus. Nunc faucibus suscipit
+              libero eget vehicula. Praesent scelerisque vitae risus ut auctor.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque efficitur sollicitudin ornare.
+            </p>
+          </div>
         </ColumnRight>
       </TwoColumnPanel>
 
-      <h2>With Optional Group Header</h2>
+      <h2>With Optional Group Heading</h2>
 
       <TwoColumnPanel>
         <ColumnLeft>
-          <ColumnHeader>Sidebar label</ColumnHeader>
+          <ColumnHeader>Items</ColumnHeader>
           <ColumnList>
-            <ColumnGroupHeader>Optional group heading</ColumnGroupHeader>
+            <ColumnGroupHeader>
+              <h3>Optional group heading</h3>
+            </ColumnGroupHeader>
             <nav>
               <ul>
                 {groupOne.map(item => (
@@ -128,7 +144,9 @@ function TwoColumnPanelDemo() {
                 ))}
               </ul>
             </nav>
-            <ColumnGroupHeader>Optional group heading</ColumnGroupHeader>
+            <ColumnGroupHeader>
+              <h3>Another optional group heading</h3>
+            </ColumnGroupHeader>
             <nav>
               <ul>
                 {groupTwo.map(item => (
@@ -148,8 +166,22 @@ function TwoColumnPanelDemo() {
           </ColumnList>
         </ColumnLeft>
         <ColumnRight>
-          <ColumnHeader>Header Label</ColumnHeader>
-          <div>{selectedGroupItem?.contents}</div>
+          <ColumnHeader>{selectedGroupItem?.name}</ColumnHeader>
+          <div>
+            {selectedGroupItem?.contents}
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              eu suscipit tellus. Sed ultrices pretium vulputate. Maecenas id
+              diam tortor. Integer a felis dignissim, euismod mauris a,
+              vestibulum leo. Aenean vel fringilla turpis. In magna massa,
+              lacinia quis arcu ut, tincidunt condimentum tortor. Maecenas quis
+              vestibulum libero, eget gravida tortor. Suspendisse sed mollis
+              lorem. Pellentesque nec sagittis risus. Nunc faucibus suscipit
+              libero eget vehicula. Praesent scelerisque vitae risus ut auctor.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque efficitur sollicitudin ornare.
+            </p>
+          </div>
         </ColumnRight>
       </TwoColumnPanel>
     </div>
