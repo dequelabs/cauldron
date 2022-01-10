@@ -32,6 +32,15 @@ fieldset.Panel {
   top: var(--space-large);
 }
 
+.Panel--collapsed {
+  padding: 12px;
+}
+
+.Panel--collapsed .Panel__Heading {
+  margin: 0 0 12px 0;
+  font-size: var(--text-size-normal);
+}
+
 /* Dark Theme */
 .cauldron--theme-dark {
   --panel-border-color: #5d676f;
