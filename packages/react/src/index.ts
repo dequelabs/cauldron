@@ -95,6 +95,11 @@ export {
 } from './components/Address';
 export { default as Pagination } from './components/Pagination';
 export { default as FieldWrap } from './components/FieldWrap';
+export {
+  default as Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink
+} from './components/Breadcrumb';
 
 /**
  * Helpers / Utils

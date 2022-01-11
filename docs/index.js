@@ -71,7 +71,8 @@ const componentsList = [
   'Address',
   'Pagination',
   'IssuePanel',
-  'FieldWrap'
+  'FieldWrap',
+  'Breadcrumb'
 ].sort();
 
 const App = () => {
