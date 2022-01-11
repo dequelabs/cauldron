@@ -8,7 +8,7 @@ import {
 } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
-const ButtonDemo = () => (
+const BreadcrumbDemo = () => (
   <div>
     <h1>Breadcrumb</h1>
     <h2>Examples</h2>
@@ -46,4 +46,4 @@ const ButtonDemo = () => (
   </div>
 );
 
-export default ButtonDemo;
+export default BreadcrumbDemo;
