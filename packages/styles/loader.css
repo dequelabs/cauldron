@@ -1,95 +1,133 @@
+:root {
+  --loader-ring-size: 104px;
+  --loader-ring-thickness: 10px;
+  --loader-inner-ring-size: 4px;
+  --loader-ring-color: var(--accent-primary);
+  --loader-inner-ring-color: #fff;
+  --loader-logo-color: var(--accent-primary);
+  --loader-text-color: var(--gray-90);
+  --loader-overlay-border-color: var(--gray-40);
+  --loader-overlay-background-color: var(--workspace-background-color);
+}
+
+.cauldron--theme-dark {
+  --loader-ring-color: var(--accent-dark);
+  --loader-inner-ring-color: var(--accent-info);
+  --loader-logo-color: var(--white);
+  --loader-text-color: var(--white);
+  --loader-overlay-border-color: #5d676e;
+  --loader-overlay-background-color: var(--accent-medium);
+}
+
+.Loader--large {
+  --loader-ring-size: 192px;
+  --loader-ring-thickness: 16px;
+  --loader-inner-ring-size: calc(var(--loader-ring-thickness) * 0.5);
+}
+
+.Loader {
+  position: relative;
+  display: flex;
+  height: var(--loader-ring-size);
+  width: var(--loader-ring-size);
+  align-items: center;
+  justify-content: center;
+}
+
+.Loader:before,
+.Loader:after {
+  content: '';
+  display: block;
+  border-radius: 50%;
+}
+
+.Loader:before {
+  height: var(--loader-ring-size);
+  width: var(--loader-ring-size);
+  border: var(--loader-ring-thickness) solid var(--loader-ring-color);
+  position: absolute;
+}
+
+.Loader:after {
+  --size: calc(
+    var(--loader-ring-size) - var(--loader-ring-thickness) +
+      var(--loader-inner-ring-size)
+  );
+  height: var(--size);
+  width: var(--size);
+  border: var(--loader-inner-ring-size) solid transparent;
+  border-top: var(--loader-inner-ring-size) solid var(--loader-inner-ring-color);
+  animation: spin 1.5s linear infinite;
+}
+
 .Loader__overlay {
-  background: var(--workspace-background-color);
+  background: var(--loader-overlay-background-color);
   position: absolute;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #02101a;
+  border: 1px solid var(--loader-overlay-border-color);
   border-radius: 3px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-height: 200px;
-  min-width: 200px;
-  font-size: var(--text-size-normal);
-  padding: 1em;
-  padding-top: 0;
+  width: 260px;
+  padding: var(--space-large) var(--space-small) var(--space-small)
+    var(--space-small);
   z-index: var(--z-index-loader);
+  box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.3);
+  font-size: var(--text-size-smaller);
+  color: var(--text-color-base);
+  text-align: center;
 }
 
 .cauldron--theme-dark .Loader__overlay {
-  border: 2px solid var(--white);
+  color: var(--accent-light);
 }
 
-.Loader {
-  font-size: 10px;
-  margin: 50px auto;
-  width: 7em;
-  height: 7em;
-  border-radius: 50%;
-  background: var(--gray-60);
-  background: linear-gradient(
-    to right,
-    var(--gray-60) 10%,
-    rgba(255, 255, 255, 0) 42%
-  );
-  transform: translateZ(0);
-  position: relative;
-  animation: load 1.4s linear infinite;
+.Loader__overlay__loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--loader-ring-size);
+  min-width: var(--loader-ring-size);
+  margin-bottom: var(--space-small);
 }
 
-.Loader:before {
-  width: 50%;
-  height: 50%;
-  background: var(--gray-60);
-  border-radius: 100% 0 0 0;
+.Loader__overlay--large .Loader__overlay__loader {
+  min-height: 192px;
+  min-width: 192px;
+}
+
+.Loader__overlay__label {
+  color: var(--loader-text-color);
+  font-size: var(--text-size-normal);
+}
+
+.Loader__overlay > *:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.Loader__overlay .Loader {
   position: absolute;
-  top: 0;
-  left: 0;
-  content: '';
 }
 
-.Loader:after {
-  background: var(--workspace-background-color);
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
-  content: '';
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.Loader__overlay svg {
+  color: var(--loader-logo-color);
+  height: calc(var(--loader-ring-size) * 0.7);
+  width: calc(var(--loader-ring-size) * 0.7);
 }
 
-.cauldron--theme-dark .Loader {
-  background: linear-gradient(
-    to right,
-    var(--white) 10%,
-    var(--workspace-background-color) 45%
-  );
+.Loader__overlay--large svg {
+  height: 120px;
+  width: 120px;
 }
 
-.cauldron--theme-dark .Loader:before {
-  background: var(--white);
-}
-
-@-webkit-keyframes load {
+@keyframes spin {
   0% {
     transform: rotate(0deg);
   }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes load {
-  0% {
-    transform: rotate(0deg);
-  }
-
   100% {
     transform: rotate(360deg);
   }

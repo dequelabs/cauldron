@@ -63,4 +63,14 @@ describe('Panel', () => {
 
     expect(panel.find('section').props()['aria-label']).toBe('Custom Label');
   });
+
+  test('adds the collapsed class', () => {
+    const panel = mount(
+      <Panel heading={{ text: 'Title' }} collapsed>
+        Content
+      </Panel>
+    );
+
+    expect(panel.find('section').hasClass('Panel--collapsed')).toBe(true);
+  });
 });

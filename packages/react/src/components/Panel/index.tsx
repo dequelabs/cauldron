@@ -12,10 +12,17 @@ interface PanelProps extends HTMLAttributes<HTMLElement> {
         text: ReactElement<any>;
         level: number | undefined;
       };
+  collapsed?: boolean;
   className?: string;
 }
 
-const Panel = ({ children, className, heading, ...other }: PanelProps) => {
+const Panel = ({
+  children,
+  collapsed,
+  className,
+  heading,
+  ...other
+}: PanelProps) => {
   const Heading = `h${
     typeof heading === 'object' && 'level' in heading && !!heading.level
       ? heading.level
@@ -27,7 +34,9 @@ const Panel = ({ children, className, heading, ...other }: PanelProps) => {
   return (
     <section
       aria-labelledby={headingId}
-      className={classNames('Panel', className)}
+      className={classNames('Panel', className, {
+        ['Panel--collapsed']: collapsed
+      })}
       {...other}
     >
       <Heading id={headingId} className="Panel__Heading">

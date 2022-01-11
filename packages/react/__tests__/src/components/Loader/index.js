@@ -25,6 +25,16 @@ test('sets expected role attributes given an aria-label', () => {
   expect(loaderNode.getAttribute('role')).toBe('alert');
 });
 
+test('sets loader variants', () => {
+  const small = mount(<Loader variant="small" />);
+  const large = mount(<Loader variant="large" />);
+  const smallNode = small.getDOMNode();
+  const largeNode = large.getDOMNode();
+
+  expect(smallNode.classList.contains('Loader--small')).toBe(true);
+  expect(largeNode.classList.contains('Loader--large')).toBe(true);
+});
+
 test('returns no axe violations', async () => {
   const withLabel = shallow(<Loader label="hi" />);
   const withoutLabel = shallow(<Loader />);

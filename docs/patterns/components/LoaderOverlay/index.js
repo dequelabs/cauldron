@@ -42,16 +42,27 @@ const LoaderOverlayDemo = () => {
       states={[]}
       propDocs={{
         className,
-        children
+        children,
+        variant: {
+          type: 'string',
+          description: 'Loader variant, can be "small" or "large".'
+        }
       }}
     >
       <div className="LoaderOverlayDemo">
         {loading && (
           <>
             <Scrim show />
-            <LoaderOverlay tabIndex={-1} ref={loaderRef}>
-              <Loader />
-              <div>Loading...</div>
+            <LoaderOverlay
+              tabIndex={-1}
+              ref={loaderRef}
+              label="Loading..."
+              variant="large"
+            >
+              <p>
+                Explanatory secondary text goes here. Let them know what's
+                happening, alright?
+              </p>
             </LoaderOverlay>
           </>
         )}
@@ -82,9 +93,8 @@ const LoaderOverlayDemo = () => {
         <Code
           role="region"
           tabIndex={0}
-        >{`<LoaderOverlay tabIndex={-1} ref={loaderRef}>
-  <Loader />
-  <div>Loading...</div>
+        >{`<LoaderOverlay tabIndex={-1} ref={loaderRef} label="Loading...">
+  <p>Explanatory secondary text goes here. Let them know what's happening, alright?</p>
 </LoaderOverlay>`}</Code>
       </div>
     </Demo>

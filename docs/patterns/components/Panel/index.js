@@ -16,6 +16,15 @@ const PanelDemo = () => {
               id: 'panel_heading'
             },
             children: 'Panel content.'
+          },
+          {
+            heading: {
+              text: 'Collapsed Panel Heading',
+              level: 2,
+              id: 'collapsed_panel_heading'
+            },
+            collapsed: true,
+            children: 'Collapsed panel content.'
           }
         ]}
         propDocs={{
@@ -24,6 +33,11 @@ const PanelDemo = () => {
             required: true,
             description:
               'Object containing: text, level (optional), id (optional)'
+          },
+          collapsed: {
+            type: 'boolean',
+            description: 'Collapse panel into view for smaller viewports',
+            default: false
           },
           children: {
             ...children,
