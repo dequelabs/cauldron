@@ -9,6 +9,7 @@ const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>(
     <span
       className={classnames('Breadcrumb__Item', className)}
       ref={ref}
+      aria-current="location"
       {...props}
     >
       {children}
