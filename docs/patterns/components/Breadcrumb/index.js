@@ -4,6 +4,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Icon,
   Code
 } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
@@ -25,6 +26,27 @@ const BreadcrumbDemo = () => (
   <BreadcrumbLink href="/one">One</BreadcrumbLink>
   <BreadcrumbLink href="/two">Two</BreadcrumbLink>
   <BreadcrumbLink href="/three">Three</BreadcrumbLink>
+  <BreadcrumbItem>Four</BreadcrumbItem>
+</Breadcrumb>`}
+    </Code>
+
+    <h3>Custom Separators</h3>
+
+    <Breadcrumb
+      aria-label="Breadcrumb"
+      separator={<Icon type="chevron-double-right" />}
+    >
+      <BreadcrumbLink href="#">One</BreadcrumbLink>
+      <BreadcrumbLink href="#">Two</BreadcrumbLink>
+      <BreadcrumbLink href="#">Three</BreadcrumbLink>
+      <BreadcrumbItem>Four</BreadcrumbItem>
+    </Breadcrumb>
+
+    <Code>
+      {`<Breadcrumb aria-label="Breadcrumb" separator={<Icon type="chevron-double-right" />}>
+  <BreadcrumbLink href="#">One</BreadcrumbLink>
+  <BreadcrumbLink href="#">Two</BreadcrumbLink>
+  <BreadcrumbLink href="#">Three</BreadcrumbLink>
   <BreadcrumbItem>Four</BreadcrumbItem>
 </Breadcrumb>`}
     </Code>

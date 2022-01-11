@@ -36,6 +36,17 @@ test('should render separators between breadcrumbs', () => {
   ).toBeFalsy();
 });
 
+test('should render custom separators between breadcrumbs', () => {
+  const breadcrumb = shallow(
+    <Breadcrumb aria-label="breadcrumb" separator="💩">
+      <BreadcrumbLink href="#">one</BreadcrumbLink>
+      <BreadcrumbLink href="#">two</BreadcrumbLink>
+      <BreadcrumbItem>three</BreadcrumbItem>
+    </Breadcrumb>
+  );
+  expect(breadcrumb.text()).toEqual('one💩two💩three');
+});
+
 test('should return no axe violations', async () => {
   const breadcrumb = shallow(
     <Breadcrumb aria-label="breadcrumb">
