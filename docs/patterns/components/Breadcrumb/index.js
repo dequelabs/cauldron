@@ -12,7 +12,15 @@ import { children, className } from '../../../props';
 const BreadcrumbDemo = () => (
   <div>
     <h1>Breadcrumb</h1>
+
+    <p>
+      The Breadcrumb component displays a list of links within a heirarchy and
+      allows navigation back through them.
+    </p>
+
     <h2>Examples</h2>
+
+    <h3>Basic</h3>
 
     <Breadcrumb aria-label="Breadcrumb">
       <BreadcrumbLink href="#">One</BreadcrumbLink>
