@@ -62,7 +62,7 @@ const ProgressBarDemo = () => {
         progressMax={25}
         progress={5}
       />
-      <Code langauge="javascript">
+      <Code langauge="javascript" role="region" tabIndex={0}>
         {
           '<ProgressBar aria-label="Progress" progress={5} progressMin={1} progressMax={25} />'
         }
@@ -76,9 +76,9 @@ const ProgressBarDemo = () => {
       <p>
         <Button onClick={handleAnimate}>Show Animated Progress</Button>
       </p>
-      <ProgressBar label="Progress" progress={progress} />
+      <ProgressBar aria-label="Progress" progress={progress} />
       <h2>Code Sample</h2>
-      <Code langauge="javascript">
+      <Code langauge="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { ProgressBar } from '@deque/cauldron-react';
 

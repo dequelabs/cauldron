@@ -56,6 +56,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             {isFirstPage ? (
               <TooltipTabstop
                 hideElementOnHidden
+                association="aria-labelledby"
                 tooltip={firstPageLabel}
                 placement={tooltipPlacement}
               >
@@ -75,6 +76,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             {isFirstPage ? (
               <TooltipTabstop
                 hideElementOnHidden
+                association="aria-labelledby"
                 tooltip={previousPageLabel}
                 placement={tooltipPlacement}
               >
@@ -105,6 +107,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             {isLastPage ? (
               <TooltipTabstop
                 hideElementOnHidden
+                association="aria-labelledby"
                 tooltip={nextPageLabel}
                 placement={tooltipPlacement}
               >
@@ -124,6 +127,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             {isLastPage ? (
               <TooltipTabstop
                 hideElementOnHidden
+                association="aria-labelledby"
                 tooltip={lastPageLabel}
                 placement={tooltipPlacement}
               >

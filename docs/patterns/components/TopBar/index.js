@@ -6,7 +6,7 @@ const Demo = () => {
     <>
       <h1>TopBar</h1>
       <h2>Code Sample</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { TopBar, TopBarMenu, OptionsMenu } from '@deque/cauldron-react';
 

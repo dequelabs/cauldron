@@ -5,3 +5,7 @@
 .Form {
   max-width: 300px;
 }
+
+.cauldron--theme-dark .tooltip-demo .popper-link {
+  color: var(--white);
+}

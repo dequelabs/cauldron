@@ -11,8 +11,10 @@ const DemoTooltipTabstop = () => {
 
       <p>
         <code>TooltipTabstop</code> is a composite component built on top of{' '}
-        <Link to="./Tooltip">Tooltip</Link> allowing for accessible tooltips on
-        non-interactive elements.
+        <Link to="./Tooltip" className="tooltip-link">
+          Tooltip
+        </Link>{' '}
+        allowing for accessible tooltips on non-interactive elements.
       </p>
 
       <p>Some examples of where this might be used over a standard Tooltip:</p>
@@ -50,7 +52,7 @@ const DemoTooltipTabstop = () => {
       </ol>
 
       <h2>Code Samples</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { TooltipTabstop } from '@deque/cauldron-react';
 

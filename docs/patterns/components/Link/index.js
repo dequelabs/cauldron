@@ -30,7 +30,9 @@ export default class LinkDemo extends Component {
                   <p>
                     Ref function. <em>Example:</em>
                   </p>
-                  <Code>{'element => this.link = element'}</Code>
+                  <Code role="region" tabIndex={0}>
+                    {'element => this.link = element'}
+                  </Code>
                 </div>
               )
             }

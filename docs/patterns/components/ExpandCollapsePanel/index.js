@@ -52,7 +52,7 @@ export default class Demo extends Component {
         </p>
         <ControlledExpandCollapse />
         <h2>Code Sample</h2>
-        <Code language="javascript">{`
+        <Code language="javascript" role="region" tabIndex={0}>{`
 import React, { useState } from 'react';
 import { ExpandCollapsePanel, PanelTrigger } from '@deque/cauldron-react';
 

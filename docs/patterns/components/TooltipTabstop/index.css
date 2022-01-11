@@ -14,3 +14,7 @@
   line-height: 1.5;
   margin-right: 0.5em;
 }
+
+.cauldron--theme-dark .tooltip-tabstop-demo .tooltip-link {
+  color: var(--white);
+}
