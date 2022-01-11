@@ -43,6 +43,10 @@ const LoaderOverlayDemo = () => {
       propDocs={{
         className,
         children,
+        label: {
+          type: 'string',
+          description: 'A primary label for the loader.'
+        },
         variant: {
           type: 'string',
           description: 'Loader variant, can be "small" or "large".'
