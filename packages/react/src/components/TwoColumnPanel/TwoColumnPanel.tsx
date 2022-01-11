@@ -8,13 +8,14 @@ import React, {
   useEffect
 } from 'react';
 import { useId } from 'react-id-generator';
+import FocusTrap from 'focus-trap-react';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
+import ClickOutsideListener from '../ClickOutsideListener';
 import { ColumnLeft, ColumnRight } from './';
 import classnames from 'classnames';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  collapsed?: boolean;
   initialCollapsed?: boolean;
   showCollapsedPanelLabel?: string;
   hideCollapsedPanelLabel?: string;
@@ -25,7 +26,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     {
       className,
       children,
-      collapsed = false,
       initialCollapsed = false,
       showCollapsedPanelLabel = 'Show Panel',
       hideCollapsedPanelLabel = 'Hide Panel',
@@ -34,6 +34,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     ref
   ) => {
     const [isCollapsed, setCollapsed] = useState(initialCollapsed);
+    const [isFocusTrap, setIsFocusTrap] = useState(false);
     const [showPanel, setShowPanel] = useState(!initialCollapsed);
     const togglePanel = () => {
       if (isCollapsed) {
@@ -54,8 +55,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     );
 
     let ColumnLeftComponent;
+    let columnLeftId;
     if (isValidElement(columnLeft)) {
       const ref = columnLeft.props.ref || columnLeftRef;
+      const id = (columnLeftId =
+        columnLeft.props.id || useId(undefined, 'sidebar-'));
       const CloseButton = (
         <div className="TwoColumnPanel__Close">
           <button
@@ -66,7 +70,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           >
             <Icon type="close" />
           </button>
-          <Tooltip target={closeButtonRef} association="aria-labelledby">
+          <Tooltip
+            target={closeButtonRef}
+            association="aria-labelledby"
+            hideElementOnHidden
+          >
             {hideCollapsedPanelLabel}
           </Tooltip>
         </div>
@@ -77,7 +85,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
-        { ref, tabIndex: -1 },
+        { id, ref, tabIndex: -1 },
         children
       );
     }
@@ -89,7 +97,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     let ColumnRightComponent;
     if (isValidElement(columnRight)) {
       const ref = columnRight.props.ref || columnRightRef;
-      const id = columnRight.props.id || useId();
       const ToggleButton = (
         <div className="TwoColumnPanel__ButtonToggle">
           <button
@@ -100,7 +107,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
               !isCollapsed ? hideCollapsedPanelLabel : showCollapsedPanelLabel
             }
             aria-expanded={!isCollapsed}
-            aria-controls={id}
+            aria-controls={columnLeftId}
           >
             <Icon
               type={
@@ -108,7 +115,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
               }
             />
           </button>
-          <Tooltip target={toggleButtonRef} association="aria-labelledby">
+          <Tooltip
+            target={toggleButtonRef}
+            association="aria-labelledby"
+            hideElementOnHidden
+          >
             {!isCollapsed ? hideCollapsedPanelLabel : showCollapsedPanelLabel}
           </Tooltip>
         </div>
@@ -119,7 +130,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnRightComponent = cloneElement(
         columnRight,
-        { id, ref, tabIndex: -1 },
+        { ref, tabIndex: -1 },
         children
       );
     }
@@ -152,6 +163,55 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       }
     }, [isCollapsed]);
 
+    // When the collapsable panel starts to overlay content, it needs to become a focus trap and collapsed by default
+    useLayoutEffect(() => {
+      const mediaQueryList = matchMedia('(max-width: 45rem)');
+      const handleMatch = (matches: boolean) => {
+        setIsFocusTrap(matches);
+        const collapsed = matches ? true : isCollapsed;
+        setCollapsed(collapsed);
+        setShowPanel(!collapsed);
+      };
+      const listener = ({ matches }: { matches: boolean }) =>
+        handleMatch(matches);
+      if (mediaQueryList.matches) {
+        handleMatch(mediaQueryList.matches);
+      }
+      mediaQueryList.addEventListener('change', listener);
+      return () => {
+        mediaQueryList.removeEventListener('change', listener);
+      };
+    }, []);
+
+    useEffect(() => {
+      const handleEscape = (event: KeyboardEvent) => {
+        if (
+          event.key === 'Escape' ||
+          event.key === 'Esc' ||
+          event.keyCode === 27
+        ) {
+          setCollapsed(true);
+        }
+      };
+
+      const targetElement = document.body;
+      if (isFocusTrap) {
+        targetElement.addEventListener('keyup', handleEscape);
+      } else {
+        targetElement.removeEventListener('keyup', handleEscape);
+      }
+
+      return () => {
+        targetElement.removeEventListener('keyup', handleEscape);
+      };
+    }, [isFocusTrap]);
+
+    const handleClickOutside = () => {
+      if (!isCollapsed && isFocusTrap) {
+        setCollapsed(true);
+      }
+    };
+
     return (
       <div
         className={classnames('TwoColumnPanel', className, {
@@ -161,6 +221,19 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         {...props}
         ref={ref}
       >
+        <FocusTrap
+          active={!isCollapsed && isFocusTrap}
+          focusTrapOptions={{
+            escapeDeactivates: true,
+            allowOutsideClick: true,
+            fallbackFocus: columnLeftRef.current as HTMLElement
+          }}
+          containerElements={[columnLeftRef.current as HTMLElement]}
+        />
+        <ClickOutsideListener
+          onClickOutside={handleClickOutside}
+          target={columnLeftRef.current as HTMLElement}
+        />
         {showPanel ? ColumnLeftComponent : null}
         {ColumnRightComponent}
       </div>

@@ -80,12 +80,12 @@ function TwoColumnPanelDemo() {
       <h1>Two Column Panel</h1>
 
       <TwoColumnPanel>
-        <ColumnLeft>
-          <ColumnHeader>Sidebar label</ColumnHeader>
-          <nav>
+        <ColumnLeft aria-labelledby="sidebar">
+          <ColumnHeader id="sidebar">Sidebar label</ColumnHeader>
+          <nav aria-label="Sidebar navigation">
             <ul>
               {items.map(item => (
-                <li>
+                <li key={item.id}>
                   <a
                     href="#"
                     onClick={selectItem(item.id)}
@@ -99,8 +99,8 @@ function TwoColumnPanelDemo() {
             </ul>
           </nav>
         </ColumnLeft>
-        <ColumnRight>
-          <ColumnHeader>{selectedItem?.name}</ColumnHeader>
+        <ColumnRight aria-labelledby="item-header">
+          <ColumnHeader id="item-header">{selectedItem?.name}</ColumnHeader>
           <div>
             {selectedItem?.contents}
             <p>
@@ -122,16 +122,16 @@ function TwoColumnPanelDemo() {
       <h2>With Optional Group Heading</h2>
 
       <TwoColumnPanel>
-        <ColumnLeft>
+        <ColumnLeft aria-labelledby="group-heading">
           <ColumnHeader>Items</ColumnHeader>
           <ColumnList>
-            <ColumnGroupHeader>
+            <ColumnGroupHeader id="group-heading">
               <h3>Optional group heading</h3>
             </ColumnGroupHeader>
-            <nav>
+            <nav aria-label="Sidebar group 1 navigation">
               <ul>
                 {groupOne.map(item => (
-                  <li>
+                  <li key={item.id}>
                     <a
                       href="#"
                       onClick={selectGroupItem(item.id)}
@@ -147,10 +147,10 @@ function TwoColumnPanelDemo() {
             <ColumnGroupHeader>
               <h3>Another optional group heading</h3>
             </ColumnGroupHeader>
-            <nav>
+            <nav aria-label="Sidebar group 2 navigation">
               <ul>
                 {groupTwo.map(item => (
-                  <li>
+                  <li key={item.id}>
                     <a
                       href="#"
                       onClick={selectGroupItem(item.id)}
@@ -165,8 +165,10 @@ function TwoColumnPanelDemo() {
             </nav>
           </ColumnList>
         </ColumnLeft>
-        <ColumnRight>
-          <ColumnHeader>{selectedGroupItem?.name}</ColumnHeader>
+        <ColumnRight aria-labelledby="group-contents-heading">
+          <ColumnHeader id="group-contents-heading">
+            {selectedGroupItem?.name}
+          </ColumnHeader>
           <div>
             {selectedGroupItem?.contents}
             <p>

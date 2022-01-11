@@ -1,18 +1,20 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
+import { Cauldron } from '../../types';
 
-interface ColumnLeftProps extends React.HTMLAttributes<HTMLDivElement> {}
+type ColumnLeftProps = React.HTMLAttributes<HTMLDivElement> &
+  Cauldron.LabelProps;
 
 const ColumnLeft = forwardRef<HTMLDivElement, ColumnLeftProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
+      <section
         className={classnames('TwoColumnPanel__Left', className)}
         {...props}
         ref={ref}
       >
         {children}
-      </div>
+      </section>
     );
   }
 );
