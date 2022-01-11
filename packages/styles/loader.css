@@ -92,7 +92,7 @@
   justify-content: center;
   min-height: var(--loader-ring-size);
   min-width: var(--loader-ring-size);
-  margin: 0 0 var(--space-small) 0;
+  margin-bottom: var(--space-small);
 }
 
 .Loader__overlay--large .Loader__overlay__loader {
