@@ -55,6 +55,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isFirstPage ? (
               <TooltipTabstop
+                hideElementOnHidden
                 tooltip={firstPageLabel}
                 placement={tooltipPlacement}
               >
@@ -73,6 +74,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isFirstPage ? (
               <TooltipTabstop
+                hideElementOnHidden
                 tooltip={previousPageLabel}
                 placement={tooltipPlacement}
               >
@@ -102,6 +104,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isLastPage ? (
               <TooltipTabstop
+                hideElementOnHidden
                 tooltip={nextPageLabel}
                 placement={tooltipPlacement}
               >
@@ -120,6 +123,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isLastPage ? (
               <TooltipTabstop
+                hideElementOnHidden
                 tooltip={lastPageLabel}
                 placement={tooltipPlacement}
               >
