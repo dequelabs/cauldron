@@ -5,11 +5,23 @@
   --two-column-panel-header-height: 3.125rem;
   --two-column-panel-animation-timing: 0.25s;
   --two-column-panel-left-column-width: 17.5rem;
+  --two-column-panel-header-text-color: var(--gray-90);
+  --two-column-panel-accent-text-color: var(--text-color-base);
+  --two-column-panel-list-background-color: var(
+    --two-column-panel-background-color
+  );
+  --two-column-panel-group-heading-background-color: var(--accent-secondary);
+  --two-column-panel-group-heading-text-color: var(--text-base);
 }
 
 .cauldron--theme-dark {
   --two-column-panel-border-color: #5d676f;
-  --two-column-panel-background-color: #283640;
+  --two-column-panel-background-color: var(--accent-medium);
+  --two-column-panel-header-text-color: #fff;
+  --two-column-panel-accent-text-color: #fff;
+  --two-column-panel-list-background-color: var(--accent-dark);
+  --two-column-panel-group-heading-background-color: #b3bfc6;
+  --two-column-panel-group-heading-text-color: var(--accent-dark);
 }
 
 .TwoColumnPanel {
@@ -26,7 +38,7 @@
   height: var(--two-column-panel-header-height);
   line-height: var(--two-column-panel-header-height);
   font-weight: 500;
-  color: var(--gray-90);
+  color: var(--two-column-panel-header-text-color);
   flex: 1;
 }
 
@@ -66,7 +78,7 @@
   color: var(--gray-90);
   font-weight: 500;
   text-decoration: none;
-  background-color: var(--two-column-panel-background-color);
+  background-color: var(--two-column-panel-list-background-color);
   transition: ease-in-out 100ms background-color;
   height: 4.1875rem;
   flex-direction: column;
@@ -99,10 +111,10 @@
 }
 
 .TwoColumnPanel__Left ul li em {
-  color: var(--text-color-base);
+  color: var(--two-column-panel-accent-text-color);
   font-size: var(--text-size-smaller);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   display: block;
 }
 
@@ -121,12 +133,12 @@
 .TwoColumnPanel__GroupHeader {
   border-top: 1px solid var(--two-column-panel-border-color);
   border-bottom: 1px solid var(--two-column-panel-border-color);
-  background: var(--accent-secondary);
+  background: var(--two-column-panel-group-heading-background-color);
   text-transform: uppercase;
   font-size: var(--text-size-smaller);
   font-weight: 500;
   padding: var(--space-smallest) var(--space-small);
-  color: var(--text-color-base);
+  color: var(--two-column-panel-group-heading-text-color);
   position: sticky;
   top: 0;
 }
@@ -137,7 +149,7 @@
 .TwoColumnPanel__GroupHeader h4,
 .TwoColumnPanel__GroupHeader h5,
 .TwoColumnPanel__GroupHeader h6 {
-  color: var(--text-color-base);
+  color: inherit;
   font-size: var(--text-size-smaller);
   font-weight: 500;
   margin: 0;

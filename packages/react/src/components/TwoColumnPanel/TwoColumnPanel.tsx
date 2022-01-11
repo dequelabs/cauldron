@@ -42,7 +42,13 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       }
       // Set collapsed state on next tick so css transitions can be applied
       requestAnimationFrame(() => {
-        setCollapsed(!isCollapsed);
+        const collapsed = !isCollapsed;
+        setCollapsed(collapsed);
+        if (!collapsed) {
+          columnLeftRef.current?.focus();
+        } else {
+          columnRightRef.current?.focus();
+        }
       });
     };
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
@@ -154,14 +160,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         );
       };
     }, [columnLeftRef.current, isCollapsed]);
-
-    useEffect(() => {
-      if (!isCollapsed) {
-        columnLeftRef.current?.focus();
-      } else {
-        columnRightRef.current?.focus();
-      }
-    }, [isCollapsed]);
 
     // When the collapsable panel starts to overlay content, it needs to become a focus trap and collapsed by default
     useLayoutEffect(() => {
