@@ -26,6 +26,7 @@
 }
 
 .Loader {
+  margin: 50px auto;
   position: relative;
   display: flex;
   height: var(--loader-ring-size);
@@ -111,6 +112,7 @@
 
 .Loader__overlay .Loader {
   position: absolute;
+  margin: 0;
 }
 
 .Loader__overlay svg {
