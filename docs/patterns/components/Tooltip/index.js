@@ -27,7 +27,10 @@ const DemoTooltip = () => {
       <h1>Tooltip</h1>
 
       <p>
-        Cauldron's Tooltip relies on <a href="https://popper.js.org/">Popper</a>{' '}
+        Cauldron's Tooltip relies on{' '}
+        <a href="https://popper.js.org/" className="popper-link">
+          Popper
+        </a>{' '}
         to position tooltips dynamically.
       </p>
 
@@ -121,7 +124,7 @@ const DemoTooltip = () => {
       </div>
 
       <h2>Code Samples</h2>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { Tooltip, Button } from '@deque/cauldron-react';
 
@@ -152,7 +155,7 @@ const Demo = () => {
         <code>aria-describedby</code> attributes.
       </p>
 
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Button
   aria-describedby="tooltip someotherid"
   buttonRef={ref}

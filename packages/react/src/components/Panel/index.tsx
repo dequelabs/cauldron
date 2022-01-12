@@ -1,33 +1,58 @@
-import React from 'react';
+import React, { HTMLAttributes, ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import IconButton from '../IconButton';
+import rndid from '../../utils/rndid';
+
+interface PanelProps extends HTMLAttributes<HTMLElement> {
+  children: ReactNode;
+  heading:
+    | ReactElement<any>
+    | {
+        id?: string;
+        text: ReactElement<any>;
+        level: number | undefined;
+      };
+  collapsed?: boolean;
+  className?: string;
+}
 
 const Panel = ({
+  children,
+  collapsed,
   className,
-  title = '',
-  actions,
-  children
-}: {
-  className?: string;
-  title?: string;
-  actions?: typeof IconButton[];
-  children: React.ReactNode;
-}) => {
+  heading,
+  ...other
+}: PanelProps) => {
+  const Heading = `h${
+    typeof heading === 'object' && 'level' in heading && !!heading.level
+      ? heading.level
+      : 2
+  }` as 'h1';
+  const headingId =
+    typeof heading === 'object' && 'id' in heading ? heading.id : rndid();
+
   return (
-    <div className={classNames('Panel', className)}>
-      <div className="Panel__Header">
-        {title && <div className="Panel__Header-title">{title}</div>}
-        {actions && <div className="Panel__Header-actions">{actions}</div>}
-      </div>
-      <div className="Panel__Content">{children}</div>
-    </div>
+    <section
+      aria-labelledby={headingId}
+      className={classNames('Panel', className, {
+        ['Panel--collapsed']: collapsed
+      })}
+      {...other}
+    >
+      <Heading id={headingId} className="Panel__Heading">
+        {typeof heading === 'object' && 'text' in heading
+          ? heading.text
+          : heading}
+      </Heading>
+      {children}
+    </section>
   );
 };
 
 Panel.displayName = 'Panel';
 Panel.propTypes = {
   children: PropTypes.node.isRequired,
+  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
   className: PropTypes.string
 };
 

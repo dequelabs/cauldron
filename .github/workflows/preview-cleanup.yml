@@ -1,0 +1,23 @@
+name: PR preview cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: setenv
+        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+      - uses: yinlinchen/amplify-preview-actions@master
+        with:
+          branch_name: ${{ steps.setenv.outputs.BRANCH_NAME }}
+          amplify_command: delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AmplifyAppId: d1gko6en628vir
+          AWS_REGION: us-east-1

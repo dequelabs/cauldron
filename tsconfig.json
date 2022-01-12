@@ -7,6 +7,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
+    "downlevelIteration": true,
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react",

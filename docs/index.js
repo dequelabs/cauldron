@@ -20,8 +20,12 @@ import {
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
-import 'fontsource-roboto';
-import 'fontsource-lato';
+import '@fontsource/roboto';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/700.css';
+import '@fontsource/lato';
+import '@fontsource/pt-mono';
 
 // styles
 import '../packages/styles';
@@ -63,7 +67,12 @@ const componentsList = [
   'TopBar',
   'Stepper',
   'ProgressBar',
-  'NavBar'
+  'NavBar',
+  'Address',
+  'Pagination',
+  'IssuePanel',
+  'FieldWrap',
+  'Breadcrumb'
 ].sort();
 
 const App = () => {
@@ -158,8 +167,8 @@ const App = () => {
           titleTemplate="%s | Deque Cauldron React"
           defaultTitle="Deque Cauldron React"
         />
-        <SkipLink target={'#main-content'} />
-        <TopBar>
+        <SkipLink target={'#main-content'} aria-label="Skip" />
+        <TopBar role="banner">
           <MenuBar thin={thin} hasTrigger>
             <TopBarTrigger onClick={onTriggerClick}>
               <button

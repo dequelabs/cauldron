@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/node:10
+    - image: circleci/node:14-browsers
   working_directory: ~/cauldron
 
 set_npm_auth: &set_npm_auth
@@ -64,6 +64,20 @@ jobs:
       - restore_cache:
           key: v2-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
+  a11y:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+      - restore_cache:
+          key: v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+      - run: yarn build:styles
+      - run: yarn build:react
+      - run: yarn build:docs
+      - run: yarn test:a11y
   canary_release:
     <<: *defaults
     steps:
@@ -122,18 +136,20 @@ workflows:
           requires:
             - dependencies
             - checks
-      - canary_release:
+      - a11y:
           requires:
             - react
             - styles
+      - canary_release:
+          requires:
+            - a11y
           filters:
             branches:
               only:
                 - develop
       - release:
           requires:
-            - react
-            - styles
+            - a11y
           filters:
             branches:
               only:

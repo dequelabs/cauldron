@@ -13,6 +13,18 @@ const mountWrapper = (onDismiss = () => {}) =>
   );
 const noop = () => {};
 
+test('passes navProps to nav', () => {
+  const wrapper = mountWrapper();
+  wrapper.setProps({
+    navProps: {
+      'aria-label': 'Side Bar'
+    }
+  });
+
+  wrapper.update();
+  expect(wrapper.find('nav').prop('aria-label')).toBe('Side Bar');
+});
+
 test('properly handles viewport resize', () => {
   expect.assertions(1);
   const wrapper = mountWrapper();

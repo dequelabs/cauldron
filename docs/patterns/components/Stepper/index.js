@@ -118,6 +118,7 @@ const StepperDemo = () => {
                       <div>Status: Complete</div>
                     </>
                   }
+                  tooltipText="Foo Complete"
                 />
                 <Step
                   status="current"
@@ -127,6 +128,7 @@ const StepperDemo = () => {
                       <div>Status: Current</div>
                     </>
                   }
+                  tooltipText="Bar Current"
                 />
               </>
             )
@@ -191,6 +193,18 @@ const StepperDemo = () => {
             <TableCell>
               tooltip content to be rendered with the tooltip tabstop on the
               step (no visible label will be rendered)
+            </TableCell>
+            <TableCell>
+              <code>null</code>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>tooltipText</TableCell>
+            <TableCell>string</TableCell>
+            <TableCell>false</TableCell>
+            <TableCell>
+              text summary of the tooltip, used as the{' '}
+              <code>&lt;Step/&gt;</code>’s <code>aria-label</code>
             </TableCell>
             <TableCell>
               <code>null</code>

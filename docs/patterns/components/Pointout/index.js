@@ -26,7 +26,7 @@ const Demo = () => {
       <Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
         <p>This is a first time point out with a pointer</p>
       </Pointout>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
   <p>This is a first time point out with a pointer</p>
 </Pointout>`}
@@ -40,7 +40,7 @@ const Demo = () => {
       >
         <p>This is a first time point out with a positioned pointer</p>
       </Pointout>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Pointout
   heading={<h4>First time point out!</h4>}
   dismissText="Close"
@@ -54,7 +54,7 @@ const Demo = () => {
       <Pointout noArrow={true}>
         <p>This is a first time point out without a pointer</p>
       </Pointout>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Pointout noArrow={true}>
   <h4>First time point out!</h4>
   <p>This is a first time point out without a pointer</p>
@@ -79,7 +79,7 @@ const Demo = () => {
       >
         <p>This is a first time point out with a positioned pointout box</p>
       </Pointout>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`<Pointout
   heading={<h4>First time point out!</h4>}
   dismissText="Close"
@@ -142,7 +142,7 @@ const Demo = () => {
       >
         <p>This is a first time point out pointing to an element target.</p>
       </Pointout>
-      <Code language="javascript">
+      <Code language="javascript" role="region" tabIndex={0}>
         {`function TargetedFTPO() {
   const buttonRef = React.createRef();
   return (

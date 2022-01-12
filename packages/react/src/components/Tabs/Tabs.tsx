@@ -2,25 +2,36 @@ import { Cauldron } from '../../types';
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useDidUpdate } from '../../index';
 import Tab from './Tab';
 import { useId } from 'react-id-generator';
+import useDidUpdate from '../../utils/use-did-update';
 
 type TabsProps = {
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
+  orientation?: 'horizontal' | 'vertical';
   className?: string;
+  onChange?: ({
+    activeTabIndex,
+    target
+  }: {
+    activeTabIndex: number;
+    target: HTMLLIElement | null;
+  }) => void;
 } & Cauldron.LabelProps;
 
 const Tabs = ({
   children,
   thin,
+  orientation = 'horizontal',
   initialActiveIndex = 0,
   className,
+  onChange,
   ...labelProp
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
@@ -37,8 +48,18 @@ const Tabs = ({
     const { key } = event;
     let newIndex: number = activeIndex;
 
+    let forward: string;
+    let backward: string;
+    if (orientation === 'horizontal') {
+      forward = 'ArrowRight';
+      backward = 'ArrowLeft';
+    } else {
+      forward = 'ArrowDown';
+      backward = 'ArrowUp';
+    }
+
     switch (key) {
-      case 'ArrowLeft': {
+      case backward: {
         newIndex = activeIndex - 1;
 
         // circularity
@@ -46,9 +67,10 @@ const Tabs = ({
           newIndex = tabCount - 1;
         }
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
-      case 'ArrowRight': {
+      case forward: {
         newIndex = activeIndex + 1;
 
         // circularity
@@ -56,17 +78,20 @@ const Tabs = ({
           newIndex = 0;
         }
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
       case 'Home': {
         newIndex = 0;
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
       case 'End': {
         event.preventDefault();
         newIndex = tabCount - 1;
         setActiveIndex(newIndex);
+        event.preventDefault();
         break;
       }
     }
@@ -107,13 +132,19 @@ const Tabs = ({
 
   useDidUpdate(() => {
     focusedTabRef.current?.focus();
+    if (typeof onChange === 'function') {
+      onChange({ activeTabIndex: activeIndex, target: focusedTabRef.current });
+    }
   }, [activeIndex]);
 
   return (
     <div
       className={classNames('Tabs', className, {
-        'Tabs--thin': thin
+        'Tabs--thin': thin,
+        'Tabs--vertical': orientation === 'vertical',
+        'Tabs--horizontal': orientation === 'horizontal'
       })}
+      ref={tabsRef}
     >
       <ul
         role="tablist"
@@ -134,6 +165,7 @@ Tabs.propTypes = {
   'aria-labelledby': PropTypes.string,
   initialActiveIndex: PropTypes.number,
   thin: PropTypes.bool,
+  orientation: PropTypes.string,
   className: PropTypes.string
 };
 

@@ -6,12 +6,16 @@ import { className } from '../../../props';
 const LoaderDemo = () => (
   <Demo
     component={Loader}
-    states={[{ label: 'Loading...' }, {}]}
+    states={[{ label: 'Loading...' }, { variant: 'large' }]}
     propDocs={{
       label: {
         type: 'string',
         description:
-          'The desired label to be set on the loader as the aria-label. If not provided, aria-hidden="true" will be applied to the element.'
+          'The desired label will be rendered offscreen. If not provided, aria-hidden="true" will be applied to the element.'
+      },
+      variant: {
+        type: 'string',
+        description: 'Loader variant, can be "small" or "large".'
       },
       className
     }}

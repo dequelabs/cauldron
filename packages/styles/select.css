@@ -7,10 +7,10 @@
 .Field__select {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--space-smallest);
 }
 
 .Field__select--disabled {
-  background: var(--field-background-color-disabled);
   opacity: 0.65;
 }
 

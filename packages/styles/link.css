@@ -1,10 +1,16 @@
 :root {
-  --link-text-color: var(--accent-primary);
+  --link-text-color: var(--gray-90);
+  --link-text-color-hover: var(--accent-primary);
   --link-text-color-light: rgba(60, 122, 174, 0.1);
 }
 
+.cauldron--theme-dark {
+  --link-text-color: var(--white);
+  --link-text-color-hover: var(--accent-light);
+}
+
 .Link {
-  text-decoration: none;
+  text-decoration: underline;
   color: var(--link-text-color);
   font-weight: var(--font-weight-medium);
   display: inline-block;
@@ -29,12 +35,4 @@ p .Link {
   text-decoration: underline;
   color: var(--gray-90);
   font-weight: var(--font-weight-normal);
-}
-
-.cauldron--theme-dark .Link {
-  --link-text-color: var(--accent-light);
-}
-
-.cauldron--theme-dark .Link:hover {
-  --link-text-color: var(--white);
 }

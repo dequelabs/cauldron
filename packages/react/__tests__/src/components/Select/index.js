@@ -34,6 +34,7 @@ test('renders the expected UI', () => {
   expect(wrapper.find('.Field__select')).toBeTruthy();
   expect(wrapper.find('.Field__option')).toBeTruthy();
   expect(wrapper.find('.Field__required-text').exists()).toBe(false);
+  expect(wrapper.find('.Error').exists()).toBe(false);
 });
 
 test('sets option attributes properly', () => {

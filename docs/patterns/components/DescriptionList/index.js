@@ -137,7 +137,7 @@ class DescriptionListDemo extends Component {
               </DescriptionList>
             </li>
           </ul>
-          <Code>
+          <Code role="region" tabIndex={0}>
             {`<DescriptionList collapsed={${collapsed}}>
   <DescriptionListItem>
     <DescriptionTerm>First name</DescriptionTerm>

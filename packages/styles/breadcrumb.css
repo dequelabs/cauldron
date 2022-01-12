@@ -1,0 +1,21 @@
+.Breadcrumb ol {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Breadcrumb__Separator {
+  color: var(--gray-40);
+  padding: 0 var(--space-half);
+}
+
+.Breadcrumb__Link {
+  font-weight: 400;
+}
+
+.Breadcrumb__Item {
+  font-weight: 500;
+  color: var(--link-text-color);
+}

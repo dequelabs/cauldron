@@ -11,7 +11,7 @@ const Demo = () => (
       <Button variant="primary">Click Inside</Button>
     </ClickOutsideListener>
     <h2>Code Sample</h2>
-    <Code language="javascript">
+    <Code language="javascript" role="region" tabIndex={0}>
       {`
 import React from 'react';
 import {

@@ -44,7 +44,7 @@ export default class Demo extends Component {
         </OptionsMenu>
 
         <h2>Code Sample</h2>
-        <Code language="javascript">
+        <Code language="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import {

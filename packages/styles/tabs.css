@@ -20,10 +20,23 @@
   width: fit-content;
 }
 
+.Tabs--vertical {
+  display: inline-flex;
+}
+
+.Tabs--vertical ~ .TabPanel {
+  vertical-align: top;
+  display: inline-block;
+}
+
 .Tablist {
   display: flex;
   flex-direction: row;
   border-left: 1px solid var(--tabs-border-color);
+}
+
+.Tabs--vertical .Tablist {
+  flex-direction: column;
 }
 
 .Tab {
@@ -41,6 +54,18 @@
   padding: var(--space-small);
 }
 
+.Tabs--vertical .Tab {
+  justify-content: flex-start;
+}
+
+.Tabs--vertical .Tab {
+  border-right: none;
+}
+
+.cauldron--theme-light .Tabs--vertical .Tab:last-child {
+  border-bottom: 1px solid var(--tabs-border-color);
+}
+
 .Tab:hover {
   cursor: pointer;
   background-color: var(--tab-active-background-color);
@@ -52,8 +77,12 @@
   background-color: var(--tab-active-background-color);
   font-weight: bold;
   text-decoration: none;
-  box-shadow: inset 0px 4px 0px var(--tab-shadow-color);
+  box-shadow: inset 0 4px 0 var(--tab-shadow-color);
   z-index: 1;
+}
+
+.Tabs--vertical .Tab--active {
+  box-shadow: inset 4px 0 0 var(--tab-shadow-color);
 }
 
 .TabPanel {
@@ -69,7 +98,7 @@
 }
 
 .TabPanel--hidden {
-  display: none;
+  display: none !important;
 }
 
 .Tabs--thin .Tab {

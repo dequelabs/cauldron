@@ -90,6 +90,14 @@ const RadioGroup = ({
           checked={isChecked}
           {...other}
         />
+        <label
+          htmlFor={id}
+          className={classNames('Field__label', {
+            'Field__label--disabled': disabled
+          })}
+        >
+          {label}
+        </label>
         <Icon
           className={classNames('Radio__overlay', {
             'Radio__overlay--focused': isFocused,
@@ -99,14 +107,6 @@ const RadioGroup = ({
           aria-hidden="true"
           onClick={() => onRadioClick(index)}
         />
-        <label
-          htmlFor={id}
-          className={classNames('Field__label', {
-            'Field__label--disabled': disabled
-          })}
-        >
-          {label}
-        </label>
       </div>
     );
   });

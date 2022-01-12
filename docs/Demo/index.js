@@ -61,7 +61,7 @@ const Demo = props => {
                 {DEMO_renderBefore}
                 <Component {...thinState} />
                 {DEMO_renderAfter}
-                <Code>
+                <Code role="region" tabIndex={0}>
                   {`${componentMarkup}${afterMarkup ? `\n${afterMarkup}` : ''}`}
                 </Code>
               </div>
