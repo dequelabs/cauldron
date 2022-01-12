@@ -134,7 +134,7 @@ function TwoColumnPanelDemo() {
 
       <h3>Example</h3>
 
-      <Code>{`<TwoColumnPanel>
+      <Code role="region" tabIndex="1">{`<TwoColumnPanel>
   <ColumnLeft aria-labelledby="sidebar">
     <ColumnHeader id="sidebar">Items</ColumnHeader>
     <nav aria-label="Sidebar navigation">
@@ -238,7 +238,7 @@ function TwoColumnPanelDemo() {
 
       <h3>Example</h3>
 
-      <Code>
+      <Code role="region" tabIndex="1">
         {`<TwoColumnPanel>
   <ColumnLeft aria-labelledby="group-heading">
     <ColumnHeader>Grouped Items</ColumnHeader>
