@@ -60,6 +60,10 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       child => (child as React.ReactElement<any>).type === ColumnLeft
     );
 
+    // The ColumnLeftComponent will end up being a focus trap when < 720px
+    // This component also gets unmounted when not visible meaning that any
+    // aria relationships cannot be set to items inside the component since
+    // they will not be present in the dom
     let ColumnLeftComponent;
     let columnLeftId;
     if (isValidElement(columnLeft)) {
