@@ -5,7 +5,7 @@ import { Cauldron } from '../../types';
 type ColumnRightProps = React.HTMLAttributes<HTMLDivElement> &
   Cauldron.LabelProps;
 
-const ColumnLeft = forwardRef<HTMLDivElement, ColumnRightProps>(
+const ColumnRight = forwardRef<HTMLDivElement, ColumnRightProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <section
@@ -19,6 +19,6 @@ const ColumnLeft = forwardRef<HTMLDivElement, ColumnRightProps>(
   }
 );
 
-ColumnLeft.displayName = 'ColumnLeft';
+ColumnRight.displayName = 'ColumnRight';
 
-export default ColumnLeft;
+export default ColumnRight;

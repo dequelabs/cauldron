@@ -69,7 +69,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     if (isValidElement(columnLeft)) {
       const ref = columnLeft.props.ref || columnLeftRef;
       const id = (columnLeftId =
-        columnLeft.props.id || useId(undefined, 'sidebar-'));
+        columnLeft.props.id || useId(undefined, 'sidebar-')[0]);
       const CloseButton = (
         <div className="TwoColumnPanel__Close">
           <button
@@ -96,7 +96,9 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ColumnLeftComponent = cloneElement(
         columnLeft,
         { id, ref, tabIndex: -1 },
-        children
+        children.map((child, index) =>
+          cloneElement(child as React.ReactElement, { key: `left-${index}` })
+        )
       );
     }
 
@@ -141,7 +143,9 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ColumnRightComponent = cloneElement(
         columnRight,
         { ref, tabIndex: -1 },
-        children
+        children.map((child, index) =>
+          cloneElement(child as React.ReactElement, { key: `right-${index}` })
+        )
       );
     }
 
