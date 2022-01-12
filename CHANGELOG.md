@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/dequelabs/cauldron/compare/v3.0.0...v4.0.0) (2022-01-12)
+
+### ⚠ BREAKING CHANGES
+
+- The panel implementation has been replaced, including removing props that are not used in the new implementation
+
+- renamed Panel to IssuePanel
+
+- added id and dark theme support
+
+### Features
+
+- **react,styles:** add breadcrumb component ([#502](https://github.com/dequelabs/cauldron/issues/502)) ([b917da5](https://github.com/dequelabs/cauldron/commit/b917da5bccef887d35d7d62e6c196a0062bc4de0))
+- add collapsed prop to panel ([#499](https://github.com/dequelabs/cauldron/issues/499)) ([73d44d6](https://github.com/dequelabs/cauldron/commit/73d44d6822b3c80df2d7d82c1d44126827806306))
+- **icon:** Adds magnifying glass icon ([#433](https://github.com/dequelabs/cauldron/issues/433)) ([03388ce](https://github.com/dequelabs/cauldron/commit/03388cec40afa0ca6035d6f731535b514e11cb31))
+- **react:** add vertical orientation for tabs ([#496](https://github.com/dequelabs/cauldron/issues/496)) ([c221fa5](https://github.com/dequelabs/cauldron/commit/c221fa5734c40d18feaf180899572d9b90389ca9))
+- **react:** Adds FieldWrap component ([#498](https://github.com/dequelabs/cauldron/issues/498)) ([10f975c](https://github.com/dequelabs/cauldron/commit/10f975c9d40650503d25bb72c93feef88212a491))
+- **react:** implement new loader and variants ([#471](https://github.com/dequelabs/cauldron/issues/471)) ([f7d9078](https://github.com/dequelabs/cauldron/commit/f7d9078ab8013091fc862a34b0880e9026d71fd2))
+- **react,styles:** Adds pagination component ([#485](https://github.com/dequelabs/cauldron/issues/485)) ([b5d7a8b](https://github.com/dequelabs/cauldron/commit/b5d7a8b305b36de04ec645c234b3f06c218059e0)), closes [#205](https://github.com/dequelabs/cauldron/issues/205)
+- replaced the panel implementation with a new one to match our pattern library ([#469](https://github.com/dequelabs/cauldron/issues/469)) ([d864a72](https://github.com/dequelabs/cauldron/commit/d864a72a8242a3b521877eced3ceac2d8f9c7d9c))
+- **react:** add onChange prop to tabs when the active tab changes ([#453](https://github.com/dequelabs/cauldron/issues/453)) ([8cb8a98](https://github.com/dequelabs/cauldron/commit/8cb8a98e6a4b7b6bb96c7b68e5a19ad1af61abb0))
+- add Address component ([#434](https://github.com/dequelabs/cauldron/issues/434)) ([1470cc3](https://github.com/dequelabs/cauldron/commit/1470cc39447fbd0162834c1af2ff562f9031ca68))
+- make IconButton polymorphic through 'as' prop ([#452](https://github.com/dequelabs/cauldron/issues/452)) ([41ff048](https://github.com/dequelabs/cauldron/commit/41ff04877188e78f400c7f53888efdc92d914685))
+
+### Bug Fixes
+
+- **react:** fix tooltip performance issue ([#505](https://github.com/dequelabs/cauldron/issues/505)) ([4fc5b1a](https://github.com/dequelabs/cauldron/commit/4fc5b1aba3ef2058e03d30ca50035a476c0afea9))
+- fix loader ([#504](https://github.com/dequelabs/cauldron/issues/504)) ([3127dde](https://github.com/dequelabs/cauldron/commit/3127ddebe7d616863d47dcbe76cd4f30589db5fa))
+- **react:** Ensure pagination items have accessible names in resting state ([#503](https://github.com/dequelabs/cauldron/issues/503)) ([00f53b5](https://github.com/dequelabs/cauldron/commit/00f53b5414fe700c3c77fefa8f13087cf1433053))
+- **react:** ensure that icons are set with viewbox and standard height/width values ([#487](https://github.com/dequelabs/cauldron/issues/487)) ([766c5ec](https://github.com/dequelabs/cauldron/commit/766c5ece38164edebd29e7a194c65c6171b25347))
+- Change focus outline colors for main ([#466](https://github.com/dequelabs/cauldron/issues/466)) ([da721d6](https://github.com/dequelabs/cauldron/commit/da721d6eb0bbb847c8f9d2a018638197a1d5ab8d))
+- Move Error bottom margin to its parent components ([#450](https://github.com/dequelabs/cauldron/issues/450)) ([cfc2241](https://github.com/dequelabs/cauldron/commit/cfc2241921635d0198767e5dbd72d9123e2c2ce9))
+- **react:** add missing viewbox attribute to svg icons ([#486](https://github.com/dequelabs/cauldron/issues/486)) ([eb6cb86](https://github.com/dequelabs/cauldron/commit/eb6cb861d44f46f9bea327b6e72a00030780d80e))
+- **react:** fix incorrect icons being displayed in Safari ([#473](https://github.com/dequelabs/cauldron/issues/473)) ([0298c7b](https://github.com/dequelabs/cauldron/commit/0298c7b08477de4f0836fa4b40c45aaf641d0c24))
+- **styles:** ensure that scrollbars match light/dark scheme ([#474](https://github.com/dequelabs/cauldron/issues/474)) ([4b645af](https://github.com/dequelabs/cauldron/commit/4b645af740e00c1553ec40bfb0615df133be1d9c))
+- Add aria label to disabled IconButton ([#461](https://github.com/dequelabs/cauldron/issues/461)) ([c0257ce](https://github.com/dequelabs/cauldron/commit/c0257ce6b887b6d59f02ada34c66ef87cf1c7642))
+- Add navProps to SideBar component ([#458](https://github.com/dequelabs/cauldron/issues/458)) ([4607c12](https://github.com/dequelabs/cauldron/commit/4607c1209bf02c0ee42d3e0f0117f89b45ec1481))
+- Implement dark theme to Table ([#463](https://github.com/dequelabs/cauldron/issues/463)) ([43fb695](https://github.com/dequelabs/cauldron/commit/43fb6953b766c04926e8661824d97597c4696792))
+- Implement dark theme to Tag ([#467](https://github.com/dequelabs/cauldron/issues/467)) ([dda42da](https://github.com/dequelabs/cauldron/commit/dda42da84e2b15bee272a3efa1dfc13e1b730896))
+- Tag value font weight should be medium ([#468](https://github.com/dequelabs/cauldron/issues/468)) ([3e79109](https://github.com/dequelabs/cauldron/commit/3e79109a1e883d142fd7003d15af7a5618fa5de5))
+- **docs:** gives skip nav a unique accessible name ([#439](https://github.com/dequelabs/cauldron/issues/439)) ([b96841e](https://github.com/dequelabs/cauldron/commit/b96841e1624ad6a41509921a68803d272b83301d))
+- **docs:** Makes code blocks focusable regions to allow keyboard users to scroll them ([#440](https://github.com/dequelabs/cauldron/issues/440)) ([273deef](https://github.com/dequelabs/cauldron/commit/273deefc016d4b5bc0e283ac4ae4107246b5e617))
+- **docs:** sets banner role on topbar to resolve axe-core issue ([#438](https://github.com/dequelabs/cauldron/issues/438)) ([5ac9722](https://github.com/dequelabs/cauldron/commit/5ac972286fae7df203ab3dd26ed21942eb8946ec))
+- **react:** import cauldron namespace from types where needed ([#429](https://github.com/dequelabs/cauldron/issues/429)) ([400a919](https://github.com/dequelabs/cauldron/commit/400a919d600a09e233b20b245e62a1d4c5af7cd1))
+- **react:** Only render form field error when field is erroneous ([#441](https://github.com/dequelabs/cauldron/issues/441)) ([db7b06b](https://github.com/dequelabs/cauldron/commit/db7b06bec599c452bdf9e54ef3d6ab013604aa29))
+- **react:** Supports adding className to Tooltip ([#435](https://github.com/dequelabs/cauldron/issues/435)) ([d3e5ac4](https://github.com/dequelabs/cauldron/commit/d3e5ac47f4b024b6e4a774851ce3922096a2ef8b))
+- **react:** update loader to address issues with being announced in JAWS ([#459](https://github.com/dequelabs/cauldron/issues/459)) ([ec8e93a](https://github.com/dequelabs/cauldron/commit/ec8e93ab612c6b101cba18f91fd80108d9d3ccc6))
+- **Step:** Add an accessible name when using `tooltip={...}` ([#449](https://github.com/dequelabs/cauldron/issues/449)) ([c806c38](https://github.com/dequelabs/cauldron/commit/c806c385741baaec0346d417240175f23bd13f97)), closes [#445](https://github.com/dequelabs/cauldron/issues/445)
+- **styles:** adjust styles of checkbox/radio to match set designs ([#418](https://github.com/dequelabs/cauldron/issues/418)) ([80ed76e](https://github.com/dequelabs/cauldron/commit/80ed76e756b6efbf9ad36d5f7fcfd675d65d53b8))
+- **styles:** set close button for toast to have a minimum height of 24px ([#457](https://github.com/dequelabs/cauldron/issues/457)) ([c933786](https://github.com/dequelabs/cauldron/commit/c93378644f3a91eb4cf6f2b3f8e8bb4f615f3568))
+- **styles:** update the link color to be set correctly for light/dark modes ([#465](https://github.com/dequelabs/cauldron/issues/465)) ([272c950](https://github.com/dequelabs/cauldron/commit/272c950a8031c2dd0d1787a66abeb10147f02a86))
+- allow TableHeader to take th attributes and TableCell to take td attributes ([#444](https://github.com/dequelabs/cauldron/issues/444)) ([8523174](https://github.com/dequelabs/cauldron/commit/8523174cc1a78a081329effb0574ec06dc6719c0))
+- Correct dialog content padding according to design ([#447](https://github.com/dequelabs/cauldron/issues/447)) ([b21ec32](https://github.com/dequelabs/cauldron/commit/b21ec32c6c6c029ab609a6c54850a7ec93612303))
+- remove unused background color for disabled select ([#446](https://github.com/dequelabs/cauldron/issues/446)) ([58741b8](https://github.com/dequelabs/cauldron/commit/58741b89dbfec28225c87e636c8844b76e2716e5))
+- render null instead of false in empty cases ([#443](https://github.com/dequelabs/cauldron/issues/443)) ([985ca49](https://github.com/dequelabs/cauldron/commit/985ca499af5186d6c815c6d9ee8b936367817808))
+- Update description list component according to design ([#462](https://github.com/dequelabs/cauldron/issues/462)) ([3e83781](https://github.com/dequelabs/cauldron/commit/3e8378112f1cb1911c3c240ae7ef0dc0ea0bf37c))
+
 ### [3.0.1](https://github.com/dequelabs/cauldron/compare/v3.0.0...v3.0.1) (2021-11-17)
 
 ### Bug Fixes
