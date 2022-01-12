@@ -143,10 +143,10 @@ export default function Tooltip({
     return () => {
       targetElement.removeEventListener('keyup', handleEscape);
     };
-  }, [show]);
+  }, [showProp]);
 
   useEffect(() => {
-    if (typeof show !== undefined) {
+    if (typeof showProp !== undefined) {
       targetElement?.addEventListener('mouseenter', handleTriggerMouseEnter);
       targetElement?.addEventListener('mouseleave', handleTriggerMouseLeave);
       targetElement?.addEventListener('focusin', show);
@@ -158,7 +158,7 @@ export default function Tooltip({
       targetElement?.removeEventListener('focusin', show);
       targetElement?.removeEventListener('focusout', hide);
     };
-  }, [targetElement, show]);
+  }, [targetElement, showProp]);
 
   useEffect(() => {
     if (tooltipElement) {
