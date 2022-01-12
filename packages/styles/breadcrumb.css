@@ -13,6 +13,7 @@
 
 .Breadcrumb__Link {
   font-weight: 400;
+  padding: 0;
 }
 
 .Breadcrumb__Item {
