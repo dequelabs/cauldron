@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { spy } from 'sinon';
 import Table, {
   TableBody,
   TableCell,
@@ -110,6 +111,76 @@ describe('Table components', () => {
     expect(head.is('thead')).toBe(true);
     expect(header.is('th')).toBe(true);
     expect(row.is('tr')).toBe(true);
+  });
+
+  describe.only('Sortable Table', () => {
+    test('renders sort button and icons when passing in sortBy and onSort in TableHeader', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDir={'none'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('button').exists()).toBe(true);
+      expect(wrapper.find('.Icon').length).toBe(2);
+    });
+
+    test('renders triangle up Icon when sortDir is ascending', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDir={'ascending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
+    });
+
+    test('renders triangle down Icon when sortDir is descending', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDir={'descending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.Icon--triangle-down').exists()).toBe(true);
+    });
+
+    test('calls onSort when sort button is clicked', () => {
+      const onSortSpy = spy();
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDir={'none'} onSort={onSortSpy}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      wrapper.find('button').simulate('click');
+
+      expect(onSortSpy.calledOnce).toBe(true);
+    });
   });
 });
 
