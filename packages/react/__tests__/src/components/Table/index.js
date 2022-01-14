@@ -113,7 +113,7 @@ describe('Table components', () => {
     expect(row.is('tr')).toBe(true);
   });
 
-  describe.only('Sortable Table', () => {
+  describe('Sortable Table', () => {
     test('renders sort button and icons when passing in sortBy and onSort in TableHeader', () => {
       const wrapper = mount(
         <Table>
