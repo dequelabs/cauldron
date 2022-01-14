@@ -26,12 +26,16 @@ const TableHeader = ({
     {...other}
   >
     {onSort && sortDir ? (
-      <button onClick={onSort}>
+      <button onClick={onSort} className="sort-button">
         {children}
-        {['none', 'ascending'].includes(sortDir) && <Icon type="triangle-up" />}
-        {['none', 'descending'].includes(sortDir) && (
-          <Icon type="triangle-down" />
-        )}
+        <span>
+          {['none', 'ascending'].includes(sortDir) && (
+            <Icon type="triangle-up" />
+          )}
+          {['none', 'descending'].includes(sortDir) && (
+            <Icon type="triangle-down" />
+          )}
+        </span>
       </button>
     ) : (
       children
