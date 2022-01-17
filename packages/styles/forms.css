@@ -270,12 +270,8 @@ textarea.Field--has-error:focus:hover,
   border: 1px solid var(--field-border-color);
 }
 
-.Field__break {
-  flex-basis: 100%;
-  height: 0;
-}
-
 .Field__labelDescription {
+  flex-basis: 100%;
   color: var(--field-label-description-text-color);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);

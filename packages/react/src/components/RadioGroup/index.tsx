@@ -111,17 +111,14 @@ const RadioGroup = ({
           onClick={() => onRadioClick(index)}
         />
         {labelDescription && (
-          <>
-            <div className="Field__break"></div>
-            <span
-              id={`${id}Desc`}
-              className={classNames('Field__labelDescription', {
-                'Field__labelDescription--disabled': disabled
-              })}
-            >
-              {labelDescription}
-            </span>
-          </>
+          <span
+            id={`${id}Desc`}
+            className={classNames('Field__labelDescription', {
+              'Field__labelDescription--disabled': disabled
+            })}
+          >
+            {labelDescription}
+          </span>
         )}
       </div>
     );
