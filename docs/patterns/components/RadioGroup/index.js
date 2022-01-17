@@ -70,7 +70,7 @@ export default class RadioGroupDemo extends Component {
               type: 'array',
               required: true,
               description:
-                'Array of objects containing: label, value (optional) and any supported HTMLInputElement properties'
+                'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
             },
             'aria-label': {
               type: 'string',
