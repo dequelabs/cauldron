@@ -203,7 +203,11 @@ describe('Table components', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDirection={'none'} onSort={() => null}>
+              <TableHeader
+                id={'button-focused'}
+                sortDirection={'none'}
+                onSort={() => null}
+              >
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -214,7 +218,9 @@ describe('Table components', () => {
       wrapper.find('button').simulate('click');
       wrapper.update();
 
-      expect(document.activeElement).toBe(wrapper.find('button').getDOMNode());
+      expect(document.activeElement.id).toBe(
+        wrapper.find('button').getDOMNode().id
+      );
     });
   });
 });

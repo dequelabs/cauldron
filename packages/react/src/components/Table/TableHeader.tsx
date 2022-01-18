@@ -22,7 +22,7 @@ const TableHeader = ({
 }: TableHeaderProps) => {
   const sortButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    if (sortDirection || sortDirection !== 'none') {
+    if (!sortDirection || sortDirection === 'none') {
       return;
     }
     sortButtonRef.current?.focus();
