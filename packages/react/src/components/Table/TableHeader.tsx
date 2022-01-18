@@ -57,7 +57,7 @@ const TableHeader = ({
 TableHeader.displayName = 'TableHeader';
 TableHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  sortDir: PropTypes.string,
+  sortDirection: PropTypes.string,
   onSort: PropTypes.func,
   className: PropTypes.string
 };
