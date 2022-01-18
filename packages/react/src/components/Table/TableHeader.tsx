@@ -1,4 +1,4 @@
-import React, { ThHTMLAttributes } from 'react';
+import React, { useRef, useEffect, ThHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
@@ -8,40 +8,51 @@ type SortDirection = 'ascending' | 'descending' | 'none';
 
 interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   children: React.ReactNode;
-  sortDir?: SortDirection;
+  sortDirection?: SortDirection;
   onSort?: () => void;
   className?: string;
 }
 
 const TableHeader = ({
   children,
-  sortDir,
+  sortDirection,
   onSort,
   className,
   ...other
-}: TableHeaderProps) => (
-  <th
-    aria-sort={sortDir}
-    className={classNames('TableHeader', className)}
-    {...other}
-  >
-    {onSort && sortDir ? (
-      <button onClick={onSort} className="sort-button">
-        {children}
-        <span>
-          {['none', 'ascending'].includes(sortDir) && (
-            <Icon type="triangle-up" />
-          )}
-          {['none', 'descending'].includes(sortDir) && (
-            <Icon type="triangle-down" />
-          )}
-        </span>
-      </button>
-    ) : (
-      children
-    )}
-  </th>
-);
+}: TableHeaderProps) => {
+  const sortButtonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (sortDirection || sortDirection !== 'none') {
+      return;
+    }
+    sortButtonRef.current?.focus();
+  }, [sortDirection]);
+  return (
+    <th
+      aria-sort={sortDirection}
+      className={classNames('TableHeader', className, {
+        'TableHeader--sorting': sortDirection && sortDirection !== 'none'
+      })}
+      {...other}
+    >
+      {onSort && sortDirection ? (
+        <button ref={sortButtonRef} onClick={onSort} className="sort-button">
+          {children}
+          <span>
+            {['none', 'ascending'].includes(sortDirection) && (
+              <Icon type="triangle-up" />
+            )}
+            {['none', 'descending'].includes(sortDirection) && (
+              <Icon type="triangle-down" />
+            )}
+          </span>
+        </button>
+      ) : (
+        children
+      )}
+    </th>
+  );
+};
 
 TableHeader.displayName = 'TableHeader';
 TableHeader.propTypes = {

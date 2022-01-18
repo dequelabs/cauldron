@@ -1,17 +1,23 @@
 :root {
   --table-header-text-color: var(--gray-90);
   --table-header-background-color: var(--gray-20);
+  --table-header-sorting-background-color: var(--gray-60);
+  --table-header-sorting-text-color: var(--white);
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
   --table-row-border-color: var(--gray-40);
   --table-space: 11px;
+  --table-header-sorting-border-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
   --table-header-text-color: var(--white);
   --table-header-background-color: var(--accent-dark);
+  --table-header-sorting-background-color: #53636e;
+  --table-header-sorting-text-color: var(--white);
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-medium);
+  --table-header-sorting-border-color: var(--accent-info);
 }
 
 .Table {
@@ -33,7 +39,8 @@
 .TableHeader .sort-button {
   background-color: transparent;
   width: 100%;
-  height: 100%;
+  /* a fixed height prevent TableHeader from being jumpy */
+  height: 1.625rem;
   display: flex;
   align-items: center;
   align-content: center;
@@ -42,6 +49,15 @@
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
+}
+
+.TableHeader--sorting {
+  background: var(--table-header-sorting-background-color);
+  border-bottom: 2px solid var(--table-header-sorting-border-color);
+}
+
+.TableHeader--sorting .sort-button {
+  color: var(--table-header-sorting-text-color);
 }
 
 .TableHeader .sort-button span {

@@ -44,23 +44,26 @@ const sampleData = [
 
 const TableDemo = () => {
   const [sort, setSort] = useState([null, 'none']);
-  const [sortBy, sortDir] = sort;
+  const [sortBy, sortDirection] = sort;
 
   const comparator = data =>
     data.sort((a, b) =>
-      (sortDir === 'ascending' ? a[sortBy] : b[sortBy]).localeCompare(
-        sortDir === 'ascending' ? b[sortBy] : a[sortBy]
+      (sortDirection === 'ascending' ? a[sortBy] : b[sortBy]).localeCompare(
+        sortDirection === 'ascending' ? b[sortBy] : a[sortBy]
       )
     );
 
   const sortedData = sortBy ? comparator(sampleData) : sampleData;
 
-  const getSortDir = column => (column === sortBy ? sortDir : 'none');
+  const getCurrentSortDirection = column =>
+    column === sortBy ? sortDirection : 'none';
   /* asc => desc
      none => asc
      desc => asc */
-  const setSortDir = column =>
-    column === sortBy && sortDir === 'ascending' ? 'descending' : 'ascending';
+  const getNextSortDirection = column =>
+    column === sortBy && sortDirection === 'ascending'
+      ? 'descending'
+      : 'ascending';
 
   return (
     <Demo
@@ -77,18 +80,18 @@ const TableDemo = () => {
                   <TableHeader scope="col">First Name</TableHeader>
                   <TableHeader
                     scope="col"
-                    sortDir={getSortDir('last_name')}
+                    sortDirection={getCurrentSortDirection('last_name')}
                     onSort={() => {
-                      setSort(['last_name', setSortDir('last_name')]);
+                      setSort(['last_name', getNextSortDirection('last_name')]);
                     }}
                   >
                     Last Name
                   </TableHeader>
                   <TableHeader
                     scope="col"
-                    sortDir={getSortDir('email')}
+                    sortDirection={getCurrentSortDirection('email')}
                     onSort={() => {
-                      setSort(['email', setSortDir('email')]);
+                      setSort(['email', getNextSortDirection('email')]);
                     }}
                   >
                     Email
