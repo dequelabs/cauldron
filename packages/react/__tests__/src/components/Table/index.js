@@ -114,12 +114,12 @@ describe('Table components', () => {
   });
 
   describe('Sortable Table', () => {
-    test('renders sort button and icons when passing in sortBy and onSort in TableHeader', () => {
+    test('renders sort button and icons when passing in sortDirection and onSort in TableHeader', () => {
       const wrapper = mount(
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDir={'none'} onSort={() => null}>
+              <TableHeader sortDirection={'none'} onSort={() => null}>
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -131,12 +131,28 @@ describe('Table components', () => {
       expect(wrapper.find('.Icon').length).toBe(2);
     });
 
-    test('renders triangle up Icon when sortDir is ascending', () => {
+    test('render className TableHeader--sorting when a TableHeader is actively sorting', () => {
       const wrapper = mount(
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDir={'ascending'} onSort={() => null}>
+              <TableHeader sortDirection={'ascending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.TableHeader--sorting').exists()).toBe(true);
+    });
+
+    test('renders triangle up Icon when sortDirection is ascending', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'ascending'} onSort={() => null}>
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -147,12 +163,12 @@ describe('Table components', () => {
       expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
     });
 
-    test('renders triangle down Icon when sortDir is descending', () => {
+    test('renders triangle down Icon when sortDirection is descending', () => {
       const wrapper = mount(
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDir={'descending'} onSort={() => null}>
+              <TableHeader sortDirection={'descending'} onSort={() => null}>
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -169,7 +185,7 @@ describe('Table components', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDir={'none'} onSort={onSortSpy}>
+              <TableHeader sortDirection={'none'} onSort={onSortSpy}>
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -180,6 +196,25 @@ describe('Table components', () => {
       wrapper.find('button').simulate('click');
 
       expect(onSortSpy.calledOnce).toBe(true);
+    });
+
+    test('focus stays on the sort button after it is clicked', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'none'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      wrapper.find('button').simulate('click');
+      wrapper.update();
+
+      expect(document.activeElement).toBe(wrapper.find('button').getDOMNode());
     });
   });
 });

@@ -51,6 +51,10 @@
   color: var(--table-header-text-color);
 }
 
+.TableHeader .sort-button:hover {
+  cursor: pointer;
+}
+
 .TableHeader--sorting {
   background: var(--table-header-sorting-background-color);
   border-bottom: 2px solid var(--table-header-sorting-border-color);
