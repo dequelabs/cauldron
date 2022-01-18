@@ -78,6 +78,41 @@ const TableDemo = () => {
               <TableHead>
                 <TableRow>
                   <TableHeader scope="col">First Name</TableHeader>
+                  <TableHeader scope="col">Last Name</TableHeader>
+                  <TableHeader scope="col">Email</TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Frank</TableCell>
+                  <TableCell>Zappa</TableCell>
+                  <TableCell>frank@zappa.io</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Duane</TableCell>
+                  <TableCell>Allman</TableCell>
+                  <TableCell>duane@almond.biz</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Yamandu</TableCell>
+                  <TableCell>Costa</TableCell>
+                  <TableCell>yamandu_costa@gmail.br</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Jimmy</TableCell>
+                  <TableCell>Herring</TableCell>
+                  <TableCell>jamesHerring@hotmail.gov</TableCell>
+                </TableRow>
+              </TableBody>
+            </>
+          )
+        },
+        {
+          children: (
+            <>
+              <TableHead>
+                <TableRow>
+                  <TableHeader scope="col">First Name</TableHeader>
                   <TableHeader
                     scope="col"
                     sortDirection={getCurrentSortDirection('last_name')}

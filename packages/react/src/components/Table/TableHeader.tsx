@@ -31,14 +31,20 @@ const TableHeader = ({
     <th
       aria-sort={sortDirection}
       className={classNames('TableHeader', className, {
-        'TableHeader--sorting': sortDirection && sortDirection !== 'none'
+        'TableHeader--sort-ascending': sortDirection === 'ascending',
+        'TableHeader--sort-descending': sortDirection === 'descending'
       })}
       {...other}
     >
       {onSort && sortDirection ? (
-        <button ref={sortButtonRef} onClick={onSort} className="sort-button">
+        <button
+          ref={sortButtonRef}
+          onClick={onSort}
+          className="TableHeader__sort-button"
+          type="button"
+        >
           {children}
-          <span>
+          <span aria-hidden="true">
             {['none', 'ascending'].includes(sortDirection) && (
               <Icon type="triangle-up" />
             )}

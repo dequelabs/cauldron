@@ -37,7 +37,7 @@
   border-bottom: 2px solid var(--table-row-border-color);
 }
 
-.TableHeader .sort-button {
+.TableHeader .TableHeader__sort-button {
   background-color: transparent;
   width: 100%;
   /* a fixed height prevent TableHeader from being jumpy */
@@ -46,7 +46,7 @@
   align-items: center;
   align-content: center;
   padding-left: 0;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: inherit;
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
@@ -54,7 +54,7 @@
   justify-content: space-between;
 }
 
-.TableHeader .sort-button:hover {
+.TableHeader .TableHeader__sort-button:hover {
   cursor: pointer;
 }
 
@@ -63,17 +63,17 @@
   border-bottom: 2px solid var(--table-header-sorting-border-color);
 }
 
-.TableHeader--sorting .sort-button {
+.TableHeader--sorting .TableHeader__sort-button {
   color: var(--table-header-sorting-text-color);
 }
 
-.TableHeader .sort-button span {
+.TableHeader .TableHeader__sort-button span {
   padding-left: var(--space-small);
   display: flex;
   flex-direction: column;
 }
 
-.sort-button span .Icon:nth-child(2) {
+.TableHeader__sort-button span .Icon:nth-child(2) {
   margin-top: calc(var(--space-medium) * -1);
 }
 
