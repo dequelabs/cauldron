@@ -1,8 +1,8 @@
 :root {
   --table-header-text-color: var(--gray-90);
   --table-header-background-color: var(--gray-20);
-  --table-header-sorting-background-color: var(--gray-60);
-  --table-header-sorting-text-color: var(--white);
+  --table-header-sorting-background-color: #caddec;
+  --table-header-sorting-text-color: var(--gray-90);
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
   --table-row-border-color: var(--gray-40);
@@ -17,6 +17,7 @@
   --table-header-sorting-text-color: var(--white);
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-medium);
+  --table-row-border-color: #5d676f;
   --table-header-sorting-border-color: var(--accent-info);
 }
 
