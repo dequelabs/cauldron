@@ -40,8 +40,7 @@
 .TableHeader .TableHeader__sort-button {
   background-color: transparent;
   width: 100%;
-  /* a fixed height prevent TableHeader from being jumpy */
-  height: 1.625rem;
+  height: 100%;
   display: flex;
   align-items: center;
   align-content: center;
@@ -71,6 +70,8 @@
   padding-left: var(--space-small);
   display: flex;
   flex-direction: column;
+  /* span's height stays the same when no icon is rendered yet */
+  height: 1.625rem;
 }
 
 .TableHeader__sort-button span .Icon:nth-child(2) {

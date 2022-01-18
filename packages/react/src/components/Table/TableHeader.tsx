@@ -27,6 +27,7 @@ const TableHeader = ({
     }
     sortButtonRef.current?.focus();
   }, [sortDirection]);
+
   return (
     <th
       aria-sort={sortDirection}
@@ -36,7 +37,7 @@ const TableHeader = ({
       })}
       {...other}
     >
-      {onSort && sortDirection ? (
+      {!!onSort && !!sortDirection ? (
         <button
           ref={sortButtonRef}
           onClick={onSort}
