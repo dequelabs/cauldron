@@ -49,6 +49,8 @@
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 .TableHeader .sort-button:hover {
