@@ -276,7 +276,7 @@ textarea.Field--has-error:focus:hover,
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   line-height: 1;
-  margin: 0 0 0 30px;
+  margin-left: calc(24px + 2px + var(--space-half));
   cursor: default;
 }
 
