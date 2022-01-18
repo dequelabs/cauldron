@@ -46,10 +46,11 @@ const TableHeader = ({
         >
           {children}
           <span aria-hidden="true">
-            {['none', 'ascending'].includes(sortDirection) && (
+            {sortDirection === 'none' ? (
+              <Icon type="sort-triangle" />
+            ) : sortDirection === 'ascending' ? (
               <Icon type="triangle-up" />
-            )}
-            {['none', 'descending'].includes(sortDirection) && (
+            ) : (
               <Icon type="triangle-down" />
             )}
           </span>

@@ -70,12 +70,8 @@
   padding-left: var(--space-small);
   display: flex;
   flex-direction: column;
-  /* span's height stays the same when no icon is rendered yet */
-  height: 1.625rem;
-}
-
-.TableHeader__sort-button span .Icon:nth-child(2) {
-  margin-top: calc(var(--space-medium) * -1);
+  /* set span's height to an icon's height when no icon is rendered yet */
+  height: 1.5rem;
 }
 
 .TableCell {

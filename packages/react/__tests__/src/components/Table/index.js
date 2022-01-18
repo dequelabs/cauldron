@@ -128,7 +128,7 @@ describe('Table components', () => {
       );
 
       expect(wrapper.find('button').exists()).toBe(true);
-      expect(wrapper.find('.Icon').length).toBe(2);
+      expect(wrapper.find('.Icon--sort-triangle').exists()).toBe(true);
     });
 
     test('render className TableHeader--sorting when a TableHeader is actively sorting', () => {
@@ -144,7 +144,7 @@ describe('Table components', () => {
         </Table>
       );
 
-      expect(wrapper.find('.TableHeader--sorting').exists()).toBe(true);
+      expect(wrapper.find('.TableHeader--sort-ascending').exists()).toBe(true);
     });
 
     test('renders triangle up Icon when sortDirection is ascending', () => {
