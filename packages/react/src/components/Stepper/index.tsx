@@ -30,7 +30,7 @@ export const Step = (props: StepProps) => {
   const isTooltip = isTooltipProps(other);
 
   if (isTooltip) {
-    ({ tooltip, tooltipText, ...liProps } = other);
+    ({ tooltip, tooltipText, ...liProps } = other as StepWithTooltip);
   } else {
     liProps = other;
   }
