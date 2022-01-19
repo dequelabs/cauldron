@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { spy } from 'sinon';
 import Table, {
   TableBody,
   TableCell,
@@ -110,6 +111,117 @@ describe('Table components', () => {
     expect(head.is('thead')).toBe(true);
     expect(header.is('th')).toBe(true);
     expect(row.is('tr')).toBe(true);
+  });
+
+  describe('Sortable Table', () => {
+    test('renders sort button and icons when passing in sortDirection and onSort in TableHeader', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'none'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('button').exists()).toBe(true);
+      expect(wrapper.find('.Icon--sort-triangle').exists()).toBe(true);
+    });
+
+    test('render className TableHeader--sorting when a TableHeader is actively sorting', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'ascending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.TableHeader--sort-ascending').exists()).toBe(true);
+    });
+
+    test('renders triangle up Icon when sortDirection is ascending', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'ascending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
+    });
+
+    test('renders triangle down Icon when sortDirection is descending', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'descending'} onSort={() => null}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(wrapper.find('.Icon--triangle-down').exists()).toBe(true);
+    });
+
+    test('calls onSort when sort button is clicked', () => {
+      const onSortSpy = spy();
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortDirection={'none'} onSort={onSortSpy}>
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      wrapper.find('button').simulate('click');
+
+      expect(onSortSpy.calledOnce).toBe(true);
+    });
+
+    test('focus stays on the sort button after it is clicked', () => {
+      const wrapper = mount(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader
+                id={'button-focused'}
+                sortDirection={'none'}
+                onSort={() => null}
+              >
+                Sortable Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      wrapper.find('button').simulate('click');
+      wrapper.update();
+
+      expect(document.activeElement.id).toBe(
+        wrapper.find('button').getDOMNode().id
+      );
+    });
   });
 });
 
