@@ -37,41 +37,41 @@
   border-bottom: 2px solid var(--table-row-border-color);
 }
 
+.TableHeader[aria-sort] {
+  padding: 0;
+}
+
 .TableHeader .TableHeader__sort-button {
   background-color: transparent;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  padding-left: 0;
   font-family: inherit;
+  width: 100%;
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: var(--table-space) var(--space-smallest);
 }
 
-.TableHeader .TableHeader__sort-button:hover {
+.TableHeader__sort-button:hover {
   cursor: pointer;
 }
 
-.TableHeader--sorting {
+.TableHeader--sort-ascending,
+.TableHeader--sort-descending {
   background: var(--table-header-sorting-background-color);
   border-bottom: 2px solid var(--table-header-sorting-border-color);
 }
 
-.TableHeader--sorting .TableHeader__sort-button {
+.TableHeader--sort-ascending .TableHeader__sort-button,
+.TableHeader--sort-decscending .TableHeader__sort-button {
   color: var(--table-header-sorting-text-color);
 }
 
-.TableHeader .TableHeader__sort-button span {
-  padding-left: var(--space-small);
-  display: flex;
-  flex-direction: column;
-  /* set span's height to an icon's height when no icon is rendered yet */
-  height: 1.5rem;
+/* compensate the gap in height between TableHeader and Icon */
+.TableHeader__sort-button span {
+  margin: calc(var(--space-half) * -1) 0;
 }
 
 .TableCell {
