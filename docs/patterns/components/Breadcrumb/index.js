@@ -29,7 +29,7 @@ const BreadcrumbDemo = () => (
       <BreadcrumbItem>Four</BreadcrumbItem>
     </Breadcrumb>
 
-    <Code role="region" tabIndex="1">
+    <Code role="region" tabIndex="0">
       {`<Breadcrumb aria-label="Breadcrumb">
   <BreadcrumbLink href="/one">One</BreadcrumbLink>
   <BreadcrumbLink href="/two">Two</BreadcrumbLink>
@@ -50,7 +50,7 @@ const BreadcrumbDemo = () => (
       <BreadcrumbItem>Four</BreadcrumbItem>
     </Breadcrumb>
 
-    <Code role="region" tabIndex="1">
+    <Code role="region" tabIndex="0">
       {`<Breadcrumb aria-label="Breadcrumb" separator={<Icon type="chevron-double-right" />}>
   <BreadcrumbLink href="#">One</BreadcrumbLink>
   <BreadcrumbLink href="#">Two</BreadcrumbLink>
