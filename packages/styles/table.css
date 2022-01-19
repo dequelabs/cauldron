@@ -59,7 +59,7 @@
 }
 
 .TableHeader__sort-button:focus {
-  outline-offset: var(--space-half);
+  outline-offset: unset;
 }
 
 .TableHeader--sort-ascending,
