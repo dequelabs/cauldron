@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "@rollup/plugin-dynamic-import-vars": "^1.4.2",
     "classnames": "^2.2.6",
     "focus-trap-react": "^3.0.5",
     "focusable": "^2.3.0",
@@ -44,6 +43,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
     "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-dynamic-import-vars": "^1.4.2",
     "@rollup/plugin-typescript": "^5.0.2",
     "@svgr/rollup": "^6.1.2",
     "@types/classnames": "^2.2.10",
