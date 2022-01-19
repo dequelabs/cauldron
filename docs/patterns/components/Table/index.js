@@ -93,7 +93,7 @@ const TableDemo = () => {
           </TableRow>
         </TableBody>
       </Table>
-      <Code role="region" tabIndex="1">
+      <Code role="region" tabIndex="0">
         {`import React from 'react';
 import {
   Table,
@@ -174,7 +174,7 @@ const BasicTable = () => (
           ))}
         </TableBody>
       </Table>
-      <Code role="region" tabIndex="1">
+      <Code role="region" tabIndex="0">
         {`import React, { useState } from 'react';
 import {
   Table,
