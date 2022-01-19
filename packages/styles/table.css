@@ -58,6 +58,10 @@
   cursor: pointer;
 }
 
+.TableHeader__sort-button:focus {
+  outline-offset: var(--space-half);
+}
+
 .TableHeader--sort-ascending,
 .TableHeader--sort-descending {
   background: var(--table-header-sorting-background-color);

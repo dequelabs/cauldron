@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ThHTMLAttributes } from 'react';
+import React, { ThHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
@@ -19,48 +19,37 @@ const TableHeader = ({
   onSort,
   className,
   ...other
-}: TableHeaderProps) => {
-  const sortButtonRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    if (!sortDirection || sortDirection === 'none') {
-      return;
-    }
-    sortButtonRef.current?.focus();
-  }, [sortDirection]);
-
-  return (
-    <th
-      aria-sort={sortDirection}
-      className={classNames('TableHeader', className, {
-        'TableHeader--sort-ascending': sortDirection === 'ascending',
-        'TableHeader--sort-descending': sortDirection === 'descending'
-      })}
-      {...other}
-    >
-      {!!onSort && !!sortDirection ? (
-        <button
-          ref={sortButtonRef}
-          onClick={onSort}
-          className="TableHeader__sort-button"
-          type="button"
-        >
-          {children}
-          <span aria-hidden="true">
-            {sortDirection === 'none' ? (
-              <Icon type="sort-triangle" />
-            ) : sortDirection === 'ascending' ? (
-              <Icon type="triangle-up" />
-            ) : (
-              <Icon type="triangle-down" />
-            )}
-          </span>
-        </button>
-      ) : (
-        children
-      )}
-    </th>
-  );
-};
+}: TableHeaderProps) => (
+  <th
+    aria-sort={sortDirection}
+    className={classNames('TableHeader', className, {
+      'TableHeader--sort-ascending': sortDirection === 'ascending',
+      'TableHeader--sort-descending': sortDirection === 'descending'
+    })}
+    {...other}
+  >
+    {!!onSort && !!sortDirection ? (
+      <button
+        onClick={onSort}
+        className="TableHeader__sort-button"
+        type="button"
+      >
+        {children}
+        <span aria-hidden="true">
+          {sortDirection === 'none' ? (
+            <Icon type="sort-triangle" />
+          ) : sortDirection === 'ascending' ? (
+            <Icon type="triangle-up" />
+          ) : (
+            <Icon type="triangle-down" />
+          )}
+        </span>
+      </button>
+    ) : (
+      children
+    )}
+  </th>
+);
 
 TableHeader.displayName = 'TableHeader';
 TableHeader.propTypes = {
