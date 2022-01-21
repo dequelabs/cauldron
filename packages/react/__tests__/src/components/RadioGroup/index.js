@@ -9,7 +9,7 @@ const defaultProps = {
   radios: [
     { value: 'foo', id: 'foo', label: 'Foo' },
     { value: 'bar', id: 'bar', label: 'Bar', disabled: true },
-    { value: 'baz', id: 'baz', label: 'Baz' }
+    { value: 'baz', id: 'baz', label: 'Baz', labelDescription: 'Baz stuff' }
   ],
   onChange: () => {}
 };
@@ -152,6 +152,21 @@ test('handles clicks on the radio overlay element', () => {
     .at(0)
     .simulate('click');
   expect(isChecked()).toBeTruthy();
+});
+
+test('handles `labelDescription` value', () => {
+  const wrapper = mount(<RadioGroup {...defaultProps} />);
+  const labelDescriptionId = wrapper
+    .find('.Field__labelDescription')
+    .at(0)
+    .prop('id');
+  expect(wrapper.find('.Field__labelDescription').length).toBe(1);
+  expect(
+    wrapper
+      .find('#baz')
+      .at(0)
+      .prop('aria-describedby')
+  ).toBe(labelDescriptionId);
 });
 
 test('should return no axe violations', async () => {

@@ -6,6 +6,7 @@ import Icon from '../Icon';
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   value?: string;
+  labelDescription?: string;
 }
 
 export interface RadioGroupProps {
@@ -59,6 +60,7 @@ const RadioGroup = ({
       label,
       disabled,
       value: radioValue,
+      labelDescription,
       id,
       className,
       ...other
@@ -88,6 +90,7 @@ const RadioGroup = ({
           }}
           disabled={disabled}
           checked={isChecked}
+          aria-describedby={labelDescription && `${id}Desc`}
           {...other}
         />
         <label
@@ -107,6 +110,16 @@ const RadioGroup = ({
           aria-hidden="true"
           onClick={() => onRadioClick(index)}
         />
+        {labelDescription && (
+          <span
+            id={`${id}Desc`}
+            className={classNames('Field__labelDescription', {
+              'Field__labelDescription--disabled': disabled
+            })}
+          >
+            {labelDescription}
+          </span>
+        )}
       </div>
     );
   });
@@ -134,7 +147,8 @@ RadioGroup.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
+      labelDescription: PropTypes.string
     })
   ).isRequired,
   hasLabel: (
