@@ -5,6 +5,15 @@ const Home = () => (
   <div>
     <h1>Cauldron React</h1>
     <h2>Installation</h2>
+    <button></button>
+    <p
+      style={{
+        background: '#fff',
+        color: '#ccc'
+      }}
+    >
+      Hello world
+    </p>
     <Code>
       {'$ npm install --save @deque/cauldron-react @deque/cauldron-styles'}
     </Code>
