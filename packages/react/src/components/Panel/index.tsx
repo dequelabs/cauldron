@@ -5,7 +5,7 @@ import rndid from '../../utils/rndid';
 
 interface PanelProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
-  heading:
+  heading?:
     | ReactElement<any>
     | {
         id?: string;
@@ -52,7 +52,7 @@ const Panel = ({
 Panel.displayName = 'Panel';
 Panel.propTypes = {
   children: PropTypes.node.isRequired,
-  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
+  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string
 };
 
