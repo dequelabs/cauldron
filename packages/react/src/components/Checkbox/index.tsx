@@ -15,6 +15,7 @@ import tokenList from '../../utils/token-list';
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: React.ReactNode;
+  labelDescription?: string;
   error?: React.ReactNode;
   customIcon?: React.ReactNode;
   checkboxRef?: Ref<HTMLInputElement>;
@@ -25,6 +26,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     {
       id,
       label,
+      labelDescription,
       error,
       checkboxRef,
       className,
@@ -49,11 +51,22 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       refProp(checkRef.current);
     }
 
-    const errorId = useMemo(() => nextId(), []);
+    const { errorId, labelDescriptionId } = useMemo(() => {
+      return {
+        labelDescriptionId: nextId(),
+        errorId: nextId()
+      };
+    }, []);
 
-    const ariaDescribedbyId = error
-      ? tokenList(errorId, ariaDescribedby)
-      : ariaDescribedby;
+    let ariaDescribedbyId = ariaDescribedby;
+
+    if (error) {
+      ariaDescribedbyId = tokenList(errorId, ariaDescribedbyId);
+    }
+
+    if (labelDescription) {
+      ariaDescribedbyId = tokenList(labelDescriptionId, ariaDescribedbyId);
+    }
 
     return (
       <>
@@ -99,12 +112,17 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               }
             }}
           />
+          {labelDescription && (
+            <span id={labelDescriptionId} className="Field__labelDescription">
+              {labelDescription}
+            </span>
+          )}
+          {error && (
+            <div id={errorId} className="Error">
+              {error}
+            </div>
+          )}
         </div>
-        {error && (
-          <div id={errorId} className="Error">
-            {error}
-          </div>
-        )}
       </>
     );
   }

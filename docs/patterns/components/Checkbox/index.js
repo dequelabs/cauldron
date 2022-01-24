@@ -59,8 +59,23 @@ export default class CheckboxDemo extends Component {
               id: 'demo-checkbox-5',
               name: 'demo-checkbox-5',
               label: 'Demo checkbox 5',
-              value: '4',
+              value: '5',
               error: 'The fifth checkbox is required!'
+            },
+            {
+              id: 'demo-checkbox-6',
+              name: 'demo-checkbox-6',
+              label: 'Demo checkbox 6',
+              labelDescription: 'Has description text',
+              value: '6'
+            },
+            {
+              id: 'demo-checkbox-7',
+              name: 'demo-checkbox-7',
+              label: 'Demo checkbox 7',
+              labelDescription: 'Has description text',
+              value: '7',
+              error: "You made a mistake, but it's ok!"
             }
           ]}
           propDocs={{
@@ -80,6 +95,11 @@ export default class CheckboxDemo extends Component {
             label: {
               type: 'string',
               description: "The text of the checkbox's label",
+              required: true
+            },
+            labelDescription: {
+              type: 'string',
+              description: "The text description of the checkbox's label",
               required: true
             },
             value: {
