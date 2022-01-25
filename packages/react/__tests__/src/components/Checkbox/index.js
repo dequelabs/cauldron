@@ -118,3 +118,15 @@ test('handles error prop', async () => {
   const input = wrapper.find('input').getDOMNode();
   expect(input.getAttribute('aria-describedby')).toBe(errorMessage.id);
 });
+
+test('handles labelDescription prop', async () => {
+  const wrapper = mount(
+    <Checkbox {...defaultProps} labelDescription={'/giphy bears'} />
+  );
+  expect(await axe(wrapper.html())).toHaveNoViolations();
+  const labelDescription = wrapper
+    .find('.Field__labelDescription')
+    .getDOMNode();
+  const input = wrapper.find('input').getDOMNode();
+  expect(input.getAttribute('aria-describedby')).toBe(labelDescription.id);
+});
