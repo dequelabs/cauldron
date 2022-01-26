@@ -28,9 +28,25 @@ export default class RadioGroupDemo extends Component {
               'aria-labelledby': 'pizza-label',
               defaultValue: 'tuesday',
               radios: [
-                { id: 'yes', value: 'yes', label: 'Yes' },
-                { id: 'no', value: 'no', label: 'No', disabled: true },
-                { id: 'tuesday', value: 'tuesday', label: 'Only on Tuesdays' }
+                {
+                  id: 'yes',
+                  value: 'yes',
+                  label: 'Yes',
+                  labelDescription: 'Of course you like pizza'
+                },
+                {
+                  id: 'no',
+                  value: 'no',
+                  label: 'No',
+                  disabled: true,
+                  labelDescription: 'Impossible, everyone likes pizza'
+                },
+                {
+                  id: 'tuesday',
+                  value: 'tuesday',
+                  label: 'Only on Tuesdays',
+                  labelDescription: 'Pizza Tuesdays are rad'
+                }
               ]
             },
             {
@@ -54,7 +70,7 @@ export default class RadioGroupDemo extends Component {
               type: 'array',
               required: true,
               description:
-                'Array of objects containing: label, value (optional) and any supported HTMLInputElement properties'
+                'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
             },
             'aria-label': {
               type: 'string',

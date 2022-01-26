@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/dequelabs/cauldron/compare/v4.0.0...v4.1.0) (2022-01-26)
+
+### Features
+
+- **checkbox:** add labelDescription prop ([#529](https://github.com/dequelabs/cauldron/issues/529)) ([9538a95](https://github.com/dequelabs/cauldron/commit/9538a95806de37130dcc5f12be3d466de423834d))
+- **radiogroup:** add labelDescription prop to radio items ([#514](https://github.com/dequelabs/cauldron/issues/514)) ([78d6a74](https://github.com/dequelabs/cauldron/commit/78d6a7430df952abf22abcdfdcc6afea5e0bf42a))
+- Add resend Icon ([#526](https://github.com/dequelabs/cauldron/issues/526)) ([2be1dbd](https://github.com/dequelabs/cauldron/commit/2be1dbdae5765eacd919f4e87750285cba2a90e4))
+- Make Table support sorting ([#511](https://github.com/dequelabs/cauldron/issues/511)) ([1402758](https://github.com/dequelabs/cauldron/commit/1402758369646d8db11a1776b8ae212775f809a0))
+
+### Bug Fixes
+
+- **docs:** fix positive tabIndex for breadcrumb docs ([#523](https://github.com/dequelabs/cauldron/issues/523)) ([debe968](https://github.com/dequelabs/cauldron/commit/debe968f524759ed9d9653114233a217c4db7754))
+- **react:** Do not require build-time dependencies in production ([#517](https://github.com/dequelabs/cauldron/issues/517)) ([5854bd2](https://github.com/dequelabs/cauldron/commit/5854bd2a944432b2f591d4ed9978c662d443be37))
+
 ## [4.0.0](https://github.com/dequelabs/cauldron/compare/v3.0.0...v4.0.0) (2022-01-12)
 
 ### ⚠ BREAKING CHANGES
