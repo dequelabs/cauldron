@@ -20,6 +20,8 @@
 
 .Tooltip--hidden {
   visibility: hidden;
+  /* Take the tooltip out of the DOM layout flow so it doesn't reserve space when hidden */
+  position: fixed !important;
 }
 
 .TooltipInfo {
