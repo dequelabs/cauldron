@@ -27,7 +27,7 @@ const PanelDemo = () => {
             children: 'Collapsed panel content.'
           },
           {
-            children: 'Content of Panel with a custom heading'
+            children: 'Content of Panel with no heading'
           }
         ]}
         propDocs={{
