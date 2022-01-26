@@ -12,7 +12,6 @@ interface PanelProps extends HTMLAttributes<HTMLElement> {
         text: ReactElement<any>;
         level: number | undefined;
       };
-  labelledBy?: string;
   collapsed?: boolean;
   className?: string;
 }
@@ -22,30 +21,29 @@ const Panel = ({
   collapsed,
   className,
   heading,
-  labelledBy,
   ...other
 }: PanelProps) => {
-  const Heading =
-    !!heading &&
-    (`h${
-      typeof heading === 'object' && 'level' in heading && !!heading.level
-        ? heading.level
-        : 2
-    }` as 'h1');
   const headingId =
-    !!heading && typeof heading === 'object' && 'id' in heading
+    heading && typeof heading === 'object' && 'id' in heading
       ? heading.id
       : rndid();
+  const Heading = heading
+    ? (`h${
+        typeof heading === 'object' && 'level' in heading && !!heading.level
+          ? heading.level
+          : 2
+      }` as 'h1')
+    : null;
 
   return (
     <section
-      aria-labelledby={labelledBy || headingId}
+      aria-labelledby={headingId}
       className={classNames('Panel', className, {
         ['Panel--collapsed']: collapsed
       })}
       {...other}
     >
-      {!!Heading && (
+      {Heading && (
         <Heading id={headingId} className="Panel__Heading">
           {typeof heading === 'object' && 'text' in heading
             ? heading.text
@@ -61,7 +59,6 @@ Panel.displayName = 'Panel';
 Panel.propTypes = {
   children: PropTypes.node.isRequired,
   heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
-  labelledBy: PropTypes.string,
   className: PropTypes.string
 };
 

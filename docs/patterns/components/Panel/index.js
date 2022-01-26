@@ -25,14 +25,18 @@ const PanelDemo = () => {
             },
             collapsed: true,
             children: 'Collapsed panel content.'
+          },
+          {
+            'aria-labelledby': 'custom-heading',
+            children:
+              'Content of Panel with a custom heading (see the very bottom)'
           }
         ]}
         propDocs={{
           heading: {
             type: 'object',
-            required: true,
             description:
-              'Object containing: text, level (optional), id (optional)'
+              'Object containing: text, level (optional), id (optional); aria-labelledby is required when there is no heading'
           },
           collapsed: {
             type: 'boolean',
@@ -46,6 +50,7 @@ const PanelDemo = () => {
           className
         }}
       />
+      <h2 id="custom-heading">Custom Heading</h2>
     </div>
   );
 };
