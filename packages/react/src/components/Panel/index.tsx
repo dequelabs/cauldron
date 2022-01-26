@@ -23,17 +23,31 @@ const Panel = ({
   heading,
   ...other
 }: PanelProps) => {
-  const headingId =
-    heading && typeof heading === 'object' && 'id' in heading
-      ? heading.id
-      : rndid();
-  const Heading = heading
-    ? (`h${
-        typeof heading === 'object' && 'level' in heading && !!heading.level
-          ? heading.level
-          : 2
-      }` as 'h1')
-    : null;
+  const headingId = !heading
+    ? undefined
+    : typeof heading === 'object' && 'id' in heading
+    ? heading.id
+    : rndid();
+
+  const Heading = () => {
+    if (!headingId) {
+      return null;
+    }
+
+    const HeadingComponent = `h${
+      typeof heading === 'object' && 'level' in heading && !!heading.level
+        ? heading.level
+        : 2
+    }` as 'h1';
+
+    return (
+      <HeadingComponent id={headingId} className="Panel__Heading">
+        {typeof heading === 'object' && 'text' in heading
+          ? heading.text
+          : heading}
+      </HeadingComponent>
+    );
+  };
 
   return (
     <section
@@ -43,13 +57,7 @@ const Panel = ({
       })}
       {...other}
     >
-      {Heading && (
-        <Heading id={headingId} className="Panel__Heading">
-          {typeof heading === 'object' && 'text' in heading
-            ? heading.text
-            : heading}
-        </Heading>
-      )}
+      <Heading />
       {children}
     </section>
   );
