@@ -5,7 +5,7 @@ import rndid from '../../utils/rndid';
 
 interface PanelProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
-  heading:
+  heading?:
     | ReactElement<any>
     | {
         id?: string;
@@ -23,13 +23,31 @@ const Panel = ({
   heading,
   ...other
 }: PanelProps) => {
-  const Heading = `h${
-    typeof heading === 'object' && 'level' in heading && !!heading.level
-      ? heading.level
-      : 2
-  }` as 'h1';
-  const headingId =
-    typeof heading === 'object' && 'id' in heading ? heading.id : rndid();
+  const headingId = !heading
+    ? undefined
+    : typeof heading === 'object' && 'id' in heading
+    ? heading.id
+    : rndid();
+
+  const Heading = () => {
+    if (!headingId) {
+      return null;
+    }
+
+    const HeadingComponent = `h${
+      typeof heading === 'object' && 'level' in heading && !!heading.level
+        ? heading.level
+        : 2
+    }` as 'h1';
+
+    return (
+      <HeadingComponent id={headingId} className="Panel__Heading">
+        {typeof heading === 'object' && 'text' in heading
+          ? heading.text
+          : heading}
+      </HeadingComponent>
+    );
+  };
 
   return (
     <section
@@ -39,11 +57,7 @@ const Panel = ({
       })}
       {...other}
     >
-      <Heading id={headingId} className="Panel__Heading">
-        {typeof heading === 'object' && 'text' in heading
-          ? heading.text
-          : heading}
-      </Heading>
+      <Heading />
       {children}
     </section>
   );
@@ -52,7 +66,7 @@ const Panel = ({
 Panel.displayName = 'Panel';
 Panel.propTypes = {
   children: PropTypes.node.isRequired,
-  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
+  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string
 };
 
