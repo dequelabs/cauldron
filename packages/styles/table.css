@@ -27,7 +27,6 @@
   border-collapse: collapse;
   text-align: left;
   width: 100%;
-  table-layout: fixed;
   overflow-wrap: break-word;
 }
 
