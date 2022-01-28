@@ -22,11 +22,11 @@
 }
 
 .Table {
+  table-layout: auto;
   font-size: var(--text-size-small);
   border-collapse: collapse;
   text-align: left;
   width: 100%;
-  table-layout: fixed;
   overflow-wrap: break-word;
 }
 
