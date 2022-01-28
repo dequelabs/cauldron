@@ -183,5 +183,5 @@ test('renders the expected default status label', () => {
     <Pagination totalItems={500} currentPage={3} itemsPerPage={17} />
   );
 
-  expect(wrapper.find('[role="log"]').text()).toBe('Showing 35 of 51 of 500');
+  expect(wrapper.find('[role="log"]').text()).toBe('Showing 35 to 51 of 500');
 });
