@@ -66,7 +66,7 @@ const PaginationDemo = () => {
               'The "x of y" status label (rendered as text in the middle of the pagination controls).',
             required: false,
             default: `<span>
-                Showing <strong>{itemStart}</strong> of{' '}
+                Showing <strong>{itemStart}</strong> to{' '}
                 <strong>{itemEnd}</strong> of <strong>{totalItems}</strong>
               </span>`
           },
