@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   linkRef?: React.Ref<HTMLAnchorElement>;
-  variant?: 'button';
+  variant?: 'button' | 'button-secondary';
 }
 
 const Link = ({
@@ -19,7 +19,8 @@ const Link = ({
     ref={linkRef}
     className={classNames(className, {
       Link: !variant,
-      'Button--primary': variant === 'button'
+      'Button--primary': variant === 'button',
+      'Button--secondary': variant === 'button-secondary'
     })}
     {...other}
   >
