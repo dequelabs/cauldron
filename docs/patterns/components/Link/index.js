@@ -15,9 +15,14 @@ export default class LinkDemo extends Component {
               href: '#'
             },
             {
-              children: 'I am a link that looks like a button',
+              children: 'I am a link that looks like a primary button',
               href: '#',
               variant: 'button'
+            },
+            {
+              children: 'I am a link that looks like a secondary button',
+              href: '#',
+              variant: 'button-secondary'
             }
           ]}
           propDocs={{
@@ -35,6 +40,10 @@ export default class LinkDemo extends Component {
                   </Code>
                 </div>
               )
+            },
+            variant: {
+              type: 'string',
+              description: 'Any of the following: "button", "button-secondary".'
             }
           }}
         />
