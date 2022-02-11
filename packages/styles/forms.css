@@ -168,7 +168,11 @@ textarea.Field--has-error:focus:hover,
   display: block;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: var(--space-smallest);
+  margin-bottom: var(--space-small);
+}
+
+.Field .Error {
+  min-height: unset;
 }
 
 .Field.is--flex-row {
@@ -193,6 +197,10 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: var(--space-smallest);
 }
 
+.Checkbox .Error {
+  min-height: unset;
+}
+
 .Checkbox + .Checkbox,
 .Radio + .Radio {
   margin-top: var(--space-smallest);
@@ -210,7 +218,7 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   color: var(--field-label-text-color);
   font-size: var(--text-size-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   padding-bottom: var(--space-half);
   cursor: default;
 }
