@@ -7,7 +7,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Code
+  Code,
+  IconButton
 } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
@@ -162,14 +163,24 @@ const BasicTable = () => (
             >
               Email
             </TableHeader>
+            <TableHeader scope="col">Actions</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
           {sortedData.map(contact => (
-            <TableRow>
+            <TableRow key={contact.email}>
               <TableCell>{contact.first_name}</TableCell>
               <TableCell>{contact.last_name}</TableCell>
               <TableCell>{contact.email}</TableCell>
+              <TableCell>
+                <IconButton
+                  icon="trash"
+                  label="Delete"
+                  onClick={() => {
+                    console.log(`Delete ${contact.email}`);
+                  }}
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

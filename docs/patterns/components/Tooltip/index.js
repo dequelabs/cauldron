@@ -178,7 +178,7 @@ const Demo = () => {
           },
           show: {
             type: 'boolean',
-            description: 'Manually control the show state of the tooltip'
+            description: 'Whether or not the tooltip is shown initially.'
           },
           placement: {
             type: 'string',
