@@ -72,13 +72,6 @@ export default function Tooltip({
     }
   );
 
-  // Keep targetElement in sync with target prop
-  useEffect(() => {
-    const targetElement =
-      target && 'current' in target ? target.current : target;
-    setTargetElement(targetElement);
-  }, [target]);
-
   // Show the tooltip
   const show: EventListener = useCallback(async () => {
     // Clear the hide timeout if there was one pending
@@ -110,6 +103,43 @@ export default function Tooltip({
     }
   }, [targetElement]);
 
+  // Keep targetElement in sync with target prop
+  useEffect(() => {
+    const targetElement =
+      target && 'current' in target ? target.current : target;
+    setTargetElement(targetElement);
+  }, [target]);
+
+  // Get popper placement
+  const placement: Placement =
+    (attributes.popper &&
+      (attributes.popper['data-popper-placement'] as Placement)) ||
+    initialPlacement;
+
+  // Only listen to key ups when the tooltip is visible
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (
+        event.key === 'Escape' ||
+        event.key === 'Esc' ||
+        event.keyCode === 27
+      ) {
+        setShowTooltip(false);
+      }
+    };
+
+    const targetElement = document.body;
+    if (showTooltip) {
+      targetElement.addEventListener('keyup', handleEscape);
+    } else {
+      targetElement.removeEventListener('keyup', handleEscape);
+    }
+
+    return () => {
+      targetElement.removeEventListener('keyup', handleEscape);
+    };
+  }, [showTooltip]);
+
   // Handle hover and focus events for the targetElement
   useEffect(() => {
     targetElement?.addEventListener('mouseenter', show);
@@ -136,30 +166,6 @@ export default function Tooltip({
     };
   }, [tooltipElement, show, hide]);
 
-  // Only listen to key ups when the tooltip is visible
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (
-        event.key === 'Escape' ||
-        event.key === 'Esc' ||
-        event.keyCode === 27
-      ) {
-        setShowTooltip(false);
-      }
-    };
-
-    const targetElement = document.body;
-    if (showTooltip) {
-      targetElement.addEventListener('keyup', handleEscape);
-    } else {
-      targetElement.removeEventListener('keyup', handleEscape);
-    }
-
-    return () => {
-      targetElement.removeEventListener('keyup', handleEscape);
-    };
-  }, [showTooltip]);
-
   // Keep the target's id in sync
   useEffect(() => {
     const attrText = targetElement?.getAttribute(association);
@@ -170,11 +176,6 @@ export default function Tooltip({
       );
     }
   }, [targetElement, id]);
-
-  const placement: Placement =
-    (attributes.popper &&
-      (attributes.popper['data-popper-placement'] as Placement)) ||
-    initialPlacement;
 
   return showTooltip || hideElementOnHidden
     ? createPortal(
