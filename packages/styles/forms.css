@@ -156,7 +156,6 @@ textarea.Field--has-error:focus:hover,
 }
 
 .Error {
-  min-height: var(--space-large);
   color: var(--error);
   text-align: left;
   font-size: var(--text-size-smallest);
@@ -169,10 +168,6 @@ textarea.Field--has-error:focus:hover,
   position: relative;
   box-sizing: border-box;
   margin-bottom: var(--space-small);
-}
-
-.Field .Error {
-  min-height: unset;
 }
 
 .Field.is--flex-row {
@@ -195,10 +190,6 @@ textarea.Field--has-error:focus:hover,
 
 .Checkbox {
   margin-bottom: var(--space-smallest);
-}
-
-.Checkbox .Error {
-  min-height: unset;
 }
 
 .Checkbox + .Checkbox,
