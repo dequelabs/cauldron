@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -44,15 +44,14 @@ export default function Tooltip({
   target,
   association = 'aria-describedby',
   variant = 'text',
-  show: showProp = false,
+  show: initialShow = false,
   hideElementOnHidden = false,
   className,
   ...props
 }: TooltipProps) {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
-  const hovering = useRef(false);
-  const [placement, setPlacement] = useState(initialPlacement);
-  const [showTooltip, setShowTooltip] = useState(!!showProp);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [showTooltip, setShowTooltip] = useState(!!initialShow);
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [tooltipElement, setTooltipElement] = useState<HTMLElement | null>(
     null
@@ -73,55 +72,51 @@ export default function Tooltip({
     }
   );
 
-  const show = async () => {
+  // Show the tooltip
+  const show: EventListener = useCallback(async () => {
+    // Clear the hide timeout if there was one pending
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+    // Make sure we update the tooltip position when showing
+    // in case the target's position changed without popper knowing
     if (update) {
       await update();
     }
     setShowTooltip(true);
     fireCustomEvent(true, targetElement);
-  };
-  const hide = ({ target }: FocusEvent | MouseEvent) => {
-    if (document.activeElement !== target) {
-      setTimeout(() => {
-        if (!hovering.current) {
-          setShowTooltip(false);
-          fireCustomEvent(false, targetElement);
-        }
+  }, [
+    targetElement,
+    // update starts off as null
+    update
+  ]);
+
+  // Hide the tooltip
+  const hide: EventListener = useCallback(() => {
+    if (!hideTimeoutRef.current) {
+      hideTimeoutRef.current = setTimeout(() => {
+        hideTimeoutRef.current = null;
+        setShowTooltip(false);
+        fireCustomEvent(false, targetElement);
       }, TIP_HIDE_DELAY);
     }
-  };
-  const handleTriggerMouseEnter = () => {
-    hovering.current = true;
-    show();
-  };
-  const handleTriggerMouseLeave = (e: MouseEvent) => {
-    hovering.current = false;
-    hide(e);
-  };
-  const handleTipMouseEnter = () => {
-    hovering.current = true;
-  };
-  const handleTipMouseLeave = (e: MouseEvent) => {
-    hovering.current = false;
-    hide(e);
-  };
+  }, [targetElement]);
 
+  // Keep targetElement in sync with target prop
   useEffect(() => {
     const targetElement =
       target && 'current' in target ? target.current : target;
     setTargetElement(targetElement);
   }, [target]);
 
-  const popperPlacement: Placement =
+  // Get popper placement
+  const placement: Placement =
     (attributes.popper &&
       (attributes.popper['data-popper-placement'] as Placement)) ||
     initialPlacement;
-  useEffect(() => {
-    if (popperPlacement) {
-      setPlacement(popperPlacement);
-    }
-  }, [popperPlacement]);
 
+  // Only listen to key ups when the tooltip is visible
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (
@@ -143,35 +138,35 @@ export default function Tooltip({
     return () => {
       targetElement.removeEventListener('keyup', handleEscape);
     };
-  }, [showProp]);
+  }, [showTooltip]);
 
+  // Handle hover and focus events for the targetElement
   useEffect(() => {
-    if (typeof showProp !== undefined) {
-      targetElement?.addEventListener('mouseenter', handleTriggerMouseEnter);
-      targetElement?.addEventListener('mouseleave', handleTriggerMouseLeave);
-      targetElement?.addEventListener('focusin', show);
-      targetElement?.addEventListener('focusout', hide);
-    }
+    targetElement?.addEventListener('mouseenter', show);
+    targetElement?.addEventListener('mouseleave', hide);
+    targetElement?.addEventListener('focusin', show);
+    targetElement?.addEventListener('focusout', hide);
+
     return () => {
       targetElement?.removeEventListener('mouseenter', show);
       targetElement?.removeEventListener('mouseleave', hide);
       targetElement?.removeEventListener('focusin', show);
       targetElement?.removeEventListener('focusout', hide);
     };
-  }, [targetElement, showProp]);
+  }, [targetElement, show, hide]);
 
+  // Handle hover events for the tooltipElement
   useEffect(() => {
-    if (tooltipElement) {
-      tooltipElement?.addEventListener('mouseenter', handleTipMouseEnter);
-      tooltipElement?.addEventListener('mouseleave', handleTipMouseLeave);
-    }
+    tooltipElement?.addEventListener('mouseenter', show);
+    tooltipElement?.addEventListener('mouseleave', hide);
 
     return () => {
-      tooltipElement?.removeEventListener('mouseenter', handleTipMouseEnter);
-      tooltipElement?.removeEventListener('mouseleave', handleTipMouseLeave);
+      tooltipElement?.removeEventListener('mouseenter', show);
+      tooltipElement?.removeEventListener('mouseleave', hide);
     };
-  }, [tooltipElement]);
+  }, [tooltipElement, show, hide]);
 
+  // Keep the target's id in sync
   useEffect(() => {
     const attrText = targetElement?.getAttribute(association);
     if (!attrText?.includes(id || '')) {
