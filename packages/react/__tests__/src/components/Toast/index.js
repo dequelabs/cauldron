@@ -83,7 +83,7 @@ test('confirmation renders the expected UI and icon', () => {
       .find('Icon')
       .at(0)
       .prop('type')
-  ).toBe('info-circle');
+  ).toBe('check-circle');
 });
 
 test('confirmation renders the expected UI and icon', () => {
@@ -98,7 +98,7 @@ test('confirmation renders the expected UI and icon', () => {
       .find('Icon')
       .at(0)
       .prop('type')
-  ).toBe('info-circle');
+  ).toBe('check-circle');
 });
 
 test('caution renders the expected UI and icon', () => {
