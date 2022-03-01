@@ -3,6 +3,7 @@
   --table-header-background-color: var(--gray-20);
   --table-header-sorting-background-color: #caddec;
   --table-header-sorting-text-color: var(--gray-90);
+  --table-header-background-color-hover: #dddddd;
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
   --table-row-border-color: var(--gray-40);
@@ -15,6 +16,7 @@
   --table-header-background-color: var(--accent-dark);
   --table-header-sorting-background-color: #53636e;
   --table-header-sorting-text-color: var(--white);
+  --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-medium);
   --table-row-border-color: #5d676f;
@@ -56,7 +58,7 @@
 
 .TableHeader__sort-button:hover {
   cursor: pointer;
-  background-color: #dddddd;
+  background-color: var(--table-header-background-color-hover);
 }
 
 .TableHeader__sort-button:focus {

@@ -67,7 +67,7 @@ export const DescriptionDetails = ({
   ...other
 }: DescriptionProps) => (
   <dd className={classNames('DescriptionList__details', className)} {...other}>
-    {children}
+    <div>{children}</div>
   </dd>
 );
 
