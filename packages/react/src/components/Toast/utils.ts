@@ -15,7 +15,7 @@ interface TypeMap {
 export const typeMap: TypeMap = {
   confirmation: {
     className: 'success',
-    icon: 'info-circle'
+    icon: 'check-circle'
   },
   caution: {
     className: 'warning',
