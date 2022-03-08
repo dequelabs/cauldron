@@ -100,6 +100,14 @@ export {
   BreadcrumbItem,
   BreadcrumbLink
 } from './components/Breadcrumb';
+export {
+  default as TwoColumnPanel,
+  ColumnHeader,
+  ColumnGroupHeader,
+  ColumnLeft,
+  ColumnRight,
+  ColumnList
+} from './components/TwoColumnPanel';
 
 /**
  * Helpers / Utils

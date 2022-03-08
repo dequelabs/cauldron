@@ -72,7 +72,8 @@ const componentsList = [
   'Pagination',
   'IssuePanel',
   'FieldWrap',
-  'Breadcrumb'
+  'Breadcrumb',
+  'TwoColumnPanel'
 ].sort();
 
 const App = () => {

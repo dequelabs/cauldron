@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import setRef from '../../utils/setRef';
 
-export interface ClickOutsideListenerProps {
-  children: React.ReactNode;
+export interface ClickOutsideListenerProps<
+  T extends HTMLElement = HTMLElement
+> {
+  children?: React.ReactNode;
   onClickOutside: (e: MouseEvent | TouchEvent) => void;
   mouseEvent?: 'mousedown' | 'click' | 'mouseup' | false;
   touchEvent?: 'touchstart' | 'touchend' | false;
+  target?: T;
 }
 
 export default class ClickOutsideListener extends React.Component<
@@ -18,7 +21,8 @@ export default class ClickOutsideListener extends React.Component<
   };
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
+    target: PropTypes.any,
     onClickOutside: PropTypes.func.isRequired,
     mouseEvent: PropTypes.oneOf(['mousedown', 'click', 'mouseup', false]),
     touchEvent: PropTypes.oneOf(['touchstart', 'touchend', false])
@@ -28,14 +32,17 @@ export default class ClickOutsideListener extends React.Component<
 
   handleEvent = (event: MouseEvent | TouchEvent) => {
     const { nodeRef, props } = this;
-    const { onClickOutside } = props;
+    const { onClickOutside, target } = props;
 
     if (event.defaultPrevented) {
       return;
     }
 
-    const target = event.target as HTMLElement;
-    if (nodeRef && !nodeRef.contains(target)) {
+    const eventTarget = event.target as HTMLElement;
+    if (
+      (target && !target.contains(eventTarget)) ||
+      (nodeRef && !nodeRef.contains(eventTarget))
+    ) {
       onClickOutside(event);
     }
   };
@@ -90,8 +97,10 @@ export default class ClickOutsideListener extends React.Component<
 
   render() {
     const { props, resolveRef } = this;
-    return React.cloneElement(props.children as any, {
-      ref: resolveRef
-    });
+    return !props.children
+      ? null
+      : React.cloneElement(props.children as any, {
+          ref: resolveRef
+        });
   }
 }
