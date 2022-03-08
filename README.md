@@ -9,6 +9,10 @@ This monorepo contains the following packages:
 
 It also contains the documentation / demo app (see `docs/`)
 
+## contributing
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+
 ## development
 
 ### install dependencies
