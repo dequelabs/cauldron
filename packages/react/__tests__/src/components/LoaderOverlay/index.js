@@ -37,6 +37,30 @@ test('handles variants', () => {
   expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
 });
 
+test('handles focus', () => {
+  const loaderOverlay = mount(
+    <LoaderOverlay className="baz" role="alert" label="loading" focus>
+      Some text
+    </LoaderOverlay>
+  );
+
+  setTimeout(() => {
+    expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
+  });
+});
+
+test('does not being focused', () => {
+  const loaderOverlay = mount(
+    <LoaderOverlay className="baz" role="alert" label="loading">
+      Some text
+    </LoaderOverlay>
+  );
+
+  setTimeout(() => {
+    expect(document.activeElement).not.toBe(loaderOverlay.getDOMNode());
+  });
+});
+
 test('returns no axe violations', async () => {
   const loaderOverlay = shallow(<LoaderOverlay>Hello world</LoaderOverlay>);
 
