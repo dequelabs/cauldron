@@ -21,6 +21,12 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 $ yarn
 ```
 
+### build (if first time building dev environment, must be run before yarn dev)
+
+```sh
+$ yarn build
+```
+
 ### dev
 
 (watches/rebuilds react, styles, and docs)
@@ -30,12 +36,6 @@ $ yarn dev
 ```
 
 navigate browser to http://localhost:8000
-
-### build
-
-```sh
-$ yarn build
-```
 
 ### run tests
 

@@ -29,9 +29,11 @@ const LoaderOverlayDemo = () => {
       return;
     }
 
+    /*
     if (loading) {
       return loaderRef.current.focus();
     }
+    */
 
     buttonRef.current.focus();
   }, [loading]);
@@ -62,6 +64,7 @@ const LoaderOverlayDemo = () => {
               ref={loaderRef}
               label="Loading..."
               variant="large"
+              focus
             >
               <p>
                 Explanatory secondary text goes here. Let them know what's
