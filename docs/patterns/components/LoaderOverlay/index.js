@@ -13,7 +13,6 @@ const LOADING_DURATION = 5000;
 
 const LoaderOverlayDemo = () => {
   const mounted = useRef(false);
-  const loaderRef = useRef();
   const buttonRef = useRef();
   const [loading, setLoading] = useState(false);
   const onClick = () => {
@@ -28,12 +27,6 @@ const LoaderOverlayDemo = () => {
       mounted.current = true;
       return;
     }
-
-    /*
-    if (loading) {
-      return loaderRef.current.focus();
-    }
-    */
 
     buttonRef.current.focus();
   }, [loading]);
@@ -52,6 +45,10 @@ const LoaderOverlayDemo = () => {
         variant: {
           type: 'string',
           description: 'Loader variant, can be "small" or "large".'
+        },
+        focus: {
+          type: 'boolean',
+          description: 'whether or not to focus the loader on initial render'
         }
       }}
     >
@@ -61,7 +58,6 @@ const LoaderOverlayDemo = () => {
             <Scrim show />
             <LoaderOverlay
               tabIndex={-1}
-              ref={loaderRef}
               label="Loading..."
               variant="large"
               focus
@@ -100,7 +96,7 @@ const LoaderOverlayDemo = () => {
         <Code
           role="region"
           tabIndex={0}
-        >{`<LoaderOverlay tabIndex={-1} ref={loaderRef} label="Loading...">
+        >{`<LoaderOverlay tabIndex={-1} label="Loading..." focus>
   <p>Explanatory secondary text goes here. Let them know what's happening, alright?</p>
 </LoaderOverlay>`}</Code>
       </div>
