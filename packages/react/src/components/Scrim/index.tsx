@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 export interface ScrimProps {
   show: boolean;
-  focus?: boolean;
 }
 
 interface ScrimState {
@@ -30,13 +29,10 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
   componentDidMount() {
     if (this.props.show) {
       this.fadeIn();
-      this.el?.focus();
     }
   }
 
   fadeIn() {
-    const { focus } = this.props;
-
     this.setState({ destroy: false }, () => {
       this.setState({
         animationClass: 'Scrim--show'
@@ -53,9 +49,6 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
         });
       });
     });
-    if (this.el && !!focus) {
-      this.el.focus();
-    }
   }
 
   fadeOut() {
