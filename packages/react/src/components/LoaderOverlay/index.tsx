@@ -7,9 +7,8 @@ import AxeLoader from './axe-loader';
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
   label?: string;
-  focus?: boolean | null;
+  focus?: boolean;
   children?: React.ReactNode;
-  loaderRef?: HTMLDivElement;
 }
 
 const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
@@ -24,11 +23,10 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
     }: LoaderOverlayProps,
     ref
   ) => {
-    const fallbackFocus = ref || null;
     const overlayRef = createRef<HTMLDivElement>();
 
     useEffect(() => {
-      if ((!!focus && overlayRef) || (ref && fallbackFocus)) {
+      if ((!!focus && overlayRef) || ref) {
         setTimeout(() => {
           return overlayRef.current?.focus();
         });
@@ -47,7 +45,7 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
             ? 'Loader__overlay--small'
             : ''
         )}
-        ref={overlayRef}
+        ref={ref ? ref : overlayRef}
         tabIndex={-1}
         {...other}
       >

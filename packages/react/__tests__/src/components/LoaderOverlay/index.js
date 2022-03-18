@@ -62,7 +62,7 @@ test('handles not being focused', () => {
 });
 
 test('handles being passed a ref', () => {
-  const loaderRef = React.createRef([]);
+  const loaderRef = React.createRef(null);
 
   const loaderOverlay = mount(
     <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>
@@ -71,7 +71,7 @@ test('handles being passed a ref', () => {
   );
 
   setTimeout(() => {
-    expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
+    expect(document.activeElement).toStrictEqual(loaderOverlay.getDOMNode());
   });
 });
 

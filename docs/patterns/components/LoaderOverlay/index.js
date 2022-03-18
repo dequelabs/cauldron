@@ -28,7 +28,6 @@ const LoaderOverlayDemo = () => {
       mounted.current = true;
       return;
     }
-
     buttonRef.current.focus();
   }, [loading]);
 
