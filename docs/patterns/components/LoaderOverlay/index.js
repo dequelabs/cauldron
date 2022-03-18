@@ -50,8 +50,10 @@ const LoaderOverlayDemo = () => {
           type: 'boolean',
           description: 'whether or not to focus the loader on initial render'
         },
-        ref: {
-          type: 'ref'
+        loaderRef: {
+          type: 'function',
+          description:
+            'DEPRECATED - replace with "focus" prop - optional ref function to move focus to loader on mount'
         }
       }}
     >
