@@ -28,10 +28,6 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
     const overlayRef = createRef<HTMLDivElement>();
 
     useEffect(() => {
-      console.log(fallbackFocus);
-      console.log(overlayRef);
-      console.log(ref);
-
       if ((!!focus && overlayRef) || (ref && fallbackFocus)) {
         setTimeout(() => {
           return overlayRef.current?.focus();
