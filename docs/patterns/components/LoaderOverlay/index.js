@@ -49,6 +49,9 @@ const LoaderOverlayDemo = () => {
         focus: {
           type: 'boolean',
           description: 'whether or not to focus the loader on initial render'
+        },
+        ref: {
+          type: 'ref'
         }
       }}
     >
