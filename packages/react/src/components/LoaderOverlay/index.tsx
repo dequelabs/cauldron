@@ -7,53 +7,64 @@ import AxeLoader from './axe-loader';
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
   label?: string;
-  focus?: boolean;
+  focus?: boolean | null;
   children?: React.ReactNode;
+  loaderRef?: HTMLDivElement;
 }
 
-const LoaderOverlay = ({
-  className,
-  variant,
-  label,
-  focus,
-  children,
-  ...other
-}: LoaderOverlayProps) => {
-  const overlayRef = createRef<HTMLDivElement>();
+const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
+  (
+    {
+      className,
+      variant,
+      label,
+      children,
+      focus,
+      ...other
+    }: LoaderOverlayProps,
+    ref
+  ) => {
+    const fallbackFocus = ref || null;
+    const overlayRef = createRef<HTMLDivElement>();
 
-  useEffect(() => {
-    if (!!focus && overlayRef) {
-      setTimeout(() => {
-        return overlayRef.current?.focus();
-      });
-    }
-    return;
-  }, []);
+    useEffect(() => {
+      console.log(fallbackFocus);
+      console.log(overlayRef);
+      console.log(ref);
 
-  return (
-    <div
-      className={classNames(
-        'Loader__overlay',
-        className,
-        variant === 'large'
-          ? 'Loader__overlay--large'
-          : variant === 'small'
-          ? 'Loader__overlay--small'
-          : ''
-      )}
-      ref={overlayRef}
-      tabIndex={-1}
-      {...other}
-    >
-      <div className="Loader__overlay__loader">
-        <Loader variant={variant} />
-        <AxeLoader />
+      if ((!!focus && overlayRef) || (ref && fallbackFocus)) {
+        setTimeout(() => {
+          return overlayRef.current?.focus();
+        });
+      }
+      return;
+    }, []);
+
+    return (
+      <div
+        className={classNames(
+          'Loader__overlay',
+          className,
+          variant === 'large'
+            ? 'Loader__overlay--large'
+            : variant === 'small'
+            ? 'Loader__overlay--small'
+            : ''
+        )}
+        ref={overlayRef}
+        tabIndex={-1}
+        {...other}
+      >
+        <div className="Loader__overlay__loader">
+          <Loader variant={variant} />
+          <AxeLoader />
+        </div>
+        {label ? <span className="Loader__overlay__label">{label}</span> : null}
+        {children}
       </div>
-      {label ? <span className="Loader__overlay__label">{label}</span> : null}
-      {children}
-    </div>
-  );
-};
+    );
+  }
+);
 
 LoaderOverlay.propTypes = {
   className: PropTypes.string,

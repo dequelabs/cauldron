@@ -14,6 +14,7 @@ const LOADING_DURATION = 5000;
 const LoaderOverlayDemo = () => {
   const mounted = useRef(false);
   const buttonRef = useRef();
+  const loaderRef = useRef();
   const [loading, setLoading] = useState(false);
   const onClick = () => {
     setLoading(true);
