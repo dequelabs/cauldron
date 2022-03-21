@@ -1,8 +1,17 @@
 version: 2
 
+orbs:
+  browser-tools: circleci/browser-tools@1.2.4
+
 defaults: &defaults
   docker:
-    - image: circleci/node:14-browsers
+    - image: cimg/node:16.14-browsers
+  steps:
+    - browser-tools/install-chrome
+    - run:
+        command: |
+          google-chrome --version
+        name: Google Chrome Version
   working_directory: ~/cauldron
 
 set_npm_auth: &set_npm_auth
