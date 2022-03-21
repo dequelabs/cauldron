@@ -46,14 +46,13 @@ const LoaderOverlayDemo = () => {
           type: 'string',
           description: 'Loader variant, can be "small" or "large".'
         },
-        focus: {
+        focusOnInitialRender: {
           type: 'boolean',
           description: 'whether or not to focus the loader on initial render'
         },
         loaderRef: {
           type: 'function',
-          description:
-            'DEPRECATED - replace with "focus" prop - optional ref function to move focus to loader on mount'
+          description: 'optional ref function'
         }
       }}
     >
@@ -65,7 +64,7 @@ const LoaderOverlayDemo = () => {
               tabIndex={-1}
               label="Loading..."
               variant="large"
-              focus
+              focusOnInitialRender
             >
               <p>
                 Explanatory secondary text goes here. Let them know what's

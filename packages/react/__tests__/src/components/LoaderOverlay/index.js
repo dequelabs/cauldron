@@ -39,7 +39,12 @@ test('handles variants', () => {
 
 test('handles focus', () => {
   const loaderOverlay = mount(
-    <LoaderOverlay className="baz" role="alert" label="loading" focus>
+    <LoaderOverlay
+      className="baz"
+      role="alert"
+      label="loading"
+      focusOnInitialRender
+    >
       Some text
     </LoaderOverlay>
   );

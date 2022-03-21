@@ -7,7 +7,7 @@ import AxeLoader from './axe-loader';
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
   label?: string;
-  focus?: boolean;
+  focusOnInitialRender?: boolean;
   children?: React.ReactNode;
 }
 
@@ -18,7 +18,7 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
       variant,
       label,
       children,
-      focus,
+      focusOnInitialRender,
       ...other
     }: LoaderOverlayProps,
     ref
@@ -26,7 +26,7 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
     const overlayRef = createRef<HTMLDivElement>();
 
     useEffect(() => {
-      if ((!!focus && overlayRef) || ref) {
+      if (!!focusOnInitialRender && overlayRef) {
         setTimeout(() => {
           return overlayRef.current?.focus();
         });
@@ -64,7 +64,7 @@ LoaderOverlay.propTypes = {
   className: PropTypes.string,
   variant: PropTypes.oneOf(['large', 'small']),
   label: PropTypes.string,
-  focus: PropTypes.bool,
+  focusOnInitialRender: PropTypes.bool,
   children: PropTypes.node
 };
 
