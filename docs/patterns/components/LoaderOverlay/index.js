@@ -100,7 +100,7 @@ const LoaderOverlayDemo = () => {
         <Code
           role="region"
           tabIndex={0}
-        >{`<LoaderOverlay tabIndex={-1} label="Loading..." focus>
+        >{`<LoaderOverlay tabIndex={-1} label="Loading..." focusOnInitialRender>
   <p>Explanatory secondary text goes here. Let them know what's happening, alright?</p>
 </LoaderOverlay>`}</Code>
       </div>
