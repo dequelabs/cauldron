@@ -23,16 +23,23 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
     }: LoaderOverlayProps,
     ref
   ) => {
-    const overlayRef = createRef<HTMLDivElement>();
+    const overlayRef =
+      typeof ref === 'function' || !ref ? createRef<HTMLDivElement>() : ref;
 
     useEffect(() => {
-      if (!!focusOnInitialRender && overlayRef) {
+      if (!!focusOnInitialRender && overlayRef.current) {
         setTimeout(() => {
           return overlayRef.current?.focus();
         });
       }
       return;
-    }, []);
+    }, [overlayRef.current]);
+
+    useEffect(() => {
+      if (typeof ref === 'function') {
+        ref(overlayRef.current);
+      }
+    }, [ref]);
 
     return (
       <div
@@ -45,7 +52,7 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
             ? 'Loader__overlay--small'
             : ''
         )}
-        ref={ref ? ref : overlayRef}
+        ref={overlayRef}
         tabIndex={-1}
         {...other}
       >
