@@ -38,7 +38,7 @@ export default class Demo extends Component {
           <AlertContent>Welcome to the danger zone</AlertContent>
           <AlertActions>
             <Button variant="error" onClick={this.toggleWarningAlert}>
-              Let's get dangerous
+              Danger
             </Button>
             <Button variant="secondary" onClick={this.toggleWarningAlert}>
               Nevermind
