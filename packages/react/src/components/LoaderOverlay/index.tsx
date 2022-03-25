@@ -1,8 +1,9 @@
-import React, { createRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
+import useSharedRef from '../../utils/useSharedRef';
 
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
@@ -11,7 +12,7 @@ interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
+const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
   (
     {
       className,
@@ -23,8 +24,7 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
     }: LoaderOverlayProps,
     ref
   ) => {
-    const overlayRef =
-      typeof ref === 'function' || !ref ? createRef<HTMLDivElement>() : ref;
+    const overlayRef = useSharedRef<HTMLDivElement>(ref);
 
     useEffect(() => {
       if (!!focusOnInitialRender && overlayRef.current) {
@@ -34,12 +34,6 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
       }
       return;
     }, [overlayRef.current]);
-
-    useEffect(() => {
-      if (typeof ref === 'function') {
-        ref(overlayRef.current);
-      }
-    }, [ref]);
 
     return (
       <div
