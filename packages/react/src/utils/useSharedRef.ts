@@ -12,7 +12,7 @@ import setRef from './setRef';
  *   if (internalRef.current) {
  *     // do something with the internal ref...
  *   }
- *   return (<div>...</div>)
+ *   return (<div ref={internalRef}>...</div>)
  * })
  */
 export default function useSharedRef<T>(ref: Ref<T>): MutableRefObject<T> {
