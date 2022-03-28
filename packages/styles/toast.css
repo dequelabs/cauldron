@@ -37,6 +37,7 @@
   background: transparent;
   border: 0;
   height: calc(var(--text-size-small) + 9px);
+  color: currentColor;
 }
 
 .Toast__dismiss:focus {
