@@ -6,6 +6,7 @@ import focusable from 'focusable';
 import Icon from '../Icon';
 import rndid from '../../utils/rndid';
 import removeIds from '../../utils/remove-ids';
+import { isBrowser } from '../../utils/is-browser';
 
 export interface PointoutProps {
   arrowPosition:
@@ -370,15 +371,16 @@ export default class Pointout extends React.Component<
       className,
       target,
       disableOffscreenPointout,
-      portal = document.body,
       previousButtonProps,
       nextButtonProps,
       closeButtonProps
     } = this.props;
 
-    if (!show) {
+    if (!show || !isBrowser()) {
       return null;
     }
+
+    const portal = this.props.portal || document.body;
 
     const FTPO = (
       <div

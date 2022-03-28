@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
+import { isBrowser } from '../../utils/is-browser';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -177,7 +178,7 @@ export default function Tooltip({
     }
   }, [targetElement, id]);
 
-  return showTooltip || hideElementOnHidden
+  return (showTooltip || hideElementOnHidden) && isBrowser()
     ? createPortal(
         <div
           id={id}
