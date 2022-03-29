@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { isBrowser } from '../../utils/is-browser';
 
 export interface SkipLinkProps {
   target: string;
@@ -73,6 +74,9 @@ export default class SkipLink extends React.Component<
   }
 
   private onClick() {
+    if (!isBrowser()) {
+      return;
+    }
     const element = document.querySelector(this.props.target) as HTMLElement;
 
     if (element) {

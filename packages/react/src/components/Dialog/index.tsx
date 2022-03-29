@@ -8,6 +8,7 @@ import Icon from '../Icon';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
+import { isBrowser } from '../../utils/is-browser';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -97,13 +98,14 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       closeButtonText,
       heading,
       show,
-      portal = document.body,
       ...other
     } = this.props;
 
-    if (!show) {
+    if (!show || !isBrowser()) {
       return null;
     }
+
+    const portal = this.props.portal || document.body;
 
     const close = !forceAction ? (
       <button className="Dialog__close" type="button" onClick={this.close}>
