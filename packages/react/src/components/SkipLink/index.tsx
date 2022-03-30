@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Icon from '../Icon';
 
 export interface SkipLinkProps {
   target: string;
@@ -65,8 +66,11 @@ export default class SkipLink extends React.Component<
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         >
-          <span className="SkipLink__item--first">{skipText}</span>&nbsp;
-          <span className="SkipLink__item--second">{targetText}</span>
+          <span className="SkipLink__item--first">{skipText}</span>
+          <span className="SkipLink__item--second">
+            <Icon type="triangle-right" aria-hidden="true" />
+            {targetText}
+          </span>
         </a>
       </nav>
     );
