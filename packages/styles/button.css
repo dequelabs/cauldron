@@ -164,7 +164,7 @@ button.Link {
 }
 
 .Button--thin {
-  height: var(--button-thin-height);
+  min-height: var(--button-thin-height);
   min-width: 100px;
   font-size: var(--text-size-smallest);
   line-height: var(--text-size-smallest);
