@@ -1,4 +1,5 @@
-a.Button--primary {
+a.Button--primary,
+a.Button--secondary {
   text-decoration: none;
   padding: 9px 18px;
 }

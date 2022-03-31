@@ -25,12 +25,14 @@ const PanelDemo = () => {
             },
             collapsed: true,
             children: 'Collapsed panel content.'
+          },
+          {
+            children: 'Content of Panel with no heading'
           }
         ]}
         propDocs={{
           heading: {
             type: 'object',
-            required: true,
             description:
               'Object containing: text, level (optional), id (optional)'
           },

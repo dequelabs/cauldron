@@ -156,7 +156,6 @@ textarea.Field--has-error:focus:hover,
 }
 
 .Error {
-  min-height: var(--space-large);
   color: var(--error);
   text-align: left;
   font-size: var(--text-size-smallest);
@@ -168,7 +167,7 @@ textarea.Field--has-error:focus:hover,
   display: block;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: var(--space-smallest);
+  margin-bottom: var(--space-small);
 }
 
 .Field.is--flex-row {
@@ -210,7 +209,7 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   color: var(--field-label-text-color);
   font-size: var(--text-size-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   padding-bottom: var(--space-half);
   cursor: default;
 }
@@ -322,7 +321,6 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
-  border: 0;
 }
 
 .Checkbox__overlay.Checkbox__overlay--focused,
@@ -351,8 +349,6 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
-  width: 2px;
-  border: 0;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {

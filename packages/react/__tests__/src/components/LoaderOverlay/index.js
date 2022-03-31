@@ -37,6 +37,49 @@ test('handles variants', () => {
   expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
 });
 
+test('handles focus', () => {
+  const loaderOverlay = mount(
+    <LoaderOverlay
+      className="baz"
+      role="alert"
+      label="loading"
+      focusOnInitialRender
+    >
+      Some text
+    </LoaderOverlay>
+  );
+
+  setTimeout(() => {
+    expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
+  });
+});
+
+test('handles not being focused', () => {
+  const loaderOverlay = mount(
+    <LoaderOverlay className="baz" role="alert" label="loading">
+      Some text
+    </LoaderOverlay>
+  );
+
+  setTimeout(() => {
+    expect(document.activeElement).not.toBe(loaderOverlay.getDOMNode());
+  });
+});
+
+test('handles being passed a ref', () => {
+  const loaderRef = React.createRef(null);
+
+  const loaderOverlay = mount(
+    <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>
+      Some text
+    </LoaderOverlay>
+  );
+
+  setTimeout(() => {
+    expect(document.activeElement).toStrictEqual(loaderOverlay.getDOMNode());
+  });
+});
+
 test('returns no axe violations', async () => {
   const loaderOverlay = shallow(<LoaderOverlay>Hello world</LoaderOverlay>);
 

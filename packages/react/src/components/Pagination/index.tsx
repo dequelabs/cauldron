@@ -96,7 +96,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             <span role="log" aria-atomic="true">
               {statusLabel || (
                 <span>
-                  Showing <strong>{itemStart}</strong> of{' '}
+                  Showing <strong>{itemStart}</strong> to{' '}
                   <strong>{itemEnd}</strong> of <strong>{totalItems}</strong>
                 </span>
               )}

@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/dequelabs/cauldron/compare/v4.1.0...v4.2.0) (2022-03-31)
+
+### Features
+
+- **react,styles:** add two-column panel component ([#501](https://github.com/dequelabs/cauldron/issues/501)) ([42326e2](https://github.com/dequelabs/cauldron/commit/42326e21000e387405a0cba1635d560125188fd2))
+- add support for button-secondary to link ([#540](https://github.com/dequelabs/cauldron/issues/540)) ([30f2d0e](https://github.com/dequelabs/cauldron/commit/30f2d0e2cf22191c8aace359a01b74bbebd9a788))
+
+### Bug Fixes
+
+- **react:** ensure browser environment before accessing browser-related objects ([76098bb](https://github.com/dequelabs/cauldron/commit/76098bb857a95e55b67af7359ed2d69b7ccd5cb6))
+- **styles:** allow button text to wrap to prevent text from being cut off ([#601](https://github.com/dequelabs/cauldron/issues/601)) ([cb27434](https://github.com/dequelabs/cauldron/commit/cb274348a3f4833168f2facb70bfeecdd5faa1f7))
+- **styles:** fix color contrast issue with toast dismiss button in dark theme ([#600](https://github.com/dequelabs/cauldron/issues/600)) ([ab60e8d](https://github.com/dequelabs/cauldron/commit/ab60e8dde0690bdb73033b09c14dface1fcd44ae))
+- **styles:** fix issue which prevents navigation/tabstop in NVDA/Chrome on Checkboxes/Radios ([#605](https://github.com/dequelabs/cauldron/issues/605)) ([20bef56](https://github.com/dequelabs/cauldron/commit/20bef56201b0081d86244aa1b4311f12f26c20c8))
+- Add hover state to Table and correct Toast icon ([#554](https://github.com/dequelabs/cauldron/issues/554)) ([fe222ef](https://github.com/dequelabs/cauldron/commit/fe222ef4f6680d89579544dc243f1905cf10e21f))
+- Add missing margin to TextField and Select ([#543](https://github.com/dequelabs/cauldron/issues/543)) ([a93171d](https://github.com/dequelabs/cauldron/commit/a93171df9a0bce5bfd89471440211de631c0685c))
+- added prop to handle moving focus to loader overlay on initial render; updated readme ([#562](https://github.com/dequelabs/cauldron/issues/562)) ([a5dcfee](https://github.com/dequelabs/cauldron/commit/a5dcfeed1f026051b322d5dff4ba12dba58d1197))
+- fix issue with tooltip not updating placement ([#547](https://github.com/dequelabs/cauldron/issues/547)) ([3eec066](https://github.com/dequelabs/cauldron/commit/3eec06603cd2a560833d8ff7bcfe116fd6880e42))
+- **react:** Allow `Step` to accept any LI props ([#519](https://github.com/dequelabs/cauldron/issues/519)) ([50e983d](https://github.com/dequelabs/cauldron/commit/50e983d09ca59859c5abce7bbb562c393711fb39))
+- **styles:** fix unnecessary border from lists inside of cards ([#535](https://github.com/dequelabs/cauldron/issues/535)) ([e368ef0](https://github.com/dequelabs/cauldron/commit/e368ef0b63846b521fafef3906f6fb92119998d5))
+- do not reserve space for tooltip when hidden ([#534](https://github.com/dequelabs/cauldron/issues/534)) ([26257ad](https://github.com/dequelabs/cauldron/commit/26257ad7b14b41d2b9a54421d3e1c12f6262bc2a))
+- Make Table width uneven ([#537](https://github.com/dequelabs/cauldron/issues/537)) ([ab3e71e](https://github.com/dequelabs/cauldron/commit/ab3e71e6782b93de9b9d3ac9e3002d8e914fde59))
+- **react:** use correct grammar for pagination start/end text ([#536](https://github.com/dequelabs/cauldron/issues/536)) ([d1059d0](https://github.com/dequelabs/cauldron/commit/d1059d02889e27c2cc421b282dcb789917d65331))
+- Make Panel heading optional ([#530](https://github.com/dequelabs/cauldron/issues/530)) ([49b3b90](https://github.com/dequelabs/cauldron/commit/49b3b9092b3a38c603a1b6be17fc193a20fbd64f))
+
 ## [4.1.0](https://github.com/dequelabs/cauldron/compare/v4.0.0...v4.1.0) (2022-01-26)
 
 ### Features

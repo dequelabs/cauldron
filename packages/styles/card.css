@@ -75,10 +75,6 @@
   box-sizing: border-box;
 }
 
-.Card__content ul li {
-  border-bottom: 1px solid var(--list-separator);
-}
-
 .Card__footer {
   padding: var(--space-small);
   text-align: center;

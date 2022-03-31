@@ -178,7 +178,9 @@ const Demo = () => {
           },
           show: {
             type: 'boolean',
-            description: 'Manually control the show state of the tooltip'
+            // See: https://github.com/dequelabs/cauldron/issues/546
+            description:
+              'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
           },
           placement: {
             type: 'string',

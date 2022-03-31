@@ -1,0 +1,33 @@
+name: Semantic PR Title
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - edited
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        run: |
+            set -e
+
+            Title="${{ github.event.pull_request.title }}"
+            CommitTypes="feat fix perf style docs refactor test build ci chore Merge Revert"
+
+            echo "Validating PR title: \"$Title\""
+            echo
+
+            for Type in $CommitTypes; do
+              if [[ "$Title" =~ ^"$Type" ]]; then
+                echo "Title matches conventional commits."
+                exit 0
+              fi
+            done
+
+            echo "PR title does not follow conventional commits."
+            echo "Please refer to https://www.conventionalcommits.org/en/v1.0.0"
+            exit 1
