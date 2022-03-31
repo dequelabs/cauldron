@@ -321,7 +321,6 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
-  border: 0;
 }
 
 .Checkbox__overlay.Checkbox__overlay--focused,
@@ -350,8 +349,6 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
-  width: 2px;
-  border: 0;
 }
 
 .Checkbox__overlay.Icon--checkbox-checked {
