@@ -1,12 +1,19 @@
-@media only screen and (max-width: 450px) {
-  .FieldWrapDemo .Panel {
-    max-width: 100%;
-  }
-}
-
 .FieldWrapDemo .Panel {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 600px;
+}
+
+.FieldWrapDemo button {
+  max-width: max-content;
+}
+
+@media only screen and (max-width: 450px) {
+  .FieldWrapDemo .Panel {
+    max-width: 100%;
+    overflow: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
