@@ -6,6 +6,7 @@ import {
   AlertActions,
   Code
 } from '@deque/cauldron-react/';
+import './index.css';
 
 export default class Demo extends Component {
   constructor() {
@@ -23,8 +24,10 @@ export default class Demo extends Component {
       <div>
         <h1>Alert</h1>
         <h2>Demo</h2>
-        <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
-        <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
+        <div className="ButtonWrapper">
+          <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
+          <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
+        </div>
         <Alert heading="Default Alert" show={showDefaultAlert}>
           <AlertContent>Dismissable alert</AlertContent>
           <AlertActions>

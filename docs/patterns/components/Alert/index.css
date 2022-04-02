@@ -1,0 +1,13 @@
+@media only screen and (max-width: 375px) {
+  .ButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ButtonWrapper button {
+    margin-left: 0px !important;
+    max-width: max-content;
+  }
+}
