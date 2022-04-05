@@ -69,7 +69,7 @@ export default class SkipLink extends React.Component<
         >
           <span className="SkipLink__item--first">{skipText}</span>
           <span className="SkipLink__item--second">
-            <Icon type="triangle-right" aria-hidden="true" />
+            <Icon type="triangle-right" />
             {targetText}
           </span>
         </a>
