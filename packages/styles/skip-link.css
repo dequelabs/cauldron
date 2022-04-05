@@ -25,7 +25,7 @@
 }
 
 .SkipLink a {
-  min-width: 208px;
+  min-width: 13rem;
   background-color: var(--skip-link-background-color);
   display: block;
   color: var(--skip-link-text-color);
