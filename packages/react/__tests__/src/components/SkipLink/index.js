@@ -60,16 +60,3 @@ test('passes props through to the nav element', () => {
       .getAttribute('aria-label')
   ).toBe('Skip to my lou');
 });
-
-test('includes space (&nbsp;) between skipText and targetText', () => {
-  const skipLink = mount(
-    <SkipLink
-      target="#skip-target"
-      skipText="Skip to"
-      targetText="Main Content"
-    />
-  );
-  expect(skipLink.find('nav a').getDOMNode().textContent).toBe(
-    'Skip to\xa0Main Content'
-  );
-});
