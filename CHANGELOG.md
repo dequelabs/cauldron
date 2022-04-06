@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/dequelabs/cauldron/compare/v4.2.1...v4.3.0) (2022-04-06)
+
+### Features
+
+- **icons:** add minus ([#611](https://github.com/dequelabs/cauldron/issues/611)) ([abded4e](https://github.com/dequelabs/cauldron/commit/abded4e2c730f6716abab598eccbc2a066b97cbf))
+- **react:** announce changes to sort on sortable TableHeaders ([#622](https://github.com/dequelabs/cauldron/issues/622)) ([01c786a](https://github.com/dequelabs/cauldron/commit/01c786aea73440a6aedc9b79af2944b974d23b1d))
+
+### Bug Fixes
+
+- **react:** create useSharedRef util to share refs on forwardRef functional components ([#597](https://github.com/dequelabs/cauldron/issues/597)) ([d153945](https://github.com/dequelabs/cauldron/commit/d15394566685da7ff50bb70924be80d316834bc4))
+- **skip-link:** fix skip-link styles with new design ([#607](https://github.com/dequelabs/cauldron/issues/607)) ([f766f9d](https://github.com/dequelabs/cauldron/commit/f766f9dd496d75b7649bfe79b81bae853e0d9e47))
+- **styles:** fix thin buttons being too large ([#613](https://github.com/dequelabs/cauldron/issues/613)) ([62c9172](https://github.com/dequelabs/cauldron/commit/62c917271fd30df2e4e65c8eb421578ae20f373c))
+
 ### [4.2.1](https://github.com/dequelabs/cauldron/compare/v4.2.0...v4.2.1) (2022-03-31)
 
 ### Bug Fixes
