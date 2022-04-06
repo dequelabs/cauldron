@@ -1,19 +1,17 @@
 :root {
-  --skip-link-background-color: rgba(11, 14, 17, 0.9);
+  --skip-link-background-color: rgba(255, 255, 255, 0.95);
+  --skip-link-focus-color: var(--focus-light);
+  --skip-link-text-color: var(--text-color-base);
 }
 
 .SkipLink {
-  min-width: 173px;
-  height: 58px;
-  background-color: var(--skip-link-background-color);
   position: absolute;
   box-sizing: border-box;
-  padding: var(--space-half);
+  padding: var(--space-smallest);
   top: -999px;
   left: 11px;
   opacity: 0;
   transition: 250ms opacity;
-  border-radius: 2px;
   z-index: var(--z-index-skip-container);
 }
 
@@ -27,10 +25,13 @@
 }
 
 .SkipLink a {
+  min-width: 13rem;
+  background-color: var(--skip-link-background-color);
   display: block;
-  color: var(--text-color-light);
+  color: var(--skip-link-text-color);
   text-decoration: none;
-  padding: var(--space-three-quarters);
+  padding: 12px;
+  border-radius: 2px;
 }
 
 .SkipLink span {
@@ -40,13 +41,16 @@
 .SkipLink .SkipLink__item--first {
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
-  color: var(--text-color-light);
+  margin-bottom: var(--space-three-quarters);
 }
 
 .SkipLink .SkipLink__item--second {
   font-size: var(--text-size-normal);
   font-weight: var(--font-weight-medium);
-  color: var(--text-color-light);
+}
+
+.SkipLink .Icon--triangle-right {
+  color: var(--skip-link-focus-color);
 }
 
 .SkipLink ul {
@@ -91,4 +95,11 @@
 .SkipLink ul li a:focus:before,
 .SkipLink ul li a:focus:after {
   color: var(--text-color-light);
+}
+
+/* Dark Theme */
+.cauldron--theme-dark {
+  --skip-link-background-color: rgba(11, 14, 17, 0.95);
+  --skip-link-focus-color: var(--focus-dark);
+  --skip-link-text-color: var(--text-color-light);
 }
