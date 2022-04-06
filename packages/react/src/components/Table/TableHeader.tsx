@@ -64,7 +64,7 @@ const TableHeader = ({
             )}
           </span>
           <Offscreen>
-            <span role="alert" aria-live="polite">
+            <span role="status" aria-live="polite">
               {announcement}
             </span>
           </Offscreen>
