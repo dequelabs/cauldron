@@ -9,7 +9,8 @@ import {
   Breadcrumb,
   BreadcrumbLink,
   BreadcrumbItem,
-  Code
+  Code,
+  SkipLink
 } from '@deque/cauldron-react/';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
@@ -134,7 +135,7 @@ function TwoColumnPanelDemo() {
 
       <h3>Example</h3>
 
-      <Code role="region" tabIndex="1">{`<TwoColumnPanel>
+      <Code role="region" tabIndex="1">{`<TwoColumnPanel:
   <ColumnLeft aria-labelledby="sidebar">
     <ColumnHeader id="sidebar">Items</ColumnHeader>
     <nav aria-label="Sidebar navigation">

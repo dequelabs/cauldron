@@ -12,13 +12,16 @@ import FocusTrap from 'focus-trap-react';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import ClickOutsideListener from '../ClickOutsideListener';
-import { ColumnLeft, ColumnRight } from './';
+import ColumnLeft from './ColumnLeft';
+import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
+import SkipLink from '../SkipLink';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   initialCollapsed?: boolean;
   showCollapsedPanelLabel?: string;
   hideCollapsedPanelLabel?: string;
+  skipLink?: SkipLink;
 }
 
 const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
@@ -29,6 +32,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       initialCollapsed = false,
       showCollapsedPanelLabel = 'Show Panel',
       hideCollapsedPanelLabel = 'Hide Panel',
+      skipLink = null,
       ...props
     },
     ref
@@ -240,6 +244,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           onClickOutside={handleClickOutside}
           target={columnLeftRef.current as HTMLElement}
         />
+        {skipLink}
         {showPanel ? ColumnLeftComponent : null}
         {ColumnRightComponent}
       </div>
