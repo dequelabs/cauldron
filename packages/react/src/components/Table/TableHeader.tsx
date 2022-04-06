@@ -13,7 +13,7 @@ interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   onSort?: () => void;
   className?: string;
   sortAscendingAnnouncement?: string;
-  sortDescendingAnnoucnement?: string;
+  sortDescendingAnnouncemen?: string;
 }
 
 const TableHeader = ({
@@ -22,7 +22,7 @@ const TableHeader = ({
   onSort,
   className,
   sortAscendingAnnouncement = 'sorted ascending',
-  sortDescendingAnnoucnement = 'sorted descending',
+  sortDescendingAnnouncemen = 'sorted descending',
   ...other
 }: TableHeaderProps) => {
   // When the sort direction changes, we want to announce the change in a live region
@@ -34,7 +34,7 @@ const TableHeader = ({
       setAnnouncement(
         sortDirection === 'ascending'
           ? sortAscendingAnnouncement
-          : sortDescendingAnnoucnement
+          : sortDescendingAnnouncemen
       );
     }
   }, [sortDirection]);
