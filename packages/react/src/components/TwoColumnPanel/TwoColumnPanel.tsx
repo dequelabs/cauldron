@@ -244,7 +244,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           onClickOutside={handleClickOutside}
           target={columnLeftRef.current as HTMLElement}
         />
-        {skipLink}
+        {isCollapsed ? null : skipLink}
         {showPanel ? ColumnLeftComponent : null}
         {ColumnRightComponent}
       </div>
