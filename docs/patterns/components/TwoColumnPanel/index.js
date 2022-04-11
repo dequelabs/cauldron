@@ -9,8 +9,7 @@ import {
   Breadcrumb,
   BreadcrumbLink,
   BreadcrumbItem,
-  Code,
-  SkipLink
+  Code
 } from '@deque/cauldron-react/';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
@@ -320,6 +319,11 @@ function TwoColumnPanelDemo() {
               type: 'string',
               description: 'Label hide panel toggle',
               default: 'Hide Panel'
+            },
+            skipLink: {
+              type: 'SkipLink',
+              description: 'A "Skip to Content" link',
+              default: 'null'
             },
             children
           }}
