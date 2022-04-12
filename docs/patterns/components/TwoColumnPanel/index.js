@@ -323,7 +323,6 @@ function TwoColumnPanelDemo() {
             skipLink: {
               type: 'SkipLink',
               description: 'A "Skip to Content" link',
-              default: 'null'
             },
             children
           }}
