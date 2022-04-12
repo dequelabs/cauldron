@@ -276,4 +276,8 @@
   .TwoColumnPanel--hide .TwoColumnPanel__Left {
     transform: translateX(-10vw);
   }
+
+  .TwoColumnPanel > .SkipLink {
+    display: none;
+  }
 }
