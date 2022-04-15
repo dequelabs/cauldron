@@ -27,16 +27,6 @@ test('should be focusable when tabIndex is set to 0', () => {
   expect(document.activeElement).toBe(pre);
 });
 
-test('should be focusable when tabIndex is set to 0', () => {
-  const code = mount(
-    <Code language="javascript" tabIndex={0}>{`var some = "javascript"`}</Code>
-  );
-
-  const pre = code.find('pre').getDOMNode();
-  pre.focus();
-  expect(document.activeElement).toBe(pre);
-});
-
 test('should not be focusable when tabindex is not set', () => {
   const code = mount(
     <Code language="javascript">{`var some = "javascript"`}</Code>
