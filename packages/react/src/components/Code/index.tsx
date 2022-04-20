@@ -17,17 +17,20 @@ interface Props extends SyntaxHighlighterProps {
   children: React.ReactNode;
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
+  tabIndex?: number;
 }
 
 const Code: React.ComponentType<Props> = ({
   children,
   className,
+  tabIndex,
   ...props
 }) => (
   <SyntaxHighlighter
     {...props}
     useInlineStyles={false}
     className={classNames('Code', className)}
+    tabIndex={tabIndex}
   >
     {children}
   </SyntaxHighlighter>
