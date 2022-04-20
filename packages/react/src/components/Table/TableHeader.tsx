@@ -8,10 +8,8 @@ import Icon from '../Icon';
 type SortDirection = 'ascending' | 'descending' | 'none';
 
 interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
-  children: React.ReactNode;
   sortDirection?: SortDirection;
   onSort?: () => void;
-  className?: string;
   sortAscendingAnnouncement?: string;
   sortDescendingAnnouncemen?: string;
 }
