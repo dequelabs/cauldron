@@ -7,13 +7,8 @@ const PaginationDemo = () => {
   const totalItems = 111;
   const itemsPerPage = 25;
   const [currentPage, setCurrentPage] = useState(3);
-  const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
-  const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
-
-  const onNextPageClick = () => setCurrentPage(currentPage + 1);
-  const onFirstPageClick = () => setCurrentPage(1);
-  const onPreviousPageClick = () => setCurrentPage(currentPage - 1);
-  const onLastPageClick = () => setCurrentPage(5);
+  const itemStart = currentPage * itemsPerPage + 1;
+  const itemEnd = Math.min((currentPage + 1) * itemsPerPage, totalItems);
 
   return (
     <div>
@@ -35,10 +30,7 @@ const PaginationDemo = () => {
             nextPageLabel: 'NEXT PAGE!!',
             previousPageLabel: 'PREV PAGE!!',
             lastPageLabel: 'JIMMY PAGE!!',
-            onNextPageClick,
-            onFirstPageClick,
-            onPreviousPageClick,
-            onLastPageClick
+            goToPage: setCurrentPage
           }
         ]}
         propDocs={{
@@ -57,8 +49,14 @@ const PaginationDemo = () => {
           currentPage: {
             type: 'number',
             description: 'The (1-based) number of the current page.',
-            required: false,
+            required: true,
             default: 1
+          },
+          goToPage: {
+            type: 'function',
+            description:
+              'Function to be called when a page navigation button is clicked',
+            required: true
           },
           statusLabel: {
             type: 'ReactNode',
@@ -97,30 +95,6 @@ const PaginationDemo = () => {
               'The label text for the last page button (to be rendered as a tooltip).',
             required: false,
             default: 'Last page'
-          },
-          onNextPageClick: {
-            type: 'function',
-            description:
-              'Function to be called when next page button is clicked',
-            required: false
-          },
-          onPreviousPageClick: {
-            type: 'function',
-            description:
-              'Function to be called when previous page button is clicked',
-            required: false
-          },
-          onFirstPageClick: {
-            type: 'function',
-            description:
-              'Function to be called when first page button is clicked',
-            required: false
-          },
-          onLastPageClick: {
-            type: 'function',
-            description:
-              'Function to be called when last page button is clicked',
-            required: false
           },
           tooltipPlacement: {
             type: 'string',

@@ -5,15 +5,9 @@ import Pagination from '../../../../src/components/Pagination';
 
 describe('on the first page', () => {
   test('Disables first/prev page buttons', () => {
-    const onFirstPageClick = sinon.spy();
-    const onPreviousPageClick = sinon.spy();
+    const goToPage = sinon.spy();
     const wrapper = mount(
-      <Pagination
-        totalItems={18}
-        currentPage={1}
-        onFirstPageClick={onFirstPageClick}
-        onPreviousPageClick={onPreviousPageClick}
-      />
+      <Pagination totalItems={18} currentPage={0} goToPage={goToPage} />
     );
     expect(
       wrapper
@@ -52,22 +46,15 @@ describe('on the first page', () => {
       .at(1)
       .simulate('click');
 
-    expect(onFirstPageClick.callCount).toBe(0);
-    expect(onPreviousPageClick.callCount).toBe(0);
+    expect(goToPage.callCount).toBe(0);
   });
 });
 
 describe('on the last page', () => {
   test('Disables last/next page buttons', () => {
-    const onNextPageClick = sinon.spy();
-    const onLastPageClick = sinon.spy();
+    const goToPage = sinon.spy();
     const wrapper = mount(
-      <Pagination
-        totalItems={18}
-        currentPage={2}
-        onNextPageClick={onNextPageClick}
-        onLastPageClick={onLastPageClick}
-      />
+      <Pagination totalItems={18} currentPage={2} goToPage={goToPage} />
     );
     expect(
       wrapper
@@ -106,8 +93,7 @@ describe('on the last page', () => {
       .at(3)
       .simulate('click');
 
-    expect(onNextPageClick.callCount).toBe(0);
-    expect(onLastPageClick.callCount).toBe(0);
+    expect(goToPage.callCount).toBe(0);
   });
 });
 
@@ -120,20 +106,14 @@ test('supports custom status label text', () => {
 });
 
 test('calls on{Next,Previous,First,Last}Click as expected', () => {
-  const onNextPageClick = sinon.spy();
-  const onPreviousPageClick = sinon.spy();
-  const onFirstPageClick = sinon.spy();
-  const onLastPageClick = sinon.spy();
+  const goToPage = sinon.spy();
 
   const wrapper = mount(
     <Pagination
       totalItems={500}
       currentPage={3}
       itemsPerPage={10}
-      onNextPageClick={onNextPageClick}
-      onPreviousPageClick={onPreviousPageClick}
-      onFirstPageClick={onFirstPageClick}
-      onLastPageClick={onLastPageClick}
+      goToPage={goToPage}
     />
   );
 
@@ -142,45 +122,33 @@ test('calls on{Next,Previous,First,Last}Click as expected', () => {
     .find('button')
     .at(0)
     .simulate('click');
-  expect(onFirstPageClick.callCount).toBe(1);
-  expect(onPreviousPageClick.callCount).toBe(0);
-  expect(onNextPageClick.callCount).toBe(0);
-  expect(onLastPageClick.callCount).toBe(0);
+  expect(goToPage.args).toStrictEqual([[0]]);
 
   // click the prev page button
   wrapper
     .find('button')
     .at(1)
     .simulate('click');
-  expect(onFirstPageClick.callCount).toBe(1);
-  expect(onPreviousPageClick.callCount).toBe(1);
-  expect(onNextPageClick.callCount).toBe(0);
-  expect(onLastPageClick.callCount).toBe(0);
+  expect(goToPage.args).toStrictEqual([[0], [2]]);
 
   // click the next page button
   wrapper
     .find('button')
     .at(2)
     .simulate('click');
-  expect(onFirstPageClick.callCount).toBe(1);
-  expect(onPreviousPageClick.callCount).toBe(1);
-  expect(onNextPageClick.callCount).toBe(1);
-  expect(onLastPageClick.callCount).toBe(0);
+  expect(goToPage.args).toStrictEqual([[0], [2], [4]]);
 
   // click the last page button
   wrapper
     .find('button')
     .at(3)
     .simulate('click');
-  expect(onFirstPageClick.callCount).toBe(1);
-  expect(onPreviousPageClick.callCount).toBe(1);
-  expect(onNextPageClick.callCount).toBe(1);
-  expect(onLastPageClick.callCount).toBe(1);
+  expect(goToPage.args).toStrictEqual([[0], [2], [4], [49]]);
 });
 
 test('renders the expected default status label', () => {
   const wrapper = mount(
-    <Pagination totalItems={500} currentPage={3} itemsPerPage={17} />
+    <Pagination totalItems={500} currentPage={2} itemsPerPage={17} />
   );
 
   expect(wrapper.find('[role="log"]').text()).toBe('Showing 35 to 51 of 500');
