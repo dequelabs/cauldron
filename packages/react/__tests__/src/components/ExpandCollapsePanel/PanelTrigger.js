@@ -45,7 +45,7 @@ test('should render default trigger icons', () => {
 
 test('should render custom trigger icons', () => {
   const wrapper = shallow(
-    <PanelTrigger expandedIcon="triangle-down" collapsedIcon="triangle-right" />
+    <PanelTrigger iconExpanded="triangle-down" iconCollapsed="triangle-right" />
   );
   expect(wrapper.find('Icon').props('type')).toEqual({
     type: 'triangle-right'

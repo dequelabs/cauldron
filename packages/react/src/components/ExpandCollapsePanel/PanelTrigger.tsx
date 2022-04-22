@@ -9,8 +9,8 @@ export interface PanelTriggerProps
   open?: boolean;
   fullWidth?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  expandedIcon?: IconType;
-  collapsedIcon?: IconType;
+  iconExpanded?: IconType;
+  iconCollapsed?: IconType;
 }
 
 function PanelTrigger({
@@ -19,8 +19,8 @@ function PanelTrigger({
   open,
   fullWidth,
   onClick,
-  expandedIcon = 'chevron-down',
-  collapsedIcon = 'chevron-right',
+  iconExpanded = 'chevron-down',
+  iconCollapsed = 'chevron-right',
   ...other
 }: PanelTriggerProps) {
   return (
@@ -38,7 +38,7 @@ function PanelTrigger({
       <div className="ExpandCollapse__trigger-title">
         {typeof children === 'function' ? children({ open: !!open }) : children}
       </div>
-      <Icon type={open ? expandedIcon : collapsedIcon} />
+      <Icon type={open ? iconExpanded : iconCollapsed} />
     </button>
   );
 }
@@ -48,8 +48,8 @@ PanelTrigger.propTypes = {
   open: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,
-  expandedIcon: PropTypes.string,
-  collapsedIcon: PropTypes.string
+  iconExpanded: PropTypes.string,
+  iconCollapsed: PropTypes.string
 };
 
 export default React.memo(PanelTrigger);
