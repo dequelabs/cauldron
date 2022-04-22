@@ -48,8 +48,8 @@ PanelTrigger.propTypes = {
   open: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,
-  expandIcon: PropTypes.string,
-  collapseIcon: PropTypes.string
+  expandedIcon: PropTypes.string,
+  collapsedIcon: PropTypes.string
 };
 
 export default React.memo(PanelTrigger);
