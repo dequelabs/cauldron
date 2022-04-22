@@ -31,3 +31,27 @@ test('should handle onclick', () => {
   wrapper.simulate('click');
   expect(handleClick).toBeCalled();
 });
+
+test('should render default trigger icons', () => {
+  const wrapper = shallow(<PanelTrigger />);
+  expect(wrapper.find('Icon').props('type')).toEqual({
+    type: 'chevron-right'
+  });
+  wrapper.setProps({ open: true });
+  expect(wrapper.find('Icon').props('type')).toEqual({
+    type: 'chevron-down'
+  });
+});
+
+test('should render custom trigger icons', () => {
+  const wrapper = shallow(
+    <PanelTrigger iconExpanded="triangle-down" iconCollapsed="triangle-right" />
+  );
+  expect(wrapper.find('Icon').props('type')).toEqual({
+    type: 'triangle-right'
+  });
+  wrapper.setProps({ open: true });
+  expect(wrapper.find('Icon').props('type')).toEqual({
+    type: 'triangle-down'
+  });
+});
