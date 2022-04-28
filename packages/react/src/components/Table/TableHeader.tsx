@@ -78,7 +78,9 @@ TableHeader.propTypes = {
   children: PropTypes.node.isRequired,
   sortDirection: PropTypes.string,
   onSort: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  sortAscendingAnnouncement: PropTypes.string,
+  sortDescendingAnnouncement: PropTypes.string
 };
 
 export default TableHeader;
