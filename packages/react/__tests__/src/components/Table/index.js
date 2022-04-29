@@ -129,6 +129,7 @@ describe('Table components', () => {
 
       expect(wrapper.find('button').exists()).toBe(true);
       expect(wrapper.find('.Icon--sort-triangle').exists()).toBe(true);
+      expect(wrapper.find('Offscreen').text()).toBe('');
     });
 
     test('render className TableHeader--sorting when a TableHeader is actively sorting', () => {
@@ -147,12 +148,16 @@ describe('Table components', () => {
       expect(wrapper.find('.TableHeader--sort-ascending').exists()).toBe(true);
     });
 
-    test('renders triangle up Icon when sortDirection is ascending', () => {
+    test('renders triangle up Icon and ascending message when sortDirection is ascending', () => {
       const wrapper = mount(
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDirection={'ascending'} onSort={() => null}>
+              <TableHeader
+                sortDirection={'ascending'}
+                sortAscendingAnnouncement={'up and away'}
+                onSort={() => null}
+              >
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -160,15 +165,20 @@ describe('Table components', () => {
         </Table>
       );
 
+      expect(wrapper.find('Offscreen').text()).toBe('up and away');
       expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
     });
 
-    test('renders triangle down Icon when sortDirection is descending', () => {
+    test('renders triangle down Icon and descending message when sortDirection is descending', () => {
       const wrapper = mount(
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeader sortDirection={'descending'} onSort={() => null}>
+              <TableHeader
+                sortDirection={'descending'}
+                sortDescendingAnnouncement={'down below'}
+                onSort={() => null}
+              >
                 Sortable Header
               </TableHeader>
             </TableRow>
@@ -176,6 +186,7 @@ describe('Table components', () => {
         </Table>
       );
 
+      expect(wrapper.find('Offscreen').text()).toBe('down below');
       expect(wrapper.find('.Icon--triangle-down').exists()).toBe(true);
     });
 
