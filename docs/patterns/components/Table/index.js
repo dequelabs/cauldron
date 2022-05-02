@@ -66,6 +66,7 @@ const TableDemo = () => {
       <Table>
         <TableHead>
           <TableRow>
+            <TableHeader scope="col">ID</TableHeader>
             <TableHeader scope="col">First Name</TableHeader>
             <TableHeader scope="col">Last Name</TableHeader>
             <TableHeader scope="col">Email</TableHeader>
@@ -73,21 +74,33 @@ const TableDemo = () => {
         </TableHead>
         <TableBody>
           <TableRow>
+            <TableHeader scope="row" variant="cell">
+              1
+            </TableHeader>
             <TableCell>Frank</TableCell>
             <TableCell>Zappa</TableCell>
             <TableCell>frank@zappa.io</TableCell>
           </TableRow>
           <TableRow>
+            <TableHeader scope="row" variant="cell">
+              2
+            </TableHeader>
             <TableCell>Duane</TableCell>
             <TableCell>Allman</TableCell>
             <TableCell>duane@almond.biz</TableCell>
           </TableRow>
           <TableRow>
+            <TableHeader scope="row" variant="cell">
+              3
+            </TableHeader>
             <TableCell>Yamandu</TableCell>
             <TableCell>Costa</TableCell>
             <TableCell>yamandu_costa@gmail.br</TableCell>
           </TableRow>
           <TableRow>
+            <TableHeader scope="row" variant="cell">
+              4
+            </TableHeader>
             <TableCell>Jimmy</TableCell>
             <TableCell>Herring</TableCell>
             <TableCell>jamesHerring@hotmail.gov</TableCell>
@@ -109,6 +122,7 @@ const BasicTable = () => (
   <Table>
     <TableHead>
       <TableRow>
+        <TableHeader scope="col">ID</TableHeader>
         <TableHeader scope="col">First Name</TableHeader>
         <TableHeader scope="col">Last Name</TableHeader>
         <TableHeader scope="col">Email</TableHeader>
@@ -116,21 +130,25 @@ const BasicTable = () => (
     </TableHead>
     <TableBody>
       <TableRow>
+        <TableHeader scope="row" variant="cell">1</TableHeader>
         <TableCell>Frank</TableCell>
         <TableCell>Zappa</TableCell>
         <TableCell>frank@zappa.io</TableCell>
       </TableRow>
       <TableRow>
+        <TableHeader scope="row" variant="cell">2</TableHeader>
         <TableCell>Duane</TableCell>
         <TableCell>Allman</TableCell>
         <TableCell>duane@almond.biz</TableCell>
       </TableRow>
       <TableRow>
+        <TableHeader scope="row" variant="cell">3</TableHeader>
         <TableCell>Yamandu</TableCell>
         <TableCell>Costa</TableCell>
         <TableCell>yamandu_costa@gmail.br</TableCell>
       </TableRow>
       <TableRow>
+        <TableHeader scope="row" variant="cell">4</TableHeader>
         <TableCell>Jimmy</TableCell>
         <TableCell>Herring</TableCell>
         <TableCell>jamesHerring@hotmail.gov</TableCell>

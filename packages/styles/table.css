@@ -32,7 +32,7 @@
   overflow-wrap: break-word;
 }
 
-.TableHeader {
+.TableHeader:not(.TableCell) {
   background: var(--table-header-background-color);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
@@ -85,6 +85,7 @@
   background: var(--table-cell-background-color);
   color: var(--table-cell-text-color);
   border-bottom: 1px solid var(--table-row-border-color);
+  font-weight: var(--font-weight-normal);
 }
 
 .TableCell,

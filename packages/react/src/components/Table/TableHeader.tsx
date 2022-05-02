@@ -7,6 +7,9 @@ import Icon from '../Icon';
 // these match aria-sort's values
 type SortDirection = 'ascending' | 'descending' | 'none';
 
+const variants = ['cell'] as const;
+type Variant = typeof variants[number];
+
 interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   children: React.ReactNode;
   sortDirection?: SortDirection;
@@ -14,6 +17,7 @@ interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   className?: string;
   sortAscendingAnnouncement?: string;
   sortDescendingAnnouncement?: string;
+  variant?: Variant;
 }
 
 const TableHeader = ({
@@ -23,6 +27,7 @@ const TableHeader = ({
   className,
   sortAscendingAnnouncement = 'sorted ascending',
   sortDescendingAnnouncement = 'sorted descending',
+  variant,
   ...other
 }: TableHeaderProps) => {
   // When the sort direction changes, we want to announce the change in a live region
@@ -40,7 +45,8 @@ const TableHeader = ({
       aria-sort={sortDirection}
       className={classNames('TableHeader', className, {
         'TableHeader--sort-ascending': sortDirection === 'ascending',
-        'TableHeader--sort-descending': sortDirection === 'descending'
+        'TableHeader--sort-descending': sortDirection === 'descending',
+        TableCell: variant === 'cell'
       })}
       {...other}
     >
@@ -80,7 +86,8 @@ TableHeader.propTypes = {
   onSort: PropTypes.func,
   className: PropTypes.string,
   sortAscendingAnnouncement: PropTypes.string,
-  sortDescendingAnnouncement: PropTypes.string
+  sortDescendingAnnouncement: PropTypes.string,
+  variant: PropTypes.oneOf(variants)
 };
 
 export default TableHeader;
