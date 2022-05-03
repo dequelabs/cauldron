@@ -21,7 +21,7 @@ import Tooltip, { TooltipProps } from '../Tooltip';
 
 export interface IconButtonOwnProps {
   icon: IconType;
-  label: string;
+  label: React.ReactNode;
   tooltipPlacement?: TooltipProps['placement'];
   tooltipVariant?: TooltipProps['variant'];
   tooltipPortal?: TooltipProps['portal'];
@@ -121,7 +121,7 @@ IconButton.propTypes = {
   as: PropTypes.elementType,
   // @ts-expect-error
   icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   // @ts-expect-error
   tooltipPlacement: PropTypes.string,
   // @ts-expect-error
