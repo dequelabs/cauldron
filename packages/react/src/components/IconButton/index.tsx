@@ -18,6 +18,8 @@ import classnames from 'classnames';
 import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
+import { useId } from 'react-id-generator';
+import Offscreen from '../Offscreen';
 
 export interface IconButtonOwnProps {
   icon: IconType;
@@ -75,13 +77,6 @@ const IconButton = forwardRef(
       }
     }
 
-    useEffect(() => {
-      if (!disabled) {
-        return;
-      }
-      internalRef.current?.setAttribute('aria-label', label);
-    }, [disabled]);
-
     return (
       <React.Fragment>
         <Component
@@ -98,6 +93,8 @@ const IconButton = forwardRef(
           {...other}
         >
           <Icon type={icon} />
+          {// When not disabled, the button is labelled by the tooltip
+          disabled && <Offscreen>{label}</Offscreen>}
         </Component>
         {!disabled && (
           <Tooltip
