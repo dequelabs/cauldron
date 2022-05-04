@@ -10,15 +10,13 @@ import React, {
   forwardRef,
   useImperativeHandle,
   MutableRefObject,
-  HTMLProps,
-  useEffect
+  HTMLProps
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
-import { useId } from 'react-id-generator';
 import Offscreen from '../Offscreen';
 
 export interface IconButtonOwnProps {
