@@ -19,6 +19,7 @@ test('should render button by default', async () => {
   expect(button.prop('type')).toBe('button');
   expect(button.prop('tabIndex')).toBe(0);
   expect(button.prop('role')).toBeUndefined();
+  expect(button.text()).toBe('Edit');
 });
 
 test('should render a "as" an anchor', async () => {
@@ -37,13 +38,6 @@ test('adds aria-disabled when disabled is passed in for something other than a b
   const a = wrapper.find('a');
   expect(a.exists()).toBe(true);
   expect(a.prop('aria-disabled')).toBe(true);
-});
-
-test('adds aria-label when disabled is passed in', async () => {
-  const wrapper = mount(<IconButton icon="pencil" label="Edit" disabled />);
-
-  await update(wrapper);
-  expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('Edit');
 });
 
 test('should add button role when the component is not a link or a button', async () => {

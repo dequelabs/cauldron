@@ -10,18 +10,18 @@ import React, {
   forwardRef,
   useImperativeHandle,
   MutableRefObject,
-  HTMLProps,
-  useEffect
+  HTMLProps
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
+import Offscreen from '../Offscreen';
 
 export interface IconButtonOwnProps {
   icon: IconType;
-  label: string;
+  label: React.ReactNode;
   tooltipPlacement?: TooltipProps['placement'];
   tooltipVariant?: TooltipProps['variant'];
   tooltipPortal?: TooltipProps['portal'];
@@ -75,13 +75,6 @@ const IconButton = forwardRef(
       }
     }
 
-    useEffect(() => {
-      if (!disabled) {
-        return;
-      }
-      internalRef.current?.setAttribute('aria-label', label);
-    }, [disabled]);
-
     return (
       <React.Fragment>
         <Component
@@ -98,6 +91,7 @@ const IconButton = forwardRef(
           {...other}
         >
           <Icon type={icon} />
+          <Offscreen>{label}</Offscreen>
         </Component>
         {!disabled && (
           <Tooltip
@@ -121,7 +115,7 @@ IconButton.propTypes = {
   as: PropTypes.elementType,
   // @ts-expect-error
   icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   // @ts-expect-error
   tooltipPlacement: PropTypes.string,
   // @ts-expect-error
