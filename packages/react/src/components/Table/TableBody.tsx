@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-interface TableBodyProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const TableBody = ({ children, className, ...other }: TableBodyProps) => (
+const TableBody = ({
+  children,
+  className,
+  ...other
+}: HTMLAttributes<HTMLTableSectionElement>) => (
   <tbody className={classNames('TableBody', className)} {...other}>
     {children}
   </tbody>
