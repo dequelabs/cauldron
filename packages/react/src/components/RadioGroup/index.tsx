@@ -90,7 +90,7 @@ const RadioGroup = ({
           }}
           disabled={disabled}
           checked={isChecked}
-          aria-describedby={labelDescription && `${id}Desc`}
+          aria-describedby={labelDescription ? `${id}Desc` : undefined}
           {...other}
         />
         <label
