@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label: React.ReactNode;
   value?: string;
-  labelDescription?: string;
+  labelDescription?: React.ReactNode;
 }
 
 export interface RadioGroupProps {
