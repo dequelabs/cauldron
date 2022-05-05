@@ -10,7 +10,11 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage: number;
-  goToPage: (page: number) => void;
+  goToPage?: (page: number) => void;
+  onNextPageClick?: () => void;
+  onPreviousPageClick?: () => void;
+  onFirstPageClick?: () => void;
+  onLastPageClick?: () => void;
   statusLabel?: React.ReactNode;
   firstPageLabel?: string;
   previousPageLabel?: string;
@@ -33,15 +37,19 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       lastPageLabel = 'Last page',
       tooltipPlacement = 'bottom',
       goToPage,
+      onNextPageClick,
+      onPreviousPageClick,
+      onFirstPageClick,
+      onLastPageClick,
       className,
       ...other
     },
     ref
   ) => {
-    const itemStart = currentPage * itemsPerPage + 1;
-    const itemEnd = Math.min((currentPage + 1) * itemsPerPage, totalItems);
+    const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
+    const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
     const isLastPage = itemEnd === totalItems;
-    const isFirstPage = currentPage === 0;
+    const isFirstPage = currentPage === 1;
 
     return (
       <div ref={ref} className={classNames('Pagination', className)} {...other}>
@@ -61,7 +69,10 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
                 icon="chevron-double-left"
                 tooltipPlacement={tooltipPlacement}
                 label={firstPageLabel}
-                onClick={() => goToPage(0)}
+                onClick={() => {
+                  goToPage?.(1);
+                  onFirstPageClick?.();
+                }}
               />
             )}
           </li>
@@ -81,7 +92,10 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
                 icon="chevron-left"
                 tooltipPlacement={tooltipPlacement}
                 label={previousPageLabel}
-                onClick={() => goToPage(currentPage - 1)}
+                onClick={() => {
+                  goToPage?.(currentPage - 1);
+                  onPreviousPageClick?.();
+                }}
               />
             )}
           </li>
@@ -112,7 +126,10 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
                 icon="chevron-right"
                 tooltipPlacement={tooltipPlacement}
                 label={nextPageLabel}
-                onClick={() => goToPage(currentPage + 1)}
+                onClick={() => {
+                  goToPage?.(currentPage + 1);
+                  onNextPageClick?.();
+                }}
               />
             )}
           </li>
@@ -132,9 +149,10 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
                 icon="chevron-double-right"
                 tooltipPlacement={tooltipPlacement}
                 label={lastPageLabel}
-                onClick={() =>
-                  goToPage(Math.ceil(totalItems / itemsPerPage) - 1)
-                }
+                onClick={() => {
+                  goToPage?.(Math.ceil(totalItems / itemsPerPage));
+                  onLastPageClick?.();
+                }}
               />
             )}
           </li>
@@ -149,7 +167,11 @@ Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   itemsPerPage: PropTypes.number,
   currentPage: PropTypes.number.isRequired,
-  goToPage: PropTypes.func.isRequired,
+  goToPage: PropTypes.func,
+  onNextPageClick: PropTypes.func,
+  onPreviousPageClick: PropTypes.func,
+  onFirstPageClick: PropTypes.func,
+  onLastPageClick: PropTypes.func,
   statusLabel: PropTypes.element,
   firstPageLabel: PropTypes.string,
   previousPageLabel: PropTypes.string,

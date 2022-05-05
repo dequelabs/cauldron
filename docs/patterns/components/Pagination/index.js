@@ -7,15 +7,15 @@ const PaginationDemo = () => {
   const totalItems = 111;
   const itemsPerPage = 25;
   const [currentPage, setCurrentPage] = useState(3);
-  const itemStart = currentPage * itemsPerPage + 1;
-  const itemEnd = Math.min((currentPage + 1) * itemsPerPage, totalItems);
+  const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
+  const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
 
   return (
     <div>
       <Demo
         component={Pagination}
         states={[
-          { totalItems: 15 },
+          { totalItems: 15, currentPage: 1 },
           {
             totalItems,
             itemsPerPage,
@@ -56,7 +56,31 @@ const PaginationDemo = () => {
             type: 'function',
             description:
               'Function to be called when a page navigation button is clicked',
-            required: true
+            required: false
+          },
+          onNextPageClick: {
+            type: 'function',
+            description:
+              'Function to be called when next page button is clicked',
+            required: false
+          },
+          onPreviousPageClick: {
+            type: 'function',
+            description:
+              'Function to be called when previous page button is clicked',
+            required: false
+          },
+          onFirstPageClick: {
+            type: 'function',
+            description:
+              'Function to be called when first page button is clicked',
+            required: false
+          },
+          onLastPageClick: {
+            type: 'function',
+            description:
+              'Function to be called when last page button is clicked',
+            required: false
           },
           statusLabel: {
             type: 'ReactNode',
