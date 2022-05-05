@@ -52,6 +52,11 @@ const LoaderOverlayDemo = () => {
         loaderRef: {
           type: 'function',
           description: 'optional ref function'
+        },
+        focusTrap: {
+          type: 'boolean',
+          description: 'conditionally wrap the overlay in a focus trap',
+          defaultValue: 'false'
         }
       }}
     >
@@ -63,7 +68,7 @@ const LoaderOverlayDemo = () => {
               tabIndex={-1}
               label="Loading..."
               variant="large"
-              focusOnInitialRender
+              focusTrap
             >
               <p>
                 Explanatory secondary text goes here. Let them know what's

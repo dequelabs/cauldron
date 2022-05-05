@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect } from 'react';
+import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
@@ -10,6 +11,7 @@ interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
   focusOnInitialRender?: boolean;
   children?: React.ReactNode;
+  focusTrap?: boolean;
 }
 
 const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
@@ -20,6 +22,7 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
       label,
       children,
       focusOnInitialRender,
+      focusTrap = false,
       ...other
     }: LoaderOverlayProps,
     ref
@@ -35,28 +38,41 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
       return;
     }, [overlayRef.current]);
 
+    const Wrapper = focusTrap ? FocusTrap : React.Fragment;
+    const wrapperProps = focusTrap
+      ? {
+          focusTrapOptions: {
+            fallbackFocus: '.Loader__overlay'
+          }
+        }
+      : {};
+
     return (
-      <div
-        className={classNames(
-          'Loader__overlay',
-          className,
-          variant === 'large'
-            ? 'Loader__overlay--large'
-            : variant === 'small'
-            ? 'Loader__overlay--small'
-            : ''
-        )}
-        ref={overlayRef}
-        tabIndex={-1}
-        {...other}
-      >
-        <div className="Loader__overlay__loader">
-          <Loader variant={variant} />
-          <AxeLoader />
+      <Wrapper {...wrapperProps}>
+        <div
+          className={classNames(
+            'Loader__overlay',
+            className,
+            variant === 'large'
+              ? 'Loader__overlay--large'
+              : variant === 'small'
+              ? 'Loader__overlay--small'
+              : ''
+          )}
+          ref={overlayRef}
+          tabIndex={-1}
+          {...other}
+        >
+          <div className="Loader__overlay__loader">
+            <Loader variant={variant} />
+            <AxeLoader />
+          </div>
+          {label ? (
+            <span className="Loader__overlay__label">{label}</span>
+          ) : null}
+          {children}
         </div>
-        {label ? <span className="Loader__overlay__label">{label}</span> : null}
-        {children}
-      </div>
+      </Wrapper>
     );
   }
 );
