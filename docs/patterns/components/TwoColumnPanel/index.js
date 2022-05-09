@@ -320,6 +320,10 @@ function TwoColumnPanelDemo() {
               description: 'Label hide panel toggle',
               default: 'Hide Panel'
             },
+            skipLink: {
+              type: 'SkipLink',
+              description: 'A "Skip to Content" link',
+            },
             children
           }}
         />

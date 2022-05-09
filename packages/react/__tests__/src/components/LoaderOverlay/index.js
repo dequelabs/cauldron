@@ -80,6 +80,16 @@ test('handles being passed a ref', () => {
   });
 });
 
+test('traps focus', () => {
+  const loaderOverlay = shallow(
+    <LoaderOverlay className="baz" role="alert" label="loading" focusTrap>
+      Some text
+    </LoaderOverlay>
+  );
+
+  expect(loaderOverlay.find('FocusTrap').exists()).toBe(true);
+});
+
 test('returns no axe violations', async () => {
   const loaderOverlay = shallow(<LoaderOverlay>Hello world</LoaderOverlay>);
 

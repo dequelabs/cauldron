@@ -9,6 +9,7 @@ import {
   ColumnHeader,
   ColumnGroupHeader
 } from 'src/components/TwoColumnPanel';
+import SkipLink from 'src/components/SkipLink';
 import axe from '../../../axe';
 
 const sandbox = createSandbox();
@@ -101,6 +102,35 @@ test('should render collapsed TwoColumnPanel', () => {
   expect(
     wrapper.find('ColumnRight button[aria-expanded]').prop('aria-expanded')
   ).toBeFalsy();
+});
+
+test('should accept a skip link', () => {
+  const wrapper = mount(
+    <TwoColumnPanel skipLink={<SkipLink target="#my-target" />}>
+      <ColumnLeft>
+        <ColumnHeader>Sidebar</ColumnHeader>
+        <nav>
+          <ul>
+            <li>
+              <a href="/one">1</a>
+            </li>
+            <li>
+              <a href="/two">2</a>
+            </li>
+            <li>
+              <a href="/three">3</a>
+            </li>
+          </ul>
+        </nav>
+      </ColumnLeft>
+      <ColumnRight>
+        <ColumnHeader>Column Header</ColumnHeader>
+        <div id="my-target">1</div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  );
+
+  expect(wrapper.find('.SkipLink').exists()).toBeTruthy();
 });
 
 test('should return no axe violations', async () => {

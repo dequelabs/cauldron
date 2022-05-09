@@ -93,12 +93,12 @@ export default class CheckboxDemo extends Component {
               required: true
             },
             label: {
-              type: 'string',
+              type: 'node',
               description: "The text of the checkbox's label",
               required: true
             },
             labelDescription: {
-              type: 'string',
+              type: 'node',
               description: "The text description of the checkbox's label",
               required: true
             },

@@ -1,4 +1,4 @@
-import React, { ThHTMLAttributes, useState, useEffect } from 'react';
+import React, { ThHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
@@ -8,12 +8,10 @@ import Icon from '../Icon';
 type SortDirection = 'ascending' | 'descending' | 'none';
 
 interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
-  children: React.ReactNode;
   sortDirection?: SortDirection;
   onSort?: () => void;
-  className?: string;
   sortAscendingAnnouncement?: string;
-  sortDescendingAnnouncemen?: string;
+  sortDescendingAnnouncement?: string;
 }
 
 const TableHeader = ({
@@ -22,22 +20,19 @@ const TableHeader = ({
   onSort,
   className,
   sortAscendingAnnouncement = 'sorted ascending',
-  sortDescendingAnnouncemen = 'sorted descending',
+  sortDescendingAnnouncement = 'sorted descending',
   ...other
 }: TableHeaderProps) => {
   // When the sort direction changes, we want to announce the change in a live region
   // because changes to the sort value is not widely supported yet
   // see: https://a11ysupport.io/tech/aria/aria-sort_attribute
-  const [announcement, setAnnouncement] = useState('');
-  useEffect(() => {
-    if (sortDirection !== 'none') {
-      setAnnouncement(
-        sortDirection === 'ascending'
-          ? sortAscendingAnnouncement
-          : sortDescendingAnnouncemen
-      );
-    }
-  }, [sortDirection]);
+  const announcement =
+    sortDirection === 'ascending'
+      ? sortAscendingAnnouncement
+      : sortDirection === 'descending'
+      ? sortDescendingAnnouncement
+      : '';
+
   return (
     <th
       aria-sort={sortDirection}
@@ -81,7 +76,9 @@ TableHeader.propTypes = {
   children: PropTypes.node.isRequired,
   sortDirection: PropTypes.string,
   onSort: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  sortAscendingAnnouncement: PropTypes.string,
+  sortDescendingAnnouncement: PropTypes.string
 };
 
 export default TableHeader;
