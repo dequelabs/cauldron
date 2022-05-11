@@ -73,4 +73,15 @@ describe('Panel', () => {
 
     expect(panel.find('section').hasClass('Panel--collapsed')).toBe(true);
   });
+
+  test('forwards a ref', () => {
+    const ref = jest.fn();
+    mount(
+      <Panel ref={ref} heading={{ text: 'Title' }}>
+        Content
+      </Panel>
+    );
+
+    expect(ref).toHaveBeenCalled();
+  });
 });
