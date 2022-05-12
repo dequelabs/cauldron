@@ -42,3 +42,9 @@ test('returns no axe violations', async () => {
   expect(await axe(withLabel.html())).toHaveNoViolations();
   expect(await axe(withoutLabel.html())).toHaveNoViolations();
 });
+
+test('supports ref={React.createRef()}', () => {
+  const ref = React.createRef();
+  mount(<Loader ref={ref} />);
+  expect(ref.current).toBeTruthy();
+});
