@@ -15,7 +15,7 @@ jobs:
         run: |
             set -e
 
-            Title="${{ github.event.pull_request.title }}"
+            Title='${{ github.event.pull_request.title }}'
             CommitTypes="feat fix perf style docs refactor test build ci chore Merge Revert"
 
             echo "Validating PR title: \"$Title\""
