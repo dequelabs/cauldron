@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/dequelabs/cauldron/compare/v4.4.0...v4.5.0) (2022-05-17)
+
+### Features
+
+- **react:** Add `ref` support to `<Loader/>` ([#651](https://github.com/dequelabs/cauldron/issues/651)) ([f8ca4e9](https://github.com/dequelabs/cauldron/commit/f8ca4e9b0465f085394206878ceff0d4c39fb290))
+- add ref forwarding to Panel component ([#649](https://github.com/dequelabs/cauldron/issues/649)) ([77fc218](https://github.com/dequelabs/cauldron/commit/77fc21838a462f7403013c8c121ea2db7f1f1071))
+
+### Bug Fixes
+
+- **react:** ensure that sibling elements get correctly hidden when setting focusTrap on overlay loader ([#656](https://github.com/dequelabs/cauldron/issues/656)) ([2f777a4](https://github.com/dequelabs/cauldron/commit/2f777a4317d0aa51db0e66c1749a9f5488b9eed4))
+
 ## [4.4.0](https://github.com/dequelabs/cauldron/compare/v4.3.0...v4.4.0) (2022-05-09)
 
 ### Features
