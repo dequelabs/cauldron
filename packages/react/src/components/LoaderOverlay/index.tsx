@@ -35,8 +35,8 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
         ? new AriaIsolate(overlayRef.current)
         : null;
 
-      if (focusTrap && isolator) {
-        isolator.activate();
+      if (isolator) {
+        focusTrap ? isolator.activate() : isolator.deactivate();
       }
 
       return () => {
