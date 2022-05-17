@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
+import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,6 +29,20 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     ref
   ) => {
     const overlayRef = useSharedRef<HTMLDivElement>(ref);
+
+    useEffect(() => {
+      const isolator = overlayRef.current
+        ? new AriaIsolate(overlayRef.current)
+        : null;
+
+      if (isolator) {
+        focusTrap ? isolator.activate() : isolator.deactivate();
+      }
+
+      return () => {
+        isolator?.deactivate();
+      };
+    }, [focusTrap, overlayRef.current]);
 
     useEffect(() => {
       if (!!focusOnInitialRender && overlayRef.current) {
