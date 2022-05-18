@@ -98,3 +98,12 @@ For modifiers, such as variants or states, these values would be delimited by tw
   font-size: var(--text-size-small);
 }
 ```
+
+## Icons
+
+Icons are located in [packages/react/src/components/Icon/icons](./packages/react/src/components/Icon/icons). To add a new icon, follow the following steps:
+
+* Change any `fill`, `stroke`, or any color related attributes in the SVG to use `currentColor`.
+* Remove any namespace attributes (such as `xmlns:*`) from the SVG.
+* Save your icon in the above location with the proposed name of your icon, e.g. `[your-name].svg`. The `your-name` portion will be how the icon is used in the React Component, e.g. `<Icon type="your-name" />`.
+* Submit a new `feat` PR with your changes.
