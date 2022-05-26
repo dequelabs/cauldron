@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+import randomId from '../../utils/rndid';
+import IconButton from '../IconButton';
 
 interface AccordionProps {
   children?: string;
@@ -26,12 +28,13 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
   return (
     <div className="Accordion__item">
       <button
+        id={randomId()}
         type="button"
         aria-expanded={panelState}
         onClick={handleClick}
         className="Accordion__trigger"
       >
-        Elements must have sufficient color contrast (14)
+        <span>Elements must have sufficient color contrast (14)</span>
         <Icon
           type="triangle-right"
           className={classNames(
@@ -42,9 +45,18 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
         />
       </button>
       {panelState && (
-        <AccordionPanel className="Accordion__panel">
-          Here is the expanded panel
-        </AccordionPanel>
+        <>
+          <AccordionControls>
+            <IconButton label="Highlight" type="button" icon="highlight" />
+          </AccordionControls>
+          <AccordionPanel className="Accordion__panel">
+            <h3 className="Accordion__panel--heading">Issue Description</h3>
+            <p>
+              Ensures the contrast between foreground and background colors
+              meets WCAG 2 AA contrast ratio thresholds
+            </p>
+          </AccordionPanel>
+        </>
       )}
     </div>
   );
@@ -65,6 +77,14 @@ const AccordionPanel = ({ className, children }: AccordionPanelProps) => {
       {children}
     </div>
   );
+};
+
+type AccordionControlsProps = {
+  children?: React.ReactNode | React.ReactNode[];
+};
+
+const AccordionControls = ({ children }: AccordionControlsProps) => {
+  return <div className="Accordion__controls--wrapper">{children}</div>;
 };
 
 export default Accordion;
