@@ -16,7 +16,8 @@ import {
   OptionsMenuList,
   TopBarMenu,
   Icon,
-  ThemeProvider
+  ThemeProvider,
+  Accordion
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
@@ -73,7 +74,8 @@ const componentsList = [
   'IssuePanel',
   'FieldWrap',
   'Breadcrumb',
-  'TwoColumnPanel'
+  'TwoColumnPanel',
+  'Accordion'
 ].sort();
 
 const App = () => {

@@ -4,6 +4,11 @@
 
 export { default as Workspace } from './components/Workspace';
 export { default as Main } from './components/Main';
+export {
+  default as Accordion,
+  AccordionItem,
+  AccordionPanel
+} from './components/Accordion';
 export { default as Layout } from './components/Layout';
 export { default as Icon, IconType, iconTypes } from './components/Icon';
 export { default as Offscreen } from './components/Offscreen';

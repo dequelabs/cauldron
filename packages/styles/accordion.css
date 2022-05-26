@@ -1,0 +1,48 @@
+.Accordion__trigger {
+  background-color: var(--accent-medium);
+  padding: 8px;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px gray solid;
+  font-size: 14px;
+  margin-top: 7px;
+}
+
+.Accordion__icon--collapsed > svg {
+  transform: rotate(90deg);
+  transition: transform 250ms;
+}
+
+.Accordion__icon--expanded > svg {
+  transition: transform 250ms;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.Accordion__panel {
+  background-color: #02101a;
+  color: #ffffff;
+  padding: 20px;
+  height: 400px;
+  width: 100%;
+}
+
+.Accordion__item {
+  max-width: 750px;
+  width: 100%;
+}
+
+.Accordion__panel--expanded {
+  height: 400px;
+  width: 100%;
+}
