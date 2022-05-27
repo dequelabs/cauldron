@@ -3,6 +3,9 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import randomId from '../../utils/rndid';
 import IconButton from '../IconButton';
+import Button from '../Button';
+import Code from '../Code';
+import Pagination from '../Pagination';
 
 interface AccordionProps {
   children?: string;
@@ -47,7 +50,37 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
       {panelState && (
         <>
           <AccordionControls>
-            <IconButton label="Highlight" type="button" icon="highlight" />
+            <div>
+              <IconButton label="Highlight" type="button" icon="highlight" />
+              <IconButton label="Inspect" type="button" icon="code" />
+              <IconButton
+                label="More Info"
+                type="button"
+                icon="external-link"
+              />
+              <button
+                type="button"
+                className="uppercase Accordion__button--share"
+              >
+                <Icon type="share" />
+                Share
+              </button>
+            </div>
+            <Pagination
+              currentPage={3}
+              firstPageLabel="FIRST PAGE!!"
+              itemsPerPage={25}
+              lastPageLabel="JIMMY PAGE!!"
+              nextPageLabel="NEXT PAGE!!"
+              previousPageLabel="PREV PAGE!!"
+              statusLabel={
+                <span>
+                  <strong>51</strong> - <strong>75</strong> of{' '}
+                  <strong>111</strong>
+                </span>
+              }
+              totalItems={111}
+            />
           </AccordionControls>
           <AccordionPanel className="Accordion__panel">
             <h3 className="Accordion__panel--heading">Issue Description</h3>
@@ -55,6 +88,11 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
               Ensures the contrast between foreground and background colors
               meets WCAG 2 AA contrast ratio thresholds
             </p>
+            <Code tabIndex={0}>{`Here is some code`}</Code>
+            <h3 className="Accordion__panel--heading">Element source</h3>
+            <Code
+              tabIndex={0}
+            >{`<a class="viewProduct product_btn blue product_view" href="/product/bottle-armor/" title="Short's Bottle Armor">View Product</a>`}</Code>
           </AccordionPanel>
         </>
       )}

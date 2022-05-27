@@ -70,7 +70,7 @@ button.Accordion__trigger:hover {
 }
 
 .Accordion__item {
-  max-width: 750px;
+  max-width: 480px;
   width: 100%;
 }
 
@@ -89,4 +89,61 @@ button.Accordion__trigger:hover {
   align-items: center;
   padding-left: 5px;
   padding-right: 5px;
+  justify-content: space-between;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.Accordion__button--share {
+  border-radius: 2px;
+  background-color: #283640;
+  background-size: cover;
+  border: none;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.Accordion__button--share svg {
+  height: 21px;
+  width: 21px;
+}
+
+.Code.hljs {
+  padding: 13px 12px;
+  border-radius: 3px;
+  background-color: #02101a;
+  background-size: cover;
+  font-family: PT Mono;
+  font-size: 13px;
+  color: #d4dde0;
+  text-decoration: none solid rgb(212, 221, 224);
+  line-height: 20px;
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 480px;
+}
+
+.Pagination button {
+  height: var(--button-thin-height);
+  width: var(--button-thin-height);
+}
+
+.Pagination li {
+  font-size: 13px;
+}
+
+pre,
+code {
+  white-space: pre;
+  overflow-x: scroll;
+}
+.hljs {
+  display: inline-block;
+  overflow-x: scroll;
+  padding: 0.5em;
+  padding-right: 100%;
+  background: #002b36;
+  color: #839496;
 }
