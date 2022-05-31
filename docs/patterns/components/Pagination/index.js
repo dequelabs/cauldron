@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import Demo from '../../../Demo';
-import { Pagination } from '@deque/cauldron-react/';
+import { Pagination, usePagination } from '@deque/cauldron-react/';
 import { children, className } from '../../../props';
 
 const PaginationDemo = () => {
   const totalItems = 111;
   const itemsPerPage = 25;
-  const [currentPage, setCurrentPage] = useState(3);
-  const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
-  const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
 
-  const onNextPageClick = () => setCurrentPage(currentPage + 1);
-  const onFirstPageClick = () => setCurrentPage(1);
-  const onPreviousPageClick = () => setCurrentPage(currentPage - 1);
-  const onLastPageClick = () => setCurrentPage(5);
+  const [pagination, pageStatus] = usePagination({
+    totalItems,
+    itemsPerPage
+  });
 
   return (
     <div>
@@ -22,23 +19,18 @@ const PaginationDemo = () => {
         states={[
           { totalItems: 15 },
           {
-            totalItems,
-            itemsPerPage,
-            currentPage,
+            ...pagination,
             statusLabel: (
               <span>
-                <strong>{itemStart}</strong> - <strong>{itemEnd}</strong> of{' '}
+                <strong>{pageStatus.pageStart}</strong> -{' '}
+                <strong>{pageStatus.pageEnd}</strong> of{' '}
                 <strong>{totalItems}</strong>
               </span>
             ),
             firstPageLabel: 'FIRST PAGE!!',
             nextPageLabel: 'NEXT PAGE!!',
             previousPageLabel: 'PREV PAGE!!',
-            lastPageLabel: 'JIMMY PAGE!!',
-            onNextPageClick,
-            onFirstPageClick,
-            onPreviousPageClick,
-            onLastPageClick
+            lastPageLabel: 'JIMMY PAGE!!'
           }
         ]}
         propDocs={{
