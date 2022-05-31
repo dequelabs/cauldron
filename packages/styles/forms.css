@@ -323,6 +323,50 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
+.Radio_card_base {
+  text-align: center;
+}
+
+.Radio_card_icon_div {
+  display: flex;
+  justify-content: end;
+  min-height: 44px;
+}
+.Radio_card--icon.Icon svg {
+  color: var(--accent-success-dark);
+  height: 44px;
+  width: 44px;
+}
+
+.Radio_card {
+  width: 255px;
+  height: 229px;
+  justify-content: center;
+  align-content: center;
+}
+
+.Radio_card:hover {
+  background-color: var(--gray-20);
+}
+
+.Radio__overlay--checked.Radio__overlay--checked {
+  background-color: var(--gray-20);
+}
+
+.Radio_card_img {
+  width: 101px;
+  height: 101px;
+  text-align: center;
+}
+
+.Radio_card_label {
+  font-size: var(--text-size-medium);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-90);
+  margin-top: var(--space-small);
+  justify-content: center;
+}
+
 .Checkbox__overlay.Checkbox__overlay--focused,
 .Radio__overlay.Radio__overlay--focused {
   border: 1px solid var(--focus);
