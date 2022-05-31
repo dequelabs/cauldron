@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'simple';
+  type?: string;
 }
 
 const Card = ({ className, variant, ...other }: CardProps) => (
