@@ -28,7 +28,10 @@ export const usePagination = ({
   totalItems,
   initialPageSize = 10,
   initialPage = 1
-}: Options): [PaginationResults, PageStatus] => {
+}: Options): {
+  pagination: PaginationResults;
+  pageStatus: PageStatus;
+} => {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   const pageStart = currentPage * initialPageSize - initialPageSize + 1;
@@ -56,5 +59,5 @@ export const usePagination = ({
     pageEnd
   };
 
-  return [pagination, pageStatus];
+  return { pagination, pageStatus };
 };

@@ -7,7 +7,7 @@ const PaginationDemo = () => {
   const totalItems = 111;
   const itemsPerPage = 25;
 
-  const [pagination, pageStatus] = usePagination({
+  const { pagination, pageStatus } = usePagination({
     totalItems,
     itemsPerPage
   });

@@ -202,7 +202,7 @@ describe('Pagination', () => {
       let testPageStatus;
 
       const PaginationWithHook = () => {
-        const [pagination, pageStatus] = usePagination({
+        const { pagination, pageStatus } = usePagination({
           totalItems: 500,
           initialPage: 3
         });
