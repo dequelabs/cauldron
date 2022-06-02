@@ -64,7 +64,7 @@ const config = {
     }
   },
   devServer: {
-    port: 8000,
+    port: 3000,
     historyApiFallback: true
   }
 };
