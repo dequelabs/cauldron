@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Demo from '../../../Demo';
 import { Pagination, usePagination } from '@deque/cauldron-react/';
+import { Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
 
 const PaginationDemo = () => {
@@ -122,7 +124,56 @@ const PaginationDemo = () => {
             defaultValue: "'bottom'"
           }
         }}
-      />
+      >
+        <h2>Using the usePagination Hook</h2>
+        <Code>
+          {`const { pagination, pageStatus } = usePagination({
+  totalItems: 111,
+  itemsPerPage: 25
+});
+return <Pagination {...pagination} />;`}
+        </Code>
+        <div className="Demo-props">
+          <h3>usePagination Options</h3>
+          <PropDocs
+            docs={{
+              totalItems: {
+                type: 'number',
+                description:
+                  'The total number of items being rendered (not the total number of pages).',
+                required: true
+              },
+              itemsPerPage: {
+                type: 'number',
+                description: 'The total number of items per page.',
+                required: false,
+                default: 10
+              },
+              initialPage: {
+                type: 'number',
+                description:
+                  'The (1-based) number of the page that pagination will start on.',
+                required: false,
+                default: 1
+              }
+            }}
+            defaultProps={undefined}
+          />
+        </div>
+        <p>
+          <span>
+            {
+              'This returns `pagination`, a series of controls that can be spread into the Pagination component and'
+            }
+          </span>
+          <br />
+          <span>
+            {
+              '`pageStatus` which contains details about the `currentPage`, `pageStart`, and `pageEnd`.'
+            }
+          </span>
+        </p>
+      </Demo>
     </div>
   );
 };
