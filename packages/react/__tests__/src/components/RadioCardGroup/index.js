@@ -22,7 +22,6 @@ const defaultProps = {
       cardIcon: 'check-circle',
       disabled: true
     },
-    { value: 'bar', id: 'bar', label: 'Bar', disabled: true },
     {
       id: 'no',
       value: 'no',
