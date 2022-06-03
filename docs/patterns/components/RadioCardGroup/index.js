@@ -8,13 +8,12 @@ const labelDescription =
 
 export default class RadioCardGroupDemo extends Component {
   state = {
-    value: 'yes'
+    value: 'yes',
+    cardImgSrc: 'https://via.placeholder.com/150',
+    cardIcon: 'check-circle'
   };
 
-  onChange = ({ value }) => this.setState({ value });
-
   render() {
-    const { value } = this.state;
     return (
       <FieldWrap>
         <FieldWrapNotice />
@@ -26,39 +25,29 @@ export default class RadioCardGroupDemo extends Component {
               name: 'pizza',
               DEMO_renderBefore: <h3 id="pizza-label">Do you like pizza?</h3>,
               defaultValue: 'tuesday',
+              'aria-labelledby': 'pizza-label',
               radios: [
                 {
                   id: 'yes',
                   value: 'yes',
                   label: 'Yes',
-                  cardImg: 'https://via.placeholder.com/150',
+                  cardImgSrc: 'https://via.placeholder.com/150',
                   cardIcon: 'check-circle'
                 },
                 {
                   id: 'no',
                   value: 'no',
                   label: 'No',
-                  disabled: true
+                  disabled: true,
+                  cardImgSrc: 'https://via.placeholder.com/150',
+                  cardIcon: 'check-circle'
                 },
                 {
                   id: 'tuesday',
                   value: 'tuesday',
-                  label: 'Only on Tuesdays'
-                }
-              ]
-            },
-            {
-              value,
-              name: 'gyros',
-              DEMO_renderBefore: <h3 id="gyros-label">Do you like gyros?</h3>,
-              'aria-labelledby': 'gyros-label',
-              radios: [
-                { id: 'gyros-yes', value: 'yes', label: 'Yes!!' },
-                { id: 'gyros-no', value: 'no', label: 'Nope.' },
-                {
-                  id: 'gyros-friday',
-                  value: 'friday',
-                  label: 'Only on fridays'
+                  label: 'Only on Tuesdays',
+                  cardImgSrc: 'https://via.placeholder.com/150',
+                  cardIcon: 'check-circle'
                 }
               ]
             }
@@ -68,9 +57,13 @@ export default class RadioCardGroupDemo extends Component {
               type: 'array',
               required: true,
               description:
-                'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
+                'Array of objects containing: label, cardImgSrc (used in <img />), cardIcon (see IconTypes), value (optional), and any supported HTMLInputElement properties'
             },
             'aria-label': {
+              type: 'string',
+              description: labelDescription
+            },
+            'aria-labelledby': {
               type: 'string',
               description: labelDescription
             },
