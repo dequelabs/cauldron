@@ -323,6 +323,15 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
+.Radio_card_group {
+  display: flex;
+  gap: var(--space-large);
+  flex-wrap: wrap;
+}
+
+.Radio_card_group .Radio + .Radio {
+  margin-top: 0;
+}
 .Radio_card_base {
   text-align: center;
 }
@@ -338,10 +347,9 @@ textarea.Field--has-error:focus:hover,
   width: 44px;
 }
 
-.Radio_card {
+.Radio_card.Card--simple {
   width: 255px;
   height: 229px;
-  justify-content: center;
   align-content: center;
 }
 
@@ -362,8 +370,9 @@ textarea.Field--has-error:focus:hover,
 .Radio_card_label {
   font-size: var(--text-size-medium);
   font-weight: var(--font-weight-bold);
-  color: var(--gray-90);
+  color: var(--field-label-text-color);
   margin-top: var(--space-small);
+  display: flex;
   justify-content: center;
 }
 
