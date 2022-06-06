@@ -93,7 +93,7 @@ export {
   AddressLine,
   AddressCityStateZip
 } from './components/Address';
-export { default as Pagination } from './components/Pagination';
+export { default as Pagination, usePagination } from './components/Pagination';
 export { default as FieldWrap } from './components/FieldWrap';
 export {
   default as Breadcrumb,
