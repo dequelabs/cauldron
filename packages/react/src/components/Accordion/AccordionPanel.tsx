@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
 
-type AccordionItemProps = {
+type AccordionPanelProps = {
   children?: React.ReactNode | React.ReactNode[];
   className?: string;
 };
 
-const AccordionItem = ({ children, className }: AccordionItemProps) => {
+const AccordionPanel = ({ children, className }: AccordionPanelProps) => {
   const [open, setOpen] = useState(false);
-  function onToggle() {
+  function toggle() {
     setOpen(!open);
   }
 
@@ -17,11 +17,11 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
     <ExpandCollapsePanel
       open={open}
       onToggle={() => setOpen(!open)}
-      className="Accordion__item"
+      className="Accordion__panel"
     >
-      <PanelTrigger className="Accordion__trigger">
-        <span>Elements must have sufficient color contrast (14)</span>
-      </PanelTrigger>
+      {children}
     </ExpandCollapsePanel>
   );
 };
+
+export default AccordionPanel;

@@ -11,7 +11,7 @@ import {
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   animationTiming?: number | boolean;
   onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -34,7 +34,7 @@ export default class ExpandCollapsePanel extends React.Component<
 
   static propTypes = {
     open: PropTypes.bool,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     className: PropTypes.string,
     animationTiming: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     onToggle: PropTypes.func

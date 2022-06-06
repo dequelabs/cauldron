@@ -7,7 +7,8 @@ export { default as Main } from './components/Main';
 export {
   default as Accordion,
   AccordionItem,
-  AccordionPanel
+  AccordionPanel,
+  AccordionTrigger
 } from './components/Accordion';
 export { default as Layout } from './components/Layout';
 export { default as Icon, IconType, iconTypes } from './components/Icon';

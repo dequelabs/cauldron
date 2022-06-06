@@ -70,12 +70,10 @@ button.Accordion__trigger:hover {
 }
 
 .Accordion__item {
-  max-width: 480px;
   width: 100%;
 }
 
 .Accordion__panel--expanded {
-  height: 400px;
   width: 100%;
 }
 
@@ -147,3 +145,18 @@ code {
   background: #002b36;
   color: #839496;
 }
+
+/* .ExpandCollapse__trigger-title {
+  background-color: var(--accent-medium);
+  padding: 11px 12px;
+  height: 43px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px #5d676f solid;
+  background-size: cover;
+  font-size: 14px;
+  margin-top: 7px;
+} */

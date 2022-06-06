@@ -3,7 +3,8 @@ import Demo from '../../../Demo';
 import {
   Accordion,
   AccordionItem,
-  AccordionPanel
+  AccordionPanel,
+  AccordionTrigger
 } from '@deque/cauldron-react/';
 import { className } from '../../../props';
 
@@ -13,11 +14,11 @@ export const AccordionDemo = () => {
       <h1>Accordion</h1>
       <h2>Demo</h2>
       <h2>Code Sample</h2>
-      <Accordion>Testing</Accordion>
-      <AccordionItem />
       <Accordion>
-        <AccordionItem>Second element</AccordionItem>
-        <AccordionItem>Third element</AccordionItem>
+        <AccordionItem>
+          <AccordionTrigger>Testing</AccordionTrigger>
+          <AccordionPanel>Second element</AccordionPanel>
+        </AccordionItem>
       </Accordion>
     </div>
   );

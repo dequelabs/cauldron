@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import {
   default as Accordion,
   AccordionPanel,
+  AccordionTrigger,
   AccordionTrigger
 } from 'src/components/Accordion';
 import * as stylesheets from 'src/utils/stylesheets';
