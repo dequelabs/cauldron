@@ -27,7 +27,7 @@ function PanelTrigger({
     <button
       {...other}
       className={classnames(
-        'ExpandCollapse__trigger',
+        className ? className : 'ExpandCollapse__trigger',
         fullWidth ? 'fullWidth' : '',
         className
       )}

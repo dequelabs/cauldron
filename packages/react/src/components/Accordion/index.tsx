@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
+import Accordion from './Accordion';
+import {
+  injectStyleTag,
+  setStyle,
+  removeStyleTag
+} from '../../utils/stylesheets';
 
-interface AccordionProps {
-  children?: string;
-  className?: string;
-}
+// interface AccordionProps {
+//   children?: string;
+//   className?: string;
+// }
 
-const Accordion = ({ className, children }: AccordionProps) => {
-  return <div className="Accordion__container">{children}</div>;
-};
+// const Accordion = ({ className, children }: AccordionProps) => {
+//   return <div className="Accordion__container">{children}</div>;
+// };
 
 type AccordionItemProps = {
   children?: React.ReactNode | React.ReactNode[];
@@ -31,6 +37,7 @@ const AccordionItem = ({ children, className }: AccordionItemProps) => {
       <PanelTrigger className="Accordion__trigger">
         <span>Elements must have sufficient color contrast (14)</span>
       </PanelTrigger>
+      {children}
     </ExpandCollapsePanel>
   );
 };
