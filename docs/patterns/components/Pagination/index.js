@@ -162,15 +162,14 @@ return <Pagination {...pagination} />;`}
         </div>
         <p>
           <span>
-            {
-              'This returns `pagination`, a series of controls that can be spread into the Pagination component and'
-            }
+            This returns <code>pagination</code>, a series of controls that can
+            be spread into the Pagination component and
           </span>
           <br />
           <span>
-            {
-              '`pageStatus` which contains details about the `currentPage`, `pageStart`, and `pageEnd`.'
-            }
+            <code>pageStatus</code> which contains details about the{' '}
+            <code>currentPage</code>, <code>pageStart</code>, and{' '}
+            <code>pageEnd</code>.
           </span>
         </p>
       </Demo>
