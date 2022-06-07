@@ -25,7 +25,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
       buttonRef,
       iconExpanded = 'chevron-down',
       iconCollapsed = 'chevron-right',
-      ...other
+      ...props
     }: PanelTriggerProps,
     ref
   ) => {
@@ -36,7 +36,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
 
     return (
       <button
-        {...other}
+        {...props}
         className={classnames(
           className ? className : 'ExpandCollapse__trigger',
           fullWidth ? 'fullWidth' : ''

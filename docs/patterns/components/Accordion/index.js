@@ -49,6 +49,24 @@ export const AccordionDemo = () => {
             Here is some content
           </AccordionContent>
         </AccordionContainer>
+        <AccordionContainer
+          open={open}
+          onToggle={() => setIsOpen(!open)}
+          tabIndex={0}
+        >
+          <AccordionPanelTrigger
+            className={classNames(
+              open
+                ? 'Accordion__trigger underline expanded'
+                : 'Accordion__trigger underline'
+            )}
+          >
+            This is a trigger
+          </AccordionPanelTrigger>
+          <AccordionContent className="Accordion__panel">
+            Here is some content
+          </AccordionContent>
+        </AccordionContainer>
       </AccordionTwo>
       <AccordionTwo>
         <AccordionContainer>
