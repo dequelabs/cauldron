@@ -72,7 +72,7 @@ const RadioCardGroup = ({
     const isFocused = focusIndex === index;
 
     return (
-      <div className={classNames('RadioCard')}>
+      <div className={classNames('RadioCard')} key={index}>
         <Card
           variant="simple"
           className={classNames('RadioCardGroup__Card RadioCard__overlay', {

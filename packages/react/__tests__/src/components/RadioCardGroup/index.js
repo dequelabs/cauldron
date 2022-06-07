@@ -11,22 +11,35 @@ const defaultProps = {
       id: 'yes',
       value: 'yes',
       label: 'Yes',
-      cardImgSrc: 'https://via.placeholder.com/150',
+      cardImg: <img src="https://via.placeholder.com/150" alt="" />,
       cardIcon: 'check-circle'
-    },
-    {
-      id: 'maybe',
-      value: 'maybe',
-      label: 'maybe',
-      cardImgSrc: 'https://via.placeholder.com/150',
-      cardIcon: 'check-circle',
-      disabled: true
     },
     {
       id: 'no',
       value: 'no',
-      label: 'no',
-      cardImgSrc: 'https://via.placeholder.com/150',
+      label: 'No',
+      disabled: true,
+      cardImg: (
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="red" />
+        </svg>
+      ),
+      cardIcon: 'check-circle'
+    },
+    {
+      id: 'tuesday',
+      value: 'tuesday',
+      label: 'Only on Tuesdays',
+      cardImg: (
+        <div
+          style={{
+            backgroundColor: 'green',
+            height: 100,
+            width: 100,
+            borderRadius: 50
+          }}
+        ></div>
+      ),
       cardIcon: 'check-circle'
     }
   ],
@@ -41,14 +54,14 @@ test('handles `defaultValue`', () => {
     />
   );
   expect(
-    wrapper.find('.Radio__overlay--checked.Radio__overlay--checked')
+    wrapper.find('.RadioCard__overlay--checked.RadioCard__overlay--checked')
   ).toBeTruthy();
 });
 
 test('handles `disabled` radio prop', () => {
   const wrapper = mount(<RadioCardGroup {...defaultProps} />);
   expect(
-    wrapper.find('Radio_card Radio__overlay Radio__overlay--disabled')
+    wrapper.find('Radio_card RadioCard__overlay RadioCard__overlay--disabled')
   ).toBeTruthy();
 });
 
@@ -57,11 +70,11 @@ test('handles focus', () => {
 
   expect(
     wrapper
-      .find('.Radio__overlay')
+      .find('.RadioCard__overlay')
       .at(0)
-      .hasClass('Radio__overlay--focused')
+      .hasClass('RadioCard__overlay--focused')
   ).toBeFalsy();
-  expect(wrapper.find('.Icon.Radio__overlay--focused').length).toBe(0);
+  expect(wrapper.find('.RadioCard__overlay--focused').length).toBe(0);
 
   wrapper
     .find('[type="radio"]')
@@ -70,9 +83,9 @@ test('handles focus', () => {
 
   expect(
     wrapper
-      .find('.Radio__overlay')
+      .find('.RadioCard__overlay')
       .at(0)
-      .hasClass('Radio__overlay--focused')
+      .hasClass('RadioCard__overlay--focused')
   ).toBeTruthy();
 });
 
