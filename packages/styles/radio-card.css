@@ -1,0 +1,83 @@
+.RadioCard__overlay {
+  border-radius: 50%;
+}
+
+.RadioCard input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  appearance: none;
+}
+
+.RadioCard__overlay.RadioCard__overlay--focused {
+  border: 1px solid var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus), 0 0 4px 2px var(--focus-glow);
+}
+
+.RadioCard__overlay--checked.RadioCard__overlay--checked {
+  background-color: var(--gray-20);
+}
+
+.RadioCard__overlay.RadioCard__overlay--disabled,
+.RadioCard__overlay.RadioCard__overlay--disabled:hover {
+  background-color: var(--gray-30);
+}
+
+.RadioCardGroup {
+  display: flex;
+  gap: var(--space-large);
+  flex-wrap: wrap;
+}
+
+.RadioCardGroup .Radio + .Radio {
+  margin-top: 0;
+}
+.RadioCardGroup__Base {
+  text-align: center;
+}
+
+.RadioCardGroup__Checked {
+  display: flex;
+  justify-content: end;
+  min-height: 44px;
+}
+.RadioCardGroup__Icon.Icon svg {
+  color: var(--accent-success-dark);
+  height: 44px;
+  width: 44px;
+}
+
+.RadioCardGroup__Card.Card--simple {
+  width: var(--radio-card-width);
+  height: var(--radio-card-height);
+  align-content: center;
+}
+
+.RadioCardGroup__Card:hover {
+  background-color: var(--gray-20);
+}
+
+.Radio__overlay--checked.Radio__overlay--checked {
+  background-color: var(--gray-20);
+}
+
+.RadioCardGroup__Image * {
+  max-width: 100%;
+}
+
+.RadioCardGroup__Image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.RadioCardGroup__Label {
+  font-size: var(--text-size-medium);
+  font-weight: var(--font-weight-bold);
+  color: var(--field-label-text-color);
+  margin-top: var(--space-small);
+  display: flex;
+  justify-content: center;
+}
