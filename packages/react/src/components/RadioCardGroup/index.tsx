@@ -72,15 +72,14 @@ const RadioCardGroup = ({
     const isFocused = focusIndex === index;
 
     return (
-      <div className={classNames('Radio')} key={id}>
+      <div className={classNames('Radio')}>
         <Card
           variant="simple"
-          className={classNames('Radio_card Radio__overlay', {
+          className={classNames('RadioCardGroup__Card Radio__overlay', {
             'Radio__overlay--focused': isFocused,
             'Radio__overlay--checked': isChecked,
             'Radio__overlay--disabled': disabled
           })}
-          type={isChecked ? 'radio-checked' : 'radio-unchecked'}
           onClick={() => onRadioClick(index)}
         >
           <input
@@ -106,22 +105,25 @@ const RadioCardGroup = ({
             {...other}
           />
           <CardContent>
-            <div className={classNames('Radio_card_icon_div')}>
+            <div className={classNames('RadioCardGroup__Checked')}>
               {isChecked && (
                 <Icon
-                  className={classNames('Radio_card--icon')}
+                  className={classNames('RadioCardGroup__Icon')}
                   type="check-circle"
                 />
               )}
             </div>
 
-            <div className={classNames('Radio_card_base')}>
+            <div className={classNames('RadioCardGroup__Base')}>
               <img
-                className={classNames('Radio_card_img')}
+                className={classNames('RadioCardGroup__Image')}
                 src={cardImgSrc}
                 alt=""
               />
-              <label htmlFor={id} className={classNames('Radio_card_label')}>
+              <label
+                htmlFor={id}
+                className={classNames('RadioCardGroup__Label')}
+              >
                 {label}
               </label>
             </div>
@@ -142,11 +144,7 @@ const RadioCardGroup = ({
   inputs.current = [];
 
   return (
-    <div
-      className={classNames('Radio_card_group')}
-      role="radiogroup"
-      {...other}
-    >
+    <div className={classNames('RadioCardGroup')} role="radiogroup" {...other}>
       {radioButtons}
     </div>
   );

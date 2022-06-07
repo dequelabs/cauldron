@@ -323,37 +323,37 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
-.Radio_card_group {
+.RadioCardGroup {
   display: flex;
   gap: var(--space-large);
   flex-wrap: wrap;
 }
 
-.Radio_card_group .Radio + .Radio {
+.RadioCardGroup .Radio + .Radio {
   margin-top: 0;
 }
-.Radio_card_base {
+.RadioCardGroup__Base {
   text-align: center;
 }
 
-.Radio_card_icon_div {
+.RadioCardGroup__Checked {
   display: flex;
   justify-content: end;
   min-height: 44px;
 }
-.Radio_card--icon.Icon svg {
+.RadioCardGroup__Icon.Icon svg {
   color: var(--accent-success-dark);
   height: 44px;
   width: 44px;
 }
 
-.Radio_card.Card--simple {
-  width: 255px;
-  height: 229px;
+.RadioCardGroup__Card.Card--simple {
+  width: var(--radio-card-width);
+  height: var(--radio-card-height);
   align-content: center;
 }
 
-.Radio_card:hover {
+.RadioCardGroup__Card:hover {
   background-color: var(--gray-20);
 }
 
@@ -361,13 +361,13 @@ textarea.Field--has-error:focus:hover,
   background-color: var(--gray-20);
 }
 
-.Radio_card_img {
+.RadioCardGroup__Image {
   width: 101px;
   height: 101px;
   text-align: center;
 }
 
-.Radio_card_label {
+.RadioCardGroup__Label {
   font-size: var(--text-size-medium);
   font-weight: var(--font-weight-bold);
   color: var(--field-label-text-color);
