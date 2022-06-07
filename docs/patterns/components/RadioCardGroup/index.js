@@ -27,17 +27,26 @@ const DemoRadioCardGroup = () => {
       <h2>Demo</h2>
 
       <FieldWrap>
-        <h3 id="pizza-label">Do you like pizza?</h3>
+        <h3 id="coffee-label">Do you like coffee?</h3>
         <RadioCardGroup
-          name="pizza"
-          defaultValue="tuesday"
-          aria-labelledby="pizza-label"
+          name="coffee"
+          defaultValue="yes"
+          aria-labelledby="coffee-label"
           radios={[
             {
               id: 'yes',
               value: 'yes',
               label: 'Yes',
-              cardImg: <img src="inserturl" alt="" />,
+              cardImg: (
+                <div
+                  style={{
+                    backgroundColor: 'green',
+                    height: 100,
+                    width: 100,
+                    borderRadius: 50
+                  }}
+                ></div>
+              ),
               cardIcon: 'check-circle'
             },
             {
@@ -53,9 +62,9 @@ const DemoRadioCardGroup = () => {
               cardIcon: 'check-circle'
             },
             {
-              id: 'tuesday',
-              value: 'tuesday',
-              label: 'Only on Tuesdays',
+              id: 'still-yes',
+              value: 'still yes',
+              label: 'still yes',
               cardImg: (
                 <div
                   style={{
@@ -80,17 +89,26 @@ import { RadioCardGroup, FieldWrap } from '@deque/cauldron-react';
 const Demo = () => {
 return (
   <FieldWrap>
-  <h3 id="pizza-label">Do you like pizza?</h3>
+  <h3 id="coffee-label">Do you like coffee?</h3>
   <RadioCardGroup
-    name="pizza"
-    defaultValue="tuesday"
-    aria-labelledby="pizza-label"
+    name="coffee"
+    defaultValue="yes"
+    aria-labelledby="coffee-label"
     radios={[
       {
         id: 'yes',
         value: 'yes',
         label: 'Yes',
-        cardImg: <img src="inserturl" alt="" />,
+        cardImg: (
+          <div
+            style={{
+              backgroundColor: 'green',
+              height: 100,
+              width: 100,
+              borderRadius: 50
+            }}
+          ></div>
+        ),
         cardIcon: 'check-circle'
       },
       {
@@ -106,9 +124,9 @@ return (
         cardIcon: 'check-circle'
       },
       {
-        id: 'tuesday',
-        value: 'tuesday',
-        label: 'Only on Tuesdays',
+        id: 'still-yes',
+        value: 'still yes',
+        label: 'still yes',
         cardImg: (
           <div
             style={{
