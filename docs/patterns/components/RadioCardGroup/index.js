@@ -9,7 +9,7 @@ const labelDescription =
 export default class RadioCardGroupDemo extends Component {
   state = {
     value: 'yes',
-    cardImgSrc: 'https://via.placeholder.com/150',
+    cardImg: <img src="https://via.placeholder.com/150" alt="" />,
     cardIcon: 'check-circle'
   };
 
@@ -21,7 +21,6 @@ export default class RadioCardGroupDemo extends Component {
           component={RadioCardGroup}
           states={[
             {
-              defaultValue: 'tuesday',
               name: 'pizza',
               DEMO_renderBefore: <h3 id="pizza-label">Do you like pizza?</h3>,
               defaultValue: 'tuesday',
@@ -31,7 +30,7 @@ export default class RadioCardGroupDemo extends Component {
                   id: 'yes',
                   value: 'yes',
                   label: 'Yes',
-                  cardImgSrc: 'https://via.placeholder.com/150',
+                  cardImg: <img src="https://via.placeholder.com/150" alt="" />,
                   cardIcon: 'check-circle'
                 },
                 {
@@ -39,14 +38,27 @@ export default class RadioCardGroupDemo extends Component {
                   value: 'no',
                   label: 'No',
                   disabled: true,
-                  cardImgSrc: 'https://via.placeholder.com/150',
+                  cardImg: (
+                    <svg viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="40" fill="red" />
+                    </svg>
+                  ),
                   cardIcon: 'check-circle'
                 },
                 {
                   id: 'tuesday',
                   value: 'tuesday',
                   label: 'Only on Tuesdays',
-                  cardImgSrc: 'https://via.placeholder.com/150',
+                  cardImg: (
+                    <div
+                      style={{
+                        backgroundColor: 'green',
+                        height: 100,
+                        width: 100,
+                        borderRadius: 50
+                      }}
+                    ></div>
+                  ),
                   cardIcon: 'check-circle'
                 }
               ]
@@ -57,7 +69,7 @@ export default class RadioCardGroupDemo extends Component {
               type: 'array',
               required: true,
               description:
-                'Array of objects containing: label, cardImgSrc (used in <img />), cardIcon (see IconTypes), value (optional), and any supported HTMLInputElement properties'
+                'Array of objects containing: label, cardImg, cardIcon (see IconTypes), value (optional), and any supported HTMLInputElement properties'
             },
             'aria-label': {
               type: 'string',

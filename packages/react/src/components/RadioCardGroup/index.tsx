@@ -6,7 +6,7 @@ import Card, { CardContent } from '../Card';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
-  cardImgSrc: string;
+  cardImg: JSX.Element;
   cardIcon: IconType;
   value?: string;
 }
@@ -30,8 +30,8 @@ const RadioCardGroup = ({
   className,
   ...other
 }: RadioCardGroupProps) => {
-  const [currentValue, setCurrentValue] = useState<string | null>(
-    value || defaultValue || null
+  const [currentValue, setCurrentValue] = useState<string>(
+    value ?? defaultValue
   );
   const [focusIndex, setFocusIndex] = useState<number | null>(null);
   const inputs = useRef<HTMLInputElement[]>([]);
@@ -62,7 +62,7 @@ const RadioCardGroup = ({
       label,
       disabled,
       value: radioValue,
-      cardImgSrc,
+      cardImg,
       cardIcon,
       id,
       className,
@@ -72,13 +72,13 @@ const RadioCardGroup = ({
     const isFocused = focusIndex === index;
 
     return (
-      <div className={classNames('Radio')}>
+      <div className={classNames('RadioCard')}>
         <Card
           variant="simple"
-          className={classNames('RadioCardGroup__Card Radio__overlay', {
-            'Radio__overlay--focused': isFocused,
-            'Radio__overlay--checked': isChecked,
-            'Radio__overlay--disabled': disabled
+          className={classNames('RadioCardGroup__Card RadioCard__overlay', {
+            'RadioCard__overlay--focused': isFocused,
+            'RadioCard__overlay--checked': isChecked,
+            'RadioCard__overlay--disabled': disabled
           })}
           onClick={() => onRadioClick(index)}
         >
@@ -115,11 +115,9 @@ const RadioCardGroup = ({
             </div>
 
             <div className={classNames('RadioCardGroup__Base')}>
-              <img
-                className={classNames('RadioCardGroup__Image')}
-                src={cardImgSrc}
-                alt=""
-              />
+              <div className={classNames('RadioCardGroup__Image')}>
+                {cardImg}
+              </div>
               <label
                 htmlFor={id}
                 className={classNames('RadioCardGroup__Label')}
@@ -157,7 +155,8 @@ RadioCardGroup.propTypes = {
       value: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      labelDescription: PropTypes.string
+      cardImg: PropTypes.element.isRequired,
+      cardIcon: PropTypes.string.isRequired
     })
   ).isRequired,
   hasLabel: (

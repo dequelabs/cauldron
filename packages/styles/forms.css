@@ -323,6 +323,34 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
+.RadioCard {
+}
+
+.RadioCard__overlay {
+  border-radius: 50%;
+}
+
+.RadioCard input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  top: 8px;
+  left: 8px;
+  appearance: none;
+}
+
+.RadioCard__overlay.RadioCard__overlay--focused {
+  border: 1px solid var(--focus);
+  box-shadow: inset 0 0 0 1px var(--focus), 0 0 4px 2px var(--focus-glow);
+}
+
+.RadioCard__overlay--checked.RadioCard__overlay--checked {
+  background-color: var(--gray-20);
+}
+
+.RadioCard__overlay--checked.RadioCard__overlay--disabled {
+  background-color: var(black);
+}
+
 .RadioCardGroup {
   display: flex;
   gap: var(--space-large);
@@ -361,10 +389,17 @@ textarea.Field--has-error:focus:hover,
   background-color: var(--gray-20);
 }
 
+.RadioCardGroup__Image * {
+  max-width: 100%;
+}
+
 .RadioCardGroup__Image {
-  width: 101px;
-  height: 101px;
-  text-align: center;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .RadioCardGroup__Label {
