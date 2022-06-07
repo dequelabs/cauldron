@@ -323,9 +323,6 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
-.RadioCard {
-}
-
 .RadioCard__overlay {
   border-radius: 50%;
 }
@@ -347,8 +344,9 @@ textarea.Field--has-error:focus:hover,
   background-color: var(--gray-20);
 }
 
-.RadioCard__overlay--checked.RadioCard__overlay--disabled {
-  background-color: var(black);
+.RadioCard__overlay.RadioCard__overlay--disabled,
+.RadioCard__overlay.RadioCard__overlay--disabled:hover {
+  background-color: var(--gray-30);
 }
 
 .RadioCardGroup {
