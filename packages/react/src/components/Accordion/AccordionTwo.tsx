@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import classNames from 'classnames';
 import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
 import randomId from './../../../src/utils/rndid';
@@ -35,19 +35,25 @@ const AccordionContainer = ({
   setIsOpen,
   ...props
 }: AccordionContainerProps) => {
-  const id: string = randomId();
+  const [elementId, setElementId] = useState<string | null>(null);
+  const [initial, setIsInitial] = useState(true);
+  useEffect(() => {
+    if (!initial) return;
+    setElementId(randomId());
+    setIsInitial(false);
+  });
 
   if (setIsOpen && open) {
     return (
       <ExpandCollapsePanel
         {...props}
-        id={`${id}-panel`}
+        id={`${elementId}-panel`}
         open={open}
         onToggle={() => setIsOpen(!open)}
       >
         <PanelTrigger
           className={children[0].props.className}
-          aria-controls={`${id}-panel`}
+          aria-controls={`${elementId}-panel`}
         >
           {children[0]}
         </PanelTrigger>
@@ -57,9 +63,9 @@ const AccordionContainer = ({
   }
 
   return (
-    <ExpandCollapsePanel id={`${id}-panel`} {...props}>
+    <ExpandCollapsePanel id={`${elementId}-panel`} {...props}>
       <PanelTrigger
-        aria-controls={`${id}-panel`}
+        aria-controls={`${elementId}-panel`}
         className={children[0].props.className}
       >
         {children[0]}
