@@ -13,7 +13,7 @@
   margin-top: 7px;
 }
 
-.Accordion__trigger--expanded {
+.expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
 }

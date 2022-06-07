@@ -8,7 +8,11 @@ export {
   default as Accordion,
   AccordionItem,
   AccordionPanel,
-  AccordionTrigger
+  AccordionTrigger,
+  AccordionTwo,
+  AccordionContainer,
+  AccordionPanelTrigger,
+  AccordionContent
 } from './components/Accordion';
 export { default as Layout } from './components/Layout';
 export { default as Icon, IconType, iconTypes } from './components/Icon';
