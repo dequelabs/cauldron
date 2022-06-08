@@ -98,6 +98,7 @@ const ControlledAccordion = () => {
         open={open}
         onToggle={() => setIsOpen(!open)}
         tabIndex={0}
+        setIsOpen={setIsOpen}
       >
         <AccordionPanelTrigger
           className={classNames(

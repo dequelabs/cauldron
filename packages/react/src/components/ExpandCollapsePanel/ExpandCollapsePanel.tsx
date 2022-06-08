@@ -199,16 +199,15 @@ export default class ExpandCollapsePanel extends React.Component<
             onClick: this.handleToggle
           })}
         <div
-          {...props}
           className={classnames(
             className ? className : 'ExpandCollapse__panel',
             animationClass,
-            className,
             {
               'is--hidden': !isOpen && !isAnimating
             }
           )}
           ref={this.panel}
+          {...props}
         >
           {panelElements}
         </div>

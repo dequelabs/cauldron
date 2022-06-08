@@ -12,6 +12,7 @@ const AccordionTwo = ({ className, children, ...props }: AccordionProps) => {
   return (
     <div
       className={classNames(className ? className : '', 'Accordion__container')}
+      {...props}
     >
       {children}
     </div>
@@ -44,12 +45,7 @@ const AccordionContainer = ({
   if (setIsOpen && open) {
     return (
       <>
-        <ExpandCollapsePanel
-          id={`${elementId}-panel`}
-          open={open}
-          key={`${elementId}-key`}
-          {...props}
-        >
+        <ExpandCollapsePanel id={`${elementId}-panel`} open={open} {...props}>
           <PanelTrigger
             className={children[0].props.className}
             aria-controls={`${elementId}-panel`}
