@@ -1,6 +1,6 @@
 .Accordion__trigger {
   background-color: var(--accent-medium);
-  padding: 11px 12px;
+  padding: 8px 16px;
   height: 43px;
   width: 100%;
   display: flex;
@@ -16,12 +16,19 @@
 .Accordion__trigger--expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
+  background-color: #02101a;
 }
 
 button.Accordion__trigger:hover {
-  box-shadow: inset 3.5px 0px #6cdaf2;
+  /*box-shadow: inset 3.5px 0px #6cdaf2;
   color: #ffffff;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;*/
+  border-left: 4px #6cdaf2 solid;
+  border-radius: 3px 3px 3px 0px;
+}
+
+.max-w {
+  max-width: 750px;
 }
 
 .Accordion__icon {
@@ -48,11 +55,12 @@ button.Accordion__trigger:hover {
 }
 
 .Accordion__panel {
-  background-color: #5d676f;
+  background-color: var(--accent-medium);
   color: #ffffff;
   padding: 16px;
   height: 300px;
-  width: 100%;
+  width: calc(100% - 2px);
+  margin: 0 auto;
 }
 
 .Accordion__panel h3 {
