@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import PanelTrigger from './PanelTrigger';
@@ -14,6 +14,7 @@ export interface ExpandCollapsePanelProps
   children?: React.ReactNode;
   animationTiming?: number | boolean;
   onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  other?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 interface ExpandCollapsePanelState {
@@ -177,7 +178,7 @@ export default class ExpandCollapsePanel extends React.Component<
       className,
       onToggle,
       open,
-      ...other
+      ...props
     } = this.props;
     /* eslint-enable no-unused-vars */
     const { isOpen, isAnimating, animationClass } = this.state;
@@ -198,16 +199,15 @@ export default class ExpandCollapsePanel extends React.Component<
             onClick: this.handleToggle
           })}
         <div
-          {...other}
           className={classnames(
             className ? className : 'ExpandCollapse__panel',
             animationClass,
-            className,
             {
               'is--hidden': !isOpen && !isAnimating
             }
           )}
           ref={this.panel}
+          {...props}
         >
           {panelElements}
         </div>
