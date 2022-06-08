@@ -18,11 +18,6 @@ import {
 import classNames from 'classnames';
 
 export const AccordionDemo = () => {
-  const [open, setIsOpen] = useState(true);
-  useEffect(() => {
-    console.log('value of open', open);
-  }, [open]);
-
   return (
     <div>
       <h1>Accordion</h1>
@@ -34,21 +29,10 @@ export const AccordionDemo = () => {
           <AccordionPanel open={open}>Second element</AccordionPanel>
         </AccordionItem>
       </Accordion> */}
-      <AccordionTwo>
-        <AccordionContainer open={open} onToggle={() => setIsOpen(!open)}>
-          <AccordionPanelTrigger
-            className={classNames(
-              open
-                ? 'Accordion__trigger underline'
-                : 'Accordion__trigger underline expanded'
-            )}
-          >
-            This is a trigger
-          </AccordionPanelTrigger>
-          <AccordionContent className="Accordion__panel">
-            Here is some content
-          </AccordionContent>
-        </AccordionContainer>
+      <h3>Controlled</h3>
+      <ControlledAccordion />
+      <ControlledAccordion />
+      {/* <AccordionTwo>
         <AccordionContainer
           open={open}
           onToggle={() => setIsOpen(!open)}
@@ -69,6 +53,27 @@ export const AccordionDemo = () => {
         </AccordionContainer>
       </AccordionTwo>
       <AccordionTwo>
+        <AccordionContainer
+          open={open}
+          onToggle={() => setIsOpen(!open)}
+          tabIndex={0}
+        >
+          <AccordionPanelTrigger
+            className={classNames(
+              open
+                ? 'Accordion__trigger underline expanded'
+                : 'Accordion__trigger underline'
+            )}
+          >
+            This is a trigger
+          </AccordionPanelTrigger>
+          <AccordionContent className="Accordion__panel">
+            Here is some content
+          </AccordionContent>
+        </AccordionContainer>
+      </AccordionTwo> */}
+      <h3>Uncontrolled</h3>
+      <AccordionTwo>
         <AccordionContainer>
           <AccordionPanelTrigger className="Accordion__trigger">
             This is a trigger
@@ -83,5 +88,32 @@ export const AccordionDemo = () => {
 };
 
 AccordionDemo.displayName = 'AccordionDemo';
+
+const ControlledAccordion = () => {
+  const [open, setIsOpen] = useState(false);
+
+  return (
+    <AccordionTwo>
+      <AccordionContainer
+        open={open}
+        onToggle={() => setIsOpen(!open)}
+        tabIndex={0}
+      >
+        <AccordionPanelTrigger
+          className={classNames(
+            open
+              ? 'Accordion__trigger underline expanded'
+              : 'Accordion__trigger underline'
+          )}
+        >
+          This is a trigger
+        </AccordionPanelTrigger>
+        <AccordionContent className="Accordion__panel">
+          Here is some content
+        </AccordionContent>
+      </AccordionContainer>
+    </AccordionTwo>
+  );
+};
 
 export default AccordionDemo;
