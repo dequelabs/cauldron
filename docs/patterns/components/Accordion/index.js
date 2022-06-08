@@ -31,7 +31,6 @@ export const AccordionDemo = () => {
       <AccordionTwo>
         <AccordionContainer>
           <AccordionPanelTrigger
-            className="Accordion__trigger"
             iconExpanded="triangle-down"
             iconCollapsed="triangle-right"
           >
@@ -61,6 +60,7 @@ const ControlledAccordion = () => {
         onToggle={() => setIsOpen(!open)}
         tabIndex={0}
         setIsOpen={setIsOpen}
+        isControlled
       >
         <AccordionPanelTrigger
           className={classNames(
@@ -89,10 +89,10 @@ const CheckboxAccordion = () => {
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
-        tabIndex={0}
         iconExpanded="triangle-down"
         iconCollapsed="triangle-right"
         shouldHideIcon
+        isControlled
       >
         <AccordionPanelTrigger
           className={classNames(

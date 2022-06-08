@@ -1,7 +1,3 @@
-import Accordion from './Accordion';
-import AccordionPanel from './AccordionPanel';
-import AccordionTrigger from './AccordionTrigger';
-import AccordionItem from './AccordionItem';
 import {
   AccordionTwo,
   AccordionContainer,
@@ -9,12 +5,8 @@ import {
   AccordionContent
 } from './AccordionTwo';
 
-export default Accordion;
+export default AccordionTwo;
 export {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  AccordionItem,
   AccordionContainer,
   AccordionTwo,
   AccordionPanelTrigger,

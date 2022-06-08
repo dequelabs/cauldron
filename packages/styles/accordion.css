@@ -2,18 +2,18 @@
   max-width: 600px;
 }
 
-.Accordion__trigger {
+.Accordion__trigger,
+.ExpandCollapse__trigger {
   background-color: var(--white);
-  padding: 11px 12px;
+  padding: 12px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border-radius: 3px;
   border: 1px var(--gray-40) solid;
   background-size: cover;
   font-size: var(--text-size-small);
-  margin-top: 7px;
+  margin-top: 16px;
 }
 
 .expanded {
@@ -26,8 +26,6 @@ button.Accordion__trigger:hover {
   box-shadow: inset 3.5px 0px var(--accent-primary);
   color: var(--gray-90);
   transition: all 0.2s ease-in-out;
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 2px;
 }
 
 .underline {
@@ -51,6 +49,7 @@ button.Accordion__trigger:hover {
   border-color: var(--gray-40);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+  box-shadow: 0px 2px 3px 0px #00000015;
 }
 
 .ExpandCollapse__panel {
@@ -84,11 +83,7 @@ button.Accordion__trigger:hover {
   background-color: var(--accent-medium);
 }
 
-.cauldron--theme-dark {
-  --table-header-text-color: var(--white);
-  --table-header-background-color: var(--accent-dark);
-  --table-cell-text-color: var(--accent-light);
-  --table-cell-background-color: var(--accent-medium);
+.cauldron--theme-dark .Tooltip {
 }
 
 .cauldron--theme-dark .Accordion__trigger {
@@ -110,6 +105,7 @@ button.Accordion__trigger:hover {
 
 .cauldron--theme-dark .Accordion__panel {
   background-color: var(--accent-medium);
+  border-color: var(--stroke-dark);
   color: #ffffff;
 }
 

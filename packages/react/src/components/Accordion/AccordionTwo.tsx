@@ -46,6 +46,7 @@ const AccordionContainer = ({
   ...props
 }: AccordionContainerProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
+  const [notControlledOpen, setNotControlledOpen] = useState(false);
 
   useEffect(() => {
     setElementId(randomId());
@@ -53,12 +54,22 @@ const AccordionContainer = ({
 
   if (!isControlled) {
     return (
-      <ExpandCollapsePanel id={`${elementId}-panel`} {...props}>
+      <ExpandCollapsePanel
+        id={`${elementId}-panel`}
+        open={notControlledOpen}
+        onToggle={() => setNotControlledOpen(!notControlledOpen)}
+        {...props}
+      >
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
           aria-controls={`${elementId}-panel`}
-          className={children[0].props.className}
+          className={classNames(
+            children[0].props.className
+              ? children[0].props.className
+              : 'Accordion__trigger',
+            notControlledOpen ? 'expanded' : ''
+          )}
           shouldHideIcon={shouldHideIcon}
         >
           {children[0]}
@@ -70,7 +81,12 @@ const AccordionContainer = ({
 
   return (
     <>
-      <ExpandCollapsePanel id={`${elementId}-panel`} open={open} {...props}>
+      <ExpandCollapsePanel
+        id={`${elementId}-panel`}
+        open={open}
+        onToggle={() => setIsOpen(!open)}
+        {...props}
+      >
         <PanelTrigger
           iconCollapsed={'triangle-right'}
           iconExpanded={'triangle-down'}
