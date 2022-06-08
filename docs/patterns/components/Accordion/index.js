@@ -39,8 +39,8 @@ export const AccordionDemo = () => {
           <AccordionPanelTrigger
             className={classNames(
               open
-                ? 'Accordion__trigger underline expanded'
-                : 'Accordion__trigger underline'
+                ? 'Accordion__trigger underline'
+                : 'Accordion__trigger underline expanded'
             )}
           >
             This is a trigger

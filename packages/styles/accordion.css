@@ -13,15 +13,24 @@
   margin-top: 7px;
 }
 
+button.Accordion__trigger:hover::before {
+  border: 5px#6cdaf2 solid;
+}
+
 .expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
 }
 
 button.Accordion__trigger:hover {
-  box-shadow: inset 3.5px 0px #6cdaf2;
+  /*box-shadow: inset 3.5px 0px #6cdaf2;*/
   color: #ffffff;
   transition: all 0.2s ease-in-out;
+  border-left: 3px solid #6cdaf2;
+}
+
+button.Accordion_trigger:hover:after {
+  margin-left: -2px;
 }
 
 .Accordion__icon {
