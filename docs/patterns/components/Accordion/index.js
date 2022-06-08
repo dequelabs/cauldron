@@ -135,16 +135,14 @@ const CheckboxAccordion = () => {
         open={open}
         onToggle={() => setIsOpen(!open)}
         tabIndex={0}
-        setIsOpen={setIsOpen}
         iconExpanded="triangle-down"
         iconCollapsed="triangle-right"
       >
         <AccordionPanelTrigger
           className={classNames(
-            open
-              ? 'Accordion__trigger underline expanded'
-              : 'Accordion__trigger underline'
+            open ? 'Accordion__trigger expanded' : 'Accordion__trigger'
           )}
+          shouldHideIcon
         >
           <div className="checkbox-demo">
             <Checkbox label="Some text and stuff" />
