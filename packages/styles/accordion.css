@@ -1,61 +1,37 @@
 .Accordion__container {
-  max-width: 700px;
+  max-width: 600px;
 }
 
 .Accordion__trigger {
-  background-color: var(--accent-medium);
-  padding: 8px 12px;
-  height: 43px;
+  background-color: var(--white);
+  padding: 11px 12px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 3px;
-  border: 1px #5d676f solid;
+  border: 1px var(--gray-40) solid;
   background-size: cover;
-  font-size: 14px;
+  font-size: var(--text-size-small);
   margin-top: 7px;
-}
-
-button.Accordion__trigger:hover::before {
-  border: 5px#6cdaf2 solid;
 }
 
 .expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
-  background-color: var(--accent-dark);
+  background-color: var(--gray-20);
 }
 
 button.Accordion__trigger:hover {
-  box-shadow: inset 3.5px 0px #6cdaf2;
-  color: #ffffff;
+  box-shadow: inset 3.5px 0px var(--accent-primary);
+  color: var(--gray-90);
   transition: all 0.2s ease-in-out;
   border-bottom-left-radius: 0px;
   border-top-left-radius: 2px;
 }
 
-button.Accordion_trigger:hover:after {
-  margin-left: -2px;
-}
-
-.Accordion__icon {
-  width: 24px;
-  height: 24px;
-  fill: #ffffff;
-}
-
-.Accordion__icon--collapsed > svg {
-  transform: rotate(90deg);
-  transition: transform 250ms;
-}
-
-.Accordion__icon--expanded > svg {
-  transition: transform 250ms;
-}
-
 .underline {
-  text-decoration: underline solid rgb(212, 221, 224);
+  text-decoration: underline solid var(--gray-90);
 }
 
 .no-underline {
@@ -63,30 +39,23 @@ button.Accordion_trigger:hover:after {
 }
 
 .Accordion__panel {
-  background-color: var(--accent-medium);
-  color: #ffffff;
+  background-color: var(--white);
+  color: var(--white);
   padding: 16px;
   height: 300px;
-  width: calc(100%-3px);
+  border-left: 1px;
+  border-bottom: 1px;
+  border-right: 1px;
+  border-style: solid;
+  border-top: 0px;
+  border-color: var(--gray-40);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .ExpandCollapse__panel {
-  max-width: calc(100% - 2px);
+  max-width: calc(100% - 0.5px);
   margin: 0 auto;
-}
-
-.Accordion__panel h3 {
-  font-size: 15px;
-  color: #fff;
-  text-decoration: none solid rgb(255, 255, 255);
-  font-weight: 700;
-}
-
-.Accordion__panel p {
-  font-size: 15px;
-  color: #fff;
-  text-decoration: none solid rgb(255, 255, 255);
-  font-weight: 400;
 }
 
 .Accordion__item {
@@ -115,17 +84,35 @@ button.Accordion_trigger:hover:after {
   background-color: var(--accent-medium);
 }
 
-/* .ExpandCollapse__trigger-title {
+.cauldron--theme-dark {
+  --table-header-text-color: var(--white);
+  --table-header-background-color: var(--accent-dark);
+  --table-cell-text-color: var(--accent-light);
+  --table-cell-background-color: var(--accent-medium);
+}
+
+.cauldron--theme-dark .Accordion__trigger {
+  color: var(--white);
   background-color: var(--accent-medium);
-  padding: 11px 12px;
-  height: 43px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 3px;
-  border: 1px #5d676f solid;
-  background-size: cover;
-  font-size: 14px;
-  margin-top: 7px;
-} */
+  border: 1px var(--stroke-dark) solid;
+}
+
+.cauldron--theme-dark .expanded {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark button.Accordion__trigger:hover {
+  box-shadow: inset 3.5px 0px var(--accent-info);
+  color: #ffffff;
+}
+
+.cauldron--theme-dark .Accordion__panel {
+  background-color: var(--accent-medium);
+  color: #ffffff;
+}
+
+.cauldron--theme-dark .underline {
+  text-decoration: underline solid var(--white);
+}

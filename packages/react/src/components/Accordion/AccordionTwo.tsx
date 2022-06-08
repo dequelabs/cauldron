@@ -31,7 +31,7 @@ export interface AccordionContainerProps
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
   shouldHideIcon?: boolean;
-  as?: ElementType;
+  isControlled?: boolean;
 }
 
 const AccordionContainer = ({
@@ -41,8 +41,8 @@ const AccordionContainer = ({
   setIsOpen,
   iconExpanded,
   iconCollapsed,
-  shouldHideIcon,
-  as = 'button',
+  shouldHideIcon = false,
+  isControlled = false,
   ...props
 }: AccordionContainerProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
@@ -51,16 +51,32 @@ const AccordionContainer = ({
     setElementId(randomId());
   }, []);
 
+  if (!isControlled) {
+    return (
+      <ExpandCollapsePanel id={`${elementId}-panel`} {...props}>
+        <PanelTrigger
+          iconCollapsed="triangle-right"
+          iconExpanded="triangle-down"
+          aria-controls={`${elementId}-panel`}
+          className={children[0].props.className}
+          shouldHideIcon={shouldHideIcon}
+        >
+          {children[0]}
+        </PanelTrigger>
+        {children[1]}
+      </ExpandCollapsePanel>
+    );
+  }
+
   return (
     <>
       <ExpandCollapsePanel id={`${elementId}-panel`} open={open} {...props}>
         <PanelTrigger
-          as={as}
           iconCollapsed={'triangle-right'}
           iconExpanded={'triangle-down'}
           className={children[0].props.className}
           aria-controls={`${elementId}-panel`}
-          shouldHideIcon
+          shouldHideIcon={shouldHideIcon}
         >
           {children[0]}
         </PanelTrigger>
@@ -69,20 +85,6 @@ const AccordionContainer = ({
     </>
   );
 };
-
-// return (
-//   <ExpandCollapsePanel id={`${elementId}-panel`} {...props}>
-//     <PanelTrigger
-//       iconCollapsed='triangle-right'
-//       iconExpanded='triangle-down'
-//       aria-controls={`${elementId}-panel`}
-//       className={children[0].props.className}
-//     >
-//       {children[0]}
-//     </PanelTrigger>
-//     {children[1]}
-//   </ExpandCollapsePanel>
-// );
 
 type AccordionContentProps = {
   children: React.ReactElement;

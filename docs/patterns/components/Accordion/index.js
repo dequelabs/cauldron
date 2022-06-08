@@ -24,57 +24,9 @@ export const AccordionDemo = () => {
     <div>
       <h1>Accordion</h1>
       <h2>Demo</h2>
-      <h2>Code Sample</h2>
-      {/* <Accordion>
-        <AccordionItem>
-          <AccordionTrigger open={open} onToggle={() => setIsOpen(!open)}>Testing</AccordionTrigger>
-          <AccordionPanel open={open}>Second element</AccordionPanel>
-        </AccordionItem>
-      </Accordion> */}
       <h3>Controlled</h3>
       <ControlledAccordion />
       <ControlledAccordion />
-      <CheckboxAccordion />
-      {/* <AccordionTwo>
-        <AccordionContainer
-          open={open}
-          onToggle={() => setIsOpen(!open)}
-          tabIndex={0}
-        >
-          <AccordionPanelTrigger
-            className={classNames(
-              open
-                ? 'Accordion__trigger underline expanded'
-                : 'Accordion__trigger underline'
-            )}
-          >
-            This is a trigger
-          </AccordionPanelTrigger>
-          <AccordionContent className="Accordion__panel">
-            Here is some content
-          </AccordionContent>
-        </AccordionContainer>
-      </AccordionTwo>
-      <AccordionTwo>
-        <AccordionContainer
-          open={open}
-          onToggle={() => setIsOpen(!open)}
-          tabIndex={0}
-        >
-          <AccordionPanelTrigger
-            className={classNames(
-              open
-                ? 'Accordion__trigger underline expanded'
-                : 'Accordion__trigger underline'
-            )}
-          >
-            This is a trigger
-          </AccordionPanelTrigger>
-          <AccordionContent className="Accordion__panel">
-            Here is some content
-          </AccordionContent>
-        </AccordionContainer>
-      </AccordionTwo> */}
       <h3>Uncontrolled</h3>
       <AccordionTwo>
         <AccordionContainer>
@@ -90,6 +42,9 @@ export const AccordionDemo = () => {
           </AccordionContent>
         </AccordionContainer>
       </AccordionTwo>
+      <h3>Advanced</h3>
+      <CheckboxAccordion />
+      <h2>Code Sample</h2>
     </div>
   );
 };
@@ -137,12 +92,12 @@ const CheckboxAccordion = () => {
         tabIndex={0}
         iconExpanded="triangle-down"
         iconCollapsed="triangle-right"
+        shouldHideIcon
       >
         <AccordionPanelTrigger
           className={classNames(
             open ? 'Accordion__trigger expanded' : 'Accordion__trigger'
           )}
-          shouldHideIcon
         >
           <div className="checkbox-demo">
             <Checkbox label="Some text and stuff" />
