@@ -101,6 +101,12 @@ button.Accordion_trigger:hover:after {
   text-transform: uppercase;
 }
 
+.checkbox-demo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* .ExpandCollapse__trigger-title {
   background-color: var(--accent-medium);
   padding: 11px 12px;

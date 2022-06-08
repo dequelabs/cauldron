@@ -8,7 +8,8 @@ import {
   AccordionTwo,
   AccordionContainer,
   AccordionPanelTrigger,
-  AccordionContent
+  AccordionContent,
+  Checkbox
 } from '@deque/cauldron-react/';
 import { className } from '../../../props';
 import {
@@ -32,6 +33,7 @@ export const AccordionDemo = () => {
       <h3>Controlled</h3>
       <ControlledAccordion />
       <ControlledAccordion />
+      <CheckboxAccordion />
       {/* <AccordionTwo>
         <AccordionContainer
           open={open}
@@ -108,6 +110,36 @@ const ControlledAccordion = () => {
           )}
         >
           This is a trigger
+        </AccordionPanelTrigger>
+        <AccordionContent className="Accordion__panel">
+          Here is some content
+        </AccordionContent>
+      </AccordionContainer>
+    </AccordionTwo>
+  );
+};
+
+const CheckboxAccordion = () => {
+  const [open, setIsOpen] = useState(false);
+
+  return (
+    <AccordionTwo>
+      <AccordionContainer
+        open={open}
+        onToggle={() => setIsOpen(!open)}
+        tabIndex={0}
+        setIsOpen={setIsOpen}
+      >
+        <AccordionPanelTrigger
+          className={classNames(
+            open
+              ? 'Accordion__trigger underline expanded'
+              : 'Accordion__trigger underline'
+          )}
+        >
+          <div className="checkbox-demo">
+            <Checkbox label="Some text and stuff" />
+          </div>
         </AccordionPanelTrigger>
         <AccordionContent className="Accordion__panel">
           Here is some content
