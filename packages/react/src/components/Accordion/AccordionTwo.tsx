@@ -39,8 +39,8 @@ const AccordionContainer = ({
   children,
   open = false,
   setIsOpen,
-  iconExpanded,
-  iconCollapsed,
+  iconExpanded = 'triangle-down',
+  iconCollapsed = 'triangle-right',
   shouldHideIcon = false,
   isControlled = false,
   ...props
@@ -88,8 +88,8 @@ const AccordionContainer = ({
         {...props}
       >
         <PanelTrigger
-          iconCollapsed={'triangle-right'}
-          iconExpanded={'triangle-down'}
+          iconCollapsed={iconCollapsed}
+          iconExpanded={iconExpanded}
           className={children[0].props.className}
           aria-controls={`${elementId}-panel`}
           shouldHideIcon={shouldHideIcon}

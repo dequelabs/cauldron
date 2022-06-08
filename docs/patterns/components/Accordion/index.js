@@ -25,17 +25,12 @@ export const AccordionDemo = () => {
       <h1>Accordion</h1>
       <h2>Demo</h2>
       <h3>Controlled</h3>
-      <ControlledAccordion />
-      <ControlledAccordion />
+      <ControlledAccordion label="Accordion #1" />
+      <ControlledAccordion label="Accordion #2" />
       <h3>Uncontrolled</h3>
       <AccordionTwo>
         <AccordionContainer>
-          <AccordionPanelTrigger
-            iconExpanded="triangle-down"
-            iconCollapsed="triangle-right"
-          >
-            This is a trigger
-          </AccordionPanelTrigger>
+          <AccordionPanelTrigger>Accordion #3</AccordionPanelTrigger>
           <AccordionContent className="Accordion__panel">
             Here is some content
           </AccordionContent>
@@ -50,7 +45,7 @@ export const AccordionDemo = () => {
 
 AccordionDemo.displayName = 'AccordionDemo';
 
-const ControlledAccordion = () => {
+const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
@@ -58,7 +53,6 @@ const ControlledAccordion = () => {
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
-        tabIndex={0}
         setIsOpen={setIsOpen}
         isControlled
       >
@@ -71,7 +65,7 @@ const ControlledAccordion = () => {
           iconExpanded="triangle-down"
           iconCollapsed="triangle-right"
         >
-          This is a trigger
+          {label}
         </AccordionPanelTrigger>
         <AccordionContent className="Accordion__panel">
           Here is some content
@@ -100,7 +94,7 @@ const CheckboxAccordion = () => {
           )}
         >
           <div className="checkbox-demo">
-            <Checkbox label="Some text and stuff" />
+            <Checkbox label="Accordion #4" />
             <IconButton
               icon={open ? 'triangle-down' : 'triangle-right'}
               label={open ? 'Close panel' : 'Open panel'}
