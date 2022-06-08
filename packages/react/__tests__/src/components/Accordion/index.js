@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow, getDOMNode } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import {
   AccordionTwo,
   AccordionPanelTrigger,
@@ -9,12 +9,13 @@ import {
 import * as stylesheets from 'src/utils/stylesheets';
 
 describe('Accordion', () => {
-  test('renders without errors', () => {
+  it('renders without errors', () => {
     const accordion = mount(<AccordionTwo />);
 
     expect(accordion.find('.Accordion__container')).toBeTruthy();
   });
-  test('renders with a trigger and panel element', () => {
+
+  it('renders with a trigger and panel element', () => {
     const accordion = shallow(
       <AccordionContainer>
         <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
@@ -26,7 +27,7 @@ describe('Accordion', () => {
     expect(accordion.find('.Accordion__panel')).toBeTruthy();
   });
 
-  test('renders the trigger as a button', () => {
+  it('renders the trigger element', () => {
     const accordion = mount(
       <AccordionContainer>
         <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
@@ -40,9 +41,23 @@ describe('Accordion', () => {
     );
   });
 
-  test('aria-expanded is false when collapsed', () => {
+  it('renders the content element', () => {
     const accordion = mount(
       <AccordionContainer>
+        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionContent>This is another test</AccordionContent>
+      </AccordionContainer>
+    );
+
+    expect(accordion.find('.Accordion__panel')).toBeTruthy();
+    expect(
+      accordion.find('.ExpandCollapse__panel .Accordion__panel').text()
+    ).toEqual('This is another test');
+  });
+
+  it('sets aria-expanded to false when collapsed', () => {
+    const accordion = mount(
+      <AccordionContainer open={true}>
         <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
@@ -56,7 +71,7 @@ describe('Accordion', () => {
     ).toEqual('false');
   });
 
-  test('toggles aria-expanded to true', () => {
+  it('toggles aria-expanded to true when expanded', () => {
     const accordion = mount(
       <AccordionContainer>
         <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
@@ -73,7 +88,7 @@ describe('Accordion', () => {
     ).toEqual('true');
   });
 
-  test('expands the panel element when the trigger is clicked', () => {
+  it('expands the panel element when the trigger element is clicked', () => {
     const spy = jest.fn();
     const accordion = mount(
       <AccordionContainer onToggle={spy}>
@@ -86,5 +101,24 @@ describe('Accordion', () => {
     button.simulate('click');
     expect(accordion.find('expanded')).toBeTruthy();
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  describe('when controlled', () => {
+    it('expands the panel when the open prop is passed "true"', () => {
+      const accordion = mount(
+        <AccordionContainer open={false} isControlled>
+          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </AccordionContainer>
+      );
+
+      expect(accordion.find('.expanded')).toEqual({});
+      expect(accordion.props().open).toEqual(false);
+
+      accordion.setProps({ open: true });
+
+      expect(accordion.find('.expanded')).toBeTruthy();
+      expect(accordion.props().open).toEqual(true);
+    });
   });
 });

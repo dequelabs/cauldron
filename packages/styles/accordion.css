@@ -14,6 +14,7 @@
   background-size: cover;
   font-size: var(--text-size-small);
   margin-top: 16px;
+  color: var(--gray-90);
 }
 
 .expanded {
@@ -24,8 +25,9 @@
 
 button.Accordion__trigger:hover {
   box-shadow: inset 3.5px 0px var(--accent-primary);
-  color: var(--gray-90);
+  color: var(--accent-primary);
   transition: all 0.2s ease-in-out;
+  text-decoration-color: var(--accent-primary);
 }
 
 .underline {
@@ -38,7 +40,7 @@ button.Accordion__trigger:hover {
 
 .Accordion__panel {
   background-color: var(--white);
-  color: var(--white);
+  color: var(--gray-90);
   padding: 16px;
   height: 300px;
   border-left: 1px;
@@ -106,7 +108,7 @@ button.Accordion__trigger:hover {
 .cauldron--theme-dark .Accordion__panel {
   background-color: var(--accent-medium);
   border-color: var(--stroke-dark);
-  color: #ffffff;
+  color: var(--white);
 }
 
 .cauldron--theme-dark .underline {

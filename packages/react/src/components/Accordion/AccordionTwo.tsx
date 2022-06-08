@@ -90,7 +90,11 @@ const AccordionContainer = ({
         <PanelTrigger
           iconCollapsed={iconCollapsed}
           iconExpanded={iconExpanded}
-          className={children[0].props.className}
+          className={
+            children[0].props.className
+              ? children[0].props.className
+              : 'Accordion__trigger'
+          }
           aria-controls={`${elementId}-panel`}
           shouldHideIcon={shouldHideIcon}
         >
@@ -108,7 +112,9 @@ type AccordionContentProps = {
 };
 
 const AccordionContent = ({ children, className }: AccordionContentProps) => {
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={className ? className : 'Accordion__panel'}>{children}</div>
+  );
 };
 
 type AccordionPanelTriggerProps = {
