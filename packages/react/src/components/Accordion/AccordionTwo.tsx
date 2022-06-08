@@ -113,7 +113,7 @@ const AccordionContent = ({ children, className }: AccordionContentProps) => {
 
 type AccordionPanelTriggerProps = {
   className?: string;
-  children: React.ReactNode | React.ReactNode[];
+  children: React.ReactElement | React.ReactElement[];
 };
 
 const AccordionPanelTrigger = ({
