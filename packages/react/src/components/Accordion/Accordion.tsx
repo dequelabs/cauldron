@@ -125,10 +125,7 @@ type AccordionPanelTriggerProps = {
   children: React.ReactElement | React.ReactElement[];
 };
 
-const AccordionPanelTrigger = ({
-  className,
-  children
-}: AccordionPanelTriggerProps) => {
+const AccordionPanelTrigger = ({ children }: AccordionPanelTriggerProps) => {
   return <>{children}</>;
 };
 

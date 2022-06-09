@@ -1,0 +1,7 @@
+.Accordion__container {
+  max-width: 600px;
+}
+
+.Accordion__panel {
+  min-height: 200px;
+}

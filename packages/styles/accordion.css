@@ -1,3 +1,7 @@
+.Accordion__container {
+  max-width: 600px;
+}
+
 .Accordion__trigger,
 .ExpandCollapse__trigger {
   background-color: var(--white);
@@ -45,7 +49,6 @@ button.Accordion__trigger:hover .Icon {
   background-color: var(--white);
   color: var(--gray-90);
   padding: 16px;
-  height: 300px;
   border-left: 1px;
   border-bottom: 1px;
   border-right: 1px;
@@ -72,16 +75,6 @@ button.Accordion__trigger:hover .Icon {
 
 .uppercase {
   text-transform: uppercase;
-}
-
-.checkbox-demo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.Checkbox {
-  margin-bottom: 0px;
 }
 
 .cauldron--theme-dark .Accordion__trigger {

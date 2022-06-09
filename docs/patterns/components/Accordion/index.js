@@ -10,6 +10,7 @@ import {
   Button
 } from '@deque/cauldron-react/';
 import classNames from 'classnames';
+import './index.css';
 
 export const AccordionDemo = () => {
   return (

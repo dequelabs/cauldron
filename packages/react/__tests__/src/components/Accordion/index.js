@@ -6,7 +6,6 @@ import {
   AccordionContent,
   AccordionContainer
 } from 'src/components/Accordion';
-import * as stylesheets from 'src/utils/stylesheets';
 
 describe('Accordion', () => {
   it('renders without errors', () => {
