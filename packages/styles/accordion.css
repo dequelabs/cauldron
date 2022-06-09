@@ -74,8 +74,8 @@ button.Accordion__trigger:hover .Icon {
 
 .cauldron--theme-dark button.Accordion__trigger:hover {
   box-shadow: inset 3.5px 0px var(--accent-info);
-  color: var(--gray-40);
-  text-decoration: underline solid var(--gray-40);
+  color: var(--accent-light);
+  text-decoration: underline solid var(--accent-light);
 }
 
 .cauldron--theme-dark .Accordion__panel {

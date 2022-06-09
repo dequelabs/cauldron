@@ -4,10 +4,10 @@ import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
 import randomId from '../../utils/rndid';
 import { IconType } from '../Icon';
 
-type AccordionProps = {
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactNode;
-};
+}
 
 const Accordion = ({ className, children, ...props }: AccordionProps) => {
   return (
