@@ -59,6 +59,11 @@ button.Accordion__trigger:hover .Icon {
   color: var(--white);
   background-color: var(--accent-medium);
   border: 1px var(--stroke-dark) solid;
+  text-decoration: underline solid var(--white);
+}
+
+.cauldron--theme-dark button.Accordion__trigger:hover .Icon {
+  color: var(--white);
 }
 
 .cauldron--theme-dark .expanded {
@@ -69,7 +74,8 @@ button.Accordion__trigger:hover .Icon {
 
 .cauldron--theme-dark button.Accordion__trigger:hover {
   box-shadow: inset 3.5px 0px var(--accent-info);
-  color: #ffffff;
+  color: var(--gray-40);
+  text-decoration: underline solid var(--gray-40);
 }
 
 .cauldron--theme-dark .Accordion__panel {
