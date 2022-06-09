@@ -5,3 +5,7 @@
 .Accordion__panel {
   min-height: 200px;
 }
+
+.Demo-props {
+  margin-bottom: var(--space-small);
+}

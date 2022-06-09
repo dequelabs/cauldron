@@ -32,6 +32,7 @@ export interface AccordionContainerProps
   iconCollapsed?: IconType;
   shouldHideIcon?: boolean;
   isControlled?: boolean;
+  animationTiming?: number | boolean;
 }
 
 const AccordionContainer = ({
@@ -42,6 +43,7 @@ const AccordionContainer = ({
   iconCollapsed = 'triangle-right',
   shouldHideIcon = false,
   isControlled = false,
+  animationTiming,
   ...props
 }: AccordionContainerProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
@@ -58,6 +60,7 @@ const AccordionContainer = ({
         open={notControlledOpen}
         onToggle={() => setNotControlledOpen(!notControlledOpen)}
         aria-labelledby={`${elementId}-trigger`}
+        animationTiming={animationTiming}
         {...props}
       >
         <PanelTrigger
@@ -86,8 +89,9 @@ const AccordionContainer = ({
           id={`${elementId}-panel`}
           open={open}
           onToggle={() => setIsOpen(!open)}
-          {...props}
           aria-labelledby={`${elementId}-trigger`}
+          animationTiming={animationTiming}
+          {...props}
         >
           <PanelTrigger
             id={`${elementId}-trigger`}
@@ -110,23 +114,29 @@ const AccordionContainer = ({
   }
 };
 
-type AccordionContentProps = {
+export interface AccordionContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
   className: string;
-};
+}
 
-const AccordionContent = ({ children, className }: AccordionContentProps) => {
+const AccordionContent = ({
+  children,
+  className,
+  ...props
+}: AccordionContentProps) => {
   return (
-    <div className={className ? className : 'Accordion__panel'}>{children}</div>
+    <div className={className ? className : 'Accordion__panel'} {...props}>
+      {children}
+    </div>
   );
 };
 
-type AccordionTriggerProps = {
+export interface AccordionTriggerProps {
   children: React.ReactElement | React.ReactElement[];
-  className?: string;
-};
+}
 
-const AccordionTrigger = ({ children, className }: AccordionTriggerProps) => {
+const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 

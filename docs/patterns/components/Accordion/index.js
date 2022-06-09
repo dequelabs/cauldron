@@ -110,7 +110,17 @@ const ControlledAccordion = ({ label }) => {
       <div className="Demo-props">
         <h2>Props</h2>
         <h3>
-          <code>ExpandCollapsePanel</code>
+          <code>Accordion</code>
+        </h3>
+
+        <PropDocs
+          docs={{
+            className,
+            children
+          }}
+        />
+        <h3>
+          <code>AccordionContainer</code>
         </h3>
 
         <PropDocs
@@ -128,47 +138,36 @@ const ControlledAccordion = ({ label }) => {
                 'Animation time of expand/collapse in ms. Animation disabled when set to false.',
               default: 250
             },
-            onToggle: {
+            setIsOpen: {
               type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
               description:
                 'onToggle handler for the panel. The original event object will be passed.',
               default: 'function () {}'
-            }
+            },
+            iconCollapsed: {},
+            iconExpanded: {},
+            shouldHideIcon: {},
+            isControlled: {}
           }}
         />
 
         <h3>
-          <code>PanelTrigger</code>
+          <code>AccordionTrigger</code>
         </h3>
         <PropDocs
           docs={{
             children,
-            className,
-            open: {
-              type: 'boolean',
-              description: 'Initial collapsed state of PanelTrigger',
-              default: 'false'
-            },
-            fullWidth: {
-              type: 'string',
-              description:
-                'When set to "fullWidth" this component will stretch to the full width of its parent.'
-            },
-            onClick: {
-              type: '(e: React.MouseEvent<HTMLButtonElement>)',
-              description:
-                'onClick handler for PanelTrigger. The original event object will be passed.'
-            },
-            iconExpanded: {
-              type: 'string',
-              description: 'The Icon to use when open=true.',
-              default: 'chevron-down'
-            },
-            iconCollapsed: {
-              type: 'string',
-              description: 'The Icon to use when open=false.',
-              default: 'chevron-right'
-            }
+            className
+          }}
+        />
+
+        <h3>
+          <code>AccordionContent</code>
+        </h3>
+        <PropDocs
+          docs={{
+            children,
+            className
           }}
         />
       </div>
