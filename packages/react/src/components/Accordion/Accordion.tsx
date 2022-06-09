@@ -7,6 +7,7 @@ import { IconType } from '../Icon';
 interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
+  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const Accordion = ({ className, children, ...props }: AccordionProps) => {
@@ -26,12 +27,12 @@ interface AccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   setIsOpen?: (open: boolean) => void;
   trigger?: React.ReactNode | React.ReactNode[];
-  other?: React.HTMLAttributes<HTMLDivElement>;
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
   shouldHideIcon?: boolean;
   isControlled?: boolean;
   animationTiming?: number | boolean;
+  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const AccordionContainer = ({
@@ -116,6 +117,7 @@ const AccordionContainer = ({
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
   className: string;
+  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const AccordionContent = ({
