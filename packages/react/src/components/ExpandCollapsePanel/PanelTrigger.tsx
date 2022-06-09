@@ -13,7 +13,6 @@ export interface PanelTriggerProps
   iconCollapsed?: IconType;
   shouldHideIcon?: boolean;
   buttonRef?: Ref<HTMLButtonElement>;
-  as?: ElementType;
 }
 
 const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
@@ -64,9 +63,7 @@ PanelTrigger.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string,
-  iconExpanded: PropTypes.string,
-  iconCollapsed: PropTypes.string
+  className: PropTypes.string
 };
 
 PanelTrigger.displayName = 'PanelTrigger';
