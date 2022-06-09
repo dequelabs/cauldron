@@ -1,5 +1,5 @@
 .Accordion__trigger,
-.ExpandCollapse__trigger {
+.Accordion__container > .ExpandCollapse__trigger {
   background-color: var(--white);
   padding: 12px;
   width: 100%;
@@ -14,7 +14,7 @@
   text-decoration: underline solid var(--gray-90);
 }
 
-.expanded {
+button.Accordion__trigger.expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   background-color: var(--gray-20);
@@ -46,7 +46,7 @@ button.Accordion__trigger:hover .Icon {
   box-shadow: 0px 2px 3px 0px #00000015;
 }
 
-.ExpandCollapse__panel {
+.Accordion__container div.ExpandCollapse__panel {
   max-width: calc(100% - 0.5px);
   margin: 0 auto;
 }
@@ -55,7 +55,7 @@ button.Accordion__trigger:hover .Icon {
   margin: 0 auto;
 }
 
-.cauldron--theme-dark .Accordion__trigger {
+.cauldron--theme-dark button.Accordion__trigger {
   color: var(--white);
   background-color: var(--accent-medium);
   border: 1px var(--stroke-dark) solid;
@@ -66,7 +66,7 @@ button.Accordion__trigger:hover .Icon {
   color: var(--white);
 }
 
-.cauldron--theme-dark .expanded {
+.cauldron--theme-dark button.Accordion__trigger.expanded {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   background-color: var(--accent-dark);
