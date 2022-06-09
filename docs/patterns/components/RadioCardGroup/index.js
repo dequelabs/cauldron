@@ -26,7 +26,7 @@ const DemoRadioCardGroup = () => {
 
       <h2>Demo</h2>
 
-      <FieldWrap>
+      <div>
         <h3 id="coffee-label">Do you like coffee?</h3>
         <RadioCardGroup
           name="coffee"
@@ -79,7 +79,7 @@ const DemoRadioCardGroup = () => {
             }
           ]}
         />
-      </FieldWrap>
+      </div>
 
       <h2>Code Samples</h2>
       <Code language="javascript" role="region" tabIndex={0}>
