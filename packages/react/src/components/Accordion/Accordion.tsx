@@ -93,11 +93,11 @@ const AccordionContainer = ({
           id={`${elementId}-trigger`}
           iconCollapsed={iconCollapsed}
           iconExpanded={iconExpanded}
-          className={
+          className={classNames(
             children[0].props.className
               ? children[0].props.className
               : 'Accordion__trigger'
-          }
+          )}
           aria-controls={`${elementId}-panel`}
           shouldHideIcon={shouldHideIcon}
         >
@@ -120,18 +120,12 @@ const AccordionContent = ({ children, className }: AccordionContentProps) => {
   );
 };
 
-type AccordionPanelTriggerProps = {
-  className?: string;
+type AccordionTriggerProps = {
   children: React.ReactElement | React.ReactElement[];
 };
 
-const AccordionPanelTrigger = ({ children }: AccordionPanelTriggerProps) => {
+const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 
-export {
-  AccordionContainer,
-  Accordion,
-  AccordionPanelTrigger,
-  AccordionContent
-};
+export { AccordionContainer, Accordion, AccordionTrigger, AccordionContent };

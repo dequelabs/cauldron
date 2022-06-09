@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
   Accordion,
-  AccordionPanelTrigger,
+  AccordionTrigger,
   AccordionContent,
   AccordionContainer
 } from 'src/components/Accordion';
@@ -17,7 +17,7 @@ describe('Accordion', () => {
   it('renders with a trigger and panel element', () => {
     const accordion = shallow(
       <AccordionContainer>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -29,7 +29,7 @@ describe('Accordion', () => {
   it('renders the trigger element', () => {
     const accordion = mount(
       <AccordionContainer>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -43,7 +43,7 @@ describe('Accordion', () => {
   it('renders the content element', () => {
     const accordion = mount(
       <AccordionContainer>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -57,7 +57,7 @@ describe('Accordion', () => {
   it('sets aria-expanded to false when collapsed', () => {
     const accordion = mount(
       <AccordionContainer open={true}>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -73,7 +73,7 @@ describe('Accordion', () => {
   it('toggles aria-expanded to true when expanded', () => {
     const accordion = mount(
       <AccordionContainer>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -94,7 +94,7 @@ describe('Accordion', () => {
 
     const accordion = mount(
       <AccordionContainer onToggle={spy}>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -108,7 +108,7 @@ describe('Accordion', () => {
   it('sets a random id on trigger element and content panel', () => {
     const accordion = mount(
       <AccordionContainer open={false} isControlled>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -129,7 +129,7 @@ describe('Accordion', () => {
   it('sets aria-labelledby on panel using the trigger elements id', () => {
     const accordion = mount(
       <AccordionContainer open={false} isControlled>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -150,7 +150,7 @@ describe('Accordion', () => {
   it('sets aria-controls on trigger element using the panel id', () => {
     const accordion = mount(
       <AccordionContainer open={false} isControlled>
-        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
@@ -174,7 +174,7 @@ describe('Accordion', () => {
     it('expands when the open prop is passed "true"', () => {
       const accordion = mount(
         <AccordionContainer open={false} isControlled>
-          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </AccordionContainer>
       );
@@ -191,7 +191,7 @@ describe('Accordion', () => {
     it('hides the icon when the "shouldHideIcon" prop is true', () => {
       const accordion = mount(
         <AccordionContainer open={false} isControlled shouldHideIcon>
-          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </AccordionContainer>
       );
@@ -204,7 +204,7 @@ describe('Accordion', () => {
 
       const accordion = mount(
         <AccordionContainer open={false} onToggle={spy}>
-          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </AccordionContainer>
       );
@@ -220,7 +220,7 @@ describe('Accordion', () => {
 
       const accordion = mount(
         <AccordionContainer open={false} setIsOpen={spy} isControlled>
-          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </AccordionContainer>
       );
@@ -238,9 +238,9 @@ describe('Accordion', () => {
         const accordion = mount(
           <Accordion>
             <AccordionContainer open={false} shouldHideIcon>
-              <AccordionPanelTrigger className="test">
+              <AccordionTrigger className="test">
                 Testing 1 2 3
-              </AccordionPanelTrigger>
+              </AccordionTrigger>
               <AccordionContent>This is another test</AccordionContent>
             </AccordionContainer>
           </Accordion>
@@ -256,9 +256,7 @@ describe('Accordion', () => {
       const accordion = mount(
         <Accordion>
           <AccordionContainer open={false} isControlled shouldHideIcon>
-            <AccordionPanelTrigger className="test">
-              Testing 1 2 3
-            </AccordionPanelTrigger>
+            <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
         </Accordion>
@@ -273,7 +271,7 @@ describe('Accordion', () => {
       const accordion = mount(
         <Accordion>
           <AccordionContainer open={false} isControlled shouldHideIcon>
-            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
         </Accordion>
@@ -286,7 +284,7 @@ describe('Accordion', () => {
       const accordion = mount(
         <Accordion className="test">
           <AccordionContainer open={false} isControlled shouldHideIcon>
-            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
         </Accordion>
@@ -301,7 +299,7 @@ describe('Accordion', () => {
       const accordion = mount(
         <Accordion>
           <AccordionContainer>
-            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
         </Accordion>
@@ -314,7 +312,7 @@ describe('Accordion', () => {
       const accordion = mount(
         <Accordion>
           <AccordionContainer>
-            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
             <AccordionContent className="test">
               This is another test
             </AccordionContent>

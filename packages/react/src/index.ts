@@ -7,7 +7,7 @@ export { default as Main } from './components/Main';
 export {
   Accordion,
   AccordionContainer,
-  AccordionPanelTrigger,
+  AccordionTrigger,
   AccordionContent
 } from './components/Accordion';
 export { default as Layout } from './components/Layout';
