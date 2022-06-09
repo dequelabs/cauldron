@@ -198,14 +198,11 @@ describe('Accordion', () => {
           <AccordionContent>This is another test</AccordionContent>
         </AccordionContainer>
       );
-      console.log(accordion.debug());
 
       expect(accordion.find('.expanded')).toEqual({});
       expect(accordion.props().open).toEqual(false);
 
       accordion.setProps({ open: true });
-
-      console.log(accordion.debug());
 
       expect(accordion.find('.expanded')).toBeTruthy();
       expect(accordion.props().open).toEqual(true);
