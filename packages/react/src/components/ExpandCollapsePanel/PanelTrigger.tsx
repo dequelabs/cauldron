@@ -1,4 +1,4 @@
-import React, { ElementType, forwardRef, Ref } from 'react';
+import React, { forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon, { IconType } from '../Icon';
