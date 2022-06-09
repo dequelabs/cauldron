@@ -144,10 +144,28 @@ const ControlledAccordion = ({ label }) => {
                 'onToggle handler for the panel. The original event object will be passed.',
               default: 'function () {}'
             },
-            iconCollapsed: {},
-            iconExpanded: {},
-            shouldHideIcon: {},
-            isControlled: {}
+            iconCollapsed: {
+              type: 'IconType',
+              description: 'name of an <Icon> component',
+              default: 'triangle-right'
+            },
+            iconExpanded: {
+              type: 'IconType',
+              description: 'name of an <Icon> component',
+              default: 'triangle-down'
+            },
+            shouldHideIcon: {
+              type: 'boolean',
+              description:
+                'used to control whether an icon appears on the trigger element',
+              default: 'false'
+            },
+            isControlled: {
+              type: 'boolean',
+              description:
+                'used when controlling the opening and closing of the component via "open" prop',
+              default: 'false'
+            }
           }}
         />
 
@@ -156,8 +174,7 @@ const ControlledAccordion = ({ label }) => {
         </h3>
         <PropDocs
           docs={{
-            children,
-            className
+            children
           }}
         />
 
