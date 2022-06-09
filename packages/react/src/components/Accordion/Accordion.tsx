@@ -4,7 +4,7 @@ import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
 import randomId from '../../utils/rndid';
 import { IconType } from '../Icon';
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
 }
@@ -20,8 +20,7 @@ const Accordion = ({ className, children, ...props }: AccordionProps) => {
   );
 };
 
-export interface AccordionContainerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactElement[];
   open?: boolean;
@@ -114,8 +113,7 @@ const AccordionContainer = ({
   }
 };
 
-export interface AccordionContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
   className: string;
 }
@@ -140,4 +138,5 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 
+export default Accordion;
 export { Accordion, AccordionContainer, AccordionTrigger, AccordionContent };
