@@ -5,7 +5,7 @@
 export { default as Workspace } from './components/Workspace';
 export { default as Main } from './components/Main';
 export {
-  Accordion,
+  default as Accordion,
   AccordionContainer,
   AccordionTrigger,
   AccordionContent

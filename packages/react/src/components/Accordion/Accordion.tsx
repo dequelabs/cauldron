@@ -123,10 +123,11 @@ const AccordionContent = ({ children, className }: AccordionContentProps) => {
 
 type AccordionTriggerProps = {
   children: React.ReactElement | React.ReactElement[];
+  className?: string;
 };
 
-const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
+const AccordionTrigger = ({ children, className }: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 
-export { AccordionContainer, Accordion, AccordionTrigger, AccordionContent };
+export { Accordion, AccordionContainer, AccordionTrigger, AccordionContent };
