@@ -34,7 +34,7 @@ button.Accordion__trigger:hover .Icon {
 .Accordion__panel {
   background-color: var(--white);
   color: var(--gray-90);
-  padding: 16px;
+  padding: var(--space-small);
   border-left: 1px;
   border-bottom: 1px;
   border-right: 1px;

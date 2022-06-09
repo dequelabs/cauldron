@@ -6,7 +6,7 @@ import { IconType } from '../Icon';
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[];
 }
 
 const Accordion = ({ className, children, ...props }: AccordionProps) => {
@@ -67,8 +67,7 @@ const AccordionContainer = ({
           className={classNames(
             children[0].props.className
               ? children[0].props.className
-              : 'Accordion__trigger',
-            notControlledOpen ? 'expanded' : ''
+              : 'Accordion__trigger'
           )}
           aria-controls={`${elementId}-panel`}
           shouldHideIcon={shouldHideIcon}
