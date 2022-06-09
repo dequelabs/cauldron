@@ -106,6 +106,71 @@ describe('Accordion', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
+  it('sets a random id on trigger element and content panel', () => {
+    const accordion = mount(
+      <AccordionContainer open={false} isControlled>
+        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionContent>This is another test</AccordionContent>
+      </AccordionContainer>
+    );
+
+    const triggerId = accordion
+      .find('button.Accordion__trigger')
+      .getDOMNode()
+      .getAttribute('aria-controls');
+
+    expect(
+      accordion
+        .find('.ExpandCollapse__panel')
+        .getDOMNode()
+        .getAttribute('id')
+    ).toEqual(triggerId);
+  });
+
+  it('sets aria-labelledby on panel using the trigger elements id', () => {
+    const accordion = mount(
+      <AccordionContainer open={false} isControlled>
+        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionContent>This is another test</AccordionContent>
+      </AccordionContainer>
+    );
+
+    const triggerId = accordion
+      .find('button.Accordion__trigger')
+      .getDOMNode()
+      .getAttribute('id');
+
+    expect(
+      accordion
+        .find('.ExpandCollapse__panel')
+        .getDOMNode()
+        .getAttribute('aria-labelledby')
+    ).toEqual(triggerId);
+  });
+
+  it('sets aria-controls on trigger element using the panel id', () => {
+    const accordion = mount(
+      <AccordionContainer open={false} isControlled>
+        <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+        <AccordionContent>This is another test</AccordionContent>
+      </AccordionContainer>
+    );
+
+    expect(
+      accordion
+        .find('button.Accordion__trigger')
+        .getDOMNode()
+        .getAttribute('id')
+    ).toBeTruthy();
+
+    expect(
+      accordion
+        .find('.ExpandCollapse__panel')
+        .getDOMNode()
+        .getAttribute('id')
+    ).toBeTruthy();
+  });
+
   describe('when controlled', () => {
     it('expands when the open prop is passed "true"', () => {
       const accordion = mount(
@@ -153,6 +218,7 @@ describe('Accordion', () => {
 
     it('setIsOpen is called when the trigger element receives an onClick event', () => {
       const spy = jest.fn();
+
       const accordion = mount(
         <AccordionContainer open={false} setIsOpen={spy} isControlled>
           <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>

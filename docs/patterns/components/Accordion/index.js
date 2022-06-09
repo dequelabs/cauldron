@@ -34,8 +34,8 @@ export const AccordionDemo = () => {
           <AccordionPanelTrigger>Accordion #3</AccordionPanelTrigger>
           <AccordionContent className="Accordion__panel">
             Here is some content
-            <Button>Testing</Button>
           </AccordionContent>
+          <Button>Testing</Button>
         </AccordionContainer>
       </AccordionTwo>
       <h3>Advanced</h3>

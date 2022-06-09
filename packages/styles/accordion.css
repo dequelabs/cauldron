@@ -27,11 +27,18 @@ button.Accordion__trigger:hover {
   box-shadow: inset 3.5px 0px var(--accent-primary);
   color: var(--accent-primary);
   transition: all 0.2s ease-in-out;
-  text-decoration-color: var(--accent-primary);
+}
+
+button.Accordion__trigger:hover .Icon {
+  color: var(--gray-90);
 }
 
 .underline {
   text-decoration: underline solid var(--gray-90);
+}
+
+.underline:hover {
+  text-decoration: underline solid var(--accent-primary);
 }
 
 .no-underline {
