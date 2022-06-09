@@ -4,4 +4,3 @@ coverage
 packages/react/lib
 .DS_Store
 yarn-error.log
-.prettierrc
