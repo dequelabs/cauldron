@@ -58,18 +58,20 @@ const AccordionContainer = ({
         id={`${elementId}-panel`}
         open={notControlledOpen}
         onToggle={() => setNotControlledOpen(!notControlledOpen)}
+        aria-labelledby={`${elementId}-trigger`}
         {...props}
       >
         <PanelTrigger
+          id={`${elementId}-trigger`}
           iconCollapsed={iconCollapsed}
           iconExpanded={iconExpanded}
-          aria-controls={`${elementId}-panel`}
           className={classNames(
             children[0].props.className
               ? children[0].props.className
               : 'Accordion__trigger',
             notControlledOpen ? 'expanded' : ''
           )}
+          aria-controls={`${elementId}-panel`}
           shouldHideIcon={shouldHideIcon}
         >
           {children[0]}
@@ -86,8 +88,10 @@ const AccordionContainer = ({
         open={open}
         onToggle={() => setIsOpen(!open)}
         {...props}
+        aria-labelledby={`${elementId}-trigger`}
       >
         <PanelTrigger
+          id={`${elementId}-trigger`}
           iconCollapsed={iconCollapsed}
           iconExpanded={iconExpanded}
           className={

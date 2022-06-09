@@ -78,8 +78,10 @@ describe('Accordion', () => {
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
+
     const button = accordion.find('button.Accordion__trigger');
     button.simulate('click');
+
     expect(
       accordion
         .find('button.Accordion__trigger')
@@ -90,6 +92,7 @@ describe('Accordion', () => {
 
   it('expands the panel element when the trigger element is clicked', () => {
     const spy = jest.fn();
+
     const accordion = mount(
       <AccordionContainer onToggle={spy}>
         <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
@@ -134,6 +137,7 @@ describe('Accordion', () => {
 
     it('triggers onToggle when trigger element receives an onClick event', () => {
       const spy = jest.fn();
+
       const accordion = mount(
         <AccordionContainer open={false} onToggle={spy}>
           <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
