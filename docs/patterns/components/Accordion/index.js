@@ -30,7 +30,7 @@ export const AccordionDemo = () => {
 
         <h3>Uncontrolled</h3>
 
-        <Accordion tabIndex={0}>
+        <Accordion>
           <AccordionContainer>
             <AccordionTrigger>Accordion #1</AccordionTrigger>
             <AccordionContent>Here is some content</AccordionContent>
