@@ -34,7 +34,6 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
   ) => {
     return (
       <button
-        {...props}
         className={classnames(
           className ? className : 'ExpandCollapse__trigger',
           fullWidth ? 'fullWidth' : '',
@@ -44,6 +43,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
         aria-expanded={open}
         onClick={onClick}
         ref={buttonRef}
+        {...props}
       >
         <div className="ExpandCollapse__trigger-title">
           {typeof children === 'function'

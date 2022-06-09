@@ -10,7 +10,8 @@ import {
   AccordionPanelTrigger,
   AccordionContent,
   Checkbox,
-  IconButton
+  IconButton,
+  Button
 } from '@deque/cauldron-react/';
 import { className } from '../../../props';
 import {
@@ -33,6 +34,7 @@ export const AccordionDemo = () => {
           <AccordionPanelTrigger>Accordion #3</AccordionPanelTrigger>
           <AccordionContent className="Accordion__panel">
             Here is some content
+            <Button>Testing</Button>
           </AccordionContent>
         </AccordionContainer>
       </AccordionTwo>

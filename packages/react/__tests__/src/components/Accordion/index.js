@@ -34,7 +34,7 @@ describe('Accordion', () => {
         <AccordionContent>This is another test</AccordionContent>
       </AccordionContainer>
     );
-    console.log(accordion);
+
     expect(accordion.find('button')).toBeTruthy();
     expect(accordion.find('button.Accordion__trigger').text()).toEqual(
       'Testing 1 2 3'
@@ -132,25 +132,46 @@ describe('Accordion', () => {
       expect(accordion.find('svg').length).toBe(0);
     });
 
-    describe('AccordionContainer', () => {
-      it('uses a default className if not passed one via the className prop', () => {
-        const accordion = mount(
-          <AccordionTwo>
-            <AccordionContainer open={false} isControlled shouldHideIcon>
-              <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
-              <AccordionContent>This is another test</AccordionContent>
-            </AccordionContainer>
-          </AccordionTwo>
-        );
+    it('triggers onToggle when trigger element receives an onClick event', () => {
+      const spy = jest.fn();
+      const accordion = mount(
+        <AccordionContainer open={false} onToggle={spy}>
+          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </AccordionContainer>
+      );
 
-        expect(accordion.find('.Accordion__container')).toBeTruthy();
-      });
+      const button = accordion.find('button.Accordion__trigger');
+      button.simulate('click');
+      expect(accordion.find('expanded')).toBeTruthy();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
 
+    it('setIsOpen is called when the trigger element receives an onClick event', () => {
+      const spy = jest.fn();
+      const accordion = mount(
+        <AccordionContainer open={false} setIsOpen={spy} isControlled>
+          <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </AccordionContainer>
+      );
+
+      const button = accordion.find('button.Accordion__trigger');
+      button.simulate('click');
+
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when not controlled', () => {
+    describe('AccordionTrigger', () => {
       it('sets the className when passed a value in the className prop', () => {
         const accordion = mount(
-          <AccordionTwo className="test">
-            <AccordionContainer open={false} isControlled shouldHideIcon>
-              <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+          <AccordionTwo>
+            <AccordionContainer open={false} shouldHideIcon>
+              <AccordionPanelTrigger className="test">
+                Testing 1 2 3
+              </AccordionPanelTrigger>
               <AccordionContent>This is another test</AccordionContent>
             </AccordionContainer>
           </AccordionTwo>
@@ -159,38 +180,80 @@ describe('Accordion', () => {
         expect(accordion.find('.test')).toBeTruthy();
       });
     });
+  });
 
-    describe('AccordionContent', () => {
-      it('uses a default className if not passed one via the className prop', () => {
-        const accordion = mount(
-          <AccordionTwo>
-            <AccordionContainer open={false} isControlled shouldHideIcon>
-              <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
-              <AccordionContent>This is another test</AccordionContent>
-            </AccordionContainer>
-          </AccordionTwo>
-        );
+  describe('AccordionTrigger', () => {
+    it('sets the className when passed a value in the className prop', () => {
+      const accordion = mount(
+        <AccordionTwo>
+          <AccordionContainer open={false} isControlled shouldHideIcon>
+            <AccordionPanelTrigger className="test">
+              Testing 1 2 3
+            </AccordionPanelTrigger>
+            <AccordionContent>This is another test</AccordionContent>
+          </AccordionContainer>
+        </AccordionTwo>
+      );
 
-        expect(accordion.find('.Accordion__panel')).toBeTruthy();
-      });
+      expect(accordion.find('.test')).toBeTruthy();
+    });
+  });
 
-      it('sets the className when passed a value in the className prop', () => {
-        const accordion = mount(
-          <AccordionTwo>
-            <AccordionContainer
-              className="test"
-              open={false}
-              isControlled
-              shouldHideIcon
-            >
-              <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
-              <AccordionContent>This is another test</AccordionContent>
-            </AccordionContainer>
-          </AccordionTwo>
-        );
+  describe('AccordionContainer', () => {
+    it('uses a default className if not passed one via the className prop', () => {
+      const accordion = mount(
+        <AccordionTwo>
+          <AccordionContainer open={false} isControlled shouldHideIcon>
+            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionContent>This is another test</AccordionContent>
+          </AccordionContainer>
+        </AccordionTwo>
+      );
 
-        expect(accordion.find('.test')).toBeTruthy();
-      });
+      expect(accordion.find('.Accordion__container')).toBeTruthy();
+    });
+
+    it('sets the className when passed a value in the className prop', () => {
+      const accordion = mount(
+        <AccordionTwo className="test">
+          <AccordionContainer open={false} isControlled shouldHideIcon>
+            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionContent>This is another test</AccordionContent>
+          </AccordionContainer>
+        </AccordionTwo>
+      );
+
+      expect(accordion.find('.test')).toBeTruthy();
+    });
+  });
+
+  describe('AccordionContent', () => {
+    it('uses a default className if not passed one via the className prop', () => {
+      const accordion = mount(
+        <AccordionTwo>
+          <AccordionContainer>
+            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionContent>This is another test</AccordionContent>
+          </AccordionContainer>
+        </AccordionTwo>
+      );
+
+      expect(accordion.find('.Accordion__panel')).toBeTruthy();
+    });
+
+    it('sets the className when passed a value in the className prop', () => {
+      const accordion = mount(
+        <AccordionTwo>
+          <AccordionContainer>
+            <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
+            <AccordionContent className="test">
+              This is another test
+            </AccordionContent>
+          </AccordionContainer>
+        </AccordionTwo>
+      );
+
+      expect(accordion.find('.test')).toBeTruthy();
     });
   });
 });
