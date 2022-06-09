@@ -1,11 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Demo from '../../../Demo';
 import {
   Accordion,
-  AccordionItem,
-  AccordionPanel,
-  AccordionTrigger,
-  AccordionTwo,
   AccordionContainer,
   AccordionPanelTrigger,
   AccordionContent,
@@ -13,11 +9,6 @@ import {
   IconButton,
   Button
 } from '@deque/cauldron-react/';
-import { className } from '../../../props';
-import {
-  ExpandCollapsePanel,
-  PanelTrigger
-} from '../../../../packages/react/lib';
 import classNames from 'classnames';
 
 export const AccordionDemo = () => {
@@ -29,7 +20,7 @@ export const AccordionDemo = () => {
       <ControlledAccordion label="Accordion #1" />
       <ControlledAccordion label="Accordion #2" />
       <h3>Uncontrolled</h3>
-      <AccordionTwo>
+      <Accordion>
         <AccordionContainer>
           <AccordionPanelTrigger>Accordion #3</AccordionPanelTrigger>
           <AccordionContent className="Accordion__panel">
@@ -37,7 +28,7 @@ export const AccordionDemo = () => {
           </AccordionContent>
           <Button>Testing</Button>
         </AccordionContainer>
-      </AccordionTwo>
+      </Accordion>
       <h3>Advanced</h3>
       <CheckboxAccordion />
       <h2>Code Sample</h2>
@@ -51,7 +42,7 @@ const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
-    <AccordionTwo>
+    <Accordion>
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
@@ -73,7 +64,7 @@ const ControlledAccordion = ({ label }) => {
           Here is some content
         </AccordionContent>
       </AccordionContainer>
-    </AccordionTwo>
+    </Accordion>
   );
 };
 
@@ -81,7 +72,7 @@ const CheckboxAccordion = () => {
   const [open, setIsOpen] = useState(false);
 
   return (
-    <AccordionTwo>
+    <Accordion>
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
@@ -108,7 +99,7 @@ const CheckboxAccordion = () => {
           Here is some content
         </AccordionContent>
       </AccordionContainer>
-    </AccordionTwo>
+    </Accordion>
   );
 };
 

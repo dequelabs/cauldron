@@ -16,8 +16,7 @@ import {
   OptionsMenuList,
   TopBarMenu,
   Icon,
-  ThemeProvider,
-  Accordion
+  ThemeProvider
 } from '@deque/cauldron-react';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';

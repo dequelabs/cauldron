@@ -1,14 +1,14 @@
 import {
-  AccordionTwo,
+  Accordion,
   AccordionContainer,
   AccordionPanelTrigger,
   AccordionContent
-} from './AccordionTwo';
+} from './Accordion';
 
-export default AccordionTwo;
+export default Accordion;
 export {
   AccordionContainer,
-  AccordionTwo,
+  Accordion,
   AccordionPanelTrigger,
   AccordionContent
 };

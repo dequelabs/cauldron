@@ -1,7 +1,7 @@
-import React, { ElementType, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
-import randomId from './../../../src/utils/rndid';
+import randomId from '../../utils/rndid';
 import { IconType } from '../Icon';
 
 type AccordionProps = {
@@ -9,7 +9,7 @@ type AccordionProps = {
   children: React.ReactNode;
 };
 
-const AccordionTwo = ({ className, children, ...props }: AccordionProps) => {
+const Accordion = ({ className, children, ...props }: AccordionProps) => {
   return (
     <div
       className={classNames(className ? className : '', 'Accordion__container')}
@@ -35,7 +35,6 @@ export interface AccordionContainerProps
 }
 
 const AccordionContainer = ({
-  className,
   children,
   open = false,
   setIsOpen,
@@ -135,7 +134,7 @@ const AccordionPanelTrigger = ({
 
 export {
   AccordionContainer,
-  AccordionTwo,
+  Accordion,
   AccordionPanelTrigger,
   AccordionContent
 };

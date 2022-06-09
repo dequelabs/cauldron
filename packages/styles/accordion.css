@@ -1,7 +1,3 @@
-.Accordion__container {
-  max-width: 600px;
-}
-
 .Accordion__trigger,
 .ExpandCollapse__trigger {
   background-color: var(--white);
@@ -86,13 +82,6 @@ button.Accordion__trigger:hover .Icon {
 
 .Checkbox {
   margin-bottom: 0px;
-}
-
-.Tooltip {
-  background-color: var(--accent-medium);
-}
-
-.cauldron--theme-dark .Tooltip {
 }
 
 .cauldron--theme-dark .Accordion__trigger {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
-  AccordionTwo,
+  Accordion,
   AccordionPanelTrigger,
   AccordionContent,
   AccordionContainer
@@ -10,7 +10,7 @@ import * as stylesheets from 'src/utils/stylesheets';
 
 describe('Accordion', () => {
   it('renders without errors', () => {
-    const accordion = mount(<AccordionTwo />);
+    const accordion = mount(<Accordion />);
 
     expect(accordion.find('.Accordion__container')).toBeTruthy();
   });
@@ -237,14 +237,14 @@ describe('Accordion', () => {
     describe('AccordionTrigger', () => {
       it('sets the className when passed a value in the className prop', () => {
         const accordion = mount(
-          <AccordionTwo>
+          <Accordion>
             <AccordionContainer open={false} shouldHideIcon>
               <AccordionPanelTrigger className="test">
                 Testing 1 2 3
               </AccordionPanelTrigger>
               <AccordionContent>This is another test</AccordionContent>
             </AccordionContainer>
-          </AccordionTwo>
+          </Accordion>
         );
 
         expect(accordion.find('.test')).toBeTruthy();
@@ -255,14 +255,14 @@ describe('Accordion', () => {
   describe('AccordionTrigger', () => {
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <AccordionTwo>
+        <Accordion>
           <AccordionContainer open={false} isControlled shouldHideIcon>
             <AccordionPanelTrigger className="test">
               Testing 1 2 3
             </AccordionPanelTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
-        </AccordionTwo>
+        </Accordion>
       );
 
       expect(accordion.find('.test')).toBeTruthy();
@@ -272,12 +272,12 @@ describe('Accordion', () => {
   describe('AccordionContainer', () => {
     it('uses a default className if not passed one via the className prop', () => {
       const accordion = mount(
-        <AccordionTwo>
+        <Accordion>
           <AccordionContainer open={false} isControlled shouldHideIcon>
             <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
-        </AccordionTwo>
+        </Accordion>
       );
 
       expect(accordion.find('.Accordion__container')).toBeTruthy();
@@ -285,12 +285,12 @@ describe('Accordion', () => {
 
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <AccordionTwo className="test">
+        <Accordion className="test">
           <AccordionContainer open={false} isControlled shouldHideIcon>
             <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
-        </AccordionTwo>
+        </Accordion>
       );
 
       expect(accordion.find('.test')).toBeTruthy();
@@ -300,12 +300,12 @@ describe('Accordion', () => {
   describe('AccordionContent', () => {
     it('uses a default className if not passed one via the className prop', () => {
       const accordion = mount(
-        <AccordionTwo>
+        <Accordion>
           <AccordionContainer>
             <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </AccordionContainer>
-        </AccordionTwo>
+        </Accordion>
       );
 
       expect(accordion.find('.Accordion__panel')).toBeTruthy();
@@ -313,14 +313,14 @@ describe('Accordion', () => {
 
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <AccordionTwo>
+        <Accordion>
           <AccordionContainer>
             <AccordionPanelTrigger>Testing 1 2 3</AccordionPanelTrigger>
             <AccordionContent className="test">
               This is another test
             </AccordionContent>
           </AccordionContainer>
-        </AccordionTwo>
+        </Accordion>
       );
 
       expect(accordion.find('.test')).toBeTruthy();
