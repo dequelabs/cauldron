@@ -26,6 +26,11 @@ test('should render button as link', () => {
   expect(button.hasClass('Link')).toBe(true);
 });
 
+test('should render button as tag', () => {
+  const button = shallow(<Button variant="tag">tag</Button>);
+  expect(button.hasClass('Tag')).toBe(true);
+});
+
 test('should handle <Icon /> as child', () => {
   const button = shallow(
     <Button>
