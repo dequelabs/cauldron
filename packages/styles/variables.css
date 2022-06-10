@@ -35,6 +35,10 @@
   --accent-secondary-active: var(--gray-30);
   --focus-light: #c11bde;
   --focus-dark: #eb94ff;
+  --axe-issue-critical: #ed5959;
+  --axe-issue-serious: #f3826b;
+  --axe-issue-moderatee: #ffdd76;
+  --axe-issue-minor: #d3dde0;
 
   /* text colours */
   --text-color-base: var(--gray-60);
