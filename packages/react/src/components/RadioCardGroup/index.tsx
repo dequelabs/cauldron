@@ -109,7 +109,7 @@ const RadioCardGroup = ({
               {isChecked && (
                 <Icon
                   className={classNames('RadioCardGroup__Icon')}
-                  type="check-circle"
+                  type={cardIcon}
                 />
               )}
             </div>

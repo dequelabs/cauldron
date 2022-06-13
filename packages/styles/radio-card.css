@@ -6,6 +6,8 @@
   position: absolute;
   opacity: 0;
   appearance: none;
+  height: 1px;
+  width: 1px;
 }
 
 .RadioCard__overlay.RadioCard__overlay--focused {
