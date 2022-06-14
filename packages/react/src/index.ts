@@ -51,6 +51,7 @@ export {
   SelectProps
 } from './components/Select';
 export { default as RadioGroup } from './components/RadioGroup';
+export { default as RadioCardGroup } from './components/RadioCardGroup';
 export { default as Checkbox } from './components/Checkbox';
 export {
   default as Tooltip,
@@ -99,7 +100,7 @@ export {
   AddressLine,
   AddressCityStateZip
 } from './components/Address';
-export { default as Pagination } from './components/Pagination';
+export { default as Pagination, usePagination } from './components/Pagination';
 export { default as FieldWrap } from './components/FieldWrap';
 export {
   default as Breadcrumb,

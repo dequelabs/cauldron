@@ -46,6 +46,7 @@ const componentsList = [
   'OptionsMenu',
   'Panel',
   'Select',
+  'RadioCardGroup',
   'RadioGroup',
   'Checkbox',
   'ClickOutsideListener',
