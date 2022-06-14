@@ -202,7 +202,6 @@ const ControlledAccordion = ({ label }) => {
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
-        setIsOpen={setIsOpen}
         isControlled
       >
         <AccordionTrigger

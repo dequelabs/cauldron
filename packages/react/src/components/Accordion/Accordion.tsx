@@ -25,7 +25,6 @@ interface AccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactElement[];
   open?: boolean;
-  setIsOpen?: (open: boolean) => void;
   trigger?: React.ReactNode | React.ReactNode[];
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
@@ -38,7 +37,6 @@ interface AccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 const AccordionContainer = ({
   children,
   open = false,
-  setIsOpen,
   iconExpanded = 'triangle-down',
   iconCollapsed = 'triangle-right',
   shouldHideIcon = false,
@@ -53,65 +51,32 @@ const AccordionContainer = ({
     setElementId(randomId());
   }, []);
 
-  if (!isControlled) {
-    return (
-      <ExpandCollapsePanel
-        id={`${elementId}-panel`}
-        open={notControlledOpen}
-        onToggle={() => setNotControlledOpen(!notControlledOpen)}
-        aria-labelledby={`${elementId}-trigger`}
-        animationTiming={animationTiming}
-        {...props}
+  return (
+    <ExpandCollapsePanel
+      id={`${elementId}-panel`}
+      open={notControlledOpen}
+      onToggle={() => setNotControlledOpen(!notControlledOpen)}
+      aria-labelledby={`${elementId}-trigger`}
+      animationTiming={animationTiming}
+      {...props}
+    >
+      <PanelTrigger
+        id={`${elementId}-trigger`}
+        iconCollapsed={iconCollapsed}
+        iconExpanded={iconExpanded}
+        className={classNames(
+          children[0].props.className
+            ? children[0].props.className
+            : 'Accordion__trigger'
+        )}
+        aria-controls={`${elementId}-panel`}
+        shouldHideIcon={shouldHideIcon}
       >
-        <PanelTrigger
-          id={`${elementId}-trigger`}
-          iconCollapsed={iconCollapsed}
-          iconExpanded={iconExpanded}
-          className={classNames(
-            children[0].props.className
-              ? children[0].props.className
-              : 'Accordion__trigger'
-          )}
-          aria-controls={`${elementId}-panel`}
-          shouldHideIcon={shouldHideIcon}
-        >
-          {children[0]}
-        </PanelTrigger>
-        {children[1]}
-      </ExpandCollapsePanel>
-    );
-  }
-
-  if (setIsOpen) {
-    return (
-      <>
-        <ExpandCollapsePanel
-          id={`${elementId}-panel`}
-          open={open}
-          onToggle={() => setIsOpen(!open)}
-          aria-labelledby={`${elementId}-trigger`}
-          animationTiming={animationTiming}
-          {...props}
-        >
-          <PanelTrigger
-            id={`${elementId}-trigger`}
-            iconCollapsed={iconCollapsed}
-            iconExpanded={iconExpanded}
-            className={classNames(
-              children[0].props.className
-                ? children[0].props.className
-                : 'Accordion__trigger'
-            )}
-            aria-controls={`${elementId}-panel`}
-            shouldHideIcon={shouldHideIcon}
-          >
-            {children[0]}
-          </PanelTrigger>
-          {children[1]}
-        </ExpandCollapsePanel>
-      </>
-    );
-  }
+        {children[0]}
+      </PanelTrigger>
+      {children[1]}
+    </ExpandCollapsePanel>
+  );
 };
 
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
