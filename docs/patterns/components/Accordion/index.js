@@ -70,7 +70,6 @@ const ControlledAccordion = ({ label }) => {
       <AccordionContainer
         open={open}
         onToggle={() => setIsOpen(!open)}
-        setIsOpen={setIsOpen}
         isControlled
       >
         <AccordionTrigger
@@ -137,12 +136,6 @@ const ControlledAccordion = ({ label }) => {
               description:
                 'Animation time of expand/collapse in ms. Animation disabled when set to false.',
               default: 250
-            },
-            setIsOpen: {
-              type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-              description:
-                'onToggle handler for the panel. The original event object will be passed.',
-              default: 'function () {}'
             },
             iconCollapsed: {
               type: 'IconType',
