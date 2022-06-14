@@ -68,7 +68,7 @@ export default class TextField extends React.Component<
     this.state = {
       value:
         typeof this.props.value !== 'undefined'
-          ? this.props.value
+          ? (this.props.value as string)
           : this.props.defaultValue || ''
     };
     this.onChange = this.onChange.bind(this);

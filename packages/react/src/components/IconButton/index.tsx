@@ -115,6 +115,7 @@ IconButton.propTypes = {
   as: PropTypes.elementType,
   // @ts-expect-error
   icon: PropTypes.string.isRequired,
+  // @ts-expect-error
   label: PropTypes.node.isRequired,
   // @ts-expect-error
   tooltipPlacement: PropTypes.string,
