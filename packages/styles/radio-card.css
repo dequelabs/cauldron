@@ -39,7 +39,7 @@
 
 .RadioCardGroup__Checked {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   min-height: 44px;
 }
 .RadioCardGroup__Icon.Icon svg {
