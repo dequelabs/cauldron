@@ -57,13 +57,14 @@ const ButtonDemo = () => (
         { children: 'Error', variant: 'error' },
         { children: 'Error Disabled', variant: 'error', disabled: true },
         { children: 'Error thin', variant: 'error', thin: true },
-        { children: 'Link', variant: 'link' }
+        { children: 'Link', variant: 'link' },
+        { children: 'Tag', variant: 'tag' }
       ]}
       propDocs={{
         variant: {
           type: 'string',
           description:
-            'Any of the following: "primary", "secondary", "error", "link".',
+            'Any of the following: "primary", "secondary", "error", "link", "tag".',
           default: '"primary"'
         },
         buttonRef: {
