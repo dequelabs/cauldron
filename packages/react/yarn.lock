@@ -4382,10 +4382,10 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
   integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
-focus-trap-react@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-9.0.0.tgz#4ce24e80e702fbefea7d75ac82a81b8420bc437e"
-  integrity sha512-LvS2NXFf8elJcEnkGXOKCt26g9LOHEePYUGSgM4FLNCV2Oa6UWHShM/YYz7hYyBWoYhl9IPG6b6okc3dUG7WbQ==
+focus-trap-react@8:
+  version "8.11.3"
+  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-8.11.3.tgz#aa0ba3b17676abf8faf78c5e51d8cd8df83eec41"
+  integrity sha512-y126gMYuB1aVYiEZSP6/v9bAfVmAIUVixanhcoMelkz7bOh+l0c3h05CEHC8S63ztxdRI2AAPS9AsTat6jlDeQ==
   dependencies:
     focus-trap "^6.9.4"
 

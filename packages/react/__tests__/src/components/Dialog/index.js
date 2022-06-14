@@ -15,7 +15,7 @@ test('returns null if passed a falsey "show" prop', () => {
 test('focuses heading when mounted with a truthy "show" prop', done => {
   const dialog = mount(
     <Dialog {...defaults} show={true}>
-      {'hello'}
+      hello
     </Dialog>
   );
 
@@ -115,7 +115,11 @@ test('supports heading from text', async () => {
 
 test('supports heading from options', async () => {
   const dialog = mount(
-    <Dialog {...defaults} heading={{ text: 'hello title', level: 3 }} show={true}>
+    <Dialog
+      {...defaults}
+      heading={{ text: 'hello title', level: 3 }}
+      show={true}
+    >
       {'body'}
     </Dialog>
   );
