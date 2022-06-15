@@ -58,7 +58,8 @@ const ButtonDemo = () => (
         { children: 'Error Disabled', variant: 'error', disabled: true },
         { children: 'Error thin', variant: 'error', thin: true },
         { children: 'Link', variant: 'link' },
-        { children: 'Tag', variant: 'tag' }
+        { children: 'Tag', variant: 'tag' },
+        { children: 'Tag Disabled', variant: 'tag', disabled: true }
       ]}
       propDocs={{
         variant: {

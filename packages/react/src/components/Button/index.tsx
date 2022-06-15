@@ -27,6 +27,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'Button--error': variant === 'error',
         Link: variant === 'link',
         Tag: variant === 'tag',
+        'Button--tag': variant === 'tag',
         'Button--thin': thin
       })}
       ref={ref || buttonRef}
