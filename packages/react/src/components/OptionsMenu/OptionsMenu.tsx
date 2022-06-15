@@ -25,6 +25,7 @@ export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   onSelect: (e: React.MouseEvent<HTMLElement>) => void;
   closeOnSelect?: boolean;
   show?: boolean;
+  children: React.ReactNode;
 }
 
 interface OptionsMenuState {

@@ -12,6 +12,7 @@ export interface ToastProps {
   toastRef: React.Ref<HTMLDivElement>;
   focus?: boolean;
   show?: boolean;
+  children: React.ReactNode;
 }
 
 interface ToastState {

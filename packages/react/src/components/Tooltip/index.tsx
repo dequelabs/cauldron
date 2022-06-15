@@ -49,7 +49,7 @@ export default function Tooltip({
   hideElementOnHidden = false,
   className,
   ...props
-}: TooltipProps) {
+}: TooltipProps): JSX.Element {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showTooltip, setShowTooltip] = useState(!!initialShow);
@@ -178,34 +178,43 @@ export default function Tooltip({
     }
   }, [targetElement, id]);
 
-  return (showTooltip || hideElementOnHidden) && isBrowser()
-    ? createPortal(
-        <div
-          id={id}
-          className={classnames('Tooltip', `Tooltip--${placement}`, className, {
-            TooltipInfo: variant === 'info',
-            'Tooltip--hidden': !showTooltip && hideElementOnHidden,
-            'Tooltip--big': variant === 'big'
-          })}
-          ref={setTooltipElement}
-          role="tooltip"
-          style={styles.popper}
-          {...attributes.popper}
-          {...props}
-        >
-          {variant !== 'big' && (
+  return (
+    <>
+      {(showTooltip || hideElementOnHidden) && isBrowser()
+        ? createPortal(
             <div
-              className="TooltipArrow"
-              ref={setArrowElement}
-              style={styles.arrow}
-            />
-          )}
-          {children}
-        </div>,
-        (portal && 'current' in portal ? portal.current : portal) ||
-          document.body
-      )
-    : null;
+              id={id}
+              className={classnames(
+                'Tooltip',
+                `Tooltip--${placement}`,
+                className,
+                {
+                  TooltipInfo: variant === 'info',
+                  'Tooltip--hidden': !showTooltip && hideElementOnHidden,
+                  'Tooltip--big': variant === 'big'
+                }
+              )}
+              ref={setTooltipElement}
+              role="tooltip"
+              style={styles.popper}
+              {...attributes.popper}
+              {...props}
+            >
+              {variant !== 'big' && (
+                <div
+                  className="TooltipArrow"
+                  ref={setArrowElement}
+                  style={styles.arrow}
+                />
+              )}
+              {children}
+            </div>,
+            (portal && 'current' in portal ? portal.current : portal) ||
+              document.body
+          )
+        : null}
+    </>
+  );
 }
 
 Tooltip.displayName = 'Tooltip';

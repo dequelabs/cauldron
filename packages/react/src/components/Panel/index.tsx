@@ -65,7 +65,9 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
 
 Panel.displayName = 'Panel';
 Panel.propTypes = {
+  // @ts-expect-error
   children: PropTypes.node.isRequired,
+  // @ts-expect-error
   heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string
 };
