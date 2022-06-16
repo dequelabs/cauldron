@@ -88,8 +88,8 @@
     "url": "git+https://github.com/dequelabs/cauldron-react.git"
   },
   "peerDependencies": {
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react": ">=16.6 <= 18",
+    "react-dom": ">=16.6 <= 18"
   },
   "nyc": {
     "checkCoverage": true,
