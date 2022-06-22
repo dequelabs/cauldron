@@ -177,7 +177,7 @@ export default class ExpandCollapsePanel extends React.Component<
       className,
       onToggle,
       open,
-      ...props
+      ...otherProps
     } = this.props;
     /* eslint-enable no-unused-vars */
     const { isOpen, isAnimating, animationClass } = this.state;
@@ -206,7 +206,7 @@ export default class ExpandCollapsePanel extends React.Component<
             }
           )}
           ref={this.panel}
-          {...props}
+          {...otherProps}
         >
           {panelElements}
         </div>

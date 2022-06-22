@@ -27,7 +27,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
       iconExpanded = 'chevron-down',
       iconCollapsed = 'chevron-right',
       hideIcon = false,
-      ...props
+      ...otherProps
     }: PanelTriggerProps,
     ref
   ) => {
@@ -42,7 +42,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
         aria-expanded={open}
         onClick={onClick}
         ref={buttonRef}
-        {...props}
+        {...otherProps}
       >
         <div className="ExpandCollapse__trigger-title">
           {typeof children === 'function'
