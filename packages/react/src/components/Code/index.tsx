@@ -48,8 +48,7 @@ Code.displayName = 'Code';
 Code.propTypes = {
   children: PropTypes.string.isRequired,
   language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
-  className: PropTypes.string,
-  tabIndex: PropTypes.number
+  className: PropTypes.string
 };
 
 export default Code;
