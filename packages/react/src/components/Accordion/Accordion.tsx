@@ -28,7 +28,7 @@ interface AccordionContainerProps extends ExpandCollapsePanelProps {
   trigger?: React.ReactNode | React.ReactNode[];
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
-  shouldHideIcon?: boolean;
+  hideIcon?: boolean;
   isControlled?: boolean;
   animationTiming?: number | boolean;
   props?: React.HTMLAttributes<HTMLDivElement>;
@@ -39,7 +39,7 @@ const AccordionContainer = ({
   open = false,
   iconExpanded = 'triangle-down',
   iconCollapsed = 'triangle-right',
-  shouldHideIcon = false,
+  hideIcon = false,
   isControlled = false,
   animationTiming,
   ...props
@@ -70,7 +70,7 @@ const AccordionContainer = ({
             : 'Accordion__trigger'
         )}
         aria-controls={`${elementId}-panel`}
-        shouldHideIcon={shouldHideIcon}
+        hideIcon={hideIcon}
       >
         {children[0]}
       </PanelTrigger>
