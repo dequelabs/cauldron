@@ -59,7 +59,9 @@ PanelTrigger.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  iconExpanded: PropTypes.oneOf<IconType>([]),
+  iconCollapsed: PropTypes.oneOf<IconType>([])
 };
 
 PanelTrigger.displayName = 'PanelTrigger';
