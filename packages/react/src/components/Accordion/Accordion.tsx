@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import ExpandCollapsePanel, { PanelTrigger } from '../ExpandCollapsePanel';
+import ExpandCollapsePanel, {
+  ExpandCollapsePanelProps,
+  PanelTrigger
+} from '../ExpandCollapsePanel';
 import randomId from '../../utils/rndid';
 import { IconType } from '../Icon';
 
 interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
-  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
-const Accordion = ({ className, children, ...props }: AccordionProps) => {
+const Accordion = ({ className, children, ...otherProps }: AccordionProps) => {
   return (
     <div
       className={classNames(className ? className : '', 'Accordion__container')}
-      {...props}
+      {...otherProps}
     >
       {children}
     </div>
@@ -31,7 +33,6 @@ interface AccordionContainerProps extends ExpandCollapsePanelProps {
   hideIcon?: boolean;
   isControlled?: boolean;
   animationTiming?: number | boolean;
-  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const AccordionContainer = ({
@@ -42,7 +43,7 @@ const AccordionContainer = ({
   hideIcon = false,
   isControlled = false,
   animationTiming,
-  ...props
+  ...otherProps
 }: AccordionContainerProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
   const [notControlledOpen, setNotControlledOpen] = useState(false);
@@ -55,10 +56,10 @@ const AccordionContainer = ({
     <ExpandCollapsePanel
       id={`${elementId}-panel`}
       open={notControlledOpen}
-      onToggle={() => setNotControlledOpen(!notControlledOpen)}
       aria-labelledby={`${elementId}-trigger`}
       animationTiming={animationTiming}
-      {...props}
+      {...otherProps}
+      onToggle={() => setNotControlledOpen(!notControlledOpen)}
     >
       <PanelTrigger
         id={`${elementId}-trigger`}
@@ -82,16 +83,15 @@ const AccordionContainer = ({
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
   className: string;
-  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const AccordionContent = ({
   children,
   className,
-  ...props
+  ...otherProps
 }: AccordionContentProps) => {
   return (
-    <div className={className ? className : 'Accordion__panel'} {...props}>
+    <div className={className ? className : 'Accordion__panel'} {...otherProps}>
       {children}
     </div>
   );
