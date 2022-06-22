@@ -21,7 +21,7 @@ const Accordion = ({ className, children, ...props }: AccordionProps) => {
   );
 };
 
-interface AccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionContainerProps extends ExpandCollapsePanelProps {
   className?: string;
   children: React.ReactElement[];
   open?: boolean;
