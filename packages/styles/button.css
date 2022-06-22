@@ -41,6 +41,10 @@
   gap: 8px;
 }
 
+.Button--tag {
+  position: relative;
+}
+
 button.Link {
   cursor: pointer;
 }
@@ -55,7 +59,8 @@ button.Link {
 .Button--primary:before,
 .Button--secondary:before,
 .Button--clear:before,
-.Button--error:before {
+.Button--error:before,
+.Button--tag:before {
   content: '';
   position: absolute;
   top: -2px;
@@ -64,6 +69,10 @@ button.Link {
   left: -2px;
   border-radius: 3px;
   pointer-events: none;
+}
+
+.Button--tag:before {
+  border-radius: 11px;
 }
 
 .Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
@@ -78,9 +87,14 @@ button.Link {
   box-shadow: 0 0 0 1px var(--button-outline-color-error);
 }
 
+.Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--button-outline-color-primary);
+}
+
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
-.Button--error:focus:before {
+.Button--error:focus:before,
+.Button--tag:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
 
@@ -129,6 +143,11 @@ button.Link {
 
 .Button--error:active {
   background-color: var(--button-background-color-error-active);
+}
+
+.Button--tag[aria-disabled='true'],
+.Button--tag[disabled] {
+  color: var(--disabled);
 }
 
 .Button--primary .Icon,
@@ -214,7 +233,8 @@ button.Link {
 .cauldron--theme-dark .Button--secondary[aria-disabled='true'],
 .cauldron--theme-dark .Button--secondary[disabled],
 .cauldron--theme-dark .Button--error[aria-disabled='true'],
-.cauldron--theme-dark .Button--error[disabled] {
+.cauldron--theme-dark .Button--error[disabled],
+.cauldron--theme-dark .Button--tag[disabled] {
   color: var(--dark-workspace-color);
 }
 
@@ -252,4 +272,10 @@ button.Link {
   .Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-danger);
+}
+
+.cauldron--theme-dark
+  .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+    0 0 0 2px var(--accent-info);
 }

@@ -463,7 +463,7 @@ export default class Pointout extends React.Component<
 
     if (target && portal && !disableOffscreenPointout) {
       return (
-        <React.Fragment>
+        <>
           <div
             className="Offscreen"
             role="region"
@@ -503,7 +503,7 @@ export default class Pointout extends React.Component<
             )}
           </div>
           {createPortal(FTPO, portal as HTMLElement)}
-        </React.Fragment>
+        </>
       );
     }
 

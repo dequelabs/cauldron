@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Icon, { IconType } from '../Icon';
 
 export interface PanelTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   children?: ((props: { open: boolean }) => React.ReactNode) | React.ReactNode;
   open?: boolean;
   fullWidth?: string;

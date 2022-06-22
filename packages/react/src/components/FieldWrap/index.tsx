@@ -17,6 +17,7 @@ const FieldWrap = React.forwardRef<HTMLElement, Props>(
 
 FieldWrap.displayName = 'FieldWrap';
 FieldWrap.propTypes = {
+  // @ts-expect-error
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   as: PropTypes.string

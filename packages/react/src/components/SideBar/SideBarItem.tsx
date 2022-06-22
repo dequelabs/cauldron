@@ -7,11 +7,9 @@ export interface SideBarItemProps extends React.HTMLAttributes<HTMLLIElement> {
   autoClickLink?: boolean;
 }
 
-const SideBarItem: React.ComponentType<SideBarItemProps> = ({
-  children,
-  autoClickLink,
-  ...other
-}) => {
+const SideBarItem: React.ComponentType<React.PropsWithChildren<
+  SideBarItemProps
+>> = ({ children, autoClickLink, ...other }) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!autoClickLink) {
       return;
@@ -33,6 +31,7 @@ SideBarItem.defaultProps = {
   autoClickLink: true
 };
 SideBarItem.propTypes = {
+  // @ts-expect-error
   children: PropTypes.node.isRequired,
   autoClickLink: PropTypes.bool
 };
