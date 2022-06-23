@@ -1,5 +1,5 @@
 .Accordion__trigger,
-.Accordion__container > .ExpandCollapse__trigger {
+.Accordion > .ExpandCollapse__trigger {
   background-color: var(--white);
   padding: 12px;
   width: 100%;
