@@ -5,7 +5,9 @@ import Icon, { IconType } from '../Icon';
 
 export interface PanelTriggerProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-  children?: ((props: { open: boolean }) => React.ReactNode) | React.ReactNode;
+  children?:
+    | ((props: { open: boolean }) => React.ReactNode)
+    | React.ReactElement;
   open?: boolean;
   fullWidth?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -56,7 +58,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
 );
 
 PanelTrigger.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  //children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string

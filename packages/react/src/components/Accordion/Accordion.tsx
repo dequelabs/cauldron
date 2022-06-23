@@ -11,54 +11,49 @@ interface AccordionProps extends ExpandCollapsePanelProps {
   className?: string;
   children: React.ReactElement[];
   open?: boolean;
-  trigger?: React.ReactNode | React.ReactNode[];
-  iconExpanded?: IconType;
-  iconCollapsed?: IconType;
-  hideIcon?: boolean;
   animationTiming?: number | boolean;
 }
 
 const Accordion = ({
   children,
-  open = false,
-  iconExpanded = 'triangle-down',
-  iconCollapsed = 'triangle-right',
-  hideIcon = false,
+  open,
   animationTiming,
+  className,
   ...otherProps
 }: AccordionProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
-  const [notControlledOpen, setNotControlledOpen] = useState(false);
+  const [isControlled, setIsControlled] = useState<boolean>();
+
+  const trigger = React.Children.toArray(children).find(
+    child => (child as React.ReactElement<any>).type === AccordionTrigger
+  );
+
+  const accordionContents = React.Children.toArray(children).filter(
+    child =>
+      typeof child === 'string' ||
+      (child as React.ReactElement<any>).type !== AccordionTrigger
+  );
 
   useEffect(() => {
     setElementId(randomId());
+
+    if (typeof open === 'undefined') {
+      return setIsControlled(false);
+    }
+    return;
   }, []);
 
   return (
     <div className="Accordion">
+      {trigger && React.cloneElement(trigger as React.ReactElement<any>)}
       <ExpandCollapsePanel
-        open={notControlledOpen}
+        open={isControlled ? open : undefined}
         aria-labelledby={`${elementId}-trigger`}
         animationTiming={animationTiming}
         {...otherProps}
         id={`${elementId}-panel`}
-        onToggle={() => setNotControlledOpen(!notControlledOpen)}
       >
-        <PanelTrigger
-          id={`${elementId}-trigger`}
-          iconCollapsed={iconCollapsed}
-          iconExpanded={iconExpanded}
-          className={classNames(
-            children[0].props.className
-              ? children[0].props.className
-              : 'Accordion__trigger'
-          )}
-          aria-controls={`${elementId}-panel`}
-          hideIcon={hideIcon}
-        >
-          {children[0]}
-        </PanelTrigger>
-        {children[1]}
+        {accordionContents}
       </ExpandCollapsePanel>
     </div>
   );
@@ -75,18 +70,48 @@ const AccordionContent = ({
   ...otherProps
 }: AccordionContentProps) => {
   return (
-    <div className={className ? className : 'Accordion__panel'} {...otherProps}>
+    <div
+      className={classNames([className, 'Accordion__panel'])}
+      {...otherProps}
+    >
       {children}
     </div>
   );
 };
 
 export interface AccordionTriggerProps {
-  children: React.ReactElement | React.ReactElement[];
+  elementId: string;
+  children: React.ReactElement;
+  className: string;
+  iconExpanded?: IconType;
+  iconCollapsed?: IconType;
+  hideIcon?: boolean;
 }
 
-const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
-  return <>{children}</>;
+const AccordionTrigger = ({
+  elementId,
+  children,
+  className,
+  iconExpanded = 'triangle-down',
+  iconCollapsed = 'triangle-right',
+  hideIcon = false,
+  ...otherProps
+}: AccordionTriggerProps) => {
+  return (
+    <>
+      <PanelTrigger
+        iconCollapsed={iconCollapsed}
+        iconExpanded={iconExpanded}
+        className={classNames(className ? className : '', 'Accordion__trigger')}
+        hideIcon={hideIcon}
+        {...otherProps}
+        id={`${elementId}-trigger`}
+        aria-controls={`${elementId}-panel`}
+      >
+        {children}
+      </PanelTrigger>
+    </>
+  );
 };
 
 export default Accordion;
