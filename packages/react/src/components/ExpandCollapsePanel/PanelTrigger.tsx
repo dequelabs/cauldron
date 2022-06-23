@@ -56,7 +56,7 @@ const PanelTrigger = forwardRef<HTMLButtonElement, PanelTriggerProps>(
 );
 
 PanelTrigger.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,
