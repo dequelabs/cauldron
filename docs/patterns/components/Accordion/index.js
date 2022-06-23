@@ -186,11 +186,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger
-        className={classNames('Accordion__trigger underline')}
-        iconExpanded="triangle-down"
-        iconCollapsed="triangle-right"
-      >
+      <AccordionTrigger className={classNames('Accordion__trigger underline')}>
         {label}
       </AccordionTrigger>
       <AccordionContent className="Accordion__panel">

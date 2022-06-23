@@ -14,7 +14,7 @@
   text-decoration: underline solid var(--gray-90);
 }
 
-button.Accordion__trigger.expanded {
+button.Accordion__trigger[aria-expanded='true'] {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   background-color: var(--gray-20);
@@ -35,15 +35,12 @@ button.Accordion__trigger:hover .Icon {
   background-color: var(--white);
   color: var(--gray-90);
   padding: var(--space-small);
-  border-left: 1px;
-  border-bottom: 1px;
-  border-right: 1px;
-  border-style: solid;
+  border: 1px solid var(--gray-40);
   border-top: 0px;
   border-color: var(--gray-40);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .15);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
 .Accordion__container div.ExpandCollapse__panel {
@@ -51,7 +48,7 @@ button.Accordion__trigger:hover .Icon {
   margin: 0 auto;
 }
 
-.Accordion__panel--expanded {
+.Accordion__panel[aria-expanded='true'] {
   margin: 0 auto;
 }
 
@@ -66,7 +63,7 @@ button.Accordion__trigger:hover .Icon {
   color: var(--white);
 }
 
-.cauldron--theme-dark button.Accordion__trigger.expanded {
+.cauldron--theme-dark button.Accordion__trigger[aria-expanded='true'] {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   background-color: var(--accent-dark);

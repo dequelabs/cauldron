@@ -10,7 +10,7 @@ import {
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  open?: boolean;
+  open?: boolean | undefined;
   children: React.ReactNode;
   animationTiming?: number | boolean;
   onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -199,7 +199,8 @@ export default class ExpandCollapsePanel extends React.Component<
           })}
         <div
           className={classnames(
-            className ? className : 'ExpandCollapse__panel',
+            className ? className : '',
+            'ExpandCollapse__panel',
             animationClass,
             {
               'is--hidden': !isOpen && !isAnimating
