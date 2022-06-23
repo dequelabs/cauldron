@@ -34,6 +34,9 @@ const Accordion = ({
       (child as React.ReactElement<any>).type !== AccordionTrigger
   );
 
+  const handleToggle = () =>
+    console.log('opening up: ', open, trigger, isControlled);
+
   useEffect(() => {
     setElementId(randomId());
 
@@ -45,10 +48,13 @@ const Accordion = ({
 
   return (
     <div className="Accordion">
-      {trigger && React.cloneElement(trigger as React.ReactElement<any>)}
+      {trigger &&
+        React.cloneElement(trigger as React.ReactElement<any>, {
+          open: open,
+          onClick: handleToggle
+        })}
       <ExpandCollapsePanel
         open={isControlled ? open : undefined}
-        aria-labelledby={`${elementId}-trigger`}
         animationTiming={animationTiming}
         {...otherProps}
         id={`${elementId}-panel`}
@@ -71,7 +77,7 @@ const AccordionContent = ({
 }: AccordionContentProps) => {
   return (
     <div
-      className={classNames([className, 'Accordion__panel'])}
+      className={classNames([className ? className : '', 'Accordion__panel'])}
       {...otherProps}
     >
       {children}
