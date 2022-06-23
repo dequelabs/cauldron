@@ -31,24 +31,18 @@ export const AccordionDemo = () => {
         <h3>Uncontrolled</h3>
 
         <Accordion>
-          <AccordionContainer>
-            <AccordionTrigger>Accordion #1</AccordionTrigger>
-            <AccordionContent>Here is some content</AccordionContent>
-          </AccordionContainer>
+          <AccordionTrigger>Accordion #1</AccordionTrigger>
+          <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
 
         <Accordion>
-          <AccordionContainer>
-            <AccordionTrigger>Accordion #2</AccordionTrigger>
-            <AccordionContent>Here is some content</AccordionContent>
-          </AccordionContainer>
+          <AccordionTrigger>Accordion #2</AccordionTrigger>
+          <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
 
         <Accordion>
-          <AccordionContainer>
-            <AccordionTrigger>Accordion #3</AccordionTrigger>
-            <AccordionContent>Here is some content</AccordionContent>
-          </AccordionContainer>
+          <AccordionTrigger>Accordion #3</AccordionTrigger>
+          <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
 
         <h2>Code Sample</h2>
@@ -191,23 +185,17 @@ const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
-    <Accordion>
-      <AccordionContainer
-        open={open}
-        onToggle={() => setIsOpen(!open)}
-        isControlled
+    <Accordion open={open} onToggle={() => setIsOpen(!open)}>
+      <AccordionTrigger
+        className={classNames('Accordion__trigger underline')}
+        iconExpanded="triangle-down"
+        iconCollapsed="triangle-right"
       >
-        <AccordionTrigger
-          className={classNames('Accordion__trigger underline')}
-          iconExpanded="triangle-down"
-          iconCollapsed="triangle-right"
-        >
-          {label}
-        </AccordionTrigger>
-        <AccordionContent className="Accordion__panel">
-          Here is some content
-        </AccordionContent>
-      </AccordionContainer>
+        {label}
+      </AccordionTrigger>
+      <AccordionContent className="Accordion__panel">
+        Here is some content
+      </AccordionContent>
     </Accordion>
   );
 };

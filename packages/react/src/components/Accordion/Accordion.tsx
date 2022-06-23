@@ -7,23 +7,23 @@ import ExpandCollapsePanel, {
 import randomId from '../../utils/rndid';
 import { IconType } from '../Icon';
 
-interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children: React.ReactNode | React.ReactNode[];
-}
+// interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+//   className?: string;
+//   children: React.ReactNode | React.ReactNode[];
+// }
 
-const Accordion = ({ className, children, ...otherProps }: AccordionProps) => {
-  return (
-    <div
-      className={classNames(className ? className : '', 'Accordion__container')}
-      {...otherProps}
-    >
-      {children}
-    </div>
-  );
-};
+// const Accordion = ({ className, children, ...otherProps }: AccordionProps) => {
+//   return (
+//     <div
+//       className={classNames(className ? className : '', 'Accordion__container')}
+//       {...otherProps}
+//     >
+//       {children}
+//     </div>
+//   );
+// };
 
-interface AccordionContainerProps extends ExpandCollapsePanelProps {
+interface AccordionProps extends ExpandCollapsePanelProps {
   className?: string;
   children: React.ReactElement[];
   open?: boolean;
@@ -31,20 +31,18 @@ interface AccordionContainerProps extends ExpandCollapsePanelProps {
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
   hideIcon?: boolean;
-  isControlled?: boolean;
   animationTiming?: number | boolean;
 }
 
-const AccordionContainer = ({
+const Accordion = ({
   children,
   open = false,
   iconExpanded = 'triangle-down',
   iconCollapsed = 'triangle-right',
   hideIcon = false,
-  isControlled = false,
   animationTiming,
   ...otherProps
-}: AccordionContainerProps) => {
+}: AccordionProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
   const [notControlledOpen, setNotControlledOpen] = useState(false);
 
@@ -106,4 +104,8 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
 };
 
 export default Accordion;
-export { Accordion, AccordionContainer, AccordionTrigger, AccordionContent };
+export {
+  Accordion,
+  /* AccordionContainer,*/ AccordionTrigger,
+  AccordionContent
+};
