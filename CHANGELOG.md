@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/dequelabs/cauldron/compare/v4.5.0...v4.6.0) (2022-06-23)
+
+### Features
+
+- **button:** add option to render as tag ([#674](https://github.com/dequelabs/cauldron/issues/674)) ([9a1593a](https://github.com/dequelabs/cauldron/commit/9a1593aecc8f24bdc5c5f515d9726b42a9c241c5))
+- **components:** RadioCardGroup ([#663](https://github.com/dequelabs/cauldron/issues/663)) ([7f1627e](https://github.com/dequelabs/cauldron/commit/7f1627ef017552b049559889d55d00e80feb73e1))
+- **pagination:** create usePagination hook ([#662](https://github.com/dequelabs/cauldron/issues/662)) ([7f6a304](https://github.com/dequelabs/cauldron/commit/7f6a304aa63b83454e15425cd52f94651abafa17))
+- **react:** add `recycle-square` icon ([#679](https://github.com/dequelabs/cauldron/issues/679)) ([ca48f72](https://github.com/dequelabs/cauldron/commit/ca48f72e5eedac0258b71bdf9549f6e3da93e6b5))
+- **react:** add play icon ([#683](https://github.com/dequelabs/cauldron/issues/683)) ([cc78a93](https://github.com/dequelabs/cauldron/commit/cc78a93efb85d21e7d6491a483cf87f2fe4cd2f7))
+- **styles:** add axe-core issue impact colors ([#673](https://github.com/dequelabs/cauldron/issues/673)) ([959f5b1](https://github.com/dequelabs/cauldron/commit/959f5b11b818227093c7f2fa2c986d820efec4f7))
+
+### Bug Fixes
+
+- **RadioCardGroup:** use `flex-end` instead of `end` for checked card ([#677](https://github.com/dequelabs/cauldron/issues/677)) ([f4c1c3d](https://github.com/dequelabs/cauldron/commit/f4c1c3dd94db23e4b07a1fd3e2df376727e6a315))
+- **react:** Allow usage with React v18 ([#678](https://github.com/dequelabs/cauldron/issues/678)) ([a80cb0b](https://github.com/dequelabs/cauldron/commit/a80cb0bbe2e1aaf62fb280d569e3210af1a43806)), closes [#555](https://github.com/dequelabs/cauldron/issues/555) [#631](https://github.com/dequelabs/cauldron/issues/631)
+- **react:** Support React 18 types ([#676](https://github.com/dequelabs/cauldron/issues/676)) ([16adb90](https://github.com/dequelabs/cauldron/commit/16adb90060f3962eb6a7df4bce421c1dd8f056b3))
+
 ## [4.5.0](https://github.com/dequelabs/cauldron/compare/v4.4.0...v4.5.0) (2022-05-17)
 
 ### Features
