@@ -43,7 +43,7 @@ button.Accordion__trigger:hover .Icon {
   border-color: var(--gray-40);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  box-shadow: 0px 2px 3px 0px #00000015;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .15);
 }
 
 .Accordion__container div.ExpandCollapse__panel {
