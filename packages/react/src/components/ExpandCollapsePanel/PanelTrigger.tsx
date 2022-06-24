@@ -5,15 +5,12 @@ import Icon, { IconType } from '../Icon';
 
 export interface PanelTriggerProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-  children?:
-    | ((props: { open: boolean }) => React.ReactNode)
-    | React.ReactElement;
+  children?: ((props: { open: boolean }) => React.ReactNode) | React.ReactNode;
   open?: boolean;
   fullWidth?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
-  buttonRef?: Ref<HTMLButtonElement>;
 }
 
 const PanelTrigger = ({
@@ -22,7 +19,6 @@ const PanelTrigger = ({
   open,
   fullWidth,
   onClick,
-  buttonRef,
   iconExpanded = 'chevron-down',
   iconCollapsed = 'chevron-right',
   ...otherProps
@@ -35,7 +31,6 @@ const PanelTrigger = ({
       type="button"
       aria-expanded={open}
       onClick={onClick}
-      ref={buttonRef}
       {...otherProps}
     >
       <div className="ExpandCollapse__trigger-title">

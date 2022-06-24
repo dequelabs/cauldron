@@ -8,7 +8,7 @@ import {
 } from '@deque/cauldron-react/';
 import PropDocs from '../../../Demo/PropDocs';
 import './index.css';
-import { className } from '../../../props';
+import { children, className } from '../../../props';
 
 export const AccordionDemo = () => {
   return (
@@ -97,10 +97,7 @@ const ControlledAccordion = ({ label }) => {
         <PropDocs
           docs={{
             className,
-            children: {
-              type: 'React.ReactElement',
-              required: true
-            },
+            children,
             open: {
               type: 'boolean',
               description: 'Initial collapsed state of ExpandCollapsePanel',
@@ -125,10 +122,7 @@ const ControlledAccordion = ({ label }) => {
         </p>
         <PropDocs
           docs={{
-            children: {
-              type: 'React.ReactNode',
-              required: true
-            }
+            children
           }}
         />
 
@@ -143,10 +137,7 @@ const ControlledAccordion = ({ label }) => {
         <PropDocs
           docs={{
             className,
-            children: {
-              type: 'React.ReactNode and React.ReactNode[]',
-              required: true
-            }
+            children
           }}
         />
       </div>
