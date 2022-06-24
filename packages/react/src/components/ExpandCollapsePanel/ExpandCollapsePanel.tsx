@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import PanelTrigger from './PanelTrigger';
@@ -34,7 +34,7 @@ export default class ExpandCollapsePanel extends React.Component<
 
   static propTypes = {
     open: PropTypes.bool,
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     className: PropTypes.string,
     animationTiming: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     onToggle: PropTypes.func
