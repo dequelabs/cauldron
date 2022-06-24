@@ -18,9 +18,16 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
 
 interface AccordionProps extends ExpandCollapsePanelProps {
   children: React.ReactNode;
+  panelId?: string;
+  triggerId?: string;
 }
 
-const Accordion = ({ children, ...otherProps }: AccordionProps) => {
+const Accordion = ({
+  children,
+  triggerId,
+  panelId,
+  ...otherProps
+}: AccordionProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
   const childrenArray = React.Children.toArray(children);
   const trigger = childrenArray.find(
@@ -34,16 +41,19 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   if (trigger && React.isValidElement(trigger)) {
     return (
       <div className="Accordion">
-        <ExpandCollapsePanel id={`${elementId}-panel`} {...otherProps}>
+        <ExpandCollapsePanel
+          id={panelId || `${elementId}-panel`}
+          {...otherProps}
+        >
           <PanelTrigger
-            id={`${elementId}-trigger`}
+            id={triggerId || `${elementId}-trigger`}
             iconCollapsed="triangle-right"
             iconExpanded={'triangle-down'}
             className={classnames(
               'Accordion__trigger',
               trigger.props.className
             )}
-            aria-controls={`${elementId}-panel`}
+            aria-controls={panelId || `${elementId}-panel`}
             hideIcon={trigger.props.hideIcon}
             {...trigger.props.otherProps}
           >
@@ -62,7 +72,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
 };
 
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactElement;
+  children: React.ReactNode | React.ReactNode[];
   className: string;
 }
 
@@ -78,8 +88,8 @@ const AccordionContent = ({
   );
 };
 
-AccordionTrigger.displayName = 'AccordionTrigger';
 Accordion.displayName = 'Accordion';
+AccordionTrigger.displayName = 'AccordionTrigger';
 AccordionContent.displayName = 'AccordionContent';
 
 export default Accordion;

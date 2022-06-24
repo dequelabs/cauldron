@@ -32,8 +32,12 @@ export const AccordionDemo = () => {
         <h3>Uncontrolled</h3>
 
         <Accordion>
-          <AccordionTrigger>Accordion #1</AccordionTrigger>
-          <AccordionContent>Here is some content</AccordionContent>
+          <AccordionTrigger id="accordion-1-trigger">
+            Accordion #1
+          </AccordionTrigger>
+          <AccordionContent id="accordion-1-content">
+            Here is some content
+          </AccordionContent>
         </Accordion>
 
         <Accordion>
