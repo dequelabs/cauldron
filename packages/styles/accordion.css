@@ -60,7 +60,7 @@ button.Accordion__trigger:hover .Icon {
 }
 
 .cauldron--theme-dark button.Accordion__trigger:hover {
-  box-shadow: inset 3.5px 0px var(--accent-info);
+  box-shadow: inset 3.5px 0 var(--accent-info);
   color: var(--accent-light);
   text-decoration: underline solid var(--accent-light);
 }
