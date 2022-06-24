@@ -13,7 +13,6 @@ export interface PanelTriggerProps
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
-  hideIcon?: boolean;
   buttonRef?: Ref<HTMLButtonElement>;
 }
 
@@ -26,7 +25,6 @@ const PanelTrigger = ({
   buttonRef,
   iconExpanded = 'chevron-down',
   iconCollapsed = 'chevron-right',
-  hideIcon = false,
   ...otherProps
 }: PanelTriggerProps) => {
   return (
@@ -43,7 +41,7 @@ const PanelTrigger = ({
       <div className="ExpandCollapse__trigger-title">
         {typeof children === 'function' ? children({ open: !!open }) : children}
       </div>
-      {hideIcon ? '' : <Icon type={open ? iconExpanded : iconCollapsed} />}
+      {<Icon type={open ? iconExpanded : iconCollapsed} />}
     </button>
   );
 };

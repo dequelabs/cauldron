@@ -8,7 +8,7 @@ import {
 } from '@deque/cauldron-react/';
 import PropDocs from '../../../Demo/PropDocs';
 import './index.css';
-import { children, className } from '../../../props';
+import { className } from '../../../props';
 
 export const AccordionDemo = () => {
   return (
@@ -91,7 +91,7 @@ const ControlledAccordion = ({ label }) => {
           <Link href="/components/ExpandCollapsePanel">
             ExpandCollapsePanelProps
           </Link>{' '}
-          as well as:
+          including/in addition to the following:
         </p>
 
         <PropDocs
@@ -105,6 +105,12 @@ const ControlledAccordion = ({ label }) => {
               type: 'boolean',
               description: 'Initial collapsed state of ExpandCollapsePanel',
               default: 'false'
+            },
+            onToggle: {
+              type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
+              description:
+                'onToggle handler for the panel. The original event object will be passed.',
+              default: 'function () {}'
             }
           }}
         />
@@ -114,8 +120,8 @@ const ControlledAccordion = ({ label }) => {
         </h3>
         <p>
           The <code>AccordionTrigger</code> extends{' '}
-          <code>React.HTMLAttributes&lt;HTMLButtonElement&gt;</code> and
-          supports the following:
+          <code>React.HTMLAttributes&lt;HTMLButtonElement&gt;</code> and also
+          supports:
         </p>
         <PropDocs
           docs={{
@@ -130,8 +136,9 @@ const ControlledAccordion = ({ label }) => {
           <code>AccordionContent</code>
         </h3>
         <p>
-          The <code>AccordionTrigger</code> supports spreading of any props
-          supported by HTML Div elements as well as:
+          The <code>AccordionTrigger</code> extends{' '}
+          <code>React.HTMLAttributes&lt;HTMLDivElement&gt;</code> and supports
+          spreading of any props supported by the element, as well as:
         </p>
         <PropDocs
           docs={{

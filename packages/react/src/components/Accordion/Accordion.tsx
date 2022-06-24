@@ -72,7 +72,6 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
               trigger.props.className
             )}
             aria-controls={panel.props.id || `${elementId}-panel`}
-            hideIcon={trigger.props.hideIcon}
             {...trigger.props.otherProps}
           >
             {trigger}
