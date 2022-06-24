@@ -46,7 +46,7 @@ button.Accordion__trigger:hover .Icon {
 .cauldron--theme-dark button.Accordion__trigger {
   color: var(--white);
   background-color: var(--accent-medium);
-  border: 1px var(--stroke-dark) solid;
+  border: 1px solid var(--stroke-dark);
   text-decoration: underline solid var(--white);
 }
 
