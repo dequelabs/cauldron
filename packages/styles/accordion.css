@@ -1,7 +1,7 @@
 .Accordion__trigger,
 .Accordion > .ExpandCollapse__trigger {
   background-color: var(--white);
-  padding: 12px;
+  padding: calc(var(--space-small) + var(--space-half));
   width: 100%;
   display: flex;
   align-items: center;
