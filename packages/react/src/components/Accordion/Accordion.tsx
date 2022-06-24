@@ -1,73 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import ExpandCollapsePanel, {
   ExpandCollapsePanelProps,
   PanelTrigger
 } from '../ExpandCollapsePanel';
 import randomId from '../../utils/rndid';
-import { IconType } from '../Icon';
 
-interface AccordionProps extends ExpandCollapsePanelProps {
+export interface AccordionTriggerProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
-  children: React.ReactElement[];
-  open?: boolean;
-  animationTiming?: number | boolean;
+  children: React.ReactElement;
 }
 
-const Accordion = ({
-  children,
-  open,
-  animationTiming,
-  ...otherProps
-}: AccordionProps) => {
+const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
+  return <>{children}</>;
+};
+
+interface AccordionProps extends ExpandCollapsePanelProps {
+  children: React.ReactNode;
+}
+
+const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
   const childrenArray = React.Children.toArray(children);
-  const trigger = children.length > 0 && children[0].type === AccordionTrigger;
+  const trigger = childrenArray.find(
+    child => (child as React.ReactElement<any>).type === AccordionTrigger
+  );
 
   useEffect(() => {
     setElementId(randomId());
     return;
   }, []);
+  if (trigger && React.isValidElement(trigger)) {
+    return (
+      <div className="Accordion">
+        <ExpandCollapsePanel id={`${elementId}-panel`} {...otherProps}>
+          <PanelTrigger
+            id={`${elementId}-trigger`}
+            iconCollapsed="triangle-right"
+            iconExpanded={'triangle-down'}
+            className={classnames(
+              'Accordion__trigger',
+              trigger.props.className
+            )}
+            aria-controls={`${elementId}-panel`}
+            hideIcon={trigger.props.hideIcon}
+            {...trigger.props.otherProps}
+          >
+            {trigger}
+          </PanelTrigger>
 
-  return (
-    <div className="Accordion">
-      <ExpandCollapsePanel
-        id={`${elementId}-panel`}
-        open={open}
-        animationTiming={animationTiming}
-        {...otherProps}
-      >
-        <PanelTrigger
-          id={`${elementId}-trigger`}
-          iconCollapsed={
-            children[0].props.iconCollapsed
-              ? children[0].props.iconCollapsed
-              : 'triangle-right'
-          }
-          iconExpanded={
-            children[0].props.iconExpanded
-              ? children[0].props.iconExpanded
-              : 'triangle-down'
-          }
-          className={classNames(
-            children[0].props.className ? children[0].props.className : '',
-            'Accordion__trigger'
-          )}
-          aria-controls={`${elementId}-panel`}
-          hideIcon={children[0].props.hideIcon}
-          {...children[0].props}
-        >
-          {children[0]}
-        </PanelTrigger>
-
-        {childrenArray.length &&
-          React.Children.map(childrenArray, (child, index) => {
-            if (trigger && index === 0) return;
-            return <>{child}</>;
-          })}
-      </ExpandCollapsePanel>
-    </div>
-  );
+          {childrenArray.length &&
+            React.Children.map(childrenArray, (child, index) => {
+              if (trigger && index === 0) return;
+              return <>{child}</>;
+            })}
+        </ExpandCollapsePanel>
+      </div>
+    );
+  }
 };
 
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -81,20 +72,15 @@ const AccordionContent = ({
   ...otherProps
 }: AccordionContentProps) => {
   return (
-    <div className={classNames('Accordion__panel', className)} {...otherProps}>
+    <div className={classnames('Accordion__panel', className)} {...otherProps}>
       {children}
     </div>
   );
 };
 
-export interface AccordionTriggerProps {
-  className?: string;
-  children?: React.ReactElement;
-}
-
-const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
-  return <>{children}</>;
-};
+AccordionTrigger.displayName = 'AccordionTrigger';
+Accordion.displayName = 'Accordion';
+AccordionContent.displayName = 'AccordionContent';
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };
