@@ -54,8 +54,8 @@ button.Accordion__trigger:hover .Icon {
 }
 
 .cauldron--theme-dark button.Accordion__trigger[aria-expanded='true'] {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
   background-color: var(--accent-dark);
 }
 
