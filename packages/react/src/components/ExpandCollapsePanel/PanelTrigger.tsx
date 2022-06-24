@@ -42,10 +42,12 @@ const PanelTrigger = ({
 };
 
 PanelTrigger.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  iconExpanded: PropTypes.string,
+  iconCollapsed: PropTypes.string
 };
 
 PanelTrigger.displayName = 'PanelTrigger';
