@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   border-radius: 3px;
-  border: 1px var(--gray-40) solid;
+  border: 1px solid var(--gray-40);
   font-size: var(--text-size-small);
   margin-top: var(--space-small);
   color: var(--gray-90);
