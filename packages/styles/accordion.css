@@ -14,8 +14,8 @@
 }
 
 button.Accordion__trigger[aria-expanded='true'] {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
   background-color: var(--gray-20);
 }
 
