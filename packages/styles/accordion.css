@@ -7,7 +7,6 @@
   align-items: center;
   border-radius: 3px;
   border: 1px var(--gray-40) solid;
-  background-size: cover;
   font-size: var(--text-size-small);
   margin-top: 16px;
   color: var(--gray-90);
