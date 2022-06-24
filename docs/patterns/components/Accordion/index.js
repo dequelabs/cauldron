@@ -5,7 +5,6 @@ import {
   AccordionContent,
   Code
 } from '@deque/cauldron-react/';
-import classNames from 'classnames';
 import PropDocs from '../../../Demo/PropDocs';
 import './index.css';
 import { children, className } from '../../../props';
@@ -16,10 +15,16 @@ export const AccordionDemo = () => {
       <div className="data-list-demo">
         <h1>Accordion</h1>
         <h2>Component Description</h2>
-        <h2>Common Uses</h2>
+        <p>
+          An accordion is a vertically stacked set of interactive headings that
+          each contain a title, content snippet, or thumbnail representing a
+          section of content. The headings function as controls that enable
+          users to reveal or hide their associated sections of content.
+          Accordions are commonly used to reduce the need to scroll when
+          presenting multiple sections of content on a single page.
+        </p>
         <h2>Try it out</h2>
         <h3>Controlled</h3>
-
         <p>
           If you need to manually control the open/closed state of the panel,
           you can do this by setting the open prop and handling changes with
@@ -28,29 +33,30 @@ export const AccordionDemo = () => {
         <ControlledAccordion label="Accordion #1" />
         <ControlledAccordion label="Accordion #2" />
         <ControlledAccordion label="Accordion #3" />
-
         <h3>Uncontrolled</h3>
-
         <Accordion>
-          <AccordionTrigger id="accordion-1-trigger">
-            Accordion #1
-          </AccordionTrigger>
-          <AccordionContent id="accordion-1-content">
-            Here is some content
-          </AccordionContent>
+          <AccordionTrigger>Accordion #1</AccordionTrigger>
+          <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
-
         <Accordion>
           <AccordionTrigger>Accordion #2</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
-
         <Accordion>
           <AccordionTrigger>Accordion #3</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
+        <h3>Accessibility features</h3>
+        <p>
+          Out of the box, this component handles recommended ARIA attributes
+          (e.g., aria-expanded, aria-controls, etc) using unique/random ids
+          without any additional effort. However, you can also provide your own
+          ids for the trigger and content elements if you need to.
+        </p>
 
-        <h2>Code Sample</h2>
+        <p>Example...</p>
+
+        <h2>Examples</h2>
         <h3>Controlled</h3>
         <Code role="region" tabIndex={0}>
           {`import React, { useEffect, useState } from 'react';
@@ -102,16 +108,11 @@ const ControlledAccordion = ({ label }) => {
         <h3>
           <code>Accordion</code>
         </h3>
-
-        <PropDocs
-          docs={{
-            className,
-            children
-          }}
-        />
-        <h3>
-          <code>Accordion</code>
-        </h3>
+        <p>
+          The <code>Accordion</code> supports all the props from the{' '}
+          <a href="/components/ExpandCollapsePanel">ExpandCollapsePanelProps</a>{' '}
+          as well as:
+        </p>
 
         <PropDocs
           docs={{
@@ -121,34 +122,6 @@ const ControlledAccordion = ({ label }) => {
               type: 'boolean',
               description: 'Initial collapsed state of ExpandCollapsePanel',
               default: 'false'
-            },
-            animationTiming: {
-              type: 'number | boolean',
-              description:
-                'Animation time of expand/collapse in ms. Animation disabled when set to false.',
-              default: 250
-            },
-            iconCollapsed: {
-              type: 'IconType',
-              description: 'name of an <Icon> component',
-              default: 'triangle-right'
-            },
-            iconExpanded: {
-              type: 'IconType',
-              description: 'name of an <Icon> component',
-              default: 'triangle-down'
-            },
-            shouldHideIcon: {
-              type: 'boolean',
-              description:
-                'used to control whether an icon appears on the trigger element',
-              default: 'false'
-            },
-            isControlled: {
-              type: 'boolean',
-              description:
-                'used when controlling the opening and closing of the component via "open" prop',
-              default: 'false'
             }
           }}
         />
@@ -156,6 +129,10 @@ const ControlledAccordion = ({ label }) => {
         <h3>
           <code>AccordionTrigger</code>
         </h3>
+        <p>
+          The <code>AccordionTrigger</code> supports all the props from the{' '}
+          <a href="/components/ExpandCollapsePanel">PanelTrigger</a> as well as:
+        </p>
         <PropDocs
           docs={{
             children
@@ -165,6 +142,10 @@ const ControlledAccordion = ({ label }) => {
         <h3>
           <code>AccordionContent</code>
         </h3>
+        <p>
+          The <code>AccordionTrigger</code> supports all the props supported by
+          HTML Div elements as well as:
+        </p>
         <PropDocs
           docs={{
             children,
