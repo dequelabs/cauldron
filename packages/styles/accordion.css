@@ -43,10 +43,6 @@ button.Accordion__trigger:hover .Icon {
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
-.Accordion__panel[aria-expanded='true'] {
-  margin: 0 auto;
-}
-
 .cauldron--theme-dark button.Accordion__trigger {
   color: var(--white);
   background-color: var(--accent-medium);

@@ -1,13 +1,4 @@
-import {
-  Accordion,
-  // AccordionContainer,
-  AccordionTrigger,
-  AccordionContent
-} from './Accordion';
+import { Accordion, AccordionTrigger, AccordionContent } from './Accordion';
 
 export default Accordion;
-export {
-  /*AccordionContainer,*/ Accordion,
-  AccordionTrigger,
-  AccordionContent
-};
+export { Accordion, AccordionTrigger, AccordionContent };

@@ -16,7 +16,9 @@ export const AccordionDemo = () => {
     <div>
       <div className="data-list-demo">
         <h1>Accordion</h1>
-        <h2>Demo</h2>
+        <h2>Component Description</h2>
+        <h2>Common Uses</h2>
+        <h2>Try it out</h2>
         <h3>Controlled</h3>
 
         <p>
@@ -31,7 +33,9 @@ export const AccordionDemo = () => {
         <h3>Uncontrolled</h3>
 
         <Accordion>
-          <AccordionTrigger>Accordion #1</AccordionTrigger>
+          <AccordionTrigger iconExpanded={'chevron-right'}>
+            Accordion #1
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
 
