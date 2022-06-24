@@ -199,7 +199,7 @@ export default class ExpandCollapsePanel extends React.Component<
           })}
         <div
           className={classnames(
-            className ? className : '',
+            className,
             'ExpandCollapse__panel',
             animationClass,
             {

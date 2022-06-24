@@ -22,11 +22,10 @@ const Accordion = ({
 }: AccordionProps) => {
   const [elementId, setElementId] = useState<string | null>(null);
   const childrenArray = React.Children.toArray(children);
-  const trigger = children[0].type === AccordionTrigger;
+  const trigger = children.length > 0 && children[0].type === AccordionTrigger;
 
   useEffect(() => {
     setElementId(randomId());
-
     return;
   }, []);
 
@@ -40,15 +39,23 @@ const Accordion = ({
       >
         <PanelTrigger
           id={`${elementId}-trigger`}
-          iconCollapsed={children[0].props.iconCollapsed || 'triangle-right'}
-          iconExpanded={children[0].props.iconExpanded || 'triangle-down'}
+          iconCollapsed={
+            children[0].props.iconCollapsed
+              ? children[0].props.iconCollapsed
+              : 'triangle-right'
+          }
+          iconExpanded={
+            children[0].props.iconExpanded
+              ? children[0].props.iconExpanded
+              : 'triangle-down'
+          }
           className={classNames(
-            'Accordion__trigger',
-            children[0].props.className
+            children[0].props.className ? children[0].props.className : '',
+            'Accordion__trigger'
           )}
           aria-controls={`${elementId}-panel`}
           hideIcon={children[0].props.hideIcon}
-          {...children[0].props.otherProps}
+          {...children[0].props}
         >
           {children[0]}
         </PanelTrigger>
@@ -85,7 +92,7 @@ export interface AccordionTriggerProps {
   children?: React.ReactElement;
 }
 
-const AccordionTrigger = ({ className, children }: AccordionTriggerProps) => {
+const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 

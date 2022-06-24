@@ -3,26 +3,28 @@ import { mount } from 'enzyme';
 import {
   Accordion,
   AccordionTrigger,
-  AccordionContent,
-  AccordionContainer
+  AccordionContent
 } from 'src/components/Accordion';
 
 const noop = () => {};
 
 describe('Accordion', () => {
   it('renders without errors', () => {
-    const accordion = mount(<Accordion />);
+    const accordion = mount(
+      <Accordion>
+        <AccordionTrigger>Trigger</AccordionTrigger>
+        <AccordionContent>Content</AccordionContent>
+      </Accordion>
+    );
 
-    expect(accordion.find('.Accordion__container')).toBeTruthy();
+    expect(accordion.find('.Accordion')).toBeTruthy();
   });
 
   it('renders with a trigger and panel element', () => {
     const accordion = mount(
       <Accordion>
-        <AccordionContainer>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -33,10 +35,8 @@ describe('Accordion', () => {
   it('renders the trigger element', () => {
     const accordion = mount(
       <Accordion>
-        <AccordionContainer>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -49,10 +49,8 @@ describe('Accordion', () => {
   it('renders the content element', () => {
     const accordion = mount(
       <Accordion>
-        <AccordionContainer>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -64,11 +62,9 @@ describe('Accordion', () => {
 
   it('sets aria-expanded to false when collapsed', () => {
     const accordion = mount(
-      <Accordion>
-        <AccordionContainer open={true}>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+      <Accordion open={false}>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -83,10 +79,8 @@ describe('Accordion', () => {
   it('toggles aria-expanded to true when expanded', () => {
     const accordion = mount(
       <Accordion>
-        <AccordionContainer>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -105,27 +99,23 @@ describe('Accordion', () => {
     const spy = jest.fn();
 
     const accordion = mount(
-      <Accordion>
-        <AccordionContainer onToggle={spy}>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+      <Accordion onToggle={spy}>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
     const button = accordion.find('button.Accordion__trigger');
     button.simulate('click');
-    expect(accordion.find('expanded')).toBeTruthy();
+    expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('sets a random id on trigger element and content panel', () => {
     const accordion = mount(
-      <Accordion>
-        <AccordionContainer open={false} setIsOpen={noop} isControlled>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+      <Accordion open={false} setIsOpen={noop}>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -142,36 +132,11 @@ describe('Accordion', () => {
     ).toEqual(triggerId);
   });
 
-  it('sets aria-labelledby on panel using the trigger elements id', () => {
-    const accordion = mount(
-      <Accordion>
-        <AccordionContainer open={false} setIsOpen={noop} isControlled>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
-      </Accordion>
-    );
-
-    const triggerId = accordion
-      .find('button.Accordion__trigger')
-      .getDOMNode()
-      .getAttribute('id');
-
-    expect(
-      accordion
-        .find('.ExpandCollapse__panel')
-        .getDOMNode()
-        .getAttribute('aria-labelledby')
-    ).toEqual(triggerId);
-  });
-
   it('sets aria-controls on trigger element using the panel id', () => {
     const accordion = mount(
-      <Accordion>
-        <AccordionContainer open={false} setIsOpen={noop} isControlled>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+      <Accordion open={false}>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
@@ -193,33 +158,25 @@ describe('Accordion', () => {
   describe('when controlled', () => {
     it('expands when the open prop is passed "true"', () => {
       const accordion = mount(
-        <AccordionContainer open={false} setIsOpen={noop} isControlled>
+        <Accordion open={false}>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
-        </AccordionContainer>
+        </Accordion>
       );
 
-      expect(accordion.find('.expanded')).toEqual({});
       expect(accordion.props().open).toEqual(false);
 
       accordion.setProps({ open: true });
 
-      expect(accordion.find('.expanded')).toBeTruthy();
+      expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
       expect(accordion.props().open).toEqual(true);
     });
 
     it('hides the icon when the "shouldHideIcon" prop is true', () => {
       const accordion = mount(
-        <Accordion>
-          <AccordionContainer
-            open={false}
-            setIsOpen={noop}
-            isControlled
-            shouldHideIcon
-          >
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+        <Accordion open={false}>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
@@ -229,34 +186,15 @@ describe('Accordion', () => {
     it('triggers onToggle when trigger element receives an onClick event', () => {
       const spy = jest.fn();
       const accordion = mount(
-        <Accordion>
-          <AccordionContainer open={false} setIsOpen={noop} onToggle={spy}>
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+        <Accordion open={false} onToggle={spy}>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
       const button = accordion.find('button.Accordion__trigger');
       button.simulate('click');
-      expect(accordion.find('expanded')).toBeTruthy();
-      expect(spy).toHaveBeenCalledTimes(1);
-    });
-
-    it('setIsOpen is called when the trigger element receives an onClick event', () => {
-      const spy = jest.fn();
-      const accordion = mount(
-        <Accordion>
-          <AccordionContainer open={false} setIsOpen={spy} isControlled>
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
-        </Accordion>
-      );
-
-      const button = accordion.find('button.Accordion__trigger');
-      button.simulate('click');
-
+      expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
       expect(spy).toHaveBeenCalledTimes(1);
     });
   });
@@ -265,13 +203,9 @@ describe('Accordion', () => {
     describe('AccordionTrigger', () => {
       it('sets the className when passed a value in the className prop', () => {
         const accordion = mount(
-          <Accordion>
-            <AccordionContainer open={false} setIsOpen={noop} shouldHideIcon>
-              <AccordionTrigger className="test">
-                Testing 1 2 3
-              </AccordionTrigger>
-              <AccordionContent>This is another test</AccordionContent>
-            </AccordionContainer>
+          <Accordion open={false} setIsOpen={noop} shouldHideIcon>
+            <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
+            <AccordionContent>This is another test</AccordionContent>
           </Accordion>
         );
 
@@ -283,16 +217,9 @@ describe('Accordion', () => {
   describe('AccordionTrigger', () => {
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <Accordion>
-          <AccordionContainer
-            open={false}
-            setIsOpen={noop}
-            isControlled
-            shouldHideIcon
-          >
-            <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+        <Accordion open={false}>
+          <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
@@ -300,37 +227,23 @@ describe('Accordion', () => {
     });
   });
 
-  describe('AccordionContainer', () => {
+  describe('Accordion', () => {
     it('uses a default className if not passed one via the className prop', () => {
       const accordion = mount(
-        <Accordion>
-          <AccordionContainer
-            open={false}
-            setIsOpen={noop}
-            isControlled
-            shouldHideIcon
-          >
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+        <Accordion open={false}>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
-      expect(accordion.find('.Accordion__container')).toBeTruthy();
+      expect(accordion.find('.Accordion')).toBeTruthy();
     });
 
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <Accordion className="test">
-          <AccordionContainer
-            open={false}
-            setIsOpen={noop}
-            isControlled
-            shouldHideIcon
-          >
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+        <Accordion className="test" open={false}>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
@@ -342,10 +255,8 @@ describe('Accordion', () => {
     it('uses a default className if not passed one via the className prop', () => {
       const accordion = mount(
         <Accordion>
-          <AccordionContainer>
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent>This is another test</AccordionContent>
-          </AccordionContainer>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
@@ -355,12 +266,10 @@ describe('Accordion', () => {
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
         <Accordion>
-          <AccordionContainer>
-            <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-            <AccordionContent className="test">
-              This is another test
-            </AccordionContent>
-          </AccordionContainer>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent className="test">
+            This is another test
+          </AccordionContent>
         </Accordion>
       );
 
