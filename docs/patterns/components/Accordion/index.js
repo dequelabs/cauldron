@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Accordion,
-  AccordionContainer,
   AccordionTrigger,
   AccordionContent,
   Code
@@ -16,7 +15,9 @@ export const AccordionDemo = () => {
     <div>
       <div className="data-list-demo">
         <h1>Accordion</h1>
-        <h2>Demo</h2>
+        <h2>Component Description</h2>
+        <h2>Common Uses</h2>
+        <h2>Try it out</h2>
         <h3>Controlled</h3>
 
         <p>
@@ -51,7 +52,6 @@ export const AccordionDemo = () => {
           {`import React, { useEffect, useState } from 'react';
   import {
   Accordion,
-  AccordionContainer,
   AccordionTrigger,
   AccordionContent,
 } from '@deque/cauldron-react/';
@@ -60,16 +60,12 @@ const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
-    <Accordion>
-      <AccordionContainer
+    <Accordion
         open={open}
         onToggle={() => setIsOpen(!open)}
-        isControlled
       >
         <AccordionTrigger
-          className={classNames(
-            open ? 'expanded' : '',
-            'Accordion__trigger underline'
+          className={classNames('Accordion__trigger underline'
           )}
           iconExpanded="triangle-down"
           iconCollapsed="triangle-right"
@@ -79,7 +75,6 @@ const ControlledAccordion = ({ label }) => {
         <AccordionContent className="Accordion__panel">
           Here is some content
         </AccordionContent>
-      </AccordionContainer>
     </Accordion>
   );
 };`}
@@ -93,10 +88,8 @@ const ControlledAccordion = ({ label }) => {
         <h3>Uncontrolled</h3>
         <Code role="region" tabIndex={0}>
           {`<Accordion>
-  <AccordionContainer>
     <AccordionTrigger>Accordion #3</AccordionTrigger>
     <AccordionContent>Here is some content</AccordionContent>
-  </AccordionContainer>
 </Accordion>`}
         </Code>
       </div>
@@ -113,7 +106,7 @@ const ControlledAccordion = ({ label }) => {
           }}
         />
         <h3>
-          <code>AccordionContainer</code>
+          <code>Accordion</code>
         </h3>
 
         <PropDocs
