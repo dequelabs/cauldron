@@ -10,7 +10,7 @@ import {
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  open?: boolean | undefined;
+  open?: boolean;
   children: React.ReactNode;
   animationTiming?: number | boolean;
   onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void;
