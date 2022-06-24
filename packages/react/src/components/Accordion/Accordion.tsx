@@ -66,7 +66,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
           <PanelTrigger
             id={trigger.props.id || `${elementId}-trigger`}
             iconCollapsed="triangle-right"
-            iconExpanded={'triangle-down'}
+            iconExpanded="triangle-down"
             className={classnames(
               'Accordion__trigger',
               trigger.props.className
@@ -76,12 +76,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
           >
             {trigger}
           </PanelTrigger>
-
-          {childrenArray.length &&
-            React.Children.map(childrenArray, (child, index) => {
-              if (trigger && index === 0) return;
-              return <>{child}</>;
-            })}
+          {panel}
         </ExpandCollapsePanel>
       </div>
     );
