@@ -70,10 +70,10 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger className={'Accordion__trigger underline'}>
+      <AccordionTrigger>
         {label}
       </AccordionTrigger>
-      <AccordionContent className="Accordion__panel">
+      <AccordionContent>
         Here is some content
       </AccordionContent>
     </Accordion>
@@ -152,12 +152,8 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger className={'Accordion__trigger underline'}>
-        {label}
-      </AccordionTrigger>
-      <AccordionContent className="Accordion__panel">
-        Here is some content
-      </AccordionContent>
+      <AccordionTrigger>{label}</AccordionTrigger>
+      <AccordionContent>Here is some content</AccordionContent>
     </Accordion>
   );
 };

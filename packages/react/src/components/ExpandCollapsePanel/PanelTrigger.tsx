@@ -36,7 +36,7 @@ const PanelTrigger = ({
       <div className="ExpandCollapse__trigger-title">
         {typeof children === 'function' ? children({ open: !!open }) : children}
       </div>
-      {<Icon type={open ? iconExpanded : iconCollapsed} />}
+      <Icon type={open ? iconExpanded : iconCollapsed} />
     </button>
   );
 };

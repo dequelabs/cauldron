@@ -43,7 +43,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger
   );
-  const panel = childrenArray.find(
+  const panelElement = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionContent
   );
 
@@ -51,16 +51,11 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
     setElementId(randomId());
     return;
   }, []);
-  if (
-    trigger &&
-    React.isValidElement(trigger) &&
-    panel &&
-    React.isValidElement(panel)
-  ) {
+  if (React.isValidElement(trigger) && React.isValidElement(panelElement)) {
     return (
       <div className="Accordion">
         <ExpandCollapsePanel
-          id={panel.props.id || `${elementId}-panel`}
+          id={panelElement.props.id || `${elementId}-panel`}
           {...otherProps}
         >
           <PanelTrigger
@@ -71,12 +66,12 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
               'Accordion__trigger',
               trigger.props.className
             )}
-            aria-controls={panel.props.id || `${elementId}-panel`}
+            aria-controls={panelElement.props.id || `${elementId}-panel`}
             {...trigger.props.otherProps}
           >
             {trigger}
           </PanelTrigger>
-          {panel}
+          {panelElement}
         </ExpandCollapsePanel>
       </div>
     );
