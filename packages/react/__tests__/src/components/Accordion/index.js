@@ -95,7 +95,7 @@ describe('Accordion', () => {
     ).toEqual('true');
   });
 
-  it('expands the panel element when the trigger element is clicked', () => {
+  it('calls onToggle when the trigger element is clicked', () => {
     const spy = jest.fn();
 
     const accordion = mount(

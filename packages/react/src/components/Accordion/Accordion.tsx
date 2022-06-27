@@ -46,31 +46,33 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
     child => (child as React.ReactElement<any>).type === AccordionContent
   );
   const elementId = useId();
+  const isValid = !!(
+    React.isValidElement(trigger) && React.isValidElement(panelElement)
+  );
 
-  if (React.isValidElement(trigger) && React.isValidElement(panelElement)) {
-    return (
-      <div className="Accordion">
-        <ExpandCollapsePanel
-          id={panelElement.props.id || `${elementId}-panel`}
-          {...otherProps}
-        >
-          <PanelTrigger
-            iconCollapsed="triangle-right"
-            iconExpanded="triangle-down"
-            className={classnames(
-              'Accordion__trigger',
-              trigger.props.className
-            )}
-            aria-controls={panelElement.props.id || `${elementId}-panel`}
-            {...trigger.props.otherProps}
-          >
-            {trigger}
-          </PanelTrigger>
-          {panelElement}
-        </ExpandCollapsePanel>
-      </div>
-    );
+  if (!isValid) {
+    return null;
   }
+
+  return (
+    <div className="Accordion">
+      <ExpandCollapsePanel
+        id={panelElement.props.id || `${elementId}-panel`}
+        {...otherProps}
+      >
+        <PanelTrigger
+          iconCollapsed="triangle-right"
+          iconExpanded="triangle-down"
+          className={classnames('Accordion__trigger', trigger.props.className)}
+          aria-controls={panelElement.props.id || `${elementId}-panel`}
+          {...trigger.props.otherProps}
+        >
+          {trigger}
+        </PanelTrigger>
+        {panelElement}
+      </ExpandCollapsePanel>
+    </div>
+  );
 };
 
 Accordion.displayName = 'Accordion';

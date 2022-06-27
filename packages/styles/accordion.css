@@ -47,7 +47,7 @@ button.Accordion__trigger[aria-expanded='true'] {
 }
 
 button.Accordion__trigger:hover {
-  box-shadow: inset 3.5px 0px var(--accordion-trigger-box-shadow-hover);
+  box-shadow: inset 8px 0 0 -4px var(--accordion-trigger-box-shadow-hover);
   color: var(--accordion-trigger-text-color-hover);
   transition: all 0.2s ease-in-out;
   text-decoration: underline solid var(--accordion-trigger-text-color-hover);
@@ -65,8 +65,4 @@ button.Accordion__trigger:hover .Icon {
   border-top: 0;
   border-radius: 0 0 3px 3px;
   box-shadow: 0 2px 3px 0 var(--accordion-box-shadow-color);
-}
-
-.cauldron--theme-dark .Accordion__panel {
-  box-shadow: none;
 }
