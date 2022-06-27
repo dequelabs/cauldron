@@ -4,7 +4,7 @@ import ExpandCollapsePanel, {
   ExpandCollapsePanelProps,
   PanelTrigger
 } from '../ExpandCollapsePanel';
-import randomId from '../../utils/rndid';
+import { useId } from 'react-id-generator';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -38,7 +38,7 @@ interface AccordionProps extends ExpandCollapsePanelProps {
 }
 
 const Accordion = ({ children, ...otherProps }: AccordionProps) => {
-  const [elementId, setElementId] = useState<string | null>(null);
+  // const [elementId, setElementId] = useState<string | null>(null);
   const childrenArray = React.Children.toArray(children);
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger
@@ -46,11 +46,8 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const panelElement = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionContent
   );
+  const elementId = useId();
 
-  useEffect(() => {
-    setElementId(randomId());
-    return;
-  }, []);
   if (React.isValidElement(trigger) && React.isValidElement(panelElement)) {
     return (
       <div className="Accordion">
@@ -59,7 +56,6 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
           {...otherProps}
         >
           <PanelTrigger
-            id={trigger.props.id || `${elementId}-trigger`}
             iconCollapsed="triangle-right"
             iconExpanded="triangle-down"
             className={classnames(
