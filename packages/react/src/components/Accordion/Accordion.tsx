@@ -49,10 +49,10 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
 
   if (React.isValidElement(trigger) && React.isValidElement(panelElement)) {
     return (
-      <div className="Accordion">
+      <div className="Accordion" {...otherProps}>
         <ExpandCollapsePanel
           id={panelElement.props.id || `${elementId}-panel`}
-          {...otherProps}
+          {...panelElement.props.otherProps}
         >
           <PanelTrigger
             iconCollapsed="triangle-right"
