@@ -51,11 +51,8 @@ describe('Accordion', () => {
         <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
-
-    expect(accordion.find('.Accordion__panel')).toBeTruthy();
-    expect(
-      accordion.find('.ExpandCollapse__panel .Accordion__panel').text()
-    ).toEqual('This is another test');
+    const panel = accordion.find('.ExpandCollapse__panel');
+    expect(panel.text()).toEqual('This is another test');
   });
 
   it('sets aria-expanded to false when collapsed', () => {
@@ -101,6 +98,21 @@ describe('Accordion', () => {
     button.simulate('click');
     expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('hides content in the panel element when collapsed', () => {
+    const accordion = mount(
+      <Accordion open={false}>
+        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+        <AccordionContent>
+          <div data-test>foo</div>
+        </AccordionContent>
+      </Accordion>
+    );
+    setTimeout(() => {
+      expect(isVisible(wrapper.find('[data-test]'))).toBeFalsy();
+      done();
+    });
   });
 
   it('sets aria-controls on trigger element using the panel id', () => {

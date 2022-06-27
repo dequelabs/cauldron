@@ -20,12 +20,7 @@ interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const AccordionContent = ({ children }: AccordionContentProps) => {
-  return (
-    // <div className={classnames('Accordion__panel', className)} {...otherProps}>
-    //   {children}
-    // </div>
-    <>{children}</>
-  );
+  return <>{children}</>;
 };
 
 interface AccordionProps extends ExpandCollapsePanelProps {
