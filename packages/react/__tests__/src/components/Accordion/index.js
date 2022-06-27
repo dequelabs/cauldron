@@ -113,7 +113,7 @@ describe('Accordion', () => {
 
   it('sets a random id on trigger element and content panel', () => {
     const accordion = mount(
-      <Accordion open={false} setIsOpen={noop}>
+      <Accordion open={false}>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </Accordion>
@@ -140,12 +140,17 @@ describe('Accordion', () => {
       </Accordion>
     );
 
+    const panelId = accordion
+      .find('.ExpandCollapse__panel')
+      .getDOMNode()
+      .getAttribute('id');
+
     expect(
       accordion
         .find('button.Accordion__trigger')
         .getDOMNode()
-        .getAttribute('id')
-    ).toBeTruthy();
+        .getAttribute('aria-controls')
+    ).toEqual(panelId);
 
     expect(
       accordion
@@ -172,17 +177,6 @@ describe('Accordion', () => {
       expect(accordion.props().open).toEqual(true);
     });
 
-    it('hides the icon when the "shouldHideIcon" prop is true', () => {
-      const accordion = mount(
-        <Accordion open={false}>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </Accordion>
-      );
-
-      expect(accordion.find('svg').length).toBe(0);
-    });
-
     it('triggers onToggle when trigger element receives an onClick event', () => {
       const spy = jest.fn();
       const accordion = mount(
@@ -203,7 +197,7 @@ describe('Accordion', () => {
     describe('AccordionTrigger', () => {
       it('sets the className when passed a value in the className prop', () => {
         const accordion = mount(
-          <Accordion open={false} setIsOpen={noop} shouldHideIcon>
+          <Accordion open={false}>
             <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </Accordion>

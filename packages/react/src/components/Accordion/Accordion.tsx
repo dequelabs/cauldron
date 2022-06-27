@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import ExpandCollapsePanel, {
   ExpandCollapsePanelProps,
@@ -38,7 +38,6 @@ interface AccordionProps extends ExpandCollapsePanelProps {
 }
 
 const Accordion = ({ children, ...otherProps }: AccordionProps) => {
-  // const [elementId, setElementId] = useState<string | null>(null);
   const childrenArray = React.Children.toArray(children);
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger

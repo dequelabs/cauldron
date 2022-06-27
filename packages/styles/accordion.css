@@ -54,7 +54,7 @@ button.Accordion__trigger:hover {
 }
 
 button.Accordion__trigger:hover .Icon {
-  color: var(--gray-90);
+  color: var(--accordion-trigger-icon-color);
 }
 
 .Accordion__panel {
