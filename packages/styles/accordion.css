@@ -27,7 +27,7 @@
 
 .Accordion__trigger,
 .Accordion > .ExpandCollapse__trigger {
-  background-color: var(--accordion-trigger-background-color);
+  background: var(--accordion-trigger-background-color);
   padding: calc(var(--space-small) - var(--space-half));
   width: 100%;
   display: flex;
@@ -43,7 +43,7 @@
 button.Accordion__trigger[aria-expanded='true'] {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  background-color: var(--accordion-trigger-background-color-expanded);
+  background: var(--accordion-trigger-background-color-expanded);
 }
 
 button.Accordion__trigger:hover {
@@ -58,7 +58,7 @@ button.Accordion__trigger:hover .Icon {
 }
 
 .Accordion__panel {
-  background-color: var(--accordion-panel-background-color);
+  background: var(--accordion-panel-background-color);
   color: var(--accordion-panel-text-color);
   padding: var(--space-small);
   border: 1px solid var(--accordion-panel-border-color);
