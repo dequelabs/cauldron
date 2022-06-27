@@ -6,8 +6,6 @@ import {
   AccordionContent
 } from 'src/components/Accordion';
 
-const noop = () => {};
-
 describe('Accordion', () => {
   it('renders without errors', () => {
     const accordion = mount(
@@ -69,11 +67,8 @@ describe('Accordion', () => {
     );
 
     expect(
-      accordion
-        .find('button.Accordion__trigger')
-        .getDOMNode()
-        .getAttribute('aria-expanded')
-    ).toEqual('false');
+      accordion.find('button.Accordion__trigger').prop('aria-expanded')
+    ).toBeFalsy();
   });
 
   it('toggles aria-expanded to true when expanded', () => {
@@ -88,11 +83,8 @@ describe('Accordion', () => {
     button.simulate('click');
 
     expect(
-      accordion
-        .find('button.Accordion__trigger')
-        .getDOMNode()
-        .getAttribute('aria-expanded')
-    ).toEqual('true');
+      accordion.find('button.Accordion__trigger').props('aria-expanded')
+    ).toBeTruthy();
   });
 
   it('calls onToggle when the trigger element is clicked', () => {
@@ -111,27 +103,6 @@ describe('Accordion', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('sets a random id on trigger element and content panel', () => {
-    const accordion = mount(
-      <Accordion open={false}>
-        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-        <AccordionContent>This is another test</AccordionContent>
-      </Accordion>
-    );
-
-    const triggerId = accordion
-      .find('button.Accordion__trigger')
-      .getDOMNode()
-      .getAttribute('aria-controls');
-
-    expect(
-      accordion
-        .find('.ExpandCollapse__panel')
-        .getDOMNode()
-        .getAttribute('id')
-    ).toEqual(triggerId);
-  });
-
   it('sets aria-controls on trigger element using the panel id', () => {
     const accordion = mount(
       <Accordion open={false}>
@@ -140,24 +111,13 @@ describe('Accordion', () => {
       </Accordion>
     );
 
-    const panelId = accordion
-      .find('.ExpandCollapse__panel')
-      .getDOMNode()
-      .getAttribute('id');
+    const panelId = accordion.find('.ExpandCollapse__panel').prop('id');
 
     expect(
-      accordion
-        .find('button.Accordion__trigger')
-        .getDOMNode()
-        .getAttribute('aria-controls')
+      accordion.find('button.Accordion__trigger').prop('aria-controls')
     ).toEqual(panelId);
 
-    expect(
-      accordion
-        .find('.ExpandCollapse__panel')
-        .getDOMNode()
-        .getAttribute('id')
-    ).toBeTruthy();
+    expect(accordion.find('.ExpandCollapse__panel').props('id')).toBeTruthy();
   });
 
   describe('when controlled', () => {
