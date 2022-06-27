@@ -8,7 +8,6 @@ import { useId } from 'react-id-generator';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  className?: string;
   children: React.ReactElement;
 }
 
@@ -18,18 +17,14 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
 
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode | React.ReactNode[];
-  className: string;
 }
 
-const AccordionContent = ({
-  children,
-  className,
-  ...otherProps
-}: AccordionContentProps) => {
+const AccordionContent = ({ children }: AccordionContentProps) => {
   return (
-    <div className={classnames('Accordion__panel', className)} {...otherProps}>
-      {children}
-    </div>
+    // <div className={classnames('Accordion__panel', className)} {...otherProps}>
+    //   {children}
+    // </div>
+    <>{children}</>
   );
 };
 
@@ -58,6 +53,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
     <div className="Accordion">
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
+        className={classnames('Accordion__panel', panelElement.props.className)}
         {...otherProps}
       >
         <PanelTrigger
