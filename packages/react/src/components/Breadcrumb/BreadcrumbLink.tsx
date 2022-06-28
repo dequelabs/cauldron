@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
-import { Cauldron } from '../../types';
 
-interface BreadcrumbLinkProps extends React.HTMLAttributes<HTMLLinkElement> {
+interface BreadcrumbLinkProps
+  extends Omit<React.LinkHTMLAttributes<HTMLLinkElement>, 'as'> {
   as?: React.ElementType;
 }
 
@@ -26,4 +26,5 @@ const BreadcrumbLink = forwardRef<HTMLElement, BreadcrumbLinkProps>(
   )
 );
 
+BreadcrumbLink.displayName = 'BreadcrumbLink';
 export default BreadcrumbLink;
