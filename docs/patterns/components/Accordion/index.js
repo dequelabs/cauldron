@@ -31,7 +31,14 @@ export const AccordionDemo = () => {
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger>Accordion #1</AccordionTrigger>
+          <AccordionTrigger
+            heading={{
+              level: 2,
+              text: 'Panel heading'
+            }}
+          >
+            Accordion #1
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>

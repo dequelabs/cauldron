@@ -17,10 +17,19 @@ const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
 
 interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode | React.ReactNode[];
+  className?: string;
 }
 
-const AccordionContent = ({ children }: AccordionContentProps) => {
-  return <>{children}</>;
+const AccordionContent = ({
+  children,
+  className,
+  ...otherProps
+}: AccordionContentProps) => {
+  return (
+    <div className={classnames('Accordion__panel', className)} {...otherProps}>
+      {children}
+    </div>
+  );
 };
 
 interface AccordionProps extends ExpandCollapsePanelProps {
@@ -48,7 +57,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
     <div className="Accordion">
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
-        className={classnames('Accordion__panel', panelElement.props.className)}
+        className={classnames(panelElement.props.className)}
         {...otherProps}
       >
         <PanelTrigger
