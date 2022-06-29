@@ -12,11 +12,9 @@ export interface PanelTriggerProps
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
   heading?:
-    | React.ReactNode
+    | React.ReactElement
     | {
-        id?: string;
-        text: React.ReactNode;
-        level: number | undefined;
+        level: string | undefined;
       };
 }
 
@@ -31,31 +29,30 @@ const PanelTrigger = ({
   heading,
   ...otherProps
 }: PanelTriggerProps) => {
-  const HeadingComponent =
-    (`h${
-      heading &&
-      typeof heading === 'object' &&
-      'level' in heading &&
-      !!heading.level
-        ? heading.level
-        : 2
-    }` as 'h2') || React.Fragment;
+  const Header =
+    typeof heading === 'object' && 'level' in heading && !!heading.level
+      ? `h${heading.level}`
+      : React.Fragment;
 
   return (
-    <button
-      className={classnames(className, 'ExpandCollapse__trigger', {
-        fullWidth: fullWidth
-      })}
-      type="button"
-      aria-expanded={open}
-      onClick={onClick}
-      {...otherProps}
-    >
-      <div className="ExpandCollapse__trigger-title">
-        {typeof children === 'function' ? children({ open: !!open }) : children}
-      </div>
-      <Icon type={open ? iconExpanded : iconCollapsed} />
-    </button>
+    <Header>
+      <button
+        className={classnames(className, 'ExpandCollapse__trigger', {
+          fullWidth: fullWidth
+        })}
+        type="button"
+        aria-expanded={open}
+        onClick={onClick}
+        {...otherProps}
+      >
+        <div className="ExpandCollapse__trigger-title">
+          {typeof children === 'function'
+            ? children({ open: !!open })
+            : children}
+        </div>
+        <Icon type={open ? iconExpanded : iconCollapsed} />
+      </button>
+    </Header>
   );
 };
 

@@ -31,11 +31,15 @@ export const AccordionDemo = () => {
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger>Accordion #1</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 2 }}>
+            Accordion #1
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger>Accordion #2</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 2 }}>
+            Accordion #2
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
