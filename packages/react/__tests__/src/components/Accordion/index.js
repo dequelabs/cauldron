@@ -113,17 +113,6 @@ describe('Accordion', () => {
     ).toBeTruthy();
   });
 
-  it('calls onToggle when the trigger element is clicked', () => {
-    const wrapper = mount(
-      <Accordion open={false} onToggle={jest.fn()}>
-        <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-        <AccordionContent>This is another test</AccordionContent>
-      </Accordion>
-    );
-
-    expect(wrapper.find('.c').props('aria-expanded')).toBeTruthy();
-  });
-
   it('hides content in the panel element when collapsed', () => {
     mount(
       <Accordion open={false}>
