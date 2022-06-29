@@ -101,7 +101,7 @@ describe('Accordion', () => {
   });
 
   it('hides content in the panel element when collapsed', () => {
-    const accordion = mount(
+    mount(
       <Accordion open={false}>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>
@@ -190,6 +190,36 @@ describe('Accordion', () => {
       );
 
       expect(accordion.find('.test')).toBeTruthy();
+    });
+
+    it('sets a heading level 2 element when passed a headingLevel prop', () => {
+      const accordion = mount(
+        <Accordion open={false}>
+          <AccordionTrigger headingLevel={2}>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </Accordion>
+      );
+      expect(accordion.find('h2')).toBeTruthy();
+    });
+
+    it('sets a heading level 2 element when passed a headingLevel prop', () => {
+      const accordion = mount(
+        <Accordion open={false}>
+          <AccordionTrigger headingLevel={2}>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </Accordion>
+      );
+      expect(accordion.find('h2')).toBeTruthy();
+    });
+
+    it('does not set a heading element wrapper around the trigger', () => {
+      const accordion = mount(
+        <Accordion open={false}>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </Accordion>
+      );
+      expect(accordion.find('h2')).toBeFalsy();
     });
   });
 
