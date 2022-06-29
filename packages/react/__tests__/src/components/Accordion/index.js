@@ -202,23 +202,15 @@ describe('Accordion', () => {
       expect(accordion.find('h2')).toBeTruthy();
     });
 
-    it('sets a heading level 2 element when passed a headingLevel prop', () => {
-      const accordion = mount(
-        <Accordion open={false}>
-          <AccordionTrigger headingLevel={2}>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </Accordion>
-      );
-      expect(accordion.find('h2')).toBeTruthy();
-    });
-
-    it('does not set a heading element wrapper around the trigger', () => {
+    it('does not set a heading element wrapper around the trigger when passed no prop', () => {
       const accordion = mount(
         <Accordion open={false}>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
+
+      screen.debug();
       expect(accordion.find('h2')).toBeFalsy();
     });
   });

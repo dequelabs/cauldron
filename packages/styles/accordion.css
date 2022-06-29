@@ -25,7 +25,7 @@
   --accordion-panel-border-color: var(--stroke-dark);
 }
 
-.Accordionr > h1,
+.Accordion > [role='heading'] h1,
 h2,
 h3,
 h4,

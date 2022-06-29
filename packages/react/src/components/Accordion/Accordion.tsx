@@ -40,12 +40,10 @@ interface AccordionProps extends ExpandCollapsePanelProps {
 const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
   const trigger = childrenArray.find(
-    child =>
-      (child as React.ReactElement<React.ReactElement>).type ===
-      AccordionTrigger
+    child => (child as React.ReactElement<any>).type === AccordionTrigger
   );
   const panelElement = childrenArray.find(child => {
-    (child as React.ReactElement<React.ReactElement>).type === AccordionContent;
+    (child as React.ReactElement<any>).type === AccordionContent;
   });
   const [elementId] = useId();
   const isValid = !!(
@@ -61,7 +59,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
         className={classnames(panelElement.props.className)}
-        {...otherProps}
+        {...panelElement.props.otherProps}
       >
         <PanelTrigger
           iconCollapsed="triangle-right"

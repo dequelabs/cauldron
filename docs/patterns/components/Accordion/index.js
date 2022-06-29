@@ -31,15 +31,15 @@ export const AccordionDemo = () => {
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger headingLevel="h4">Accordion #1</AccordionTrigger>
+          <AccordionTrigger>Accordion #1</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger headingLevel="h4">Accordion #2</AccordionTrigger>
+          <AccordionTrigger>Accordion #2</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger headingLevel="h4">Accordion #3</AccordionTrigger>
+          <AccordionTrigger>Accordion #3</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Code role="region" tabIndex={0}>
@@ -90,27 +90,9 @@ const ControlledAccordion = ({ label }) => {
           The <code>Accordion</code> supports all the props from the{' '}
           <Link href="/components/ExpandCollapsePanel">
             ExpandCollapsePanelProps
-          </Link>{' '}
+          </Link>
           including/in addition to the following:
         </p>
-
-        <PropDocs
-          docs={{
-            className,
-            children,
-            open: {
-              type: 'boolean',
-              description: 'Initial collapsed state of ExpandCollapsePanel',
-              default: 'false'
-            },
-            onToggle: {
-              type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-              description:
-                'onToggle handler for the panel. The original event object will be passed.',
-              default: 'function () {}'
-            }
-          }}
-        />
 
         <h3>
           <code>AccordionTrigger</code>
@@ -124,7 +106,7 @@ const ControlledAccordion = ({ label }) => {
           docs={{
             children,
             headingLevel: {
-              type: 'string',
+              type: 'h1, h2, h3, h4, h5, h6, or undefined',
               description:
                 'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.',
               default: 'undefined'
@@ -140,28 +122,22 @@ const ControlledAccordion = ({ label }) => {
           <code>React.HTMLAttributes&lt;HTMLDivElement&gt;</code> and supports
           spreading of any props supported by the element, as well as:
         </p>
-        <PropDocs
-          docs={{
-            className,
-            children
-          }}
-        />
       </div>
     </div>
   );
 };
-
-AccordionDemo.displayName = 'AccordionDemo';
 
 const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger headingLevel="h4">{label}</AccordionTrigger>
+      <AccordionTrigger>{label}</AccordionTrigger>
       <AccordionContent>Here is some content</AccordionContent>
     </Accordion>
   );
 };
+
+AccordionDemo.displayName = 'AccordionDemo';
 
 export default AccordionDemo;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { PanelTrigger } from 'src/components/ExpandCollapsePanel';
 
 test('should render children', () => {
@@ -26,7 +26,7 @@ test('should pass-through props', () => {
 
 test('should handle onclick', () => {
   const handleClick = jest.fn();
-  const wrapper = shallow(<PanelTrigger onClick={handleClick} />);
+  const wrapper = mount(<PanelTrigger onClick={handleClick} />);
 
   wrapper.simulate('click');
   expect(handleClick).toBeCalled();
