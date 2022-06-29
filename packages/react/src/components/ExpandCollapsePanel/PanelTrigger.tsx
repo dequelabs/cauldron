@@ -42,24 +42,20 @@ const PanelTrigger = ({
     }` as 'h2') || React.Fragment;
 
   return (
-    <HeadingComponent>
-      <button
-        className={classnames(className, 'ExpandCollapse__trigger', {
-          fullWidth: fullWidth
-        })}
-        type="button"
-        aria-expanded={open}
-        onClick={onClick}
-        {...otherProps}
-      >
-        <div className="ExpandCollapse__trigger-title">
-          {typeof children === 'function'
-            ? children({ open: !!open })
-            : children}
-        </div>
-        <Icon type={open ? iconExpanded : iconCollapsed} />
-      </button>
-    </HeadingComponent>
+    <button
+      className={classnames(className, 'ExpandCollapse__trigger', {
+        fullWidth: fullWidth
+      })}
+      type="button"
+      aria-expanded={open}
+      onClick={onClick}
+      {...otherProps}
+    >
+      <div className="ExpandCollapse__trigger-title">
+        {typeof children === 'function' ? children({ open: !!open }) : children}
+      </div>
+      <Icon type={open ? iconExpanded : iconCollapsed} />
+    </button>
   );
 };
 
