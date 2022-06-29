@@ -9,6 +9,7 @@ import { useId } from 'react-id-generator';
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | undefined;
 }
 
 const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
@@ -65,6 +66,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
           iconExpanded="triangle-down"
           className={classnames('Accordion__trigger', trigger.props.className)}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
+          headingLevel={trigger.props.headingLevel}
           {...trigger.props.otherProps}
         >
           {trigger}
