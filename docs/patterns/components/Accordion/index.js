@@ -76,13 +76,12 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger headingLevel="h4">
-        {label}
-      </AccordionTrigger>
-      <AccordionContent>
-        Here is some content
-      </AccordionContent>
-    </Accordion>
+    <Accordion>
+    <AccordionTrigger heading={{ level: 4 }}>
+      {label}
+    </AccordionTrigger>
+    <AccordionContent>Here is some content</AccordionContent>
+  </Accordion>
   );
 };`}
         </Code>
@@ -122,14 +121,14 @@ const ControlledAccordion = ({ label }) => {
           <code>AccordionTrigger</code>
         </h3>
         <p>
-          The <code>AccordionTrigger</code> extends
-          <code>React.HTMLAttributes&lt;HTMLButtonElement&gt;</code> and also
+          The <code>AccordionTrigger </code> extends
+          <code>React.HTMLAttributes&lt;HTMLButtonElement&gt; </code> and also
           supports:
         </p>
         <PropDocs
           docs={{
             children,
-            headingLevel: {
+            heading: {
               type: 'string',
               description:
                 'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.',

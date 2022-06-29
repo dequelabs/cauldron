@@ -29,8 +29,7 @@
   all: unset;
 }
 
-.Accordion__trigger,
-.ExpandCollapse__trigger[type='button'] {
+.Accordion__trigger[type='button'] {
   background: var(--accordion-trigger-background-color);
   padding: calc(var(--space-small) - var(--space-half));
   width: 100%;
@@ -63,7 +62,7 @@ button.Accordion__trigger:hover .Icon {
 
 .Accordion .Icon {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 0.2s;
 }
 
 .Accordion__panel {

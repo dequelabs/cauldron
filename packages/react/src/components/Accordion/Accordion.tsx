@@ -42,7 +42,7 @@ interface AccordionProps extends ExpandCollapsePanelProps {
   children: React.ReactNode;
 }
 
-const Accordion = ({ children, ...otherProps }: AccordionProps) => {
+const Accordion = ({ children }: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
@@ -60,11 +60,14 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   );
 
   if (!isValid) {
-    console.warn('MUST provide both a trigger and panelElement', {
-      trigger: trigger,
-      panelElement: panelElement,
-      isValid: isValid
-    });
+    console.warn(
+      'Must provide <AccordionTrigger /> and <AccordionContent /> element(s). You provided:',
+      {
+        trigger: trigger,
+        panelElement: panelElement,
+        isValid: isValid
+      }
+    );
     return null;
   }
 

@@ -3,7 +3,8 @@
 }
 
 .Accordion__panel {
-  height: 200px;
+  max-height: max-content;
+  min-height: 250px;
 }
 
 .Demo-props {
