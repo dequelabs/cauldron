@@ -11,7 +11,8 @@
     "moduleResolution": "node",
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["node"]
   },
   "exclude": ["node_modules"]
 }
