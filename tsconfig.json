@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "lib": ["es6", "dom", "ES2017"],
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -10,8 +10,7 @@
     "downlevelIteration": true,
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
-    "jsx": "react",
-    "types": ["node"]
+    "jsx": "react"
   },
   "exclude": ["node_modules"]
 }

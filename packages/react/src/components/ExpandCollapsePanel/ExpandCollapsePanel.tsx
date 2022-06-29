@@ -29,6 +29,7 @@ export default class ExpandCollapsePanel extends React.Component<
 > {
   static defaultProps = {
     animationTiming: 250,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onToggle: () => {}
   };
 
@@ -47,7 +48,7 @@ export default class ExpandCollapsePanel extends React.Component<
 
   private panel = React.createRef<HTMLDivElement>();
 
-  private styleTag: HTMLStyleElement;
+  private styleTag: HTMLStyleElement | null = null;
 
   handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { onToggle } = this.props;
@@ -77,7 +78,7 @@ export default class ExpandCollapsePanel extends React.Component<
     }
 
     setStyle(
-      this.styleTag,
+      this.styleTag!,
       `
       @keyframes expandOpenAnimation {
         0% { opacity: 0; height: 0; }
@@ -95,7 +96,7 @@ export default class ExpandCollapsePanel extends React.Component<
     this.setState({ animationClass: 'cauldron-expand-open' }, () => {
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag, '');
+        setStyle(this.styleTag!, '');
       }, animationTiming as number);
     });
   };
@@ -135,7 +136,7 @@ export default class ExpandCollapsePanel extends React.Component<
     this.setState({ animationClass: 'cauldron-collapse-close' }, () => {
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag, '');
+        setStyle(this.styleTag!, '');
       }, animationTiming as number);
     });
   };
@@ -177,7 +178,7 @@ export default class ExpandCollapsePanel extends React.Component<
       className,
       onToggle,
       open,
-      ...other
+      ...otherProps
     } = this.props;
     /* eslint-enable no-unused-vars */
     const { isOpen, isAnimating, animationClass } = this.state;
@@ -198,16 +199,16 @@ export default class ExpandCollapsePanel extends React.Component<
             onClick: this.handleToggle
           })}
         <div
-          {...other}
           className={classnames(
+            className,
             'ExpandCollapse__panel',
             animationClass,
-            className,
             {
               'is--hidden': !isOpen && !isAnimating
             }
           )}
           ref={this.panel}
+          {...otherProps}
         >
           {panelElements}
         </div>

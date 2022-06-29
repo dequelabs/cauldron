@@ -1,0 +1,19 @@
+.Accordion {
+  max-width: 600px;
+}
+
+.Accordion__panel {
+  height: 200px;
+}
+
+.Demo-props {
+  margin-bottom: var(--space-small);
+}
+
+.cauldron--theme-dark p .Link {
+  color: var(--white);
+}
+
+.cauldron--theme-dark p .Link:hover {
+  color: var(--accent-light);
+}
