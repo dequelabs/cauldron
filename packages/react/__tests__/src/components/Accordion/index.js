@@ -1,10 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import {
   Accordion,
   AccordionTrigger,
   AccordionContent
 } from 'src/components/Accordion';
+const { axe, toHaveNoViolations } = require('jest-axe');
+
+expect.extend(toHaveNoViolations);
 
 describe('Accordion', () => {
   it('renders without errors', () => {
@@ -16,6 +19,19 @@ describe('Accordion', () => {
     );
 
     expect(accordion.find('.Accordion')).toBeTruthy();
+  });
+
+  it('renders with no axe violations', async () => {
+    const wrapper = mount(
+      <main>
+        <Accordion>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </Accordion>
+      </main>
+    );
+    const results = await axe(wrapper.getDOMNode());
+    expect(results).toHaveNoViolations();
   });
 
   it('renders with a trigger and panel element', () => {
@@ -55,6 +71,19 @@ describe('Accordion', () => {
     expect(panel.text()).toEqual('This is another test');
   });
 
+  it('renders the content element without axe violations', async () => {
+    const wrapper = mount(
+      <main>
+        <Accordion>
+          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
+          <AccordionContent>This is another test</AccordionContent>
+        </Accordion>
+      </main>
+    );
+    const results = await axe(wrapper.getDOMNode());
+    expect(results).toHaveNoViolations();
+  });
+
   it('sets aria-expanded to false when collapsed', () => {
     const accordion = mount(
       <Accordion open={false}>
@@ -87,17 +116,16 @@ describe('Accordion', () => {
   it('calls onToggle when the trigger element is clicked', () => {
     const spy = jest.fn();
 
-    const accordion = mount(
-      <Accordion onToggle={spy}>
+    const wrapper = mount(
+      <Accordion open={false} onToggle={jest.fn()}>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </Accordion>
     );
 
-    const button = accordion.find('button.Accordion__trigger');
-    button.simulate('click');
-    expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('.c').props('aria-expanded')).toBeTruthy();
+    wrapper.find('aria-expanded');
+    expect(spy).toHaveBeenCalled();
   });
 
   it('hides content in the panel element when collapsed', () => {
@@ -148,21 +176,6 @@ describe('Accordion', () => {
       expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
       expect(accordion.props().open).toEqual(true);
     });
-
-    it('triggers onToggle when trigger element receives an onClick event', () => {
-      const spy = jest.fn();
-      const accordion = mount(
-        <Accordion open={false} onToggle={spy}>
-          <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
-          <AccordionContent>This is another test</AccordionContent>
-        </Accordion>
-      );
-
-      const button = accordion.find('button.Accordion__trigger');
-      button.simulate('click');
-      expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
-      expect(spy).toHaveBeenCalledTimes(1);
-    });
   });
 
   describe('when not controlled', () => {
@@ -195,11 +208,13 @@ describe('Accordion', () => {
     it('sets a heading level 2 element when passed a headingLevel prop', () => {
       const accordion = mount(
         <Accordion open={false}>
-          <AccordionTrigger headingLevel={2}>Testing 1 2 3</AccordionTrigger>
+          <AccordionTrigger header={{ level: 2 }}>
+            Testing 1 2 3
+          </AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
-      expect(accordion.find('h2')).toBeTruthy();
+      expect(accordion.find('Header')).toBeTruthy();
     });
 
     it('does not set a heading element wrapper around the trigger when passed no prop', () => {
@@ -210,8 +225,7 @@ describe('Accordion', () => {
         </Accordion>
       );
 
-      screen.debug();
-      expect(accordion.find('h2')).toBeFalsy();
+      expect(document.querySelector('h2')).toBeNull();
     });
   });
 
