@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -48,7 +49,7 @@ export default class ExpandCollapsePanel extends React.Component<
 
   private panel = React.createRef<HTMLDivElement>();
 
-  private styleTag: HTMLStyleElement | null = null;
+  private styleTag: HTMLStyleElement;
 
   handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { onToggle } = this.props;
@@ -78,7 +79,7 @@ export default class ExpandCollapsePanel extends React.Component<
     }
 
     setStyle(
-      this.styleTag!,
+      this.styleTag,
       `
       @keyframes expandOpenAnimation {
         0% { opacity: 0; height: 0; }
@@ -96,7 +97,7 @@ export default class ExpandCollapsePanel extends React.Component<
     this.setState({ animationClass: 'cauldron-expand-open' }, () => {
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag!, '');
+        setStyle(this.styleTag, '');
       }, animationTiming as number);
     });
   };
@@ -136,7 +137,7 @@ export default class ExpandCollapsePanel extends React.Component<
     this.setState({ animationClass: 'cauldron-collapse-close' }, () => {
       setTimeout(() => {
         this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag!, '');
+        setStyle(this.styleTag, '');
       }, animationTiming as number);
     });
   };

@@ -210,7 +210,7 @@ describe('Accordion', () => {
         </Accordion>
       );
 
-      screen.debug();
+      console.log(accordion);
       expect(accordion.find('h2')).toBeFalsy();
     });
   });
