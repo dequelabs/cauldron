@@ -33,8 +33,7 @@ export const AccordionDemo = () => {
         <Accordion>
           <AccordionTrigger
             heading={{
-              level: 2,
-              text: 'Panel heading'
+              level: 2
             }}
           >
             Accordion #1
