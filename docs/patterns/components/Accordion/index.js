@@ -31,20 +31,20 @@ export const AccordionDemo = () => {
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger headingLevel="h2">Accordion #1</AccordionTrigger>
+          <AccordionTrigger headingLevel="h4">Accordion #1</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger>Accordion #2</AccordionTrigger>
+          <AccordionTrigger headingLevel="h4">Accordion #2</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger>Accordion #3</AccordionTrigger>
+          <AccordionTrigger headingLevel="h4">Accordion #3</AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Code role="region" tabIndex={0}>
           {`<Accordion>
-    <AccordionTrigger>Accordion #3</AccordionTrigger>
+    <AccordionTrigger headingLevel="h4">Accordion #3</AccordionTrigger>
     <AccordionContent>Here is some content</AccordionContent>
 </Accordion>`}
         </Code>
@@ -70,7 +70,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger>
+      <AccordionTrigger headingLevel="h4">
         {label}
       </AccordionTrigger>
       <AccordionContent>
@@ -122,7 +122,13 @@ const ControlledAccordion = ({ label }) => {
         </p>
         <PropDocs
           docs={{
-            children
+            children,
+            headingLevel: {
+              type: 'string',
+              description:
+                'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.',
+              default: 'undefined'
+            }
           }}
         />
 
@@ -152,7 +158,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger>{label}</AccordionTrigger>
+      <AccordionTrigger headingLevel="h4">{label}</AccordionTrigger>
       <AccordionContent>Here is some content</AccordionContent>
     </Accordion>
   );

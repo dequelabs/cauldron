@@ -39,7 +39,6 @@ interface AccordionProps extends ExpandCollapsePanelProps {
 
 const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
-  console.log(childrenArray);
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger
   );
