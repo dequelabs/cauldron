@@ -11,7 +11,11 @@ export interface PanelTriggerProps
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
-  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | undefined;
+  heading?:
+    | React.ReactElement
+    | {
+        level: string | undefined;
+      };
 }
 
 const PanelTrigger = ({
@@ -22,13 +26,16 @@ const PanelTrigger = ({
   onClick,
   iconExpanded = 'chevron-down',
   iconCollapsed = 'chevron-right',
-  headingLevel,
+  heading,
   ...otherProps
 }: PanelTriggerProps) => {
-  const Heading = headingLevel ? headingLevel : React.Fragment;
+  const Header =
+    typeof heading === 'object' && 'level' in heading && !!heading.level
+      ? `h${heading.level}`
+      : React.Fragment;
 
   return (
-    <Heading>
+    <Header>
       <button
         className={classnames(className, 'ExpandCollapse__trigger', {
           fullWidth: fullWidth
@@ -45,7 +52,7 @@ const PanelTrigger = ({
         </div>
         <Icon type={open ? iconExpanded : iconCollapsed} />
       </button>
-    </Heading>
+    </Header>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { PanelTrigger } from 'src/components/ExpandCollapsePanel';
 
-test('should render children', () => {
+test('should renders children', () => {
   const children = <div>Hello World</div>;
   const wrapper = shallow(<PanelTrigger>{children}</PanelTrigger>);
 
@@ -18,10 +18,10 @@ test('should render functional children', () => {
   expect(wrapper.contains('Closed')).toBeTruthy();
 });
 
-test('should pass-through props', () => {
-  const wrapper = shallow(<PanelTrigger foo="bar" />);
+test('should pass-through props allowed in its extended type', () => {
+  const wrapper = mount(<PanelTrigger type="submit" />);
 
-  expect(wrapper.props().foo).toBe('bar');
+  expect(wrapper.props().type).toBe('submit');
 });
 
 test('should handle onclick', () => {

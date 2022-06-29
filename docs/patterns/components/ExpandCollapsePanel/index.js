@@ -27,7 +27,7 @@ export default class Demo extends Component {
         <h1>Expand Collapse Panel</h1>
         <h2>Demo</h2>
         <ExpandCollapsePanel>
-          <PanelTrigger>More bacon info</PanelTrigger>
+          <PanelTrigger foo="bar">More bacon info</PanelTrigger>
           Bacon ipsum dolor amet chicken frankfurter shoulder strip steak
           kielbasa ribeye ham hamburger. Fatback kielbasa shoulder, jowl buffalo
           bacon jerky ham pancetta. Strip steak pig chicken, spare ribs buffalo
@@ -150,8 +150,8 @@ const Demo = () => {
                 description: 'The Icon to use when open=false.',
                 default: 'chevron-right'
               },
-              headingLevel: {
-                type: 'string',
+              heading: {
+                type: 'object',
                 description: 'Used to wrap the trigger in a heading element.',
                 default: undefined
               }

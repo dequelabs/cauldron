@@ -25,12 +25,16 @@
   --accordion-panel-border-color: var(--stroke-dark);
 }
 
+<<<<<<< HEAD
 /* .Accordion > [role='heading'] h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+=======
+.Accordion > :is(h1, h2, h3, h4, h5, h6):first-of-type {
+>>>>>>> cc78545dcf4e820818a49d5b4af5551480f0d937
   all: unset;
 } */
 .Accordion__trigger,

@@ -8,10 +8,11 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "downlevelIteration": true,
+    "moduleResolution": "node",
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
-    "types": ["node"],
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["node"]
   },
   "exclude": ["node_modules"]
 }
