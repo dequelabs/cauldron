@@ -42,7 +42,9 @@ export const AccordionDemo = () => {
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger>Accordion #2</AccordionTrigger>
+          <h2>
+            <AccordionTrigger>Accordion #2</AccordionTrigger>
+          </h2>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>

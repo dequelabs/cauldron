@@ -20,6 +20,8 @@ interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
+AccordionTrigger.displayName = 'AccordionTrigger';
+
 const AccordionContent = ({
   children,
   className,
@@ -32,6 +34,8 @@ const AccordionContent = ({
   );
 };
 
+AccordionContent.displayName = 'AccordionContent';
+
 interface AccordionProps extends ExpandCollapsePanelProps {
   children: React.ReactNode;
 }
@@ -41,9 +45,9 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger
   );
-  const panelElement = childrenArray.find(
-    child => (child as React.ReactElement<any>).type === AccordionContent
-  );
+  const panelElement = childrenArray.find(child => {
+    (child as React.ReactElement<any>).type === AccordionContent;
+  });
   const elementId = useId();
   const isValid = !!(
     React.isValidElement(trigger) && React.isValidElement(panelElement)
@@ -76,8 +80,6 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
 };
 
 Accordion.displayName = 'Accordion';
-AccordionTrigger.displayName = 'AccordionTrigger';
-AccordionContent.displayName = 'AccordionContent';
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };
