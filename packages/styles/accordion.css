@@ -25,18 +25,10 @@
   --accordion-panel-border-color: var(--stroke-dark);
 }
 
-<<<<<<< HEAD
-/* .Accordion > [role='heading'] h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-=======
 .Accordion > :is(h1, h2, h3, h4, h5, h6):first-of-type {
->>>>>>> cc78545dcf4e820818a49d5b4af5551480f0d937
   all: unset;
-} */
+}
+
 .Accordion__trigger,
 .ExpandCollapse__trigger[type='button'] {
   background: var(--accordion-trigger-background-color);
@@ -69,10 +61,10 @@ button.Accordion__trigger:hover .Icon {
   color: var(--accordion-trigger-icon-color);
 }
 
-/* .Accordion .Icon {
+.Accordion .Icon {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
-} */
+}
 
 .Accordion__panel {
   background: var(--accordion-panel-background-color);

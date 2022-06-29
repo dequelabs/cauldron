@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Accordion,
   AccordionTrigger,
@@ -21,25 +21,31 @@ const AccordionDemo = () => {
           <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/">
             ARIA Authoring Practices Guide (APG)
           </Link>
-          describes an Accordion as, " ...a vertically stacked set of
-          interactive headings that each contain a title, content snippet, or
-          thumbnail representing a section of content. The headings function as
-          controls that enable users to reveal or hide their associated sections
-          of content. Accordions are commonly used to reduce the need to scroll
+          describes an Accordion as, "...a vertically stacked set of interactive
+          headings that each contain a title, content snippet, or thumbnail
+          representing a section of content. The headings function as controls
+          that enable users to reveal or hide their associated sections of
+          content. Accordions are commonly used to reduce the need to scroll
           when presenting multiple sections of content on a single page."
         </p>
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger headingLevel="h2">Accordion #1</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 4 }}>
+            Accordion #1
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger headingLevel="h2">Accordion #2</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 4 }}>
+            Accordion #2
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger headingLevel="h2">Accordion #3</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 4 }}>
+            Accordion #3
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Code role="region" tabIndex={0}>
@@ -54,9 +60,9 @@ const AccordionDemo = () => {
           you can do this by setting the open prop and handling changes with
           onToggle.
         </p>
-        <ControlledAccordion label="Accordion #1" />
-        <ControlledAccordion label="Accordion #2" />
-        <ControlledAccordion label="Accordion #3" />
+        <ControlledAccordion label="Accordion #1" heading={{ level: 4 }} />
+        <ControlledAccordion label="Accordion #2" heading={{ level: 4 }} />
+        <ControlledAccordion label="Accordion #3" heading={{ level: 4 }} />
         <Code role="region" tabIndex={0}>
           {`import React, { useEffect, useState } from 'react';
   import {
@@ -90,7 +96,7 @@ const ControlledAccordion = ({ label }) => {
           The <code>Accordion</code> supports all the props from the{' '}
           <Link href="/components/ExpandCollapsePanel">
             ExpandCollapsePanelProps
-          </Link>{' '}
+          </Link>
           including/in addition to the following:
         </p>
 
@@ -156,7 +162,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger headingLevel="h4">{label}</AccordionTrigger>
+      <AccordionTrigger heading={{ level: 4 }}>{label}</AccordionTrigger>
       <AccordionContent>Here is some content</AccordionContent>
     </Accordion>
   );
