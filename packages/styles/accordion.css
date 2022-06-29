@@ -25,12 +25,11 @@
   --accordion-panel-border-color: var(--stroke-dark);
 }
 
-h2 {
+.Accordion > :is(h1, h2, h3, h4, h5, h6):first-of-type {
   all: unset;
 }
 
-.Accordion__trigger,
-.ExpandCollapse__trigger[type='button'] {
+.Accordion__trigger[type='button'] {
   background: var(--accordion-trigger-background-color);
   padding: calc(var(--space-small) - var(--space-half));
   width: 100%;

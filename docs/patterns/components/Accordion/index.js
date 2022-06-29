@@ -31,24 +31,26 @@ export const AccordionDemo = () => {
         <h2>Try it out</h2>
         <h3>Standard</h3>
         <Accordion>
-          <AccordionTrigger heading={{ level: 2 }}>
+          <AccordionTrigger heading={{ level: 4 }}>
             Accordion #1
           </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger heading={{ level: 2 }}>
+          <AccordionTrigger heading={{ level: 4 }}>
             Accordion #2
           </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionTrigger>Accordion #3</AccordionTrigger>
+          <AccordionTrigger heading={{ level: 4 }}>
+            Accordion #3
+          </AccordionTrigger>
           <AccordionContent>Here is some content</AccordionContent>
         </Accordion>
         <Code role="region" tabIndex={0}>
           {`<Accordion>
-    <AccordionTrigger>Accordion #3</AccordionTrigger>
+    <AccordionTrigger headingLevel="h4">Accordion #3</AccordionTrigger>
     <AccordionContent>Here is some content</AccordionContent>
 </Accordion>`}
         </Code>
@@ -58,9 +60,9 @@ export const AccordionDemo = () => {
           you can do this by setting the open prop and handling changes with
           onToggle.
         </p>
-        <ControlledAccordion label="Accordion #1" />
-        <ControlledAccordion label="Accordion #2" />
-        <ControlledAccordion label="Accordion #3" />
+        <ControlledAccordion label="Accordion #1" heading={{ level: 4 }} />
+        <ControlledAccordion label="Accordion #2" heading={{ level: 4 }} />
+        <ControlledAccordion label="Accordion #3" heading={{ level: 4 }} />
         <Code role="region" tabIndex={0}>
           {`import React, { useEffect, useState } from 'react';
   import {
@@ -74,7 +76,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger>
+      <AccordionTrigger headingLevel="h4">
         {label}
       </AccordionTrigger>
       <AccordionContent>
@@ -126,7 +128,13 @@ const ControlledAccordion = ({ label }) => {
         </p>
         <PropDocs
           docs={{
-            children
+            children,
+            headingLevel: {
+              type: 'object',
+              description:
+                'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.',
+              default: undefined
+            }
           }}
         />
 
@@ -156,7 +164,7 @@ const ControlledAccordion = ({ label }) => {
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-      <AccordionTrigger>{label}</AccordionTrigger>
+      <AccordionTrigger heading={{ level: 4 }}>{label}</AccordionTrigger>
       <AccordionContent>Here is some content</AccordionContent>
     </Accordion>
   );
