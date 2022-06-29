@@ -60,6 +60,11 @@ button.Accordion__trigger:hover .Icon {
   color: var(--accordion-trigger-icon-color);
 }
 
+.Accordion .Icon {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
 .Accordion__panel {
   background: var(--accordion-panel-background-color);
   color: var(--accordion-panel-text-color);

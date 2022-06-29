@@ -8,7 +8,7 @@ import {
 } from '@deque/cauldron-react/';
 import PropDocs from '../../../Demo/PropDocs';
 import './index.css';
-import { children, className } from '../../../props';
+import { children } from '../../../props';
 
 export const AccordionDemo = () => {
   return (
@@ -96,27 +96,9 @@ const ControlledAccordion = ({ label }) => {
           The <code>Accordion</code> supports all the props from the{' '}
           <Link href="/components/ExpandCollapsePanel">
             ExpandCollapsePanelProps
-          </Link>{' '}
+          </Link>
           including/in addition to the following:
         </p>
-
-        <PropDocs
-          docs={{
-            className,
-            children,
-            open: {
-              type: 'boolean',
-              description: 'Initial collapsed state of ExpandCollapsePanel',
-              default: 'false'
-            },
-            onToggle: {
-              type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-              description:
-                'onToggle handler for the panel. The original event object will be passed.',
-              default: 'function () {}'
-            }
-          }}
-        />
 
         <h3>
           <code>AccordionTrigger</code>
@@ -146,18 +128,10 @@ const ControlledAccordion = ({ label }) => {
           <code>React.HTMLAttributes&lt;HTMLDivElement&gt;</code> and supports
           spreading of any props supported by the element, as well as:
         </p>
-        <PropDocs
-          docs={{
-            className,
-            children
-          }}
-        />
       </div>
     </div>
   );
 };
-
-AccordionDemo.displayName = 'AccordionDemo';
 
 const ControlledAccordion = ({ label }) => {
   const [open, setIsOpen] = useState(false);
@@ -169,5 +143,7 @@ const ControlledAccordion = ({ label }) => {
     </Accordion>
   );
 };
+
+AccordionDemo.displayName = 'AccordionDemo';
 
 export default AccordionDemo;

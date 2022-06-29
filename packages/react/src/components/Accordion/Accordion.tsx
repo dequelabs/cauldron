@@ -9,6 +9,11 @@ import { useId } from 'react-id-generator';
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
+  heading?:
+    | React.ReactElement
+    | {
+        level: string | undefined;
+      };
 }
 
 const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
@@ -68,7 +73,7 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
         className={classnames(panelElement.props.className)}
-        {...otherProps}
+        {...panelElement.props.otherProps}
       >
         <PanelTrigger
           iconCollapsed="triangle-right"

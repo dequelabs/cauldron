@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon, { IconType } from '../Icon';
@@ -60,9 +60,7 @@ PanelTrigger.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   open: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string,
-  iconExpanded: PropTypes.string,
-  iconCollapsed: PropTypes.string
+  className: PropTypes.string
 };
 
 PanelTrigger.displayName = 'PanelTrigger';
