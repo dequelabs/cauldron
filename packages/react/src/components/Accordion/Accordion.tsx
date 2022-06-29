@@ -39,13 +39,14 @@ interface AccordionProps extends ExpandCollapsePanelProps {
 
 const Accordion = ({ children, ...otherProps }: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
+  console.log(childrenArray);
   const trigger = childrenArray.find(
     child => (child as React.ReactElement<any>).type === AccordionTrigger
   );
-  const panelElement = childrenArray.find(
-    child => (child as React.ReactElement<any>).type === AccordionContent
-  );
-  const elementId = useId();
+  const panelElement = childrenArray.find(child => {
+    (child as React.ReactElement<any>).type === AccordionContent;
+  });
+  const [elementId] = useId();
   const isValid = !!(
     React.isValidElement(trigger) && React.isValidElement(panelElement)
   );
@@ -78,8 +79,8 @@ const Accordion = ({ children, ...otherProps }: AccordionProps) => {
 };
 
 Accordion.displayName = 'Accordion';
-AccordionTrigger.displayName = 'AccordionTrigger';
 AccordionContent.displayName = 'AccordionContent';
+AccordionTrigger.displayName = 'AccordionTrigger';
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };
