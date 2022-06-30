@@ -121,7 +121,7 @@ const ControlledAccordion = ({ label }) => {
           <code>AccordionTrigger</code>
         </h3>
         <p>
-          The <code>AccordionTrigger </code> extends
+          The <code>AccordionTrigger </code> extends{' '}
           <code>React.HTMLAttributes&lt;HTMLButtonElement&gt; </code> and also
           supports:
         </p>
