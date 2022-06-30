@@ -123,10 +123,6 @@ AccordionContent.propTypes = {
   className: PropTypes.string
 };
 
-AccordionContent.defaultProps = {
-  children: null,
-  className: undefined
-};
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };
