@@ -5,7 +5,7 @@ import ExpandCollapsePanel, {
   PanelTrigger
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
-import PropTypes, { element, string } from 'prop-types';
+import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -17,7 +17,10 @@ export interface AccordionTriggerProps
       };
 }
 
-const AccordionTrigger = ({ children }: AccordionTriggerProps) => {
+const AccordionTrigger = ({
+  children,
+  ...triggerProps
+}: AccordionTriggerProps) => {
   return <>{children}</>;
 };
 
@@ -71,6 +74,10 @@ const Accordion = ({ children }: AccordionProps) => {
     return null;
   }
 
+  if (trigger && typeof trigger === 'object' && 'props' in trigger) {
+    const { className: triggerClassName, ...triggerProps } = trigger.props;
+  }
+
   const elementId = useId();
 
   return (
@@ -85,7 +92,7 @@ const Accordion = ({ children }: AccordionProps) => {
           className={classnames('Accordion__trigger', trigger.props.className)}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
           heading={trigger.props.heading}
-          {...trigger.props.otherProps}
+          {...trigger.props}
         >
           {trigger}
         </PanelTrigger>
@@ -109,15 +116,13 @@ Accordion.defaultProps = {
 
 AccordionTrigger.propTypes = {
   children: PropTypes.node,
-  headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', undefined])
+  heading: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', undefined])
 };
-
 
 AccordionContent.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string
 };
-
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };
