@@ -112,10 +112,6 @@ AccordionTrigger.propTypes = {
   headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', undefined])
 };
 
-AccordionTrigger.defaultProps = {
-  children: null,
-  headingLevel: undefined
-};
 
 AccordionContent.propTypes = {
   children: PropTypes.node.isRequired,
