@@ -110,9 +110,6 @@ Accordion.propTypes = {
   children: PropTypes.node
 };
 
-Accordion.defaultProps = {
-  children: null
-};
 
 AccordionTrigger.propTypes = {
   children: PropTypes.node,
