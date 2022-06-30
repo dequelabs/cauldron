@@ -61,7 +61,7 @@ PanelTrigger.propTypes = {
   open: PropTypes.bool,
   iconExpanded: PropTypes.string,
   iconCollapsed: PropTypes.string,
-  heading: PropTypes.oneOf(['string', 'node', 'number'])
+  heading: PropTypes.number
 };
 
 PanelTrigger.displayName = 'PanelTrigger';

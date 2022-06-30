@@ -203,7 +203,7 @@ describe('Accordion', () => {
     });
 
     it('does not set a heading element wrapper around the trigger when passed no prop', () => {
-      const accordion = mount(
+      mount(
         <Accordion open={false}>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>

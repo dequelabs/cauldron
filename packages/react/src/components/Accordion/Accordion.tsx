@@ -74,9 +74,7 @@ const Accordion = ({ children }: AccordionProps) => {
     return null;
   }
 
-  if (trigger && typeof trigger === 'object' && 'props' in trigger) {
-    const { className: triggerClassName, ...triggerProps } = trigger.props;
-  }
+  const { className: triggerClassName, ...triggerProps } = trigger.props;
 
   const elementId = useId();
 
@@ -107,11 +105,8 @@ AccordionContent.displayName = 'AccordionContent';
 AccordionTrigger.displayName = 'AccordionTrigger';
 
 Accordion.propTypes = {
-  children: PropTypes.node
-};
-
-Accordion.defaultProps = {
-  children: null
+  children: PropTypes.node,
+  className: PropTypes.string
 };
 
 AccordionTrigger.propTypes = {

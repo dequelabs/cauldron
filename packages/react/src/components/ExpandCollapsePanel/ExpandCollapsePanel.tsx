@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -172,7 +171,6 @@ export default class ExpandCollapsePanel extends React.Component<
   }
 
   render() {
-    /* eslint-disable no-unused-vars */
     const {
       children,
       animationTiming,
@@ -181,7 +179,6 @@ export default class ExpandCollapsePanel extends React.Component<
       open,
       ...otherProps
     } = this.props;
-    /* eslint-enable no-unused-vars */
     const { isOpen, isAnimating, animationClass } = this.state;
     const trigger = React.Children.toArray(children).find(
       child => (child as ReactElement<any>).type === PanelTrigger
