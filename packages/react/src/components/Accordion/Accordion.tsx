@@ -77,8 +77,7 @@ const Accordion = ({ children }: AccordionProps) => {
     <div className="Accordion">
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
-        className={classnames(panelElement.props.className)}
-        {...panelElement.props.otherProps}
+        {...panelElement.props}
       >
         <PanelTrigger
           iconCollapsed="triangle-right"
