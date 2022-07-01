@@ -11,9 +11,14 @@ export interface PanelTriggerProps
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   iconExpanded?: IconType;
   iconCollapsed?: IconType;
+  heading?:
+    | React.ReactElement
+    | {
+        level: string | undefined;
+      };
 }
 
-function PanelTrigger({
+const PanelTrigger = ({
   children,
   className,
   open,
@@ -21,35 +26,44 @@ function PanelTrigger({
   onClick,
   iconExpanded = 'chevron-down',
   iconCollapsed = 'chevron-right',
-  ...other
-}: PanelTriggerProps) {
+  heading,
+  ...otherProps
+}: PanelTriggerProps) => {
+  const Header =
+    typeof heading === 'object' && 'level' in heading && !!heading.level
+      ? `h${heading.level}`
+      : React.Fragment;
+
   return (
-    <button
-      {...other}
-      className={classnames(
-        'ExpandCollapse__trigger',
-        fullWidth ? 'fullWidth' : '',
-        className
-      )}
-      type="button"
-      aria-expanded={open}
-      onClick={onClick}
-    >
-      <div className="ExpandCollapse__trigger-title">
-        {typeof children === 'function' ? children({ open: !!open }) : children}
-      </div>
-      <Icon type={open ? iconExpanded : iconCollapsed} />
-    </button>
+    <Header>
+      <button
+        className={classnames(className, 'ExpandCollapse__trigger', {
+          fullWidth: fullWidth
+        })}
+        type="button"
+        aria-expanded={open}
+        onClick={onClick}
+        {...otherProps}
+      >
+        <div className="ExpandCollapse__trigger-title">
+          {typeof children === 'function'
+            ? children({ open: !!open })
+            : children}
+        </div>
+        <Icon type={open ? iconExpanded : iconCollapsed} />
+      </button>
+    </Header>
   );
-}
+};
 
 PanelTrigger.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   open: PropTypes.bool,
-  onClick: PropTypes.func,
-  className: PropTypes.string,
   iconExpanded: PropTypes.string,
-  iconCollapsed: PropTypes.string
+  iconCollapsed: PropTypes.string,
+  heading: PropTypes.number
 };
+
+PanelTrigger.displayName = 'PanelTrigger';
 
 export default React.memo(PanelTrigger);

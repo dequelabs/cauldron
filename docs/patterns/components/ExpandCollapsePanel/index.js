@@ -149,6 +149,11 @@ const Demo = () => {
                 type: 'string',
                 description: 'The Icon to use when open=false.',
                 default: 'chevron-right'
+              },
+              heading: {
+                type: 'object',
+                description: 'Used to wrap the trigger in a heading element.',
+                default: undefined
               }
             }}
           />

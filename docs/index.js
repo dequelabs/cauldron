@@ -74,7 +74,8 @@ const componentsList = [
   'IssuePanel',
   'FieldWrap',
   'Breadcrumb',
-  'TwoColumnPanel'
+  'TwoColumnPanel',
+  'Accordion'
 ].sort();
 
 const App = () => {
