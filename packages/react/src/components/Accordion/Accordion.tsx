@@ -111,7 +111,9 @@ Accordion.propTypes = {
 
 AccordionTrigger.propTypes = {
   children: PropTypes.node,
-  heading: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', undefined])
+  heading: PropTypes.shape({
+    level: PropTypes.number
+  })
 };
 
 AccordionContent.propTypes = {
