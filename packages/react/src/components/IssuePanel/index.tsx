@@ -18,7 +18,11 @@ const IssuePanel = ({
     <div className={classNames('IssuePanel', className)}>
       <div className="IssuePanel__Header">
         {title && <div className="IssuePanel__Header-title">{title}</div>}
-        {actions && <div className="IssuePanel__Header-actions">{actions}</div>}
+        {actions && (
+          <div className="IssuePanel__Header-actions">
+            {actions as React.ReactNode}
+          </div>
+        )}
       </div>
       <div className="IssuePanel__Content">{children}</div>
     </div>

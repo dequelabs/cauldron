@@ -1,4 +1,3 @@
-import { Cauldron } from '../../types';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Offscreen from '../Offscreen';
@@ -9,37 +8,34 @@ export interface LoaderProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
 }
 
-export default function Loader({
-  className,
-  variant = 'small',
-  label,
-  ...props
-}: LoaderProps) {
-  if (label?.length) {
-    props['role'] = 'alert';
-    props.children = <Offscreen>{label}</Offscreen>;
-  } else {
-    props['aria-hidden'] = true;
-  }
+const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
+  ({ className, variant = 'small', label, ...props }: LoaderProps, ref) => {
+    if (label?.length) {
+      props['role'] = 'alert';
+      props.children = <Offscreen>{label}</Offscreen>;
+    } else {
+      props['aria-hidden'] = true;
+    }
 
-  return (
-    <div
-      className={classNames(
-        'Loader',
-        className,
-        variant === 'large'
-          ? 'Loader--large'
-          : variant === 'small'
-          ? 'Loader--small'
-          : ''
-      )}
-      {...props}
-    />
-  );
-}
+    return (
+      <div
+        ref={ref}
+        className={classNames(
+          'Loader',
+          className,
+          variant === 'large' && 'Loader--large',
+          variant === 'small' && 'Loader--small'
+        )}
+        {...props}
+      />
+    );
+  }
+);
 
 Loader.propTypes = {
   className: PropTypes.string
 };
 
 Loader.displayName = 'Loader';
+
+export default Loader;

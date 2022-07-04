@@ -12,13 +12,16 @@ import FocusTrap from 'focus-trap-react';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import ClickOutsideListener from '../ClickOutsideListener';
-import { ColumnLeft, ColumnRight } from './';
+import ColumnLeft from './ColumnLeft';
+import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
+import SkipLink from '../SkipLink';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   initialCollapsed?: boolean;
   showCollapsedPanelLabel?: string;
   hideCollapsedPanelLabel?: string;
+  skipLink?: SkipLink;
 }
 
 const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
@@ -29,6 +32,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       initialCollapsed = false,
       showCollapsedPanelLabel = 'Show Panel',
       hideCollapsedPanelLabel = 'Hide Panel',
+      skipLink = null,
       ...props
     },
     ref
@@ -36,6 +40,15 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const [isCollapsed, setCollapsed] = useState(initialCollapsed);
     const [isFocusTrap, setIsFocusTrap] = useState(false);
     const [showPanel, setShowPanel] = useState(!initialCollapsed);
+    const toggleButtonRef = useRef<HTMLButtonElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const columnLeftRef = useRef<HTMLDivElement>(null);
+    const columnRightRef = useRef<HTMLDivElement>(null);
+
+    const columnLeft = React.Children.toArray(children).find(
+      child => (child as React.ReactElement<any>).type === ColumnLeft
+    );
+
     const togglePanel = () => {
       if (isCollapsed) {
         setShowPanel(true);
@@ -51,14 +64,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         }
       });
     };
-    const toggleButtonRef = useRef<HTMLButtonElement>(null);
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
-    const columnLeftRef = useRef<HTMLDivElement>(null);
-    const columnRightRef = useRef<HTMLDivElement>(null);
-
-    const columnLeft = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === ColumnLeft
-    );
 
     // The ColumnLeftComponent will end up being a focus trap when < 720px
     // This component also gets unmounted when not visible meaning that any
@@ -227,21 +232,24 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         {...props}
         ref={ref}
       >
-        <FocusTrap
-          active={!isCollapsed && isFocusTrap}
-          focusTrapOptions={{
-            escapeDeactivates: true,
-            allowOutsideClick: true,
-            fallbackFocus: columnLeftRef.current as HTMLElement
-          }}
-          containerElements={[columnLeftRef.current as HTMLElement]}
-        />
-        <ClickOutsideListener
-          onClickOutside={handleClickOutside}
-          target={columnLeftRef.current as HTMLElement}
-        />
-        {showPanel ? ColumnLeftComponent : null}
-        {ColumnRightComponent}
+        <>
+          <FocusTrap
+            active={!isCollapsed && isFocusTrap}
+            focusTrapOptions={{
+              escapeDeactivates: true,
+              allowOutsideClick: true,
+              fallbackFocus: columnLeftRef.current as HTMLElement
+            }}
+            containerElements={[columnLeftRef.current as HTMLElement]}
+          />
+          <ClickOutsideListener
+            onClickOutside={handleClickOutside}
+            target={columnLeftRef.current as HTMLElement}
+          />
+          {isCollapsed ? null : skipLink}
+          {showPanel ? ColumnLeftComponent : null}
+          {ColumnRightComponent}
+        </>
       </div>
     );
   }

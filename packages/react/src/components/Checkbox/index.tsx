@@ -15,7 +15,7 @@ import tokenList from '../../utils/token-list';
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: React.ReactNode;
-  labelDescription?: string;
+  labelDescription?: React.ReactNode;
   error?: React.ReactNode;
   customIcon?: React.ReactNode;
   checkboxRef?: Ref<HTMLInputElement>;

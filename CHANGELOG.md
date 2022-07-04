@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/dequelabs/cauldron/compare/v4.4.0...v4.5.0) (2022-05-17)
+
+### Features
+
+- **react:** Add `ref` support to `<Loader/>` ([#651](https://github.com/dequelabs/cauldron/issues/651)) ([f8ca4e9](https://github.com/dequelabs/cauldron/commit/f8ca4e9b0465f085394206878ceff0d4c39fb290))
+- add ref forwarding to Panel component ([#649](https://github.com/dequelabs/cauldron/issues/649)) ([77fc218](https://github.com/dequelabs/cauldron/commit/77fc21838a462f7403013c8c121ea2db7f1f1071))
+
+### Bug Fixes
+
+- **react:** ensure that sibling elements get correctly hidden when setting focusTrap on overlay loader ([#656](https://github.com/dequelabs/cauldron/issues/656)) ([2f777a4](https://github.com/dequelabs/cauldron/commit/2f777a4317d0aa51db0e66c1749a9f5488b9eed4))
+
+## [4.4.0](https://github.com/dequelabs/cauldron/compare/v4.3.0...v4.4.0) (2022-05-09)
+
+### Features
+
+- **react:** allow checkbox or radio label and/or description to be a react node ([#645](https://github.com/dequelabs/cauldron/issues/645)) ([9df9e64](https://github.com/dequelabs/cauldron/commit/9df9e64fe5d7b9f9ab200bfd663cf97b48efe816))
+- **react:** allow LoaderOverlay to be used as a focus trap ([#644](https://github.com/dequelabs/cauldron/issues/644)) ([b37b4fb](https://github.com/dequelabs/cauldron/commit/b37b4fbdac5ae095fd10f8eed23f917eefbea438))
+- allow a node to be passed in as an IconButton label ([#643](https://github.com/dequelabs/cauldron/issues/643)) ([cd53f1d](https://github.com/dequelabs/cauldron/commit/cd53f1dd1f3f6832fd13abb67a738829167692dd))
+- **PanelTrigger:** add icon override ([#634](https://github.com/dequelabs/cauldron/issues/634)) ([4881208](https://github.com/dequelabs/cauldron/commit/4881208cd30f552838238d2e4ee692413e0ac4b9))
+- **react:** add dropper icon ([#637](https://github.com/dequelabs/cauldron/issues/637)) ([9d2b7bb](https://github.com/dequelabs/cauldron/commit/9d2b7bb935e642a0d20b7aca769e01185556ecdc))
+- **react:** add skip link to 2 column panel ([#621](https://github.com/dequelabs/cauldron/issues/621)) ([ee347cd](https://github.com/dequelabs/cauldron/commit/ee347cd510fb7914d449c11a5c4f2d8f687e3ab5))
+- **react:** allow tabindex to be set for code component ([#626](https://github.com/dequelabs/cauldron/issues/626)) ([2f07202](https://github.com/dequelabs/cauldron/commit/2f0720271472ac6c9f57c5f52127eb545b0ffe57))
+
+### Bug Fixes
+
+- correct default sort announcement ([#639](https://github.com/dequelabs/cauldron/issues/639)) ([9ab9fc6](https://github.com/dequelabs/cauldron/commit/9ab9fc67e79eaff6e0847da0c43ded85be88fb74))
+- correct top bar padding ([#641](https://github.com/dequelabs/cauldron/issues/641)) ([e230285](https://github.com/dequelabs/cauldron/commit/e230285346afd425019206901089ec2cde6eedab))
+- **styles:** allow buttons to wrap ([#618](https://github.com/dequelabs/cauldron/issues/618)) ([bb49adf](https://github.com/dequelabs/cauldron/commit/bb49adf868099f2d828c3ce9a326bfbc4f093b11))
+
+## [4.3.0](https://github.com/dequelabs/cauldron/compare/v4.2.1...v4.3.0) (2022-04-06)
+
+### Features
+
+- **icons:** add minus ([#611](https://github.com/dequelabs/cauldron/issues/611)) ([abded4e](https://github.com/dequelabs/cauldron/commit/abded4e2c730f6716abab598eccbc2a066b97cbf))
+- **react:** announce changes to sort on sortable TableHeaders ([#622](https://github.com/dequelabs/cauldron/issues/622)) ([01c786a](https://github.com/dequelabs/cauldron/commit/01c786aea73440a6aedc9b79af2944b974d23b1d))
+
+### Bug Fixes
+
+- **react:** create useSharedRef util to share refs on forwardRef functional components ([#597](https://github.com/dequelabs/cauldron/issues/597)) ([d153945](https://github.com/dequelabs/cauldron/commit/d15394566685da7ff50bb70924be80d316834bc4))
+- **skip-link:** fix skip-link styles with new design ([#607](https://github.com/dequelabs/cauldron/issues/607)) ([f766f9d](https://github.com/dequelabs/cauldron/commit/f766f9dd496d75b7649bfe79b81bae853e0d9e47))
+- **styles:** fix thin buttons being too large ([#613](https://github.com/dequelabs/cauldron/issues/613)) ([62c9172](https://github.com/dequelabs/cauldron/commit/62c917271fd30df2e4e65c8eb421578ae20f373c))
+
 ### [4.2.1](https://github.com/dequelabs/cauldron/compare/v4.2.0...v4.2.1) (2022-03-31)
 
 ### Bug Fixes

@@ -4,6 +4,8 @@ import {
   PanelTrigger,
   Code
 } from '@deque/cauldron-react/';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 const ControlledExpandCollapse = () => {
   const [open, setOpen] = useState(false);
@@ -86,6 +88,76 @@ const Demo = () => {
   <ControlledExpandCollapsePanel />
 };
         `}</Code>
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <h3>
+            <code>ExpandCollapsePanel</code>
+          </h3>
+
+          <PropDocs
+            docs={{
+              className,
+              children,
+              open: {
+                type: 'boolean',
+                description: 'Initial collapsed state of ExpandCollapsePanel',
+                default: 'false'
+              },
+              animationTiming: {
+                type: 'number | boolean',
+                description:
+                  'Animation time of expand/collapse in ms. Animation disabled when set to false.',
+                default: 250
+              },
+              onToggle: {
+                type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
+                description:
+                  'onToggle handler for the panel. The original event object will be passed.',
+                default: 'function () {}'
+              }
+            }}
+          />
+
+          <h3>
+            <code>PanelTrigger</code>
+          </h3>
+          <PropDocs
+            docs={{
+              children,
+              className,
+              open: {
+                type: 'boolean',
+                description: 'Initial collapsed state of PanelTrigger',
+                default: 'false'
+              },
+              fullWidth: {
+                type: 'string',
+                description:
+                  'When set to "fullWidth" this component will stretch to the full width of its parent.'
+              },
+              onClick: {
+                type: '(e: React.MouseEvent<HTMLButtonElement>)',
+                description:
+                  'onClick handler for PanelTrigger. The original event object will be passed.'
+              },
+              iconExpanded: {
+                type: 'string',
+                description: 'The Icon to use when open=true.',
+                default: 'chevron-down'
+              },
+              iconCollapsed: {
+                type: 'string',
+                description: 'The Icon to use when open=false.',
+                default: 'chevron-right'
+              },
+              heading: {
+                type: 'object',
+                description: 'Used to wrap the trigger in a heading element.',
+                default: undefined
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }

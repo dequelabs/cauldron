@@ -8,6 +8,7 @@
   /* color palette */
   --white: #ffffff;
   --dark-workspace-color: #53636e;
+  --stroke-dark: #5d676f;
   --gray-10: #fdfdfe;
   --gray-20: #f2f2f2;
   --gray-30: #e0e0e0;
@@ -20,6 +21,7 @@
   --accent-light: #d4dde0;
   --accent-success: #a5db75;
   --accent-success-light: #d1ffa4;
+  --accent-success-dark: #57a711;
   --accent-error: #d93251;
   --accent-error-active: #c92e40;
   --accent-danger: #fe6d6b;
@@ -35,6 +37,10 @@
   --accent-secondary-active: var(--gray-30);
   --focus-light: #c11bde;
   --focus-dark: #eb94ff;
+  --issue-critical: #ed5959;
+  --issue-serious: #f3826b;
+  --issue-moderate: #ffdd76;
+  --issue-minor: #d3dde0;
 
   /* text colours */
   --text-color-base: var(--gray-60);
@@ -110,6 +116,10 @@
   --z-index-top-bar: 25;
   /* ensure this is 1 higher than the top bar z-index */
   --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
+
+  /* radio card */
+  --radio-card-width: 255px;
+  --radio-card-height: 229px;
 }
 
 .cauldron--theme-dark {

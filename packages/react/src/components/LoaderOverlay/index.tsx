@@ -1,17 +1,21 @@
-import React, { createRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
+import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
+import AriaIsolate from '../../utils/aria-isolate';
+import useSharedRef from '../../utils/useSharedRef';
 
 interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
   label?: string;
   focusOnInitialRender?: boolean;
   children?: React.ReactNode;
+  focusTrap?: boolean;
 }
 
-const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
+const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
   (
     {
       className,
@@ -19,12 +23,26 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
       label,
       children,
       focusOnInitialRender,
+      focusTrap = false,
       ...other
     }: LoaderOverlayProps,
     ref
   ) => {
-    const overlayRef =
-      typeof ref === 'function' || !ref ? createRef<HTMLDivElement>() : ref;
+    const overlayRef = useSharedRef<HTMLDivElement>(ref);
+
+    useEffect(() => {
+      const isolator = overlayRef.current
+        ? new AriaIsolate(overlayRef.current)
+        : null;
+
+      if (isolator) {
+        focusTrap ? isolator.activate() : isolator.deactivate();
+      }
+
+      return () => {
+        isolator?.deactivate();
+      };
+    }, [focusTrap, overlayRef.current]);
 
     useEffect(() => {
       if (!!focusOnInitialRender && overlayRef.current) {
@@ -35,34 +53,41 @@ const LoaderOverlay = React.forwardRef<HTMLDivElement, LoaderOverlayProps>(
       return;
     }, [overlayRef.current]);
 
-    useEffect(() => {
-      if (typeof ref === 'function') {
-        ref(overlayRef.current);
-      }
-    }, [ref]);
+    const Wrapper = focusTrap ? FocusTrap : React.Fragment;
+    const wrapperProps = focusTrap
+      ? {
+          focusTrapOptions: {
+            fallbackFocus: '.Loader__overlay'
+          }
+        }
+      : {};
 
     return (
-      <div
-        className={classNames(
-          'Loader__overlay',
-          className,
-          variant === 'large'
-            ? 'Loader__overlay--large'
-            : variant === 'small'
-            ? 'Loader__overlay--small'
-            : ''
-        )}
-        ref={overlayRef}
-        tabIndex={-1}
-        {...other}
-      >
-        <div className="Loader__overlay__loader">
-          <Loader variant={variant} />
-          <AxeLoader />
+      <Wrapper {...wrapperProps}>
+        <div
+          className={classNames(
+            'Loader__overlay',
+            className,
+            variant === 'large'
+              ? 'Loader__overlay--large'
+              : variant === 'small'
+              ? 'Loader__overlay--small'
+              : ''
+          )}
+          ref={overlayRef}
+          tabIndex={-1}
+          {...other}
+        >
+          <div className="Loader__overlay__loader">
+            <Loader variant={variant} />
+            <AxeLoader />
+          </div>
+          {label ? (
+            <span className="Loader__overlay__label">{label}</span>
+          ) : null}
+          {children}
         </div>
-        {label ? <span className="Loader__overlay__label">{label}</span> : null}
-        {children}
-      </div>
+      </Wrapper>
     );
   }
 );
@@ -72,6 +97,7 @@ LoaderOverlay.propTypes = {
   variant: PropTypes.oneOf(['large', 'small']),
   label: PropTypes.string,
   focusOnInitialRender: PropTypes.bool,
+  // @ts-expect-error
   children: PropTypes.node
 };
 

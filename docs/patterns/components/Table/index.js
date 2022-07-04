@@ -305,6 +305,20 @@ const SortableTable = () => {
               required: false,
               default: 'none'
             },
+            sortAscendingAnnouncement: {
+              type: 'string',
+              description:
+                'The message read to screen readers when the header changes to ascending',
+              required: false,
+              default: 'sorted ascending'
+            },
+            sortDescendingAnnouncement: {
+              type: 'string',
+              description:
+                'The message read to screen readers when the header changes to descending',
+              required: false,
+              default: 'sorted descending'
+            },
             onSort: {
               type: 'function',
               description:

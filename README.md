@@ -4,7 +4,7 @@
 
 This monorepo contains the following packages:
 
-- cauldron-styles ([`packages/styles`](packages/style/README.md))
+- cauldron-styles ([`packages/styles`](packages/styles/README.md))
 - cauldron-react ([`packages/react`](packages/react/README.md))
 
 It also contains the documentation / demo app (see `docs/`)

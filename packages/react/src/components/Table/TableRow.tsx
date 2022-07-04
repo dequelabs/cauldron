@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-interface TableRowProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const TableRow = ({ children, className, ...other }: TableRowProps) => (
+const TableRow = ({
+  children,
+  className,
+  ...other
+}: HTMLAttributes<HTMLTableRowElement>) => (
   <tr className={classNames('TableRow', className)} {...other}>
     {children}
   </tr>

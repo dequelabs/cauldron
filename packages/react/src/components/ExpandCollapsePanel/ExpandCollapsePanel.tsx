@@ -29,6 +29,7 @@ export default class ExpandCollapsePanel extends React.Component<
 > {
   static defaultProps = {
     animationTiming: 250,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onToggle: () => {}
   };
 
@@ -170,16 +171,14 @@ export default class ExpandCollapsePanel extends React.Component<
   }
 
   render() {
-    /* eslint-disable no-unused-vars */
     const {
       children,
       animationTiming,
       className,
       onToggle,
       open,
-      ...other
+      ...otherProps
     } = this.props;
-    /* eslint-enable no-unused-vars */
     const { isOpen, isAnimating, animationClass } = this.state;
     const trigger = React.Children.toArray(children).find(
       child => (child as ReactElement<any>).type === PanelTrigger
@@ -198,16 +197,16 @@ export default class ExpandCollapsePanel extends React.Component<
             onClick: this.handleToggle
           })}
         <div
-          {...other}
           className={classnames(
+            className,
             'ExpandCollapse__panel',
             animationClass,
-            className,
             {
               'is--hidden': !isOpen && !isAnimating
             }
           )}
           ref={this.panel}
+          {...otherProps}
         >
           {panelElements}
         </div>

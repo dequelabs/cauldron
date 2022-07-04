@@ -57,7 +57,7 @@
 }
 
 .TopBar > ul > li:not(.TopBar__menu-trigger) {
-  padding: 0 var(--space-medium);
+  padding: 0 var(--space-small);
   font-size: var(--text-size-small);
   height: var(--top-bar-height);
   display: flex;

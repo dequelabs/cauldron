@@ -1,0 +1,76 @@
+:root {
+  --accordion-trigger-background-color: var(--white);
+  --accordion-trigger-background-color-expanded: var(--gray-20);
+  --accordion-trigger-text-color: var(--gray-90);
+  --accordion-trigger-text-color-hover: var(--accent-primary);
+  --accordion-trigger-box-shadow-hover: var(--accent-primary);
+  --accordion-trigger-border-color: var(--gray-40);
+  --accordion-trigger-icon-color: var(--gray-90);
+  --accordion-panel-background-color: var(--white);
+  --accordion-panel-text-color: var(--gray-90);
+  --accordion-panel-border-color: var(--gray-40);
+  --accordion-box-shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+.cauldron--theme-dark {
+  --accordion-trigger-background-color: var(--accent-medium);
+  --accordion-trigger-background-color-expanded: var(--accent-dark);
+  --accordion-trigger-text-color: var(--white);
+  --accordion-trigger-text-color-hover: var(--accent-light);
+  --accordion-trigger-box-shadow-hover: var(--accent-info);
+  --accordion-trigger-border-color: var(--stroke-dark);
+  --accordion-trigger-icon-color: var(--white);
+  --accordion-panel-background-color: var(--accent-medium);
+  --accordion-panel-text-color: var(--white);
+  --accordion-panel-border-color: var(--stroke-dark);
+}
+
+.Accordion > :is(h1, h2, h3, h4, h5, h6):first-of-type {
+  all: unset;
+}
+
+.Accordion__trigger[type='button'] {
+  background: var(--accordion-trigger-background-color);
+  padding: calc(var(--space-small) - var(--space-half));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid var(--accordion-trigger-border-color);
+  font-size: var(--text-size-small);
+  margin-top: var(--space-small);
+  color: var(--accordion-trigger-text-color);
+  text-decoration: underline solid var(--accordion-trigger-text-color);
+}
+
+button.Accordion__trigger[aria-expanded='true'] {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background: var(--accordion-trigger-background-color-expanded);
+}
+
+button.Accordion__trigger:hover {
+  box-shadow: inset 8px 0 0 -4px var(--accordion-trigger-box-shadow-hover);
+  color: var(--accordion-trigger-text-color-hover);
+  transition: all 0.2s ease-in-out;
+  text-decoration: underline solid var(--accordion-trigger-text-color-hover);
+}
+
+button.Accordion__trigger:hover .Icon {
+  color: var(--accordion-trigger-icon-color);
+}
+
+.Accordion .Icon {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
+}
+
+.Accordion__panel {
+  background: var(--accordion-panel-background-color);
+  color: var(--accordion-panel-text-color);
+  padding: var(--space-small);
+  border: 1px solid var(--accordion-panel-border-color);
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 2px 3px 0 var(--accordion-box-shadow-color);
+}

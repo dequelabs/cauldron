@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { IconButton } from '@deque/cauldron-react/';
+import { IconButton, Offscreen } from '@deque/cauldron-react/';
 
 const IconButtonDemo = () => (
   <div>
@@ -11,18 +11,26 @@ const IconButtonDemo = () => (
         { icon: 'pencil', label: 'Edit', variant: 'primary' },
         {
           icon: 'pencil',
+          label: (
+            <>
+              Edit User
+              <Offscreen>Steve</Offscreen>
+            </>
+          ),
+          variant: 'primary'
+        },
+        {
+          icon: 'pencil',
           label: 'Edit',
           variant: 'primary',
-          disabled: true,
-          'aria-label': 'Edit'
+          disabled: true
         },
         { icon: 'pencil', label: 'Edit', variant: 'secondary' },
         {
           icon: 'pencil',
           label: 'Edit',
           variant: 'secondary',
-          disabled: true,
-          'aria-label': 'Edit'
+          disabled: true
         },
         { icon: 'pencil', label: 'Edit', variant: 'error' },
         { icon: 'trash', label: 'Delete', tooltipPlacement: 'bottom' },
@@ -41,7 +49,7 @@ const IconButtonDemo = () => (
           default: 'button'
         },
         label: {
-          type: 'string',
+          type: 'node',
           required: true
         },
         icon: {
