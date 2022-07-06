@@ -75,24 +75,14 @@
   border-bottom: none;
 }
 
-.OptionsMenu__list-item:hover {
+.OptionsMenu__list-item:hover,
+.OptionsMenu__list-item:focus {
   background-color: var(--options-menu-hover-background-color);
   outline: 0;
 }
 
 .OptionsMenu__list-item:focus {
-  outline: 0;
-}
-
-.OptionsMenu__list-item:focus:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background-color: var(--options-menu-active-border-color);
+  box-shadow: inset 0 0 0 2px var(--focus);
 }
 
 .OptionsMenu__list-item[aria-disabled='true'] {
