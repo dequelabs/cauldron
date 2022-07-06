@@ -69,7 +69,6 @@ export default class OptionsMenu extends Component<
 
   toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.setState(({ show }) => ({ show: !show }));
-    event.preventDefault();
   };
 
   handleClose = () => {
