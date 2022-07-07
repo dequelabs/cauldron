@@ -115,7 +115,7 @@ test('should set ClickOutsideListener events to false when OptionsMenu is not sh
   ).toBeFalsy();
 });
 
-test('should set ClickOutsideListener events to set when OptionsMenu is shown', () => {
+test('should set ClickOutsideListener events to default values when OptionsMenu is shown', () => {
   const optionsMenu = mount(
     <OptionsMenu trigger={trigger} show={true}>
       <li className="foo">option 1</li>
