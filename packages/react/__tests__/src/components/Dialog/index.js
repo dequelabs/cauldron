@@ -64,6 +64,19 @@ test('calls onClose when clicked outside', () => {
   expect(onClose).toBeCalled();
 });
 
+test('does not call onClose if the dialog is not currently shown', () => {
+  const onClose = jest.fn();
+  const dialog = mount(
+    <Dialog {...defaults} show={false} onClose={onClose}>
+      {'hello'}
+    </Dialog>
+  );
+
+  dialog.instance().close();
+
+  expect(onClose).not.toBeCalled();
+});
+
 test('supports the "dialogRef" prop', () => {
   const called = jest.fn();
   expect.assertions(1);
