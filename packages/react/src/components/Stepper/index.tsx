@@ -80,7 +80,7 @@ Step.propTypes = {
   children: PropTypes.node,
   tooltip: PropTypes.node,
   tooltipText: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 interface StepperProps {
@@ -98,7 +98,7 @@ Stepper.displayName = 'Stepper';
 
 Stepper.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Stepper;

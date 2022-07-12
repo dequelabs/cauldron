@@ -97,6 +97,7 @@ LoaderOverlay.propTypes = {
   variant: PropTypes.oneOf(['large', 'small']),
   label: PropTypes.string,
   focusOnInitialRender: PropTypes.bool,
+  // @ts-expect-error
   children: PropTypes.node
 };
 

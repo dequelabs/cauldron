@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import Demo from '../../../Demo';
-import { Pagination } from '@deque/cauldron-react/';
+import { Pagination, usePagination } from '@deque/cauldron-react/';
+import { Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
 
 const PaginationDemo = () => {
   const totalItems = 111;
   const itemsPerPage = 25;
-  const [currentPage, setCurrentPage] = useState(3);
-  const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
-  const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
 
-  const onNextPageClick = () => setCurrentPage(currentPage + 1);
-  const onFirstPageClick = () => setCurrentPage(1);
-  const onPreviousPageClick = () => setCurrentPage(currentPage - 1);
-  const onLastPageClick = () => setCurrentPage(5);
+  const { pagination, pageStatus } = usePagination({
+    totalItems,
+    itemsPerPage
+  });
 
   return (
     <div>
@@ -22,23 +21,18 @@ const PaginationDemo = () => {
         states={[
           { totalItems: 15 },
           {
-            totalItems,
-            itemsPerPage,
-            currentPage,
+            ...pagination,
             statusLabel: (
               <span>
-                <strong>{itemStart}</strong> - <strong>{itemEnd}</strong> of{' '}
+                <strong>{pageStatus.pageStart}</strong> -{' '}
+                <strong>{pageStatus.pageEnd}</strong> of{' '}
                 <strong>{totalItems}</strong>
               </span>
             ),
             firstPageLabel: 'FIRST PAGE!!',
             nextPageLabel: 'NEXT PAGE!!',
             previousPageLabel: 'PREV PAGE!!',
-            lastPageLabel: 'JIMMY PAGE!!',
-            onNextPageClick,
-            onFirstPageClick,
-            onPreviousPageClick,
-            onLastPageClick
+            lastPageLabel: 'JIMMY PAGE!!'
           }
         ]}
         propDocs={{
@@ -130,7 +124,55 @@ const PaginationDemo = () => {
             defaultValue: "'bottom'"
           }
         }}
-      />
+      >
+        <h2>Using the usePagination Hook</h2>
+        <Code>
+          {`const { pagination, pageStatus } = usePagination({
+  totalItems: 111,
+  itemsPerPage: 25
+});
+return <Pagination {...pagination} />;`}
+        </Code>
+        <div className="Demo-props">
+          <h3>usePagination Options</h3>
+          <PropDocs
+            docs={{
+              totalItems: {
+                type: 'number',
+                description:
+                  'The total number of items being rendered (not the total number of pages).',
+                required: true
+              },
+              itemsPerPage: {
+                type: 'number',
+                description: 'The total number of items per page.',
+                required: false,
+                default: 10
+              },
+              initialPage: {
+                type: 'number',
+                description:
+                  'The (1-based) number of the page that pagination will start on.',
+                required: false,
+                default: 1
+              }
+            }}
+            defaultProps={undefined}
+          />
+        </div>
+        <p>
+          <span>
+            This returns <code>pagination</code>, a series of controls that can
+            be spread into the Pagination component and
+          </span>
+          <br />
+          <span>
+            <code>pageStatus</code> which contains details about the{' '}
+            <code>currentPage</code>, <code>pageStart</code>, and{' '}
+            <code>pageEnd</code>.
+          </span>
+        </p>
+      </Demo>
     </div>
   );
 };

@@ -46,6 +46,7 @@ const componentsList = [
   'OptionsMenu',
   'Panel',
   'Select',
+  'RadioCardGroup',
   'RadioGroup',
   'Checkbox',
   'ClickOutsideListener',
@@ -73,7 +74,8 @@ const componentsList = [
   'IssuePanel',
   'FieldWrap',
   'Breadcrumb',
-  'TwoColumnPanel'
+  'TwoColumnPanel',
+  'Accordion'
 ].sort();
 
 const App = () => {

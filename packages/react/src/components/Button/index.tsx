@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonRef?: Ref<HTMLButtonElement>;
-  variant?: 'primary' | 'secondary' | 'error' | 'link';
+  variant?: 'primary' | 'secondary' | 'error' | 'link' | 'tag';
   thin?: boolean;
 }
 
@@ -26,6 +26,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'Button--secondary': variant === 'secondary',
         'Button--error': variant === 'error',
         Link: variant === 'link',
+        Tag: variant === 'tag',
+        'Button--tag': variant === 'tag',
         'Button--thin': thin
       })}
       ref={ref || buttonRef}

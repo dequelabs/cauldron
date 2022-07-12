@@ -141,6 +141,11 @@
   border-left: 1px solid var(--top-bar-menuitem-separator);
 }
 
+.TopBar .OptionsMenu__list {
+  top: var(--top-bar-height);
+  right: 0;
+}
+
 /* Dark Theme */
 .cauldron--theme-dark {
   --top-bar-background-color: var(--accent-dark);

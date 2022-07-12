@@ -13,27 +13,34 @@ SyntaxHighlighter.registerLanguage('css', css);
 SyntaxHighlighter.registerLanguage('html', xml);
 SyntaxHighlighter.registerLanguage('yaml', yaml);
 
+// HACK: This is a workaround for a bug in react-syntax-highlighter's types.
+const Highlighter = SyntaxHighlighter as React.ComponentType<
+  SyntaxHighlighterProps
+>;
+
 interface Props extends SyntaxHighlighterProps {
-  children: React.ReactNode;
+  children: string;
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
   tabIndex?: number;
 }
 
-const Code: React.ComponentType<Props> = ({
+const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   children,
   className,
   tabIndex,
   ...props
 }) => (
-  <SyntaxHighlighter
-    {...props}
-    useInlineStyles={false}
-    className={classNames('Code', className)}
-    tabIndex={tabIndex}
-  >
-    {children}
-  </SyntaxHighlighter>
+  <>
+    <Highlighter
+      {...props}
+      useInlineStyles={false}
+      className={classNames('Code', className)}
+      tabIndex={tabIndex}
+    >
+      {children}
+    </Highlighter>
+  </>
 );
 
 Code.displayName = 'Code';
@@ -41,7 +48,8 @@ Code.displayName = 'Code';
 Code.propTypes = {
   children: PropTypes.string.isRequired,
   language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
-  className: PropTypes.string
+  className: PropTypes.string,
+  tabIndex: PropTypes.number
 };
 
 export default Code;

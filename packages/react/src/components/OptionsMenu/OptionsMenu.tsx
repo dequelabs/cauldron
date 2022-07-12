@@ -25,6 +25,7 @@ export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   onSelect: (e: React.MouseEvent<HTMLElement>) => void;
   closeOnSelect?: boolean;
   show?: boolean;
+  children: React.ReactNode;
 }
 
 interface OptionsMenuState {
@@ -68,7 +69,6 @@ export default class OptionsMenu extends Component<
 
   toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.setState(({ show }) => ({ show: !show }));
-    event.preventDefault();
   };
 
   handleClose = () => {
