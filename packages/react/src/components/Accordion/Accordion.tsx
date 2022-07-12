@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactElement;
+  children: React.ReactNode;
   heading?:
     | React.ReactElement
     | {
