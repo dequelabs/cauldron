@@ -13,7 +13,7 @@ export interface ExpandCollapsePanelProps
   open?: boolean;
   children: React.ReactNode;
   animationTiming?: number | boolean;
-  onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onToggle: (e: React.MouseEvent<HTMLButtonElement>) => void | undefined;
 }
 
 interface ExpandCollapsePanelState {

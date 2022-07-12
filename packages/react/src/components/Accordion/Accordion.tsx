@@ -49,7 +49,9 @@ const Accordion = ({ children }: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
-    child => (child as React.ReactElement<any>).type === AccordionTrigger
+    child =>
+      typeof child === 'string' ||
+      (child as React.ReactElement<any>).type === AccordionTrigger
   );
 
   const panelElement = childrenArray.find(
