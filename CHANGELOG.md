@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/dequelabs/cauldron/compare/v4.5.0...v4.6.0) (2022-07-12)
+
+### Features
+
+- **styles:** implement dark theme and updated design for options menu dropdown ([#691](https://github.com/dequelabs/cauldron/issues/691)) ([21294bb](https://github.com/dequelabs/cauldron/commit/21294bb6aa8bf21a15461f8326637ee47230eeb2))
+- adds an accordion component to library ([#669](https://github.com/dequelabs/cauldron/issues/669)) ([7fd7d09](https://github.com/dequelabs/cauldron/commit/7fd7d095bc8c85c5369371baaf74c7300c578fd2))
+- **button:** add option to render as tag ([#674](https://github.com/dequelabs/cauldron/issues/674)) ([9a1593a](https://github.com/dequelabs/cauldron/commit/9a1593aecc8f24bdc5c5f515d9726b42a9c241c5))
+- **components:** RadioCardGroup ([#663](https://github.com/dequelabs/cauldron/issues/663)) ([7f1627e](https://github.com/dequelabs/cauldron/commit/7f1627ef017552b049559889d55d00e80feb73e1))
+- **pagination:** create usePagination hook ([#662](https://github.com/dequelabs/cauldron/issues/662)) ([7f6a304](https://github.com/dequelabs/cauldron/commit/7f6a304aa63b83454e15425cd52f94651abafa17))
+- **react:** add `filter-solid` icon ([#688](https://github.com/dequelabs/cauldron/issues/688)) ([ed40128](https://github.com/dequelabs/cauldron/commit/ed401288361bbe9dd90f9afb959bca60df1349d9))
+- **react:** add `recycle-square` icon ([#679](https://github.com/dequelabs/cauldron/issues/679)) ([ca48f72](https://github.com/dequelabs/cauldron/commit/ca48f72e5eedac0258b71bdf9549f6e3da93e6b5))
+- **react:** add play icon ([#683](https://github.com/dequelabs/cauldron/issues/683)) ([cc78a93](https://github.com/dequelabs/cauldron/commit/cc78a93efb85d21e7d6491a483cf87f2fe4cd2f7))
+- **styles:** add axe-core issue impact colors ([#673](https://github.com/dequelabs/cauldron/issues/673)) ([959f5b1](https://github.com/dequelabs/cauldron/commit/959f5b11b818227093c7f2fa2c986d820efec4f7))
+
+### Bug Fixes
+
+- **BreadcrumbLink:** TS would not allow href attribute on component ([#655](https://github.com/dequelabs/cauldron/issues/655)) ([d5614ca](https://github.com/dequelabs/cauldron/commit/d5614ca74a07dd3a5a5a20ba6fcab5e535d276ac))
+- **RadioCardGroup:** use `flex-end` instead of `end` for checked card ([#677](https://github.com/dequelabs/cauldron/issues/677)) ([f4c1c3d](https://github.com/dequelabs/cauldron/commit/f4c1c3dd94db23e4b07a1fd3e2df376727e6a315))
+- **react:** Allow usage with React v18 ([#678](https://github.com/dequelabs/cauldron/issues/678)) ([a80cb0b](https://github.com/dequelabs/cauldron/commit/a80cb0bbe2e1aaf62fb280d569e3210af1a43806)), closes [#555](https://github.com/dequelabs/cauldron/issues/555) [#631](https://github.com/dequelabs/cauldron/issues/631)
+- **react:** only allow a single options menu to be open at one time ([#693](https://github.com/dequelabs/cauldron/issues/693)) ([c21fc13](https://github.com/dequelabs/cauldron/commit/c21fc13b9ddbddaca79e8a7a943f8a3b10755b82))
+- **react:** Support React 18 types ([#676](https://github.com/dequelabs/cauldron/issues/676)) ([16adb90](https://github.com/dequelabs/cauldron/commit/16adb90060f3962eb6a7df4bce421c1dd8f056b3))
+- **styles:** correct variable name of css variable ([#687](https://github.com/dequelabs/cauldron/issues/687)) ([fa9f1d6](https://github.com/dequelabs/cauldron/commit/fa9f1d61d09ff56b358f842c3ee388b79c3483bc))
+
 ## [4.5.0](https://github.com/dequelabs/cauldron/compare/v4.4.0...v4.5.0) (2022-05-17)
 
 ### Features
