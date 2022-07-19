@@ -3,6 +3,8 @@
   --tag-label-text-color: var(--gray-60);
   --tag-background-color: var(--gray-20);
   --tag-border-color: var(--gray-90);
+  --tag-underline-color: var(--gray-90);
+  --tag-focus-outline-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
@@ -10,6 +12,8 @@
   --tag-label-text-color: var(--accent-light);
   --tag-background-color: var(--accent-medium);
   --tag-border-color: var(--accent-medium);
+  --tag-underline-color: var(--white);
+  --tag-focus-outline-color: var(--white);
 }
 
 .Tag {
@@ -22,7 +26,7 @@
   justify-content: center;
   align-items: center;
   padding: 2px 8px;
-  width: 90px;
+  width: max-content;
   font-weight: var(--font-weight-medium);
 }
 
@@ -30,4 +34,17 @@
   color: var(--tag-label-text-color);
   margin-right: 3px;
   font-weight: var(--font-weight-normal);
+}
+
+.Tag__toggle {
+  text-align: center;
+}
+
+.Tag:focus {
+  outline: 1px solid var(--tag-focus-outline-color);
+}
+
+.Tag span {
+  text-decoration: underline solid var(--tag-underline-color);
+  font-weight: var(--font-weight-medium);
 }
