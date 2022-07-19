@@ -1,0 +1,4 @@
+.Tag span {
+  text-decoration: underline solid var(--tag-underline-color);
+  font-weight: var(--font-weight-bold);
+}

@@ -35,3 +35,28 @@ test('should return no axe violations', async () => {
   );
   expect(await axe(tag.html())).toHaveNoViolations();
 });
+
+test('renders toggleable tag', () => {
+  const tag = shallow(
+    <Tag variant="toggle">
+      <TagLabel>Label:</TagLabel> value
+    </Tag>
+  );
+  expect(tag.find('.Tag Tag__toggle')).toBeTruthy();
+});
+
+test('clicking toggleable tag returns a callback', () => {
+  const spy = jest.fn();
+
+  const tag = shallow(
+    <Tag variant="toggle" onToggle={spy}>
+      <TagLabel>Label:</TagLabel> value
+    </Tag>
+  );
+
+  expect(spy).toHaveBeenCalledTimes(0);
+
+  tag.simulate('click');
+
+  expect(spy).toBeCalled();
+});

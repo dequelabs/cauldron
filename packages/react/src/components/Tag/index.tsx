@@ -24,13 +24,13 @@ const Tag = ({
   children,
   className,
   onToggle,
-  variant,
+  variant = 'default',
   ...other
 }: TagProps) => {
   if (variant === 'toggle') {
     return (
       <button
-        className={classNames('Tag Tag__toggle', className)}
+        className={classNames('Tag', className)}
         {...other}
         onClick={onToggle}
       >
@@ -45,6 +45,7 @@ const Tag = ({
     </div>
   );
 };
+
 Tag.displayName = 'Tag';
 Tag.propTypes = {
   children: PropTypes.node.isRequired,

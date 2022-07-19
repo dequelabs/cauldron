@@ -33,18 +33,9 @@
 .Tag__label {
   color: var(--tag-label-text-color);
   margin-right: 3px;
-  font-weight: var(--font-weight-normal);
-}
-
-.Tag__toggle {
-  text-align: center;
+  font-weight: var(--font-weight-medium);
 }
 
 .Tag:focus {
   outline: 1px solid var(--tag-focus-outline-color);
-}
-
-.Tag span {
-  text-decoration: underline solid var(--tag-underline-color);
-  font-weight: var(--font-weight-medium);
 }
