@@ -21,12 +21,14 @@ const TagDemo = () => {
           value
         </>
       </Tag>
-      <Code role="region" tabIndex={0}>{`<Tag>
+      <Code role="region" tabIndex={0}>
+        {`<Tag>
   <>
     <TagLabel>Label: </TagLabel>
     value
   </>
-</Tag>`}</Code>
+</Tag>`}
+      </Code>
       <h3>Toggleable</h3>
       <ToggleTag />
       <Code language="javascript" role="region" tabIndex={0}>
@@ -39,13 +41,13 @@ const TagDemo = () => {
 
   return (
       <Tag variant="toggle" onToggle={handleClick}>
-      <>
-        <TagLabel>Toggle: </TagLabel>
-        <span>{toggleState ? 'ON' : 'OFF'}</span>
-      </>
+        <>
+          <TagLabel>Toggle: </TagLabel>
+          <span>{toggleState ? 'ON' : 'OFF'}</span>
+        </>
     </Tag>
-    );
-  };`}
+  );
+};`}
       </Code>
       <div className="Demo-props">
         <h2>Props</h2>
@@ -73,10 +75,6 @@ const TagDemo = () => {
                 'The variant/type of tag; options are: "default" and "toggle"',
               default: 'default'
             }
-          }}
-          defaultProps={{
-            initialActiveIndex: 0,
-            orientation: 'horizontal'
           }}
         />
       </div>
