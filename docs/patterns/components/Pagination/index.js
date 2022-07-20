@@ -20,6 +20,7 @@ const PaginationDemo = () => {
         component={Pagination}
         states={[
           { totalItems: 15 },
+          { totalItems: 15, thin: true },
           {
             ...pagination,
             statusLabel: (
@@ -122,6 +123,11 @@ const PaginationDemo = () => {
               'The position of the tooltip relative to its target element.',
             required: false,
             defaultValue: "'bottom'"
+          },
+          thin: {
+            type: 'boolean',
+            description:
+              'Displays pagination with "thin" modifier (reduces height of buttons and spacing)'
           }
         }}
       >

@@ -1,3 +1,17 @@
+:root {
+  --pagination-button-background-color: var(--gray-20);
+  --pagination-button-border-color: var(--gray-40);
+  --pagination-button-disabled-text-color: var(--gray-40);
+  --pagination-text-accent-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --pagination-button-background-color: var(--accent-medium);
+  --pagination-button-border-color: transparent;
+  --pagination-button-disabled-text-color: var(--stroke-dark);
+  --pagination-text-accent-color: var(--white);
+}
+
 .Pagination > ul {
   list-style-type: none;
   display: flex;
@@ -6,25 +20,28 @@
 }
 
 .Pagination > ul > li {
-  margin-right: 5px;
+  margin-right: var(--space-smallest);
+}
+
+.Pagination:not(.Pagination--thin) button {
+  height: 2.26rem;
+  width: 2.26rem;
 }
 
 .Pagination button {
-  height: 2.26rem;
-  width: 2.26rem;
-  border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   /* light theme-specific styles */
-  background: var(--gray-20);
-  border: 1px solid var(--gray-40);
-  color: var(--gray-90);
+  background: var(--pagination-button-background-color);
+  border: 1px solid var(--pagination-button-border-color);
+  padding: 0;
+  margin: 0;
+  border-radius: 2px;
 }
 
 .Pagination button[aria-disabled='true'] {
-  color: var(--gray-40);
-  margin: 2px;
+  color: var(--pagination-button-disabled-text-color);
 }
 
 .Pagination button .Icon {
@@ -33,33 +50,19 @@
 }
 
 .Pagination [role='log'] {
-  margin-left: calc(var(--space-medium) - 5px);
-  margin-right: calc(var(--space-medium) - 5px);
-  color: var(--gray-60);
+  margin: 0 var(--space-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.Pagination--thin [role='log'] {
+  font-size: var(--text-size-smaller);
+  margin: 0 var(--space-half);
 }
 
 .Pagination [role='log'] strong {
-  color: var(--gray-90);
-}
-
-/*
- * dark theme
- */
-
-.cauldron--theme-dark .Pagination button {
-  background-color: var(--accent-medium);
-  border-color: transparent;
-}
-
-.cauldron--theme-dark .Pagination button[aria-disabled='true'] {
-  color: #5d676f;
+  color: var(--pagination-text-accent-color);
 }
 
 .cauldron--theme-dark .Pagination [role='log'] {
   color: var(--accent-light);
-  font-variant-numeric: tabular-nums;
-}
-
-.cauldron--theme-dark .Pagination [role='log'] strong {
-  color: var(--white);
 }
