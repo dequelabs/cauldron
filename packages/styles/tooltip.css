@@ -96,9 +96,10 @@
   transform: rotate(90deg) translateY(100%);
 }
 
-/**
-* Info tooltip arrow styles
-*/
+/*
+ * Info tooltip arrow styles
+ */
+
 .TooltipInfo .TooltipArrow:before {
   border-top-color: var(--tooltip-info-border-color);
 }
