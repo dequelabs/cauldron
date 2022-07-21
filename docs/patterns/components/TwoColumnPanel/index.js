@@ -322,7 +322,13 @@ function TwoColumnPanelDemo() {
             },
             skipLink: {
               type: 'SkipLink',
-              description: 'A "Skip to Content" link',
+              description: 'A "Skip to Content" link'
+            },
+            collapsedMediaQuery: {
+              type: 'string',
+              description:
+                'The TwoPanelColumn will collapse the ColumnLeft by default when this media query is active and display the ColumnLeft content via a slide-in element',
+              default: '(max-width: 45rem)'
             },
             children
           }}
