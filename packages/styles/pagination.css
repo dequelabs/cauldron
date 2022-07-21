@@ -19,7 +19,7 @@
   font-size: var(--text-size-small);
 }
 
-.Pagination > ul > li {
+.Pagination > ul > li:not(:last-child) {
   margin-right: var(--space-smallest);
 }
 
