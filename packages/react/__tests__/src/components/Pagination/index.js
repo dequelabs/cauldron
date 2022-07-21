@@ -6,6 +6,11 @@ import Pagination, {
 } from '../../../../src/components/Pagination';
 
 describe('Pagination', () => {
+  test('sets `thin` variant', () => {
+    const wrapper = mount(<Pagination totalItems={18} currentPage={1} thin />);
+    expect(wrapper.find('.Pagination.Pagination--thin').exists());
+  });
+
   describe('without hook', () => {
     describe('on the first page', () => {
       test('Disables first/prev page buttons', () => {

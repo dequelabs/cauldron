@@ -20,6 +20,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onFirstPageClick?: () => void;
   onLastPageClick?: () => void;
   tooltipPlacement?: Placement;
+  thin?: boolean;
   className?: string;
 }
 
@@ -40,6 +41,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       onFirstPageClick,
       onLastPageClick,
       className,
+      thin = false,
       ...other
     },
     ref
@@ -50,11 +52,18 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
     const isFirstPage = currentPage === 1;
 
     return (
-      <div ref={ref} className={classNames('Pagination', className)} {...other}>
+      <div
+        ref={ref}
+        className={classNames('Pagination', className, {
+          'Pagination--thin': thin
+        })}
+        {...other}
+      >
         <ul>
           <li>
             {isFirstPage ? (
               <TooltipTabstop
+                className="IconButton"
                 hideElementOnHidden
                 association="aria-labelledby"
                 tooltip={firstPageLabel}
@@ -75,6 +84,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isFirstPage ? (
               <TooltipTabstop
+                className="IconButton"
                 hideElementOnHidden
                 association="aria-labelledby"
                 tooltip={previousPageLabel}
@@ -106,6 +116,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isLastPage ? (
               <TooltipTabstop
+                className="IconButton"
                 hideElementOnHidden
                 association="aria-labelledby"
                 tooltip={nextPageLabel}
@@ -126,6 +137,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             {isLastPage ? (
               <TooltipTabstop
+                className="IconButton"
                 hideElementOnHidden
                 association="aria-labelledby"
                 tooltip={lastPageLabel}
