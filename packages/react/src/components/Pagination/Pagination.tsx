@@ -19,6 +19,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onPreviousPageClick?: () => void;
   onFirstPageClick?: () => void;
   onLastPageClick?: () => void;
+  onPageSizeChange?: () => void;
   tooltipPlacement?: Placement;
   thin?: boolean;
   className?: string;
@@ -40,6 +41,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       onPreviousPageClick,
       onFirstPageClick,
       onLastPageClick,
+      onPageSizeChange,
       className,
       thin = false,
       ...other
@@ -174,6 +176,7 @@ Pagination.propTypes = {
   onPreviousPageClick: PropTypes.func,
   onFirstPageClick: PropTypes.func,
   onLastPageClick: PropTypes.func,
+  onPageSizeChange: PropTypes.func,
   // @ts-expect-error
   tooltipPlacement: PropTypes.string,
   className: PropTypes.string
