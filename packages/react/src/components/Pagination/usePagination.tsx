@@ -14,7 +14,6 @@ interface PaginationResults {
   onPreviousPageClick: () => void;
   onFirstPageClick: () => void;
   onLastPageClick: () => void;
-  setCurrentPage: (page:number) => void;
 }
 
 // PageStatus has some built-in redundancy to prevent a user from
@@ -23,12 +22,13 @@ interface PageStatus {
   currentPage: number;
   pageStart: number;
   pageEnd: number;
+  setCurrentPage: (page: number) => void;
 }
 
 export const usePagination = ({
   totalItems,
   initialPageSize = 10,
-  initialPage = 1,
+  initialPage = 1
 }: Options): {
   pagination: PaginationResults;
   pageStatus: PageStatus;
@@ -50,16 +50,15 @@ export const usePagination = ({
     onFirstPageClick,
     onPreviousPageClick,
     onNextPageClick,
-    onLastPageClick,
-    setCurrentPage
+    onLastPageClick
   };
 
   const pageStatus: PageStatus = {
     currentPage,
     pageStart,
-    pageEnd
+    pageEnd,
+    setCurrentPage
   };
-
 
   return { pagination, pageStatus };
 };
