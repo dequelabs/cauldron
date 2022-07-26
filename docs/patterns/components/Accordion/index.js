@@ -79,8 +79,8 @@ const ControlledAccordion = ({ label, open: initialOpen = false }) => {
       <AccordionTrigger heading={{ level: 4 }}>
         {label}
       </AccordionTrigger>
-    <AccordionContent>Here is some content</AccordionContent>
-  </Accordion>
+      <AccordionContent>Here is some content</AccordionContent>
+    </Accordion>
   );
 };`}
         </Code>
