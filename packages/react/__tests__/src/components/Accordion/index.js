@@ -21,6 +21,19 @@ describe('Accordion', () => {
     expect(accordion.find('.Accordion')).toBeTruthy();
   });
 
+  it('passes through props', () => {
+    const accordion = mount(
+      <Accordion role="region">
+        <AccordionTrigger>Trigger</AccordionTrigger>
+        <AccordionContent>Content</AccordionContent>
+      </Accordion>
+    );
+    console.log(accordion.debug());
+    expect(
+      accordion.find('div.Accordion[role="region"]').exists()
+    ).toBeTruthy();
+  });
+
   it('renders with no axe violations', async () => {
     const wrapper = mount(
       <main>
@@ -42,8 +55,8 @@ describe('Accordion', () => {
       </Accordion>
     );
 
-    expect(accordion.find('.Accordion__triggger')).toBeTruthy();
-    expect(accordion.find('.Accordion__panel')).toBeTruthy();
+    expect(accordion.find('.Accordion__trigger').exists()).toBeTruthy();
+    expect(accordion.find('.Accordion__panel').exists()).toBeTruthy();
   });
 
   it('renders the trigger element', () => {
@@ -54,7 +67,7 @@ describe('Accordion', () => {
       </Accordion>
     );
 
-    expect(accordion.find('button')).toBeTruthy();
+    expect(accordion.find('button').exists()).toBeTruthy();
     expect(accordion.find('button.Accordion__trigger').text()).toEqual(
       'Testing 1 2 3'
     );
@@ -86,7 +99,7 @@ describe('Accordion', () => {
 
   it('sets aria-expanded to false when collapsed', () => {
     const accordion = mount(
-      <Accordion open={false}>
+      <Accordion>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </Accordion>
@@ -115,7 +128,7 @@ describe('Accordion', () => {
 
   it('hides content in the panel element when collapsed', () => {
     mount(
-      <Accordion open={false}>
+      <Accordion>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>
           <div data-test>foo</div>
@@ -130,7 +143,7 @@ describe('Accordion', () => {
 
   it('sets aria-controls on trigger element using the panel id', () => {
     const accordion = mount(
-      <Accordion open={false}>
+      <Accordion>
         <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
         <AccordionContent>This is another test</AccordionContent>
       </Accordion>
@@ -146,20 +159,17 @@ describe('Accordion', () => {
   });
 
   describe('when controlled', () => {
-    it('expands when the open prop is passed "true"', () => {
+    it('expands when the open prop is set to "true"', () => {
       const accordion = mount(
-        <Accordion open={false}>
+        <Accordion open>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
       );
 
-      expect(accordion.props().open).toEqual(false);
-
-      accordion.setProps({ open: true });
-
-      expect(accordion.find('[aria-expanded="true"]')).toBeTruthy();
-      expect(accordion.props().open).toEqual(true);
+      expect(
+        accordion.find('button[aria-expanded=true]').exists()
+      ).toBeTruthy();
     });
   });
 
@@ -167,7 +177,7 @@ describe('Accordion', () => {
     describe('AccordionTrigger', () => {
       it('sets the className when passed a value in the className prop', () => {
         const accordion = mount(
-          <Accordion open={false}>
+          <Accordion>
             <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
             <AccordionContent>This is another test</AccordionContent>
           </Accordion>
@@ -181,7 +191,7 @@ describe('Accordion', () => {
   describe('AccordionTrigger', () => {
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <Accordion open={false}>
+        <Accordion>
           <AccordionTrigger className="test">Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
@@ -192,7 +202,7 @@ describe('Accordion', () => {
 
     it('sets a heading level 2 element when passed a headingLevel prop', () => {
       const accordion = mount(
-        <Accordion open={false}>
+        <Accordion>
           <AccordionTrigger header={{ level: 2 }}>
             Testing 1 2 3
           </AccordionTrigger>
@@ -204,7 +214,7 @@ describe('Accordion', () => {
 
     it('does not set a heading element wrapper around the trigger when passed no prop', () => {
       mount(
-        <Accordion open={false}>
+        <Accordion>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
@@ -217,7 +227,7 @@ describe('Accordion', () => {
   describe('Accordion', () => {
     it('uses a default className if not passed one via the className prop', () => {
       const accordion = mount(
-        <Accordion open={false}>
+        <Accordion>
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
@@ -228,7 +238,7 @@ describe('Accordion', () => {
 
     it('sets the className when passed a value in the className prop', () => {
       const accordion = mount(
-        <Accordion className="test" open={false}>
+        <Accordion className="test">
           <AccordionTrigger>Testing 1 2 3</AccordionTrigger>
           <AccordionContent>This is another test</AccordionContent>
         </Accordion>
