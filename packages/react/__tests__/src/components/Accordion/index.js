@@ -28,7 +28,7 @@ describe('Accordion', () => {
         <AccordionContent>Content</AccordionContent>
       </Accordion>
     );
-    console.log(accordion.debug());
+
     expect(
       accordion.find('div.Accordion[role="region"]').exists()
     ).toBeTruthy();
