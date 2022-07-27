@@ -15,10 +15,18 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   previousPageLabel?: string;
   nextPageLabel?: string;
   lastPageLabel?: string;
-  onNextPageClick?: () => void;
-  onPreviousPageClick?: () => void;
-  onFirstPageClick?: () => void;
-  onLastPageClick?: () => void;
+  onNextPageClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  onPreviousPageClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  onFirstPageClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  onLastPageClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
   tooltipPlacement?: Placement;
   thin?: boolean;
   className?: string;
