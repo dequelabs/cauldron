@@ -45,7 +45,13 @@ interface AccordionProps extends ExpandCollapsePanelProps {
   children: React.ReactNode;
 }
 
-const Accordion = ({ children }: AccordionProps) => {
+const Accordion = ({
+  children,
+  open,
+  onToggle,
+  animationTiming,
+  ...props
+}: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
@@ -81,9 +87,12 @@ const Accordion = ({ children }: AccordionProps) => {
   const elementId = useId();
 
   return (
-    <div className="Accordion">
+    <div className="Accordion" {...props}>
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
+        open={open}
+        onToggle={onToggle}
+        animationTiming={animationTiming}
         {...panelElement.props}
       >
         <PanelTrigger

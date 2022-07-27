@@ -60,7 +60,7 @@ const AccordionDemo = () => {
           you can do this by setting the open prop and handling changes with
           onToggle.
         </p>
-        <ControlledAccordion label="Accordion #1" heading={{ level: 4 }} />
+        <ControlledAccordion label="Accordion #1" heading={{ level: 4 }} open />
         <ControlledAccordion label="Accordion #2" heading={{ level: 4 }} />
         <ControlledAccordion label="Accordion #3" heading={{ level: 4 }} />
         <Code role="region" tabIndex={0}>
@@ -71,17 +71,16 @@ const AccordionDemo = () => {
   AccordionContent,
 } from '@deque/cauldron-react/';
 
-const ControlledAccordion = ({ label }) => {
-  const [open, setIsOpen] = useState(false);
+const ControlledAccordion = ({ label, open: initialOpen = false }) => {
+  const [open, setIsOpen] = useState(initialOpen);
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
-    <Accordion>
-    <AccordionTrigger heading={{ level: 4 }}>
-      {label}
-    </AccordionTrigger>
-    <AccordionContent>Here is some content</AccordionContent>
-  </Accordion>
+      <AccordionTrigger heading={{ level: 4 }}>
+        {label}
+      </AccordionTrigger>
+      <AccordionContent>Here is some content</AccordionContent>
+    </Accordion>
   );
 };`}
         </Code>
@@ -156,8 +155,8 @@ const ControlledAccordion = ({ label }) => {
   );
 };
 
-const ControlledAccordion = ({ label }) => {
-  const [open, setIsOpen] = useState(false);
+const ControlledAccordion = ({ label, open: initialOpen = false }) => {
+  const [open, setIsOpen] = useState(initialOpen);
 
   return (
     <Accordion open={open} onToggle={() => setIsOpen(!open)}>
