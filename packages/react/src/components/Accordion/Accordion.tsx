@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactElement;
+  children: React.ReactNode;
   heading?:
     | React.ReactElement
     | {
@@ -45,11 +45,19 @@ interface AccordionProps extends ExpandCollapsePanelProps {
   children: React.ReactNode;
 }
 
-const Accordion = ({ children }: AccordionProps) => {
+const Accordion = ({
+  children,
+  open,
+  onToggle,
+  animationTiming,
+  ...props
+}: AccordionProps) => {
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
-    child => (child as React.ReactElement<any>).type === AccordionTrigger
+    child =>
+      typeof child === 'string' ||
+      (child as React.ReactElement<any>).type === AccordionTrigger
   );
 
   const panelElement = childrenArray.find(
@@ -79,9 +87,12 @@ const Accordion = ({ children }: AccordionProps) => {
   const elementId = useId();
 
   return (
-    <div className="Accordion">
+    <div className="Accordion" {...props}>
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
+        open={open}
+        onToggle={onToggle}
+        animationTiming={animationTiming}
         {...panelElement.props}
       >
         <PanelTrigger
@@ -111,7 +122,9 @@ Accordion.propTypes = {
 
 AccordionTrigger.propTypes = {
   children: PropTypes.node,
-  heading: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', undefined])
+  heading: PropTypes.shape({
+    level: PropTypes.number
+  })
 };
 
 AccordionContent.propTypes = {
