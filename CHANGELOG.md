@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/dequelabs/cauldron/compare/v4.6.0...v4.7.0) (2022-07-29)
+
+### Features
+
+- **react:** add `clipboard` icon ([#699](https://github.com/dequelabs/cauldron/issues/699)) ([6b49f78](https://github.com/dequelabs/cauldron/commit/6b49f7831d749f012337f49ea019fec02ab70c7a))
+- **react:** add `export-solid` icon ([#701](https://github.com/dequelabs/cauldron/issues/701)) ([18f99f9](https://github.com/dequelabs/cauldron/commit/18f99f9bf64fc22c25ba8e115d3b36b349956f75))
+- **react:** add `question-circle-clear` icon ([#709](https://github.com/dequelabs/cauldron/issues/709)) ([74cbb93](https://github.com/dequelabs/cauldron/commit/74cbb93c6543ca200c82d95bba6c1c0a6b0ffabf))
+- **react:** allow custom media query to be set for the TwoColumnPanel collapsing ([#710](https://github.com/dequelabs/cauldron/issues/710)) ([550e6a8](https://github.com/dequelabs/cauldron/commit/550e6a8eb5afaf0311458cd5b2273a7aa1961d39))
+- **react,styles:** adds thin modifier to pagination ([#705](https://github.com/dequelabs/cauldron/issues/705)) ([53b76d5](https://github.com/dequelabs/cauldron/commit/53b76d5eecb7c0ec5f652e6b9bc5e55b9975d2a0))
+- **styles:** update tooltip styles to support dark theme ([#704](https://github.com/dequelabs/cauldron/issues/704)) ([0ff6cd9](https://github.com/dequelabs/cauldron/commit/0ff6cd9464be2743b5f42536b939c9909871d75f))
+
+### Bug Fixes
+
+- **react:** add types to Pagination onClick props ([#717](https://github.com/dequelabs/cauldron/issues/717)) ([562ed45](https://github.com/dequelabs/cauldron/commit/562ed45b1d70f98723477a784ea5f5f62ce65e22))
+- **react:** fix issue where accordion would not pass through props correctly ([#713](https://github.com/dequelabs/cauldron/issues/713)) ([9fd91f4](https://github.com/dequelabs/cauldron/commit/9fd91f42fb350a880f00f4b70ee9f6372c84c13d))
+- **react:** fixes incorrect PropType and TypeScript interfaces ([#697](https://github.com/dequelabs/cauldron/issues/697)) ([120c94c](https://github.com/dequelabs/cauldron/commit/120c94c7e7b8d56f2ac83382307a1922d6440ba0))
+- **styles:** remove right margin from right most pagination button ([#711](https://github.com/dequelabs/cauldron/issues/711)) ([8df85c5](https://github.com/dequelabs/cauldron/commit/8df85c5f36b91e7c46eb916abe831934fcf09000))
+
 ## [4.6.0](https://github.com/dequelabs/cauldron/compare/v4.5.0...v4.6.0) (2022-07-12)
 
 ### Features
