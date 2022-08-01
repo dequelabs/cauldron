@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import Pagination, {
@@ -202,6 +202,58 @@ describe('Pagination', () => {
   });
 
   describe('with hook', () => {
+    test('initializes and handles pagesize change as expected', () => {
+      let testPagination1;
+      let testPageStatus1;
+
+      const PaginationWithHook1 = () => {
+        const [pageSize, setPageSize] = useState(10);
+        const { pagination, pageStatus } = usePagination({
+          totalItems: 500,
+          initialPage: 3,
+          initialPageSize: pageSize
+        });
+        testPagination1 = pagination;
+        testPageStatus1 = pageStatus;
+
+        function onPageSizeChange() {
+          setPageSize(25);
+          pageStatus.setCurrentPage(1);
+        }
+        return (
+          <div>
+            <button onClick={onPageSizeChange}>25</button>
+            <Pagination {...pagination} />
+          </div>
+        );
+      };
+      const wrapper = mount(<PaginationWithHook1 />);
+      expect(testPagination1.totalItems).toBe(500);
+      expect(testPagination1.currentPage).toBe(3);
+      expect(testPagination1.itemsPerPage).toBe(10);
+      expect(testPageStatus1.currentPage).toStrictEqual(3);
+      expect(testPageStatus1.pageStart).toStrictEqual(21);
+      expect(testPageStatus1.pageEnd).toStrictEqual(30);
+      // click the next page button
+      wrapper
+        .find('button')
+        .at(3)
+        .simulate('click');
+      expect(testPageStatus1.currentPage).toStrictEqual(4);
+      expect(testPageStatus1.pageStart).toStrictEqual(31);
+      expect(testPageStatus1.pageEnd).toStrictEqual(40);
+      //change the itemsPerPage
+      wrapper
+        .find('button')
+        .at(0)
+        .simulate('click');
+      expect(testPagination1.itemsPerPage).toBe(25);
+      expect(testPagination1.currentPage).toBe(1);
+      expect(testPageStatus1.currentPage).toStrictEqual(1);
+      expect(testPageStatus1.pageStart).toStrictEqual(1);
+      expect(testPageStatus1.pageEnd).toStrictEqual(25);
+    });
+
     test('initializes and calls on{Next,Previous,First,Last}Click as expected', () => {
       let testPagination;
       let testPageStatus;
@@ -223,55 +275,45 @@ describe('Pagination', () => {
       expect(testPagination.totalItems).toBe(500);
       expect(testPagination.currentPage).toBe(3);
       expect(testPagination.itemsPerPage).toBe(10);
-      expect(testPageStatus).toStrictEqual({
-        currentPage: 3,
-        pageStart: 21,
-        pageEnd: 30
-      });
+      expect(testPageStatus.currentPage).toStrictEqual(3);
+      expect(testPageStatus.pageStart).toStrictEqual(21);
+      expect(testPageStatus.pageEnd).toStrictEqual(30);
 
       // click the prev page button
       wrapper
         .find('button')
         .at(1)
         .simulate('click');
-      expect(testPageStatus).toStrictEqual({
-        currentPage: 2,
-        pageStart: 11,
-        pageEnd: 20
-      });
+      expect(testPageStatus.currentPage).toStrictEqual(2);
+      expect(testPageStatus.pageStart).toStrictEqual(11);
+      expect(testPageStatus.pageEnd).toStrictEqual(20);
 
       // click the next page button
       wrapper
         .find('button')
         .at(2)
         .simulate('click');
-      expect(testPageStatus).toStrictEqual({
-        currentPage: 3,
-        pageStart: 21,
-        pageEnd: 30
-      });
+      expect(testPageStatus.currentPage).toStrictEqual(3);
+      expect(testPageStatus.pageStart).toStrictEqual(21);
+      expect(testPageStatus.pageEnd).toStrictEqual(30);
 
       // click the first page button
       wrapper
         .find('button')
         .at(0)
         .simulate('click');
-      expect(testPageStatus).toStrictEqual({
-        currentPage: 1,
-        pageStart: 1,
-        pageEnd: 10
-      });
+      expect(testPageStatus.currentPage).toStrictEqual(1);
+      expect(testPageStatus.pageStart).toStrictEqual(1);
+      expect(testPageStatus.pageEnd).toStrictEqual(10);
 
       // click the last page button
       wrapper
         .find('button')
         .at(3)
         .simulate('click');
-      expect(testPageStatus).toStrictEqual({
-        currentPage: 50,
-        pageStart: 491,
-        pageEnd: 500
-      });
+      expect(testPageStatus.currentPage).toStrictEqual(50);
+      expect(testPageStatus.pageStart).toStrictEqual(491);
+      expect(testPageStatus.pageEnd).toStrictEqual(500);
     });
   });
 });
