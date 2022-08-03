@@ -29,7 +29,7 @@
   all: unset;
 }
 
-.Accordion__trigger[type='button'] {
+.Accordion__trigger {
   background: var(--accordion-trigger-background-color);
   padding: calc(var(--space-small) - var(--space-half));
   width: 100%;
@@ -43,20 +43,20 @@
   text-decoration: underline solid var(--accordion-trigger-text-color);
 }
 
-button.Accordion__trigger[aria-expanded='true'] {
+.Accordion__trigger[aria-expanded='true'] {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   background: var(--accordion-trigger-background-color-expanded);
 }
 
-button.Accordion__trigger:hover {
+.Accordion__trigger:hover {
   box-shadow: inset 8px 0 0 -4px var(--accordion-trigger-box-shadow-hover);
   color: var(--accordion-trigger-text-color-hover);
   transition: all 0.2s ease-in-out;
   text-decoration: underline solid var(--accordion-trigger-text-color-hover);
 }
 
-button.Accordion__trigger:hover .Icon {
+.Accordion__trigger:hover .Icon {
   color: var(--accordion-trigger-icon-color);
 }
 
