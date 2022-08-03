@@ -111,6 +111,32 @@ export default class Demo extends Component {
                 Error
               </Button>
             )
+          },
+          {
+            type: 'info',
+            dismissible: false,
+            focus: false,
+            children: (
+              <>
+                This toast is not dismissible by normal means. But you can
+                <Link
+                  href="#"
+                  onClick={() => this.onToastDismiss('not-dismissible')}
+                >
+                  click me to dismiss this un-dismissible toast.
+                </Link>
+              </>
+            ),
+            show: type === 'not-dismissible',
+            DEMO_renderAfter: (
+              <Button
+                variant="error"
+                onClick={() => this.onTriggerClick('not-dismissible')}
+                buttonRef={el => (this.error = el)}
+              >
+                Not dismissible
+              </Button>
+            )
           }
         ]}
         propDocs={{
@@ -136,6 +162,10 @@ export default class Demo extends Component {
             type: 'string',
             description:
               'text to be added as the aria-label of the "x" dismiss button (default: "Dismiss")'
+          },
+          dismissible: {
+            type: 'boolean',
+            description: 'whether or not the user is able to dismiss the toast'
           },
           toastRef: {
             type: 'function',
