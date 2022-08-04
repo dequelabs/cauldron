@@ -29,8 +29,9 @@
   all: unset;
 }
 
-.Accordion__trigger {
-  background: var(--accordion-trigger-background-color);
+.Accordion__trigger,
+button.Accordion__trigger {
+  background-color: var(--accordion-trigger-background-color);
   padding: calc(var(--space-small) - var(--space-half));
   width: 100%;
   display: flex;
