@@ -131,7 +131,7 @@ const Tabs = ({
 
   useDidUpdate(() => {
     const activeTab = tabsRef.current?.querySelector(
-      '[role="tablist"] > [aria-selected="true"]'
+      ':scope > [role="tablist"] > [aria-selected="true"]'
     ) as HTMLLIElement;
     activeTab?.focus();
     if (typeof onChange === 'function') {
