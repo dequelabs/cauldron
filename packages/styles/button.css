@@ -14,6 +14,8 @@
   --button-background-color-error-active: var(--accent-error-active);
   --button-outline-color-error: var(--error);
 
+  --button-outline-color-tag: var(--gray-90);
+
   --button-text-color-dark: var(--gray-90);
   --button-text-color-light: var(--white);
   --button-focus-ring-color: var(--focus-light);
@@ -88,7 +90,7 @@ button.Link {
 }
 
 .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--button-outline-color-primary);
+  box-shadow: 0 0 0 1px var(--button-outline-color-tag);
 }
 
 .Button--primary:focus:before,
@@ -206,6 +208,8 @@ button.Link {
   --button-background-color-primary-active: #a7e9f7;
   --button-background-color-secondary-active: var(--accent-light);
   --button-background-color-error-active: #fea7a6;
+
+  --button-outline-color-tag: var(--accent-info);
 
   --button-focus-ring-color: var(--focus-dark);
   --field-label-text-color: var(--accent-light);
