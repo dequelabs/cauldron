@@ -39,7 +39,7 @@
   --focus-dark: #eb94ff;
   --issue-critical: var(--accent-danger);
   --issue-serious: #ed9a55;
-  --issue-moderate: #ffdd75;
+  --issue-moderate: var(--accent-warning);
   --issue-minor: #f2f2f2;
 
   /* text colours */
