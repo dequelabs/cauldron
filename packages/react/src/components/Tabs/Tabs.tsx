@@ -32,7 +32,6 @@ const Tabs = ({
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const tabsRef = useRef<HTMLDivElement>(null);
-  const tabsListRef = useRef<HTMLUListElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === Tab
