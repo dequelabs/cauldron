@@ -40,7 +40,7 @@
   --issue-critical: var(--accent-danger);
   --issue-serious: #ed9a55;
   --issue-moderate: var(--accent-warning);
-  --issue-minor: #f2f2f2;
+  --issue-minor: var(--gray-20);
 
   /* text colours */
   --text-color-base: var(--gray-60);
