@@ -17,7 +17,7 @@ Some changes that would not need an RFC:
 
 - Bug fixes
 - Refactoring an existing component (while maintaining the same API contract)
-- Rephasing or clarifying documentation
+- Rephrasing or clarifying documentation
 
 ## How to submit an RFC
 
