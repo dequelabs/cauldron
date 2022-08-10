@@ -37,7 +37,7 @@
   --accent-secondary-active: var(--gray-30);
   --focus-light: #c11bde;
   --focus-dark: #eb94ff;
-  --issue-critical: #fe6d6b;
+  --issue-critical: var(--accent-danger);
   --issue-serious: #ed9a55;
   --issue-moderate: #ffdd75;
   --issue-minor: #f2f2f2;
