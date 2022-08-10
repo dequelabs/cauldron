@@ -216,6 +216,38 @@ test('displays correct tabpanel when clicking a tab', async () => {
   ).toBe(false);
 });
 
+test('focuses tab active tab with keyboard activation', async () => {
+  const TabsCompoonent = () => {
+    const tabPanel1 = useRef(null);
+    const tabPanel2 = useRef(null);
+
+    return (
+      <>
+        <Tabs aria-label={ariaLabel}>
+          <Tab id="tab-uno" target={tabPanel1}>
+            option 1
+          </Tab>
+          <Tab id="tab-dos" target={tabPanel2}>
+            option 2
+          </Tab>
+        </Tabs>
+        <TabPanel ref={tabPanel1}>
+          <p>Panel 1</p>
+        </TabPanel>
+        <TabPanel ref={tabPanel2}>
+          <p>Panel 2</p>
+        </TabPanel>
+      </>
+    );
+  };
+
+  const wrapper = mount(<TabsCompoonent />);
+  await update(wrapper);
+
+  wrapper.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
+  expect(document.activeElement.id).toEqual('tab-dos');
+});
+
 test('displays correct tabpanel when clicking a tab with a customized id', async () => {
   const TabswithRef = () => {
     const tabPanel1 = useRef(null);
