@@ -131,6 +131,21 @@ describe('Pagination', () => {
       expect(wrapper.find('#foo').exists()).toBe(true);
     });
 
+    test('supports custom status label formatter', () => {
+      const wrapper = mount(
+        <Pagination
+          totalItems={18}
+          statusLabel={(totalItems, itemStart, itemEnd) => (
+            <div id="foo">{`There are ${totalItems} items. You are seeing ${itemStart} through ${itemEnd}`}</div>
+          )}
+        />
+      );
+
+      expect(wrapper.find('#foo').text()).toBe(
+        'There are 18 items. You are seeing 1 through 10'
+      );
+    });
+
     test('calls on{Next,Previous,First,Last}Click as expected', () => {
       const onNextPageClick = sinon.spy();
       const onPreviousPageClick = sinon.spy();

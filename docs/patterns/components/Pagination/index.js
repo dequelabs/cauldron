@@ -56,9 +56,9 @@ const PaginationDemo = () => {
             default: 1
           },
           statusLabel: {
-            type: 'ReactNode',
+            type: 'ReactNode | function',
             description:
-              'The "x of y" status label (rendered as text in the middle of the pagination controls).',
+              'The "x of y" status label (rendered as text in the middle of the pagination controls). As a ReactNode, this property is simply the representation of this label. As a function, it is a callback exposing totalItems, itemStart, and itemEnd and returning a ReactNode; this can be useful in cases like internationalization.',
             required: false,
             default: `<span>
                 Showing <strong>{itemStart}</strong> to{' '}
