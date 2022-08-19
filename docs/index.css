@@ -46,3 +46,19 @@ code {
 .Demo ul {
   margin: var(--space-large);
 }
+
+.Footer {
+  position: fixed;
+  width: 100%;
+  height: var(--top-bar-height);
+  bottom: 0;
+  flex: none;
+  flex-direction: row;
+  box-sizing: border-box;
+  z-index: var(--z-index-top-bar);
+  display: flex;
+  align-items: center;
+  background-color: var(--top-bar-background-color);
+  color: var(--top-bar-text-color);
+  border-bottom: solid 1px var(--top-bar-border-bottom-color);
+}

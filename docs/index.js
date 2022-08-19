@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import Home from './Home';
+import Footer from './Demo/Footer';
 import {
   TopBar,
   MenuBar,
@@ -268,6 +269,7 @@ const App = () => {
           />
         </Workspace>
       </div>
+      <Footer theme={theme} />
     </Router>
   );
   /* eslint-enable jsx-a11y/anchor-has-content */
