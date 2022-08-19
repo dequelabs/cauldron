@@ -43,7 +43,7 @@
   min-height: 44px;
 }
 .RadioCardGroup__Icon.Icon svg {
-  color: var(--accent-success-dark);
+  color: #4f990f;
   height: 44px;
   width: 44px;
 }
