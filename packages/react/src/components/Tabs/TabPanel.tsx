@@ -1,17 +1,17 @@
-import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { useId } from 'react-id-generator';
+import React, { forwardRef } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { useId } from 'react-id-generator'
 
 interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  id?: string;
-  children?: React.ReactNode;
-  className?: string;
+  id?: string
+  children?: React.ReactNode
+  className?: string
 }
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, id: propId, className, ...other }: TabPanelProps, ref) => {
-    const [id] = propId ? [propId] : useId(1, 'tabpanel');
+    const [id] = propId ? [propId] : useId(1, 'tabpanel')
     return (
       <div
         role="tabpanel"
@@ -22,16 +22,15 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
       >
         {children}
       </div>
-    );
+    )
   }
-);
+)
 
-TabPanel.displayName = 'TabPanel';
+TabPanel.displayName = 'TabPanel'
 TabPanel.propTypes = {
   id: PropTypes.string,
-  // @ts-expect-error
   children: PropTypes.node,
   className: PropTypes.string
-};
+}
 
-export default TabPanel;
+export default TabPanel

@@ -1,26 +1,26 @@
-import React, { ReactElement } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import PanelTrigger from './PanelTrigger';
+import React, { ReactElement } from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import PanelTrigger from './PanelTrigger'
 import {
   injectStyleTag,
   setStyle,
   removeStyleTag
-} from '../../utils/stylesheets';
+} from '../../utils/stylesheets'
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  open?: boolean;
-  children: React.ReactNode;
-  animationTiming?: number | boolean;
-  onToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  open?: boolean
+  children: React.ReactNode
+  animationTiming?: number | boolean
+  onToggle?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 interface ExpandCollapsePanelState {
-  controlled: boolean;
-  isOpen: boolean;
-  isAnimating?: boolean;
-  animationClass?: string;
+  controlled: boolean
+  isOpen: boolean
+  isAnimating?: boolean
+  animationClass?: string
 }
 
 export default class ExpandCollapsePanel extends React.Component<
@@ -31,7 +31,7 @@ export default class ExpandCollapsePanel extends React.Component<
     animationTiming: 250,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onToggle: () => {}
-  };
+  }
 
   static propTypes = {
     open: PropTypes.bool,
@@ -39,42 +39,42 @@ export default class ExpandCollapsePanel extends React.Component<
     className: PropTypes.string,
     animationTiming: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     onToggle: PropTypes.func
-  };
+  }
 
   readonly state: ExpandCollapsePanelState = {
     controlled: typeof this.props.open !== 'undefined',
     isOpen: typeof this.props.open !== 'undefined' ? this.props.open : false
-  };
+  }
 
-  private panel = React.createRef<HTMLDivElement>();
+  private panel = React.createRef<HTMLDivElement>()
 
-  private styleTag: HTMLStyleElement;
+  private styleTag: HTMLStyleElement
 
   handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { onToggle = () => {} } = this.props;
-    const { isOpen, controlled } = this.state;
-    onToggle(e);
+    const { onToggle = () => {} } = this.props
+    const { isOpen, controlled } = this.state
+    onToggle(e)
     if (!controlled) {
-      this.setState({ isOpen: !isOpen, isAnimating: true });
+      this.setState({ isOpen: !isOpen, isAnimating: true })
     }
-  };
+  }
 
   animateOpen = () => {
-    const { current: panel } = this.panel;
-    const { animationTiming } = this.props;
+    const { current: panel } = this.panel
+    const { animationTiming } = this.props
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false });
-      return;
+      this.setState({ isAnimating: false })
+      return
     }
 
-    const rect = panel?.getBoundingClientRect();
+    const rect = panel?.getBoundingClientRect()
     if (!rect) {
-      return;
+      return
     }
 
     if (!this.styleTag) {
-      this.styleTag = injectStyleTag();
+      this.styleTag = injectStyleTag()
     }
 
     setStyle(
@@ -91,31 +91,31 @@ export default class ExpandCollapsePanel extends React.Component<
         animation: expandOpenAnimation ease-in-out ${animationTiming}ms forwards;
       }
     `
-    );
+    )
 
     this.setState({ animationClass: 'cauldron-expand-open' }, () => {
       setTimeout(() => {
-        this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag, '');
-      }, animationTiming as number);
-    });
-  };
+        this.setState({ animationClass: '', isAnimating: false })
+        setStyle(this.styleTag, '')
+      }, animationTiming as number)
+    })
+  }
 
   animateClose = () => {
-    const { current: panel } = this.panel;
-    const { animationTiming } = this.props;
+    const { current: panel } = this.panel
+    const { animationTiming } = this.props
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false });
-      return;
+      this.setState({ isAnimating: false })
+      return
     }
 
     if (!this.styleTag) {
-      this.styleTag = injectStyleTag();
+      this.styleTag = injectStyleTag()
     }
 
-    const rect = panel?.getBoundingClientRect();
-    if (!rect) return;
+    const rect = panel?.getBoundingClientRect()
+    if (!rect) return
 
     setStyle(
       this.styleTag,
@@ -131,20 +131,20 @@ export default class ExpandCollapsePanel extends React.Component<
         animation: collapseCloseAnimation ease-in-out ${animationTiming}ms forwards;
       }
     `
-    );
+    )
 
     this.setState({ animationClass: 'cauldron-collapse-close' }, () => {
       setTimeout(() => {
-        this.setState({ animationClass: '', isAnimating: false });
-        setStyle(this.styleTag, '');
-      }, animationTiming as number);
-    });
-  };
+        this.setState({ animationClass: '', isAnimating: false })
+        setStyle(this.styleTag, '')
+      }, animationTiming as number)
+    })
+  }
 
   componentWillUnmount() {
-    const { styleTag } = this;
+    const { styleTag } = this
     if (styleTag) {
-      removeStyleTag(styleTag);
+      removeStyleTag(styleTag)
     }
   }
 
@@ -152,21 +152,21 @@ export default class ExpandCollapsePanel extends React.Component<
     prevProps: ExpandCollapsePanelProps,
     prevState: ExpandCollapsePanelState
   ) {
-    const { isOpen: openState, controlled } = this.state;
-    const { open: openProp } = this.props;
+    const { isOpen: openState, controlled } = this.state
+    const { open: openProp } = this.props
 
     if (controlled && openState !== openProp) {
-      this.setState({ isOpen: !!openProp, isAnimating: true });
+      this.setState({ isOpen: !!openProp, isAnimating: true })
     }
 
     if (typeof openProp !== typeof prevProps.open) {
-      this.setState({ controlled: typeof openProp !== 'undefined' });
+      this.setState({ controlled: typeof openProp !== 'undefined' })
     }
 
     if (prevState.isOpen !== openState && openState) {
-      this.animateOpen();
+      this.animateOpen()
     } else if (prevState.isOpen !== openState && !openState) {
-      this.animateClose();
+      this.animateClose()
     }
   }
 
@@ -178,16 +178,16 @@ export default class ExpandCollapsePanel extends React.Component<
       onToggle,
       open,
       ...otherProps
-    } = this.props;
-    const { isOpen, isAnimating, animationClass } = this.state;
+    } = this.props
+    const { isOpen, isAnimating, animationClass } = this.state
     const trigger = React.Children.toArray(children).find(
       child => (child as ReactElement<any>).type === PanelTrigger
-    );
+    )
     const panelElements = React.Children.toArray(children).filter(
       child =>
         typeof child === 'string' ||
         (child as ReactElement<any>).type !== PanelTrigger
-    );
+    )
 
     return (
       <React.Fragment>
@@ -211,6 +211,6 @@ export default class ExpandCollapsePanel extends React.Component<
           {panelElements}
         </div>
       </React.Fragment>
-    );
+    )
   }
 }

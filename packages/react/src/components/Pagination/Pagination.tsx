@@ -1,35 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Placement } from '@popperjs/core';
-import IconButton from '../IconButton';
-import TooltipTabstop from '../TooltipTabstop';
-import Icon from '../Icon';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { Placement } from '@popperjs/core'
+import IconButton from '../IconButton'
+import TooltipTabstop from '../TooltipTabstop'
+import Icon from '../Icon'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  totalItems: number;
-  itemsPerPage?: number;
-  currentPage?: number;
-  statusLabel?: React.ReactNode;
-  firstPageLabel?: string;
-  previousPageLabel?: string;
-  nextPageLabel?: string;
-  lastPageLabel?: string;
-  onNextPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onPreviousPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onFirstPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onLastPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  tooltipPlacement?: Placement;
-  thin?: boolean;
-  className?: string;
+  totalItems: number
+  itemsPerPage?: number
+  currentPage?: number
+  statusLabel?: React.ReactNode
+  firstPageLabel?: string
+  previousPageLabel?: string
+  nextPageLabel?: string
+  lastPageLabel?: string
+  onNextPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onPreviousPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onFirstPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onLastPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  tooltipPlacement?: Placement
+  thin?: boolean
+  className?: string
 }
 
 const Pagination = React.forwardRef<HTMLDivElement, Props>(
@@ -54,10 +46,10 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
     },
     ref
   ) => {
-    const itemStart = currentPage * itemsPerPage - itemsPerPage + 1;
-    const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
-    const isLastPage = itemEnd === totalItems;
-    const isFirstPage = currentPage === 1;
+    const itemStart = currentPage * itemsPerPage - itemsPerPage + 1
+    const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems)
+    const isLastPage = itemEnd === totalItems
+    const isFirstPage = currentPage === 1
 
     return (
       <div
@@ -164,11 +156,11 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           </li>
         </ul>
       </div>
-    );
+    )
   }
-);
+)
 
-Pagination.displayName = 'Pagination';
+Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   itemsPerPage: PropTypes.number,
@@ -182,9 +174,8 @@ Pagination.propTypes = {
   onPreviousPageClick: PropTypes.func,
   onFirstPageClick: PropTypes.func,
   onLastPageClick: PropTypes.func,
-  // @ts-expect-error
   tooltipPlacement: PropTypes.string,
   className: PropTypes.string
-};
+}
 
-export default Pagination;
+export default Pagination

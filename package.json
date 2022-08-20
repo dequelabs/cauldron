@@ -3,15 +3,19 @@
   "private": true,
   "version": "4.7.0",
   "license": "MPL-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:docs\"",
     "build:react": "cross-env NODE_ENV=production yarn --cwd=packages/react build",
     "build:styles": "cross-env NODE_ENV=production yarn --cwd=packages/styles build",
     "build:docs": "cross-env NODE_ENV=production webpack --bail",
-    "dev": "concurrently \"yarn dev:styles\" \"yarn dev:react\" \"yarn dev:docs\"",
+    "dev": "concurrently \"yarn dev:styles\" \"yarn dev:react\" \"yarn dev:playground\"",
     "dev:react": "yarn --cwd=packages/react dev",
     "dev:styles": "yarn --cwd=packages/styles dev",
     "dev:docs": "webpack-dev-server",
+    "dev:playground": "yarn --cwd=packages/playground dev",
     "fmt": "prettier --write \"e2e/*.ts\" \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
     "lint": "eslint .",
     "test": "yarn --cwd=packages/react test",
@@ -20,7 +24,8 @@
     "release": "standard-version"
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "semi": false
   },
   "husky": {
     "hooks": {

@@ -1,19 +1,19 @@
-import React, { HTMLAttributes, ReactNode, forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import rndid from '../../utils/rndid';
+import React, { HTMLAttributes, ReactNode, forwardRef } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import rndid from '../../utils/rndid'
 
 interface PanelProps extends HTMLAttributes<HTMLElement> {
-  children: ReactNode;
+  children: ReactNode
   heading?:
     | ReactNode
     | {
-        id?: string;
-        text: ReactNode;
-        level: number | undefined;
-      };
-  collapsed?: boolean;
-  className?: string;
+        id?: string
+        text: ReactNode
+        level: number | undefined
+      }
+  collapsed?: boolean
+  className?: string
 }
 
 const Panel = forwardRef<HTMLElement, PanelProps>(
@@ -22,11 +22,11 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
       ? undefined
       : typeof heading === 'object' && 'id' in heading
       ? heading.id
-      : rndid();
+      : rndid()
 
     const Heading = () => {
       if (!headingId) {
-        return null;
+        return null
       }
 
       const HeadingComponent = `h${
@@ -36,7 +36,7 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
         !!heading.level
           ? heading.level
           : 2
-      }` as 'h1';
+      }` as 'h1'
 
       return (
         <HeadingComponent id={headingId} className="Panel__Heading">
@@ -44,8 +44,8 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
             ? heading.text
             : heading}
         </HeadingComponent>
-      );
-    };
+      )
+    }
 
     return (
       <section
@@ -59,17 +59,15 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
         <Heading />
         {children}
       </section>
-    );
+    )
   }
-);
+)
 
-Panel.displayName = 'Panel';
+Panel.displayName = 'Panel'
 Panel.propTypes = {
-  // @ts-expect-error
   children: PropTypes.node.isRequired,
-  // @ts-expect-error
   heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string
-};
+}
 
-export default Panel;
+export default Panel

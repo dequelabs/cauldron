@@ -6,30 +6,30 @@ import {
   TopBarItem,
   TopBarMenu,
   OptionsMenuList
-} from '@deque/cauldron-react';
-import { createRef, Fragment, useState } from 'react';
-import Link from 'next/link';
+} from '@deque/cauldron-react'
+import { createRef, Fragment, useState } from 'react'
+import Link from 'next/link'
 
 const TopbarLayout = () => {
-  const [workspace, setWorkspace] = useState(null);
-  const [thin, setThin] = useState(false);
-  const [show, setShow] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const topBarTrigger = createRef<HTMLButtonElement>();
+  const [workspace, setWorkspace] = useState(null)
+  const [thin, setThin] = useState(false)
+  const [show, setShow] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const topBarTrigger = createRef<HTMLButtonElement>()
 
   const onTriggerClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
   ) => {
     if (e) {
-      e.preventDefault();
+      e.preventDefault()
     }
 
     if (show && topBarTrigger?.current) {
-      topBarTrigger?.current?.focus();
+      topBarTrigger?.current?.focus()
     }
 
-    setShow(!show);
-  };
+    setShow(!show)
+  }
 
   return (
     <TopBar role="banner">
@@ -49,7 +49,6 @@ const TopbarLayout = () => {
           <Link href="/" className="MenuItem__logo" tabIndex={-1}>
             <span>Cauldron</span>
             {/* <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '} */}
-            <span>Cauldron</span>
           </Link>
         </TopBarItem>
 
@@ -89,7 +88,7 @@ const TopbarLayout = () => {
         </TopBarItem>
       </MenuBar>
     </TopBar>
-  );
-};
+  )
+}
 
-export default TopbarLayout;
+export default TopbarLayout

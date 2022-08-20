@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import MenuItem from '../MenuItem';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import MenuItem from '../MenuItem'
 
 interface TopBarTriggerProps extends React.HTMLAttributes<HTMLLIElement> {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const TopBarTrigger: React.ComponentType<React.PropsWithChildren<
@@ -17,12 +17,11 @@ const TopBarTrigger: React.ComponentType<React.PropsWithChildren<
   >
     {children}
   </MenuItem>
-);
-TopBarTrigger.displayName = 'TopBarTrigger';
+)
+TopBarTrigger.displayName = 'TopBarTrigger'
 TopBarTrigger.propTypes = {
-  // @ts-expect-error
   children: PropTypes.node.isRequired,
   className: PropTypes.string
-};
+}
 
-export default TopBarTrigger;
+export default TopBarTrigger

@@ -1,6 +1,6 @@
-import { SideBar, SideBarItem } from '@deque/cauldron-react';
-import classNames from 'classnames';
-import Link from 'next/link';
+import { SideBar, SideBarItem } from '@deque/cauldron-react'
+import classNames from 'classnames'
+import Link from 'next/link'
 
 const componentsList = [
   'Button',
@@ -44,12 +44,12 @@ const componentsList = [
   'Breadcrumb',
   'TwoColumnPanel',
   'Accordion'
-].sort();
+].sort()
 
 const SidebarLayout = () => {
-  const handleClick = (e: MouseEvent<HTMLElement>) => {
-    console.log('click was handled');
-  };
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    console.log('click was handled', e)
+  }
 
   return (
     <SideBar
@@ -58,21 +58,14 @@ const SidebarLayout = () => {
       className="sidebar"
     >
       {componentsList.map(name => {
-        const pathname = `/components/${name}`;
-        const isActive = pathname === location.pathname;
         return (
-          <SideBarItem
-            key={name}
-            className={classNames({
-              'MenuItem--active': isActive
-            })}
-          >
-            <Link href={pathname}>{name}</Link>
+          <SideBarItem key={name} className={classNames('MenuItem--active')}>
+            <Link href={`/${name}`}>{name}</Link>
           </SideBarItem>
-        );
+        )
       })}
     </SideBar>
-  );
-};
+  )
+}
 
-export default SidebarLayout;
+export default SidebarLayout
