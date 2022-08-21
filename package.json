@@ -7,10 +7,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:docs\"",
+    "build": "concurrently \"yarn build:styles\" \"yarn build:react\" \"yarn build:playground\"",
     "build:react": "cross-env NODE_ENV=production yarn --cwd=packages/react build",
     "build:styles": "cross-env NODE_ENV=production yarn --cwd=packages/styles build",
-    "build:docs": "cross-env NODE_ENV=production webpack --bail",
+    "build:playground": "cross-env NODE_ENV=production yarn --cwd=packages/playground build",
     "dev": "concurrently \"yarn dev:styles\" \"yarn dev:react\" \"yarn dev:playground\"",
     "dev:react": "yarn --cwd=packages/react dev",
     "dev:styles": "yarn --cwd=packages/styles dev",
@@ -20,12 +20,12 @@
     "lint": "eslint .",
     "test": "yarn --cwd=packages/react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
-    "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react",
+    "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react && yarn --cwd=packages/playground",
     "release": "standard-version"
   },
   "prettier": {
     "singleQuote": true,
-    "semi": false
+    "semi": true
   },
   "husky": {
     "hooks": {

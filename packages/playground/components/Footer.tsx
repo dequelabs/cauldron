@@ -1,9 +1,9 @@
-import Image from 'next/image'
-import styles from '../styles/Layout.module.css'
+import Image from 'next/image';
+import styles from '../styles/Layout.module.css';
 
 type FooterProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const Footer = ({ children }: FooterProps) => {
   return (
@@ -19,7 +19,7 @@ const Footer = ({ children }: FooterProps) => {
         </span>
       </a>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
