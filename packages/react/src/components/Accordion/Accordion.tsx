@@ -4,7 +4,7 @@ import ExpandCollapsePanel, {
   ExpandCollapsePanelProps,
   PanelTrigger
 } from '../ExpandCollapsePanel';
-import { useId } from 'react-id-generator';
+import nextId from 'react-id-generator';
 import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
@@ -84,7 +84,7 @@ const Accordion = ({
 
   const { className: triggerClassName, ...triggerProps } = trigger.props;
 
-  const elementId = useId();
+  const elementId = nextId();
 
   return (
     <div className="Accordion" {...props}>
@@ -98,7 +98,7 @@ const Accordion = ({
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
-          className={classnames('Accordion__trigger', trigger.props.className)}
+          className={classnames('Accordion__trigger', triggerClassName)}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
           heading={trigger.props.heading}
           {...triggerProps}

@@ -1,6 +1,7 @@
 import { SideBar, SideBarItem } from '@deque/cauldron-react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const componentsList = [
   'Button',
@@ -46,23 +47,27 @@ const componentsList = [
   'Accordion'
 ].sort();
 
-const SidebarLayout = () => {
+const SidebarLayout = ({ show }: { show: boolean }) => {
+  const router = useRouter();
+
   return (
-    <div>
-      <SideBar
-        onDismiss={() => console.log('dismiss')}
-        show={false}
-        navProps={undefined}
-      >
+    <>
+      <SideBar onDismiss={() => console.log('dismiss')} show={show}>
         {componentsList.map(name => {
+          const isActive = router.asPath === `/${name.toLowerCase()}`;
           return (
-            <SideBarItem key={name} className={classNames('MenuItem--active')}>
+            <SideBarItem
+              key={name}
+              className={classNames({
+                'MenuItem--active': isActive
+              })}
+            >
               <Link href={`/${name.toLowerCase()}`}>{name}</Link>
             </SideBarItem>
           );
         })}
       </SideBar>
-    </div>
+    </>
   );
 };
 

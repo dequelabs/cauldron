@@ -1,28 +1,25 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import SidebarLayout from './SidebarLayout';
 import TopbarLayout from './TopbarLayout';
 import Footer from './Footer';
-import { ThemeProvider, Workspace } from '@deque/cauldron-react';
+import { Workspace } from '@deque/cauldron-react';
 import styles from '../styles/Layout.module.css';
+import { ThemeProvider } from '../../react/lib';
 
 type LayoutProps = {
   children: ReactNode | ReactNode[];
 };
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
-  if (!ThemeProvider) {
-    return <></>;
-  }
+  const [show, setShow] = useState(false);
 
   return (
-    <div>
-      <ThemeProvider initialTheme="dark">
-        <TopbarLayout />
-        <SidebarLayout />
-        <Workspace className={styles.main}>{children}</Workspace>
-        <Footer>Test</Footer>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider initialTheme="light">
+      <TopbarLayout />
+      <SidebarLayout show={show} />
+      <Workspace className={styles.main}>{children}</Workspace>
+      <Footer>Test</Footer>
+    </ThemeProvider>
   );
 };
 

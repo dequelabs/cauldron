@@ -17,10 +17,6 @@ const ThemeProvider = ({
   initialTheme = 'light',
   context
 }: ProviderProps) => {
-  if (typeof window === undefined) {
-    return null;
-  }
-
   const [theme, setTheme] = useState(initialTheme);
   const getThemeFromContext = () =>
     context?.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
@@ -30,7 +26,9 @@ const ThemeProvider = ({
   useEffect(() => {
     if (!context) {
       context = document.body;
+      return;
     }
+    return;
   }, []);
 
   useEffect(() => {

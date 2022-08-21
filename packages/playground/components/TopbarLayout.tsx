@@ -5,11 +5,14 @@ import {
   Icon,
   TopBarItem,
   TopBarMenu,
-  OptionsMenuList,
-  useThemeContext
+  OptionsMenuList
 } from '@deque/cauldron-react';
-import { createRef, Fragment, useState } from 'react';
+import { createRef, Fragment, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useThemeContext } from '../../react/lib/';
+import styles from '../styles/topbar-layout.module.css';
+import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 const CAULDRON_THEME_STORAGE_KEY = 'cauldron-theme';
 
@@ -19,10 +22,12 @@ const TopbarLayout = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const topBarTrigger = createRef<HTMLButtonElement>();
   const { theme, toggleTheme } = useThemeContext();
+  const router = useRouter();
 
   const onSettingsSelect = (
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
   ) => {
+    console.log(e);
     if (e.target.id === 'theme') {
       localStorage.setItem(
         CAULDRON_THEME_STORAGE_KEY,
@@ -49,9 +54,9 @@ const TopbarLayout = () => {
   };
 
   return (
-    <TopBar role="banner">
-      <MenuBar hasTrigger>
-        <TopBarTrigger onClick={() => console.log('trigger clicked')}>
+    <TopBar role="banner" className={styles.topbar}>
+      <MenuBar thin={thin} hasTrigger>
+        <TopBarTrigger onClick={onTriggerClick}>
           <button
             tabIndex={-1}
             aria-label="Menu"
@@ -63,9 +68,15 @@ const TopbarLayout = () => {
           </button>
         </TopBarTrigger>
         <TopBarItem>
-          <Link href="/" className="MenuItem__logo" tabIndex={-1}>
-            <span>Cauldron</span>
-            {/* <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '} */}
+          <Link href="/">
+            {/*eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
+            <a className={classNames('MenuItem__logo')} tabIndex={-1}>
+              <img
+                src={theme === 'dark' ? 'logo.svg' : 'dark-logo.svg'}
+                alt=""
+              />
+              <span>Cauldron</span>
+            </a>
           </Link>
         </TopBarItem>
 
