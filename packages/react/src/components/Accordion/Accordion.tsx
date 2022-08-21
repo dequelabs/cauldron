@@ -101,7 +101,7 @@ const Accordion = ({
           className={classnames('Accordion__trigger', trigger.props.className)}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
           heading={trigger.props.heading}
-          {...trigger.props}
+          {...triggerProps}
         >
           {trigger}
         </PanelTrigger>

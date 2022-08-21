@@ -5,31 +5,47 @@ import {
   Icon,
   TopBarItem,
   TopBarMenu,
-  OptionsMenuList
-} from '@deque/cauldron-react'
-import { createRef, Fragment, useState } from 'react'
-import Link from 'next/link'
+  OptionsMenuList,
+  useThemeContext
+} from '@deque/cauldron-react';
+import { createRef, Fragment, useState } from 'react';
+import Link from 'next/link';
 
 const TopbarLayout = () => {
-  const [workspace, setWorkspace] = useState(null)
-  const [thin, setThin] = useState(false)
-  const [show, setShow] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const topBarTrigger = createRef<HTMLButtonElement>()
+  const [workspace, setWorkspace] = useState(null);
+  const [thin, setThin] = useState(false);
+  const [show, setShow] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const topBarTrigger = createRef<HTMLButtonElement>();
+  const { theme, toggleTheme } = useThemeContext();
+
+  const onSettingsSelect = e => {
+    if (e.target.id === 'theme') {
+      localStorage.setItem(
+        CAULDRON_THEME_STORAGE_KEY,
+        theme === 'light' ? 'dark' : 'light'
+      );
+      toggleTheme();
+    } else {
+      setState({
+        thin: e.target.innerText === 'Thin top bar'
+      });
+    }
+  };
 
   const onTriggerClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
   ) => {
     if (e) {
-      e.preventDefault()
+      e.preventDefault();
     }
 
     if (show && topBarTrigger?.current) {
-      topBarTrigger?.current?.focus()
+      topBarTrigger?.current?.focus();
     }
 
-    setShow(!show)
-  }
+    setShow(!show);
+  };
 
   return (
     <TopBar role="banner">
@@ -73,7 +89,7 @@ const TopbarLayout = () => {
           <OptionsMenuList onSelect={onTriggerClick}>
             <li>Default top bar</li>
             <li>Thin top bar</li>
-            <li id="theme">{/* theme === 'dark' ? 'Light' : 'Dark'*/} Theme</li>
+            <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
           </OptionsMenuList>
         </TopBarMenu>
         <TopBarItem className="MenuItem--separator">
@@ -88,7 +104,7 @@ const TopbarLayout = () => {
         </TopBarItem>
       </MenuBar>
     </TopBar>
-  )
-}
+  );
+};
 
-export default TopbarLayout
+export default TopbarLayout;

@@ -1,0 +1,26 @@
+import {
+  Accordion,
+  AccordionTrigger,
+  AccordionContent
+} from '@deque/cauldron-react';
+import { ReactElement } from 'react';
+import { NextPageWithLayout } from './_app';
+import Layout from '../components/Layout';
+import Head from 'next/head';
+
+<Head>
+  <title>Accordion</title>
+</Head>
+
+# MDX Test Page
+
+Here is an example component:
+
+<Accordion>
+  <AccordionTrigger>Testing</AccordionTrigger>
+  <AccordionContent>
+    <p>Hello</p>
+  </AccordionContent>
+</Accordion>
+
+export default ({ children }) => <Layout>{children}</Layout>;

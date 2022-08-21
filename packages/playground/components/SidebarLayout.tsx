@@ -49,15 +49,19 @@ const componentsList = [
 const SidebarLayout = () => {
   return (
     <div>
-      <ul>
+      <SideBar
+        onDismiss={() => console.log('dismiss')}
+        show={false}
+        navProps={undefined}
+      >
         {componentsList.map(name => {
           return (
             <SideBarItem key={name} className={classNames('MenuItem--active')}>
-              <Link href={`/${name}`}>{name}</Link>
+              <Link href={`/${name.toLowerCase()}`}>{name}</Link>
             </SideBarItem>
           );
         })}
-      </ul>
+      </SideBar>
     </div>
   );
 };

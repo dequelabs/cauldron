@@ -50,6 +50,7 @@ test('it handles alternate contexts and initial themes', () => {
     initialTheme: 'dark'
   });
 
+  console.log(document.body);
   expect(div.classList.contains('cauldron--theme-dark')).toBe(true);
 });
 

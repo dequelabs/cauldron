@@ -14,18 +14,28 @@ const ThemeContext = createContext({});
 
 const ThemeProvider = ({
   children,
-  context = document.body,
-  initialTheme = 'light'
+  initialTheme = 'light',
+  context
 }: ProviderProps) => {
+  if (typeof window === undefined) {
+    return null;
+  }
+
   const [theme, setTheme] = useState(initialTheme);
   const getThemeFromContext = () =>
-    context.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
+    context?.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
   const toggleTheme = () =>
     setTheme(getThemeFromContext() === 'dark' ? 'light' : 'dark');
 
   useEffect(() => {
-    context.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
-    context.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
+    if (!context) {
+      context = document.body;
+    }
+  }, []);
+
+  useEffect(() => {
+    context?.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
+    context?.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
   }, [context, theme]);
 
   // Use a MutationObserver to track changes to the classes outside of the context of React
@@ -42,6 +52,9 @@ const ThemeProvider = ({
 
   useEffect(() => {
     const observer = new MutationObserver(handleMutation);
+    if (!context) {
+      return;
+    }
     observer.observe(context, {
       childList: false,
       subtree: false,
