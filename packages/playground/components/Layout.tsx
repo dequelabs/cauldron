@@ -4,9 +4,7 @@ import TopbarLayout from './TopbarLayout';
 import Footer from './Footer';
 import { Workspace } from '@deque/cauldron-react';
 import styles from '../styles/Layout.module.css';
-import { ThemeProvider } from '../../react/lib';
-
-const CAULDRON_THEME_STORAGE_KEY = 'cauldron-theme';
+import { useTernaryDarkMode } from '../hooks/useTernaryDarkMode';
 
 type LayoutProps = {
   children: ReactNode | ReactNode[];
@@ -15,13 +13,27 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps): JSX.Element => {
   const [show, setShow] = useState(false);
 
+  const { isDarkMode } = useTernaryDarkMode();
+
+  useEffect(() => {
+    const nextElement = document.querySelector('.Layout');
+    if (isDarkMode) {
+      nextElement?.classList.add('cauldron--theme-dark');
+      nextElement?.classList.remove('cauldron--theme-light');
+    } else {
+      nextElement?.classList.add('cauldron--theme-light');
+      nextElement?.classList.remove('cauldron--theme-dark');
+    }
+    return;
+  }, [isDarkMode]);
+
   return (
-    <ThemeProvider initialTheme="dark">
+    <>
       <TopbarLayout />
       <SidebarLayout show={show} />
       <Workspace className={styles.main}>{children}</Workspace>
       <Footer>Test</Footer>
-    </ThemeProvider>
+    </>
   );
 };
 

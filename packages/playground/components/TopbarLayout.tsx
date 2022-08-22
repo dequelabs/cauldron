@@ -9,27 +9,32 @@ import {
 } from '@deque/cauldron-react';
 import { createRef, Fragment, useState } from 'react';
 import Link from 'next/link';
-import { useThemeContext } from '../../react/lib/';
+import { useTernaryDarkMode } from '../hooks/useTernaryDarkMode';
 import styles from '../styles/TopbarLayout.module.css';
 import classNames from 'classnames';
-
-const CAULDRON_THEME_STORAGE_KEY = 'cauldron-theme';
+import Image from 'next/image';
 
 const TopbarLayout = () => {
   const [thin, setThin] = useState(false);
   const [show, setShow] = useState(false);
   const topBarTrigger = createRef<HTMLButtonElement>();
-  //const { theme, toggleTheme } = useThemeContext();
-  let theme = 'dark';
+  const {
+    isDarkMode,
+    ternaryDarkMode,
+    setTernaryDarkMode,
+    toggleTernaryDarkMode
+  } = useTernaryDarkMode();
+  type TernaryDarkMode = typeof ternaryDarkMode;
+
   const onSettingsSelect = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLElement>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    console.log(e);
-    console.log(e.currentTarget);
-    if (e.target.id === 'theme') {
+    e.preventDefault();
+
+    if (e.currentTarget === 'theme') {
       localStorage.setItem(
         CAULDRON_THEME_STORAGE_KEY,
-        theme === 'light' ? 'dark' : 'light'
+        ternaryDarkMode === 'light' ? 'Light' : 'Dark'
       );
       //toggleTheme();
     } else {
@@ -69,8 +74,17 @@ const TopbarLayout = () => {
           <Link href="/">
             {/*eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
             <a className={classNames('MenuItem__logo')} tabIndex={-1}>
-              <img
-                src={theme === 'light' ? 'logo.svg' : 'dark-logo.svg'}
+              <Image
+                src={isDarkMode ? '/logo-dark.png' : '/logo-light.png'}
+                alt="Dark"
+                width={40}
+                height={40}
+                layout="intrinsic"
+              />
+              <Image
+                src={isDarkMode ? '/logo.svg' : '/dark-logo.svg'}
+                width="48"
+                height="48"
                 alt=""
               />
               <span>Cauldron</span>
@@ -96,10 +110,14 @@ const TopbarLayout = () => {
               </Fragment>
             )}
           </div>
-          <OptionsMenuList onSelect={onSettingsSelect}>
+          <OptionsMenuList>
             <li>Default top bar</li>
             <li>Thin top bar</li>
-            <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
+            <li id="theme">
+              <button type="button" onClick={toggleTernaryDarkMode}>
+                {ternaryDarkMode === 'light' ? 'light' : 'dark'} Theme
+              </button>
+            </li>
           </OptionsMenuList>
         </TopBarMenu>
         <TopBarItem className="MenuItem--separator">
