@@ -7,11 +7,10 @@ import {
   TopBarMenu,
   OptionsMenuList
 } from '@deque/cauldron-react';
-import { createRef, Fragment, useRef, useState } from 'react';
+import { createRef, Fragment, useState } from 'react';
 import Link from 'next/link';
 import { useThemeContext } from '../../react/lib/';
-import styles from '../styles/topbar-layout.module.css';
-import { useRouter } from 'next/router';
+import styles from '../styles/TopbarLayout.module.css';
 import classNames from 'classnames';
 
 const CAULDRON_THEME_STORAGE_KEY = 'cauldron-theme';
@@ -19,11 +18,9 @@ const CAULDRON_THEME_STORAGE_KEY = 'cauldron-theme';
 const TopbarLayout = () => {
   const [thin, setThin] = useState(false);
   const [show, setShow] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const topBarTrigger = createRef<HTMLButtonElement>();
-  const { theme, toggleTheme } = useThemeContext();
-  const router = useRouter();
-
+  //const { theme, toggleTheme } = useThemeContext();
+  let theme = 'dark';
   const onSettingsSelect = (
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
   ) => {
@@ -33,7 +30,7 @@ const TopbarLayout = () => {
         CAULDRON_THEME_STORAGE_KEY,
         theme === 'light' ? 'dark' : 'light'
       );
-      toggleTheme();
+      //toggleTheme();
     } else {
       setThin(!thin);
     }
@@ -72,7 +69,7 @@ const TopbarLayout = () => {
             {/*eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
             <a className={classNames('MenuItem__logo')} tabIndex={-1}>
               <img
-                src={theme === 'dark' ? 'logo.svg' : 'dark-logo.svg'}
+                src={theme === 'light' ? 'logo.svg' : 'dark-logo.svg'}
                 alt=""
               />
               <span>Cauldron</span>

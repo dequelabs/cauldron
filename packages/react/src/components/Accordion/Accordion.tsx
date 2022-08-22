@@ -84,7 +84,7 @@ const Accordion = ({
 
   const { className: triggerClassName, ...triggerProps } = trigger.props;
 
-  const elementId = nextId();
+  const [elementId] = nextId();
 
   return (
     <div className="Accordion" {...props}>

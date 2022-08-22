@@ -29,7 +29,7 @@ const ThemeProvider = ({
       return;
     }
     return;
-  }, []);
+  }, [context, theme]);
 
   useEffect(() => {
     context?.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');

@@ -5,3 +5,4 @@ packages/react/lib
 .DS_Store
 yarn-error.log
 .next
+packages/playground/styles

@@ -1,0 +1,32 @@
+import {
+  Address,
+  AddressLine,
+  AddressCityStateZip,
+  Code
+} from '@deque/cauldron-react';
+import { ReactElement } from 'react';
+import Layout from '../../components/Layout';
+import Head from 'next/head';
+
+<Head>
+  <title>Address</title>
+</Head>
+
+# Address
+
+Here is an example component:
+
+<Code>
+<Address>
+  <AddressLine>1234 Sesame Street</AddressLine>
+  <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
+</Address>
+
+  </Code>
+
+<Address>
+  <AddressLine>1234 Sesame Street</AddressLine>
+  <AddressCityStateZip city="Metrocity" state="AA" zip="8675309" />
+</Address>
+
+export default ({ children }) => <Layout>{children}</Layout>;

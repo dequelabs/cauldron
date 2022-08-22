@@ -54,7 +54,9 @@ const SidebarLayout = ({ show }: { show: boolean }) => {
     <>
       <SideBar onDismiss={() => console.log('dismiss')} show={show}>
         {componentsList.map(name => {
-          const isActive = router.asPath === `/${name.toLowerCase()}`;
+          name = name.toLowerCase();
+          const pathname = `/docs/${name}`;
+          const isActive = router.asPath === pathname;
           return (
             <SideBarItem
               key={name}
@@ -62,7 +64,7 @@ const SidebarLayout = ({ show }: { show: boolean }) => {
                 'MenuItem--active': isActive
               })}
             >
-              <Link href={`/${name.toLowerCase()}`}>{name}</Link>
+              <Link href={pathname}>{name}</Link>
             </SideBarItem>
           );
         })}
