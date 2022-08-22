@@ -16,13 +16,13 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   const { isDarkMode } = useTernaryDarkMode();
 
   useEffect(() => {
-    const nextElement = document.querySelector('.Layout');
+    const nextElement = document.documentElement;
     if (isDarkMode) {
-      nextElement?.classList.add('cauldron--theme-dark');
-      nextElement?.classList.remove('cauldron--theme-light');
+      // nextElement?.classList.add('cauldron--theme-dark');
+      // nextElement?.classList.remove('cauldron--theme-light');
     } else {
-      nextElement?.classList.add('cauldron--theme-light');
-      nextElement?.classList.remove('cauldron--theme-dark');
+      // nextElement?.classList.add('cauldron--theme-light');
+      // nextElement?.classList.remove('cauldron--theme-dark');
     }
     return;
   }, [isDarkMode]);

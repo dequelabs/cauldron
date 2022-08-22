@@ -9,7 +9,7 @@ import {
 } from '@deque/cauldron-react';
 import { createRef, Fragment, useState } from 'react';
 import Link from 'next/link';
-import { useTernaryDarkMode } from '../hooks/useTernaryDarkMode';
+import { useDarkMode } from '../hooks/useDarkMode';
 import styles from '../styles/TopbarLayout.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -18,29 +18,23 @@ const TopbarLayout = () => {
   const [thin, setThin] = useState(false);
   const [show, setShow] = useState(false);
   const topBarTrigger = createRef<HTMLButtonElement>();
-  const {
-    isDarkMode,
-    ternaryDarkMode,
-    setTernaryDarkMode,
-    toggleTernaryDarkMode
-  } = useTernaryDarkMode();
-  type TernaryDarkMode = typeof ternaryDarkMode;
+  const { isDarkMode, toggle } = useDarkMode();
 
-  const onSettingsSelect = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+  // const onSettingsSelect = (
+  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) => {
+  //   e.preventDefault();
 
-    if (e.currentTarget === 'theme') {
-      localStorage.setItem(
-        CAULDRON_THEME_STORAGE_KEY,
-        ternaryDarkMode === 'light' ? 'Light' : 'Dark'
-      );
-      //toggleTheme();
-    } else {
-      setThin(!thin);
-    }
-  };
+  //   if (e.currentTarget === 'theme') {
+  //     localStorage.setItem(
+  //       CAULDRON_THEME_STORAGE_KEY,
+  //       ternaryDarkMode === 'light' ? 'Light' : 'Dark'
+  //     );
+  //     //toggleTheme();
+  //   } else {
+  //     setThin(!thin);
+  //   }
+  // };
 
   const onTriggerClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
@@ -114,8 +108,8 @@ const TopbarLayout = () => {
             <li>Default top bar</li>
             <li>Thin top bar</li>
             <li id="theme">
-              <button type="button" onClick={toggleTernaryDarkMode}>
-                {ternaryDarkMode === 'light' ? 'light' : 'dark'} Theme
+              <button type="button" onClick={toggle}>
+                {isDarkMode ? 'dark' : 'light'} Theme
               </button>
             </li>
           </OptionsMenuList>
