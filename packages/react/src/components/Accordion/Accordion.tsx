@@ -82,7 +82,10 @@ const Accordion = ({
     return null;
   }
 
-  const { className: triggerClassName, ...triggerProps } = trigger.props;
+  const {
+    className: triggerClassName,
+    ...triggerProps
+  } = trigger.props as React.ReactElement;
 
   const [elementId] = nextId();
 

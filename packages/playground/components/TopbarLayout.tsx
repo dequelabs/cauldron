@@ -25,6 +25,7 @@ const TopbarLayout = () => {
     e: React.MouseEvent<HTMLButtonElement | HTMLElement>
   ) => {
     console.log(e);
+    console.log(e.currentTarget);
     if (e.target.id === 'theme') {
       localStorage.setItem(
         CAULDRON_THEME_STORAGE_KEY,
