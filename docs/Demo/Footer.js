@@ -1,20 +1,23 @@
 import React from 'react';
-import logo from '../assets/img/logo.svg';
-import darkLogo from '../assets/img/dark-logo.svg';
-import { Link, Offscreen } from '@deque/cauldron-react/';
-
-// deque logo not cauldron logo
-// sidebar is being blocked
-// doublecheck image in link with offscreen is ok
+import { Link } from '@deque/cauldron-react/';
 
 const Footer = props => {
   return (
     <footer className="Footer">
-      <Link className="MenuItem__logo" href="https://deque.com/">
-        <img src={props.theme === 'dark' ? logo : darkLogo} alt="" />
-        <Offscreen>Deque Systems</Offscreen>
-      </Link>
-      <Link href="https://www.mozilla.org/en-US/MPL/2.0/">Terms of Use</Link>
+      <ul className="Footer-links">
+        <li>
+          Copyright © 2022{' '}
+          <Link href="https://deque.com/">Deque Systems Inc.</Link>
+        </li>
+        <li>
+          <Link href="https://www.deque.com/terms-of-use/">Terms of Use</Link>
+        </li>
+        <li>
+          <Link href="https://www.mozilla.org/en-US/MPL/2.0/ ">
+            MPL-2.0 License
+          </Link>
+        </li>
+      </ul>
     </footer>
   );
 };

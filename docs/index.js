@@ -226,7 +226,11 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <SideBar show={state.show} onDismiss={onTriggerClick}>
+        <SideBar
+          show={state.show}
+          onDismiss={onTriggerClick}
+          className="SideBar-with-footer"
+        >
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
@@ -246,6 +250,7 @@ const App = () => {
           id="main-content"
           workspaceRef={el => setWorkspace}
           tabIndex={-1}
+          className="Layout-with-footer"
         >
           <Route exact path="/" component={Home} />
           {componentsList.map(name => {
@@ -268,8 +273,8 @@ const App = () => {
             }
           />
         </Workspace>
+        <Footer theme={theme} />
       </div>
-      <Footer theme={theme} />
     </Router>
   );
   /* eslint-enable jsx-a11y/anchor-has-content */
