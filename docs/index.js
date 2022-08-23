@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import Home from './Home';
+import Footer from './Demo/Footer';
 import {
   TopBar,
   MenuBar,
@@ -225,7 +226,11 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <SideBar show={state.show} onDismiss={onTriggerClick}>
+        <SideBar
+          show={state.show}
+          onDismiss={onTriggerClick}
+          className="SideBar-with-footer"
+        >
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
@@ -245,6 +250,7 @@ const App = () => {
           id="main-content"
           workspaceRef={el => setWorkspace}
           tabIndex={-1}
+          className="Layout-with-footer"
         >
           <Route exact path="/" component={Home} />
           {componentsList.map(name => {
@@ -267,6 +273,7 @@ const App = () => {
             }
           />
         </Workspace>
+        <Footer theme={theme} />
       </div>
     </Router>
   );
