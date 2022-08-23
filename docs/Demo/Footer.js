@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from '@deque/cauldron-react/';
 
 const Footer = props => {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="Footer">
       <ul className="Footer-links">
         <li>
-          Copyright © 2022{' '}
+          Copyright © {year}{' '}
           <Link href="https://deque.com/">Deque Systems Inc.</Link>
         </li>
         <li>
