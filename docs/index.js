@@ -168,7 +168,7 @@ const App = () => {
     <Router>
       <div>
         <Helmet
-          titleTemplate="%s | Deque Cauldron React"
+          titleTemplate="%s | Deque Systems"
           defaultTitle="Deque Cauldron React"
         />
         <SkipLink target={'#main-content'} aria-label="Skip" />
@@ -269,7 +269,14 @@ const App = () => {
             component={({ location }) =>
               location.state && location.state.title ? (
                 <Helmet title={location.state.title} />
-              ) : null
+              ) : (
+                <Helmet title={'Cauldron React: Accessible Components Library'}>
+                  <meta
+                    name="description"
+                    content="Free Accessible React Components from Deque Systems"
+                  />
+                </Helmet>
+              )
             }
           />
         </Workspace>

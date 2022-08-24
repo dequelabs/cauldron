@@ -3,13 +3,15 @@ import { Code, Link } from '@deque/cauldron-react';
 
 const Home = () => (
   <div>
-    <h1>Cauldron React by Deque Systems</h1>
+    <h1>Cauldron React: Accessible Components Library</h1>
     <h2>Purpose</h2>
     <p>
-      These packages include everything from typography and colors to components
-      like custom form controls. The design and interactions are intended to
-      show how Deque would solve these problems. It's how we approach them in
-      our prouducts.
+      Friends don't let friends ship inaccessible code! These accessible
+      packages include everything from typography and colors, to components like
+      custom form controls. The design and interactions shown throughout this
+      site are intended to show how Deque provides accessible experiences for
+      the users of our own products - through the use of common, accessible
+      components like these.
     </p>
     <h2>Usage</h2>
     <p>
