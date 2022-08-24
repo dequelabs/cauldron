@@ -140,7 +140,7 @@ const App = () => {
       <Link
         to={{
           pathname,
-          state: { title: `${text} | Component demo` }
+          state: { title: `${text} | Accessible Component Pattern Demo` }
         }}
         onClick={() => {
           setState({ show: false });
@@ -268,7 +268,9 @@ const App = () => {
           <Route
             component={({ location }) =>
               location.state && location.state.title ? (
-                <Helmet title={location.state.title} />
+                <Helmet title={location.state.title}>
+                  <meta name="description" content={location.state.title} />
+                </Helmet>
               ) : (
                 <Helmet title={'Cauldron React: Accessible Components Library'}>
                   <meta
