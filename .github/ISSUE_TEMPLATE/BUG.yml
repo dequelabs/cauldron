@@ -1,6 +1,7 @@
 name: Bug Report
 description: File a bug report
 title: "fix: "
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
@@ -23,7 +24,7 @@ body:
       value: "A bug happened!"
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: version
     attributes:
       label: Version
