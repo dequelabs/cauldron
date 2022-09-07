@@ -22,6 +22,9 @@ const CardDemo = () => (
         ',\n  '
       )}\n} from '@deque/cauldron-react'`}
       component={Card}
+      componentDescription={
+        'A common, versatile pattern used to display content composed of different elements, usually in a collection.'
+      }
       states={[
         {
           children: (
@@ -30,7 +33,7 @@ const CardDemo = () => (
                 <h3>Card heading</h3>
               </CardHeader>
               <CardContent>
-                <p>Card content</p>
+                <p className="CardDemoText">Card content</p>
               </CardContent>
               <CardFooter>Footer content</CardFooter>
             </>
@@ -43,7 +46,7 @@ const CardDemo = () => (
                 <h3>Simple card heading</h3>
               </CardHeader>
               <CardContent>
-                <p>Card content</p>
+                <p className="CardDemoText">Card content</p>
               </CardContent>
             </>
           ),

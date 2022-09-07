@@ -20,8 +20,13 @@ const Demo = () => {
   return (
     <div>
       <h1>First Time Point Out</h1>
+      <h2>Component Description</h2>
+      <p>
+        A component that creates a box with text, an arrow, and styling to draw
+        a user's attention to something on the page and give information about
+        it.
+      </p>
       <h2>Demo</h2>
-
       <h3>With Default Arrow</h3>
       <Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
         <p>This is a first time point out with a pointer</p>

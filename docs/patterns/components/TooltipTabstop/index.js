@@ -7,80 +7,11 @@ import './index.css';
 const DemoTooltipTabstop = () => {
   return (
     <div className="tooltip-tabstop-demo">
-      <h1>Tooltip Tabstop</h1>
-
-      <p>
-        <code>TooltipTabstop</code> is a composite component built on top of{' '}
-        <Link to="./Tooltip" className="tooltip-link">
-          Tooltip
-        </Link>{' '}
-        allowing for accessible tooltips on non-interactive elements.
-      </p>
-
-      <p>Some examples of where this might be used over a standard Tooltip:</p>
-
-      <ul>
-        <li>
-          A <code>?</code> icon that provides additional information about
-          something
-        </li>
-        <li>
-          A progress component with non-interactive steps that needs to provide
-          additional information about each step
-        </li>
-      </ul>
-
-      <p>
-        <code>TooltipTabstop</code> accepts all the same props as{' '}
-        <code>Tooltip</code>, except for <code>target</code>
-      </p>
-
-      <h2>Demo</h2>
-
-      <ol className="progress">
-        <li>
-          <TooltipTabstop tooltip={<div>Step 1: Current</div>}>
-            1
-          </TooltipTabstop>
-        </li>
-        <li>
-          <TooltipTabstop tooltip={<div>Step 2: Future</div>}>2</TooltipTabstop>
-        </li>
-        <li>
-          <TooltipTabstop tooltip={<div>Step 3: Future</div>}>3</TooltipTabstop>
-        </li>
-      </ol>
-
-      <h2>Code Samples</h2>
-      <Code language="javascript" role="region" tabIndex={0}>
-        {`import React from 'react';
-import { TooltipTabstop } from '@deque/cauldron-react';
-
-const Demo = () => {
-  return (
-    <ol className="progress">
-      <li>
-        <TooltipTabstop tooltip={<div>Step 1: Current</div>}>
-          1
-        </TooltipTabstop>
-      </li>
-      <li>
-        <TooltipTabstop tooltip={<div>Step 2: Future</div>}>
-          2
-        </TooltipTabstop>
-      </li>
-      <li>
-        <TooltipTabstop tooltip={<div>Step 3: Future</div>}>
-          3
-        </TooltipTabstop>
-      </li>
-    </ol>
-  )
-};`}
-      </Code>
-
       <Demo
         component={TooltipTabstop}
+        componentDescription={
+          'An accessible tooltip for non-interactive elements.'
+        }
         states={[]}
         propDocs={{
           children: {
@@ -92,9 +23,88 @@ const Demo = () => {
             type: 'ReactNode',
             description: 'Child content of the tooltip component.',
             required: true
+          },
+          show: {
+            type: 'boolean',
+            // See: https://github.com/dequelabs/cauldron/issues/546
+            description:
+              'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
+          },
+          placement: {
+            type: 'string',
+            description:
+              'The position of the tooltip relative to its target element.',
+            required: false,
+            defaultValue: "'auto'"
+          },
+          variant: {
+            type: 'string',
+            description: 'The style of tooltip to display.',
+            required: false,
+            defaultValue: "'text'"
+          },
+          portal: {
+            type: 'Ref | HTMLElement',
+            description: 'The parent element to place the Tooltip in.',
+            required: false,
+            defaultValue: 'document.body'
           }
         }}
-      />
+      >
+        <h2>When to Use:</h2>
+        <ul>
+          <li>An icon that provides additional information about something</li>
+          <li>
+            A progress component with non-interactive steps that needs to
+            provide additional information about each step
+          </li>
+        </ul>
+        <ol className="progress">
+          <li>
+            <TooltipTabstop tooltip={<div>Step 1: Current</div>}>
+              1
+            </TooltipTabstop>
+          </li>
+          <li>
+            <TooltipTabstop tooltip={<div>Step 2: Future</div>}>
+              2
+            </TooltipTabstop>
+          </li>
+          <li>
+            <TooltipTabstop tooltip={<div>Step 3: Future</div>}>
+              3
+            </TooltipTabstop>
+          </li>
+        </ol>
+
+        <h2>Code Samples</h2>
+        <Code language="javascript" role="region" tabIndex={0}>
+          {`import React from 'react';
+  import { TooltipTabstop } from '@deque/cauldron-react';
+
+  const Demo = () => {
+    return (
+      <ol className="progress">
+        <li>
+          <TooltipTabstop tooltip={<div>Step 1: Current</div>}>
+            1
+          </TooltipTabstop>
+        </li>
+        <li>
+          <TooltipTabstop tooltip={<div>Step 2: Future</div>}>
+            2
+          </TooltipTabstop>
+        </li>
+        <li>
+          <TooltipTabstop tooltip={<div>Step 3: Future</div>}>
+            3
+          </TooltipTabstop>
+        </li>
+      </ol>
+    )
+  };`}
+        </Code>
+      </Demo>
     </div>
   );
 };

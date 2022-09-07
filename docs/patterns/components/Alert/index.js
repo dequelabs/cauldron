@@ -22,6 +22,8 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Alert</h1>
+        <h2>Component Description</h2>
+        <p>Shows a modal with a message. Optional warning styling.</p>
         <h2>Demo</h2>
         <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
         <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>

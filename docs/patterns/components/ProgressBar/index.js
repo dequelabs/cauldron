@@ -45,6 +45,7 @@ const ProgressBarDemo = () => {
   return (
     <div className="ProgressBarDemo">
       <h1>Progress Bar</h1>
+      <h2>Component Description</h2>
       <p>
         Progress bars are used to indicate the status of some progress activity
         happening, such as number of items completed.
