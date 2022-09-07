@@ -46,7 +46,7 @@ const Foo = () => (
     </p>
     <p>
       Found a bug?{' '}
-      <Link href="https://github.com/dequelabs/cauldron/issues">
+      <Link href="https://github.com/dequelabs/cauldron/issues/new/choose">
         Open an issue!
       </Link>
     </p>
