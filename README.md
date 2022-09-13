@@ -15,7 +15,7 @@ Friends don’t let friends ship inaccessible code! These accessible packages in
 
 ## usage
 
-Cauldron React is an accessible React components library. Cauldron Styles contains accessible styling for those components and more.
+[Cauldron React](packages/react/README.md) is an accessible React components library. [Cauldron Styles](packages/styles/README.md) contains accessible styling for those components and more.
 
 ## contributing
 
