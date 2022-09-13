@@ -6,7 +6,7 @@ const Home = () => (
     <h1>Cauldron React: Accessible Components Library</h1>
     <h2>Purpose</h2>
     <p>
-      Friends don't let friends ship inaccessible code! These accessible
+      Friends don’t let friends ship inaccessible code! These accessible
       packages include everything from typography and colors, to components like
       custom form controls. The design and interactions shown throughout this
       site are intended to show how Deque provides accessible experiences for
