@@ -52,7 +52,7 @@ const Foo = () => (
     </p>
     <h2>More Accessibility Tools</h2>
     <p>
-      Don't stop here! Check out{' '}
+      Don’t stop here! Check out{' '}
       <Link href="https://www.deque.com/axe/">Deque Systems' axe Tools</Link>{' '}
       for all your accessibility testing needs!
     </p>
