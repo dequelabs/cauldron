@@ -7,8 +7,8 @@ const Demo = () => (
     <h1>Click Outside Listener</h1>
     <h2>Component Description</h2>
     <p>
-      If a user clicks outside of this component on the page, the{' '}
-      <code>onClickOutside</code> method will be called.
+      A component wrapper that calls a method when clicking outside the wrapped
+      component.
     </p>
     <h2>Demo</h2>
     <ClickOutsideListener
