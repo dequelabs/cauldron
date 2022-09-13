@@ -21,7 +21,7 @@ body:
     attributes:
       label: Expected Behavior
       description: What did you expect to happen?
-      placeholder: Tell us what you expected to see!
+      placeholder: Tell us what you expected to happen!
       value: "Not a bug."
     validations:
       required: true
