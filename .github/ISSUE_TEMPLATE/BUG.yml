@@ -30,7 +30,7 @@ body:
     attributes:
       label: Actual Behavior
       description: What actually happened?
-      placeholder: Tell us what you see!
+      placeholder: Tell us what you are experiencing!
       value: "A bug happened!"
     validations:
       required: true
