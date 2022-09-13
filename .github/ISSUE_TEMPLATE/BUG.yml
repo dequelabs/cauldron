@@ -20,7 +20,7 @@ body:
     id: version
     attributes:
       label: Version
-      description: What version of our software are you running?
+      description: What version of cauldron did this happen with?
       placeholder: 4.0.0
     validations:
       required: true
