@@ -60,8 +60,8 @@ code {
   height: 50px;
   border-width: 1px 0 0 0;
   border-style: solid;
-  border-color: var(--stroke-dark);
-  background-color: var(--accent-medium);
+  border-color: #b3bfc6;
+  background-color: var(--white);
   background-size: cover;
 }
 
@@ -70,7 +70,7 @@ code {
   flex-direction: row;
   list-style: none;
   margin-left: var(--space-smallest);
-  color: var(--accent-light);
+  color: var(--gray-60);
 }
 
 .Footer-links li {
@@ -85,5 +85,16 @@ code {
 .Copyright {
   margin-left: auto;
   margin-right: var(--space-smallest);
+  color: var(--gray-60);
+}
+
+.cauldron--theme-dark .Footer-links,
+.cauldron--theme-dark .Copyright {
   color: var(--accent-light);
+  color: var(--options-menu-text-color);
+}
+
+.cauldron--theme-dark .Footer {
+  background-color: var(--accent-medium);
+  border-color: var(--stroke-dark);
 }
