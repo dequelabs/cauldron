@@ -6,7 +6,7 @@ import { className } from '../../../props';
 const LineDemo = () => (
   <Demo
     component={Line}
-    whenToUse={'Display a horizontal line.'}
+    componentDescription={'Display a horizontal line.'}
     states={[{}]}
     propDocs={{
       className

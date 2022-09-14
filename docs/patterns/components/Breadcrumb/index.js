@@ -12,11 +12,10 @@ import { children, className } from '../../../props';
 const BreadcrumbDemo = () => (
   <div>
     <h1>Breadcrumb</h1>
-    <h2>When To Use</h2>
+    <h2>Component Description</h2>
     <p>
-      The Breadcrumb component helps users easily understand their location on a
-      page in relation to other pages. It displays a list of links within a
-      heirarchy and allows navigation back through them.
+      The Breadcrumb component displays a list of links within a heirarchy and
+      allows navigation back through them.
     </p>
 
     <h2>Examples</h2>

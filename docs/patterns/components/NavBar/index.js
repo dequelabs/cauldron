@@ -11,7 +11,7 @@ const Demo = () => {
   return (
     <div className="NavBarDemo">
       <h1>NavBar</h1>
-      <h2>When To Use</h2>
+      <h2>Component Description</h2>
       <p>
         A navigation bar that contains links to other sections of the website.
       </p>

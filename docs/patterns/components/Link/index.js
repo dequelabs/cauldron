@@ -9,7 +9,7 @@ export default class LinkDemo extends Component {
       <div>
         <Demo
           component={Link}
-          whenToUse={'A link component with accessible styling.'}
+          componentDescription={'A link component with accessible styling.'}
           states={[
             {
               children: 'I am a link!',

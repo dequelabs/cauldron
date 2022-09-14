@@ -59,7 +59,7 @@ const StepperDemo = () => {
       <Demo
         customImport="import { Stepper, Step } from '@deque/cauldron-react'"
         component={Stepper}
-        whenToUse={'Segmented progress bar'}
+        componentDescription={'Segmented progress bar'}
         states={[
           {
             children: (

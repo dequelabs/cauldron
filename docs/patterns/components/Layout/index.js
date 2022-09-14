@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <div>
       <h1>Layout</h1>
-      <h2>When To Use</h2>
+      <h2>Component Description</h2>
       <p>
         The Workspace component is a convenience wrapper around the Layout and
         Main components. It is important to note that the layout components{' '}

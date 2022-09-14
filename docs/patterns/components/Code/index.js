@@ -6,7 +6,9 @@ const CodeDemo = () => (
   <>
     <Demo
       component={Code}
-      whenToUse={'Displays text styled to indicate that it is computer code.'}
+      componentDescription={
+        'Displays text styled to indicate that it is computer code.'
+      }
       states={[
         {
           children: `// here are some vars

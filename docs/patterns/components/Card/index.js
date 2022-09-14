@@ -22,7 +22,7 @@ const CardDemo = () => (
         ',\n  '
       )}\n} from '@deque/cauldron-react'`}
       component={Card}
-      whenToUse={
+      componentDescription={
         'A common, versatile pattern used to display content composed of different elements, usually in a collection.'
       }
       states={[

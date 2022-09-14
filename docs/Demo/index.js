@@ -17,7 +17,7 @@ const Demo = props => {
     propDocs,
     children,
     customImport,
-    whenToUse
+    componentDescription
   } = props;
 
   const { displayName, defaultProps = {} } = Component;
@@ -36,8 +36,8 @@ const Demo = props => {
   return (
     <div className="Demo">
       <h1>{displayName}</h1>
-      <h2>When To Use</h2>
-      <p>{whenToUse}</p>
+      <h2>Component Description</h2>
+      <p>{componentDescription}</p>
       <h2>Demo</h2>
       <Code>
         {customImport ||

@@ -15,7 +15,7 @@ const AccordionDemo = () => {
     <div>
       <div className="Demo data-list-demo">
         <h1>Accordion</h1>
-        <h2>When To Use</h2>
+        <h2>Component Description</h2>
         <p>
           The
           <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/">

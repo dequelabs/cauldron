@@ -26,8 +26,8 @@ export default class CheckboxDemo extends Component {
         <FieldWrapNotice />
         <Demo
           component={Checkbox}
-          whenToUse={
-            'Checkboxes should be used in forms where 1 or more selections can be made. Under-the-hood this component uses native HTML checkbox elements. Checkboxes should have descriptive labels.'
+          componentDescription={
+            'Boxes that are checked when activated for selecting values. Typically used for submission in a form.'
           }
           states={[
             {

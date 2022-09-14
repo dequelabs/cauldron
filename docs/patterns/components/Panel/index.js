@@ -8,7 +8,7 @@ const PanelDemo = () => {
     <div>
       <Demo
         component={Panel}
-        whenToUse={'A styled text panel with optional heading.'}
+        componentDescription={'A styled text panel with optional heading.'}
         states={[
           {
             heading: {

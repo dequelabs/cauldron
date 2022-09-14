@@ -7,7 +7,7 @@ const ButtonDemo = () => (
   <div>
     <Demo
       component={Button}
-      whenToUse={
+      componentDescription={
         'An interactive element that performs a programmable action when activated by the user.'
       }
       states={[

@@ -36,7 +36,7 @@ class DescriptionListDemo extends Component {
       <div className="data-list-demo">
         <Demo
           component={DescriptionList}
-          whenToUse={
+          componentDescription={
             'A component that creates a list of terms and their definitions.'
           }
           customImport={`import {\n  ${dataListComponentNames.join(

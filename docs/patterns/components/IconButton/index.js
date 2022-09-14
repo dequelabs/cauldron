@@ -6,7 +6,7 @@ const IconButtonDemo = () => (
   <div>
     <Demo
       component={IconButton}
-      whenToUse={
+      componentDescription={
         'An interactive element that performs a programmable action when activated by the user displayed as a symbol image.'
       }
       states={[

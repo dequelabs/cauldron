@@ -9,7 +9,9 @@ export default class TagDemo extends Component {
       <div>
         <Demo
           component={Tag}
-          whenToUse={'Styled text intended for keywords used as tags.'}
+          componentDescription={
+            'Styled text intended for keywords used as tags.'
+          }
           states={[
             {
               children: 'Value'

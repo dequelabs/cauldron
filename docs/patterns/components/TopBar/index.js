@@ -5,7 +5,7 @@ const Demo = () => {
   return (
     <>
       <h1>TopBar</h1>
-      <h2>When To Use</h2>
+      <h2>Component Description</h2>
       <p>
         A bar at the top of the page. Typically contains information about the
         page, a navigation menu, and other actions user can take relating to the
