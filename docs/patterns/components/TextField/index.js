@@ -50,7 +50,7 @@ const TextFieldDemo = () => {
             }
           ]}
           component={TextField}
-          componentDescription={
+          whenToUse={
             'A form element that allows users to type in text. One line and multi-line options.'
           }
           propDocs={{

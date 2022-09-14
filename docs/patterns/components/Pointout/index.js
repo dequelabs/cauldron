@@ -20,7 +20,7 @@ const Demo = () => {
   return (
     <div>
       <h1>First Time Point Out</h1>
-      <h2>Component Description</h2>
+      <h2>When To Use</h2>
       <p>
         A component that creates a box with text, an arrow, and styling to draw
         a user's attention to something on the page and give information about

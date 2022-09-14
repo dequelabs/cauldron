@@ -9,7 +9,7 @@ export default class IconDemo extends Component {
       <div>
         <Demo
           component={Icon}
-          componentDescription={'Display a symbol image.'}
+          whenToUse={'Display a symbol image.'}
           states={iconTypes
             .map(type => ({ type }))
             .sort((a, b) => a.type.localeCompare(b.type))}

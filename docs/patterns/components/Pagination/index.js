@@ -18,7 +18,7 @@ const PaginationDemo = () => {
     <div>
       <Demo
         component={Pagination}
-        componentDescription={
+        whenToUse={
           'A component and hook that create pages out of a list of items.'
         }
         states={[

@@ -33,7 +33,7 @@ const LoaderOverlayDemo = () => {
   return (
     <Demo
       component={LoaderOverlay}
-      componentDescription={
+      whenToUse={
         'A wrapper in which you can mount a Loader component along with some text. It will render a centered, absolutely poisitioned loader box within its relative parent.'
       }
       states={[]}

@@ -22,7 +22,7 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Modal</h1>
-        <h2>Component Description</h2>
+        <h2>When To Use</h2>
         <p>
           Opens an element within the current window that displays in front of
           all other page content.

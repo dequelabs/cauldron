@@ -9,9 +9,7 @@ const DemoTooltipTabstop = () => {
     <div className="tooltip-tabstop-demo">
       <Demo
         component={TooltipTabstop}
-        componentDescription={
-          'An accessible tooltip for non-interactive elements.'
-        }
+        whenToUse={'An accessible tooltip for non-interactive elements.'}
         states={[]}
         propDocs={{
           children: {

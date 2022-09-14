@@ -9,7 +9,7 @@ const IssuePanelDemo = () => {
       <Demo
         customImport="import { IssuePanel, IconButton } from '@deque/cauldron-react'"
         component={IssuePanel}
-        componentDescription={
+        whenToUse={
           'A text panel with a header. Intended for describing issues. Option to put IconButton components in the header.'
         }
         states={[

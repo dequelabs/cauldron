@@ -16,7 +16,7 @@ const DemoRadioCardGroup = () => {
       <FieldWrapNotice />
       <Demo
         component={RadioCardGroup}
-        componentDescription={'A radio group with options styled like cards.'}
+        whenToUse={'A radio group with options styled like cards.'}
         states={[]}
         propDocs={{
           radios: {

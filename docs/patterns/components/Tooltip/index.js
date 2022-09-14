@@ -26,7 +26,7 @@ const DemoTooltip = () => {
     <div className="tooltip-demo">
       <Demo
         component={Tooltip}
-        componentDescription={
+        whenToUse={
           'A small text box that gives more information about a UI element when a user hovers over or focuses it.'
         }
         states={[]}

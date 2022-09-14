@@ -6,7 +6,7 @@ import { className } from '../../../props';
 const LoaderDemo = () => (
   <Demo
     component={Loader}
-    componentDescription={
+    whenToUse={
       'An animated image that indicates something is loading. Regular and large options.'
     }
     states={[{ label: 'Loading...' }, { variant: 'large' }]}

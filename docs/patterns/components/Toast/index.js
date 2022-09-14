@@ -37,9 +37,7 @@ export default class Demo extends Component {
     return (
       <DemoComponent
         component={Toast}
-        componentDescription={
-          'A banner with text positioned at the top of the page.'
-        }
+        whenToUse={'A banner with text positioned at the top of the page.'}
         states={[
           {
             type: 'confirmation',

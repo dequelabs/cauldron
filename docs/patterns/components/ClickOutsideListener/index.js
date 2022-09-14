@@ -5,7 +5,7 @@ import PropDocs from '../../../Demo/PropDocs';
 const Demo = () => (
   <div>
     <h1>Click Outside Listener</h1>
-    <h2>Component Description</h2>
+    <h2>When To Use</h2>
     <p>
       A component wrapper that calls a method when clicking outside the wrapped
       component.

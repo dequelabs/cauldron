@@ -26,7 +26,7 @@ const SelectDemo = () => {
       <FieldWrapNotice />
       <Demo
         component={Select}
-        componentDescription={
+        whenToUse={
           'A form element that lets users select a choice from a dropdown list.'
         }
         states={[

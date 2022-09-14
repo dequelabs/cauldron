@@ -15,7 +15,7 @@ const Demo = () => {
   return (
     <div className="TabsDemo">
       <h1>Tabs</h1>
-      <h2>Component Description</h2>
+      <h2>When To Use</h2>
       <p>
         The
         <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/">
