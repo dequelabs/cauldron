@@ -51,23 +51,25 @@ code {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: var(--top-bar-height);
   flex: none;
   flex-direction: row;
   box-sizing: border-box;
   z-index: var(--z-index-sidebar);
   display: flex;
   align-items: center;
-  background-color: var(--top-bar-background-color);
-  color: var(--top-bar-text-color);
-  border-bottom: solid 1px var(--top-bar-border-bottom-color);
+  height: 50px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: #5d676f;
+  background-color: #283640;
+  background-size: cover;
 }
 
 .Footer-links {
   display: flex;
   flex-direction: row;
-  margin: auto;
   list-style: none;
+  margin-left: var(--space-smallest);
 }
 
 .Footer-links li {
@@ -76,5 +78,10 @@ code {
 
 .SideBar-with-footer,
 .Layout {
-  bottom: var(--top-bar-height);
+  bottom: 50px;
+}
+
+.Copyright {
+  margin-left: auto;
+  margin-right: var(--space-smallest);
 }

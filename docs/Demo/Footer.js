@@ -8,10 +8,6 @@ const Footer = props => {
     <footer className="Footer">
       <ul className="Footer-links">
         <li>
-          Copyright © {year}{' '}
-          <Link href="https://deque.com/">Deque Systems Inc.</Link>
-        </li>
-        <li>
           <Link href="https://www.deque.com/terms-of-use/">Terms of Use</Link>
         </li>
         <li>
@@ -20,6 +16,10 @@ const Footer = props => {
           </Link>
         </li>
       </ul>
+      <div className="Copyright">
+        Copyright © {year}{' '}
+        <Link href="https://deque.com/">Deque Systems Inc.</Link>
+      </div>
     </footer>
   );
 };
