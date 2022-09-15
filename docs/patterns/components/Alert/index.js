@@ -48,7 +48,7 @@ export default class Demo extends Component {
           </AlertActions>
         </Alert>
         <h2>Code Sample</h2>
-        <Code langauge="javascript" role="region" tabIndex={0}>
+        <Code language="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react';

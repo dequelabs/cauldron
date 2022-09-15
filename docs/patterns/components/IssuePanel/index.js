@@ -16,7 +16,7 @@ const IssuePanelDemo = () => {
           {
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -25,7 +25,7 @@ const IssuePanelDemo = () => {
             title: 'Issue 1',
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -38,7 +38,7 @@ const IssuePanelDemo = () => {
             ],
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -52,7 +52,7 @@ const IssuePanelDemo = () => {
             ],
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
