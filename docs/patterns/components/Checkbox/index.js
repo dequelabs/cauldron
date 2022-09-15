@@ -26,6 +26,9 @@ export default class CheckboxDemo extends Component {
         <FieldWrapNotice />
         <Demo
           component={Checkbox}
+          componentDescription={
+            'Boxes that are checked when activated for selecting values. Typically used for submission in a form.'
+          }
           states={[
             {
               id: 'demo-checkbox-1',

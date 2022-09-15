@@ -16,6 +16,9 @@ class AddressDemo extends Component {
       <div className="data-list-demo">
         <Demo
           component={Address}
+          componentDescription={
+            'The Address component indicates contact information for people or organizations. It may include any type of contact information including a physical address.'
+          }
           customImport={`import {\n  ${addressComponentNames.join(
             ',\n  '
           )}\n} from '@deque/cauldron-react'`}

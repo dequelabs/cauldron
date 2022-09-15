@@ -12,6 +12,11 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Options Menu</h1>
+        <h2>Component Description</h2>
+        <p>
+          A dropdown menu that shows a list of <code>OptionMenuItem</code>{' '}
+          components when activated.
+        </p>
         <h2>Demo</h2>
         <h3>Options Menu (Default Trigger)</h3>
         <OptionsMenu

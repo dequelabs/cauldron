@@ -36,6 +36,9 @@ class DescriptionListDemo extends Component {
       <div className="data-list-demo">
         <Demo
           component={DescriptionList}
+          componentDescription={
+            'A component that creates a list of terms and their definitions.'
+          }
           customImport={`import {\n  ${dataListComponentNames.join(
             ',\n  '
           )}\n} from '@deque/cauldron-react'`}
