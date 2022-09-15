@@ -8,7 +8,7 @@ const ButtonDemo = () => (
     <Demo
       component={Button}
       componentDescription={
-        'An interactive element that performs a programmable action when activated by the user.'
+        'An interactive component that performs a programmable action when activated by the user.'
       }
       states={[
         { children: 'Primary' },

@@ -17,7 +17,7 @@ class AddressDemo extends Component {
         <Demo
           component={Address}
           componentDescription={
-            'The address element indicates contact information for people or organizations. It may include any type of contact information including a physical address.'
+            'The Address component indicates contact information for people or organizations. It may include any type of contact information including a physical address.'
           }
           customImport={`import {\n  ${addressComponentNames.join(
             ',\n  '

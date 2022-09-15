@@ -33,7 +33,7 @@ const CardDemo = () => (
                 <h3>Card heading</h3>
               </CardHeader>
               <CardContent>
-                <p className="CardDemoText">Card content</p>
+                <p className="CardDemo__text">Card content</p>
               </CardContent>
               <CardFooter>Footer content</CardFooter>
             </>
@@ -46,7 +46,7 @@ const CardDemo = () => (
                 <h3>Simple card heading</h3>
               </CardHeader>
               <CardContent>
-                <p className="CardDemoText">Card content</p>
+                <p className="CardDemo__text">Card content</p>
               </CardContent>
             </>
           ),
