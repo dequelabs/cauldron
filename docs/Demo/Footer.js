@@ -5,11 +5,7 @@ const Footer = props => {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      className={
-        props.theme === 'dark' ? 'cauldron--theme-dark Footer' : 'Footer'
-      }
-    >
+    <footer className="Footer">
       <ul className="Footer-links">
         <li>
           <Link href="https://www.deque.com/terms-of-use/">Terms of Use</Link>

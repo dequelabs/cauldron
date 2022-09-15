@@ -51,10 +51,7 @@ code {
   position: fixed;
   bottom: 0;
   width: 100%;
-  flex: none;
-  flex-direction: row;
   box-sizing: border-box;
-  z-index: var(--z-index-sidebar);
   display: flex;
   align-items: center;
   height: 50px;
@@ -67,7 +64,6 @@ code {
 
 .Footer-links {
   display: flex;
-  flex-direction: row;
   list-style: none;
   margin-left: var(--space-smallest);
   color: var(--gray-60);
