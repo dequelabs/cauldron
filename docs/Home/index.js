@@ -56,7 +56,7 @@ const Foo = () => (
     <p>
       Don’t stop here! Check out{' '}
       <Link href="https://www.deque.com/axe/">
-        Deque Systems' axe Tools
+        Deque Systems’ axe Tools
         <Icon type="external-link" />
       </Link>{' '}
       for all your accessibility testing needs!
