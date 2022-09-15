@@ -53,7 +53,7 @@ code {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 50px;
+  padding: 0.36rem 0;
   border-top: 1px solid var(--footer-border-color);
   background-color: var(--footer-background-color);
 }
@@ -71,7 +71,7 @@ code {
 
 .SideBar--with-footer,
 .Layout {
-  bottom: 50px;
+  bottom: 0.36rem;
 }
 
 .Copyright {
