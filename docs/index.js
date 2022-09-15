@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import Home from './Home';
-import Footer from './Demo/Footer';
+import Footer from './Home/Footer';
 import {
   TopBar,
   MenuBar,

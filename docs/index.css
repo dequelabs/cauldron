@@ -54,9 +54,8 @@ code {
   display: flex;
   align-items: center;
   height: 50px;
-  border-top: 1px solid #b3bfc6;
-  background-color: var(--white);
-  background-size: cover;
+  border-top: 1px solid var(--footer-border-color);
+  background-color: var(--footer-background-color);
 }
 
 .Footer__links {
@@ -87,9 +86,14 @@ code {
   color: var(--options-menu-text-color);
 }
 
+.cauldron--theme-light .Footer {
+  --footer-background-color: var(--white);
+  --footer-border-color: #b3bfc6;
+}
+
 .cauldron--theme-dark .Footer {
-  background-color: var(--accent-medium);
-  border-color: var(--stroke-dark);
+  --footer-background-color: var(--accent-medium);
+  --footer-border-color: var(--stroke-dark);
 }
 
 .Home__links {
