@@ -120,7 +120,7 @@ const DemoTooltip = () => {
             Left
           </Button>
           <Tooltip variant="info" target={leftInfo} placement="left">
-            Here's an informational tooltip with more content on your left.
+            Here’s an informational tooltip with more content on your left.
           </Tooltip>
 
           <Button variant="secondary" buttonRef={rightInfo}>
