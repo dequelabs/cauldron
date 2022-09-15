@@ -41,6 +41,7 @@ const Foo = () => (
     <p>
       Check out our{' '}
       <Link href="https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md">
+        <Icon type="external-link" />
         contribution guide!
       </Link>
     </p>
