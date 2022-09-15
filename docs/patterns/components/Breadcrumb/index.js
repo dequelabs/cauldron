@@ -14,7 +14,7 @@ const BreadcrumbDemo = () => (
     <h1>Breadcrumb</h1>
     <h2>Component Description</h2>
     <p>
-      The Breadcrumb component displays a list of links within a heirarchy and
+      The Breadcrumb component displays a list of links within a hierarchy and
       allows navigation back through them.
     </p>
 
