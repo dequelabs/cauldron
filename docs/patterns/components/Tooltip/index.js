@@ -106,7 +106,7 @@ const DemoTooltip = () => {
             Top
           </Button>
           <Tooltip variant="info" target={topInfo} placement="top">
-            Here's an informational tooltip with more content on top.
+            Here’s an informational tooltip with more content on top.
           </Tooltip>
 
           <Button variant="secondary" buttonRef={bottomInfo}>
