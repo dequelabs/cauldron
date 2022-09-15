@@ -127,7 +127,7 @@ const DemoTooltip = () => {
             Right
           </Button>
           <Tooltip variant="info" target={rightInfo} placement="right">
-            Here's an informational tooltip with more content on your right.
+            Here’s an informational tooltip with more content on your right.
           </Tooltip>
         </div>
 
