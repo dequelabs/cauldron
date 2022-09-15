@@ -23,7 +23,7 @@ const Demo = () => {
       <h2>Component Description</h2>
       <p>
         A component that creates a box with text, an arrow, and styling to draw
-        a user's attention to something on the page and give information about
+        a user’s attention to something on the page and give information about
         it.
       </p>
       <h2>Demo</h2>
