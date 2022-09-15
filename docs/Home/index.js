@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Link } from '@deque/cauldron-react';
+import { Code, Link, Icon } from '@deque/cauldron-react';
 
 const Home = () => (
   <div>
@@ -41,20 +41,24 @@ const Foo = () => (
     <p>
       Check out our{' '}
       <Link href="https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md">
-        <Icon type="external-link" />
         contribution guide!
+        <Icon type="external-link" />
       </Link>
     </p>
     <p>
       Found a bug?{' '}
       <Link href="https://github.com/dequelabs/cauldron/issues/new/choose">
         Open an issue!
+        <Icon type="external-link" />
       </Link>
     </p>
     <h2>More Accessibility Tools</h2>
     <p>
       Don’t stop here! Check out{' '}
-      <Link href="https://www.deque.com/axe/">Deque Systems' axe Tools</Link>{' '}
+      <Link href="https://www.deque.com/axe/">
+        Deque Systems' axe Tools
+        <Icon type="external-link" />
+      </Link>{' '}
       for all your accessibility testing needs!
     </p>
   </div>
