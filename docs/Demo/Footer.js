@@ -18,7 +18,7 @@ const Footer = props => {
       </ul>
       <div className="Copyright">
         Copyright © {year}{' '}
-        <Link href="https://deque.com/">Deque Systems Inc.</Link>
+        <Link href="https://deque.com/">Deque Systems, Inc.</Link>
       </div>
     </footer>
   );

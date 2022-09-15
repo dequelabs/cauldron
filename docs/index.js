@@ -232,7 +232,7 @@ const App = () => {
         <SideBar
           show={state.show}
           onDismiss={onTriggerClick}
-          className="SideBar-with-footer"
+          className="SideBar--with-footer"
         >
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
@@ -253,7 +253,6 @@ const App = () => {
           id="main-content"
           workspaceRef={el => setWorkspace}
           tabIndex={-1}
-          className="Layout-with-footer"
         >
           <Route exact path="/" component={Home} />
           {componentsList.map(name => {

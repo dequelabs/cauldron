@@ -51,13 +51,10 @@ code {
   position: fixed;
   bottom: 0;
   width: 100%;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   height: 50px;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-color: #b3bfc6;
+  border-top: 1px solid #b3bfc6;
   background-color: var(--white);
   background-size: cover;
 }
@@ -73,7 +70,7 @@ code {
   margin: var(--space-smallest);
 }
 
-.SideBar-with-footer,
+.SideBar--with-footer,
 .Layout {
   bottom: 50px;
 }
@@ -93,4 +90,8 @@ code {
 .cauldron--theme-dark .Footer {
   background-color: var(--accent-medium);
   border-color: var(--stroke-dark);
+}
+
+.Home__links {
+  margin: 2px 0 0 3px;
 }

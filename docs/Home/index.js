@@ -38,29 +38,37 @@ const Foo = () => (
       `}
     </Code>
     <h2>Contribute</h2>
-    <p>
-      Check out our{' '}
-      <Link href="https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md">
-        contribution guide!
-        <Icon type="external-link" />
-      </Link>
-    </p>
-    <p>
-      Found a bug?{' '}
-      <Link href="https://github.com/dequelabs/cauldron/issues/new/choose">
-        Open an issue!
-        <Icon type="external-link" />
-      </Link>
-    </p>
+    <ul>
+      <li className="is--flex-row">
+        <p>Check out our</p>
+        <Link
+          className="Home__links"
+          href="https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md"
+        >
+          contribution guide!
+          <Icon type="external-link" />
+        </Link>
+      </li>
+      <li className="is--flex-row">
+        <p>Found a bug? </p>
+        <Link
+          className="Home__links"
+          href="https://github.com/dequelabs/cauldron/issues/new/choose"
+        >
+          Open an issue!
+          <Icon type="external-link" />
+        </Link>
+      </li>
+    </ul>
     <h2>More Accessibility Tools</h2>
-    <p>
-      Don’t stop here! Check out{' '}
-      <Link href="https://www.deque.com/axe/">
-        Deque Systems’ axe Tools
+    <div className="is--flex-row">
+      <p>Don’t stop here! Check out </p>
+      <Link className="Home__links" href="https://www.deque.com/axe/">
+        Deque Systems' axe Tools
         <Icon type="external-link" />
       </Link>{' '}
-      for all your accessibility testing needs!
-    </p>
+      <p>for all your accessibility testing needs!</p>
+    </div>
   </div>
 );
 
