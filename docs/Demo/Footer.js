@@ -6,7 +6,7 @@ const Footer = props => {
 
   return (
     <footer className="Footer">
-      <ul className="Footer-links">
+      <ul className="Footer__links">
         <li>
           <Link href="https://www.deque.com/terms-of-use/">Terms of Use</Link>
         </li>
