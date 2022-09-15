@@ -16,7 +16,8 @@ const Demo = props => {
     component: Component,
     propDocs,
     children,
-    customImport
+    customImport,
+    componentDescription
   } = props;
 
   const { displayName, defaultProps = {} } = Component;
@@ -35,6 +36,9 @@ const Demo = props => {
   return (
     <div className="Demo">
       <h1>{displayName}</h1>
+      <h2>Component Description</h2>
+      <p>{componentDescription}</p>
+      <h2>Demo</h2>
       <Code>
         {customImport ||
           `import { ${displayName} } from '@deque/cauldron-react'`}

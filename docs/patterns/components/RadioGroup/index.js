@@ -20,6 +20,9 @@ export default class RadioGroupDemo extends Component {
         <FieldWrapNotice />
         <Demo
           component={RadioGroup}
+          componentDescription={
+            'A form element that lets users select a choice from a list.'
+          }
           states={[
             {
               defaultValue: 'tuesday',

@@ -33,6 +33,9 @@ const LoaderOverlayDemo = () => {
   return (
     <Demo
       component={LoaderOverlay}
+      componentDescription={
+        'A wrapper in which you can mount a Loader component along with some text. It will render a centered, absolutely positioned loader box within its relative parent.'
+      }
       states={[]}
       propDocs={{
         className,
@@ -77,12 +80,6 @@ const LoaderOverlayDemo = () => {
             </LoaderOverlay>
           </>
         )}
-        <p>
-          The <code>LoaderOverlay</code> component is simply a wrapper in which
-          you can mount a Loader along with some text. It will render a
-          centered, absolutely poisitioned loader box within its relative
-          parent.
-        </p>
         <h2>It is expected that you choose one of the following:</h2>
         <ul>
           <li>
@@ -95,8 +92,7 @@ const LoaderOverlayDemo = () => {
         </ul>
         <p>
           <strong>NOTE:</strong> in this example we also render a{' '}
-          <code>Scrim</code>
-          component.
+          <code>Scrim</code> component.
         </p>
         <Button onClick={onClick} buttonRef={buttonRef}>
           Show loader for {LOADING_DURATION / 1000} seconds

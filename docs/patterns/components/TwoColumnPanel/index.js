@@ -84,14 +84,12 @@ function TwoColumnPanelDemo() {
   return (
     <div className="twocolumnpanel-demo">
       <h1>Two Column Panel</h1>
-
+      <h2>Component Description</h2>
       <p>
         Two column panel is a container component intended to provide a
         navigable list of items that can be collapsed if not needed.
       </p>
-
       <h2>Basic</h2>
-
       <TwoColumnPanel>
         <ColumnLeft aria-labelledby="sidebar">
           <ColumnHeader id="sidebar">Items</ColumnHeader>

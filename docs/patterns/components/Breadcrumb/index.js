@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import PropDocs from '../../../Demo/PropDocs';
 import {
   Breadcrumb,
@@ -12,7 +12,7 @@ import { children, className } from '../../../props';
 const BreadcrumbDemo = () => (
   <div>
     <h1>Breadcrumb</h1>
-
+    <h2>Component Description</h2>
     <p>
       The Breadcrumb component displays a list of links within a heirarchy and
       allows navigation back through them.

@@ -7,6 +7,9 @@ const ButtonDemo = () => (
   <div>
     <Demo
       component={Button}
+      componentDescription={
+        'An interactive component that performs a programmable action when activated by the user.'
+      }
       states={[
         { children: 'Primary' },
         { children: 'Primary Disabled', disabled: true },

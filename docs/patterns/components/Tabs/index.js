@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropDocs from '../../../Demo/PropDocs';
-import { Tabs, Tab, TabPanel, Code } from '@deque/cauldron-react';
+import { Tabs, Tab, TabPanel, Code, Link } from '@deque/cauldron-react';
 import './index.css';
 
 const Demo = () => {
@@ -15,6 +15,19 @@ const Demo = () => {
   return (
     <div className="TabsDemo">
       <h1>Tabs</h1>
+      <h2>Component Description</h2>
+      <p>
+        The
+        <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/">
+          ARIA Authoring Practices Guide (APG)
+        </Link>
+        describes Tabs, a Tabbed Interface, or a Tab List as, "...a set of
+        layered sections of content, known as tab panels, that display one panel
+        of content at a time. Each tab panel has an associated tab element, that
+        when activated, displays the panel. The list of tab elements is arranged
+        along one edge of the currently displayed panel, most commonly the top
+        edge."
+      </p>
       <h2>Demo</h2>
       <h3>Horizontal Tabs</h3>
       <Tabs aria-label="Horizontal Tabs">
