@@ -33,7 +33,7 @@ test('should return no axe violations', async () => {
 });
 ```
 
-### Ensuring Screen Reader Compatability
+### Ensuring Screen Reader Compatibility
 
 You should test your changes with screen readers
 
@@ -47,7 +47,7 @@ Test your component with the keyboard
 
 ### Following Accessibility Annotations
 
-If working on a new component, you must follow the accessiblity annotations provided. This can include things like:
+If working on a new component, you must follow the accessibility annotations provided. This can include things like:
 
 - accessible names (making them required via props)
 - roles

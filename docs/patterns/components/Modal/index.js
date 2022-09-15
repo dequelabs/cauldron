@@ -24,8 +24,8 @@ export default class Demo extends Component {
         <h1>Modal</h1>
         <h2>Component Description</h2>
         <p>
-          Opens an element within the current window that displays on top of
-          all other page content.
+          Opens an element within the current window that displays on top of all
+          other page content.
         </p>
         <h2>Demo</h2>
         <Button onClick={this.toggleSimpleModal}>Simple Modal</Button>
@@ -72,7 +72,7 @@ export default class Demo extends Component {
           </ModalFooter>
         </Modal>
         <h2>Code Sample</h2>
-        <Code langauge="javascript" role="region" tabIndex={0}>
+        <Code language="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react';
