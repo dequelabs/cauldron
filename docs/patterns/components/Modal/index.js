@@ -24,7 +24,7 @@ export default class Demo extends Component {
         <h1>Modal</h1>
         <h2>Component Description</h2>
         <p>
-          Opens an element within the current window that displays in front of
+          Opens an element within the current window that displays on top of
           all other page content.
         </p>
         <h2>Demo</h2>
