@@ -64,7 +64,7 @@ const DemoTooltip = () => {
         }}
       >
         <p>
-          Cauldron's Tooltip relies on{' '}
+          Cauldron’s Tooltip relies on{' '}
           <a href="https://popper.js.org/" className="popper-link">
             Popper
           </a>{' '}
