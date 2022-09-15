@@ -62,14 +62,14 @@ code {
   background-size: cover;
 }
 
-.Footer-links {
+.Footer__links {
   display: flex;
   list-style: none;
   margin-left: var(--space-smallest);
   color: var(--gray-60);
 }
 
-.Footer-links li {
+.Footer__links li {
   margin: var(--space-smallest);
 }
 
@@ -84,7 +84,7 @@ code {
   color: var(--gray-60);
 }
 
-.cauldron--theme-dark .Footer-links,
+.cauldron--theme-dark .Footer__links,
 .cauldron--theme-dark .Copyright {
   color: var(--accent-light);
   color: var(--options-menu-text-color);
