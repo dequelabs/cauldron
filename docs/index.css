@@ -71,7 +71,7 @@ code {
 
 .SideBar--with-footer,
 .Layout {
-  bottom: 3.45rem;
+  bottom: 6.85rem;
 }
 
 .Copyright {
@@ -100,23 +100,23 @@ code {
   margin: 2px 0 0 3px;
 }
 
-@media (max-width: 590px) {
+@media (min-width: 301px) {
   .SideBar--with-footer,
   .Layout {
-    bottom: 4.55rem;
+    bottom: 5.72rem;
   }
 }
 
-@media (max-width: 370px) {
+@media (min-width: 371px) {
   .SideBar--with-footer,
   .Layout {
-    bottom: 5.7rem;
+    bottom: 4.6rem;
   }
 }
 
-@media (max-width: 300px) {
+@media (min-width: 591px) {
   .SideBar--with-footer,
   .Layout {
-    bottom: 6.8rem;
+    bottom: 3.45rem;
   }
 }
