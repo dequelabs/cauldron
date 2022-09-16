@@ -8,7 +8,7 @@ Many changes, including bug fixes and documentation improvements can be implemen
 
 ## When to follow this process
 
-You should follow this process if you intend to make "substantial" changes to cauldron or its documentation. Some examples that would benefit from an RFC include:
+You should follow this process if you intend to make substantial changes to Cauldron or its documentation. Some examples that would benefit from an RFC include:
 
 - A new component or feature
 - Any breaking changes
