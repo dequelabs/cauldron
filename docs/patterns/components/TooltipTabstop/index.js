@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Demo from '../../../Demo';
 import { TooltipTabstop, Code } from '@deque/cauldron-react/';
 import './index.css';

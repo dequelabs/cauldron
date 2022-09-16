@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Demo from '../../../Demo';
 import { Line } from '@deque/cauldron-react/';
 import { className } from '../../../props';
