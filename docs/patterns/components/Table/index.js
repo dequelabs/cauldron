@@ -180,7 +180,7 @@ const BasicTable = () => (
               <TableCell>
                 <IconButton
                   icon="trash"
-                  label="Delete"
+                  label={`Delete ${contact.first_name} ${contact.last_name}`}
                   onClick={() => {
                     console.log(`Delete ${contact.email}`);
                   }}
