@@ -8,13 +8,19 @@ const Footer = props => {
     <footer className="Footer">
       <ul className="Footer__links">
         <li>
-          <Link href="https://www.deque.com/terms-of-use/">
+          <Link
+            href="https://www.deque.com/terms-of-use/"
+            aria-label="Terms of Use - opens an external site"
+          >
             Terms of Use
             <Icon type="external-link" />
           </Link>
         </li>
         <li>
-          <Link href="https://www.mozilla.org/en-US/MPL/2.0/">
+          <Link
+            href="https://www.mozilla.org/en-US/MPL/2.0/"
+            aria-label="MPL-2.0 License - opens an external site"
+          >
             MPL-2.0 License
             <Icon type="external-link" />
           </Link>
@@ -22,7 +28,10 @@ const Footer = props => {
       </ul>
       <div className="Copyright">
         Copyright © {year}{' '}
-        <Link href="https://deque.com/">
+        <Link
+          href="https://deque.com/"
+          aria-label="Deque Systems, Inc. - opens an external site"
+        >
           Deque Systems, Inc.
           <Icon type="external-link" />
         </Link>

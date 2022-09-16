@@ -44,6 +44,7 @@ const Foo = () => (
         <Link
           className="Home__links"
           href="https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md"
+          aria-label="contribution guide - opens an external site"
         >
           contribution guide!
           <Icon type="external-link" />
@@ -54,6 +55,7 @@ const Foo = () => (
         <Link
           className="Home__links"
           href="https://github.com/dequelabs/cauldron/issues/new/choose"
+          aria-label="Open an issue! - opens an external site"
         >
           Open an issue!
           <Icon type="external-link" />
@@ -63,7 +65,11 @@ const Foo = () => (
     <h2>More Accessibility Tools</h2>
     <div className="is--flex-row">
       <p>Don’t stop here! Check out </p>
-      <Link className="Home__links" href="https://www.deque.com/axe/">
+      <Link
+        className="Home__links"
+        href="https://www.deque.com/axe/"
+        aria-label="Deque Systems' axe Tools - opens an external site"
+      >
         Deque Systems' axe Tools
         <Icon type="external-link" />
       </Link>{' '}
