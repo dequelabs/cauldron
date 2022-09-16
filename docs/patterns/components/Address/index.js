@@ -5,7 +5,7 @@ import {
   Address,
   AddressLine,
   AddressCityStateZip
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const addressComponentNames = ['Address', 'AddressLine', 'AddressCityStateZip'];

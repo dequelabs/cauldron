@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code } from '@deque/cauldron-react/';
+import { Button, Code } from '@deque/cauldron-react';
 
 class TopBarMenuDemo extends React.Component {
   buttonRef = React.createRef();

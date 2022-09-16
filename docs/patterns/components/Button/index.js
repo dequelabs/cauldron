@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { Button, Icon } from '@deque/cauldron-react/';
+import { Button, Icon } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const ButtonDemo = () => (

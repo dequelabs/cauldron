@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClickOutsideListener, Code, Button } from '@deque/cauldron-react/';
+import { ClickOutsideListener, Code, Button } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
 
 const Demo = () => (

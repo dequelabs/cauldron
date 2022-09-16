@@ -1,9 +1,5 @@
 import React, { Component, useState } from 'react';
-import {
-  ExpandCollapsePanel,
-  PanelTrigger,
-  Code
-} from '@deque/cauldron-react/';
+import { ExpandCollapsePanel, PanelTrigger, Code } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
 

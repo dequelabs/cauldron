@@ -6,7 +6,7 @@ import {
   BreadcrumbLink,
   Icon,
   Code
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const BreadcrumbDemo = () => (
