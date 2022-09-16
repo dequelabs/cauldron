@@ -2,7 +2,7 @@
 
 ## What is an RFC?
 
-A request for comments, or further referred to as "RFC" is a process intended to provide a consistent and controlled path for changes to be introduced to cauldron.
+A request for comments, or further referred to as "RFC" is a process intended to provide a consistent and controlled path for changes to be introduced to Cauldron.
 
 Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow. Some changes though are "substantial", and we ask that these be put through a bit of a design process and provide a consensus among the cauldron team.
 
