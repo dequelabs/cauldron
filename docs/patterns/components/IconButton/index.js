@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { IconButton, Offscreen } from '@deque/cauldron-react/';
+import { IconButton, Offscreen } from '@deque/cauldron-react';
 
 const IconButtonDemo = () => (
   <div>

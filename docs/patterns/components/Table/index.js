@@ -9,7 +9,7 @@ import {
   TableRow,
   Code,
   IconButton
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const sampleData = [
@@ -108,7 +108,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 const BasicTable = () => (
   <Table>
@@ -180,7 +180,7 @@ const BasicTable = () => (
               <TableCell>
                 <IconButton
                   icon="trash"
-                  label="Delete"
+                  label={`Delete ${contact.first_name} ${contact.last_name}`}
                   onClick={() => {
                     console.log(`Delete ${contact.email}`);
                   }}
@@ -199,7 +199,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 const sampleData = [
   {

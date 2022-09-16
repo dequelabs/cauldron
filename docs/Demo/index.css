@@ -7,6 +7,10 @@
   display: none;
 }
 
+.Demo-props .DescriptionList__details {
+  word-break: break-word;
+}
+
 @media (max-width: 730px) {
   .Demo-props .not-collapsed .DescriptionList {
     display: block;

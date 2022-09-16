@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { RadioGroup, FieldWrap } from '@deque/cauldron-react/';
+import { RadioGroup, FieldWrap } from '@deque/cauldron-react';
 import FieldWrapNotice from '../../../FieldWrapNotice';
 
 const labelDescription =

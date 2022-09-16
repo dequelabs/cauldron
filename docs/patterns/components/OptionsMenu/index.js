@@ -5,7 +5,7 @@ import {
   OptionsMenuTrigger,
   Icon,
   Code
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 export default class Demo extends Component {
   render() {

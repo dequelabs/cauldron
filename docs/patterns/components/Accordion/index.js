@@ -5,7 +5,7 @@ import {
   AccordionContent,
   Code,
   Link
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import './index.css';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
@@ -69,7 +69,7 @@ const AccordionDemo = () => {
   Accordion,
   AccordionTrigger,
   AccordionContent,
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 const ControlledAccordion = ({ label, open: initialOpen = false }) => {
   const [open, setIsOpen] = useState(initialOpen);

@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardContent,
   CardFooter
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import './index.css';
 
 const dataListComponentNames = [

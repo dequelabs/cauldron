@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code } from '@deque/cauldron-react/';
+import { Code } from '@deque/cauldron-react';
 
 const Demo = () => {
   return (
@@ -8,8 +8,8 @@ const Demo = () => {
       <h2>Component Description</h2>
       <p>
         A bar at the top of the page. Typically contains information about the
-        page, a navigation menu, and other actions a user can take relating to the
-        whole website.
+        page, a navigation menu, and other actions a user can take relating to
+        the whole website.
       </p>
       <h2>Demo</h2>
       <p>The TopBar is located at the top of the page.</p>

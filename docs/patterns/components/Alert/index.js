@@ -5,7 +5,7 @@ import {
   AlertContent,
   AlertActions,
   Code
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 export default class Demo extends Component {
   constructor() {
