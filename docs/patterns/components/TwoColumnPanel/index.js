@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TwoColumnPanel,
   ColumnLeft,
@@ -10,7 +10,7 @@ import {
   BreadcrumbLink,
   BreadcrumbItem,
   Code
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
 

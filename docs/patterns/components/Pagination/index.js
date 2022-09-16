@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Demo from '../../../Demo';
-import { Pagination, usePagination } from '@deque/cauldron-react/';
-import { Code } from '@deque/cauldron-react';
+import { Pagination, usePagination, Code } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
-import { children, className } from '../../../props';
 
 const PaginationDemo = () => {
   const totalItems = 111;

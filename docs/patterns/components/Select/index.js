@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, FieldWrap } from '@deque/cauldron-react/';
+import { Select, FieldWrap } from '@deque/cauldron-react';
 import './index.css';
 import Demo from '../../../Demo';
 import FieldWrapNotice from '../../../FieldWrapNotice';
