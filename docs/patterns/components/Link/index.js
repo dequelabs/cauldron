@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { Link, Code } from '@deque/cauldron-react/';
+import { Link, Code } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 export default class LinkDemo extends Component {
@@ -9,6 +9,7 @@ export default class LinkDemo extends Component {
       <div>
         <Demo
           component={Link}
+          componentDescription={'A link component with accessible styling.'}
           states={[
             {
               children: 'I am a link!',

@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { Panel } from '@deque/cauldron-react/';
+import { Panel } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const PanelDemo = () => {
@@ -8,6 +8,7 @@ const PanelDemo = () => {
     <div>
       <Demo
         component={Panel}
+        componentDescription={'A styled text panel with optional heading.'}
         states={[
           {
             heading: {

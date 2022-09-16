@@ -45,6 +45,7 @@ const ProgressBarDemo = () => {
   return (
     <div className="ProgressBarDemo">
       <h1>Progress Bar</h1>
+      <h2>Component Description</h2>
       <p>
         Progress bars are used to indicate the status of some progress activity
         happening, such as number of items completed.
@@ -52,7 +53,7 @@ const ProgressBarDemo = () => {
       <h2>Demo</h2>
       <h3>Default Progress</h3>
       <ProgressBar aria-label="Progress" progress={75} />
-      <Code langauge="javascript">
+      <Code language="javascript">
         {'<ProgressBar aria-label="Progress" progress={75} />'}
       </Code>
       <h3>Custom Progress</h3>
@@ -62,7 +63,7 @@ const ProgressBarDemo = () => {
         progressMax={25}
         progress={5}
       />
-      <Code langauge="javascript" role="region" tabIndex={0}>
+      <Code language="javascript" role="region" tabIndex={0}>
         {
           '<ProgressBar aria-label="Progress" progress={5} progressMin={1} progressMax={25} />'
         }
@@ -78,7 +79,7 @@ const ProgressBarDemo = () => {
       </p>
       <ProgressBar aria-label="Progress" progress={progress} />
       <h2>Code Sample</h2>
-      <Code langauge="javascript" role="region" tabIndex={0}>
+      <Code language="javascript" role="region" tabIndex={0}>
         {`import React from 'react';
 import { ProgressBar } from '@deque/cauldron-react';
 

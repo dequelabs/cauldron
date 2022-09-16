@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Toast, Link } from '@deque/cauldron-react/';
+import { Button, Toast, Link } from '@deque/cauldron-react';
 import DemoComponent from '../../../Demo';
 import { children } from '../../../props';
 
@@ -37,6 +37,9 @@ export default class Demo extends Component {
     return (
       <DemoComponent
         component={Toast}
+        componentDescription={
+          'A banner with text positioned at the top of the page.'
+        }
         states={[
           {
             type: 'confirmation',

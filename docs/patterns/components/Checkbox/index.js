@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
 import { className } from '../../../props';
-import { Checkbox, FieldWrap } from '@deque/cauldron-react/';
+import { Checkbox, FieldWrap } from '@deque/cauldron-react';
 import FieldWrapNotice from '../../../FieldWrapNotice';
 
 export default class CheckboxDemo extends Component {
@@ -26,6 +26,9 @@ export default class CheckboxDemo extends Component {
         <FieldWrapNotice />
         <Demo
           component={Checkbox}
+          componentDescription={
+            'Boxes that are checked when activated for selecting values. Typically used for submission in a form.'
+          }
           states={[
             {
               id: 'demo-checkbox-1',

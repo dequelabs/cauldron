@@ -1,19 +1,19 @@
 import React from 'react';
-import { Code } from '@deque/cauldron-react/';
+import { Code } from '@deque/cauldron-react';
 
 export default function Layout() {
   return (
     <div>
       <h1>Layout</h1>
-      <p>There are 2 different ways to configure a cauldron-react layout.</p>
+      <h2>Component Description</h2>
       <p>
-        It is important to note that the layout components{' '}
+        The Workspace component is a convenience wrapper around the Layout and
+        Main components. It is important to note that the layout components{' '}
         <strong>do not</strong> wrap the TopBar or Sidebar components.
       </p>
       <h2>{'Option 1: <Workspace />'}</h2>
       <p>
-        The Workspace component is a convenience wrapper around the Layout and
-        Main components.
+        Use the <code>workspaceRef</code> and <code>layoutRef</code> attributes.
       </p>
       <h3>Code sample</h3>
       <Code language="javascript" role="region" tabIndex={0}>
@@ -36,8 +36,8 @@ const App = () => (
       </Code>
       <h2>{'Option 2: <Main /> and <Layout /> components'}</h2>
       <p>
-        This option is a bit more flexible but requires you to compose the 2
-        required compoents
+        If you need a more flexible option, compose your own Main and Layout
+        components.
       </p>
       <h3>Code sample</h3>
       <Code language="javascript" role="region" tabIndex={0}>

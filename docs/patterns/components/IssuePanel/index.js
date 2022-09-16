@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { IssuePanel, IconButton } from '@deque/cauldron-react/';
+import { IssuePanel, IconButton } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const IssuePanelDemo = () => {
@@ -9,11 +9,14 @@ const IssuePanelDemo = () => {
       <Demo
         customImport="import { IssuePanel, IconButton } from '@deque/cauldron-react'"
         component={IssuePanel}
+        componentDescription={
+          'A text panel with a header. Intended for describing issues. Option to put IconButton components in the header.'
+        }
         states={[
           {
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -22,7 +25,7 @@ const IssuePanelDemo = () => {
             title: 'Issue 1',
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -35,7 +38,7 @@ const IssuePanelDemo = () => {
             ],
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
@@ -49,7 +52,7 @@ const IssuePanelDemo = () => {
             ],
             children: (
               <>
-                Text appears and functions like a section heading but it is nor
+                Text appears and functions like a section heading but it is not
                 marked up as such.
               </>
             )
