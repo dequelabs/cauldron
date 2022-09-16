@@ -10,7 +10,7 @@ import {
   TableRow,
   TableCell,
   TableBody
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 import './index.css';
 

@@ -8,7 +8,7 @@ import {
   Code,
   TextField,
   Line
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import './index.css';
 
 const DemoTooltip = () => {

@@ -9,7 +9,7 @@ import {
   TableRow,
   Code,
   IconButton
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const sampleData = [
@@ -108,7 +108,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 const BasicTable = () => (
   <Table>
@@ -199,7 +199,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 const sampleData = [
   {

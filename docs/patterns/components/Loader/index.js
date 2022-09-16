@@ -1,6 +1,6 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { Loader } from '@deque/cauldron-react/';
+import { Loader } from '@deque/cauldron-react';
 import { className } from '../../../props';
 
 const LoaderDemo = () => (

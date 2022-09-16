@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, FieldWrap } from '@deque/cauldron-react/';
+import { TextField, FieldWrap } from '@deque/cauldron-react';
 import { className } from '../../../props';
 import Demo from '../../../Demo';
 import FieldWrapNotice from '../../../FieldWrapNotice';
