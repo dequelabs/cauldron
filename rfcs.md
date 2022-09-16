@@ -30,6 +30,6 @@ Some changes that would not need an RFC:
 
 ## The RFC Process
 
-The goal of our RFC process is to reach a consensus among the cauldron team on proposed changes, and to ensure that new features are congruent with the rest of cauldron. The cauldron team will have a recurring office hours meeting on the 1st Wednesday of each month, giving the team the opportunity to discuss any new RFCs that have been introduced and make comments.
+The goal of our RFC process is to reach a consensus among the cauldron team on proposed changes, and to ensure that new features are congruent with the rest of Cauldron. The Cauldron team will have a recurring office hours meeting on the 1st Wednesday of each month, giving the team the opportunity to discuss any new RFCs that have been introduced and make comments.
 
 Once a consensus has been reached for the proposed RFC, the `rfc` label will be removed from the issue and the proposed changes can then be implemented.
