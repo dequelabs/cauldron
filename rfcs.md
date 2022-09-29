@@ -25,7 +25,7 @@ Some changes that would not need an RFC:
 1. Add the `rfc` label
 1. Be sure to include descriptive details, this includes:
    - A descriptive title
-   - Implemention details
+   - Implementation details
    - Screenshots (if necessary for a new component)
 
 ## The RFC Process
