@@ -1,11 +1,14 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { Loader } from '@deque/cauldron-react/';
+import { Loader } from '@deque/cauldron-react';
 import { className } from '../../../props';
 
 const LoaderDemo = () => (
   <Demo
     component={Loader}
+    componentDescription={
+      'An animated image that indicates something is loading. Regular and large options.'
+    }
     states={[{ label: 'Loading...' }, { variant: 'large' }]}
     propDocs={{
       label: {

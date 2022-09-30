@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Demo from '../../../Demo';
-import { Pagination, usePagination } from '@deque/cauldron-react/';
-import { Code } from '@deque/cauldron-react';
+import { Pagination, usePagination, Code } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
-import { children, className } from '../../../props';
 
 const PaginationDemo = () => {
   const totalItems = 111;
@@ -18,8 +16,12 @@ const PaginationDemo = () => {
     <div>
       <Demo
         component={Pagination}
+        componentDescription={
+          'A component and hook that create pages out of a list of items.'
+        }
         states={[
           { totalItems: 15 },
+          { totalItems: 15, thin: true },
           {
             ...pagination,
             statusLabel: (
@@ -122,6 +124,11 @@ const PaginationDemo = () => {
               'The position of the tooltip relative to its target element.',
             required: false,
             defaultValue: "'bottom'"
+          },
+          thin: {
+            type: 'boolean',
+            description:
+              'Displays pagination with "thin" modifier (reduces height of buttons and spacing)'
           }
         }}
       >

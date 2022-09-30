@@ -43,7 +43,12 @@
   min-height: 44px;
 }
 .RadioCardGroup__Icon.Icon svg {
-  color: var(--accent-success-dark);
+  /**
+   * this is edge case to pass color-contrast when the radio-card is selected,
+   * it is not a color we want to live in cauldron as a variable
+   * @see https://github.com/dequelabs/cauldron/pull/736
+   */
+  color: #4f990f;
   height: 44px;
   width: 44px;
 }
@@ -82,4 +87,8 @@
   margin-top: var(--space-small);
   display: flex;
   justify-content: center;
+}
+
+.cauldron--theme-dark .RadioCardGroup__Icon.Icon svg {
+  color: var(--accent-success);
 }

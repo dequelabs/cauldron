@@ -104,6 +104,43 @@ test('should render collapsed TwoColumnPanel', () => {
   ).toBeFalsy();
 });
 
+test('should render configurable collapsed TwoColumnPanel', () => {
+  window.matchMedia.withArgs('(max-width: 999rem)').returns({
+    matches: true,
+    addEventListener: noop
+  });
+  const wrapper = mount(
+    <TwoColumnPanel collapsedMediaQuery="(max-width: 999rem)">
+      <ColumnLeft>
+        <ColumnHeader>Sidebar</ColumnHeader>
+        <nav>
+          <ul>
+            <li>
+              <a href="/one">1</a>
+            </li>
+            <li>
+              <a href="/two">2</a>
+            </li>
+            <li>
+              <a href="/three">3</a>
+            </li>
+          </ul>
+        </nav>
+      </ColumnLeft>
+      <ColumnRight>
+        <ColumnHeader>Column Header</ColumnHeader>
+        <div>1</div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  );
+  expect(wrapper.find('.TwoColumnPanel').exists()).toBeTruthy();
+  expect(wrapper.find('ColumnLeft').exists()).toBeFalsy();
+  expect(wrapper.find('ColumnRight').exists()).toBeTruthy();
+  expect(
+    wrapper.find('ColumnRight button[aria-expanded]').prop('aria-expanded')
+  ).toBeFalsy();
+});
+
 test('should accept a skip link', () => {
   const wrapper = mount(
     <TwoColumnPanel skipLink={<SkipLink target="#my-target" />}>

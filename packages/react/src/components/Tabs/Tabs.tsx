@@ -32,7 +32,6 @@ const Tabs = ({
 }: TabsProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const tabsRef = useRef<HTMLDivElement>(null);
-  const focusedTabRef = useRef<HTMLLIElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
     child => (child as React.ReactElement<any>).type === Tab
@@ -122,7 +121,6 @@ const Tabs = ({
       tabIndex: index === activeIndex ? 0 : -1,
       ['aria-controls']: target.current?.id,
       ['aria-selected']: selected,
-      ref: index === activeIndex ? focusedTabRef : null,
       onClick: () => handleClick(index),
       ...other
     };
@@ -131,9 +129,12 @@ const Tabs = ({
   });
 
   useDidUpdate(() => {
-    focusedTabRef.current?.focus();
+    const activeTab = tabsRef.current?.querySelector(
+      ':scope > [role="tablist"] > [aria-selected="true"]'
+    ) as HTMLLIElement;
+    activeTab?.focus();
     if (typeof onChange === 'function') {
-      onChange({ activeTabIndex: activeIndex, target: focusedTabRef.current });
+      onChange({ activeTabIndex: activeIndex, target: activeTab });
     }
   }, [activeIndex]);
 

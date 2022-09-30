@@ -5,7 +5,7 @@ import {
   AlertContent,
   AlertActions,
   Code
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 
 export default class Demo extends Component {
   constructor() {
@@ -22,6 +22,8 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Alert</h1>
+        <h2>Component Description</h2>
+        <p>Shows a modal with a message. Optional warning styling.</p>
         <h2>Demo</h2>
         <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
         <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
@@ -46,7 +48,7 @@ export default class Demo extends Component {
           </AlertActions>
         </Alert>
         <h2>Code Sample</h2>
-        <Code langauge="javascript" role="region" tabIndex={0}>
+        <Code language="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react';

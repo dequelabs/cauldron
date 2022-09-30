@@ -22,6 +22,7 @@ interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   showCollapsedPanelLabel?: string;
   hideCollapsedPanelLabel?: string;
   skipLink?: SkipLink;
+  collapsedMediaQuery?: string;
 }
 
 const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
@@ -33,6 +34,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       showCollapsedPanelLabel = 'Show Panel',
       hideCollapsedPanelLabel = 'Hide Panel',
       skipLink = null,
+      collapsedMediaQuery = '(max-width: 45rem)',
       ...props
     },
     ref
@@ -176,7 +178,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
 
     // When the collapsable panel starts to overlay content, it needs to become a focus trap and collapsed by default
     useLayoutEffect(() => {
-      const mediaQueryList = matchMedia('(max-width: 45rem)');
+      const mediaQueryList = matchMedia(collapsedMediaQuery);
       const handleMatch = (matches: boolean) => {
         setIsFocusTrap(matches);
         const collapsed = matches ? true : isCollapsed;

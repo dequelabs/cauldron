@@ -8,6 +8,9 @@ const FieldWrapDemo = () => (
   <div className="FieldWrapDemo">
     <Demo
       component={FieldWrap}
+      componentDescription={
+        'The FieldWrap component adds padding and a border around your input elements.'
+      }
       states={[
         {
           children: <TextField label="First name" />

@@ -1,12 +1,15 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import Demo from '../../../Demo';
-import { Button, Icon } from '@deque/cauldron-react/';
+import { Button, Icon } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 const ButtonDemo = () => (
   <div>
     <Demo
       component={Button}
+      componentDescription={
+        'An interactive component that performs a programmable action when activated by the user.'
+      }
       states={[
         { children: 'Primary' },
         { children: 'Primary Disabled', disabled: true },

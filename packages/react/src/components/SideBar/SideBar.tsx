@@ -12,7 +12,7 @@ export interface SideBarProps extends React.HTMLAttributes<HTMLUListElement> {
   onDismiss: () => void;
   className?: string;
   show: boolean;
-  navProps: React.HTMLAttributes<HTMLElement>;
+  navProps?: React.HTMLAttributes<HTMLElement>;
 }
 
 interface SideBarState {
