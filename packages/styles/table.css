@@ -72,7 +72,7 @@
 }
 
 .TableHeader--sort-ascending .TableHeader__sort-button,
-.TableHeader--sort-descending .TableHeader__sort-button {
+.TableHeader--sort-decscending .TableHeader__sort-button {
   color: var(--table-header-sorting-text-color);
 }
 
