@@ -2,7 +2,6 @@
   --table-header-text-color: var(--gray-90);
   --table-header-background-color: var(--gray-20);
   --table-header-sorting-background-color: #caddec;
-  --table-header-sorting-text-color: var(--gray-90);
   --table-header-background-color-hover: #dddddd;
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
@@ -16,7 +15,6 @@
   --table-header-text-color: var(--white);
   --table-header-background-color: var(--accent-dark);
   --table-header-sorting-background-color: #53636e;
-  --table-header-sorting-text-color: var(--white);
   --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-medium);
@@ -70,11 +68,6 @@
 .TableHeader--sort-descending {
   background: var(--table-header-sorting-background-color);
   border-bottom: 3px solid var(--table-header-sorting-border-color);
-}
-
-.TableHeader--sort-ascending .TableHeader__sort-button,
-.TableHeader--sort-decscending .TableHeader__sort-button {
-  color: var(--table-header-sorting-text-color);
 }
 
 /* compensate the gap in height between TableHeader and Icon */
