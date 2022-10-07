@@ -15,6 +15,8 @@ export interface ClickOutsideListenerProps<
 export default class ClickOutsideListener extends React.Component<
   ClickOutsideListenerProps
 > {
+  static displayName = 'ClickOutsideListener';
+
   static defaultProps = {
     mouseEvent: 'click',
     touchEvent: 'touchend'
