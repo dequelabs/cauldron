@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ProgressBar, Button, Code } from '@deque/cauldron-react';
-import PropDocs from '../../../Demo/PropDocs';
+import Demo from '../../../Demo';
 
 const ProgressBarDemo = () => {
   const [animateProgress, setAnimateProgress] = useState(false);
@@ -43,78 +43,53 @@ const ProgressBarDemo = () => {
   };
 
   return (
-    <div className="ProgressBarDemo">
-      <h1>Progress Bar</h1>
-      <h2>Component Description</h2>
-      <p>
-        Progress bars are used to indicate the status of some progress activity
-        happening, such as number of items completed.
-      </p>
-      <h2>Demo</h2>
-      <h3>Default Progress</h3>
-      <ProgressBar aria-label="Progress" progress={75} />
-      <Code language="javascript">
-        {'<ProgressBar aria-label="Progress" progress={75} />'}
-      </Code>
-      <h3>Custom Progress</h3>
-      <ProgressBar
-        aria-label="Progress"
-        progressMin={1}
-        progressMax={25}
-        progress={5}
-      />
-      <Code language="javascript" role="region" tabIndex={0}>
-        {
-          '<ProgressBar aria-label="Progress" progress={5} progressMin={1} progressMax={25} />'
-        }
-      </Code>
-      <h3>Animated</h3>
-      <p>
-        If the progress indicates that some activity is currently progressing,
-        the progress bar will update the status of the progress bar based on the
-        current <code>progress</code> prop:
-      </p>
-      <p>
-        <Button onClick={handleAnimate}>Show Animated Progress</Button>
-      </p>
-      <ProgressBar aria-label="Progress" progress={progress} />
-      <h2>Code Sample</h2>
-      <Code language="javascript" role="region" tabIndex={0}>
-        {`import React from 'react';
-import { ProgressBar } from '@deque/cauldron-react';
-
-function Component() {
-  return (
     <div>
-      <ProgressBar label="Current Progress" aria-describedby="progress" progress={75} />
-      <span id="progress">3 of 4 items complete</span>
-    </div>
-  )
-}`}
-      </Code>
-      <h2>Props</h2>
-      <div className="Demo-props">
-        <PropDocs
-          docs={{
-            progress: {
-              type: 'number',
-              required: true,
-              description: 'The current progress bar progress'
-            },
-            progressMin: {
-              type: 'number',
-              defaultValue: '0',
-              description: 'Minimum value of progress'
-            },
-            progressMax: {
-              type: 'number',
-              defaultValue: 100,
-              description: 'Maximum value of progress'
-            }
-          }}
-          defaultProps={{}}
-        />
-      </div>
+      <Demo
+        component={ProgressBar}
+        componentDescription={
+          'Progress bars are used to indicate the status of some progress activity happening, such as number of items completed.'
+        }
+        states={[
+          { 'arial-label': 'Progress', progress: 75 },
+          {
+            'aria-label': 'Progress',
+            progress: 5,
+            progressMin: 1,
+            progressMax: 25
+          }
+        ]}
+        propDocs={{
+          progress: {
+            type: 'number',
+            required: true,
+            description: 'The current progress bar progress'
+          },
+          progressMin: {
+            type: 'number',
+            defaultValue: '0',
+            description: 'Minimum value of progress'
+          },
+          progressMax: {
+            type: 'number',
+            defaultValue: 100,
+            description: 'Maximum value of progress'
+          }
+        }}
+      >
+        <h2>Animated</h2>
+        <p>
+          If the progress indicates that some activity is currently progressing,
+          the progress bar will update the status of the progress bar based on
+          the current <code>progress</code> prop:
+        </p>
+        <Code language="javascript" role="region" tabIndex={0}>
+          {`<ProgressBar aria-label="Progress" progress={progress} />`}
+        </Code>
+        <p>
+          <Button onClick={handleAnimate}>Show Animated Progress</Button>
+        </p>
+        <ProgressBar aria-label="Progress" progress={progress} />
+      </Demo>
     </div>
   );
 };
