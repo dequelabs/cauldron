@@ -46,13 +46,13 @@ However there is a debate on whether to mark certain changes to Cauldron CSS sty
 
 3. we have not been marking the changes to remove or rename a classname as breaking
 
-The counterpoint to the first concern is that major version numbers are not sacred, as the creator of `SemVer` spec [defends releasing a new major version only about one month after the previous one](https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html). The proponents of `SemVer` spec also point out that we do not have any data to show how exactly our users utilize Cauldron. Therefore the first assumption could be right, but we have no proof for it and we have no control over how ours users consume . The last point is dictated by how we agree on the first two.
+The counterpoint to the first concern is that major version numbers are not sacred, as the creator of `SemVer` spec [defends releasing a new major version only about one month after the previous one](https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html). The proponents of `SemVer` spec also point out that we do not have any data to show how exactly our users utilize Cauldron. Therefore the first assumption could be right, but we have no proof for it and we have no control over how our users consume Cauldron. The last point is dictated by how we agree on the first two.
 
-A key to the debate is whether we would want to (or continue to) support the consumption of Cauldron CSS styles separately from Cauldron React components, although that was the original intention for Cauldron. The following definitions and examples of breaking and non-breaking changes are based on the original intention. At the same time, the notes explore different scenarios if we decide against the original intention.
+One key to the debate is whether we would want to (or continue to) support the consumption of Cauldron CSS styles separately from Cauldron React components, although that was the original intention for Cauldron. The following definitions and examples of breaking and non-breaking changes are based on the original intention. At the same time, the notes explore different scenarios if we decide against the original intention.
 
 ### Cauldron React components: breaking changes
 
-1. Remove, replace, rename a component, as well as modify the relations between components.
+1. Remove, replace, rename a component, as well as modify the relations between components
 
    - renamed Panel to IssuePanel
    - TabPanels are no longer TabList's children
@@ -63,7 +63,7 @@ A key to the debate is whether we would want to (or continue to) support the con
    - The panel implementation has been replaced, including removing props that are not used in the new implementation
    - Loader component now set role, aria-valuetext, aria-busy, aria-valuemin, and aria-valuemax instead of making a generic role (div) have an aria-label
 
-3. Modify the elements of which a React component consists, such as HTML tags and properties.
+3. Modify the elements of which a React component consists, such as HTML tags and properties
    - selects now have parity with `<TextField />`s in that they always render an .Error div. This causes a slight layout difference with more space below each `<Select />`. The text "Required" will now show up with any `<Select />` who is passed a true required prop
    - topbar no longer renders role=menubar. New component `<MenuBar />` must now be used if menubar is desired
    - The api for for implementing a tooltip has changed. Instead of `<Tooltip><button /><Tooltip>`, the tooltip takes a target ref or html element. (This is a combination of breaking change #2 and #3)
