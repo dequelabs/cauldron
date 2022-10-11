@@ -51,10 +51,10 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     };
 
     return (
-      <div ref={ref} {...data}>
+      <span ref={ref} {...data}>
         {label && <Offscreen>{label}</Offscreen>}
         {IconSVG && <IconSVG />}
-      </div>
+      </span>
     );
   }
 );
