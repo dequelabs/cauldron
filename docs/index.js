@@ -190,7 +190,7 @@ const App = () => {
             </TopBarTrigger>
             <TopBarItem>
               <Link to="/" className="MenuItem__logo" tabIndex={-1}>
-                <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '}
+                <img src={theme === 'dark' ? logo : darkLogo} alt="Cauldron" />{' '}
                 <span aria-hidden="true">Cauldron</span>
               </Link>
             </TopBarItem>
