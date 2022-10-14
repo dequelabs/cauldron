@@ -191,7 +191,7 @@ const App = () => {
             <TopBarItem>
               <Link to="/" className="MenuItem__logo" tabIndex={-1}>
                 <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '}
-                <span>Cauldron</span>
+                <span aria-hidden="true">Cauldron</span>
               </Link>
             </TopBarItem>
 
