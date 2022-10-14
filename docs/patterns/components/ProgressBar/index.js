@@ -50,7 +50,7 @@ const ProgressBarDemo = () => {
           'Progress bars are used to indicate the status of some progress activity happening, such as number of items completed.'
         }
         states={[
-          { 'arial-label': 'Progress', progress: 75 },
+          { 'aria-label': 'Progress', progress: 75 },
           {
             'aria-label': 'Progress',
             progress: 5,
@@ -82,13 +82,13 @@ const ProgressBarDemo = () => {
           the progress bar will update the status of the progress bar based on
           the current <code>progress</code> prop:
         </p>
-        <Code language="javascript" role="region" tabIndex={0}>
-          {`<ProgressBar aria-label="Progress" progress={progress} />`}
-        </Code>
         <p>
           <Button onClick={handleAnimate}>Show Animated Progress</Button>
         </p>
         <ProgressBar aria-label="Progress" progress={progress} />
+        <Code language="javascript" role="region" tabIndex={0}>
+          {`<ProgressBar aria-label="Progress" progress={progress} />`}
+        </Code>
       </Demo>
     </div>
   );
