@@ -6,6 +6,7 @@ import {
   Icon,
   Code
 } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
 
 export default class Demo extends Component {
   render() {
@@ -100,6 +101,21 @@ class Demo extends Component {
 
           `}
         </Code>
+
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <PropDocs
+            docs={{
+              separator: {
+                type: 'React.Element',
+                description: 'Separator dividing each breadcrumb item',
+                default: '"/"'
+              },
+              children,
+              className
+            }}
+          />
+        </div>
       </div>
     );
   }
