@@ -3,7 +3,6 @@ import Demo from '../../../Demo';
 import { className } from '../../../props';
 import { Checkbox, FieldWrap } from '@deque/cauldron-react';
 import FieldWrapNotice from '../../../FieldWrapNotice';
-import './index.css';
 
 export default class CheckboxDemo extends Component {
   state = {
