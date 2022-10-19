@@ -1,5 +1,7 @@
 import React from 'react';
 import { Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 const Demo = () => {
   return (
