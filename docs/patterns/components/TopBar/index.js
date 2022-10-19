@@ -38,6 +38,15 @@ const Demo = () => (
   </TopBar>
 );`}
       </Code>
+      <div className="Demo-props">
+        <h2>Props</h2>
+        <PropDocs
+          docs={{
+            children,
+            className
+          }}
+        />
+      </div>
     </>
   );
 };
