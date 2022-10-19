@@ -6,6 +6,8 @@ import {
   ModalFooter,
   Code
 } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 export default class Demo extends Component {
   constructor() {
@@ -144,6 +146,54 @@ class Demo extends Component {
 }
           `}
         </Code>
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <PropDocs
+            docs={{
+              children,
+              className,
+              variant: {
+                type: 'string',
+                description: 'The style of Modal to display.',
+                default: 'default'
+              },
+              heading: {
+                type: 'React.ReactElement<any> or object',
+                description:
+                  'Displayed in the heading at the top of the Modal. Optional to pass heading level.',
+                required: true
+              },
+              onClose: {
+                type: 'function',
+                description: 'Function called when the Modal is closed'
+              },
+              portal: {
+                type: 'any',
+                description: 'The parent element to place the Modal in.',
+                default: 'document.body'
+              },
+              show: {
+                type: 'boolean',
+                description: 'Whether or not to show the Modal'
+              },
+              dialogRef: {
+                type: 'function or function.current',
+                description: 'Pass a ref to the Modal.'
+              },
+              forceAction: {
+                type: 'boolean',
+                description:
+                  'If true, user must interact with Modal content before closing it.',
+                default: 'false'
+              },
+              closeButtonText: {
+                type: 'string',
+                description: 'Text read to screen reader about close button.',
+                default: 'Close'
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }
