@@ -7,6 +7,7 @@ import {
   Code
 } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 export default class Demo extends Component {
   render() {
@@ -106,13 +107,29 @@ class Demo extends Component {
           <h2>Props</h2>
           <PropDocs
             docs={{
-              separator: {
-                type: 'React.Element',
-                description: 'Separator dividing each breadcrumb item',
-                default: '"/"'
-              },
               children,
-              className
+              className,
+              onClose: {
+                type: '() => void',
+                description: 'Function to close the option menu component'
+              },
+              trigger: {
+                type:
+                  '((props: OptionsMenuRenderTriggerProps) => React.ReactNode)',
+                description: ''
+              },
+              closeOnSelect: {
+                type: 'boolean',
+                description: ''
+              },
+              menuRef: {
+                type: ' React.Ref<HTMLUListElement>',
+                description: ''
+              },
+              align: {
+                type: 'left | right',
+                description: ''
+              }
             }}
           />
         </div>
