@@ -7,6 +7,7 @@ import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
 import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
+import { Cauldron } from '../../types';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
@@ -23,18 +24,21 @@ interface Props extends SyntaxHighlighterProps {
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
   tabIndex?: number;
-  ariaLabel?: string;
+  focusable: boolean;
+  LabelProps: Cauldron.LabelProps;
 }
 
-const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
+type AllProps = Props & React.AriaAttributes;
+
+const Code: React.ComponentType<React.PropsWithChildren<AllProps>> = ({
   children,
   className,
   tabIndex,
-  ariaLabel,
-  ariaLabelledBy,
+  focusable,
+  LabelProps,
   ...props
 }) => {
-  if (!ariaLabel) ariaLabel = 'Code snippet';
+  // how to add LabelProps?
 
   return (
     <>
@@ -42,14 +46,9 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
         {...props}
         useInlineStyles={false}
         className={classNames('Code', className)}
-        tabIndex={tabIndex}
-        {...(tabIndex === 0 &&
-          !ariaLabelledBy && { role: 'region', 'aria-label': ariaLabel })}
-        {...(tabIndex === 0 &&
-          ariaLabelledBy && {
-            role: 'region',
-            'aria-labelledby': ariaLabelledBy
-          })}
+        {...(focusable
+          ? { tabIndex: 0, role: 'region' }
+          : { tabIndex: tabIndex })}
       >
         {children}
       </Highlighter>

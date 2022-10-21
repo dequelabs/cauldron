@@ -54,21 +54,22 @@ div[class="foo"] {
           type: 'string',
           description: '"javascript", "css" or "html"'
         },
-        tabIndex: {
-          type: 'number',
+        focusable: {
+          type: 'boolean',
           description:
             "optional prop to set tabindex value on code block's <pre> wrapper",
-          default: 'undefined'
+          default: false
         },
-        ariaLabel: {
-          type: 'string',
-          description: 'Label read by screen reader when tabindex is set to 0',
-          default: 'Code snippet'
-        },
-        ariaLabelledBy: {
+        'LabelProps.aria-label': {
           type: 'string',
           description:
-            'Pass an id for an element to ariaLabelledBy instead of ariaLabel',
+            'Add more descriptive aria-label to be read to screen readers when focusable is true.',
+          default: 'Code snippet'
+        },
+        'LabelProps.aria-labelledby': {
+          type: 'string',
+          description:
+            'Pass an id for an element to aria-labelledby instead of aria-label when focusable is true.',
           default: 'undefined'
         }
       }}
