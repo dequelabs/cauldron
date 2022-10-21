@@ -156,6 +156,26 @@ const App = () => {
     );
   };
 
+  const handleTitleChange = location => {
+    let title = location.pathname.split('/').pop();
+
+    location.state = {
+      description: `Free Accessible React Component Pattern from Deque Systems`
+    };
+
+    if (componentsList.includes(title)) {
+      location.state.title = `${title} | Accessible Component Pattern Demo`;
+    } else {
+      location.state.title = `Cauldron React: Accessible Components Library`;
+    }
+
+    return (
+      <Helmet title={location.state.title}>
+        <meta name="description" content={location.state.description} />
+      </Helmet>
+    );
+  };
+
   useEffect(() => {
     document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
 
@@ -267,25 +287,7 @@ const App = () => {
               />
             );
           })}
-          <Route
-            component={({ location }) =>
-              location.state && location.state.title ? (
-                <Helmet title={location.state.title}>
-                  <meta
-                    name="description"
-                    content={location.state.description}
-                  />
-                </Helmet>
-              ) : (
-                <Helmet title={'Cauldron React: Accessible Components Library'}>
-                  <meta
-                    name="description"
-                    content="Free Accessible React Components from Deque Systems"
-                  />
-                </Helmet>
-              )
-            }
-          />
+          <Route component={({ location }) => handleTitleChange(location)} />
         </Workspace>
         <Footer theme={theme} />
       </div>
