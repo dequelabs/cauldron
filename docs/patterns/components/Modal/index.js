@@ -188,7 +188,7 @@ class Demo extends Component {
               },
               closeButtonText: {
                 type: 'string',
-                description: 'Text read to screen reader about close button.',
+                description: 'The desired accessible name of the modal's close button.',
                 default: 'Close'
               }
             }}
