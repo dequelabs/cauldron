@@ -57,7 +57,7 @@ const DemoTooltip = () => {
           },
           portal: {
             type: 'Ref | HTMLElement',
-            description: 'The parent element to place the Tooltip in.',
+            description: 'The parent element to render the Tooltip within.',
             required: false,
             defaultValue: 'document.body'
           }

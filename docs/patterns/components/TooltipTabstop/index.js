@@ -44,7 +44,7 @@ const DemoTooltipTabstop = () => {
           },
           portal: {
             type: 'Ref | HTMLElement',
-            description: 'The parent element to place the tooltip in.',
+            description: 'The parent element to render the tooltip within.',
             required: false,
             defaultValue: 'document.body'
           }

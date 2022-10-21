@@ -169,7 +169,7 @@ class Demo extends Component {
               },
               portal: {
                 type: 'any',
-                description: 'The parent element to place the Modal in.',
+                description: 'The parent element to render the Modal within.',
                 default: 'document.body'
               },
               show: {
@@ -188,7 +188,8 @@ class Demo extends Component {
               },
               closeButtonText: {
                 type: 'string',
-                description: 'The desired accessible name of the modal's close button.',
+                description:
+                  "The desired accessible name of the modal's close button.",
                 default: 'Close'
               }
             }}
