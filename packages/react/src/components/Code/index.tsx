@@ -23,25 +23,32 @@ interface Props extends SyntaxHighlighterProps {
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
   tabIndex?: number;
+  ariaLabel?: string;
 }
 
 const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   children,
   className,
   tabIndex,
+  ariaLabel,
   ...props
-}) => (
-  <>
-    <Highlighter
-      {...props}
-      useInlineStyles={false}
-      className={classNames('Code', className)}
-      tabIndex={tabIndex}
-    >
-      {children}
-    </Highlighter>
-  </>
-);
+}) => {
+  if (!ariaLabel) ariaLabel = 'Code snippet';
+
+  return (
+    <>
+      <Highlighter
+        {...props}
+        useInlineStyles={false}
+        className={classNames('Code', className)}
+        tabIndex={tabIndex}
+        {...(tabIndex === 0 && { role: 'region', 'aria-label': ariaLabel })}
+      >
+        {children}
+      </Highlighter>
+    </>
+  );
+};
 
 Code.displayName = 'Code';
 

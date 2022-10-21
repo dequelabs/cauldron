@@ -47,7 +47,8 @@ div[class="foo"] {
         children: {
           type: 'string',
           description:
-            'code to be syntax highlighted and rendered in code block'
+            'code to be syntax highlighted and rendered in code block',
+          required: true
         },
         language: {
           type: 'string',
@@ -56,7 +57,13 @@ div[class="foo"] {
         tabIndex: {
           type: 'number',
           description:
-            "optional prop to set tabindex value on code block's <pre> wrapper"
+            "optional prop to set tabindex value on code block's <pre> wrapper",
+          default: 'undefined'
+        },
+        ariaLabel: {
+          type: 'string',
+          description: 'Label read by screen reader when tabindex is set to 0',
+          default: 'Code snippet'
         }
       }}
     />
