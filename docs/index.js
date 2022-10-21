@@ -160,13 +160,16 @@ const App = () => {
     let title = location.pathname.split('/').pop();
 
     location.state = {
-      description: `Free Accessible React Component Pattern from Deque Systems`
+      title: '',
+      description: ''
     };
 
     if (componentsList.includes(title)) {
       location.state.title = `${title} | Accessible Component Pattern Demo`;
+      location.state.description = `Free Accessible React ${title} Component Pattern from Deque Systems`;
     } else {
       location.state.title = `Cauldron React: Accessible Components Library`;
+      location.state.description = `Free Accessible React Components from Deque Systems`;
     }
 
     return (
@@ -287,7 +290,20 @@ const App = () => {
               />
             );
           })}
-          <Route component={({ location }) => handleTitleChange(location)} />
+          <Route
+            component={({ location }) =>
+              location.state && location.state.title ? (
+                <Helmet title={location.state.title}>
+                  <meta
+                    name="description"
+                    content={location.state.description}
+                  />
+                </Helmet>
+              ) : (
+                handleTitleChange(location)
+              )
+            }
+          />
         </Workspace>
         <Footer theme={theme} />
       </div>
