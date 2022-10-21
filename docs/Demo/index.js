@@ -39,7 +39,7 @@ const Demo = props => {
       <h2>Component Description</h2>
       <p>{componentDescription}</p>
       <h2>Demo</h2>
-      <Code>
+      <Code tabIndex={0}>
         {customImport ||
           `import { ${displayName} } from '@deque/cauldron-react'`}
       </Code>
@@ -65,7 +65,7 @@ const Demo = props => {
                 {DEMO_renderBefore}
                 <Component {...thinState} />
                 {DEMO_renderAfter}
-                <Code role="region" tabIndex={0}>
+                <Code tabIndex={0}>
                   {`${componentMarkup}${afterMarkup ? `\n${afterMarkup}` : ''}`}
                 </Code>
               </div>
