@@ -183,7 +183,7 @@ class Demo extends Component {
               forceAction: {
                 type: 'boolean',
                 description:
-                  'If true, user must interact with Modal content before closing it.',
+                  'If true, no close button will be rendered and the user must take action with Modal content.',
                 default: 'false'
               },
               closeButtonText: {
