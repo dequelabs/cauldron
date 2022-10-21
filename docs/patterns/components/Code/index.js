@@ -4,7 +4,7 @@ import Demo from '../../../Demo';
 
 const CodeDemo = () => (
   <>
-    {/* <Demo
+    <Demo
       component={Code}
       componentDescription={
         'Displays text styled to indicate that it is computer code.'
@@ -67,19 +67,12 @@ div[class="foo"] {
         },
         ariaLabelledBy: {
           type: 'string',
-          description: 'Pass an id for an element to ariaLabelledBy instead of ariaLabel',
+          description:
+            'Pass an id for an element to ariaLabelledBy instead of ariaLabel',
           default: 'undefined'
         }
       }}
-    /> */}
-    <div>
-      <h1 id="heading">Javascript code snippet</h1>
-      <Code
-        language="javascript"
-        tabIndex={0}
-        ariaLabelledBy="heading"
-      >{`var some = "javascript"`}</Code>
-    </div>
+    />
   </>
 );
 
