@@ -31,6 +31,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   className,
   tabIndex,
   ariaLabel,
+  ariaLabelledBy,
   ...props
 }) => {
   if (!ariaLabel) ariaLabel = 'Code snippet';
@@ -42,7 +43,13 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
         useInlineStyles={false}
         className={classNames('Code', className)}
         tabIndex={tabIndex}
-        {...(tabIndex === 0 && { role: 'region', 'aria-label': ariaLabel })}
+        {...(tabIndex === 0 &&
+          !ariaLabelledBy && { role: 'region', 'aria-label': ariaLabel })}
+        {...(tabIndex === 0 &&
+          ariaLabelledBy && {
+            role: 'region',
+            'aria-labelledby': ariaLabelledBy
+          })}
       >
         {children}
       </Highlighter>
