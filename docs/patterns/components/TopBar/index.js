@@ -1,5 +1,7 @@
 import React from 'react';
 import { Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 const Demo = () => {
   return (
@@ -38,6 +40,15 @@ const Demo = () => (
   </TopBar>
 );`}
       </Code>
+      <div className="Demo-props">
+        <h2>Props</h2>
+        <PropDocs
+          docs={{
+            children,
+            className
+          }}
+        />
+      </div>
     </>
   );
 };
