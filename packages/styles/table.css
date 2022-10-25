@@ -9,6 +9,7 @@
   --table-row-border-color: var(--gray-40);
   --table-space: 11px;
   --table-header-sorting-border-color: var(--gray-90);
+  --table-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
 }
 
 .cauldron--theme-dark {
@@ -92,6 +93,22 @@
   padding: var(--table-space) var(--space-smallest);
 }
 
-.TableRow:last-child .TableCell {
+.Table:not(.Table--variant-border) .TableRow:last-child .TableCell {
   border: none;
+}
+
+.Table--variant-border {
+  box-shadow: var(--table-box-shadow);
+}
+
+.Table--variant-border,
+.Table--variant-border .TableHeader,
+.Table--variant-border .TableCell {
+  border: 1px solid var(--gray-40);
+}
+
+.cauldron--theme-dark .Table--variant-border,
+.cauldron--theme-dark .Table--variant-border .TableHeader,
+.cauldron--theme-dark .Table--variant-border .TableCell {
+  border-color: var(--stroke-dark);
 }

@@ -145,6 +145,84 @@ const BasicTable = () => (
 )`}
       </Code>
 
+      <h3>Border variant Table</h3>
+      <Table variant="border">
+        <TableHead>
+          <TableRow>
+            <TableHeader scope="col">First Name</TableHeader>
+            <TableHeader scope="col">Last Name</TableHeader>
+            <TableHeader scope="col">Email</TableHeader>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Frank</TableCell>
+            <TableCell>Zappa</TableCell>
+            <TableCell>frank@zappa.io</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Duane</TableCell>
+            <TableCell>Allman</TableCell>
+            <TableCell>duane@almond.biz</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Yamandu</TableCell>
+            <TableCell>Costa</TableCell>
+            <TableCell>yamandu_costa@gmail.br</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Jimmy</TableCell>
+            <TableCell>Herring</TableCell>
+            <TableCell>jamesHerring@hotmail.gov</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+      <Code role="region" tabIndex="0">
+        {`import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@deque/cauldron-react';
+
+const TableBorder = () => (
+  <Table variant="border">
+    <TableHead>
+      <TableRow>
+        <TableHeader scope="col">First Name</TableHeader>
+        <TableHeader scope="col">Last Name</TableHeader>
+        <TableHeader scope="col">Email</TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Frank</TableCell>
+        <TableCell>Zappa</TableCell>
+        <TableCell>frank@zappa.io</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Duane</TableCell>
+        <TableCell>Allman</TableCell>
+        <TableCell>duane@almond.biz</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Yamandu</TableCell>
+        <TableCell>Costa</TableCell>
+        <TableCell>yamandu_costa@gmail.br</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Jimmy</TableCell>
+        <TableCell>Herring</TableCell>
+        <TableCell>jamesHerring@hotmail.gov</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+)`}
+      </Code>
+
       <h3>Sortable Table</h3>
       <Table>
         <TableHead>
@@ -296,7 +374,13 @@ const SortableTable = () => {
               default: '"/"'
             },
             children,
-            className
+            className,
+            variant: {
+              type: 'string',
+              description: 'Use the bordered variant of Table',
+              required: false,
+              default: '"border" | undefined'
+            }
           }}
         />
         <h3>TableHeader</h3>

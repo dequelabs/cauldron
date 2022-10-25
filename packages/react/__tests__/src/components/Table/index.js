@@ -113,6 +113,25 @@ describe('Table components', () => {
     expect(row.is('tr')).toBe(true);
   });
 
+  test('renders border variant', () => {
+    const wrapper = mount(
+      <Table variant="border">
+        <TableHead>
+          <TableRow>
+            <TableHeader>Header</TableHeader>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Cell</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    );
+
+    expect(wrapper.find('.Table--variant-border').exists()).toBe(true);
+  });
+
   describe('Sortable Table', () => {
     test('renders sort button and icons when passing in sortDirection and onSort in TableHeader', () => {
       const wrapper = mount(
