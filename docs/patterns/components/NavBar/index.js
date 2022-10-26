@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { NavBar, NavItem, Code, Button } from '@deque/cauldron-react';
 import './index.css';
+import { className } from '../../../props';
+import PropDocs from '../../../Demo/PropDocs';
 
 const Demo = () => {
-  const [isMobil, setIsMobil] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const componentsList = new Array(5).fill('NavItem');
   const handleToggle = () => {
-    setIsMobil(!isMobil);
+    setIsMobile(!isMobile);
   };
   return (
     <div className="NavBarDemo">
@@ -16,7 +18,7 @@ const Demo = () => {
         A navigation bar that contains links to other sections of the website.
       </p>
       <h2>Demo</h2>
-      <NavBar collapsed={isMobil}>
+      <NavBar collapsed={isMobile}>
         {componentsList.map((name, index) => {
           return (
             <NavItem key={`${name}-${index}`} active={index === 2}>
@@ -26,7 +28,7 @@ const Demo = () => {
         })}
       </NavBar>
       <Button onClick={handleToggle} className="NavBarButton">
-        Toggle between mobil and non-mobile mode
+        Toggle between mobile and non-mobile mode
       </Button>
       <h2>Code Sample</h2>
       <Code language="javascript" role="region" tabIndex={0}>
@@ -36,17 +38,17 @@ import { NavBar, NavItem, Code, Button } from '@deque/cauldron-react';
 import './index.css';
 
 const Demo = () => {
-  const [isMobil, setIsMobil] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const componentsList = new Array(5).fill('NavItem');
   const handleToggle = () => {
-    setIsMobil(!isMobil);
+    setIsMobile(!isMobile);
   };
   return (
     <div className="NavBarDemo">
       <h1>NavBar</h1>
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
-      <NavBar collapsed={isMobil}>
+      <NavBar collapsed={isMobile}>
         {componentsList.map((name, index) => {
           return (
             <NavItem key={\`\${name}-\${index}\`} active={index === 2}>
@@ -56,11 +58,39 @@ const Demo = () => {
         })}
       </NavBar>
       <Button onClick={handleToggle} className="NavBarButton">
-        Toggle between mobil and non-mobile mode
+        Toggle between mobile and non-mobile mode
       </Button>
     </div>
        `}
       </Code>
+      <div className="Demo-props">
+        <PropDocs
+          docs={{
+            children: {
+              type: 'node',
+              description: 'The child content',
+              required: true
+            },
+            className,
+            collapsed: {
+              type: 'boolean',
+              description: 'Collapsed styling for mobile',
+              default: false
+            },
+            navTriggerLabel: {
+              type: 'string',
+              description: 'Label shown in menu trigger with collapsed styling',
+              default: 'MAIN MENU'
+            },
+            propId: {
+              type: 'string',
+              description:
+                'ID passed to aria-controls, so assistive technology knows the trigger controls the menu.',
+              default: 'randomly generated with react-id-generator'
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };
