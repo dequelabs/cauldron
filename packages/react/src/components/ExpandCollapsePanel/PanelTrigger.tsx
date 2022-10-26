@@ -45,11 +45,11 @@ const PanelTrigger = ({
         onClick={onClick}
         {...otherProps}
       >
-        <div className="ExpandCollapse__trigger-title">
+        <span className="ExpandCollapse__trigger-title">
           {typeof children === 'function'
             ? children({ open: !!open })
             : children}
-        </div>
+        </span>
         <Icon type={open ? iconExpanded : iconCollapsed} />
       </button>
     </Header>
