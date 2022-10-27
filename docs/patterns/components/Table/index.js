@@ -379,7 +379,7 @@ const SortableTable = () => {
               type: 'string',
               description: 'Use the bordered variant of Table',
               required: false,
-              default: '"border" | undefined'
+              default: ''
             }
           }}
         />

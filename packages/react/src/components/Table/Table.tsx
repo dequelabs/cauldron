@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
-  variant: 'border' | undefined;
+  variant?: 'border';
 }
 
 const Table = ({ children, className, variant, ...other }: TableProps) => (
   <table
     className={classNames(
-      variant === 'border' ? 'Table Table--variant-border' : 'Table',
+      'Table',
+      variant === 'border' && 'Table--border',
       className
     )}
     {...other}

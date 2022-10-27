@@ -129,7 +129,7 @@ describe('Table components', () => {
       </Table>
     );
 
-    expect(wrapper.find('.Table--variant-border').exists()).toBe(true);
+    expect(wrapper.find('.Table--border').exists()).toBe(true);
   });
 
   describe('Sortable Table', () => {
