@@ -57,20 +57,7 @@ div[class="foo"] {
         focusable: {
           type: 'boolean',
           description:
-            "optional prop to set tabindex value on code block's <pre> wrapper",
-          default: false
-        },
-        'LabelProps.aria-label': {
-          type: 'string',
-          description:
-            'Add more descriptive aria-label to be read to screen readers when focusable is true.',
-          default: 'Code snippet'
-        },
-        'LabelProps.aria-labelledby': {
-          type: 'string',
-          description:
-            'Pass an id for an element to aria-labelledby instead of aria-label when focusable is true.',
-          default: 'undefined'
+            'When true, the code component will be focusable, have the landmark role region, and an aria-label or aria-labelledby will be required.'
         }
       }}
     />
