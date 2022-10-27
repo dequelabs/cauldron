@@ -27,42 +27,17 @@ test('should be focusable when tabIndex is set to 0', () => {
   expect(document.activeElement).toBe(pre);
 });
 
-test('should have region and accessible name when tabIndex is set to 0', () => {
-  const code = mount(
-    <Code language="javascript" tabIndex={0}>{`var some = "javascript"`}</Code>
-  );
-  const props = code.find('pre').props();
-  expect(props.role).toBe('region');
-  expect(props['aria-label']).toBe('Code snippet');
-});
-
-test('should be able to set an accessible name with ariaLabel', () => {
+test('should have role=region and tabIndex=0 when focusable is true', () => {
   const code = mount(
     <Code
       language="javascript"
-      tabIndex={0}
-      ariaLabel="Javascript code snippet"
+      focusable={true}
+      aria-label="label"
     >{`var some = "javascript"`}</Code>
   );
   const props = code.find('pre').props();
   expect(props.role).toBe('region');
-  expect(props['aria-label']).toBe('Javascript code snippet');
-});
-
-test('should be able to set an accessible name with ariaLabelledBy', () => {
-  const code = mount(
-    <div>
-      <h1 id="heading">Javascript code snippet</h1>
-      <Code
-        language="javascript"
-        tabIndex={0}
-        ariaLabelledBy="heading"
-      >{`var some = "javascript"`}</Code>
-    </div>
-  );
-  const props = code.find('pre').props();
-  expect(props.role).toBe('region');
-  expect(props['aria-labelledby']).toBe('heading');
+  expect(props.tabIndex).toBe(0);
 });
 
 test('should not be focusable when tabindex is not set', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/light';
 import classNames from 'classnames';
@@ -23,32 +23,26 @@ interface Props extends SyntaxHighlighterProps {
   children: string;
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
-  tabIndex?: number;
-  focusable: boolean;
-  LabelProps: Cauldron.LabelProps;
+  focusable?: boolean;
 }
 
-type AllProps = Props & React.AriaAttributes;
+type CodeProps = Props &
+  React.HTMLAttributes<HTMLElement> &
+  Cauldron.LabelProps;
 
-const Code: React.ComponentType<React.PropsWithChildren<AllProps>> = ({
+const Code: React.ComponentType<React.PropsWithChildren<CodeProps>> = ({
   children,
   className,
-  tabIndex,
   focusable,
-  LabelProps,
   ...props
 }) => {
-  // how to add LabelProps?
-
   return (
     <>
       <Highlighter
         {...props}
         useInlineStyles={false}
         className={classNames('Code', className)}
-        {...(focusable
-          ? { tabIndex: 0, role: 'region' }
-          : { tabIndex: tabIndex })}
+        {...(focusable && { tabIndex: 0, role: 'region' })}
       >
         {children}
       </Highlighter>
@@ -62,7 +56,20 @@ Code.propTypes = {
   children: PropTypes.string.isRequired,
   language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
   className: PropTypes.string,
-  tabIndex: PropTypes.number
+  tabIndex: PropTypes.number,
+  hasLabel: (
+    props: { [key: string]: string },
+    propName: string,
+    componentName: string
+  ) => {
+    if (props.focusable && !props['aria-label'] && !props['aria-labelledby']) {
+      return new Error(
+        `${componentName} must have an "aria-label" or "aria-labelledby" prop if focusable is true.`
+      );
+    } else {
+      return null;
+    }
+  }
 };
 
 export default Code;
