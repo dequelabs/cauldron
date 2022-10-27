@@ -28,7 +28,7 @@ const Demo = () => {
         })}
       </NavBar>
       <Button onClick={handleToggle} className="NavBarButton">
-        Toggle between mobile and non-mobile mode
+        Toggle between mobile and nonmobile mode
       </Button>
       <h2>Code Sample</h2>
       <Code language="javascript" role="region" tabIndex={0}>
@@ -58,7 +58,7 @@ const Demo = () => {
         })}
       </NavBar>
       <Button onClick={handleToggle} className="NavBarButton">
-        Toggle between mobile and non-mobile mode
+        Toggle between mobile and nonmobile mode
       </Button>
     </div>
        `}
