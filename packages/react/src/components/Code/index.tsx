@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/light';
 import classNames from 'classnames';
