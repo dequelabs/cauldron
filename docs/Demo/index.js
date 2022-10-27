@@ -39,7 +39,7 @@ const Demo = props => {
       <h2>Component Description</h2>
       <p>{componentDescription}</p>
       <h2>Demo</h2>
-      <Code tabIndex={0}>
+      <Code focusable={true} aria-label="Import the component code snippet">
         {customImport ||
           `import { ${displayName} } from '@deque/cauldron-react'`}
       </Code>
@@ -65,7 +65,10 @@ const Demo = props => {
                 {DEMO_renderBefore}
                 <Component {...thinState} />
                 {DEMO_renderAfter}
-                <Code tabIndex={0}>
+                <Code
+                  focusable={true}
+                  aria-label={`Demo ${displayName} code snippet`}
+                >
                   {`${componentMarkup}${afterMarkup ? `\n${afterMarkup}` : ''}`}
                 </Code>
               </div>
