@@ -107,28 +107,48 @@ class Demo extends Component {
           <h2>Props</h2>
           <PropDocs
             docs={{
-              children,
-              className,
+              children: {
+                type: 'node',
+                description: 'The child content',
+                required: true
+              },
               onClose: {
-                type: '() => void',
-                description: 'Function to close the option menu component'
+                type: 'function',
+                description:
+                  'Function called when the OptionMenu component is closed.',
+                default: '() => {}'
+              },
+              onSelect: {
+                type: 'function',
+                description:
+                  'Function called when a child of the OptionMenu component is selected.',
+                default: '() => {}'
               },
               trigger: {
-                type:
-                  '((props: OptionsMenuRenderTriggerProps) => React.ReactNode)',
-                description: ''
+                type: 'node',
+                description:
+                  'Pass an element that will display when the OptionsMenu component is closed and open it when activated.'
               },
               closeOnSelect: {
                 type: 'boolean',
                 description: ''
               },
               menuRef: {
-                type: ' React.Ref<HTMLUListElement>',
-                description: ''
+                type: ' function or function.current',
+                description: 'Pass a ref to the OptionsMenu'
               },
               align: {
-                type: 'left | right',
-                description: ''
+                type: 'string',
+                description: 'Style your OptionsMenu to align left or right',
+                default: 'right'
+              },
+              show: {
+                type: 'boolean',
+                description: 'Whether or not to show the opened OptionsMenu'
+              },
+              id: {
+                type: 'string',
+                description: 'ID string'
               }
             }}
           />
