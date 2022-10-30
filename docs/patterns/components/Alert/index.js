@@ -7,6 +7,8 @@ import {
   Code
 } from '@deque/cauldron-react/';
 import './index.css';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 export default class Demo extends Component {
   constructor() {
@@ -117,6 +119,43 @@ class Demo extends Component {
 }
           `}
         </Code>
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <PropDocs
+            docs={{
+              children,
+              className,
+              variant: {
+                type: 'string',
+                description: 'The style of Alert to display.',
+                default: 'default'
+              },
+              heading: {
+                type: 'React.ReactElement<any> or object',
+                description:
+                  'Displayed in the heading at the top of the Alert. Optional to pass heading level.',
+                required: true
+              },
+              onClose: {
+                type: 'function',
+                description: 'Function called when the Alert is closed'
+              },
+              portal: {
+                type: 'any',
+                description: 'The parent element to place the Alert in.',
+                default: 'document.body'
+              },
+              show: {
+                type: 'boolean',
+                description: 'Whether or not to show the Alert'
+              },
+              dialogRef: {
+                type: 'function or function.current',
+                description: 'Pass a ref to the Alert.'
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }

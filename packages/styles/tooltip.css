@@ -124,15 +124,14 @@
 
 .TooltipHead {
   background: var(--gray-20);
-  font-size: 16px;
+  font-size: var(--text-size-small);
   color: var(--gray-90);
-  padding: 16px 28px;
+  padding: var(--space-small) var(--space-large);
   text-align: center;
 }
 
 .TooltipContent {
   background: #fff;
-  font-size: var(--font-size-smaller);
   text-align: left;
 }
 
