@@ -180,12 +180,6 @@ class Demo extends Component {
                 type: 'function or function.current',
                 description: 'Pass a ref to the Modal.'
               },
-              forceAction: {
-                type: 'boolean',
-                description:
-                  'If true, no close button will be rendered and the user must take action with Modal content.',
-                default: 'false'
-              },
               closeButtonText: {
                 type: 'string',
                 description:
