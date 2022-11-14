@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
 
 export default function Layout() {
   return (
@@ -62,6 +63,23 @@ const App = () => (
 );
         `}
       </Code>
+      <div className="Demo-props">
+        <h2>Props</h2>
+        <PropDocs
+          docs={{
+            children: {
+              type: 'node',
+              description: 'The child content',
+              required: true
+            },
+            layoutRef: {
+              type: 'function or function.current',
+              description: 'Pass a ref to the Layout component',
+              default: '() => {}'
+            }
+          }}
+        />
+      </div>
     </div>
   );
 }
