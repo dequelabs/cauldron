@@ -7,7 +7,8 @@ import AxeLoader from './axe-loader';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 
-interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoaderOverlayProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'large' | 'small';
   label?: string;
   focusOnInitialRender?: boolean;

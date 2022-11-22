@@ -26,6 +26,12 @@ code {
   width: 38px;
 }
 
+@media (max-width: 348px) {
+  .MenuItem__logo span {
+    display: none;
+  }
+}
+
 [role='menubar'] .OptionsMenu__list {
   width: 140px;
   top: calc(var(--top-bar-height) - 6px);
