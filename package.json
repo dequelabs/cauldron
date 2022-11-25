@@ -20,7 +20,9 @@
     "release": "standard-version"
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   },
   "husky": {
     "hooks": {

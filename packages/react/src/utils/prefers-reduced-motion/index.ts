@@ -8,8 +8,6 @@ import { isBrowser } from '../is-browser';
 const prefersReducedMotion = (): Boolean => {
   const mediaQueryList = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  console.log(mediaQueryList.matches);
-
   if (!isBrowser()) {
     return false;
   }

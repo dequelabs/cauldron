@@ -65,7 +65,7 @@ export default class ExpandCollapsePanel extends React.Component<
     const { animationTiming } = this.props;
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false, isOpen: true });
+      this.setState({ isAnimating: false });
       return;
     }
 
@@ -107,7 +107,7 @@ export default class ExpandCollapsePanel extends React.Component<
     const { animationTiming } = this.props;
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false, isOpen: false });
+      this.setState({ isAnimating: false });
       return;
     }
 
@@ -156,7 +156,7 @@ export default class ExpandCollapsePanel extends React.Component<
     const { isOpen: openState, controlled } = this.state;
     const { open: openProp, animationTiming } = this.props;
 
-    if (controlled && openState !== openProp && animationTiming) {
+    if (controlled && openState !== openProp) {
       this.setState({ isOpen: !!openProp, isAnimating: true });
     }
 
