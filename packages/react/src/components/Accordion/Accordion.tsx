@@ -6,6 +6,7 @@ import ExpandCollapsePanel, {
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
 import PropTypes from 'prop-types';
+import prefersReducedMotion from '../../utils/prefers-reduced-motion';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -85,6 +86,11 @@ const Accordion = ({
   const { className: triggerClassName, ...triggerProps } = trigger.props;
 
   const elementId = useId();
+  const prefersReducedMotionEnabled = prefersReducedMotion();
+
+  if (prefersReducedMotionEnabled) {
+    animationTiming = false;
+  }
 
   return (
     <div className="Accordion" {...props}>

@@ -7,6 +7,7 @@ import {
   setStyle,
   removeStyleTag
 } from '../../utils/stylesheets';
+import prefersReducedMotion from '../../utils/prefers-reduced-motion';
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -64,7 +65,7 @@ export default class ExpandCollapsePanel extends React.Component<
     const { animationTiming } = this.props;
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false });
+      this.setState({ isAnimating: false, isOpen: true });
       return;
     }
 
@@ -106,7 +107,7 @@ export default class ExpandCollapsePanel extends React.Component<
     const { animationTiming } = this.props;
 
     if (!animationTiming) {
-      this.setState({ isAnimating: false });
+      this.setState({ isAnimating: false, isOpen: false });
       return;
     }
 
@@ -153,9 +154,9 @@ export default class ExpandCollapsePanel extends React.Component<
     prevState: ExpandCollapsePanelState
   ) {
     const { isOpen: openState, controlled } = this.state;
-    const { open: openProp } = this.props;
+    const { open: openProp, animationTiming } = this.props;
 
-    if (controlled && openState !== openProp) {
+    if (controlled && openState !== openProp && animationTiming) {
       this.setState({ isOpen: !!openProp, isAnimating: true });
     }
 
