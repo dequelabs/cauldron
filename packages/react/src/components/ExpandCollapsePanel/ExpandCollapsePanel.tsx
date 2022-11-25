@@ -7,7 +7,6 @@ import {
   setStyle,
   removeStyleTag
 } from '../../utils/stylesheets';
-import prefersReducedMotion from '../../utils/prefers-reduced-motion';
 
 export interface ExpandCollapsePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {

@@ -122,6 +122,7 @@ export {
 export { default as AriaIsolate } from './utils/aria-isolate';
 export { default as focusableSelector } from './utils/focusable-selector';
 export { default as useDidUpdate } from './utils/use-did-update';
+export { default as useMediaQuery } from './utils/use-media-query';
 
 /**
  * Contexts

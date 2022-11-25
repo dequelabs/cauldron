@@ -53,6 +53,7 @@ const Accordion = ({
   animationTiming,
   ...props
 }: AccordionProps) => {
+  const elementId = useId();
   const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
   const reducedMotionEnabled = useMediaQuery(reducedMotionQuery, true);
 
@@ -85,8 +86,6 @@ const Accordion = ({
     );
     return null;
   }
-
-  const elementId = useId();
 
   if (reducedMotionEnabled) {
     animationTiming = false;
