@@ -6,6 +6,10 @@ function useMediaQuery(query: string, initialValue = false): boolean {
   useEffect(() => {
     const mediaQueryList = window.matchMedia && window.matchMedia(query);
 
+    if (!mediaQueryList) {
+      return;
+    }
+
     const listener = (e: { matches: boolean }) => {
       setMatch(e.matches);
     };

@@ -57,6 +57,10 @@ const Accordion = ({
   const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
   const reducedMotionEnabled = useMediaQuery(reducedMotionQuery, true);
 
+  if (reducedMotionEnabled) {
+    animationTiming = false;
+  }
+
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
@@ -85,10 +89,6 @@ const Accordion = ({
       }
     );
     return null;
-  }
-
-  if (reducedMotionEnabled) {
-    animationTiming = false;
   }
 
   return (
