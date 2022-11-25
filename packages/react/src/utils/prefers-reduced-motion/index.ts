@@ -6,13 +6,14 @@ import { isBrowser } from '../is-browser';
  * @return {Boolean}
  */
 const prefersReducedMotion = (): Boolean => {
-  const mediaQueryList = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reducedMotionEnabled =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  if (!isBrowser()) {
-    return false;
+  if (!reducedMotionEnabled) {
+    return true;
   }
 
-  return mediaQueryList.matches;
+  return reducedMotionEnabled.matches;
 };
 
 export default prefersReducedMotion;
