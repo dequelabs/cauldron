@@ -81,6 +81,10 @@ const LoaderOverlayDemo = () => {
           <li>
             Add <code>role=alert</code> to the <code>LoaderOverlay</code>
           </li>
+          <li>
+            Use the <code>focusOnInitialRender</code> prop and allow focus to be
+            managed automatically
+          </li>
         </ul>
         <p>
           <strong>NOTE:</strong> in this example we also render a{' '}
