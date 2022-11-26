@@ -59,9 +59,7 @@ test('does not automatically handle focus when focusOnInitialRender is â€˜falseâ
     </LoaderOverlay>
   );
 
-  setTimeout(() => {
-    expect(document.activeElement).not.toBe(loaderOverlay.getDOMNode());
-  });
+  expect(document.activeElement).not.toBe(loaderOverlay.getDOMNode());
 });
 
 test('handles being passed a ref', () => {
@@ -73,9 +71,7 @@ test('handles being passed a ref', () => {
     </LoaderOverlay>
   );
 
-  setTimeout(() => {
-    expect(document.activeElement).toStrictEqual(loaderOverlay.getDOMNode());
-  });
+  expect(document.activeElement).toStrictEqual(loaderOverlay.getDOMNode());
 });
 
 test('traps focus', () => {
