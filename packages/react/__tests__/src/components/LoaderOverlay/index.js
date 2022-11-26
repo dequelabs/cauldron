@@ -37,7 +37,7 @@ test('handles variants', () => {
   expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
 });
 
-test('handles focus', () => {
+test('handles focus automatically when focusOnInitialRender is set to ’true’', () => {
   const loaderOverlay = mount(
     <LoaderOverlay
       className="baz"
@@ -49,12 +49,10 @@ test('handles focus', () => {
     </LoaderOverlay>
   );
 
-  setTimeout(() => {
-    expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
-  });
+  expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
 });
 
-test('handles not being focused', () => {
+test('does not automatically handle focus when focusOnInitialRender is ‘false‘ or unset‘', () => {
   const loaderOverlay = mount(
     <LoaderOverlay className="baz" role="alert" label="loading">
       Some text

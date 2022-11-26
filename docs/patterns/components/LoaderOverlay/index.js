@@ -12,7 +12,6 @@ import { className, children } from '../../../props';
 const LOADING_DURATION = 5000;
 
 const LoaderOverlayDemo = () => {
-  const mounted = useRef(false);
   const buttonRef = useRef();
   const [loading, setLoading] = useState(false);
   const onClick = () => {
@@ -21,14 +20,6 @@ const LoaderOverlayDemo = () => {
       setLoading(false);
     }, LOADING_DURATION);
   };
-
-  useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
-    buttonRef.current.focus();
-  }, [loading]);
 
   return (
     <Demo
@@ -72,6 +63,7 @@ const LoaderOverlayDemo = () => {
               label="Loading..."
               variant="large"
               focusTrap
+              focusOnInitialRender
             >
               <p>
                 Explanatory secondary text goes here. Let them know what's
@@ -100,7 +92,7 @@ const LoaderOverlayDemo = () => {
         <Code
           role="region"
           tabIndex={0}
-        >{`<LoaderOverlay tabIndex={-1} label="Loading..." focusOnInitialRender>
+        >{`<LoaderOverlay tabIndex={-1} label="Loading..." focusOnInitialRender focusTrap>
   <p>Explanatory secondary text goes here. Let them know what's happening, alright?</p>
 </LoaderOverlay>`}</Code>
       </div>
