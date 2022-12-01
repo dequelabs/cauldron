@@ -27,7 +27,7 @@ const fireCustomEvent = (show: boolean, button?: HTMLElement | null) => {
     return;
   }
 
-  const event = new Event(
+  const event = new CustomEvent(
     show ? 'cauldron:tooltip:show' : 'cauldron:tooltip:hide',
     {
       bubbles: true
