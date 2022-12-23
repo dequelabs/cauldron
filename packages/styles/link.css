@@ -21,7 +21,7 @@
 
 .Link:hover {
   text-decoration: underline;
-  color: var(--link-text-color);
+  color: var(--link-text-color-hover);
 }
 
 .Link:focus {
