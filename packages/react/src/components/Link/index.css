@@ -3,3 +3,6 @@ a.Button--secondary {
   text-decoration: none;
   padding: 9px 18px;
 }
+a.Button--thin {
+  padding: 0 16px;
+}

@@ -30,6 +30,11 @@ test('handles variant="button-secondary"', () => {
   expect(link.is('.Button--secondary')).toBe(true);
 });
 
+test('handles thin', () => {
+  const link = shallow(<Link thin>hi</Link>);
+  expect(link.is('.Button--thin')).toBe(true);
+});
+
 test('should return no axe violations', async () => {
   const link = shallow(<Link href="#">hello</Link>);
   expect(await axe(link.html())).toHaveNoViolations();
