@@ -24,6 +24,12 @@ export default class LinkDemo extends Component {
               children: 'I am a link that looks like a secondary button',
               href: '#',
               variant: 'button-secondary'
+            },
+            {
+              children: 'I am a link that looks like a thin primary button',
+              href: '#',
+              variant: 'button',
+              thin: true
             }
           ]}
           propDocs={{
@@ -45,6 +51,11 @@ export default class LinkDemo extends Component {
             variant: {
               type: 'string',
               description: 'Any of the following: "button", "button-secondary".'
+            },
+            thin: {
+              type: 'boolean',
+              description:
+                'render button with "thin" modifier (reduces height of button)'
             }
           }}
         />

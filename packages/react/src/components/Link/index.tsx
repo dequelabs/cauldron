@@ -6,6 +6,7 @@ export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   linkRef?: React.Ref<HTMLAnchorElement>;
   variant?: 'button' | 'button-secondary';
+  thin?: boolean;
 }
 
 const Link = ({
@@ -13,6 +14,7 @@ const Link = ({
   linkRef,
   className,
   variant,
+  thin,
   ...other
 }: LinkProps) => (
   <a
@@ -20,7 +22,8 @@ const Link = ({
     className={classNames(className, {
       Link: !variant,
       'Button--primary': variant === 'button',
-      'Button--secondary': variant === 'button-secondary'
+      'Button--secondary': variant === 'button-secondary',
+      'Button--thin': thin
     })}
     {...other}
   >
@@ -32,6 +35,7 @@ Link.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   variant: PropTypes.string,
+  thin: PropTypes.bool,
   linkRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.any })
