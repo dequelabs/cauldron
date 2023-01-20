@@ -39,8 +39,8 @@
   --focus-light: #c11bde;
   --focus-dark: #eb94ff;
   --issue-critical: var(--accent-danger);
-  --issue-serious: #ed9a55;
-  --issue-moderate: var(--accent-warning);
+  --issue-serious: var(--accent-warning);
+  --issue-moderate: #f0c4f8;
   --issue-minor: var(--gray-20);
 
   /* text colours */
