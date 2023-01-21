@@ -4,6 +4,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -362,6 +363,97 @@ const SortableTable = () => {
   )
 }`}
       </Code>
+      <h3>Border variant Table with TableFooter</h3>
+      <Table variant="border">
+        <TableHead>
+          <TableRow>
+            <TableHeader scope="col">First Name</TableHeader>
+            <TableHeader scope="col">Last Name</TableHeader>
+            <TableHeader scope="col">Email</TableHeader>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Frank</TableCell>
+            <TableCell>Zappa</TableCell>
+            <TableCell>frank@zappa.io</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Duane</TableCell>
+            <TableCell>Allman</TableCell>
+            <TableCell>duane@almond.biz</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Yamandu</TableCell>
+            <TableCell>Costa</TableCell>
+            <TableCell>yamandu_costa@gmail.br</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Jimmy</TableCell>
+            <TableCell>Herring</TableCell>
+            <TableCell>jamesHerring@hotmail.gov</TableCell>
+          </TableRow>
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell>This is a table footer.</TableCell>
+            <TableCell>It can be used to provide additional</TableCell>
+            <TableCell>information about the table.</TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
+      <Code role="region" tabIndex="0">
+        {`import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@deque/cauldron-react';
+
+const TableBorder = () => (
+  <Table variant="border">
+    <TableHead>
+      <TableRow>
+        <TableHeader scope="col">First Name</TableHeader>
+        <TableHeader scope="col">Last Name</TableHeader>
+        <TableHeader scope="col">Email</TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Frank</TableCell>
+        <TableCell>Zappa</TableCell>
+        <TableCell>frank@zappa.io</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Duane</TableCell>
+        <TableCell>Allman</TableCell>
+        <TableCell>duane@almond.biz</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Yamandu</TableCell>
+        <TableCell>Costa</TableCell>
+        <TableCell>yamandu_costa@gmail.br</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Jimmy</TableCell>
+        <TableCell>Herring</TableCell>
+        <TableCell>jamesHerring@hotmail.gov</TableCell>
+      </TableRow>
+    </TableBody>
+    <TableFooter>
+      <TableRow>
+        <TableCell>This is a table footer.</TableCell>
+        <TableCell>It can be used to provide additional</TableCell>
+        <TableCell>information about the table.</TableCell>
+      </TableRow>
+    </TableFooter>
+  </Table>
+)`}
+      </Code>
 
       <div className="Demo-props">
         <h2>Props</h2>
@@ -417,7 +509,7 @@ const SortableTable = () => {
             className
           }}
         />
-        <h3>TableHead, TableBody, TableRow, and TableCell</h3>
+        <h3>TableHead, TableBody, TableFooter, TableRow, and TableCell</h3>
         <PropDocs
           docs={{
             children,
