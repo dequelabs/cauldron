@@ -66,3 +66,13 @@
 .cauldron--theme-dark .Pagination [role='log'] {
   color: var(--accent-light);
 }
+
+@media (max-width: 450px) {
+  .Pagination [role='log'] {
+    margin: 0;
+  }
+
+  .Pagination--thin [role='log'] {
+    margin: 0;
+  }
+}
