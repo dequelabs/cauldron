@@ -67,7 +67,7 @@
   color: var(--accent-light);
 }
 
-@media (max-width: 450px) {
+@media (max-width: 28.125rem) {
   .Pagination [role='log'] {
     margin: 0;
   }
