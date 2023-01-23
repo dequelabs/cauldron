@@ -89,7 +89,8 @@
 }
 
 .TableCell,
-.TableHeader {
+.TableHeader,
+.TableFooter {
   padding: var(--table-space) var(--space-smallest);
 }
 
@@ -103,12 +104,20 @@
 
 .Table--border,
 .Table--border .TableHeader,
+.Table--border .TableFooter,
 .Table--border .TableCell {
   border: 1px solid var(--gray-40);
 }
 
 .cauldron--theme-dark .Table--border,
 .cauldron--theme-dark .Table--border .TableHeader,
+.cauldron--theme-dark .Table--border .TableFooter,
 .cauldron--theme-dark .Table--border .TableCell {
   border-color: var(--stroke-dark);
+}
+
+.TableFooter .TableCell {
+  background: var(--table-header-background-color);
+  font-weight: var(--font-weight-medium);
+  color: var(--table-header-text-color);
 }
