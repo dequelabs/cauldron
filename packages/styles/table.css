@@ -120,5 +120,4 @@
   background: var(--table-header-background-color);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
-  border-bottom: 2px solid var(--table-row-border-color);
 }
