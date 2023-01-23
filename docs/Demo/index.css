@@ -33,4 +33,8 @@
   .Demo-props .Table {
     display: none;
   }
+
+  .Demo ul {
+    margin: 0;
+  }
 }
