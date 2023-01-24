@@ -102,6 +102,10 @@
   box-shadow: var(--table-box-shadow);
 }
 
+.TableCell {
+  color: var(--gray-90);
+}
+
 .Table--border,
 .Table--border .TableHeader,
 .Table--border .TableFooter,
