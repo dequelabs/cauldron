@@ -65,8 +65,9 @@ a.IconButton {
 }
 
 .IconButton .Icon {
-  width: 100%;
-  height: 100%;
+  height: var(--space-small);
+  width: var(--space-small);
+  margin-top: 2px;
   pointer-events: none;
 }
 
