@@ -20,7 +20,7 @@
     --button-background-color-secondary-active
   );
   --icon-button-outline-color-secondary: var(--button-outline-color-secondary);
-  --icon-button-border-color-secondary: #dadada;
+  --icon-button-border-color-secondary: var(--gray-40);
 
   --icon-button-background-color-error: var(--button-background-color-error);
   --icon-button-background-color-error-disabled: var(
