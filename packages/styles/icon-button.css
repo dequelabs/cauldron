@@ -61,6 +61,7 @@
 /* Ensure both <a> and <button> IconButtons are aligned correctly. See #846. */
 a.IconButton {
   vertical-align: middle;
+  line-height: unset;
 }
 
 .IconButton .Icon {
