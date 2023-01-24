@@ -53,9 +53,9 @@ const TableHeader = ({
             {sortDirection === 'none' ? (
               <Icon type="sort-triangle" />
             ) : sortDirection === 'ascending' ? (
-              <Icon type="triangle-up" />
+              <Icon type="sort-up" />
             ) : (
-              <Icon type="triangle-down" />
+              <Icon type="sort-down" />
             )}
           </span>
           <Offscreen>
