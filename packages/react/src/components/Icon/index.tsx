@@ -14,10 +14,9 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = forwardRef<HTMLDivElement, IconProps>(
   ({ label, className, type, ...other }: IconProps, ref) => {
     const isMounted = useRef(true);
-    const [, name, direction] = type.match(/(.*)-(right|left|up|down)$/) || [
-      '',
-      type
-    ];
+    const [, name, direction] = (type !== 'table-sort-down' &&
+      type !== 'table-sort-up' &&
+      type.match(/(.*)-(right|left|up|down)$/)) || ['', type];
     const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
 
     useEffect(() => {
