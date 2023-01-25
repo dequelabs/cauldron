@@ -107,6 +107,10 @@
   color: var(--gray-90);
 }
 
+.cauldron--theme-dark .TableCell {
+  color: var(--white);
+}
+
 .Table--border,
 .Table--border .TableHeader,
 .Table--border .TableFooter,
