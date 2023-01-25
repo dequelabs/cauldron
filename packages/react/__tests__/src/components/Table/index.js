@@ -202,7 +202,7 @@ describe('Table components', () => {
       );
 
       expect(wrapper.find('Offscreen').text()).toBe('up and away');
-      expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
+      expect(wrapper.find('.Icon--table-sort-ascending').exists()).toBe(true);
     });
 
     test('renders triangle down Icon and descending message when sortDirection is descending', () => {
@@ -223,7 +223,7 @@ describe('Table components', () => {
       );
 
       expect(wrapper.find('Offscreen').text()).toBe('down below');
-      expect(wrapper.find('.Icon--triangle-down').exists()).toBe(true);
+      expect(wrapper.find('.Icon--table-sort-descending').exists()).toBe(true);
     });
 
     test('calls onSort when sort button is clicked', () => {
