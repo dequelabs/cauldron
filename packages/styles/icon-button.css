@@ -48,6 +48,7 @@
   display: inline-flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
   height: var(--button-thin-height);
   width: var(--button-thin-height);
   border-radius: 3px;
@@ -67,7 +68,6 @@ a.IconButton {
 .IconButton .Icon {
   height: var(--space-small);
   width: var(--space-small);
-  margin-top: 2px;
   pointer-events: none;
 }
 
