@@ -43,7 +43,7 @@ $ yarn build
 $ yarn dev
 ```
 
-navigate browser to http://localhost:8000
+navigate browser to http://localhost:8003/
 
 ### run tests
 
