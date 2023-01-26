@@ -20,7 +20,7 @@
     --button-background-color-secondary-active
   );
   --icon-button-outline-color-secondary: var(--button-outline-color-secondary);
-  --icon-button-border-color-secondary: #dadada;
+  --icon-button-border-color-secondary: var(--gray-40);
 
   --icon-button-background-color-error: var(--button-background-color-error);
   --icon-button-background-color-error-disabled: var(
@@ -48,6 +48,7 @@
   display: inline-flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
   height: var(--button-thin-height);
   width: var(--button-thin-height);
   border-radius: 3px;
@@ -61,11 +62,12 @@
 /* Ensure both <a> and <button> IconButtons are aligned correctly. See #846. */
 a.IconButton {
   vertical-align: middle;
+  line-height: unset;
 }
 
 .IconButton .Icon {
-  width: 100%;
-  height: 100%;
+  height: var(--space-small);
+  width: var(--space-small);
   pointer-events: none;
 }
 

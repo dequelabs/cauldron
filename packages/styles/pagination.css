@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   font-size: var(--text-size-small);
+  margin: 0;
 }
 
 .Pagination > ul > li:not(:last-child) {
