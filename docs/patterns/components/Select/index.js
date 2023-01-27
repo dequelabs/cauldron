@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, FieldWrap } from '@deque/cauldron-react/';
+import { Select, FieldWrap } from '@deque/cauldron-react';
 import './index.css';
 import Demo from '../../../Demo';
 import FieldWrapNotice from '../../../FieldWrapNotice';
@@ -26,6 +26,9 @@ const SelectDemo = () => {
       <FieldWrapNotice />
       <Demo
         component={Select}
+        componentDescription={
+          'A form element that lets users select a choice from a dropdown list.'
+        }
         states={[
           {
             label: 'Do you like yogurt?',

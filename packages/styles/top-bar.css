@@ -171,3 +171,9 @@
 .cauldron--theme-dark .TopBar > ul > li:hover:before {
   background-color: var(--top-bar-text-color);
 }
+
+@media (max-width: 71.25rem) {
+  .TopBar > ul {
+    border: 0;
+  }
+}

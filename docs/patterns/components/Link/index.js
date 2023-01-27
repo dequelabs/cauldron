@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { Link, Code } from '@deque/cauldron-react/';
+import { Link, Code } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 export default class LinkDemo extends Component {
@@ -9,6 +9,7 @@ export default class LinkDemo extends Component {
       <div>
         <Demo
           component={Link}
+          componentDescription={'A link component with accessible styling.'}
           states={[
             {
               children: 'I am a link!',
@@ -23,6 +24,12 @@ export default class LinkDemo extends Component {
               children: 'I am a link that looks like a secondary button',
               href: '#',
               variant: 'button-secondary'
+            },
+            {
+              children: 'I am a link that looks like a thin primary button',
+              href: '#',
+              variant: 'button',
+              thin: true
             }
           ]}
           propDocs={{
@@ -44,6 +51,11 @@ export default class LinkDemo extends Component {
             variant: {
               type: 'string',
               description: 'Any of the following: "button", "button-secondary".'
+            },
+            thin: {
+              type: 'boolean',
+              description:
+                'render button with "thin" modifier (reduces height of button)'
             }
           }}
         />

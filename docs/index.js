@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import Home from './Home';
+import Footer from './Home/Footer';
 import {
   TopBar,
   MenuBar,
@@ -139,7 +140,10 @@ const App = () => {
       <Link
         to={{
           pathname,
-          state: { title: `${text} | Component demo` }
+          state: {
+            title: `${text} | Accessible Component Pattern Demo`,
+            description: `Free Accessible React ${text} Component Pattern from Deque Systems`
+          }
         }}
         onClick={() => {
           setState({ show: false });
@@ -167,7 +171,7 @@ const App = () => {
     <Router>
       <div>
         <Helmet
-          titleTemplate="%s | Deque Cauldron React"
+          titleTemplate="%s | Deque Systems"
           defaultTitle="Deque Cauldron React"
         />
         <SkipLink target={'#main-content'} aria-label="Skip" />
@@ -186,8 +190,8 @@ const App = () => {
             </TopBarTrigger>
             <TopBarItem>
               <Link to="/" className="MenuItem__logo" tabIndex={-1}>
-                <img src={theme === 'dark' ? logo : darkLogo} alt="" />{' '}
-                <span>Cauldron</span>
+                <img src={theme === 'dark' ? logo : darkLogo} alt="Cauldron" />{' '}
+                <span aria-hidden="true">Cauldron</span>
               </Link>
             </TopBarItem>
 
@@ -225,7 +229,11 @@ const App = () => {
             </TopBarItem>
           </MenuBar>
         </TopBar>
-        <SideBar show={state.show} onDismiss={onTriggerClick}>
+        <SideBar
+          show={state.show}
+          onDismiss={onTriggerClick}
+          className="SideBar--with-footer"
+        >
           {componentsList.map(name => {
             const pathname = `/components/${name}`;
             const isActive = pathname === location.pathname;
@@ -262,11 +270,24 @@ const App = () => {
           <Route
             component={({ location }) =>
               location.state && location.state.title ? (
-                <Helmet title={location.state.title} />
-              ) : null
+                <Helmet title={location.state.title}>
+                  <meta
+                    name="description"
+                    content={location.state.description}
+                  />
+                </Helmet>
+              ) : (
+                <Helmet title={'Cauldron React: Accessible Components Library'}>
+                  <meta
+                    name="description"
+                    content="Free Accessible React Components from Deque Systems"
+                  />
+                </Helmet>
+              )
             }
           />
         </Workspace>
+        <Footer theme={theme} />
       </div>
     </Router>
   );

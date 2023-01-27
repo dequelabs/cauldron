@@ -81,7 +81,8 @@ export {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
+  TableFooter
 } from './components/Table';
 export { default as Tabs, Tab, TabPanel } from './components/Tabs';
 export {

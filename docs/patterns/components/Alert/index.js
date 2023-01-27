@@ -6,6 +6,9 @@ import {
   AlertActions,
   Code
 } from '@deque/cauldron-react/';
+import './index.css';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 export default class Demo extends Component {
   constructor() {
@@ -22,9 +25,15 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Alert</h1>
+        <h2>Component Description</h2>
+        <p>Shows a modal with a message. Optional warning styling.</p>
         <h2>Demo</h2>
-        <Button onClick={this.toggleDefaultAlert}>Default Alert</Button>
-        <Button onClick={this.toggleWarningAlert}>Warning Alert</Button>
+        <Button className="AlertDemo__button" onClick={this.toggleDefaultAlert}>
+          Default Alert
+        </Button>
+        <Button className="AlertDemo__button" onClick={this.toggleWarningAlert}>
+          Warning Alert
+        </Button>
         <Alert heading="Default Alert" show={showDefaultAlert}>
           <AlertContent>Dismissable alert</AlertContent>
           <AlertActions>
@@ -46,7 +55,7 @@ export default class Demo extends Component {
           </AlertActions>
         </Alert>
         <h2>Code Sample</h2>
-        <Code langauge="javascript" role="region" tabIndex={0}>
+        <Code language="javascript" role="region" tabIndex={0}>
           {`
 import React, { Component } from 'react';
 import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react';
@@ -110,6 +119,43 @@ class Demo extends Component {
 }
           `}
         </Code>
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <PropDocs
+            docs={{
+              children,
+              className,
+              variant: {
+                type: 'string',
+                description: 'The style of Alert to display.',
+                default: 'default'
+              },
+              heading: {
+                type: 'React.ReactElement<any> or object',
+                description:
+                  'Displayed in the heading at the top of the Alert. Optional to pass heading level.',
+                required: true
+              },
+              onClose: {
+                type: 'function',
+                description: 'Function called when the Alert is closed'
+              },
+              portal: {
+                type: 'any',
+                description: 'The parent element to place the Alert in.',
+                default: 'document.body'
+              },
+              show: {
+                type: 'boolean',
+                description: 'Whether or not to show the Alert'
+              },
+              dialogRef: {
+                type: 'function or function.current',
+                description: 'Pass a ref to the Alert.'
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }

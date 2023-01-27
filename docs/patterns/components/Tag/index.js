@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Demo from '../../../Demo';
-import { Tag, TagLabel } from '@deque/cauldron-react/';
+import { Tag, TagLabel } from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 
 export default class TagDemo extends Component {
@@ -9,6 +9,9 @@ export default class TagDemo extends Component {
       <div>
         <Demo
           component={Tag}
+          componentDescription={
+            'Styled text intended for keywords used as tags.'
+          }
           states={[
             {
               children: 'Value'

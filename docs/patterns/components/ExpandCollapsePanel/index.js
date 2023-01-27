@@ -1,9 +1,5 @@
 import React, { Component, useState } from 'react';
-import {
-  ExpandCollapsePanel,
-  PanelTrigger,
-  Code
-} from '@deque/cauldron-react/';
+import { ExpandCollapsePanel, PanelTrigger, Code } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
 import { children, className } from '../../../props';
 
@@ -25,6 +21,8 @@ export default class Demo extends Component {
     return (
       <div>
         <h1>Expand Collapse Panel</h1>
+        <h2>Component Description</h2>
+        <p>Click a panel trigger to open a panel with more information.</p>
         <h2>Demo</h2>
         <ExpandCollapsePanel>
           <PanelTrigger>More bacon info</PanelTrigger>

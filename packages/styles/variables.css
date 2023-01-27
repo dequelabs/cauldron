@@ -20,6 +20,7 @@
   --accent-medium: #283640;
   --accent-light: #d4dde0;
   --accent-success: #a5db75;
+  --accent-success-high-contrast: #4fa630;
   --accent-success-light: #d1ffa4;
   --accent-success-dark: #57a711;
   --accent-error: #d93251;
@@ -37,10 +38,10 @@
   --accent-secondary-active: var(--gray-30);
   --focus-light: #c11bde;
   --focus-dark: #eb94ff;
-  --issue-critical: #ed5959;
-  --issue-serious: #f3826b;
-  --issue-moderate: #ffdd76;
-  --issue-minor: #d3dde0;
+  --issue-critical: var(--accent-danger);
+  --issue-serious: var(--accent-warning);
+  --issue-moderate: #f0c4f8;
+  --issue-minor: var(--gray-20);
 
   /* text colours */
   --text-color-base: var(--gray-60);
@@ -68,7 +69,7 @@
   --space-small: 16px;
   --space-medium: 18px;
   --space-large: 24px;
-  --space-largest: 29px;
+  --space-largest: 32px;
   --space-half: 4px;
   --space-three-quarters: 6px;
   --space-quarter: 2px;
@@ -101,7 +102,7 @@
   --content-max-width: 1000px;
 
   /* z-index */
-  --z-index-tooltip: 9;
+  --z-index-tooltip: 22;
   --z-index-loader: 8;
   --z-index-scrim: 7;
   --z-index-dialog: 21;
