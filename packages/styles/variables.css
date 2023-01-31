@@ -50,6 +50,12 @@
   --header-text-color: var(--gray-80);
   --header-text-color-dark: var(--gray-90);
 
+  /* stroke colours */
+  --stroke-light: #b3bfc6;
+
+  /* background colours */
+  --background-light: #f0f2f5;
+
   /* accents */
   --error: var(--accent-error);
   --disabled: var(--gray-40);
@@ -66,6 +72,7 @@
 
   /* spacing (padding/margin) */
   --space-smallest: 8px;
+  --space-smaller: 12px;
   --space-small: 16px;
   --space-medium: 18px;
   --space-large: 24px;
@@ -81,6 +88,7 @@
   --text-size-larger: 56px;
   --text-size-large: 45px;
   --text-size-large-medium: 34px;
+  --text-size-medium-small: 32px;
   --text-size-medium: 24px;
   --text-small-medium: 20px;
   --text-size-normal: 18px;
