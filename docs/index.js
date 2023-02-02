@@ -156,6 +156,29 @@ const App = () => {
     );
   };
 
+  const handleTitleChange = location => {
+    let title = location.pathname.split('/').pop();
+
+    location.state = {
+      title: '',
+      description: ''
+    };
+
+    if (componentsList.includes(title)) {
+      location.state.title = `${title} | Accessible Component Pattern Demo`;
+      location.state.description = `Free Accessible React ${title} Component Pattern from Deque Systems`;
+    } else {
+      location.state.title = `Cauldron React: Accessible Components Library`;
+      location.state.description = `Free Accessible React Components from Deque Systems`;
+    }
+
+    return (
+      <Helmet title={location.state.title}>
+        <meta name="description" content={location.state.description} />
+      </Helmet>
+    );
+  };
+
   useEffect(() => {
     document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
 
@@ -277,12 +300,7 @@ const App = () => {
                   />
                 </Helmet>
               ) : (
-                <Helmet title={'Cauldron React: Accessible Components Library'}>
-                  <meta
-                    name="description"
-                    content="Free Accessible React Components from Deque Systems"
-                  />
-                </Helmet>
+                handleTitleChange(location)
               )
             }
           />
