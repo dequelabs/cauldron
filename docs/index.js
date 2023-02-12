@@ -59,6 +59,7 @@ const componentsList = [
   'Link',
   'Icon',
   'IconButton',
+  'IconImpact',
   'Code',
   'LoaderOverlay',
   'Line',

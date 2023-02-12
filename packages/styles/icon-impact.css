@@ -1,0 +1,50 @@
+:root {
+  --icon-impact-critical-background-color: var(--accent-warning-light);
+  --icon-impact-serious-background-color: var(--accent-caution);
+  --icon-impact-moderate-background-color: var(--accent-light);
+  --icon-impact-minor-background-color: var(--accent-caution);
+}
+
+.cauldron--theme-dark {
+  --icon-impact-critical-background-color: var(--accent-danger);
+  --icon-impact-serious-background-color: var(--accent-warning);
+  --icon-impact-moderate-background-color: var(--accent-warning-light);
+  --icon-impact-minor-background-color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Pagination [role='log'] {
+  color: var(--accent-light);
+}
+
+.TooltipTabstop--IconImpact {
+  padding: 0;
+}
+
+.IconImpact {
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+  border-radius: 50%;
+  color: #02101a;
+  border: solid 1px #02101a;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.IconImpact--critical {
+  background: var(--icon-impact-critical-background-color);
+}
+
+.IconImpact--serious {
+  background: var(--icon-impact-serious-background-color);
+}
+
+.IconImpact--moderate {
+  background: var(--icon-impact-moderate-background-color);
+}
+
+.IconImpact--minor {
+  background: var(--gray-20);
+}
