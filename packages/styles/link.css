@@ -1,6 +1,6 @@
 :root {
   --link-text-color: var(--gray-90);
-  --link-text-color-hover: var(--accent-primary);
+  --link-text-color-hover: #3873a3;
   --link-text-color-light: rgba(60, 122, 174, 0.1);
 }
 
