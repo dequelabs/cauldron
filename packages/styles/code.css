@@ -25,7 +25,7 @@
 .Code .hljs-addition,
 .Code .hljs-attr,
 .Code .hljs-attribute {
-  color: var(--focus-light);
+  color: #8a0c8a;
 }
 
 .Code .hljs-number {
@@ -62,7 +62,7 @@
 .Code .hljs-tag,
 .Code .hljs-selector-id,
 .Code .hljs-selector-class {
-  color: var(--focus-light);
+  color: #8a0c8a;
 }
 
 .Code .hljs-strong {
