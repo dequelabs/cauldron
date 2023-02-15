@@ -37,8 +37,7 @@
   --accent-primary-active: #316091;
   --accent-secondary: var(--gray-20);
   --accent-secondary-active: var(--gray-30);
-  --accent-purple-high-contrast: #b51ad1;
-  --focus-light: #c11bde;
+  --focus-light: #b51ad1;
   --focus-dark: #eb94ff;
   --issue-critical: var(--accent-danger);
   --issue-serious: var(--accent-warning);
