@@ -33,6 +33,6 @@ p .Link {
   margin: 0 2px;
   display: inline;
   text-decoration: underline;
-  color: var(--gray-90);
+  color: var(--link-text-color);
   font-weight: var(--font-weight-normal);
 }
