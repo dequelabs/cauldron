@@ -58,6 +58,10 @@ ul {
   padding: 0;
 }
 
+button {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+
 button,
 [role='button'] {
   display: inline-block;
