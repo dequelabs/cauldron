@@ -4,6 +4,7 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .Breadcrumb__Separator {
@@ -19,4 +20,6 @@
 .Breadcrumb__Item {
   font-weight: 500;
   color: var(--link-text-color);
+  display: flex;
+  flex-wrap: nowrap;
 }
