@@ -6,27 +6,25 @@ import IconButton from '../IconButton';
 import TooltipTabstop from '../TooltipTabstop';
 import Icon from '../Icon';
 
+export type StatusLabeller = (
+  totalItems: number,
+  itemStart: number,
+  itemEnd: number
+) => React.ReactNode;
+
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
-  statusLabel?: React.ReactNode;
+  statusLabel?: React.ReactNode | StatusLabeller;
   firstPageLabel?: string;
   previousPageLabel?: string;
   nextPageLabel?: string;
   lastPageLabel?: string;
-  onNextPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onPreviousPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onFirstPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onLastPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  onNextPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onPreviousPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onFirstPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onLastPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   tooltipPlacement?: Placement;
   thin?: boolean;
   className?: string;
@@ -58,7 +56,6 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
     const itemEnd = Math.min(itemStart + itemsPerPage - 1, totalItems);
     const isLastPage = itemEnd === totalItems;
     const isFirstPage = currentPage === 1;
-
     return (
       <div
         ref={ref}
@@ -112,7 +109,13 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
 
           <li>
             <span role="log" aria-atomic="true">
-              {statusLabel || (
+              {statusLabel ? (
+                typeof statusLabel === 'function' ? (
+                  statusLabel(totalItems, itemStart, itemEnd)
+                ) : (
+                  statusLabel
+                )
+              ) : (
                 <span>
                   Showing <strong>{itemStart}</strong> to{' '}
                   <strong>{itemEnd}</strong> of <strong>{totalItems}</strong>
@@ -173,7 +176,7 @@ Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   itemsPerPage: PropTypes.number,
   currentPage: PropTypes.number,
-  statusLabel: PropTypes.element,
+  statusLabel: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   firstPageLabel: PropTypes.string,
   previousPageLabel: PropTypes.string,
   nextPageLabel: PropTypes.string,
