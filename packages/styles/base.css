@@ -60,6 +60,7 @@ ul {
 
 button {
   font-family: var(--base-font-family);
+  font-weight: 500;
 }
 
 button,
