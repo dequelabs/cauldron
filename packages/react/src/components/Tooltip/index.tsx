@@ -6,6 +6,7 @@ import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
+import { off } from 'process';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -58,12 +59,14 @@ export default function Tooltip({
     null
   );
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
-
+  const [actualPlacement, setActualPlacement] = useState<Placement | undefined>(
+    initialPlacement
+  );
   const { styles, attributes, update } = usePopper(
     targetElement,
     tooltipElement,
     {
-      placement: initialPlacement,
+      placement: actualPlacement,
       modifiers: [
         { name: 'preventOverflow', options: { padding: 8 } },
         { name: 'flip' },
@@ -112,7 +115,7 @@ export default function Tooltip({
   }, [target]);
 
   // Get popper placement
-  const placement: Placement =
+  let placement: Placement =
     (attributes.popper &&
       (attributes.popper['data-popper-placement'] as Placement)) ||
     initialPlacement;
@@ -177,6 +180,25 @@ export default function Tooltip({
       );
     }
   }, [targetElement, id]);
+  /* align tooltip below target if it will overflow off of the page */
+  const tooltipExpectedWidth = 50;
+  const bodyRect = document.body.getBoundingClientRect(),
+    elemRect = targetElement?.getBoundingClientRect();
+  if (elemRect) {
+    if (initialPlacement === 'right') {
+      const offset = bodyRect.right - elemRect.right;
+      if (offset < tooltipExpectedWidth && actualPlacement !== 'bottom') {
+        placement = 'bottom';
+        setActualPlacement('bottom');
+      }
+    } else if (initialPlacement === 'left') {
+      const offset = elemRect.left;
+      if (offset < tooltipExpectedWidth && actualPlacement !== 'bottom') {
+        placement = 'bottom';
+        setActualPlacement('bottom');
+      }
+    }
+  }
 
   return (
     <>
