@@ -94,6 +94,9 @@
   --text-size-smaller: 13px;
   --text-size-smallest: 12px;
 
+  /* fonts */
+  --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;
+
   /* font weight */
   --font-weight-thin: 100;
   --font-weight-light: 300;
@@ -127,9 +130,6 @@
   /* radio card */
   --radio-card-width: 255px;
   --radio-card-height: 229px;
-
-  /* Font family for the project*/
-  --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
 .cauldron--theme-dark {
