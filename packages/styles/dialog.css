@@ -80,8 +80,8 @@
 }
 
 .Dialog__close svg {
-  height: 24px;
-  width: 24px;
+  height: var(--icon-size);
+  width: var(--icon-size);
 }
 
 .Dialog__content {

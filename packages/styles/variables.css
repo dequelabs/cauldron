@@ -102,6 +102,9 @@
   --font-weight-bold: 700;
   --font-weight-ultra-bold: 900;
 
+  /* icon sizes */
+  --icon-size: 24px;
+
   /* dimensions */
   --border-width: 6px;
   --layout-padding: 9px;
