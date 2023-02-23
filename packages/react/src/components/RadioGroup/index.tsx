@@ -65,7 +65,6 @@ const RadioGroup = ({
       className,
       ...other
     } = radio;
-    const isChecked = currentValue === radioValue;
     const isFocused = focusIndex === index;
 
     return (
@@ -89,8 +88,9 @@ const RadioGroup = ({
             onChange(radio, inputs.current?.[index]);
           }}
           disabled={disabled}
-          checked={isChecked}
+          checked={currentValue === radioValue}
           aria-describedby={labelDescription ? `${id}Desc` : undefined}
+          key={`input-${index}-${currentValue}`}
           {...other}
         />
         <label
@@ -106,7 +106,9 @@ const RadioGroup = ({
             'Radio__overlay--focused': isFocused,
             'Radio__overlay--disabled': disabled
           })}
-          type={isChecked ? 'radio-checked' : 'radio-unchecked'}
+          type={
+            currentValue === radioValue ? 'radio-checked' : 'radio-unchecked'
+          }
           aria-hidden="true"
           onClick={() => onRadioClick(index)}
         />
