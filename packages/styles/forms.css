@@ -187,7 +187,7 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  flex-wrap: wrap-reverse;
+  flex-wrap: nowrap;
 }
 
 .Checkbox {
