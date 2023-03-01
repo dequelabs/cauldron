@@ -125,19 +125,19 @@ For cauldron's component library, any of the following would be considered break
 For cauldron's styles library, any of the following would be considered breaking changes:
 
 * Changing or removing a class name
-* Changing or removing a global variable (see `variables.css`)
-* Changing or removing a component variable
+* Changing or removing a global css custom property name (see `variables.css`)
+* Changing or removing a component css custom property name
 
-In addition, changing a css property may be a breaking change for the following:
+In addition, changing a css custom property may be a breaking change for the following:
 
-* Changing a global variable property (see `variables.css`)
-* Changing a component variable property
+* Changing a global css custom property value (see `variables.css`)
+* Changing a component css custom property value
 
 For the latter, the change must be reviewed by a member of the cauldron team to ensure there are no breaking changes.
 
 ### Deprecating
 
-Before a breaking change can be released, the breaking change should be documented with the component, property, or style being changed getting flagged as _Deprecated_. This could mean warning the consumer that a component or property is now deprecated, or including a deprecated comment next to a css class name. This deprecation must exist for at least two months.
+Before a breaking change can be released, the breaking change should be documented with the component, property, or style being changed getting flagged as _Deprecated_. This could mean warning the consumer that a component or property is now deprecated, or including a deprecated comment next to a css class name. This deprecation must exist for at least two months. If a change is additive (e.g. making a new property required), the new property must be optional until the deprecation period has passed.
 
 ### Removal
 
