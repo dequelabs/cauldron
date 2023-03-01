@@ -120,6 +120,20 @@ For cauldron's component library, any of the following would be considered break
 * Changing a prop that would break usage of an existing component
 * Adding a new required prop to an existing component
 
+Some examples of implementing non-breaking changes for components:
+
+#### Aliasing component name in export, supporting both component names
+
+```js
+export { NewName, OldName: NewName }
+```
+
+#### Aliasing a component prop, supporting both property names
+
+```js
+function Component({ oldProp: newProp, newProp }) { ... }
+```
+
 ### Styles
 
 For cauldron's styles library, any of the following would be considered breaking changes:
@@ -127,6 +141,26 @@ For cauldron's styles library, any of the following would be considered breaking
 * Changing or removing a class name
 * Changing or removing a global css custom property name (see `variables.css`)
 * Changing or removing a component css custom property name
+
+Some examples of implementing non-breaking changes for styles:
+
+#### Aliasing CSS class, supporting both class names
+
+```css
+/* Usage of .Foo is deprecated, please use .Bar */
+.Foo,
+.Bar {
+  ...
+}
+```
+
+#### Utilizing new css custom variable for new property name
+
+```css
+/* Usage of --red is deprecated, please use --better-red */
+--red: var(--better-red);
+--better-red: red;
+```
 
 In addition, changing a css custom property may be a breaking change for the following:
 
