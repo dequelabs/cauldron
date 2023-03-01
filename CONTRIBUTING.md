@@ -126,7 +126,7 @@ For cauldron's styles library, any of the following would be considered breaking
 
 * Changing or removing a class name
 * Changing or removing a global variable (see `variables.css`)
-* Changing or removing a component variables
+* Changing or removing a component variable
 
 In addition, changing a css property may be a breaking change for the following:
 
