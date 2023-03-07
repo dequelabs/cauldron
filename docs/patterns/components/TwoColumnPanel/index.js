@@ -126,7 +126,10 @@ function TwoColumnPanelDemo() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Pellentesque efficitur sollicitudin ornare.
             </p>
-            <Code>{`<div>example of an element that has horizontal scrolling</div>`}</Code>
+            <Code
+              role="region"
+              tabIndex="0"
+            >{`<div>example of an element that has horizontal scrolling</div>`}</Code>
           </div>
         </ColumnRight>
       </TwoColumnPanel>
