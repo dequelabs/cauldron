@@ -50,6 +50,18 @@
   transition: background-color 0.3s ease;
 }
 
+.NavBar > ul > .NavItem {
+  font-weight: var(--font-weight-normal);
+}
+
+.NavBar > ul > .NavItem--active {
+  font-weight: var(--font-weight-medium);
+}
+
+.NavBar > ul > .NavItem a {
+  font-weight: inherit;
+}
+
 .NavBar > ul > li:first-child:not(.NavBar__trigger) {
   border-left: 1px solid var(--top-nav-box-shadow-color);
 }
