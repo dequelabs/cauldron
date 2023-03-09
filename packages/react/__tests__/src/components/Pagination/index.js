@@ -40,12 +40,6 @@ describe('Pagination', () => {
             .getAttribute('aria-disabled')
         ).toBe('true');
 
-        console.log(
-          wrapper
-            .find('button')
-            .at(2)
-            .debug()
-        );
         expect(
           wrapper
             .find('button')
