@@ -34,7 +34,8 @@ const PaginationDemo = () => {
             firstPageLabel: 'FIRST PAGE!!',
             nextPageLabel: 'NEXT PAGE!!',
             previousPageLabel: 'PREV PAGE!!',
-            lastPageLabel: 'JIMMY PAGE!!'
+            lastPageLabel: 'JIMMY PAGE!!',
+            DEMO_key: 'pagination'
           }
         ]}
         propDocs={{
