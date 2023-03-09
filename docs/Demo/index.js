@@ -52,16 +52,18 @@ const Demo = props => {
               DEMO_renderAfter,
               DEMO_renderBefore,
               DEMO_hide_renderAfterBefore = false,
+              DEMO_key,
               ...thinState
             } = state;
             const componentMarkup = renderState(thinState);
+            const key = DEMO_key || componentMarkup;
             const afterMarkup =
               DEMO_renderAfter &&
               !DEMO_hide_renderAfterBefore &&
               jsxStringify(DEMO_renderAfter, stringifyConfig);
 
             return (
-              <div key={componentMarkup}>
+              <div key={key}>
                 {DEMO_renderBefore}
                 <Component {...thinState} />
                 {DEMO_renderAfter}

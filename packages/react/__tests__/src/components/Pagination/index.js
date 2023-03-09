@@ -28,29 +28,39 @@ describe('Pagination', () => {
           wrapper
             .find('button')
             .at(0)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         expect(
           wrapper
             .find('button')
             .at(1)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
+        console.log(
+          wrapper
+            .find('button')
+            .at(2)
+            .debug()
+        );
         expect(
           wrapper
             .find('button')
             .at(2)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(3)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         wrapper
           .find('button')
@@ -82,29 +92,33 @@ describe('Pagination', () => {
           wrapper
             .find('button')
             .at(0)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(1)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(2)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         expect(
           wrapper
             .find('button')
             .at(3)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         wrapper
           .find('button')
