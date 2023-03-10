@@ -83,3 +83,9 @@
 .Field__select--wrapper.Field--has-error select:focus:hover {
   border-color: var(--field-border-color-error-hover);
 }
+
+@media (max-width: 23rem) {
+  .Field__select--wrapper {
+    min-width: auto;
+  }
+}
