@@ -5,12 +5,77 @@
 h1,
 h2,
 h3 {
-  font-weight: 300;
+  font-weight: 400;
   color: var(--heading-text-color);
 }
 
 code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.Layout .Main {
+  max-width: 100%;
+  width: 70rem;
+  padding: 0;
+  border-left: none;
+}
+
+.Layout .Main:focus {
+  border-left: none;
+}
+
+.Layout .Main h1 {
+  margin-bottom: 0;
+  padding-bottom: var(--space-smallest);
+}
+
+.Layout .Main h1 + p {
+  margin: 0;
+  padding-bottom: var(--space-smallest);
+  font-size: var(--text-size-normal);
+}
+
+.Layout ul {
+  margin: 0 var(--space-small);
+}
+
+.Layout > :first-child,
+.Layout > :last-child {
+  padding-bottom: var(--space-medium) !important;
+}
+
+h1:has(> .Permalink),
+h2:has(> .Permalink),
+h3:has(> .Permalink),
+h4:has(> .Permalink),
+h5:has(> .Permalink),
+h6:has(> .Permalink) {
+  display: flex;
+  align-items: center;
+}
+
+.Permalink {
+  position: absolute;
+  opacity: 0;
+  display: flex;
+  transform: translateX(-20px);
+  height: 20px;
+  width: 20px;
+}
+
+.Permalink svg {
+  height: 100%;
+  width: 100%;
+}
+
+h1:has(> .Permalink):hover .Permalink,
+h2:has(> .Permalink):hover .Permalink,
+h3:has(> .Permalink):hover .Permalink,
+h4:has(> .Permalink):hover .Permalink,
+h5:has(> .Permalink):hover .Permalink,
+h6:has(> .Permalink):hover .Permalink,
+.Permalink:focus {
+  opacity: 1;
 }
 
 /* adjust ftpo positioning for demo layout */

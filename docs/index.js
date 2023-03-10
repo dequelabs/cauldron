@@ -3,9 +3,14 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
-import Home from './Home';
-import Footer from './Home/Footer';
+import { MDXProvider } from '@mdx-js/react';
+import mdxComponents from './mdx-components';
+import Home from './components/Home';
+import Footer from './components/Footer';
+import Example from './components/Example';
+import ComponentLayout from './components/ComponentLayout';
 import {
+  Code,
   TopBar,
   MenuBar,
   TopBarTrigger,
@@ -19,6 +24,7 @@ import {
   Icon,
   ThemeProvider
 } from '@deque/cauldron-react';
+import minimatch from 'minimatch';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
 import '@fontsource/roboto';
@@ -28,6 +34,66 @@ import '@fontsource/roboto/700.css';
 import '@fontsource/lato';
 import '@fontsource/pt-mono';
 
+// Collections
+const collections = require
+  .context('./', true, /\.(mdx|jsx?)$/)
+  .keys()
+  .reduce(
+    (collections, key) => {
+      const pagesMatch = minimatch(key, './pages/*.mdx');
+      const componentMatch = minimatch(key, './pages/components/*.mdx');
+      const componentsV1Match = minimatch(key, './patterns/components/**/*.js');
+
+      if (pagesMatch) {
+        const name = key.match(/(\w+)\.mdx$/)[1];
+        const {
+          default: Component,
+          title,
+          path
+        } = require(`./pages/${name}.mdx`);
+        const component = { name, title, Component, path: path || `/${name}` };
+        collections.pages.push(component);
+      } else if (componentMatch) {
+        const name = key.match(/(\w+)\.mdx$/)[1];
+        const {
+          default: Component,
+          title,
+          path,
+          ...props
+        } = require(`./pages/components/${name}.mdx`);
+        const component = {
+          name,
+          title,
+          Component,
+          path: path || `/components/${name}`,
+          ...props
+        };
+        collections.components.push(component);
+      } else if (componentsV1Match) {
+        const name = key.match(/(\w+)\/index\.jsx?$/)[1];
+        const { default: Component } = require(`./patterns/components/${name}`);
+        const component = {
+          name,
+          title: name,
+          Component,
+          path: `/components/${name}`
+        };
+        collections.componentsV1.push(component);
+      }
+
+      return collections;
+    },
+    { pages: [], components: [], componentsV1: [] }
+  );
+
+// Merge V1/MDX components into a single list with MDX components taking priority
+const componentsList = [
+  ...collections.components,
+  ...collections.componentsV1.filter(
+    v1 => !collections.components.find(c => c.name === v1.name)
+  )
+].sort((a, b) => a.name.localeCompare(b.name));
+
 // styles
 import '../packages/styles';
 import '@deque/cauldron-react/cauldron.css';
@@ -35,49 +101,6 @@ import './index.css';
 import { useThemeContext } from '../packages/react/lib';
 
 const CAULDRON_THEME_STORAGE_KEY = 'cauldron_theme';
-const componentsList = [
-  'Button',
-  'Pointout',
-  'Alert',
-  'Modal',
-  'TopBarMenu',
-  'Toast',
-  'Loader',
-  'Layout',
-  'OptionsMenu',
-  'Panel',
-  'Select',
-  'RadioCardGroup',
-  'RadioGroup',
-  'Checkbox',
-  'ClickOutsideListener',
-  'Tooltip',
-  'TooltipTabstop',
-  'Card',
-  'ExpandCollapsePanel',
-  'TextField',
-  'Link',
-  'Icon',
-  'IconButton',
-  'Code',
-  'LoaderOverlay',
-  'Line',
-  'Tabs',
-  'Tag',
-  'Table',
-  'DescriptionList',
-  'TopBar',
-  'Stepper',
-  'ProgressBar',
-  'NavBar',
-  'Address',
-  'Pagination',
-  'IssuePanel',
-  'FieldWrap',
-  'Breadcrumb',
-  'TwoColumnPanel',
-  'Accordion'
-].sort();
 
 const App = () => {
   const [state, setState] = useState({
@@ -164,7 +187,9 @@ const App = () => {
       description: ''
     };
 
-    if (componentsList.includes(title)) {
+    const matchingComponent = componentsList.find(({ name }) => name === title);
+
+    if (matchingComponent?.title) {
       location.state.title = `${title} | Accessible Component Pattern Demo`;
       location.state.description = `Free Accessible React ${title} Component Pattern from Deque Systems`;
     } else {
@@ -257,9 +282,8 @@ const App = () => {
           onDismiss={onTriggerClick}
           className="SideBar--with-footer"
         >
-          {componentsList.map(name => {
-            const pathname = `/components/${name}`;
-            const isActive = pathname === location.pathname;
+          {componentsList.map(({ name, path }) => {
+            const isActive = path === location.pathname;
             return (
               <SideBarItem
                 key={name}
@@ -267,7 +291,7 @@ const App = () => {
                   'MenuItem--active': isActive
                 })}
               >
-                {renderSideBarLink(pathname, name, isActive)}
+                {renderSideBarLink(path, name, isActive)}
               </SideBarItem>
             );
           })}
@@ -278,17 +302,18 @@ const App = () => {
           tabIndex={-1}
         >
           <Route exact path="/" component={Home} />
-          {componentsList.map(name => {
-            const DemoComponent = require(`./patterns/components/${name}`)
-              .default;
-            return (
-              <Route
-                key={name}
-                exact
-                path={`/components/${name}`}
-                component={DemoComponent}
-              />
-            );
+          {componentsList.map(({ name, path, Component, ...props }) => {
+            let render = Component;
+
+            if (Component.name === 'MDXContent') {
+              render = () => (
+                <ComponentLayout {...props}>
+                  <Component components={mdxComponents} />
+                </ComponentLayout>
+              );
+            }
+
+            return <Route key={name} exact path={path} component={render} />;
           })}
           <Route
             component={({ location }) =>

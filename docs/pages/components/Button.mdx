@@ -1,0 +1,72 @@
+---
+title: Button
+description: An interactive component that performs a programmable action when activated by the user.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Button/index.tsx
+---
+
+import { Icon, Button, Code } from '@deque/cauldron-react'
+
+```js
+import { Button } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Primary
+
+Primary buttons are the default variant for the `Button` component.
+
+```jsx example
+<Button>Primary</Button>
+```
+
+### Secondary
+
+Secondary buttons are used for actions that are not the primary action.
+
+```jsx example
+<Button variant="secondary">Secondary</Button>
+```
+
+### Error
+
+Error buttons are used to indicate potentially dangerous actions.
+
+```jsx example
+<Button variant="error">Error</Button>
+```
+
+### Link
+
+```jsx example
+<Button variant="link">Link</Button>
+```
+
+### Tag
+
+```jsx example
+<Button variant="tag">Tag</Button>
+```
+
+### Additional Button States
+
+```jsx example
+<Button disabled>Primary Disabled</Button>
+<Button variant="secondary" thin>Secondary Thin Button</Button>
+<Button variant="error">
+  <Icon type="caution" />
+  Danger With Icon
+</Button>
+```
+
+## Props
+
+| Name      | Type     | Description                                                   | Default |
+|-----------|----------|---------------------------------------------------------------|---------|
+| variant   | string   | Any of the following, primary, secondary, error, link, or tag | primary |
+| buttonRef | function | false                                                         |         |
+| thin      | boolean  | Render button with "thin" modifier, reducing height of button |         |
+
+## Related Components
+
+- [IconButton](./IconButton)

@@ -5,10 +5,10 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import remarkPlugins from './docs/remark-plugins.mjs'
 
 const { NODE_ENV = 'development' } = process.env;
 const isProd = NODE_ENV === 'production';
-
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const config = {
@@ -40,6 +40,17 @@ const config = {
         loader: 'babel-loader'
       },
       {
+        test: /\.mdx?$/,
+        use: [
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              remarkPlugins
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -60,7 +71,7 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['.js', 'ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
