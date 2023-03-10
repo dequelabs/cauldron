@@ -16,7 +16,8 @@
 
 .Field__select--wrapper {
   position: relative;
-  min-width: var(--select-width);
+  width: var(--select-width);
+  max-width: 100%;
 }
 
 .arrow-down {
@@ -82,10 +83,4 @@
 .Field__select--wrapper select:invalid:focus:hover,
 .Field__select--wrapper.Field--has-error select:focus:hover {
   border-color: var(--field-border-color-error-hover);
-}
-
-@media (max-width: 23rem) {
-  .Field__select--wrapper {
-    min-width: auto;
-  }
 }
