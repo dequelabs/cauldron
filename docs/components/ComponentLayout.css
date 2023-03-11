@@ -1,3 +1,11 @@
+:root {
+  --toc-active-color: var(--accent-primary);
+}
+
+.cauldron--theme-dark {
+  --toc-active-color: var(--accent-info);
+}
+
 main {
   display: grid;
   grid-auto-columns: 1fr 15.625rem;
@@ -32,8 +40,15 @@ ul.toc {
 
 ul.toc a {
   display: block;
-  padding-bottom: var(--space-half);
+  margin: var(--space-half);
+  padding-left: var(--space-smallest);
   font-weight: var(--font-weight-normal);
+}
+
+ul.toc a.toc--active {
+  transform: translateX(-3px);
+  border-left: 3px solid var(--toc-active-color);
+  font-weight: var(--font-weight-medium);
 }
 
 ul.toc ul {
