@@ -18,7 +18,26 @@ section[aria-labelledby='on-this-page'] > :first-child {
 }
 
 section[aria-labelledby='on-this-page'] h2 {
+  font-size: var(--text-size-normal);
   margin-top: var(--space-smallest);
+  margin-bottom: var(--space-smallest);
+  padding-bottom: var(--space-half);
+  border-bottom: 1px solid var(--panel-border-color);
+}
+
+ul.toc {
+  list-style-type: none;
+  margin: 0 !important;
+}
+
+ul.toc a {
+  display: block;
+  padding-bottom: var(--space-half);
+  font-weight: var(--font-weight-normal);
+}
+
+ul.toc ul {
+  list-style-type: none;
 }
 
 .Component {
