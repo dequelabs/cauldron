@@ -46,10 +46,9 @@ interface MDXComponentProps {
 }
 
 const mdxComponents = {
-  a: <T extends React.AnchorHTMLAttributes<HTMLAnchorElement>>({
-    href,
-    ...props
-  }: T) => <Link {...props} />,
+  a: <T extends React.AnchorHTMLAttributes<HTMLAnchorElement>>(props: T) => (
+    <Link {...props} />
+  ),
   pre: <T extends React.HTMLAttributes<HTMLPreElement>>({
     children,
     ...props

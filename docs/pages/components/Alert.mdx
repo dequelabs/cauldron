@@ -1,0 +1,58 @@
+---
+title: Alert
+description: A component that displays a dialog to prompt for user action.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Alert/index.tsx
+---
+
+import { useState } from 'react'
+import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+
+```jsx
+import { Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Alert
+
+```jsx example
+function DefaultAlertExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setShow(!show)}>Toggle Alert</Button>
+      <Alert heading="Default Alert" show={show}>
+        <AlertContent>
+          Just letting you know that something happened.
+        </AlertContent>
+        <AlertActions>
+          <Button onClick={() => setShow(false)}>Ok</Button>
+          <Button variant="secondary" onClick={() => setShow(false)}>Close</Button>
+        </AlertActions>
+      </Alert>
+    </>
+  )
+}
+```
+
+### Warning Alert
+
+```jsx example
+function WarningAlertExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setShow(!show)}>Toggle Warning Alert</Button>
+      <Alert variant="warning" heading="Danger Zone" show={show}>
+        <AlertContent>
+          Welcome to the danger zone!
+        </AlertContent>
+        <AlertActions>
+          <Button variant="error" onClick={() => setShow(false)}>Danger</Button>
+          <Button variant="secondary" onClick={() => setShow(false)}>Nevermind</Button>
+        </AlertActions>
+      </Alert>
+    </>
+  )
+}
+```

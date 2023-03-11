@@ -13,7 +13,7 @@ import { mdxExpressionFromMarkdown } from 'mdast-util-mdx-expression'
 const exampleFromMDX = () => {
   return (tree) => {
     visit(tree, 'code', (node, index, parent) => {
-      const { meta, lang, value: code } = node;
+      const { meta, lang, value: raw } = node;
       if (!meta || meta !== 'example') {
         return node;
       }
@@ -26,13 +26,26 @@ const exampleFromMDX = () => {
         ]
       };
 
-      const exampleMarkdown =  `<Example raw={''}>
+      // HACKY - there might be a better way to do this
+      let func = ''
+      let render = ''
+      if (raw.startsWith('function')) {
+        // Try to parse the name
+        const [,name] = raw.match(/^function\s+(\w+)/)
+        if (name) {
+          func = `\n\nexport ${raw}\n\n`
+          render = `<${name} />`
+        }
+      }
+
+      const exampleMarkdown =  `${func}<Example raw={''}>
 {
   <div className="Component__example__react">
-  ${code}
+  ${render || raw}
   </div>
 }
 </Example>`
+
       const updatedNode = fromMarkdown(
         exampleMarkdown,
         options
@@ -40,7 +53,7 @@ const exampleFromMDX = () => {
 
       // Note: From markdown will strip extra whitespace from raw code, which
       // we want to preserve so manually include it in the mdast
-      updatedNode.children[0].attributes[0].value = code
+      updatedNode.children[func ? 1 : 0].attributes[0].value = raw
 
       Object.assign(node, updatedNode);
     });

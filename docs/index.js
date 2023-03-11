@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import mdxComponents from './mdx-components';
 import Home from './components/Home';
 import Footer from './components/Footer';
-import Example from './components/Example';
 import ComponentLayout from './components/ComponentLayout';
 import {
   Code,

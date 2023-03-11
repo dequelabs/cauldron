@@ -61,7 +61,11 @@ ul.toc ul {
 }
 
 .Component .Panel > :first-child {
-  margin-top: 0;
+  margin-top: 0 !important;
+}
+
+.Component .Panel > :last-child {
+  margin-bottom: 0 !important;
 }
 
 .Component__metadata {

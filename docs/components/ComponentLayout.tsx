@@ -51,7 +51,7 @@ export default function ComponentLayout({
     );
 
     // Set the first element as active
-    anchors[0].classList.toggle('toc--active');
+    anchors[0]?.classList.toggle('toc--active');
 
     const handleIntersection: IntersectionObserverCallback = ([entry]) => {
       const { target, isIntersecting, intersectionRect, rootBounds } = entry;
