@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { mdxjs } from 'micromark-extension-mdxjs';
-import { mdxFromMarkdown, } from 'mdast-util-mdx';
+import { mdxFromMarkdown } from 'mdast-util-mdx';
 import { mdxExpressionFromMarkdown } from 'mdast-util-mdx-expression'
 
 const exampleFromMDX = () => {
@@ -26,7 +26,8 @@ const exampleFromMDX = () => {
         ]
       };
 
-      // HACKY - there might be a better way to do this
+      // HACKY - using an AST parser to detect functions
+      // would be a better (and safer) experience than this
       let func = ''
       let render = ''
       if (raw.startsWith('function')) {

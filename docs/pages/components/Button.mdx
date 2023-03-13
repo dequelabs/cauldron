@@ -61,11 +61,29 @@ Error buttons are used to indicate potentially dangerous actions.
 
 ## Props
 
-| Name      | Type     | Description                                                   | Default |
-|-----------|----------|---------------------------------------------------------------|---------|
-| variant   | string   | Any of the following, primary, secondary, error, link, or tag | primary |
-| buttonRef | function | false                                                         |         |
-| thin      | boolean  | Render button with "thin" modifier, reducing height of button |         |
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[
+    {
+      name: 'variant',
+      type: ['primary', 'secondary', 'error', 'link', 'tag'],
+      defaultValue: 'primary',
+      description: 'Visual style of the button.'
+    },
+    {
+      name: 'thin',
+      type: 'boolean',
+      description: 'Thinner visual style of button.'
+    },
+    {
+      name: 'buttonRef',
+      type: 'function',
+      description: 'Ref function for the button element'
+    }
+  ]}
+/>
 
 ## Related Components
 

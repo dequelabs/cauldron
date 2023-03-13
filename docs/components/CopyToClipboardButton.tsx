@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { IconButton } from '@deque/cauldron-react';
 
 interface CopyToClipboardButtonProps
@@ -32,10 +32,18 @@ export default function CopyToClipboardButton({
   label = 'copy to clipboard',
   ...props
 }: CopyToClipboardButtonProps) {
+  const ref = useRef();
   const handleClick = () => {
     copyTextToClipboard(value);
+    ref.current?.focus();
   };
   return (
-    <IconButton icon="copy" label={label} onClick={handleClick} {...props} />
+    <IconButton
+      ref={ref}
+      icon="copy"
+      label={label}
+      onClick={handleClick}
+      {...props}
+    />
   );
 }

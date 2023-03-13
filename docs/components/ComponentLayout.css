@@ -58,6 +58,7 @@ ul.toc ul {
 .Component {
   grid-row: 1;
   grid-column: 1;
+  overflow: hidden;
 }
 
 .Component .Panel > :first-child {
@@ -90,6 +91,11 @@ ul.toc ul {
 
 .Component__metadata .Pill--deprecated {
   background-color: var(--accent-warning-light);
+}
+
+ul.Component__Props {
+  list-style-type: none;
+  margin: 0 !important;
 }
 
 @media (max-width: 75rem) {

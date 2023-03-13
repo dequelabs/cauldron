@@ -12,6 +12,7 @@ import {
   TableCell
 } from '@deque/cauldron-react';
 import Example from './components/Example';
+import ComponentProps from './components/ComponentProps';
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: number;
@@ -89,7 +90,8 @@ const mdxComponents = {
   h6: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
     <Heading level={6} {...props} />
   ),
-  Example
+  Example,
+  ComponentProps
 };
 
 export default mdxComponents;
