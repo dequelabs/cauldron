@@ -31,10 +31,7 @@
   z-index: var(--z-index-tooltip);
   text-align: center;
   max-width: calc(100vw - 16px);
-}
-
-.Tooltip--wordwrap {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .Tooltip--hidden {
