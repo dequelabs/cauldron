@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "esModuleInterop": true,
     "module": "commonjs",
@@ -12,7 +13,8 @@
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react",
-    "types": ["node"]
+    "types": ["node"],
+    "esModuleInterop": true
   },
   "exclude": ["node_modules"]
 }
