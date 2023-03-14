@@ -13,14 +13,36 @@ code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
+body {
+  overflow: auto;
+}
+
+.Content {
+  display: grid;
+  grid-template-columns: var(--menu-width) 1fr;
+  grid-template-rows: auto;
+  margin-top: var(--top-bar-height);
+  height: calc(100vh - var(--top-bar-height));
+}
+
+.Layout,
+.Navigation {
+  overflow: auto;
+}
+
+.Footer {
+  grid-column: 1 / 3;
+}
+
+.Layout {
+  position: static;
+  padding: 0 var(--space-small);
+}
+
 .Layout .Main {
   max-width: 100%;
   width: 70rem;
   padding: 0;
-  border-left: none;
-}
-
-.Layout .Main:focus {
   border-left: none;
 }
 
@@ -35,10 +57,6 @@ code {
   font-size: var(--text-size-normal);
 }
 
-.Layout ul {
-  margin: 0 var(--space-small);
-}
-
 .Layout > :first-child,
 .Layout > :last-child {
   padding-bottom: var(--space-medium) !important;
@@ -51,16 +69,14 @@ h4:has(> .Permalink),
 h5:has(> .Permalink),
 h6:has(> .Permalink) {
   display: flex;
-  align-items: center;
 }
 
 .Permalink {
-  position: absolute;
   opacity: 0;
   display: flex;
-  transform: translateX(-20px);
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
+  justify-content: center;
 }
 
 .Permalink svg {
@@ -81,10 +97,6 @@ h6:has(> .Permalink):hover .Permalink,
 /* adjust ftpo positioning for demo layout */
 .Pointout:not(.Pointout--auto) {
   position: relative;
-}
-
-.MenuItem__logo {
-  padding: 0;
 }
 
 .MenuItem__logo img {
@@ -118,76 +130,14 @@ h6:has(> .Permalink):hover .Permalink,
   margin: var(--space-large);
 }
 
-.Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0.36rem 0;
-  border-top: 1px solid var(--footer-border-color);
-  background-color: var(--footer-background-color);
-}
-
-.Footer__links {
-  display: flex;
-  list-style: none;
-  margin-left: var(--space-smallest);
-  color: var(--gray-60);
-}
-
-.Footer__links li {
-  margin: var(--space-smallest);
-}
-
-.SideBar--with-footer,
-.Layout {
-  bottom: 6.85rem;
-}
-
-.Copyright {
-  margin-left: auto;
-  margin-right: var(--space-smallest);
-  color: var(--gray-60);
-}
-
-.cauldron--theme-dark .Footer__links,
-.cauldron--theme-dark .Copyright {
-  color: var(--accent-light);
-  color: var(--options-menu-text-color);
-}
-
-.cauldron--theme-light .Footer {
-  --footer-background-color: var(--white);
-  --footer-border-color: #b3bfc6;
-}
-
-.cauldron--theme-dark .Footer {
-  --footer-background-color: var(--accent-medium);
-  --footer-border-color: var(--stroke-dark);
-}
-
-.Home__links {
-  margin: 2px 0 0 3px;
-}
-
-@media (min-width: 301px) {
-  .SideBar--with-footer,
-  .Layout {
-    bottom: 5.72rem;
+@media (max-width: 64rem) {
+  .Navigation {
+    z-index: var(--z-index-side-bar);
+    position: absolute;
+    max-height: calc(100vh - var(--top-bar-height));
   }
-}
 
-@media (min-width: 371px) {
-  .SideBar--with-footer,
-  .Layout {
-    bottom: 4.6rem;
-  }
-}
-
-@media (min-width: 591px) {
-  .SideBar--with-footer,
-  .Layout {
-    bottom: 3.45rem;
+  .Content {
+    grid-template-columns: 1fr;
   }
 }

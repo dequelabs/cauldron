@@ -8,7 +8,7 @@
 
 main {
   display: grid;
-  grid-auto-columns: 1fr 15.625rem;
+  grid-auto-columns: minmax(0, 1fr) 15.625rem;
   gap: var(--space-large);
   margin: 0 auto;
 }
@@ -18,6 +18,7 @@ main > section[aria-labelledby='on-this-page'] {
   grid-column: 2;
   position: sticky;
   top: 0;
+  align-self: start;
 }
 
 section[aria-labelledby='on-this-page'] > :first-child {
@@ -53,6 +54,11 @@ ul.toc a.toc--active {
 
 ul.toc ul {
   list-style-type: none;
+  margin-left: var(--space-small);
+}
+
+ul.Component__list {
+  margin-left: var(--space-large);
 }
 
 .Component {
@@ -93,6 +99,12 @@ ul.toc ul {
   background-color: var(--accent-warning-light);
 }
 
+.Component__history {
+  font-size: var(--text-size-smaller);
+  padding-top: var(--space-small);
+  text-align: center;
+}
+
 ul.Component__Props {
   list-style-type: none;
   margin: 0 !important;
@@ -102,4 +114,9 @@ ul.Component__Props {
   section[aria-labelledby='on-this-page'] {
     display: none;
   }
+}
+
+.cauldron--theme-dark .Component > .Panel {
+  background: transparent;
+  border: 1px solid var(--panel-background-color);
 }

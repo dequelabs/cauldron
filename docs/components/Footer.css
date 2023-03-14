@@ -1,0 +1,31 @@
+:root {
+  --docs-footer-background-color: #fff;
+  --docs-footer-border-color: var(--stroke-light);
+}
+
+.cauldron--theme-dark {
+  --docs-footer-background-color: var(--accent-medium);
+  --docs-footer-border-color: var(--stroke-dark);
+  --docs-footer-text-color: #fff;
+}
+
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.36rem 0;
+  border-top: 1px solid var(--docs-footer-border-color);
+  background-color: var(--docs-footer-background-color);
+  color: var(--docs-footer-text-color);
+}
+
+.Footer ul {
+  list-style-type: none;
+}
+
+.Footer > * {
+  display: flex;
+  align-items: center;
+  padding: var(--space-smaller);
+  gap: var(--space-half);
+}

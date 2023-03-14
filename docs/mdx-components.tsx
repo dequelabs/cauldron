@@ -9,13 +9,15 @@ import {
   TableBody,
   TableRow,
   TableHead,
-  TableCell
+  TableCell,
+  Link as CauldronLink
 } from '@deque/cauldron-react';
 import Example from './components/Example';
 import ComponentProps from './components/ComponentProps';
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: number;
+  children: string;
 }
 
 function Heading({ level, children, ...props }: HeadingProps) {
@@ -23,23 +25,25 @@ function Heading({ level, children, ...props }: HeadingProps) {
   const slug = slugify(children as string);
   return (
     <HeadingComponent id={slug} {...props}>
+      {children}
       <a
         className="Permalink"
         href={`#${slug}`}
         aria-label={`{children} (permalink)`}
       >
-        <Icon type="link" />
+        #
       </a>
-      {children}
     </HeadingComponent>
   );
 }
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
-
-function Link({ href, ...props }: LinkProps) {
-  // TODO: Check for relative/external links
-  return <RouterLink to={href as string} {...props} />;
+function Link({ href, ...props }: React.LinkHTMLAttributes<HTMLLinkElement>) {
+  const external = href.indexOf('://') > 0 || href.indexOf('//') === 0;
+  return external ? (
+    <CauldronLink href={href} {...props} />
+  ) : (
+    <RouterLink to={href} {...props} />
+  );
 }
 
 interface MDXComponentProps {
@@ -47,6 +51,12 @@ interface MDXComponentProps {
 }
 
 const mdxComponents = {
+  ul: <T extends React.AnchorHTMLAttributes<HTMLUListElement>>(props: T) => (
+    <ul className="Component__list" {...props} />
+  ),
+  ol: <T extends React.AnchorHTMLAttributes<HTMLUListElement>>(props: T) => (
+    <ol className="Component__list" {...props} />
+  ),
   a: <T extends React.AnchorHTMLAttributes<HTMLAnchorElement>>(props: T) => (
     <Link {...props} />
   ),
@@ -72,22 +82,22 @@ const mdxComponents = {
   td: <T extends React.HTMLAttributes<HTMLTableCellElement>>(props: T) => (
     <TableCell {...props} />
   ),
-  h1: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={1} {...props} />
   ),
-  h2: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={2} {...props} />
   ),
-  h3: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={3} {...props} />
   ),
-  h4: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={4} {...props} />
   ),
-  h5: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h5: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={5} {...props} />
   ),
-  h6: <T extends React.HTMLAttributes<HTMLHeadingElement>>(props: T) => (
+  h6: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Heading level={6} {...props} />
   ),
   Example,

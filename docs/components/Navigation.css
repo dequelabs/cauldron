@@ -1,0 +1,59 @@
+.Navigation {
+  --docs-navigation-background-color: #fff;
+  --docs-navigation-link-active-background-color: var(--accent-primary);
+  --docs-navigation-link-active-text-color: #fff;
+}
+
+.cauldron--theme-dark .Navigation {
+  --docs-navigation-background-color: var(--accent-medium);
+  --docs-navigation-link-active-background-color: var(--accent-light);
+  --docs-navigation-link-active-text-color: var(--accent-dark);
+}
+
+.Navigation {
+  width: var(--menu-width);
+  background-color: var(--docs-navigation-background-color);
+  padding: var(--space-half);
+  overflow-y: auto;
+  transition: transform ease-in-out 250ms;
+}
+
+.Navigation h2 {
+  padding: 0 var(--space-smallest);
+  margin: var(--space-smallest) 0;
+  font-size: var(--text-small-medium);
+  display: flex;
+  gap: var(--space-half);
+}
+
+.Navigation ul + h2 {
+  margin-top: var(--space-large);
+}
+
+.Navigation li {
+  padding: 0 var(--space-smaller);
+  font-weight: var(--font-weight-medium);
+}
+
+.Navigation a {
+  display: block;
+  padding: var(--space-smallest);
+  font-weight: var(--font-weight-normal);
+  border-radius: 3px;
+}
+
+.Navigation a[aria-current='page'] {
+  color: var(--docs-navigation-link-active-text-color);
+  background-color: var(--docs-navigation-link-active-background-color);
+  text-decoration: none;
+}
+
+@media (max-width: 64rem) {
+  .Navigation {
+    transform: translateX(-100%);
+  }
+
+  .menu--open .Navigation {
+    transform: translateX(0);
+  }
+}
