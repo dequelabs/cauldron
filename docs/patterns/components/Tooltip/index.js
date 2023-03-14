@@ -42,13 +42,6 @@ const DemoTooltip = () => {
             description:
               'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
           },
-          wordwrap: {
-            type: 'boolean',
-            description:
-              'Whether or not the tooltip should wrap its content to fit the width of the tooltip.',
-            required: false,
-            defaultValue: 'false'
-          },
           placement: {
             type: 'string',
             description:
