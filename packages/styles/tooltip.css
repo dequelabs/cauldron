@@ -47,6 +47,7 @@
   color: var(--tooltip-info-text-color);
   max-width: 12.5rem;
   padding: var(--space-half);
+  word-break: normal;
 }
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
