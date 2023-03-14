@@ -15,6 +15,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby';
   show?: boolean | undefined;
+  wordwrap?: boolean;
   placement?: Placement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   hideElementOnHidden?: boolean;
@@ -45,6 +46,7 @@ export default function Tooltip({
   target,
   association = 'aria-describedby',
   variant = 'text',
+  wordwrap = false,
   show: initialShow = false,
   hideElementOnHidden = false,
   className,
@@ -191,7 +193,8 @@ export default function Tooltip({
                 {
                   TooltipInfo: variant === 'info',
                   'Tooltip--hidden': !showTooltip && hideElementOnHidden,
-                  'Tooltip--big': variant === 'big'
+                  'Tooltip--big': variant === 'big',
+                  'Tooltip--wordwrap': wordwrap
                 }
               )}
               ref={setTooltipElement}

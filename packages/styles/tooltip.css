@@ -30,8 +30,11 @@
   border-radius: 3px;
   z-index: var(--z-index-tooltip);
   text-align: center;
-  word-break: break-all;
   max-width: calc(100vw - 16px);
+}
+
+.Tooltip--wordwrap {
+  word-break: break-all;
 }
 
 .Tooltip--hidden {
@@ -47,7 +50,6 @@
   color: var(--tooltip-info-text-color);
   max-width: 12.5rem;
   padding: var(--space-half);
-  word-break: normal;
 }
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
