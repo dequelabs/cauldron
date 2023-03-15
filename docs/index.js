@@ -7,6 +7,7 @@ import mdxComponents from './mdx-components';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
+import Drawer from './components/Drawer';
 import Navigation from './components/Navigation';
 import {
   Code,
@@ -48,6 +49,7 @@ const App = () => {
   });
   const [topBarMenuItem, setTopBarMenuItem] = useState(null);
   const workspaceRef = useRef(null);
+  const navigationRef = useRef(null);
   const topBarTrigger = useRef();
   const { theme, toggleTheme } = useThemeContext();
 
@@ -122,6 +124,32 @@ const App = () => {
 
   const { show, thin } = state;
 
+  const [drawerIsActive, setDrawerIsActive] = useState(false);
+  useEffect(() => {
+    const mediaQueryList = matchMedia('(max-width: 64rem)');
+    const listener = ({ matches }) => {
+      setDrawerIsActive(matches);
+    };
+    mediaQueryList.addEventListener('change', listener);
+
+    if (mediaQueryList.matches !== drawerIsActive) {
+      setDrawerIsActive(mediaQueryList.matches);
+    }
+
+    return () => {
+      mediaQueryList.removeEventListener('change', listener);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (state.show) {
+      // Focus on the first focusable navigation item
+      navigationRef.current?.querySelector('a')?.focus();
+    } else {
+      workspaceRef.current?.focus();
+    }
+  }, [state.show]);
+
   return (
     <Router>
       <Helmet
@@ -183,12 +211,19 @@ const App = () => {
           </TopBarItem>
         </MenuBar>
       </TopBar>
-      <div className={classNames('Content', { 'menu--open': show })}>
-        <Navigation
-          contentRef={workspaceRef}
-          show={state.show}
-          onClick={() => setState({ show: false })}
-        />
+      <div className="Content">
+        <Drawer
+          open={show && drawerIsActive}
+          onClose={() => setState({ show: false })}
+        >
+          <Navigation
+            active={show || !drawerIsActive}
+            ref={navigationRef}
+            contentRef={workspaceRef}
+            onClick={() => setState({ show: false })}
+            aria-hidden={!show && drawerIsActive}
+          />
+        </Drawer>
         <Workspace
           id="main-content"
           workspaceRef={workspaceRef}

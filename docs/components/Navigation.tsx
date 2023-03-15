@@ -36,19 +36,17 @@ const NavigationLink = ({
   </Link>
 );
 
-interface NavigationProps {
+interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   contentRef: React.RefObject<HTMLElement>;
-  show?: boolean;
+  active?: boolean;
   onClick?: () => void;
 }
 
-export default function Navigation({
-  contentRef,
-  show,
-  onClick = () => {}
-}: NavigationProps) {
+function Navigation(
+  { contentRef, active = true, onClick = () => {}, ...props }: NavigationProps,
+  ref: React.Ref<HTMLElement>
+) {
   const location = useLocation();
-  const [isHamburger, setIsHamburger] = useState(false);
 
   const handleClick = () => {
     if (contentRef.current) {
@@ -64,80 +62,55 @@ export default function Navigation({
     onClick();
   };
 
-  const handleClickOutside = () => {
-    if (!show) {
-      return;
-    }
+  const activeComponents = components.filter(
+    component => !component.deprecated
+  );
+  const deprecatedComponents = components.filter(
+    component => component.deprecated
+  );
 
-    onClick();
+  const renderListItem = ({ path, name }: typeof components[number]) => {
+    const isActive = path === location.pathname;
+    return (
+      <li>
+        <NavigationLink
+          pathname={path}
+          text={name}
+          active={isActive}
+          onClick={handleClick}
+          tabIndex={!active ? -1 : undefined}
+        />
+      </li>
+    );
   };
 
-  useEffect(() => {
-    const mediaQueryList = matchMedia('(max-width: 64rem)');
-    const listener = ({ matches }: { matches: boolean }) => {
-      setIsHamburger(matches);
-    };
-    mediaQueryList.addEventListener('change', listener);
-
-    if (mediaQueryList.matches !== isHamburger) {
-      setIsHamburger(mediaQueryList.matches);
-    }
-
-    return () => {
-      mediaQueryList.removeEventListener('change', listener);
-    };
-  }, []);
-
   return (
-    <>
-      <ClickOutsideListener onClickOutside={handleClickOutside}>
-        <nav
-          className="Navigation"
-          aria-label="Site Navigation"
-          aria-hidden={!show && isHamburger}
-        >
+    <nav
+      ref={ref}
+      className="Navigation"
+      aria-label="Site Navigation"
+      {...props}
+    >
+      <h2>
+        <Icon type="info-circle" /> Getting Started
+      </h2>
+      <ul>{pages.map(renderListItem)}</ul>
+      <h2>
+        <Icon type="gears" />
+        Components
+      </h2>
+      <ul>{activeComponents.map(renderListItem)}</ul>
+      {deprecatedComponents.length && (
+        <>
           <h2>
-            <Icon type="info-circle" /> Getting Started
+            <Icon type="caution" />
+            Deprecated Components
           </h2>
-          <ul>
-            {pages.map(({ path, name }) => {
-              const isActive = path === location.pathname;
-              return (
-                <li key={path}>
-                  <NavigationLink
-                    pathname={path}
-                    text={name}
-                    active={isActive}
-                    onClick={handleClick}
-                    tabIndex={show ? undefined : -1}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-          <h2>
-            <Icon type="gears" />
-            Components
-          </h2>
-          <ul>
-            {components.map(({ path, name }) => {
-              const isActive = path === location.pathname;
-              return (
-                <li key={path}>
-                  <NavigationLink
-                    pathname={path}
-                    text={name}
-                    active={isActive}
-                    onClick={handleClick}
-                    tabIndex={show ? undefined : -1}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </ClickOutsideListener>
-      {isHamburger && <Scrim show={show} />}
-    </>
+          <ul>{deprecatedComponents.map(renderListItem)}</ul>
+        </>
+      )}
+    </nav>
   );
 }
+
+export default React.forwardRef(Navigation);

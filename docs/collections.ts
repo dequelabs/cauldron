@@ -1,15 +1,15 @@
 import minimatch from 'minimatch';
 
-interface Collection {
+type Collection<T = {}> = {
   name: string;
   title: string;
   Component: React.ReactElement;
   path: string;
-}
+} & T;
 
 interface Collections {
   pages: Collection[];
-  components: Collection[];
+  components: Collection<{ deprecated?: boolean }>[];
   componentsV1: Collection[];
 }
 
@@ -76,7 +76,7 @@ const collections: Collections = (require as any)
   );
 
 // Merge V1/MDX components into a single list with MDX components taking priority
-const componentsList = [
+const componentsList: Collection<{ deprecated?: boolean }>[] = [
   ...collections.components,
   ...collections.componentsV1.filter(
     v1 => !collections.components.find(c => c.name === v1.name)
