@@ -81,9 +81,10 @@
   text-decoration: none;
   background-color: var(--two-column-panel-list-background-color);
   transition: ease-in-out 100ms background-color;
-  min-height: 4.1875rem;
+  height: 4.1875rem;
   flex-direction: column;
   align-items: flex-start;
+  border-top: 1px solid var(--two-column-panel-border-color);
 }
 
 .TwoColumnPanel__Left ul li a {
