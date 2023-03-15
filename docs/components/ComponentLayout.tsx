@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Offscreen, Link, Icon, Panel } from '@deque/cauldron-react';
 import TableOfContents, { Heading } from './TableOfContents';
-import { getEditUrl, getCommits } from '../repo-metadata';
+import { getEditUrl } from '../repo-metadata';
 import './ComponentLayout.css';
 
 interface ComponentLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
