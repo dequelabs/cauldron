@@ -15,13 +15,14 @@
 .Navigation {
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);
-  padding: var(--space-half);
 }
 
 .Navigation h2 {
-  padding: 0 var(--space-smallest);
-  margin: var(--space-smallest) 0;
-  font-size: var(--text-small-medium);
+  padding: 0 var(--space-small);
+  padding-top: var(--space-small);
+  margin-top: 0;
+  margin-bottom: var(--space-smallest);
+  font-size: var(--text-size-normal);
   display: flex;
   align-items: center;
   gap: var(--space-half);
@@ -35,6 +36,10 @@
 
 .Navigation ul + h2 {
   margin-top: var(--space-large);
+}
+
+.Navigation ul:last-of-type {
+  padding-bottom: var(--space-small);
 }
 
 .Navigation li {

@@ -1,10 +1,12 @@
 :root {
   --docs-toc-active-color: var(--accent-primary);
   --docs-toc-border-color: var(--stroke-light);
+  --docs-hero-background-color: #fff;
 }
 
 .cauldron--theme-dark {
   --docs-toc-active-color: var(--accent-info);
+  --docs-hero-background-color: var(--accent-dark);
 }
 
 main {
@@ -18,7 +20,7 @@ main > section[aria-labelledby='on-this-page'] {
   grid-row: 1;
   grid-column: 2;
   position: sticky;
-  top: 0;
+  top: var(--space-medium);
   align-self: start;
 }
 
@@ -29,7 +31,7 @@ section[aria-labelledby='on-this-page'] > :first-child {
 
 section[aria-labelledby='on-this-page'] h2 {
   font-size: var(--text-size-normal);
-  margin-top: var(--space-smallest);
+  margin-top: 0;
   margin-bottom: var(--space-smallest);
   padding-bottom: var(--space-half);
   border-bottom: 1px solid var(--docs-toc-border-color);
@@ -42,9 +44,10 @@ ul.toc {
 
 ul.toc a {
   display: block;
-  margin: var(--space-half);
+  padding: var(--space-half);
   padding-left: var(--space-smallest);
   font-weight: var(--font-weight-normal);
+  margin: 2px 0;
 }
 
 ul.toc a.toc--active {
@@ -68,6 +71,15 @@ ul.Component__list {
   overflow: hidden;
 }
 
+.Panel.Component__hero {
+  background-color: var(--docs-hero-background-color);
+  margin: var(--space-small) 0;
+}
+
+.Component__hero h1 {
+  padding-top: 0;
+}
+
 .Component .Panel > :first-child {
   margin-top: 0 !important;
 }
@@ -78,7 +90,6 @@ ul.Component__list {
 
 .Component__metadata {
   margin: 0 !important;
-  padding-bottom: var(--space-large);
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -115,9 +126,4 @@ ul.Component__Props {
   section[aria-labelledby='on-this-page'] {
     display: none;
   }
-}
-
-.cauldron--theme-dark .Component > .Panel {
-  background: transparent;
-  border: 1px solid var(--panel-background-color);
 }

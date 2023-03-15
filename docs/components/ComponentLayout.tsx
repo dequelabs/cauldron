@@ -35,19 +35,23 @@ export default function ComponentLayout({
         />
       </section>
       <div className="Component" ref={containerRef}>
-        <h1 id="main-title">{title}</h1>
-        {description && <p>{description}</p>}
-        <ul className="Component__metadata">
-          {deprecated && <li className="Pill Pill--deprecated">Deprecated</li>}
-          {source && (
-            <li>
-              <Link href={source} target="_blank" rel="noopener noreferrer">
-                Source <Offscreen>link opens in new window</Offscreen>{' '}
-                <Icon type="external-link" />
-              </Link>
-            </li>
-          )}
-        </ul>
+        <Panel className="Component__hero">
+          <h1 id="main-title">{title}</h1>
+          {description && <p>{description}</p>}
+          <ul className="Component__metadata">
+            {deprecated && (
+              <li className="Pill Pill--deprecated">Deprecated</li>
+            )}
+            {source && (
+              <li>
+                <Link href={source} target="_blank" rel="noopener noreferrer">
+                  Source <Offscreen>link opens in new window</Offscreen>{' '}
+                  <Icon type="external-link" />
+                </Link>
+              </li>
+            )}
+          </ul>
+        </Panel>
         <Panel>{children}</Panel>
         <div className="Component__history">
           <Link href={getEditUrl(filepath)}>Edit this page on GitHub</Link>

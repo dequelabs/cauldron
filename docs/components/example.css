@@ -5,7 +5,7 @@
 }
 
 body.cauldron--theme-dark {
-  --example-border-color: var(--accent-dark);
+  --example-border-color: var(--stroke-dark);
   --example-background-color: var(--dark-workspace-color);
   --example-code-background-color: var(--accent-dark);
 }
@@ -36,6 +36,8 @@ body.cauldron--theme-dark {
   margin-top: var(--space-medium);
   border-top: 1px solid var(--example-border-color);
   display: flex;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .Component__example > p:last-child {

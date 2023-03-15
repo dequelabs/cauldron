@@ -104,7 +104,7 @@ function Navigation(
         <>
           <h2>
             <Icon type="caution" />
-            Deprecated Components
+            Deprecated
           </h2>
           <ul>{deprecatedComponents.map(renderListItem)}</ul>
         </>

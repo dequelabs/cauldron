@@ -52,7 +52,7 @@ body.TopBar--thin .Content {
 
 .Layout .Main h1 {
   margin-bottom: 0;
-  padding-bottom: var(--space-smallest);
+  padding-bottom: 0;
 }
 
 .Layout .Main h1 + p {
