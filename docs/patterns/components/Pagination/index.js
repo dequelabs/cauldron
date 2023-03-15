@@ -68,28 +68,28 @@ const PaginationDemo = () => {
               </span>`
           },
           firstPageLabel: {
-            type: 'string',
+            type: 'ReactNode',
             description:
               'The label text for the first page button (to be rendered as a tooltip).',
             required: false,
             default: 'First page'
           },
           previousPageLabel: {
-            type: 'string',
+            type: 'ReactNode',
             description:
               'The label text for the previous page button (to be rendered as a tooltip).',
             required: false,
             default: 'Previous page'
           },
           nextPageLabel: {
-            type: 'string',
+            type: 'ReactNode',
             description:
               'The label text for the next page button (to be rendered as a tooltip).',
             required: false,
             default: 'Next page'
           },
           lastPageLabel: {
-            type: 'string',
+            type: 'ReactNode',
             description:
               'The label text for the last page button (to be rendered as a tooltip).',
             required: false,
