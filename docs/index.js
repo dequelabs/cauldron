@@ -214,7 +214,8 @@ const App = () => {
       </TopBar>
       <div className="Content">
         <Drawer
-          open={show && drawerIsActive}
+          active={drawerIsActive}
+          open={show}
           onClose={() => setState({ show: false })}
         >
           <Navigation

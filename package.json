@@ -90,6 +90,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.5.1",
     "express": "^4.17.1",
+    "focusable": "^2.3.0",
     "fontsource-lato": "^4.0.0",
     "fontsource-roboto": "^3.0.3",
     "html-webpack-plugin": "^5.5.0",

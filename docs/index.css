@@ -131,12 +131,6 @@ h6:has(> .Permalink):hover .Permalink,
 }
 
 @media (max-width: 64rem) {
-  .Navigation {
-    z-index: var(--z-index-side-bar);
-    position: absolute;
-    max-height: calc(100vh - var(--top-bar-height));
-  }
-
   .Content {
     grid-template-columns: 1fr;
   }

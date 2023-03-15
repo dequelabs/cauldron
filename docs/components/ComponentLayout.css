@@ -1,9 +1,10 @@
 :root {
-  --toc-active-color: var(--accent-primary);
+  --docs-toc-active-color: var(--accent-primary);
+  --docs-toc-border-color: var(--stroke-light);
 }
 
 .cauldron--theme-dark {
-  --toc-active-color: var(--accent-info);
+  --docs-toc-active-color: var(--accent-info);
 }
 
 main {
@@ -31,7 +32,7 @@ section[aria-labelledby='on-this-page'] h2 {
   margin-top: var(--space-smallest);
   margin-bottom: var(--space-smallest);
   padding-bottom: var(--space-half);
-  border-bottom: 1px solid var(--panel-border-color);
+  border-bottom: 1px solid var(--docs-toc-border-color);
 }
 
 ul.toc {
@@ -48,7 +49,7 @@ ul.toc a {
 
 ul.toc a.toc--active {
   transform: translateX(-3px);
-  border-left: 3px solid var(--toc-active-color);
+  border-left: 3px solid var(--docs-toc-active-color);
   font-weight: var(--font-weight-medium);
 }
 

@@ -5110,6 +5110,11 @@ flatten@^1.0.2:
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
 
+focusable@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/focusable/-/focusable-2.3.0.tgz#f9eef68dc6d6015e5526f1aa19e59f48b3ae2892"
+  integrity sha512-e63a4CAb5yLbn4Scn0wG9F+rEq4ZcbggRc9pD3hufAWf8y8dpZImdIES8YNUufRpKB+p0JS+BRd8RBU+sLAeIw==
+
 follow-redirects@^1.0.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.0.tgz#06441868281c86d0dda4ad8bdaead2d02dca89d4"

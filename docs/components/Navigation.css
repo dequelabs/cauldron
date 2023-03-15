@@ -1,11 +1,13 @@
 .Navigation {
   --docs-navigation-background-color: #fff;
+  --docs-navigation-border-color: var(--stroke-light);
   --docs-navigation-link-active-background-color: var(--accent-primary);
   --docs-navigation-link-active-text-color: #fff;
 }
 
 .cauldron--theme-dark .Navigation {
   --docs-navigation-background-color: var(--accent-medium);
+  --docs-navigation-border-color: var(--stroke-dark);
   --docs-navigation-link-active-background-color: var(--accent-light);
   --docs-navigation-link-active-text-color: var(--accent-dark);
 }
@@ -14,8 +16,6 @@
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);
   padding: var(--space-half);
-  overflow-y: auto;
-  transition: transform ease-in-out 250ms;
 }
 
 .Navigation h2 {
@@ -25,6 +25,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-half);
+}
+
+.Navigation h2:nth-of-type(1n + 2) {
+  margin-top: var(--space-small);
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--docs-navigation-border-color);
 }
 
 .Navigation ul + h2 {
@@ -47,14 +53,4 @@
   color: var(--docs-navigation-link-active-text-color);
   background-color: var(--docs-navigation-link-active-background-color);
   text-decoration: none;
-}
-
-@media (max-width: 64rem) {
-  .Navigation {
-    transform: translateX(-100%);
-  }
-
-  .drawer--open .Navigation {
-    transform: translateX(0);
-  }
 }

@@ -1,0 +1,12 @@
+.Drawer {
+  z-index: var(--z-index-side-bar);
+  position: absolute;
+  max-height: calc(100vh - var(--top-bar-height));
+  transform: translateX(-100%);
+  overflow-y: auto;
+  transition: transform ease-in-out 250ms;
+}
+
+.Drawer--open {
+  transform: translateX(0);
+}

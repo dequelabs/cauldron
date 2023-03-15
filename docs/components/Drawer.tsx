@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import classnames from 'classnames';
+import focusable from 'focusable';
 import { ClickOutsideListener, Scrim } from '@deque/cauldron-react';
+import './Drawer.css';
 
 interface DrawerProps {
   open: boolean;
   children: React.ReactNode;
-  target?: React.RefObject<HTMLElement>;
+  active?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
 }
@@ -12,10 +15,12 @@ interface DrawerProps {
 export default function Drawer({
   children,
   open,
-  target,
+  active = true,
   onOpen = () => null,
   onClose = () => null
 }: DrawerProps) {
+  const drawerRef = useRef<HTMLDivElement>(null);
+
   const handleClickOutside = () => {
     if (!open) {
       return;
@@ -24,6 +29,7 @@ export default function Drawer({
     onClose();
   };
 
+  // Allow keyboard users to close the drawer with "esc"
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if (e.which === 27 && open) {
@@ -35,26 +41,41 @@ export default function Drawer({
     return () => {
       document.body.removeEventListener('keydown', listener);
     };
-  });
+  }, []);
 
+  // Ensure that focusable elements aren't focusable when the drawer is closed
   useEffect(() => {
-    document.body.classList.toggle('drawer--open', open);
-    document.body.classList.toggle('drawer--closed', !open);
-    return () => {
-      document.body.classList.toggle('drawer--open', false);
-      document.body.classList.toggle('drawer--closed', false);
-    };
+    const elements = drawerRef.current?.querySelectorAll(focusable) || [];
+
+    if (!open) {
+      Array.from(elements).forEach(element => {
+        // Note: we just need an typed element to act as an element
+        // with a tabIndex attribute
+        (element as HTMLInputElement).tabIndex = -1;
+      });
+    } else {
+      Array.from(elements).forEach(element => {
+        const tabIndexAttr = Number(element.getAttribute('tabindex'));
+        (element as HTMLInputElement).tabIndex =
+          typeof tabIndexAttr === 'number' ? tabIndexAttr : 0;
+      });
+    }
   }, [open]);
 
-  return (
+  return active ? (
     <>
-      <ClickOutsideListener
-        target={target?.current}
-        onClickOutside={handleClickOutside}
+      <div
+        className={classnames('Drawer', { 'Drawer--open': open })}
+        ref={drawerRef}
+        aria-hidden={!open}
       >
-        {children}
-      </ClickOutsideListener>
+        <ClickOutsideListener onClickOutside={handleClickOutside}>
+          {children}
+        </ClickOutsideListener>
+      </div>
       <Scrim show={open} />
     </>
+  ) : (
+    children
   );
 }
