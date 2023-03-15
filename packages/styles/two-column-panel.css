@@ -33,7 +33,7 @@
 }
 
 .TwoColumnPanel__Header {
-  padding: 0 var(--space-small);
+  padding: calc(var(--space-small) - 2px);
   border-bottom: 1px solid var(--two-column-panel-border-color);
   min-height: var(--two-column-panel-header-height);
   font-weight: 500;
