@@ -17,6 +17,10 @@ body {
   overflow: auto;
 }
 
+body.TopBar--thin .Content {
+  --top-bar-height: var(--top-bar-height-thin);
+}
+
 .Content {
   display: grid;
   grid-template-columns: var(--menu-width) 1fr;

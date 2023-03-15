@@ -1,3 +1,7 @@
+body.TopBar--thin .Drawer {
+  --top-bar-height: var(--top-bar-height-thin);
+}
+
 .Drawer {
   z-index: var(--z-index-side-bar);
   position: absolute;
