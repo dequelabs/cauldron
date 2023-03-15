@@ -166,6 +166,7 @@ const App = () => {
               aria-haspopup="true"
               ref={topBarTrigger}
               aria-expanded={show}
+              aria-controls="navigation"
             >
               <Icon type="hamburger-menu" />
             </button>
@@ -217,6 +218,7 @@ const App = () => {
           onClose={() => setState({ show: false })}
         >
           <Navigation
+            id="navigation"
             active={show || !drawerIsActive}
             ref={navigationRef}
             contentRef={workspaceRef}
@@ -229,6 +231,7 @@ const App = () => {
           workspaceRef={workspaceRef}
           tabIndex={-1}
           aria-hidden={show}
+          aria-labelledby="main-title"
         >
           {pages.map(({ name, path, Component, ...props }) => {
             const render = () => (

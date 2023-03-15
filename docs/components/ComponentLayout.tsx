@@ -35,7 +35,7 @@ export default function ComponentLayout({
         />
       </section>
       <div className="Component" ref={containerRef}>
-        <h1>{title}</h1>
+        <h1 id="main-title">{title}</h1>
         {description && <p>{description}</p>}
         <ul className="Component__metadata">
           {deprecated && <li className="Pill Pill--deprecated">Deprecated</li>}

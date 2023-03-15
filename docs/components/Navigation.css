@@ -23,6 +23,7 @@
   margin: var(--space-smallest) 0;
   font-size: var(--text-small-medium);
   display: flex;
+  align-items: center;
   gap: var(--space-half);
 }
 

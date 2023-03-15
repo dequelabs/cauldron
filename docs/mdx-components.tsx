@@ -29,7 +29,7 @@ function Heading({ level, children, ...props }: HeadingProps) {
       <a
         className="Permalink"
         href={`#${slug}`}
-        aria-label={`{children} (permalink)`}
+        aria-label={`${children} (permalink)`}
       >
         #
       </a>

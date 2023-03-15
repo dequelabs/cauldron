@@ -100,7 +100,7 @@ function Navigation(
         Components
       </h2>
       <ul>{activeComponents.map(renderListItem)}</ul>
-      {deprecatedComponents.length && (
+      {!!deprecatedComponents.length && (
         <>
           <h2>
             <Icon type="caution" />
