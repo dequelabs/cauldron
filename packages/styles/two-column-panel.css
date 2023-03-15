@@ -35,11 +35,12 @@
 .TwoColumnPanel__Header {
   padding: 0 var(--space-small);
   border-bottom: 1px solid var(--two-column-panel-border-color);
-  height: var(--two-column-panel-header-height);
-  line-height: var(--two-column-panel-header-height);
+  min-height: var(--two-column-panel-header-height);
   font-weight: 500;
   color: var(--two-column-panel-header-text-color);
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .TwoColumnPanel__Left {
@@ -80,10 +81,9 @@
   text-decoration: none;
   background-color: var(--two-column-panel-list-background-color);
   transition: ease-in-out 100ms background-color;
-  height: 4.1875rem;
+  min-height: 4.1875rem;
   flex-direction: column;
   align-items: flex-start;
-  border-top: 1px solid var(--two-column-panel-border-color);
 }
 
 .TwoColumnPanel__Left ul li a {
@@ -176,12 +176,16 @@
   margin-bottom: 0;
 }
 
+.TwoColumnPanel__ButtonToggle {
+  display: flex;
+}
+
 .TwoColumnPanel__ButtonToggle button,
 .TwoColumnPanel__Close button {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid var(--two-column-panel-border-color);
-  height: var(--two-column-panel-header-height);
+  min-height: var(--two-column-panel-header-height);
   width: var(--two-column-panel-header-height);
 }
 
