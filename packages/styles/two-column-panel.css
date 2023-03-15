@@ -33,6 +33,7 @@
 }
 
 .TwoColumnPanel__Header {
+  /* The -2px is to account for the borders that are outside of the element and will make it line up with the left panel when there's only one line of text */
   padding: calc(var(--space-small) - 2px);
   border-bottom: 1px solid var(--two-column-panel-border-color);
   min-height: var(--two-column-panel-header-height);
