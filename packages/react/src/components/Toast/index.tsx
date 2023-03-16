@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
@@ -119,7 +120,12 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
     const defaultProps: React.HTMLAttributes<HTMLDivElement> = {
       tabIndex: -1,
-      className: `Toast Toast--${typeMap[type].className} ${animationClass}`
+      className: classNames(
+        'Toast',
+        `Toast--${typeMap[type].className}`,
+        animationClass,
+        { 'Toast--dismissible': dismissible }
+      )
     };
 
     if (!focus) {
