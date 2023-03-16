@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Placement } from '@popperjs/core';
 import IconButton from '../IconButton';
+import { ContentNode } from '../../types';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
   statusLabel?: React.ReactNode;
-  firstPageLabel?: React.ReactNode;
-  previousPageLabel?: React.ReactNode;
-  nextPageLabel?: React.ReactNode;
-  lastPageLabel?: React.ReactNode;
+  firstPageLabel?: ContentNode;
+  previousPageLabel?: ContentNode;
+  nextPageLabel?: ContentNode;
+  lastPageLabel?: ContentNode;
   onNextPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onPreviousPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onFirstPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

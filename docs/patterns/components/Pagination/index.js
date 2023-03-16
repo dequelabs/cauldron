@@ -2,6 +2,7 @@ import React from 'react';
 import Demo from '../../../Demo';
 import { Pagination, usePagination, Code } from '@deque/cauldron-react';
 import PropDocs from '../../../Demo/PropDocs';
+import { contentNodeType } from '../../../props';
 
 const PaginationDemo = () => {
   const totalItems = 111;
@@ -68,28 +69,28 @@ const PaginationDemo = () => {
               </span>`
           },
           firstPageLabel: {
-            type: 'ReactNode',
+            type: contentNodeType,
             description:
               'The label text for the first page button (to be rendered as a tooltip).',
             required: false,
             default: 'First page'
           },
           previousPageLabel: {
-            type: 'ReactNode',
+            type: contentNodeType,
             description:
               'The label text for the previous page button (to be rendered as a tooltip).',
             required: false,
             default: 'Previous page'
           },
           nextPageLabel: {
-            type: 'ReactNode',
+            type: contentNodeType,
             description:
               'The label text for the next page button (to be rendered as a tooltip).',
             required: false,
             default: 'Next page'
           },
           lastPageLabel: {
-            type: 'ReactNode',
+            type: contentNodeType,
             description:
               'The label text for the last page button (to be rendered as a tooltip).',
             required: false,
