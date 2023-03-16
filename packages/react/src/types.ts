@@ -6,7 +6,10 @@ export namespace Cauldron {
     | { 'aria-labelledby': string };
 }
 
-// Explicit equivalent of Exclude<ReactNode, boolean | null | undefined>
+/**
+ * This type is meant to ensure that a prop can actually be rendered as content.
+ * Explicit equivalent of Exclude<ReactNode, boolean | null | undefined>
+ */
 export type ContentNode =
   | string
   | number
