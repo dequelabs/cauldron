@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactFragment, ReactPortal } from 'react';
 
 export namespace Cauldron {
   export type LabelProps =
@@ -6,4 +6,10 @@ export namespace Cauldron {
     | { 'aria-labelledby': string };
 }
 
-export type ContentNode = Exclude<ReactNode, boolean | null | undefined>;
+// Explicit equivalent of Exclude<ReactNode, boolean | null | undefined>
+export type ContentNode =
+  | string
+  | number
+  | ReactFragment
+  | ReactPortal
+  | ReactElement;
