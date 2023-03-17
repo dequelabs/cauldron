@@ -91,7 +91,7 @@ const IconButton = forwardRef(
           {...other}
         >
           <Icon type={icon} />
-          <Offscreen>{label}</Offscreen>
+          {disabled && <Offscreen>{label}</Offscreen>}
         </Component>
         {!disabled && (
           <Tooltip
