@@ -126,7 +126,3 @@ code {
     bottom: 3.45rem;
   }
 }
-
-.Toast:not(.Toast--dismissible) {
-  margin-bottom: 1rem;
-}

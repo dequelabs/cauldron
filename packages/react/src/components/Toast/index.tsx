@@ -124,7 +124,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
         'Toast',
         `Toast--${typeMap[type].className}`,
         animationClass,
-        { 'Toast--dismissible': dismissible }
+        { 'Toast--non-dismissible': !dismissible }
       )
     };
 

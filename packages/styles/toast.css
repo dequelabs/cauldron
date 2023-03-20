@@ -1,4 +1,8 @@
 .Toast {
+  top: var(--top-bar-height);
+  position: fixed;
+  right: 0;
+  left: 0;
   color: #0b0e11;
   font-size: var(--text-size-small);
   z-index: var(--z-index-toast);
@@ -8,11 +12,9 @@
   padding: 4px 15px;
 }
 
-.Toast.Toast--dismissible {
-  top: var(--top-bar-height);
-  position: fixed;
-  right: 0;
-  left: 0;
+.Toast.Toast--non-dismissible {
+  position: static;
+  margin-bottom: var(--space-small);
 }
 
 .TopBar--thin .Toast {
