@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Placement } from '@popperjs/core';
 import IconButton from '../IconButton';
 import { ContentNode } from '../../types';
+import * as CustomPropTypes from '../../propTypes';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
@@ -121,10 +122,10 @@ Pagination.propTypes = {
   itemsPerPage: PropTypes.number,
   currentPage: PropTypes.number,
   statusLabel: PropTypes.element,
-  firstPageLabel: PropTypes.element,
-  previousPageLabel: PropTypes.element,
-  nextPageLabel: PropTypes.element,
-  lastPageLabel: PropTypes.element,
+  firstPageLabel: CustomPropTypes.contentNode,
+  previousPageLabel: CustomPropTypes.contentNode,
+  nextPageLabel: CustomPropTypes.contentNode,
+  lastPageLabel: CustomPropTypes.contentNode,
   onNextPageClick: PropTypes.func,
   onPreviousPageClick: PropTypes.func,
   onFirstPageClick: PropTypes.func,
