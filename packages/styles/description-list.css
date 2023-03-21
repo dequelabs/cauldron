@@ -85,6 +85,8 @@
   color: var(--data-list-value-text-color);
   background-color: var(--data-list-value-background-color);
   font-weight: var(--font-weight-normal);
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .DescriptionList__term,
