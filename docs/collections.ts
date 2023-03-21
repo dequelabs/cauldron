@@ -13,7 +13,15 @@ interface Collections {
   componentsV1: Collection[];
 }
 
-// Collections
+/*
+ * Maps specific components/mdx to collections:
+ *  - Pages collection is for generic documentation (like getting started, or principles)
+ *  - Components collection is for all component MDX documentation
+ *  - ComponentsV1 collection is for all current (js) documentation
+ *
+ * These collections are can be used to automatically import/sort components and display
+ * them in the relevant section within the site navigation.
+ */
 const collections: Collections = (require as any)
   .context('./', true, /\.(mdx|jsx?)$/)
   .keys()
