@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - release-please
+      - release-please-testing
 
 permissions:
   contents: write
