@@ -13,7 +13,7 @@ const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
     ref
   ) => {
     const items = React.Children.toArray(children);
-    const childrenWithSeparators: any[] = [];
+    const childrenWithSeparators: React.ReactNode[] = [];
 
     items.forEach((child, index) => {
       if (index !== items.length - 1) {
