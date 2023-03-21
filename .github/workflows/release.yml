@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - release-please-testing
+      - develop
 
 permissions:
   contents: write
@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
+          pull-request-header: :robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md))
           release-type: node
           package-name: cauldron
-          default-branch: develop
+          component: cauldron
+          default-branch: master
