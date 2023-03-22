@@ -53,9 +53,9 @@ export default function CopyToClipboardButton({
     );
     const index = elements.findIndex(element => element === ref.current);
     if (index !== -1 && elements.length) {
-      setAccessibleName(`${label} example, ${index + 1} of ${elements.length}`);
+      setAccessibleName(`${label}, ${index + 1} of ${elements.length}`);
     }
-  });
+  }, [value]);
 
   return (
     <>

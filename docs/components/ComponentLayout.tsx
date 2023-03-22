@@ -23,7 +23,7 @@ export default function ComponentLayout({
   deprecated = false,
   filepath
 }: ComponentLayoutProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   return (
     <>
       <section aria-labelledby="on-this-page">

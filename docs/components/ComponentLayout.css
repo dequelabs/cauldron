@@ -24,7 +24,7 @@ main > section[aria-labelledby='on-this-page'] {
   align-self: start;
 }
 
-section[aria-labelledby='on-this-page'] > :first-child {
+section[aria-labelledby='on-this-page'] > .toc {
   position: sticky;
   top: var(--space-smallest);
 }

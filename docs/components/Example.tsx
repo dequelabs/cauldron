@@ -14,7 +14,10 @@ export default function Example({ children, raw, ...props }: ExampleProps) {
       {children}
       <div className="Component__example__code">
         <Code children={raw} />
-        <CopyToClipboardButton value={raw} />
+        <CopyToClipboardButton
+          label="copy code example to clipboard"
+          value={raw}
+        />
       </div>
     </section>
   );
