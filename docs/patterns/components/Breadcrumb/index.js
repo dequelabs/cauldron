@@ -11,7 +11,7 @@ import { children, className } from '../../../props';
 
 const BreadcrumbDemo = () => (
   <div>
-    <h1>Breadcrumb</h1>
+    <h1 id="main-title">Breadcrumb</h1>
     <h2>Component Description</h2>
     <p>
       The Breadcrumb component displays a list of links within a hierarchy and

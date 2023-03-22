@@ -19,7 +19,7 @@ const Demo = () => {
 
   return (
     <div>
-      <h1>First Time Point Out</h1>
+      <h1 id="main-title">First Time Point Out</h1>
       <h2>Component Description</h2>
       <p>
         A component that creates a box with text, an arrow, and styling to draw

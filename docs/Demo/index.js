@@ -35,7 +35,7 @@ const Demo = props => {
 
   return (
     <div className="Demo">
-      <h1>{displayName}</h1>
+      <h1 id="main-title">{displayName}</h1>
       <h2>Component Description</h2>
       <p>{componentDescription}</p>
       <h2>Demo</h2>
