@@ -18,9 +18,9 @@ code {
   background-color: var(--gray-20);
   border: 1px solid var(--gray-40);
   border-radius: 3px;
-  font-size: 13px;
+  line-height: 1.4;
+  font-size: var(--text-size-smaller);
   padding: 0 var(--space-half);
-  margin: 1px 0;
 }
 
 .cauldron--theme-dark :not(.Code) > code {
