@@ -166,7 +166,7 @@ function DescriptionListProps({
           </li>
         )
       )}
-      {children && (
+      {ref && (
         <li>
           <DescriptionList collapsed={collapsed}>
             <DescriptionListItem>
