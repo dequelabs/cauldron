@@ -13,6 +13,22 @@ code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
+:not(.Code) > code {
+  display: inline-block;
+  background-color: var(--gray-20);
+  border: 1px solid var(--gray-40);
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 0 var(--space-half);
+  margin: 1px 0;
+}
+
+.cauldron--theme-dark :not(.Code) > code {
+  background-color: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  color: var(--accent-light);
+}
+
 body {
   overflow: auto;
 }

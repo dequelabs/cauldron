@@ -37,9 +37,13 @@ There are a few additional packages that you will need to install:
 
 ### Setup
 
-Once installed, you will need to add include cauldron's styles somewhere in the top level of your application. You will also need to include the required font family of Roboto with something like [google fonts](https://fonts.google.com/specimen/Roboto) or [fontsource](https://fontsource.org/fonts/roboto):
+Once installed, you will need to add include cauldron's styles somewhere in the top level of your application. You will also need to load the required font family of Roboto before cauldron styles. This can be using [google fonts](https://fonts.google.com/specimen/Roboto) or with something like [fontsource](https://fontsource.org/fonts/roboto):
+
+An example of this using the [fontsource](https://fontsource.org/fonts/roboto) package and loading cauldron styles as follows:
 
 ```js
+import '@fontsource/roboto' // defaults as font-weight 400
+import '@fontsource/roboto/500.css'
 import '@deque/cauldron-styles'
 import '@deque/cauldron-react/lib/cauldron.css'
 ```
