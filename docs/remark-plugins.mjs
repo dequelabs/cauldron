@@ -44,7 +44,7 @@ const exampleFromMDX = () => {
       if (!func) {
         // We want to ensure that any react markup renders pure and does
         // not get rendered using markdown components, so export the code
-        // wrapped in a function to ensure it's pure
+        // wrapped in a function to ensure components do not get applied
         index++
         func = `\n\nexport function CodeExample${index}() { return <>${raw}</> }\n\n`
         render = `<CodeExample${index} />`
@@ -62,6 +62,10 @@ const exampleFromMDX = () => {
         exampleMarkdown,
         options
       );
+
+      // Note: From markdown will strip extra whitespace from raw code, which
+      // we want to preserve so manually include it in the mdast
+      updatedNode.children[func ? 1 : 0].attributes[0].value = raw
 
       Object.assign(node, updatedNode);
     });
