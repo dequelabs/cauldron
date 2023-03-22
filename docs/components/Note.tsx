@@ -9,11 +9,8 @@ interface NoteProps {
   children?: React.ReactNode;
 }
 
-export default function Note({
-  children,
-  title = 'Note',
-  variant = 'info'
-}: NoteProps) {
+export default function Note({ children, title, variant = 'info' }: NoteProps) {
+  const noteTitle = title ?? variant === 'info' ? 'Note' : 'Warning';
   return (
     <div
       className={classnames('Note', {
@@ -23,7 +20,7 @@ export default function Note({
     >
       <div className="Note__title">
         <Icon type={variant === 'info' ? 'info-circle-alt' : 'caution'} />{' '}
-        {title}
+        {noteTitle}
       </div>
       <div className="Note__content">{children}</div>
     </div>
