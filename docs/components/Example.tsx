@@ -1,5 +1,4 @@
 import React from 'react';
-import { MDXProvider } from '@mdx-js/react';
 import { Code } from '@deque/cauldron-react';
 import CopyToClipboardButton from './CopyToClipboardButton';
 import './example.css';
