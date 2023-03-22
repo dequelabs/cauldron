@@ -37,16 +37,6 @@ test('should return no axe violations', async () => {
 
 Local development setup is documented in [this project's readme](./README.md#development)
 
-## React
-
-Cauldron is an evolving project. Moving forward, it is preferred that the react components are implemented with simplicity and readability in mind.
-
-- functional components over class components
-  - hooks over `setState`
-- `React.forwardRef` over `ref={el => ...}`
-- declaring valid typescript types for components
-- including `PropTypes` for non-typescript consumers of this project
-
 ## Styles
 
 We use [BEM](http://getbem.com/introduction/) for our CSS naming conventions. Here's an example for a mythical "Calendar" component:
