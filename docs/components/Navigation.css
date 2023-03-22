@@ -1,6 +1,7 @@
 .Navigation {
   --docs-navigation-background-color: #fff;
   --docs-navigation-border-color: var(--stroke-light);
+  --docs-navigation-divider-color: var(--gray-40);
   --docs-navigation-link-active-background-color: var(--accent-primary);
   --docs-navigation-link-active-text-color: #fff;
 }
@@ -10,11 +11,13 @@
   --docs-navigation-border-color: var(--stroke-dark);
   --docs-navigation-link-active-background-color: var(--accent-light);
   --docs-navigation-link-active-text-color: var(--accent-dark);
+  --docs-navigation-divider-color: var(--stroke-dark);
 }
 
 .Navigation {
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);
+  border-right: 1px solid var(--docs-navigation-divider-color);
 }
 
 .Navigation h2 {
