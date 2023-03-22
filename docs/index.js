@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
 import mdxComponents from './mdx-components';
-import Home from './components/Home';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
 import Drawer from './components/Drawer';
