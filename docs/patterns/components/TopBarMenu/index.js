@@ -14,7 +14,7 @@ class TopBarMenuDemo extends React.Component {
 
     return (
       <div className="topbarmenu-demo">
-        <h1>TopBar Menu</h1>
+        <h1 id="main-title">TopBar Menu</h1>
         <h2>Component Description</h2>
         <p>
           The <em>TopBar Menu</em> is a composite component intended to be

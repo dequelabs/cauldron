@@ -12,7 +12,7 @@ const Demo = () => {
   };
   return (
     <div className="NavBarDemo">
-      <h1>NavBar</h1>
+      <h1 id="main-title">NavBar</h1>
       <h2>Component Description</h2>
       <p>
         A navigation bar that contains links to other sections of the website.
@@ -45,7 +45,7 @@ const Demo = () => {
   };
   return (
     <div className="NavBarDemo">
-      <h1>NavBar</h1>
+      <h1 id="main-title">NavBar</h1>
       <h2>Demo</h2>
       <h3>Basic NavBar</h3>
       <NavBar collapsed={isMobile}>
