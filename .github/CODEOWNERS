@@ -4,4 +4,4 @@
 * @dequelabs/cauldron-codeowners
 
 # Request a review from cauldron team on docs PRs
-docs/* @dequelabs/cauldron
+/docs/ @dequelabs/cauldron
