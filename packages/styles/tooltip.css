@@ -30,7 +30,6 @@
   border-radius: 3px;
   z-index: var(--z-index-tooltip);
   text-align: center;
-  max-width: calc(100vw - 16px);
   word-break: break-word;
 }
 

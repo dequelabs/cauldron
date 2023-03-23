@@ -6,6 +6,7 @@ import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
+import maxSize from 'popper-max-size-modifier';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -37,6 +38,18 @@ const fireCustomEvent = (show: boolean, button?: HTMLElement | null) => {
   button.dispatchEvent(event);
 };
 
+const applyMaxSize = {
+  name: 'applyMaxSize',
+  enabled: true,
+  phase: 'beforeWrite' as 'beforeWrite',
+  requires: ['maxSize'],
+  fn({ state }: { state: any }) {
+    // The `maxSize` modifier provides this data
+    const { width } = state.modifiersData.maxSize;
+    state.styles.popper.maxWidth = width;
+  }
+};
+
 export default function Tooltip({
   id: propId,
   placement: initialPlacement = 'auto',
@@ -65,8 +78,10 @@ export default function Tooltip({
     {
       placement: initialPlacement,
       modifiers: [
+        maxSize,
+        applyMaxSize,
         { name: 'preventOverflow', options: { padding: 8 } },
-        { name: 'flip' },
+        { name: 'flip', options: { rootBoundary: 'document' } },
         { name: 'offset', options: { offset: [0, 8] } },
         { name: 'arrow', options: { padding: 5, element: arrowElement } }
       ]
