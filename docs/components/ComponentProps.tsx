@@ -29,11 +29,11 @@ interface Props {
         type?: string | string[];
       }
     | boolean;
-  ref?: string;
+  refType?: string;
   props: ComponentProps[];
 }
 
-function TableProps({ children, ref, props }: Props) {
+function TableProps({ children, refType, props }: Props) {
   return (
     <Table className="Component__Props">
       <TableHead>
@@ -82,10 +82,10 @@ function TableProps({ children, ref, props }: Props) {
             </TableRow>
           )
         )}
-        {ref && (
+        {refType && (
           <TableRow>
-            <TableCell>Ref</TableCell>
-            <TableCell>{ref}</TableCell>
+            <TableCell>ref</TableCell>
+            <TableCell>React.RefObject&lt;{refType}&gt;</TableCell>
             <TableCell></TableCell>
             <TableCell>
               A ref pointed to the element rendered by this component.
@@ -100,7 +100,7 @@ function TableProps({ children, ref, props }: Props) {
 function DescriptionListProps({
   children,
   props,
-  ref,
+  refType,
   collapsed
 }: Props & { collapsed?: boolean }) {
   return (
@@ -166,7 +166,7 @@ function DescriptionListProps({
           </li>
         )
       )}
-      {ref && (
+      {refType && (
         <li>
           <DescriptionList collapsed={collapsed}>
             <DescriptionListItem>
@@ -175,7 +175,7 @@ function DescriptionListProps({
             </DescriptionListItem>
             <DescriptionListItem>
               <DescriptionTerm>Type</DescriptionTerm>
-              <DescriptionDetails>{ref}</DescriptionDetails>
+              <DescriptionDetails>{refType}</DescriptionDetails>
             </DescriptionListItem>
             <DescriptionListItem>
               <DescriptionTerm>Description</DescriptionTerm>
@@ -190,7 +190,11 @@ function DescriptionListProps({
   );
 }
 
-export default function ComponentProps({ children, props }: Props) {
+export default function ComponentProps({
+  children,
+  refType,
+  props = []
+}: Props) {
   const [narrow, setNarrow] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -223,9 +227,10 @@ export default function ComponentProps({ children, props }: Props) {
     <DescriptionListProps
       children={children}
       props={props}
+      refType={refType}
       collapsed={collapsed}
     />
   ) : (
-    <TableProps children={children} props={props} />
+    <TableProps children={children} refType={refType} props={props} />
   );
 }

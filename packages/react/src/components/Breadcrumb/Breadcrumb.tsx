@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Cauldron } from '../../types';
 
 type BreadcrumbProps = {
-  separator?: string;
+  separator?: React.ReactNode;
 } & React.HTMLAttributes<HTMLElement> &
   Cauldron.LabelProps;
 
