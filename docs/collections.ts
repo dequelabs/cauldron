@@ -104,6 +104,6 @@ export const pages = [
     .filter(({ index }) => !index)
     .sort((a, b) => a.name.localeCompare(b.name))
 ];
-console.log({ pages });
+
 export const components = componentsList;
 export const componentsV2 = collections.components;
