@@ -1,0 +1,30 @@
+.Note {
+  padding: var(--space-small);
+}
+
+.Note--info {
+  border: 1px solid var(--accent-info);
+  border-left-width: 5px;
+}
+
+.Note--warning {
+  border: 1px solid var(--accent-error);
+  border-left-width: 5px;
+}
+
+.Note__title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-normal);
+}
+
+.Note--warning .Note__title {
+  color: var(--accent-error);
+}
+
+.cauldron--theme-dark .Note--warning .Note__title {
+  color: #fff;
+}
+
+.Note__content > :last-child {
+  margin-bottom: 0;
+}

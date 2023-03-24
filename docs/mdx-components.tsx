@@ -14,6 +14,7 @@ import {
 } from '@deque/cauldron-react';
 import Example from './components/Example';
 import ComponentProps from './components/ComponentProps';
+import Note from './components/Note';
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: number;
@@ -101,7 +102,8 @@ const mdxComponents = {
     <Heading level={6} {...props} />
   ),
   Example,
-  ComponentProps
+  ComponentProps,
+  Note
 };
 
 export default mdxComponents;
