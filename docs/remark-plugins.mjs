@@ -10,6 +10,8 @@ import { mdxjs } from 'micromark-extension-mdxjs';
 import { mdxFromMarkdown } from 'mdast-util-mdx';
 import { mdxExpressionFromMarkdown } from 'mdast-util-mdx-expression'
 
+const index = 0
+
 const exampleFromMDX = () => {
   return (tree) => {
     visit(tree, 'code', (node, index, parent) => {
@@ -37,6 +39,15 @@ const exampleFromMDX = () => {
           func = `\n\nexport ${raw}\n\n`
           render = `<${name} />`
         }
+      }
+
+      if (!func) {
+        // We want to ensure that any react markup renders pure and does
+        // not get rendered using markdown components, so export the code
+        // wrapped in a function to ensure components do not get applied
+        index++
+        func = `\n\nexport function CodeExample${index}() { return <>${raw}</> }\n\n`
+        render = `<CodeExample${index} />`
       }
 
       const exampleMarkdown =  `${func}<Example raw={''}>
