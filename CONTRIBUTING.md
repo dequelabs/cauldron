@@ -33,39 +33,9 @@ test('should return no axe violations', async () => {
 });
 ```
 
-### Ensuring Screen Reader Compatibility
-
-You should test your changes with screen readers
-
-- VoiceOver
-- NVDA
-- JAWS
-
-### Ensuring Keyboard Operability
-
-Test your component with the keyboard
-
-### Following Accessibility Annotations
-
-If working on a new component, you must follow the accessibility annotations provided. This can include things like:
-
-- accessible names (making them required via props)
-- roles
-- states/properties
-
 ## Local Development
 
 Local development setup is documented in [this project's readme](./README.md#development)
-
-## React
-
-Cauldron is an evolving project. Moving forward, it is preferred that the react components are implemented with simplicity and readability in mind.
-
-- functional components over class components
-  - hooks over `setState`
-- `React.forwardRef` over `ref={el => ...}`
-- declaring valid typescript types for components
-- including `PropTypes` for non-typescript consumers of this project
 
 ## Styles
 
@@ -116,9 +86,9 @@ Cauldron is constantly evolving, and it's inevitable that breaking changes will 
 
 For cauldron's component library, any of the following would be considered breaking changes:
 
-* Renaming (exported name) or removing a Component
-* Changing a prop that would break usage of an existing component
-* Adding a new required prop to an existing component
+- Renaming (exported name) or removing a Component
+- Changing a prop that would break usage of an existing component
+- Adding a new required prop to an existing component
 
 Some examples of implementing non-breaking changes for components:
 
@@ -138,9 +108,9 @@ function Component({ oldProp: newProp, newProp }) { ... }
 
 For cauldron's styles library, any of the following would be considered breaking changes:
 
-* Changing or removing a class name
-* Changing or removing a global css custom property name (see `variables.css`)
-* Changing or removing a component css custom property name
+- Changing or removing a class name
+- Changing or removing a global css custom property name (see `variables.css`)
+- Changing or removing a component css custom property name
 
 Some examples of implementing non-breaking changes for styles:
 
@@ -150,7 +120,7 @@ Some examples of implementing non-breaking changes for styles:
 /* Usage of .Foo is deprecated, please use .Bar */
 .Foo,
 .Bar {
-  ...
+  ...;
 }
 ```
 
@@ -164,8 +134,8 @@ Some examples of implementing non-breaking changes for styles:
 
 In addition, changing a css custom property may be a breaking change for the following:
 
-* Changing a global css custom property value (see `variables.css`)
-* Changing a component css custom property value
+- Changing a global css custom property value (see `variables.css`)
+- Changing a component css custom property value
 
 For the latter, the change must be reviewed by a member of the cauldron team to ensure there are no breaking changes.
 

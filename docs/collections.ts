@@ -8,7 +8,7 @@ type Collection<T = {}> = {
 } & T;
 
 interface Collections {
-  pages: Collection[];
+  pages: Collection<{ index?: number }>[];
   components: Collection<{ deprecated?: boolean }>[];
   componentsV1: Collection[];
 }
@@ -91,6 +91,19 @@ const componentsList: Collection<{ deprecated?: boolean }>[] = [
   )
 ].sort((a, b) => a.name.localeCompare(b.name));
 
-export const pages = collections.pages;
+// Pages should first be sorted by their index, then alphabetical
+export const pages = [
+  ...collections.pages
+    .filter(({ index }) => !!index)
+    .sort(
+      (a, b) =>
+        (a as Collection<{ index: number }>).index -
+        (b as Collection<{ index: number }>).index
+    ),
+  ...collections.pages
+    .filter(({ index }) => !index)
+    .sort((a, b) => a.name.localeCompare(b.name))
+];
+
 export const components = componentsList;
 export const componentsV2 = collections.components;
