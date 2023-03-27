@@ -1,0 +1,49 @@
+---
+title: Component Guidelines
+name: Component Guidelines
+path: /component-guidelines
+---
+
+## Types of Components
+
+### Primitive Components
+
+Primitive components are the "building blocks" of cauldron and are intended to be simple and basic in their functionality. These components are not necessarily intended to be used in isolation, but composed and connected together to build different types of UI. Some examples of primitive components would be `Button`, `Link`, `Icon`, or `Tag`.
+
+### Pattern Components
+
+Pattern components are collections of components intended to replicate common patterns as a part of Cauldron's design system and can tend to be more complex in their design. This includes components like `Accordion`, `Alert`, or `TwoColumnPanel`.
+
+### Helper Components
+
+Helper components are components that wrap components to provide specific functionality but don't necessarily render ui directly. Some examples of this would be `ClickOutsideListener` to handle clicks outside of a component, or `ThemeProvider` to be able to control setting the theme of components.
+
+## Component Standards
+
+Components should generally be crafted using the following standards. There may be existing components that do not adhere to these standards, but new components going forward should comply:
+
+- Primitive/Pattern components should always use `React.forwardRef` to provide direct access to the component's primary element
+- All components should include a `displayName`
+- All components should be functional (i.e. do not use class components)
+- All components should be named using [Pascal case](https://en.wiktionary.org/wiki/Pascal_case)
+- All components should include typescript types for component props
+- Polymorphic components should support using `as` property providing the capability for components to render as a different component under the hood
+
+### Accessibility
+
+Components must adhere to minimum accessibility standards, meaning:
+
+- Automated tests (via [`axe-core`](https://github.com/dequelabs/axe-core) @ _WCAG 2.1 AA_) must return no violations for the component
+- All of the necessary visual/aria states are included (hover, focus, active, expanded, etc)
+- Component/elements are using the correct roles / semantic elements
+- If accessible names are provided via props they should be required _OR_ a default accessible name is used
+- If a component needs an id for aria relationships, it should be required _OR_ generated if not provided
+- If a component is interactive it should be tested and fully operable using only a keyboard
+
+Additionally, components should be operable using the following screen readers:
+
+- VoiceOver
+- NVDA
+- JAWS
+
+Cauldron aims to provide accessible components by default with minimal configuration.
