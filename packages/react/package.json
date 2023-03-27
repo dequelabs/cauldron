@@ -27,7 +27,6 @@
     "focus-trap-react": "8",
     "focusable": "^2.3.0",
     "keyname": "^0.1.0",
-    "popper-max-size-modifier": "^0.2.0",
     "prop-types": "^15.6.0",
     "react-id-generator": "^3.0.1",
     "react-popper": "^2.2.4",

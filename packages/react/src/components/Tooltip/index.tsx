@@ -3,10 +3,9 @@ import classnames from 'classnames';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
-import { Placement } from '@popperjs/core';
+import { Placement, detectOverflow } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
-import maxSize from 'popper-max-size-modifier';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -38,15 +37,37 @@ const fireCustomEvent = (show: boolean, button?: HTMLElement | null) => {
   button.dispatchEvent(event);
 };
 
-const applyMaxSize = {
-  name: 'applyMaxSize',
+const maxWidth = {
+  name: 'maxWidth',
+  enabled: true,
+  phase: 'main' as 'main',
+  requiresIfExists: ['offset', 'preventOverflow', 'flip'],
+  fn(ref: any) {
+    const overflow = detectOverflow(ref.state, ref.options);
+    const { x } = ref.state.modifiersData.preventOverflow || {
+      x: 0
+    };
+
+    const { width } = ref.state.rects.popper;
+    const placementSplit = ref.state.placement.split('-')[0];
+    const widthProp = placementSplit === 'left' ? 'left' : 'right';
+    ref.state.modifiersData.maxWidth = {
+      width: width - overflow[widthProp] - x
+    };
+  }
+};
+
+const applyMaxWidth = {
+  name: 'applyMaxWidth',
   enabled: true,
   phase: 'beforeWrite' as 'beforeWrite',
-  requires: ['maxSize'],
+  requires: ['maxWidth'],
   fn({ state }: { state: any }) {
-    // The `maxSize` modifier provides this data
-    const { width } = state.modifiersData.maxSize;
-    state.styles.popper.maxWidth = width;
+    const { width } = state.modifiersData.maxWidth;
+    state.styles.popper = {
+      ...state.styles.popper,
+      maxWidth: `${Math.max(width, 100)}px`
+    };
   }
 };
 
@@ -78,12 +99,12 @@ export default function Tooltip({
     {
       placement: initialPlacement,
       modifiers: [
-        maxSize,
-        applyMaxSize,
-        { name: 'preventOverflow', options: { padding: 8 } },
-        { name: 'flip', options: { rootBoundary: 'document' } },
+        { name: 'preventOverflow' },
+        { name: 'flip' },
         { name: 'offset', options: { offset: [0, 8] } },
-        { name: 'arrow', options: { padding: 5, element: arrowElement } }
+        { name: 'arrow', options: { padding: 5, element: arrowElement } },
+        maxWidth,
+        applyMaxWidth
       ]
     }
   );
