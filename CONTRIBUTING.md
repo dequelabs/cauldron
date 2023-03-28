@@ -37,38 +37,6 @@ test('should return no axe violations', async () => {
 
 Local development setup is documented in [this project's readme](./README.md#development)
 
-## Styles
-
-We use [BEM](http://getbem.com/introduction/) for our CSS naming conventions. Here's an example for a mythical "Calendar" component:
-
-We always start with the component name, uppercased:
-
-```css
-.Calendar {
-  border: 1px solid var(--gray-90);
-}
-```
-
-For blocks within the component, such as a date within a calendar would be delimited by two underscores: `__`
-
-```css
-.Calendar__date {
-  border: 1px solid var(--gray-90);
-}
-```
-
-For modifiers, such as variants or states, these values would be delimited by two dashes `--`
-
-```css
-.Calendar--variant-large {
-  font-size: var(--text-size-large);
-}
-
-.Calendar--variant-small {
-  font-size: var(--text-size-small);
-}
-```
-
 ## Icons
 
 Icons are located in [packages/react/src/components/Icon/icons](./packages/react/src/components/Icon/icons). To add a new icon, follow the following steps:
