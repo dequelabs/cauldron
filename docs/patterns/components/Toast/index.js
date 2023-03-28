@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Toast, Link } from '@deque/cauldron-react/';
+import { Button, Toast, Link } from '@deque/cauldron-react';
 import DemoComponent from '../../../Demo';
 import { children } from '../../../props';
 
@@ -37,6 +37,9 @@ export default class Demo extends Component {
     return (
       <DemoComponent
         component={Toast}
+        componentDescription={
+          'A banner with text positioned at the top of the page.'
+        }
         states={[
           {
             type: 'confirmation',
@@ -111,6 +114,38 @@ export default class Demo extends Component {
                 Error
               </Button>
             )
+          },
+          {
+            type: 'info',
+            dismissible: false,
+            focus: false,
+            children: (
+              <>
+                This toast is not dismissible by normal means. But you can
+                <Link
+                  href="#"
+                  onClick={() => this.onToastDismiss('not-dismissible')}
+                >
+                  click me to dismiss this un-dismissible toast.
+                </Link>
+              </>
+            ),
+            show: type === 'not-dismissible',
+            DEMO_renderBefore: (
+              <p>
+                A current limitation is that non-dismissible Toasts are shown
+                where they are rendered to prevent them from clipping content.
+              </p>
+            ),
+            DEMO_renderAfter: (
+              <Button
+                variant="error"
+                onClick={() => this.onTriggerClick('not-dismissible')}
+                buttonRef={el => (this.error = el)}
+              >
+                Not dismissible
+              </Button>
+            )
           }
         ]}
         propDocs={{
@@ -136,6 +171,10 @@ export default class Demo extends Component {
             type: 'string',
             description:
               'text to be added as the aria-label of the "x" dismiss button (default: "Dismiss")'
+          },
+          dismissible: {
+            type: 'boolean',
+            description: 'whether or not the user is able to dismiss the toast'
           },
           toastRef: {
             type: 'function',

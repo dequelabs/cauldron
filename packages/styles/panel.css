@@ -2,10 +2,11 @@
   --panel-border-color: var(--gray-40);
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
+  --panel-padding: var(--space-small);
 }
 
 .Panel {
-  padding: var(--space-large);
+  padding: var(--panel-padding);
   border: 1px solid var(--panel-border-color);
   border-radius: 3px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
@@ -33,7 +34,7 @@ fieldset.Panel {
 }
 
 .Panel--collapsed {
-  padding: 12px;
+  --panel-padding: 12px;
 }
 
 .Panel--collapsed .Panel__Heading {

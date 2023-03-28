@@ -2,6 +2,99 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/dequelabs/cauldron/compare/v4.7.0...v5.0.0) (2023-01-26)
+
+### ⚠ BREAKING CHANGES
+
+- various variables have changed values (eg `--space-largest`).
+- **react:** This makes it so that `onClose` is only called when the element is not controlled. If an author is currently depending on this behavior via a controlled component, `onClose` will no longer be closed when the `show` prop changes from `true` to `false`.
+
+### Features
+
+- **react:** Add "person running" icon ([#852](https://github.com/dequelabs/cauldron/issues/852)) ([c2f1f8f](https://github.com/dequelabs/cauldron/commit/c2f1f8ff237e8ae4dbd09c67c3bef01c6148a012)), closes [#851](https://github.com/dequelabs/cauldron/issues/851)
+- **table:** create table footer component ([#864](https://github.com/dequelabs/cauldron/issues/864)) ([aee7d22](https://github.com/dequelabs/cauldron/commit/aee7d22774033b215fb2d77d4a9343ba698c9e1d))
+- add accent-accessible-success color ([#842](https://github.com/dequelabs/cauldron/issues/842)) ([de38101](https://github.com/dequelabs/cauldron/commit/de381010b95d123a99cc8d7987b6932fc3e36417))
+- add border variant for table component. ([#820](https://github.com/dequelabs/cauldron/issues/820)) ([082ddc6](https://github.com/dequelabs/cauldron/commit/082ddc6e90d038eb662d64a98876ebf838ed4ee1))
+- **icon:** add link icon ([#821](https://github.com/dequelabs/cauldron/issues/821)) ([85b3cbc](https://github.com/dequelabs/cauldron/commit/85b3cbc0024d44f79bb0885b54996e1a9fa38cad))
+- **react:** allow Toasts to not be dismissible ([#724](https://github.com/dequelabs/cauldron/issues/724)) ([8277faf](https://github.com/dequelabs/cauldron/commit/8277faf15836de35c9619c9f71a4e4170923c39e))
+
+### Bug Fixes
+
+- Integrate design review feedback ([#868](https://github.com/dequelabs/cauldron/issues/868)) ([a8a7180](https://github.com/dequelabs/cauldron/commit/a8a7180a175f2cfba568850a5252515df8041db5)), closes [#866](https://github.com/dequelabs/cauldron/issues/866)
+- **IconButton:** Ensure anchor and button icons are aligned ([#847](https://github.com/dequelabs/cauldron/issues/847)) ([4a2a6ce](https://github.com/dequelabs/cauldron/commit/4a2a6cef46ae38bb871c7a460f661c95a319d03e))
+- **pagination:** remove unnecessary margins ([#865](https://github.com/dequelabs/cauldron/issues/865)) ([c168abd](https://github.com/dequelabs/cauldron/commit/c168abdbf16cb7737d2a7b98b6fe78fe47ac3ff1))
+- **react:** Use correct color for `person-running` icon ([#863](https://github.com/dequelabs/cauldron/issues/863)) ([f7f6318](https://github.com/dequelabs/cauldron/commit/f7f6318a79b59471b15f518f3825a86604d06fe9)), closes [#852](https://github.com/dequelabs/cauldron/issues/852)
+- allow users to use thin link button ([#849](https://github.com/dequelabs/cauldron/issues/849)) ([299bd7a](https://github.com/dequelabs/cauldron/commit/299bd7ab627b989deae32386f24f9f1f40ee1e55))
+- GitHub icon invisible on smaller screens ([#808](https://github.com/dequelabs/cauldron/issues/808)) ([6078288](https://github.com/dequelabs/cauldron/commit/60782888daab263a83724252e8891c1317da2c89))
+- update css variable for moderate/serious ([#859](https://github.com/dequelabs/cauldron/issues/859)) ([4b3c1d5](https://github.com/dequelabs/cauldron/commit/4b3c1d5921cfd319f28479f5eff9a26f45913f83))
+- use `--link-hover-color` on `.Link:hover` ([#843](https://github.com/dequelabs/cauldron/issues/843)) ([1e87412](https://github.com/dequelabs/cauldron/commit/1e874120b9055a40629469281a8469c3efef7f90))
+- **app:** ensure tooltips are not displayed behind a dialog ([#735](https://github.com/dequelabs/cauldron/issues/735)) ([6a77ef1](https://github.com/dequelabs/cauldron/commit/6a77ef18002b5c019ebb8b179d8a92f8caf13926))
+- **docs:** Ensures alert buttons do not overlap ([#770](https://github.com/dequelabs/cauldron/issues/770)) ([dcc3921](https://github.com/dequelabs/cauldron/commit/dcc3921f2bae7576de0c594738436eacb7ad20a0))
+- **docs:** Ensures content doesn't get cutoff in prop docs tables ([#775](https://github.com/dequelabs/cauldron/issues/775)) ([aa673cb](https://github.com/dequelabs/cauldron/commit/aa673cb51cfb6eb358017710a07ec564a19884c9))
+- **docs:** Gives table demo delete buttons unique names ([#773](https://github.com/dequelabs/cauldron/issues/773)) ([2b81cae](https://github.com/dequelabs/cauldron/commit/2b81cae79513c3ce6c6d2a2f59746c6b27d53852))
+- **docs:** use Demo component for ProgressBar ([#799](https://github.com/dequelabs/cauldron/issues/799)) ([15273d7](https://github.com/dequelabs/cauldron/commit/15273d742a4bc2359dd9e757d1c0277637b1d2fc))
+- **LoadeOverlay:** export LoaderOverlayProps interface ([4571ec6](https://github.com/dequelabs/cauldron/commit/4571ec6b4913806add9c2da7d4d31f2202298c48))
+- **LoaderOverlay:** export LoaderOverlayProps interface ([#812](https://github.com/dequelabs/cauldron/issues/812)) ([2930b9c](https://github.com/dequelabs/cauldron/commit/2930b9c874caaa93990cc175c7e955c289f2cd1c))
+- **react:** change div element to span in Icon component ([#795](https://github.com/dequelabs/cauldron/issues/795)) ([61754b2](https://github.com/dequelabs/cauldron/commit/61754b20d7a4ca320d0600047c0b959dd1427a4d))
+- **react:** change div to span inside of ExpandCollapse ([#818](https://github.com/dequelabs/cauldron/issues/818)) ([ded5fda](https://github.com/dequelabs/cauldron/commit/ded5fdafa720d19cc47b2e7b51f61437a37a3e6b)), closes [#224](https://github.com/dequelabs/cauldron/issues/224)
+- **react:** Do not require `navProps` in `<SideBar>` ([#781](https://github.com/dequelabs/cauldron/issues/781)) ([937cd46](https://github.com/dequelabs/cauldron/commit/937cd46edcf6b6ae3bd4796cbb3f47707b09ab69))
+- **react:** ensure check-circle icon meets color-constrast requirements ([#736](https://github.com/dequelabs/cauldron/issues/736)) ([b6bfee0](https://github.com/dequelabs/cauldron/commit/b6bfee024f465ff4c1270aa07aeb8a24f90658e6))
+- **react:** expose setCurrentPage method from usePagination Hook for components to manage case sensitive pagination ([5f6e6cb](https://github.com/dequelabs/cauldron/commit/5f6e6cb25e2a92e87c3d56cd9e24f8a5d49ecbb7))
+- **react:** fix issue where ref property was getting clobberd on <Tab> ([#728](https://github.com/dequelabs/cauldron/issues/728)) ([d45d734](https://github.com/dequelabs/cauldron/commit/d45d7341ec7b14ea3aa6c77750c972be6ca091c1))
+- **react:** only call onClose one per user event ([#698](https://github.com/dequelabs/cauldron/issues/698)) ([ab33163](https://github.com/dequelabs/cauldron/commit/ab3316389eb7f8b102123a2076e69bdd0914208f)), closes [#694](https://github.com/dequelabs/cauldron/issues/694)
+- **react:** use CustomEvent for tooltip events ([#824](https://github.com/dequelabs/cauldron/issues/824)) ([3ba9dc2](https://github.com/dequelabs/cauldron/commit/3ba9dc2a80bf52567c00361f9bddbe4ab6afa154))
+- **styles:** correct axe issue colors ([#729](https://github.com/dequelabs/cauldron/issues/729)) ([683b333](https://github.com/dequelabs/cauldron/commit/683b3330d09efa9dfc0400676a19613c1d62710f))
+- **styles:** do not shift content when input elements gain focus ([#737](https://github.com/dequelabs/cauldron/issues/737)) ([6d72e2e](https://github.com/dequelabs/cauldron/commit/6d72e2eb50d5abfbc4b8b4d59fc7b089cace9531))
+- **styles:** Ensures dark mode RadioCardGroup selected icon meets contrast requirements ([#779](https://github.com/dequelabs/cauldron/issues/779)) ([6ad2f51](https://github.com/dequelabs/cauldron/commit/6ad2f51b9ae7cc0d75c5048e8cf21eb409fe8d38)), closes [#778](https://github.com/dequelabs/cauldron/issues/778)
+- **styles:** fix accordion background colors ([#725](https://github.com/dequelabs/cauldron/issues/725)) ([e34d0aa](https://github.com/dequelabs/cauldron/commit/e34d0aa19d0ee1f6a2f9b18172e95983733a57cb))
+- **styles:** fix tooltip arrow positioning when zoomed ([#750](https://github.com/dequelabs/cauldron/issues/750)) ([26021ae](https://github.com/dequelabs/cauldron/commit/26021aeac4b4ded346950ae5e2564b22cd76bf54))
+- **styles:** remove unnecessary specificity for accordion styles ([#723](https://github.com/dequelabs/cauldron/issues/723)) ([1a47074](https://github.com/dequelabs/cauldron/commit/1a47074dc2d6644c8a4ba9d7059c316e3f11f97b))
+- **styles:** use css variables for big tooltip font size and padding ([#810](https://github.com/dequelabs/cauldron/issues/810)) ([fa8e54c](https://github.com/dequelabs/cauldron/commit/fa8e54c533a55ae2c5164802675a6a3fbf8fa985))
+- **typo:** descending misspelled ([#782](https://github.com/dequelabs/cauldron/issues/782)) ([87de5e6](https://github.com/dequelabs/cauldron/commit/87de5e625038316bcc501d848398be03d642ca08))
+- pagination sizing bug ([3e2417d](https://github.com/dequelabs/cauldron/commit/3e2417dc3aa151c0009b15e5a7511a3a16a11cc0))
+- upgrade ts-node to fix coverage reports ([#719](https://github.com/dequelabs/cauldron/issues/719)) ([5fcb970](https://github.com/dequelabs/cauldron/commit/5fcb9709fdafea00568d2277af4686c994c7a365))
+
+## [4.7.0](https://github.com/dequelabs/cauldron/compare/v4.6.0...v4.7.0) (2022-07-29)
+
+### Features
+
+- **react:** add `clipboard` icon ([#699](https://github.com/dequelabs/cauldron/issues/699)) ([6b49f78](https://github.com/dequelabs/cauldron/commit/6b49f7831d749f012337f49ea019fec02ab70c7a))
+- **react:** add `export-solid` icon ([#701](https://github.com/dequelabs/cauldron/issues/701)) ([18f99f9](https://github.com/dequelabs/cauldron/commit/18f99f9bf64fc22c25ba8e115d3b36b349956f75))
+- **react:** add `question-circle-clear` icon ([#709](https://github.com/dequelabs/cauldron/issues/709)) ([74cbb93](https://github.com/dequelabs/cauldron/commit/74cbb93c6543ca200c82d95bba6c1c0a6b0ffabf))
+- **react:** allow custom media query to be set for the TwoColumnPanel collapsing ([#710](https://github.com/dequelabs/cauldron/issues/710)) ([550e6a8](https://github.com/dequelabs/cauldron/commit/550e6a8eb5afaf0311458cd5b2273a7aa1961d39))
+- **react,styles:** adds thin modifier to pagination ([#705](https://github.com/dequelabs/cauldron/issues/705)) ([53b76d5](https://github.com/dequelabs/cauldron/commit/53b76d5eecb7c0ec5f652e6b9bc5e55b9975d2a0))
+- **styles:** update tooltip styles to support dark theme ([#704](https://github.com/dequelabs/cauldron/issues/704)) ([0ff6cd9](https://github.com/dequelabs/cauldron/commit/0ff6cd9464be2743b5f42536b939c9909871d75f))
+
+### Bug Fixes
+
+- **react:** add types to Pagination onClick props ([#717](https://github.com/dequelabs/cauldron/issues/717)) ([562ed45](https://github.com/dequelabs/cauldron/commit/562ed45b1d70f98723477a784ea5f5f62ce65e22))
+- **react:** fix issue where accordion would not pass through props correctly ([#713](https://github.com/dequelabs/cauldron/issues/713)) ([9fd91f4](https://github.com/dequelabs/cauldron/commit/9fd91f42fb350a880f00f4b70ee9f6372c84c13d))
+- **react:** fixes incorrect PropType and TypeScript interfaces ([#697](https://github.com/dequelabs/cauldron/issues/697)) ([120c94c](https://github.com/dequelabs/cauldron/commit/120c94c7e7b8d56f2ac83382307a1922d6440ba0))
+- **styles:** remove right margin from right most pagination button ([#711](https://github.com/dequelabs/cauldron/issues/711)) ([8df85c5](https://github.com/dequelabs/cauldron/commit/8df85c5f36b91e7c46eb916abe831934fcf09000))
+
+## [4.6.0](https://github.com/dequelabs/cauldron/compare/v4.5.0...v4.6.0) (2022-07-12)
+
+### Features
+
+- **styles:** implement dark theme and updated design for options menu dropdown ([#691](https://github.com/dequelabs/cauldron/issues/691)) ([21294bb](https://github.com/dequelabs/cauldron/commit/21294bb6aa8bf21a15461f8326637ee47230eeb2))
+- adds an accordion component to library ([#669](https://github.com/dequelabs/cauldron/issues/669)) ([7fd7d09](https://github.com/dequelabs/cauldron/commit/7fd7d095bc8c85c5369371baaf74c7300c578fd2))
+- **button:** add option to render as tag ([#674](https://github.com/dequelabs/cauldron/issues/674)) ([9a1593a](https://github.com/dequelabs/cauldron/commit/9a1593aecc8f24bdc5c5f515d9726b42a9c241c5))
+- **components:** RadioCardGroup ([#663](https://github.com/dequelabs/cauldron/issues/663)) ([7f1627e](https://github.com/dequelabs/cauldron/commit/7f1627ef017552b049559889d55d00e80feb73e1))
+- **pagination:** create usePagination hook ([#662](https://github.com/dequelabs/cauldron/issues/662)) ([7f6a304](https://github.com/dequelabs/cauldron/commit/7f6a304aa63b83454e15425cd52f94651abafa17))
+- **react:** add `filter-solid` icon ([#688](https://github.com/dequelabs/cauldron/issues/688)) ([ed40128](https://github.com/dequelabs/cauldron/commit/ed401288361bbe9dd90f9afb959bca60df1349d9))
+- **react:** add `recycle-square` icon ([#679](https://github.com/dequelabs/cauldron/issues/679)) ([ca48f72](https://github.com/dequelabs/cauldron/commit/ca48f72e5eedac0258b71bdf9549f6e3da93e6b5))
+- **react:** add play icon ([#683](https://github.com/dequelabs/cauldron/issues/683)) ([cc78a93](https://github.com/dequelabs/cauldron/commit/cc78a93efb85d21e7d6491a483cf87f2fe4cd2f7))
+- **styles:** add axe-core issue impact colors ([#673](https://github.com/dequelabs/cauldron/issues/673)) ([959f5b1](https://github.com/dequelabs/cauldron/commit/959f5b11b818227093c7f2fa2c986d820efec4f7))
+
+### Bug Fixes
+
+- **BreadcrumbLink:** TS would not allow href attribute on component ([#655](https://github.com/dequelabs/cauldron/issues/655)) ([d5614ca](https://github.com/dequelabs/cauldron/commit/d5614ca74a07dd3a5a5a20ba6fcab5e535d276ac))
+- **RadioCardGroup:** use `flex-end` instead of `end` for checked card ([#677](https://github.com/dequelabs/cauldron/issues/677)) ([f4c1c3d](https://github.com/dequelabs/cauldron/commit/f4c1c3dd94db23e4b07a1fd3e2df376727e6a315))
+- **react:** Allow usage with React v18 ([#678](https://github.com/dequelabs/cauldron/issues/678)) ([a80cb0b](https://github.com/dequelabs/cauldron/commit/a80cb0bbe2e1aaf62fb280d569e3210af1a43806)), closes [#555](https://github.com/dequelabs/cauldron/issues/555) [#631](https://github.com/dequelabs/cauldron/issues/631)
+- **react:** only allow a single options menu to be open at one time ([#693](https://github.com/dequelabs/cauldron/issues/693)) ([c21fc13](https://github.com/dequelabs/cauldron/commit/c21fc13b9ddbddaca79e8a7a943f8a3b10755b82))
+- **react:** Support React 18 types ([#676](https://github.com/dequelabs/cauldron/issues/676)) ([16adb90](https://github.com/dequelabs/cauldron/commit/16adb90060f3962eb6a7df4bce421c1dd8f056b3))
+- **styles:** correct variable name of css variable ([#687](https://github.com/dequelabs/cauldron/issues/687)) ([fa9f1d6](https://github.com/dequelabs/cauldron/commit/fa9f1d61d09ff56b358f842c3ee388b79c3483bc))
+
 ## [4.5.0](https://github.com/dequelabs/cauldron/compare/v4.4.0...v4.5.0) (2022-05-17)
 
 ### Features

@@ -100,3 +100,31 @@ test('should pass className through to OptionsMenuWrapper', () => {
 
   expect(optionsMenu.find('.OptionsMenu.foo.bar').exists()).toBe(true);
 });
+
+test('should set ClickOutsideListener events to false when OptionsMenu is not shown', () => {
+  const optionsMenu = mount(
+    <OptionsMenu trigger={trigger} show={false}>
+      <li className="foo">option 1</li>
+    </OptionsMenu>
+  );
+  expect(
+    optionsMenu.find('ClickOutsideListener').prop('mouseEvent')
+  ).toBeFalsy();
+  expect(
+    optionsMenu.find('ClickOutsideListener').prop('touchEvent')
+  ).toBeFalsy();
+});
+
+test('should set ClickOutsideListener events to default values when OptionsMenu is shown', () => {
+  const optionsMenu = mount(
+    <OptionsMenu trigger={trigger} show={true}>
+      <li className="foo">option 1</li>
+    </OptionsMenu>
+  );
+  expect(optionsMenu.find('ClickOutsideListener').prop('mouseEvent')).toEqual(
+    'click'
+  );
+  expect(optionsMenu.find('ClickOutsideListener').prop('touchEvent')).toEqual(
+    'touchend'
+  );
+});

@@ -155,8 +155,8 @@
 .Pointout__dismiss .Icon svg,
 .Pointout__next .Icon svg,
 .Pointout__previous .Icon svg {
-  height: 24px;
-  width: 24px;
+  height: var(--icon-size);
+  width: var(--icon-size);
 }
 
 .Pointout__dismiss:hover {

@@ -238,3 +238,16 @@ test('should return no axe violations', async () => {
   expect(await axe(actionNeeded.html())).toHaveNoViolations();
   expect(await axe(info.html())).toHaveNoViolations();
 });
+
+test('dismiss control is not rendered when dismissible is `false`', done => {
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true} type="info" dismissible={false}>
+      {'hi'}
+    </Toast>
+  );
+
+  setTimeout(() => {
+    expect(wrapper.find('.Toast__dismiss').exists()).toBeFalsy();
+    done();
+  }); // wait for animation timeouts / async setState calls
+});

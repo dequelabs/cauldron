@@ -33,39 +33,9 @@ test('should return no axe violations', async () => {
 });
 ```
 
-### Ensuring Screen Reader Compatability
-
-You should test your changes with screen readers
-
-- VoiceOver
-- NVDA
-- JAWS
-
-### Ensuring Keyboard Operability
-
-Test your component with the keyboard
-
-### Following Accessibility Annotations
-
-If working on a new component, you must follow the accessiblity annotations provided. This can include things like:
-
-- accessible names (making them required via props)
-- roles
-- states/properties
-
 ## Local Development
 
 Local development setup is documented in [this project's readme](./README.md#development)
-
-## React
-
-Cauldron is an evolving project. Moving forward, it is preferred that the react components are implemented with simplicity and readability in mind.
-
-- functional components over class components
-  - hooks over `setState`
-- `React.forwardRef` over `ref={el => ...}`
-- declaring valid typescript types for components
-- including `PropTypes` for non-typescript consumers of this project
 
 ## Styles
 
@@ -107,3 +77,72 @@ Icons are located in [packages/react/src/components/Icon/icons](./packages/react
 - Remove any namespace attributes (such as `xmlns:*`) from the SVG.
 - Save your icon in the above location with the proposed name of your icon, e.g. `[your-name].svg`. The `your-name` portion will be how the icon is used in the React Component, e.g. `<Icon type="your-name" />`.
 - Submit a new `feat` PR with your changes.
+
+## Breaking Changes
+
+Cauldron is constantly evolving, and it's inevitable that breaking changes will need to be introduced. Before a breaking change is released, other alternatives should be considered and allow for a deprecation period before the breaking change is released.
+
+### Components
+
+For cauldron's component library, any of the following would be considered breaking changes:
+
+- Renaming (exported name) or removing a Component
+- Changing a prop that would break usage of an existing component
+- Adding a new required prop to an existing component
+
+Some examples of implementing non-breaking changes for components:
+
+#### Aliasing component name in export, supporting both component names
+
+```js
+export { NewName, OldName: NewName }
+```
+
+#### Aliasing a component prop, supporting both property names
+
+```js
+function Component({ oldProp: newProp, newProp }) { ... }
+```
+
+### Styles
+
+For cauldron's styles library, any of the following would be considered breaking changes:
+
+- Changing or removing a class name
+- Changing or removing a global css custom property name (see `variables.css`)
+- Changing or removing a component css custom property name
+
+Some examples of implementing non-breaking changes for styles:
+
+#### Aliasing CSS class, supporting both class names
+
+```css
+/* Usage of .Foo is deprecated, please use .Bar */
+.Foo,
+.Bar {
+  ...;
+}
+```
+
+#### Utilizing new css custom variable for new property name
+
+```css
+/* Usage of --red is deprecated, please use --better-red */
+--red: var(--better-red);
+--better-red: red;
+```
+
+In addition, changing a css custom property may be a breaking change for the following:
+
+- Changing a global css custom property value (see `variables.css`)
+- Changing a component css custom property value
+
+For the latter, the change must be reviewed by a member of the cauldron team to ensure there are no breaking changes.
+
+### Deprecating
+
+Before a breaking change can be released, the breaking change should be documented with the component, property, or style being changed getting flagged as _Deprecated_. This could mean warning the consumer that a component or property is now deprecated, or including a deprecated comment next to a css class name. This deprecation must exist for at least two months. If a change is additive (e.g. making a new property required), the new property must be optional until the deprecation period has passed.
+
+### Removal
+
+Once the deprecation period has passed, the breaking change can be implemented by removing the deprecation and including `BREAKING CHANGE:` in the body of your commit message with the description of the breaking change.

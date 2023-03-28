@@ -39,18 +39,6 @@ test('focuses heading when "show" prop is updated from falsey to truthy', done =
   });
 });
 
-test('calls onClose when a "show" prop is updated from truthy to falsey', () => {
-  const onClose = jest.fn();
-  const dialog = mount(
-    <Dialog {...defaults} show={true} onClose={onClose}>
-      {'hello'}
-    </Dialog>
-  );
-
-  dialog.setProps({ show: false });
-  expect(onClose).toBeCalled();
-});
-
 test('calls onClose when clicked outside', () => {
   const onClose = jest.fn();
   const dialog = mount(
@@ -62,6 +50,19 @@ test('calls onClose when clicked outside', () => {
   dialog.instance().handleClickOutside();
 
   expect(onClose).toBeCalled();
+});
+
+test('does not call onClose if the dialog is not currently shown', () => {
+  const onClose = jest.fn();
+  const dialog = mount(
+    <Dialog {...defaults} show={false} onClose={onClose}>
+      {'hello'}
+    </Dialog>
+  );
+
+  dialog.instance().close();
+
+  expect(onClose).not.toBeCalled();
 });
 
 test('supports the "dialogRef" prop', () => {

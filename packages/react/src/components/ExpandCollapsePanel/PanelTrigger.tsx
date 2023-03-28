@@ -45,11 +45,11 @@ const PanelTrigger = ({
         onClick={onClick}
         {...otherProps}
       >
-        <div className="ExpandCollapse__trigger-title">
+        <span className="ExpandCollapse__trigger-title">
           {typeof children === 'function'
             ? children({ open: !!open })
             : children}
-        </div>
+        </span>
         <Icon type={open ? iconExpanded : iconCollapsed} />
       </button>
     </Header>
@@ -61,7 +61,9 @@ PanelTrigger.propTypes = {
   open: PropTypes.bool,
   iconExpanded: PropTypes.string,
   iconCollapsed: PropTypes.string,
-  heading: PropTypes.number
+  heading: PropTypes.shape({
+    level: PropTypes.number
+  })
 };
 
 PanelTrigger.displayName = 'PanelTrigger';

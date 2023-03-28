@@ -1,21 +1,37 @@
 :root {
-  --tooltip-background-color: var(--gray-90);
-  --tooltip-border-color: #fff;
-  --tooltip-text-color: var(--gray-20);
-  --tooltip-info-background-color: var(--gray-20);
-  --tooltip-info-border-color: var(--gray-90);
+  --tooltip-background-color: var(--gray-10);
+  --tooltip-border-color: var(--gray-90);
+  --tooltip-text-color: var(--gray-90);
+  --tooltip-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
+  --tooltip-info-background-color: var(--white);
+  --tooltip-info-border-color: var(--accent-primary);
   --tooltip-info-text-color: var(--gray-90);
+  --tooltip-info-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
+}
+
+/* Dark theme variables */
+.cauldron--theme-dark {
+  --tooltip-background-color: var(--accent-medium);
+  --tooltip-border-color: #b3bfc6;
+  --tooltip-text-color: var(--white);
+  --tooltip-info-background-color: var(--accent-dark);
+  --tooltip-info-border-color: var(--accent-info);
+  --tooltip-info-text-color: var(--white);
 }
 
 .Tooltip {
   background-color: var(--tooltip-background-color);
   border: 2px solid var(--tooltip-border-color);
+  box-shadow: var(--tooltip-box-shadow);
   color: var(--tooltip-text-color);
   font-size: var(--text-size-smaller);
   line-height: var(--text-size-normal);
   padding: var(--space-half) var(--space-small);
-  border-radius: 4px;
+  border-radius: 3px;
   z-index: var(--z-index-tooltip);
+  text-align: center;
+  max-width: calc(100vw - 16px);
+  word-break: break-word;
 }
 
 .Tooltip--hidden {
@@ -27,8 +43,10 @@
 .TooltipInfo {
   background-color: var(--tooltip-info-background-color);
   border: 2px solid var(--tooltip-info-border-color);
+  box-shadow: var(--tooltip-info-box-shadow);
   color: var(--tooltip-info-text-color);
   max-width: 12.5rem;
+  padding: var(--space-half);
 }
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
@@ -37,16 +55,17 @@
   width: 0.1px;
 }
 
+/* Adjust position to try to center the arrow in the tooltip's border */
 [class*='Tooltip--top'] .TooltipArrow {
-  bottom: 0;
+  bottom: -1px;
 }
 
 [class*='Tooltip--bottom'] .TooltipArrow {
-  top: 0;
+  top: -1px;
 }
 
 [class*='Tooltip--left'] .TooltipArrow {
-  right: 0;
+  right: -1px;
 }
 
 [class*='Tooltip--right'] .TooltipArrow {
@@ -68,33 +87,12 @@
   transform-origin: top;
 }
 
-.TooltipArrow:after {
-  content: '';
-  position: absolute;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid var(--tooltip-background-color);
-  border-bottom: none;
-  z-index: 1;
-  transform: translateX(-50%);
-  transform-origin: top;
-}
-
-[class*='Tooltip--bottom'] .TooltipArrow:after,
 [class*='Tooltip--bottom'] .TooltipArrow:before {
   transform: translateX(-50%) rotate(180deg);
 }
 
-[class*='Tooltip--left'] .TooltipArrow:after {
-  transform: rotate(-90deg) translateY(-5px);
-}
-
 [class*='Tooltip--left'] .TooltipArrow:before {
   transform: rotate(-90deg) translateY(-6px);
-}
-
-[class*='Tooltip--right'] .TooltipArrow:after {
-  transform: rotate(90deg) translateY(4px);
 }
 
 [class*='Tooltip--right'] .TooltipArrow:before {
@@ -106,36 +104,7 @@
  */
 
 .TooltipInfo .TooltipArrow:before {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 7px solid var(--tooltip-info-border-color);
-}
-
-.TooltipInfo .TooltipArrow:after {
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 4px solid var(--tooltip-info-background-color);
-}
-
-.TooltipInfo[class*='Tooltip--bottom'] .TooltipArrow:after,
-.TooltipInfo[class*='Tooltip--bottom'] .TooltipArrow:before {
-  transform: translateX(-50%) rotate(180deg);
-}
-
-.TooltipInfo[class*='Tooltip--left'] .TooltipArrow:after {
-  transform: rotate(-90deg) translateY(-3px);
-}
-
-.TooltipInfo[class*='Tooltip--left'] .TooltipArrow:before {
-  transform: rotate(-90deg) translateY(-6px);
-}
-
-.TooltipInfo[class*='Tooltip--right'] .TooltipArrow:after {
-  transform: rotate(90deg) translateY(3px);
-}
-
-.TooltipInfo[class*='Tooltip--right'] .TooltipArrow:before {
-  transform: rotate(90deg) translateY(6px);
+  border-top-color: var(--tooltip-info-border-color);
 }
 
 /*
@@ -156,16 +125,16 @@
 }
 
 .TooltipHead {
-  background: var(--tooltip-info-background-color);
-  font-size: 16px;
+  background: var(--gray-20);
+  font-size: var(--text-size-small);
   color: var(--gray-90);
-  padding: 16px 28px;
+  padding: var(--space-small) var(--space-large);
   text-align: center;
 }
 
 .TooltipContent {
   background: #fff;
-  font-size: var(--font-size-smaller);
+  text-align: left;
 }
 
 .Tooltip--big ul {

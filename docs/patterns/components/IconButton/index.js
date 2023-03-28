@@ -1,11 +1,14 @@
 import React from 'react';
 import Demo from '../../../Demo';
-import { IconButton, Offscreen } from '@deque/cauldron-react/';
+import { IconButton, Offscreen } from '@deque/cauldron-react';
 
 const IconButtonDemo = () => (
   <div>
     <Demo
       component={IconButton}
+      componentDescription={
+        'An interactive element that performs a programmable action when activated by the user displayed as a symbol image.'
+      }
       states={[
         { icon: 'pencil', label: 'Edit' },
         { icon: 'pencil', label: 'Edit', variant: 'primary' },

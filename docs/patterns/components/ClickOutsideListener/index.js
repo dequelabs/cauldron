@@ -1,33 +1,29 @@
+import { Button, ClickOutsideListener } from '@deque/cauldron-react';
 import React from 'react';
-import { ClickOutsideListener, Code, Button } from '@deque/cauldron-react/';
+import Demo from '../../../Demo';
 
-const Demo = () => (
+const ClickOutsideListenerDemo = () => (
   <div>
-    <h1>Click Outside Listener</h1>
-    <h2>Demo</h2>
-    <ClickOutsideListener
-      onClickOutside={() => alert('You clicked outside of me.')}
-    >
-      <Button variant="primary">Click Inside</Button>
-    </ClickOutsideListener>
-    <h2>Code Sample</h2>
-    <Code language="javascript" role="region" tabIndex={0}>
-      {`
-import React from 'react';
-import {
-  ClickOutsideListener,
-  Code,
-  Button
-} from '@deque/cauldron-react';
-
-const Demo = () => (
-  <ClickOutsideListener onClickOutside={() => alert('You clicked outside of me.')}>
-    <Button variant="primary">Click Inside</Button>
-  </ClickOutsideListener>
-);
-      `}
-    </Code>
+    <Demo
+      component={ClickOutsideListener}
+      componentDescription={
+        'A component wrapper that calls a method when clicking outside the wrapped component.'
+      }
+      states={[
+        {
+          children: <Button>Click Inside</Button>,
+          onClickOutside: () => alert('You clicked outside of me.')
+        }
+      ]}
+      propDocs={{
+        onClickOutside: {
+          type: 'function',
+          description: 'Function called when a user clicks outside',
+          required: 'true'
+        }
+      }}
+    />
   </div>
 );
 
-export default Demo;
+export default ClickOutsideListenerDemo;

@@ -10,7 +10,7 @@ import {
   TableRow,
   TableCell,
   TableBody
-} from '@deque/cauldron-react/';
+} from '@deque/cauldron-react';
 import { children, className } from '../../../props';
 import './index.css';
 
@@ -59,6 +59,7 @@ const StepperDemo = () => {
       <Demo
         customImport="import { Stepper, Step } from '@deque/cauldron-react'"
         component={Stepper}
+        componentDescription={'A segmented progress bar.'}
         states={[
           {
             children: (

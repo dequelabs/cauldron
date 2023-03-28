@@ -22,6 +22,7 @@ interface PageStatus {
   currentPage: number;
   pageStart: number;
   pageEnd: number;
+  setCurrentPage: (page: number) => void;
 }
 
 export const usePagination = ({
@@ -36,7 +37,6 @@ export const usePagination = ({
 
   const pageStart = currentPage * initialPageSize - initialPageSize + 1;
   const pageEnd = Math.min(pageStart + initialPageSize - 1, totalItems);
-
   const onFirstPageClick = () => setCurrentPage(1);
   const onPreviousPageClick = () => setCurrentPage(currentPage - 1);
   const onNextPageClick = () => setCurrentPage(currentPage + 1);
@@ -56,7 +56,8 @@ export const usePagination = ({
   const pageStatus: PageStatus = {
     currentPage,
     pageStart,
-    pageEnd
+    pageEnd,
+    setCurrentPage
   };
 
   return { pagination, pageStatus };

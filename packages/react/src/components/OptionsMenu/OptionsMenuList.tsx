@@ -165,10 +165,19 @@ export default class OptionsMenuList extends React.Component<
       });
     });
 
+    // This allows the ClickOutsideListener to only be activated when the menu is
+    // currently open. This prevents an obscure behavior where the activation of a
+    // different menu would cause all menus to close
+    const clickOutsideEventActive = !show ? false : undefined;
+
     // Key event is being handled in componentDidMount
     /* eslint-disable jsx-a11y/click-events-have-key-events */
     return (
-      <ClickOutsideListener onClickOutside={this.handleClickOutside}>
+      <ClickOutsideListener
+        onClickOutside={this.handleClickOutside}
+        mouseEvent={clickOutsideEventActive}
+        touchEvent={clickOutsideEventActive}
+      >
         <ul
           {...other}
           className={classnames('OptionsMenu__list', className)}

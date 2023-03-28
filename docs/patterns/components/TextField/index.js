@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, FieldWrap } from '@deque/cauldron-react/';
+import { TextField, FieldWrap } from '@deque/cauldron-react';
 import { className } from '../../../props';
 import Demo from '../../../Demo';
 import FieldWrapNotice from '../../../FieldWrapNotice';
@@ -50,6 +50,9 @@ const TextFieldDemo = () => {
             }
           ]}
           component={TextField}
+          componentDescription={
+            'A form element that allows users to type in text. One line and multi-line options.'
+          }
           propDocs={{
             className,
             label: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
@@ -12,6 +13,7 @@ export interface ToastProps {
   toastRef: React.Ref<HTMLDivElement>;
   focus?: boolean;
   show?: boolean;
+  dismissible?: boolean;
   children: React.ReactNode;
 }
 
@@ -31,7 +33,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     toastRef: () => {},
     focus: true,
-    show: false
+    show: false,
+    dismissible: true
   };
 
   static propTypes = {
@@ -51,7 +54,9 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     // whether or not to focus the toast
     focus: PropTypes.bool,
     // whether or not to show the toast
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    // whether or not the toast is dismissible
+    dismissible: PropTypes.bool
   };
 
   static displayName = 'Toast';
@@ -105,6 +110,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
       toastRef,
       focus,
       show,
+      dismissible,
       ...otherProps
     } = this.props;
     const scrim =
@@ -114,7 +120,12 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
 
     const defaultProps: React.HTMLAttributes<HTMLDivElement> = {
       tabIndex: -1,
-      className: `Toast Toast--${typeMap[type].className} ${animationClass}`
+      className: classNames(
+        'Toast',
+        `Toast--${typeMap[type].className}`,
+        animationClass,
+        { 'Toast--non-dismissible': !dismissible }
+      )
     };
 
     if (!focus) {
@@ -135,7 +146,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             <Icon type={typeMap[type].icon} />
             <div className="Toast__message-content">{children}</div>
           </div>
-          {type !== 'action-needed' && (
+          {type !== 'action-needed' && dismissible && (
             <button
               type="button"
               className={'Toast__dismiss'}
