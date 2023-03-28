@@ -72,7 +72,7 @@ function Navigation(
   const renderListItem = ({ path, name }: typeof components[number]) => {
     const isActive = path === location.pathname;
     return (
-      <li>
+      <li key={path}>
         <NavigationLink
           pathname={path}
           text={name}
