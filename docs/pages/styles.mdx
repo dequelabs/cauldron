@@ -1,0 +1,95 @@
+---
+title: Style Guidelines
+name: Style Guidelines
+path: /style-guidelines
+---
+
+## Styles
+
+Cauldron is divided into two parts, [cauldron-react](https://github.com/dequelabs/cauldron/tree/develop/packages/react) for components and [cauldron-styles](https://github.com/dequelabs/cauldron/tree/develop/packages/styles). The intention is that styles are used in parallel to their respective components, but the styles can be used independently in some scenarios to match the expected style of a component in scenarios where cauldron components cannot be used.
+
+### Creating Styles
+
+We use [BEM](http://getbem.com/introduction/) for our CSS naming conventions. Examples for a mythical "Calendar" component as follows:
+
+Styles always start with the component name, uppercased:
+
+```css
+.Calendar {
+  border: 1px solid var(--gray-90);
+}
+```
+
+For blocks within the component, such as a date within a calendar would be delimited by two underscores: `__`
+
+```css
+.Calendar__date {
+  border: 1px solid var(--gray-90);
+}
+```
+
+For modifiers, such as variants or states, these values would be delimited by two dashes `--`
+
+```css
+.Calendar--variant-large {
+  font-size: var(--text-size-large);
+}
+
+.Calendar--variant-small {
+  font-size: var(--text-size-small);
+}
+```
+
+### Variables
+
+It is inevitable that some flexibility in components may be needed, and this flexibility can be provided via [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). These variables can be a global variable, as defined in [variables.css](https://github.com/dequelabs/cauldron/blob/develop/packages/styles/variables.css) or locally in a component's individual css file.
+
+<Note>
+  Component level variables should not be set in `variables.css`, this is reserved for things that should apply globally across all cauldron components. If a component variable needs to use a global variable, it should use a cascading component variable that inherits from the global variable.
+</Note>
+
+A component variable name should be as descriptive as possible so that its intended usage is clear. This would mean including the component name, along with what property it sets, and any states or variants:
+
+```css
+:root {
+  /* this inherits from the global accent-primary color */
+  --button-background-color-primary: var(--accent-primary);
+  /* this sets a color specific to this component */
+  --button-background-color-primary-disabled: #79a7d9;
+}
+
+.Button--primary {
+  background-color: var(--button-background-color-primary);
+}
+
+.Button--primary[aria-disabled='true'],
+.Button--primary[disabled] {
+  background-color: var(--button-background-color-primary);
+}
+```
+
+When necessary, setting a CSS variable for a component style is preferred over a hard coded value. Alternatively, a fallback value can be provided if no CSS variable has been initialized for a component:
+
+```css
+.Button {
+  min-width: var(--button-min-width, 100px);
+}
+```
+
+### Theming
+
+Cauldron supports light and dark variants of components, with the default variant as "light". To provide variables for both light and dark modes, include light variable values in the `:root` scope, with the dark variable values in a `.cauldron--theme-dark` scope:
+
+```css
+:root {
+  --button-background-color-primary: var(--accent-primary);
+}
+
+.cauldron--theme-dark {
+  --button-background-color-primary: var(--accent-medium);
+}
+
+.Button--primary {
+  background-color: var(--button-background-color-primary);
+}
+```
