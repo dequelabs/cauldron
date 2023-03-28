@@ -37,6 +37,10 @@ test('should return no axe violations', async () => {
 
 Local development setup is documented in [this project's readme](./README.md#development)
 
+## Styles
+
+See [style-guidelines](https://cauldron.dequqelabs.com/style-guidelines)
+
 ## Icons
 
 Icons are located in [packages/react/src/components/Icon/icons](./packages/react/src/components/Icon/icons). To add a new icon, follow the following steps:
