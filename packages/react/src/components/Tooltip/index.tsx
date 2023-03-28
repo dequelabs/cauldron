@@ -8,6 +8,7 @@ import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
 
 const TIP_HIDE_DELAY = 100;
+const OVERFLOW_PADDING = 8;
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -42,17 +43,17 @@ const maxWidth = {
   enabled: true,
   phase: 'main' as 'main',
   requiresIfExists: ['offset', 'preventOverflow', 'flip'],
-  fn(ref: any) {
-    const overflow = detectOverflow(ref.state, ref.options);
-    const { x } = ref.state.modifiersData.preventOverflow || {
+  fn({ state }: { state: any }) {
+    const overflow = detectOverflow(state);
+    const { x } = state.modifiersData.preventOverflow || {
       x: 0
     };
 
-    const { width } = ref.state.rects.popper;
-    const placementSplit = ref.state.placement.split('-')[0];
+    const { width } = state.rects.popper;
+    const placementSplit = state.placement.split('-')[0];
     const widthProp = placementSplit === 'left' ? 'left' : 'right';
-    ref.state.modifiersData.maxWidth = {
-      width: width - overflow[widthProp] - x
+    state.modifiersData.maxWidth = {
+      width: width - overflow[widthProp] - x - OVERFLOW_PADDING
     };
   }
 };
@@ -64,10 +65,7 @@ const applyMaxWidth = {
   requires: ['maxWidth'],
   fn({ state }: { state: any }) {
     const { width } = state.modifiersData.maxWidth;
-    state.styles.popper = {
-      ...state.styles.popper,
-      maxWidth: `${Math.max(width, 100)}px`
-    };
+    state.styles.popper.maxWidth = `${width}px`;
   }
 };
 
@@ -99,7 +97,7 @@ export default function Tooltip({
     {
       placement: initialPlacement,
       modifiers: [
-        { name: 'preventOverflow' },
+        { name: 'preventOverflow', options: { padding: OVERFLOW_PADDING } },
         { name: 'flip' },
         { name: 'offset', options: { offset: [0, 8] } },
         { name: 'arrow', options: { padding: 5, element: arrowElement } },
