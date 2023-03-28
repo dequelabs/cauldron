@@ -65,6 +65,10 @@ ul.Component__list {
   margin-left: var(--space-large);
 }
 
+ul.Component__list li {
+  margin: var(--space-half) 0;
+}
+
 .Component {
   grid-row: 1;
   grid-column: 1;
