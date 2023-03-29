@@ -54,6 +54,18 @@ div[class="foo"] {
 </Code>
 ```
 
+### Scrollable
+
+By default, Code components will wrap code forcing breaks where it can. If the original formatting of the code needs to be maintained, setting `scrollable` will allow the code block to scroll dynamically adding `tabIndex` to the scrollable area when needed to ensure it is focusable:
+
+```jsx example
+<Code scrollable>
+ {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
+  Hello World
+</div>`}
+</Code>
+```
+
 ## Props
 
 <ComponentProps
@@ -66,9 +78,10 @@ div[class="foo"] {
       description: 'The language type of code to be displayed.'
     },
     {
-      name: 'tabIndex',
-      type: 'number',
-      description: 'optional prop to set tabindex value on code block\'s <pre> wrapper'
+      name: 'scrollable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Preserve the original markup, forcing the component to scroll when it overflows.'
     }
   ]}
 />

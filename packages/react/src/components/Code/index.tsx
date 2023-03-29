@@ -29,7 +29,7 @@ type Props = {
 const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   children,
   className,
-  scrollable,
+  scrollable = false,
   ...props
 }) => {
   const ref = useRef<HTMLPreElement>(null);
