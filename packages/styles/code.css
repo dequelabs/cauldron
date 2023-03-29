@@ -1,11 +1,25 @@
 .Code.hljs {
   display: block;
-  overflow-x: auto;
   padding: 0.5em;
   background: var(--gray-20);
   color: var(--gray-90);
   border: 1px solid var(--gray-40);
   color: var(--accent-primary-active);
+  word-break: anywhere;
+}
+
+.Code--scrollable {
+  overflow-x: auto;
+}
+
+.Code code {
+  /* important needed to override inline styles */
+  white-space: break-spaces !important;
+}
+
+.Code--scrollable code {
+  /* important needed to override inline styles */
+  white-space: pre !important;
 }
 
 .Code .hljs-comment {

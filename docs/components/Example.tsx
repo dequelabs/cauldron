@@ -12,7 +12,7 @@ export default function Example({ children, raw, ...props }: ExampleProps) {
     <section className="Component__example" {...props}>
       {children}
       <div className="Component__example__code">
-        <Code children={raw} />
+        <Code children={raw} scrollable={true} />
         <CopyToClipboardButton
           label="copy code example to clipboard"
           value={raw}
