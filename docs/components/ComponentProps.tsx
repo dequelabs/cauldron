@@ -29,11 +29,12 @@ interface Props {
         type?: string | string[];
       }
     | boolean;
+  className?: boolean;
   refType?: string;
   props: ComponentProps[];
 }
 
-function TableProps({ children, refType, props }: Props) {
+function TableProps({ children, className, refType, props }: Props) {
   return (
     <Table className="Component__Props">
       <TableHead>
@@ -62,6 +63,14 @@ function TableProps({ children, refType, props }: Props) {
             </TableCell>
             <TableCell></TableCell>
             <TableCell>Child content.</TableCell>
+          </TableRow>
+        )}
+        {className && (
+          <TableRow>
+            <TableCell>className</TableCell>
+            <TableCell>string</TableCell>
+            <TableCell></TableCell>
+            <TableCell>Class name string.</TableCell>
           </TableRow>
         )}
         {props.map(
@@ -99,6 +108,7 @@ function TableProps({ children, refType, props }: Props) {
 
 function DescriptionListProps({
   children,
+  className,
   props,
   refType,
   collapsed
@@ -130,6 +140,24 @@ function DescriptionListProps({
             <DescriptionListItem>
               <DescriptionTerm>Description</DescriptionTerm>
               <DescriptionDetails>Child content.</DescriptionDetails>
+            </DescriptionListItem>
+          </DescriptionList>
+        </li>
+      )}
+      {className && (
+        <li>
+          <DescriptionList collapsed={collapsed}>
+            <DescriptionListItem>
+              <DescriptionTerm>Name</DescriptionTerm>
+              <DescriptionDetails>className</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Type</DescriptionTerm>
+              <DescriptionDetails>string</DescriptionDetails>
+            </DescriptionListItem>
+            <DescriptionListItem>
+              <DescriptionTerm>Description</DescriptionTerm>
+              <DescriptionDetails>Class name string.</DescriptionDetails>
             </DescriptionListItem>
           </DescriptionList>
         </li>
@@ -192,6 +220,7 @@ function DescriptionListProps({
 
 export default function ComponentProps({
   children,
+  className,
   refType,
   props = []
 }: Props) {
@@ -226,11 +255,17 @@ export default function ComponentProps({
   return narrow ? (
     <DescriptionListProps
       children={children}
+      className={className}
       props={props}
       refType={refType}
       collapsed={collapsed}
     />
   ) : (
-    <TableProps children={children} refType={refType} props={props} />
+    <TableProps
+      children={children}
+      className={className}
+      refType={refType}
+      props={props}
+    />
   );
 }
