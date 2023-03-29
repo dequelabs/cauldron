@@ -1,0 +1,74 @@
+---
+title: Code
+description: A component to display markup with syntax highlighting.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Code/index.tsx
+---
+
+import { Code } from '@deque/cauldron-react'
+
+```js
+import { Code } from '@deque/cauldron-react'
+```
+
+## Examples
+
+The Code component uses [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) with custom [highlight.js](https://highlightjs.org/) themes. Only javascript, css, xml/html, and yml are currently supported.
+
+### Javascript
+
+```jsx example
+<Code language="javascript">
+  {`// here are some vars
+var foo = true;
+const number = 1234;
+const string = "hello world";
+const regex = /^anything$/i;`}
+</Code>
+```
+
+### HTML
+
+```jsx example
+<Code language="html">
+  {`<span class="foo">Hello world!</span>`}
+</Code>
+```
+
+### CSS
+
+```jsx example
+<Code language="css">
+{`.foo,
+#foo,
+div[class="foo"] {
+  color: green;
+}`}
+</Code>
+```
+
+### No Language Prop
+
+```jsx example
+<Code>
+  $ npm install --save @deque/cauldron-react
+</Code>
+```
+
+## Props
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'language',
+      type: ['javascript', 'css', 'html', 'yaml'],
+      description: 'The language type of code to be displayed.'
+    },
+    {
+      name: 'tabIndex',
+      type: 'number',
+      description: 'optional prop to set tabindex value on code block\'s <pre> wrapper'
+    }
+  ]}
+/>
