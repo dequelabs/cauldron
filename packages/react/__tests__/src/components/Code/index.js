@@ -47,7 +47,7 @@ test('should return no axe violations', async () => {
   expect(await axe(code.html())).toHaveNoViolations();
 });
 
-test.only('should set tabIndex when element is scrollable', async () => {
+test('should set tabIndex when element is scrollable', async () => {
   // Mock the specific state expected when the tab should be scrollable
   sandbox.stub(global.HTMLPreElement.prototype, 'clientWidth').value(123);
   sandbox.stub(global.HTMLPreElement.prototype, 'scrollWidth').value(456);
@@ -66,7 +66,7 @@ test.only('should set tabIndex when element is scrollable', async () => {
   expect(wrapper.find('pre').prop('tabIndex')).toEqual(0);
 });
 
-test.only('should not set tabIndex when element is not scrollable', () => {
+test('should not set tabIndex when element is not scrollable', () => {
   // Mock the specific state expected when the tab should not be scrollable
   sandbox.stub(global.HTMLPreElement.prototype, 'clientWidth').value(123);
   sandbox.stub(global.HTMLPreElement.prototype, 'scrollWidth').value(123);
