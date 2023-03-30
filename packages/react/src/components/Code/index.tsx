@@ -59,8 +59,10 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
       observer.observe(ref.current.parentElement);
     }
 
-    return () => observer?.disconnect();
-  }, []);
+    return () => {
+      observer?.disconnect();
+    };
+  }, [scrollable]);
 
   return (
     <Highlighter
