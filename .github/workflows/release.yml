@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: Cauldron Release
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          pull-request-header: :robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md))
+          release-type: node
+          package-name: cauldron
+          component: cauldron
+          default-branch: master
