@@ -37,8 +37,8 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   // react-syntax-highlighter does not provide direct access to its dom elements
   // via refs, but we can specify the wrapping tags to bypass this limitation
   // see: https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/335
-  const PreWithRef = (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre {...props} ref={ref} />
+  const PreWithRef = (preProps: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre {...preProps} ref={ref} />
   );
 
   useEffect(() => {
