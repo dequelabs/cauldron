@@ -11,9 +11,9 @@ name: Cauldron Release
 
 jobs:
   release-please:
+    name: Release Please PR
     runs-on: ubuntu-latest
     steps:
-      - name: Release Please PR
       - uses: google-github-actions/release-please-action@v3
         with:
           pull-request-header: ":robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md))"
