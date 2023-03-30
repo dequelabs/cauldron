@@ -60,6 +60,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
     }
 
     return () => {
+      setScrollableRegion(false);
       observer?.disconnect();
     };
   }, [scrollable]);
