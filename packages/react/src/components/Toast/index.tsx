@@ -98,6 +98,11 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     }
   }
 
+  componentWillUnmount() {
+    const { isolator } = this.state;
+    isolator?.deactivate();
+  }
+
   render() {
     const { animationClass } = this.state;
     const {
