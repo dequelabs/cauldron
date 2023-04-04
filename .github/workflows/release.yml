@@ -21,7 +21,8 @@ jobs:
           release-type: node
           package-name: cauldron
       - uses: Surnet/change-pr-base@v1.0
-        repo: dequelabs/cauldron
-        pull-number: ${{ steps[0].outputs.pr }}
-        new-base: master
-        token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repo: dequelabs/cauldron
+          pull-number: ${{ steps[0].outputs.pr }}
+          new-base: master
+          token: ${{ secrets.GITHUB_TOKEN }}
