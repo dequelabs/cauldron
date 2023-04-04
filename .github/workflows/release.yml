@@ -22,8 +22,8 @@ jobs:
           release-type: node
           package-name: cauldron
       - name: Echo
-        run: echo ${{ steps.release-please.outputs }}
-      - name: Update target branch
+        run: echo ${{ JSON.stringify(steps.release-please.outputs) }}
+      - name: update target branch
         uses: Surnet/change-pr-base@v1.0
         with:
           repo: dequelabs/cauldron
