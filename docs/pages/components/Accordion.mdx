@@ -1,0 +1,100 @@
+---
+title: Accordion
+description: A component with a collapsible panel and an interactive heading to toggle the panel.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Accordion/Accordion.tsx
+---
+
+import { useState } from 'react'
+import { Accordion, AccordionTrigger, AccordionContent } from '@deque/cauldron-react'
+
+```jsx
+import { 
+  Accordion,
+  AccordionTrigger,
+  AccordionContent
+} from '@deque/cauldron-react'
+```
+
+The `Accordion` is a styled component as a wrapper around `ExpandCollapsePanel`. Most of the interactive behavior comes from `ExpandCollapsePanel`.
+
+## Examples
+
+### Uncontrolled
+
+By default, the Accordion is uncontrolled and will store the collapsed state internally with the panel initially collapsed.
+
+```jsx example
+<Accordion>
+  <AccordionTrigger>Accordion #1</AccordionTrigger>
+  <AccordionContent>Here is some content</AccordionContent>
+</Accordion>
+```
+
+### Controlled
+
+If you need to manually control the open/closed state of the panel, you can do this by setting the open prop and handling changes with onToggle.
+
+```jsx example
+function ControlledAccordion({ initialOpen = true }) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
+  const toggleHandler = () => setIsOpen(!isOpen);
+  return (
+    <Accordion open={isOpen} onToggle={toggleHandler}>
+      <AccordionTrigger>Controlled Accordion</AccordionTrigger>
+      <AccordionContent>Content</AccordionContent>
+    </Accordion>
+  );
+}
+```
+
+## Props
+
+### Accordion
+
+`Accordion` supports all props from `ExpandCollapsePanelProps` including/in addition to the following:
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'open',
+      type: 'boolean',
+      description: 'Open state of the AccordionPanel.'
+    },
+    {
+      name: 'onToggle',
+      type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
+      description: 'onToggle handler for the panel. The original event object will be passed.',
+      defaultValue: 'function() {}'
+    }
+  ]}
+/>
+
+### Accordion Trigger
+
+`AccordionTrigger` extends `React.HTMLAttributes<HTMLButtonElement>` and also supports:
+
+<ComponentProps
+  children={{ required: true }}
+  props={[
+    {
+      name: 'heading',
+      type: ['string', '{ level: number }'],
+      description: 'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.'
+    }
+  ]}
+/>
+
+### Accordion Content
+
+`AccordionContent` extends `React.HTMLAttributes<HTMLDivElement>` and supports spreading of any props supported by the element, as well as:
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+/>
+
+## Related Components
+
+- [ExpandCollapsePanel](./ExpandCollapsePanel)
