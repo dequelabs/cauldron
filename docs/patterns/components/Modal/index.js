@@ -21,7 +21,7 @@ export default class Demo extends Component {
 
     return (
       <div>
-        <h1>Modal</h1>
+        <h1 id="main-title">Modal</h1>
         <h2>Component Description</h2>
         <p>
           Opens an element within the current window that displays on top of all

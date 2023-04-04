@@ -19,7 +19,8 @@ test('should render button by default', async () => {
   expect(button.prop('type')).toBe('button');
   expect(button.prop('tabIndex')).toBe(0);
   expect(button.prop('role')).toBeUndefined();
-  expect(button.text()).toBe('Edit');
+  expect(button.text()).toBe('');
+  expect(wrapper.find('Tooltip').text()).toBe('Edit');
 });
 
 test('should render a "as" an anchor', async () => {
@@ -104,4 +105,5 @@ test('should not render tooltip when disabled prop is true', async () => {
   expect(wrapper.find('Tooltip').exists()).toBe(false);
   const button = wrapper.find('button');
   expect(button.prop('tabIndex')).toBe(-1);
+  expect(button.text()).toBe('Edit');
 });

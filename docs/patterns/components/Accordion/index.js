@@ -14,7 +14,7 @@ const AccordionDemo = () => {
   return (
     <div>
       <div className="Demo data-list-demo">
-        <h1>Accordion</h1>
+        <h1 id="main-title">Accordion</h1>
         <h2>Component Description</h2>
         <p>
           The

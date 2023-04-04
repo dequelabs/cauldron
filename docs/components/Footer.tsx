@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, Icon } from '@deque/cauldron-react/';
+import { Link, Icon } from '@deque/cauldron-react';
+import './Footer.css';
 
-const Footer = props => {
+const Footer = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="Footer">
+    <footer className="Footer" {...props}>
       <ul className="Footer__links">
         <li>
           <Link

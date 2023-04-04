@@ -8,6 +8,7 @@
   /* color palette */
   --white: #ffffff;
   --dark-workspace-color: #53636e;
+  --stroke-light: #b3bfc6;
   --stroke-dark: #5d676f;
   --gray-10: #fdfdfe;
   --gray-20: #f2f2f2;
@@ -36,7 +37,7 @@
   --accent-primary-active: #316091;
   --accent-secondary: var(--gray-20);
   --accent-secondary-active: var(--gray-30);
-  --focus-light: #c11bde;
+  --focus-light: #b51ad1;
   --focus-dark: #eb94ff;
   --issue-critical: var(--accent-danger);
   --issue-serious: var(--accent-warning);
@@ -49,6 +50,9 @@
   --text-color-light-disabled: rgba(255, 255, 255, 0.5);
   --header-text-color: var(--gray-80);
   --header-text-color-dark: var(--gray-90);
+
+  /* background colours */
+  --background-light: #f0f2f5;
 
   /* accents */
   --error: var(--accent-error);
@@ -66,6 +70,7 @@
 
   /* spacing (padding/margin) */
   --space-smallest: 8px;
+  --space-smaller: 12px;
   --space-small: 16px;
   --space-medium: 18px;
   --space-large: 24px;
@@ -81,12 +86,16 @@
   --text-size-larger: 56px;
   --text-size-large: 45px;
   --text-size-large-medium: 34px;
+  --text-size-medium-large: 32px;
   --text-size-medium: 24px;
   --text-small-medium: 20px;
   --text-size-normal: 18px;
   --text-size-small: 15px;
   --text-size-smaller: 13px;
   --text-size-smallest: 12px;
+
+  /* fonts */
+  --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;
 
   /* font weight */
   --font-weight-thin: 100;
@@ -95,6 +104,9 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
   --font-weight-ultra-bold: 900;
+
+  /* icon sizes */
+  --icon-size: 24px;
 
   /* dimensions */
   --border-width: 6px;

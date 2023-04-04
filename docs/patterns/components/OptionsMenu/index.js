@@ -6,12 +6,14 @@ import {
   Icon,
   Code
 } from '@deque/cauldron-react';
+import PropDocs from '../../../Demo/PropDocs';
+import { children, className } from '../../../props';
 
 export default class Demo extends Component {
   render() {
     return (
       <div>
-        <h1>Options Menu</h1>
+        <h1 id="main-title">Options Menu</h1>
         <h2>Component Description</h2>
         <p>
           A dropdown menu that shows a list of <code>OptionMenuItem</code>{' '}
@@ -100,6 +102,57 @@ class Demo extends Component {
 
           `}
         </Code>
+
+        <div className="Demo-props">
+          <h2>Props</h2>
+          <PropDocs
+            docs={{
+              children: {
+                type: 'node',
+                description: 'The child content',
+                required: true
+              },
+              onClose: {
+                type: 'function',
+                description:
+                  'Function called when the OptionMenu component is closed.',
+                default: '() => {}'
+              },
+              onSelect: {
+                type: 'function',
+                description:
+                  'Function called when a child of the OptionMenu component is selected.',
+                default: '() => {}'
+              },
+              trigger: {
+                type: 'node',
+                description:
+                  'Pass an element that will display when the OptionsMenu component is closed and open it when activated.'
+              },
+              closeOnSelect: {
+                type: 'boolean',
+                description: ''
+              },
+              menuRef: {
+                type: ' function or function.current',
+                description: 'Pass a ref to the OptionsMenu'
+              },
+              align: {
+                type: 'string',
+                description: 'Style your OptionsMenu to align left or right',
+                default: 'right'
+              },
+              show: {
+                type: 'boolean',
+                description: 'Whether or not to show the opened OptionsMenu'
+              },
+              id: {
+                type: 'string',
+                description: 'ID string'
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }

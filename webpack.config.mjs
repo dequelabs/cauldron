@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-
-const path = require('path');
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import remarkPlugins from './docs/remark-plugins.mjs'
 
 const { NODE_ENV = 'development' } = process.env;
 const isProd = NODE_ENV === 'production';
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const config = {
   context: __dirname,
@@ -18,7 +19,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'docs', 'dist'),
     filename: isProd ? '[name].[hash].js' : '[name].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -34,9 +35,20 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.mdx?$/,
+        use: [
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              remarkPlugins
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
@@ -51,20 +63,26 @@ const config = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader?name=public/fonts/[name].[ext]'
+        type: 'asset/resource',
+        generator: {
+          filename: 'public/fonts/[name][ext]'
+        }
       }
     ]
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts', '.tsx'],
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
       '@deque/cauldron-react': path.resolve(__dirname, './packages/react/lib')
+    },
+    fallback: {
+      path: false
     }
   },
   devServer: {
-    port: 8000,
+    port: 8003,
     historyApiFallback: true
   }
 };
@@ -77,9 +95,8 @@ if (isProd) {
   );
 
   config.optimization = {
-    minimizer: [new OptimizeCSSAssetsPlugin({}), new TerserPlugin()]
+    minimizer: [new CssMinimizerPlugin({}), new TerserPlugin()]
   };
 }
 
-module.exports = config;
-/* eslint-disable @typescript-eslint/no-var-requires */
+export default config

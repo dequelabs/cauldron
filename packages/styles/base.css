@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: var(--base-font-family);
   font-style: normal;
   font-weight: 400;
   color: var(--text-color-base);
@@ -56,6 +56,11 @@ h6,
 ul {
   margin: 0;
   padding: 0;
+}
+
+button {
+  font-family: var(--base-font-family);
+  font-weight: 500;
 }
 
 button,

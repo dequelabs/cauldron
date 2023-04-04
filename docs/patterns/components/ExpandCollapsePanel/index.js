@@ -20,7 +20,7 @@ export default class Demo extends Component {
   render() {
     return (
       <div>
-        <h1>Expand Collapse Panel</h1>
+        <h1 id="main-title">Expand Collapse Panel</h1>
         <h2>Component Description</h2>
         <p>Click a panel trigger to open a panel with more information.</p>
         <h2>Demo</h2>

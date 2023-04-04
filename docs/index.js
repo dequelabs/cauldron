@@ -3,9 +3,13 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
-import Home from './Home';
-import Footer from './Home/Footer';
+import mdxComponents from './mdx-components';
+import Footer from './components/Footer';
+import ComponentLayout from './components/ComponentLayout';
+import Drawer from './components/Drawer';
+import Navigation from './components/Navigation';
 import {
+  Code,
   TopBar,
   MenuBar,
   TopBarTrigger,
@@ -19,6 +23,7 @@ import {
   Icon,
   ThemeProvider
 } from '@deque/cauldron-react';
+import { components, pages, componentsV2, componentsV1 } from './collections';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
 import '@fontsource/roboto';
@@ -35,49 +40,6 @@ import './index.css';
 import { useThemeContext } from '../packages/react/lib';
 
 const CAULDRON_THEME_STORAGE_KEY = 'cauldron_theme';
-const componentsList = [
-  'Button',
-  'Pointout',
-  'Alert',
-  'Modal',
-  'TopBarMenu',
-  'Toast',
-  'Loader',
-  'Layout',
-  'OptionsMenu',
-  'Panel',
-  'Select',
-  'RadioCardGroup',
-  'RadioGroup',
-  'Checkbox',
-  'ClickOutsideListener',
-  'Tooltip',
-  'TooltipTabstop',
-  'Card',
-  'ExpandCollapsePanel',
-  'TextField',
-  'Link',
-  'Icon',
-  'IconButton',
-  'Code',
-  'LoaderOverlay',
-  'Line',
-  'Tabs',
-  'Tag',
-  'Table',
-  'DescriptionList',
-  'TopBar',
-  'Stepper',
-  'ProgressBar',
-  'NavBar',
-  'Address',
-  'Pagination',
-  'IssuePanel',
-  'FieldWrap',
-  'Breadcrumb',
-  'TwoColumnPanel',
-  'Accordion'
-].sort();
 
 const App = () => {
   const [state, setState] = useState({
@@ -85,7 +47,8 @@ const App = () => {
     thin: false
   });
   const [topBarMenuItem, setTopBarMenuItem] = useState(null);
-  const [workspace, setWorkspace] = useState(null);
+  const workspaceRef = useRef(null);
+  const navigationRef = useRef(null);
   const topBarTrigger = useRef();
   const { theme, toggleTheme } = useThemeContext();
 
@@ -111,16 +74,6 @@ const App = () => {
     setState({ show: !show });
   };
 
-  const toggleMenu = () => {
-    setState(({ menuOpen }) => ({
-      menuOpen: !menuOpen
-    }));
-  };
-
-  const handleClose = () => {
-    setState({ menuOpen: false });
-  };
-
   const onSettingsSelect = e => {
     if (e.target.id === 'theme') {
       localStorage.setItem(
@@ -135,24 +88,28 @@ const App = () => {
     }
   };
 
-  const renderSideBarLink = (pathname, text, isCurrent) => {
+  const handleTitleChange = location => {
+    let title = location.pathname.split('/').pop();
+
+    location.state = {
+      title: '',
+      description: ''
+    };
+
+    const matchingComponent = components.find(({ name }) => name === title);
+
+    if (matchingComponent?.title) {
+      location.state.title = `${title} | Accessible Component Pattern Demo`;
+      location.state.description = `Free Accessible React ${title} Component Pattern from Deque Systems`;
+    } else {
+      location.state.title = `Cauldron React: Accessible Components Library`;
+      location.state.description = `Free Accessible React Components from Deque Systems`;
+    }
+
     return (
-      <Link
-        to={{
-          pathname,
-          state: {
-            title: `${text} | Accessible Component Pattern Demo`,
-            description: `Free Accessible React ${text} Component Pattern from Deque Systems`
-          }
-        }}
-        onClick={() => {
-          setState({ show: false });
-          workspace?.focus();
-        }}
-        aria-current={isCurrent ? 'page' : null}
-      >
-        {text}
-      </Link>
+      <Helmet title={location.state.title}>
+        <meta name="description" content={location.state.description} />
+      </Helmet>
     );
   };
 
@@ -166,106 +123,139 @@ const App = () => {
 
   const { show, thin } = state;
 
-  /* eslint-disable jsx-a11y/anchor-has-content */
+  const [drawerIsActive, setDrawerIsActive] = useState(false);
+  useEffect(() => {
+    const mediaQueryList = matchMedia('(max-width: 64rem)');
+    const listener = ({ matches }) => {
+      setDrawerIsActive(matches);
+    };
+    mediaQueryList.addEventListener('change', listener);
+
+    if (mediaQueryList.matches !== drawerIsActive) {
+      setDrawerIsActive(mediaQueryList.matches);
+    }
+
+    return () => {
+      mediaQueryList.removeEventListener('change', listener);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (state.show) {
+      // Focus on the first focusable navigation item
+      navigationRef.current?.querySelector('a')?.focus();
+    } else {
+      workspaceRef.current?.focus();
+    }
+  }, [state.show]);
+
   return (
     <Router>
-      <div>
-        <Helmet
-          titleTemplate="%s | Deque Systems"
-          defaultTitle="Deque Cauldron React"
-        />
-        <SkipLink target={'#main-content'} aria-label="Skip" />
-        <TopBar role="banner">
-          <MenuBar thin={thin} hasTrigger>
-            <TopBarTrigger onClick={onTriggerClick}>
-              <button
-                tabIndex={-1}
-                aria-label="Menu"
-                aria-haspopup="true"
-                ref={topBarTrigger}
-                aria-expanded={show}
-              >
-                <Icon type="hamburger-menu" />
-              </button>
-            </TopBarTrigger>
-            <TopBarItem>
-              <Link to="/" className="MenuItem__logo" tabIndex={-1}>
-                <img src={theme === 'dark' ? logo : darkLogo} alt="Cauldron" />{' '}
-                <span aria-hidden="true">Cauldron</span>
-              </Link>
-            </TopBarItem>
-
-            {/* The below line demonstrates the ability to conditionally include menu item children. */}
-            {false && <TopBarItem>Potato</TopBarItem>}
-
-            <TopBarMenu
-              id="topbar-menu"
-              className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
-              menuItemRef={el => setTopBarMenuItem}
+      <Helmet
+        titleTemplate="%s | Deque Systems"
+        defaultTitle="Deque Cauldron React"
+      />
+      <SkipLink target={'#main-content'} aria-label="Skip" />
+      <TopBar role="banner">
+        <MenuBar thin={thin} hasTrigger>
+          <TopBarTrigger onClick={onTriggerClick}>
+            <button
+              tabIndex={-1}
+              aria-label="Menu"
+              aria-haspopup="true"
+              ref={topBarTrigger}
+              aria-expanded={show}
+              aria-controls="navigation"
             >
-              <div className="TopBar__item--icon">
-                {thin ? (
-                  <Icon type="gears" label="Settings" />
-                ) : (
-                  <Fragment>
-                    <Icon type="gears" />
-                    <div>Settings</div>
-                  </Fragment>
-                )}
-              </div>
-              <OptionsMenuList onSelect={onSettingsSelect}>
-                <li>Default top bar</li>
-                <li>Thin top bar</li>
-                <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
-              </OptionsMenuList>
-            </TopBarMenu>
-            <TopBarItem className="MenuItem--separator">
-              <a
-                href="https://github.com/dequelabs/cauldron"
-                className="fa fa-github"
-                aria-label="Cauldron on GitHub"
-                tabIndex={-1}
-              />
-            </TopBarItem>
-          </MenuBar>
-        </TopBar>
-        <SideBar
-          show={state.show}
-          onDismiss={onTriggerClick}
-          className="SideBar--with-footer"
+              <Icon type="hamburger-menu" />
+            </button>
+          </TopBarTrigger>
+          <TopBarItem>
+            <Link to="/" className="MenuItem__logo" tabIndex={-1}>
+              <img src={theme === 'dark' ? logo : darkLogo} alt="Cauldron" />{' '}
+              <span aria-hidden="true">Cauldron</span>
+            </Link>
+          </TopBarItem>
+
+          {/* The below line demonstrates the ability to conditionally include menu item children. */}
+          {false && <TopBarItem>Potato</TopBarItem>}
+
+          <TopBarMenu
+            id="topbar-menu"
+            className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
+            menuItemRef={el => setTopBarMenuItem}
+          >
+            <div className="TopBar__item--icon">
+              {thin ? (
+                <Icon type="gears" label="Settings" />
+              ) : (
+                <Fragment>
+                  <Icon type="gears" />
+                  <div>Settings</div>
+                </Fragment>
+              )}
+            </div>
+            <OptionsMenuList onSelect={onSettingsSelect}>
+              <li>Default top bar</li>
+              <li>Thin top bar</li>
+              <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
+            </OptionsMenuList>
+          </TopBarMenu>
+          <TopBarItem className="MenuItem--separator">
+            <a
+              href="https://github.com/dequelabs/cauldron"
+              className="fa fa-github"
+              aria-label="Cauldron on GitHub"
+              tabIndex={-1}
+            />
+          </TopBarItem>
+        </MenuBar>
+      </TopBar>
+      <div className="Content">
+        <Drawer
+          active={drawerIsActive}
+          open={show}
+          onClose={() => setState({ show: false })}
         >
-          {componentsList.map(name => {
-            const pathname = `/components/${name}`;
-            const isActive = pathname === location.pathname;
-            return (
-              <SideBarItem
-                key={name}
-                className={classNames({
-                  'MenuItem--active': isActive
-                })}
-              >
-                {renderSideBarLink(pathname, name, isActive)}
-              </SideBarItem>
-            );
-          })}
-        </SideBar>
+          <Navigation
+            id="navigation"
+            active={show || !drawerIsActive}
+            ref={navigationRef}
+            contentRef={workspaceRef}
+            onClick={() => setState({ show: false })}
+            aria-hidden={!show && drawerIsActive}
+          />
+        </Drawer>
         <Workspace
           id="main-content"
-          workspaceRef={el => setWorkspace}
+          workspaceRef={workspaceRef}
           tabIndex={-1}
+          aria-hidden={show}
+          aria-labelledby="main-title"
         >
-          <Route exact path="/" component={Home} />
-          {componentsList.map(name => {
-            const DemoComponent = require(`./patterns/components/${name}`)
-              .default;
-            return (
-              <Route
-                key={name}
-                exact
-                path={`/components/${name}`}
-                component={DemoComponent}
-              />
+          {pages.map(({ name, path, Component, ...props }) => {
+            const render = () => (
+              <ComponentLayout {...props}>
+                <Component components={mdxComponents} />
+              </ComponentLayout>
             );
+
+            return <Route key={name} exact path={path} component={render} />;
+          })}
+          {components.map(({ name, path, Component, ...props }) => {
+            let render = Component;
+
+            // Special case for MDX components, since we want to wrap them with
+            // a specific layout/provider
+            if (componentsV2.find(c => c.name === name)) {
+              render = () => (
+                <ComponentLayout {...props}>
+                  <Component components={mdxComponents} />
+                </ComponentLayout>
+              );
+            }
+
+            return <Route key={name} exact path={path} component={render} />;
           })}
           <Route
             component={({ location }) =>
@@ -277,21 +267,15 @@ const App = () => {
                   />
                 </Helmet>
               ) : (
-                <Helmet title={'Cauldron React: Accessible Components Library'}>
-                  <meta
-                    name="description"
-                    content="Free Accessible React Components from Deque Systems"
-                  />
-                </Helmet>
+                handleTitleChange(location)
               )
             }
           />
         </Workspace>
-        <Footer theme={theme} />
+        <Footer theme={theme} aria-hidden={show} />
       </div>
     </Router>
   );
-  /* eslint-enable jsx-a11y/anchor-has-content */
 };
 
 const initialTheme =
