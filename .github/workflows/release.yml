@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - develop
+      - fix-package-bump
 
 permissions:
   contents: write
@@ -22,6 +22,9 @@ jobs:
           release-type: node
           package-name: cauldron
           default-branch: develop
+          extra-files: |
+            packages/react/package.json
+            packages/styles/package.json
       # release-please-action does not allow for specifying a different target branch
       # for merging than the branch it uses to check for the changelog. The below
       # action is just there to update the base branch to allow for 1 step merges
