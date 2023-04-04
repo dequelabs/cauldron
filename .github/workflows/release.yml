@@ -23,15 +23,12 @@ jobs:
           package-name: cauldron
       - name: Echo
         run: |
-          echo ${{ steps.release-please.outputs.tagName }}
-          echo ${{ steps.release-please.outputs.uploadUrl }}
-          echo ${{ steps.release-please.outputs.url }}
-          echo ${{ steps.release-please.outputs.pr }}
-          echo ${{ steps.release-please.outputs.prs }}
-      - name: update target branch
+          echo ${{ steps.release-please.outputs.pr.number }}
+      - if ${{ steps.release-please.outputs.pr.number > 0 }}
+        name: update target branch
         uses: Surnet/change-pr-base@v1.0
         with:
           repo: dequelabs/cauldron
-          pull-number: 1010
+          pull-number: ${{ steps.release-please.outputs.pr.number }}
           new-base: master
           token: ${{ secrets.GITHUB_TOKEN }}
