@@ -23,6 +23,7 @@ jobs:
           package-name: cauldron
       - name: Echo
         run: |
+          echo ${{ steps.release-please.outputs.pr.number }}
           echo ${{ steps.release-please.outputs.pr }}
       - if: ${{ steps.release-please.outputs.pr.number > 0 }}
         name: update target branch
