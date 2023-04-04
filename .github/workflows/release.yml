@@ -21,15 +21,11 @@ jobs:
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
-      - name: Echo
-        run: |
-          echo ${{ fromJSON(steps.release-please.outputs.pr).number }}
-          echo ${{ steps.release-please.outputs.pr }}
-      - if: ${{ steps.release-please.outputs.pr.number > 0 }}
-        name: update target branch
+      - if: ${{ fromJSON(steps.release-please.outputs.pr).number > 0 }}
+        name: Update target branch
         uses: Surnet/change-pr-base@v1.0
         with:
           repo: dequelabs/cauldron
-          pull-number: ${{ steps.release-please.outputs.pr.number }}
+          pull-number: ${{ fromJSON(steps.release-please.outputs.pr).number }}
           new-base: master
           token: ${{ secrets.GITHUB_TOKEN }}
