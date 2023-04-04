@@ -21,9 +21,11 @@ jobs:
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
+      - name: Echo
+        run: echo ${{ steps.release-please.outputs.pr }}
       - uses: Surnet/change-pr-base@v1.0
         with:
           repo: dequelabs/cauldron
-          pull-number: ${{ steps.release-please.outputs.pr }}
+          pull-number: 1010
           new-base: master
           token: ${{ secrets.GITHUB_TOKEN }}
