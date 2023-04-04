@@ -22,7 +22,7 @@ npx standard-version \
   --infile="$changelog" \
   --commit-all \
   --skip.tag true \
-  "${@:2}" # allow runtime args to be passed into standard-version
+  "${@:1}" # allow runtime args to be passed into standard-version
 
 # Get the new version number
 new_version=$(node -p 'require("./package.json").version')
