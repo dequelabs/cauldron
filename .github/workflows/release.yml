@@ -24,7 +24,7 @@ jobs:
       - name: Echo
         run: |
           echo ${{ steps.release-please.outputs.pr.number }}
-      - if ${{ steps.release-please.outputs.pr.number > 0 }}
+      - if: ${{ steps.release-please.outputs.pr.number > 0 }}
         name: update target branch
         uses: Surnet/change-pr-base@v1.0
         with:
