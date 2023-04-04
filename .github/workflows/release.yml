@@ -14,10 +14,24 @@ jobs:
     name: Release Please PR
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - id: release-please
+        uses: google-github-actions/release-please-action@v3
         with:
           pull-request-header: ":robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md))"
+          pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
-          component: cauldron
-          default-branch: master
+          default-branch: develop
+      # release-please-action does not allow for specifying a different target branch
+      # for merging than the branch it uses to check for the changelog. The below
+      # action is just there to update the base branch to allow for 1 step merges
+      # into our target branch (master). The below step only runs if there was a
+      # pr number output from the release-please step.
+      - if: ${{ fromJSON(steps.release-please.outputs.pr).number > 0 }}
+        name: Update target branch
+        uses: Surnet/change-pr-base@v1.0
+        with:
+          repo: dequelabs/cauldron
+          pull-number: ${{ fromJSON(steps.release-please.outputs.pr).number }}
+          new-base: master
+          token: ${{ secrets.GITHUB_TOKEN }}
