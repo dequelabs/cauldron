@@ -22,7 +22,12 @@ jobs:
           release-type: node
           package-name: cauldron
       - name: Echo
-        run: echo ${{ JSON.stringify(steps.release-please.outputs) }}
+        run: echo ${{ steps.release-please.outputs.tagName }}
+        run: echo ${{ steps.release-please.outputs.uploadUrl }}
+        run: echo ${{ steps.release-please.outputs.notes }}
+        run: echo ${{ steps.release-please.outputs.url }}
+        run: echo ${{ steps.release-please.outputs.pr }}
+        run: echo ${{ steps.release-please.outputs.prs }}
       - name: update target branch
         uses: Surnet/change-pr-base@v1.0
         with:
