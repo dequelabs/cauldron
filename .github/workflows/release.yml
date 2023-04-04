@@ -25,7 +25,6 @@ jobs:
         run: |
           echo ${{ steps.release-please.outputs.tagName }}
           echo ${{ steps.release-please.outputs.uploadUrl }}
-          echo ${{ steps.release-please.outputs.notes }}
           echo ${{ steps.release-please.outputs.url }}
           echo ${{ steps.release-please.outputs.pr }}
           echo ${{ steps.release-please.outputs.prs }}
