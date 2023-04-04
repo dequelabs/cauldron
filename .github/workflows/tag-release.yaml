@@ -3,7 +3,7 @@ name: Tag version
 on:
   push:
     branches:
-      - release
+      - master
 
 jobs:
   tag_release:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'release'
+          ref: 'master'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
