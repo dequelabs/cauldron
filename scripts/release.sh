@@ -7,11 +7,6 @@ throw() {
   exit 1
 }
 
-branch_name=
-version=
-changelog=
-tag_prefix=
-message=
 branch_name="release-staging"
 version=$(node -p 'require("./package.json").version')
 changelog=CHANGELOG.md
