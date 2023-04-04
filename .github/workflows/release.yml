@@ -13,6 +13,7 @@ jobs:
   release-please:
     name: Release Please PR
     runs-on: ubuntu-latest
+    id: release-please
     steps:
       - uses: google-github-actions/release-please-action@v3
         with:
@@ -20,4 +21,8 @@ jobs:
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
-          default-branch: master
+      - uses: Surnet/change-pr-base@v1.0
+        repo: dequelabs/cauldron
+        pull-number: ${{ steps.step1.outputs.pr }}
+        new-base: master
+        token: ${{ secrets.GITHUB_TOKEN }}
