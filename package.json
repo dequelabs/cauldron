@@ -20,7 +20,7 @@
     "test": "yarn --cwd=packages/react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
     "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react",
-    "release": "standard-version"
+    "release": "./scripts/release.sh"
   },
   "prettier": {
     "singleQuote": true
