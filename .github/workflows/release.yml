@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - update-release-please-action
+      - develop
 
 permissions:
   contents: write
@@ -21,6 +21,7 @@ jobs:
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
+          default-branch: develop
       - if: ${{ fromJSON(steps.release-please.outputs.pr).number > 0 }}
         name: Update target branch
         uses: Surnet/change-pr-base@v1.0
