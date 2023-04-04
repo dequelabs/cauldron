@@ -14,7 +14,8 @@ jobs:
     name: Release Please PR
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - id: release-please
+        uses: google-github-actions/release-please-action@v3
         with:
           pull-request-header: ":robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md))"
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
@@ -23,6 +24,6 @@ jobs:
       - uses: Surnet/change-pr-base@v1.0
         with:
           repo: dequelabs/cauldron
-          pull-number: ${{ steps[0].outputs.pr }}
+          pull-number: ${{ steps.release-please.outputs.pr }}
           new-base: master
           token: ${{ secrets.GITHUB_TOKEN }}
