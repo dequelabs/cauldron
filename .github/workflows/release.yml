@@ -20,4 +20,4 @@ jobs:
           pull-request-title-pattern: "chore(release): release cauldron ${version}"
           release-type: node
           package-name: cauldron
-          default-branch: master
+          default-branch: develop
