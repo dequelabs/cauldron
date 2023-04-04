@@ -40,7 +40,7 @@ fi
 git push origin $release_branch
 
 # Get the additions to the changelog as the commit body and generate the PR url
-uri_encoded_commit_body=$(git show --no-color --no-prefix --output-indicator-new=! AXE_CHANGELOG.md | egrep '^!' | awk -F'^[!]' '{print $2}' | sed -e 's/\n/$0A/g' | node -p 'encodeURIComponent(require("fs").readFileSync(0))')
+uri_encoded_commit_body=$(git show --no-color --no-prefix --output-indicator-new=! CHANGELOG.md | egrep '^!' | awk -F'^[!]' '{print $2}' | sed -e 's/\n/$0A/g' | node -p 'encodeURIComponent(require("fs").readFileSync(0))')
 uri_encoded_message=$(git show --no-patch --format=%s | node -p 'encodeURIComponent(require("fs").readFileSync(0))')
 pr_url="https://github.com/dequelabs/cauldron/compare/master...$release_branch?title=$uri_encoded_message&body=$uri_encoded_commit_body"
 
