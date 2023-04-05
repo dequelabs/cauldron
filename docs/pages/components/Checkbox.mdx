@@ -1,0 +1,166 @@
+---
+title: Checkbox
+description: An interactive component that toggles between checked and unchecked states.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Checkbox/index.tsx
+---
+
+import { Checkbox } from '@deque/cauldron-react'
+
+```js
+import { Checkbox } from '@deque/cauldron-react'
+```
+
+<Note>
+  Use [FieldWrap](/FieldWrap) to wrap all input components. The `Checkbox` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+</Note>
+
+## Examples
+
+### Unchecked Checkbox
+
+```jsx example
+<Checkbox
+  id="unchecked-checkbox"
+  label="Unchecked Checkbox"
+  name="unchecked-checkbox"
+  value="1"
+/>
+```
+
+### Checked Checkbox
+
+```jsx example
+<Checkbox
+  checked
+  id="checked-checkbox"
+  label="Checked Checkbox"
+  name="checked-checkbox"
+  value="1"
+/>
+```
+
+### Disabled Checkbox
+
+```jsx example
+<Checkbox
+  disabled
+  id="disabled-checkbox"
+  label="Disabled Checkbox"
+  name="disabled-checkbox"
+  value="1"
+/>
+```
+
+### Disabled Checked Checkbox
+
+```jsx example
+<Checkbox
+  disabled
+  checked
+  id="disabled-checked-checkbox"
+  label="Disabled Checked Checkbox"
+  name="disabled-checked-checkbox"
+  value="1"
+/>
+```
+
+### Error Checkbox
+
+```jsx example
+<Checkbox
+  error="You must check this checkbox to continue"
+  id="error-checkbox"
+  label="Error Checkbox"
+  name="error-checkbox"
+  value="1"
+/>
+```
+
+### Checkbox with Description
+
+```jsx example
+<Checkbox
+  id="description-checkbox"
+  label="Description Checkbox"
+  labelDescription="Additional text to describe the checkbox"
+  name="description-checkbox"
+  value="1"
+/>
+```
+
+### Checkbox with Description & Error
+
+```jsx example
+<Checkbox
+  error="You must check this checkbox to continue"
+  id="description-error-checkbox"
+  label="Description Checkbox"
+  labelDescription="Additional text to describe the checkbox"
+  name="description-error-checkbox"
+  value="1"
+/>
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  refType="HTMLInputElement"
+  props={[
+    {
+      name: 'id',
+      type: 'string',
+      required: true,
+      description: 'The id to be set on the input element.'
+    },
+    {
+      name: 'name',
+      type: 'string',
+      required: true,
+      description: 'The name to be set on the input element.'
+    },
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Label for the checkbox element.'
+    },
+    {
+      name: 'labelDescription',
+      type: 'React.ReactNode',
+      description: 'Description for the checkbox element.'
+    },
+    {
+      name: 'value',
+      type: 'string',
+      description: 'The value to be set on the input element.',
+      required: true
+    },
+    {
+      name: 'checked',
+      type: 'boolean',
+      description: 'If the checkbox should be checked, which allows it to be controlled.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'If the checkbox should be disabled.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'error',
+      type: 'string',
+      description: 'Descriptive text of error.',
+    },
+    {
+      name: 'checkboxRef',
+      type: 'React.RefObject<HTMLInputElement>',
+      description: 'Ref object for input element. Using ref is preferred.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [FieldWrap](/FieldWrap)
