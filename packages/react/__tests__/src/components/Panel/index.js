@@ -11,7 +11,7 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.type()).toBe('h2');
+    expect(heading.children().type()).toBe('h2');
 
     expect(panel.text()).toContain('Content');
   });
@@ -23,7 +23,7 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.type()).toBe('h3');
+    expect(heading.children().type()).toBe('h3');
 
     expect(panel.text()).toContain('Content');
   });
@@ -32,9 +32,9 @@ describe('Panel', () => {
     const panel = mount(<Panel heading={{ text: 'Title' }}>Content</Panel>);
 
     const heading = panel.find('.Panel__Heading');
-    const headingId = heading.props()['id'];
+    const headingId = heading.children().props()['id'];
     expect(heading.text()).toBe('Title');
-    expect(heading.type()).toBe('h2');
+    expect(heading.children().type()).toBe('h2');
     expect(headingId).toEqual(expect.any(String));
 
     expect(panel.text()).toContain('Content');
@@ -49,8 +49,9 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.type()).toBe('h2');
-    expect(heading.props()['id']).toBe('heading123');
+    expect(heading.type()).toBe('div');
+    expect(heading.children().type()).toBe('h2');
+    expect(heading.children().props()['id']).toBe('heading123');
 
     expect(panel.text()).toContain('Content');
 
@@ -91,6 +92,7 @@ describe('Panel', () => {
   test('renders with no heading', () => {
     const panel = mount(<Panel>Content</Panel>);
 
+    expect(panel.find('.Panel__Header').exists()).toBe(false);
     expect(panel.find('.Panel__Heading').exists()).toBe(false);
     expect(panel.text()).toContain('Content');
   });
@@ -104,7 +106,8 @@ describe('Panel', () => {
         Content
       </Panel>
     );
-    expect(panel.find('.Panel__Heading').exists()).toBe(true);
+    console.log(panel);
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
     expect(panel.text()).toContain('Content');
   });
 
@@ -127,7 +130,44 @@ describe('Panel', () => {
         <PanelContent>Content</PanelContent>
       </Panel>
     );
-    expect(panel.find('.Panel__Heading').exists()).toBe(true);
+
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
     expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content and heading with custom attributes', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent aria-label="Custom Label">Content</PanelContent>
+      </Panel>
+    );
+
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+    expect(panel.find('.Panel__Content').props()['aria-label']).toBe(
+      'Custom Label'
+    );
+  });
+
+  test('renders with multiple `PanelContent` components', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent>Content #1</PanelContent>
+        <PanelContent>Content #2</PanelContent>
+      </Panel>
+    );
+
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').length).toBe(2);
+    expect(panel.text()).toContain('Content #1');
+    expect(panel.text()).toContain('Content #2');
   });
 });
