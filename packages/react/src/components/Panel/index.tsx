@@ -1,4 +1,6 @@
 import React, { HTMLAttributes, ReactNode, forwardRef } from 'react';
+import PanelHeader from './PanelHeader';
+import PanelContent from './PanelContent';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import rndid from '../../utils/rndid';
@@ -14,10 +16,21 @@ interface PanelProps extends HTMLAttributes<HTMLElement> {
       };
   collapsed?: boolean;
   className?: string;
+  padding?: boolean;
 }
 
 const Panel = forwardRef<HTMLElement, PanelProps>(
-  ({ children, collapsed, className, heading, ...other }: PanelProps, ref) => {
+  (
+    {
+      children,
+      collapsed,
+      className,
+      heading,
+      padding = true,
+      ...other
+    }: PanelProps,
+    ref
+  ) => {
     const headingId = !heading
       ? undefined
       : typeof heading === 'object' && 'id' in heading
@@ -39,11 +52,13 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
       }` as 'h1';
 
       return (
-        <HeadingComponent id={headingId} className="Panel__Heading">
-          {heading && typeof heading === 'object' && 'text' in heading
-            ? heading.text
-            : heading}
-        </HeadingComponent>
+        <div className="Panel__Heading">
+          <HeadingComponent id={headingId}>
+            {heading && typeof heading === 'object' && 'text' in heading
+              ? heading.text
+              : heading}
+          </HeadingComponent>
+        </div>
       );
     };
 
@@ -51,7 +66,8 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
       <section
         aria-labelledby={headingId}
         className={classNames('Panel', className, {
-          ['Panel--collapsed']: collapsed
+          ['Panel--collapsed']: collapsed,
+          ['Panel--padding']: padding
         })}
         ref={ref}
         {...other}
@@ -71,5 +87,7 @@ Panel.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string
 };
+
+export { PanelHeader, PanelContent };
 
 export default Panel;

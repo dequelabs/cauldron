@@ -1,6 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Panel from '../../../../src/components/Panel';
+import Panel, {
+  PanelHeader,
+  PanelContent
+} from '../../../../src/components/Panel';
 
 describe('Panel', () => {
   test('renders with default heading level', () => {
@@ -83,5 +86,48 @@ describe('Panel', () => {
     );
 
     expect(ref).toHaveBeenCalled();
+  });
+
+  test('renders with no heading', () => {
+    const panel = mount(<Panel>Content</Panel>);
+
+    expect(panel.find('.Panel__Heading').exists()).toBe(false);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed heading', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        Content
+      </Panel>
+    );
+    expect(panel.find('.Panel__Heading').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content', () => {
+    const panel = mount(
+      <Panel>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content and heading', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+    expect(panel.find('.Panel__Heading').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
   });
 });

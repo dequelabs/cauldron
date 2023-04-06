@@ -3,10 +3,10 @@
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
+  --panel-heading-padding: var(--space-smaller) var(--space-small);
 }
 
 .Panel {
-  padding: var(--panel-padding);
   border: 1px solid var(--panel-border-color);
   border-radius: 3px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
@@ -15,11 +15,60 @@
 
 .Panel__Heading,
 .Panel legend {
-  font-size: var(--text-size-medium);
+  font-size: var(--text-size-normal);
   color: var(--panel-heading-color);
   padding: 0;
   margin: 0 0 var(--space-large) 0;
   font-weight: var(--font-weight-bold);
+}
+
+.Panel--padding,
+.Panel__Content--padding {
+  padding: var(--panel-padding);
+}
+
+.Panel__Heading {
+  border-bottom: 1px solid var(--panel-border-color);
+}
+
+.Panel__Header + .Panel__Content,
+.Panel__Content + .Panel__Content {
+  border-top: 1px solid var(--panel-border-color);
+}
+
+.Panel__Header,
+.Panel__Heading {
+  padding: var(--panel-heading-padding);
+  margin-bottom: 0;
+}
+
+:is(.Panel__Header, .Panel__Heading) :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--text-size-normal);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+.Panel__Content > :first-child,
+.Panel__Heading + * {
+  margin: 0;
+}
+
+.Panel__Header--flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/** For demo only, cleanup later */
+.flex-with-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-with-space :last-child {
+  margin-left: 0.5rem;
 }
 
 fieldset.Panel {
