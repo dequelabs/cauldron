@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-interface PanelHeaderProps {
+export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
 }
@@ -27,3 +27,4 @@ PanelHeader.propTypes = {
 };
 
 export default PanelHeader;
+export { PanelHeader };

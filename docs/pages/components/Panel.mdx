@@ -12,7 +12,8 @@ import {
   Button,
   Icon,
   Link,
-  IconButton
+  IconButton,
+  Code
 } from '@deque/cauldron-react';
 
 ```js
@@ -32,11 +33,11 @@ There are two ways to include headings in the `Panel` component. The first is to
 and `PanelContent` components. The second is to use the `heading` prop on the `Panel` component.
 
 ```jsx example
-<Panel padding={false}>
+<Panel>
   <PanelHeader>
     <h3>Panel Header</h3>
   </PanelHeader>
-  <PanelContent padding>
+  <PanelContent>
     <p>Panel Content</p>
   </PanelContent>
 </Panel>
@@ -47,13 +48,12 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 ```jsx example
 <Panel
   heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
-  padding={false}
 >
-  <p className="Panel__Content--padding">Panel Content</p>
+  <p>Panel Content</p>
 </Panel>
 ```
 
-### Simple (Heading Prop)
+### Simple (Heading)
 
 ```jsx example
 <Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
@@ -103,9 +103,9 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
       Button
     </Button>
   </PanelHeader>
-  <PanelContent padding>
+  <PanelContent>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornareadfasdfdsaf
       eleifend tempus. Sed odio sem, pulvinar nec erat ac, iaculis maximus nisl.
       Pellentesque gravida lorem sit amet ipsum efficitur, eget finibus justo
       feugiat. Suspendisse blandit, urna eu facilisis pulvinar, mi turpis mattis
@@ -115,17 +115,9 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
       laoreet.
     </p>
   </PanelContent>
-  <PanelContent padding>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare
-      eleifend tempus. Sed odio sem, pulvinar nec erat ac, iaculis maximus nisl.
-      Pellentesque gravida lorem sit amet ipsum efficitur, eget finibus justo
-      feugiat. Suspendisse blandit, urna eu facilisis pulvinar, mi turpis mattis
-      magna, at rutrum leo leo egestas risus. Curabitur mattis in erat vel
-      tristique. Nam fermentum consectetur ipsum, ut placerat purus volutpat
-      vitae. Nam molestie vulputate accumsan. Sed vitae odio eu justo venenatis
-      laoreet.
-    </p>
+  <PanelContent className='center'>
+    <Button variant="secondary">Previous</Button>
+    <Button>Next</Button>
   </PanelContent>
 </Panel>
 ```
@@ -133,7 +125,20 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
 ### Complex Content
 
 ```jsx example
-<Panel padding={false}>
+
+{/** For demo only, cleanup later
+.flex-with-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-with-space :last-child {
+  margin-left: 0.5rem;
+}
+*/}
+
+<Panel>
   <PanelHeader className="Panel__Header--flex">
     <div>
       <Link href="#">I am a link!</Link>
@@ -142,6 +147,7 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
     <div>
       <IconButton icon="pencil" label="Edit" />
       <IconButton icon="kabob" label="Options" />
+      <IconButton icon="plus" label="Add" />
     </div>
   </PanelHeader>
   <PanelContent>
@@ -163,3 +169,13 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
     }
   ]}
 />
+
+{/**
+- Panel (ex: no properties/special stuff - just using to wrap something)
+- Panel with a heading (ex: no properties/special stuff - just using to wrap something)
+- Panel with a header 
+- Panel with multiple `PanelContent`
+- ### Padding 
+- #### Turning off padding on `Panel`
+- #### Turning off padding on `PanelContent`
+*/}

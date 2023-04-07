@@ -84,11 +84,11 @@ ul.Component__list li {
   padding-top: 0;
 }
 
-.Component .Panel > :first-child {
+.Component > .Panel > :first-child {
   margin-top: 0 !important;
 }
 
-.Component .Panel > :last-child {
+.Component > .Panel > :last-child {
   margin-bottom: 0 !important;
 }
 

@@ -2,7 +2,8 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-interface PanelContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PanelContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
   padding?: boolean;
