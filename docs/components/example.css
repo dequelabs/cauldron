@@ -43,3 +43,19 @@ body.cauldron--theme-dark {
 .Component__example > p:last-child {
   margin: 0;
 }
+
+/* When displaying Scrim within an example, we want it to be constrained inside
+ * the boundaries of the component and not the viewport */
+
+.Component__example__react .Scrim {
+  position: absolute;
+}
+
+.Component__example:has(.Scrim) {
+  position: relative;
+}
+
+.Component__example__react:has(.Scrim) {
+  position: relative;
+  width: calc(100% + var(--space-medium) * 2);
+}
