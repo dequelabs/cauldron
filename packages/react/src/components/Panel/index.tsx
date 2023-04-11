@@ -52,13 +52,11 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
       }` as 'h1';
 
       return (
-        <div className="Panel__Heading">
-          <HeadingComponent id={headingId}>
-            {heading && typeof heading === 'object' && 'text' in heading
-              ? heading.text
-              : heading}
-          </HeadingComponent>
-        </div>
+        <HeadingComponent id={headingId} className="Panel__Heading">
+          {heading && typeof heading === 'object' && 'text' in heading
+            ? heading.text
+            : heading}
+        </HeadingComponent>
       );
     };
 
