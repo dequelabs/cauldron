@@ -104,4 +104,9 @@ fieldset.Panel {
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: var(--accent-light);
   --panel-divider-border: 1px solid var(--stroke-dark);
+  --icon-button-border-color-secondary: var(--accent-light);
+}
+
+.cauldron--theme-dark .IconButton--secondary {
+  border: 2px solid var(--icon-button-border-color-secondary);
 }
