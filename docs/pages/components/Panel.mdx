@@ -24,25 +24,43 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ### Panel
 
+At its simplest, a `Panel` is a styled semantic HTML `<section>` element with with content inside.
+
+<Note>
+If a `Panel` does not have a heading, <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/general-principles.html" rel="noopener noreferrer" target="_blank">it is recommended</Link> to add an `aria-label` to the `Panel` component.
+</Note>
+
 ```jsx example
-<Panel>
+<Panel aria-label="Panel Heading">
   <p>Panel Content</p>
 </Panel>
 ```
 
 ### Panel with Heading (Prop)
 
+To add a heading to a `Panel`, you can use the `heading` prop. One advantage to using this prop over composing
+the elements is it automatically adds an `id` to the heading and `aria-labelledby` to the `Panel` component.
+
+Inspect the below example and you will see that the `Panel` component has an `aria-labelledby` attribute with the 
+value of the `id` of the heading.
+
 ```jsx example
-<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
+<Panel heading={{ id: 'panel-heading-prop-example', text: 'Panel Heading', level: 3 }}>
   <p>Panel Content</p>
 </Panel>
 ```
 
 ### Panel (Composed)
 
+In addition to using the `heading` prop, you can also compose the `Panel` component with the `PanelHeader` and 
+`PanelContent` components.
+
 <Note>
-  The `PanelHeader` should not be used with the `Panel` heading prop at the same
-  time. Choose one or the other to use.
+  The `PanelHeader` and `PanelContent` should not be used with the `Panel`
+  heading prop at the same time. Choose one or the other to use. 
+  
+  In addition, if you use the `PanelHeader`, you are responsible for adding `aria-labelledby` to
+  the `Panel` and an ID to the heading.
 </Note>
 
 ```jsx example
@@ -58,6 +76,9 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ### Disabling Panel Padding
 
+For greater control over the styling of the `Panel`'s content, you can disable the default padding by setting 
+the `padding` prop to `false`.
+
 ```jsx example
 <Panel
   heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
@@ -68,6 +89,12 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 ```
 
 ### Disabling Panel Content Padding
+
+In addition to being able to disable the `Panel` padding via its `padding` prop, the `PanelContent` also has a `padding`
+prop which can be set to `false`. An example where this may be useful is when trying to display content in a two 
+column or grid layout. 
+
+In the following example, we are using CSS `columns` to create the two column layout. 
 
 ```jsx example
 <Panel>
@@ -104,8 +131,11 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ### Header With Flexbox Content
 
+A common use-case for the `Panel` is to display a header with a button or other content. To achieve this, you 
+can compose the `Panel` using a `PanelHeader` with a flexbox layout.
+
 ```jsx example
-<Panel padding={false}>
+<Panel>
   <PanelHeader
     style={{
       display: 'flex',
@@ -128,7 +158,7 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ### Stacked Content Sections
 
-Stacking `PanelContent` components will create a visual separation between the sections.
+Stacking `PanelContent` components will create a visual separation between the sections. A common pattern where this may be useful is when trying to display a footer for the `Panel`.
 
 ```jsx example
 <Panel>
@@ -168,7 +198,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 ### Additional Example
 
 ```jsx example
-<Panel aria-labelledby="panel-heading-additional-example">
+<Panel aria-label="Panel label">
   <PanelHeader
     style={{
       display: 'flex',
@@ -180,19 +210,12 @@ Stacking `PanelContent` components will create a visual separation between the s
     <div>
       <Link
         href="#"
-        role="heading"
-        aria-level="2"
-        id="panel-heading-additional-example"
       >
         I am a link!
       </Link>
       <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
     </div>
-    <div>
-      <IconButton icon="pencil" label="Edit" />
-      <IconButton icon="kabob" label="Options" />
-      <IconButton icon="plus" label="Add" />
-    </div>
+    <IconButton icon="plus" label="Add" />
   </PanelHeader>
   <PanelContent>
     <p>Panel Content</p>
