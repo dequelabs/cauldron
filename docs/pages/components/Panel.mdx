@@ -22,15 +22,28 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ## Examples
 
-### Simple (Composable Heading and Content)
+### Panel
+
+```jsx example
+<Panel>
+  <p>Panel Content</p>
+</Panel>
+```
+
+### Panel with Heading (Prop)
+
+```jsx example
+<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
+  <p>Panel Content</p>
+</Panel>
+```
+
+### Panel (Composed)
 
 <Note>
   The `PanelHeader` should not be used with the `Panel` heading prop at the same
   time. Choose one or the other to use.
 </Note>
-
-There are two ways to include headings in the `Panel` component. The first is to compose the heading with `PanelHeader`
-and `PanelContent` components. The second is to use the `heading` prop on the `Panel` component.
 
 ```jsx example
 <Panel>
@@ -43,31 +56,53 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 </Panel>
 ```
 
-### Simple (Heading Prop)
+### Disabling Panel Padding
 
 ```jsx example
-<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
-  <p>Panel Content</p>
+<Panel
+  heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
+  padding={false}
+>
+  <p style={{ paddingLeft: '1rem' }}>Panel Content</p>
 </Panel>
 ```
 
-### Simple (Heading)
-
-```jsx example
-<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
-  <p>Panel Content</p>
-</Panel>
-```
-
-### Without Heading
+### Disabling Panel Content Padding
 
 ```jsx example
 <Panel>
-  <p>Panel Content</p>
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}
+  >
+    <h3>Panel Header</h3>
+    <Button variant="primary" thin>
+      <Icon type="plus" />
+      Button
+    </Button>
+  </PanelHeader>
+  <PanelContent
+    padding={false}
+    style={{
+      columns: '2',
+      columnRule: 'var(--panel-divider-border)',
+      columnGap: '0'
+    }}
+  >
+    <div style={{ padding: 'var(--space-small)' }}>Column 1</div>
+    <div style={{ padding: 'var(--space-small' }}>Column 2</div>
+  </PanelContent>
+  <PanelContent>
+    <p>Footer</p>
+  </PanelContent>
 </Panel>
 ```
 
-### Header with Flex Heading Content
+### Header With Flexbox Content
 
 ```jsx example
 <Panel padding={false}>
@@ -96,8 +131,8 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 Stacking `PanelContent` components will create a visual separation between the sections.
 
 <Note>
-  Padding must be disabled via `<PanelContent padding={false} />` when stacking
-  the sections.
+  Padding must be disabled via `<Panel padding={false} />` when stacking the
+  sections.
 </Note>
 
 ```jsx example
@@ -135,7 +170,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 </Panel>
 ```
 
-### Complex Content
+### Additional Example
 
 ```jsx example
 <Panel>
@@ -160,70 +195,6 @@ Stacking `PanelContent` components will create a visual separation between the s
   <PanelContent>
     <p>Panel Content</p>
   </PanelContent>
-</Panel>
-```
-
-### Complex Content
-
-```jsx example
-<Panel>
-  <PanelHeader
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap'
-    }}
-  >
-    <div>
-      <Link href="#">I am a link!</Link>
-      <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
-    </div>
-    <div>
-      <IconButton icon="pencil" label="Edit" />
-      <IconButton icon="kabob" label="Options" />
-      <IconButton icon="plus" label="Add" />
-    </div>
-  </PanelHeader>
-  <PanelContent>
-    <p>Panel Content</p>
-  </PanelContent>
-</Panel>
-```
-
-### Overwriting Padding
-
-```jsx example
-<Panel padding={false}>
-  <PanelHeader
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap'
-    }}
-  >
-    <h3>Panel Header</h3>
-    <Button variant="primary" thin>
-      <Icon type="plus" />
-      Button
-    </Button>
-  </PanelHeader>
-  <PanelContent
-    padding={false}
-    style={{ columns: '2', columnRule: '1px solid #ccc', columnGap: '0' }}
-  >
-    <div style={{ padding: '1rem' }}>Column 1</div>
-    <div style={{ padding: '1rem' }}>Column 2</div>
-  </PanelContent>
-</Panel>
-```
-
-### Collapsed
-
-```jsx example
-<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }} collapsed>
-  <p>Panel Content</p>
 </Panel>
 ```
 
@@ -232,36 +203,34 @@ Stacking `PanelContent` components will create a visual separation between the s
 <ComponentProps
   name="Panel"
   children={true}
+  className={true}
   props={[
     {
-      name: 'variant',
-      type: ['simple', 'undefined'],
+      name: 'padding',
+      type: 'boolean',
+      defaultValue: 'true',
       description:
-        '"simple" variant is smaller and not intended to be used with Card Footer'
-    }
-  ]}
-/>
-<ComponentProps
-  name="PanelHeader"
-  children={true}
-  props={[
+        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
+    },
     {
-      name: 'variant',
-      type: ['simple', 'undefined'],
-      description:
-        '"simple" variant is smaller and not intended to be used with Card Footer'
+      name: 'heading',
+      type: 'object',
+      description: 'Object containing: text, level (optional), id (optional)',
+      required: false
     }
   ]}
 />
 <ComponentProps
   name="PanelContent"
   children={true}
+  className={true}
   props={[
     {
-      name: 'variant',
-      type: ['simple', 'undefined'],
+      name: 'padding',
+      type: 'boolean',
+      defaultValue: 'true',
       description:
-        '"simple" variant is smaller and not intended to be used with Card Footer'
+        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
     }
   ]}
 />

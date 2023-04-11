@@ -4,18 +4,17 @@
   --panel-heading-color: var(--gray-90);
   --panel-padding: 0;
   --panel-margin: 0;
-  --panel-content-padding: 0;
-  --panel-content-margin: 0;
-  --panel-header-margin: 0;
-  --panel-header-padding: 0;
-  --panel-divider-border: 1px solid var(--panel-border-color);
+  --panel-content-padding: var(--space-small);
+  --panel-content-margin: 0 calc(var(--space-small) * -1);
+  --panel-header-margin: calc(var(--space-small) * -1);
+  --panel-header-padding: var(--space-smaller) var(--space-small);
+  --panel-divider-border: 1px solid var(--gray-40);
 }
 
 /* Resets aggressive Chrome user agent styles */
 .Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > *,
-.Panel.Panel--padding
-  :first-child
-  :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
+.Panel.Panel--padding:first-child
+  > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
   margin-block-start: 0;
   margin-block-end: 0;
 }
@@ -30,14 +29,12 @@
   word-break: break-word;
 }
 
-.Panel--padding {
+.Panel.Panel--padding {
   --panel-padding: var(--space-small);
-  --panel-header-padding: 0 var(--space-small) var(--space-small)
-    var(--space-small);
-  --panel-header-margin: 0 calc(var(--space-small) * -1);
-  --panel-content-margin: 0 calc(var(--space-small) * -1);
-  --panel-content-padding: 0 var(--space-small) var(--space-small)
-    var(--space-small);
+}
+
+.Panel:not(.Panel--padding) {
+  --panel-padding: 0;
 }
 
 .Panel__Header,
@@ -52,36 +49,30 @@
 }
 
 .Panel__Content:not(.Panel__Content--padding) {
-  --panel-padding: 0;
-  --panel-header-padding: var(--space-small);
   --panel-content-padding: 0;
 }
 
-.Panel__Content--padding {
-  --panel-padding: var(--space-small);
-  --panel-header-padding: 0 var(--space-small) var(--space-small)
-    var(--space-small);
-  --panel-content-padding: var(--space-small) var(--space-small) 0
-    var(--space-small);
-}
-
-.Panel:not(.Panel--padding) > .Panel__Content--padding {
-  --panel-padding: 0;
+.Panel.Panel--padding > .Panel__Content--padding {
   --panel-header-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
 }
 
 .Panel:not(.Panel--padding) {
-  --panel-padding: 0;
-  --panel-header-margin: 0;
   --panel-content-margin: 0;
-  --panel-header-padding: var(--space-small);
-  --panel-content-padding: var(--space-small);
+  --panel-header-margin: 0;
 }
 
-.Panel > .Panel__Header + .Panel__Content,
-.Panel > .Panel__Content + .Panel__Content {
+.Panel
+  > :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
   border-top: var(--panel-divider-border);
+}
+
+.Panel.Panel--padding > :is(.Panel__Header, :last-child) {
+  margin-bottom: 0;
+}
+
+.Panel.Panel--padding > :last-child {
+  padding-bottom: 0;
 }
 
 .Panel > .Panel__Heading {
@@ -112,4 +103,5 @@ fieldset.Panel {
   --panel-border-color: #5d676f;
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: var(--accent-light);
+  --panel-divider-border: 1px solid var(--stroke-dark);
 }

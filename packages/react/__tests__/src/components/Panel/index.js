@@ -4,6 +4,9 @@ import Panel, {
   PanelHeader,
   PanelContent
 } from '../../../../src/components/Panel';
+const { axe, toHaveNoViolations } = require('jest-axe');
+
+expect.extend(toHaveNoViolations);
 
 describe('Panel', () => {
   test('renders with default heading level', () => {
@@ -169,5 +172,42 @@ describe('Panel', () => {
     expect(panel.find('.Panel__Content').length).toBe(2);
     expect(panel.text()).toContain('Content #1');
     expect(panel.text()).toContain('Content #2');
+  });
+
+  describe('has no a11y violations with', () => {
+    test('Panel and heading prop', async () => {
+      const panel = mount(
+        <main>
+          <Panel heading={{ text: 'Title' }}>Content</Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
+
+    test('Panel and composed heading', async () => {
+      const panel = mount(
+        <main>
+          <Panel>
+            <PanelHeader>
+              <h1>Panel Heading</h1>
+            </PanelHeader>
+            Content
+          </Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
+
+    test('Panel with no heading', async () => {
+      const panel = mount(
+        <main>
+          <Panel>Content</Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
   });
 });
