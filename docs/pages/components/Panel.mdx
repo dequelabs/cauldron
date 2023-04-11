@@ -94,7 +94,7 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
     }}
   >
     <div style={{ padding: 'var(--space-small)' }}>Column 1</div>
-    <div style={{ padding: 'var(--space-small' }}>Column 2</div>
+    <div style={{ padding: 'var(--space-small)' }}>Column 2</div>
   </PanelContent>
   <PanelContent>
     <p>Footer</p>
@@ -130,13 +130,8 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 Stacking `PanelContent` components will create a visual separation between the sections.
 
-<Note>
-  Padding must be disabled via `<Panel padding={false} />` when stacking the
-  sections.
-</Note>
-
 ```jsx example
-<Panel padding={false}>
+<Panel>
   <PanelHeader
     style={{
       display: 'flex',
@@ -173,7 +168,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 ### Additional Example
 
 ```jsx example
-<Panel>
+<Panel aria-labelledby="panel-heading-additional-example">
   <PanelHeader
     style={{
       display: 'flex',
@@ -183,7 +178,14 @@ Stacking `PanelContent` components will create a visual separation between the s
     }}
   >
     <div>
-      <Link href="#">I am a link!</Link>
+      <Link
+        href="#"
+        role="heading"
+        aria-level="2"
+        id="panel-heading-additional-example"
+      >
+        I am a link!
+      </Link>
       <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
     </div>
     <div>

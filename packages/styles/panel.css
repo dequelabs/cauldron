@@ -29,12 +29,12 @@
   word-break: break-word;
 }
 
-.Panel.Panel--padding {
-  --panel-padding: var(--space-small);
-}
-
 .Panel:not(.Panel--padding) {
   --panel-padding: 0;
+}
+
+.Panel.Panel--padding {
+  --panel-padding: var(--space-small);
 }
 
 .Panel__Header,
@@ -83,7 +83,7 @@
 :is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6),
 .Panel legend {
   font-size: var(--text-size-normal);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   color: var(--panel-heading-color);
 }
 
@@ -98,6 +98,10 @@ fieldset.Panel {
   top: var(--space-large);
 }
 
+:global(.IconButton--secondary) {
+  border: 1px solid var(--icon-button-border-color-secondary);
+}
+
 /* Dark Theme */
 .cauldron--theme-dark {
   --panel-border-color: #5d676f;
@@ -107,6 +111,6 @@ fieldset.Panel {
   --icon-button-border-color-secondary: var(--accent-light);
 }
 
-.cauldron--theme-dark .IconButton--secondary {
+:global(.cauldron--theme-dark .IconButton--secondary) {
   border: 2px solid var(--icon-button-border-color-secondary);
 }
