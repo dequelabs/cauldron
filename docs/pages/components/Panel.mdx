@@ -46,9 +46,7 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 ### Simple (Heading Prop)
 
 ```jsx example
-<Panel
-  heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
->
+<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }}>
   <p>Panel Content</p>
 </Panel>
 ```
@@ -73,7 +71,17 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 
 ```jsx example
 <Panel padding={false}>
-  <PanelHeader className="Panel__Header--flex">
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      ':last-child': {
+        marginLeft: '0.5rem'
+      }
+    }}
+  >
     <h3>Panel Header</h3>
     <Button variant="primary" thin>
       <Icon type="plus" />
@@ -87,16 +95,27 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
 ```
 
 ### Stacked Content Sections
-Stacking `PanelContent` components will create a visual separation between the sections. 
+
+Stacking `PanelContent` components will create a visual separation between the sections.
 
 <Note>
-Padding must be disabled via `<PanelContent padding={false}>` when stacking the sections.
+  Padding must be disabled via `<PanelContent padding={false} />` when stacking
+  the sections.
 </Note>
-
 
 ```jsx example
 <Panel padding={false}>
-  <PanelHeader className="Panel__Header--flex">
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      ':last-child': {
+        marginLeft: '0.5rem'
+      }
+    }}
+  >
     <h3>Panel Header</h3>
     <Button variant="primary" thin>
       <Icon type="plus" />
@@ -105,17 +124,17 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
   </PanelHeader>
   <PanelContent>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornareadfasdfdsaf
-      eleifend tempus. Sed odio sem, pulvinar nec erat ac, iaculis maximus nisl.
-      Pellentesque gravida lorem sit amet ipsum efficitur, eget finibus justo
-      feugiat. Suspendisse blandit, urna eu facilisis pulvinar, mi turpis mattis
-      magna, at rutrum leo leo egestas risus. Curabitur mattis in erat vel
-      tristique. Nam fermentum consectetur ipsum, ut placerat purus volutpat
-      vitae. Nam molestie vulputate accumsan. Sed vitae odio eu justo venenatis
-      laoreet.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+      ornareadfasdfdsaf eleifend tempus. Sed odio sem, pulvinar nec erat ac,
+      iaculis maximus nisl. Pellentesque gravida lorem sit amet ipsum efficitur,
+      eget finibus justo feugiat. Suspendisse blandit, urna eu facilisis
+      pulvinar, mi turpis mattis magna, at rutrum leo leo egestas risus.
+      Curabitur mattis in erat vel tristique. Nam fermentum consectetur ipsum,
+      ut placerat purus volutpat vitae. Nam molestie vulputate accumsan. Sed
+      vitae odio eu justo venenatis laoreet.
     </p>
   </PanelContent>
-  <PanelContent className='center'>
+  <PanelContent style={{ textAlign: 'center' }}>
     <Button variant="secondary">Previous</Button>
     <Button>Next</Button>
   </PanelContent>
@@ -125,24 +144,18 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
 ### Complex Content
 
 ```jsx example
-
-{/** For demo only, cleanup later
-.flex-with-space {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-with-space :last-child {
-  margin-left: 0.5rem;
-}
-*/}
-
 <Panel>
-  <PanelHeader className="Panel__Header--flex">
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}
+  >
     <div>
       <Link href="#">I am a link!</Link>
-      <span>&nbsp;Panel Subheading</span>
+      <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
     </div>
     <div>
       <IconButton icon="pencil" label="Edit" />
@@ -153,6 +166,14 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
   <PanelContent>
     <p>Panel Content</p>
   </PanelContent>
+</Panel>
+```
+
+### Collapsed
+
+```jsx example
+<Panel heading={{ id: 'example', text: 'Panel Heading', level: 3 }} collapsed>
+  <p>Panel Content</p>
 </Panel>
 ```
 
@@ -169,13 +190,4 @@ Padding must be disabled via `<PanelContent padding={false}>` when stacking the 
     }
   ]}
 />
-
-{/**
-- Panel (ex: no properties/special stuff - just using to wrap something)
-- Panel with a heading (ex: no properties/special stuff - just using to wrap something)
-- Panel with a header 
-- Panel with multiple `PanelContent`
-- ### Padding 
-- #### Turning off padding on `Panel`
-- #### Turning off padding on `PanelContent`
-*/}
+```
