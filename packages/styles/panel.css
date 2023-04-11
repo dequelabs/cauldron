@@ -2,72 +2,81 @@
   --panel-border-color: var(--gray-40);
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
-  --panel-padding: var(--space-small);
+  --panel-padding: 0;
+  --panel-margin: 0;
+  --panel-content-padding: 0;
+  --panel-content-margin: 0;
   --panel-header-margin: 0;
-  --panel-header-content-padding: var(--space-smaller) var(--space-small);
+  --panel-header-padding: 0;
   --panel-divider-border: 1px solid var(--panel-border-color);
 }
 
-.Panel {
-  border: 1px solid var(--panel-border-color);
-  border-radius: 3px;
-  padding: 0;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
-  background-color: var(--panel-background-color);
-}
-
-.Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > * {
+/* Resets aggressive Chrome user agent styles */
+.Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > *,
+.Panel.Panel--padding
+  :first-child
+  :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
   margin-block-start: 0;
   margin-block-end: 0;
 }
 
-.Panel > * {
+.Panel {
+  margin: var(--panel-margin);
+  padding: var(--panel-padding);
+  border: 1px solid var(--panel-border-color);
+  border-radius: 3px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
+  background-color: var(--panel-background-color);
   word-break: break-word;
 }
 
-.Panel--padding,
+.Panel--padding {
+  --panel-padding: var(--space-small);
+  --panel-header-padding: 0 var(--space-small) var(--space-small)
+    var(--space-small);
+  --panel-header-margin: 0 calc(var(--space-small) * -1);
+  --panel-content-margin: 0 calc(var(--space-small) * -1);
+  --panel-content-padding: 0 var(--space-small) var(--space-small)
+    var(--space-small);
+}
+
+.Panel__Header,
+.Panel__Heading {
+  padding: var(--panel-header-padding);
+  margin: var(--panel-header-margin);
+}
+
+.Panel__Content {
+  padding: var(--panel-content-padding);
+  margin: var(--panel-content-margin);
+}
+
+.Panel__Content:not(.Panel__Content--padding) {
+  --panel-padding: 0;
+  --panel-header-padding: var(--space-small);
+  --panel-content-padding: 0;
+}
+
 .Panel__Content--padding {
-  padding: var(--panel-padding);
-  --panel-margin: -4px -16px var(--space-smaller) -16px;
+  --panel-padding: var(--space-small);
+  --panel-header-padding: 0 var(--space-small) var(--space-small)
+    var(--space-small);
+  --panel-content-padding: var(--space-small) var(--space-small) 0
+    var(--space-small);
 }
 
-.Panel.Panel--padding
-  > :is(.Panel__Content:not(.Panel__Content--padding), .Panel__Header, .Panel__Heading) {
-  padding-left: var(--space-smaller);
-  padding-right: var(--space-smaller);
-  margin: -4px -16px var(--space-smaller) -16px;
+.Panel:not(.Panel--padding) > .Panel__Content--padding {
+  --panel-padding: 0;
+  --panel-header-padding: var(--space-small);
+  --panel-content-padding: var(--space-small);
 }
 
-.Panel--padding > .Panel__Content--padding {
-  padding: var(--panel-padding);
-  padding: var(--space-smaller) var(--space-small) 0 var(--space-small);
-  margin: -4px -16px 0 -16px;
-}
-
-.Panel:not(.Panel--padding) > .Panel__Content.Panel__Content--padding {
-  padding: var(--panel-padding) var(--space-small);
-}
-
-.Panel.Panel--padding > .Panel__Heading {
-  padding-bottom: var(--space-smaller);
-}
-
-.Panel.Panel--padding
-  > :first-child:not(.Panel__Header, .Panel__Heading, .Panel__Content) {
-  margin: 0;
-}
-
-.Panel:not(.Panel--padding)
-  > :is(.Panel__Content, .Panel__Header, .Panel__Heading) {
-  padding: var(--panel-header-content-padding);
-}
-
-.Panel > .Panel__Heading {
-  border-bottom: var(--panel-divider-border);
-}
-
-.Panel > .Panel__Heading + * {
-  margin: 0;
+.Panel:not(.Panel--padding) {
+  --panel-padding: 0;
+  --panel-header-margin: 0;
+  --panel-content-margin: 0;
+  --panel-header-padding: var(--space-small);
+  --panel-content-padding: var(--space-small);
 }
 
 .Panel > .Panel__Header + .Panel__Content,
@@ -75,17 +84,16 @@
   border-top: var(--panel-divider-border);
 }
 
-:is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6) {
-  font-size: var(--text-size-normal);
-  font-weight: var(--font-weight-bold);
+.Panel > .Panel__Heading {
+  border-bottom: var(--panel-divider-border);
+  margin-bottom: var(--space-small);
 }
 
-.Panel__Heading,
+:is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6),
 .Panel legend {
   font-size: var(--text-size-normal);
-  color: var(--panel-heading-color);
-  margin: 0 0 var(--space-large) 0;
   font-weight: var(--font-weight-bold);
+  color: var(--panel-heading-color);
 }
 
 fieldset.Panel {
@@ -97,14 +105,6 @@ fieldset.Panel {
 .Panel legend {
   position: absolute;
   top: var(--space-large);
-}
-
-.Panel--collapsed {
-  --panel-padding: var(--space-small);
-}
-
-.Panel--collapsed .Panel__Heading {
-  font-size: var(--text-size-normal);
 }
 
 /* Dark Theme */

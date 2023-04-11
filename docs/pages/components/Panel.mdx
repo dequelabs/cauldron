@@ -76,10 +76,7 @@ and `PanelContent` components. The second is to use the `heading` prop on the `P
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      flexWrap: 'wrap',
-      ':last-child': {
-        marginLeft: '0.5rem'
-      }
+      flexWrap: 'wrap'
     }}
   >
     <h3>Panel Header</h3>
@@ -110,10 +107,7 @@ Stacking `PanelContent` components will create a visual separation between the s
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      flexWrap: 'wrap',
-      ':last-child': {
-        marginLeft: '0.5rem'
-      }
+      flexWrap: 'wrap'
     }}
   >
     <h3>Panel Header</h3>
@@ -169,6 +163,62 @@ Stacking `PanelContent` components will create a visual separation between the s
 </Panel>
 ```
 
+### Complex Content
+
+```jsx example
+<Panel>
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}
+  >
+    <div>
+      <Link href="#">I am a link!</Link>
+      <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
+    </div>
+    <div>
+      <IconButton icon="pencil" label="Edit" />
+      <IconButton icon="kabob" label="Options" />
+      <IconButton icon="plus" label="Add" />
+    </div>
+  </PanelHeader>
+  <PanelContent>
+    <p>Panel Content</p>
+  </PanelContent>
+</Panel>
+```
+
+### Overwriting Padding
+
+```jsx example
+<Panel padding={false}>
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}
+  >
+    <h3>Panel Header</h3>
+    <Button variant="primary" thin>
+      <Icon type="plus" />
+      Button
+    </Button>
+  </PanelHeader>
+  <PanelContent
+    padding={false}
+    style={{ columns: '2', columnRule: '1px solid #ccc', columnGap: '0' }}
+  >
+    <div style={{ padding: '1rem' }}>Column 1</div>
+    <div style={{ padding: '1rem' }}>Column 2</div>
+  </PanelContent>
+</Panel>
+```
+
 ### Collapsed
 
 ```jsx example
@@ -180,6 +230,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 ## Props
 
 <ComponentProps
+  name="Panel"
   children={true}
   props={[
     {
@@ -190,4 +241,27 @@ Stacking `PanelContent` components will create a visual separation between the s
     }
   ]}
 />
-```
+<ComponentProps
+  name="PanelHeader"
+  children={true}
+  props={[
+    {
+      name: 'variant',
+      type: ['simple', 'undefined'],
+      description:
+        '"simple" variant is smaller and not intended to be used with Card Footer'
+    }
+  ]}
+/>
+<ComponentProps
+  name="PanelContent"
+  children={true}
+  props={[
+    {
+      name: 'variant',
+      type: ['simple', 'undefined'],
+      description:
+        '"simple" variant is smaller and not intended to be used with Card Footer'
+    }
+  ]}
+/>
