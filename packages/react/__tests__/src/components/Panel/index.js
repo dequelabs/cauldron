@@ -14,7 +14,7 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.children().type()).toBe('h2');
+    expect(heading.type()).toBe('h2');
 
     expect(panel.text()).toContain('Content');
   });
@@ -26,7 +26,7 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.children().type()).toBe('h3');
+    expect(heading.type()).toBe('h3');
 
     expect(panel.text()).toContain('Content');
   });
@@ -35,9 +35,9 @@ describe('Panel', () => {
     const panel = mount(<Panel heading={{ text: 'Title' }}>Content</Panel>);
 
     const heading = panel.find('.Panel__Heading');
-    const headingId = heading.children().props()['id'];
+    const headingId = heading.props()['id'];
     expect(heading.text()).toBe('Title');
-    expect(heading.children().type()).toBe('h2');
+    expect(heading.type()).toBe('h2');
     expect(headingId).toEqual(expect.any(String));
 
     expect(panel.text()).toContain('Content');
@@ -52,9 +52,8 @@ describe('Panel', () => {
 
     const heading = panel.find('.Panel__Heading');
     expect(heading.text()).toBe('Title');
-    expect(heading.type()).toBe('div');
-    expect(heading.children().type()).toBe('h2');
-    expect(heading.children().props()['id']).toBe('heading123');
+    expect(heading.type()).toBe('h2');
+    expect(heading.props()['id']).toBe('heading123');
 
     expect(panel.text()).toContain('Content');
 
