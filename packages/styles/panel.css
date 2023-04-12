@@ -117,7 +117,7 @@ fieldset.Panel {
 .cauldron--theme-dark {
   --panel-border-color: var(--stroke-dark);
   --panel-background-color: var(--accent-medium);
-  --panel-heading-color: var(--accent-light);
+  --panel-heading-color: #fff;
   --panel-divider-border: 1px solid var(--stroke-dark);
   --panel-content-color: var(--accent-light);
 }
