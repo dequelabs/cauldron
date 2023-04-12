@@ -54,9 +54,11 @@
   --panel-content-padding: 0;
 }
 
-.Panel:not(.Panel--no-padding) > :not(.Panel__Content--no-padding) {
+.Panel:not(.Panel--no-padding)
+  > .Panel__Content:not(.Panel__Content--no-padding) {
   --panel-header-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
+  color: var(--panel-content-color);
 }
 
 .Panel.Panel--no-padding {
@@ -108,8 +110,10 @@ fieldset.Panel {
   color: white;
 }
 
-:is(.Panel.Panel--no-padding, .Panel:not(.Panel--no-padding)).Panel--collapsed {
+:is(.Panel.Panel--no-padding.Panel--collapsed, .Panel:not(.Panel--no-padding).Panel--collapsed) {
   --panel-padding: var(--space-smaller);
+  --panel-header-padding: var(--space-smaller);
+  --panel-header-margin: calc(var(--space-smaller) * -1);
 }
 
 /* Dark Theme */
