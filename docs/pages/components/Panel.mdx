@@ -120,21 +120,6 @@ In the following example, we are using CSS `columns` to create a two-column layo
 </Panel>
 ```
 
-### Panel (Collapsed)
-
-```jsx example
-<Panel
-  heading={{
-    id: 'panel-collapsed-example',
-    text: 'Panel Heading',
-    level: 3
-  }}
-  collapsed
->
-  Panel Content
-</Panel>
-```
-
 ### Header With Flexbox Content
 
 A common use-case for the `Panel` is to display a header with a button or other content. To achieve this, you
@@ -191,7 +176,7 @@ this may be useful is when trying to display a footer for the `Panel`.
 ### Panel
 
 <ComponentProps
-  children={true}
+  children={{ required: true }}
   className={true}
   props={[
     {
@@ -204,7 +189,8 @@ this may be useful is when trying to display a footer for the `Panel`.
       name: 'collapsed',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Collapse the `Panel` padding to `12px` on all sides'
+      description: 'Collapse the `Panel` padding to `12px` on all sides',
+      deprecated: true
     },
     {
       name: 'heading',
@@ -218,12 +204,16 @@ this may be useful is when trying to display a footer for the `Panel`.
 
 ### PanelHeader
 
-<ComponentProps children={true} className={true} refType="HTMLDivElement" />
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  refType="HTMLDivElement"
+/>
 
 ### PanelContent
 
 <ComponentProps
-  children={true}
+  children={{ required: true }}
   className={true}
   props={[
     {
