@@ -115,6 +115,29 @@ describe('Panel', () => {
     expect(ref).toHaveBeenCalled();
   });
 
+  test('`Panel` accepts a boolean padding prop', () => {
+    const panel = mount(
+      <Panel heading={{ text: 'Title' }} padding={false}>
+        Content
+      </Panel>
+    );
+
+    expect(panel.find('section').hasClass('Panel--no-padding')).toBe(true);
+  });
+
+  test('`PanelContent` accepts a boolean padding prop', () => {
+    const panel = mount(
+      <Panel heading={{ text: 'Title' }}>
+        <PanelHeader>Header</PanelHeader>
+        <PanelContent padding={false}>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(
+      panel.find('.Panel__Content').hasClass('Panel__Content--no-padding')
+    ).toBe(true);
+  });
+
   test('renders with no heading', () => {
     const panel = mount(<Panel>Content</Panel>);
 
@@ -196,11 +219,21 @@ describe('Panel', () => {
     expect(panel.text()).toContain('Content #2');
   });
 
-  describe('has no a11y violations with', () => {
+  describe('has no a11y violations', () => {
+    test('Panel with no heading', async () => {
+      const panel = mount(
+        <main>
+          <Panel>Content</Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
+
     test('Panel and heading prop', async () => {
       const panel = mount(
         <main>
-          <Panel heading={{ text: 'Title' }}>Content</Panel>
+          <Panel heading={{ level: 2, text: 'Title' }}>Content</Panel>
         </main>
       );
 
@@ -216,16 +249,6 @@ describe('Panel', () => {
             </PanelHeader>
             Content
           </Panel>
-        </main>
-      );
-
-      expect(await axe(panel.html())).toHaveNoViolations();
-    });
-
-    test('Panel with no heading', async () => {
-      const panel = mount(
-        <main>
-          <Panel>Content</Panel>
         </main>
       );
 
