@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import Panel, {
   PanelHeader,
   PanelContent
-} from '../../../../src/components/Panel/Panel';
+} from '../../../../src/components/Panel';
 const { axe, toHaveNoViolations } = require('jest-axe');
 
 expect.extend(toHaveNoViolations);
@@ -80,11 +80,35 @@ describe('Panel', () => {
     expect(panel.find('section').hasClass('Panel--collapsed')).toBe(true);
   });
 
-  test('forwards a ref', () => {
+  test('`Panel` forwards a ref', () => {
     const ref = jest.fn();
     mount(
       <Panel ref={ref} heading={{ text: 'Title' }}>
         Content
+      </Panel>
+    );
+
+    expect(ref).toHaveBeenCalled();
+  });
+
+  test('`PanelHeader` forwards a ref', () => {
+    const ref = jest.fn();
+    mount(
+      <Panel>
+        <PanelHeader ref={ref}>Panel Header</PanelHeader>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(ref).toHaveBeenCalled();
+  });
+
+  test('`PanelContent` forwards a ref', () => {
+    const ref = jest.fn();
+    mount(
+      <Panel>
+        <PanelHeader>Panel Header</PanelHeader>
+        <PanelContent ref={ref}>Content</PanelContent>
       </Panel>
     );
 

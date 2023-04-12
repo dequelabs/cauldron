@@ -28,6 +28,7 @@
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
   background-color: var(--panel-background-color);
   word-break: break-word;
+  color: var(--panel-content-color);
 }
 
 .Panel:not(.Panel--no-padding) {
@@ -47,7 +48,6 @@
 .Panel__Content {
   padding: var(--panel-content-padding);
   margin: var(--panel-content-margin);
-  color: var(--panel-content-color);
 }
 
 .Panel__Content.Panel__Content--no-padding {
@@ -58,7 +58,6 @@
   > .Panel__Content:not(.Panel__Content--no-padding) {
   --panel-header-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
-  color: var(--panel-content-color);
 }
 
 .Panel.Panel--no-padding {
