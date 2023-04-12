@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -9,27 +9,29 @@ export interface PanelContentProps
   padding?: boolean;
 }
 
-const PanelContent = ({
-  children,
-  className,
-  padding = true,
-  ...otherProps
-}: PanelContentProps) => {
-  return (
-    <div
-      className={classNames('Panel__Content', className, {
-        ['Panel__Content--padding']: padding
-      })}
-      {...otherProps}
-    >
-      {children}
-    </div>
-  );
-};
+const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
+  (
+    { children, className, padding = true, ...otherProps }: PanelContentProps,
+    ref
+  ) => {
+    return (
+      <div
+        className={classNames('Panel__Content', className, {
+          ['Panel__Content--padding']: padding
+        })}
+        ref={ref}
+        {...otherProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 PanelContent.displayName = 'PanelContent';
 
 PanelContent.propTypes = {
+  //@ts-expect-error
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   padding: PropTypes.bool

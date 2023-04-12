@@ -32,7 +32,7 @@ If a `Panel` does not have a heading, <Link href="https://www.w3.org/WAI/ARIA/ap
 
 ```jsx example
 <Panel aria-label="Panel Heading">
-  <p>Panel Content</p>
+  Panel Content
 </Panel>
 ```
 
@@ -69,7 +69,7 @@ In addition to using the `heading` prop, you can also compose the `Panel` compon
     <h3>Panel Header</h3>
   </PanelHeader>
   <PanelContent>
-    <p>Panel Content</p>
+    Panel Content
   </PanelContent>
 </Panel>
 ```
@@ -84,7 +84,7 @@ the `padding` prop to `false`.
   heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
   padding={false}
 >
-  <p style={{ paddingLeft: '1rem' }}>Panel Content</p>
+  <p style={{ padding: '1rem' }}>Panel Content</p>
 </Panel>
 ```
 
@@ -98,19 +98,9 @@ In the following example, we are using CSS `columns` to create the two column la
 
 ```jsx example
 <Panel>
-  <PanelHeader
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap'
-    }}
-  >
+  <PanelHeader>
     <h3>Panel Header</h3>
-    <Button variant="primary" thin>
-      <Icon type="plus" />
-      Button
-    </Button>
+
   </PanelHeader>
   <PanelContent
     padding={false}
@@ -163,18 +153,8 @@ Stacking `PanelContent` components will create a visual separation between the s
 ```jsx example
 <Panel>
   <PanelHeader
-    style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap'
-    }}
   >
     <h3>Panel Header</h3>
-    <Button variant="primary" thin>
-      <Icon type="plus" />
-      Button
-    </Button>
   </PanelHeader>
   <PanelContent>
     <p>
@@ -183,7 +163,7 @@ Stacking `PanelContent` components will create a visual separation between the s
       iaculis maximus nisl. Pellentesque gravida lorem sit amet ipsum efficitur,
       eget finibus justo feugiat. Suspendisse blandit, urna eu facilisis
       pulvinar, mi turpis mattis magna, at rutrum leo leo egestas risus.
-      Curabitur mattis in erat vel tristique. Nam fermentum consectetur ipsum,
+      Curabitur mattis in erat vel tristique. Nam fermentum `cons`ectetur ipsum,
       ut placerat purus volutpat vitae. Nam molestie vulputate accumsan. Sed
       vitae odio eu justo venenatis laoreet.
     </p>
@@ -225,8 +205,8 @@ Stacking `PanelContent` components will create a visual separation between the s
 
 ## Props
 
+### Panel
 <ComponentProps
-  name="Panel"
   children={true}
   className={true}
   props={[
@@ -244,9 +224,12 @@ Stacking `PanelContent` components will create a visual separation between the s
       required: false
     }
   ]}
+  refType="HTMLElement"
 />
+
+### PanelHeader
+
 <ComponentProps
-  name="PanelContent"
   children={true}
   className={true}
   props={[
@@ -258,4 +241,22 @@ Stacking `PanelContent` components will create a visual separation between the s
         'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
     }
   ]}
+  refType="HTMLDivElement"
+/>
+
+### PanelContent
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'padding',
+      type: 'boolean',
+      defaultValue: 'true',
+      description:
+        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
+    }
+  ]}
+  refType="HTMLDivElement"
 />

@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import Panel, {
   PanelHeader,
   PanelContent
-} from '../../../../src/components/Panel';
+} from '../../../../src/components/Panel/Panel';
 const { axe, toHaveNoViolations } = require('jest-axe');
 
 expect.extend(toHaveNoViolations);
@@ -108,7 +108,6 @@ describe('Panel', () => {
         Content
       </Panel>
     );
-    console.log(panel);
     expect(panel.find('.Panel__Header').exists()).toBe(true);
     expect(panel.text()).toContain('Content');
   });
