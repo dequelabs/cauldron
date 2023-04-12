@@ -86,6 +86,10 @@
   margin-bottom: var(--space-small);
 }
 
+.Panel:not(.Panel--no-padding).Panel--collapsed > .Panel__Heading {
+  margin-bottom: var(--space-smaller);
+}
+
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
 .Panel > :is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6),
 .Panel legend {
