@@ -43,7 +43,6 @@
 .Panel__Heading {
   padding: var(--panel-header-padding);
   margin: var(--panel-header-margin);
-  line-height: 1;
 }
 
 .Panel__Content {
@@ -98,6 +97,7 @@
   font-size: var(--text-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--panel-heading-color);
+  line-height: 1;
 }
 
 fieldset.Panel {
