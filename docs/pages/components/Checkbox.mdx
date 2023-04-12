@@ -4,7 +4,7 @@ description: An interactive component that toggles between checked and unchecked
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Checkbox/index.tsx
 ---
 
-import { Checkbox } from '@deque/cauldron-react'
+import { Checkbox, FieldWrap } from '@deque/cauldron-react'
 
 ```js
 import { Checkbox } from '@deque/cauldron-react'
@@ -19,86 +19,100 @@ import { Checkbox } from '@deque/cauldron-react'
 ### Unchecked Checkbox
 
 ```jsx example
-<Checkbox
-  id="checkbox-unchecked"
-  label="Unchecked Checkbox"
-  name="unchecked-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    id="checkbox-unchecked"
+    label="Unchecked Checkbox"
+    name="unchecked-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Checked Checkbox
 
 ```jsx example
-<Checkbox
-  checked
-  id="checkbox-checked"
-  label="Checked Checkbox"
-  name="checked-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    checked
+    id="checkbox-checked"
+    label="Checked Checkbox"
+    name="checked-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Disabled Checkbox
 
 ```jsx example
-<Checkbox
-  disabled
-  id="checkbox-disabled"
-  label="Disabled Checkbox"
-  name="disabled-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    disabled
+    id="checkbox-disabled"
+    label="Disabled Checkbox"
+    name="disabled-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Disabled Checked Checkbox
 
 ```jsx example
-<Checkbox
-  disabled
-  checked
-  id="checkbox-disabled-checked"
-  label="Disabled Checked Checkbox"
-  name="disabled-checked-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    disabled
+    checked
+    id="checkbox-disabled-checked"
+    label="Disabled Checked Checkbox"
+    name="disabled-checked-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Error Checkbox
 
 ```jsx example
-<Checkbox
-  error="You must check this checkbox to continue"
-  id="checkbox-error"
-  label="Error Checkbox"
-  name="error-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    error="You must check this checkbox to continue"
+    id="checkbox-error"
+    label="Error Checkbox"
+    name="error-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Checkbox with Description
 
 ```jsx example
-<Checkbox
-  id="description-checkbox"
-  label="Description Checkbox"
-  labelDescription="Additional text to describe the checkbox"
-  name="description-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    id="description-checkbox"
+    label="Description Checkbox"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ### Checkbox with Description & Error
 
 ```jsx example
-<Checkbox
-  error="You must check this checkbox to continue"
-  id="description-error-checkbox"
-  label="Description Checkbox"
-  labelDescription="Additional text to describe the checkbox"
-  name="description-error-checkbox"
-  value="1"
-/>
+<FieldWrap>
+  <Checkbox
+    error="You must check this checkbox to continue"
+    id="description-error-checkbox"
+    label="Description Checkbox"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-error-checkbox"
+    value="1"
+  />
+</FieldWrap>
 ```
 
 ## Props
