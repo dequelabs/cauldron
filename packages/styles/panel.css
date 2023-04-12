@@ -14,7 +14,7 @@
 
 /* Resets aggressive Chrome user agent styles */
 .Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > *,
-:is(.Panel.Panel--no-padding:first-child, .Panel:not(.Panel--no-padding):first-child)
+:is(.Panel.Panel--no-padding:first-child, .Panel.Panel--collapsed:first-child, .Panel:not(.Panel--no-padding):first-child)
   > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -43,6 +43,7 @@
 .Panel__Heading {
   padding: var(--panel-header-padding);
   margin: var(--panel-header-margin);
+  line-height: 1;
 }
 
 .Panel__Content {
@@ -86,8 +87,9 @@
   margin-bottom: var(--space-small);
 }
 
-.Panel:not(.Panel--no-padding).Panel--collapsed > .Panel__Heading {
+.Panel.Panel--collapsed > .Panel__Heading {
   margin-bottom: var(--space-smaller);
+  line-height: 1;
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
