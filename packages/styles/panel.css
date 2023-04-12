@@ -2,7 +2,7 @@
   --panel-border-color: var(--gray-40);
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
-  --panel-padding: 0;
+  --panel-padding: var(--space-small);
   --panel-margin: 0;
   --panel-content-padding: var(--space-small);
   --panel-content-margin: 0 calc(var(--space-small) * -1);
@@ -14,7 +14,7 @@
 
 /* Resets aggressive Chrome user agent styles */
 .Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > *,
-:is(.Panel.Panel--padding:first-child, .Panel:not(.Panel--padding):first-child)
+:is(.Panel.Panel--no-padding:first-child, .Panel:not(.Panel--no-padding):first-child)
   > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -30,12 +30,12 @@
   word-break: break-word;
 }
 
-.Panel:not(.Panel--padding) {
-  --panel-padding: 0;
+.Panel:not(.Panel--no-padding) {
+  --panel-padding: var(--space-small);
 }
 
-.Panel.Panel--padding {
-  --panel-padding: var(--space-small);
+.Panel.Panel--no-padding {
+  --panel-padding: 0;
 }
 
 .Panel__Header,
@@ -50,16 +50,16 @@
   color: var(--panel-content-color);
 }
 
-.Panel__Content:not(.Panel__Content--padding) {
+.Panel__Content.Panel__Content--no-padding {
   --panel-content-padding: 0;
 }
 
-.Panel.Panel--padding > .Panel__Content--padding {
+.Panel:not(.Panel--no-padding) > :not(.Panel__Content--no-padding) {
   --panel-header-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
 }
 
-.Panel:not(.Panel--padding) {
+.Panel.Panel--no-padding {
   --panel-content-margin: 0;
   --panel-header-margin: 0;
 }
@@ -69,11 +69,11 @@
   border-top: var(--panel-divider-border);
 }
 
-.Panel.Panel--padding > :is(.Panel__Header, :last-child) {
+.Panel:not(.Panel--no-padding) > :is(.Panel__Header, :last-child) {
   margin-bottom: 0;
 }
 
-.Panel.Panel--padding > :last-child {
+.Panel:not(.Panel--no-padding) > :last-child {
   padding-bottom: 0;
 }
 
@@ -81,7 +81,7 @@
   border-bottom: var(--panel-divider-border);
 }
 
-.Panel.Panel--padding > .Panel__Heading {
+.Panel:not(.Panel--no-padding) > .Panel__Heading {
   margin-bottom: var(--space-small);
 }
 
@@ -106,6 +106,10 @@ fieldset.Panel {
 
 .Panel > .Button--primary {
   color: white;
+}
+
+:is(.Panel.Panel--no-padding, .Panel:not(.Panel--no-padding)).Panel--collapsed {
+  --panel-padding: var(--space-smaller);
 }
 
 /* Dark Theme */

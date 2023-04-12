@@ -63,7 +63,7 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
         aria-labelledby={headingId}
         className={classNames('Panel', className, {
           ['Panel--collapsed']: collapsed,
-          ['Panel--padding']: padding
+          ['Panel--no-padding']: !padding
         })}
         ref={ref}
         {...other}

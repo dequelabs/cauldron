@@ -17,7 +17,7 @@ const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
     return (
       <div
         className={classNames('Panel__Content', className, {
-          ['Panel__Content--padding']: padding
+          ['Panel__Content--no-padding']: !padding
         })}
         ref={ref}
         {...otherProps}
