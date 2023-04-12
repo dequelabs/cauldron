@@ -85,7 +85,7 @@
   margin-bottom: var(--space-small);
 }
 
-.Panel > :is(h1, h2, h3, h4, h5, h6),
+.Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
 .Panel > :is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6),
 .Panel legend {
   font-size: var(--text-size-normal);
@@ -108,20 +108,11 @@ fieldset.Panel {
   color: white;
 }
 
-:global(.IconButton--secondary) {
-  border: 1px solid var(--icon-button-border-color-secondary);
-}
-
 /* Dark Theme */
 .cauldron--theme-dark {
   --panel-border-color: #5d676f;
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: var(--accent-light);
   --panel-divider-border: 1px solid var(--stroke-dark);
-  --icon-button-border-color-secondary: var(--accent-light);
   --panel-content-color: var(--accent-light);
-}
-
-:global(.cauldron--theme-dark .IconButton--secondary) {
-  border: 2px solid var(--icon-button-border-color-secondary);
 }

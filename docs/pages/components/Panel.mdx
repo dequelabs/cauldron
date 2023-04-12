@@ -27,13 +27,12 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 At its simplest, a `Panel` is a styled semantic HTML `<section>` element with with content inside.
 
 <Note>
-If a `Panel` does not have a heading, <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/general-principles.html" rel="noopener noreferrer" target="_blank">it is recommended</Link> to add an `aria-label` to the `Panel` component.
+  If your section needs to have an accessible name, be sure to include an
+  `aria-label` or `aria-labelledby` pointed to the `id` of your label.
 </Note>
 
 ```jsx example
-<Panel aria-label="Panel Heading">
-  Panel Content
-</Panel>
+<Panel aria-label="Panel Heading">Panel Content</Panel>
 ```
 
 ### Panel with Heading (Prop)
@@ -41,26 +40,29 @@ If a `Panel` does not have a heading, <Link href="https://www.w3.org/WAI/ARIA/ap
 To add a heading to a `Panel`, you can use the `heading` prop. One advantage to using this prop over composing
 the elements is it automatically adds an `id` to the heading and `aria-labelledby` to the `Panel` component.
 
-Inspect the below example and you will see that the `Panel` component has an `aria-labelledby` attribute with the 
+Inspect the below example and you will see that the `Panel` component has an `aria-labelledby` attribute with the
 value of the `id` of the heading.
 
 ```jsx example
-<Panel heading={{ id: 'panel-heading-prop-example', text: 'Panel Heading', level: 3 }}>
+<Panel
+  heading={{
+    id: 'panel-heading-prop-example',
+    text: 'Panel Heading',
+    level: 3
+  }}
+>
   <p>Panel Content</p>
 </Panel>
 ```
 
 ### Panel (Composed)
 
-In addition to using the `heading` prop, you can also compose the `Panel` component with the `PanelHeader` and 
+In addition to using the `heading` prop, you can also compose the `Panel` component with the `PanelHeader` and
 `PanelContent` components.
 
 <Note>
   The `PanelHeader` and `PanelContent` should not be used with the `Panel`
-  heading prop at the same time. Choose one or the other to use. 
-  
-  In addition, if you use the `PanelHeader`, you are responsible for adding `aria-labelledby` to
-  the `Panel` and an ID to the heading.
+  heading prop at the same time. Choose one or the other.
 </Note>
 
 ```jsx example
@@ -68,20 +70,22 @@ In addition to using the `heading` prop, you can also compose the `Panel` compon
   <PanelHeader>
     <h3>Panel Header</h3>
   </PanelHeader>
-  <PanelContent>
-    Panel Content
-  </PanelContent>
+  <PanelContent>Panel Content</PanelContent>
 </Panel>
 ```
 
 ### Disabling Panel Padding
 
-For greater control over the styling of the `Panel`'s content, you can disable the default padding by setting 
+For greater control over the styling of the `Panel`'s content, you can disable the default padding by setting
 the `padding` prop to `false`.
 
 ```jsx example
 <Panel
-  heading={{ id: 'example', text: 'Panel Heading', level: 3 }}
+  heading={{
+    id: 'disabling-panel-padding-example',
+    text: 'Panel Heading',
+    level: 3
+  }}
   padding={false}
 >
   <p style={{ padding: '1rem' }}>Panel Content</p>
@@ -91,16 +95,15 @@ the `padding` prop to `false`.
 ### Disabling Panel Content Padding
 
 In addition to being able to disable the `Panel` padding via its `padding` prop, the `PanelContent` also has a `padding`
-prop which can be set to `false`. An example where this may be useful is when trying to display content in a two 
-column or grid layout. 
+prop which can be set to `false`. An example where this may be useful is when trying to display content in a two
+column or grid layout.
 
-In the following example, we are using CSS `columns` to create the two column layout. 
+In the following example, we are using CSS `columns` to create the two column layout.
 
 ```jsx example
 <Panel>
   <PanelHeader>
     <h3>Panel Header</h3>
-
   </PanelHeader>
   <PanelContent
     padding={false}
@@ -121,7 +124,7 @@ In the following example, we are using CSS `columns` to create the two column la
 
 ### Header With Flexbox Content
 
-A common use-case for the `Panel` is to display a header with a button or other content. To achieve this, you 
+A common use-case for the `Panel` is to display a header with a button or other content. To achieve this, you
 can compose the `Panel` using a `PanelHeader` with a flexbox layout.
 
 ```jsx example
@@ -152,8 +155,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 
 ```jsx example
 <Panel>
-  <PanelHeader
-  >
+  <PanelHeader>
     <h3>Panel Header</h3>
   </PanelHeader>
   <PanelContent>
@@ -188,14 +190,9 @@ Stacking `PanelContent` components will create a visual separation between the s
     }}
   >
     <div>
-      <Link
-        href="#"
-      >
-        I am a link!
-      </Link>
+      <Link href="#">I am a link!</Link>
       <span style={{ marginLeft: '0.5rem' }}>Panel Subheading</span>
     </div>
-    <IconButton icon="plus" label="Add" />
   </PanelHeader>
   <PanelContent>
     <p>Panel Content</p>
@@ -206,6 +203,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 ## Props
 
 ### Panel
+
 <ComponentProps
   children={true}
   className={true}
@@ -214,8 +212,7 @@ Stacking `PanelContent` components will create a visual separation between the s
       name: 'padding',
       type: 'boolean',
       defaultValue: 'true',
-      description:
-        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
+      description: 'Disable the `Panel` padding'
     },
     {
       name: 'heading',
@@ -229,20 +226,7 @@ Stacking `PanelContent` components will create a visual separation between the s
 
 ### PanelHeader
 
-<ComponentProps
-  children={true}
-  className={true}
-  props={[
-    {
-      name: 'padding',
-      type: 'boolean',
-      defaultValue: 'true',
-      description:
-        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
-    }
-  ]}
-  refType="HTMLDivElement"
-/>
+<ComponentProps children={true} className={true} refType="HTMLDivElement" />
 
 ### PanelContent
 
@@ -254,8 +238,7 @@ Stacking `PanelContent` components will create a visual separation between the s
       name: 'padding',
       type: 'boolean',
       defaultValue: 'true',
-      description:
-        'Disable the padding on the Panel. This is useful when stacking PanelContent components.'
+      description: 'Disable padding for the `PanelContent`.'
     }
   ]}
   refType="HTMLDivElement"
