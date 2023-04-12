@@ -94,14 +94,14 @@ the `padding` prop to `false`.
 
 ### Disabling Panel Content Padding
 
-In addition to being able to disable the `Panel` padding via its `padding` prop, the `PanelContent` also has a `padding`
-prop which can be set to `false`. An example where this may be useful is when trying to display content in a two
-column or grid layout.
+In addition to being able to disable the `Panel` padding via its `padding` prop, the `PanelContent` also has a
+`padding` prop which can be set to `false`. An example where this may be useful is when trying to display content
+in a multi-column or grid layout.
 
-In the following example, we are using CSS `columns` to create the two column layout.
+In the following example, we are using CSS `columns` to create a two-column layout:
 
 ```jsx example
-<Panel>
+<Panel padding={false}>
   <PanelHeader>
     <h3>Panel Header</h3>
   </PanelHeader>
@@ -162,7 +162,8 @@ can compose the `Panel` using a `PanelHeader` with a flexbox layout.
 
 ### Stacked Content Sections
 
-Stacking `PanelContent` components will create a visual separation between the sections. A common pattern where this may be useful is when trying to display a footer for the `Panel`.
+Stacking `PanelContent` components will create a visual separation between the sections. A common pattern where
+this may be useful is when trying to display a footer for the `Panel`.
 
 ```jsx example
 <Panel>

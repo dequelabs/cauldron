@@ -5,7 +5,8 @@
   --panel-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
   --panel-content-margin: 0 calc(var(--space-small) * -1);
-  --panel-header-margin: calc(var(--space-small) * -1);
+  --panel-header-margin: calc(var(--space-smaller) * -1)
+    calc(var(--space-small) * -1);
   --panel-header-padding: var(--space-smaller) var(--space-small);
   --panel-divider-border: 1px solid var(--gray-40);
   --panel-content-color: var(--gray-80);
@@ -62,13 +63,13 @@
 }
 
 .Panel:not(.Panel--no-padding)
-  > .Panel__Content:not(.Panel__Content--no-padding) {
+  .Panel__Content:not(.Panel__Content--no-padding) {
   --panel-header-padding: var(--space-small);
   --panel-content-padding: var(--space-small);
 }
 
 .Panel
-  > :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
+  :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
   border-top: var(--panel-divider-border);
 }
 
