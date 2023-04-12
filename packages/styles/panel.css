@@ -105,10 +105,6 @@ fieldset.Panel {
   top: var(--space-large);
 }
 
-.Panel > .Button--primary {
-  color: white;
-}
-
 :is(.Panel.Panel--no-padding.Panel--collapsed, .Panel:not(.Panel--no-padding).Panel--collapsed) {
   --panel-padding: var(--space-smaller);
   --panel-header-padding: var(--space-smaller);
