@@ -75,6 +75,10 @@ ul.Component__list li {
   overflow: hidden;
 }
 
+.Component > .Panel {
+  padding: var(--space-small);
+}
+
 .Panel.Component__hero {
   background-color: var(--docs-hero-background-color);
   margin: var(--space-small) 0;

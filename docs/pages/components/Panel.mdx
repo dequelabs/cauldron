@@ -32,7 +32,9 @@ At its simplest, a `Panel` is a styled semantic HTML `<section>` element with wi
 </Note>
 
 ```jsx example
-<Panel aria-label="Panel Heading">Panel Content</Panel>
+<Panel aria-label="Panel Heading">
+  <p>Panel Content</p>
+</Panel>
 ```
 
 ### Panel with Heading (Prop)
@@ -87,6 +89,20 @@ the `padding` prop to `false`.
     level: 3
   }}
   padding={false}
+>
+  <p style={{ padding: '1rem' }}>Panel Content</p>
+</Panel>
+```
+
+```jsx example
+<Panel
+  heading={{
+    id: 'disabling-panel-padding-example',
+    text: 'Panel Heading',
+    level: 3
+  }}
+  padding={false}
+  collapsed={true}
 >
   <p style={{ padding: '1rem' }}>Panel Content</p>
 </Panel>

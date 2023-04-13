@@ -3,11 +3,8 @@
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
-  --panel-content-padding: var(--space-small);
-  --panel-content-margin: 0 calc(var(--space-small) * -1);
-  --panel-header-margin: calc(var(--space-smaller) * -1)
-    calc(var(--space-small) * -1);
   --panel-header-padding: var(--space-smaller) var(--space-small);
+  --panel-header-margin: var(--panel-margin);
   --panel-divider-border: 1px solid var(--gray-40);
   --panel-content-color: var(--gray-80);
 }
@@ -22,7 +19,11 @@
 }
 
 .Panel {
-  padding: var(--panel-padding);
+  padding: max(
+    calc(var(--panel-header-padding, --panel-padding) - 4px)
+      var(--panel-header-padding, --panel-padding)
+  );
+  margin: 0;
   border: 1px solid var(--panel-border-color);
   border-radius: 3px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
@@ -31,41 +32,37 @@
   color: var(--panel-content-color);
 }
 
+.Panel > :first-child(*) {
+  padding: var(--panel-padding);
+}
+
+.Panel__Content {
+  padding: var(--panel-padding);
+}
+
 .Panel__Header,
 .Panel__Heading {
   padding: var(--panel-header-padding);
   margin: var(--panel-header-margin);
 }
 
-.Panel__Content {
-  padding: var(--panel-content-padding);
-  margin: var(--panel-content-margin);
-}
-
-.Panel:not(.Panel--no-padding) {
-  --panel-padding: var(--space-small);
-}
-
 .Panel.Panel--collapsed {
-  --panel-padding: var(--space-smaller);
   --panel-header-padding: var(--space-smaller);
-  --panel-header-margin: calc(var(--space-smaller) * -1);
+  --panel-header-margin: calc(var(--panel-padding) * -1);
 }
 
-.Panel.Panel--no-padding {
+.Panel--no-padding {
   --panel-padding: 0;
-  --panel-content-margin: 0;
   --panel-header-margin: 0;
+  --panel-header-padding: var(--space-smaller) var(--space-small);
 }
 
 .Panel__Content.Panel__Content--no-padding {
-  --panel-content-padding: 0;
+  --panel-padding: 0;
 }
 
-.Panel:not(.Panel--no-padding)
-  .Panel__Content:not(.Panel__Content--no-padding) {
-  --panel-header-padding: var(--space-small);
-  --panel-content-padding: var(--space-small);
+.Panel > .Panel__Content:not(.Panel__Content--no-padding) {
+  --panel-padding: var(--space-small);
 }
 
 .Panel
@@ -73,24 +70,12 @@
   border-top: var(--panel-divider-border);
 }
 
-.Panel:not(.Panel--no-padding) > :is(.Panel__Header, :last-child) {
-  margin-bottom: 0;
-}
-
 .Panel:not(.Panel--no-padding, .Panel--collapsed) > :last-child {
-  padding-bottom: 0;
+  padding: var(--panel-padding);
 }
 
 .Panel > .Panel__Heading {
   border-bottom: var(--panel-divider-border);
-}
-
-.Panel:not(.Panel--no-padding) > .Panel__Heading {
-  margin-bottom: var(--space-small);
-}
-
-.Panel.Panel--collapsed > .Panel__Heading {
-  margin-bottom: var(--space-smaller);
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
@@ -99,7 +84,6 @@
   font-size: var(--text-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--panel-heading-color);
-  line-height: 1;
 }
 
 fieldset.Panel {
