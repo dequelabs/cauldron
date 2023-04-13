@@ -4,7 +4,7 @@
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
   --panel-header-margin: 0 calc(var(--panel-padding) * -1);
-  --panel-divider-border: var(--gray-40);
+  --panel-divider-border-color-color: var(--gray-40);
   --panel-content-color: var(--gray-80);
 }
 
@@ -70,7 +70,7 @@
 
 .Panel
   :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
-  border-top: 1px solid var(--panel-divider-border);
+  border-top: 1px solid var(--panel-divider-border-color);
 }
 
 .Panel:not(.Panel--no-padding, .Panel--collapsed) > :last-child {
@@ -78,7 +78,7 @@
 }
 
 .Panel > .Panel__Heading {
-  border-bottom: 1px solid var(--panel-divider-border);
+  border-bottom: 1px solid var(--panel-divider-border-color);
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
@@ -87,6 +87,15 @@
   font-size: var(--text-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--panel-heading-color);
+}
+
+.Panel--collapsed {
+  --panel-padding: 12px;
+}
+
+.Panel--collapsed .Panel__Heading {
+  margin: 0 0 12px 0;
+  font-size: var(--text-size-normal);
 }
 
 fieldset.Panel {
@@ -105,6 +114,6 @@ fieldset.Panel {
   --panel-border-color: var(--stroke-dark);
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: #fff;
-  --panel-divider-border: var(--stroke-dark);
+  --panel-divider-border-color: var(--stroke-dark);
   --panel-content-color: var(--accent-light);
 }
