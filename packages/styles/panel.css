@@ -64,6 +64,10 @@
   margin: 0 calc(var(--panel-padding) * -1);
 }
 
+.Panel--no-padding > .Panel__Content {
+  margin: 0;
+}
+
 .Panel
   :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
   border-top: 1px solid var(--panel-divider-border);
