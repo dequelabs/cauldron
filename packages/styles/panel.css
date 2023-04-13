@@ -4,8 +4,8 @@
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
   --panel-header-padding: var(--space-smaller) var(--space-small);
-  --panel-header-margin: var(--panel-margin);
-  --panel-divider-border: 1px solid var(--gray-40);
+  --panel-header-margin: 0 calc(var(--panel-padding) * -1);
+  --panel-divider-border: var(--gray-40);
   --panel-content-color: var(--gray-80);
 }
 
@@ -19,10 +19,7 @@
 }
 
 .Panel {
-  padding: max(
-    calc(var(--panel-header-padding, --panel-padding) - 4px)
-      var(--panel-header-padding, --panel-padding)
-  );
+  padding: var(--panel-padding);
   margin: 0;
   border: 1px solid var(--panel-border-color);
   border-radius: 3px;
@@ -32,29 +29,42 @@
   color: var(--panel-content-color);
 }
 
-.Panel > :first-child(*) {
+.Panel--no-padding {
+  --panel-padding: max(
+    calc(var(--panel-header-padding, --panel-padding) - 4px)
+      var(--panel-header-padding, --panel-padding)
+  );
+  --panel-header-margin: 0;
+  --panel-header-padding: var(--space-smaller) var(--space-small);
+}
+
+.Panel:first-child > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
+  --panel-padding: var(--space-small);
   padding: var(--panel-padding);
 }
 
 .Panel__Content {
   padding: var(--panel-padding);
+  margin: var(--panel-header-margin);
 }
 
-.Panel__Header,
 .Panel__Heading {
   padding: var(--panel-header-padding);
   margin: var(--panel-header-margin);
 }
 
-.Panel.Panel--collapsed {
-  --panel-header-padding: var(--space-smaller);
-  --panel-header-margin: calc(var(--panel-padding) * -1);
+.Panel__Header {
+  --panel-header-padding: 0 0 var(--space-smaller) 0;
+  padding: var(--panel-header-padding);
 }
 
-.Panel--no-padding {
-  --panel-padding: 0;
-  --panel-header-margin: 0;
+.Panel.Panel--no-padding > .Panel__Header {
   --panel-header-padding: var(--space-smaller) var(--space-small);
+}
+
+.Panel.Panel--collapsed {
+  --panel-header-padding: var(--space-smaller);
+  --panel-header-margin: 0 calc(var(--panel-padding) * -1);
 }
 
 .Panel__Content.Panel__Content--no-padding {
@@ -67,15 +77,15 @@
 
 .Panel
   :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
-  border-top: var(--panel-divider-border);
+  border-top: 1px solid var(--panel-divider-border);
 }
 
 .Panel:not(.Panel--no-padding, .Panel--collapsed) > :last-child {
-  padding: var(--panel-padding);
+  --panel-padding: var(--space-small) var(--space-small) 0 var(--space-small);
 }
 
 .Panel > .Panel__Heading {
-  border-bottom: var(--panel-divider-border);
+  border-bottom: 1px solid var(--panel-divider-border);
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
@@ -102,6 +112,6 @@ fieldset.Panel {
   --panel-border-color: var(--stroke-dark);
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: #fff;
-  --panel-divider-border: 1px solid var(--stroke-dark);
+  --panel-divider-border: var(--stroke-dark);
   --panel-content-color: var(--accent-light);
 }

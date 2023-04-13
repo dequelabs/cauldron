@@ -18,7 +18,7 @@ import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
 
 ## Examples
 
-### Panel
+### Panel Component
 
 At its simplest, a `Panel` is a styled semantic HTML `<section>` element with with content inside.
 
@@ -28,9 +28,7 @@ At its simplest, a `Panel` is a styled semantic HTML `<section>` element with wi
 </Note>
 
 ```jsx example
-<Panel aria-label="Panel Heading">
-  <p>Panel Content</p>
-</Panel>
+<Panel aria-label="Panel Heading">Panel Content</Panel>
 ```
 
 ### Panel with Heading (Prop)
@@ -48,6 +46,7 @@ value of the `id` of the heading.
     text: 'Panel Heading',
     level: 3
   }}
+  padding={false}
 >
   <p>Panel Content</p>
 </Panel>
@@ -121,7 +120,7 @@ In the following example, we are using CSS `columns` to create a two-column layo
     padding={false}
     style={{
       columns: '2',
-      columnRule: 'var(--panel-divider-border)',
+      columnRule: '1px solid var(--panel-divider-border)',
       columnGap: '0'
     }}
   >
