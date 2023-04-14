@@ -32,10 +32,6 @@
   margin: 0;
 }
 
-/* .Panel:first-child > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
-  padding: var(--panel-padding);
-} */
-
 .Panel__Content {
   padding: var(--panel-padding);
   margin: 0 calc(var(--panel-padding) * -1);
