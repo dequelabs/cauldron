@@ -4,7 +4,7 @@
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
   --panel-header-margin: 0 calc(var(--panel-padding) * -1);
-  --panel-divider-border-color-color: var(--gray-40);
+  --panel-divider-border-color: var(--gray-40);
   --panel-content-color: var(--gray-80);
 }
 
