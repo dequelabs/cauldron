@@ -82,7 +82,8 @@ Panel.propTypes = {
   // @ts-expect-error
   heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
   className: PropTypes.string,
-  padding: PropTypes.bool
+  padding: PropTypes.bool,
+  collapsed: PropTypes.bool
 };
 
 export default Panel;

@@ -46,9 +46,8 @@ value of the `id` of the heading.
     text: 'Panel Heading',
     level: 3
   }}
-  padding={false}
 >
-  <p>Panel Content</p>
+  Panel Content
 </Panel>
 ```
 
@@ -75,19 +74,6 @@ In addition to using the `heading` prop, you can also compose the `Panel` compon
 
 For greater control over the styling of the `Panel`'s content, you can disable the default padding by setting
 the `padding` prop to `false`.
-
-```jsx example
-<Panel
-  heading={{
-    id: 'disabling-panel-padding-example',
-    text: 'Panel Heading',
-    level: 3
-  }}
-  padding={false}
->
-  <p style={{ padding: '1rem' }}>Panel Content</p>
-</Panel>
-```
 
 ```jsx example
 <Panel
