@@ -27,6 +27,7 @@ interface Props {
     | {
         required?: boolean;
         type?: string | string[];
+        description?: string;
       }
     | boolean;
   className?: boolean;
@@ -62,7 +63,7 @@ function TableProps({ children, className, refType, props }: Props) {
                 : children.type}
             </TableCell>
             <TableCell></TableCell>
-            <TableCell>Child content.</TableCell>
+            <TableCell>{children?.description || 'Child content.'}</TableCell>
           </TableRow>
         )}
         {className && (
