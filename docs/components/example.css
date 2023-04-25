@@ -59,3 +59,9 @@ body.cauldron--theme-dark {
   position: relative;
   width: calc(100% + var(--space-medium) * 2);
 }
+
+/* Prevents duplicate scrollbars in sortable tables with offscreen elements*/
+
+.Component__example__react:has(.Table) {
+  position: relative;
+}
