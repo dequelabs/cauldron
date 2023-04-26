@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
       - run: yarn
-      - id: release
+      - name: Release
         run: yarn run release
         env:
           COMMIT_BODY_HEADER: 'This PR was opened by a robot :robot: :tada: \n\n'
