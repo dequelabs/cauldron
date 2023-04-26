@@ -67,6 +67,8 @@ if [[ -z "$CI" ]] && [[ -z "$GITHUB_ACTION" ]]; then
 else
 
   commit_body="$COMMIT_BODY_HEADER $release_notes $COMMIT_BODY_FOOTER"
-  gh pr create --title "$message" --body "$commit_body" --base "$base"
+  commit_title=$(git show --no-patch --format=%s)
+
+  gh pr create --title "$commit_title" --body "$commit_body" --base "$base"
 
 fi

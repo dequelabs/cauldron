@@ -19,5 +19,5 @@ jobs:
       - name: Release
         run: yarn run release
         env:
-          COMMIT_BODY_HEADER: 'This PR was opened by a robot :robot: :tada: \n\n'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          COMMIT_BODY_HEADER: "This PR was opened by a robot :robot: :tada: \n\n"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
