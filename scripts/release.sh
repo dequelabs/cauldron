@@ -16,6 +16,12 @@ message=${COMMIT_MESSAGE:-"chore(cauldron): Release {{currentTag}}"}
 echo "Creating release staging branch: $branch_name"
 git checkout -b "$branch_name"
 
+if [[ ! -z "$CI" ]] && [[ ! -z "$GITHUB_ACTION" ]]; then
+  # use the default github actions bot when in ci
+  git config user.email "github-actions[bot]@users.noreply.github.comm"
+  git config user.name "github-actions[bot]"
+fi
+
 # Run release stuff (update package.json#version, changelog, etc.)
 npx standard-version \
   --releaseCommitMessageFormat="$message" \
@@ -59,9 +65,6 @@ if [[ -z "$CI" ]] && [[ -z "$GITHUB_ACTION" ]]; then
   open -n $pr_url
 
 else
-
-  git config user.name ":robot:"
-  git config user.email "aciattestteamci@deque.com"
 
   commit_body="$COMMIT_BODY_HEADER $release_notes $COMMIT_BODY_FOOTER"
   gh pr create --title $message --body $commit_body --base $base
