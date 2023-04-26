@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/dequelabs/cauldron/compare/v5.1.0...v5.2.0) (2023-04-26)
+
+### Features
+
+- **NavBar:** ensure NavBar sets aria-current=true by default on active items ([#973](https://github.com/dequelabs/cauldron/issues/973)) ([b109bdf](https://github.com/dequelabs/cauldron/commit/b109bdf739f156042a1182a276e9c8d1ccfbff10))
+- **panel:** add composable components and revise docs ([#1025](https://github.com/dequelabs/cauldron/issues/1025)) ([90da2bc](https://github.com/dequelabs/cauldron/commit/90da2bc0600a5d9d889e3d27b99f43a075a4625e))
+
+### Bug Fixes
+
+- **Button:** ensure button.Link variant inherits its font-size to match inline text ([#971](https://github.com/dequelabs/cauldron/issues/971)) ([6e8ea8b](https://github.com/dequelabs/cauldron/commit/6e8ea8b271ca3e3fd8b3e08806a3767c4391a625))
+- **react:** fix incorrect proptype for Offscreen component and update documentation to v2 ([#1026](https://github.com/dequelabs/cauldron/issues/1026)) ([c2d1521](https://github.com/dequelabs/cauldron/commit/c2d1521fdc00f63aee5c88c8c7453280b85aba8a))
+
 ## [5.1.0](https://github.com/dequelabs/cauldron/compare/v5.0.0...v5.1.0) (2023-04-04)
 
 ### Features
