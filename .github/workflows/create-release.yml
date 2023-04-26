@@ -1,6 +1,8 @@
 name: Create Release PR
 
-on: [workflow_dispatch]
+# on: [workflow_dispatch]
+on:
+  push:
 
 jobs:
   create_release:
