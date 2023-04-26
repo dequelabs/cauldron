@@ -51,13 +51,13 @@ release_notes=$(
     --output-indicator-new=! CHANGELOG.md | egrep '^!' | awk -F'^[!]' '{print $2}' | sed -e 's/\n/$0A/g'
 )
 
+git push origin $release_branch
+
 if [[ -z "$CI" ]] && [[ -z "$GITHUB_ACTION" ]]; then
 
   # Get the additions to the changelog as the commit body and generate the PR url
   uri_encoded_commit_body=$(echo $release_notes | node -p 'encodeURIComponent(require("fs").readFileSync(0))')
   uri_encoded_message=$(git show --no-patch --format=%s | node -p 'encodeURIComponent(require("fs").readFileSync(0))')
-
-  git push origin $release_branch
 
   pr_url="https://github.com/dequelabs/cauldron/compare/$base...$release_branch?title=$uri_encoded_message&body=$uri_encoded_commit_body"
 
