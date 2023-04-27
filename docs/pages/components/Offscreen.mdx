@@ -1,0 +1,30 @@
+---
+title: Offscreen
+description: A component to visually hide text and display content only to assistive technology.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Offscreen/index.tsx
+---
+
+import { Offscreen, Link, Icon } from '@deque/cauldron-react'
+
+```js
+import { Offscreen } from '@deque/cauldron-react'
+```
+
+## Example
+
+The `Offscreen` component is a utility component to visually hide text while still providing accessible text to AT (Assistive Technology). This would be used in instances where a user using an AT tool would need additional context provided, or where `aria-label` could not be used (i.e. non-interactive elements), or when the user needs additional hints such as shortcut keys or controls to interact with the page.
+
+```jsx example
+<Link href="#Example" target="_blank" rel="noopener noreferrer">
+  <Icon type="external-link" />
+  Learn More
+  <Offscreen>(Link opens in a new window)</Offscreen>
+</Link>
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  props={[]}
+/>

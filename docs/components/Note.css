@@ -1,5 +1,6 @@
 .Note {
   padding: var(--space-small);
+  margin: var(--space-small) 0;
 }
 
 .Note--info {
