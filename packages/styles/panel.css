@@ -54,6 +54,7 @@
 }
 
 .Panel > :not(.Panel__Heading, .Panel__Header, .Panel__Content):first-child,
+.Panel > .Panel__Heading + :not(.Panel__Content),
 .Panel__Content > :first-child {
   margin-top: 0;
 }
