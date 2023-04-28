@@ -5,7 +5,7 @@ import PropDocs from '../../../Demo/PropDocs';
 export default function Layout() {
   return (
     <div>
-      <h1>Layout</h1>
+      <h1 id="main-title">Layout</h1>
       <h2>Component Description</h2>
       <p>
         The Workspace component is a convenience wrapper around the Layout and
@@ -29,7 +29,7 @@ const App = () => (
       workspaceRef={el => console.log('the main ref is ', el)}
       layoutRef={el => console.log('the layout ref is ', el)}
     >
-      <h1>Hello world!</h1>
+      <h1 id="main-title">Hello world!</h1>
     </Workspace>
   </div>
 );
@@ -55,7 +55,7 @@ const App = () => (
       <Main
         mainRef={el => console.log('the main ref is ', el)}
       >
-        <h1>Hello world!</h1>
+        <h1 id="main-title">Hello world!</h1>
       </Main>
       <footer>I am a footer</footer>
     </Layout>

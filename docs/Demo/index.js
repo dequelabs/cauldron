@@ -35,7 +35,7 @@ const Demo = props => {
 
   return (
     <div className="Demo">
-      <h1>{displayName}</h1>
+      <h1 id="main-title">{displayName}</h1>
       <h2>Component Description</h2>
       <p>{componentDescription}</p>
       <h2>Demo</h2>
@@ -52,16 +52,18 @@ const Demo = props => {
               DEMO_renderAfter,
               DEMO_renderBefore,
               DEMO_hide_renderAfterBefore = false,
+              DEMO_key,
               ...thinState
             } = state;
             const componentMarkup = renderState(thinState);
+            const key = DEMO_key || componentMarkup;
             const afterMarkup =
               DEMO_renderAfter &&
               !DEMO_hide_renderAfterBefore &&
               jsxStringify(DEMO_renderAfter, stringifyConfig);
 
             return (
-              <div key={componentMarkup}>
+              <div key={key}>
                 {DEMO_renderBefore}
                 <Component {...thinState} />
                 {DEMO_renderAfter}

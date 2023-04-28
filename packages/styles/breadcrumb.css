@@ -1,5 +1,6 @@
 .Breadcrumb ol {
-  display: flex;
+  display: block;
+  word-break: break-all;
   align-items: center;
   list-style-type: none;
   padding: 0;
@@ -14,9 +15,11 @@
 .Breadcrumb__Link {
   font-weight: 400;
   padding: 0;
+  display: inline;
 }
 
 .Breadcrumb__Item {
   font-weight: 500;
   color: var(--link-text-color);
+  display: inline;
 }

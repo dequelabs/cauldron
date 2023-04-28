@@ -1,0 +1,106 @@
+---
+title: Alert
+description: A component that displays an alert dialog to prompt for user action.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Alert/index.tsx
+---
+
+import { useState } from 'react'
+import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+
+```jsx
+import { Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Alert
+
+```jsx example
+function DefaultAlertExample() {
+  const [show, setShow] = useState(false)
+  const toggleAlert = () => setShow(!show)
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleAlert}>Toggle Alert</Button>
+      <Alert heading="Default Alert" show={show}>
+        <AlertContent>
+          Just letting you know that something happened.
+        </AlertContent>
+        <AlertActions>
+          <Button onClick={toggleAlert}>Ok</Button>
+          <Button variant="secondary" onClick={toggleAlert}>Close</Button>
+        </AlertActions>
+      </Alert>
+    </>
+  )
+}
+```
+
+### Warning Alert
+
+```jsx example
+function WarningAlertExample() {
+  const [show, setShow] = useState(false)
+  const toggleAlert = () => setShow(!show)
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleAlert}>Toggle Warning Alert</Button>
+      <Alert variant="warning" heading="Danger Zone" show={show}>
+        <AlertContent>
+          Welcome to the danger zone!
+        </AlertContent>
+        <AlertActions>
+          <Button variant="error" onClick={toggleAlert}>Danger</Button>
+          <Button variant="secondary" onClick={toggleAlert}>Nevermind</Button>
+        </AlertActions>
+      </Alert>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  props={[
+    {
+      name: 'variant',
+      type: ['default', 'warning'],
+      defaultValue: 'default',
+      description: 'Visual style of the alert.'
+    },
+    {
+      name: 'heading',
+      type: ['React.ReactElement', 'object'],
+      required: true,
+      description: 'Displayed in the heading at the top of the alert. Optionally include the heading level.'
+    },
+    {
+      name: 'onClose',
+      type: 'function',
+      description: 'Ref function for the button element'
+    },
+    {
+      name: 'portal',
+      type: 'HTMLElement',
+      description: 'The parent element to mount Alert to.',
+      default: 'document.body'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'Whether or not to show the alert.'
+    },
+    {
+      name: 'dialogRef',
+      type: 'function',
+      description: 'Ref function for the Alert element'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Modal](./Modal)
+- [Scrim](./Scrim)

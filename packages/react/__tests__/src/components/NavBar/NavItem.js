@@ -29,3 +29,38 @@ test('handles active prop properly', () => {
   );
   expect(MountedNavItem.find('.NavItem--active').exists()).toBe(true);
 });
+
+test('does not set aria-current when inactive', () => {
+  const MountedNavItem = mount(
+    <NavItem active>
+      <p>I am a child</p>
+    </NavItem>
+  );
+
+  expect(
+    MountedNavItem.find('.NavItem--active[aria-current="true"]').exists()
+  ).toBe(false);
+});
+
+test('sets aria-current when active', () => {
+  const MountedNavItem = mount(
+    <NavItem active>
+      <p>I am a child</p>
+    </NavItem>
+  );
+  expect(MountedNavItem.find('.NavItem--active').prop('aria-current')).toBe(
+    true
+  );
+});
+
+test('allows aria-current to be overridden', () => {
+  const MountedNavItem = mount(
+    <NavItem active aria-current="page">
+      <p>I am a child</p>
+    </NavItem>
+  );
+
+  expect(MountedNavItem.find('.NavItem--active').prop('aria-current')).toBe(
+    'page'
+  );
+});

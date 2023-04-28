@@ -94,6 +94,9 @@
   --text-size-smaller: 13px;
   --text-size-smallest: 12px;
 
+  /* fonts */
+  --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;
+
   /* font weight */
   --font-weight-thin: 100;
   --font-weight-light: 300;
@@ -101,6 +104,9 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
   --font-weight-ultra-bold: 900;
+
+  /* icon sizes */
+  --icon-size: 24px;
 
   /* dimensions */
   --border-width: 6px;
