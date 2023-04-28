@@ -6,7 +6,7 @@ import { children, className } from '../../../props';
 const Demo = () => {
   return (
     <>
-      <h1>TopBar</h1>
+      <h1 id="main-title">TopBar</h1>
       <h2>Component Description</h2>
       <p>
         A bar at the top of the page. Typically contains information about the

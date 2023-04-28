@@ -1,6 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Panel from '../../../../src/components/Panel';
+import Panel, {
+  PanelHeader,
+  PanelContent
+} from '../../../../src/components/Panel';
+const { axe, toHaveNoViolations } = require('jest-axe');
+
+expect.extend(toHaveNoViolations);
 
 describe('Panel', () => {
   test('renders with default heading level', () => {
@@ -74,7 +80,7 @@ describe('Panel', () => {
     expect(panel.find('section').hasClass('Panel--collapsed')).toBe(true);
   });
 
-  test('forwards a ref', () => {
+  test('`Panel` forwards a ref', () => {
     const ref = jest.fn();
     mount(
       <Panel ref={ref} heading={{ text: 'Title' }}>
@@ -83,5 +89,170 @@ describe('Panel', () => {
     );
 
     expect(ref).toHaveBeenCalled();
+  });
+
+  test('`PanelHeader` forwards a ref', () => {
+    const ref = jest.fn();
+    mount(
+      <Panel>
+        <PanelHeader ref={ref}>Panel Header</PanelHeader>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(ref).toHaveBeenCalled();
+  });
+
+  test('`PanelContent` forwards a ref', () => {
+    const ref = jest.fn();
+    mount(
+      <Panel>
+        <PanelHeader>Panel Header</PanelHeader>
+        <PanelContent ref={ref}>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(ref).toHaveBeenCalled();
+  });
+
+  test('`Panel` accepts a boolean padding prop', () => {
+    const panel = mount(
+      <Panel heading={{ text: 'Title' }} padding={false}>
+        Content
+      </Panel>
+    );
+
+    expect(panel.find('section').hasClass('Panel--no-padding')).toBe(true);
+  });
+
+  test('`PanelContent` accepts a boolean padding prop', () => {
+    const panel = mount(
+      <Panel heading={{ text: 'Title' }}>
+        <PanelHeader>Header</PanelHeader>
+        <PanelContent padding={false}>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(
+      panel.find('.Panel__Content').hasClass('Panel__Content--no-padding')
+    ).toBe(true);
+  });
+
+  test('renders with no heading', () => {
+    const panel = mount(<Panel>Content</Panel>);
+
+    expect(panel.find('.Panel__Header').exists()).toBe(false);
+    expect(panel.find('.Panel__Heading').exists()).toBe(false);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed heading', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        Content
+      </Panel>
+    );
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content', () => {
+    const panel = mount(
+      <Panel>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content and heading', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent>Content</PanelContent>
+      </Panel>
+    );
+
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+  });
+
+  test('renders with composed content and heading with custom attributes', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent aria-label="Custom Label">Content</PanelContent>
+      </Panel>
+    );
+
+    expect(panel.find('.Panel__Header').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.text()).toContain('Content');
+    expect(panel.find('.Panel__Content').props()['aria-label']).toBe(
+      'Custom Label'
+    );
+  });
+
+  test('renders with multiple `PanelContent` components', () => {
+    const panel = mount(
+      <Panel>
+        <PanelHeader>
+          <h1>Panel Heading</h1>
+        </PanelHeader>
+        <PanelContent>Content #1</PanelContent>
+        <PanelContent>Content #2</PanelContent>
+      </Panel>
+    );
+
+    expect(panel.find('.Panel__Content').exists()).toBe(true);
+    expect(panel.find('.Panel__Content').length).toBe(2);
+    expect(panel.text()).toContain('Content #1');
+    expect(panel.text()).toContain('Content #2');
+  });
+
+  describe('has no a11y violations', () => {
+    test('Panel with no heading', async () => {
+      const panel = mount(
+        <main>
+          <Panel>Content</Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
+
+    test('Panel and heading prop', async () => {
+      const panel = mount(
+        <main>
+          <Panel heading={{ level: 2, text: 'Title' }}>Content</Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
+
+    test('Panel and composed heading', async () => {
+      const panel = mount(
+        <main>
+          <Panel>
+            <PanelHeader>
+              <h1>Panel Heading</h1>
+            </PanelHeader>
+            Content
+          </Panel>
+        </main>
+      );
+
+      expect(await axe(panel.html())).toHaveNoViolations();
+    });
   });
 });

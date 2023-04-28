@@ -131,6 +131,12 @@ export default class Demo extends Component {
               </>
             ),
             show: type === 'not-dismissible',
+            DEMO_renderBefore: (
+              <p>
+                A current limitation is that non-dismissible Toasts are shown
+                where they are rendered to prevent them from clipping content.
+              </p>
+            ),
             DEMO_renderAfter: (
               <Button
                 variant="error"

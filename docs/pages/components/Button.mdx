@@ -1,0 +1,112 @@
+---
+title: Button
+description: An interactive component that performs a programmable action when activated by the user.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Button/index.tsx
+---
+
+import { Icon, Button, Code } from '@deque/cauldron-react'
+
+```js
+import { Button } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Primary
+
+Primary buttons are the default variant for the `Button` component.
+
+```jsx example
+<Button>Primary</Button>
+```
+
+### Secondary
+
+Secondary buttons are used for actions that are not the primary action.
+
+```jsx example
+<Button variant="secondary">Secondary</Button>
+```
+
+### Error
+
+Error buttons are used to indicate potentially dangerous actions.
+
+```jsx example
+<Button variant="error">Error</Button>
+```
+
+### Button with Icon
+
+Icons can be optionally appended to the left, or to the right of the button's text.
+
+```jsx example
+<Button variant="secondary">
+  <Icon type="plus" />
+  Add New User
+</Button>
+<Button variant="secondary">
+  Add New User
+  <Icon type="plus" />
+</Button>
+<Button variant="secondary">
+  <Icon type="add-user" />
+  Add New User
+  <Icon type="plus" />
+</Button>
+```
+
+### Link
+
+When you need a semantic button with the visual appearance of a link.
+
+```jsx example
+<Button variant="link">Link</Button>
+```
+
+### Tag
+
+```jsx example
+<Button variant="tag">Tag</Button>
+```
+
+### Additional Button States
+
+```jsx example
+<Button disabled>Primary Disabled</Button>
+<Button variant="secondary" thin>Secondary Thin Button</Button>
+<Button variant="error">
+  <Icon type="caution" />
+  Danger With Icon
+</Button>
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[
+    {
+      name: 'variant',
+      type: ['primary', 'secondary', 'error', 'link', 'tag'],
+      defaultValue: 'primary',
+      description: 'Visual style of the button.'
+    },
+    {
+      name: 'thin',
+      type: 'boolean',
+      description: 'Thinner visual style of button.'
+    },
+    {
+      name: 'buttonRef',
+      type: 'function',
+      description: 'Ref function for the button element'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [IconButton](./IconButton)

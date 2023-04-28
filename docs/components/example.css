@@ -1,0 +1,61 @@
+:root {
+  --example-border-color: var(--gray-40);
+  --example-background-color: #fff;
+  --example-code-background-color: var(--gray-20);
+}
+
+body.cauldron--theme-dark {
+  --example-border-color: var(--stroke-dark);
+  --example-background-color: var(--dark-workspace-color);
+  --example-code-background-color: var(--accent-dark);
+}
+
+.Component__example {
+  border-radius: 3px;
+  border: 1px solid var(--example-border-color);
+  background-color: var(--example-background-color);
+  padding: var(--space-medium);
+}
+
+.Component__example > :first-child {
+  margin: calc(var(--space-medium) * -1);
+  padding: var(--space-small);
+}
+
+.Component__example pre.Code {
+  margin: 0;
+  border: none;
+  font-size: var(--text-size-smaller);
+  flex: 1;
+}
+
+.Component__example__code {
+  background-color: var(--example-code-background-color);
+  padding: var(--space-small);
+  margin: calc(var(--space-medium) * -1);
+  margin-top: var(--space-medium);
+  border-top: 1px solid var(--example-border-color);
+  display: flex;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.Component__example > p:last-child {
+  margin: 0;
+}
+
+/* When displaying Scrim within an example, we want it to be constrained inside
+ * the boundaries of the component and not the viewport */
+
+.Component__example__react .Scrim {
+  position: absolute;
+}
+
+.Component__example:has(.Scrim) {
+  position: relative;
+}
+
+.Component__example__react:has(.Scrim) {
+  position: relative;
+  width: calc(100% + var(--space-medium) * 2);
+}

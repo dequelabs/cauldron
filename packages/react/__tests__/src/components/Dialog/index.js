@@ -1,5 +1,7 @@
 import React from 'react';
+import { setImmediate } from 'timers/promises';
 import { mount } from 'enzyme';
+import sinon from 'sinon';
 import Dialog from 'src/components/Dialog';
 import axe from '../../../axe';
 
@@ -126,6 +128,23 @@ test('supports heading from options', async () => {
   );
   expect(dialog.find('h3').exists()).toBe(true);
   expect(dialog.find('h3').text()).toEqual('hello title');
+});
+
+test('deactivates aria isolate on unmount', async () => {
+  const dialog = mount(
+    <Dialog {...defaults} show={true}>
+      {'body'}
+    </Dialog>
+  );
+
+  const deactivate = sinon.spy();
+  dialog.setState({ isolator: { deactivate, activate: () => {} } });
+  dialog.update();
+
+  expect(deactivate.notCalled).toBe(true);
+  dialog.unmount();
+  await setImmediate();
+  expect(deactivate.called).toBe(true);
 });
 
 test('should return no axe violations', async () => {

@@ -1,0 +1,223 @@
+---
+title: Panel
+description: A common, versatile pattern used to display content composed of different elements, usually in a collection.
+source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Panel/Panel.tsx
+---
+
+import {
+  Panel,
+  PanelHeader,
+  PanelContent,
+  Button,
+  Icon
+} from '@deque/cauldron-react';
+
+```js
+import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
+```
+
+## Examples
+
+### Panel Component
+
+At its simplest, a `Panel` is a styled semantic HTML `<section>` element with with content inside.
+
+<Note>
+  If your section needs to have an accessible name, be sure to include an
+  `aria-label` or `aria-labelledby` pointed to the `id` of your label.
+</Note>
+
+```jsx example
+<Panel aria-label="Panel Content">Panel Content</Panel>
+```
+
+### Panel with Heading (Prop)
+
+To add a heading to a `Panel`, you can use the `heading` prop. One advantage to using this prop over composing
+the elements is it automatically adds an `id` to the heading and `aria-labelledby` to the `Panel` component.
+
+Inspect the below example and you will see that the `Panel` component has an `aria-labelledby` attribute with the
+value of the `id` of the heading.
+
+```jsx example
+<Panel
+  heading={{
+    id: 'panel-heading-prop-example',
+    text: 'Panel Heading Prop',
+    level: 3
+  }}
+>
+  Panel Content
+</Panel>
+```
+
+### Panel (Composed)
+
+In addition to using the `heading` prop, you can also compose the `Panel` component with the `PanelHeader` and
+`PanelContent` components.
+
+<Note>
+  The `PanelHeader` and `PanelContent` should not be used with the `Panel`
+  heading prop at the same time. Choose one or the other.
+</Note>
+
+```jsx example
+<Panel>
+  <PanelHeader>
+    <h3>Panel Header</h3>
+  </PanelHeader>
+  <PanelContent>Panel Content</PanelContent>
+</Panel>
+```
+
+### Disabling Panel Padding
+
+For greater control over the styling of the `Panel`'s content, you can disable the default padding by setting
+the `padding` prop to `false`.
+
+```jsx example
+<Panel
+  heading={{
+    id: 'disabling-panel-padding-example',
+    text: 'Panel Heading',
+    level: 3
+  }}
+  padding={false}
+>
+  <p style={{ padding: '1rem' }}>Panel Content</p>
+</Panel>
+```
+
+### Disabling Panel Content Padding
+
+In addition to being able to disable the `Panel` padding via its `padding` prop, the `PanelContent` also has a
+`padding` prop which can be set to `false`. An example where this may be useful is when trying to display content
+in a multi-column or grid layout.
+
+In the following example, we are using CSS `columns` to create a two-column layout:
+
+```jsx example
+<Panel padding={false}>
+  <PanelHeader>
+    <h3>Panel Header</h3>
+  </PanelHeader>
+  <PanelContent
+    padding={false}
+    style={{
+      columns: '2',
+      columnRule: '1px solid var(--panel-divider-border-color)',
+      columnGap: '0'
+    }}
+  >
+    <div style={{ padding: 'var(--space-small)' }}>Column 1</div>
+    <div style={{ padding: 'var(--space-small)' }}>Column 2</div>
+  </PanelContent>
+  <PanelContent>Footer</PanelContent>
+</Panel>
+```
+
+### Header With Flexbox Content
+
+A common use-case for the `Panel` is to display a header with a button or other content. To achieve this, you
+can compose the `Panel` using a `PanelHeader` with a flexbox layout.
+
+```jsx example
+<Panel>
+  <PanelHeader
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}
+  >
+    <h3>Panel Header</h3>
+    <Button variant="primary" thin>
+      <Icon type="plus" />
+      Button
+    </Button>
+  </PanelHeader>
+  <PanelContent padding>Panel Content</PanelContent>
+</Panel>
+```
+
+### Stacked Content Sections
+
+Stacking `PanelContent` components will create a visual separation between the sections. A common pattern where
+this may be useful is when trying to display a footer for the `Panel`.
+
+```jsx example
+<Panel>
+  <PanelHeader>
+    <h3>Panel Header</h3>
+  </PanelHeader>
+  <PanelContent>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+      ornareadfasdfdsaf eleifend tempus. Sed odio sem, pulvinar nec erat ac,
+      iaculis maximus nisl. Pellentesque gravida lorem sit amet ipsum efficitur,
+      eget finibus justo feugiat. Suspendisse blandit, urna eu facilisis
+      pulvinar, mi turpis mattis magna, at rutrum leo leo egestas risus.
+    </p>
+  </PanelContent>
+  <PanelContent style={{ textAlign: 'center' }}>
+    <Button variant="secondary">Previous</Button>
+    <Button>Next</Button>
+  </PanelContent>
+</Panel>
+```
+
+## Props
+
+### Panel
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'padding',
+      type: 'boolean',
+      defaultValue: 'true',
+      description: 'Disable the `Panel` padding'
+    },
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Collapse the `Panel` padding to `12px` on all sides',
+      deprecated: true
+    },
+    {
+      name: 'heading',
+      type: 'object',
+      description: 'Object containing: text, level (optional), id (optional)',
+      required: false
+    }
+  ]}
+  refType="HTMLElement"
+/>
+
+### PanelHeader
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  refType="HTMLDivElement"
+/>
+
+### PanelContent
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'padding',
+      type: 'boolean',
+      defaultValue: 'true',
+      description: 'Disable padding for the `PanelContent`.'
+    }
+  ]}
+  refType="HTMLDivElement"
+/>

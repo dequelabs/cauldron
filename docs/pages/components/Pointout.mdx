@@ -1,0 +1,59 @@
+---
+title: Pointout
+deprecated: true
+description: A component that creates a box with text, an arrow, and styling to draw a user’s attention to something on the page and give information about it.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Pointout/index.tsx
+---
+
+import { useRef } from 'react'
+import { Pointout } from '@deque/cauldron-react'
+
+<Note type="warning">
+  The Pointout component is deprecated and should not be used. It will be removed in a future version of cauldron.
+</Note>
+
+```js
+import { Pointout } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### With Default Arrow
+
+```jsx example
+<Pointout heading={<h4>First time point out!</h4>} dismissText="Close">
+  <p>This is a first time point out with a pointer</p>
+</Pointout>
+```
+
+### With Positioned Arrow
+
+```jsx example
+<Pointout
+  heading={<h4>First time point out!</h4>}
+  dismissText="Close"
+  arrowPosition="top-right"
+>
+  <p>This is a first time point out with a positioned pointer</p>
+</Pointout>
+```
+
+### Without Arrow
+
+```jsx example
+<Pointout heading={<h4>This is a first time point out</h4>} noArrow={true}>
+  <p>This is a first time point out without a pointer</p>
+</Pointout>
+```
+
+### Targeted First Time Point Outs
+
+First time point outs can specify a `target` prop that will dynamically position itself pointing to the target element on render. Under the hood, we are using Portals to render the element to `document.body` but you can customize the portal location by setting the `portal` prop with your own element or ref.
+
+Positioning tracks `window.resize` events so that the First Time Point Out should always be positioned correctly no matter the context. If your component has a side effect where a target's position is changed that does not cause a trigger a resize, you can call `forceUpdate()` on the First Time Point out to reset the positioning.
+
+Please be aware that when using a `target` prop, the First Time Point Out's children are duplicated in order to address accessibility concerns. Any ids that are present in children will be sanitized in order to prevent duplicate ids from existing in the DOM. These ids will not be available to style, so it's recommended that you use classes or attribute to target styling instead.
+
+<Note>
+  Any ids/attributes of children will be applied to the offscreen/screen-reader-only ftpo, so things like aria-labelledby and aria-describedby etc will still work as expected.
+</Note>

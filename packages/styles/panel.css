@@ -2,23 +2,98 @@
   --panel-border-color: var(--gray-40);
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
+  --panel-padding: var(--space-small);
+  --panel-divider-border-color: var(--gray-40);
+  --panel-content-color: var(--gray-80);
+}
+
+/* Resets aggressive Chrome user agent styles */
+.Panel > :is(.Panel__Header, .Panel__Content, .Panel__Heading) > *,
+.Panel:first-child > :not(.Panel__Header, .Panel__Heading, .Panel__Content) {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .Panel {
-  padding: var(--space-small);
+  padding: var(--panel-padding);
+  margin: 0;
   border: 1px solid var(--panel-border-color);
   border-radius: 3px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
   background-color: var(--panel-background-color);
+  word-break: break-word;
+  color: var(--panel-content-color);
+}
+
+.Panel--no-padding {
+  padding: 0;
+  margin: 0;
+}
+
+.Panel__Content {
+  padding: var(--panel-padding);
+  margin: 0 calc(var(--panel-padding) * -1);
 }
 
 .Panel__Heading,
+.Panel__Header {
+  padding: max(calc(var(--panel-header-padding, var(--panel-padding)) - 4px))
+    var(--panel-header-padding, var(--panel-padding));
+}
+
+.Panel__Heading {
+  margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1)
+    var(--space-small) calc(var(--panel-padding) * -1);
+}
+
+.Panel__Header {
+  margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1) 0
+    calc(var(--panel-padding) * -1);
+}
+
+.Panel--no-padding > :is(.Panel__Heading, .Panel__Header, .Panel__Content) {
+  margin: 0;
+}
+
+.Panel__Content--no-padding {
+  --panel-padding: 0;
+  margin: 0 calc(var(--panel-padding) * -1);
+}
+
+.Panel
+  :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
+  border-top: 1px solid var(--panel-divider-border-color);
+}
+
+.Panel__Content:last-child {
+  padding-bottom: 0;
+}
+
+.Panel--no-padding > .Panel__Content:last-child {
+  padding-bottom: var(--panel-padding);
+}
+
+.Panel > .Panel__Heading {
+  border-bottom: 1px solid var(--panel-divider-border-color);
+}
+
+.Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
+.Panel > :is(.Panel__Header, .Panel__Heading) > :is(h1, h2, h3, h4, h5, h6),
 .Panel legend {
-  font-size: var(--text-size-medium);
+  font-size: var(--text-size-normal);
+  font-weight: var(--font-weight-medium);
   color: var(--panel-heading-color);
-  padding: 0;
-  margin: 0 0 var(--space-large) 0;
-  font-weight: var(--font-weight-bold);
+}
+
+.Panel--collapsed {
+  --panel-padding: 12px;
+}
+
+.Panel--collapsed .Panel__Heading {
+  margin: 0 0 12px 0;
+  font-size: var(--text-size-normal);
 }
 
 fieldset.Panel {
@@ -32,18 +107,11 @@ fieldset.Panel {
   top: var(--space-large);
 }
 
-.Panel--collapsed {
-  padding: 12px;
-}
-
-.Panel--collapsed .Panel__Heading {
-  margin: 0 0 12px 0;
-  font-size: var(--text-size-normal);
-}
-
 /* Dark Theme */
 .cauldron--theme-dark {
-  --panel-border-color: #5d676f;
+  --panel-border-color: var(--stroke-dark);
   --panel-background-color: var(--accent-medium);
-  --panel-heading-color: var(--accent-light);
+  --panel-heading-color: #fff;
+  --panel-divider-border-color: var(--stroke-dark);
+  --panel-content-color: var(--accent-light);
 }

@@ -61,7 +61,7 @@ const TableDemo = () => {
 
   return (
     <div>
-      <h1>Table</h1>
+      <h1 id="main-title">Table</h1>
       <h2>Component Description</h2>
       <p>
         A container for tabular data (information presented in a two-dimensional
