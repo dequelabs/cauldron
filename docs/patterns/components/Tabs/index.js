@@ -14,7 +14,7 @@ const Demo = () => {
 
   return (
     <div className="TabsDemo">
-      <h1>Tabs</h1>
+      <h1 id="main-title">Tabs</h1>
       <h2>Component Description</h2>
       <p>
         The

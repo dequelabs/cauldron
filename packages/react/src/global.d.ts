@@ -4,6 +4,6 @@ declare module 'keyname' {
 }
 
 declare module 'focusable' {
-  function focusable(): string;
+  const focusable: string;
   export = focusable;
 }

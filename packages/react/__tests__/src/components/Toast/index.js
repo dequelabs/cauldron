@@ -1,5 +1,7 @@
 import React from 'react';
+import { setImmediate } from 'timers/promises';
 import { mount } from 'enzyme';
+import sinon from 'sinon';
 import Toast from 'src/components/Toast';
 import axe from '../../../axe';
 
@@ -203,6 +205,23 @@ test('toast should not be focused with falsey focus prop', done => {
     expect(document.body).toBe(document.activeElement);
     done();
   }, 10);
+});
+
+test('deactivates aria isolate on unmount', async () => {
+  const dialog = mount(
+    <Toast {...defaultProps} type="action-needed" show={true}>
+      {'body'}
+    </Toast>
+  );
+
+  const deactivate = sinon.spy();
+  dialog.setState({ isolator: { deactivate, activate: () => {} } });
+  dialog.update();
+
+  expect(deactivate.notCalled).toBe(true);
+  dialog.unmount();
+  await setImmediate();
+  expect(deactivate.called).toBe(true);
 });
 
 test('should return no axe violations', async () => {
