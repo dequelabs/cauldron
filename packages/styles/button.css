@@ -187,7 +187,6 @@ button.Link {
   min-height: var(--button-thin-height);
   min-width: 100px;
   font-size: var(--text-size-smallest);
-  line-height: var(--text-size-smallest);
   padding: 0 16px;
 }
 
