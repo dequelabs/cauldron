@@ -36,7 +36,7 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 
 Frontmatter can also include:
 
-- `deprecated` - boolean value flagging the component as deprecated (which display a tag and display component in a separate deprecated section)
+- `deprecated` - boolean value flagging the component as deprecated (which displays a tag and displays component in a separate deprecated section)
 - `path` - Used when the url path needs to be different than the default name of the mdx file
 
 ### Writing Good Documentation
