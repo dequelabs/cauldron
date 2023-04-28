@@ -13,7 +13,9 @@ import { Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
 
 ## Examples
 
-### Alert
+### Default Alert
+
+Display an alert dialog that prompts the user to take action, by default this alert is non-dismissable:
 
 ```jsx example
 function DefaultAlertExample() {
@@ -38,6 +40,8 @@ function DefaultAlertExample() {
 
 ### Warning Alert
 
+If the user action is potentially dangerous, use a warning variant to indicate potentially destructive actions:
+
 ```jsx example
 function WarningAlertExample() {
   const [show, setShow] = useState(false)
@@ -61,6 +65,8 @@ function WarningAlertExample() {
 
 ## Props
 
+### Alert
+
 <ComponentProps
   children={true}
   props={[
@@ -79,7 +85,7 @@ function WarningAlertExample() {
     {
       name: 'onClose',
       type: 'function',
-      description: 'Ref function for the button element'
+      description: 'Called when the alert is closed or dismissed.'
     },
     {
       name: 'portal',
@@ -99,6 +105,21 @@ function WarningAlertExample() {
     }
   ]}
 />
+
+### AlertContent
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### AlertFooter
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
 
 ## Related Components
 
