@@ -18,7 +18,7 @@ Cauldron documentation is a mix of [mdxjs](https://mdxjs.com/) and custom react 
 
 ## Component Documentation
 
-To add document for a component, add a `.mdx` file to `pages/components` with the name of your component, i.e. `MyComponent.mdx`. A component should minimally include the following [frontmatter](https://mdxjs.com/guides/frontmatter/):
+To add documentation for a component, add a `.mdx` file to `pages/components` with the name of your component, i.e. `MyComponent.mdx`. A component should minimally include the following [frontmatter](https://mdxjs.com/guides/frontmatter/):
 
 - `title` - Will be used as the title and primary heading of the component
 - `description` - A short description of the component
