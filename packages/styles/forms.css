@@ -190,6 +190,13 @@ textarea.Field--has-error:focus:hover,
   flex-wrap: wrap;
 }
 
+.Radio--inline {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-large);
+}
+
 .Checkbox {
   margin-bottom: var(--space-smallest);
 }
