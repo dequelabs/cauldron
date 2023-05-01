@@ -9,7 +9,7 @@
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  padding: 4px 15px;
+  padding: var(--space-smallest) var(--space-small);
 }
 
 .Toast.Toast--non-dismissible {
