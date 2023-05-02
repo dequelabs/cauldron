@@ -60,6 +60,12 @@ body.cauldron--theme-dark {
   width: calc(100% + var(--space-medium) * 2);
 }
 
+/* Prevents duplicate scrollbars in sortable tables with offscreen elements*/
+
+.Component__example__react:has(.Table) {
+  position: relative;
+}
+
 /* Progress Example for TooltipTabstop */
 
 .Component__example__react .ExampleProgress {
