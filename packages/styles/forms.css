@@ -194,7 +194,7 @@ textarea.Field--has-error:focus:hover,
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: var(--space-large);
+  gap: var(--space-small);
 }
 
 .Checkbox {
