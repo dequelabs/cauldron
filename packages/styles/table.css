@@ -29,7 +29,7 @@
   font-size: var(--text-size-small);
   border-collapse: collapse;
   text-align: left;
-  width: 100%;
+  width: var(--table-width, 100%);
   overflow-wrap: break-word;
 }
 

@@ -15,6 +15,7 @@ export interface RadioGroupProps {
   radios: RadioItem[];
   defaultValue?: string;
   value?: any;
+  inline?: boolean;
   onChange: (radio: RadioItem, input: HTMLElement) => void;
 }
 
@@ -26,6 +27,7 @@ const RadioGroup = ({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange = () => {},
   className,
+  inline = false,
   ...other
 }: RadioGroupProps) => {
   const [currentValue, setCurrentValue] = useState<string | null>(
@@ -137,7 +139,11 @@ const RadioGroup = ({
   inputs.current = [];
 
   return (
-    <div className={className} role="radiogroup" {...other}>
+    <div
+      className={classNames(className, { 'Radio--inline': inline })}
+      role="radiogroup"
+      {...other}
+    >
       {radioButtons}
     </div>
   );

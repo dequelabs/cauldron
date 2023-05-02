@@ -59,3 +59,37 @@ body.cauldron--theme-dark {
   position: relative;
   width: calc(100% + var(--space-medium) * 2);
 }
+
+/* Prevents duplicate scrollbars in sortable tables with offscreen elements*/
+
+.Component__example__react:has(.Table) {
+  position: relative;
+}
+
+/* Progress Example for TooltipTabstop */
+
+.Component__example__react .ExampleProgress {
+  list-style-type: none;
+  display: flex;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  --example-progress-text-color: var(--accent-dark);
+  --example-progress-background-color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Component__example__react .ExampleProgress {
+  --example-progress-text-color: var(--gray-10);
+  --example-progress-background-color: var(--accent-dark);
+}
+
+.Component__example__react ol.ExampleProgress li button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.4rem;
+  width: 1.4rem;
+  border-radius: 50%;
+  color: var(--example-progress-text-color);
+  background-color: var(--example-progress-background-color);
+}
