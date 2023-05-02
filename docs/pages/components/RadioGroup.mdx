@@ -1,0 +1,157 @@
+---
+title: RadioGroup
+description: An interactive component that lets users select a single option from a list.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioGroup/index.tsx
+---
+
+import { RadioGroup, FieldWrap, Code } from '@deque/cauldron-react'
+
+```js
+import { RadioGroup } from '@deque/cauldron-react'
+```
+
+<Note>
+  Use [FieldWrap](/FieldWrap) to wrap all input components. The `RadioGroup` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+</Note>
+
+## Examples
+
+### Default
+
+```jsx example
+<FieldWrap>
+  <h3 id="gyros-label">Do you like gyros?</h3>
+  <RadioGroup
+    aria-labelledby="gyros-label"
+    name="gyros"
+    radios={[
+      {
+        id: 'gyros-yes',
+        label: 'Yes!!',
+        value: 'yes'
+      },
+      {
+        id: 'gyros-no',
+        label: 'Nope.',
+        value: 'no'
+      },
+      {
+        id: 'gyros-friday',
+        label: 'Only on fridays',
+        value: 'friday'
+      }
+    ]}
+    value="yes"
+  />
+</FieldWrap>
+```
+
+### With Descriptions
+
+```jsx example
+<FieldWrap>
+  <h3 id="pizza-label">Do you like pizza?</h3>
+  <RadioGroup
+    aria-labelledby="pizza-label"
+    defaultValue="tuesday"
+    name="pizza"
+    radios={[
+      {
+        id: 'yes',
+        label: 'Yes',
+        labelDescription: 'Of course you like pizza',
+        value: 'yes'
+      },
+      {
+        disabled: true,
+        id: 'no',
+        label: 'No',
+        labelDescription: 'Impossible, everyone likes pizza',
+        value: 'no'
+      },
+      {
+        id: 'tuesday',
+        label: 'Only on Tuesdays',
+        labelDescription: 'Pizza Tuesdays are rad',
+        value: 'tuesday'
+      }
+    ]}
+  />
+</FieldWrap>
+```
+
+### Inline Layout
+
+If your list of options is short, `RadioGroup` can optionally accept a `inline` prop to display the radio items in a horizontal orientation instead of vertical.
+
+```jsx example
+<FieldWrap>
+  <h3 id="robot-label">Are you a robot?</h3>
+  <RadioGroup
+    aria-labelledby="robot-label"
+    defaultValue="no"
+    name="robot"
+    inline
+    radios={[
+      {
+        id: 'robot-yes',
+        label: 'Yes',
+        value: 'yes'
+      },
+      {
+        id: 'robot-no',
+        label: 'No',
+        value: 'no'
+      }
+    ]}
+  />
+</FieldWrap>
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  props={[
+    {
+      name: 'radios',
+      type: 'array',
+      required: true,
+      description: 'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
+    },
+    {
+      name: 'aria-label',
+      type: 'string',
+      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'name',
+      type: 'string',
+      description: 'The "name" value of the HTMLInputElement.'
+    },
+    {
+      name: 'defaultValue',
+      type: 'any',
+      description: 'The initial value of the radio group. Used when the RadioGroup is uncontrolled'
+    },
+    {
+      name: 'value',
+      type: 'any',
+      description: 'The value of the radio group. Used when the RadioGroup is controlled.'
+    },
+    {
+      name: 'onChange',
+      type: 'function',
+      description: 'This is required if using "controlled" input; otherwise it is optional'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [FieldWrap](/FieldWrap)
