@@ -38,7 +38,7 @@ const main = async (): Promise<void> => {
   await page.goto(`http://localhost:${port}/`);
 
   // Build a list of all URLs.
-  const links = await page.$$('.SideBar a[href]');
+  const links = await page.$$('nav.Navigation a[href]');
   for (const link of links) {
     const href = await link.getProperty('href');
     const url = (await href?.jsonValue()) as string;
