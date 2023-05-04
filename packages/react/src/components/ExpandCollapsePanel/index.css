@@ -33,9 +33,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ExpandCollapse__panel,
-  .cauldron-expand-open,
-  .cauldron-collapse-close {
+  .ExpandCollapse__panel {
     animation: unset !important;
   }
 }
