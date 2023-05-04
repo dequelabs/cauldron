@@ -39,6 +39,10 @@
     var(--space-small) calc(var(--panel-padding) * -1);
 }
 
+.Panel__Heading + .Panel__Content {
+  margin-top: calc(var(--panel-padding) * -1);
+}
+
 .Panel__Header {
   margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1) 0
     calc(var(--panel-padding) * -1);
