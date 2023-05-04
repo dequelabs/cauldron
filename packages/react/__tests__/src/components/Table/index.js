@@ -6,7 +6,8 @@ import Table, {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
+  TableFooter
 } from '../../../../src/components/Table';
 import axe from '../../../axe';
 
@@ -31,6 +32,14 @@ const renderDefaultTable = () =>
           <TableCell className="my-table-cell">2</TableCell>
         </TableRow>
       </TableBody>
+      <TableFooter className="my-table-footer" data-foo="true">
+        <TableRow className="my-table-row">
+          <TableCell className="my-table-cell" data-foo="true">
+            foo
+          </TableCell>
+          <TableCell className="my-table-cell">bar</TableCell>
+        </TableRow>
+      </TableFooter>
     </Table>
   );
 
@@ -42,6 +51,7 @@ describe('Table components', () => {
     const tableHeader = table.find('TableHeader').at(0);
     const tableBody = table.find('TableBody');
     const tableCell = table.find('TableCell').at(0);
+    const tableFooter = table.find('TableFooter').at(0);
 
     const tableItems = [
       table,
@@ -49,7 +59,8 @@ describe('Table components', () => {
       tableRow,
       tableHeader,
       tableBody,
-      tableCell
+      tableCell,
+      tableFooter
     ];
 
     tableItems.forEach(wrapper => {
@@ -64,6 +75,7 @@ describe('Table components', () => {
     const tableHeader = table.find('TableHeader').at(0);
     const tableBody = table.find('TableBody');
     const tableCell = table.find('TableCell').at(0);
+    const tableFooter = table.find('TableFooter').at(0);
 
     expect(table.is('.my-table')).toBe(true);
     expect(tableHead.is('.my-table-head')).toBe(true);
@@ -71,6 +83,7 @@ describe('Table components', () => {
     expect(tableHeader.is('.my-table-header')).toBe(true);
     expect(tableBody.is('.my-table-body')).toBe(true);
     expect(tableCell.is('.my-table-cell')).toBe(true);
+    expect(tableFooter.is('.my-table-footer')).toBe(true);
   });
 
   test('passes arbitrary props through', () => {
@@ -80,6 +93,7 @@ describe('Table components', () => {
     const tableHeader = table.find('TableHeader').at(0);
     const tableBody = table.find('TableBody');
     const tableCell = table.find('TableCell').at(0);
+    const tableFooter = table.find('TableFooter').at(0);
 
     const tableItems = [
       table,
@@ -87,7 +101,8 @@ describe('Table components', () => {
       tableRow,
       tableHeader,
       tableBody,
-      tableCell
+      tableCell,
+      tableFooter
     ];
 
     tableItems.forEach(wrapper => {
@@ -104,12 +119,14 @@ describe('Table components', () => {
     const head = shallow(<TableHead>a</TableHead>);
     const header = shallow(<TableHeader>a</TableHeader>);
     const row = shallow(<TableRow>a</TableRow>);
+    const footer = shallow(<TableFooter>a</TableFooter>);
 
     expect(table.is('table')).toBe(true);
     expect(body.is('tbody')).toBe(true);
     expect(cell.is('td')).toBe(true);
     expect(head.is('thead')).toBe(true);
     expect(header.is('th')).toBe(true);
+    expect(footer.is('tfoot')).toBe(true);
     expect(row.is('tr')).toBe(true);
   });
 
@@ -185,7 +202,7 @@ describe('Table components', () => {
       );
 
       expect(wrapper.find('Offscreen').text()).toBe('up and away');
-      expect(wrapper.find('.Icon--triangle-up').exists()).toBe(true);
+      expect(wrapper.find('.Icon--table-sort-ascending').exists()).toBe(true);
     });
 
     test('renders triangle down Icon and descending message when sortDirection is descending', () => {
@@ -206,7 +223,7 @@ describe('Table components', () => {
       );
 
       expect(wrapper.find('Offscreen').text()).toBe('down below');
-      expect(wrapper.find('.Icon--triangle-down').exists()).toBe(true);
+      expect(wrapper.find('.Icon--table-sort-descending').exists()).toBe(true);
     });
 
     test('calls onSort when sort button is clicked', () => {

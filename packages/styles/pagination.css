@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   font-size: var(--text-size-small);
+  margin: 0;
 }
 
 .Pagination > ul > li:not(:last-child) {
@@ -65,4 +66,14 @@
 
 .cauldron--theme-dark .Pagination [role='log'] {
   color: var(--accent-light);
+}
+
+@media (max-width: 28.125rem) {
+  .Pagination [role='log'] {
+    margin: 0;
+  }
+
+  .Pagination--thin [role='log'] {
+    margin: 0;
+  }
 }

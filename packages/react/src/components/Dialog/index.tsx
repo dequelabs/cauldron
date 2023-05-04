@@ -72,6 +72,11 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     }
   }
 
+  componentWillUnmount() {
+    const { isolator } = this.state;
+    isolator?.deactivate();
+  }
+
   componentDidUpdate(prevProps: DialogProps) {
     if (!prevProps.show && this.props.show) {
       this.attachIsolator(this.focusHeading);
@@ -170,8 +175,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   }
 
   close() {
+    this.state.isolator?.deactivate();
     if (this.props.show) {
-      this.state.isolator?.deactivate();
       this.props.onClose?.();
     }
   }

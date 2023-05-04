@@ -83,7 +83,7 @@ function TwoColumnPanelDemo() {
 
   return (
     <div className="twocolumnpanel-demo">
-      <h1>Two Column Panel</h1>
+      <h1 id="main-title">Two Column Panel</h1>
       <h2>Component Description</h2>
       <p>
         Two column panel is a container component intended to provide a

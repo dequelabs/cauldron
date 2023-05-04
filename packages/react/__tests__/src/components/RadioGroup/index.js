@@ -169,6 +169,11 @@ test('handles `labelDescription` value', () => {
   ).toBe(labelDescriptionId);
 });
 
+test('handles `inline` prop', () => {
+  const wrapper = mount(<RadioGroup {...defaultProps} inline />);
+  expect(wrapper.find('[role="radiogroup"].Radio--inline').exists()).toBe(true);
+});
+
 test('should return no axe violations', async () => {
   const radioGroup = mount(<RadioGroup {...defaultProps} />);
   expect(await axe(radioGroup.html())).toHaveNoViolations();

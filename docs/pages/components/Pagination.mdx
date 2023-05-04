@@ -1,0 +1,162 @@
+---
+title: Pagination
+description: A component and hook that create pages out of a list of items.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Pagination/Pagination.tsx
+---
+
+import { Pagination, usePagination } from '@deque/cauldron-react'
+
+```js
+import { Pagination } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+```jsx example
+<Pagination totalItems={15} />
+```
+
+### Thin
+
+```jsx example
+<Pagination totalItems={15} thin />
+```
+
+### Customizing Pagination Labels
+
+The pagination component sets labels by default, but these labels can be overridden if you need to customize the labels based on the types of items that are being displayed, or to provide the labels in a different locale.
+
+```jsx example
+<Pagination
+  currentPage={1}
+  itemsPerPage={1}
+  totalItems={25}
+  firstPageLabel="First Issue"
+  previousPageLabel="Previous Issue"
+  nextPageLabel="Next Issue"
+  lastPageLabel="Last Issue"
+  statusLabel={<span><strong>1</strong> of <strong>25</strong></span>}
+/>
+```
+
+## Pagination Hook
+
+The pagination component does not maintain any state, but is dependent on state being passed in. This can be done manually using props, or by using the provided `usePagination` hook:
+
+```jsx example
+function PaginationWithHook() {
+  const { pagination } = usePagination({
+    totalItems: 111,
+    initialPageSize: 25
+  })
+  return <Pagination {...pagination} />
+}
+```
+
+The pagination hook returns an object containing the properties `pagination`, a series of controls that can be spread into the Pagination component, and `pageStatus` which contains details about the state including, `currentPage`, `pageStart`, and `pageEnd`.
+
+### usePagination Options
+
+<ComponentProps
+  props={[
+    {
+      name: 'totalItems',
+      type: 'number',
+      required: true,
+      description: 'The total number of items being rendered (not the total number of pages).'
+    },
+    {
+      name: 'initialPageSize',
+      type: 'number',
+      description: 'The total number of items per page.',
+      defaultValue: 10
+    },
+    {
+      name: 'initialPage',
+      type: 'number',
+      description: 'The (1-based) number of the page that pagination will start on.',
+      defaultValue: 1
+    }
+  ]}
+/>
+
+## Props
+
+<ComponentProps
+  props={[
+    {
+      name: 'totalItems',
+      type: 'number',
+      required: true,
+      description: 'The total number of items being rendered (not the total number of pages).'
+    },
+    {
+      name: 'itemsPerPage',
+      type: 'number',
+      defaultValue: 10
+    },
+    {
+      name: 'currentPage',
+      type: 'number',
+      defaultValue: 1,
+      description: 'The (1-based) number of the current page.'
+    },
+    {
+      name: 'firstPageLabel',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      defaultValue: 'First page',
+      description: 'The label text for the first page button (to be rendered as a tooltip).'
+    },
+    {
+      name: 'previousPageLabel',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      defaultValue: 'Previous page',
+      description: 'The label text for the previous page button (to be rendered as a tooltip).'
+    },
+    {
+      name: 'nextPageLabel',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      defaultValue: 'Next page',
+      description: 'The label text for the next page button (to be rendered as a tooltip).'
+    },
+    {
+      name: 'lastPageLabel',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      defaultValue: 'Last page',
+      description: 'The label text for the last page button (to be rendered as a tooltip).'
+    },
+    {
+      name: 'onNextPageClick',
+      type: 'function',
+      description: 'Function to be called when next page button is clicked'
+    },
+    {
+      name: 'onPreviousPageClick',
+      type: 'function',
+      description: 'Function to be called when previous page button is clicked'
+    },
+    {
+      name: 'onFirstPageClick',
+      type: 'function',
+      description: 'Function to be called when first page button is clicked'
+    },
+    {
+      name: 'onLastPageClick',
+      type: 'function',
+      description: 'Function to be called when last page button is clicked'
+    },
+    {
+      name: 'tooltipPlacement',
+      type: 'string',
+      description: 'The position of the tooltip relative to its target element.',
+      defaultValue: 'bottom'
+    },
+    {
+      name: 'thin',
+      type: 'boolean',
+      description: 'Displays pagination with "thin" modifier (reduces height of buttons and spacing)'
+    }
+  ]}
+/>
