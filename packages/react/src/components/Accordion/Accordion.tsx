@@ -6,7 +6,6 @@ import ExpandCollapsePanel, {
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
 import PropTypes from 'prop-types';
-import useMediaQuery from '../../utils/use-media-query';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -54,12 +53,6 @@ const Accordion = ({
   ...props
 }: AccordionProps) => {
   const elementId = useId();
-  const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
-  const reducedMotionEnabled = useMediaQuery(reducedMotionQuery, true);
-
-  if (reducedMotionEnabled) {
-    animationTiming = false;
-  }
 
   const childrenArray = React.Children.toArray(children);
 

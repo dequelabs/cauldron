@@ -75,10 +75,3 @@ button.Accordion__trigger {
   border-radius: 0 0 3px 3px;
   box-shadow: 0 2px 3px 0 var(--accordion-box-shadow-color);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .Accordion__trigger:hover,
-  .Accordion .Icon {
-    transition: none;
-  }
-}

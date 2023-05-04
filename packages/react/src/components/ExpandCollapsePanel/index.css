@@ -31,3 +31,11 @@
   --expandcollapse-trigger-color: var(--white);
   --expandcollapse-panel-color: var(--accent-light);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ExpandCollapse__panel,
+  .cauldron-expand-open,
+  .cauldron-collapse-close {
+    animation: unset !important;
+  }
+}
