@@ -34,6 +34,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ExpandCollapse__panel {
-    animation: unset !important;
+    animation: none !important;
   }
 }
