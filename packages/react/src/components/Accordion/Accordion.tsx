@@ -52,6 +52,8 @@ const Accordion = ({
   animationTiming,
   ...props
 }: AccordionProps) => {
+  const elementId = useId();
+
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
@@ -81,10 +83,6 @@ const Accordion = ({
     );
     return null;
   }
-
-  const { className: triggerClassName, ...triggerProps } = trigger.props;
-
-  const elementId = useId();
 
   return (
     <div className="Accordion" {...props}>

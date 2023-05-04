@@ -31,3 +31,9 @@
   --expandcollapse-trigger-color: var(--white);
   --expandcollapse-panel-color: var(--accent-light);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ExpandCollapse__panel {
+    animation: none !important;
+  }
+}
