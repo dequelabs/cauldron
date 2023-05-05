@@ -2,19 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [5.2.0](https://github.com/dequelabs/cauldron/compare/v5.1.0...v5.2.0) (2023-04-27)
+## [5.3.0](https://github.com/dequelabs/cauldron/compare/v5.2.0...v5.3.0) (2023-05-05)
 
 
 ### Features
 
-* **NavBar:** ensure NavBar sets aria-current=true by default on active items ([#973](https://github.com/dequelabs/cauldron/issues/973)) ([b109bdf](https://github.com/dequelabs/cauldron/commit/b109bdf739f156042a1182a276e9c8d1ccfbff10))
-* **panel:** add composable components and revise docs  ([#1025](https://github.com/dequelabs/cauldron/issues/1025)) ([90da2bc](https://github.com/dequelabs/cauldron/commit/90da2bc0600a5d9d889e3d27b99f43a075a4625e))
+* **RadioGroup:** add inline modifier for RadioGroup ([#1049](https://github.com/dequelabs/cauldron/issues/1049)) ([714a3a4](https://github.com/dequelabs/cauldron/commit/714a3a4b114b07cd006d86946922867cc67d4aed))
+* **react:** include custom css var for setting table width and update table documentation ([#1035](https://github.com/dequelabs/cauldron/issues/1035)) ([c4857aa](https://github.com/dequelabs/cauldron/commit/c4857aa64f4d09274480ec6855232c18e5f43dbb))
+* **react:** respect prefers-reduced-motion with Accordion ([#832](https://github.com/dequelabs/cauldron/issues/832)) ([9f1a3f9](https://github.com/dequelabs/cauldron/commit/9f1a3f920f2905d0fc5955a0abc171202b554f05))
+* **styles:** adds darker colored warning variable ([#1066](https://github.com/dequelabs/cauldron/issues/1066)) ([a9c85dd](https://github.com/dequelabs/cauldron/commit/a9c85dd2584c977594b5e1f33047f1ab07de9a75))
 
 
 ### Bug Fixes
 
-* **Button:** ensure button.Link variant inherits its font-size to match inline text ([#971](https://github.com/dequelabs/cauldron/issues/971)) ([6e8ea8b](https://github.com/dequelabs/cauldron/commit/6e8ea8b271ca3e3fd8b3e08806a3767c4391a625))
-* **react:** fix incorrect proptype for Offscreen component and update documentation to v2 ([#1026](https://github.com/dequelabs/cauldron/issues/1026)) ([c2d1521](https://github.com/dequelabs/cauldron/commit/c2d1521fdc00f63aee5c88c8c7453280b85aba8a))
+* **styles:** fix spacing between PanelHeading and PanelContent ([#1064](https://github.com/dequelabs/cauldron/issues/1064)) ([abdecaa](https://github.com/dequelabs/cauldron/commit/abdecaa3d71176786b55d5059cb267391a4116da))
+* **styles:** prevent select text from overlapping with carat indicator ([#1058](https://github.com/dequelabs/cauldron/issues/1058)) ([7637a80](https://github.com/dequelabs/cauldron/commit/7637a808d1eed9295ca421eeca26cd59b07f203e))
+* removed line height styling from button ([#1046](https://github.com/dequelabs/cauldron/issues/1046)) ([9daa8e8](https://github.com/dequelabs/cauldron/commit/9daa8e8527afc15748444ec2b0bdbcebe310553a))
+* **react:** corrected toast component's padding ([#1047](https://github.com/dequelabs/cauldron/issues/1047)) ([e89d35c](https://github.com/dequelabs/cauldron/commit/e89d35c3aa952a992d01552164bd02e0adb28c6d))
+* **style:** fix aggressive styles getting applied to nested elements in Panel ([#1045](https://github.com/dequelabs/cauldron/issues/1045)) ([de81016](https://github.com/dequelabs/cauldron/commit/de81016a8c1f47800ae7bb69ed64c17a0346f386))
+
+## [5.2.0](https://github.com/dequelabs/cauldron/compare/v5.1.0...v5.2.0) (2023-04-27)
+
+### Features
+
+- **NavBar:** ensure NavBar sets aria-current=true by default on active items ([#973](https://github.com/dequelabs/cauldron/issues/973)) ([b109bdf](https://github.com/dequelabs/cauldron/commit/b109bdf739f156042a1182a276e9c8d1ccfbff10))
+- **panel:** add composable components and revise docs ([#1025](https://github.com/dequelabs/cauldron/issues/1025)) ([90da2bc](https://github.com/dequelabs/cauldron/commit/90da2bc0600a5d9d889e3d27b99f43a075a4625e))
+
+### Bug Fixes
+
+- **Button:** ensure button.Link variant inherits its font-size to match inline text ([#971](https://github.com/dequelabs/cauldron/issues/971)) ([6e8ea8b](https://github.com/dequelabs/cauldron/commit/6e8ea8b271ca3e3fd8b3e08806a3767c4391a625))
+- **react:** fix incorrect proptype for Offscreen component and update documentation to v2 ([#1026](https://github.com/dequelabs/cauldron/issues/1026)) ([c2d1521](https://github.com/dequelabs/cauldron/commit/c2d1521fdc00f63aee5c88c8c7453280b85aba8a))
 
 ## [5.1.0](https://github.com/dequelabs/cauldron/compare/v5.0.0...v5.1.0) (2023-04-04)
 

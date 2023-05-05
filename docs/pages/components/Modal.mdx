@@ -1,0 +1,132 @@
+---
+title: Modal
+description: A dismissable dialog component.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Modal/index.tsx
+---
+
+import { useState } from 'react'
+import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+
+```jsx
+import { Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default Modal
+
+By default, modals display with a heading and a dismissable close action:
+
+```jsx example
+function DefaultModalExample() {
+  const [show, setShow] = useState(false)
+  const toggleModal = () => setShow(!show)
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleModal}>Toggle Default Modal</Button>
+      <Modal heading="Default Modal" show={show} onClose={toggleModal}>
+        <ModalContent>
+          Modal content here, get your modal content here!
+        </ModalContent>
+        <ModalFooter>
+          <Button onClick={toggleModal}>Ok</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+```
+
+If the action taken from the modal needs to be non-dismissable, use a variant of [Alert](./Alert) instead.
+
+### Info Modal
+
+Alternatively, an "unstyled" modal is available that is less opinionated in its styling and allows for a more informational presentation of the modal:
+
+```jsx example
+function UnstyledModalExample() {
+  const [show, setShow] = useState(false)
+  const toggleModal = () => setShow(!show)
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleModal}>Toggle Info Modal</Button>
+      <Modal heading="Info Modal" variant="info" show={show} onClose={toggleModal}>
+        <ModalContent>
+          Modal content here, get your modal content here!
+        </ModalContent>
+        <ModalFooter>
+          <Button onClick={toggleModal}>Ok</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+```
+
+## Props
+
+### Modal
+
+<ComponentProps
+  children={true}
+  props={[
+    {
+      name: 'variant',
+      type: ['info', 'undefined'],
+      defaultValue: '',
+      description: 'Visual style of the modal.'
+    },
+    {
+      name: 'heading',
+      type: ['React.ReactElement', 'object'],
+      required: true,
+      description: 'Displayed in the heading at the top of the alert. Optionally include the heading level.'
+    },
+    {
+      name: 'onClose',
+      type: 'function',
+      description: 'Called when the modal is closed or dismissed.'
+    },
+    {
+      name: 'closeButtonText',
+      type: 'string',
+      defaultValue: 'Close',
+      description: 'Text label for the close button.'
+    },
+    {
+      name: 'portal',
+      type: 'HTMLElement',
+      description: 'The parent element to mount Modal to.',
+      default: 'document.body'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'Whether or not to show the Modal.'
+    },
+    {
+      name: 'dialogRef',
+      type: 'function',
+      description: 'Ref function for the Modal element'
+    }
+  ]}
+/>
+
+### ModalContent
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### ModalFooter
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+## Related Components
+
+- [Alert](./Alert)
+- [Scrim](./Scrim)
