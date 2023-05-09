@@ -1,0 +1,60 @@
+---
+title: FieldWrap
+description: A utility component to wrap input fields.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldWrap/index.tsx
+---
+
+import { FieldWrap, TextField, Button } from '@deque/cauldron-react'
+
+```js
+import { FieldWrap } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Single Field
+
+```jsx example
+<FieldWrap>
+  <TextField label="First name" />
+</FieldWrap>
+```
+
+### Multiple Fields
+
+```jsx example
+<FieldWrap as="fieldset">
+  <legend>
+    Send us a message
+  </legend>
+  <TextField label="Email" />
+  <TextField
+    label="Message"
+    multiline
+  />
+  <Button>
+    Send Message
+  </Button>
+</FieldWrap>
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'as',
+      type: ['React.ElementType', 'string'],
+      description: 'A component to render the FieldWrap as.',
+      defaultValue: 'div'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [TextField](./TextField)
+- [RadioGroup](./RadioGroup)
+- [Checkbox](./Checkbox)
