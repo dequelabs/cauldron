@@ -1,6 +1,6 @@
 ---
 title: Link
-description: A link component with accessible styling.
+description: An interactive component that creates a hyperlink to other web pages, files, email addresses, locations on the same page, etc.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Link/index.tsx
 ---
 
@@ -12,7 +12,7 @@ import { Link } from '@deque/cauldron-react';
 
 ## Examples
 
-### Primary
+### Link
 
 The default variant for the `Link` component.
 
@@ -22,34 +22,31 @@ The default variant for the `Link` component.
 
 ### Button
 
-When you need a semantic link with the visual appearance of a button.
+When you need a semantic link with the visual appearance of a button. A `Link` component should use the `button` variant for a page's primary action(s).
 
 ```jsx example
-<Link variant="button">I am a link!</Link>
+<Link variant="button">I am a link that looks like a button!</Link>
 ```
 
 ### Button (secondary)
 
-When you need a semantic link with the visual appearance of a secondary button. Secondary buttons are used for actions that are not the primary action.
+When you need a semantic link with the visual appearance of a secondary button. A `Link` component should use the `button-secondary` variant for a page's non-primary action(s).
+
+An example of a secondary button is a "Cancel" button next to a "Submit" button on a form.
 
 ```jsx example
 <Link variant="button-secondary">I am a link!</Link>
 ```
 
-### Additional Link States
+### Buttin (with thin modifier)
 
 A link with visual styling applied to make it look like a button with reduced height.
 
-<div style={{ display: 'flex', flexDirection: 'column' }}>
 ```jsx example
 <Link variant="button" thin>
   I am a thin link!
 </Link>
-
-<Link lowercase>I AM A LOWERCASE LINK</Link>
-
 ```
-</div>
 
 ## Props
 
@@ -60,25 +57,21 @@ A link with visual styling applied to make it look like a button with reduced he
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'error', 'link', 'tag'],
-      defaultValue: 'primary',
+      type: ['button', 'button-secondary'],
+      defaultValue: 'button',
       description: 'Visual style of the button.'
     },
     {
       name: 'thin',
       type: 'boolean',
+      defaultValue: 'false',
       description: 'Thinner visual style of button.'
-    },
-    {
-      name: 'lowercase',
-      type: 'boolean',
-      description:
-        'When `true`, adds style to make text contents all lowercase.'
     },
     {
       name: 'buttonRef',
       type: 'function',
-      description: 'Ref function for the button element'
+      description:
+        'Ref function for the button element. Use this to access the button element directly.'
     }
   ]}
 />
