@@ -17,7 +17,7 @@ import { Link } from '@deque/cauldron-react';
 The default variant for the `Link` component.
 
 ```jsx example
-<Link>I am a link!</Link>
+<Link href="#">I am a link</Link>
 ```
 
 ### Button
@@ -25,7 +25,9 @@ The default variant for the `Link` component.
 When you need a semantic link with the visual appearance of a button. A `Link` component should use the `button` variant for a page's primary action(s).
 
 ```jsx example
-<Link variant="button">I am a link that looks like a button!</Link>
+<Link variant="button" href="#">
+  I am a link that looks like a primary button
+</Link>
 ```
 
 ### Button (secondary)
@@ -35,7 +37,9 @@ When you need a semantic link with the visual appearance of a secondary button. 
 An example of a secondary button is a "Cancel" button next to a "Submit" button on a form.
 
 ```jsx example
-<Link variant="button-secondary">I am a link!</Link>
+<Link variant="button-secondary" href="#">
+  I am a link that looks like a secondary button
+</Link>
 ```
 
 ### Buttin (with thin modifier)
@@ -43,8 +47,8 @@ An example of a secondary button is a "Cancel" button next to a "Submit" button 
 A link with visual styling applied to make it look like a button with reduced height.
 
 ```jsx example
-<Link variant="button" thin>
-  I am a thin link!
+<Link variant="button" href="#" thin>
+  I am a link that looks like a thin primary button
 </Link>
 ```
 
