@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
+import focusable from 'focusable';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
@@ -50,6 +51,7 @@ const App = () => {
   const workspaceRef = useRef(null);
   const navigationRef = useRef(null);
   const topBarTrigger = useRef();
+  const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
   const { theme, toggleTheme } = useThemeContext();
 
   const focusTopBarMenuItem = () => {
@@ -149,6 +151,13 @@ const App = () => {
     }
   }, [state.show]);
 
+  useEffect(() => {
+    const firstFocusableElement = workspaceRef.current?.querySelector(
+      focusable
+    );
+    setWorkspaceTabIndex(!firstFocusableElement ? 0 : -1);
+  });
+
   return (
     <Router>
       <Helmet
@@ -229,7 +238,7 @@ const App = () => {
         <Workspace
           id="main-content"
           workspaceRef={workspaceRef}
-          tabIndex={-1}
+          tabIndex={workspaceTabIndex}
           aria-hidden={show}
           aria-labelledby="main-title"
         >

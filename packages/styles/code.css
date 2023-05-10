@@ -28,7 +28,7 @@
 }
 
 .Code .hljs-quote {
-  color: #969896;
+  color: #666666;
   font-style: italic;
 }
 
@@ -88,11 +88,11 @@
 .Code .hljs-subst,
 .Code .hljs-meta,
 .Code .hljs-link {
-  color: #f99157;
+  color: #8a3500;
 }
 
 .Code .hljs-deletion {
-  color: #dc322f;
+  color: #c92e40;
 }
 
 .Code .hljs-formula {
@@ -122,6 +122,14 @@
   color: #cc99cc;
 }
 
+.cauldron--theme-dark .Code .hljs-symbol,
+.cauldron--theme-dark .Code .hljs-bullet,
+.cauldron--theme-dark .Code .hljs-subst,
+.cauldron--theme-dark .Code .hljs-meta,
+.cauldron--theme-dark .Code .hljs-link {
+  color: #f99157;
+}
+
 .cauldron--theme-dark .Code .hljs-comment {
   color: #9f9f9f;
 }
@@ -133,6 +141,11 @@
 .Code .hljs-name,
 .Code .hljs-section {
   color: var(--accent-primary-active);
+}
+
+.cauldron--theme-dark .Code .hljs-name,
+.cauldron--theme-dark .Code .hljs-section {
+  color: #79a7d9;
 }
 
 .cauldron--theme-dark .Code .hljs-variable,
