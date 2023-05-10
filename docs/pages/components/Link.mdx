@@ -1,0 +1,88 @@
+---
+title: Link
+description: A link component with accessible styling.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Link/index.tsx
+---
+
+import { Link, Button } from '@deque/cauldron-react';
+
+```js
+import { Link } from '@deque/cauldron-react';
+```
+
+## Examples
+
+### Primary
+
+The default variant for the `Link` component.
+
+```jsx example
+<Link>I am a link!</Link>
+```
+
+### Button
+
+When you need a semantic link with the visual appearance of a button.
+
+```jsx example
+<Link variant="button">I am a link!</Link>
+```
+
+### Button (secondary)
+
+When you need a semantic link with the visual appearance of a secondary button. Secondary buttons are used for actions that are not the primary action.
+
+```jsx example
+<Link variant="button-secondary">I am a link!</Link>
+```
+
+### Additional Link States
+
+A link with visual styling applied to make it look like a button with reduced height.
+
+<div style={{ display: 'flex', flexDirection: 'column' }}>
+```jsx example
+<Link variant="button" thin>
+  I am a thin link!
+</Link>
+
+<Link lowercase>I AM A LOWERCASE LINK</Link>
+
+```
+</div>
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[
+    {
+      name: 'variant',
+      type: ['primary', 'secondary', 'error', 'link', 'tag'],
+      defaultValue: 'primary',
+      description: 'Visual style of the button.'
+    },
+    {
+      name: 'thin',
+      type: 'boolean',
+      description: 'Thinner visual style of button.'
+    },
+    {
+      name: 'lowercase',
+      type: 'boolean',
+      description:
+        'When `true`, adds style to make text contents all lowercase.'
+    },
+    {
+      name: 'buttonRef',
+      type: 'function',
+      description: 'Ref function for the button element'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Button](./Button)

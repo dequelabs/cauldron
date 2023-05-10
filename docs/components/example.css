@@ -66,6 +66,10 @@ body.cauldron--theme-dark {
   position: relative;
 }
 
+.Component__example__react .Link--lowercase {
+  margin: 0 var(--space-smaller);
+}
+
 /* Progress Example for TooltipTabstop */
 
 .Component__example__react .ExampleProgress {
