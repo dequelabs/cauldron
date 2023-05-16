@@ -20,96 +20,104 @@ import { Select } from '@deque/cauldron-react'
 ### Resting
 
 ```jsx example
-<Select
-  label="Do you like yogurt?"
-  options={[
-    {
-      key: 'yes',
-      value: 'Yes'
-    },
-    {
-      key: 'no',
-      value: 'No'
-    },
-    {
-      key: 'maybe',
-      value: 'Maybe'
-    }
-  ]}
-  defaultValue="Yes"
-/>
+<FieldWrap>
+  <Select
+    label="Do you like yogurt?"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+      {
+        key: 'maybe',
+        value: 'Maybe'
+      }
+    ]}
+    defaultValue="Yes"
+  />
+</FieldWrap>
 ```
 
 ### Disabled
 
 ```jsx example
-<Select
-  label="Can you change this select?"
-  options={[
-    {
-      key: 'yes',
-      value: 'Yes'
-    },
-    {
-      key: 'no',
-      value: 'No'
-    },
-  ]}
-  defaultValue="No"
-  disabled
-/>
+<FieldWrap>
+  <Select
+    label="Can you change this select?"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+    ]}
+    defaultValue="No"
+    disabled
+  />
+</FieldWrap>
 ```
 
 ### Required
 
 ```jsx example
-<Select
-  label="You must choose from one of the following options:"
-  options={[
-    {
-      key: 'choose',
-      label: 'Please choose',
-      value: ''
-    },
-    {
-      key: 'yes',
-      value: 'Yes'
-    },
-    {
-      key: 'no',
-      value: 'No'
-    },
-  ]}
-  required
-/>
+<FieldWrap>
+  <Select
+    label="You must choose from one of the following options:"
+    options={[
+      {
+        key: 'choose',
+        label: 'Please choose',
+        value: ''
+      },
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+    ]}
+    required
+  />
+</FieldWrap>
 ```
 
 ### Error
 
 ```jsx example
-<Select
-  label="What is your favorite color?"
-  options={[
-    {
-      key: 'red',
-      value: 'Blue'
-    },
-    {
-      key: 'blue',
-      value: 'Blue'
-    },
-    {
-      key: 'green',
-      value: 'Green'
-    },
-    {
-      key: 'one',
-      value: 'One'
-    }
-  ]}
-  error="You choose poorly."
-  value="One"
-/>
+<FieldWrap>
+  <Select
+    label="What is your favorite color?"
+    options={[
+      {
+        key: 'red',
+        value: 'Blue'
+      },
+      {
+        key: 'blue',
+        value: 'Blue'
+      },
+      {
+        key: 'green',
+        value: 'Green'
+      },
+      {
+        key: 'one',
+        value: 'One'
+      }
+    ]}
+    error="You choose poorly."
+    value="One"
+  />
+</FieldWrap>
 ```
 
 ### Uncontrolled
@@ -117,24 +125,26 @@ import { Select } from '@deque/cauldron-react'
 Select can be uncontrolled or controlled. For an uncontrolled component, use `defaultValue` to set the initial value of the listed options.
 
 ```jsx example
-<Select
-  label="Uncontrolled Select"
-  options={[
-    {
-      key: 'yes',
-      value: 'Yes'
-    },
-    {
-      key: 'no',
-      value: 'No'
-    },
-    {
-      key: 'maybe',
-      value: 'Maybe'
-    }
-  ]}
-  defaultValue="Yes"
-/>
+<FieldWrap>
+  <Select
+    label="Uncontrolled Select"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+      {
+        key: 'maybe',
+        value: 'Maybe'
+      }
+    ]}
+    defaultValue="Yes"
+  />
+</FieldWrap>
 ```
 
 ### Controlled
@@ -148,25 +158,27 @@ function ControlledSelectExample() {
     setValue(event.target.value)
   }
   return (
-    <Select
-      label="Controlled Select"
-      options={[
-        {
-          key: 'yes',
-          value: 'Yes'
-        },
-        {
-          key: 'no',
-          value: 'No'
-        },
-        {
-          key: 'maybe',
-          value: 'Maybe'
-        }
-      ]}
-      value={value}
-      onChange={handleChange}
-    />
+    <FieldWrap>
+      <Select
+        label="Controlled Select"
+        options={[
+          {
+            key: 'yes',
+            value: 'Yes'
+          },
+          {
+            key: 'no',
+            value: 'No'
+          },
+          {
+            key: 'maybe',
+            value: 'Maybe'
+          }
+        ]}
+        value={value}
+        onChange={handleChange}
+      />
+    </FieldWrap>
   )
 }
 ```
@@ -179,7 +191,7 @@ The options list can be an array of objects with specific properties, or an `HTM
 function OptionsExample() {
   const options = ['one', 'two', 'three']
   return (
-    <>
+    <FieldWrap>
       <Select
         label="Select with array"
         options={options.map(value => ({ key: value, value }))}
@@ -187,7 +199,7 @@ function OptionsExample() {
       <Select label="Select with HTMLOptions">
         {options.map(value => <option key={value} value={value}>{value}</option>)}
       </Select>
-    </>
+    </FieldWrap>
   )
 }
 ```
