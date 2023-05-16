@@ -17,6 +17,10 @@ body.cauldron--theme-dark {
   padding: var(--space-medium);
 }
 
+.Component__example + .Component__example {
+  margin-top: var(--space-medium);
+}
+
 .Component__example > :first-child {
   margin: calc(var(--space-medium) * -1);
   padding: var(--space-small);
