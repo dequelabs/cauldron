@@ -59,7 +59,7 @@ function TableProps({ children, className, refType, props }: Props) {
               {children === true || !children?.type
                 ? 'React.ReactNode'
                 : Array.isArray(children.type)
-                ? children.type.join('| ')
+                ? children.type.join(' | ')
                 : children.type}
             </TableCell>
             <TableCell></TableCell>

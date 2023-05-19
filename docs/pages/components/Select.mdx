@@ -1,0 +1,263 @@
+---
+title: Select
+description: A form element that lets users select a choice from a dropdown list.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Select/index.tsx
+---
+
+import { useState } from 'react'
+import { FieldWrap, Select } from '@deque/cauldron-react'
+
+```js
+import { Select } from '@deque/cauldron-react'
+```
+
+<Note>
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Select` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+</Note>
+
+## Examples
+
+### Resting
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="Do you like yogurt?"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+      {
+        key: 'maybe',
+        value: 'Maybe'
+      }
+    ]}
+    defaultValue="Yes"
+  />
+</FieldWrap>
+```
+
+### Disabled
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="Can you change this select?"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+    ]}
+    defaultValue="No"
+    disabled
+  />
+</FieldWrap>
+```
+
+### Required
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="You must choose from one of the following options:"
+    options={[
+      {
+        key: 'choose',
+        label: 'Please choose',
+        value: ''
+      },
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+    ]}
+    required
+  />
+</FieldWrap>
+```
+
+### Error
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="What is your favorite color?"
+    options={[
+      {
+        key: 'red',
+        value: 'Blue'
+      },
+      {
+        key: 'blue',
+        value: 'Blue'
+      },
+      {
+        key: 'green',
+        value: 'Green'
+      },
+      {
+        key: 'one',
+        value: 'One'
+      }
+    ]}
+    error="You choose poorly."
+    value="One"
+  />
+</FieldWrap>
+```
+
+### Uncontrolled
+
+Select can be uncontrolled or controlled. For an uncontrolled component, use `defaultValue` to set the initial value of the listed options.
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="Uncontrolled Select"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+      {
+        key: 'maybe',
+        value: 'Maybe'
+      }
+    ]}
+    defaultValue="Yes"
+  />
+</FieldWrap>
+```
+
+### Controlled
+
+For a controlled select, use `value` to set the currently selected value of the listed options. You must also use this in conjunction with `onChange` in order for the value to get updated on change.
+
+```jsx example
+function ControlledSelectExample() {
+  const [value, setValue] = useState('Yes')
+  const handleChange = (event) => {
+    setValue(event.target.value)
+  }
+  return (
+    <FieldWrap>
+      <Select
+        label="Controlled Select"
+        options={[
+          {
+            key: 'yes',
+            value: 'Yes'
+          },
+          {
+            key: 'no',
+            value: 'No'
+          },
+          {
+            key: 'maybe',
+            value: 'Maybe'
+          }
+        ]}
+        value={value}
+        onChange={handleChange}
+      />
+    </FieldWrap>
+  )
+}
+```
+
+### Options
+
+The options list can be an array of objects with specific properties, or an `HTMLOptions` element:
+
+```jsx example
+function OptionsExample() {
+  const options = ['one', 'two', 'three']
+  return (
+    <FieldWrap>
+      <Select
+        label="Select with array"
+        options={options.map(value => ({ key: value, value }))}
+      />
+      <Select label="Select with HTMLOptions">
+        {options.map(value => <option key={value} value={value}>{value}</option>)}
+      </Select>
+    </FieldWrap>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    type: ['HTMLOptionElement', 'HTMLOptGroupElement']
+  }}
+  className={true}
+  refType="HTMLSelectElement"
+  props={[
+    {
+      name: 'label',
+      type: 'string',
+      description: 'Label for the field.',
+      required: true
+    },
+    {
+      name: 'options',
+      type: 'SelectOption[]',
+      description: 'Array of objects containing: key, value, disabled (optional), and label (optional).'
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      description: 'Whether the field is required or not.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'requiredText',
+      type: 'string',
+      defaultValue: 'Required'
+    },
+    {
+      name: 'error',
+      type: 'string',
+      description: 'Error message for the field (if needed).'
+    },
+    {
+      name: 'value',
+      type: 'string',
+      description: 'Use for "controlled" selects. Caller is responsible for managing the value of the select element.'
+    },
+    {
+      name: 'defaultValue',
+      type: 'string',
+      description: 'The default element value. Use when the component is not controlled.'
+    },
+    {
+      name: 'onChange',
+      type: 'function',
+      description: 'Callback function that gets invoked when the selected value of Select changes.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [FieldWrap](./FieldWrap)
