@@ -37,7 +37,7 @@ import {
   <MenuBar>
     <TopBarItem>
       <a className="MenuItem__logo" href="#" tabIndex={-1}>
-        <img src="/public/fonts/dark-logo.svg" alt="" />
+        <img src="/public/fonts/logo.svg" alt="" />
         Cauldron
       </a>
     </TopBarItem>
@@ -57,14 +57,14 @@ import {
 
 ### With Menu
 
-In addition to navigational items, the `MenuBar` can also contain a dropdown menu with items:
+In addition to navigational items, the `MenuBar` can also contain a dropdown menu with items when composed with `TopBarMenu` and `OptionsMenuList`:
 
 ```jsx example
 <TopBar>
   <MenuBar>
     <TopBarItem>
       <a className="MenuItem__logo" href="#" tabIndex={-1}>
-        <img src="/public/fonts/dark-logo.svg" alt="" />
+        <img src="/public/fonts/logo.svg" alt="" />
         Cauldron
       </a>
     </TopBarItem>
@@ -106,8 +106,50 @@ In addition to navigational items, the `MenuBar` can also contain a dropdown men
 <ComponentProps
   children={true}
   className={true}
+  props={[
+    {
+      name: 'onClick',
+      type: 'function',
+      description: 'Callback when item is clicked.'
+    },
+    {
+      name: 'onKeyDown',
+      type: 'function',
+      description: 'Callback when keydown is triggered on item.'
+    },
+    {
+      name: 'autoClickLink',
+      type: 'boolean',
+      defaultValue: 'true',
+      description: 'Automatically clicks links when click occurs on TopBarItem.'
+    },
+    {
+      name: 'menuItemRef',
+      type: 'React.Ref<HTMLLIElement>',
+      description: 'Ref object for the menu item element'
+    }
+  ]}
+/>
+
+### TopBarMenu
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'onKeyDown',
+      type: 'function',
+      description: 'Callback when keydown is triggered on item.'
+    },
+    {
+      name: 'menuItemRef',
+      type: 'React.Ref<HTMLLIElement>',
+      description: 'Ref object for the menu item element'
+    }
+  ]}
 />
 
 ## Related Components
 
-???
+- [OptionsMenu](./OptionsMenu)

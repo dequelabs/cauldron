@@ -71,6 +71,12 @@ body.cauldron--theme-dark {
   position: relative;
 }
 
+/* Invert the default colors of MenuItem logo so that it contrasts against the background */
+
+.cauldron--theme-light .Component__example__react .MenuItem__logo img {
+  filter: invert(1);
+}
+
 /* Prevents duplicate scrollbars in sortable tables with offscreen elements*/
 
 .Component__example__react:has(.Table) {
