@@ -67,6 +67,7 @@ const RadioGroup = ({
       className,
       ...other
     } = radio;
+    const isChecked = currentValue === radioValue;
     const isFocused = focusIndex === index;
 
     return (
@@ -90,7 +91,7 @@ const RadioGroup = ({
             onChange(radio, inputs.current?.[index]);
           }}
           disabled={disabled}
-          checked={currentValue === radioValue}
+          checked={isChecked}
           aria-describedby={labelDescription ? `${id}Desc` : undefined}
           key={`input-${index}-${currentValue}`}
           {...other}
