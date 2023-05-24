@@ -1,0 +1,111 @@
+---
+title: TopBar
+description: A container component that typically contains information about the page, a navigation menu, and other actions a user can take relating to the whole website.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TopBar/TopBar.tsx
+---
+
+import {
+  TopBar,
+  MenuBar,
+  TopBarMenu,
+  TopBarItem,
+  OptionsMenuList,
+  OptionsMenuItem,
+  Icon
+} from '@deque/cauldron-react'
+
+```jsx
+import {
+  TopBar
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+`TopBar` is a container component intended to wrap navigational items, actions, or other site-wide information. By default, it is position `fixed` to the top of your page and works in parallel with [Layout](./Layout) and [Workspace](./Workspace).
+
+<Note>
+  When using `MenuBar` within `TopBar`, `MenuBar` automatically sets `tabIndex="0"` on direct children. You _must_ set `tabindex="-1"` on any descendant components to prevent extra tabstops from occurring as `MenuBar` manages keyboard navigation automatically with <kbd>tab</kbd> and arrow key navigation.
+</Note>
+
+```jsx example
+<TopBar>
+  <MenuBar>
+    <TopBarItem>
+      <a className="MenuItem__logo" href="#" tabIndex={-1}>
+        <img src="/public/fonts/dark-logo.svg" alt="" />
+        Cauldron
+      </a>
+    </TopBarItem>
+    <TopBarItem>
+      <a href="#" tabIndex={-1}>
+        Item 1
+      </a>
+    </TopBarItem>
+    <TopBarItem>
+      <a href="#" tabIndex={-1}>
+        Item 2
+      </a>
+    </TopBarItem>
+  </MenuBar>
+</TopBar>
+```
+
+### With Menu
+
+In addition to navigational items, the `MenuBar` can also contain a dropdown menu with items:
+
+```jsx example
+<TopBar>
+  <MenuBar>
+    <TopBarItem>
+      <a className="MenuItem__logo" href="#" tabIndex={-1}>
+        <img src="/public/fonts/dark-logo.svg" alt="" />
+        Cauldron
+      </a>
+    </TopBarItem>
+    <TopBarItem>
+      <a href="#" tabIndex={-1}>
+        Item 1
+      </a>
+    </TopBarItem>
+    <TopBarMenu>
+      Menu <Icon type="chevron-down" />
+      <OptionsMenuList>
+        <OptionsMenuItem>
+          Menu Item 1
+        </OptionsMenuItem>
+        <OptionsMenuItem>
+          Menu Item 2
+        </OptionsMenuItem>
+        <OptionsMenuItem>
+          Menu Item 3
+        </OptionsMenuItem>
+      </OptionsMenuList>
+    </TopBarMenu>
+  </MenuBar>
+</TopBar>
+```
+
+
+## Props
+
+### TopBar
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### TopBarItem
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+## Related Components
+
+???
