@@ -1,0 +1,125 @@
+---
+title: ProgressBar
+description: A component to display the progress of some activity.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ProgressBar/index.tsx
+---
+
+import { useState, useEffect, useRef } from 'react'
+import { ProgressBar, Button } from '@deque/cauldron-react'
+
+```jsx
+import { ProgressBar } from '@deque/cauldron-react'
+```
+
+## Examples
+
+```jsx example
+<ProgressBar
+  aria-label="Progress %"
+  progress={75}
+/>
+```
+
+```jsx example
+<ProgressBar
+  aria-label="Progress X of Y"
+  progress={5}
+  progressMax={25}
+  progressMin={1}
+/>
+```
+
+### Animated Progress
+
+If the progress indicates that some activity is currently progressing, the progress bar will will update the current progress based on the value of the `progress` prop:
+
+```jsx example
+function ProgressExample() {
+  const [animateProgress, setAnimateProgress] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const updateProgress = useRef();
+
+  const incrementProgress = () => {
+    const updatedProgress = progress + 1;
+    setProgress(updatedProgress);
+    return progress;
+  };
+
+  useEffect(() => {
+    updateProgress.current = incrementProgress;
+  });
+
+  useEffect(() => {
+    let intervalId;
+
+    const update = () => {
+      return updateProgress.current();
+    };
+
+    if (animateProgress) {
+      intervalId = setInterval(() => {
+        const progress = update();
+        if (progress >= 100) {
+          clearInterval(intervalId);
+          setAnimateProgress(false);
+        }
+      }, 16);
+    }
+
+    return () => clearInterval(intervalId);
+  }, [animateProgress]);
+
+  const handleUpdateProgress = () => {
+    setProgress(0);
+    setAnimateProgress(true);
+  };
+
+  return (
+    <>
+      <ProgressBar
+        aria-label="Animated Progres"
+        progress={progress}
+      />
+      <Button onClick={handleUpdateProgress} variant="secondary">
+        Show Animated Progress
+      </Button>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'progress',
+      type: 'number',
+      required: true,
+      description: 'The current progress bar progress.'
+    },
+    {
+      name: 'progressMin',
+      type: 'number',
+      defaultValue: 0,
+      description: 'Minimum value of progress.'
+    },
+    {
+      name: 'progressMax',
+      type: 'number',
+      defaultValue: 100,
+      description: 'Maximum value of progress.'
+    },
+    {
+      name: 'aria-label',
+      type: 'string',
+      description: 'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+  ]}
+/>
