@@ -10,7 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: setenv
-        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+        run: |
+          echo BRANCH_NAME=$(echo ${GITHUB_HEAD_REF}) >> $GITHUB_OUTPUT
       - uses: yinlinchen/amplify-preview-actions@master
         with:
           branch_name: ${{ steps.setenv.outputs.BRANCH_NAME }}
