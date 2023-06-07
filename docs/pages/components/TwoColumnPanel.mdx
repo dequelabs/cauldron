@@ -41,19 +41,22 @@ function TwoColumnPanelExample() {
       id: 1,
       name: 'One',
       description: 'Short description of one',
-      contents: 'Content for One'
+      contents: 'Content for One',
+      url: '#'
     },
     {
       id: 2,
       name: 'Two',
       description: 'Short description of two',
-      contents: 'Content for Two'
+      contents: 'Content for Two',
+      url: '#'
     },
     {
       id: 3,
       name: 'Three',
       description: 'Short description of three',
-      contents: 'Content for Three'
+      contents: 'Content for Three',
+      url: '#'
     }
   ];
 
@@ -67,7 +70,7 @@ function TwoColumnPanelExample() {
     <TwoColumnPanel>
       <ColumnLeft aria-labelledby="sidebar">
         <ColumnHeader id="sidebar">Items</ColumnHeader>
-        <nav aria-label="Sidebar navigation">
+        <nav aria-labelledby="sidebar">
           <ul>
             {items.map(item => (
               <li key={item.id}>
@@ -108,13 +111,15 @@ function TwoColumnPanelGroupedItemsExample() {
       id: 1,
       name: 'One',
       description: 'Short description of one',
-      contents: 'Content for grouped One'
+      contents: 'Content for grouped One',
+      url: '#'
     },
     {
       id: 2,
       name: 'Two',
       description: 'Short description of two',
-      contents: 'Content for grouped Two'
+      contents: 'Content for grouped Two',
+      url: '#'
     }
   ];
 
@@ -123,13 +128,15 @@ function TwoColumnPanelGroupedItemsExample() {
       id: 3,
       name: 'Three',
       description: 'Short description of three',
-      contents: 'Content for grouped Three'
+      contents: 'Content for grouped Three',
+      url: '#'
     },
     {
       id: 4,
       name: 'Four',
       description: 'Short description of four',
-      contents: 'Content for grouped Four'
+      contents: 'Content for grouped Four',
+      url: '#'
     }
   ];
 
@@ -150,7 +157,7 @@ function TwoColumnPanelGroupedItemsExample() {
           <ColumnGroupHeader id="group-heading">
             <h3>Optional group heading</h3>
           </ColumnGroupHeader>
-          <nav aria-label="Sidebar group 1 navigation">
+          <nav aria-labelledby="group-heading">
             <ul>
               {groupOne.map(item => (
                 <li key={item.id}>
@@ -166,10 +173,10 @@ function TwoColumnPanelGroupedItemsExample() {
               ))}
             </ul>
           </nav>
-          <ColumnGroupHeader>
+          <ColumnGroupHeader id="alternate-group-heading">
             <h3>Another optional group heading</h3>
           </ColumnGroupHeader>
-          <nav aria-label="Sidebar group 2 navigation">
+          <nav aria-labelledby="alternate-group-heading">
             <ul>
               {groupTwo.map(item => (
                 <li key={item.id}>
