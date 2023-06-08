@@ -13,8 +13,7 @@
     "strictFunctionTypes": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react",
-    "types": ["node"],
-    "esModuleInterop": true
+    "types": ["node"]
   },
   "exclude": ["node_modules"]
 }
