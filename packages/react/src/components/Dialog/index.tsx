@@ -31,7 +31,9 @@ interface DialogState {
   isolator?: AriaIsolate;
 }
 
-const noop = () => {};
+const noop = () => {
+  //not empty
+};
 
 export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {

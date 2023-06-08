@@ -172,6 +172,7 @@ export default class OptionsMenuList extends React.Component<
 
     // Key event is being handled in componentDidMount
     /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
       <ClickOutsideListener
         onClickOutside={this.handleClickOutside}
@@ -182,7 +183,7 @@ export default class OptionsMenuList extends React.Component<
           {...other}
           className={classnames('OptionsMenu__list', className)}
           /* aria-expanded is not correct usage here, but the pattern library
-             currently styles the open state of the menu. based on this attribute */
+          currently styles the open state of the menu. based on this attribute */
           aria-expanded={show}
           role="menu"
           onClick={handleClick}

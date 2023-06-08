@@ -273,7 +273,7 @@ export default class Pointout extends React.Component<
     const portalNode =
       (portal as React.RefObject<HTMLElement>)?.current ||
       (portal as HTMLElement);
-
+    // eslint-disable-next-line prefer-const
     let { top, left, width, height } = targetNode.getBoundingClientRect();
     if (portalNode && portalNode !== document.body) {
       // If the portal is not placed on document.body
