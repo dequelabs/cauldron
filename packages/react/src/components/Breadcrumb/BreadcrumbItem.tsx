@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { Cauldron } from '../../types';
 
-interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLSpanElement> {}
+type BreadcrumbItemProps = React.HTMLAttributes<HTMLSpanElement>;
 
 const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>(
   ({ className, children, ...props }: BreadcrumbItemProps, ref) => (

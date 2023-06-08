@@ -93,7 +93,7 @@ export default class ClickOutsideListener extends React.Component<
     setRef;
     // If child has its own ref, we want to update
     // its ref with the newly cloned node
-    let { ref } = this.props.children as any;
+    const { ref } = this.props.children as any;
     setRef(ref, node);
   };
 

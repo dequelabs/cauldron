@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface OffscreenProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export type OffscreenProps = React.HTMLAttributes<HTMLSpanElement>;
 
 const Offscreen = (props: OffscreenProps) => (
   <span className="Offscreen" {...props} />

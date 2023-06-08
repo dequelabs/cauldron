@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 
-interface ColumnListProps extends React.HTMLAttributes<HTMLDivElement> {}
+type ColumnListProps = React.HTMLAttributes<HTMLDivElement>;
 
 const ColumnList = forwardRef<HTMLDivElement, ColumnListProps>(
   ({ className, children, ...props }, ref) => {
