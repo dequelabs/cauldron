@@ -215,6 +215,5 @@ test('fires onChange when change occurs', () => {
 
 test('renders a ReactNode as a label', () => {
   const wrapper = withCustomOptions({ label: <span>Foo</span> });
-  console.log(wrapper.debug());
   expect(wrapper.find('.Field__label').text()).toBe('Foo');
 });
