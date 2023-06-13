@@ -2,6 +2,7 @@ import React, { Ref, useEffect, useState } from 'react';
 import uid from '../../utils/rndid';
 import classNames from 'classnames';
 import tokenList from '../../utils/token-list';
+import { ContentNode } from '../../types';
 
 export interface SelectOption {
   key: string;
@@ -11,8 +12,8 @@ export interface SelectOption {
 }
 
 export interface SelectProps
-  extends Omit<React.HTMLProps<HTMLSelectElement>, 'children'> {
-  label: string;
+  extends Omit<React.HTMLProps<HTMLSelectElement>, 'children' | 'label'> {
+  label: ContentNode;
   requiredText?: string;
   error?: string;
   options?: SelectOption[];
