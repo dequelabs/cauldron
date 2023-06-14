@@ -215,7 +215,7 @@ function OptionsExample() {
   props={[
     {
       name: 'label',
-      type: 'string',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
       description: 'Label for the field.',
       required: true
     },
