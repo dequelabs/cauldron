@@ -17,6 +17,10 @@ body.cauldron--theme-dark {
   padding: var(--space-medium);
 }
 
+.Component__example + .Component__example {
+  margin-top: var(--space-medium);
+}
+
 .Component__example > :first-child {
   margin: calc(var(--space-medium) * -1);
   padding: var(--space-small);
@@ -58,6 +62,19 @@ body.cauldron--theme-dark {
 .Component__example__react:has(.Scrim) {
   position: relative;
   width: calc(100% + var(--space-medium) * 2);
+}
+
+/* When displaying TopBar within an example, we want it to be constrained inside
+ * the boundaries of the component and not the viewport */
+
+.Component__example__react .TopBar {
+  position: relative;
+}
+
+/* Invert the default colors of MenuItem logo so that it contrasts against the background */
+
+.cauldron--theme-light .Component__example__react .MenuItem__logo img {
+  filter: invert(1);
 }
 
 /* Prevents duplicate scrollbars in sortable tables with offscreen elements*/

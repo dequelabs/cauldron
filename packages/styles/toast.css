@@ -69,7 +69,8 @@
   margin-right: 3px;
 }
 
-.Toast__message .Link {
+.Toast__message .Link,
+.Toast__message button.Link {
   color: var(--accent-dark);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
