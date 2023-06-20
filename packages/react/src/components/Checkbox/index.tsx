@@ -31,6 +31,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       checkboxRef,
       className,
       onChange,
+      onFocus,
+      onBlur,
       'aria-describedby': ariaDescribedby,
       disabled = false,
       checked = false,
@@ -77,8 +79,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             type="checkbox"
             checked={isChecked}
             disabled={disabled}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(e): void => {
+              setFocused(true);
+              if (onFocus) {
+                onFocus(e);
+              }
+            }}
+            onBlur={(e): void => {
+              setFocused(false);
+              if (onBlur) {
+                onBlur(e);
+              }
+            }}
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
               setIsChecked(e.target.checked);
