@@ -87,7 +87,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }}
             onBlur={(e): void => {
               setFocused(false);
-              if (onBlur) {
+              if (typeof onBlur === 'function') {
                 onBlur(e);
               }
             }}
