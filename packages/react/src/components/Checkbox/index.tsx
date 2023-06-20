@@ -81,7 +81,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             disabled={disabled}
             onFocus={(e): void => {
               setFocused(true);
-              if (onFocus) {
+              if (typeof onFocus === 'function') {
                 onFocus(e);
               }
             }}
