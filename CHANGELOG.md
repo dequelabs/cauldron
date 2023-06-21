@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/dequelabs/cauldron/compare/v5.4.0...v5.4.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **react:** allow onBlur and onFocus to be passed to Checkbox without messing up focus state ([#1095](https://github.com/dequelabs/cauldron/issues/1095)) ([2dd973a](https://github.com/dequelabs/cauldron/commit/2dd973af4c6c6883a50049333f69c3eb8f8aea3a))
+
 ## [5.4.0](https://github.com/dequelabs/cauldron/compare/v5.3.0...v5.4.0) (2023-06-15)
 
 
