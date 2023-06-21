@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { mount } from 'enzyme';
 import Checkbox from 'src/components/Checkbox';
 import axe from '../../../axe';
@@ -73,15 +74,22 @@ test('handles disabled prop', () => {
 });
 
 test('handles focus/blur', () => {
-  const wrapper = mount(<Checkbox {...defaultProps} />);
+  const onFocus = sinon.spy();
+  const onBlur = sinon.spy();
+
+  const wrapper = mount(
+    <Checkbox {...defaultProps} onFocus={onFocus} onBlur={onBlur} />
+  );
 
   wrapper.find('[type="checkbox"]').simulate('focus');
 
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeTruthy();
+  expect(onFocus.calledOnce).toBe(true);
 
   wrapper.find('[type="checkbox"]').simulate('blur');
 
   expect(wrapper.find('.Checkbox__overlay--focused').exists()).toBeFalsy();
+  expect(onBlur.calledOnce).toBe(true);
 });
 
 test('call onChange when checked state changes', done => {
