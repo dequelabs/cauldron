@@ -1,0 +1,115 @@
+---
+title: ExpandCollapsePanel
+description: An unstyled component with a collapsible panel and an interactive trigger to toggle the panel.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ExpandCollapsePanel/ExpandCollapsePanel.tsx
+---
+
+import { useState } from 'react'
+import { ExpandCollapsePanel, PanelTrigger } from '@deque/cauldron-react'
+
+```jsx
+import { 
+  ExpandCollapsePanel,
+  PanelTrigger
+} from '@deque/cauldron-react'
+```
+
+The `ExpandCollapsePanel` is an unstyled component to provide expand/collapse behavior to a section of content. For a more opinionated component, see [Accordion](./Accordion).
+
+## Examples
+
+### Uncontrolled
+
+By default, the ExpandCollapsePanel is uncontrolled and will store the collapsed state internally with the panel initially collapsed.
+
+```jsx example
+<ExpandCollapsePanel>
+  <PanelTrigger>There's more info here</PanelTrigger>
+  This is content with more info about that thing that you should know.
+</ExpandCollapsePanel>
+```
+
+### Controlled
+
+If you need to manually control the open/closed state of the panel, you can do this by setting the open prop and handling changes with onToggle.
+
+```jsx example
+function ControlledExpandCollapsePanel() {
+  const [open, setOpen] = useState(true)
+  return (
+    <ExpandCollapsePanel open={open} onToggle={() => setOpen(!open)}>
+      <PanelTrigger>There's more info here</PanelTrigger>
+      This is content with more info about that thing that you should know.
+    </ExpandCollapsePanel>
+  )
+}
+```
+
+## Props
+
+### ExpandCollapsePanel
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'open',
+      type: 'boolean',
+      description: 'Open state of the ExpandCollapsePanel.'
+    },
+    {
+      name: 'onToggle',
+      type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
+      description: 'onToggle handler for the panel. The original event object will be passed.',
+      defaultValue: 'function() {}'
+    },
+    {
+      name: 'animationTiming',
+      type: ['number', 'boolean'],
+      defaultValue: 250,
+      description: 'Animation time of expand/collapse in ms. Animations are disabled when set to false.'
+    }
+  ]}
+/>
+
+### PanelTrigger
+
+`PanelTrigger` extends `React.HTMLAttributes<HTMLButtonElement>` and also supports:
+
+<ComponentProps
+  children={{ required: true }}
+  className={true}
+  props={[
+    {
+      name: 'fullWidth',
+      type: 'boolean',
+      description: 'When set to "fullWidth" this component will stretch to the full width of its parent.'
+    },
+    {
+      name: 'onClick',
+      type: '(e: React.MouseEvent<HTMLButtonElement>) => void', 
+      description: 'onClick handler for PanelTrigger. The original event object will be passed.'
+    },
+    {
+      name: 'iconExpanded',
+      type: 'string',
+      defaultValue: 'chevron-down',
+      description: 'The icon to use when panel is open.'
+    },
+    {
+      name: 'iconCollapsed',
+      type: 'string',
+      defaultValue: 'chevron-right',
+      description: 'The icon to use when panel is closed.'
+    },{
+      name: 'heading',
+      type: 'object',
+      description: 'Used to wrap the trigger in a heading element.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Accordion](./Accordion)
