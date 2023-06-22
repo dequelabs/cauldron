@@ -208,6 +208,10 @@ const DialogContent = ({
   </div>
 );
 DialogContent.displayName = 'DialogContent';
+DialogContent.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node
+};
 
 const DialogFooter = ({
   children,
@@ -219,5 +223,8 @@ const DialogFooter = ({
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
-
+DialogFooter.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node
+};
 export { Dialog, DialogContent, DialogFooter };

@@ -14,6 +14,7 @@ export interface OptionsMenuItemProps
 
 class OptionsMenuItemComponent extends React.Component<OptionsMenuItemProps> {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onSelect: () => {}
   };
 

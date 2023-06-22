@@ -235,6 +235,9 @@ export const TooltipHead = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={classnames('TooltipHead', className)} {...other} />
 );
+TooltipHead.propTypes = {
+  className: PropTypes.string
+};
 
 export const TooltipContent = ({
   className,
@@ -242,3 +245,6 @@ export const TooltipContent = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={classnames('TooltipContent', className)} {...other} />
 );
+TooltipContent.propTypes = {
+  className: PropTypes.string
+};

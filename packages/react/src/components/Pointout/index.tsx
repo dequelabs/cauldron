@@ -51,8 +51,10 @@ export default class Pointout extends React.Component<
   PointoutState
 > {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     ftpoRef: () => {},
     noArrow: false,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {},
     dismissText: 'dismiss',
     previousText: 'previous',

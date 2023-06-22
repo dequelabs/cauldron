@@ -22,7 +22,9 @@ export default class OptionsMenuList extends React.Component<
 > {
   static defaultProps = {
     closeOnSelect: true,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onSelect: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {}
   };
 
