@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/dequelabs/cauldron/compare/v5.4.0...v5.4.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **react:** allow onBlur and onFocus to be passed to Checkbox without messing up focus state ([#1095](https://github.com/dequelabs/cauldron/issues/1095)) ([2dd973a](https://github.com/dequelabs/cauldron/commit/2dd973af4c6c6883a50049333f69c3eb8f8aea3a))
+
+## [5.4.0](https://github.com/dequelabs/cauldron/compare/v5.3.0...v5.4.0) (2023-06-15)
+
+
+### Features
+
+* **react:** allow Select label to be a ReactNode ([#1091](https://github.com/dequelabs/cauldron/issues/1091)) ([18ac4e1](https://github.com/dequelabs/cauldron/commit/18ac4e1dbc6a0501162ce718409fe607ad63c777))
+
+
+### Bug Fixes
+
+* changed top bar height to 70px ([#1081](https://github.com/dequelabs/cauldron/issues/1081)) ([14d052e](https://github.com/dequelabs/cauldron/commit/14d052ed352a6d6a7e72e2e8250fe0dc8cd98364))
+* **styles:** fix inaccessibile syntax highlight colors ([#1075](https://github.com/dequelabs/cauldron/issues/1075)) ([1fc89ed](https://github.com/dequelabs/cauldron/commit/1fc89edd2af2c8e89ee2a934f2eedee3f53a3691))
+
 ## [5.3.0](https://github.com/dequelabs/cauldron/compare/v5.2.0...v5.3.0) (2023-05-05)
 
 
