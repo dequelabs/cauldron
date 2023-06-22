@@ -1,8 +1,0 @@
-.data-list-demo .Error {
-  /* the checkbox can't have an error */
-  display: none;
-}
-
-.data-list-demo ul {
-  margin: 0;
-}

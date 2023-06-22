@@ -1,0 +1,223 @@
+---
+title: Toast
+description: A banner with text positioned at the top of the page.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Toast/index.tsx
+---
+
+import { useState } from 'react'
+import { Toast, Button } from '@deque/cauldron-react'
+
+```js
+import { Toast } from '@deque/cauldron-react'
+```
+
+## Examples
+
+<Note>
+  Only a single toast should be rendered at a given moment as additional toasts will stack on top of each other.
+</Note>
+
+### Confirmation
+
+```jsx example
+function ConfirmationToastExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="confirmation"
+        onDismiss={() => setShow(false)}
+      >
+        Your toast is ready!
+      </Toast>
+      <Button
+        variant="secondary"
+        onClick={() => setShow(true)}
+      >
+        Show Confirmation Toast
+      </Button>
+    </>
+  )
+}
+```
+
+### Caution
+
+```jsx example
+function CautionToastExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="caution"
+        onDismiss={() => setShow(false)}
+      >
+        Your toast is getting toasty...
+      </Toast>
+      <Button
+        variant="secondary"
+        onClick={() => setShow(true)}
+      >
+        Show Caution Toast
+      </Button>
+    </>
+  )
+}
+```
+
+### Action Needed
+
+```jsx example
+function ActionNeededToastExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="action-needed"
+      >
+        You burnt the toast! Check yourself before you wreck yourself...
+        <Button variant="link" onClick={() => setShow(false)}>Ok</Button>
+      </Toast>
+      <Button
+        variant="secondary"
+        onClick={() => setShow(true)}
+      >
+        Show Action Needed Toast
+      </Button>
+    </>
+  )
+}
+```
+
+### Info
+
+```jsx example
+function InfoToastExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="info"
+        onDismiss={() => setShow(false)}
+      >
+        It is getting toasty in here!
+      </Toast>
+      <Button
+        variant="secondary"
+        onClick={() => setShow(true)}
+      >
+        Show Info Toast
+      </Button>
+    </>
+  )
+}
+```
+
+### Error
+
+```jsx example
+function ErrorToastExample() {
+  const [show, setShow] = useState(false)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="error"
+        onDismiss={() => setShow(false)}
+      >
+        This toast tastes like toast!
+      </Toast>
+      <Button
+        variant="secondary"
+        onClick={() => setShow(true)}
+      >
+        Show Error Toast
+      </Button>
+    </>
+  )
+}
+```
+
+### Non-dismissible
+
+Non-dismissable toasts are shown inline to prevent clipping of content.
+
+
+```jsx example
+function NonDismissibleToastExample() {
+  const [show, setShow] = useState(true)
+  return (
+    <>
+      <Toast
+        show={show}
+        type="info"
+        dismissible={false}
+        focus={false}
+      >
+        This toast is not dismissible by normal methods.
+        But you can <Button variant="link" onClick={() => setShow(false)}>click me to dismiss this toast</Button>.
+      </Toast>
+      {!show && (
+        <Button
+          variant="secondary"
+          onClick={() => setShow(true)}
+        >
+          Show Non-dismissible Toast
+        </Button>
+      )}
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  props={[
+    {
+      name: 'type',
+      type: ['confirmation', 'caution', 'error', 'action-needed', 'info'],
+      required: true,
+      description: 'The type of toast to display'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Whether or not to show the toast.',
+    },
+    {
+      name: 'focus',
+      type: 'boolean',
+      defaultValue: 'true',
+      description: 'Whether or not to focus the toast. This will also set the toast to `role="alert"` when set to true.'
+    },
+    {
+      name: 'onDismiss',
+      type: 'function',
+      description: 'Callback function when toast is dismissed.'
+    },
+    {
+      name: 'dismissText',
+      type: 'string',
+      defaultValue: 'Dismiss',
+      description: 'The aria label of the dismiss control for the toast.'
+    },
+    {
+      name: 'dismissible',
+      type: 'boolean',
+      defaultValue: 'true',
+      description: 'Whether or not the user is able to dismiss the toast.'
+    },
+    {
+      name: 'toastRef',
+      type: 'function',
+      description: 'Optional ref function for the toast element.'
+    }
+  ]}
+/>

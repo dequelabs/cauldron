@@ -1,0 +1,101 @@
+---
+title: DescriptionList
+description: A component that creates a list of terms and their definitions.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/DescriptionList/index.tsx
+---
+
+import {
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
+} from '@deque/cauldron-react'
+
+```js
+import {
+  DescriptionList,
+  DescriptionListItem,
+  DescriptionTerm,
+  DescriptionDetails
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+```jsx example
+<DescriptionList>
+  <DescriptionListItem>
+    <DescriptionTerm>First name</DescriptionTerm>
+    <DescriptionDetails>Frank</DescriptionDetails>
+  </DescriptionListItem>
+  <DescriptionListItem>
+    <DescriptionTerm>Last name</DescriptionTerm>
+    <DescriptionDetails>Zappa</DescriptionDetails>
+  </DescriptionListItem>
+  <DescriptionListItem>
+    <DescriptionTerm>Email</DescriptionTerm>
+    <DescriptionDetails>frank@zappa.io</DescriptionDetails>
+  </DescriptionListItem>
+</DescriptionList>
+```
+
+### Collapsed
+
+At narrower viewport widths, the `collapsed` prop can be set to render a narrower version of the DescriptionList component with the term/details stacked instead of inline.
+
+```jsx example
+<DescriptionList collapsed>
+  <DescriptionListItem>
+    <DescriptionTerm>First name</DescriptionTerm>
+    <DescriptionDetails>Frank</DescriptionDetails>
+  </DescriptionListItem>
+  <DescriptionListItem>
+    <DescriptionTerm>Last name</DescriptionTerm>
+    <DescriptionDetails>Zappa</DescriptionDetails>
+  </DescriptionListItem>
+  <DescriptionListItem>
+    <DescriptionTerm>Email</DescriptionTerm>
+    <DescriptionDetails>frank@zappa.io</DescriptionDetails>
+  </DescriptionListItem>
+</DescriptionList>
+```
+
+## Props
+
+### DescriptionList
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Collapse list into UI catered to narrow viewport widths.'
+    }
+  ]}
+/>
+
+### DescriptionListItem
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### DescriptionTerm
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### DescriptionDetails
+
+<ComponentProps
+  children={true}
+  className={true}
+/>

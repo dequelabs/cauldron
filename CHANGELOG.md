@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/dequelabs/cauldron/compare/v5.4.0...v5.4.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **react:** allow onBlur and onFocus to be passed to Checkbox without messing up focus state ([#1095](https://github.com/dequelabs/cauldron/issues/1095)) ([2dd973a](https://github.com/dequelabs/cauldron/commit/2dd973af4c6c6883a50049333f69c3eb8f8aea3a))
+
+## [5.4.0](https://github.com/dequelabs/cauldron/compare/v5.3.0...v5.4.0) (2023-06-15)
+
+
+### Features
+
+* **react:** allow Select label to be a ReactNode ([#1091](https://github.com/dequelabs/cauldron/issues/1091)) ([18ac4e1](https://github.com/dequelabs/cauldron/commit/18ac4e1dbc6a0501162ce718409fe607ad63c777))
+
+
+### Bug Fixes
+
+* changed top bar height to 70px ([#1081](https://github.com/dequelabs/cauldron/issues/1081)) ([14d052e](https://github.com/dequelabs/cauldron/commit/14d052ed352a6d6a7e72e2e8250fe0dc8cd98364))
+* **styles:** fix inaccessibile syntax highlight colors ([#1075](https://github.com/dequelabs/cauldron/issues/1075)) ([1fc89ed](https://github.com/dequelabs/cauldron/commit/1fc89edd2af2c8e89ee2a934f2eedee3f53a3691))
+
+## [5.3.0](https://github.com/dequelabs/cauldron/compare/v5.2.0...v5.3.0) (2023-05-05)
+
+
+### Features
+
+* **RadioGroup:** add inline modifier for RadioGroup ([#1049](https://github.com/dequelabs/cauldron/issues/1049)) ([714a3a4](https://github.com/dequelabs/cauldron/commit/714a3a4b114b07cd006d86946922867cc67d4aed))
+* **react:** include custom css var for setting table width and update table documentation ([#1035](https://github.com/dequelabs/cauldron/issues/1035)) ([c4857aa](https://github.com/dequelabs/cauldron/commit/c4857aa64f4d09274480ec6855232c18e5f43dbb))
+* **react:** respect prefers-reduced-motion with Accordion ([#832](https://github.com/dequelabs/cauldron/issues/832)) ([9f1a3f9](https://github.com/dequelabs/cauldron/commit/9f1a3f920f2905d0fc5955a0abc171202b554f05))
+* **styles:** adds darker colored warning variable ([#1066](https://github.com/dequelabs/cauldron/issues/1066)) ([a9c85dd](https://github.com/dequelabs/cauldron/commit/a9c85dd2584c977594b5e1f33047f1ab07de9a75))
+
+
+### Bug Fixes
+
+* **styles:** fix spacing between PanelHeading and PanelContent ([#1064](https://github.com/dequelabs/cauldron/issues/1064)) ([abdecaa](https://github.com/dequelabs/cauldron/commit/abdecaa3d71176786b55d5059cb267391a4116da))
+* **styles:** prevent select text from overlapping with carat indicator ([#1058](https://github.com/dequelabs/cauldron/issues/1058)) ([7637a80](https://github.com/dequelabs/cauldron/commit/7637a808d1eed9295ca421eeca26cd59b07f203e))
+* removed line height styling from button ([#1046](https://github.com/dequelabs/cauldron/issues/1046)) ([9daa8e8](https://github.com/dequelabs/cauldron/commit/9daa8e8527afc15748444ec2b0bdbcebe310553a))
+* **react:** corrected toast component's padding ([#1047](https://github.com/dequelabs/cauldron/issues/1047)) ([e89d35c](https://github.com/dequelabs/cauldron/commit/e89d35c3aa952a992d01552164bd02e0adb28c6d))
+* **style:** fix aggressive styles getting applied to nested elements in Panel ([#1045](https://github.com/dequelabs/cauldron/issues/1045)) ([de81016](https://github.com/dequelabs/cauldron/commit/de81016a8c1f47800ae7bb69ed64c17a0346f386))
+
 ## [5.2.0](https://github.com/dequelabs/cauldron/compare/v5.1.0...v5.2.0) (2023-04-27)
 
 ### Features

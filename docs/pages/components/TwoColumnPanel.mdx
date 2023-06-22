@@ -1,0 +1,317 @@
+---
+title: TwoColumnPanel
+description: A container component intended to provide a navigable list of items that can be collapsed if not needed.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TwoColumnPanel/TwoColumnPanel.tsx
+---
+
+import { useState } from 'react'
+import {
+  TwoColumnPanel,
+  ColumnLeft,
+  ColumnRight,
+  ColumnHeader,
+  ColumnList,
+  ColumnGroupHeader,
+  Breadcrumb,
+  BreadcrumbLink,
+  BreadcrumbItem
+} from '@deque/cauldron-react'
+
+```jsx
+import {
+  TwoColumnPanel,
+  ColumnLeft,
+  ColumnRight,
+  ColumnHeader
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+`TwoColumnPanel` takes in a set of columns, `ColumnLeft` and `ColumnRight` with the left column containing the list of items to choose from and the right column intended to be the currently selected item. It is expected that accessible names are provided for both of the left/right column via `aria-label` or `aria-labelledby`.
+
+```jsx example
+function TwoColumnPanelExample() {
+  const [selected, setSelected] = useState(1);
+
+  const items = [
+    {
+      id: 1,
+      name: 'One',
+      description: 'Short description of one',
+      contents: 'Content for One',
+      url: '#'
+    },
+    {
+      id: 2,
+      name: 'Two',
+      description: 'Short description of two',
+      contents: 'Content for Two',
+      url: '#'
+    },
+    {
+      id: 3,
+      name: 'Three',
+      description: 'Short description of three',
+      contents: 'Content for Three',
+      url: '#'
+    }
+  ];
+
+  const selectedItem = items.find(item => item.id === selected);
+  const selectItem = id => event => {
+    event.preventDefault();
+    setSelected(id);
+  };
+
+  return (
+    <TwoColumnPanel>
+      <ColumnLeft aria-labelledby="sidebar">
+        <ColumnHeader id="sidebar">Items</ColumnHeader>
+        <nav aria-labelledby="sidebar">
+          <ul>
+            {items.map(item => (
+              <li key={item.id}>
+                <a
+                  href={item.url}
+                  onClick={selectItem(item.id)} aria-current={item.id === selectedItem.id}
+                  aria-current={item.id === selectedItem.id}
+                >
+                  {item.name}
+                  <em>{item.description}</em>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </ColumnLeft>
+      <ColumnRight aria-labelledby="item-header">
+        <ColumnHeader id="item-header">{selectedItem?.name}</ColumnHeader>
+        <div>
+          {selectedItem?.contents}
+        </div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  )
+}
+```
+
+### With Optional Group Headings
+
+The list of items can also contain optional group headings if the list of items needs to be segmented. This can be combined with [Breadcrumb](./Breadcrumb) to group sections of provide a hierarchical navigation context.
+
+```jsx example
+function TwoColumnPanelGroupedItemsExample() {
+  const [selectedGroup, setSelectedGroupItem] = useState(1);
+
+  const groupOne = [
+    {
+      id: 1,
+      name: 'One',
+      description: 'Short description of one',
+      contents: 'Content for grouped One',
+      url: '#'
+    },
+    {
+      id: 2,
+      name: 'Two',
+      description: 'Short description of two',
+      contents: 'Content for grouped Two',
+      url: '#'
+    }
+  ];
+
+  const groupTwo = [
+    {
+      id: 3,
+      name: 'Three',
+      description: 'Short description of three',
+      contents: 'Content for grouped Three',
+      url: '#'
+    },
+    {
+      id: 4,
+      name: 'Four',
+      description: 'Short description of four',
+      contents: 'Content for grouped Four',
+      url: '#'
+    }
+  ];
+
+  const selectedGroupItem = [...groupOne, ...groupTwo].find(
+    item => item.id === selectedGroup
+  );
+
+  const selectGroupItem = id => event => {
+    event.preventDefault();
+    setSelectedGroupItem(id);
+  };
+
+  return (
+    <TwoColumnPanel>
+      <ColumnLeft aria-labelledby="group-heading">
+        <ColumnHeader>Grouped Items</ColumnHeader>
+        <ColumnList>
+          <ColumnGroupHeader id="group-heading">
+            <h3>Optional group heading</h3>
+          </ColumnGroupHeader>
+          <nav aria-labelledby="group-heading">
+            <ul>
+              {groupOne.map(item => (
+                <li key={item.id}>
+                  <a
+                    href="#"
+                    onClick={selectGroupItem(item.id)}
+                    aria-current={item.id === selectedGroupItem.id}
+                  >
+                    {item.name}
+                    <em>{item.description}</em>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ColumnGroupHeader id="alternate-group-heading">
+            <h3>Another optional group heading</h3>
+          </ColumnGroupHeader>
+          <nav aria-labelledby="alternate-group-heading">
+            <ul>
+              {groupTwo.map(item => (
+                <li key={item.id}>
+                  <a
+                    href={item.url}
+                    onClick={selectGroupItem(item.id)}
+                    aria-current={item.id === selectedGroupItem.id}
+                  >
+                    {item.name}
+                    <em>{item.description}</em>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </ColumnList>
+      </ColumnLeft>
+      <ColumnRight aria-labelledby="group-contents-heading">
+        <ColumnHeader>
+          <Breadcrumb aria-label="content breadcrumbs">
+            <BreadcrumbLink href="#">Context A</BreadcrumbLink>
+            <BreadcrumbLink href="#">Context B</BreadcrumbLink>
+            <BreadcrumbItem id="group-contents-heading">Grouped {selectedGroupItem?.name}</BreadcrumbItem>
+          </Breadcrumb>
+        </ColumnHeader>
+        <div>
+          {selectedGroupItem?.contents}
+        </div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  )
+}
+```
+
+## Props
+
+### TwoColumnPanel
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'initialCollapsed',
+      type: 'boolean',
+      description: 'Initial collapsed state of ColumnLeft',
+      defaultValue: 'false'
+    },
+    {
+      name: 'showCollapsedPanelLabel',
+      type: 'string',
+      description: 'Label for the show panel toggle control',
+      defaultValue: 'Show Panel',
+    },
+    {
+      name: 'hideCollapsedPanelLabel',
+      type: 'string',
+      description: 'Label for the hide panel toggle control',
+      defaultValue: 'Hide Panel',
+    },
+    {
+      name: 'skipLink',
+      type: 'SkipLink',
+      description: 'A "Skip to Content" link'
+    },
+    {
+      name: 'collapsedMediaQuery',
+      type: 'string',
+      description: 'The TwoPanelColumn will collapse the ColumnLeft by default when this media query is active and display the ColumnLeft content via a slide-in element',
+      defaultValue: '(max-width: 45rem)'
+    }
+  ]}
+/>
+
+### ColumnLeft
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'aria-label',
+      type: 'string',
+      description: 'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    }
+  ]}
+/>
+
+### ColumnRight
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'aria-label',
+      type: 'string',
+      description: 'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    }
+  ]}
+/>
+
+### ColumnHeader
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+/>
+
+### ColumnList
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+/>
+
+### ColumnGroupHeader
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+/>

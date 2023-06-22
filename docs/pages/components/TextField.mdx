@@ -1,0 +1,164 @@
+---
+title: TextField
+description: A form element that allows users to type in text. Single and multi-line options.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TextField/index.tsx
+---
+
+import { TextField, FieldWrap } from '@deque/cauldron-react'
+
+```js
+import { TextField } from '@deque/cauldron-react'
+```
+
+<Note>
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `TextField` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+</Note>
+
+## Examples
+
+### Resting
+
+```jsx example
+<FieldWrap>
+  <TextField label="Resting" />
+</FieldWrap>
+```
+
+### Disabled
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Disabled"
+    disabled
+  />
+</FieldWrap>
+```
+
+### Required
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Required"
+    required
+  />
+</FieldWrap>
+```
+
+### Error
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Error"
+    error="This field has an error!"
+  />
+</FieldWrap>
+```
+
+### Multi-line Resting
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Multiline"
+    multiline
+  />
+</FieldWrap>
+```
+
+### Multi-line Disabled
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Multiline Disabled"
+    multiline
+    disabled
+  />
+</FieldWrap>
+```
+
+### Multi-line Required
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Multiline Required"
+    multiline
+    required
+  />
+</FieldWrap>
+```
+
+### Multi-line Error
+
+```jsx example
+<FieldWrap>
+  <TextField
+    label="Multiline Error"
+    multiline
+    error="This field has an error!"
+  />
+</FieldWrap>
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  props={[
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Label for the field.'
+    },
+    {
+      name: 'error',
+      type: 'React.ReactNode',
+      description: 'Error message for the field (if needed).'
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      description: 'Whether the field is required or not.'
+    },
+    {
+      name: 'defaultValue',
+      type: 'string',
+      description: 'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
+    },
+    {
+      name: 'value',
+      type: 'string',
+      description: 'The value to be applied to the field. Used for "controlled" fields.'
+    },
+    {
+      name: 'onChange',
+      type: 'function',
+      description: 'Callback function when the field\'s value changes.'
+    },
+    {
+      name: 'fieldRef',
+      type: ['React.Ref<HTMLInputElement>', 'HTMLInputElement'],
+      description: 'Ref for the field.'
+    },
+    {
+      name: 'requiredText',
+      type: 'string',
+      defaultValue: 'Required',
+      description: 'Custom "required" text. Useful for localization.'
+    },
+    {
+      name: 'multiline',
+      type: 'boolean',
+      description: 'If true, a textarea element will be rendered. Otherwise, an input[type="text"] will be rendered.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [FieldWrap](./FieldWrap)
