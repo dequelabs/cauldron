@@ -5,7 +5,7 @@ import React, {
   useState,
   useEffect,
   useRef,
-  useMemo
+  useMemo,
 } from 'react';
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
@@ -56,7 +56,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const { errorId, labelDescriptionId } = useMemo(() => {
       return {
         labelDescriptionId: nextId(),
-        errorId: nextId()
+        errorId: nextId(),
       };
     }, []);
 
@@ -72,58 +72,62 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <>
-        <div className={classNames('Checkbox is--flex-row', className)}>
-          <input
-            id={id}
-            ref={typeof refProp === 'function' || !refProp ? checkRef : refProp}
-            type="checkbox"
-            checked={isChecked}
-            disabled={disabled}
-            onFocus={(e): void => {
-              setFocused(true);
-              if (typeof onFocus === 'function') {
-                onFocus(e);
+        <div className="column">
+          <div className={classNames('Checkbox is--flex-row', className)}>
+            <input
+              id={id}
+              ref={
+                typeof refProp === 'function' || !refProp ? checkRef : refProp
               }
-            }}
-            onBlur={(e): void => {
-              setFocused(false);
-              if (typeof onBlur === 'function') {
-                onBlur(e);
-              }
-            }}
-            aria-describedby={ariaDescribedbyId}
-            onChange={(e): void => {
-              setIsChecked(e.target.checked);
-              if (onChange) {
-                onChange(e);
-              }
-            }}
-            {...other}
-          />
-          <label
-            className={classNames('Field__label', {
-              'Field__label--disabled': disabled
-            })}
-            htmlFor={id}
-          >
-            {label}
-          </label>
-          <Icon
-            className={classNames('Checkbox__overlay', {
-              'Checkbox__overlay--disabled': disabled,
-              'Checkbox__overlay--focused': focused,
-              'Field--has-error': error
-            })}
-            type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
-            aria-hidden="true"
-            onClick={(): void => {
-              if (refProp && typeof refProp !== 'function') {
-                refProp?.current?.click();
-              } else {
-                checkRef.current?.click();
-              }
-            }}
-          />
+              type="checkbox"
+              checked={isChecked}
+              disabled={disabled}
+              onFocus={(e): void => {
+                setFocused(true);
+                if (typeof onFocus === 'function') {
+                  onFocus(e);
+                }
+              }}
+              onBlur={(e): void => {
+                setFocused(false);
+                if (typeof onBlur === 'function') {
+                  onBlur(e);
+                }
+              }}
+              aria-describedby={ariaDescribedbyId}
+              onChange={(e): void => {
+                setIsChecked(e.target.checked);
+                if (onChange) {
+                  onChange(e);
+                }
+              }}
+              {...other}
+            />
+            <label
+              className={classNames('Field__label', {
+                'Field__label--disabled': disabled,
+              })}
+              htmlFor={id}
+            >
+              {label}
+            </label>
+            <Icon
+              className={classNames('Checkbox__overlay', {
+                'Checkbox__overlay--disabled': disabled,
+                'Checkbox__overlay--focused': focused,
+                'Field--has-error': error,
+              })}
+              type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
+              aria-hidden="true"
+              onClick={(): void => {
+                if (refProp && typeof refProp !== 'function') {
+                  refProp?.current?.click();
+                } else {
+                  checkRef.current?.click();
+                }
+              }}
+            />
+          </div>
           {labelDescription && (
             <span id={labelDescriptionId} className="Field__labelDescription">
               {labelDescription}

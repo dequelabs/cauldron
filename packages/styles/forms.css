@@ -189,6 +189,14 @@ textarea.Field--has-error:focus:hover,
   justify-content: flex-end;
   flex-wrap: nowrap;
 }
+.column {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.with-label {
+  flex-wrap: nowrap;
+}
 
 .Radio--inline {
   display: flex;
