@@ -25,7 +25,8 @@ module.exports = {
       }
     ],
     '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/ban-ts-comment': 'warn'
   },
   settings: {
     react: {
