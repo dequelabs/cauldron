@@ -104,7 +104,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         columnLeft,
         { id, ref, tabIndex: -1 },
         children.map((child, index) =>
-          cloneElement(child as React.ReactElement, { key: `left-${index}` })
+          cloneElement(child as React.ReactElement, {
+            key: (child as React.ReactElement).key
+              ? (child as React.ReactElement).key
+              : `left-${index}`
+          })
         )
       );
     }
@@ -151,7 +155,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         columnRight,
         { ref, tabIndex: -1 },
         children.map((child, index) =>
-          cloneElement(child as React.ReactElement, { key: `right-${index}` })
+          cloneElement(child as React.ReactElement, {
+            key: (child as React.ReactElement).key
+              ? (child as React.ReactElement).key
+              : `right-${index}`
+          })
         )
       );
     }
