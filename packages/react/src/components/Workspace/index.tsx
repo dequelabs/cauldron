@@ -11,7 +11,9 @@ export interface WorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default class Workspace extends React.Component<WorkspaceProps> {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     workspaceRef: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     layoutRef: () => {},
     noSideBar: false
   };

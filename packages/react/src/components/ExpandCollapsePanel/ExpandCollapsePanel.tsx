@@ -51,6 +51,7 @@ export default class ExpandCollapsePanel extends React.Component<
   private styleTag: HTMLStyleElement;
 
   handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const { onToggle = () => {} } = this.props;
     const { isOpen, controlled } = this.state;
     onToggle(e);

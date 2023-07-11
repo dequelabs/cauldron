@@ -7,6 +7,7 @@ export interface MainProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default class Main extends Component<MainProps> {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     mainRef: () => {}
   };
 

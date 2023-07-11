@@ -24,7 +24,9 @@ export default class TopBarMenu extends React.Component<
   TopBarMenuState
 > {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onKeyDown: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     menuItemRef: () => {}
   };
 

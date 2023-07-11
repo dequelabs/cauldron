@@ -7,11 +7,13 @@ import * as React from 'react';
 /* -------------------------------------------------------------------------------------------------
  * Utility types
  * -----------------------------------------------------------------------------------------------*/
+// eslint-disable-next-line @typescript-eslint/ban-types
 type Merge<P1 = {}, P2 = {}> = Omit<P1, keyof P2> & P2;
 
 /**
  * Infers the OwnProps if E is a ForwardRefExoticComponentWithAs
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 type OwnProps<E> = E extends ForwardRefComponent<any, infer P> ? P : {};
 
 /**
@@ -34,6 +36,7 @@ type ForwardRefExoticComponent<E, OwnProps> = React.ForwardRefExoticComponent<
 
 interface ForwardRefComponent<
   IntrinsicElementString,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   OwnProps = {}
   /**
    * Extends original type to ensure built in React types play nice
