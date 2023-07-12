@@ -20,6 +20,7 @@ export default function Drawer({
   onClose = () => null
 }: DrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
+  const triggerElement = useRef<HTMLElement | null>(null);
 
   const handleClickOutside = () => {
     if (!open) {
@@ -34,6 +35,7 @@ export default function Drawer({
     const listener = (e: KeyboardEvent) => {
       if (e.which === 27 && open) {
         onClose();
+        triggerElement.current?.focus();
       }
     };
 
@@ -41,7 +43,7 @@ export default function Drawer({
     return () => {
       document.body.removeEventListener('keydown', listener);
     };
-  }, []);
+  }, [open]);
 
   // Ensure that focusable elements aren't focusable when the drawer is closed
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function Drawer({
         (element as HTMLInputElement).tabIndex = -1;
       });
     } else {
+      triggerElement.current = document.activeElement as HTMLElement;
       Array.from(elements).forEach(element => {
         const tabIndexAttr = Number(element.getAttribute('tabindex'));
         (element as HTMLInputElement).tabIndex =
