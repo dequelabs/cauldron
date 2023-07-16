@@ -187,7 +187,7 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .Radio--inline {
@@ -312,6 +312,7 @@ textarea.Field--has-error:focus:hover,
 
 .Radio__overlay {
   border-radius: 50%;
+  align-self: start;
 }
 
 .Radio__overlay svg,
