@@ -312,7 +312,7 @@ textarea.Field--has-error:focus:hover,
 
 .Radio__overlay {
   border-radius: 50%;
-  align-self: start;
+  align-self: flex-start;
 }
 
 .Radio__overlay svg,
