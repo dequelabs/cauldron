@@ -286,6 +286,7 @@ textarea.Field--has-error:focus:hover,
   line-height: 1;
   margin-left: calc(24px + 2px + var(--space-half));
   cursor: default;
+  display: flex;
 }
 
 .Icon + .Error {
