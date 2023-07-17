@@ -71,7 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <>
+      <div className="Checkbox">
         <div className={classNames('Checkbox is--flex-row', className)}>
           <input
             id={id}
@@ -124,18 +124,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               }
             }}
           />
-          {labelDescription && (
-            <span id={labelDescriptionId} className="Field__labelDescription">
-              {labelDescription}
-            </span>
-          )}
-          {error && (
-            <div id={errorId} className="Error">
-              {error}
-            </div>
-          )}
         </div>
-      </>
+        {labelDescription && (
+          <span id={labelDescriptionId} className="Field__labelDescription">
+            {labelDescription}
+          </span>
+        )}
+        {error && (
+          <div id={errorId} className="Error">
+            {error}
+          </div>
+        )}
+      </div>
     );
   }
 );

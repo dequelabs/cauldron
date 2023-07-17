@@ -309,11 +309,11 @@ textarea.Field--has-error:focus:hover,
   border-radius: 3px;
   color: #333;
   margin-right: var(--space-half);
+  align-self: flex-start;
 }
 
 .Radio__overlay {
   border-radius: 50%;
-  align-self: flex-start;
 }
 
 .Radio__overlay svg,
