@@ -63,8 +63,10 @@ export default class ExpandCollapsePanel extends React.Component<
   animateOpen = () => {
     const { current: panel } = this.panel;
     const { animationTiming } = this.props;
+    const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+      .matches;
 
-    if (!animationTiming) {
+    if (!animationTiming || prefersReducedMotion) {
       this.setState({ isAnimating: false });
       return;
     }
@@ -105,8 +107,10 @@ export default class ExpandCollapsePanel extends React.Component<
   animateClose = () => {
     const { current: panel } = this.panel;
     const { animationTiming } = this.props;
+    const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+      .matches;
 
-    if (!animationTiming) {
+    if (!animationTiming || prefersReducedMotion) {
       this.setState({ isAnimating: false });
       return;
     }
