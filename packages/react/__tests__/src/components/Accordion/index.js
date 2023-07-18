@@ -12,9 +12,6 @@ expect.extend(toHaveNoViolations);
 
 const sandbox = createSandbox();
 const noop = () => {};
-const matchMedia = {
-  matches: false
-};
 
 beforeEach(() => {
   window.matchMedia = window.matchMedia || noop;
