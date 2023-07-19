@@ -71,7 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <div className="Checkbox">
+      <div className="Checkbox__wrap">
         <div className={classNames('Checkbox is--flex-row', className)}>
           <input
             id={id}

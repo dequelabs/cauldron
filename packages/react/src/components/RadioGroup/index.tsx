@@ -71,7 +71,7 @@ const RadioGroup = ({
     const isFocused = focusIndex === index;
 
     return (
-      <div className="Radio" key={id}>
+      <div className="Radio__wrap" key={id}>
         <div className={classNames('Radio is--flex-row', className)}>
           <input
             type="radio"

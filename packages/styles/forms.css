@@ -184,15 +184,19 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
 }
 
+.Checkbox__wrap,
+.Radio__wrap {
+  margin-top: 0;
+  margin-bottom: var(--space-smallest);
+}
+
 .Checkbox,
 .Radio {
   box-sizing: border-box;
   position: relative;
-  margin-top: 0;
   flex-direction: row-reverse;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  margin-bottom: var(--space-smallest);
 }
 
 .Radio--inline {
@@ -202,8 +206,8 @@ textarea.Field--has-error:focus:hover,
   gap: var(--space-small);
 }
 
-.Checkbox:last-of-type,
-.Radio:last-of-type {
+.Checkbox__wrap:last-of-type,
+.Radio__wrap:last-of-type {
   margin-bottom: 0;
 }
 
