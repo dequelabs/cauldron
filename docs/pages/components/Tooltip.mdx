@@ -1,0 +1,183 @@
+---
+title: Tooltip
+description: A small text box that gives more information about a UI element when a user hovers over or focuses it.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Tooltip/index.tsx
+---
+
+import { useRef } from 'react'
+import { Tooltip, TooltipHead, TooltipContent, Button, TextField, Line } from '@deque/cauldron-react'
+
+```js
+import { Tooltip } from '@deque/cauldron-react'
+```
+
+## Examples
+
+Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Tooltips can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
+
+### Text Tooltips
+
+Text Tooltips are the default variant and are intended to show short single-line text hints.
+
+```jsx example
+function TextTooltipExamples() {
+  const top = useRef();
+  const bottom = useRef();
+  const left = useRef();
+  const right = useRef();
+
+  return (
+    <>
+      <Button variant="secondary" buttonRef={top}>
+        Top
+      </Button>
+      <Tooltip target={top} placement="top">
+        On top
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={bottom}>
+        Bottom
+      </Button>
+      <Tooltip target={bottom} placement="bottom">
+        On bottom
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={left}>
+        Left
+      </Button>
+      <Tooltip target={left} placement="left">
+        On your left
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={right}>
+        Right
+      </Button>
+      <Tooltip target={right} placement="right">
+        On your right
+      </Tooltip>
+    </>
+  )
+}
+```
+
+### Info Tooltips
+
+Info Tooltips are an alternate variant to present longer textual content that may occur over multiple lines.
+
+```jsx example
+function InfoTooltipExamples() {
+  const top = useRef();
+  const bottom = useRef();
+  const left = useRef();
+  const right = useRef();
+
+  return (
+    <>
+      <Button variant="secondary" buttonRef={top}>
+        Top
+      </Button>
+      <Tooltip variant="info" target={top} placement="top">
+        Here’s an informational tooltip with more content on top.
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={bottom}>
+        Bottom
+      </Button>
+      <Tooltip variant="info" target={bottom} placement="bottom">
+        Here’s an informational tooltip with more content on bottom.
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={left}>
+        Left
+      </Button>
+      <Tooltip variant="info" target={left} placement="left">
+        Here’s an informational tooltip with more content on your left.
+      </Tooltip>
+
+      <Button variant="secondary" buttonRef={right}>
+        Right
+      </Button>
+      <Tooltip variant="info" target={right} placement="right">
+        Here’s an informational tooltip with more content on your right.
+      </Tooltip>
+    </>
+  )
+}
+```
+
+### Big Tooltips
+
+For more verbose tooltips, the `big` variant can be used.
+
+```jsx example
+function BigTooltipExample() {
+  const password = useRef()
+  return (
+    <>
+      <TextField fieldRef={password} label="Password" />
+      <Tooltip variant="big" target={password} placement="auto">
+        <TooltipHead>Password requirements</TooltipHead>
+        <Line />
+        <TooltipContent>
+          <ul>
+            <li>The character length should be long or whatever.</li>
+            <li>
+              You need Lower-case, Upper-case, Super-case, and Basket-case.
+            </li>
+            <li>
+              Special characters are good, but remember all characters are
+              special in their own way
+            </li>
+            <li>
+              Make sure your passwords match...that should be obvious.
+            </li>
+          </ul>
+        </TooltipContent>
+      </Tooltip>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[
+    {
+      name: 'target',
+      type: ['React.Ref', 'HTMLElement'],
+      required: true,
+      description: 'The target element to attach the tooltip to.'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'The position of the tooltip relative to its target element.'
+    },
+    {
+      name: 'variant',
+      type: ['text', 'info', 'big'],
+      defaultValue: 'text',
+      description: 'The style of tooltip to display.'
+    },
+    {
+      name: 'portal',
+      type: ['React.Ref', 'HTMLElement'],
+      description: 'The parent element to place the Tooltip in.',
+      defaultValue: 'document.body'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [TooltipTabstop](./TooltipTabstop)
