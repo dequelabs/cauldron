@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: 16
       - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name attest-team-ci
+          git config user.email aciattestteamci@deque.com
           VERSION=$(node -p 'require("./package.json").version')
           if [ -z "$VERSION" ]; then
             echo "VERSION cannot be empty"
