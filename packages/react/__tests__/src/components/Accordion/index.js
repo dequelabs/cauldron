@@ -12,9 +12,17 @@ expect.extend(toHaveNoViolations);
 
 const sandbox = createSandbox();
 const noop = () => {};
+const matchMedia = {
+  matches: false
+};
 
 beforeEach(() => {
   window.matchMedia = window.matchMedia || noop;
+  matchMediaStub = sandbox.stub(window, 'matchMedia').returns(matchMedia);
+});
+
+afterEach(() => {
+  sandbox.restore();
 });
 
 describe('Accordion', () => {
