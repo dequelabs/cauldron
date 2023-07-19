@@ -18,7 +18,7 @@ const matchMedia = {
 
 beforeEach(() => {
   window.matchMedia = window.matchMedia || noop;
-  matchMediaStub = sandbox.stub(window, 'matchMedia').returns(matchMedia);
+  sandbox.stub(window, 'matchMedia').returns(matchMedia);
 });
 
 afterEach(() => {
