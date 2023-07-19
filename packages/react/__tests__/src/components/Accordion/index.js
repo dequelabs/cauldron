@@ -5,9 +5,25 @@ import {
   AccordionTrigger,
   AccordionContent
 } from 'src/components/Accordion';
+import { createSandbox } from 'sinon';
 const { axe, toHaveNoViolations } = require('jest-axe');
 
 expect.extend(toHaveNoViolations);
+
+const sandbox = createSandbox();
+const noop = () => {};
+const matchMedia = {
+  matches: false
+};
+
+beforeEach(() => {
+  window.matchMedia = window.matchMedia || noop;
+  sandbox.stub(window, 'matchMedia').returns(matchMedia);
+});
+
+afterEach(() => {
+  sandbox.restore();
+});
 
 describe('Accordion', () => {
   it('renders without errors', () => {

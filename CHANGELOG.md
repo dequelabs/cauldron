@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.5.0](https://github.com/dequelabs/cauldron/compare/v5.4.1...v5.5.0) (2023-07-19)
+
+
+### Features
+
+* **react:** respect prefers-reduced-motion when opening/closing ExpandCollapsePanel or Accordion ([#1112](https://github.com/dequelabs/cauldron/issues/1112)) ([cfe8292](https://github.com/dequelabs/cauldron/commit/cfe8292dda72f35da34b1568d6f21eeb76f4acc9))
+* **styles:** removed unwanted text transform property ([#1102](https://github.com/dequelabs/cauldron/issues/1102)) ([fe1c8ad](https://github.com/dequelabs/cauldron/commit/fe1c8ad45eabfafee28691741220feab836c1113))
+
+
+### Bug Fixes
+
+* updated TwoColumnPanel to not override children keys ([#1100](https://github.com/dequelabs/cauldron/issues/1100)) ([b60588f](https://github.com/dequelabs/cauldron/commit/b60588fe44708a3fc01fb8bf18866171a8e0d9b3)), closes [#924](https://github.com/dequelabs/cauldron/issues/924)
+
 ### [5.4.1](https://github.com/dequelabs/cauldron/compare/v5.4.0...v5.4.1) (2023-06-21)
 
 
