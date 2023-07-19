@@ -7,6 +7,7 @@ export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default class Layout extends React.Component<LayoutProps> {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     layoutRef: () => {}
   };
 

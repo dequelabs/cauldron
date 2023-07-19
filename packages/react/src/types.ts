@@ -1,5 +1,6 @@
 import { ReactElement, ReactFragment, ReactPortal } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Cauldron {
   export type LabelProps =
     | { 'aria-label': string }
