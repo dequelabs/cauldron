@@ -165,7 +165,7 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   font-size: var(--text-size-smallest);
   margin-top: var(--space-half);
-  margin-left: calc(24px + 2px + var(--space-half));
+  margin-left: calc(var(--icon-size) + 2px + var(--space-half));
   padding: var(--space-half) 0;
 }
 
