@@ -16,7 +16,7 @@
   --field-label-text-color: var(--gray-90);
   --field-label-description-text-color: var(--gray-60);
   --input-min-width: 250px;
-  --focus-glow: rgba(181, 26, 209, 1);
+  --field-focus-ring-color: var(--focus-light);
 }
 
 .cauldron--theme-dark {
@@ -32,7 +32,7 @@
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
   --field-label-description-text-color: rgba(255, 255, 255, 0.8);
-  --focus-glow: rgba(235, 148, 255, 1);
+  --field-focus-ring-color: var(--focus-dark);
 }
 
 input,
@@ -334,7 +334,7 @@ textarea.Field--has-error:focus:hover,
 .Checkbox__overlay.Checkbox__overlay--focused,
 .Radio__overlay.Radio__overlay--focused {
   border-radius: 5px;
-  box-shadow: 0 0 0 2px var(--focus-glow);
+  box-shadow: 0 0 0 2px var(--field-focus-ring-color);
 }
 
 .Radio__overlay.Icon--radio-checked {
@@ -398,10 +398,4 @@ textarea.Field--has-error:focus:hover,
 .cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-checked,
 .cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-unchecked {
   color: var(--stroke-dark);
-}
-
-.Checkbox__overlay.Checkbox__overlay--focused,
-.Radio__overlay.Radio__overlay--focused {
-  border-radius: 5px;
-  box-shadow: 0 0 0 2px var(--focus-glow);
 }
