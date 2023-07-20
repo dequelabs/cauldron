@@ -397,7 +397,7 @@ textarea.Field--has-error:focus:hover,
 .cauldron--theme-dark .Radio__overlay--disabled,
 .cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-checked,
 .cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-unchecked {
-  color: #5d676f;
+  color: var(--stroke-dark);
 }
 
 .Checkbox__overlay.Checkbox__overlay--focused,
