@@ -17,7 +17,12 @@
   --field-label-error-text-color: var(--error);
   --field-label-description-text-color: var(--gray-60);
   --icon-inactive-color: var(--gray-90);
-  --icon-active-color: rgb(212, 221, 224, 0.25);
+  --icon-active-color: color-mix(
+    in srgb,
+    var(--accent-primary) 20%,
+    transparent
+  );
+  --icon-error-active-color: color-mix(in srgb, var(--error) 20%, transparent);
   --icon-checked-color: var(--accent-primary);
   --icon-checked-disabled-color: var(--accent-primary-dsiabled, #78a6d8);
   --icon-unchecked-disabled-color: var(--gray-40);
@@ -41,6 +46,12 @@
   --field-label-text-color: var(--white);
   --field-label-description-text-color: var(--accent-light);
   --icon-inactive-color: var(--white);
+  --icon-active-color: color-mix(in srgb, var(--accent-light) 20%, transparent);
+  --icon-error-active-color: color-mix(
+    in srgb,
+    var(--accent-danger) 20%,
+    transparent
+  );
   --icon-checked-color: var(--accent-light);
   --icon-checked-disabled-color: var(--stroke-dark);
   --icon-unchecked-disabled-color: var(--stroke-dark);
@@ -132,6 +143,10 @@ textarea.Field--has-error,
 
 .Checkbox__overlay.Field--has-error {
   color: var(--field-border-color-error);
+}
+
+.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
+  background-color: var(--icon-error-active-color);
 }
 
 input.Field--has-error:hover,
@@ -246,7 +261,7 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   color: var(--field-label-text-color);
   font-size: var(--text-size-small);
-  padding-bottom: var(--space-half);
+  margin-bottom: var(--space-smallest);
   cursor: default;
 }
 
