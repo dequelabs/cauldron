@@ -216,7 +216,6 @@ textarea.Field--has-error:focus:hover,
 
 .Checkbox__wrap,
 .Radio__wrap {
-  margin-top: 0;
   margin-bottom: var(--space-smallest);
 }
 
@@ -245,12 +244,6 @@ textarea.Field--has-error:focus:hover,
   gap: var(--space-small);
 }
 
-.Checkbox .Field__label,
-.Radio .Field__label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
 .Checkbox + .Field__labelDescription,
 .Radio + .Field__labelDescription {
   margin-top: var(--space-half);
@@ -269,8 +262,12 @@ textarea.Field--has-error:focus:hover,
   color: var(--field-label-text-color);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
-  margin-bottom: var(--space-smallest);
   cursor: default;
+}
+
+.Field__label + .Checkbox__wrap,
+.Field__label + div[role='radiogroup'] {
+  margin-top: var(--space-smallest);
 }
 
 .Field__label .Checkbox__label,

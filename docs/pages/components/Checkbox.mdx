@@ -157,6 +157,53 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
+### Checkbox with Description List
+
+```jsx example
+<FieldWrap>
+  <Checkbox
+    id="description-checkbox-unchecked"
+    label="Description Checkbox Unchecked"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-checkbox- unchecked"
+    value="1"
+  />
+  <Checkbox
+  checked
+    id="description-checkbox-checked"
+    label="Description Checkbox Checked"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-checkbox-checked"
+    value="1"
+  />
+  <Checkbox
+    disabled
+    id="description-checkbox-disabled-unchecked"
+    label="Description Checkbox Disabled Unchecked"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-checkbox-disabled-unchecked"
+    value="1"
+  />
+  <Checkbox
+    disabled
+    checked
+    id="description-checkbox-disabled-checked"
+    label="Description Checkbox Disabled Checked"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-checkbox-disabled-checked"
+    value="1"
+  />
+  <Checkbox
+    error="You must check this checkbox to continue"
+    id="description-error-checkbox"
+    label="Description Error Checkbox"
+    labelDescription="Additional text to describe the checkbox"
+    name="description-error-checkbox"
+    value="1"
+  />
+</FieldWrap>
+```
+
 ## Props
 
 <ComponentProps
