@@ -86,6 +86,48 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
+### Checkbox List
+
+```jsx example
+<FieldWrap>
+  <Checkbox
+    id="checkbox-list-unchecked"
+    label="Unchecked Checkbox"
+    name="unchecked-checkbox-list"
+    value="1"
+  />
+  <Checkbox
+    checked
+    id="checkbox-list-checked"
+    label="Checked Checkbox"
+    name="checked-checkbox-list"
+    value="1"
+  />
+  <Checkbox
+    disabled
+    id="checkbox-list-checkbox-disabled-unchecked"
+    label="Checked Disabled Checkbox"
+    name="disabled-checkbox-list-unchecked"
+    value="1"
+  />
+  <Checkbox
+    disabled
+    checked
+    id="checkbox-list-checkbox-disabled-checked"
+    label="Unchecked Disabled Checkbox"
+    name="disabled-checkbox-list-checked"
+    value="1"
+  />
+  <Checkbox
+    error="You must check this checkbox to continue"
+    id="checkbox-error"
+    label="Error Checkbox"
+    name="error-checkbox"
+    value="1"
+  />
+</FieldWrap>
+```
+
 ### Checkbox with Description
 
 ```jsx example

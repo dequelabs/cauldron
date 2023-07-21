@@ -145,7 +145,7 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
-.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
+.Icon--checkbox-unchecked.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
   background-color: var(--icon-error-active-color);
 }
 
@@ -192,6 +192,7 @@ textarea.Field--has-error:focus:hover,
   color: var(--error-text-color);
   border-top: 1px solid var(--error-border-color);
   text-align: left;
+  font-weight: var(--font-weight-normal);
   font-size: var(--text-size-smallest);
   margin-top: var(--space-half);
   margin-left: calc(var(--icon-size) + 2px + var(--space-half));
@@ -219,6 +220,11 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: var(--space-smallest);
 }
 
+.Checkbox__wrap:last-of-type,
+.Radio__wrap:last-of-type {
+  margin-bottom: 0;
+}
+
 .Radio--inline .Radio__wrap {
   margin-bottom: 0;
 }
@@ -239,11 +245,6 @@ textarea.Field--has-error:focus:hover,
   gap: var(--space-small);
 }
 
-.Checkbox__wrap:last-of-type,
-.Radio__wrap:last-of-type {
-  margin-bottom: 0;
-}
-
 .Checkbox .Field__label,
 .Radio .Field__label {
   margin-bottom: 0;
@@ -252,7 +253,13 @@ textarea.Field--has-error:focus:hover,
 
 .Checkbox + .Field__labelDescription,
 .Radio + .Field__labelDescription {
-  margin-top: var(--space-smallest);
+  margin-top: var(--space-half);
+  margin-bottom: var(--space-small);
+}
+
+.Checkbox__wrap:last-of-type .Checkbox + .Field__labelDescription,
+.Radio__wrap:last-of-type .Radio + .Field__labelDescription {
+  margin-bottom: 0;
 }
 
 .Field__label {
@@ -261,8 +268,14 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   color: var(--field-label-text-color);
   font-size: var(--text-size-small);
+  font-weight: var(--font-weight-medium);
   margin-bottom: var(--space-smallest);
   cursor: default;
+}
+
+.Field__label .Checkbox__label,
+.Field__label .Radio__label {
+  margin-bottom: var(--space-smallest);
 }
 
 .Field__required-text {
@@ -324,6 +337,7 @@ textarea.Field--has-error:focus:hover,
   flex-basis: 100%;
   color: var(--field-label-description-text-color);
   font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   line-height: 1;
   margin-top: var(--space-half);
   margin-left: calc(24px + 2px + var(--space-half));
