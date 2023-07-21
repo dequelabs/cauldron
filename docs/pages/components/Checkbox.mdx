@@ -90,6 +90,7 @@ import { Checkbox } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
+<div className="Field__label" id="checkbox-list-label">Checkbox List Label</div>
   <Checkbox
     id="checkbox-list-unchecked"
     label="Unchecked Checkbox"
@@ -106,7 +107,7 @@ import { Checkbox } from '@deque/cauldron-react'
   <Checkbox
     disabled
     id="checkbox-list-checkbox-disabled-unchecked"
-    label="Checked Disabled Checkbox"
+    label="Unchecked Disabled Checkbox"
     name="disabled-checkbox-list-unchecked"
     value="1"
   />
@@ -114,7 +115,7 @@ import { Checkbox } from '@deque/cauldron-react'
     disabled
     checked
     id="checkbox-list-checkbox-disabled-checked"
-    label="Unchecked Disabled Checkbox"
+    label="Checked Disabled Checkbox"
     name="disabled-checkbox-list-checked"
     value="1"
   />
@@ -161,6 +162,7 @@ import { Checkbox } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
+<div className="Field__label" id="checkbox-list-label">Checkbox with Description List Label</div>
   <Checkbox
     id="description-checkbox-list-unchecked"
     label="Description Checkbox Unchecked"
