@@ -71,47 +71,49 @@ const RadioGroup = ({
     const isFocused = focusIndex === index;
 
     return (
-      <div className={classNames('Radio is--flex-row', className)} key={id}>
-        <input
-          type="radio"
-          name={name}
-          value={radioValue}
-          id={id}
-          ref={input => {
-            if (!input) {
-              return;
-            }
+      <div className="Radio__wrap" key={id}>
+        <div className={classNames('Radio is--flex-row', className)}>
+          <input
+            type="radio"
+            name={name}
+            value={radioValue}
+            id={id}
+            ref={input => {
+              if (!input) {
+                return;
+              }
 
-            inputs.current.push(input);
-          }}
-          onFocus={() => onRadioFocus(index)}
-          onBlur={() => onRadioBlur()}
-          onChange={() => {
-            handleChange(radioValue);
-            onChange(radio, inputs.current?.[index]);
-          }}
-          disabled={disabled}
-          checked={isChecked}
-          aria-describedby={labelDescription ? `${id}Desc` : undefined}
-          {...other}
-        />
-        <label
-          htmlFor={id}
-          className={classNames('Field__label', {
-            'Field__label--disabled': disabled
-          })}
-        >
-          {label}
-        </label>
-        <Icon
-          className={classNames('Radio__overlay', {
-            'Radio__overlay--focused': isFocused,
-            'Radio__overlay--disabled': disabled
-          })}
-          type={isChecked ? 'radio-checked' : 'radio-unchecked'}
-          aria-hidden="true"
-          onClick={() => onRadioClick(index)}
-        />
+              inputs.current.push(input);
+            }}
+            onFocus={() => onRadioFocus(index)}
+            onBlur={() => onRadioBlur()}
+            onChange={() => {
+              handleChange(radioValue);
+              onChange(radio, inputs.current?.[index]);
+            }}
+            disabled={disabled}
+            checked={isChecked}
+            aria-describedby={labelDescription ? `${id}Desc` : undefined}
+            {...other}
+          />
+          <label
+            htmlFor={id}
+            className={classNames('Radio__label', {
+              'Field__label--disabled': disabled
+            })}
+          >
+            {label}
+          </label>
+          <Icon
+            className={classNames('Radio__overlay', {
+              'Radio__overlay--focused': isFocused,
+              'Radio__overlay--disabled': disabled
+            })}
+            type={isChecked ? 'radio-checked' : 'radio-unchecked'}
+            aria-hidden="true"
+            onClick={() => onRadioClick(index)}
+          />
+        </div>
         {labelDescription && (
           <span
             id={`${id}Desc`}
