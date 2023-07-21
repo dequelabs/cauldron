@@ -17,16 +17,8 @@
   --field-label-error-text-color: var(--error);
   --field-label-description-text-color: var(--gray-60);
   --field-icon-inactive-color: var(--gray-90);
-  --field-icon-active-color: color-mix(
-    in srgb,
-    var(--accent-primary) 20%,
-    transparent
-  );
-  --field-icon-error-active-color: color-mix(
-    in srgb,
-    var(--error) 20%,
-    transparent
-  );
+  --field-icon-active-color: rgba(60, 122, 174, 0.25);
+  --field-icon-error-active-color: rgba(217, 50, 81, 0.25);
   --field-icon-checked-color: var(--accent-primary);
   --field-icon-checked-disabled-color: var(--accent-primary-dsiabled, #78a6d8);
   --field-icon-unchecked-disabled-color: var(--gray-40);
@@ -50,16 +42,8 @@
   --field-label-text-color: var(--white);
   --field-label-description-text-color: var(--accent-light);
   --field-icon-inactive-color: var(--white);
-  --field-icon-active-color: color-mix(
-    in srgb,
-    var(--accent-light) 20%,
-    transparent
-  );
-  --field-icon-error-active-color: color-mix(
-    in srgb,
-    var(--accent-danger) 20%,
-    transparent
-  );
+  --field-icon-active-color: rgba(212, 221, 224, 0.25);
+  --field-icon-error-active-color: rgba(254, 109, 107, 0.25);
   --field-icon-checked-color: var(--accent-light);
   --field-icon-checked-disabled-color: var(--stroke-dark);
   --field-icon-unchecked-disabled-color: var(--stroke-dark);
