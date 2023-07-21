@@ -258,8 +258,11 @@ textarea.Field--has-error:focus:hover,
   cursor: default;
 }
 
-.Field__label + .Checkbox__wrap,
-.Field__label + div[role='radiogroup'] {
+.Field__label + .Checkbox__wrap {
+  margin-top: var(--space-half);
+}
+
+.Field__label + [role^='radiogroup'] {
   margin-top: var(--space-smallest);
 }
 
