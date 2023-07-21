@@ -101,7 +101,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {...other}
           />
           <label
-            className={classNames('Field__label', 'Checkbox__label', {
+            className={classNames('Checkbox__label', {
               'Field__label--disabled': disabled
             })}
             htmlFor={id}

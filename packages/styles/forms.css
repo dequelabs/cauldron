@@ -268,6 +268,7 @@ textarea.Field--has-error:focus:hover,
   align-items: center;
   text-align: left;
   color: var(--field-label-text-color);
+  margin-bottom: var(--space-half);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   cursor: default;
@@ -280,7 +281,13 @@ textarea.Field--has-error:focus:hover,
 
 .Checkbox__label,
 .Radio__label {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: var(--field-label-text-color);
+  font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
+  cursor: default;
 }
 
 .Field__required-text {
