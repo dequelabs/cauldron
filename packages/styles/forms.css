@@ -137,7 +137,7 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
-.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
+.Icon--checkbox-unchecked.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
   background-color: var(--field-icon-error-active-color);
 }
 
