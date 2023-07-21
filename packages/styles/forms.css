@@ -270,9 +270,9 @@ textarea.Field--has-error:focus:hover,
   margin-top: var(--space-smallest);
 }
 
-.Field__label .Checkbox__label,
-.Field__label .Radio__label {
-  margin-bottom: var(--space-smallest);
+.Checkbox__label,
+.Radio__label {
+  font-weight: var(--font-weight-normal);
 }
 
 .Field__required-text {
