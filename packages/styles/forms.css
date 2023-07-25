@@ -14,7 +14,17 @@
   --field-background-color-disabled: #f7f7f7;
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
+  --field-label-error-text-color: var(--error);
   --field-label-description-text-color: var(--gray-60);
+  --field-icon-inactive-color: var(--gray-90);
+  --field-icon-active-color: rgba(60, 122, 174, 0.25);
+  --field-icon-error-active-color: rgba(217, 50, 81, 0.25);
+  --field-icon-checked-color: var(--accent-primary);
+  --field-icon-checked-disabled-color: var(--accent-primary-dsiabled, #78a6d8);
+  --field-icon-unchecked-disabled-color: var(--gray-40);
+  --field-icon-focus-color: var(--focus-light);
+  --field-error-text-color: var(--error);
+  --field-error-border-color: var(--error);
   --input-min-width: 250px;
 }
 
@@ -30,7 +40,16 @@
   --field-background-color-disabled: #5d676f;
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
-  --field-label-description-text-color: rgba(255, 255, 255, 0.8);
+  --field-label-description-text-color: var(--accent-light);
+  --field-icon-inactive-color: var(--white);
+  --field-icon-active-color: rgba(212, 221, 224, 0.25);
+  --field-icon-error-active-color: rgba(254, 109, 107, 0.25);
+  --field-icon-checked-color: var(--accent-light);
+  --field-icon-checked-disabled-color: var(--stroke-dark);
+  --field-icon-unchecked-disabled-color: var(--stroke-dark);
+  --field-icon-focus-color: var(--focus-dark);
+  --field-error-text-color: var(--error);
+  --field-error-border-color: var(--error);
 }
 
 input,
@@ -118,6 +137,10 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
+.Icon--checkbox-unchecked.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
+  background-color: var(--field-icon-error-active-color);
+}
+
 input.Field--has-error:hover,
 select.Field--has-error:hover,
 textarea.Field--has-error:hover,
@@ -158,11 +181,14 @@ textarea.Field--has-error:focus:hover,
 }
 
 .Error {
-  color: var(--error);
+  color: var(--field-error-text-color);
+  border-top: 1px solid var(--field-error-border-color);
   text-align: left;
-  font-size: var(--text-size-smallest);
   font-weight: var(--font-weight-normal);
-  padding-left: var(--space-half);
+  font-size: var(--text-size-smallest);
+  margin-top: var(--space-half);
+  margin-left: calc(var(--icon-size) + 2px + var(--space-half));
+  padding: var(--space-half) 0;
 }
 
 .Field {
@@ -180,14 +206,27 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
 }
 
+.Checkbox__wrap,
+.Radio__wrap {
+  margin-bottom: var(--space-smallest);
+}
+
+.Checkbox__wrap:last-of-type,
+.Radio__wrap:last-of-type {
+  margin-bottom: 0;
+}
+
+.Radio--inline .Radio__wrap {
+  margin-bottom: 0;
+}
+
 .Checkbox,
 .Radio {
   box-sizing: border-box;
   position: relative;
-  margin-bottom: 0;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .Radio--inline {
@@ -197,19 +236,15 @@ textarea.Field--has-error:focus:hover,
   gap: var(--space-small);
 }
 
-.Checkbox {
-  margin-bottom: var(--space-smallest);
+.Checkbox + .Field__labelDescription,
+.Radio + .Field__labelDescription {
+  margin-top: var(--space-half);
+  margin-bottom: var(--space-small);
 }
 
-.Checkbox + .Checkbox,
-.Radio + .Radio {
-  margin-top: var(--space-smallest);
-}
-
-.Checkbox .Field__label,
-.Radio .Field__label {
+.Checkbox__wrap:last-of-type .Checkbox + .Field__labelDescription,
+.Radio__wrap:last-of-type .Radio + .Field__labelDescription {
   margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .Field__label {
@@ -217,9 +252,28 @@ textarea.Field--has-error:focus:hover,
   align-items: center;
   text-align: left;
   color: var(--field-label-text-color);
+  margin-bottom: var(--space-half);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
-  padding-bottom: var(--space-half);
+  cursor: default;
+}
+
+.Field__label + .Checkbox__wrap {
+  margin-top: var(--space-half);
+}
+
+.Field__label + [role^='radiogroup'] {
+  margin-top: var(--space-smallest);
+}
+
+.Checkbox__label,
+.Radio__label {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: var(--field-label-text-color);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   cursor: default;
 }
 
@@ -239,7 +293,7 @@ textarea.Field--has-error:focus:hover,
 }
 
 .Field__label--has-error .Field__required-text {
-  color: var(--error);
+  color: var(--field-label-error-text-color);
 }
 
 .Field__label--inline {
@@ -284,20 +338,14 @@ textarea.Field--has-error:focus:hover,
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   line-height: 1;
+  margin-top: var(--space-half);
   margin-left: calc(24px + 2px + var(--space-half));
   cursor: default;
-}
-
-.Icon + .Error {
-  flex-basis: 100%;
-  margin-top: var(--space-smallest);
+  display: flex;
 }
 
 .Field__labelDescription + .Error {
-  border-top: 1px solid var(--error);
-  margin-left: calc(24px + 2px + var(--space-half));
-  padding: 4px 0;
-  margin-top: 4px;
+  margin-top: var(--space-smallest);
 }
 
 .Radio__overlay,
@@ -305,9 +353,13 @@ textarea.Field--has-error:focus:hover,
   border: 1px solid transparent;
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 3px;
-  color: #333;
+  color: var(--field-icon-inactive-color);
   margin-right: var(--space-half);
+  align-self: flex-start;
+}
+
+.Checkbox__overlay {
+  border-radius: 5px;
 }
 
 .Radio__overlay {
@@ -321,7 +373,7 @@ textarea.Field--has-error:focus:hover,
 
 .Radio__overlay:active:not(.Radio__overlay--disabled),
 .Checkbox__overlay:active:not(.Checkbox__overlay--disabled) {
-  background-color: rgba(60, 122, 174, 0.25);
+  background-color: var(--field-icon-active-color);
 }
 
 .Radio input[type='radio'] {
@@ -334,17 +386,22 @@ textarea.Field--has-error:focus:hover,
 
 .Checkbox__overlay.Checkbox__overlay--focused,
 .Radio__overlay.Radio__overlay--focused {
-  border: 1px solid var(--focus);
-  box-shadow: inset 0 0 0 1px var(--focus), 0 0 4px 2px var(--focus-glow);
+  box-shadow: 0 0 0 2px var(--field-icon-focus-color);
 }
 
-.Radio__overlay.Icon--radio-checked {
-  color: #3c7aae;
+.Radio__overlay.Icon--radio-checked,
+.Checkbox__overlay.Icon--checkbox-checked {
+  color: var(--field-icon-checked-color);
 }
 
 .Radio__overlay--disabled.Icon--radio-checked,
+.Checkbox__overlay--disabled.Icon--checkbox-checked {
+  color: var(--field-icon-checked-disabled-color);
+}
+
+.Checkbox__overlay--disabled.Icon--checkbox-unchecked,
 .Radio__overlay--disabled.Icon--radio-unchecked {
-  color: #ccc;
+  color: var(--field-icon-unchecked-disabled-color);
 }
 
 .Field__label:hover ~ .Radio__overlay:not(.Radio__overlay--disabled),
@@ -360,40 +417,7 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
-.Checkbox__overlay.Icon--checkbox-checked {
-  color: #3c7aae;
-}
-
-.Checkbox__overlay--disabled.Icon--checkbox-checked,
-.Checkbox__overlay--disabled.Icon--checkbox-unchecked {
-  color: #ccc;
-}
-
 .Field__label:hover ~ .Checkbox__overlay:not(.Checkbox__overlay--disabled),
 .Checkbox__overlay:hover:not(.Checkbox__overlay--disabled) {
   border: 1px solid currentColor;
-}
-
-/* Dark Theme */
-.cauldron--theme-dark {
-  --field-label-text-color: var(--white);
-}
-
-.cauldron--theme-dark .Radio__overlay,
-.cauldron--theme-dark .Checkbox__overlay {
-  color: var(--white);
-}
-
-.cauldron--theme-dark .Checkbox__overlay.Icon--checkbox-checked {
-  color: var(--accent-light);
-}
-
-.cauldron--theme-dark .Checkbox__overlay.Field--has-error {
-  color: var(--accent-danger);
-}
-
-.cauldron--theme-dark .Radio__overlay--disabled,
-.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-checked,
-.cauldron--theme-dark .Checkbox__overlay--disabled.Icon--checkbox-unchecked {
-  color: #4c99a9;
 }

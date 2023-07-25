@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.1](https://github.com/dequelabs/cauldron/compare/v5.5.0...v5.5.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **styles:** fix overflow styling on Radio Group and Checkbox and align styles with Pattern Library ([#1110](https://github.com/dequelabs/cauldron/issues/1110)) ([4f8a9ba](https://github.com/dequelabs/cauldron/commit/4f8a9bacee971b4eb71aa9d897491e96a91a4b2f))
+
 ## [5.5.0](https://github.com/dequelabs/cauldron/compare/v5.4.1...v5.5.0) (2023-07-19)
 
 
