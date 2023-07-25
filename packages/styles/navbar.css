@@ -45,7 +45,6 @@
   display: flex;
   align-items: center;
   background-color: var(--top-nav-background-color);
-  border-bottom: 1px solid var(--top-nav-border-bottom-color);
   border-right: 1px solid var(--top-nav-box-shadow-color);
   transition: background-color 0.3s ease;
 }
