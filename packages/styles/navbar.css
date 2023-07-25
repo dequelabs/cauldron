@@ -147,7 +147,10 @@
   margin-right: var(--space-smallest);
 }
 
-@media (max-width: 61.25rem) {
+@media (max-width: 62rem) {
+  .NavBar {
+    padding: 0 var(--space-small);
+  }
   .NavBar > ul > li {
     font-size: var(--text-size-small);
   }
