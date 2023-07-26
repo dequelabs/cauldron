@@ -35,7 +35,6 @@ const RadioGroup = forwardRef(
     }: RadioGroupProps,
     ref: Ref<HTMLDivElement>
   ) => {
-    console.log({ other });
     const [currentValue, setCurrentValue] = useState<string | null>(
       value || defaultValue || null
     );
