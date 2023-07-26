@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.1](https://github.com/dequelabs/cauldron/compare/v5.6.0...v5.6.1) (2023-07-26)
+
+
+### Bug Fixes
+
+* add support for tabIndex and other div element props to radiogroup ([#1128](https://github.com/dequelabs/cauldron/issues/1128)) ([35214f6](https://github.com/dequelabs/cauldron/commit/35214f626b71a9e28b7f7efe7659727c2fe36f8d))
+
 ## [5.6.0](https://github.com/dequelabs/cauldron/compare/v5.5.1...v5.6.0) (2023-07-26)
 
 
