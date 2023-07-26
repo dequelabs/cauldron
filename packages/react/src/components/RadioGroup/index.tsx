@@ -133,11 +133,6 @@ const RadioGroup = forwardRef(
       );
     });
 
-    // Hack to prevent ESLint from erroring about this variable not
-    // being used. We want to pull it from `props` to ensure it's
-    // not passed through to the radiogroup element.
-    void defaultValue;
-
     // reset the input refs array
     // refs get clobbered every re-render anyway and this supports "dynamic" radios
     // (changing the number of radio buttons for example)
