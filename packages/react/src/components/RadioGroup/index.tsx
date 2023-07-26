@@ -9,7 +9,8 @@ export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   labelDescription?: React.ReactNode;
 }
 
-export interface RadioGroupProps {
+export interface RadioGroupProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   name?: string;
   className?: string;
   radios: RadioItem[];
