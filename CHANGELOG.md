@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/dequelabs/cauldron/compare/v5.5.1...v5.6.0) (2023-07-26)
+
+
+### Features
+
+* support refs for radioGroup component ([#1125](https://github.com/dequelabs/cauldron/issues/1125)) ([9e1d45a](https://github.com/dequelabs/cauldron/commit/9e1d45a04ba9638556eff072d16b6c6735d4891e))
+
+
+### Bug Fixes
+
+* sync Tag component with uxpin ([#1122](https://github.com/dequelabs/cauldron/issues/1122)) ([0e6e408](https://github.com/dequelabs/cauldron/commit/0e6e408cfdd5647b725c378a89b2646d024eb2d1))
+
 ### [5.5.1](https://github.com/dequelabs/cauldron/compare/v5.5.0...v5.5.1) (2023-07-25)
 
 
