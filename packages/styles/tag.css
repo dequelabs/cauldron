@@ -9,7 +9,7 @@
   --tag-text-color: var(--white);
   --tag-label-text-color: var(--accent-light);
   --tag-background-color: var(--accent-medium);
-  --tag-border-color: var(--accent-medium);
+  --tag-border-color: var(--stroke-dark);
 }
 
 .Tag {
