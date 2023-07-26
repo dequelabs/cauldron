@@ -16,7 +16,7 @@ export interface RadioGroupProps {
   defaultValue?: string;
   value?: any;
   inline?: boolean;
-  onChange: (radio: RadioItem, input: HTMLElement) => void;
+  onChange?: (radio: RadioItem, input: HTMLElement) => void;
   hasLabel?: never;
 }
 
@@ -175,7 +175,7 @@ RadioGroup.propTypes = {
   },
   className: PropTypes.string,
   defaultValue: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 RadioGroup.displayName = 'RadioGroup';
