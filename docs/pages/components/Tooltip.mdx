@@ -174,6 +174,18 @@ function BigTooltipExample() {
       type: ['React.Ref', 'HTMLElement'],
       description: 'The parent element to place the Tooltip in.',
       defaultValue: 'document.body'
+    },
+    {
+      name: 'association',
+      type: ['aria-labelledby', 'aria-describedby'],
+      description: 'Sets the aria relationship for the targeted element.',
+      defaultValue: 'aria-describedby'
+    },
+    {
+      name: 'hideElementOnHidden',
+      type: 'boolean',
+      description: 'Removes the tooltip from the dom when not visible.',
+      defaultValue: 'false'
     }
   ]}
 />
