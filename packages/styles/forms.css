@@ -185,12 +185,11 @@ textarea.Field--has-error:focus:hover,
   text-align: left;
   font-size: var(--text-size-smallest);
   font-weight: var(--font-weight-normal);
-  padding-left: var(--space-half);
 }
 
 .Checkbox__wrap .Error {
-  border-top: 1px solid var(--field-error-border-color);
   margin-top: var(--space-half);
+  border-top: 1px solid var(--field-error-border-color);
   margin-left: calc(var(--icon-size) + 2px + var(--space-half));
   padding: var(--space-half) 0;
 }
