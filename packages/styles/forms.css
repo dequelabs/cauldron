@@ -188,8 +188,6 @@ textarea.Field--has-error:focus:hover,
   padding-left: var(--space-half);
 }
 
-.Field .Error,
-.Field__select .Error,
 .Checkbox__wrap .Error {
   border-top: 1px solid var(--field-error-border-color);
   margin-top: var(--space-half);
