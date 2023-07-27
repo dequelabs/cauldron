@@ -181,11 +181,17 @@ textarea.Field--has-error:focus:hover,
 }
 
 .Error {
-  color: var(--field-error-text-color);
-  border-top: 1px solid var(--field-error-border-color);
+  color: var(--error);
   text-align: left;
-  font-weight: var(--font-weight-normal);
   font-size: var(--text-size-smallest);
+  font-weight: var(--font-weight-normal);
+  padding-left: var(--space-half);
+}
+
+.Field .Error,
+.Field__select .Error,
+.Checkbox__wrap .Error {
+  border-top: 1px solid var(--field-error-border-color);
   margin-top: var(--space-half);
   margin-left: calc(var(--icon-size) + 2px + var(--space-half));
   padding: var(--space-half) 0;
