@@ -119,6 +119,7 @@ export {
   ColumnRight,
   ColumnList
 } from './components/TwoColumnPanel';
+export { default as Notice } from './components/Notice';
 
 /**
  * Helpers / Utils
