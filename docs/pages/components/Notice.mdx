@@ -5,23 +5,23 @@ source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/co
 ---
 
 import {
+  Notice,
+  Icon,
   Panel,
   PanelHeader,
   PanelContent,
-  Notice,
-  Button,
-  Icon
+  Button
 } from '@deque/cauldron-react';
 
 ```js
-import { Panel, PanelHeader, PanelContent } from '@deque/cauldron-react';
+import { Notice, Icon } from '@deque/cauldron-react';
 ```
 
 ## Examples
 
 ### Notice Component
 
-At its simplest, a `Panel` is a styled semantic HTML `<section>` element with with content inside.
+The `Notice` component is used to display a message to the user. It can be used to display information, warnings,
 
 <Note>
   If your section needs to have an accessible name, be sure to include an
@@ -29,28 +29,38 @@ At its simplest, a `Panel` is a styled semantic HTML `<section>` element with wi
 </Note>
 
 ```jsx example
-<Notice type="info" title={<h2>Here is a Notice</h2>}>
-  Notice Content
+<Notice type="info" title='Information'>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
 
-<Notice type="danger" title={<h2>Here is a Notice</h2>}>
-  Notice Content
-</Notice>
-
-<Notice type="caution" title={<h2>Here is a Notice</h2>}>
-  Notice Content
-</Notice>
-
-<Notice type="success" title={<h2>Here is a Notice</h2>}>
-  Notice Content
+<Notice type="caution" title="Caution">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
 ```
 
 ### Notice With Icon
 
 ```jsx example
-<Notice type="info" icon="info-circle" title={<h2>Here is a Notice</h2>}>
-  Notice Content
+<Notice type="info" title={<h3 style={{ margin: 0, padding: 0, fontSize: 'var(--text-size-small)', fontWeight: 500 }}>Information</h3>}>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+
+<Notice type="caution" title={<h3 style={{ margin: 0, padding: 0, fontSize: 'var(--text-size-small)', fontWeight: 500 }}>Caution</h3>}>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Overwriting Icon
+
+```jsx example
+<Notice type="caution" title="Dynamo!" icon="bolt">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
 </Notice>
 ```
 
