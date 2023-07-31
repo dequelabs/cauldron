@@ -112,7 +112,7 @@ Rendering a `Notice` that appears as a thin bar can be accomplished by only pass
 
 <Notice type="info">
   <Icon type="info-circle-alt" />
-  <span className="Notice__content" style={{ marginLeft: 'var(--space-half)'}}>A new update has been released! See
+  <span className="Notice__content" style={{ marginLeft: 'var(--space-half)', position: 'relative'}}>A new update has been released! See
     <Link href='#' target="_blank" rel="noopener noreferrer">release notes<Offscreen>link opens in new window</Offscreen>
       <Icon type="external-link" />
     </Link>
@@ -140,23 +140,30 @@ properties such as `role`, `aria-label`, `aria-labelledby`, `id`, etc.
   props={[
     {
       name: 'type',
-      type: ['"info"', '"caution"'],
+      type: ["'info'", "'caution'"],
       defaultValue: '"info"',
-      description: '',
+      description:
+        'Notice preset variant that sets both the background color and Icon type (optionally overwritable)',
       required: false
     },
     {
-      name: 'heading',
-      type: 'object',
-      description: 'Object containing: text, level (optional), id (optional)',
+      name: 'title',
+      type: 'React.ReactNode',
+      description:
+        'Any valid React node (e.g., string, boolean, ReactElement, etc.)',
       required: false
     },
     {
       name: 'icon',
-      type: 'string',
-      description: 'Icon name',
+      type: ['string - IconType'],
+      description:
+        'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons',
       required: false
     }
   ]}
   refType="HTMLDivElement"
 />
+
+## Related Components
+
+- [Toast](./Toast)
