@@ -32,39 +32,60 @@ or anywhere else in the DOM without needing to be absolutely/statically position
 In addition, the `Notice` component has only limited dynamic functionality built in, allowing developers to
 have full control over the underlying element via its `forwardRef`, while still having useful base styling..
 
-````jsx live
-
-<Note>
-  If your section needs to have an accessible name, be sure to include an
-  `aria-label` or `aria-labelledby` pointed to the `id` of your label.
-</Note>
-
 ```jsx example
 <Notice type="info" title='Information'>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
-  Donec placerat nisl magna, et faucibus arcu condimentum sed.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
 
 <Notice type="caution" title="Caution">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
-  Donec placerat nisl magna, et faucibus arcu condimentum sed.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
-````
+```
 
 ### Notice With Icon
 
 ```jsx example
-<Notice type="info" title={<h3 style={{ margin: 0, padding: 0, fontSize: 'var(--text-size-small)', fontWeight: 500 }}>Information</h3>}>
+<Notice
+  type="info"
+  title={
+    <h3
+      style={{
+        margin: 0,
+        padding: 0,
+        fontSize: 'var(--text-size-small)',
+        fontWeight: 500
+      }}
+    >
+      Information
+    </h3>
+  }
+>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
-</Notice>
+</Notice>;
 
-<Notice type="caution" title={<h3 style={{ margin: 0, padding: 0, fontSize: 'var(--text-size-small)', fontWeight: 500 }}>Caution</h3>}>
+<Notice
+  type="caution"
+  title={
+    <h3
+      style={{
+        margin: 0,
+        padding: 0,
+        fontSize: 'var(--text-size-small)',
+        fontWeight: 500
+      }}
+    >
+      Caution
+    </h3>
+  }
+>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
-</Notice>
+</Notice>;
 ```
 
 ### Notice With Different icon
@@ -73,7 +94,7 @@ have full control over the underlying element via its `forwardRef`, while still 
   The `icon` prop takes a string that corresponds to a [Cauldron
   Icon](/components/icon). If you would like to use a custom icon, you can
   compose the contents of the `Notice` component (see
-  [example](http://localhost:8003/components/Notice#notice-with-composed-contents)).
+  [example](#notice-with-composed-contents)).
 </Note>
 
 ```jsx example
@@ -121,12 +142,24 @@ Rendering a `Notice` that appears as a thin bar can be accomplished by only pass
 
 <Notice type="info">
   <Icon type="info-circle-alt" />
-  <span className="Notice__content" style={{ marginLeft: 'var(--space-half)', position: 'relative'}}>A new update has been released! See
-    <Link href='#' target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-dark)'}}>release notes<Offscreen>link opens in new window</Offscreen>
+  <span
+    className="Notice__content"
+    style={{ marginLeft: 'var(--space-half)', position: 'relative' }}
+  >
+    A new update has been released! See
+    <Link
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: 'var(--accent-dark)' }}
+    >
+      release notes
+      <Offscreen>link opens in new window</Offscreen>
       <Icon type="external-link" />
     </Link>
   </span>
-</Notice>
+</Notice>;
+
 ```
 
 ### Notice (with HTML element properties)

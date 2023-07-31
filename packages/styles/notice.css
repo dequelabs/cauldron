@@ -8,6 +8,11 @@
   --notice-border-color: var(--accent-dark);
 }
 
+.cauldron--theme-dark {
+  --notice-text-color: var(--accent-dark);
+  --notice-title-text-color: var(--accent-dark);
+}
+
 .Notice--info {
   --notice-background-color: var(--notice-info-color);
 }
@@ -55,9 +60,4 @@
 .Notice .Icon > svg {
   height: var(--space-medium);
   width: var(--space-medium);
-}
-
-.cauldron--theme-dark {
-  --notice-text-color: var(--accent-dark);
-  --notice-title-text-color: var(--accent-dark);
 }
