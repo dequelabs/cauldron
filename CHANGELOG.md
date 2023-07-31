@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.2](https://github.com/dequelabs/cauldron/compare/v5.6.1...v5.6.2) (2023-07-28)
+
+
+### Bug Fixes
+
+* **styles:** fix bug where Error class changes are applied globally ([#1131](https://github.com/dequelabs/cauldron/issues/1131)) ([bb3ed29](https://github.com/dequelabs/cauldron/commit/bb3ed293f2c5de816f41b4835fdcb6defdb44d85))
+
 ### [5.6.1](https://github.com/dequelabs/cauldron/compare/v5.6.0...v5.6.1) (2023-07-26)
 
 
