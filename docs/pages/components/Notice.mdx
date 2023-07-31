@@ -1,6 +1,6 @@
 ---
 title: Notice
-description: TODO
+description: A notification banner - similar to a Toast, but allows for more flexibile positioning and control.
 source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Notice/Notice.tsx
 ---
 
@@ -10,11 +10,13 @@ import {
   Panel,
   PanelHeader,
   PanelContent,
-  Button
+  Button,
+  Link,
+  Offscreen
 } from '@deque/cauldron-react';
 
 ```js
-import { Notice, Icon } from '@deque/cauldron-react';
+import { Notice } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -30,11 +32,13 @@ The `Notice` component is used to display a message to the user. It can be used 
 
 ```jsx example
 <Notice type="info" title='Information'>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
+  Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
 
 <Notice type="caution" title="Caution">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
+  Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
 ```
 
@@ -54,7 +58,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor se
 </Notice>
 ```
 
-### Notice With Overridden Icon
+### Notice With Different icon
+
+<Note>
+  The `icon` prop takes a string that corresponds to a [Cauldron
+  Icon](/components/icon). If you would like to use a custom icon, you can
+  compose the contents of the `Notice` component (see
+  [example](http://localhost:8003/components/Notice#notice-with-composed-contents)).
+</Note>
 
 ```jsx example
 <Notice type="caution" title="Dynamo!" icon="bolt">
@@ -75,13 +86,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor se
         margin: 0,
         padding: 0,
         fontSize: 'var(--text-size-small)',
-        fontWeight: 500
+        fontWeight: 'var(--font-weight-medium)'
       }}
     >
       You are a star!
     </h2>
   </div>
-  <p style={{ margin: 'var(--space-half) 0 0 0' }}>
+  <p style={{ margin: 'var(--space-half) 0 0 var(--space-half)' }}>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
     porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus
     arcu condimentum sed.
@@ -89,65 +100,62 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor se
 </Notice>
 ```
 
-### Example (thin)
+### Notice (thin)
+
+Rendering a `Notice` that appears as a thin bar can be accomplished by only passing a `title` prop, or only passing a child.
 
 ```jsx example
 <Notice
   type="caution"
   title="Caution, about to tread into dangerous territory"
 />
+
+<Notice type="info">
+  <Icon type="info-circle-alt" />
+  <span className="Notice__content" style={{ marginLeft: 'var(--space-half)'}}>A new update has been released! See
+    <Link href='#' target="_blank" rel="noopener noreferrer">release notes<Offscreen>link opens in new window</Offscreen>
+      <Icon type="external-link" />
+    </Link>
+  </span>
+</Notice>
+```
+
+### Notice (with HTML element properties)
+
+The `Notice` component will support the spreading of any props normally available to a `div` element. This includes
+properties such as `role`, `aria-label`, `aria-labelledby`, `id`, etc.
+
+```jsx example
+<Notice type="info" title="Alert!" role="alert">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
 ```
 
 ## Props
 
-### Notice
-
 <ComponentProps
-  children={{ required: true }}
-  className={true}
+  children={{ required: false }}
   props={[
     {
-      name: 'padding',
-      type: 'boolean',
-      defaultValue: 'true',
-      description: 'Disable the `Panel` padding'
-    },
-    {
-      name: 'collapsed',
-      type: 'boolean',
-      defaultValue: 'false',
-      description: 'Collapse the `Panel` padding to `12px` on all sides',
-      deprecated: true
+      name: 'type',
+      type: ['"info"', '"caution"'],
+      defaultValue: '"info"',
+      description: '',
+      required: false
     },
     {
       name: 'heading',
       type: 'object',
       description: 'Object containing: text, level (optional), id (optional)',
       required: false
-    }
-  ]}
-  refType="HTMLElement"
-/>
-
-### PanelHeader
-
-<ComponentProps
-  children={{ required: true }}
-  className={true}
-  refType="HTMLDivElement"
-/>
-
-### PanelContent
-
-<ComponentProps
-  children={{ required: true }}
-  className={true}
-  props={[
+    },
     {
-      name: 'padding',
-      type: 'boolean',
-      defaultValue: 'true',
-      description: 'Disable padding for the `PanelContent`.'
+      name: 'icon',
+      type: 'string',
+      description: 'Icon name',
+      required: false
     }
   ]}
   refType="HTMLDivElement"

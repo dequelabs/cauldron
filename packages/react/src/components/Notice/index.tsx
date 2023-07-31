@@ -28,16 +28,6 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         ? icon
         : (iconTypeMap[validType] as IconType);
 
-    const validTitle = () => {
-      return (
-        <div className="Notice__title">
-          {<Icon type={validIcon} />}
-          {title}
-        </div>
-      );
-    };
-
-    console.log('iconType', validIcon);
     return (
       <div
         className={classNames('Notice', {
@@ -46,7 +36,12 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         ref={ref}
         {...otherProps}
       >
-        {title && validTitle()}
+        {title && (
+          <div className="Notice__title">
+            <Icon type={validIcon} />
+            {title}
+          </div>
+        )}
         {children && typeof children === 'string' ? (
           <div className="Notice__content">{children}</div>
         ) : (
@@ -63,7 +58,9 @@ Notice.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(['caution', 'info']),
   // @ts-expect-error
-  title: PropTypes.node
+  title: PropTypes.node,
+  // @ts-expect-error
+  icon: PropTypes.string
 };
 
 export default Notice;
