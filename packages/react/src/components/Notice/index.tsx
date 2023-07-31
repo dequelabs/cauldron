@@ -31,7 +31,7 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
     return (
       <div
         className={classNames('Notice', {
-          [`Notice--${type}`]: type
+          [`Notice--${validType}`]: validType
         })}
         ref={ref}
         {...otherProps}
