@@ -23,7 +23,16 @@ import { Notice } from '@deque/cauldron-react';
 
 ### Notice Component
 
-The `Notice` component is used to display a message to the user. It can be used to display information, warnings,
+The `Notice` component is used to display a notification banner. It is similar to the [Toast](./Toast) component,
+but can be used in more flexible ways.
+
+For example, the `Notice` component can be used to display a notification banner within a [Panel](./Panel) component
+or anywhere else in the DOM without needing to be absolutely/statically positioned.
+
+In addition, the `Notice` component has only limited dynamic functionality built in, allowing developers to
+have full control over the underlying element via its `forwardRef`, while still having useful base styling..
+
+````jsx live
 
 <Note>
   If your section needs to have an accessible name, be sure to include an
@@ -40,7 +49,7 @@ The `Notice` component is used to display a message to the user. It can be used 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
   Donec placerat nisl magna, et faucibus arcu condimentum sed.
 </Notice>
-```
+````
 
 ### Notice With Icon
 
