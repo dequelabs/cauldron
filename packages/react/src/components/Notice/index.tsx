@@ -46,8 +46,12 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         ref={ref}
         {...otherProps}
       >
-        {title ? validTitle() : null}
-        {children && children}
+        {title && validTitle()}
+        {children && typeof children === 'string' ? (
+          <div className="Notice__content">{children}</div>
+        ) : (
+          children
+        )}
       </div>
     );
   }

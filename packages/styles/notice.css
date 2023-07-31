@@ -1,18 +1,16 @@
 :root {
-  --notice-text-color: var(--gray-90);
-  --notice-title-text-color: var(--gray-60);
-  --notice-background-color: var(--gray-20);
-  --notice-border-color: var(--gray-90);
   --notice-info-color: var(--accent-info-active);
-  --notice-success-color: var(--success);
-  --notice-caution-color: var(--accent-caution); /* #ffe8a4; */
-  --notice-danger-color: var(--error-alt);
+  --notice-caution-color: var(--accent-caution);
+  --notice-text-color: var(--accent-dark);
+  --notice-title-text-color: var(--accent-dark);
+  --notice-background-color: var(--notice-info-color);
+  --notice-border-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
-  --notice-text-color: var(--gray-90);
-  --notice-title-text-color: var(--gray-60);
-  --notice-background-color: var(--gray-20);
+  --notice-text-color: var(--accent-dark);
+  --notice-title-text-color: var(--accent-dark);
+  --notice-background-color: var(--nnotice-info-color);
   --notice-border-color: var(--gray-90);
 }
 
@@ -26,7 +24,7 @@
 
 .Notice {
   display: block;
-  flex-direction: column;
+  align-items: center;
   padding: var(--space-smaller) var(--space-small);
   border: 1px solid #02101a;
   background-color: var(--notice-background-color);
@@ -48,7 +46,13 @@
   margin: 0;
   padding: 0;
   gap: var(--space-three-quarters);
-  margin-bottom: var(--space-three-quarters);
+  color: var(--notice-title-text-color);
+}
+
+.Notice .Notice__content {
+  margin-top: var(--space-half);
+  margin-left: var(--space-quarter);
+  line-height: 1.618;
 }
 
 .Notice .Icon > svg {
