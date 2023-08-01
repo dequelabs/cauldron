@@ -22,8 +22,10 @@
 }
 
 .Notice {
-  display: block;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
   padding: var(--space-smaller) var(--space-small);
   border: 1px solid var(--notice-border-color);
   background-color: var(--notice-background-color);
@@ -34,6 +36,10 @@
 
 .Notice + .Notice {
   margin-top: var(--space-smaller);
+}
+
+.Notice p {
+  margin: 0;
 }
 
 .Notice .Notice__title,
@@ -50,11 +56,8 @@
 }
 
 .Notice .Notice__title + .Notice__content {
-  margin-top: var(--space-smallest);
-}
-
-.Notice .Notice__content {
-  line-height: 1.618;
+  margin-top: var(--space-quarter);
+  margin-left: var(--space-quarter);
 }
 
 .Notice .Icon > svg {
