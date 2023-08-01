@@ -15,6 +15,12 @@ import { Tooltip } from '@deque/cauldron-react'
 
 Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Tooltips can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
 
+<Note>
+
+`Tooltip` is intended to be used with elements that are interactive or are keyboard accessible such as buttons or links. For non-interactive elements such as informational tooltips attached to an icon, consider using [TooltipTabstop](./TooltipTabstop) instead.
+
+</Note>
+
 ### Text Tooltips
 
 Text Tooltips are the default variant and are intended to show short single-line text hints.
