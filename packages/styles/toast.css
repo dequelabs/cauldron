@@ -82,6 +82,11 @@
   outline-offset: var(--space-quarter);
 }
 
+.Toast__message button.Link:hover,
+.Notice a.Link:hover {
+  color: var(--accent-medium);
+}
+
 .Toast:focus {
   outline: 0;
 }
