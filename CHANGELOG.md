@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.7.0](https://github.com/dequelabs/cauldron/compare/v5.6.2...v5.7.0) (2023-08-02)
+
+
+### Features
+
+* **react:** allow for NavBar to include additional props for html div elements. ([#1144](https://github.com/dequelabs/cauldron/issues/1144)) ([b103453](https://github.com/dequelabs/cauldron/commit/b103453db0f59b2498de2653c5c5d88328c5bb99))
+* **react,styles:** add Notice component ([#1136](https://github.com/dequelabs/cauldron/issues/1136)) ([14bfe32](https://github.com/dequelabs/cauldron/commit/14bfe32d8763a2a64e821823e5bd3a2befa76cf6))
+
+
+### Bug Fixes
+
+* fixes overflow bug on text-field and text-area ([#1143](https://github.com/dequelabs/cauldron/issues/1143)) ([10f53c9](https://github.com/dequelabs/cauldron/commit/10f53c90fe2466f913bb00c49fc0b8e1aad501b1))
+
 ### [5.6.2](https://github.com/dequelabs/cauldron/compare/v5.6.1...v5.6.2) (2023-07-28)
 
 

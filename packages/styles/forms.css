@@ -310,7 +310,7 @@ textarea.Field--has-error:focus:hover,
   box-sizing: border-box;
   font-size: var(--text-size-small);
   color: var(--field-content-color);
-  min-width: var(--input-min-width);
+  min-width: min(var(--input-min-width), 100%);
 }
 
 .Field__text-input[disabled],
@@ -323,7 +323,7 @@ textarea.Field--has-error:focus:hover,
   display: block;
   min-height: 56px;
   font-size: var(--text-size-small);
-  min-width: var(--input-min-width);
+  min-width: min(var(--input-min-width), 100%);
   padding: var(--space-half);
   max-width: 500px;
   color: var(--field-content-color);

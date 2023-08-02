@@ -1,0 +1,86 @@
+:root {
+  --notice-info-color: var(--accent-info-active);
+  --notice-caution-color: var(--accent-caution);
+  --notice-danger-color: var(--accent-warning-light);
+  --notice-text-color: var(--accent-dark);
+  --notice-title-text-color: var(--accent-dark);
+  --notice-title-font-weight: var(--font-weight-medium);
+  --notice-background-color: var(--notice-info-color);
+  --notice-border-color: var(--accent-dark);
+  --notice-link-hover-color: var(--accent-medium);
+  --notice-icon-size: 1.2em;
+}
+
+.Notice--info {
+  --notice-background-color: var(--notice-info-color);
+}
+
+.Notice--caution {
+  --notice-background-color: var(--notice-caution-color);
+}
+
+.Notice--danger {
+  --notice-background-color: var(--notice-danger-color);
+}
+
+.Notice {
+  display: block;
+  padding: var(--space-smaller) var(--space-small);
+  border: 1px solid var(--notice-border-color);
+  background-color: var(--notice-background-color);
+  color: var(--notice-text-color);
+  width: 100%;
+  font-size: var(--text-size-smaller);
+}
+
+.Notice .Notice__title,
+.Notice .Notice__title > :is(h1, h2, h3, h4, h5, h6) {
+  display: flex;
+  align-items: center;
+  font-size: var(--text-size-small);
+  font-weight: var(--notice-title-font-weight);
+  margin: 0;
+  padding: 0;
+  gap: var(--space-three-quarters);
+  color: var(--notice-title-text-color);
+}
+
+.Notice .Notice__title + .Notice__content {
+  margin-top: var(--space-smallest);
+}
+
+.Notice .Icon > svg {
+  height: var(--notice-icon-size);
+  width: var(--notice-icon-size);
+}
+
+.Notice button.Link,
+.Notice a.Link {
+  background: transparent;
+  border: 0;
+  color: currentColor;
+}
+
+.Notice button.Link,
+.Notice a.Link {
+  color: var(--accent-dark);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-light);
+  text-decoration: underline;
+}
+
+.Notice button.Link:focus,
+.Notice a.Link:focus {
+  outline: 2px solid;
+  color: var(--gray-90);
+}
+
+.Notice button.Link:hover,
+.Notice a.Link:hover {
+  color: var(--notice-link-hover-color);
+}
+
+.Notice .Notice__content > p:first-of-type {
+  margin-top: 0;
+  margin-bottom: var(--space-smallest);
+}
