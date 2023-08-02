@@ -2,6 +2,72 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.2](https://github.com/dequelabs/cauldron/compare/v5.6.1...v5.6.2) (2023-07-28)
+
+
+### Bug Fixes
+
+* **styles:** fix bug where Error class changes are applied globally ([#1131](https://github.com/dequelabs/cauldron/issues/1131)) ([bb3ed29](https://github.com/dequelabs/cauldron/commit/bb3ed293f2c5de816f41b4835fdcb6defdb44d85))
+
+### [5.6.1](https://github.com/dequelabs/cauldron/compare/v5.6.0...v5.6.1) (2023-07-26)
+
+
+### Bug Fixes
+
+* add support for tabIndex and other div element props to radiogroup ([#1128](https://github.com/dequelabs/cauldron/issues/1128)) ([35214f6](https://github.com/dequelabs/cauldron/commit/35214f626b71a9e28b7f7efe7659727c2fe36f8d))
+
+## [5.6.0](https://github.com/dequelabs/cauldron/compare/v5.5.1...v5.6.0) (2023-07-26)
+
+
+### Features
+
+* support refs for radioGroup component ([#1125](https://github.com/dequelabs/cauldron/issues/1125)) ([9e1d45a](https://github.com/dequelabs/cauldron/commit/9e1d45a04ba9638556eff072d16b6c6735d4891e))
+
+
+### Bug Fixes
+
+* sync Tag component with uxpin ([#1122](https://github.com/dequelabs/cauldron/issues/1122)) ([0e6e408](https://github.com/dequelabs/cauldron/commit/0e6e408cfdd5647b725c378a89b2646d024eb2d1))
+
+### [5.5.1](https://github.com/dequelabs/cauldron/compare/v5.5.0...v5.5.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **styles:** fix overflow styling on Radio Group and Checkbox and align styles with Pattern Library ([#1110](https://github.com/dequelabs/cauldron/issues/1110)) ([4f8a9ba](https://github.com/dequelabs/cauldron/commit/4f8a9bacee971b4eb71aa9d897491e96a91a4b2f))
+
+## [5.5.0](https://github.com/dequelabs/cauldron/compare/v5.4.1...v5.5.0) (2023-07-19)
+
+
+### Features
+
+* **react:** respect prefers-reduced-motion when opening/closing ExpandCollapsePanel or Accordion ([#1112](https://github.com/dequelabs/cauldron/issues/1112)) ([cfe8292](https://github.com/dequelabs/cauldron/commit/cfe8292dda72f35da34b1568d6f21eeb76f4acc9))
+* **styles:** removed unwanted text transform property ([#1102](https://github.com/dequelabs/cauldron/issues/1102)) ([fe1c8ad](https://github.com/dequelabs/cauldron/commit/fe1c8ad45eabfafee28691741220feab836c1113))
+
+
+### Bug Fixes
+
+* updated TwoColumnPanel to not override children keys ([#1100](https://github.com/dequelabs/cauldron/issues/1100)) ([b60588f](https://github.com/dequelabs/cauldron/commit/b60588fe44708a3fc01fb8bf18866171a8e0d9b3)), closes [#924](https://github.com/dequelabs/cauldron/issues/924)
+
+### [5.4.1](https://github.com/dequelabs/cauldron/compare/v5.4.0...v5.4.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **react:** allow onBlur and onFocus to be passed to Checkbox without messing up focus state ([#1095](https://github.com/dequelabs/cauldron/issues/1095)) ([2dd973a](https://github.com/dequelabs/cauldron/commit/2dd973af4c6c6883a50049333f69c3eb8f8aea3a))
+
+## [5.4.0](https://github.com/dequelabs/cauldron/compare/v5.3.0...v5.4.0) (2023-06-15)
+
+
+### Features
+
+* **react:** allow Select label to be a ReactNode ([#1091](https://github.com/dequelabs/cauldron/issues/1091)) ([18ac4e1](https://github.com/dequelabs/cauldron/commit/18ac4e1dbc6a0501162ce718409fe607ad63c777))
+
+
+### Bug Fixes
+
+* changed top bar height to 70px ([#1081](https://github.com/dequelabs/cauldron/issues/1081)) ([14d052e](https://github.com/dequelabs/cauldron/commit/14d052ed352a6d6a7e72e2e8250fe0dc8cd98364))
+* **styles:** fix inaccessibile syntax highlight colors ([#1075](https://github.com/dequelabs/cauldron/issues/1075)) ([1fc89ed](https://github.com/dequelabs/cauldron/commit/1fc89edd2af2c8e89ee2a934f2eedee3f53a3691))
+
 ## [5.3.0](https://github.com/dequelabs/cauldron/compare/v5.2.0...v5.3.0) (2023-05-05)
 
 

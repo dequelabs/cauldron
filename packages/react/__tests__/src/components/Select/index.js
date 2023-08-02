@@ -29,10 +29,9 @@ const withCustomOptions = (otherProps = {}) => {
 test('renders the expected UI', () => {
   const wrapper = withCustomOptions();
 
-  expect(wrapper.find('.Field__select--label')).toBeTruthy();
-  expect(wrapper.find('.Field__select--required')).toBeTruthy();
-  expect(wrapper.find('.Field__select')).toBeTruthy();
-  expect(wrapper.find('.Field__option')).toBeTruthy();
+  expect(wrapper.find('.Field__label').text()).toBe(defaultProps.name);
+  expect(wrapper.find('.Field__select').exists()).toBe(true);
+  expect(wrapper.find('.Field__option').length).toBe(4);
   expect(wrapper.find('.Field__required-text').exists()).toBe(false);
   expect(wrapper.find('.Error').exists()).toBe(false);
 });
@@ -212,4 +211,9 @@ test('fires onChange when change occurs', () => {
 
   select.find('select').simulate('change');
   expect(onChange.called).toBe(true);
+});
+
+test('renders a ReactNode as a label', () => {
+  const wrapper = withCustomOptions({ label: <span>Foo</span> });
+  expect(wrapper.find('.Field__label').text()).toBe('Foo');
 });

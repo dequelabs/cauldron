@@ -40,7 +40,9 @@ export default class OptionsMenu extends Component<
   OptionsMenuState
 > {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onSelect: () => {},
     align: 'right'
   };

@@ -51,8 +51,10 @@ export default class Pointout extends React.Component<
   PointoutState
 > {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     ftpoRef: () => {},
     noArrow: false,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {},
     dismissText: 'dismiss',
     previousText: 'previous',
@@ -273,7 +275,7 @@ export default class Pointout extends React.Component<
     const portalNode =
       (portal as React.RefObject<HTMLElement>)?.current ||
       (portal as HTMLElement);
-
+    // eslint-disable-next-line prefer-const
     let { top, left, width, height } = targetNode.getBoundingClientRect();
     if (portalNode && portalNode !== document.body) {
       // If the portal is not placed on document.body

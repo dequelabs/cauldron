@@ -4,10 +4,25 @@ import {
   default as ExpandCollapsePanel,
   PanelTrigger
 } from 'src/components/ExpandCollapsePanel';
+import { createSandbox } from 'sinon';
 import * as stylesheets from 'src/utils/stylesheets';
+
+const sandbox = createSandbox();
+const noop = () => {};
+const matchMedia = {
+  matches: false
+};
+
+let matchMediaStub;
+
+beforeEach(() => {
+  window.matchMedia = window.matchMedia || noop;
+  matchMediaStub = sandbox.stub(window, 'matchMedia').returns(matchMedia);
+});
 
 afterEach(() => {
   jest.resetAllMocks();
+  sandbox.restore();
 });
 
 const isVisible = element => {
@@ -221,4 +236,32 @@ test('should be able to switch between controlled and uncontrolled component', (
   expect(wrapper.state('controlled')).toBeFalsy();
   wrapper.setProps({ open: true });
   expect(wrapper.state('controlled')).toBeTruthy();
+});
+
+test('should not animate open when prefers reduced motion is enabled', () => {
+  matchMediaStub
+    .withArgs('(prefers-reduced-motion: reduce)')
+    .returns({ matches: true });
+  const wrapper = mount(
+    <ExpandCollapsePanel animationTiming={500}>
+      <div data-test>foo</div>
+    </ExpandCollapsePanel>
+  );
+
+  wrapper.instance().setState({ isOpen: true });
+  expect(wrapper.state('isAnimating')).toBeFalsy();
+});
+
+test('should not animate close when prefers reduced motion is enabled', () => {
+  matchMediaStub
+    .withArgs('(prefers-reduced-motion: reduce)')
+    .returns({ matches: true });
+  const wrapper = mount(
+    <ExpandCollapsePanel animationTiming={500} open={true}>
+      <div data-test>foo</div>
+    </ExpandCollapsePanel>
+  );
+
+  wrapper.instance().setState({ isOpen: false });
+  expect(wrapper.state('isAnimating')).toBeFalsy();
 });

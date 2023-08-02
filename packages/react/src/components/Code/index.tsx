@@ -86,7 +86,8 @@ Code.propTypes = {
   children: PropTypes.string.isRequired,
   language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
   className: PropTypes.string,
-  tabIndex: PropTypes.number
+  tabIndex: PropTypes.number,
+  scrollable: PropTypes.bool
 };
 
 export default Code;

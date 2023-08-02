@@ -20,7 +20,7 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <h3 id="gyros-label">Do you like gyros?</h3>
+  <div className="Field__label" id="gyros-label">Do you like gyros?</div>
   <RadioGroup
     aria-labelledby="gyros-label"
     name="gyros"
@@ -50,7 +50,7 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <h3 id="pizza-label">Do you like pizza?</h3>
+  <div className="Field__label" id="pizza-label">Do you like pizza?</div>
   <RadioGroup
     aria-labelledby="pizza-label"
     defaultValue="tuesday"
@@ -86,7 +86,7 @@ If your list of options is short, `RadioGroup` can optionally accept a `inline` 
 
 ```jsx example
 <FieldWrap>
-  <h3 id="robot-label">Are you a robot?</h3>
+  <div className="Field__label" id="robot-label">Are you a robot?</div>
   <RadioGroup
     aria-labelledby="robot-label"
     defaultValue="no"

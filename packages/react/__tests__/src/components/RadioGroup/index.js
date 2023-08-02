@@ -174,6 +174,17 @@ test('handles `inline` prop', () => {
   expect(wrapper.find('[role="radiogroup"].Radio--inline').exists()).toBe(true);
 });
 
+test('handles `ref` prop', () => {
+  const ref = React.createRef();
+  mount(<RadioGroup {...defaultProps} ref={ref} />);
+  expect(ref.current).toBeTruthy();
+});
+
+test('handles `tabIndex` prop', () => {
+  const wrapper = mount(<RadioGroup {...defaultProps} tabIndex={-1} />);
+  expect(wrapper.find('[role="radiogroup"]').prop('tabIndex')).toBe(-1);
+});
+
 test('should return no axe violations', async () => {
   const radioGroup = mount(<RadioGroup {...defaultProps} />);
   expect(await axe(radioGroup.html())).toHaveNoViolations();

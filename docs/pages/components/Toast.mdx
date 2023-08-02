@@ -4,41 +4,35 @@ description: A banner with text positioned at the top of the page.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Toast/index.tsx
 ---
 
-import { useState } from 'react'
-import { Toast, Button } from '@deque/cauldron-react'
+import { useState } from 'react';
+import { Toast, Button } from '@deque/cauldron-react';
 
 ```js
-import { Toast } from '@deque/cauldron-react'
+import { Toast } from '@deque/cauldron-react';
 ```
 
 ## Examples
 
 <Note>
-  Only a single toast should be rendered at a given moment as additional toasts will stack on top of each other.
+  Only a single toast should be rendered at a given moment as additional toasts
+  will stack on top of each other.
 </Note>
 
 ### Confirmation
 
 ```jsx example
 function ConfirmationToastExample() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Toast
-        show={show}
-        type="confirmation"
-        onDismiss={() => setShow(false)}
-      >
+      <Toast show={show} type="confirmation" onDismiss={() => setShow(false)}>
         Your toast is ready!
       </Toast>
-      <Button
-        variant="secondary"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="secondary" onClick={() => setShow(true)}>
         Show Confirmation Toast
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -46,24 +40,17 @@ function ConfirmationToastExample() {
 
 ```jsx example
 function CautionToastExample() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Toast
-        show={show}
-        type="caution"
-        onDismiss={() => setShow(false)}
-      >
+      <Toast show={show} type="caution" onDismiss={() => setShow(false)}>
         Your toast is getting toasty...
       </Toast>
-      <Button
-        variant="secondary"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="secondary" onClick={() => setShow(true)}>
         Show Caution Toast
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -71,24 +58,20 @@ function CautionToastExample() {
 
 ```jsx example
 function ActionNeededToastExample() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Toast
-        show={show}
-        type="action-needed"
-      >
+      <Toast show={show} type="action-needed">
         You burnt the toast! Check yourself before you wreck yourself...
-        <Button variant="link" onClick={() => setShow(false)}>Ok</Button>
+        <Button variant="link" onClick={() => setShow(false)}>
+          Ok
+        </Button>
       </Toast>
-      <Button
-        variant="secondary"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="secondary" onClick={() => setShow(true)}>
         Show Action Needed Toast
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -96,24 +79,17 @@ function ActionNeededToastExample() {
 
 ```jsx example
 function InfoToastExample() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Toast
-        show={show}
-        type="info"
-        onDismiss={() => setShow(false)}
-      >
+      <Toast show={show} type="info" onDismiss={() => setShow(false)}>
         It is getting toasty in here!
       </Toast>
-      <Button
-        variant="secondary"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="secondary" onClick={() => setShow(true)}>
         Show Info Toast
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -121,24 +97,17 @@ function InfoToastExample() {
 
 ```jsx example
 function ErrorToastExample() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Toast
-        show={show}
-        type="error"
-        onDismiss={() => setShow(false)}
-      >
+      <Toast show={show} type="error" onDismiss={() => setShow(false)}>
         This toast tastes like toast!
       </Toast>
-      <Button
-        variant="secondary"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="secondary" onClick={() => setShow(true)}>
         Show Error Toast
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -146,31 +115,25 @@ function ErrorToastExample() {
 
 Non-dismissable toasts are shown inline to prevent clipping of content.
 
-
 ```jsx example
 function NonDismissibleToastExample() {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(true);
   return (
     <>
-      <Toast
-        show={show}
-        type="info"
-        dismissible={false}
-        focus={false}
-      >
-        This toast is not dismissible by normal methods.
-        But you can <Button variant="link" onClick={() => setShow(false)}>click me to dismiss this toast</Button>.
+      <Toast show={show} type="info" dismissible={false} focus={false}>
+        This toast is not dismissible by normal methods. But you can{' '}
+        <Button variant="link" onClick={() => setShow(false)}>
+          click me to dismiss this toast
+        </Button>
+        .
       </Toast>
       {!show && (
-        <Button
-          variant="secondary"
-          onClick={() => setShow(true)}
-        >
+        <Button variant="secondary" onClick={() => setShow(true)}>
           Show Non-dismissible Toast
         </Button>
       )}
     </>
-  )
+  );
 }
 ```
 
@@ -189,13 +152,14 @@ function NonDismissibleToastExample() {
       name: 'show',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Whether or not to show the toast.',
+      description: 'Whether or not to show the toast.'
     },
     {
       name: 'focus',
       type: 'boolean',
       defaultValue: 'true',
-      description: 'Whether or not to focus the toast. This will also set the toast to `role="alert"` when set to true.'
+      description:
+        'Whether or not to focus the toast. This will also set the toast to `role="alert"` when set to true.'
     },
     {
       name: 'onDismiss',
@@ -221,3 +185,7 @@ function NonDismissibleToastExample() {
     }
   ]}
 />
+
+## Related
+
+- [Notice](./Notice)

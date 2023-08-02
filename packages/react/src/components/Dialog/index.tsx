@@ -31,7 +31,9 @@ interface DialogState {
   isolator?: AriaIsolate;
 }
 
-const noop = () => {};
+const noop = () => {
+  //not empty
+};
 
 export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
@@ -206,6 +208,10 @@ const DialogContent = ({
   </div>
 );
 DialogContent.displayName = 'DialogContent';
+DialogContent.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node
+};
 
 const DialogFooter = ({
   children,
@@ -217,5 +223,8 @@ const DialogFooter = ({
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
-
+DialogFooter.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node
+};
 export { Dialog, DialogContent, DialogFooter };

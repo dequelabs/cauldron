@@ -31,7 +31,6 @@
   padding: 0 16px;
   position: relative;
   text-align: center;
-  text-transform: uppercase;
   min-height: 36px;
   min-width: 100px;
   display: inline-grid;
@@ -94,8 +93,7 @@ button.Link {
 
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
-.Button--error:focus:before,
-.Button--tag:focus:before {
+.Button--error:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
 

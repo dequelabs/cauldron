@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
-interface ColumnHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+type ColumnHeaderProps = React.HTMLAttributes<HTMLDivElement>;
 
 const ColumnHeader = forwardRef<HTMLDivElement, ColumnHeaderProps>(
   ({ className, children, ...props }, ref) => {
@@ -18,5 +19,7 @@ const ColumnHeader = forwardRef<HTMLDivElement, ColumnHeaderProps>(
 );
 
 ColumnHeader.displayName = 'ColumnHeader';
-
+ColumnHeader.propTypes = {
+  className: PropTypes.string
+};
 export default ColumnHeader;
