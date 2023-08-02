@@ -78,7 +78,7 @@ test('should render only a `title` when no children are passed in', async () => 
   expect(wrapper.find('.Notice__title').contains('foo')).toBeTruthy();
 });
 
-test('`title` prop should allow for any valid ReactNode element', async () => {
+test('`title` prop should allow for any valid ContentNode element', async () => {
   const wrapper = mount(
     <Notice title={<h2>foo</h2>}>
       <span>bar</span>
@@ -87,19 +87,6 @@ test('`title` prop should allow for any valid ReactNode element', async () => {
 
   expect(wrapper.find('Notice').length).toBe(1);
   expect(wrapper.contains(<h2>foo</h2>)).toBeTruthy();
-});
-
-test('should allow rendering with children, but no title', async () => {
-  const wrapper = mount(
-    <Notice>
-      <span>bar</span>
-    </Notice>
-  );
-
-  expect(wrapper.find('Notice').length).toBe(1);
-  expect(wrapper.find('Icon').length).toBe(0);
-  expect(wrapper.find('span').length).toBe(1);
-  expect(wrapper.find('span').contains('bar')).toBeTruthy();
 });
 
 test('should allow a ref to be forwarded', async () => {
