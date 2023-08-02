@@ -11,7 +11,6 @@ import { useId } from 'react-id-generator';
 
 interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  initialActiveIndex?: number;
   className?: string;
   collapsed?: boolean;
   navTriggerLabel?: string;
