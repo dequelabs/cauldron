@@ -52,17 +52,6 @@ test('should return correctly with props passed in', async () => {
   expect(wrapper.prop('children')).toBe('bar');
 });
 
-test('should fallback to the `info-circle` icon when an invalid icon type is passed in', async () => {
-  const wrapper = mount(
-    <Notice type="info" icon="invalid-icon" title="foo">
-      bar
-    </Notice>
-  );
-
-  expect(wrapper.find('Notice').length).toBe(1);
-  expect(wrapper.find('Icon').prop('type')).toBe('info-circle');
-});
-
 test('should render with the correct icon when a valid icon `type` string is passed in', async () => {
   const wrapper = mount(<Notice type="info" icon="bolt" title="Dynamo!" />);
 

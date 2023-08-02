@@ -31,9 +31,7 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         {...otherProps}
       >
         <div className="Notice__title">
-          <Icon
-            type={icon || (iconTypeMap[type] as IconType) || iconTypeMap.info}
-          />
+          <Icon type={icon || (iconTypeMap[type] as IconType)} />
           {title}
         </div>
         {children && typeof children === 'string' ? (
@@ -53,11 +51,9 @@ Notice.propTypes = {
   type: PropTypes.oneOf(['caution', 'info']),
   // @ts-expect-error
   title: PropTypes.oneOf([
-    'string',
-    'number',
-    'ReactElement',
-    'ReactFragment',
-    'ReactPortal'
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.element
   ]),
   // @ts-expect-error
   icon: PropTypes.string

@@ -19,7 +19,7 @@
 
 .Notice {
   display: block;
-  padding: var(--space-small) var(--space-small);
+  padding: var(--space-smaller) var(--space-small);
   border: 1px solid var(--notice-border-color);
   background-color: var(--notice-background-color);
   color: var(--notice-text-color);
