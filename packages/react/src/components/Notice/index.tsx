@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Icon, { iconTypes, IconType } from '../Icon';
+import Icon, { IconType } from '../Icon';
 import { ContentNode } from '../../types';
 
 const iconTypeMap = {
@@ -14,7 +14,7 @@ export interface NoticeProps
   type?: keyof typeof iconTypeMap;
   title: ContentNode;
   icon?: IconType;
-  children?: ContentNode;
+  children?: ReactNode;
 }
 
 const Notice = forwardRef<HTMLDivElement, NoticeProps>(
@@ -30,12 +30,12 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         ref={ref}
         {...otherProps}
       >
-        {title && (
-          <div className="Notice__title">
-            <Icon type={icon || (iconTypeMap[type] as IconType)} />
-            {title}
-          </div>
-        )}
+        <div className="Notice__title">
+          <Icon
+            type={icon || (iconTypeMap[type] as IconType) || iconTypeMap.info}
+          />
+          {title}
+        </div>
         {children && typeof children === 'string' ? (
           <div className="Notice__content">{children}</div>
         ) : (
@@ -52,7 +52,13 @@ Notice.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(['caution', 'info']),
   // @ts-expect-error
-  title: PropTypes.node,
+  title: PropTypes.oneOf([
+    'string',
+    'number',
+    'ReactElement',
+    'ReactFragment',
+    'ReactPortal'
+  ]),
   // @ts-expect-error
   icon: PropTypes.string
 };

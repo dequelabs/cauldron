@@ -56,21 +56,7 @@ Rendering a `Notice` that appears as a thin bar can be accomplished by only pass
 ### Composing Title
 
 ```jsx example
-<Notice
-  type="info"
-  title={
-    <h3
-      style={{
-        margin: 0,
-        padding: 0,
-        fontSize: 'var(--text-size-small)',
-        fontWeight: 'var(--font-weight-medium)'
-      }}
-    >
-      Information
-    </h3>
-  }
->
+<Notice type="info" title={<h1>Information</h1>}>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
@@ -105,14 +91,20 @@ Icon Type](/components/icon).
     },
     {
       name: 'title',
-      type: 'React.ReactNode',
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       description:
         'Any valid React node (e.g., string, boolean, ReactElement, etc.)',
       required: true
     },
     {
       name: 'icon',
-      type: ['ContentNode'],
+      type: ['IconType', 'string'],
       description:
         'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons',
       required: false

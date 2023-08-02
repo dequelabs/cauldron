@@ -6,7 +6,7 @@
   --notice-title-font-weight: var(--font-weight-medium);
   --notice-background-color: var(--notice-info-color);
   --notice-border-color: var(--accent-dark);
-  --notice-icon-size: 1em;
+  --notice-icon-size: 1.2em;
 }
 
 .Notice--info {
@@ -19,13 +19,12 @@
 
 .Notice {
   display: block;
-  padding: var(--space-smaller) var(--space-small);
+  padding: var(--space-small) var(--space-small);
   border: 1px solid var(--notice-border-color);
   background-color: var(--notice-background-color);
   color: var(--notice-text-color);
   width: 100%;
   font-size: var(--text-size-smaller);
-  line-height: 1.618;
 }
 
 .Notice .Notice__title,
@@ -40,8 +39,8 @@
   color: var(--notice-title-text-color);
 }
 
-.Notice .Notice__title + .Notice__content {
-  margin-left: var(--space-quarter);
+.Notice .Notice__title + * {
+  margin-top: var(--space-smallest);
 }
 
 .Notice .Icon > svg {
