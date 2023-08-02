@@ -53,10 +53,10 @@ Rendering a `Notice` that appears as a thin bar can be accomplished by only pass
 />
 ```
 
-### Composing Title
+### Notice Title
 
 ```jsx example
-<Notice type="info" title={<h1>Information</h1>}>
+<Notice type="info" title={<h4>Information</h4>}>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
@@ -79,15 +79,14 @@ Icon Type](/components/icon).
 ## Props
 
 <ComponentProps
-  children={{ required: false }}
+  children="true"
   props={[
     {
       name: 'type',
       type: ['info', 'caution'],
       defaultValue: 'info',
       description:
-        'Notice preset variant that sets both the background color and Icon type (optionally overwritable)',
-      required: false
+        'Notice preset variant that sets both the background color and Icon type (optionally overwritable)'
     },
     {
       name: 'title',
@@ -106,8 +105,7 @@ Icon Type](/components/icon).
       name: 'icon',
       type: ['IconType', 'string'],
       description:
-        'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons',
-      required: false
+        'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons'
     }
   ]}
   refType="HTMLDivElement"
