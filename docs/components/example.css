@@ -48,10 +48,6 @@ body.cauldron--theme-dark {
   margin: 0;
 }
 
-.Component__example__react .Notice {
-  line-height: 1.618;
-}
-
 /* When displaying Scrim within an example, we want it to be constrained inside
  * the boundaries of the component and not the viewport */
 

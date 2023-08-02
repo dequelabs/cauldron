@@ -10,32 +10,50 @@ import { Notice, Icon } from '@deque/cauldron-react';
 import { Notice } from '@deque/cauldron-react';
 ```
 
-## Examples
-
-### Notice Component
-
 The `Notice` component is used to display a notification banner. It is similar to the [Toast](./Toast) component,
 but can be used in more flexible ways.
 
 For example, the `Notice` component can be used to display a notification banner within a [Panel](./Panel) component
 or anywhere else in the DOM without needing to be absolutely/statically positioned.
 
-In addition, the `Notice` component has only limited dynamic functionality built in, allowing developers to
-have full control over the underlying element via its `forwardRef`, while still having useful base styling..
+## Examples
+
+There are two variants of the `Notice` component: `info` and `caution`. The `info` variant is used to display general
+information, while the `caution` variant is used to display a warning. Depending on the variant, the background color
+and icon will change (can be overwritten).
+
+### Info
 
 ```jsx example
-<Notice type="info" title='Information'>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
-  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
-</Notice>
-
-<Notice type="caution" title="Caution">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
-  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+<Notice type="info" title="Information">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
 </Notice>
 ```
 
-### Notice With Icon
+### Caution
+
+```jsx example
+<Notice type="caution" title="Caution">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Thin
+
+Rendering a `Notice` that appears as a thin bar can be accomplished by only passing a `title` prop, or only passing a child.
+
+```jsx example
+<Notice
+  type="caution"
+  title="Caution, about to tread into dangerous territory"
+/>
+```
+
+### Composing Title
 
 ```jsx example
 <Notice
@@ -57,99 +75,15 @@ have full control over the underlying element via its `forwardRef`, while still 
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
 </Notice>
-
-<Notice
-  type="caution"
-  title={
-    <h3
-      style={{
-        margin: 0,
-        padding: 0,
-        fontSize: 'var(--text-size-small)',
-        fontWeight: 'var(--font-weight-medium)'
-      }}
-    >
-      Caution
-    </h3>
-  }
->
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
-  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
-  condimentum sed.
-</Notice>
 ```
 
-### Notice With Different icon
+### Customizing Icon
 
-<Note>
-  The `icon` prop takes a string that corresponds to a [Cauldron
-  Icon](/components/icon). If you would like to use a custom icon, you can
-  compose the contents of the `Notice` component (see
-  <a href="/components/Notice#notice-with-composed-contents">example</a>).
-</Note>
+If you would like to customize the preset icon/type variants, the `icon` prop can be used with any [Cauldron
+Icon Type](/components/icon).
 
 ```jsx example
 <Notice type="caution" title="Dynamo!" icon="bolt">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
-  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
-  condimentum sed.
-</Notice>
-```
-
-### Notice With Composed Contents
-
-```jsx example
-<Notice>
-  <div className="Notice__title">
-    <Icon type="star" />
-    <h2
-      style={{
-        margin: 0,
-        padding: 0,
-        fontSize: 'var(--text-size-small)',
-        fontWeight: 'var(--font-weight-medium)'
-      }}
-    >
-      You are a star!
-    </h2>
-  </div>
-  <p style={{ margin: 'var(--space-half) 0 0 var(--space-half)' }}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
-    porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus
-    arcu condimentum sed.
-  </p>
-</Notice>
-```
-
-### Notice (thin)
-
-Rendering a `Notice` that appears as a thin bar can be accomplished by only passing a `title` prop, or only passing a child.
-
-```jsx example
-<Notice
-  type="caution"
-  title="Caution, about to tread into dangerous territory"
-/>
-
-<Notice type="info">
-  <div
-    className="Notice__content"
-    style={{ display: 'inline-flex', gap: 'var(--space-half)', justifyContent: 'center', alignItems: 'center' }}
-  >
-  <Icon type="info-circle-alt" />
-    <span>A new update has been released!</span>
-  </div>
-</Notice>
-
-```
-
-### Notice (with HTML element properties)
-
-The `Notice` component will support the spreading of any props normally available to a `div` element. This includes
-properties such as `role`, `aria-label`, `aria-labelledby`, `id`, etc.
-
-```jsx example
-<Notice type="info" title="Alert!" role="alert">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
@@ -163,8 +97,8 @@ properties such as `role`, `aria-label`, `aria-labelledby`, `id`, etc.
   props={[
     {
       name: 'type',
-      type: ["'info'", "'caution'"],
-      defaultValue: '"info"',
+      type: ['info', 'caution'],
+      defaultValue: 'info',
       description:
         'Notice preset variant that sets both the background color and Icon type (optionally overwritable)',
       required: false
@@ -174,11 +108,11 @@ properties such as `role`, `aria-label`, `aria-labelledby`, `id`, etc.
       type: 'React.ReactNode',
       description:
         'Any valid React node (e.g., string, boolean, ReactElement, etc.)',
-      required: false
+      required: true
     },
     {
       name: 'icon',
-      type: ['string - IconType'],
+      type: ['ContentNode'],
       description:
         'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons',
       required: false

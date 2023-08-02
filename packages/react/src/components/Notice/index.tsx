@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon, { iconTypes, IconType } from '../Icon';
+import { ContentNode } from '../../types';
 
 const iconTypeMap = {
   caution: 'caution',
@@ -11,34 +12,27 @@ const iconTypeMap = {
 export interface NoticeProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   type?: keyof typeof iconTypeMap;
-  title?: React.ReactNode;
+  title: ContentNode;
   icon?: IconType;
-  children?: React.ReactNode;
+  children?: ContentNode;
 }
 
-/**
- * The cauldron Notice notification component
- */
 const Notice = forwardRef<HTMLDivElement, NoticeProps>(
-  ({ type, title, icon, children, ...otherProps }: NoticeProps, ref) => {
-    const validType =
-      type && Object.keys(iconTypeMap).includes(type) ? type : 'info';
-    const validIcon =
-      icon && iconTypes.includes(icon)
-        ? icon
-        : (iconTypeMap[validType] as IconType);
-
+  (
+    { type = 'info', title, icon, children, ...otherProps }: NoticeProps,
+    ref
+  ) => {
     return (
       <div
         className={classNames('Notice', {
-          [`Notice--${validType}`]: validType
+          [`Notice--${type}`]: type
         })}
         ref={ref}
         {...otherProps}
       >
         {title && (
           <div className="Notice__title">
-            <Icon type={validIcon} />
+            <Icon type={icon || (iconTypeMap[type] as IconType)} />
             {title}
           </div>
         )}
