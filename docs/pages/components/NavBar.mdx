@@ -1,0 +1,119 @@
+---
+title: NavBar
+description: A navigation bar that contains links to other sections of the website.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/NavBar/NavBar.tsx
+---
+
+import { NavBar, NavItem } from '@deque/cauldron-react'
+
+```js
+import { NavBar, NavItem } from '@deque/cauldron-react'
+```
+
+The `NavBar` component is intended to be placed directly below the `TopBar` component to display an additional section of navigational links for the current area.
+
+Under the hood, `NavBar` renders inside of a `nav` element. If there are multiple `nav` elements present on the page be sure to include `aria-label` or `aria-labelledby` to help uniquely identify each nav region.
+
+## Examples
+
+### Default
+
+```jsx example
+<NavBar aria-label="NavBar Example">
+  <NavItem>
+    <a href="#">One</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Two</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Three</a>
+  </NavItem>
+</NavBar>
+```
+
+### NavBar with Active NavItem
+
+```jsx example
+<NavBar aria-label="NavBar with Active NavItem Example">
+  <NavItem active>
+    <a href="#">One</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Two</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Three</a>
+  </NavItem>
+</NavBar>
+```
+
+### Collapsed
+
+```jsx example
+<NavBar aria-label="Collapsed NavBar Example" collapsed={true}>
+  <NavItem>
+    <a href="#">One</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Two</a>
+  </NavItem>
+  <NavItem>
+    <a href="#">Three</a>
+  </NavItem>
+</NavBar>
+```
+
+## Props
+
+### NavBar
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Collapses NavBar into a toggleable hamburger menu with a flyout list of nav items.',
+    },
+    {
+      name: 'navTriggerLabel',
+      type: 'string',
+      description: 'Label shown in menu trigger when component is collapsed.',
+      defaultValue: 'MAIN MENU'
+    },
+    {
+      name: 'propId',
+      type: 'string',
+      description: 'ID passed to aria-controls, so assistive technology knows the trigger controls the menu.',
+      defaultValue: 'randomly generated with react-id-generator'
+    }
+  ]}
+/>
+
+### NavItem
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'active',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Indicates that the current NavItem is active.',
+    },
+    {
+      name: 'aria-current',
+      type: ['page', 'step', 'location', 'boolean'],
+      description: 'When active, the aria-current value to mark the NavItem as.',
+      defaultValue: 'true'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [TopBar](./TopBar)
