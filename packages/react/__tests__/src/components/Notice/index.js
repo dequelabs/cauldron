@@ -33,10 +33,18 @@ test('should return no axe violations', async () => {
     </Notice>
   );
 
+  const danger = mount(
+    <Notice type="danger" title="foo">
+      bar
+    </Notice>
+  );
+
   const infoAxeResults = await axe(info.html());
   const cautionAxeResults = await axe(caution.html());
+  const dangerAxeResults = await axe(danger.html());
   expect(infoAxeResults).toHaveNoViolations();
   expect(cautionAxeResults).toHaveNoViolations();
+  expect(dangerAxeResults).toHaveNoViolations();
 });
 
 test('should return correctly with props passed in', async () => {

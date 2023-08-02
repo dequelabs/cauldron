@@ -6,6 +6,7 @@ import { ContentNode } from '../../types';
 
 const iconTypeMap = {
   caution: 'caution',
+  danger: 'caution',
   info: 'info-circle'
 };
 
@@ -34,11 +35,7 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
           <Icon type={icon || (iconTypeMap[type] as IconType)} />
           {title}
         </div>
-        {children && typeof children === 'string' ? (
-          <div className="Notice__content">{children}</div>
-        ) : (
-          children
-        )}
+        {children && <div className="Notice__content">{children}</div>}
       </div>
     );
   }
@@ -48,9 +45,9 @@ Notice.displayName = 'Notice';
 Notice.propTypes = {
   // @ts-expect-error
   children: PropTypes.node,
-  type: PropTypes.oneOf(['caution', 'info']),
+  type: PropTypes.oneOf(['caution', 'info', 'danger']),
   // @ts-expect-error
-  title: PropTypes.oneOf([
+  title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.element

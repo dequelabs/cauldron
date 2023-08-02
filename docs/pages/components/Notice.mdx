@@ -4,7 +4,8 @@ description: A notification banner - similar to a Toast, but allows for more fle
 source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Notice/Notice.tsx
 ---
 
-import { Notice, Icon } from '@deque/cauldron-react';
+import { useState } from 'react';
+import { Notice, Icon, Button } from '@deque/cauldron-react';
 
 ```js
 import { Notice } from '@deque/cauldron-react';
@@ -36,6 +37,16 @@ and icon will change (can be overwritten).
 
 ```jsx example
 <Notice type="caution" title="Caution">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Danger
+
+```jsx example
+<Notice type="danger" title="Danger!">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
@@ -76,6 +87,31 @@ Icon Type](/components/icon).
 </Notice>
 ```
 
+### Dismissable
+
+```jsx example
+function DismissableNotice() {
+  const [dismissed, setDismissed] = useState(false);
+  const handleDismiss = () => {
+    setDismissed(true);
+    setTimeout(() => setDismissed(false), 2000);
+  };
+
+  return dismissed ? null : (
+    <Notice type="info" title="Information" dismissable>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+        porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et
+        faucibus arcu condimentum sed.
+      </p>
+      <Button variant="link" onClick={handleDismiss}>
+        dismiss
+      </Button>
+    </Notice>
+  );
+}
+```
+
 ## Props
 
 <ComponentProps
@@ -83,7 +119,7 @@ Icon Type](/components/icon).
   props={[
     {
       name: 'type',
-      type: ['info', 'caution'],
+      type: ['info', 'caution', 'danger'],
       defaultValue: 'info',
       description:
         'Notice preset variant that sets both the background color and Icon type (optionally overwritable)'
