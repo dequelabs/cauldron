@@ -1,23 +1,38 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
 
+type Theme = 'light' | 'dark';
+
 interface ProviderProps {
   children: React.ReactNode;
   context?: HTMLElement;
-  initialTheme?: string;
+  initialTheme?: Theme;
 }
 
 const LIGHT_THEME_CLASS = 'cauldron--theme-light';
 const DARK_THEME_CLASS = 'cauldron--theme-dark';
 
-const ThemeContext = createContext({});
+interface State {
+  theme: Theme;
+}
+
+interface Methods {
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<State & Methods>({
+  theme: 'light',
+  toggleTheme: () => {
+    throw new Error('ThemeContext not initialized');
+  }
+});
 
 const ThemeProvider = ({
   children,
   context = document.body,
   initialTheme = 'light'
 }: ProviderProps) => {
-  const [theme, setTheme] = useState(initialTheme);
+  const [theme, setTheme] = useState<Theme>(initialTheme);
   const getThemeFromContext = () =>
     context.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
   const toggleTheme = () =>

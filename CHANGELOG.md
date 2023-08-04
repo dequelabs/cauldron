@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.7.1](https://github.com/dequelabs/cauldron/compare/v5.7.0...v5.7.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* **react:** ensure that Field__label remains for Radio/Checkbox for better backwards compatibility ([#1150](https://github.com/dequelabs/cauldron/issues/1150)) ([f86d18e](https://github.com/dequelabs/cauldron/commit/f86d18ecfef162ddcadc5cf8dcbe9c18a364f560))
+* update pagination statusLabel type to ContentNode ([#1099](https://github.com/dequelabs/cauldron/issues/1099)) ([ade57cc](https://github.com/dequelabs/cauldron/commit/ade57ccab94c357708af8f812af66a701ab0168e))
+* **react:** Correctly expose `theme` and `toggleTheme` from context ([#1148](https://github.com/dequelabs/cauldron/issues/1148)) ([f3d7c4d](https://github.com/dequelabs/cauldron/commit/f3d7c4d6bdff59238d25978abf7a9b9cbaa0473a))
+
 ## [5.7.0](https://github.com/dequelabs/cauldron/compare/v5.6.2...v5.7.0) (2023-08-02)
 
 
