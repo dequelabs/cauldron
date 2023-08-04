@@ -104,7 +104,7 @@ const RadioGroup = forwardRef(
             />
             <label
               htmlFor={id}
-              className={classNames('Radio__label', {
+              className={classNames('Field__label Radio__label', {
                 'Field__label--disabled': disabled
               })}
             >
