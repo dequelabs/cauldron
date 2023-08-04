@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
-  statusLabel?: React.ReactNode;
+  statusLabel?: ContentNode;
   firstPageLabel?: ContentNode;
   previousPageLabel?: ContentNode;
   nextPageLabel?: ContentNode;
