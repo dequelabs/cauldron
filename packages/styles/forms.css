@@ -274,10 +274,9 @@ textarea.Field--has-error:focus:hover,
   display: flex;
   align-items: center;
   text-align: left;
-  color: var(--field-label-text-color);
-  font-size: var(--text-size-small);
   font-weight: var(--font-weight-normal);
   cursor: default;
+  margin-bottom: unset;
 }
 
 .Field__required-text {
