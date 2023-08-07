@@ -9,9 +9,6 @@
 
 .Breadcrumb__Separator {
   padding: 0 var(--space-half);
-}
-
-.cauldron--theme-light .Breadcrumb__Separator {
   color: var(--gray-60);
 }
 
