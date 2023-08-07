@@ -7,14 +7,16 @@
   margin: 0;
 }
 
+.Breadcrumb__Separator {
+  padding: 0 var(--space-half);
+}
+
 .cauldron--theme-light .Breadcrumb__Separator {
   color: var(--gray-60);
-  padding: 0 var(--space-half);
 }
 
 .cauldron--theme-dark .Breadcrumb__Separator {
   color: var(--accent-light);
-  padding: 0 var(--space-half);
 }
 
 .Breadcrumb__Link {
