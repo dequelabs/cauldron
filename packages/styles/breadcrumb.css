@@ -1,3 +1,11 @@
+:root {
+  --breadcrumb-separator-color: var(--gray-60);
+}
+
+.cauldron--theme-dark {
+  --breadcrumb-separator-color: var(--accent-light);
+}
+
 .Breadcrumb ol {
   display: block;
   word-break: break-all;
@@ -9,11 +17,7 @@
 
 .Breadcrumb__Separator {
   padding: 0 var(--space-half);
-  color: var(--gray-60);
-}
-
-.cauldron--theme-dark .Breadcrumb__Separator {
-  color: var(--accent-light);
+  color: var(--breadcrumb-separator-color);
 }
 
 .Breadcrumb__Link {
