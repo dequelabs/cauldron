@@ -46,15 +46,16 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const columnLeftRef = useRef<HTMLDivElement>(null);
     const columnRightRef = useRef<HTMLDivElement>(null);
-    const prefersReducedMotion =
-      'matchMedia' in window &&
-      matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const columnLeft = React.Children.toArray(children).find(
       child => (child as React.ReactElement<any>).type === ColumnLeft
     );
 
     const togglePanel = () => {
+      const prefersReducedMotion =
+        'matchMedia' in window &&
+        matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       if (isCollapsed) {
         setShowPanel(true);
       } else if (prefersReducedMotion) {
