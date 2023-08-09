@@ -46,6 +46,9 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const columnLeftRef = useRef<HTMLDivElement>(null);
     const columnRightRef = useRef<HTMLDivElement>(null);
+    const prefersReducedMotion =
+      'matchMedia' in window &&
+      matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const columnLeft = React.Children.toArray(children).find(
       child => (child as React.ReactElement<any>).type === ColumnLeft
@@ -54,7 +57,12 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const togglePanel = () => {
       if (isCollapsed) {
         setShowPanel(true);
+      } else if (prefersReducedMotion) {
+        // Immediately collapse the panel as we do not need to wait for css
+        // transitions to complete
+        setShowPanel(false);
       }
+
       // Set collapsed state on next tick so css transitions can be applied
       requestAnimationFrame(() => {
         const collapsed = !isCollapsed;
