@@ -54,6 +54,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const togglePanel = () => {
       const prefersReducedMotion =
         'matchMedia' in window &&
+        typeof matchMedia === 'function' &&
         matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       if (isCollapsed) {
