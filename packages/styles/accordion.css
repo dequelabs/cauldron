@@ -1,6 +1,6 @@
 :root {
   --accordion-trigger-background-color: var(--white);
-  --accordion-trigger-background-color-expanded: var(--gray-20);
+  --accordion-trigger-background-color-expanded: var(--white);
   --accordion-trigger-text-color: var(--gray-90);
   --accordion-trigger-text-color-hover: var(--accent-primary);
   --accordion-trigger-box-shadow-hover: var(--accent-primary);
