@@ -52,9 +52,19 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     );
 
     const togglePanel = () => {
+      const prefersReducedMotion =
+        'matchMedia' in window &&
+        typeof matchMedia === 'function' &&
+        matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       if (isCollapsed) {
         setShowPanel(true);
+      } else if (prefersReducedMotion) {
+        // Immediately collapse the panel as we do not need to wait for css
+        // transitions to complete
+        setShowPanel(false);
       }
+
       // Set collapsed state on next tick so css transitions can be applied
       requestAnimationFrame(() => {
         const collapsed = !isCollapsed;
