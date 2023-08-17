@@ -30,8 +30,10 @@ interface ListboxProps
   }) => void;
 }
 
-const getOptionId = (option: ListboxOption): string | null =>
-  option.element.getAttribute('id');
+// id for listbox options should always be defined since it should
+// be provide via the author, or auto-generated via the component
+const getOptionId = (option: ListboxOption): string =>
+  option.element.getAttribute('id') as string;
 
 const isDisabledOption = (option: ListboxOption): boolean =>
   option.element.getAttribute('aria-disabled') === 'true';
