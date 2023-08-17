@@ -45,7 +45,7 @@
     "@babel/register": "^7.9.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-dynamic-import-vars": "^1.4.2",
-    "@rollup/plugin-typescript": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.1.2",
     "@svgr/rollup": "^6.1.2",
     "@types/classnames": "^2.2.10",
     "@types/node": "^17.0.42",
