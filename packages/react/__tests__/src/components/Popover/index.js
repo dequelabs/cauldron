@@ -1,0 +1,250 @@
+import React, { useRef } from 'react';
+import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
+import Popover from 'src/components/Popover';
+import axe from '../../../axe';
+
+let wrapperNode;
+let mountNode;
+
+beforeEach(() => {
+  wrapperNode = document.createElement('div');
+  wrapperNode.innerHTML = `
+    <button data-test>Click Me!</button>
+    <div id="#mount"></div>
+  `;
+  document.body.appendChild(wrapperNode);
+  mountNode = document.getElementById('mount');
+});
+
+afterEach(() => {
+  document.body.innerHTML = '';
+  wrapperNode = null;
+  mountNode = null;
+});
+
+const update = async wrapper => {
+  await act(async () => {
+    await new Promise(resolve => setImmediate(resolve));
+    wrapper.update();
+  });
+};
+
+// eslint-disable-next-line react/prop-types
+const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
+  const ref = useRef();
+  const onClose = jest.fn();
+  return (
+    <React.Fragment>
+      <button ref={ref} {...buttonProps}>
+        button
+      </button>
+      <Popover target={ref} show onClose={onClose} {...tooltipProps}>
+        Hello Word
+      </Popover>
+      <div data-test></div>
+    </React.Fragment>
+  );
+};
+
+const WrapperPopoverWithElements = () => {
+  const ref = useRef();
+  const onClose = jest.fn();
+  return (
+    <React.Fragment>
+      <button ref={ref}>button</button>
+      <Popover target={ref} show onClose={onClose}>
+        <button data-test="foo1">Foo1</button>
+        <button data-test="foo2">Foo2</button>
+        <button data-test="foo3">Foo3</button>
+      </Popover>
+      <div data-test></div>
+    </React.Fragment>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const WrapperAlert = ({ buttonProps = {}, tooltipProps = {} }) => {
+  const ref = useRef();
+  const onClose = jest.fn();
+  return (
+    <React.Fragment>
+      <button ref={ref} {...buttonProps}>
+        button
+      </button>
+      <Popover
+        variant="alert"
+        target={ref}
+        show
+        onClose={onClose}
+        {...tooltipProps}
+      />
+    </React.Fragment>
+  );
+};
+
+test('renders without blowing up', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(wrapper.find('Tooltip').exists()).toBeTruthy();
+});
+
+test('should auto-generate id', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  const id = wrapper.find('.Popover').props().id;
+  expect(id).toBeTruthy();
+  expect(id).toEqual(
+    wrapper
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-describedby')
+  );
+});
+
+test('should support adding className to tooltip', async () => {
+  const wrapper = mount(<Wrapper tooltipProps={{ className: 'foo' }} />);
+  await update(wrapper);
+  expect(wrapper.find('.Popover').hasClass('Popover')).toBeTruthy();
+  expect(wrapper.find('.Popover').hasClass('foo')).toBeTruthy();
+});
+
+test('should not overwrite user provided id and aria-describedby', async () => {
+  const buttonProps = { [`aria-describedby`]: 'foo popoverid' };
+  const tooltipProps = { id: 'popoverid' };
+  const props = { buttonProps, tooltipProps };
+  const wrapper = mount(<Wrapper {...props} />);
+  await update(wrapper);
+  expect(wrapper.find('.Popover').props().id).toEqual('popoverid');
+  expect(
+    wrapper
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-describedby')
+  ).toEqual('foo popoverid');
+});
+
+test('should call onClose on escape keypress', async () => {
+  const onClose = jest.fn().mockImplementation(() => {});
+  const wrapper = mount(<Wrapper tooltipProps={{ onClose }} />, {
+    attachTo: mountNode
+  });
+  await update(wrapper);
+  expect(wrapper.find('.Popover').exists).toBeTruthy();
+  await act(async () => {
+    document.body.dispatchEvent(
+      new KeyboardEvent('keyup', {
+        bubbles: true,
+        key: 'Escape'
+      })
+    );
+  });
+
+  await update(wrapper);
+
+  expect(onClose).toBeCalled();
+});
+
+test('should call onClose on clicking outside', async () => {
+  const onClose = jest.fn().mockImplementation(() => {});
+  mount(<Wrapper tooltipProps={{ onClose }} />, { attachTo: mountNode });
+
+  await act(async () => {
+    wrapperNode
+      .querySelector('[data-test]')
+      .dispatchEvent(new Event('click', { bubbles: true }));
+  });
+
+  expect(onClose).toBeCalled();
+});
+
+test('first element inside the popover container should have focus', async () => {
+  const wrapper = mount(<WrapperPopoverWithElements />, {
+    attachTo: mountNode
+  });
+
+  await update(wrapper);
+
+  const firstInteractableElement = wrapper.find('[data-test="foo1"]');
+
+  const focusedElement = document.activeElement;
+
+  expect(firstInteractableElement.instance()).toBe(focusedElement);
+});
+
+test('should render two buttons (Apply/Close) for alert variant', async () => {
+  const wrapper = mount(<Wrapper tooltipProps={{ variant: 'alert' }} />, {
+    attachTo: mountNode
+  });
+
+  await update(wrapper);
+
+  const closeBtn = wrapper.find('.CloseBtn');
+  const applyBtn = wrapper.find('.ApplyBtn');
+
+  expect(closeBtn.exists()).toBeTruthy();
+  expect(applyBtn.exists()).toBeTruthy();
+});
+
+test('onClose should be called, when close button in alert popover is clicked', async () => {
+  const handleClose = jest.fn();
+
+  const wrapper = mount(
+    <WrapperAlert tooltipProps={{ variant: 'alert', onClose: handleClose }} />,
+    { attachTo: mountNode }
+  );
+
+  await act(async () => {
+    wrapper.find('button.CloseBtn').simulate('click');
+  });
+
+  expect(handleClose).toHaveBeenCalled();
+});
+
+test('onApply should be called, when apply button in alert popover is clicked', async () => {
+  const applyFunc = jest.fn();
+
+  const wrapper = mount(
+    <WrapperAlert tooltipProps={{ variant: 'alert', onApply: applyFunc }} />,
+    { attachTo: mountNode }
+  );
+
+  await act(async () => {
+    wrapper.find('button.ApplyBtn').simulate('click');
+  });
+
+  expect(applyFunc).toHaveBeenCalled();
+});
+
+test('text for apply/close buttons are rendered correct', async () => {
+  const closeButtonText = 'Specific text to close popover';
+  const applyButtonText = 'Specific text to apply popover';
+
+  const wrapper = mount(
+    <WrapperAlert
+      tooltipProps={{ variant: 'alert', closeButtonText, applyButtonText }}
+    />,
+    { attachTo: mountNode }
+  );
+
+  await update(wrapper);
+
+  const closeBtn = wrapper.find('button.CloseBtn');
+
+  const applyBtn = wrapper.find('button.ApplyBtn');
+
+  expect(closeBtn.text()).toBe(closeButtonText);
+  expect(applyBtn.text()).toBe(applyButtonText);
+});
+
+test('variant="alert" should return no axe violations', async () => {
+  const wrapper = mount(<WrapperAlert />);
+  await update(wrapper);
+  expect(await axe(wrapper.html())).toHaveNoViolations();
+});
+
+test('should return no axe violations', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(await axe(wrapper.html())).toHaveNoViolations();
+});
