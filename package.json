@@ -128,7 +128,7 @@
     "style-loader": "^0.19.0",
     "terser-webpack-plugin": "^5.3.6",
     "ts-node": "^10.9.1",
-    "typescript": "^3.7.5",
+    "typescript": "~5.0.0",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
