@@ -1,0 +1,87 @@
+---
+title: Popover
+description: A popover component is a user interface element designed to provide contextual information or actions in a compact and non-intrusive manner. 
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Popover/index.tsx
+---
+
+import { useRef, useState } from 'react'
+import { Popover, Button } from '@deque/cauldron-react'
+
+```js
+import { Popover, Button } from '@deque/cauldron-react'
+```
+
+## Examples
+
+Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Popover can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
+
+### Alter Popover
+
+Alert Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
+also popup contains information text to show some message to the user.
+Canceling the action will only close the popup window.
+
+```jsx example
+function TextTooltipExamples() {
+  const [show, setShow] = useState(false);
+  const onTogglePopover = () => setShow(!show);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button 
+        onClick={onTogglePopover} 
+        variant="secondary" 
+        buttonRef={buttonRef}
+      >
+        Alert!
+      </Button>
+      <Popover
+        variant="alert"
+        target={buttonRef} 
+        placement="auto" 
+        show={show} 
+        onClose={onTogglePopover}
+        infoText="Are you sure you want to exit this wizard? All changes will be lost."
+      />
+    </>
+  )
+}
+```
+
+### Custom Popover
+
+For custom purposes you can use "custom" variant, which is default.
+
+```jsx example
+function BigTooltipExample() {
+  const [show, setShow] = useState(false);
+  const onTogglePopover = () => setShow(!show);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button 
+        onClick={onTogglePopover} 
+        variant="secondary" 
+        buttonRef={buttonRef}
+      >
+        Custom!
+      </Button>
+      <Popover
+        target={buttonRef} 
+        placement="auto" 
+        show={show} 
+        onClose={onTogglePopover}
+      >
+        <div>
+          <p>Popover content</p>
+          <Button>Custom button</Button>
+          <Button>Custom button</Button>
+          <p>Popover content</p>
+        </div>
+      </Popover>
+    </>
+  )
+}
+```
