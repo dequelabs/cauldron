@@ -1,0 +1,117 @@
+:root {
+  --popover-background-color: var(--gray-10);
+  --popover-border-color: var(--gray-90);
+  --popover-text-color: var(--gray-90);
+  --popover-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
+  --popover-button-height: 24px;
+  --popover-alert-max-width: 192px;
+  --popover-alert-min-height: 156px;
+}
+
+/* Dark theme variables */
+.cauldron--theme-dark {
+  --popover-background-color: var(--accent-medium);
+  --popover-border-color: var(--accent-light);
+  --popover-text-color: var(--white);
+  --popover-button-height: 24px;
+  --popover-alert-max-width: 192px;
+  --popover-alert-min-height: 156px;
+}
+
+.Popover {
+  background-color: var(--popover-background-color);
+  border: 2px solid var(--popover-border-color);
+  box-shadow: var(--popover-box-shadow);
+  color: var(--popover-text-color);
+  font-size: var(--text-size-smaller);
+  line-height: var(--text-size-normal);
+  padding: var(--space-half) var(--space-small);
+  border-radius: 3px;
+  z-index: var(--z-index-popover);
+  text-align: center;
+  max-width: calc(100vw - 16px);
+  word-break: break-word;
+}
+
+.Popover--hidden {
+  visibility: hidden;
+  /* Take the tooltip out of the DOM layout flow so it doesn't reserve space when hidden */
+  position: fixed !important;
+}
+
+/* TooltipArrow needs some dimensions to accurately calculate its positioning */
+.PopoverArrow {
+  height: 0.1px;
+  width: 0.1px;
+}
+
+.BorderLeft {
+  position: absolute;
+  left: 4px;
+  top: var(--space-half);
+  height: calc(100% - (var(--space-half) * 2));
+  width: 3px;
+  background-color: var(--popover-border-color);
+}
+
+/* Adjust position to try to center the arrow in the tooltip's border */
+[class*='Popover--top'] .PopoverArrow {
+  bottom: -1px;
+}
+
+[class*='Popover--bottom'] .PopoverArrow {
+  top: -1px;
+}
+
+[class*='Popover--left'] .PopoverArrow {
+  right: -1px;
+}
+
+[class*='Popover--right'] .PopoverArrow {
+  left: 0;
+}
+
+/*
+ * Default tooltip arrow styles
+ */
+
+.PopoverArrow:before {
+  content: '';
+  position: absolute;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--popover-border-color);
+  border-bottom: none;
+  transform: translateX(-50%);
+  transform-origin: top;
+}
+
+[class*='Popover--bottom'] .PopoverArrow:before {
+  transform: translateX(-50%) rotate(180deg);
+}
+
+[class*='Popover--left'] .PopoverArrow:before {
+  transform: rotate(-90deg) translateY(-6px);
+}
+
+[class*='Popover--right'] .PopoverArrow:before {
+  transform: rotate(90deg) translateY(100%);
+}
+
+/* Alert popover styles */
+
+.Popover--alert {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-smallest);
+  align-items: center;
+  justify-content: center;
+  max-width: var(--popover-alert-max-width);
+  min-height: var(--popover-alert-min-height);
+}
+
+.Popover--alert > button {
+  width: 100%;
+  margin-left: 0 !important;
+  min-height: var(--popover-button-height);
+}
