@@ -34,14 +34,14 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-stage-0": "^7.8.3",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/preset-typescript": "^7.22.5",
     "@babel/register": "^7.9.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-dynamic-import-vars": "^1.4.2",

@@ -4,7 +4,8 @@ import React, {
   useState,
   useLayoutEffect,
 } from 'react';
-import { ListboxProvider, type ListboxOption } from './ListboxContext';
+import { ListboxProvider } from './ListboxContext';
+import type { ListboxOption } from './ListboxContext';
 import type { ListboxValue } from './ListboxOption';
 import useSharedRef from '../../utils/useSharedRef';
 
