@@ -24,7 +24,7 @@ const ListboxContext = createContext({
   active: null,
   selected: null,
   setOptions: () => null,
-  onSelect: () => {},
+  onSelect: () => null,
 });
 
 function ListboxProvider<T extends ListboxOption>({

@@ -28,7 +28,6 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
       disabled,
       activeClass = 'ListboxOption--active',
       onClick,
-      onKeyDown,
       ...props
     },
     ref
