@@ -1,0 +1,191 @@
+---
+title: Listbox
+description: An unstyled component to provide a keyboard navigable list of options.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Listbox/Listbox.tsx
+---
+
+import { Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
+
+```js
+import { 
+  Listbox, 
+  ListboxOption, 
+  ListboxGroup 
+} from '@deque/cauldron-react';
+```
+
+## Examples
+
+<Note>
+  Listbox follows [aria practices](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for _Listbox_ but is not currently intended to be used by itself. This component's intended usage is to be composed with components that have keyboard navigable items like Combobox and [OptionsMenu](./OptionsMenu).
+</Note>
+
+### Listbox Options
+
+A listbox can contain a list of options with optional values.
+
+```jsx example
+<>
+  <div id="listbox-options-example">Numbers</div>
+  <Listbox aria-labelledby="listbox-options-example">
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption value="dos">Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+### Disabled Options
+
+A listbox option can be optionally disabled.
+
+```jsx example
+<>
+  <div id="listbox-disabled-options-example">Numbers, but two is disabled</div>
+  <Listbox aria-labelledby="listbox-disabled-options-example">
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption disabled>Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+### Grouped Options
+
+Listbox options can also be grouped into categories.
+
+```jsx example
+<>
+  <div id="listbox-grouped-example">Colors and Numbers</div>
+  <Listbox as="div" aria-labelledby="listbox-grouped-example">
+    <ListboxGroup label="Colors">
+      <ListboxOption>Red</ListboxOption>
+      <ListboxOption>Green</ListboxOption>
+      <ListboxOption>Blue</ListboxOption>
+    </ListboxGroup>
+    <ListboxGroup label="Numbers">
+      <ListboxOption>One</ListboxOption>
+      <ListboxOption>Two</ListboxOption>
+      <ListboxOption>Three</ListboxOption>
+    </ListboxGroup>
+  </Listbox>
+</>
+```
+
+### Keyboard Navigation
+
+By default, keyboard navigation will stop at the first or last option of the list. To wrap around focus to the beginning or the end of the list, `navigation="cycle"` can be set to enable this behavior.
+
+```jsx example
+<>
+  <div id="listbox-cycle-example">Numbers that Cycle</div>
+  <Listbox navigation="cycle" aria-labelledby="listbox-cycle-example">
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption>Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+### Controlled
+
+Controlled listboxes require updating the value to reflect the new selected state. Useful if some form of validation needs to be performed before setting the selected value.
+
+```jsx example
+<>
+  <div id="listbox-controlled-example">Controlled Listbox</div>
+  <Listbox navigation="cycle" aria-labelledby="listbox-controlled-example" value="Two">
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption>Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+### Uncontrolled
+
+Uncontrolled listboxes will automatically set `aria-selected="true"` for the selected option upon selection. The initial value can be set via `defaultValue`.
+
+```jsx example
+<>
+  <div id="listbox-uncontrolled-example">Uncontrolled Listbox</div>
+  <Listbox navigation="cycle" aria-labelledby="listbox-uncontrolled-example" defaultValue="Two">
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption>Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+## Props
+
+### Listbox
+
+<ComponentProps className={true} refType="HTMLUListElement" props={[
+  {
+    name: 'navigation',
+    type: ['bound', 'cycle'],
+    defaultValue: 'bound',
+    description: 'How keyboard navigation is handled when reaching the start/end of the list.'
+  },
+  {
+    name: 'value',
+    type: ['string', 'number'],
+    description: 'Initial value to be applied to the listbox. Optionally used for "controlled" listboxes.'
+  },
+  {
+    name: 'defaultValue',
+    type: ['string', 'number'],
+    description: 'Value to be applied to the listbox. Optionally used for "controlled" listboxes.'
+  },
+  {
+    name: 'as',
+    type: ['React.ElementType', 'string'],
+    description: 'A component to render the Listbox as.',
+    defaultValue: 'ul'
+  }
+]} />
+
+### ListboxOption
+
+<ComponentProps className={true} refType="HTMLLIElement" props={[
+  {
+    name: 'value',
+    type: ['string', 'number'],
+    description: 'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    description: 'When set, sets the listbox option as "aria-disabled="true" and removes the element from key navigation.'
+  },
+  {
+    name: 'activeClass',
+    type: 'string',
+    defaultValue: 'ListboxOption--active',
+    description: 'When the listbox option becomes active, this class will be applied to the element.'
+  },
+  {
+    name: 'as',
+    type: ['React.ElementType', 'string'],
+    description: 'A component to render the ListboxOption as.',
+    defaultValue: 'li'
+  }
+]} />
+
+### ListboxGroup
+
+<ComponentProps className={true} refType="HTMLUListElement" props={[
+  {
+    name: 'label',
+    required: true,
+    type: ['string', 'number'],
+    description: 'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
+  },
+  {
+    name: 'as',
+    type: ['React.ElementType', 'string'],
+    description: 'A component to render the ListboxGroup as.',
+    defaultValue: 'ul'
+  }
+]} />
