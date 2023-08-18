@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { spy } from 'sinon';
 import {
   default as Listbox,
   ListboxGroup,
@@ -9,10 +10,10 @@ import {
 // Utility function for checking for active element for the given li index of a Listbox component
 const listItemIsActive = (wrapper) => (index) => {
   const ul = wrapper.find(Listbox).childAt(0);
-  const options = ul.find('li');
+  const options = ul.find('[role="option"]');
   const activeOption = options.at(index);
   expect(ul.prop('aria-activedescendant')).toBeTruthy();
-  expect(ul.find('ul').prop('aria-activedescendant')).toEqual(
+  expect(ul.find('[role="listbox"]').prop('aria-activedescendant')).toEqual(
     activeOption.prop('id')
   );
   expect(activeOption.hasClass('ListboxOption--active')).toBeTruthy();
@@ -20,6 +21,17 @@ const listItemIsActive = (wrapper) => (index) => {
     (option, index) =>
       index !== index &&
       expect(option).hasClass('ListboxOption--active').toBeFalsy()
+  );
+};
+
+// Utility function for checking for selected element for the given li index of a Listbox component
+const listItemIsSelected = (wrapper) => (index) => {
+  const options = wrapper.find('[role="option"]');
+  const selectedOption = options.at(index);
+  expect(selectedOption.prop('aria-selected')).toEqual(true);
+  options.forEach(
+    (option, index) =>
+      index !== index && expect(option).prop('aria-selected').toEqual(false)
   );
 };
 
@@ -41,6 +53,34 @@ test('should render listbox with options', () => {
   expect(wrapper.find(ListboxOption).at(0).text()).toEqual('Apple');
   expect(wrapper.find(ListboxOption).at(1).text()).toEqual('Banana');
   expect(wrapper.find(ListboxOption).at(2).text()).toEqual('Cantaloupe');
+});
+
+test('should set "as" element for listbox', () => {
+  const wrapper = mount(
+    <Listbox as="span">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  expect(
+    wrapper.find(Listbox).children('span[role="listbox"]').exists()
+  ).toBeTruthy();
+});
+
+test('should set "as" element for listbox option', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption as="span">Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  expect(
+    wrapper.find(ListboxOption).children('span[role="option"]').exists()
+  ).toBeTruthy();
 });
 
 test('should render listbox with grouped options', () => {
@@ -67,12 +107,61 @@ test('should render listbox with grouped options', () => {
   expect(group2.exists()).toBeTruthy();
   expect(group1.find('ul').prop('role')).toEqual('group');
   expect(group2.find('ul').prop('role')).toEqual('group');
+  expect(group1.find('ul').prop('aria-labelledby')).toBeTruthy();
+  expect(group2.find('ul').prop('aria-labelledby')).toBeTruthy();
   expect(group1.find(ListboxOption).at(0).text()).toEqual('Apple');
   expect(group1.find(ListboxOption).at(1).text()).toEqual('Banana');
   expect(group1.find(ListboxOption).at(2).text()).toEqual('Cantaloupe');
   expect(group2.find(ListboxOption).at(0).text()).toEqual('Artichoke');
   expect(group2.find(ListboxOption).at(1).text()).toEqual('Broccoli');
   expect(group2.find(ListboxOption).at(2).text()).toEqual('Carrots');
+});
+
+test('should use prop id for listbox group', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxGroup id="fruit" label="Fruit">
+        <ListboxOption>Apple</ListboxOption>
+        <ListboxOption>Banana</ListboxOption>
+        <ListboxOption>Cantaloupe</ListboxOption>
+      </ListboxGroup>
+    </Listbox>
+  );
+
+  expect(wrapper.find('ul[role="group"]').prop('aria-labelledby')).toEqual(
+    'fruit'
+  );
+  expect(wrapper.find('li[role="presentation"]').prop('id')).toEqual('fruit');
+});
+
+test('should set group label props', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxGroup label="Fruit" groupLabelProps={{ 'data-value': 'true' }}>
+        <ListboxOption>Apple</ListboxOption>
+        <ListboxOption>Banana</ListboxOption>
+        <ListboxOption>Cantaloupe</ListboxOption>
+      </ListboxGroup>
+    </Listbox>
+  );
+
+  expect(wrapper.find('li[role="presentation"]').prop('data-value')).toEqual(
+    'true'
+  );
+});
+
+test('should use prop id for listbox option', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption id="apple">Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  expect(
+    wrapper.find(ListboxOption).find('[role="option"]').at(0).prop('id')
+  ).toEqual('apple');
 });
 
 test('should set accessible name of grouped options', () => {
@@ -105,8 +194,8 @@ test('should set the first non-disabled option as active on focus', () => {
 
   wrapper.find(Listbox).simulate('focus');
   wrapper.update();
-  const listbox = wrapper.find('ul');
-  const option = wrapper.find('li').at(1);
+  const listbox = wrapper.find('[role="listbox"]');
+  const option = wrapper.find('[role="option"]').at(1);
 
   expect(option.hasClass('ListboxOption--active')).toBeTruthy();
   expect(listbox.prop('aria-activedescendant')).toEqual(option.prop('id'));
@@ -122,11 +211,9 @@ test('should set selected value with "value" prop when listbox option only has t
   );
 
   wrapper.update();
-  const li = wrapper.find(ListboxOption).children();
 
-  expect(li.at(0).prop('aria-selected')).toBeFalsy();
-  expect(li.at(1).prop('aria-selected')).toEqual(true);
-  expect(li.at(2).prop('aria-selected')).toBeFalsy();
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(1);
 });
 
 test('should set selected value with "defaultValue" prop when listbox option only has text label', () => {
@@ -139,11 +226,9 @@ test('should set selected value with "defaultValue" prop when listbox option onl
   );
 
   wrapper.update();
-  const li = wrapper.find(ListboxOption).children();
 
-  expect(li.at(0).prop('aria-selected')).toBeFalsy();
-  expect(li.at(1).prop('aria-selected')).toEqual(true);
-  expect(li.at(2).prop('aria-selected')).toBeFalsy();
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(1);
 });
 
 test('should set selected value with "value" prop when listbox option uses value prop', () => {
@@ -156,11 +241,9 @@ test('should set selected value with "value" prop when listbox option uses value
   );
 
   wrapper.update();
-  const li = wrapper.find(ListboxOption).children();
 
-  expect(li.at(0).prop('aria-selected')).toBeFalsy();
-  expect(li.at(1).prop('aria-selected')).toEqual(true);
-  expect(li.at(2).prop('aria-selected')).toBeFalsy();
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(1);
 });
 
 test('should set selected value with "value" prop when listbox option uses defaultValue prop', () => {
@@ -173,11 +256,9 @@ test('should set selected value with "value" prop when listbox option uses defau
   );
 
   wrapper.update();
-  const li = wrapper.find(ListboxOption).children();
 
-  expect(li.at(0).prop('aria-selected')).toBeFalsy();
-  expect(li.at(1).prop('aria-selected')).toEqual(true);
-  expect(li.at(2).prop('aria-selected')).toBeFalsy();
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(1);
 });
 
 test('should handle ↓ keypress', () => {
@@ -317,3 +398,97 @@ test.skip('should handle <end> keypress', () => {
   simulateHomeKeypress();
   assertListItemIsActive(3);
 });
+
+test.skip('should handle listbox selection with "enter" keypress', () => {
+  const onSelect = spy();
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+  const simulateEnterKeypress = simulateKeydown(wrapper, 'Enter');
+  listbox.simulate('focus');
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+
+  expect(onSelect.notCalled).toBeTruthy();
+  expect(onSelectionChange.notCalled).toBeTruthy();
+
+  simulateDownKeypress();
+  simulateEnterKeypress();
+  assertListItemIsSelected(2);
+
+  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
+  expect(
+    onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
+  ).toBeTruthy();
+});
+
+test.skip('should handle listbox selection with "space" keypress', () => {
+  const onSelect = spy();
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+  const simulateSpaceKeypress = simulateKeydown(wrapper, ' ');
+  listbox.simulate('focus');
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+
+  expect(onSelect.notCalled).toBeTruthy();
+  expect(onSelectionChange.notCalled).toBeTruthy();
+
+  simulateDownKeypress();
+  simulateSpaceKeypress();
+  assertListItemIsSelected(2);
+
+  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
+  expect(
+    onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
+  ).toBeTruthy();
+});
+
+test('should handle listbox selection with "click" event', () => {
+  const onSelect = spy();
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  expect(onSelect.notCalled).toBeTruthy();
+  expect(onSelectionChange.notCalled).toBeTruthy();
+
+  wrapper.find('[role="option"]').at(2).simulate('click');
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(2);
+
+  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
+  expect(
+    onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
+  ).toBeTruthy();
+});
+
+test.todo(
+  'should not invoke selection for disabled elements with "click" event'
+);
