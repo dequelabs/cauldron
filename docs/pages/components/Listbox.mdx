@@ -4,6 +4,7 @@ description: An unstyled component to provide a keyboard navigable list of optio
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Listbox/Listbox.tsx
 ---
 
+import { useState } from 'react';
 import { Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
 
 ```js
@@ -52,7 +53,7 @@ A listbox option can be optionally disabled.
 
 ### Grouped Options
 
-Listbox options can also be grouped into categories.
+Listbox options can also be grouped into categories. As a best practice, when using grouped options the `as` property should be set to a generic container for the wrapping `Listbox` component for proper HTML semantics.
 
 ```jsx example
 <>
@@ -92,14 +93,24 @@ By default, keyboard navigation will stop at the first or last option of the lis
 Controlled listboxes require updating the value to reflect the new selected state. Useful if some form of validation needs to be performed before setting the selected value.
 
 ```jsx example
-<>
-  <div id="listbox-controlled-example">Controlled Listbox</div>
-  <Listbox navigation="cycle" aria-labelledby="listbox-controlled-example" value="Two">
-    <ListboxOption>One</ListboxOption>
-    <ListboxOption>Two</ListboxOption>
-    <ListboxOption>Three</ListboxOption>
-  </Listbox>
-</>
+function ControlledListboxExample() {
+  const [value, setValue] = useState('Two');
+  const handleSelect = ({ value }) => setValue(value);
+  return (
+    <>
+      <div id="listbox-controlled-example">Controlled Listbox</div>
+      <Listbox 
+        aria-labelledby="listbox-controlled-example" 
+        value={value}
+        onSelect={handleSelect}
+      >
+        <ListboxOption>One</ListboxOption>
+        <ListboxOption>Two</ListboxOption>
+        <ListboxOption>Three</ListboxOption>
+      </Listbox>
+    </>
+  );
+}
 ```
 
 ### Uncontrolled
@@ -109,7 +120,7 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
 ```jsx example
 <>
   <div id="listbox-uncontrolled-example">Uncontrolled Listbox</div>
-  <Listbox navigation="cycle" aria-labelledby="listbox-uncontrolled-example" defaultValue="Two">
+  <Listbox aria-labelledby="listbox-uncontrolled-example" defaultValue="Two">
     <ListboxOption>One</ListboxOption>
     <ListboxOption>Two</ListboxOption>
     <ListboxOption>Three</ListboxOption>
@@ -123,20 +134,30 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
 
 <ComponentProps className={true} refType="HTMLUListElement" props={[
   {
-    name: 'navigation',
-    type: ['bound', 'cycle'],
-    defaultValue: 'bound',
-    description: 'How keyboard navigation is handled when reaching the start/end of the list.'
-  },
-  {
     name: 'value',
     type: ['string', 'number'],
-    description: 'Initial value to be applied to the listbox. Optionally used for "controlled" listboxes.'
+    description: 'Value to be applied to the listbox. Optionally used for "controlled" listboxes.'
   },
   {
     name: 'defaultValue',
     type: ['string', 'number'],
-    description: 'Value to be applied to the listbox. Optionally used for "controlled" listboxes.'
+    description: 'Initial value to be applied to the listbox. Optionally used for "uncontrolled" listboxes.'
+  },
+  {
+    name: 'onSelect',
+    type: 'function',
+    description: 'Callback function that gets invoked when a selection is made from one of the ListboxOptions.'
+  },
+  {
+    name: 'onSelectionChange',
+    type: 'function',
+    description: 'Callback function that gets invoked when the selected value is changed.'
+  },
+  {
+    name: 'navigation',
+    type: ['bound', 'cycle'],
+    defaultValue: 'bound',
+    description: 'How keyboard navigation is handled when reaching the start/end of the list.'
   },
   {
     name: 'as',

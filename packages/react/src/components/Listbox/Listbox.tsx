@@ -2,7 +2,7 @@ import React, {
   forwardRef,
   useCallback,
   useState,
-  useLayoutEffect,
+  useLayoutEffect
 } from 'react';
 import { ListboxProvider } from './ListboxContext';
 import type { ListboxOption } from './ListboxContext';
@@ -18,13 +18,13 @@ interface ListboxProps
   navigation?: 'cycle' | 'bound';
   onSelect?: <T extends HTMLElement = HTMLElement>({
     target,
-    value,
+    value
   }: {
     target: T;
     value: ListboxValue;
   }) => void;
   onSelectionChange?: ({
-    value,
+    value
   }: {
     previousValue: ListboxValue;
     value: ListboxValue;
@@ -75,10 +75,8 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       const selectedOption = options.find((option) =>
         optionMatchesValue(option, listboxValue)
       );
-      if (selectedOption) {
-        setSelectedOption(selectedOption);
-      }
-    }, [options]);
+      setSelectedOption(selectedOption || null);
+    }, [options, value]);
 
     const handleSelect = useCallback(
       (option: ListboxOption) => {
@@ -88,7 +86,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
           setSelectedOption(option);
           onSelectionChange?.({
             value: option.value,
-            previousValue: selectedOption?.value,
+            previousValue: selectedOption?.value
           });
         }
       },
