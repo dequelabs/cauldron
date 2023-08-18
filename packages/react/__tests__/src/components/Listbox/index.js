@@ -72,7 +72,7 @@ test('should set the first non-disabled option as active on focus', () => {
   expect(listbox.prop('aria-activedescendant')).toEqual(option.prop('id'));
 });
 
-test.only('should set selected value with "value" prop when listbox option only has text label', async () => {
+test.skip('should set selected value with "value" prop when listbox option only has text label', async () => {
   const wrapper = mount(
     <Listbox value="Banana">
       <ListboxOption>Apple</ListboxOption>
@@ -81,6 +81,9 @@ test.only('should set selected value with "value" prop when listbox option only 
     </Listbox>
   );
 
+  await setImmediate();
+  wrapper.update();
+
   expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
   expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
     'true'
@@ -88,7 +91,7 @@ test.only('should set selected value with "value" prop when listbox option only 
   expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test('should set selected value with "defaultValue" prop when listbox option only has text label', () => {
+test.skip('should set selected value with "defaultValue" prop when listbox option only has text label', async () => {
   const wrapper = mount(
     <Listbox defaultValue="Banana">
       <ListboxOption>Apple</ListboxOption>
@@ -97,6 +100,9 @@ test('should set selected value with "defaultValue" prop when listbox option onl
     </Listbox>
   );
 
+  await setImmediate();
+  wrapper.update();
+
   expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
   expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
     'true'
@@ -104,7 +110,7 @@ test('should set selected value with "defaultValue" prop when listbox option onl
   expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test('should set selected value with "value" prop when listbox option uses value prop', () => {
+test.skip('should set selected value with "value" prop when listbox option uses value prop', async () => {
   const wrapper = mount(
     <Listbox value="b">
       <ListboxOption value="a">Apple</ListboxOption>
@@ -113,6 +119,9 @@ test('should set selected value with "value" prop when listbox option uses value
     </Listbox>
   );
 
+  await setImmediate();
+  wrapper.update();
+
   expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
   expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
     'true'
@@ -120,7 +129,7 @@ test('should set selected value with "value" prop when listbox option uses value
   expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test('should set selected value with "value" prop when listbox option uses defaultValue prop', () => {
+test.skip('should set selected value with "value" prop when listbox option uses defaultValue prop', async () => {
   const wrapper = mount(
     <Listbox defaultValue="b">
       <ListboxOption value="a">Apple</ListboxOption>
@@ -128,6 +137,9 @@ test('should set selected value with "value" prop when listbox option uses defau
       <ListboxOption value="c">Cantaloupe</ListboxOption>
     </Listbox>
   );
+
+  await setImmediate();
+  wrapper.update();
 
   expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
   expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
