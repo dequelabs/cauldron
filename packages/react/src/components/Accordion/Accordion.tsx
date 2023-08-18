@@ -57,13 +57,13 @@ const Accordion = ({
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
-    child =>
+    (child) =>
       typeof child === 'string' ||
       (child as React.ReactElement<any>).type === AccordionTrigger
-  );
+  ) as unknown as typeof AccordionTrigger;
 
   const panelElement = childrenArray.find(
-    child =>
+    (child) =>
       typeof child === 'string' ||
       (child as React.ReactElement<any>).type === AccordionContent
   );
@@ -96,10 +96,13 @@ const Accordion = ({
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
-          className={classnames('Accordion__trigger', trigger.props.className)}
+          className={classnames(
+            'Accordion__trigger',
+            (trigger.props as AccordionTriggerProps).className
+          )}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
-          heading={trigger.props.heading}
-          {...trigger.props}
+          heading={(trigger.props as AccordionTriggerProps).heading}
+          {...(trigger.props as AccordionTriggerProps)}
         >
           {trigger}
         </PanelTrigger>

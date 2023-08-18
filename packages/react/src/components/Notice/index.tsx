@@ -43,7 +43,6 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
 
 Notice.displayName = 'Notice';
 Notice.propTypes = {
-  // @ts-expect-error
   children: PropTypes.node,
   type: PropTypes.oneOf(['caution', 'info', 'danger']),
   // @ts-expect-error
