@@ -3,8 +3,30 @@ import { mount } from 'enzyme';
 import {
   default as Listbox,
   ListboxGroup,
-  ListboxOption,
+  ListboxOption
 } from 'src/components/Listbox';
+
+// Utility function for checking for active element for the given li index of a Listbox component
+const listItemIsActive = (wrapper) => (index) => {
+  const ul = wrapper.find(Listbox).childAt(0);
+  const options = ul.find('li');
+  const activeOption = options.at(index);
+  expect(ul.prop('aria-activedescendant')).toBeTruthy();
+  expect(ul.find('ul').prop('aria-activedescendant')).toEqual(
+    activeOption.prop('id')
+  );
+  expect(activeOption.hasClass('ListboxOption--active')).toBeTruthy();
+  options.forEach(
+    (option, index) =>
+      index !== index &&
+      expect(option).hasClass('ListboxOption--active').toBeFalsy()
+  );
+};
+
+const simulateKeydown = (wrapper, key) => () => {
+  wrapper.simulate('keydown', { key });
+  wrapper.update();
+};
 
 test('should render listbox with options', () => {
   const wrapper = mount(
@@ -64,7 +86,7 @@ test('should set accessible name of grouped options', () => {
     </Listbox>
   );
 
-  const group = wrapper.find(ListboxGroup).find('ul');
+  const group = wrapper.find(ListboxGroup).childAt(0);
   const groupLabel = group.find('li[role="presentation"]');
 
   expect(groupLabel.text()).toEqual('Fruit');
@@ -100,7 +122,7 @@ test('should set selected value with "value" prop when listbox option only has t
   );
 
   wrapper.update();
-  const li = wrapper.find('li');
+  const li = wrapper.find(ListboxOption).children();
 
   expect(li.at(0).prop('aria-selected')).toBeFalsy();
   expect(li.at(1).prop('aria-selected')).toEqual(true);
@@ -117,7 +139,7 @@ test('should set selected value with "defaultValue" prop when listbox option onl
   );
 
   wrapper.update();
-  const li = wrapper.find('li');
+  const li = wrapper.find(ListboxOption).children();
 
   expect(li.at(0).prop('aria-selected')).toBeFalsy();
   expect(li.at(1).prop('aria-selected')).toEqual(true);
@@ -134,7 +156,7 @@ test('should set selected value with "value" prop when listbox option uses value
   );
 
   wrapper.update();
-  const li = wrapper.find('li');
+  const li = wrapper.find(ListboxOption).children();
 
   expect(li.at(0).prop('aria-selected')).toBeFalsy();
   expect(li.at(1).prop('aria-selected')).toEqual(true);
@@ -151,9 +173,147 @@ test('should set selected value with "value" prop when listbox option uses defau
   );
 
   wrapper.update();
-  const li = wrapper.find('li');
+  const li = wrapper.find(ListboxOption).children();
 
   expect(li.at(0).prop('aria-selected')).toBeFalsy();
   expect(li.at(1).prop('aria-selected')).toEqual(true);
   expect(li.at(2).prop('aria-selected')).toBeFalsy();
+});
+
+test('should handle ↓ keypress', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateDownKeypress = simulateKeydown(listbox, 'ArrowDown');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  // skips disabled option
+  simulateDownKeypress();
+  assertListItemIsActive(2);
+  simulateDownKeypress();
+  assertListItemIsActive(3);
+});
+
+test.skip('should handle ↑ keypress', () => {
+  const wrapper = mount(
+    <Listbox defaultValue="Dragon Fruit">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateUpKeypress = simulateKeydown(wrapper, 'ArrowUp');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  simulateUpKeypress();
+  assertListItemIsActive(2);
+  simulateUpKeypress();
+  // skips disabled option
+  assertListItemIsActive(0);
+});
+
+test('should keep active element bound to first/last when navigation is set to "bound"', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateUpKeypress = simulateKeydown(wrapper, 'ArrowUp');
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  simulateUpKeypress();
+  assertListItemIsActive(0);
+  simulateDownKeypress();
+  simulateDownKeypress();
+  simulateDownKeypress();
+  assertListItemIsActive(3);
+});
+
+test.skip('should cycle to first/last acive element when navigation is set to "cycle"', () => {
+  const wrapper = mount(
+    <Listbox navigation="cycle">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateUpKeypress = simulateKeydown(wrapper, 'ArrowUp');
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  simulateDownKeypress();
+  simulateDownKeypress();
+  simulateDownKeypress();
+  // First item should be active from cycled key navigation
+  assertListItemIsActive(0);
+  simulateUpKeypress();
+  // Last item should be active from cycled key navigation
+  assertListItemIsActive(3);
+});
+
+test('should handle <home> keypress', () => {
+  const wrapper = mount(
+    <Listbox defaultValue="Dragon Fruit">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateHomeKeypress = simulateKeydown(wrapper, 'Home');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  simulateHomeKeypress();
+  assertListItemIsActive(0);
+});
+
+test.skip('should handle <end> keypress', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateHomeKeypress = simulateKeydown(wrapper, 'End');
+  listbox.simulate('focus');
+
+  const assertListItemIsActive = listItemIsActive(wrapper);
+
+  simulateHomeKeypress();
+  assertListItemIsActive(3);
 });
