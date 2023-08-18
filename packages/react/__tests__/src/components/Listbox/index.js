@@ -1,8 +1,5 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import { setImmediate } from 'timers/promises';
-import { createSandbox } from 'sinon';
 import {
   default as Listbox,
   ListboxGroup,
@@ -46,12 +43,33 @@ test('should render listbox with grouped options', () => {
   expect(wrapper.find(Listbox).exists()).toBeTruthy();
   expect(group1.exists()).toBeTruthy();
   expect(group2.exists()).toBeTruthy();
+  expect(group1.find('ul').prop('role')).toEqual('group');
+  expect(group2.find('ul').prop('role')).toEqual('group');
   expect(group1.find(ListboxOption).at(0).text()).toEqual('Apple');
   expect(group1.find(ListboxOption).at(1).text()).toEqual('Banana');
   expect(group1.find(ListboxOption).at(2).text()).toEqual('Cantaloupe');
   expect(group2.find(ListboxOption).at(0).text()).toEqual('Artichoke');
   expect(group2.find(ListboxOption).at(1).text()).toEqual('Broccoli');
   expect(group2.find(ListboxOption).at(2).text()).toEqual('Carrots');
+});
+
+test('should set accessible name of grouped options', () => {
+  const wrapper = mount(
+    <Listbox>
+      <ListboxGroup label="Fruit">
+        <ListboxOption>Apple</ListboxOption>
+        <ListboxOption>Banana</ListboxOption>
+        <ListboxOption>Cantaloupe</ListboxOption>
+      </ListboxGroup>
+    </Listbox>
+  );
+
+  const group = wrapper.find(ListboxGroup).find('ul');
+  const groupLabel = group.find('li[role="presentation"]');
+
+  expect(groupLabel.text()).toEqual('Fruit');
+  expect(groupLabel.prop('id')).not.toBeFalsy();
+  expect(group.prop('aria-labelledby')).toEqual(groupLabel.prop('id'));
 });
 
 test('should set the first non-disabled option as active on focus', () => {
@@ -72,7 +90,7 @@ test('should set the first non-disabled option as active on focus', () => {
   expect(listbox.prop('aria-activedescendant')).toEqual(option.prop('id'));
 });
 
-test.skip('should set selected value with "value" prop when listbox option only has text label', async () => {
+test('should set selected value with "value" prop when listbox option only has text label', () => {
   const wrapper = mount(
     <Listbox value="Banana">
       <ListboxOption>Apple</ListboxOption>
@@ -81,17 +99,15 @@ test.skip('should set selected value with "value" prop when listbox option only 
     </Listbox>
   );
 
-  await setImmediate();
   wrapper.update();
+  const li = wrapper.find('li');
 
-  expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
-  expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
-    'true'
-  );
-  expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
+  expect(li.at(0).prop('aria-selected')).toBeFalsy();
+  expect(li.at(1).prop('aria-selected')).toEqual(true);
+  expect(li.at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test.skip('should set selected value with "defaultValue" prop when listbox option only has text label', async () => {
+test('should set selected value with "defaultValue" prop when listbox option only has text label', () => {
   const wrapper = mount(
     <Listbox defaultValue="Banana">
       <ListboxOption>Apple</ListboxOption>
@@ -100,17 +116,15 @@ test.skip('should set selected value with "defaultValue" prop when listbox optio
     </Listbox>
   );
 
-  await setImmediate();
   wrapper.update();
+  const li = wrapper.find('li');
 
-  expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
-  expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
-    'true'
-  );
-  expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
+  expect(li.at(0).prop('aria-selected')).toBeFalsy();
+  expect(li.at(1).prop('aria-selected')).toEqual(true);
+  expect(li.at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test.skip('should set selected value with "value" prop when listbox option uses value prop', async () => {
+test('should set selected value with "value" prop when listbox option uses value prop', () => {
   const wrapper = mount(
     <Listbox value="b">
       <ListboxOption value="a">Apple</ListboxOption>
@@ -119,17 +133,15 @@ test.skip('should set selected value with "value" prop when listbox option uses 
     </Listbox>
   );
 
-  await setImmediate();
   wrapper.update();
+  const li = wrapper.find('li');
 
-  expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
-  expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
-    'true'
-  );
-  expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
+  expect(li.at(0).prop('aria-selected')).toBeFalsy();
+  expect(li.at(1).prop('aria-selected')).toEqual(true);
+  expect(li.at(2).prop('aria-selected')).toBeFalsy();
 });
 
-test.skip('should set selected value with "value" prop when listbox option uses defaultValue prop', async () => {
+test('should set selected value with "value" prop when listbox option uses defaultValue prop', () => {
   const wrapper = mount(
     <Listbox defaultValue="b">
       <ListboxOption value="a">Apple</ListboxOption>
@@ -138,12 +150,10 @@ test.skip('should set selected value with "value" prop when listbox option uses 
     </Listbox>
   );
 
-  await setImmediate();
   wrapper.update();
+  const li = wrapper.find('li');
 
-  expect(wrapper.find(ListboxOption).at(0).prop('aria-selected')).toBeFalsy();
-  expect(wrapper.find(ListboxOption).at(1).prop('aria-selected')).toEqual(
-    'true'
-  );
-  expect(wrapper.find(ListboxOption).at(2).prop('aria-selected')).toBeFalsy();
+  expect(li.at(0).prop('aria-selected')).toBeFalsy();
+  expect(li.at(1).prop('aria-selected')).toEqual(true);
+  expect(li.at(2).prop('aria-selected')).toBeFalsy();
 });
