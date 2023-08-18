@@ -21,7 +21,7 @@ Tab.displayName = 'Tab';
 Tab.propTypes = {
   target: PropTypes.any.isRequired,
   id: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default Tab;

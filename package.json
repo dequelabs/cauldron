@@ -23,7 +23,8 @@
     "release": "./scripts/release.sh"
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "none"
   },
   "husky": {
     "hooks": {
