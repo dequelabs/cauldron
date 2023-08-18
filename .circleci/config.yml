@@ -24,8 +24,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v3-react-yarn-
       - run: NODE_ENV=production yarn --cwd=packages/react build
       - run: yarn --cwd=packages/react test
   styles:
@@ -34,8 +34,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v3-styles-yarn-
       - run: NODE_ENV=production yarn --cwd=packages/styles build
   dependencies:
     <<: *defaults
@@ -43,46 +43,46 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-yarn-cache-{{ checksum "yarn.lock" }}
-            - v2-yarn-cache-
+            - v3-yarn-cache-{{ checksum "yarn.lock" }}
+            - v3-yarn-cache-
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v3-react-yarn-
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v3-styles-yarn-
       - run: yarn
       - save_cache:
-          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v3-yarn-cache-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - save_cache:
           paths:
             - packages/react/node_modules
-          key: v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+          key: v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
       - save_cache:
           paths:
             - packages/styles/node_modules
-          key: v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+          key: v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
   checks:
     <<: *defaults
     steps:
       - checkout
       - restore_cache:
-          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v3-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
   a11y:
     <<: *defaults
     steps:
       - checkout
       - restore_cache:
-          key: v2-yarn-cache-{{ checksum "yarn.lock" }}
+          key: v3-yarn-cache-{{ checksum "yarn.lock" }}
       - restore_cache:
-          key: v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+          key: v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
       - restore_cache:
-          key: v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+          key: v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
       - run: yarn build:styles
       - run: yarn build:react
       - run: yarn build:docs
@@ -94,16 +94,16 @@ jobs:
       - <<: *set_npm_auth
       - restore_cache:
           keys:
-            - v2-yarn-cache-{{ checksum "yarn.lock" }}
-            - v2-yarn-cache-
+            - v3-yarn-cache-{{ checksum "yarn.lock" }}
+            - v3-yarn-cache-
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v3-react-yarn-
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v3-styles-yarn-
       - run: npm whoami
       - run: .circleci/canary-version.js
       - run: cd packages/styles && npm publish --tag=next
@@ -115,16 +115,16 @@ jobs:
       - <<: *set_npm_auth
       - restore_cache:
           keys:
-            - v2-yarn-cache-{{ checksum "yarn.lock" }}
-            - v2-yarn-cache-
+            - v3-yarn-cache-{{ checksum "yarn.lock" }}
+            - v3-yarn-cache-
       - restore_cache:
           keys:
-            - v2-react-yarn-{{ checksum "packages/react/yarn.lock" }}
-            - v2-react-yarn-
+            - v3-react-yarn-{{ checksum "packages/react/yarn.lock" }}
+            - v3-react-yarn-
       - restore_cache:
           keys:
-            - v2-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
-            - v2-styles-yarn-
+            - v3-styles-yarn-{{ checksum "packages/styles/yarn.lock" }}
+            - v3-styles-yarn-
       - run: npm whoami
       - run: cd packages/styles && npm publish
       - run: cd packages/react && npm publish
