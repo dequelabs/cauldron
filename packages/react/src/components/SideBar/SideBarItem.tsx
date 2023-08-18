@@ -28,11 +28,11 @@ const SideBarItem: React.ComponentType<
 
 SideBarItem.displayName = 'SideBarItem';
 SideBarItem.defaultProps = {
-  autoClickLink: true,
+  autoClickLink: true
 };
 SideBarItem.propTypes = {
   children: PropTypes.node.isRequired,
-  autoClickLink: PropTypes.bool,
+  autoClickLink: PropTypes.bool
 };
 
 export default SideBarItem;

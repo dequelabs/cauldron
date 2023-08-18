@@ -25,7 +25,7 @@ PanelHeader.displayName = 'PanelHeader';
 
 PanelHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default PanelHeader;

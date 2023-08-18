@@ -21,7 +21,7 @@ const TopBarTrigger: React.ComponentType<
 TopBarTrigger.displayName = 'TopBarTrigger';
 TopBarTrigger.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default TopBarTrigger;

@@ -19,7 +19,7 @@ FieldWrap.displayName = 'FieldWrap';
 FieldWrap.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  as: PropTypes.string,
+  as: PropTypes.string
 };
 
 export default FieldWrap;

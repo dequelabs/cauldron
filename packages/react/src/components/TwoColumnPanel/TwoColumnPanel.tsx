@@ -5,7 +5,7 @@ import React, {
   isValidElement,
   useRef,
   useLayoutEffect,
-  useEffect,
+  useEffect
 } from 'react';
 import { useId } from 'react-id-generator';
 import FocusTrap from 'focus-trap-react';
@@ -108,7 +108,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       );
       const children = [
         CloseButton,
-        ...React.Children.toArray(columnLeft.props.children),
+        ...React.Children.toArray(columnLeft.props.children)
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
@@ -117,7 +117,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           cloneElement(child as React.ReactElement, {
             key: (child as React.ReactElement).key
               ? (child as React.ReactElement).key
-              : `left-${index}`,
+              : `left-${index}`
           })
         )
       );
@@ -159,7 +159,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       );
       const children = [
         ToggleButton,
-        ...React.Children.toArray(columnRight.props.children),
+        ...React.Children.toArray(columnRight.props.children)
       ];
       ColumnRightComponent = cloneElement(
         columnRight,
@@ -168,7 +168,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           cloneElement(child as React.ReactElement, {
             key: (child as React.ReactElement).key
               ? (child as React.ReactElement).key
-              : `right-${index}`,
+              : `right-${index}`
           })
         )
       );
@@ -247,7 +247,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       <div
         className={classnames('TwoColumnPanel', className, {
           'TwoColumnPanel--show': !isCollapsed,
-          'TwoColumnPanel--hide': isCollapsed,
+          'TwoColumnPanel--hide': isCollapsed
         })}
         {...props}
         ref={ref}
@@ -258,7 +258,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
             focusTrapOptions={{
               escapeDeactivates: true,
               allowOutsideClick: true,
-              fallbackFocus: columnLeftRef.current as HTMLElement,
+              fallbackFocus: columnLeftRef.current as HTMLElement
             }}
             containerElements={[columnLeftRef.current as HTMLElement]}
           />
