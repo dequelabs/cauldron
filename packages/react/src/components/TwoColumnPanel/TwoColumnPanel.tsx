@@ -48,7 +48,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const columnRightRef = useRef<HTMLDivElement>(null);
 
     const columnLeft = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === ColumnLeft
+      (child) => (child as React.ReactElement<any>).type === ColumnLeft
     );
 
     const togglePanel = () => {
@@ -112,7 +112,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
-        { id, ref, tabIndex: -1 },
+        { id, ref, tabIndex: -1 } as React.ComponentProps<typeof ColumnLeft>,
         children.map((child, index) =>
           cloneElement(child as React.ReactElement, {
             key: (child as React.ReactElement).key
@@ -124,7 +124,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     }
 
     const columnRight = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === ColumnRight
+      (child) => (child as React.ReactElement<any>).type === ColumnRight
     );
 
     let ColumnRightComponent;
@@ -163,7 +163,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnRightComponent = cloneElement(
         columnRight,
-        { ref, tabIndex: -1 },
+        { ref, tabIndex: -1 } as React.ComponentProps<typeof ColumnRight>,
         children.map((child, index) =>
           cloneElement(child as React.ReactElement, {
             key: (child as React.ReactElement).key

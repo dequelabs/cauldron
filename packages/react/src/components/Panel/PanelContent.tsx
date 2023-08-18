@@ -31,7 +31,6 @@ const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
 PanelContent.displayName = 'PanelContent';
 
 PanelContent.propTypes = {
-  //@ts-expect-error
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   padding: PropTypes.bool
