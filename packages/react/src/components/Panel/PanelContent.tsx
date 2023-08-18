@@ -17,7 +17,7 @@ const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
     return (
       <div
         className={classNames('Panel__Content', className, {
-          ['Panel__Content--no-padding']: !padding
+          ['Panel__Content--no-padding']: !padding,
         })}
         ref={ref}
         {...otherProps}
@@ -31,10 +31,9 @@ const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
 PanelContent.displayName = 'PanelContent';
 
 PanelContent.propTypes = {
-  //@ts-expect-error
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  padding: PropTypes.bool
+  padding: PropTypes.bool,
 };
 
 export default PanelContent;

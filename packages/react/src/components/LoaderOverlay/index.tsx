@@ -58,8 +58,8 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     const wrapperProps = focusTrap
       ? {
           focusTrapOptions: {
-            fallbackFocus: '.Loader__overlay'
-          }
+            fallbackFocus: '.Loader__overlay',
+          },
         }
       : {};
 
@@ -98,8 +98,7 @@ LoaderOverlay.propTypes = {
   variant: PropTypes.oneOf(['large', 'small']),
   label: PropTypes.string,
   focusOnInitialRender: PropTypes.bool,
-  // @ts-expect-error
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 LoaderOverlay.displayName = 'LoaderOverlay';

@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
-import { useListboxContext } from './';
+import { useListboxContext } from './ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 
 export type ListboxValue = Readonly<string | number | undefined>;

@@ -10,7 +10,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
   MutableRefObject,
-  HTMLProps
+  HTMLProps,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -82,7 +82,7 @@ const IconButton = forwardRef(
             IconButton: true,
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
-            'IconButton--error': variant === 'error'
+            'IconButton--error': variant === 'error',
           })}
           ref={internalRef}
           disabled={disabled}
@@ -115,7 +115,6 @@ IconButton.propTypes = {
   as: PropTypes.elementType,
   // @ts-expect-error
   icon: PropTypes.string.isRequired,
-  // @ts-expect-error
   label: PropTypes.node.isRequired,
   // @ts-expect-error
   tooltipPlacement: PropTypes.string,
@@ -123,7 +122,7 @@ IconButton.propTypes = {
   tooltipVariant: PropTypes.string,
   tooltipPortal: PropTypes.any,
   // @ts-expect-error
-  variant: PropTypes.string
+  variant: PropTypes.string,
 };
 
 IconButton.displayName = 'IconButton';

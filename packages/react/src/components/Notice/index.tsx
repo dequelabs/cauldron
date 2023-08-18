@@ -7,7 +7,7 @@ import { ContentNode } from '../../types';
 const iconTypeMap = {
   caution: 'caution',
   danger: 'caution',
-  info: 'info-circle'
+  info: 'info-circle',
 };
 
 export interface NoticeProps
@@ -26,7 +26,7 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
     return (
       <div
         className={classNames('Notice', {
-          [`Notice--${type}`]: type
+          [`Notice--${type}`]: type,
         })}
         ref={ref}
         {...otherProps}
@@ -43,17 +43,16 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
 
 Notice.displayName = 'Notice';
 Notice.propTypes = {
-  // @ts-expect-error
   children: PropTypes.node,
   type: PropTypes.oneOf(['caution', 'info', 'danger']),
   // @ts-expect-error
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.element
+    PropTypes.element,
   ]),
   // @ts-expect-error
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };
 
 export default Notice;

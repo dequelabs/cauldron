@@ -24,9 +24,8 @@ const PanelHeader = forwardRef<HTMLDivElement, PanelHeaderProps>(
 PanelHeader.displayName = 'PanelHeader';
 
 PanelHeader.propTypes = {
-  //@ts-expect-error
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default PanelHeader;
