@@ -27,7 +27,6 @@
   font-size: var(--popover-font-size);
   line-height: var(--popover-line-height);
   padding: var(--popover-padding);
-  z-index: var(--z-index-popover);
   word-break: break-word;
 }
 
