@@ -92,7 +92,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
           });
         }
       },
-      [isControlled]
+      [isControlled, selectedOption]
     );
 
     const handleKeyDown = useCallback(
@@ -116,7 +116,9 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
         // available option
         // istanbul ignore next
         const currentOption = activeOption || firstOption;
-        const currentIndex = enabledOptions.indexOf(currentOption);
+        const currentIndex = enabledOptions.findIndex(
+          ({ element }) => element === currentOption.element
+        );
         const allowCyclicalNavigation = navigation === 'cycle';
 
         switch (event.key) {

@@ -25,6 +25,7 @@
   --field-icon-focus-color: var(--focus-light);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
+  --field-listbox-selected-background-color: var(--accent-secondary-active);
   --input-min-width: 250px;
 }
 
@@ -50,6 +51,7 @@
   --field-icon-focus-color: var(--focus-dark);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
+  --field-listbox-selected-background-color: var(--accent-dark);
 }
 
 input,
@@ -181,6 +183,10 @@ textarea.Field--has-error:focus:hover,
 [role='listbox']:focus-within > li.ListboxOption--active,
 [role='listbox']:focus-within > [role='group'] > li.ListboxOption--active {
   box-shadow: 0 0 0 2px var(--field-icon-focus-color);
+}
+
+[role='listbox'] li[role='option'][aria-selected='true'] {
+  background-color: var(--field-listbox-selected-background-color);
 }
 
 .Error {
