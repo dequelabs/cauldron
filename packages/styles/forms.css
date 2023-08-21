@@ -185,7 +185,8 @@ textarea.Field--has-error:focus:hover,
   box-shadow: 0 0 0 2px var(--field-icon-focus-color);
 }
 
-[role='listbox'] li[role='option'][aria-selected='true'] {
+[role='listbox']
+  li[role='option']:is([aria-selected='true'], [aria-checked='true']) {
   background-color: var(--field-listbox-selected-background-color);
 }
 
