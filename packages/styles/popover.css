@@ -6,7 +6,7 @@
   --popover-font-size: var(--text-size-smaller);
   --popover-line-height: var(--text-size-normal);
   --popover-padding: 0 var(--space-small);
-  --popover-alert-max-width: 192px;
+  --popover-alert-max-width: 12rem;
   --popover-alert-min-height: auto;
   --popover-alert-padding: var(--space-small);
   --popover-alert-apply-button-margin: var(--space-smallest) 0;
