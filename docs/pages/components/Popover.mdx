@@ -15,7 +15,7 @@ import { Popover, Button } from '@deque/cauldron-react'
 
 Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Popover can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
 
-### Alter Popover
+### Alert Popover
 
 Alert Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
 also popup contains information text to show some message to the user.
@@ -85,3 +85,80 @@ function BigTooltipExample() {
   )
 }
 ```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: false,
+    description: 'Please, note, if the variant is Custom - then children is required'
+  }}
+  props={[
+    {
+      name: 'target',
+      type: ['React.Ref', 'HTMLElement'],
+      required: true,
+      description: 'The target element to attach the popover to.'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      required: true,
+      description: 'Manually control the show state of the popover.'
+    },
+    {
+      name: 'onClose',
+      type: 'function',
+      required: true,
+      description: 'Callback, which is invoked on closing popover'
+    },
+    {
+      name: 'infoText',
+      required: true,
+      type: 'string',
+      description: 'Information text to show some warning or useful information in Alert variant of the component. Please note that required is only for "Alert" variant.',
+    },
+    {
+      name: 'onApply',
+      required: true,
+      type: 'function',
+      description: 'Callback, which is used for Apply button in Alert variant of the component. Please note, that is only required for Alert variant',
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'The position of the popover relative to its target element.'
+    },
+    {
+      name: 'variant',
+      type: ['custom', 'alert'],
+      defaultValue: 'custom',
+      description: 'The style of Popover to display.'
+    },
+    {
+      name: 'portal',
+      type: ['React.Ref', 'HTMLElement'],
+      description: 'The parent element to place the Portal in.',
+      defaultValue: 'document.body'
+    },
+    {
+      name: 'association',
+      type: ['aria-labelledby', 'aria-describedby'],
+      description: 'Sets the aria relationship for the targeted element.',
+      defaultValue: 'aria-describedby'
+    },
+    {
+      name: 'applyButtonText',
+      type: 'string',
+      description: 'Label for button, which is used to apply action in Alert variant of the popover',
+      defaultValue: 'Apply'
+    },
+    {
+      name: 'closeButtonText',
+      type: 'string',
+      description: 'Label for button, which is used to close popover in Alert variant of the component',
+      defaultValue: 'Close'
+    },
+  ]}
+/>

@@ -3,9 +3,13 @@
   --popover-border-color: var(--gray-90);
   --popover-text-color: var(--gray-90);
   --popover-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
-  --popover-button-height: 24px;
+  --popover-font-size: var(--text-size-smaller);
+  --popover-line-height: var(--text-size-normal);
+  --popover-padding: 0 var(--space-small);
   --popover-alert-max-width: 192px;
-  --popover-alert-min-height: 156px;
+  --popover-alert-min-height: auto;
+  --popover-alert-padding: var(--space-small);
+  --popover-alert-apply-button-margin: var(--space-smallest) 0;
 }
 
 /* Dark theme variables */
@@ -13,9 +17,6 @@
   --popover-background-color: var(--accent-medium);
   --popover-border-color: var(--accent-light);
   --popover-text-color: var(--white);
-  --popover-button-height: 24px;
-  --popover-alert-max-width: 192px;
-  --popover-alert-min-height: 156px;
 }
 
 .Popover {
@@ -23,13 +24,10 @@
   border: 2px solid var(--popover-border-color);
   box-shadow: var(--popover-box-shadow);
   color: var(--popover-text-color);
-  font-size: var(--text-size-smaller);
-  line-height: var(--text-size-normal);
-  padding: var(--space-half) var(--space-small);
-  border-radius: 3px;
+  font-size: var(--popover-font-size);
+  line-height: var(--popover-line-height);
+  padding: var(--popover-padding);
   z-index: var(--z-index-popover);
-  text-align: center;
-  max-width: calc(100vw - 16px);
   word-break: break-word;
 }
 
@@ -40,12 +38,12 @@
 }
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
-.PopoverArrow {
+.Popover__popoverArrow {
   height: 0.1px;
   width: 0.1px;
 }
 
-.BorderLeft {
+.Popover__borderLeft {
   position: absolute;
   left: 4px;
   top: var(--space-half);
@@ -55,19 +53,19 @@
 }
 
 /* Adjust position to try to center the arrow in the tooltip's border */
-[class*='Popover--top'] .PopoverArrow {
+[class*='Popover--top'] .Popover__popoverArrow {
   bottom: -1px;
 }
 
-[class*='Popover--bottom'] .PopoverArrow {
+[class*='Popover--bottom'] .Popover__popoverArrow {
   top: -1px;
 }
 
-[class*='Popover--left'] .PopoverArrow {
+[class*='Popover--left'] .Popover__popoverArrow {
   right: -1px;
 }
 
-[class*='Popover--right'] .PopoverArrow {
+[class*='Popover--right'] .Popover__popoverArrow {
   left: 0;
 }
 
@@ -75,7 +73,7 @@
  * Default tooltip arrow styles
  */
 
-.PopoverArrow:before {
+.Popover__popoverArrow:before {
   content: '';
   position: absolute;
   border-left: 6px solid transparent;
@@ -86,15 +84,15 @@
   transform-origin: top;
 }
 
-[class*='Popover--bottom'] .PopoverArrow:before {
+[class*='Popover--bottom'] .Popover__popoverArrow:before {
   transform: translateX(-50%) rotate(180deg);
 }
 
-[class*='Popover--left'] .PopoverArrow:before {
+[class*='Popover--left'] .Popover__popoverArrow:before {
   transform: rotate(-90deg) translateY(-6px);
 }
 
-[class*='Popover--right'] .PopoverArrow:before {
+[class*='Popover--right'] .Popover__popoverArrow:before {
   transform: rotate(90deg) translateY(100%);
 }
 
@@ -103,15 +101,19 @@
 .Popover--alert {
   display: flex;
   flex-direction: column;
-  gap: var(--space-smallest);
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: var(--popover-alert-padding);
   max-width: var(--popover-alert-max-width);
   min-height: var(--popover-alert-min-height);
 }
 
-.Popover--alert > button {
+.Popover--alert > .Button--thin {
   width: 100%;
-  margin-left: 0 !important;
-  min-height: var(--popover-button-height);
+  margin-left: 0;
+}
+
+.Popover__apply {
+  margin: var(--popover-alert-apply-button-margin);
 }
