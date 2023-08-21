@@ -76,12 +76,14 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
         optionMatchesValue(option, listboxValue)
       );
       setSelectedOption(selectedOption || null);
+      setActiveOption(selectedOption || null);
     }, [options, value]);
 
     const handleSelect = useCallback(
       (option: ListboxOption) => {
         setActiveOption(option);
         onSelect?.({ target: option.element, value: option.value as string });
+        // istanbul ignore else
         if (!isControlled) {
           setSelectedOption(option);
           onSelectionChange?.({
@@ -103,11 +105,16 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
           (option) => !isDisabledOption(option)
         );
 
+        // istanbul ignore next
         if (!enabledOptions.length) return;
 
         const [up, down, home, end, enter, space] = keys;
         const firstOption = enabledOptions[0];
-        const lastOption = enabledOptions[options.length - 1];
+        const lastOption = enabledOptions[enabledOptions.length - 1];
+        // the active option should already be set from the focus event but
+        // if for some reason that hasn't happened we default to the first
+        // available option
+        // istanbul ignore next
         const currentOption = activeOption || firstOption;
         const currentIndex = enabledOptions.indexOf(currentOption);
         const allowCyclicalNavigation = navigation === 'cycle';
@@ -151,10 +158,12 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
           const firstOption = options.find(
             (option) => !isDisabledOption(option)
           );
+          // istanbul ignore else
           if (firstOption) {
             setActiveOption(firstOption);
             firstOption.element.focus();
           }
+          // istanbul ignore else
         } else if (event.target === listboxRef.current) {
           activeOption.element.focus();
         }

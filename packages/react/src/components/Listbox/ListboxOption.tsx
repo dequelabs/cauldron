@@ -47,6 +47,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
 
       setOptions((options) => {
         const option = { element, value: optionValue };
+        // istanbul ignore next
         if (!element) return options;
 
         // Elements are frequently appended, so check to see if the newly rendered
@@ -67,11 +68,13 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
             return [
               ...options.slice(0, index),
               option,
-              ...options.slice(index),
+              ...options.slice(index)
             ];
           }
         }
 
+        // istanbul ignore next
+        // this should never happen, but just in case fall back to options
         return options;
       });
 
@@ -96,7 +99,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
       <Component
         id={id}
         className={classnames(className, {
-          [activeClass]: isActive,
+          [activeClass]: isActive
         })}
         role="option"
         ref={listboxOptionRef}

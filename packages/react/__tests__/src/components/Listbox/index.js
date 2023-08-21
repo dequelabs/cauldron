@@ -35,10 +35,12 @@ const listItemIsSelected = (wrapper) => (index) => {
   );
 };
 
-const simulateKeydown = (wrapper, key) => () => {
-  wrapper.simulate('keydown', { key });
-  wrapper.update();
-};
+const simulateKeydown =
+  (wrapper, key) =>
+  (event = {}) => {
+    wrapper.simulate('keydown', { key, ...event });
+    wrapper.update();
+  };
 
 test('should render listbox with options', () => {
   const wrapper = mount(
@@ -284,7 +286,7 @@ test('should handle ↓ keypress', () => {
   assertListItemIsActive(3);
 });
 
-test.skip('should handle ↑ keypress', () => {
+test('should handle ↑ keypress', () => {
   const wrapper = mount(
     <Listbox defaultValue="Dragon Fruit">
       <ListboxOption>Apple</ListboxOption>
@@ -332,7 +334,7 @@ test('should keep active element bound to first/last when navigation is set to "
   assertListItemIsActive(3);
 });
 
-test.skip('should cycle to first/last acive element when navigation is set to "cycle"', () => {
+test('should cycle to first/last acive element when navigation is set to "cycle"', () => {
   const wrapper = mount(
     <Listbox navigation="cycle">
       <ListboxOption>Apple</ListboxOption>
@@ -379,7 +381,7 @@ test('should handle <home> keypress', () => {
   assertListItemIsActive(0);
 });
 
-test.skip('should handle <end> keypress', () => {
+test('should handle <end> keypress', () => {
   const wrapper = mount(
     <Listbox>
       <ListboxOption>Apple</ListboxOption>
@@ -390,20 +392,20 @@ test.skip('should handle <end> keypress', () => {
   );
 
   const listbox = wrapper.find(Listbox).childAt(0);
-  const simulateHomeKeypress = simulateKeydown(wrapper, 'End');
+  const simulateEndKeyPress = simulateKeydown(wrapper, 'End');
   listbox.simulate('focus');
 
   const assertListItemIsActive = listItemIsActive(wrapper);
 
-  simulateHomeKeypress();
+  simulateEndKeyPress();
   assertListItemIsActive(3);
 });
 
-test.skip('should handle listbox selection with "enter" keypress', () => {
+test('should handle listbox selection with "enter" keypress', () => {
   const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox>
+    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -425,17 +427,19 @@ test.skip('should handle listbox selection with "enter" keypress', () => {
   simulateEnterKeypress();
   assertListItemIsSelected(2);
 
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelectionChange.calledOnce).toBeTruthy();
   expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
 });
 
-test.skip('should handle listbox selection with "space" keypress', () => {
+test('should handle listbox selection with "space" keypress', () => {
   const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox>
+    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -457,10 +461,37 @@ test.skip('should handle listbox selection with "space" keypress', () => {
   simulateSpaceKeypress();
   assertListItemIsSelected(2);
 
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelectionChange.calledOnce).toBeTruthy();
   expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
+});
+
+test('should not prevent default event with non-navigational keypress', () => {
+  const event = { preventDefault: spy(), bla: 'bla' };
+  const wrapper = mount(
+    <Listbox>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = wrapper.find(Listbox).childAt(0);
+  const simulateTabKeypress = simulateKeydown(wrapper, 'Tab');
+  const simulateEscKeypress = simulateKeydown(wrapper, 'Escape');
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+  listbox.simulate('focus');
+
+  simulateTabKeypress(event);
+  expect(event.preventDefault.notCalled).toBeTruthy();
+  simulateEscKeypress(event);
+  expect(event.preventDefault.notCalled).toBeTruthy();
+  simulateDownKeypress(event);
+  expect(event.preventDefault.calledOnce).toBeTruthy();
 });
 
 test('should handle listbox selection with "click" event', () => {
@@ -483,12 +514,27 @@ test('should handle listbox selection with "click" event', () => {
   const assertListItemIsSelected = listItemIsSelected(wrapper);
   assertListItemIsSelected(2);
 
+  expect(onSelect.calledOnce).toBeTruthy();
+  expect(onSelectionChange.calledOnce).toBeTruthy();
   expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
 });
 
-test.todo(
-  'should not invoke selection for disabled elements with "click" event'
-);
+test('should not invoke selection for disabled elements with "click" event', () => {
+  const onSelect = spy();
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+  wrapper.find('[role="option"]').at(1).simulate('click');
+
+  expect(onSelect.notCalled).toBeTruthy();
+  expect(onSelectionChange.notCalled).toBeTruthy();
+});

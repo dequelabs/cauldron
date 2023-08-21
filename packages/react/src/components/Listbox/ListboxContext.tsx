@@ -19,12 +19,13 @@ type ListboxProvider<T extends ListboxOption> = {
   children: React.ReactNode;
 } & ListboxContext<T>;
 
+/* istanbul ignore next */
 const ListboxContext = createContext({
   options: [],
   active: null,
   selected: null,
   setOptions: () => null,
-  onSelect: () => null,
+  onSelect: () => null
 });
 
 function ListboxProvider<T extends ListboxOption>({
@@ -33,7 +34,7 @@ function ListboxProvider<T extends ListboxOption>({
   selected,
   setOptions,
   onSelect,
-  children,
+  children
 }: ListboxProvider<T>): JSX.Element {
   const { Provider } = ListboxContext as unknown as React.Context<
     ListboxContext<T>
@@ -44,7 +45,7 @@ function ListboxProvider<T extends ListboxOption>({
       active,
       selected,
       setOptions,
-      onSelect,
+      onSelect
     }),
     [options, active, selected, setOptions]
   );
