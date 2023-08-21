@@ -66,7 +66,12 @@ const AlertPopoverContent = ({
       <Button className="Popover__apply" onClick={onApply} thin>
         {applyButtonText}
       </Button>
-      <Button className="Popover__close" onClick={onClose} thin>
+      <Button
+        className="Popover__close"
+        variant="secondary"
+        onClick={onClose}
+        thin
+      >
         {closeButtonText}
       </Button>
     </>
@@ -171,10 +176,16 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
 
     useEffect(() => {
       const attrText = targetElement?.getAttribute('aria-controls');
-      if (!attrText?.includes(id)) {
+      const hasPopupAttr = targetElement?.getAttribute('aria-haspopup');
+
+      if (!attrText?.includes(id) && show) {
         targetElement?.setAttribute('aria-controls', id);
       }
-    }, [targetElement, id]);
+
+      if (!hasPopupAttr) {
+        targetElement?.setAttribute('aria-haspopup', Boolean(true).toString());
+      }
+    }, [targetElement, id, show]);
 
     const handleClickOutside = () => {
       if (show) {
