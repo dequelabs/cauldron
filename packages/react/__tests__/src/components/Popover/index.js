@@ -284,7 +284,6 @@ test('should use parent-provided ref', () => {
   const parentRef = React.createRef();
   const ref = React.createRef();
   const onClose = jest.fn();
-  // const wrapper = mount(<WrapperWithParentRef ref={parentRef} />);
   const wrapper = mount(
     <Popover ref={parentRef} target={ref} show onClose={onClose}>
       Hello Word
