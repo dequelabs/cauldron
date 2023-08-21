@@ -47,6 +47,17 @@ const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
   );
 };
 
+// // eslint-disable-next-line react/prop-types, react/display-name
+// const WrapperWithParentRef = React.forwardRef(({}, ref) => {
+//   const buttonRef = useRef();
+//   const onClose = jest.fn();
+//   return (
+//     <Popover ref={parentRef} target={ref} show onClose={onClose}>
+//       Hello Word
+//     </Popover>
+//   );
+// });
+
 const WrapperPopoverWithElements = () => {
   const ref = useRef();
   const onClose = jest.fn();
@@ -267,4 +278,19 @@ test('should return no axe violations', async () => {
   const wrapper = mount(<Wrapper />);
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
+});
+
+test('should use parent-provided ref', () => {
+  const parentRef = React.createRef();
+  const ref = React.createRef();
+  const onClose = jest.fn();
+  // const wrapper = mount(<WrapperWithParentRef ref={parentRef} />);
+  const wrapper = mount(
+    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+      Hello Word
+    </Popover>
+  );
+
+  const componentNode = wrapper.getDOMNode();
+  expect(parentRef.current).toBe(componentNode);
 });

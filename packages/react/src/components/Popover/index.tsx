@@ -1,4 +1,12 @@
-import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ReactNode,
+  forwardRef,
+  Ref,
+  useRef,
+  MutableRefObject
+} from 'react';
 import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
@@ -65,7 +73,7 @@ const AlertPopoverContent = ({
   );
 };
 
-const Popover = forwardRef<HTMLInputElement, PopoverProps>(
+const Popover = forwardRef<HTMLElement, PopoverProps>(
   (
     {
       id: propId,
@@ -90,20 +98,27 @@ const Popover = forwardRef<HTMLInputElement, PopoverProps>(
     const [targetElement, setTargetElement] = useState<HTMLElement | null>(
       null
     );
-    const [popoverElement, setPopoverElement] = useState<HTMLElement | null>(
-      null
-    );
+
+    const popoverElement = useRef<HTMLDivElement | null>(null);
+
+    const popoverRef =
+      (ref as MutableRefObject<HTMLDivElement>) || popoverElement;
+
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
 
-    const { styles, attributes } = usePopper(targetElement, popoverElement, {
-      placement: initialPlacement,
-      modifiers: [
-        { name: 'preventOverflow', options: { padding: 8 } },
-        { name: 'flip' },
-        { name: 'offset', options: { offset: [0, 8] } },
-        { name: 'arrow', options: { padding: 5, element: arrowElement } }
-      ]
-    });
+    const { styles, attributes } = usePopper(
+      targetElement,
+      popoverRef?.current,
+      {
+        placement: initialPlacement,
+        modifiers: [
+          { name: 'preventOverflow', options: { padding: 8 } },
+          { name: 'flip' },
+          { name: 'offset', options: { offset: [0, 8] } },
+          { name: 'arrow', options: { padding: 5, element: arrowElement } }
+        ]
+      }
+    );
 
     const placement: Placement =
       (attributes.popper &&
@@ -118,9 +133,9 @@ const Popover = forwardRef<HTMLInputElement, PopoverProps>(
     }, [target]);
 
     useEffect(() => {
-      if (show && popoverElement) {
+      if (show && popoverRef.current) {
         // Find the first focusable element inside the container
-        const firstFocusableElement = popoverElement.querySelector(
+        const firstFocusableElement = popoverRef.current.querySelector(
           focusableSelector
         );
 
@@ -130,7 +145,7 @@ const Popover = forwardRef<HTMLInputElement, PopoverProps>(
       }
 
       targetElement?.setAttribute('aria-expanded', Boolean(show).toString());
-    }, [show, popoverElement]);
+    }, [show, popoverRef.current]);
 
     useEffect(() => {
       const handleEscape = (event: KeyboardEvent) => {
@@ -188,7 +203,7 @@ const Popover = forwardRef<HTMLInputElement, PopoverProps>(
                 'Popover--alert': variant === 'alert'
               }
             )}
-            ref={setPopoverElement}
+            ref={popoverRef}
             role="dialog"
             style={styles.popper}
             {...attributes.popper}
