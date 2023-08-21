@@ -86,7 +86,7 @@ const WrapperAlert = ({ buttonProps = {}, tooltipProps = {} }) => {
 test('renders without blowing up', async () => {
   const wrapper = mount(<Wrapper />);
   await update(wrapper);
-  expect(wrapper.find('Tooltip').exists()).toBeTruthy();
+  expect(wrapper.find('.Popover').exists()).toBeTruthy();
 });
 
 test('should auto-generate id', async () => {
@@ -98,8 +98,28 @@ test('should auto-generate id', async () => {
     wrapper
       .find('button')
       .getDOMNode()
-      .getAttribute('aria-describedby')
+      .getAttribute('aria-controls')
   );
+});
+
+test('should attach attribute aria-expanded correctly based on shown state', async () => {
+  const wrapper = mount(<Wrapper />);
+  await update(wrapper);
+  expect(
+    wrapper
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-expanded')
+  ).toBeTruthy();
+
+  const shownStateFalsy = mount(<Wrapper tooltipProps={{ show: false }} />);
+
+  expect(
+    shownStateFalsy
+      .find('button')
+      .getDOMNode()
+      .getAttribute('aria-expanded')
+  ).toBeFalsy();
 });
 
 test('should support adding className to tooltip', async () => {
@@ -179,8 +199,8 @@ test('should render two buttons (Apply/Close) for alert variant', async () => {
 
   await update(wrapper);
 
-  const closeBtn = wrapper.find('.CloseBtn');
-  const applyBtn = wrapper.find('.ApplyBtn');
+  const closeBtn = wrapper.find('.Popover__close');
+  const applyBtn = wrapper.find('.Popover__apply');
 
   expect(closeBtn.exists()).toBeTruthy();
   expect(applyBtn.exists()).toBeTruthy();
@@ -195,7 +215,7 @@ test('onClose should be called, when close button in alert popover is clicked', 
   );
 
   await act(async () => {
-    wrapper.find('button.CloseBtn').simulate('click');
+    wrapper.find('button.Popover__close').simulate('click');
   });
 
   expect(handleClose).toHaveBeenCalled();
@@ -210,7 +230,7 @@ test('onApply should be called, when apply button in alert popover is clicked', 
   );
 
   await act(async () => {
-    wrapper.find('button.ApplyBtn').simulate('click');
+    wrapper.find('button.Popover__apply').simulate('click');
   });
 
   expect(applyFunc).toHaveBeenCalled();
@@ -229,9 +249,9 @@ test('text for apply/close buttons are rendered correct', async () => {
 
   await update(wrapper);
 
-  const closeBtn = wrapper.find('button.CloseBtn');
+  const closeBtn = wrapper.find('button.Popover__close');
 
-  const applyBtn = wrapper.find('button.ApplyBtn');
+  const applyBtn = wrapper.find('button.Popover__apply');
 
   expect(closeBtn.text()).toBe(closeButtonText);
   expect(applyBtn.text()).toBe(applyButtonText);
