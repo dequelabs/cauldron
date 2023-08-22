@@ -7,7 +7,6 @@
   --popover-line-height: var(--text-size-normal);
   --popover-padding: 0 var(--space-small);
   --popover-alert-max-width: 12rem;
-  --popover-alert-min-height: auto;
   --popover-alert-padding: var(--space-small);
   --popover-alert-apply-button-margin: var(--space-smallest) 0;
 }
@@ -105,7 +104,6 @@
   text-align: center;
   padding: var(--popover-alert-padding);
   max-width: var(--popover-alert-max-width);
-  min-height: var(--popover-alert-min-height);
 }
 
 .Popover--alert > .Button--thin {

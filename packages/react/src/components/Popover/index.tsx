@@ -18,6 +18,7 @@ import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
 import FocusTrap from 'focus-trap-react';
 import focusableSelector from '../../utils/focusable-selector';
+import AriaIsolate from '../../utils/aria-isolate';
 
 export type PopoverVariant = 'alert' | 'custom';
 
@@ -97,12 +98,14 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
       ...props
     }: PopoverProps,
     ref: Ref<HTMLElement>
-  ): JSX.Element => {
+  ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'popover');
 
     const [targetElement, setTargetElement] = useState<HTMLElement | null>(
       null
     );
+
+    const [isolator, setIsolator] = useState<AriaIsolate | null>(null);
 
     const popoverElement = useRef<HTMLDivElement | null>(null);
 
@@ -138,6 +141,23 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
     }, [target]);
 
     useEffect(() => {
+      return () => {
+        isolator?.deactivate();
+      };
+    }, []);
+
+    useEffect(() => {
+      if (!isolator) return;
+
+      if (show) isolator.activate();
+      else isolator.deactivate();
+    }, [show, isolator]);
+
+    useEffect(() => {
+      if (popoverRef.current) attachIsolator();
+    }, [popoverRef.current]);
+
+    useEffect(() => {
       if (show && popoverRef.current) {
         // Find the first focusable element inside the container
         const firstFocusableElement = popoverRef.current.querySelector(
@@ -159,7 +179,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
           event.key === 'Esc' ||
           event.keyCode === 27
         ) {
-          onClose();
+          handleClosePopover();
         }
       };
 
@@ -183,17 +203,30 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
       }
 
       if (!hasPopupAttr) {
-        targetElement?.setAttribute('aria-haspopup', Boolean(true).toString());
+        targetElement?.setAttribute('aria-haspopup', 'true');
       }
     }, [targetElement, id, show]);
 
     const handleClickOutside = () => {
       if (show) {
+        handleClosePopover();
+      }
+    };
+
+    const attachIsolator = () => {
+      if (popoverRef?.current) {
+        setIsolator(new AriaIsolate(popoverRef?.current));
+      }
+    };
+
+    const handleClosePopover = () => {
+      isolator?.deactivate();
+      if (show) {
         onClose();
       }
     };
 
-    if (!show || !isBrowser()) return <></>;
+    if (!show || !isBrowser()) return null;
 
     return createPortal(
       <FocusTrap
@@ -232,7 +265,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
                 onApply={onApply}
                 closeButtonText={closeButtonText}
                 infoText={infoText || ''}
-                onClose={onClose}
+                onClose={handleClosePopover}
               />
             ) : (
               children

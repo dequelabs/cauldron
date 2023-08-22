@@ -3,6 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import Popover from 'src/components/Popover';
 import axe from '../../../axe';
+import * as AriaIsolate from '../../../../src/utils/aria-isolate';
 
 let wrapperNode;
 let mountNode;
@@ -46,17 +47,6 @@ const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
     </React.Fragment>
   );
 };
-
-// // eslint-disable-next-line react/prop-types, react/display-name
-// const WrapperWithParentRef = React.forwardRef(({}, ref) => {
-//   const buttonRef = useRef();
-//   const onClose = jest.fn();
-//   return (
-//     <Popover ref={parentRef} target={ref} show onClose={onClose}>
-//       Hello Word
-//     </Popover>
-//   );
-// });
 
 const WrapperPopoverWithElements = () => {
   const ref = useRef();
@@ -292,4 +282,52 @@ test('should use parent-provided ref', () => {
 
   const componentNode = wrapper.getDOMNode();
   expect(parentRef.current).toBe(componentNode);
+});
+
+test('activates aria isolate on show', async () => {
+  const parentRef = React.createRef();
+  const ref = React.createRef();
+  const onClose = jest.fn();
+
+  const activateFn = jest.fn();
+  const deactivateFn = jest.fn();
+
+  jest.spyOn(AriaIsolate, 'default').mockImplementation(() => ({
+    activate: activateFn,
+    deactivate: deactivateFn
+  }));
+
+  mount(
+    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+      Hello Word
+    </Popover>
+  );
+
+  expect(activateFn).toBeCalled();
+});
+
+test('deactivates aria isolate on hide', async () => {
+  const parentRef = React.createRef();
+  const ref = React.createRef();
+  const onClose = jest.fn();
+
+  const activateFn = jest.fn();
+  const deactivateFn = jest.fn();
+
+  jest.spyOn(AriaIsolate, 'default').mockImplementation(() => ({
+    activate: activateFn,
+    deactivate: deactivateFn
+  }));
+
+  const wrapper = mount(
+    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+      Hello Word
+    </Popover>
+  );
+
+  expect(activateFn).toBeCalled();
+
+  wrapper.setProps({ show: false });
+
+  expect(deactivateFn).toBeCalled();
 });
