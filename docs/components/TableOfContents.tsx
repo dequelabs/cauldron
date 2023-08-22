@@ -25,10 +25,10 @@ export default function TableOfContents({
     const observingElements = new Map<Element, boolean>(
       Array.from(
         container.current?.querySelectorAll(elementSelector) || []
-      ).map(element => [element, false])
+      ).map((element) => [element, false])
     );
 
-    const handleIntersection: IntersectionObserverCallback = entries => {
+    const handleIntersection: IntersectionObserverCallback = (entries) => {
       for (const entry of entries) {
         observingElements.set(entry.target, entry.isIntersecting);
       }
@@ -36,6 +36,8 @@ export default function TableOfContents({
       const visibleElements = Array.from(observingElements.entries())
         .filter(([, visible]) => visible)
         .map(([element]) => element);
+
+      if (!visibleElements.length) return;
 
       setActiveHeading(visibleElements[0].getAttribute('id') ?? null);
     };

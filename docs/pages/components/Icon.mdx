@@ -1,0 +1,47 @@
+---
+title: Icon
+description: A primitive component that displays an icon with an accessible label.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Icon/index.tsx
+---
+
+import { useState } from 'react'
+import IconGrid from '../../components/IconGrid'
+import { Icon } from '@deque/cauldron-react'
+
+```jsx
+import { Icon } from '@deque/cauldron-react'
+```
+
+## Icons
+
+<IconGrid />
+
+## Example
+
+```jsx example
+<Icon type="check" />
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  refType="HTMLSpanElement"
+  props={[
+    {
+      name: 'type',
+      type: 'string',
+      required: true,
+      description: 'The icon type to display.'
+    },
+    {
+      name: 'label',
+      type: 'string',
+      description: 'When needed, sets the accessible label of the icon.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [IconButton](./IconButton)
