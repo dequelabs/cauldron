@@ -401,6 +401,28 @@ test('should handle <end> keypress', () => {
   assertListItemIsActive(3);
 });
 
+test('should handle onActiveChange', () => {
+  const onActiveChange = spy();
+  const wrapper = mount(
+    <Listbox onActiveChange={onActiveChange}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+
+  expect(onActiveChange.notCalled).toBeTruthy();
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Apple');
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Cantaloupe');
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Dragon Fruit');
+});
+
 test('should handle listbox selection with "enter" keypress', () => {
   const onSelect = spy();
   const onSelectionChange = spy();

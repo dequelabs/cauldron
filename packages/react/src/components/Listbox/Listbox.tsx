@@ -2,7 +2,8 @@ import React, {
   forwardRef,
   useCallback,
   useState,
-  useLayoutEffect
+  useLayoutEffect,
+  useEffect
 } from 'react';
 import { ListboxProvider } from './ListboxContext';
 import type { ListboxOption } from './ListboxContext';
@@ -29,6 +30,7 @@ interface ListboxProps
     previousValue: ListboxValue;
     value: ListboxValue;
   }) => void;
+  onActiveChange?: (option: ListboxOption) => void;
 }
 
 // id for listbox options should always be defined since it should
@@ -56,6 +58,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       onFocus,
       onSelect,
       onSelectionChange,
+      onActiveChange,
       ...props
     },
     ref
@@ -78,6 +81,12 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       setSelectedOption(selectedOption || null);
       setActiveOption(selectedOption || null);
     }, [options, value]);
+
+    useEffect(() => {
+      if (activeOption) {
+        onActiveChange?.(activeOption);
+      }
+    }, [activeOption]);
 
     const handleSelect = useCallback(
       (option: ListboxOption) => {
@@ -110,12 +119,14 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
 
         const [up, down, home, end, enter, space] = keys;
         const firstOption = enabledOptions[0];
+
+        if (!activeOption) {
+          setActiveOption(firstOption);
+          return;
+        }
+
         const lastOption = enabledOptions[enabledOptions.length - 1];
-        // the active option should already be set from the focus event but
-        // if for some reason that hasn't happened we default to the first
-        // available option
-        // istanbul ignore next
-        const currentOption = activeOption || firstOption;
+        const currentOption = activeOption;
         const currentIndex = enabledOptions.findIndex(
           ({ element }) => element === currentOption.element
         );
