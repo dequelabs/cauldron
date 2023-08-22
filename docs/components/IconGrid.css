@@ -27,3 +27,27 @@
 .IconGrid__NoResults {
   text-align: center;
 }
+
+@media (max-width: 48rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(5, auto);
+  }
+}
+
+@media (max-width: 40rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+
+@media (max-width: 32rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media (max-width: 24rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(2, auto);
+  }
+}
