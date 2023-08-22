@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.8.0](https://github.com/dequelabs/cauldron/compare/v5.7.1...v5.8.0) (2023-08-22)
+
+
+### Features
+
+* **react:** Adds clock icon ([#1155](https://github.com/dequelabs/cauldron/issues/1155)) ([0dd10f2](https://github.com/dequelabs/cauldron/commit/0dd10f2c077a04808e31a826f3f1a2425c29cce4))
+
+
+### Bug Fixes
+
+* **breadcrumbs:** amend `/` separator colours in light and dark mode ([#1153](https://github.com/dequelabs/cauldron/issues/1153)) ([f2f134b](https://github.com/dequelabs/cauldron/commit/f2f134b5fe68252bf43d7fbb271aa6b3ca99e9fe))
+* **react:** fix color contrast issue for accordion trigger on hover ([#1163](https://github.com/dequelabs/cauldron/issues/1163)) ([57df9d4](https://github.com/dequelabs/cauldron/commit/57df9d4fdced99ba9cd3b0ec9eb69e438bce56bc))
+* **react:** fix issue where TwoColumnPanel would not collapse correctly with reduced motion ([#1158](https://github.com/dequelabs/cauldron/issues/1158)) ([ab3e5b8](https://github.com/dequelabs/cauldron/commit/ab3e5b872ceb6bed117c0c7ad993fb30fba040b2))
+* **react:** fix options menu size and update documentation to v2 docs ([#1166](https://github.com/dequelabs/cauldron/issues/1166)) ([8df46f8](https://github.com/dequelabs/cauldron/commit/8df46f8243ab6d00025dcfe3350dce2fa86af04b))
+* **table:** adjust border table thickness and sortable table icon ([#1154](https://github.com/dequelabs/cauldron/issues/1154)) ([5f0c732](https://github.com/dequelabs/cauldron/commit/5f0c7324cf7fc7b02cba8513c998877280fe45b9))
+* **table:** position sort icons using flex-start ([#1160](https://github.com/dequelabs/cauldron/issues/1160)) ([dc735be](https://github.com/dequelabs/cauldron/commit/dc735bed609f67de5194e5142feed5deb8159805))
+
 ### [5.7.1](https://github.com/dequelabs/cauldron/compare/v5.7.0...v5.7.1) (2023-08-04)
 
 
