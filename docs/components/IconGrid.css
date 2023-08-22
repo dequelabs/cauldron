@@ -23,3 +23,7 @@
   font-size: var(--text-size-smallest);
   margin-top: var(--space-half);
 }
+
+.IconGrid__NoResults {
+  text-align: center;
+}
