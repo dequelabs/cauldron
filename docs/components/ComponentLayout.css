@@ -75,6 +75,10 @@ ul.Component__list li {
   overflow: hidden;
 }
 
+.Component .Offscreen {
+  top: 0;
+}
+
 .Component > .Panel {
   padding: var(--space-small);
 }
