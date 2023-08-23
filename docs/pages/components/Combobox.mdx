@@ -1,0 +1,132 @@
+---
+title: Combobox
+description: An input component to display a list of suggested options matching the current text input.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Combobox/Combobox.tsx
+---
+
+import { Combobox, ComboboxItem, ComboboxGroup } from '@deque/cauldron-react'
+
+```js
+import { 
+  Combobox,
+  ComboboxItem,
+  ComboboxGroup
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### With Items
+
+Options can be rendered from an array of items with a label and an optional value by setting the `items` prop:
+
+```jsx example
+function ComboboxWithItemPropExample() {
+  const items = [
+    { label: 'Red', value: 'Red' },
+    { label: 'Orange', value: 'Orange' },
+    { label: 'Yellow', value: 'Yellow' },
+    { label: 'Green', value: 'Green' },
+    { label: 'Blue', value: 'Blue' }
+  ]
+  return (
+    <Combobox label="Favorite Color" items={items} />
+  )
+}
+```
+
+### With Children
+
+For more advanced scenarios where the rendering of the item label needs to be customized, `ComboboxItem` can be passed in to `Combobox` as `children`.
+
+```jsx example
+<Combobox label="Fruit" defaultValue="Peach">
+  <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
+  <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
+  <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
+  <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
+  <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
+  <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+</Combobox>
+```
+
+### With Descriptions
+
+Combobox items can optionally include a description, which can be set via a property on the array of items, or as a property on the `ComboboxItem` component.
+
+```jsx example
+<Combobox label="Select a Drink">
+  <ComboboxItem 
+    description="A monster of a barleywine, with a footprint of caramel and toffee."
+    value="Bigfoot's Barleywine"
+  >
+    Bigfoot's Barleywine
+  </ComboboxItem>
+  <ComboboxItem 
+    description="A hoppy explosion of citrus and pine, a true hopocalypse."
+    value="Hopocalypse IPA"
+  >
+    Hopocalypse IPA
+  </ComboboxItem>
+  <ComboboxItem 
+    description="A pot of liquid gold at the end of the rainbow."
+    value="Leprechaun's Gold Lager"
+  >
+    Leprechaun's Gold Lager
+  </ComboboxItem>
+
+  <ComboboxItem 
+    description="Delicate, effervescent, with a hint of mythical magic in every sip."
+    value="Unicorn Tears Saison"
+  >
+    Unicorn Tears Saison
+  </ComboboxItem>
+  <ComboboxItem 
+    description="Revive your taste buds with this undead burst of citrusy hops."
+    value="Zombie Zest Pale Ale"
+  >
+    Zombie Zest Pale Ale
+  </ComboboxItem>
+</Combobox>
+```
+
+### Required
+
+```jsx example
+<Combobox label="Fruit" defaultValue="Peach" required>
+  <ComboboxItem description="Apple is a fruit" value="Apple">🍎 Apple</ComboboxItem>
+  <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
+  <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
+  <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
+  <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
+  <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+</Combobox>
+```
+
+## Grouping
+
+```jsx example
+<Combobox label="Countries">
+  <ComboboxGroup label="North America">
+    <ComboboxItem>Canada</ComboboxItem>
+    <ComboboxItem>Mexico</ComboboxItem>
+    <ComboboxItem>United States</ComboboxItem>
+  </ComboboxGroup>
+  <ComboboxGroup label="South America">
+    <ComboboxItem>Argentina</ComboboxItem>
+    <ComboboxItem>Bolivia</ComboboxItem>
+    <ComboboxItem>Brazil</ComboboxItem>
+    <ComboboxItem>Chile</ComboboxItem>
+    <ComboboxItem>Columbia</ComboboxItem>
+    <ComboboxItem>Ecuador</ComboboxItem>
+    <ComboboxItem>Falkland Islands</ComboboxItem>
+    <ComboboxItem>French Guiana</ComboboxItem>
+    <ComboboxItem>Guyana</ComboboxItem>
+    <ComboboxItem>Paraguay</ComboboxItem>
+    <ComboboxItem>Peru</ComboboxItem>
+    <ComboboxItem>Suriname</ComboboxItem>
+    <ComboboxItem>Uruguay</ComboboxItem>
+    <ComboboxItem>Venezuela</ComboboxItem>
+  </ComboboxGroup>
+</Combobox>
+```
