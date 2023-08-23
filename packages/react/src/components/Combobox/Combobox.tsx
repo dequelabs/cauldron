@@ -99,6 +99,14 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setOpen(true);
     }, []);
 
+    const handleComboboxItemMouseDown = useCallback(
+      (event: React.MouseEvent<HTMLUListElement>) => {
+        // prevent blur from triggering when activating combobox items
+        event.preventDefault();
+      },
+      []
+    );
+
     const handleComboboxItemClick = useCallback(() => {
       setOpen(false);
       // maintain focus within the input
@@ -219,7 +227,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           aria-labelledby={`${id}-label`}
           id={`${id}-listbox`}
           value={selectedValue}
-          onMouseDown={(event) => event.preventDefault()}
+          onMouseDown={handleComboboxItemMouseDown}
           onClick={handleComboboxItemClick}
           onSelect={handleSelection}
           onSelectionChange={onSelectionChange}

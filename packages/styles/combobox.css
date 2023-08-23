@@ -19,6 +19,7 @@
   --combobox-item-background-color-hover: var(--gray-20);
   --combobox-item-description-font-color: var(--gray-60);
   --combobox-item-description-font-size: var(--text-size-smaller);
+  --combobox-item-min-height: 2.625rem;
   --combobox-group-label-background-color: var(--gray-20);
   --combobox-group-label-font-size: var(--text-size-smaller);
 }
@@ -87,6 +88,11 @@
   background-color: var(--combobox-listbox-background-color);
   z-index: var(--z-index-listbox);
   max-width: var(--combobox-listbox-max-width, 100%);
+  max-height: var(
+    --combobox-listbox-max-height,
+    calc(var(--combobox-item-min-height) * 10)
+  );
+  overflow-y: auto;
 }
 
 .Combobox__listbox:hover {
@@ -120,7 +126,7 @@
   align-items: center;
   gap: var(--space-half);
   justify-content: space-between;
-  min-height: 2.625rem;
+  min-height: var(--combobox-item-min-height);
 }
 
 .ComboboxItem:not(:last-child) {
