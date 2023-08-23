@@ -10,7 +10,6 @@ Cauldron documentation is a mix of [mdxjs](https://mdxjs.com/) and custom react 
 ├── Demo/               # Deprecated documentation, do not use
 ├── pages/              # MDX components mapping to specific pages in documentation
 │   └── components/     # MDX component level documentation
-├── patterns/           # Deprecated documentation, do not use
 ├── utils/              # Shared utilites for documentation
 ├── mdx-components.tsx  # Used to allow for rendering of html tags for custom components (see https://mdxjs.com/table-of-components/)
 └── remark-plugins.tsx  # Remark plugins to transform markdown ast - mainly used to support things like TOCs and front matter
