@@ -24,7 +24,7 @@ import {
   Icon,
   ThemeProvider
 } from '@deque/cauldron-react';
-import { components, pages, componentsV2, componentsV1 } from './collections';
+import { components, pages } from './collections';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
 import '@fontsource/roboto';
@@ -62,7 +62,7 @@ const App = () => {
     topBarMenuItem?.focus();
   };
 
-  const onTriggerClick = e => {
+  const onTriggerClick = (e) => {
     const { show } = state;
 
     if (e) {
@@ -76,7 +76,7 @@ const App = () => {
     setState({ show: !show });
   };
 
-  const onSettingsSelect = e => {
+  const onSettingsSelect = (e) => {
     if (e.target.id === 'theme') {
       localStorage.setItem(
         CAULDRON_THEME_STORAGE_KEY,
@@ -90,7 +90,7 @@ const App = () => {
     }
   };
 
-  const handleTitleChange = location => {
+  const handleTitleChange = (location) => {
     let title = location.pathname.split('/').pop();
 
     location.state = {
@@ -152,9 +152,8 @@ const App = () => {
   }, [state.show]);
 
   useEffect(() => {
-    const firstFocusableElement = workspaceRef.current?.querySelector(
-      focusable
-    );
+    const firstFocusableElement =
+      workspaceRef.current?.querySelector(focusable);
     setWorkspaceTabIndex(!firstFocusableElement ? 0 : -1);
   });
 
@@ -192,7 +191,7 @@ const App = () => {
           <TopBarMenu
             id="topbar-menu"
             className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
-            menuItemRef={el => setTopBarMenuItem}
+            menuItemRef={(el) => setTopBarMenuItem}
           >
             <div className="TopBar__item--icon">
               {thin ? (
@@ -252,17 +251,11 @@ const App = () => {
             return <Route key={name} exact path={path} component={render} />;
           })}
           {components.map(({ name, path, Component, ...props }) => {
-            let render = Component;
-
-            // Special case for MDX components, since we want to wrap them with
-            // a specific layout/provider
-            if (componentsV2.find(c => c.name === name)) {
-              render = () => (
-                <ComponentLayout {...props}>
-                  <Component components={mdxComponents} />
-                </ComponentLayout>
-              );
-            }
+            const render = () => (
+              <ComponentLayout {...props}>
+                <Component components={mdxComponents} />
+              </ComponentLayout>
+            );
 
             return <Route key={name} exact path={path} component={render} />;
           })}
