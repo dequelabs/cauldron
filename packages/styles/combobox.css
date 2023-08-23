@@ -86,6 +86,7 @@
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
   background-color: var(--combobox-listbox-background-color);
   z-index: var(--z-index-listbox);
+  max-width: var(--combobox-listbox-max-width, 100%);
 }
 
 .Combobox__listbox:hover {
