@@ -68,6 +68,7 @@
   justify-content: center;
   position: absolute;
   right: 0;
+  pointer-events: none;
 }
 
 .Combobox__arrow:before {
