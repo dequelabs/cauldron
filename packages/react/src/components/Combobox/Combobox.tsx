@@ -92,7 +92,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setOpen(true);
         }
       },
-      []
+      [onFocus]
     );
 
     const handleInputClick = useCallback(() => {
@@ -118,7 +118,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         onBlur?.(event);
         setOpen(false);
       },
-      []
+      [onBlur]
     );
 
     const handleKeyDown = useCallback(
@@ -141,7 +141,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           })
         );
       },
-      []
+      [onKeyDown]
     );
 
     const handleChange = useCallback(
@@ -151,7 +151,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setValue(event.target.value);
         }
       },
-      [isControlled]
+      [isControlled, onChange]
     );
 
     const handleSelection = useCallback(
@@ -168,7 +168,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setSelectedValue(listboxValue);
         }
       },
-      [isControlled]
+      [isControlled, onSelect]
     );
 
     const handleActiveChange = useCallback(({ element }: ListboxOption) => {
