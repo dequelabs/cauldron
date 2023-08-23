@@ -74,13 +74,18 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const isControlled = typeof value !== 'undefined';
 
     useLayoutEffect(() => {
+      if (!isControlled && selectedOption) {
+        return;
+      }
+
       const listboxValue = isControlled ? value : defaultValue;
-      const selectedOption = options.find((option) =>
+      const matchingOption = options.find((option) =>
         optionMatchesValue(option, listboxValue)
       );
-      setSelectedOption(selectedOption || null);
-      setActiveOption(selectedOption || null);
-    }, [options, value]);
+
+      setSelectedOption(matchingOption || null);
+      setActiveOption(matchingOption || null);
+    }, [isControlled, options, value]);
 
     useEffect(() => {
       if (activeOption) {
