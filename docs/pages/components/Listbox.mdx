@@ -200,8 +200,8 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
   {
     name: 'label',
     required: true,
-    type: ['string', 'number'],
-    description: 'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
+    type: ['string', number', ReactElement', ReactFragment', 'ReactPortal'],
+    description: 'Label for the group of items.'
   },
   {
     name: 'as',
