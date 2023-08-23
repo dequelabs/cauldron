@@ -53,7 +53,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
         if (!element) return options;
 
         // Elements are frequently appended, so check to see if the newly rendered
-        // element follows the last element element first before any other checks
+        // element follows the last element first before any other checks
         if (
           !options.length ||
           isElementPreceding(

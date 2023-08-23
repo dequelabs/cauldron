@@ -108,14 +108,19 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       (event: React.KeyboardEvent<HTMLElement>) => {
         onKeyDown?.(event);
 
-        if (!keys.includes(event.key)) return;
+        if (!keys.includes(event.key)) {
+          return;
+        }
+
         event.preventDefault();
         const enabledOptions = options.filter(
           (option) => !isDisabledOption(option)
         );
 
         // istanbul ignore next
-        if (!enabledOptions.length) return;
+        if (!enabledOptions.length) {
+          return;
+        }
 
         const [up, down, home, end, enter, space] = keys;
         const firstOption = enabledOptions[0];
