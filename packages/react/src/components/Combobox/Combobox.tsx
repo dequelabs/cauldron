@@ -95,15 +95,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       []
     );
 
-    const handleClick = useCallback(
-      (event: React.MouseEvent<HTMLInputElement>) => {
-        event.preventDefault();
-        // maintain focus within the input
-        inputRef.current?.focus();
-        setOpen(false);
-      },
-      []
-    );
+    const handleInputClick = useCallback(() => {
+      setOpen(true);
+    }, []);
+
+    const handleComboboxItemClick = useCallback(() => {
+      setOpen(false);
+      // maintain focus within the input
+      inputRef.current?.focus();
+    }, []);
 
     const handleBlur = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
@@ -185,7 +185,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             <span className="Field__required-text">{requiredText}</span>
           )}
         </label>
-        <div className="Combobox__input">
+        <div
+          className={classnames('Combobox__input', {
+            'Combobox__input--error': hasError
+          })}
+          onClick={handleInputClick}
+        >
           <input
             type="text"
             id={`${id}-input`}
@@ -214,7 +219,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           aria-labelledby={`${id}-label`}
           id={`${id}-listbox`}
           value={selectedValue}
-          onClick={handleClick}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={handleComboboxItemClick}
           onSelect={handleSelection}
           onSelectionChange={onSelectionChange}
           onActiveChange={handleActiveChange}

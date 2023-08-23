@@ -93,17 +93,28 @@ Combobox items can optionally include a description, which can be set via a prop
 ### Required
 
 ```jsx example
-<Combobox label="Fruit" defaultValue="Peach" required>
-  <ComboboxItem description="Apple is a fruit" value="Apple">🍎 Apple</ComboboxItem>
-  <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
-  <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
-  <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
-  <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
-  <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+<Combobox label="Is this combobox required?" required>
+  <ComboboxItem>Yes</ComboboxItem>
+  <ComboboxItem>No</ComboboxItem>
+  <ComboboxItem>I'm not sure</ComboboxItem>
 </Combobox>
 ```
 
-## Grouping
+### Error
+
+```jsx example
+<Combobox 
+  label="Does this combobox have an error?"
+  error="You must select an option."
+  required
+>
+  <ComboboxItem>Yes</ComboboxItem>
+  <ComboboxItem>No</ComboboxItem>
+  <ComboboxItem>I'm not sure</ComboboxItem>
+</Combobox>
+```
+
+### Grouping
 
 ```jsx example
 <Combobox label="Countries">
