@@ -331,3 +331,17 @@ test('deactivates aria isolate on hide', async () => {
 
   expect(deactivateFn).toBeCalled();
 });
+
+test('aria-labelledby is set correctly for alert variant', async () => {
+  const wrapper = mount(<WrapperAlert />);
+  await update(wrapper);
+
+  const id = wrapper.find('.Popover').props().id;
+
+  expect(`${id}-label`).toEqual(
+    wrapper
+      .find('.Popover')
+      .getDOMNode()
+      .getAttribute('aria-labelledby')
+  );
+});

@@ -1,17 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  ReactNode,
-  forwardRef,
-  Ref,
-  useRef,
-  MutableRefObject
-} from 'react';
+import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
 import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
+import { Cauldron } from '../../types';
 
 import classnames from 'classnames';
 import ClickOutsideListener from '../ClickOutsideListener';
@@ -19,6 +12,7 @@ import Button from '../Button';
 import FocusTrap from 'focus-trap-react';
 import focusableSelector from '../../utils/focusable-selector';
 import AriaIsolate from '../../utils/aria-isolate';
+import useSharedRef from '../../utils/useSharedRef';
 
 export type PopoverVariant = 'alert' | 'custom';
 
@@ -38,7 +32,7 @@ type CustomProps = BaseProps & {
   closeButtonText?: string;
   infoText?: string;
   chidlren: ReactNode;
-};
+} & Cauldron.LabelProps;
 
 type AlertProps = BaseProps & {
   variant: 'alert';
@@ -56,14 +50,15 @@ const AlertPopoverContent = ({
   applyButtonText = 'Apply',
   onApply,
   closeButtonText = 'Close',
-  infoText
+  infoText,
+  infoTextId
 }: Pick<
   PopoverProps,
   'onClose' | 'applyButtonText' | 'onApply' | 'closeButtonText' | 'infoText'
->) => {
+> & { infoTextId: string }) => {
   return (
     <>
-      {infoText}
+      <span id={infoTextId}>{infoText}</span>
       <Button className="Popover__apply" onClick={onApply} thin>
         {applyButtonText}
       </Button>
@@ -79,7 +74,7 @@ const AlertPopoverContent = ({
   );
 };
 
-const Popover = forwardRef<HTMLElement, PopoverProps>(
+const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       id: propId,
@@ -97,7 +92,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
       onApply,
       ...props
     }: PopoverProps,
-    ref: Ref<HTMLElement>
+    ref: Ref<HTMLDivElement>
   ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'popover');
 
@@ -107,10 +102,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
 
     const [isolator, setIsolator] = useState<AriaIsolate | null>(null);
 
-    const popoverElement = useRef<HTMLDivElement | null>(null);
-
-    const popoverRef =
-      (ref as MutableRefObject<HTMLDivElement>) || popoverElement;
+    const popoverRef = useSharedRef<HTMLDivElement>(ref);
 
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
 
@@ -133,6 +125,9 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
         (attributes.popper['data-popper-placement'] as Placement)) ||
       initialPlacement;
 
+    const additionalProps =
+      variant === 'alert' ? { 'aria-labelledby': `${id}-label` } : {};
+
     // Keep targetElement in sync with target prop
     useEffect(() => {
       const targetElement =
@@ -149,8 +144,15 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
     useEffect(() => {
       if (!isolator) return;
 
-      if (show) isolator.activate();
-      else isolator.deactivate();
+      if (show) {
+        isolator.activate();
+      } else {
+        isolator.deactivate();
+      }
+
+      return () => {
+        isolator?.deactivate();
+      };
     }, [show, isolator]);
 
     useEffect(() => {
@@ -252,6 +254,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
             style={styles.popper}
             {...attributes.popper}
             {...props}
+            {...additionalProps}
           >
             <div
               className="Popover__popoverArrow"
@@ -266,6 +269,7 @@ const Popover = forwardRef<HTMLElement, PopoverProps>(
                 closeButtonText={closeButtonText}
                 infoText={infoText || ''}
                 onClose={handleClosePopover}
+                infoTextId={`${id}-label`}
               />
             ) : (
               children
