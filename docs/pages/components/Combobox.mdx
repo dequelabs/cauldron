@@ -4,6 +4,7 @@ description: An input component to display a list of suggested options matching 
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Combobox/Combobox.tsx
 ---
 
+import { useState } from 'react'
 import { Combobox, ComboboxItem, ComboboxGroup } from '@deque/cauldron-react'
 
 ```js
@@ -13,6 +14,10 @@ import {
   ComboboxGroup
 } from '@deque/cauldron-react'
 ```
+
+<Note>
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Combobox` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+</Note>
 
 ## Examples
 
@@ -40,7 +45,7 @@ function ComboboxWithItemPropExample() {
 For more advanced scenarios where the rendering of the item label needs to be customized, `ComboboxItem` can be passed in to `Combobox` as `children`.
 
 ```jsx example
-<Combobox label="Fruit" defaultValue="Peach">
+<Combobox label="Fruit">
   <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
   <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
   <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
@@ -117,8 +122,8 @@ Combobox items can optionally include a description, which can be set via a prop
 ### Grouping
 
 ```jsx example
-<Combobox label="Countries" autocomplete="manual">
-  <ComboboxGroup label="North America" autocomplete="manual">
+<Combobox label="Countries">
+  <ComboboxGroup label="North America">
     <ComboboxItem>Canada</ComboboxItem>
     <ComboboxItem>Mexico</ComboboxItem>
     <ComboboxItem>United States</ComboboxItem>
@@ -142,13 +147,79 @@ Combobox items can optionally include a description, which can be set via a prop
 </Combobox>
 ```
 
+### Uncontrolled
+
+To set the initial value for uncontrolled Comboboxes, use `defaultValue`.
+
+```jsx example
+<Combobox label="Fruit" defaultValue="Peach">
+  <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
+  <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
+  <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
+  <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
+  <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
+  <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+</Combobox>
+```
+
+### Controlled
+
+Comboboxes can also be controlled, by setting the `value` prop and updating the value from `onSelectionChange`.
+
+```jsx example
+function ComboboxControlledExample() {
+  const [value, setValue] = useState('Peach');
+  const handleChange = ({ target }) => {
+    setValue(target.value);
+  };
+  const handleSelectionChange = ({ value }) => {
+    setValue(value);
+  };
+  return (
+    <Combobox 
+      label="Fruit" 
+      value={value} 
+      onChange={handleChange}
+      onSelectionChange={handleSelectionChange}
+    >
+      <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
+      <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
+      <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
+      <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
+      <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
+      <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+    </Combobox>
+  );
+}
+```
+
 ## Autocomplete
 
-There are a couple of different methods to control the auto completion of the text field. By default, autocomplete is turned off meaning the user will need to manually select a value to change the input of the field.
+There are a couple of different methods to control the auto completion of the options in the listbox. By default, autocomplete is set to "manual" meaning selections will be filtered based on the value of the input, and a value will need to be manually selected via click or keypress to change the value of the input field.
 
-### Manual
+### None
+
+When autocomplete is set to "none" the listbox will provide the full list of options and will not change based on the value of the input.
+
+```jsx example
+<Combobox label="Auto Completion (None)" autocomplete="none">
+  <ComboboxItem>None</ComboboxItem>
+  <ComboboxItem>Manual</ComboboxItem>
+  <ComboboxItem>Automatic</ComboboxItem>
+</Combobox>
+```
 
 ### Automatic
+
+When autocomplete is set to "automatic" the listbox will provide a filtered list of options with the first value selected by default. The selected value will become the value of the input when the listbox closes.
+
+```jsx example
+<Combobox label="Auto Completion (Automatic)" autocomplete="automatic">
+  <ComboboxItem>None</ComboboxItem>
+  <ComboboxItem>Manual</ComboboxItem>
+  <ComboboxItem>Automatic</ComboboxItem>
+</Combobox>
+```
 
 ## Props
 
@@ -161,3 +232,4 @@ There are a couple of different methods to control the auto completion of the te
 ## Related Components
 
 - [Listbox](./Listbox)
+- [FieldWrap](./FieldWrap)

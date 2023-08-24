@@ -60,7 +60,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       requiredText = 'Required',
       error,
-      autocomplete = 'none',
+      autocomplete = 'manual',
       onSelectionChange,
       onActiveChange,
       onChange,
@@ -86,6 +86,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const listboxRef = useRef<HTMLUListElement>(null);
     const isControlled = typeof propValue !== 'undefined';
     const isRequired = !!props.required;
+    const isAutocomplete = autocomplete !== 'none';
     const hasError = !!error;
 
     const comboboxItems =
@@ -262,7 +263,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             value={value}
             role="combobox"
             autoComplete="off"
-            aria-autocomplete={autocomplete === 'none' ? 'none' : 'list'}
+            aria-autocomplete={!isAutocomplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}
             aria-haspopup="listbox"
@@ -280,7 +281,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         <ComboboxProvider
           inputValue={value}
           selectedValue={selectedValue}
-          matches={autocomplete === 'none' || defaultAutocompleteMatches}
+          matches={!isAutocomplete || defaultAutocompleteMatches}
         >
           {portal
             ? createPortal(
