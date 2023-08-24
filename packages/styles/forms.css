@@ -25,6 +25,7 @@
   --field-icon-focus-color: var(--focus-light);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
+  --field-listbox-selected-background-color: var(--accent-secondary-active);
   --input-min-width: 250px;
 }
 
@@ -50,6 +51,7 @@
   --field-icon-focus-color: var(--focus-dark);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
+  --field-listbox-selected-background-color: var(--accent-dark);
 }
 
 input,
@@ -58,7 +60,6 @@ textarea,
 [role='menuitemcheckbox'],
 [role='menuitemradio'],
 [role='textbox'],
-[aria-haspopup='listbox'],
 [role='listbox'],
 [role='spinbutton'] {
   width: 100%;
@@ -75,7 +76,6 @@ textarea,
 [role='menuitemcheckbox'],
 [role='menuitemradio'],
 [role='textbox'],
-[aria-haspopup='listbox'],
 [role='listbox'],
 [role='spinbutton'] {
   border: 1px solid var(--field-border-color);
@@ -87,7 +87,6 @@ textarea:focus,
 [role='menuitemcheckbox']:focus,
 [role='menuitemradio']:focus,
 [role='textbox']:focus,
-[aria-haspopup='listbox']:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
@@ -103,7 +102,6 @@ textarea:hover,
 [role='menuitemcheckbox']:hover,
 [role='menuitemradio']:hover,
 [role='textbox']:hover,
-[aria-haspopup='listbox']:hover,
 [role='listbox']:hover,
 [role='spinbutton']:hover {
   border: 1px solid var(--field-border-color-hover);
@@ -115,7 +113,6 @@ textarea:focus:hover,
 [role='menuitemcheckbox']:focus:hover,
 [role='menuitemradio']:focus:hover,
 [role='textbox']:focus:hover,
-[aria-haspopup='listbox']:focus:hover,
 [role='listbox']:focus:hover,
 [role='spinbutton']:focus:hover {
   border: 1px solid var(--field-border-color-focus-hover);
@@ -127,7 +124,6 @@ textarea.Field--has-error,
 [role='menuitemcheckbox'].Field--has-error,
 [role='menuitemradio'].Field--has-error,
 [role='textbox'].Field--has-error,
-[aria-haspopup='listbox'].Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
@@ -137,7 +133,9 @@ textarea.Field--has-error,
   color: var(--field-border-color-error);
 }
 
-.Icon--checkbox-unchecked.Checkbox__overlay:active.Field--has-error:not(.Checkbox__overlay--disabled) {
+.Icon--checkbox-unchecked.Checkbox__overlay:active.Field--has-error:not(
+    .Checkbox__overlay--disabled
+  ) {
   background-color: var(--field-icon-error-active-color);
 }
 
@@ -147,7 +145,6 @@ textarea.Field--has-error:hover,
 [role='menuitemcheckbox'].Field--has-error:hover,
 [role='menuitemradio'].Field--has-error:hover,
 [role='textbox'].Field--has-error:hover,
-[aria-haspopup='listbox'].Field--has-error:hover,
 [role='listbox'].Field--has-error:hover,
 [role='spinbutton'].Field--has-error:hover {
   border-color: var(--field-border-color-error-hover);
@@ -159,7 +156,6 @@ textarea.Field--has-error:focus,
 [role='menuitemcheckbox'].Field--has-error:focus,
 [role='menuitemradio'].Field--has-error:focus,
 [role='textbox'].Field--has-error:focus,
-[aria-haspopup='listbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
   border: 1px solid var(--field-border-color-error);
@@ -174,10 +170,24 @@ textarea.Field--has-error:focus:hover,
 [role='menuitemcheckbox'].Field--has-error:focus:hover,
 [role='menuitemradio'].Field--has-error:focus:hover,
 [role='textbox'].Field--has-error:focus:hover,
-[aria-haspopup='listbox'].Field--has-error:focus:hover,
 [role='listbox'].Field--has-error:focus:hover,
 [role='spinbutton'].Field--has-error:focus:hover {
   border-color: var(--field-border-color-error-hover);
+}
+
+[role='listbox'] > li,
+[role='listbox'] > [role='group'] > li {
+  list-style-type: none;
+}
+
+[role='listbox']:focus-within > li.ListboxOption--active,
+[role='listbox']:focus-within > [role='group'] > li.ListboxOption--active {
+  box-shadow: 0 0 0 2px var(--field-icon-focus-color);
+}
+
+[role='listbox']
+  li[role='option']:is([aria-selected='true'], [aria-checked='true']) {
+  background-color: var(--field-listbox-selected-background-color);
 }
 
 .Error {
