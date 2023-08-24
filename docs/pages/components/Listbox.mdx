@@ -154,6 +154,11 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
     description: 'Callback function that gets invoked when the selected value is changed.'
   },
   {
+    name: 'onActiveChange',
+    type: 'function',
+    description: 'Callback function that gets invoked when the current active option was changed.'
+  },
+  {
     name: 'navigation',
     type: ['bound', 'cycle'],
     defaultValue: 'bound',
@@ -200,8 +205,8 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
   {
     name: 'label',
     required: true,
-    type: ['string', 'number'],
-    description: 'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
+    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+    description: 'Label for the group of items.'
   },
   {
     name: 'as',

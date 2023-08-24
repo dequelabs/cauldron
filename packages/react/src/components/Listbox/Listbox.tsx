@@ -17,16 +17,10 @@ interface ListboxProps
   as?: React.ElementType | string;
   value?: ListboxValue;
   navigation?: 'cycle' | 'bound';
-  onSelect?: <T extends HTMLElement = HTMLElement>({
-    target,
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
     value
   }: {
     target: T;
-    value: ListboxValue;
-  }) => void;
-  onSelectionChange?: ({
-    value
-  }: {
     previousValue: ListboxValue;
     value: ListboxValue;
   }) => void;
@@ -56,7 +50,6 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       navigation = 'bound',
       onKeyDown,
       onFocus,
-      onSelect,
       onSelectionChange,
       onActiveChange,
       ...props
@@ -74,13 +67,18 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const isControlled = typeof value !== 'undefined';
 
     useLayoutEffect(() => {
+      if (!isControlled && selectedOption) {
+        return;
+      }
+
       const listboxValue = isControlled ? value : defaultValue;
-      const selectedOption = options.find((option) =>
+      const matchingOption = options.find((option) =>
         optionMatchesValue(option, listboxValue)
       );
-      setSelectedOption(selectedOption || null);
-      setActiveOption(selectedOption || null);
-    }, [options, value]);
+
+      setSelectedOption(matchingOption || null);
+      setActiveOption(matchingOption || null);
+    }, [isControlled, options, value]);
 
     useEffect(() => {
       if (activeOption) {
@@ -91,15 +89,15 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const handleSelect = useCallback(
       (option: ListboxOption) => {
         setActiveOption(option);
-        onSelect?.({ target: option.element, value: option.value as string });
         // istanbul ignore else
         if (!isControlled) {
           setSelectedOption(option);
-          onSelectionChange?.({
-            value: option.value,
-            previousValue: selectedOption?.value
-          });
         }
+        onSelectionChange?.({
+          target: option.element,
+          value: option.value,
+          previousValue: selectedOption?.value
+        });
       },
       [isControlled, selectedOption]
     );
@@ -108,14 +106,19 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       (event: React.KeyboardEvent<HTMLElement>) => {
         onKeyDown?.(event);
 
-        if (!keys.includes(event.key)) return;
+        if (!keys.includes(event.key)) {
+          return;
+        }
+
         event.preventDefault();
         const enabledOptions = options.filter(
           (option) => !isDisabledOption(option)
         );
 
         // istanbul ignore next
-        if (!enabledOptions.length) return;
+        if (!enabledOptions.length) {
+          return;
+        }
 
         const [up, down, home, end, enter, space] = keys;
         const firstOption = enabledOptions[0];

@@ -263,6 +263,38 @@ test('should set selected value with "value" prop when listbox option uses defau
   assertListItemIsSelected(1);
 });
 
+test('should not change selected value when listbox is controlled', () => {
+  const wrapper = mount(
+    <Listbox value="b">
+      <ListboxOption value="a">Apple</ListboxOption>
+      <ListboxOption value="b">Banana</ListboxOption>
+      <ListboxOption value="c">Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  wrapper.find('[role="option"]').at(2).simulate('click');
+  wrapper.update();
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(1);
+});
+
+test('should change selected value when listbox is uncontrolled', () => {
+  const wrapper = mount(
+    <Listbox defaultValue="b">
+      <ListboxOption value="a">Apple</ListboxOption>
+      <ListboxOption value="b">Banana</ListboxOption>
+      <ListboxOption value="c">Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  wrapper.find('[role="option"]').at(2).simulate('click');
+  wrapper.update();
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  assertListItemIsSelected(2);
+});
+
 test('should handle ↓ keypress', () => {
   const wrapper = mount(
     <Listbox>
@@ -401,11 +433,32 @@ test('should handle <end> keypress', () => {
   assertListItemIsActive(3);
 });
 
+test('should handle onActiveChange', () => {
+  const onActiveChange = spy();
+  const wrapper = mount(
+    <Listbox onActiveChange={onActiveChange}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const simulateDownKeypress = simulateKeydown(wrapper, 'ArrowDown');
+
+  expect(onActiveChange.notCalled).toBeTruthy();
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Apple');
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Cantaloupe');
+  simulateDownKeypress();
+  expect(onActiveChange.lastCall.firstArg.value).toEqual('Dragon Fruit');
+});
+
 test('should handle listbox selection with "enter" keypress', () => {
-  const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+    <Listbox onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -420,26 +473,22 @@ test('should handle listbox selection with "enter" keypress', () => {
 
   const assertListItemIsSelected = listItemIsSelected(wrapper);
 
-  expect(onSelect.notCalled).toBeTruthy();
   expect(onSelectionChange.notCalled).toBeTruthy();
 
   simulateDownKeypress();
   simulateEnterKeypress();
   assertListItemIsSelected(2);
 
-  expect(onSelect.calledOnce).toBeTruthy();
   expect(onSelectionChange.calledOnce).toBeTruthy();
-  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
 });
 
 test('should handle listbox selection with "space" keypress', () => {
-  const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+    <Listbox onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -454,16 +503,13 @@ test('should handle listbox selection with "space" keypress', () => {
 
   const assertListItemIsSelected = listItemIsSelected(wrapper);
 
-  expect(onSelect.notCalled).toBeTruthy();
   expect(onSelectionChange.notCalled).toBeTruthy();
 
   simulateDownKeypress();
   simulateSpaceKeypress();
   assertListItemIsSelected(2);
 
-  expect(onSelect.calledOnce).toBeTruthy();
   expect(onSelectionChange.calledOnce).toBeTruthy();
-  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
@@ -495,10 +541,9 @@ test('should not prevent default event with non-navigational keypress', () => {
 });
 
 test('should handle listbox selection with "click" event', () => {
-  const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+    <Listbox onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -506,7 +551,6 @@ test('should handle listbox selection with "click" event', () => {
     </Listbox>
   );
 
-  expect(onSelect.notCalled).toBeTruthy();
   expect(onSelectionChange.notCalled).toBeTruthy();
 
   wrapper.find('[role="option"]').at(2).simulate('click');
@@ -514,19 +558,16 @@ test('should handle listbox selection with "click" event', () => {
   const assertListItemIsSelected = listItemIsSelected(wrapper);
   assertListItemIsSelected(2);
 
-  expect(onSelect.calledOnce).toBeTruthy();
   expect(onSelectionChange.calledOnce).toBeTruthy();
-  expect(onSelect.calledWithMatch({ value: 'Cantaloupe' })).toBeTruthy();
   expect(
     onSelectionChange.calledWithMatch({ value: 'Cantaloupe' })
   ).toBeTruthy();
 });
 
 test('should not invoke selection for disabled elements with "click" event', () => {
-  const onSelect = spy();
   const onSelectionChange = spy();
   const wrapper = mount(
-    <Listbox onSelect={onSelect} onSelectionChange={onSelectionChange}>
+    <Listbox onSelectionChange={onSelectionChange}>
       <ListboxOption>Apple</ListboxOption>
       <ListboxOption disabled>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
@@ -535,6 +576,36 @@ test('should not invoke selection for disabled elements with "click" event', () 
   );
   wrapper.find('[role="option"]').at(1).simulate('click');
 
-  expect(onSelect.notCalled).toBeTruthy();
   expect(onSelectionChange.notCalled).toBeTruthy();
+});
+
+test('should retain selected value when options changes with defaultValue', () => {
+  const options = [
+    <ListboxOption key="a" value="a">
+      Apple
+    </ListboxOption>,
+    <ListboxOption key="b" value="b">
+      Banana
+    </ListboxOption>,
+    <ListboxOption key="c" value="c">
+      Cantaloupe
+    </ListboxOption>
+  ];
+  const wrapper = mount(<Listbox defaultValue="b">{options}</Listbox>);
+
+  const assertListItemIsSelected = listItemIsSelected(wrapper);
+  wrapper.find('[role="option"]').at(2).simulate('click');
+  assertListItemIsSelected(2);
+
+  wrapper.setProps({
+    children: [
+      ...options,
+      <ListboxOption key="d" value="d">
+        Dragon Fruit
+      </ListboxOption>
+    ]
+  });
+  wrapper.update();
+
+  assertListItemIsSelected(2);
 });

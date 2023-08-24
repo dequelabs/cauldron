@@ -35,8 +35,10 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
     const { active, selected, setOptions, onSelect } = useListboxContext();
     const listboxOptionRef = useSharedRef<HTMLElement>(ref);
     const [id] = propId ? [propId] : useId(1, 'listbox-option');
-    const isActive = active?.element === listboxOptionRef.current;
-    const isSelected = selected?.element === listboxOptionRef.current;
+    const isActive =
+      active !== null && active.element === listboxOptionRef.current;
+    const isSelected =
+      selected !== null && selected.element === listboxOptionRef.current;
     const optionValue =
       typeof value !== 'undefined'
         ? value
@@ -51,7 +53,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
         if (!element) return options;
 
         // Elements are frequently appended, so check to see if the newly rendered
-        // element follows the last element element first before any other checks
+        // element follows the last element first before any other checks
         if (
           !options.length ||
           isElementPreceding(
