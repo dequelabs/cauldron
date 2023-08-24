@@ -17,16 +17,10 @@ interface ListboxProps
   as?: React.ElementType | string;
   value?: ListboxValue;
   navigation?: 'cycle' | 'bound';
-  onSelect?: <T extends HTMLElement = HTMLElement>({
-    target,
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
     value
   }: {
     target: T;
-    value: ListboxValue;
-  }) => void;
-  onSelectionChange?: ({
-    value
-  }: {
     previousValue: ListboxValue;
     value: ListboxValue;
   }) => void;
@@ -56,7 +50,6 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       navigation = 'bound',
       onKeyDown,
       onFocus,
-      onSelect,
       onSelectionChange,
       onActiveChange,
       ...props
@@ -96,15 +89,15 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const handleSelect = useCallback(
       (option: ListboxOption) => {
         setActiveOption(option);
-        onSelect?.({ target: option.element, value: option.value as string });
         // istanbul ignore else
         if (!isControlled) {
           setSelectedOption(option);
-          onSelectionChange?.({
-            value: option.value,
-            previousValue: selectedOption?.value
-          });
         }
+        onSelectionChange?.({
+          target: option.element,
+          value: option.value,
+          previousValue: selectedOption?.value
+        });
       },
       [isControlled, selectedOption]
     );
