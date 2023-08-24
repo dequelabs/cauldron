@@ -15,6 +15,14 @@ interface Props extends React.HTMLAttributes<HTMLLIElement> {
   description?: ContentNode;
 }
 
+const ComboboxMatch = ({
+  children
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
+  return <span>{children}</span>;
+};
+
 const ComboboxItem = forwardRef<HTMLLIElement, Props>(
   (
     { className, children, disabled, id: propId, description, ...props },
@@ -38,13 +46,9 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
         id={id}
         {...props}
       >
-        {description ? (
-          <span>
-            {children}
-            <div className="ComboboxItem__description">{description}</div>
-          </span>
-        ) : (
-          children
+        <ComboboxMatch>{children}</ComboboxMatch>
+        {description && (
+          <div className="ComboboxItem__description">{description}</div>
         )}
         {isSelected ? <Icon type="check-solid" /> : null}
       </ListboxOption>

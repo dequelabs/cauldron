@@ -1,4 +1,5 @@
 import React, { forwardRef, useState, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ContentNode } from '../../types';
@@ -6,6 +7,7 @@ import Listbox from '../Listbox';
 import ComboboxItem from './ComboboxItem';
 import type { ComboboxValue } from './ComboboxItem';
 import type { ListboxOption } from '../Listbox/ListboxContext';
+import useSharedRef from '../../utils/useSharedRef';
 
 interface ComboboxItem {
   key?: string;
@@ -36,6 +38,7 @@ type ComboboxProps = {
     value: ComboboxValue;
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
+  portal?: React.RefObject<HTMLElement> | HTMLElement;
 } & React.InputHTMLAttributes<Omit<HTMLInputElement, 'value' | 'defaultValue'>>;
 
 const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
@@ -58,6 +61,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onKeyDown,
       onFocus,
       onBlur,
+      portal,
       ...props
     },
     ref
@@ -71,6 +75,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       null
     );
     const [id] = propId ? [propId] : useId(1, 'combobox');
+    const comboboxRef = useSharedRef<HTMLDivElement>(ref);
     const inputRef = useRef<HTMLInputElement>(null);
     const listboxRef = useRef<HTMLUListElement>(null);
     const isControlled = typeof propValue !== 'undefined';
@@ -196,8 +201,28 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onActiveChange?.(option);
     }, []);
 
+    const comboboxListbox = (
+      <Listbox
+        className="Combobox__listbox"
+        role="listbox"
+        aria-labelledby={`${id}-label`}
+        id={`${id}-listbox`}
+        value={selectedValue}
+        onMouseDown={handleComboboxItemMouseDown}
+        onClick={handleComboboxItemClick}
+        onSelect={handleSelection}
+        onSelectionChange={onSelectionChange}
+        onActiveChange={handleActiveChange}
+        ref={listboxRef}
+        tabIndex={undefined}
+        aria-activedescendant=""
+      >
+        {comboboxItems}
+      </Listbox>
+    );
+
     return (
-      <div className={classnames('Combobox', className)} ref={ref}>
+      <div className={classnames('Combobox', className)} ref={comboboxRef}>
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -224,7 +249,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             value={value}
             role="combobox"
             autoComplete="off"
-            aria-autocomplete="list"
+            aria-autocomplete={autocomplete === 'none' ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}
             aria-haspopup="listbox"
@@ -239,23 +264,14 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           />
           <span className="Combobox__arrow" />
         </div>
-        <Listbox
-          className="Combobox__listbox"
-          role="listbox"
-          aria-labelledby={`${id}-label`}
-          id={`${id}-listbox`}
-          value={selectedValue}
-          onMouseDown={handleComboboxItemMouseDown}
-          onClick={handleComboboxItemClick}
-          onSelect={handleSelection}
-          onSelectionChange={onSelectionChange}
-          onActiveChange={handleActiveChange}
-          ref={listboxRef}
-          tabIndex={undefined}
-          aria-activedescendant=""
-        >
-          {comboboxItems}
-        </Listbox>
+        {portal
+          ? createPortal(
+              comboboxListbox,
+              portal instanceof HTMLElement
+                ? portal
+                : portal.current || document.body
+            )
+          : comboboxListbox}
         {hasError && (
           <div className="Error" id={`${id}-error`}>
             {error}
