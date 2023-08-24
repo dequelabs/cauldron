@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
-import type { ListboxValue } from '../Listbox/ListboxOption';
-import { ListboxOption, useListboxContext } from '../Listbox';
 import Icon from '../Icon';
 import useSharedRef from '../../utils/useSharedRef';
+import type { ListboxValue } from '../Listbox/ListboxOption';
 import type { ContentNode } from '../../types';
+import { ListboxOption, useListboxContext } from '../Listbox';
+import { useComboboxContext } from './ComboboxContext';
 
-export type ComboboxValue = ListboxValue;
+export type ComboboxValue = Exclude<ListboxValue, number>;
 
 interface Props extends React.HTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
@@ -27,12 +28,21 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
   (
     { className, children, disabled, id: propId, description, ...props },
     ref
-  ): JSX.Element => {
+  ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-item');
     const { selected } = useListboxContext();
+    const { matches } = useComboboxContext();
     const comboboxItemRef = useSharedRef<HTMLElement>(ref);
     const isSelected =
       selected?.element && selected.element === comboboxItemRef.current;
+
+    // TODO: this code is bad I should feel bad for writing it
+    if (
+      !matches ||
+      (typeof matches === 'function' && !matches(children as string))
+    ) {
+      return null;
+    }
 
     return (
       <ListboxOption
@@ -46,10 +56,12 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
         id={id}
         {...props}
       >
-        <ComboboxMatch>{children}</ComboboxMatch>
-        {description && (
-          <div className="ComboboxItem__description">{description}</div>
-        )}
+        <span>
+          <ComboboxMatch>{children}</ComboboxMatch>
+          {description && (
+            <div className="ComboboxItem__description">{description}</div>
+          )}
+        </span>
         {isSelected ? <Icon type="check-solid" /> : null}
       </ListboxOption>
     );

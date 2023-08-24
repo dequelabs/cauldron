@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 const ComboboxGroup = forwardRef<HTMLUListElement, Props>(
-  ({ className, children, label, ...props }, ref): JSX.Element => {
+  ({ className, children, label, ...props }, ref): JSX.Element | null => {
     return (
       <ListboxGroup
         as="ul"

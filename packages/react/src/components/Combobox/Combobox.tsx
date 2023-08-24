@@ -5,6 +5,7 @@ import { useId } from 'react-id-generator';
 import { ContentNode } from '../../types';
 import Listbox from '../Listbox';
 import ComboboxItem from './ComboboxItem';
+import { ComboboxProvider } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxItem';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
@@ -24,22 +25,28 @@ type ComboboxProps = {
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
   autocomplete?: 'none' | 'manual' | 'automatic';
-  onSelect?: <T extends HTMLElement = HTMLElement>({
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
     target,
-    value
+    value,
+    previousValue
   }: {
     target: T;
     value: ComboboxValue;
-  }) => void;
-  onSelectionChange?: ({
-    value
-  }: {
     previousValue: ComboboxValue;
-    value: ComboboxValue;
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 } & React.InputHTMLAttributes<Omit<HTMLInputElement, 'value' | 'defaultValue'>>;
+
+const defaultAutocompleteMatches = (
+  inputValue: string,
+  value: string | undefined
+) => {
+  if (typeof value === 'undefined') {
+    return true;
+  }
+  return value?.toLowerCase().includes(inputValue.toLowerCase());
+};
 
 const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (
@@ -54,7 +61,6 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       requiredText = 'Required',
       error,
       autocomplete = 'none',
-      onSelect,
       onSelectionChange,
       onActiveChange,
       onChange,
@@ -175,21 +181,29 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [isControlled, onChange]
     );
 
-    const handleSelection = useCallback(
+    const handleSelectionChange = useCallback(
       ({
         target,
-        value: listboxValue
-      }: {
-        target: HTMLElement;
-        value: ComboboxValue;
-      }) => {
-        onSelect?.({ target, value });
+        value: listboxValue,
+        previousValue
+      }: Parameters<
+        Exclude<
+          React.ComponentProps<typeof Listbox>['onSelectionChange'],
+          undefined
+        >
+      >[0]) => {
         if (!isControlled) {
-          setValue(listboxValue);
-          setSelectedValue(listboxValue);
+          setValue(listboxValue?.toString());
+          setSelectedValue(listboxValue?.toString());
         }
+
+        onSelectionChange?.({
+          target,
+          value: listboxValue?.toString(),
+          previousValue: previousValue?.toString()
+        });
       },
-      [isControlled, onSelect]
+      [isControlled, onSelectionChange]
     );
 
     const handleActiveChange = useCallback((option: ListboxOption) => {
@@ -210,8 +224,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         value={selectedValue}
         onMouseDown={handleComboboxItemMouseDown}
         onClick={handleComboboxItemClick}
-        onSelect={handleSelection}
-        onSelectionChange={onSelectionChange}
+        onSelectionChange={handleSelectionChange}
         onActiveChange={handleActiveChange}
         ref={listboxRef}
         tabIndex={undefined}
@@ -264,14 +277,20 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           />
           <span className="Combobox__arrow" />
         </div>
-        {portal
-          ? createPortal(
-              comboboxListbox,
-              portal instanceof HTMLElement
-                ? portal
-                : portal.current || document.body
-            )
-          : comboboxListbox}
+        <ComboboxProvider
+          inputValue={value}
+          selectedValue={selectedValue}
+          matches={autocomplete === 'none' || defaultAutocompleteMatches}
+        >
+          {portal
+            ? createPortal(
+                comboboxListbox,
+                portal instanceof HTMLElement
+                  ? portal
+                  : portal.current || document.body
+              )
+            : comboboxListbox}
+        </ComboboxProvider>
         {hasError && (
           <div className="Error" id={`${id}-error`}>
             {error}
