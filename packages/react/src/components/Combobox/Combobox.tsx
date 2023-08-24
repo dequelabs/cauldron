@@ -21,6 +21,7 @@ type ComboboxProps = {
   defaultValue?: ComboboxValue;
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
+  autocomplete?: 'none' | 'manual' | 'automatic';
   onSelect?: <T extends HTMLElement = HTMLElement>({
     target,
     value
@@ -34,6 +35,7 @@ type ComboboxProps = {
     previousValue: ComboboxValue;
     value: ComboboxValue;
   }) => void;
+  onActiveChange?: (option: ListboxOption) => void;
 } & React.InputHTMLAttributes<Omit<HTMLInputElement, 'value' | 'defaultValue'>>;
 
 const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
@@ -48,8 +50,10 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       defaultValue,
       requiredText = 'Required',
       error,
+      autocomplete = 'none',
       onSelect,
       onSelectionChange,
+      onActiveChange,
       onChange,
       onKeyDown,
       onFocus,
@@ -130,7 +134,19 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           return;
         }
 
+        // Selection should not open the listbox or be
+        // forwarded to the listbox component when closed
+        if (event.key === 'Enter' && !open) {
+          return;
+        }
+
         setOpen(true);
+
+        // Space should not trigger selection since the user
+        // could be typing a value for autocompletion
+        if (event.key === ' ') {
+          return;
+        }
 
         // forward input events to listbox
         listboxRef.current?.dispatchEvent(
@@ -141,7 +157,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           })
         );
       },
-      [onKeyDown]
+      [onKeyDown, open]
     );
 
     const handleChange = useCallback(
@@ -171,11 +187,13 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [isControlled, onSelect]
     );
 
-    const handleActiveChange = useCallback(({ element }: ListboxOption) => {
-      if (element) {
-        setActiveDescendant(element.getAttribute('id'));
+    const handleActiveChange = useCallback((option: ListboxOption) => {
+      if (option.element) {
+        setActiveDescendant(option.element.getAttribute('id'));
         // element.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' })
       }
+
+      onActiveChange?.(option);
     }, []);
 
     return (
