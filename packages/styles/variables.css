@@ -65,7 +65,7 @@
   --info: var(--accent-info-light);
   --success: var(--accent-success-light);
   --focus-active: rgba(215, 30, 247, 0.25);
-  --focus-glow: rgba(193, 27, 222, 0.75);
+  --focus-glow: rgba(181, 26, 209, 0.75);
   --metric-accent-low: var(--accent-danger-light);
   --metric-accent-mid: #8ba6c5;
   --metric-accent-full: var(--accent-success);
