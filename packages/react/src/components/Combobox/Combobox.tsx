@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, useRef, useCallback } from 'react';
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  useCallback,
+  useEffect
+} from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
@@ -176,6 +182,10 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [onKeyDown, open]
     );
 
+    useEffect(() => {
+      setValue(propValue);
+    }, [propValue]);
+
     const handleChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(event);
@@ -197,14 +207,16 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           undefined
         >
       >[0]) => {
+        const stringValue = listboxValue?.toString();
+
         if (!isControlled) {
-          setValue(listboxValue?.toString());
-          setSelectedValue(listboxValue?.toString());
+          setValue(stringValue);
+          setSelectedValue(stringValue);
         }
 
         onSelectionChange?.({
           target,
-          value: listboxValue?.toString(),
+          value: stringValue,
           previousValue: previousValue?.toString()
         });
       },

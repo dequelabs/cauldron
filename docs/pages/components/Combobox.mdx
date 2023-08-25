@@ -178,7 +178,11 @@ To set the initial value for uncontrolled Comboboxes, use `defaultValue`.
 
 ### Controlled
 
-Comboboxes can also be controlled, by setting the `value` prop and updating the value from `onSelectionChange`.
+Comboboxes can also be controlled, by setting the `value` prop and updating the value from event callbacks.
+
+<Note>
+  `onChange` and `onSelectionChange` have different behaviors and special consideration needs need to be made when `Combobox` is controlled. `onChange` gets called when the value of the input field changes from user input or selections while `onSelectionChange` is only called when a selection changes from the listbox.
+</Note>
 
 ```jsx example
 function ComboboxControlledExample() {
