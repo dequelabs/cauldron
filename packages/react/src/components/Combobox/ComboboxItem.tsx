@@ -53,12 +53,11 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
 
     useEffect(() => {
       const intersectionEntry = intersectionRef.current;
-
-      if (!intersectionEntry) {
+      if (!intersectionEntry || !isActive) {
         return;
       }
 
-      if (!intersectionEntry.isIntersecting && isActive) {
+      if (!intersectionEntry.isIntersecting) {
         comboboxItemRef.current.scrollIntoView({
           inline: 'nearest',
           block: intersectionEntry.intersectionRect.y <= 0 ? 'end' : 'nearest'
