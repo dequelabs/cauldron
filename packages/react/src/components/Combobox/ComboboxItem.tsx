@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import Icon from '../Icon';
@@ -7,6 +7,7 @@ import type { ListboxValue } from '../Listbox/ListboxOption';
 import type { ContentNode } from '../../types';
 import { ListboxOption, useListboxContext } from '../Listbox';
 import { useComboboxContext } from './ComboboxContext';
+import useIntersectionRef from '../../utils/useIntersectionRef';
 
 export type ComboboxValue = Exclude<ListboxValue, number>;
 
@@ -30,9 +31,15 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
     ref
   ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-item');
-    const { selected } = useListboxContext();
+    const { selected, active } = useListboxContext();
     const { matches } = useComboboxContext();
     const comboboxItemRef = useSharedRef<HTMLElement>(ref);
+    const intersectionRef = useIntersectionRef<HTMLElement>(comboboxItemRef, {
+      root: null,
+      threshold: 1.0
+    });
+    const isActive =
+      active?.element && active.element === comboboxItemRef.current;
     const isSelected =
       selected?.element && selected.element === comboboxItemRef.current;
 
@@ -41,8 +48,23 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
       !matches ||
       (typeof matches === 'function' && !matches(children as string))
     ) {
-      return null;
+      // return null;
     }
+
+    useEffect(() => {
+      const intersectionEntry = intersectionRef.current;
+
+      if (!intersectionEntry) {
+        return;
+      }
+
+      if (!intersectionEntry.isIntersecting && isActive) {
+        comboboxItemRef.current.scrollIntoView({
+          inline: 'nearest',
+          block: intersectionEntry.intersectionRect.y <= 0 ? 'end' : 'nearest'
+        });
+      }
+    }, [isActive]);
 
     return (
       <ListboxOption
