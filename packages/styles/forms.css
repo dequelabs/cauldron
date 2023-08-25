@@ -41,6 +41,7 @@
   --field-background-color-disabled: #5d676f;
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
+  --field-label-error-text-color: var(--error);
   --field-label-description-text-color: var(--accent-light);
   --field-icon-inactive-color: var(--white);
   --field-icon-active-color: rgba(212, 221, 224, 0.25);
