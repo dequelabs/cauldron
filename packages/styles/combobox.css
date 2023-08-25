@@ -16,6 +16,7 @@
   --combobox-input-font-color: var(--field-content-color);
   --combobox-listbox-border-color: var(--gray-40);
   --combobox-listbox-background-color: #fff;
+  --combobox-item-font-color: var(--text-color-base);
   --combobox-item-hover-background-color: var(--gray-20);
   --combobox-item-description-font-color: var(--gray-60);
   --combobox-item-description-font-size: var(--text-size-smaller);
@@ -40,7 +41,9 @@
     --field-border-color-focus-glow
   );
   --combobox-input-font-color: var(--field-content-color);
+  --combobox-item-font-color: var(--text-color-light);
   --combobox-item-hover-background-color: var(--accent-dark);
+  --combobox-item-description-font-color: var(--accent-light);
   --combobox-listbox-background-color: var(--accent-medium);
   --combobox-group-label-background-color: var(--accent-dark);
   --combobox-item-selected-icon-color: var(--accent-success-light);
@@ -144,6 +147,7 @@
 }
 
 .ComboboxItem {
+  color: var(--combobox-item-font-color);
   padding: var(--space-smallest);
   cursor: pointer;
   display: flex;
