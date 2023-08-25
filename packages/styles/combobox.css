@@ -22,6 +22,7 @@
   --combobox-item-min-height: 2.625rem;
   --combobox-group-label-background-color: var(--gray-20);
   --combobox-group-label-font-size: var(--text-size-smaller);
+  --combobox-item-selected-icon-color: var(--accent-success-dark);
 }
 
 .cauldron--theme-dark {
@@ -42,6 +43,7 @@
   --combobox-item-hover-background-color: var(--accent-dark);
   --combobox-listbox-background-color: var(--accent-medium);
   --combobox-group-label-background-color: var(--accent-dark);
+  --combobox-item-selected-icon-color: var(--accent-success-light);
 }
 
 .Combobox {
@@ -164,7 +166,7 @@
 }
 
 .ComboboxItem .Icon {
-  color: var(--accent-success-dark);
+  color: var(--combobox-item-selected-icon-color);
 }
 
 .ComboboxItem .Icon svg {

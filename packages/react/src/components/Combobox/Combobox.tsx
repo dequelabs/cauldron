@@ -262,7 +262,6 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             ref={inputRef}
             value={value}
             role="combobox"
-            autoComplete="off"
             aria-autocomplete={!isAutocomplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}
