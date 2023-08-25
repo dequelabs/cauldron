@@ -17,7 +17,10 @@ interface ComboboxItem {
   description?: string;
 }
 
-type ComboboxProps = {
+interface ComboboxProps
+  extends React.InputHTMLAttributes<
+    Omit<HTMLInputElement, 'value' | 'defaultValue'>
+  > {
   label: ContentNode;
   items?: ComboboxItem[];
   value?: ComboboxValue;
@@ -36,7 +39,7 @@ type ComboboxProps = {
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
-} & React.InputHTMLAttributes<Omit<HTMLInputElement, 'value' | 'defaultValue'>>;
+}
 
 const defaultAutocompleteMatches = (
   inputValue: string,
@@ -250,10 +253,13 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             <span className="Field__required-text">{requiredText}</span>
           )}
         </label>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
           className={classnames('Combobox__input', {
             'Combobox__input--error': hasError
           })}
+          // We're handling click here to open the listbox when the wrapping element is clicked,
+          // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
           <input
