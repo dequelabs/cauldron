@@ -165,7 +165,7 @@
   box-shadow: inset 0 0 0 2px var(--focus);
 }
 
-.ComboboxItem:is(:hover) {
+.ComboboxItem:is(:hover, [role='option'][aria-selected='true']:hover) {
   background-color: var(--combobox-item-hover-background-color);
 }
 
