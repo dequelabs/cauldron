@@ -2,8 +2,8 @@ import React, { createContext, useContext, useMemo } from 'react';
 import { ComboboxValue } from './ComboboxItem';
 
 type ComboboxContext = {
-  inputValue: string | undefined;
-  selectedValue: string | undefined;
+  inputValue: ComboboxValue;
+  selectedValue: ComboboxValue;
   matches:
     | (<T extends string = string>(value: T | undefined) => boolean)
     | boolean;
