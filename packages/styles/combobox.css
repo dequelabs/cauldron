@@ -142,7 +142,7 @@
   background-color: var(--combobox-group-label-background-color);
   padding: var(--space-smallest);
   font-size: var(--combobox-group-label-font-size);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   border-bottom: 1px solid var(--combobox-listbox-border-color);
 }
 
