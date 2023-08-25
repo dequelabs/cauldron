@@ -42,7 +42,7 @@ const defaultAutocompleteMatches = (
   inputValue: string,
   value: string | undefined
 ) => {
-  if (typeof value === 'undefined') {
+  if (typeof value === 'undefined' || !value) {
     return true;
   }
   return value?.toLowerCase().includes(inputValue.toLowerCase());
