@@ -9,6 +9,7 @@ import { useRef, useEffect } from 'react';
  * @example
  * const elementRef = useRef<HTMLElement>()
  * const intersectionRef = useIntersectionRef<HTMLElement>(elementRef)
+ * return <span ref={elementRef}>...</span>
  */
 export default function useIntersectionRef<T extends HTMLElement>(
   element: T | MutableRefObject<T>,
