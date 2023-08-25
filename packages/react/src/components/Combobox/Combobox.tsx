@@ -128,7 +128,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const handleComboboxItemClick = useCallback(() => {
       setOpen(false);
-      // maintain focus within the input
+      // maintain focus on the input
       inputRef.current?.focus();
     }, []);
 
@@ -157,9 +157,10 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
         setOpen(true);
 
-        // Space should not trigger selection since the user
-        // could be typing a value for autocompletion
-        if (event.key === ' ') {
+        // Space should not trigger selection since the user could be typing
+        // a value for autocompletion. Additionally when not open and there's
+        // an active descendent we do not want to forward keydown events.
+        if (event.key === ' ' || (!open && activeDescendant)) {
           return;
         }
 
@@ -213,7 +214,6 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleActiveChange = useCallback((option: ListboxOption) => {
       if (option.element) {
         setActiveDescendant(option.element.getAttribute('id'));
-        // element.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' })
       }
 
       onActiveChange?.(option);
