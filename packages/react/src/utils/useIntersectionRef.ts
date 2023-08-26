@@ -21,6 +21,7 @@ export default function useIntersectionRef<T extends HTMLElement>(
   const intersectionRef = useRef<IntersectionObserverEntry | null>(null);
 
   useEffect(() => {
+    // istanbul ignore else
     if (
       'IntersectionObserver' in globalThis &&
       typeof IntersectionObserver === 'function'
