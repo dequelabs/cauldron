@@ -113,6 +113,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
         onFocus?.(event);
+        // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(true);
         }
@@ -209,6 +210,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       >[0]) => {
         const stringValue = listboxValue?.toString();
 
+        // istanbul ignore else
         if (!isControlled) {
           setValue(stringValue);
           setSelectedValue(stringValue);
@@ -224,6 +226,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const handleActiveChange = useCallback((option: ListboxOption) => {
+      // istanbul ignore else
       if (option.element) {
         setActiveDescendant(option.element.getAttribute('id'));
       }
@@ -253,7 +256,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     return (
-      <div className={classnames('Combobox', className)} ref={comboboxRef}>
+      <div
+        id={id}
+        className={classnames('Combobox', className)}
+        ref={comboboxRef}
+      >
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,

@@ -7,7 +7,7 @@ import {
   ComboboxOption
 } from 'src/components/Combobox';
 
-const simulateKeydown =
+const simulateKeyDown =
   (wrapper, key) =>
   (event = {}) => {
     wrapper.simulate('keydown', { key, ...event });
@@ -24,6 +24,23 @@ const listboxIsOpen = (wrapper) => (isOpen) => {
   } else {
     expect(Listbox.prop('className')).not.toContain('Combobox__listbox--open');
   }
+};
+
+// Utility function for checking for active element for the given Combobox Option of a Listbox component
+const optionIsActive = (wrapper) => (index) => {
+  const combobox = wrapper.find('input[role="combobox"]');
+  const options = wrapper.find('[role="listbox"] [role="option"]');
+  const activeOption = options.at(index);
+  expect(combobox.prop('aria-activedescendant')).toBeTruthy();
+  expect(combobox.prop('aria-activedescendant')).toEqual(
+    activeOption.prop('id')
+  );
+  expect(activeOption.hasClass('ComboboxOption--active')).toBeTruthy();
+  options.forEach(
+    (option, index) =>
+      index !== index &&
+      expect(option).hasClass('ComboboxOption--active').toBeFalsy()
+  );
 };
 
 test('should render combobox with options', () => {
@@ -154,6 +171,22 @@ test('should close combobox listbox on "esc" keypress', () => {
   assertListboxIsOpen(false);
 });
 
+test('should not open combobox listbox on "enter" keypress', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+
+  assertListboxIsOpen(false);
+  wrapper.find('[role="combobox"]').simulate('keydown', { key: 'Enter' });
+  assertListboxIsOpen(false);
+});
+
 test('should close combobox listbox on "blur"', () => {
   const wrapper = mount(
     <Combobox>
@@ -211,6 +244,98 @@ test('should not close combobox listbox when selecting option via keypress', () 
   assertListboxIsOpen(true);
 });
 
+test('should set aria-activedescendent for active combobox options', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const simulateArrowKeyDown = simulateKeyDown(
+    wrapper.find('ul[role="listbox"]'),
+    'ArrowDown'
+  );
+  const assertOptionIsActive = optionIsActive(wrapper);
+
+  expect(combobox.prop('aria-activedescendant')).toBeFalsy();
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  simulateArrowKeyDown();
+  assertOptionIsActive(0);
+  simulateArrowKeyDown();
+  assertOptionIsActive(1);
+  simulateArrowKeyDown();
+  assertOptionIsActive(2);
+});
+
+test('should call onActiveChange when active option changes', () => {
+  const onActiveChange = spy();
+  const wrapper = mount(
+    <Combobox onActiveChange={onActiveChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const simulateArrowKeyDown = simulateKeyDown(
+    wrapper.find('ul[role="listbox"]'),
+    'ArrowDown'
+  );
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  expect(onActiveChange.notCalled).toBeTruthy();
+  simulateArrowKeyDown();
+  expect(onActiveChange.callCount).toEqual(1);
+  expect(onActiveChange.getCall(0).firstArg.value).toEqual('Apple');
+  simulateArrowKeyDown();
+  expect(onActiveChange.callCount).toEqual(2);
+  expect(onActiveChange.getCall(1).firstArg.value).toEqual('Banana');
+  simulateArrowKeyDown();
+  expect(onActiveChange.callCount).toEqual(3);
+  expect(onActiveChange.getCall(2).firstArg.value).toEqual('Cantaloupe');
+});
+
+test.skip('should handle selection with "click" event', () => {
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Combobox onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  wrapper.find('[role="option"]').at(1).simulate('click');
+  wrapper.update();
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
+  expect(onSelectionChange.firstCall.firstArg.previousValue).toEqual(undefined);
+  combobox.simulate('click');
+  wrapper.find('[role="option"]').at(2).simulate('click');
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
+  expect(onSelectionChange.secondCall.firstArg.previousValue).toEqual('Banana');
+});
+
+test.todo('should handle selection with "enter" keydown event');
+
 test.todo('should render all options when autocomplete="none"');
 
 test.todo('should render matching options when autocomplete="manual"');
@@ -229,7 +354,16 @@ test.todo(
   'should set first active descendent when autocomplete="automatic" on open'
 );
 
-test.todo('should use id from props when set');
+test('should use id from props when set', () => {
+  const wrapper = mount(
+    <Combobox id="this-is-a-combobox">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(wrapper.find('.Combobox').prop('id')).toEqual('this-is-a-combobox');
+});
 
 test.todo('should set selected value with "defaultValue" prop');
 
