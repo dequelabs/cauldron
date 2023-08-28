@@ -2,6 +2,7 @@
   --combobox-input-border-color: var(--field-border-color);
   --combobox-input-background-color: var(--field-background-color);
   --combobox-input-border-focus-color: var(--field-border-color-focus);
+  --combobox-input-border-hover-color: var(--field-border-color-focus-hover);
   --combobox-input-border-focus-glow-color: var(
     --field-border-color-focus-glow
   );
@@ -30,6 +31,7 @@
   --combobox-input-border-color: var(--field-border-color);
   --combobox-input-background-color: var(--field-background-color);
   --combobox-input-border-focus-color: var(--field-border-color-focus);
+  --combobox-input-border-hover-color: var(--field-border-color-focus-hover);
   --combobox-input-border-focus-glow-color: var(
     --field-border-color-focus-glow
   );
@@ -76,6 +78,11 @@
   border: 1px solid var(--combobox-input-border-color);
 }
 
+.Combobox__input:hover,
+.cauldron--theme-dark .Combobox__input:hover {
+  border-color: var(--combobox-input-border-hover-color);
+}
+
 .Combobox__input input[type='text'] {
   font-size: var(--combobox-input-font-size);
   color: var(--combobox-input-font-color);
@@ -87,7 +94,6 @@
     0 0 5px var(--combobox-input-border-focus-glow-color),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-
 .Combobox__arrow {
   width: 2rem;
   display: flex;
