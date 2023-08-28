@@ -5,12 +5,12 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useState } from 'react'
-import { Combobox, ComboboxItem, ComboboxGroup, FieldWrap } from '@deque/cauldron-react'
+import { Combobox, ComboboxOption, ComboboxGroup, FieldWrap } from '@deque/cauldron-react'
 
 ```js
 import { 
   Combobox,
-  ComboboxItem,
+  ComboboxOption,
   ComboboxGroup
 } from '@deque/cauldron-react'
 ```
@@ -21,13 +21,13 @@ import {
 
 ## Examples
 
-### With Items
+### With Options
 
-Options can be rendered from an array of items with a label and an optional value by setting the `items` prop:
+Options can be rendered from an array of options with a label and an optional value by setting the `options` prop:
 
 ```jsx example
-function ComboboxWithItemPropExample() {
-  const items = [
+function ComboboxWithOptionsPropExample() {
+  const options = [
     { label: 'Red', value: 'Red' },
     { label: 'Orange', value: 'Orange' },
     { label: 'Yellow', value: 'Yellow' },
@@ -36,7 +36,7 @@ function ComboboxWithItemPropExample() {
   ]
   return (
     <FieldWrap>
-      <Combobox label="Favorite Color" items={items} />
+      <Combobox label="Favorite Color" options={options} />
     </FieldWrap>
   )
 }
@@ -44,59 +44,59 @@ function ComboboxWithItemPropExample() {
 
 ### With Children
 
-For more advanced scenarios where the rendering of the item label needs to be customized, `ComboboxItem` can be passed in to `Combobox` as `children`.
+For more advanced scenarios where the rendering of the option label needs to be customized, `ComboboxOption` can be passed in to `Combobox` as `children`.
 
 ```jsx example
 <FieldWrap>
   <Combobox label="Fruit">
-    <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
-    <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
-    <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
-    <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
-    <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
-    <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
 
-### Item Descriptions
+### Option Descriptions
 
-Combobox items can optionally include a description, which can be set via a property on the array of items, or as a property on the `ComboboxItem` component.
+Combobox options can optionally include a description, which can be set via a property on the array of options, or as a property on the `ComboboxOption` component.
 
 ```jsx example
 <FieldWrap>
   <Combobox label="Select a Drink">
-    <ComboboxItem 
+    <ComboboxOption 
       description="A monster of a barleywine, with a footprint of caramel and toffee."
       value="Bigfoot's Barleywine"
     >
       Bigfoot's Barleywine
-    </ComboboxItem>
-    <ComboboxItem 
+    </ComboboxOption>
+    <ComboboxOption 
       description="A hoppy explosion of citrus and pine, a true hopocalypse."
       value="Hopocalypse IPA"
     >
       Hopocalypse IPA
-    </ComboboxItem>
-    <ComboboxItem 
+    </ComboboxOption>
+    <ComboboxOption 
       description="A pot of liquid gold at the end of the rainbow."
       value="Leprechaun's Gold Lager"
     >
       Leprechaun's Gold Lager
-    </ComboboxItem>
+    </ComboboxOption>
 
-    <ComboboxItem 
+    <ComboboxOption 
       description="Delicate, effervescent, with a hint of mythical magic in every sip."
       value="Unicorn Tears Saison"
     >
       Unicorn Tears Saison
-    </ComboboxItem>
-    <ComboboxItem 
+    </ComboboxOption>
+    <ComboboxOption 
       description="Revive your taste buds with this undead burst of citrusy hops."
       value="Zombie Zest Pale Ale"
     >
       Zombie Zest Pale Ale
-    </ComboboxItem>
+    </ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -106,9 +106,9 @@ Combobox items can optionally include a description, which can be set via a prop
 ```jsx example
 <FieldWrap>
   <Combobox label="Is this combobox required?" required>
-    <ComboboxItem>Yes</ComboboxItem>
-    <ComboboxItem>No</ComboboxItem>
-    <ComboboxItem>I'm not sure</ComboboxItem>
+    <ComboboxOption>Yes</ComboboxOption>
+    <ComboboxOption>No</ComboboxOption>
+    <ComboboxOption>I'm not sure</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -122,9 +122,9 @@ Combobox items can optionally include a description, which can be set via a prop
     error="You must select an option."
     required
   >
-    <ComboboxItem>Yes</ComboboxItem>
-    <ComboboxItem>No</ComboboxItem>
-    <ComboboxItem>I'm not sure</ComboboxItem>
+    <ComboboxOption>Yes</ComboboxOption>
+    <ComboboxOption>No</ComboboxOption>
+    <ComboboxOption>I'm not sure</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -135,25 +135,25 @@ Combobox items can optionally include a description, which can be set via a prop
 <FieldWrap>
   <Combobox label="Countries">
     <ComboboxGroup label="North America">
-      <ComboboxItem>Canada</ComboboxItem>
-      <ComboboxItem>Mexico</ComboboxItem>
-      <ComboboxItem>United States</ComboboxItem>
+      <ComboboxOption>Canada</ComboboxOption>
+      <ComboboxOption>Mexico</ComboboxOption>
+      <ComboboxOption>United States</ComboboxOption>
     </ComboboxGroup>
     <ComboboxGroup label="South America">
-      <ComboboxItem>Argentina</ComboboxItem>
-      <ComboboxItem>Bolivia</ComboboxItem>
-      <ComboboxItem>Brazil</ComboboxItem>
-      <ComboboxItem>Chile</ComboboxItem>
-      <ComboboxItem>Columbia</ComboboxItem>
-      <ComboboxItem>Ecuador</ComboboxItem>
-      <ComboboxItem>Falkland Islands</ComboboxItem>
-      <ComboboxItem>French Guiana</ComboboxItem>
-      <ComboboxItem>Guyana</ComboboxItem>
-      <ComboboxItem>Paraguay</ComboboxItem>
-      <ComboboxItem>Peru</ComboboxItem>
-      <ComboboxItem>Suriname</ComboboxItem>
-      <ComboboxItem>Uruguay</ComboboxItem>
-      <ComboboxItem>Venezuela</ComboboxItem>
+      <ComboboxOption>Argentina</ComboboxOption>
+      <ComboboxOption>Bolivia</ComboboxOption>
+      <ComboboxOption>Brazil</ComboboxOption>
+      <ComboboxOption>Chile</ComboboxOption>
+      <ComboboxOption>Columbia</ComboboxOption>
+      <ComboboxOption>Ecuador</ComboboxOption>
+      <ComboboxOption>Falkland Islands</ComboboxOption>
+      <ComboboxOption>French Guiana</ComboboxOption>
+      <ComboboxOption>Guyana</ComboboxOption>
+      <ComboboxOption>Paraguay</ComboboxOption>
+      <ComboboxOption>Peru</ComboboxOption>
+      <ComboboxOption>Suriname</ComboboxOption>
+      <ComboboxOption>Uruguay</ComboboxOption>
+      <ComboboxOption>Venezuela</ComboboxOption>
     </ComboboxGroup>
   </Combobox>
 </FieldWrap>
@@ -166,12 +166,12 @@ To set the initial value for uncontrolled Comboboxes, use `defaultValue`.
 ```jsx example
 <FieldWrap>
   <Combobox label="Fruit" defaultValue="Peach">
-    <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
-    <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
-    <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
-    <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
-    <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
-    <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -201,12 +201,12 @@ function ComboboxControlledExample() {
         onChange={handleChange}
         onSelectionChange={handleSelectionChange}
       >
-        <ComboboxItem value="Apple">🍎 Apple</ComboboxItem>
-        <ComboboxItem value="Banana">🍌 Banana</ComboboxItem>
-        <ComboboxItem value="Cucumber">🥒 Cucumber</ComboboxItem>
-        <ComboboxItem value="Orange">🍊 Orange</ComboboxItem>
-        <ComboboxItem value="Peach">🍑 Peach</ComboboxItem>
-        <ComboboxItem value="Pear">🍐 Pear</ComboboxItem>
+        <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+        <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+        <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+        <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+        <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+        <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
       </Combobox>
     </FieldWrap>
   );
@@ -224,9 +224,9 @@ When autocomplete is set to "none" the listbox will provide the full list of opt
 ```jsx example
 <FieldWrap>
   <Combobox label="Auto Completion (None)" autocomplete="none">
-    <ComboboxItem>None</ComboboxItem>
-    <ComboboxItem>Manual</ComboboxItem>
-    <ComboboxItem>Automatic</ComboboxItem>
+    <ComboboxOption>None</ComboboxOption>
+    <ComboboxOption>Manual</ComboboxOption>
+    <ComboboxOption>Automatic</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -238,9 +238,9 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 ```jsx example
 <FieldWrap>
   <Combobox label="Auto Completion (Automatic)" autocomplete="automatic">
-    <ComboboxItem>None</ComboboxItem>
-    <ComboboxItem>Manual</ComboboxItem>
-    <ComboboxItem>Automatic</ComboboxItem>
+    <ComboboxOption>None</ComboboxOption>
+    <ComboboxOption>Manual</ComboboxOption>
+    <ComboboxOption>Automatic</ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -249,7 +249,7 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 
 ### Combobox
 
-### ComboboxItem
+### ComboboxOption
 
 ### ComboboxGroup
 
