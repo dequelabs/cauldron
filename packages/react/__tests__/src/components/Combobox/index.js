@@ -26,10 +26,12 @@ const listboxIsOpen = (wrapper) => (isOpen) => {
   }
 };
 
-// Utility function for checking for active element for the given Combobox Option of a Listbox component
+// Utility function for checking for active element for the given Combobox Option of a Combobox component
 const optionIsActive = (wrapper) => (index) => {
   const combobox = wrapper.find('input[role="combobox"]');
-  const options = wrapper.find('[role="listbox"] [role="option"]');
+  const options = wrapper.find(
+    '[role="listbox"] .ComboboxOption[role="option"]'
+  );
   const activeOption = options.at(index);
   expect(combobox.prop('aria-activedescendant')).toBeTruthy();
   expect(combobox.prop('aria-activedescendant')).toEqual(
@@ -39,7 +41,20 @@ const optionIsActive = (wrapper) => (index) => {
   options.forEach(
     (option, index) =>
       index !== index &&
-      expect(option).hasClass('ComboboxOption--active').toBeFalsy()
+      expect(option.hasClass('ComboboxOption--active')).toBeFalsy()
+  );
+};
+
+// Utility function for checking for active element for the given Combobox Option of a Combobox component
+const optionIsSelected = (wrapper) => (index) => {
+  const options = wrapper.find(
+    '[role="listbox"] .ComboboxOption[role="option"]'
+  );
+  const selectedOption = options.at(index);
+  expect(selectedOption.prop('aria-selected')).toEqual(true);
+  options.forEach(
+    (option, index) =>
+      index !== index && expect(option.prop('aria-selected')).toEqual(false)
   );
 };
 
@@ -318,6 +333,7 @@ test.skip('should handle selection with "click" event', () => {
   );
 
   const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const assertOptionIsSelected = optionIsSelected(wrapper);
   const combobox = wrapper.find('[role="combobox"]');
 
   combobox.simulate('focus');
@@ -328,10 +344,12 @@ test.skip('should handle selection with "click" event', () => {
   expect(onSelectionChange.callCount).toEqual(1);
   expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
   expect(onSelectionChange.firstCall.firstArg.previousValue).toEqual(undefined);
+  assertOptionIsSelected(1);
   combobox.simulate('click');
   wrapper.find('[role="option"]').at(2).simulate('click');
   expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
   expect(onSelectionChange.secondCall.firstArg.previousValue).toEqual('Banana');
+  assertOptionIsSelected(2);
 });
 
 test.todo('should handle selection with "enter" keydown event');
@@ -365,6 +383,41 @@ test('should use id from props when set', () => {
   expect(wrapper.find('.Combobox').prop('id')).toEqual('this-is-a-combobox');
 });
 
-test.todo('should set selected value with "defaultValue" prop');
+test('should set selected value with "defaultValue" prop', () => {
+  const wrapper = mount(
+    <Combobox defaultValue="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
 
-test.todo('should set selected value with "value" prop');
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+  const assertOptionIsSelected = optionIsSelected(wrapper);
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  assertOptionIsSelected(1);
+});
+
+test('should set selected value with "value" prop', () => {
+  const wrapper = mount(
+    <Combobox value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+  const assertOptionIsSelected = optionIsSelected(wrapper);
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  assertOptionIsSelected(1);
+  expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual(
+    'Banana'
+  );
+});

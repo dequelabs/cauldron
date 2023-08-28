@@ -30,7 +30,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, Props>(
     { className, children, disabled, id: propId, description, ...props },
     ref
   ): JSX.Element | null => {
-    const [id] = propId ? [propId] : useId(1, 'combobox-item');
+    const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
     const { matches } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
