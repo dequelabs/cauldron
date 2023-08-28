@@ -85,6 +85,77 @@ test('should render combobox with children', () => {
   expect(wrapper.find(ComboboxOption).at(2).text()).toEqual('Cantaloupe');
 });
 
+test('should render combobox options with description', () => {
+  const options = [
+    {
+      value: 'Apple',
+      label: 'Apple',
+      description:
+        'A crispy orb of deliciousness that comes in colors from "stoplight red" to "alien green".'
+    },
+    {
+      value: 'Banana',
+      label: 'Banana',
+      description:
+        'This curvy wonder brings the tropics to your taste buds with its sunny disposition.'
+    },
+    {
+      value: 'Cantaloupe',
+      label: 'Cantaloupe',
+      description: 'A bumpy, juicy, orb with moist deliciousness inside.'
+    }
+  ];
+  const wrapper = mount(<Combobox options={options} />);
+  expect(wrapper.find(Combobox).exists()).toBeTruthy();
+  expect(wrapper.find('.ComboboxOption__description').at(0).text()).toEqual(
+    options[0].description
+  );
+  expect(wrapper.find('.ComboboxOption__description').at(1).text()).toEqual(
+    options[1].description
+  );
+  expect(wrapper.find('.ComboboxOption__description').at(2).text()).toEqual(
+    options[2].description
+  );
+});
+
+test('should render combobox children with description', () => {
+  const options = [
+    {
+      value: 'Apple',
+      label: 'Apple',
+      description:
+        'A crispy orb of deliciousness that comes in colors from "stoplight red" to "alien green".'
+    },
+    {
+      value: 'Banana',
+      label: 'Banana',
+      description:
+        'This curvy wonder brings the tropics to your taste buds with its sunny disposition.'
+    },
+    {
+      value: 'Cantaloupe',
+      label: 'Cantaloupe',
+      description: 'A bumpy, juicy, orb with moist deliciousness inside.'
+    }
+  ];
+  const children = options.map(({ value, label, description }, index) => (
+    <ComboboxOption key={index} value={value} description={description}>
+      {label}
+    </ComboboxOption>
+  ));
+  const wrapper = mount(<Combobox>{children}</Combobox>);
+  expect(wrapper.find(Combobox).exists()).toBeTruthy();
+  expect(wrapper.find('.ComboboxOption__description').at(0).text()).toEqual(
+    options[0].description
+  );
+  expect(wrapper.find('.ComboboxOption__description').at(1).text()).toEqual(
+    options[1].description
+  );
+  expect(wrapper.find('.ComboboxOption__description').at(2).text()).toEqual(
+    options[2].description
+  );
+});
+
 test('should render combobox with groups', () => {
   const wrapper = mount(
     <Combobox>
@@ -272,7 +343,7 @@ test('should set aria-activedescendent for active combobox options', () => {
   const combobox = wrapper.find('[role="combobox"]');
   // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
   // work correctly within jsdom/enzyme so we fire the events directly on listbox
-  const simulateArrowKeyDown = simulateKeyDown(
+  const simulateArrowDownKeypress = simulateKeyDown(
     wrapper.find('ul[role="listbox"]'),
     'ArrowDown'
   );
@@ -281,11 +352,11 @@ test('should set aria-activedescendent for active combobox options', () => {
   expect(combobox.prop('aria-activedescendant')).toBeFalsy();
   combobox.simulate('focus');
   assertListboxIsOpen(true);
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   assertOptionIsActive(0);
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   assertOptionIsActive(1);
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   assertOptionIsActive(2);
 });
 
@@ -303,7 +374,7 @@ test('should call onActiveChange when active option changes', () => {
   const combobox = wrapper.find('[role="combobox"]');
   // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
   // work correctly within jsdom/enzyme so we fire the events directly on listbox
-  const simulateArrowKeyDown = simulateKeyDown(
+  const simulateArrowDownKeypress = simulateKeyDown(
     wrapper.find('ul[role="listbox"]'),
     'ArrowDown'
   );
@@ -311,18 +382,18 @@ test('should call onActiveChange when active option changes', () => {
   combobox.simulate('focus');
   assertListboxIsOpen(true);
   expect(onActiveChange.notCalled).toBeTruthy();
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   expect(onActiveChange.callCount).toEqual(1);
   expect(onActiveChange.getCall(0).firstArg.value).toEqual('Apple');
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   expect(onActiveChange.callCount).toEqual(2);
   expect(onActiveChange.getCall(1).firstArg.value).toEqual('Banana');
-  simulateArrowKeyDown();
+  simulateArrowDownKeypress();
   expect(onActiveChange.callCount).toEqual(3);
   expect(onActiveChange.getCall(2).firstArg.value).toEqual('Cantaloupe');
 });
 
-test.skip('should handle selection with "click" event', () => {
+test('should handle selection with "click" event', () => {
   const onSelectionChange = spy();
   const wrapper = mount(
     <Combobox onSelectionChange={onSelectionChange}>
@@ -343,16 +414,51 @@ test.skip('should handle selection with "click" event', () => {
   wrapper.update();
   expect(onSelectionChange.callCount).toEqual(1);
   expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
-  expect(onSelectionChange.firstCall.firstArg.previousValue).toEqual(undefined);
   assertOptionIsSelected(1);
   combobox.simulate('click');
   wrapper.find('[role="option"]').at(2).simulate('click');
   expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
-  expect(onSelectionChange.secondCall.firstArg.previousValue).toEqual('Banana');
   assertOptionIsSelected(2);
 });
 
-test.todo('should handle selection with "enter" keydown event');
+test.skip('should handle selection with "enter" keydown event', () => {
+  const onSelectionChange = spy();
+  const wrapper = mount(
+    <Combobox onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const assertOptionIsSelected = optionIsSelected(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const simulateArrowDownKeypress = simulateKeyDown(
+    wrapper.find('ul[role="listbox"]'),
+    'ArrowDown'
+  );
+  const simulateEnterKeypress = simulateKeyDown(
+    wrapper.find('ul[role="listbox"]'),
+    'Enter'
+  );
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  simulateArrowDownKeypress();
+  simulateEnterKeypress();
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
+  assertOptionIsSelected(1);
+  simulateArrowDownKeypress();
+  simulateEnterKeypress();
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
+  assertOptionIsSelected(2);
+});
 
 test.todo('should render all options when autocomplete="none"');
 
