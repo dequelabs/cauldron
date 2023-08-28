@@ -25,7 +25,7 @@ const ComboboxMatch = ({
   return <span>{children}</span>;
 };
 
-const ComboboxItem = forwardRef<HTMLLIElement, Props>(
+const ComboboxOption = forwardRef<HTMLLIElement, Props>(
   (
     { className, children, disabled, id: propId, description, ...props },
     ref
@@ -33,15 +33,15 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
     const [id] = propId ? [propId] : useId(1, 'combobox-item');
     const { selected, active } = useListboxContext();
     const { matches } = useComboboxContext();
-    const comboboxItemRef = useSharedRef<HTMLElement>(ref);
-    const intersectionRef = useIntersectionRef<HTMLElement>(comboboxItemRef, {
+    const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
+    const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
       threshold: 1.0
     });
     const isActive =
-      active?.element && active.element === comboboxItemRef.current;
+      active?.element && active.element === comboboxOptionRef.current;
     const isSelected =
-      selected?.element && selected.element === comboboxItemRef.current;
+      selected?.element && selected.element === comboboxOptionRef.current;
 
     useEffect(() => {
       const intersectionEntry = intersectionRef.current;
@@ -50,7 +50,7 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
       }
 
       if (!intersectionEntry.isIntersecting) {
-        comboboxItemRef.current.scrollIntoView({
+        comboboxOptionRef.current.scrollIntoView({
           inline: 'nearest',
           block: intersectionEntry.intersectionRect.y <= 0 ? 'end' : 'nearest'
         });
@@ -68,11 +68,11 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
     return (
       <ListboxOption
         as="li"
-        className={classnames('ComboboxItem', className, {
-          'ComboboxItem--disabled': disabled
+        className={classnames('ComboboxOption', className, {
+          'ComboboxOption--disabled': disabled
         })}
-        activeClass="ComboboxItem--active"
-        ref={comboboxItemRef}
+        activeClass="ComboboxOption--active"
+        ref={comboboxOptionRef}
         disabled={disabled}
         id={id}
         {...props}
@@ -80,7 +80,7 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
         <span>
           <ComboboxMatch>{children}</ComboboxMatch>
           {description && (
-            <div className="ComboboxItem__description">{description}</div>
+            <div className="ComboboxOption__description">{description}</div>
           )}
         </span>
         {isSelected ? <Icon type="check-solid" /> : null}
@@ -89,6 +89,6 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
   }
 );
 
-ComboboxItem.displayName = 'ComboboxItem';
+ComboboxOption.displayName = 'ComboboxOption';
 
-export default ComboboxItem;
+export default ComboboxOption;
