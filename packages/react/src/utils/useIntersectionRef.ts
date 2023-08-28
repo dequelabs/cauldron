@@ -27,6 +27,14 @@ export default function useIntersectionRef<T extends HTMLElement>(
       typeof IntersectionObserver === 'function'
     ) {
       if (
+        !element &&
+        typeof element === 'object' &&
+        !(element as MutableRefObject<T>)?.current
+      ) {
+        return;
+      }
+
+      if (
         !(element instanceof HTMLElement) &&
         !(element.current instanceof HTMLElement)
       ) {

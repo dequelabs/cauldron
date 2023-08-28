@@ -100,7 +100,7 @@ test('should not error with non element ref', () => {
 
 test('should not error with non element', () => {
   const Component = () => {
-    useIntersectionRef('banana');
+    useIntersectionRef(null);
     return <span></span>;
   };
   expect(() => mount(<Component />)).not.toThrow();
