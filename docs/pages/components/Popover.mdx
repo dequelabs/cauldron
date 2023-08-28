@@ -15,14 +15,14 @@ import { Popover, Button } from '@deque/cauldron-react'
 
 Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Popover can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
 
-### Alert Popover
+### Prompt Popover
 
-Alert Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
+Prompt Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
 also popup contains information text to show some message to the user.
 Canceling the action will only close the popup window.
 
 ```jsx example
-function TextTooltipExamples() {
+function PromptPopoverExample() {
   const [show, setShow] = useState(false);
   const onTogglePopover = () => setShow(!show);
   const buttonRef = useRef();
@@ -34,10 +34,10 @@ function TextTooltipExamples() {
         variant="secondary" 
         buttonRef={buttonRef}
       >
-        Alert!
+        Prompt!
       </Button>
       <Popover
-        variant="alert"
+        variant="prompt"
         target={buttonRef} 
         placement="auto" 
         show={show} 
@@ -54,7 +54,7 @@ function TextTooltipExamples() {
 For custom purposes you can use "custom" variant, which is default.
 
 ```jsx example
-function BigTooltipExample() {
+function CustomPopoverExample() {
   const [show, setShow] = useState(false);
   const onTogglePopover = () => setShow(!show);
   const buttonRef = useRef();
@@ -73,8 +73,10 @@ function BigTooltipExample() {
         placement="auto" 
         show={show} 
         onClose={onTogglePopover}
+        aria-labelledby={"popover-title"}
       >
         <div>
+          <h2 id="popover-title">Popover Title</h2>
           <p>Popover content</p>
           <Button>Custom button</Button>
           <Button>Custom button</Button>
@@ -116,13 +118,13 @@ function BigTooltipExample() {
       name: 'infoText',
       required: true,
       type: 'string',
-      description: 'Information text to show some warning or useful information in Alert variant of the component. Please note that required is only for "Alert" variant.',
+      description: 'Information text to show some warning or useful information in Prompt variant of the component. Please note that required is only for "Prompt" variant.',
     },
     {
       name: 'onApply',
       required: true,
       type: 'function',
-      description: 'Callback, which is used for Apply button in Alert variant of the component. Please note, that is only required for Alert variant',
+      description: 'Callback, which is used for Apply button in Prompt variant of the component. Please note, that is only required for Prompt variant',
     },
     {
       name: 'placement',
@@ -132,7 +134,7 @@ function BigTooltipExample() {
     },
     {
       name: 'variant',
-      type: ['custom', 'alert'],
+      type: ['custom', 'prompt'],
       defaultValue: 'custom',
       description: 'The style of Popover to display.'
     },
@@ -151,24 +153,24 @@ function BigTooltipExample() {
     {
       name: 'applyButtonText',
       type: 'string',
-      description: 'Label for button, which is used to apply action in Alert variant of the popover',
+      description: 'Label for button, which is used to apply action in Prompt variant of the popover',
       defaultValue: 'Apply'
     },
     {
       name: 'closeButtonText',
       type: 'string',
-      description: 'Label for button, which is used to close popover in Alert variant of the component',
+      description: 'Label for button, which is used to close popover in Prompt variant of the component',
       defaultValue: 'Close'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop. Please note that for alert variant we use infoText to get labelled by'
+      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop. Please note that for alert variant we use infoText to get labelled by'
+      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
     },
   ]}
 />

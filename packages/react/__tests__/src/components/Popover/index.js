@@ -65,7 +65,7 @@ const WrapperPopoverWithElements = () => {
 };
 
 // eslint-disable-next-line react/prop-types
-const WrapperAlert = ({ buttonProps = {}, tooltipProps = {} }) => {
+const WrapperPrompt = ({ buttonProps = {}, tooltipProps = {} }) => {
   const ref = useRef();
   const onClose = jest.fn();
   return (
@@ -74,7 +74,7 @@ const WrapperAlert = ({ buttonProps = {}, tooltipProps = {} }) => {
         button
       </button>
       <Popover
-        variant="alert"
+        variant="prompt"
         target={ref}
         show
         onClose={onClose}
@@ -193,8 +193,8 @@ test('first element inside the popover container should have focus', async () =>
   expect(firstInteractableElement.instance()).toBe(focusedElement);
 });
 
-test('should render two buttons (Apply/Close) for alert variant', async () => {
-  const wrapper = mount(<Wrapper tooltipProps={{ variant: 'alert' }} />, {
+test('should render two buttons (Apply/Close) for prompt variant', async () => {
+  const wrapper = mount(<Wrapper tooltipProps={{ variant: 'prompt' }} />, {
     attachTo: mountNode
   });
 
@@ -207,11 +207,13 @@ test('should render two buttons (Apply/Close) for alert variant', async () => {
   expect(applyBtn.exists()).toBeTruthy();
 });
 
-test('onClose should be called, when close button in alert popover is clicked', async () => {
+test('onClose should be called, when close button in prompt popover is clicked', async () => {
   const handleClose = jest.fn();
 
   const wrapper = mount(
-    <WrapperAlert tooltipProps={{ variant: 'alert', onClose: handleClose }} />,
+    <WrapperPrompt
+      tooltipProps={{ variant: 'prompt', onClose: handleClose }}
+    />,
     { attachTo: mountNode }
   );
 
@@ -222,11 +224,11 @@ test('onClose should be called, when close button in alert popover is clicked', 
   expect(handleClose).toHaveBeenCalled();
 });
 
-test('onApply should be called, when apply button in alert popover is clicked', async () => {
+test('onApply should be called, when apply button in prompt popover is clicked', async () => {
   const applyFunc = jest.fn();
 
   const wrapper = mount(
-    <WrapperAlert tooltipProps={{ variant: 'alert', onApply: applyFunc }} />,
+    <WrapperPrompt tooltipProps={{ variant: 'prompt', onApply: applyFunc }} />,
     { attachTo: mountNode }
   );
 
@@ -242,8 +244,8 @@ test('text for apply/close buttons are rendered correct', async () => {
   const applyButtonText = 'Specific text to apply popover';
 
   const wrapper = mount(
-    <WrapperAlert
-      tooltipProps={{ variant: 'alert', closeButtonText, applyButtonText }}
+    <WrapperPrompt
+      tooltipProps={{ variant: 'prompt', closeButtonText, applyButtonText }}
     />,
     { attachTo: mountNode }
   );
@@ -258,8 +260,8 @@ test('text for apply/close buttons are rendered correct', async () => {
   expect(applyBtn.text()).toBe(applyButtonText);
 });
 
-test('variant="alert" should return no axe violations', async () => {
-  const wrapper = mount(<WrapperAlert />);
+test('variant="prompt" should return no axe violations', async () => {
+  const wrapper = mount(<WrapperPrompt />);
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });
@@ -332,8 +334,8 @@ test('deactivates aria isolate on hide', async () => {
   expect(deactivateFn).toBeCalled();
 });
 
-test('aria-labelledby is set correctly for alert variant', async () => {
-  const wrapper = mount(<WrapperAlert />);
+test('aria-labelledby is set correctly for prompt variant', async () => {
+  const wrapper = mount(<WrapperPrompt />);
   await update(wrapper);
 
   const id = wrapper.find('.Popover').props().id;

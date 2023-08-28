@@ -2,7 +2,7 @@
   --popover-background-color: var(--gray-10);
   --popover-border-color: var(--gray-90);
   --popover-text-color: var(--gray-90);
-  --popover-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
+  --popover-box-shadow: rgba(0, 0, 0, 0.35) 0 0 10px 0;
   --popover-font-size: var(--text-size-smaller);
   --popover-line-height: var(--text-size-normal);
   --popover-padding: 0 var(--space-small);

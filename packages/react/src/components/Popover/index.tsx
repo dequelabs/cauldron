@@ -14,7 +14,7 @@ import focusableSelector from '../../utils/focusable-selector';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 
-export type PopoverVariant = 'alert' | 'custom';
+export type PopoverVariant = 'prompt' | 'custom';
 
 type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
   target: React.RefObject<HTMLElement> | HTMLElement;
@@ -30,22 +30,22 @@ type CustomProps = BaseProps & {
   applyButtonText?: string;
   onApply?: () => void;
   closeButtonText?: string;
-  infoText?: string;
-  chidlren: ReactNode;
+  infoText?: ReactNode;
+  children: ReactNode;
 } & Cauldron.LabelProps;
 
-type AlertProps = BaseProps & {
-  variant: 'alert';
+type PromptProps = BaseProps & {
+  variant: 'prompt';
   applyButtonText?: string;
   onApply: () => void;
   closeButtonText?: string;
-  infoText: string;
-  chidlren?: ReactNode;
+  infoText: ReactNode;
+  children?: ReactNode;
 };
 
-export type PopoverProps = AlertProps | CustomProps;
+export type PopoverProps = PromptProps | CustomProps;
 
-const AlertPopoverContent = ({
+const PromptPopoverContent = ({
   onClose,
   applyButtonText = 'Apply',
   onApply,
@@ -126,7 +126,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       initialPlacement;
 
     const additionalProps =
-      variant === 'alert' ? { 'aria-labelledby': `${id}-label` } : {};
+      variant === 'prompt' ? { 'aria-labelledby': `${id}-label` } : {};
 
     // Keep targetElement in sync with target prop
     useEffect(() => {
@@ -246,7 +246,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               className,
               {
                 'Popover--hidden': !show,
-                'Popover--alert': variant === 'alert'
+                'Popover--prompt': variant === 'prompt'
               }
             )}
             ref={popoverRef}
@@ -262,8 +262,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               style={styles.arrow}
             />
             <div className="Popover__borderLeft" />
-            {variant === 'alert' ? (
-              <AlertPopoverContent
+            {variant === 'prompt' ? (
+              <PromptPopoverContent
                 applyButtonText={applyButtonText}
                 onApply={onApply}
                 closeButtonText={closeButtonText}
