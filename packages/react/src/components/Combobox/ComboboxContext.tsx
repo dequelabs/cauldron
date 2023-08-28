@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import { ComboboxValue } from './ComboboxItem';
+import { ComboboxValue } from './ComboboxOption';
 
 type ComboboxContext = {
   inputValue: ComboboxValue;

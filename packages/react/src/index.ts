@@ -127,7 +127,7 @@ export {
 } from './components/Listbox';
 export {
   default as Combobox,
-  ComboboxItem,
+  ComboboxOption,
   ComboboxGroup
 } from './components/Combobox';
 

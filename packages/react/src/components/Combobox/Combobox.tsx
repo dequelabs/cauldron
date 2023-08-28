@@ -10,13 +10,13 @@ import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ContentNode } from '../../types';
 import Listbox from '../Listbox';
-import ComboboxItem from './ComboboxItem';
+import ComboboxOption from './ComboboxOption';
 import { ComboboxProvider } from './ComboboxContext';
-import type { ComboboxValue } from './ComboboxItem';
+import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 
-interface ComboboxItem {
+interface ComboboxOption {
   key?: string;
   label: string;
   value?: ComboboxValue;
@@ -28,7 +28,7 @@ interface ComboboxProps
     Omit<HTMLInputElement, 'value' | 'defaultValue'>
   > {
   label: ContentNode;
-  items?: ComboboxItem[];
+  options?: ComboboxOption[];
   value?: ComboboxValue;
   defaultValue?: ComboboxValue;
   requiredText?: React.ReactNode;
@@ -64,7 +64,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       className,
       label,
       children,
-      items = [],
+      options = [],
       value: propValue,
       defaultValue,
       requiredText = 'Required',
@@ -98,16 +98,16 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const isAutocomplete = autocomplete !== 'none';
     const hasError = !!error;
 
-    const comboboxItems =
+    const comboboxOptions =
       children ||
-      items.map((item, index) => (
-        <ComboboxItem
-          key={item.key || index}
+      options.map((option, index) => (
+        <ComboboxOption
+          key={option.key || index}
           id={`${id}-option-${index + 1}`}
-          description={item.description}
+          description={option.description}
         >
-          {item.label}
-        </ComboboxItem>
+          {option.label}
+        </ComboboxOption>
       ));
 
     const handleFocus = useCallback(
@@ -124,15 +124,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       setOpen(true);
     }, []);
 
-    const handleComboboxItemMouseDown = useCallback(
+    const handleComboboxOptionMouseDown = useCallback(
       (event: React.MouseEvent<HTMLUListElement>) => {
-        // prevent blur from triggering when activating combobox items
+        // prevent blur from triggering when activating combobox options
         event.preventDefault();
       },
       []
     );
 
-    const handleComboboxItemClick = useCallback(() => {
+    const handleComboboxOptionClick = useCallback(() => {
       setOpen(false);
       // maintain focus on the input
       inputRef.current?.focus();
@@ -238,15 +238,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         aria-labelledby={`${id}-label`}
         id={`${id}-listbox`}
         value={selectedValue}
-        onMouseDown={handleComboboxItemMouseDown}
-        onClick={handleComboboxItemClick}
+        onMouseDown={handleComboboxOptionMouseDown}
+        onClick={handleComboboxOptionClick}
         onSelectionChange={handleSelectionChange}
         onActiveChange={handleActiveChange}
         ref={listboxRef}
         tabIndex={undefined}
         aria-activedescendant=""
       >
-        {comboboxItems}
+        {comboboxOptions}
       </Listbox>
     );
 

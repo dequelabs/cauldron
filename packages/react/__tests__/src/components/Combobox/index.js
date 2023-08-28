@@ -4,7 +4,7 @@ import { spy } from 'sinon';
 import {
   default as Combobox,
   ComboboxGroup,
-  ComboboxItem
+  ComboboxOption
 } from 'src/components/Combobox';
 
 const simulateKeydown =
@@ -14,9 +14,32 @@ const simulateKeydown =
     wrapper.update();
   };
 
-test.todo('should render combobox with items');
+test('should render combobox with options', () => {
+  const options = [
+    { value: 'Apple', label: 'Apple' },
+    { value: 'Banana', label: 'Banana' },
+    { value: 'Cantaloupe', label: 'Cantaloupe' }
+  ];
+  const wrapper = mount(<Combobox options={options} />);
+  expect(wrapper.find(Combobox).exists()).toBeTruthy();
+  expect(wrapper.find(ComboboxOption).at(0).text()).toEqual('Apple');
+  expect(wrapper.find(ComboboxOption).at(1).text()).toEqual('Banana');
+  expect(wrapper.find(ComboboxOption).at(2).text()).toEqual('Cantaloupe');
+});
 
-test.todo('should render combobox with children');
+test('should render combobox with children', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(wrapper.find(Combobox).exists()).toBeTruthy();
+  expect(wrapper.find(ComboboxOption).at(0).text()).toEqual('Apple');
+  expect(wrapper.find(ComboboxOption).at(1).text()).toEqual('Banana');
+  expect(wrapper.find(ComboboxOption).at(2).text()).toEqual('Cantaloupe');
+});
 
 test.todo('should render combobox with groups');
 

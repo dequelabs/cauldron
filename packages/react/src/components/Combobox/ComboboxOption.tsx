@@ -43,14 +43,6 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
     const isSelected =
       selected?.element && selected.element === comboboxItemRef.current;
 
-    // TODO: this code is bad I should feel bad for writing it
-    if (
-      !matches ||
-      (typeof matches === 'function' && !matches(children as string))
-    ) {
-      // return null;
-    }
-
     useEffect(() => {
       const intersectionEntry = intersectionRef.current;
       if (!intersectionEntry || !isActive) {
@@ -64,6 +56,14 @@ const ComboboxItem = forwardRef<HTMLLIElement, Props>(
         });
       }
     }, [isActive]);
+
+    // TODO: this code is bad I should feel bad for writing it
+    if (
+      !matches ||
+      (typeof matches === 'function' && !matches(children as string))
+    ) {
+      // return null;
+    }
 
     return (
       <ListboxOption
