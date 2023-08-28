@@ -126,7 +126,13 @@
   border-color: var(--combobox-listbox-border-color);
 }
 
-.Combobox:has([role='combobox'][aria-expanded='true']) .Combobox__listbox {
+/* 
+ * Note: Firefox doesn't yet have full support for :has, so .Combobox__listbox--open
+ * is provided as a fallback selector to indicate open listboxes
+ * see: https://caniuse.com/css-has
+ */
+.Combobox:has([role='combobox'][aria-expanded='true']) .Combobox__listbox,
+.Combobox__listbox--open {
   display: block;
 }
 

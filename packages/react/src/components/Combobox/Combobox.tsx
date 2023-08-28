@@ -233,7 +233,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const comboboxListbox = (
       <Listbox
-        className="Combobox__listbox"
+        className={classnames('Combobox__listbox', {
+          'Combobox__listbox--open': open
+        })}
         role="listbox"
         aria-labelledby={`${id}-label`}
         id={`${id}-listbox`}
