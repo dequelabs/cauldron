@@ -249,9 +249,92 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 
 ### Combobox
 
+<ComponentProps className={true} refType="HTMLDivElement" props={[
+  {
+    name: 'label',
+    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+    required: true,
+    description: 'Label for the Combobox input field.'
+  },
+  {
+    name: 'options',
+    type: 'object',
+    description: 'Array of objects mapping to Combobox options. Alternatively, "ComboboxOption" can be used as children instead of this prop.'
+  },
+  {
+    name: 'value',
+    type: 'string',
+    description: 'Initial value to be applied to the combobox. Optionally used for "uncontrolled" comboboxes.'
+  },
+  {
+    name: 'defaultValue',
+    type: 'string',
+    description: 'Value to be applied to the combobox. Optionally used for "controlled" comboboxes.'
+  },
+  {
+    name: 'autocomplete',
+    type: ['none', 'manual', 'automatic'],
+    defaultValue: 'manual',
+    description: 'Sets the autocompletion type of the Combobox listbox.'
+  },
+  {
+    name: 'onSelectionChange',
+    type: 'function',
+    description: 'Callback function that gets invoked when the selected value is changed.'
+  },
+  {
+    name: 'onActiveChange',
+    type: 'function',
+    description: 'Callback function that gets invoked when the current active option was changed.'
+  },
+  { 
+    name: 'error',
+    type: 'React.ReactNode',
+    description: 'Error message for the field, when needed.'
+  },
+  {
+    name: 'requiredText',
+    type: 'string',
+    defaultValue: 'Required',
+    description: 'Custom "required" text. Useful for localization.'
+  },
+  {
+    name: 'portal',
+    type: ['React.Ref<HTMLElement>', 'HTMLElement'],
+    description: 'Alternative placement of combobox listbox. When not set, the listbox will be absolutely positioned inline.'
+  }
+]} />
+
 ### ComboboxOption
 
+<ComponentProps className={true} refType="HTMLLIElement" props={[
+  {
+    name: 'value',
+    type: ['string', 'number'],
+    description: 'Value to be applied to the combobox option. When omitted, value will default to the text content of the option.'
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    description: 'When set, sets the combobox option as "aria-disabled="true" and removes the element from key navigation.'
+  },
+  {
+    name: 'description',
+    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+    description: 'Additional text to display for the ComboboxOption.'
+  }
+]} />
+
 ### ComboboxGroup
+
+<ComponentProps className={true} refType="HTMLUListElement" props={[
+  {
+    name: 'label',
+    required: true,
+    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+    description: 'Label for the group of options.'
+  }
+]} />
 
 ## Related Components
 
