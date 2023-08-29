@@ -91,7 +91,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         rect.bottom <= window.innerHeight &&
         rect.right <= window.innerWidth;
 
-      if (!isInViewport || !intersectionEntry?.isIntersecting) {
+      if (!isInViewport || !intersectionEntry.isIntersecting) {
         comboboxOptionRef.current.scrollIntoView({
           inline: 'nearest',
           block: rect.top <= 0 ? 'end' : 'nearest'
