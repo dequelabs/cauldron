@@ -163,8 +163,8 @@
   list-style-type: none;
 }
 
-.Combobox__listbox > ul[role='group']:not(:first-child) {
-  border-top: 1px solid var(--combobox-listbox-border-color);
+.Combobox__listbox > ul[role='group']:not(:last-child) {
+  border-bottom: 1px solid var(--combobox-listbox-border-color);
 }
 
 .ComboboxGroup__label {
@@ -173,6 +173,10 @@
   font-size: var(--combobox-group-label-font-size);
   font-weight: var(--font-weight-medium);
   border-bottom: 1px solid var(--combobox-listbox-border-color);
+}
+
+.ComboboxGroup--hidden {
+  display: none !important;
 }
 
 .ComboboxOption {
@@ -235,7 +239,7 @@
     0 0 5px 0 var(--combobox-input-error-focus-border-glow-color);
 }
 
-.Combobox__empty {
+.ComboboxListbox__empty {
   padding: var(--space-smaller);
   text-align: center;
 }

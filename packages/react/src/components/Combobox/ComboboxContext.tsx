@@ -17,9 +17,9 @@ export type ComboboxOptionState = {
   value: ComboboxValue;
 };
 
-type ComboboxProvider<T extends string = string> = {
+type ComboboxProvider = {
   children: React.ReactNode;
-  matches: ((inputValue: string, value: T | undefined) => boolean) | boolean;
+  matches: ((inputValue: string, value: string) => boolean) | boolean;
 } & Omit<ComboboxContext, 'matches'>;
 
 /* istanbul ignore next */
@@ -54,7 +54,14 @@ function ComboboxProvider({
       matchingOptions,
       setMatchingOptions
     }),
-    [inputValue, selectedValue, matches]
+    [
+      autocomplete,
+      inputValue,
+      selectedValue,
+      matches,
+      matchingOptions,
+      setMatchingOptions
+    ]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;

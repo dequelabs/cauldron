@@ -76,10 +76,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       !!selected?.element && selected.element === comboboxOptionRef.current;
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
-      (typeof matches === 'function' &&
-        matches(
-          typeof propValue === 'string' ? propValue : (children as string)
-        ));
+      (typeof matches === 'function' && matches(children));
 
     useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
@@ -96,18 +93,16 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     }, [isActive]);
 
     useEffect(() => {
-      if (!isMatching) {
-        return;
+      if (isMatching) {
+        setMatchingOptions((options) => {
+          return new Map(
+            options.set(comboboxOptionRef.current, {
+              value: children as string,
+              selected: isSelected
+            })
+          );
+        });
       }
-
-      setMatchingOptions((options) => {
-        return new Map(
-          options.set(comboboxOptionRef.current, {
-            value: children as string,
-            selected: isSelected
-          })
-        );
-      });
 
       return () => {
         setMatchingOptions((options) => {

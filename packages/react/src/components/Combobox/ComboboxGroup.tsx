@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useLayoutEffect } from 'react';
+import React, { forwardRef, useState, useLayoutEffect, useEffect } from 'react';
 import classnames from 'classnames';
 import { ListboxGroup } from '../Listbox';
 import { useComboboxContext } from './ComboboxContext';
@@ -17,6 +17,7 @@ const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
 
     useLayoutEffect(() => {
       if (autocomplete === 'none' || !inputValue?.length) {
+        setShowGroup(true);
         return;
       }
 
@@ -30,7 +31,9 @@ const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
     return (
       <ListboxGroup
         as="ul"
-        className={classnames('ComboboxGroup', className)}
+        className={classnames('ComboboxGroup', className, {
+          'ComboboxGroup--hidden': !showGroup
+        })}
         ref={comboboxGroupRef}
         label={label}
         groupLabelProps={{ className: 'ComboboxGroup__label' }}
