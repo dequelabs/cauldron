@@ -34,6 +34,7 @@ const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
         className={classnames('ComboboxGroup', className, {
           'ComboboxGroup--hidden': !showGroup
         })}
+        aria-hidden={!showGroup}
         ref={comboboxGroupRef}
         label={label}
         groupLabelProps={{ className: 'ComboboxGroup__label' }}

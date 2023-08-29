@@ -84,10 +84,17 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         return;
       }
 
-      if (!intersectionEntry.isIntersecting) {
+      const rect = comboboxOptionRef.current.getBoundingClientRect();
+      const isInViewport =
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth;
+
+      if (!isInViewport || !intersectionEntry?.isIntersecting) {
         comboboxOptionRef.current.scrollIntoView({
           inline: 'nearest',
-          block: intersectionEntry.intersectionRect.y <= 0 ? 'end' : 'nearest'
+          block: rect.top <= 0 ? 'end' : 'nearest'
         });
       }
     }, [isActive]);
