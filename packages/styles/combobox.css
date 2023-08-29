@@ -234,7 +234,7 @@
     0 0 5px 0 var(--combobox-input-error-focus-border-glow-color);
 }
 
-.Combobox__empty {
+.ComboboxListbox__empty {
   padding: var(--space-smaller);
   text-align: center;
 }

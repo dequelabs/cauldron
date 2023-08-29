@@ -460,19 +460,124 @@ test.skip('should handle selection with "enter" keydown event', () => {
   assertOptionIsSelected(2);
 });
 
-test.todo('should render all options when autocomplete="none"');
+test('should always render all options when autocomplete="none"', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="none">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
 
-test.todo('should render matching options when autocomplete="manual"');
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
 
-test.todo(
-  'should render results not found when no options match when autocomplete="manual"'
-);
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'a' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(3);
+  combobox.simulate('change', { target: { value: 'ap' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(3);
+  combobox.simulate('change', { target: { value: 'apple' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(3);
+});
 
-test.todo('should render matching options when autocomplete="automatic"');
+test('should render matching options when autocomplete="manual"', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="manual">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
 
-test.todo(
-  'should render results not found when no options match when autocomplete="automatic"'
-);
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'a' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(3);
+  combobox.simulate('change', { target: { value: 'ap' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(1);
+  expect(wrapper.find('.ComboboxOption[role="option"]').text()).toEqual(
+    'Apple'
+  );
+});
+
+test('should render results not found when no options match when autocomplete="manual"', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="manual">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'x' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(0);
+  expect(wrapper.find('.ComboboxListbox__empty').text()).toEqual(
+    'No results found.'
+  );
+});
+
+test('should render matching options when autocomplete="automatic"', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="automatic">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'a' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(3);
+  combobox.simulate('change', { target: { value: 'ap' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(1);
+  expect(wrapper.find('.ComboboxOption[role="option"]').text()).toEqual(
+    'Apple'
+  );
+});
+
+test('should render results not found when no options match when autocomplete="automatic"', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="automatic">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'x' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(0);
+  expect(wrapper.find('.ComboboxListbox__empty').text()).toEqual(
+    'No results found.'
+  );
+});
 
 test.todo(
   'should set first active descendent when autocomplete="automatic" on open'

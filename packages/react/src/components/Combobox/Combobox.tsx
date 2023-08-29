@@ -61,7 +61,7 @@ const defaultAutocompleteMatches = (
 
 const ComboboxNoResults = (): JSX.Element => {
   return (
-    <div className="Combobox__empty" aria-live="polite">
+    <div className="ComboboxListbox__empty" aria-live="polite">
       No results found.
     </div>
   );
