@@ -31,7 +31,7 @@ const ComboboxContext = createContext<ComboboxContext>({
   selectedValue: undefined,
   matches: true,
   matchingOptions: new Map(),
-  setMatchingOptions: () => {}
+  setMatchingOptions: () => null
 });
 
 function ComboboxProvider({
