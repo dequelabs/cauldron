@@ -190,6 +190,35 @@ test('should render combobox with groups', () => {
   expect(group2.find(ComboboxOption).at(2).text()).toEqual('Carrots');
 });
 
+test('should render required combobox', () => {
+  const wrapper = mount(
+    <Combobox required>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('[role="combobox"]').prop('required')).toEqual(true);
+  expect(wrapper.find('.Field__required-text').exists()).toBeTruthy();
+  expect(wrapper.find('.Field__required-text').text()).toEqual('Required');
+});
+
+test('should render combobox with error', () => {
+  const wrapper = mount(
+    <Combobox required error="You forgot to choose a value.">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('.Error').exists()).toBeTruthy();
+  expect(wrapper.find('.Error').text()).toEqual(
+    'You forgot to choose a value.'
+  );
+});
+
 test('should open combobox listbox on click', () => {
   const wrapper = mount(
     <Combobox>

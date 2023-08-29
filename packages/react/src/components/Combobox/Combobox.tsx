@@ -49,14 +49,12 @@ interface ComboboxProps
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
-const defaultAutocompleteMatches = (
-  inputValue: string,
-  value: string | undefined
-) => {
-  if (typeof value === 'undefined' || !value) {
+const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
+  // istanbul ignore if
+  if (!value) {
     return true;
   }
-  return value?.toLowerCase().includes(inputValue.toLowerCase());
+  return value.toLowerCase().includes(inputValue.toLowerCase());
 };
 
 const ComboboxNoResults = (): JSX.Element => {
@@ -123,10 +121,13 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ));
 
     useEffect(() => {
+      if (!isAutocomplete) {
+        return;
+      }
+
       if (!open && selectedValue && value !== selectedValue) {
         setValue(selectedValue);
-      }
-      if (open && value === selectedValue) {
+      } else if (open && value === selectedValue) {
         setValue('');
       }
     }, [open]);
@@ -247,8 +248,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
         // istanbul ignore else
         if (!isControlled) {
-          setValue(stringValue || '');
-          setSelectedValue(stringValue || '');
+          setValue(stringValue || /* istanbul ignore next */ '');
+          setSelectedValue(stringValue || /* istanbul ignore next */ '');
         }
 
         onSelectionChange?.({
@@ -358,7 +359,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           autocomplete={autocomplete}
           inputValue={value}
           selectedValue={selectedValue}
-          matches={!isAutocomplete || defaultAutocompleteMatches}
+          matches={!isAutocomplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
         >

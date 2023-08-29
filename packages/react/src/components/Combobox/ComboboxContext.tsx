@@ -9,9 +9,7 @@ type ComboboxContext = {
   setMatchingOptions: React.Dispatch<
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
   >;
-  matches:
-    | (<T extends string = string>(value: T | undefined) => boolean)
-    | boolean;
+  matches: (<T extends string = string>(value: T) => boolean) | boolean;
 };
 
 export type ComboboxOptionState = {
