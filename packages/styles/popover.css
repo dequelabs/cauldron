@@ -96,7 +96,7 @@
 
 /* Alert popover styles */
 
-.Popover--alert {
+.Popover--prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,7 +106,7 @@
   max-width: var(--popover-alert-max-width);
 }
 
-.Popover--alert > .Button--thin {
+.Popover--prompt > .Button--thin {
   width: 100%;
   margin-left: 0;
 }
