@@ -414,11 +414,11 @@ test('should handle selection with "click" event', () => {
   wrapper.update();
   expect(onSelectionChange.callCount).toEqual(1);
   expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
-  assertOptionIsSelected(1);
+  assertOptionIsSelected(0);
   combobox.simulate('click');
   wrapper.find('[role="option"]').at(2).simulate('click');
   expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
-  assertOptionIsSelected(2);
+  assertOptionIsSelected(0);
 });
 
 test.skip('should handle selection with "enter" keydown event', () => {
@@ -502,6 +502,10 @@ test('should set selected value with "defaultValue" prop', () => {
   const combobox = wrapper.find('[role="combobox"]');
   const assertOptionIsSelected = optionIsSelected(wrapper);
 
+  expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual(
+    'Banana'
+  );
+
   combobox.simulate('focus');
   assertListboxIsOpen(true);
   assertOptionIsSelected(1);
@@ -520,10 +524,11 @@ test('should set selected value with "value" prop', () => {
   const combobox = wrapper.find('[role="combobox"]');
   const assertOptionIsSelected = optionIsSelected(wrapper);
 
-  combobox.simulate('focus');
-  assertListboxIsOpen(true);
-  assertOptionIsSelected(1);
   expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual(
     'Banana'
   );
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  assertOptionIsSelected(1);
 });

@@ -299,6 +299,11 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
     description: 'Custom "required" text. Useful for localization.'
   },
   {
+    name: 'renderNoResults',
+    type: ['() => JSX.Element', 'React.Element'],
+    description: 'Render prop to customize the output when there are no matching results. Useful for localization.'
+  },
+  {
     name: 'portal',
     type: ['React.Ref<HTMLElement>', 'HTMLElement'],
     description: 'Alternative placement of combobox listbox. When not set, the listbox will be absolutely positioned inline.'
@@ -310,7 +315,7 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 <ComponentProps className={true} refType="HTMLLIElement" props={[
   {
     name: 'value',
-    type: ['string', 'number'],
+    type: 'string',
     description: 'Value to be applied to the combobox option. When omitted, value will default to the text content of the option.'
   },
   {

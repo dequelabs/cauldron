@@ -12,6 +12,7 @@ import { ContentNode } from '../../types';
 import Listbox from '../Listbox';
 import ComboboxOption from './ComboboxOption';
 import { ComboboxProvider } from './ComboboxContext';
+import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
@@ -44,6 +45,7 @@ interface ComboboxProps
     previousValue: ComboboxValue;
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
+  renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
@@ -55,6 +57,14 @@ const defaultAutocompleteMatches = (
     return true;
   }
   return value?.toLowerCase().includes(inputValue.toLowerCase());
+};
+
+const ComboboxNoResults = (): JSX.Element => {
+  return (
+    <div className="Combobox__empty" aria-live="polite">
+      No results found.
+    </div>
+  );
 };
 
 const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
@@ -76,15 +86,17 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onKeyDown,
       onFocus,
       onBlur,
+      renderNoResults,
       portal,
       ...props
     },
     ref
   ): JSX.Element => {
-    const [value, setValue] = useState<ComboboxValue>(
-      defaultValue || propValue || ''
-    );
-    const [selectedValue, setSelectedValue] = useState<ComboboxValue>(value);
+    const [value, setValue] = useState<string>(defaultValue || propValue || '');
+    const [matchingOptions, setMatchingOptions] = useState<
+      Map<HTMLElement, ComboboxOptionState>
+    >(new Map());
+    const [selectedValue, setSelectedValue] = useState<string>(value || '');
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] = useState<string | null>(
       null
@@ -109,6 +121,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           {option.label}
         </ComboboxOption>
       ));
+
+    useEffect(() => {
+      if (!open && selectedValue && value !== selectedValue) {
+        setValue(selectedValue);
+      }
+      if (open && value === selectedValue) {
+        setValue('');
+      }
+    }, [open]);
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
@@ -151,14 +172,17 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: React.KeyboardEvent<HTMLInputElement>) => {
         onKeyDown?.(event);
 
-        if (event.key === 'Escape') {
+        const enterKeypress = event.key === 'Enter';
+        const escKeypress = event.key === 'Escape';
+
+        if (escKeypress) {
           setOpen(false);
           return;
         }
 
         // Selection should not open the listbox or be
         // forwarded to the listbox component when closed
-        if (event.key === 'Enter' && !open) {
+        if (enterKeypress && !open) {
           return;
         }
 
@@ -167,7 +191,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         // Space should not trigger selection since the user could be typing
         // a value for autocompletion. Additionally when not open and there's
         // an active descendent we do not want to forward keydown events.
-        if (event.key === ' ' || (!open && activeDescendant)) {
+        if (
+          event.key === ' ' ||
+          (!open && activeDescendant) ||
+          (enterKeypress && !activeDescendant)
+        ) {
           return;
         }
 
@@ -179,12 +207,19 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             cancelable: true
           })
         );
+
+        // Close combobox with keyboard selections
+        if (enterKeypress && activeDescendant) {
+          setOpen(false);
+        }
       },
-      [onKeyDown, open]
+      [onKeyDown, open, activeDescendant]
     );
 
     useEffect(() => {
-      setValue(propValue);
+      if (typeof propValue !== 'undefined') {
+        setValue(propValue);
+      }
     }, [propValue]);
 
     const handleChange = useCallback(
@@ -212,8 +247,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
         // istanbul ignore else
         if (!isControlled) {
-          setValue(stringValue);
-          setSelectedValue(stringValue);
+          setValue(stringValue || '');
+          setSelectedValue(stringValue || '');
         }
 
         onSelectionChange?.({
@@ -234,6 +269,20 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onActiveChange?.(option);
     }, []);
 
+    const NoMatchingOptions = React.useMemo(
+      () =>
+        React.isValidElement(renderNoResults)
+          ? () => renderNoResults
+          : typeof renderNoResults === 'function'
+          ? () => renderNoResults()
+          : ComboboxNoResults,
+      [renderNoResults]
+    );
+
+    const noMatchingOptions = !!value?.length && !matchingOptions.size && (
+      <NoMatchingOptions />
+    );
+
     const comboboxListbox = (
       <Listbox
         className={classnames('Combobox__listbox', {
@@ -252,6 +301,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         aria-activedescendant=""
       >
         {comboboxOptions}
+        {noMatchingOptions}
       </Listbox>
     );
 
@@ -305,9 +355,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           <span className="Combobox__arrow" />
         </div>
         <ComboboxProvider
+          autocomplete={autocomplete}
           inputValue={value}
           selectedValue={selectedValue}
           matches={!isAutocomplete || defaultAutocompleteMatches}
+          matchingOptions={matchingOptions}
+          setMatchingOptions={setMatchingOptions}
         >
           {portal
             ? createPortal(

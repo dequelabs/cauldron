@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import Icon from '../Icon';
@@ -11,39 +11,77 @@ import useIntersectionRef from '../../utils/useIntersectionRef';
 
 export type ComboboxValue = Exclude<ListboxValue, number>;
 
-interface Props extends React.HTMLAttributes<HTMLLIElement> {
+interface ComboboxOptionProps extends React.HTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
   value?: ComboboxValue;
   description?: ContentNode;
+  children: string;
 }
 
 const ComboboxMatch = ({
-  children
+  children: text
 }: {
-  children: React.ReactNode;
+  children: string;
 }): JSX.Element => {
-  return <span>{children}</span>;
+  const { inputValue } = useComboboxContext();
+
+  if (!inputValue?.length) {
+    return <span>{text}</span>;
+  }
+
+  const matchStart = text.toLowerCase().indexOf(inputValue?.toLowerCase());
+
+  if (matchStart === -1) {
+    return <span>{text}</span>;
+  }
+
+  const matchLength = inputValue.length;
+  const matchBefore = text.substring(0, matchStart);
+  const match = text.substring(matchStart, matchLength + matchStart);
+  const matchAfter = text.substring(matchStart + matchLength);
+
+  return (
+    <>
+      <span>{matchBefore}</span>
+      <em className="ComboboxOption__match">{match}</em>
+      <span>{matchAfter}</span>
+    </>
+  );
 };
 
-const ComboboxOption = forwardRef<HTMLLIElement, Props>(
+const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
   (
-    { className, children, disabled, id: propId, description, ...props },
+    {
+      className,
+      children,
+      disabled,
+      id: propId,
+      description,
+      value: propValue,
+      ...props
+    },
     ref
   ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { matches } = useComboboxContext();
+    const { matches, setMatchingOptions } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
       threshold: 1.0
     });
     const isActive =
-      active?.element && active.element === comboboxOptionRef.current;
+      !!active?.element && active.element === comboboxOptionRef.current;
     const isSelected =
-      selected?.element && selected.element === comboboxOptionRef.current;
+      !!selected?.element && selected.element === comboboxOptionRef.current;
+    const isMatching =
+      (typeof matches === 'boolean' && matches) ||
+      (typeof matches === 'function' &&
+        matches(
+          typeof propValue === 'string' ? propValue : (children as string)
+        ));
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
       if (!intersectionEntry || !isActive) {
         return;
@@ -57,12 +95,34 @@ const ComboboxOption = forwardRef<HTMLLIElement, Props>(
       }
     }, [isActive]);
 
-    // TODO: this code is bad I should feel bad for writing it
-    if (
-      !matches ||
-      (typeof matches === 'function' && !matches(children as string))
-    ) {
-      // return null;
+    useEffect(() => {
+      if (!isMatching) {
+        return;
+      }
+
+      setMatchingOptions((options) => {
+        return new Map(
+          options.set(comboboxOptionRef.current, {
+            value: children as string,
+            selected: isSelected
+          })
+        );
+      });
+
+      return () => {
+        setMatchingOptions((options) => {
+          options.forEach((_value, element) => {
+            if (!element.isConnected) {
+              options.delete(element);
+            }
+          });
+          return new Map(options);
+        });
+      };
+    }, [isMatching, isSelected]);
+
+    if (!isMatching) {
+      return null;
     }
 
     return (
@@ -75,6 +135,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, Props>(
         ref={comboboxOptionRef}
         disabled={disabled}
         id={id}
+        value={propValue}
         {...props}
       >
         <span>
