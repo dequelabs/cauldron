@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useLayoutEffect, useEffect } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import classnames from 'classnames';
 import { ListboxGroup } from '../Listbox';
 import { useComboboxContext } from './ComboboxContext';
@@ -13,20 +13,17 @@ const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
   ({ className, children, label, ...props }, ref): JSX.Element | null => {
     const { inputValue, autocomplete, matchingOptions } = useComboboxContext();
     const comboboxGroupRef = useSharedRef<HTMLUListElement>(ref);
-    const [showGroup, setShowGroup] = useState(true);
 
     // istanbul ignore next
-    useLayoutEffect(() => {
+    const showGroup = useMemo(() => {
       if (autocomplete === 'none' || !inputValue?.length) {
-        setShowGroup(true);
-        return;
+        return true;
       }
 
       const elements = Array.from(matchingOptions.keys());
-      const groupHasChildren = !!elements.find((element) =>
+      return !!elements.find((element) =>
         comboboxGroupRef.current?.contains(element)
       );
-      setShowGroup(groupHasChildren);
     }, [inputValue, autocomplete, matchingOptions]);
 
     return (
