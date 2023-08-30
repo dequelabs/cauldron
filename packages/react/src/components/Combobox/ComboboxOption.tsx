@@ -78,6 +78,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       (typeof matches === 'boolean' && matches) ||
       (typeof matches === 'function' && matches(children));
 
+    // istanbul ignore next
     useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
       if (!intersectionEntry || !isActive) {
@@ -114,6 +115,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       return () => {
         setMatchingOptions((options) => {
           options.forEach((_value, element) => {
+            // istanbul ignore else
             if (!element.isConnected) {
               options.delete(element);
             }

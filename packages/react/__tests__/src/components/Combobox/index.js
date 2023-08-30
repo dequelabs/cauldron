@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import {
@@ -338,7 +339,30 @@ test('should close combobox listbox when selecting option via click', () => {
   assertListboxIsOpen(false);
 });
 
-test('should not close combobox listbox when selecting option via keypress', () => {
+test('should prevent default on combobox listbox option via mousedown', () => {
+  const preventDefault = spy();
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+
+  assertListboxIsOpen(false);
+  wrapper.find('[role="combobox"]').simulate('focus');
+  assertListboxIsOpen(true);
+  expect(preventDefault.notCalled).toBeTruthy();
+  wrapper
+    .find('li[role="option"]')
+    .at(0)
+    .simulate('mousedown', { preventDefault });
+  expect(preventDefault.calledOnce).toBeTruthy();
+});
+
+test('should close combobox listbox when selecting option via keypress', () => {
   const wrapper = mount(
     <Combobox>
       <ComboboxOption>Apple</ComboboxOption>
@@ -354,9 +378,19 @@ test('should not close combobox listbox when selecting option via keypress', () 
   combobox.simulate('focus');
   assertListboxIsOpen(true);
   combobox.simulate('keydown', { key: 'ArrowDown' });
-  combobox.simulate('keydown', { key: 'ArrowDown' });
+  act(() => {
+    // we need to manually fire active change for the listbox
+    wrapper
+      .find('Listbox')
+      .props()
+      .onActiveChange({
+        element: {
+          getAttribute: () => 'id'
+        }
+      });
+  });
   combobox.simulate('keydown', { key: 'Enter' });
-  assertListboxIsOpen(true);
+  assertListboxIsOpen(false);
 });
 
 test('should set aria-activedescendent for active combobox options', () => {
@@ -422,6 +456,51 @@ test('should call onActiveChange when active option changes', () => {
   expect(onActiveChange.getCall(2).firstArg.value).toEqual('Cantaloupe');
 });
 
+test('should set input value to empty string on open with selected option', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  wrapper.find('[role="option"]').at(1).simulate('click');
+  combobox.simulate('blur');
+  assertListboxIsOpen(false);
+  combobox.simulate('focus');
+  expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual('');
+});
+
+test('should set input value to selected value on close with selected option', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  wrapper.find('[role="option"]').at(1).simulate('click');
+  combobox.simulate('blur');
+  assertListboxIsOpen(false);
+  combobox.simulate('focus');
+  combobox.simulate('blur');
+  expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual(
+    'Banana'
+  );
+});
+
 test('should handle selection with "click" event', () => {
   const onSelectionChange = spy();
   const wrapper = mount(
@@ -450,7 +529,7 @@ test('should handle selection with "click" event', () => {
   assertOptionIsSelected(0);
 });
 
-test.skip('should handle selection with "enter" keydown event', () => {
+test('should handle selection with "enter" keydown event', () => {
   const onSelectionChange = spy();
   const wrapper = mount(
     <Combobox onSelectionChange={onSelectionChange}>
@@ -481,12 +560,16 @@ test.skip('should handle selection with "enter" keydown event', () => {
   simulateArrowDownKeypress();
   simulateEnterKeypress();
   expect(onSelectionChange.callCount).toEqual(1);
-  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Apple');
+  combobox.simulate('click');
+  assertOptionIsSelected(0);
+  simulateArrowDownKeypress();
+  simulateEnterKeypress();
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual('Banana');
+  combobox.simulate('click');
   assertOptionIsSelected(1);
   simulateArrowDownKeypress();
   simulateEnterKeypress();
-  expect(onSelectionChange.secondCall.firstArg.value).toEqual('Cantaloupe');
-  assertOptionIsSelected(2);
 });
 
 test('should always render all options when autocomplete="none"', () => {
@@ -558,6 +641,60 @@ test('should render results not found when no options match when autocomplete="m
   expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(0);
   expect(wrapper.find('.ComboboxListbox__empty').text()).toEqual(
     'No results found.'
+  );
+});
+
+test('should render results not found render function when no options match when autocomplete="manual"', () => {
+  const wrapper = mount(
+    <Combobox
+      autocomplete="manual"
+      renderNoResults={() => (
+        <span className="no-results">Yo, no results found here.</span>
+      )}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'x' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(0);
+  expect(wrapper.find('.no-results').text()).toEqual(
+    'Yo, no results found here.'
+  );
+});
+
+test('should render results not found render component when no options match when autocomplete="manual"', () => {
+  const wrapper = mount(
+    <Combobox
+      autocomplete="manual"
+      renderNoResults={
+        <span className="no-results">Yo, no results found here.</span>
+      }
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  combobox.simulate('change', { target: { value: 'x' } });
+  wrapper.update();
+  expect(wrapper.find('.ComboboxOption[role="option"]').length).toEqual(0);
+  expect(wrapper.find('.no-results').text()).toEqual(
+    'Yo, no results found here.'
   );
 });
 
@@ -665,4 +802,30 @@ test('should set selected value with "value" prop', () => {
   combobox.simulate('focus');
   assertListboxIsOpen(true);
   assertOptionIsSelected(1);
+});
+
+test('should support portal element for combobox listbos', () => {
+  const element = document.createElement('div');
+  const wrapper = mount(
+    <Combobox portal={element}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(wrapper.find('Portal').exists()).toBeTruthy();
+  expect(element.querySelector('ul[role="listbox"]')).toBeTruthy();
+});
+
+test('should support portal element ref for combobox listbos', () => {
+  const element = document.createElement('div');
+  const wrapper = mount(
+    <Combobox portal={{ current: element }}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(wrapper.find('Portal').exists()).toBeTruthy();
+  expect(element.querySelector('ul[role="listbox"]')).toBeTruthy();
 });

@@ -15,6 +15,7 @@ const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
     const comboboxGroupRef = useSharedRef<HTMLUListElement>(ref);
     const [showGroup, setShowGroup] = useState(true);
 
+    // istanbul ignore next
     useLayoutEffect(() => {
       if (autocomplete === 'none' || !inputValue?.length) {
         setShowGroup(true);

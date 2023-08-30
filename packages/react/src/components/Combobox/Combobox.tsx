@@ -229,6 +229,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(event);
+        // istanbul ignore else
         if (!isControlled) {
           setValue(event.target.value);
         }
@@ -247,13 +248,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           undefined
         >
       >[0]) => {
-        const stringValue = listboxValue?.toString();
+        const stringValue =
+          listboxValue?.toString() || /* istanbul ignore next */ '';
 
         // istanbul ignore else
         if (!isControlled) {
-          setValue(stringValue || /* istanbul ignore next */ '');
-          setSelectedValue(stringValue || /* istanbul ignore next */ '');
+          setValue(stringValue);
         }
+
+        setSelectedValue(stringValue);
 
         onSelectionChange?.({
           target,
@@ -373,7 +376,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 comboboxListbox,
                 portal instanceof HTMLElement
                   ? portal
-                  : portal.current || document.body
+                  : portal.current ||
+                      /* istanbul ignore next: default fallback value */ document.body
               )
             : comboboxListbox}
         </ComboboxProvider>
