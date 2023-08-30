@@ -86,6 +86,7 @@
 .Combobox__input input[type='text'] {
   font-size: var(--combobox-input-font-size);
   color: var(--combobox-input-font-color);
+  margin-right: 1.25rem;
 }
 
 .Combobox__input:focus-within {
