@@ -96,9 +96,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     >(new Map());
     const [selectedValue, setSelectedValue] = useState<string>(value || '');
     const [open, setOpen] = useState(false);
-    const [activeDescendant, setActiveDescendant] = useState<string | null>(
-      null
-    );
+    const [activeDescendant, setActiveDescendant] =
+      useState<ListboxOption | null>(null);
     const [id] = propId ? [propId] : useId(1, 'combobox');
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -128,7 +127,39 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       if (!open && selectedValue && value !== selectedValue) {
         setValue(selectedValue);
       }
+
+      if (!open) {
+        setActiveDescendant(null);
+      }
+
+      if (open && autocomplete === 'automatic' && !selectedValue) {
+        // Fire an Home keydown event on listbox to ensure the first item is selected
+        listboxRef.current?.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'Home',
+            bubbles: true,
+            cancelable: true
+          })
+        );
+      }
     }, [open]);
+
+    useEffect(() => {
+      if (autocomplete === 'manual') {
+        setActiveDescendant(null);
+      } else if (autocomplete === 'automatic' && matchingOptions.size) {
+        // Fire a home keydown event on listbox to ensure the first item is selected
+        requestAnimationFrame(() => {
+          listboxRef.current?.dispatchEvent(
+            new KeyboardEvent('keydown', {
+              key: 'Home',
+              bubbles: true,
+              cancelable: true
+            })
+          );
+        });
+      }
+    }, [matchingOptions]);
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
@@ -168,8 +199,15 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: React.FocusEvent<HTMLInputElement>) => {
         onBlur?.(event);
         setOpen(false);
+        if (autocomplete === 'automatic' && activeDescendant) {
+          const stringValue =
+            activeDescendant.value?.toString() ||
+            /* istanbul ignore next: default value */ '';
+          setValue(stringValue);
+          setSelectedValue(stringValue);
+        }
       },
-      [onBlur]
+      [autocomplete, activeDescendant, onBlur]
     );
 
     const handleKeyDown = useCallback(
@@ -272,7 +310,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleActiveChange = useCallback((option: ListboxOption) => {
       // istanbul ignore else
       if (option.element) {
-        setActiveDescendant(option.element.getAttribute('id'));
+        setActiveDescendant(option);
       }
 
       onActiveChange?.(option);
@@ -353,7 +391,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             aria-expanded={open}
             aria-haspopup="listbox"
             aria-activedescendant={
-              open && activeDescendant ? activeDescendant : undefined
+              open && activeDescendant ? activeDescendant.element.id : undefined
             }
             {...props}
             onChange={handleChange}

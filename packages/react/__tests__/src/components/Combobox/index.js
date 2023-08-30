@@ -745,9 +745,34 @@ test('should render results not found when no options match when autocomplete="a
   );
 });
 
-test.todo(
-  'should set first active descendent when autocomplete="automatic" on open'
-);
+test('should set selected value to active descendent when autocomplete="automatic" loses focus', () => {
+  const wrapper = mount(
+    <Combobox autocomplete="automatic">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+  const combobox = wrapper.find('[role="combobox"]');
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const simulateArrowDownKeypress = simulateKeyDown(
+    wrapper.find('ul[role="listbox"]'),
+    'ArrowDown'
+  );
+
+  combobox.simulate('focus');
+  assertListboxIsOpen(true);
+  // Note: first active item should already be "Apple", but since dispatchEvent is
+  // used it's not triggered correctly in enzyme so we fire an initial event to
+  // make the first value active
+  simulateArrowDownKeypress();
+  simulateArrowDownKeypress();
+  combobox.simulate('blur');
+  expect(wrapper.find('[role="combobox"]').prop('value')).toEqual('Banana');
+});
 
 test('should use id from props when set', () => {
   const wrapper = mount(
