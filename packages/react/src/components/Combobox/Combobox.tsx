@@ -105,7 +105,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const listboxRef = useRef<HTMLUListElement>(null);
     const isControlled = typeof propValue !== 'undefined';
     const isRequired = !!props.required;
-    const isAutocomplete = autocomplete !== 'none';
+    const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
 
     const comboboxOptions =
@@ -121,14 +121,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ));
 
     useEffect(() => {
-      if (!isAutocomplete) {
+      if (!isAutoComplete) {
         return;
       }
 
       if (!open && selectedValue && value !== selectedValue) {
         setValue(selectedValue);
-      } else if (open && value === selectedValue) {
-        setValue('');
       }
     }, [open]);
 
@@ -138,14 +136,20 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(true);
+          if (selectedValue && value === selectedValue) {
+            setValue('');
+          }
         }
       },
-      [onFocus]
+      [onFocus, value, selectedValue]
     );
 
     const handleInputClick = useCallback(() => {
       setOpen(true);
-    }, []);
+      if (selectedValue && value === selectedValue) {
+        setValue('');
+      }
+    }, [value, selectedValue]);
 
     const handleComboboxOptionMouseDown = useCallback(
       (event: React.MouseEvent<HTMLUListElement>) => {
@@ -156,7 +160,6 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     );
 
     const handleComboboxOptionClick = useCallback(() => {
-      setOpen(false);
       // maintain focus on the input
       inputRef.current?.focus();
     }, []);
@@ -214,7 +217,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setOpen(false);
         }
       },
-      [onKeyDown, open, activeDescendant]
+      [onKeyDown, isAutoComplete, open, activeDescendant]
     );
 
     useEffect(() => {
@@ -257,6 +260,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           value: stringValue,
           previousValue: previousValue?.toString()
         });
+
+        setOpen(false);
       },
       [isControlled, onSelectionChange]
     );
@@ -340,7 +345,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             ref={inputRef}
             value={value}
             role="combobox"
-            aria-autocomplete={!isAutocomplete ? 'none' : 'list'}
+            aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}
             aria-haspopup="listbox"
@@ -359,7 +364,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           autocomplete={autocomplete}
           inputValue={value}
           selectedValue={selectedValue}
-          matches={!isAutocomplete || defaultAutoCompleteMatches}
+          matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
         >
