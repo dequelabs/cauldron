@@ -216,6 +216,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
         const enterKeypress = event.key === 'Enter';
         const escKeypress = event.key === 'Escape';
+        const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
 
         if (escKeypress) {
           setOpen(false);
@@ -229,6 +230,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         }
 
         setOpen(true);
+
+        if (!open && arrowKeypress && selectedValue) {
+          // If the user opens the combobox again with a selected value
+          // just clear out the field to restore filtering capabilities
+          setValue('');
+        }
 
         // Space should not trigger selection since the user could be typing
         // a value for autocompletion. Additionally when not open and there's
@@ -255,7 +262,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setOpen(false);
         }
       },
-      [onKeyDown, isAutoComplete, open, activeDescendant]
+      [onKeyDown, isAutoComplete, open, selectedValue, activeDescendant]
     );
 
     useEffect(() => {
