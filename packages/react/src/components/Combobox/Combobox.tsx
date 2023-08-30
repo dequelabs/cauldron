@@ -175,12 +175,20 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [onFocus, value, selectedValue]
     );
 
-    const handleInputClick = useCallback(() => {
-      setOpen(true);
-      if (selectedValue && value === selectedValue) {
-        setValue('');
-      }
-    }, [value, selectedValue]);
+    const handleInputClick = useCallback(
+      (event: React.MouseEvent<HTMLDivElement>) => {
+        setOpen(true);
+        if (selectedValue && value === selectedValue) {
+          setValue('');
+        }
+
+        if (event.target !== inputRef.current) {
+          // ensure focus is set on the input field
+          inputRef.current?.focus();
+        }
+      },
+      [value, selectedValue]
+    );
 
     const handleComboboxOptionMouseDown = useCallback(
       (event: React.MouseEvent<HTMLUListElement>) => {
