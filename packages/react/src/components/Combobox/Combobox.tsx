@@ -17,6 +17,9 @@ import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 
+// Event Keys
+const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
+
 interface ComboboxOption {
   key?: string;
   label: string;
@@ -119,6 +122,19 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         </ComboboxOption>
       ));
 
+    const triggerListboxKeyDown = React.useCallback(
+      (key: string) => {
+        listboxRef.current?.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key,
+            bubbles: true,
+            cancelable: true
+          })
+        );
+      },
+      [listboxRef]
+    );
+
     useEffect(() => {
       if (!isAutoComplete) {
         return;
@@ -134,13 +150,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
       if (open && autocomplete === 'automatic' && !selectedValue) {
         // Fire an Home keydown event on listbox to ensure the first item is selected
-        listboxRef.current?.dispatchEvent(
-          new KeyboardEvent('keydown', {
-            key: 'Home',
-            bubbles: true,
-            cancelable: true
-          })
-        );
+        triggerListboxKeyDown(Home);
       }
     }, [open]);
 
@@ -154,13 +164,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       ) {
         // Fire a home keydown event on listbox to ensure the first item is selected
         requestAnimationFrame(() => {
-          listboxRef.current?.dispatchEvent(
-            new KeyboardEvent('keydown', {
-              key: 'Home',
-              bubbles: true,
-              cancelable: true
-            })
-          );
+          triggerListboxKeyDown(Home);
         });
       }
     }, [matchingOptions]);
@@ -226,11 +230,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       (event: React.KeyboardEvent<HTMLInputElement>) => {
         onKeyDown?.(event);
 
-        const enterKeypress = event.key === 'Enter';
-        const escKeypress = event.key === 'Escape';
+        const enterKeypress = event.key === Enter;
+        const escKeypress = event.key === Escape;
         const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
 
-        if (['Home', 'End'].includes(event.key)) {
+        if ([Home, End].includes(event.key)) {
           // prevent the page from scrolling and allow start/end option activation
           event.preventDefault();
         }
@@ -266,13 +270,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         }
 
         // forward input events to listbox
-        listboxRef.current?.dispatchEvent(
-          new KeyboardEvent('keydown', {
-            key: event.key,
-            bubbles: true,
-            cancelable: true
-          })
-        );
+        triggerListboxKeyDown(event.key);
 
         // Close combobox with keyboard selections
         if (enterKeypress && activeDescendant) {
