@@ -230,6 +230,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         const escKeypress = event.key === 'Escape';
         const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
 
+        if (['Home', 'End'].includes(event.key)) {
+          // prevent the page from scrolling and allow start/end option activation
+          event.preventDefault();
+        }
+
         if (escKeypress) {
           setOpen(false);
           return;

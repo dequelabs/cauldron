@@ -447,6 +447,26 @@ test('should set aria-activedescendent for active combobox options', () => {
   assertOptionIsActive(2);
 });
 
+test('should prevent default event on home/end keypress', () => {
+  const preventDefault = spy();
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = wrapper.find('[role="combobox"]');
+  expect(preventDefault.notCalled).toBeTruthy();
+  combobox.simulate('keydown', { key: 'Home', preventDefault });
+  expect(preventDefault.callCount).toEqual(1);
+  combobox.simulate('keydown', { key: 'End', preventDefault });
+  expect(preventDefault.callCount).toEqual(2);
+  combobox.simulate('keydown', { key: 'ArrowDown', preventDefault });
+  expect(preventDefault.callCount).toEqual(2);
+});
+
 test('should call onActiveChange when active option changes', () => {
   const onActiveChange = spy();
   const wrapper = mount(
