@@ -171,7 +171,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(true);
-          if (selectedValue && value === selectedValue) {
+          if (selectedValue && value === selectedValue && isAutoComplete) {
             setValue('');
           }
         }
@@ -182,7 +182,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const handleInputClick = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
         setOpen(true);
-        if (selectedValue && value === selectedValue) {
+        if (selectedValue && value === selectedValue && isAutoComplete) {
           setValue('');
         }
 
@@ -217,8 +217,6 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             /* istanbul ignore next: default value */ '';
           setValue(stringValue);
           setSelectedValue(stringValue);
-        } else if (autocomplete === 'none') {
-          setValue(value);
         }
       },
       [autocomplete, activeDescendant, onBlur]
@@ -245,7 +243,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
         setOpen(true);
 
-        if (!open && arrowKeypress && selectedValue) {
+        if (!open && arrowKeypress && selectedValue && isAutoComplete) {
           // If the user opens the combobox again with a selected value
           // just clear out the field to restore filtering capabilities
           setValue('');

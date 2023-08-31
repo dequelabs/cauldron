@@ -236,6 +236,30 @@ test('should open combobox listbox on click', () => {
   assertListboxIsOpen(true);
 });
 
+test('should focus combobox input on click', () => {
+  const wrapper = mount(
+    <Combobox>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const assertListboxIsOpen = listboxIsOpen(wrapper);
+
+  assertListboxIsOpen(false);
+  const onFocus = spy(
+    wrapper.find('[role="combobox"]').getElement().ref.current,
+    'focus'
+  );
+  expect(onFocus.notCalled).toBeTruthy();
+  wrapper
+    .find('[role="combobox"]')
+    .simulate('click', { target: document.body });
+  assertListboxIsOpen(true);
+  expect(onFocus.calledOnce).toBeTruthy();
+});
+
 test('should open combobox listbox on focus', () => {
   const wrapper = mount(
     <Combobox>
@@ -477,7 +501,7 @@ test('should set input value to empty string on open with selected option', () =
   expect(wrapper.find('input[role="combobox"]').prop('value')).toEqual('');
 });
 
-test('should set input value to selected value on close with selected option', () => {
+test('should restore input value to selected value on close with selected option', () => {
   const wrapper = mount(
     <Combobox>
       <ComboboxOption>Apple</ComboboxOption>
