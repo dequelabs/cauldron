@@ -147,7 +147,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     useEffect(() => {
       if (autocomplete === 'manual') {
         setActiveDescendant(null);
-      } else if (autocomplete === 'automatic' && matchingOptions.size) {
+      } else if (
+        autocomplete === 'automatic' &&
+        matchingOptions.size &&
+        !selectedValue
+      ) {
         // Fire a home keydown event on listbox to ensure the first item is selected
         requestAnimationFrame(() => {
           listboxRef.current?.dispatchEvent(
@@ -213,6 +217,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             /* istanbul ignore next: default value */ '';
           setValue(stringValue);
           setSelectedValue(stringValue);
+        } else if (autocomplete === 'none') {
+          setValue(value);
         }
       },
       [autocomplete, activeDescendant, onBlur]
