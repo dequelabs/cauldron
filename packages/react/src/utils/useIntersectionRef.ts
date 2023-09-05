@@ -26,11 +26,7 @@ export default function useIntersectionRef<T extends HTMLElement>(
       'IntersectionObserver' in globalThis &&
       typeof IntersectionObserver === 'function'
     ) {
-      if (
-        !element &&
-        typeof element === 'object' &&
-        !(element as MutableRefObject<T>)?.current
-      ) {
+      if (typeof element === 'undefined' || element === null) {
         return;
       }
 
