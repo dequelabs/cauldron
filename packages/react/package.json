@@ -110,7 +110,7 @@
       "**/__tests__/demo/**/*.js"
     ],
     "collectCoverageFrom": [
-      "**/src/**/*.tsx"
+      "**/src/**/*.{ts,tsx}"
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",

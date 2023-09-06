@@ -18,7 +18,7 @@ import {
 ## Examples
 
 <Note>
-  Listbox follows [aria practices](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for _Listbox_ but is not currently intended to be used by itself. This component's intended usage is to be composed of components that have keyboard-navigable items like Combobox and [OptionsMenu](./OptionsMenu).
+  Listbox follows [aria practices](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for _Listbox_ but is not currently intended to be used by itself. This component's intended usage is to be composed with components that have keyboard-navigable items like [Combobox](./Combobox) and [OptionsMenu](./OptionsMenu).
 </Note>
 
 ### Listbox Options
@@ -144,11 +144,6 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
     description: 'Initial value to be applied to the listbox. Optionally used for "uncontrolled" listboxes.'
   },
   {
-    name: 'onSelect',
-    type: 'function',
-    description: 'Callback function that gets invoked when a selection is made from one of the ListboxOptions.'
-  },
-  {
     name: 'onSelectionChange',
     type: 'function',
     description: 'Callback function that gets invoked when the selected value is changed.'
@@ -215,3 +210,7 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
     defaultValue: 'ul'
   }
 ]} />
+
+## Related Components
+
+- [Combobox](./Combobox)

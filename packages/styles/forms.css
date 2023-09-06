@@ -26,6 +26,7 @@
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
   --field-listbox-selected-background-color: var(--accent-secondary-active);
+  --field-font-size: var(--text-size-small);
   --input-min-width: 250px;
 }
 
@@ -318,7 +319,7 @@ textarea.Field--has-error:focus:hover,
 .Field__text-input {
   padding: var(--space-smallest);
   box-sizing: border-box;
-  font-size: var(--text-size-small);
+  font-size: var(--field-font-size);
   color: var(--field-content-color);
   min-width: min(var(--input-min-width), 100%);
 }
@@ -332,7 +333,7 @@ textarea.Field--has-error:focus:hover,
 .Field__textarea {
   display: block;
   min-height: 56px;
-  font-size: var(--text-size-small);
+  font-size: var(--field-font-size);
   min-width: min(var(--input-min-width), 100%);
   padding: var(--space-half);
   max-width: 500px;

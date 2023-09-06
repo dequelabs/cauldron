@@ -126,6 +126,11 @@ export {
   ListboxOption,
   ListboxGroup
 } from './components/Listbox';
+export {
+  default as Combobox,
+  ComboboxOption,
+  ComboboxGroup
+} from './components/Combobox';
 
 export { default as Popover } from './components/Popover';
 
