@@ -104,6 +104,41 @@ test('should render collapsed TwoColumnPanel', () => {
   ).toBeFalsy();
 });
 
+test('should collapse panel when prefers-reduced-motion: reduce is set', () => {
+  window.matchMedia.withArgs('(prefers-reduced-motion: reduce)').returns({
+    matches: true
+  });
+  const wrapper = mount(
+    <TwoColumnPanel>
+      <ColumnLeft>
+        <ColumnHeader>Sidebar</ColumnHeader>
+        <nav>
+          <ul>
+            <li>
+              <a href="/one">1</a>
+            </li>
+            <li>
+              <a href="/two">2</a>
+            </li>
+            <li>
+              <a href="/three">3</a>
+            </li>
+          </ul>
+        </nav>
+      </ColumnLeft>
+      <ColumnRight>
+        <ColumnHeader>Column Header</ColumnHeader>
+        <div>1</div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  );
+  wrapper
+    .find('.TwoColumnPanel__Right button[aria-label="Hide Panel"]')
+    .simulate('click');
+  wrapper.update();
+  expect(wrapper.find('TwoColumnPanel__Left').exists()).toBe(false);
+});
+
 test('should render configurable collapsed TwoColumnPanel', () => {
   window.matchMedia.withArgs('(max-width: 999rem)').returns({
     matches: true,

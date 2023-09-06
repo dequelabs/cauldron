@@ -75,6 +75,10 @@ ul.Component__list li {
   overflow: hidden;
 }
 
+.Component .Offscreen {
+  top: 0;
+}
+
 .Component > .Panel {
   padding: var(--space-small);
 }
@@ -123,6 +127,15 @@ ul.Component__list li {
   font-size: var(--text-size-smaller);
   padding-top: var(--space-small);
   text-align: center;
+}
+
+table.Component__Props tr td:first-child,
+ul.Component__Props
+  li
+  dl
+  .DescriptionList__item:first-child
+  .DescriptionList__details {
+  white-space: nowrap;
 }
 
 ul.Component__Props {

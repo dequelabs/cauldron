@@ -29,7 +29,6 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
 TabPanel.displayName = 'TabPanel';
 TabPanel.propTypes = {
   id: PropTypes.string,
-  // @ts-expect-error
   children: PropTypes.node,
   className: PropTypes.string
 };
