@@ -120,11 +120,14 @@ export {
   ColumnList
 } from './components/TwoColumnPanel';
 export { default as Notice } from './components/Notice';
+
 export {
   default as Listbox,
   ListboxOption,
   ListboxGroup
 } from './components/Listbox';
+
+export { default as Popover } from './components/Popover';
 
 /**
  * Helpers / Utils

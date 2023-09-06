@@ -1,0 +1,176 @@
+---
+title: Popover
+description: A popover component is a user interface element designed to provide contextual information or actions in a compact and non-intrusive manner. 
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Popover/index.tsx
+---
+
+import { useRef, useState } from 'react'
+import { Popover, Button } from '@deque/cauldron-react'
+
+```js
+import { Popover, Button } from '@deque/cauldron-react'
+```
+
+## Examples
+
+Cauldron's tooltip relies on [Popper](https://popper.js.org/) to position tooltips dynamically. Popover can be triggered from any focusable element via a `target` attribute pointed to an HTMLElement or React ref object.
+
+### Prompt Popover
+
+Prompt Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
+also popup contains information text to show some message to the user.
+Canceling the action will only close the popup window.
+
+```jsx example
+function PromptPopoverExample() {
+  const [show, setShow] = useState(false);
+  const onTogglePopover = () => setShow(!show);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button 
+        onClick={onTogglePopover} 
+        variant="secondary" 
+        buttonRef={buttonRef}
+      >
+        Prompt!
+      </Button>
+      <Popover
+        variant="prompt"
+        target={buttonRef} 
+        placement="auto" 
+        show={show} 
+        onClose={onTogglePopover}
+        infoText="Are you sure you want to exit this wizard? All changes will be lost."
+      />
+    </>
+  )
+}
+```
+
+### Custom Popover
+
+For custom purposes you can use "custom" variant, which is default.
+
+```jsx example
+function CustomPopoverExample() {
+  const [show, setShow] = useState(false);
+  const onTogglePopover = () => setShow(!show);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button 
+        onClick={onTogglePopover} 
+        variant="secondary" 
+        buttonRef={buttonRef}
+      >
+        Custom!
+      </Button>
+      <Popover
+        target={buttonRef} 
+        placement="auto" 
+        show={show} 
+        onClose={onTogglePopover}
+        aria-labelledby={"popover-title"}
+      >
+        <div>
+          <h2 id="popover-title">Popover Title</h2>
+          <p>Popover content</p>
+          <Button>Custom button</Button>
+          <Button>Custom button</Button>
+          <p>Popover content</p>
+        </div>
+      </Popover>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: false,
+    description: 'Please, note, if the variant is Custom - then children is required'
+  }}
+  props={[
+    {
+      name: 'target',
+      type: ['React.Ref', 'HTMLElement'],
+      required: true,
+      description: 'The target element to attach the popover to.'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      required: true,
+      description: 'Manually control the show state of the popover.'
+    },
+    {
+      name: 'onClose',
+      type: 'function',
+      required: true,
+      description: 'Callback, which is invoked on closing popover'
+    },
+    {
+      name: 'infoText',
+      required: true,
+      type: 'string',
+      description: 'Information text to show some warning or useful information in Prompt variant of the component. Please note that required is only for "Prompt" variant.',
+    },
+    {
+      name: 'onApply',
+      required: true,
+      type: 'function',
+      description: 'Callback, which is used for Apply button in Prompt variant of the component. Please note, that is only required for Prompt variant',
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'The position of the popover relative to its target element.'
+    },
+    {
+      name: 'variant',
+      type: ['custom', 'prompt'],
+      defaultValue: 'custom',
+      description: 'The style of Popover to display.'
+    },
+    {
+      name: 'portal',
+      type: ['React.Ref', 'HTMLElement'],
+      description: 'The parent element to place the Portal in.',
+      defaultValue: 'document.body'
+    },
+    {
+      name: 'association',
+      type: ['aria-labelledby', 'aria-describedby'],
+      description: 'Sets the aria relationship for the targeted element.',
+      defaultValue: 'aria-describedby'
+    },
+    {
+      name: 'applyButtonText',
+      type: 'string',
+      description: 'Label for button, which is used to apply action in Prompt variant of the popover',
+      defaultValue: 'Apply'
+    },
+    {
+      name: 'closeButtonText',
+      type: 'string',
+      description: 'Label for button, which is used to close popover in Prompt variant of the component',
+      defaultValue: 'Close'
+    },
+    {
+      name: 'aria-label',
+      type: 'string',
+      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
+    },
+  ]}
+/>
