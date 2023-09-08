@@ -1,0 +1,8 @@
+.TagButton {
+  vertical-align: middle;
+}
+
+.TagButton__icon svg {
+  width: 15px;
+  height: 15px;
+}
