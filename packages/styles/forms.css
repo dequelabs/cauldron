@@ -355,9 +355,16 @@ textarea.Field--has-error:focus:hover,
   font-weight: var(--font-weight-normal);
   line-height: 1;
   margin-top: var(--space-half);
-  margin-left: calc(var(--checkbox-size) + 2px + var(--space-half));
   cursor: default;
   display: flex;
+}
+
+.Checkbox .Field__labelDescription {
+  margin-left: calc(var(--checkbox-size) + 2px + var(--space-half));
+}
+
+.Checkbox .Field__labelDescription {
+  margin-left: calc(var(--radio-size) + 2px + var(--space-half));
 }
 
 .Field__labelDescription + .Error {
