@@ -28,6 +28,8 @@
   --field-listbox-selected-background-color: var(--accent-secondary-active);
   --field-font-size: var(--text-size-small);
   --input-min-width: 250px;
+  --checkbox-size: var(--icon-size);
+  --radio-size: var(--icon-size);
 }
 
 .cauldron--theme-dark {
@@ -353,9 +355,16 @@ textarea.Field--has-error:focus:hover,
   font-weight: var(--font-weight-normal);
   line-height: 1;
   margin-top: var(--space-half);
-  margin-left: calc(24px + 2px + var(--space-half));
   cursor: default;
   display: flex;
+}
+
+.Checkbox__wrap .Field__labelDescription {
+  margin-left: calc(var(--checkbox-size) + 2px + var(--space-half));
+}
+
+.Radio__wrap .Field__labelDescription {
+  margin-left: calc(var(--radio-size) + 2px + var(--space-half));
 }
 
 .Field__labelDescription + .Error {
@@ -383,6 +392,16 @@ textarea.Field--has-error:focus:hover,
 .Radio__overlay svg,
 .Checkbox__overlay svg {
   pointer-events: none;
+}
+
+.Radio__overlay svg {
+  height: var(--radio-size);
+  width: var(--radio-size);
+}
+
+.Checkbox__overlay svg {
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
 }
 
 .Radio__overlay:active:not(.Radio__overlay--disabled),
