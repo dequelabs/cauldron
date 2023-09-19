@@ -49,6 +49,7 @@ interface ComboboxProps
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
+  formKey?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
@@ -89,6 +90,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onBlur,
       renderNoResults,
       portal,
+      name,
+      formKey,
       ...props
     },
     ref
@@ -109,6 +112,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
+
+    const selectedOpaqueValue = useMemo(() => {
+      // todo
+      return '';
+    }, [selectedValue, formKey]);
 
     const comboboxOptions =
       children ||
@@ -134,6 +142,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       },
       [listboxRef]
     );
+
+    const isOpaqueFormValue = formKey && formKey !== 'value' && name;
 
     useEffect(() => {
       if (!isAutoComplete) {
@@ -380,6 +390,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox', className)}
         ref={comboboxRef}
       >
+        {isOpaqueFormValue && (
+          <input type="hidden" name={name} value={selectedOpaqueValue} />
+        )}
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -406,6 +419,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             type="text"
             id={`${id}-input`}
             ref={inputRef}
+            name={isOpaqueFormValue ? undefined : name}
             value={value}
             role="combobox"
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
