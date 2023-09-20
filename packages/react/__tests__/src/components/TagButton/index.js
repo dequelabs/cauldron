@@ -23,17 +23,6 @@ test('should render button by default', async () => {
   expect(button.text()).toBe('Edit: value');
 });
 
-test('should render tag component in case when disabled state is absent', async () => {
-  const wrapper = mount(
-    <TagButton icon="pencil" label="Edit: " value={'value'} />
-  );
-  await update(wrapper);
-  const button = wrapper.find('button');
-  expect(button.exists()).toBe(false);
-  const tag = wrapper.find('.Tag');
-  expect(tag.exists()).toBe(true);
-});
-
 test('should support adding className to button', async () => {
   const wrapper = mount(
     <TagButton
@@ -48,14 +37,6 @@ test('should support adding className to button', async () => {
   expect(wrapper.find('button.TagButton').hasClass('foo')).toBeTruthy();
 });
 
-test('should support adding className to tag (in case when disabled state is not provided', async () => {
-  const wrapper = mount(
-    <TagButton icon="pencil" label="Edit: " value={'value'} className="foo" />
-  );
-  await update(wrapper);
-  expect(wrapper.find('div.TagButton').hasClass('foo')).toBeTruthy();
-});
-
 test('action is called on click button', async () => {
   const action = jest.fn().mockImplementation(() => {});
   const wrapper = mount(
@@ -65,7 +46,7 @@ test('action is called on click button', async () => {
       value={'value'}
       className="foo"
       disabled={false}
-      action={action}
+      onClick={action}
     />
   );
   await update(wrapper);
@@ -86,7 +67,7 @@ test('action should not be called on click button, if state is provided and disa
       value={'value'}
       className="foo"
       disabled={true}
-      action={action}
+      onClick={action}
     />
   );
   await update(wrapper);
@@ -98,22 +79,15 @@ test('action should not be called on click button, if state is provided and disa
   expect(action).not.toHaveBeenCalled();
 });
 
-test('action should not be called on click button, if state is not provided', async () => {
-  const action = jest.fn().mockImplementation(() => {});
+test('should return no axe violations', async () => {
   const wrapper = mount(
     <TagButton
       icon="pencil"
       label="Edit: "
       value={'value'}
+      disabled={false}
       className="foo"
-      action={action}
     />
   );
-  await update(wrapper);
-
-  await act(async () => {
-    wrapper.find('div.TagButton').simulate('click');
-  });
-
-  expect(action).not.toHaveBeenCalled();
+  expect(await axe(wrapper.html())).toHaveNoViolations();
 });
