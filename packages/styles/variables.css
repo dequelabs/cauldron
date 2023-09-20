@@ -109,6 +109,7 @@
 
   /* icon sizes */
   --icon-size: 24px;
+  --tag-button-icon-size: 10px;
 
   /* dimensions */
   --border-width: 6px;
