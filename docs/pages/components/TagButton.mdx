@@ -1,62 +1,73 @@
 ---
 title: TagButton
-description: Component that is an extension of the existing <Button variant="tag"> that requires those properties listed in the Props Section
+description: An interactive element that performs a programmable action when clicked by the user, displayed as a label and value with symbol image.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TagButton/index.tsx
 ---
 
-import { TagButton } from '@deque/cauldron-react'
+import { TagButton } from '@deque/cauldron-react';
 
 ```js
-import { TagButton } from '@deque/cauldron-react'
+import { TagButton } from '@deque/cauldron-react';
 ```
 
 ## Example
 
 ```jsx example
-<div style={{ display: "flex", gap: "8px" }}>
-  <TagButton label={"Label"} value={"value"} action={() => console.log("test")} icon={"pencil"} />
-
-  <TagButton label={"Label"} value={"value"} action={() => console.log("test")} icon={"pencil"} disabled={true} />
-</div>
+<TagButton
+  label={'Label'}
+  value={'value'}
+  onClick={() => console.log('test')}
+  icon={'pencil'}
+/>
 ```
-
 
 ## Props
 
 ### TagButton
 
-<ComponentProps 
-  className={true} 
+<ComponentProps
+  className={true}
   props={[
     {
       name: 'label',
       required: true,
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       description: 'Label for the tag button.'
     },
     {
       name: 'value',
       required: true,
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       description: 'Value for the tag button.'
     },
     {
-      name: 'action',
+      name: 'onClick',
       required: true,
       type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-      description: 'Label for the tag button.'
+      description: 'a function that gets executed when a user clicks on an element.'
     },
     {
       name: 'icon',
       type: 'string',
       required: true,
       description: 'Icon to use for the TagButton'
-    },
-    {
-      name: 'disabled',
-      required: false,
-      type: 'boolean',
-      description: 'Disabled state of the element'
-    },
+    }
   ]}
 />
+
+## Related Components
+
+- [Button](./Button)
+- [Tag](./Tag)
