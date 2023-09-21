@@ -69,7 +69,7 @@ const ComboboxNoResults = ({
     <div
       className="ComboboxListbox__empty"
       aria-atomic="true"
-      aria-relevant="text"
+      aria-relevant="all"
       aria-live="polite"
     >
       {children || 'No results found.'}
