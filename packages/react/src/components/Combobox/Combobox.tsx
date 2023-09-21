@@ -66,7 +66,12 @@ const ComboboxNoResults = ({
   children?: React.ReactNode;
 }): JSX.Element => {
   return (
-    <div className="ComboboxListbox__empty" role="alert" aria-live="polite">
+    <div
+      className="ComboboxListbox__empty"
+      aria-atomic="true"
+      aria-relevant="text"
+      aria-live="polite"
+    >
       {children || 'No results found.'}
     </div>
   );
