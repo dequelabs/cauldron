@@ -62,7 +62,11 @@ const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
 
 const ComboboxNoResults = (): JSX.Element => {
   return (
-    <div className="ComboboxListbox__empty" aria-live="polite">
+    <div
+      className="ComboboxListbox__empty"
+      aria-live="polite"
+      aria-relevant="all"
+    >
       No results found.
     </div>
   );
