@@ -65,14 +65,20 @@ const ComboboxNoResults = ({
 }: {
   children?: React.ReactNode;
 }): JSX.Element => {
+  const [liveText, setLiveText] = useState<React.ReactNode>('');
+
+  useEffect(() => {
+    // Note: NVDA will not announce live regions unless initially mounted,
+    // we work around this by arbitrarily updating the live region text
+    // on the next animation frame.
+    requestAnimationFrame(() => {
+      setLiveText(children || 'No results found.');
+    });
+  }, []);
+
   return (
-    <div
-      className="ComboboxListbox__empty"
-      aria-atomic="true"
-      aria-relevant="all"
-      aria-live="polite"
-    >
-      {children || 'No results found.'}
+    <div className="ComboboxListbox__empty" aria-live="polite">
+      {liveText}
     </div>
   );
 };
