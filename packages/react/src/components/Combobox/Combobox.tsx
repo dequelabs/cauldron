@@ -60,14 +60,14 @@ const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   return value.toLowerCase().includes(inputValue.toLowerCase());
 };
 
-const ComboboxNoResults = (): JSX.Element => {
+const ComboboxNoResults = ({
+  children
+}: {
+  children: 'No results found.';
+}): JSX.Element => {
   return (
-    <div
-      className="ComboboxListbox__empty"
-      aria-live="polite"
-      aria-relevant="all"
-    >
-      No results found.
+    <div className="ComboboxListbox__empty" role="alert" aria-live="polite">
+      {children}
     </div>
   );
 };
