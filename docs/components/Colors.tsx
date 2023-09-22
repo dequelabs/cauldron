@@ -57,8 +57,6 @@ const isNeedFrame = (color: string) => {
 const Color = ({ name, value }: ColorProps) => {
   const { theme } = useThemeContext();
 
-  console.log(calculateLuminance('#B3BFC6'));
-
   const textColor = useMemo(
     () =>
       calculateLuminance(value) > LUMINANCE_TEXT_DIFFERENTIAL ? GRAY : WHITE,
