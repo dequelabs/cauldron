@@ -1,0 +1,41 @@
+:root {
+  --color-width: 177px;
+  --color-height: 60px;
+  --hex-font-size: 11px;
+  --border-color: #f0f0f0;
+}
+
+.Colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px var(--space-medium);
+}
+
+.Color {
+  width: var(--color-width);
+  height: var(--color-height);
+  display: inline-block;
+  margin-right: 20px var(--space-medium);
+}
+
+.Color .Color__bg {
+  height: 80%;
+  position: relative;
+  border-radius: 2px;
+}
+
+.Color .Color__bg--border {
+  border: 1px solid var(--border-color);
+}
+
+.Color .Color__title {
+  padding-top: var(--space-half);
+  font-size: var(--text-size-smallest);
+}
+
+.Color .Color__hex {
+  font-size: var(--hex-font-size);
+  position: absolute;
+  left: var(--space-half);
+  bottom: var(--space-half);
+}
