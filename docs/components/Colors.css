@@ -3,6 +3,8 @@
   --color-height: 60px;
   --hex-font-size: 11px;
   --border-color: #f0f0f0;
+  --color-text-white: #fefefe;
+  --color-text-gray: var(--accent-dark);
 }
 
 .Colors {
@@ -38,4 +40,12 @@
   position: absolute;
   left: var(--space-half);
   bottom: var(--space-half);
+}
+
+.Color .Color__hex--gray {
+  color: var(--color-text-gray);
+}
+
+.Color .Color__hex--white {
+  color: var(--color-text-white);
 }

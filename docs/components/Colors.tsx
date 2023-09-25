@@ -14,15 +14,22 @@ interface ColorProps {
   value: string;
 }
 
-const LUMINANCE_TEXT_DIFFERENTIAL = 0.7;
+const LUMINANCE_TEXT_DIFFERENTIAL = 0.45;
 const LUMINANCE_FRAME_DIFFERENTIAL = 0.95;
 
-const GRAY = 'gray-80';
-const WHITE = 'white';
+const GRAY_TEXT = 'Color__hex--gray';
+const WHITE_TEXT = 'Color__hex--white';
 
 function calculateLuminance(hexColor: string) {
   // Remove the "#" character if it exists
   hexColor = hexColor.replace(/^#/, '');
+
+  if (hexColor.length === 3) {
+    hexColor = hexColor
+      .split('')
+      .map((char) => char + char)
+      .join('');
+  }
 
   // Convert the hex color to RGB
   const r = parseInt(hexColor.slice(0, 2), 16);
@@ -57,9 +64,11 @@ const isNeedFrame = (color: string) => {
 const Color = ({ name, value }: ColorProps) => {
   const { theme } = useThemeContext();
 
-  const textColor = useMemo(
+  const textColorClass = useMemo(
     () =>
-      calculateLuminance(value) > LUMINANCE_TEXT_DIFFERENTIAL ? GRAY : WHITE,
+      calculateLuminance(value) > LUMINANCE_TEXT_DIFFERENTIAL
+        ? GRAY_TEXT
+        : WHITE_TEXT,
     [value]
   );
 
@@ -77,7 +86,7 @@ const Color = ({ name, value }: ColorProps) => {
         )}
         style={{ background: value }}
       >
-        <span className={'Color__hex'} style={{ color: textColor }}>
+        <span className={classNames('Color__hex', textColorClass)}>
           {value.toUpperCase()}
         </span>
       </div>
@@ -91,6 +100,8 @@ export default function Colors({ colorGroup, colorNames }: ColorsProps) {
     name: color,
     value: normalizeVarValue(color)
   }));
+
+  console.log({ colors });
 
   return (
     <section className={`Colors Colors--${colorGroup}`}>

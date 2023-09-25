@@ -1,8 +1,13 @@
 :root {
   --spacing-list-number-color: #cdcdcd;
-  --spacing-list-name-color: #0086b3;
+  --spacing-list-name-color: #0077cc;
   --spacing-list-base-color: #5e5e5e;
   --spacing-list-base-size: 14px;
+}
+
+.cauldron--theme-dark {
+  --spacing-list-name-color: var(--gray-20);
+  --spacing-list-base-color: var(--gray-40);
 }
 
 .Spacing ol {
