@@ -10,7 +10,7 @@
   --field-border-color-error: var(--accent-error);
   --field-border-color-error-hover: #c42f41;
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
-  --field-border-color-disabled: rgba(204, 204, 204, 0.25);
+  --field-border-color-disabled: var(--gray-40);
   --field-background-color-disabled: #f7f7f7;
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
@@ -35,6 +35,7 @@
 .cauldron--theme-dark {
   --field-background-color: var(--accent-medium);
   --field-content-color: var(--white);
+  --field-border-color: #74818b;
   --field-border-color-hover: var(--accent-info-light);
   --field-border-color-focus: var(--accent-info);
   --field-border-color-focus-hover: var(--accent-info-light);
@@ -130,7 +131,7 @@ textarea.Field--has-error,
 [role='textbox'].Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
-  border: 1px solid var(--field-border-color-error);
+  border: 2px solid var(--field-border-color-error);
 }
 
 .Checkbox__overlay.Field--has-error {
