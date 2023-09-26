@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.8.1](https://github.com/dequelabs/cauldron/compare/v5.8.0...v5.8.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* **react:** prevent esm modules from appearing in cjs dist ([#1207](https://github.com/dequelabs/cauldron/issues/1207)) ([fdec72f](https://github.com/dequelabs/cauldron/commit/fdec72f4318c95998eeb35e87f99471b64b6358e))
+
 ## [5.8.0](https://github.com/dequelabs/cauldron/compare/v5.7.1...v5.8.0) (2023-09-05)
 
 
