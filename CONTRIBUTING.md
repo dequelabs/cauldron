@@ -50,6 +50,12 @@ Icons are located in [packages/react/src/components/Icon/icons](./packages/react
 - Save your icon in the above location with the proposed name of your icon, e.g. `[your-name].svg`. The `your-name` portion will be how the icon is used in the React Component, e.g. `<Icon type="your-name" />`.
 - Submit a new `feat` PR with your changes.
 
+## Server-side Rendering
+
+Avoid referencing `window` properties, such as `document`, unless you are sure the code will only be executed in a browser environment. For instance, it is safe to reference `document` in an [Effect Hook](https://reactjs.org/docs/hooks-effect.html) or a lifecycle method like `componentDidMount()`, but not in the `render()` method of a class component.
+
+Ensuring you only reference these objects when it is safe to do so will ensure that library consumers can use Cauldron with platforms that use an SSR engine, such as GatsbyJS and NextJS.
+
 ## Breaking Changes
 
 Cauldron is constantly evolving, and it's inevitable that breaking changes will need to be introduced. Before a breaking change is released, other alternatives should be considered and allow for a deprecation period before the breaking change is released.
