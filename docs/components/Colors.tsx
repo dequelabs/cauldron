@@ -101,8 +101,6 @@ export default function Colors({ colorGroup, colorNames }: ColorsProps) {
     value: normalizeVarValue(color)
   }));
 
-  console.log({ colors });
-
   return (
     <section className={`Colors Colors--${colorGroup}`}>
       {colors.map((color: ColorProps, index: number) => (
