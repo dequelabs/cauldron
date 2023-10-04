@@ -10,12 +10,12 @@ import { SkipLink } from '@deque/cauldron-react'
 import { SkipLink } from '@deque/cauldron-react'
 ```
 
-The skip link is at the very top of the page, but it’s “hidden”. The link will be “activated” by navigating through the page with the Tab button right after the page is loaded.
+The skip link is visually located at the very top of the page, but it’s hidden. The link will be activated by navigating through the page with the Tab key based on its document location.
 
 ## Example
 
 ```jsx example
-<SkipLink target="#main-content" aria-label={"Skip"} />
+<SkipLink target="#main-content" skipText="Skip to" targetText="Main page content" />
 ```
 
 ## Props
@@ -28,18 +28,18 @@ The skip link is at the very top of the page, but it’s “hidden”. The link 
       name: 'target',
       type: 'string',
       required: true,
-      description: 'Id of the element. It uses to navigate to the element.'
+      description: 'The id of the element to which a skip link navigates.'
     },
     {
       name: 'skipText',
       type: 'string',
-      description: 'Text, which uses to indicate that the block is used to skip to',
+      description: 'Text label for the skip link',
       default: 'Skip to'
     },
     {
       name: 'targetText',
       type: 'string',
-      description: 'Text to indicate to which content the link navigate to',
+      description: 'Text label for the target',
       default: 'Main Content'
     }
   ]}
