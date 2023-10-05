@@ -36,7 +36,7 @@
 .Notice .Notice__title,
 .Notice .Notice__title > :is(h1, h2, h3, h4, h5, h6) {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-size: var(--text-size-small);
   font-weight: var(--notice-title-font-weight);
   margin: 0;
