@@ -62,8 +62,6 @@ const isNeedFrame = (color: string) => {
 };
 
 const Color = ({ name, value }: ColorProps) => {
-  const { theme } = useThemeContext();
-
   const textColorClass = useMemo(
     () =>
       calculateLuminance(value) > LUMINANCE_TEXT_DIFFERENTIAL
@@ -72,20 +70,9 @@ const Color = ({ name, value }: ColorProps) => {
     [value]
   );
 
-  const needToAddFrame = useMemo(
-    () => isNeedFrame(value) && theme === 'light',
-    [value]
-  );
-
   return (
     <div className={'Color'}>
-      <div
-        className={classNames(
-          'Color__bg',
-          needToAddFrame ? 'Color__bg--border' : ''
-        )}
-        style={{ background: value }}
-      >
+      <div className={classNames('Color__bg')} style={{ background: value }}>
         <span className={classNames('Color__hex', textColorClass)}>
           {value.toUpperCase()}
         </span>

@@ -1,16 +1,14 @@
 :root {
-  --color-width: 11rem;
-  --color-height: 3.75rem;
-  --hex-font-size: 0.6rem;
+  --hex-font-size: 0.7rem;
   --border-color: #f0f0f0;
   --color-text-white: #fefefe;
   --color-text-gray: var(--accent-dark);
 }
 
 .Colors {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px var(--space-medium);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-small);
 }
 
 .Color {
@@ -18,34 +16,50 @@
   height: var(--color-height);
   display: inline-block;
   margin-right: 20px var(--space-medium);
-}
-
-.Color .Color__bg {
-  height: 80%;
-  position: relative;
-  border-radius: 2px;
-}
-
-.Color .Color__bg--border {
   border: 1px solid var(--border-color);
 }
 
-.Color .Color__title {
-  padding-top: var(--space-half);
-  font-size: var(--text-size-smallest);
+.Color__bg {
+  height: 3rem;
+  position: relative;
+  border-bottom: solid 1px var(--border-color);
 }
 
-.Color .Color__hex {
+.Color__title {
+  display: inline-block;
+  font-size: var(--text-size-smallest);
+  padding-left: var(--space-half);
+}
+
+.Color__hex {
   font-size: var(--hex-font-size);
   position: absolute;
   left: var(--space-half);
   bottom: var(--space-half);
 }
 
-.Color .Color__hex--gray {
+.Color__hex--gray {
   color: var(--color-text-gray);
 }
 
-.Color .Color__hex--white {
+.Color__hex--white {
   color: var(--color-text-white);
+}
+
+@media (max-width: 42rem) {
+  .Colors {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 36rem) {
+  .Colors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 24rem) {
+  .Colors {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
