@@ -1,7 +1,7 @@
 :root {
-  --color-width: 177px;
-  --color-height: 60px;
-  --hex-font-size: 11px;
+  --color-width: 11rem;
+  --color-height: 3.75rem;
+  --hex-font-size: 0.6rem;
   --border-color: #f0f0f0;
   --color-text-white: #fefefe;
   --color-text-gray: var(--accent-dark);
