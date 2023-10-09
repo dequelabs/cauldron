@@ -1,22 +1,16 @@
 import React from 'react';
 
-import { getCssVariablesStartingWith } from '../utils/getCssVariablesStartingWith';
-
 import './Spacing.css';
+import CssParamsTable from './CssParamsTable';
 
 const Spacing = () => {
-  const spaces = getCssVariablesStartingWith('--space');
+  const renderExample = (name: string, value: string) => {
+    return <div style={{ padding: value }}></div>;
+  };
 
   return (
     <div className="Spacing">
-      <ol>
-        {Object.entries(spaces).map(([name, space]) => (
-          <li>
-            <span className="Spacing__name">{name}</span> :{' '}
-            <span className="Space__value">{space}</span>
-          </li>
-        ))}
-      </ol>
+      <CssParamsTable param="--space" renderExample={renderExample} />
     </div>
   );
 };
