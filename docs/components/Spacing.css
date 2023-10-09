@@ -1,8 +1,6 @@
 :root {
-  --spacing-list-number-color: #cdcdcd;
-  --spacing-list-name-color: #0077cc;
-  --spacing-list-base-color: #5e5e5e;
   --spacing-list-base-size: 14px;
+  --spacing-example-color: #0077cc;
 }
 
 .cauldron--theme-dark {
@@ -10,21 +8,6 @@
   --spacing-list-base-color: var(--gray-40);
 }
 
-.Spacing ol {
-  list-style-type: decimal;
-}
-
-.Spacing li {
-  padding-left: var(--space-large);
-  color: var(--spacing-list-base-color);
-  font-size: var(--spacing-list-base-size);
-}
-
-.Spacing .Spacing__name {
-  color: var(--spacing-list-name-color);
-}
-
-.Spacing li::marker {
-  color: var(--spacing-list-number-color);
-  margin: 5px 0;
+.Spacing__example {
+  background: var(--spacing-example-color);
 }

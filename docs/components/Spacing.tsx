@@ -5,7 +5,7 @@ import CssParamsTable from './CssParamsTable';
 
 const Spacing = () => {
   const renderExample = (name: string, value: string) => {
-    return <div style={{ padding: value }}></div>;
+    return <div className="Spacing__example" style={{ padding: value }}></div>;
   };
 
   return (
