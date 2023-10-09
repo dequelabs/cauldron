@@ -10,7 +10,7 @@
   --button-background-color-secondary-active: var(--gray-30);
 
   --button-background-color-error: var(--error);
-  --button-background-color-error-disabled: var(----accent-error-disabled);
+  --button-background-color-error-disabled: #db6379;
   --button-background-color-error-active: var(--accent-error-active);
   --button-outline-color-error: var(--error);
 
