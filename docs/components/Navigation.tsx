@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Icon, ClickOutsideListener, Scrim } from '@deque/cauldron-react';
 import { Link, useLocation } from 'react-router-dom';
-import { components, pages } from '../collections';
+import { components, pages, foundations } from '../collections';
 import './Navigation.css';
 
 interface NavigationLinkProps {
@@ -63,13 +63,13 @@ function Navigation(
   };
 
   const activeComponents = components.filter(
-    component => !component.deprecated
+    (component) => !component.deprecated
   );
   const deprecatedComponents = components.filter(
-    component => component.deprecated
+    (component) => component.deprecated
   );
 
-  const renderListItem = ({ path, name }: typeof components[number]) => {
+  const renderListItem = ({ path, name }: (typeof components)[number]) => {
     const isActive = path === location.pathname;
     return (
       <li key={path}>
@@ -95,6 +95,10 @@ function Navigation(
         <Icon type="info-circle" /> Getting Started
       </h2>
       <ul>{pages.map(renderListItem)}</ul>
+      <h2>
+        <Icon type="info-circle" /> Foundations
+      </h2>
+      <ul>{foundations.map(renderListItem)}</ul>
       <h2>
         <Icon type="gears" />
         Components
