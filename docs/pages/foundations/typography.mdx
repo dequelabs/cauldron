@@ -1,0 +1,50 @@
+---
+title: Typography
+name: Typography
+path: /foundations/typography
+---
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@deque/cauldron-react';
+
+Cauldron harnesses a range of text Tokens to ensure a polished and engaging user experience.
+
+## Font
+
+Font tokens tie an intention to a font family.
+
+<CssParamsTable
+  param={'--base-font-family'}
+  formatName={() => 'Base'}
+  renderExample={(name, value) => (
+    <span style={{ fontFamily: value }}>
+      This is an example of the font family
+    </span>
+  )}
+/>
+
+## Font size
+
+Font size tokens are relative to the <b>--text-size-small</b>. Use font size tokens to define the size of the font.
+
+<CssParamsTable
+  param={'--text-size'}
+  renderExample={(name, value) => <span style={{ fontSize: value }}>Text</span>}
+/>
+
+## Font weight
+
+Font weight tokens define the weight of the font face.
+
+<CssParamsTable
+  param={'--font-weight'}
+  renderExample={(name, value) => (
+    <span style={{ fontWeight: value }}>Text</span>
+  )}
+/>
