@@ -61,10 +61,14 @@ const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   return value.toLowerCase().includes(inputValue.toLowerCase());
 };
 
-const ComboboxNoResults = (): JSX.Element => {
+const ComboboxNoResults = ({
+  children
+}: {
+  children?: React.ReactNode;
+}): JSX.Element => {
   return (
-    <div className="ComboboxListbox__empty" aria-live="polite">
-      No results found.
+    <div className="ComboboxListbox__empty" role="alert" aria-live="polite">
+      {children || 'No results found.'}
     </div>
   );
 };
@@ -351,9 +355,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const NoMatchingOptions = React.useMemo(
       () =>
         React.isValidElement(renderNoResults)
-          ? () => renderNoResults
+          ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
           : typeof renderNoResults === 'function'
-          ? () => renderNoResults()
+          ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
           : ComboboxNoResults,
       [renderNoResults]
     );

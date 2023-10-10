@@ -1,19 +1,29 @@
-# cauldron react
+# Cauldron React
 
-## installation
+Friends don’t let friends ship inaccessible code! Cauldron is designed with accessibility in mind, including styles covering everything from typography to colors, and React components that are designed to be inclusive of all users. Additionally, Cauldron's React components are designed to include full screen reader and keyboard navigation support.
 
-```sh
-$ npm install @deque/cauldron-react --save
+## Installation
+
+To start using Cauldron React, install the packages with your package manager of choice:
+
+### npm
+
+```js
+npm install @deque/cauldron-react @deque/cauldron-styles
 ```
 
-and pull in the styles:
+### yarn
 
-```sh
-$ npm install @deque/cauldron-styles --save
+```js
+yarn add @deque/cauldron-react @deque/cauldron-styles
 ```
 
-## server-side rendering
+## Getting Started
 
-Avoid referencing `window` properties, such as `document`, unless you are sure the code will only be executed in a browser environment. For instance, it is safe to reference `document` in an [Effect Hook](https://reactjs.org/docs/hooks-effect.html) or a lifecycle method like `componentDidMount()`, but not in the `render()` method of a class component.
+To get started, follow our [usage guide](https://cauldron.dequelabs.com/#usage) that includes setup instructions and necessary dependencies. Further documentation is also available at [cauldron.dequelabs.com](https://cauldron.dequelabs.com) that includes documentation for every available Cauldron component.
 
-Ensuring you only reference these objects when it is safe to do so will ensure that library consumers can use Cauldron with platforms that use an SSR engine, such as GatsbyJS and NextJS.
+## Contribute
+
+If you're interested in contributing to Cauldron, you can check out our [contribution guide](https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md) as well as our [code of conduct](https://github.com/dequelabs/cauldron/blob/develop/CODE_OF_CONDUCT.md).
+
+Did you find a bug or have a feature request? [Open an issue!](https://github.com/dequelabs/cauldron/issues/new/choose)

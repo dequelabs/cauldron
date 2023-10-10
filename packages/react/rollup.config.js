@@ -8,7 +8,12 @@ export default {
   input: 'src/index.ts',
   external: [
     ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.peerDependencies)
+    ...Object.keys(pkg.peerDependencies),
+    // Note: We directly import only the specific language syntax needed
+    // directly in the Code component. This ensures it is still treated as
+    // an external dependency since it won't match the dependencies or
+    // peerDependencies when pulled from package.json.
+    /^react-syntax-highlighter/
   ],
   output: {
     dir: 'lib',
