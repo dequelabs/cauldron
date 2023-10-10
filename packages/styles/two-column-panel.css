@@ -260,7 +260,11 @@
 
   .TwoColumnPanel--hide .TwoColumnPanel__Left,
   .TwoColumnPanel--show .TwoColumnPanel__Left {
-    margin-left: calc(var(--two-column-panel-left-column-width) * -1);
+    max-width: 100%;
+    margin-left: max(
+      calc(var(--two-column-panel-left-column-width) * -1),
+      calc(100% * -1)
+    );
     animation: none;
     opacity: 1;
   }
