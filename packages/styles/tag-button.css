@@ -1,3 +1,7 @@
+:root {
+  --tag-button-icon-size: 15px;
+}
+
 .TagButton {
   vertical-align: middle;
 }
