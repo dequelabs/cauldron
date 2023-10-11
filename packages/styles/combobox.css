@@ -181,6 +181,7 @@
 }
 
 .ComboboxOption {
+  --field-listbox-selected-text-color: var(--combobox-option-font-color);
   color: var(--combobox-option-font-color);
   padding: var(--space-smallest);
   cursor: pointer;
