@@ -2,7 +2,9 @@ export function getCssVariablesStartingWith(prefix: string) {
   const cssVariables: { [key: string]: string } = {};
 
   // Iterate through all style sheets in the document
-  for (const styleSheet of Array.from(document.styleSheets)) {
+  for (const styleSheet of Array.from(document.styleSheets).filter(
+    (s) => !s.href
+  )) {
     try {
       if (styleSheet.cssRules) {
         // Iterate through the rules in the style sheet

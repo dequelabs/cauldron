@@ -35,8 +35,8 @@ const CssParamsTable = ({
         </TableRow>
       </TableHead>
       <TableBody>
-        {Object.entries(textSizes).map(([name, value]) => (
-          <TableRow>
+        {Object.entries(textSizes).map(([name, value], index) => (
+          <TableRow key={index}>
             <TableCell>{formatName(name)}</TableCell>
             <TableCell>{value}</TableCell>
             <TableCell>-</TableCell>
