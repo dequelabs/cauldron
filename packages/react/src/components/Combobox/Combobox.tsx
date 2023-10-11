@@ -117,7 +117,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
 
-    const selectedOpaqueValue = useMemo(() => {
+    const selectedHiddenValue = useMemo(() => {
       // todo, map list of options to get the value
       return '';
     }, [selectedValue, formKey]);
@@ -147,7 +147,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       [listboxRef]
     );
 
-    const hasOpaqueFormValue = formKey && formKey !== 'value' && name;
+    const hasHiddenFormValue = formKey && formKey !== 'value' && name;
 
     useEffect(() => {
       if (!isAutoComplete) {
@@ -394,8 +394,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox', className)}
         ref={comboboxRef}
       >
-        {hasOpaqueFormValue && (
-          <input type="hidden" name={name} value={selectedOpaqueValue} />
+        {hasHiddenFormValue && (
+          <input type="hidden" name={name} value={selectedHiddenValue} />
         )}
         <label
           className={classnames('Field__label', {
@@ -423,7 +423,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             type="text"
             id={`${id}-input`}
             ref={inputRef}
-            name={hasOpaqueFormValue ? undefined : name}
+            name={hasHiddenFormValue ? undefined : name}
             value={value}
             role="combobox"
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
