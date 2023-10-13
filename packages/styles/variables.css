@@ -136,6 +136,12 @@
   /* radio card */
   --radio-card-width: 255px;
   --radio-card-height: 229px;
+
+  /* target size */
+  /* Note: target-size is deprecated, use --target-size-enhanced or --target-size-minimum */
+  --target-size: 44px;
+  --target-size-enhanced: var(--target-size);
+  --target-size-minimum: 24px;
 }
 
 .cauldron--theme-dark {

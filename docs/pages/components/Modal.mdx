@@ -41,7 +41,7 @@ If the action taken from the modal needs to be non-dismissable, use a variant of
 
 ### Info Modal
 
-Alternatively, an "unstyled" modal is available that is less opinionated in its styling and allows for a more informational presentation of the modal:
+Alternatively, an alternative modal is available that is less opinionated in its styling and allows for a more informational presentation of the modal:
 
 ```jsx example
 function UnstyledModalExample() {
@@ -117,6 +117,11 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
+  props={[{
+    name: 'align',
+    type: ['left', 'right', 'center'],
+    description: 'Set the alignment of modal content.'
+  }]}
 />
 
 ### ModalFooter
@@ -124,6 +129,11 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
+  props={[{
+    name: 'align',
+    type: ['left', 'right', 'center'],
+    description: 'Set the alignment of modal footer content.'
+  }]}
 />
 
 ## Related Components
