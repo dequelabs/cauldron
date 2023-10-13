@@ -160,11 +160,11 @@
 }
 
 .cauldron--theme-dark .Dialog__header {
-  border-bottom: 1px solid #5d676f;
+  border-bottom: 1px solid var(--stroke-dark);
 }
 
 .cauldron--theme-dark .Dialog__footer {
-  border-top: 1px solid #5d676f;
+  border-top: 1px solid var(--stroke-dark);
 }
 
 .cauldron--theme-dark .Dialog__header,
