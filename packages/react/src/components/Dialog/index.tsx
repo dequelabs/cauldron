@@ -202,7 +202,7 @@ interface DialogAlignmentProps {
   align?: 'left' | 'center' | 'right';
 }
 
-type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
+export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
   DialogAlignmentProps;
 
 const DialogContent = ({
@@ -229,7 +229,7 @@ DialogContent.propTypes = {
   align: PropTypes.string
 };
 
-type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
+export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
   DialogAlignmentProps;
 
 const DialogFooter = ({
