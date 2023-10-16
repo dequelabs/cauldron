@@ -141,7 +141,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             className={classNames('Dialog', className, {
               'Dialog--show': show
             })}
-            ref={el => {
+            ref={(el) => {
               this.element = el;
               if (!dialogRef) {
                 return;
@@ -198,33 +198,61 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   }
 }
 
+interface DialogAlignmentProps {
+  align?: 'left' | 'center' | 'right';
+}
+
+export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
+  DialogAlignmentProps;
+
 const DialogContent = ({
   children,
   className,
+  align,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={classNames('Dialog__content', className)} {...other}>
+}: DialogContentProps) => (
+  <div
+    className={classNames('Dialog__content', className, {
+      'text--align-left': align === 'left',
+      'text--align-center': align === 'center',
+      'text--align-right': align === 'right'
+    })}
+    {...other}
+  >
     {children}
   </div>
 );
 DialogContent.displayName = 'DialogContent';
 DialogContent.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  align: PropTypes.string
 };
+
+export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
+  DialogAlignmentProps;
 
 const DialogFooter = ({
   children,
   className,
+  align,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={classNames('Dialog__footer', className)} {...other}>
+}: DialogFooterProps) => (
+  <div
+    className={classNames('Dialog__footer', className, {
+      'text--align-left': align === 'left',
+      'text--align-center': align === 'center',
+      'text--align-right': align === 'right'
+    })}
+    {...other}
+  >
     {children}
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
 DialogFooter.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  align: PropTypes.string
 };
 export { Dialog, DialogContent, DialogFooter };

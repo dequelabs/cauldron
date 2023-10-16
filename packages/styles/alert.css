@@ -24,6 +24,7 @@
   padding-top: 0;
   display: flex;
   justify-content: center;
+  background-color: transparent;
 }
 
 .Alert__warning .Dialog__heading:focus {
