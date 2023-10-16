@@ -28,7 +28,6 @@ body.cauldron--theme-dark {
 
 .Component__example pre.Code {
   margin: 0;
-  border: none;
   font-size: var(--text-size-smaller);
   flex: 1;
 }
@@ -42,6 +41,11 @@ body.cauldron--theme-dark {
   display: flex;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.Component__example__code pre.Code {
+  border: none;
+  padding: 0.5rem;
 }
 
 .Component__example > p:last-child {

@@ -1,6 +1,7 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "5.8.1",
+  "version": "5.9.0",
+  "license": "MPL-2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "homepage": "https://cauldron.dequelabs.com/",
   "publishConfig": {
@@ -110,7 +111,7 @@
       "**/__tests__/demo/**/*.js"
     ],
     "collectCoverageFrom": [
-      "**/src/**/*.tsx"
+      "**/src/**/*.{ts,tsx}"
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",

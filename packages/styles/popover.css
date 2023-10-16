@@ -1,0 +1,116 @@
+:root {
+  --popover-background-color: var(--gray-10);
+  --popover-border-color: var(--gray-90);
+  --popover-text-color: var(--gray-90);
+  --popover-box-shadow: rgba(0, 0, 0, 0.35) 0 0 10px 0;
+  --popover-font-size: var(--text-size-smaller);
+  --popover-line-height: var(--text-size-normal);
+  --popover-padding: 0 var(--space-small);
+  --popover-alert-max-width: 12rem;
+  --popover-alert-padding: var(--space-small);
+  --popover-alert-apply-button-margin: var(--space-smallest) 0;
+}
+
+/* Dark theme variables */
+.cauldron--theme-dark {
+  --popover-background-color: var(--accent-medium);
+  --popover-border-color: var(--accent-light);
+  --popover-text-color: var(--white);
+}
+
+.Popover {
+  background-color: var(--popover-background-color);
+  border: 2px solid var(--popover-border-color);
+  box-shadow: var(--popover-box-shadow);
+  color: var(--popover-text-color);
+  font-size: var(--popover-font-size);
+  line-height: var(--popover-line-height);
+  padding: var(--popover-padding);
+  word-break: break-word;
+}
+
+.Popover--hidden {
+  visibility: hidden;
+  /* Take the tooltip out of the DOM layout flow so it doesn't reserve space when hidden */
+  position: fixed !important;
+}
+
+/* TooltipArrow needs some dimensions to accurately calculate its positioning */
+.Popover__popoverArrow {
+  height: 0.1px;
+  width: 0.1px;
+}
+
+.Popover__borderLeft {
+  position: absolute;
+  left: 4px;
+  top: var(--space-half);
+  height: calc(100% - (var(--space-half) * 2));
+  width: 3px;
+  background-color: var(--popover-border-color);
+}
+
+/* Adjust position to try to center the arrow in the tooltip's border */
+[class*='Popover--top'] .Popover__popoverArrow {
+  bottom: -1px;
+}
+
+[class*='Popover--bottom'] .Popover__popoverArrow {
+  top: -1px;
+}
+
+[class*='Popover--left'] .Popover__popoverArrow {
+  right: -1px;
+}
+
+[class*='Popover--right'] .Popover__popoverArrow {
+  left: 0;
+}
+
+/*
+ * Default tooltip arrow styles
+ */
+
+.Popover__popoverArrow:before {
+  content: '';
+  position: absolute;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--popover-border-color);
+  border-bottom: none;
+  transform: translateX(-50%);
+  transform-origin: top;
+}
+
+[class*='Popover--bottom'] .Popover__popoverArrow:before {
+  transform: translateX(-50%) rotate(180deg);
+}
+
+[class*='Popover--left'] .Popover__popoverArrow:before {
+  transform: rotate(-90deg) translateY(-6px);
+}
+
+[class*='Popover--right'] .Popover__popoverArrow:before {
+  transform: rotate(90deg) translateY(100%);
+}
+
+/* Alert popover styles */
+
+.Popover--prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--popover-alert-padding);
+  max-width: var(--popover-alert-max-width);
+}
+
+.Popover--prompt > .Button--thin {
+  width: 100%;
+  margin-left: 0;
+}
+
+.Popover__apply {
+  margin: var(--popover-alert-apply-button-margin);
+}
