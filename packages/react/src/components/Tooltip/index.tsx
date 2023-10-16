@@ -66,7 +66,10 @@ export default function Tooltip({
       placement: initialPlacement,
       modifiers: [
         { name: 'preventOverflow', options: { padding: 8 } },
-        { name: 'flip' },
+        {
+          name: 'flip',
+          options: { fallbackPlacements: ['left', 'right', 'top', 'bottom'] }
+        },
         { name: 'offset', options: { offset: [0, 8] } },
         { name: 'arrow', options: { padding: 5, element: arrowElement } }
       ]
