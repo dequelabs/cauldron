@@ -95,8 +95,9 @@ textarea:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
-  border: 2px solid var(--field-border-color-focus);
-  box-shadow: 0px 0px 5px var(--field-border-color-focus-glow),
+  border: 1px solid var(--field-border-color-focus);
+  box-shadow: 0 0 0 1px var(--field-border-color-focus),
+    0px 0px 5px var(--field-border-color-focus-glow),
     inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -119,7 +120,10 @@ textarea:focus:hover,
 [role='textbox']:focus:hover,
 [role='listbox']:focus:hover,
 [role='spinbutton']:focus:hover {
-  border: 2px solid var(--field-border-color-focus-hover);
+  border: 1px solid var(--field-border-color-focus-hover);
+  box-shadow: 0 0 0 1px var(--field-border-color-focus-hover),
+    0px 0px 5px var(--field-border-color-focus-glow),
+    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error,
@@ -130,7 +134,9 @@ textarea.Field--has-error,
 [role='textbox'].Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
-  border: 2px solid var(--field-border-color-error);
+  border: 1px solid var(--field-border-color-error);
+  box-shadow: 0 0 0 1px var(--field-border-color-error),
+    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Checkbox__overlay.Field--has-error {
@@ -162,8 +168,9 @@ textarea.Field--has-error:focus,
 [role='textbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
-  border: 2px solid var(--field-border-color-error);
-  box-shadow: 0px 0px 5px var(--field-border-color-error-focus-glow),
+  border: 1px solid var(--field-border-color-error);
+  box-shadow: 0 0 0 1px var(--field-border-color-error),
+    0px 0px 5px var(--field-border-color-error-focus-glow),
     inset 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
