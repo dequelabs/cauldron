@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clickLink from '../MenuItem/click-link';
 
 export interface SideBarItemProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -29,10 +28,6 @@ const SideBarItem: React.ComponentType<
 SideBarItem.displayName = 'SideBarItem';
 SideBarItem.defaultProps = {
   autoClickLink: true
-};
-SideBarItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  autoClickLink: PropTypes.bool
 };
 
 export default SideBarItem;

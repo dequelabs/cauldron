@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
@@ -222,25 +221,12 @@ export default function Tooltip({
 
 Tooltip.displayName = 'Tooltip';
 
-Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
-  target: PropTypes.any.isRequired,
-  association: PropTypes.oneOf(['aria-labelledby', 'aria-describedby']),
-  show: PropTypes.bool,
-  placement: PropTypes.string,
-  variant: PropTypes.string,
-  portal: PropTypes.any
-};
-
 export const TooltipHead = ({
   className,
   ...other
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={classnames('TooltipHead', className)} {...other} />
 );
-TooltipHead.propTypes = {
-  className: PropTypes.string
-};
 
 export const TooltipContent = ({
   className,
@@ -248,6 +234,3 @@ export const TooltipContent = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={classnames('TooltipContent', className)} {...other} />
 );
-TooltipContent.propTypes = {
-  className: PropTypes.string
-};

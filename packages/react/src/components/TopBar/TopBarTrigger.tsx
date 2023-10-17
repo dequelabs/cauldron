@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MenuItem from '../MenuItem';
 
@@ -19,9 +18,5 @@ const TopBarTrigger: React.ComponentType<
   </MenuItem>
 );
 TopBarTrigger.displayName = 'TopBarTrigger';
-TopBarTrigger.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default TopBarTrigger;

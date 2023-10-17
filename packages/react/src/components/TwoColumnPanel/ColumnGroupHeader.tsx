@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 
@@ -19,7 +18,4 @@ const ColumnGroupHeader = forwardRef<HTMLDivElement, ColumnGroupHeaderProps>(
 );
 
 ColumnGroupHeader.displayName = 'ColumnGroupHeader';
-ColumnGroupHeader.propTypes = {
-  className: PropTypes.string
-};
 export default ColumnGroupHeader;

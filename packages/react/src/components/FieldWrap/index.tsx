@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -16,10 +15,5 @@ const FieldWrap = React.forwardRef<HTMLElement, Props>(
 );
 
 FieldWrap.displayName = 'FieldWrap';
-FieldWrap.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  as: PropTypes.string
-};
 
 export default FieldWrap;

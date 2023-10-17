@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export interface ScrimProps {
   show: boolean;
@@ -12,10 +11,6 @@ interface ScrimState {
 
 export default class Scrim extends React.Component<ScrimProps, ScrimState> {
   private el: HTMLDivElement | null;
-
-  static propTypes = {
-    show: PropTypes.bool.isRequired
-  };
 
   constructor(props: ScrimProps) {
     super(props);
@@ -83,7 +78,7 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
     }
 
     return (
-      <div ref={el => (this.el = el)} className={`Scrim ${animationClass}`} />
+      <div ref={(el) => (this.el = el)} className={`Scrim ${animationClass}`} />
     );
   }
 }

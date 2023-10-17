@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import PropTypes from 'prop-types';
 
 type Theme = 'light' | 'dark';
 
@@ -83,10 +82,5 @@ const ThemeProvider = ({
 function useThemeContext() {
   return useContext(ThemeContext);
 }
-
-ThemeProvider.propTypes = {
-  children: PropTypes.any,
-  initialTheme: PropTypes.string
-};
 
 export { ThemeContext, ThemeProvider, useThemeContext };
