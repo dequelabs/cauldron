@@ -4,6 +4,7 @@ import MenuItem from '../MenuItem';
 
 interface TopBarTriggerProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
+  className?: string;
 }
 
 const TopBarTrigger: React.ComponentType<

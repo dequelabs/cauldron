@@ -1,7 +1,9 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 
-type ColumnGroupHeaderProps = React.HTMLAttributes<HTMLDivElement>;
+type ColumnGroupHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
+  className?: string;
+};
 
 const ColumnGroupHeader = forwardRef<HTMLDivElement, ColumnGroupHeaderProps>(
   ({ className, children, ...props }, ref) => {

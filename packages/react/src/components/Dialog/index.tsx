@@ -188,7 +188,7 @@ interface DialogAlignmentProps {
 }
 
 export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogContent = ({
   children,
@@ -210,7 +210,7 @@ const DialogContent = ({
 DialogContent.displayName = 'DialogContent';
 
 export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogFooter = ({
   children,

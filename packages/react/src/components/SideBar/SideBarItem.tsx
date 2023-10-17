@@ -3,12 +3,13 @@ import clickLink from '../MenuItem/click-link';
 
 export interface SideBarItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
+  className?: string;
   autoClickLink?: boolean;
 }
 
 const SideBarItem: React.ComponentType<
   React.PropsWithChildren<SideBarItemProps>
-> = ({ children, autoClickLink, ...other }) => {
+> = ({ children, autoClickLink, ...other }: SideBarItemProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!autoClickLink) {
       return;

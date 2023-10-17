@@ -29,7 +29,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   className,
   scrollable = false,
   ...props
-}) => {
+}: Props) => {
   const ref = useRef<HTMLPreElement>(null);
   const [scrollableRegion, setScrollableRegion] = useState(false);
   // react-syntax-highlighter does not provide direct access to its dom elements

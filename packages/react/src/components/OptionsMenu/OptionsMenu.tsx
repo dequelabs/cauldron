@@ -18,6 +18,7 @@ export interface OptionsMenuRenderTriggerProps {
 
 export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   id?: string;
+  className?: string;
   menuRef?: React.Ref<HTMLUListElement>;
   trigger?: (props: OptionsMenuRenderTriggerProps) => React.ReactNode;
   onClose?: () => void;

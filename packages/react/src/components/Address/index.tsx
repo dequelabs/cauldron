@@ -13,7 +13,9 @@ export const Address = ({ children, className, ...other }: AddressProps) => (
 
 Address.displayName = 'Address';
 
-type AddressLineProps = React.HTMLAttributes<HTMLElement>;
+type AddressLineProps = React.HTMLAttributes<HTMLElement> & {
+  className?: string;
+};
 
 export const AddressLine = ({
   children,

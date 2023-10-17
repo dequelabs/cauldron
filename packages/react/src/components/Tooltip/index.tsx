@@ -10,6 +10,7 @@ const TIP_HIDE_DELAY = 100;
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  className?: string;
   target: React.RefObject<HTMLElement> | HTMLElement;
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby';
@@ -221,16 +222,21 @@ export default function Tooltip({
 
 Tooltip.displayName = 'Tooltip';
 
-export const TooltipHead = ({
-  className,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
+interface TooltipHeadProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export const TooltipHead = ({ className, ...other }: TooltipHeadProps) => (
   <div className={classnames('TooltipHead', className)} {...other} />
 );
+
+interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
 
 export const TooltipContent = ({
   className,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
+}: TooltipContentProps) => (
   <div className={classnames('TooltipContent', className)} {...other} />
 );
