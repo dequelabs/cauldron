@@ -9,7 +9,7 @@ interface TopBarTriggerProps extends React.HTMLAttributes<HTMLLIElement> {
 
 const TopBarTrigger: React.ComponentType<
   React.PropsWithChildren<TopBarTriggerProps>
-> = ({ children, className, ...other }) => (
+> = ({ children, className, ...other }: TopBarTriggerProps) => (
   <MenuItem
     aria-haspopup="true"
     className={classNames('TopBar__menu-trigger', className)}
