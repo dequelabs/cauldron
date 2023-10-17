@@ -3,7 +3,7 @@ export function getCssVariablesStartingWith(prefix: string) {
 
   // Iterate through all style sheets in the document
   for (const styleSheet of Array.from(document.styleSheets).filter(
-    (s) => !s.href
+    (s) => !s.href || s.href.startsWith(window.location.origin)
   )) {
     try {
       if (styleSheet.cssRules) {
