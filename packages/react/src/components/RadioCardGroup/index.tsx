@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon, { IconType } from '../Icon';
-import Card, { CardContent } from '../Card';
+import Panel, { PanelContent } from '../Panel';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
@@ -73,8 +73,7 @@ const RadioCardGroup = ({
 
     return (
       <div className={classNames('RadioCard')} key={index}>
-        <Card
-          variant="simple"
+        <Panel
           className={classNames('RadioCardGroup__Card RadioCard__overlay', {
             'RadioCard__overlay--focused': isFocused,
             'RadioCard__overlay--checked': isChecked,
@@ -87,7 +86,7 @@ const RadioCardGroup = ({
             name={name}
             value={radioValue}
             id={id}
-            ref={input => {
+            ref={(input) => {
               if (!input) {
                 return;
               }
@@ -104,7 +103,7 @@ const RadioCardGroup = ({
             checked={isChecked}
             {...other}
           />
-          <CardContent>
+          <PanelContent>
             <div className={classNames('RadioCardGroup__Checked')}>
               {isChecked && (
                 <Icon
@@ -125,8 +124,8 @@ const RadioCardGroup = ({
                 {label}
               </label>
             </div>
-          </CardContent>
-        </Card>
+          </PanelContent>
+        </Panel>
       </div>
     );
   });
