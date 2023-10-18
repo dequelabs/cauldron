@@ -92,8 +92,8 @@
 .Combobox__input:focus-within {
   border: 1px solid var(--combobox-input-border-focus-color);
   box-shadow: 0 0 0 1px var(--combobox-input-border-focus-color),
-    0px 0px 5px var(--combobox-input-border-focus-glow-color),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--combobox-input-border-focus-glow-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Combobox__arrow {
@@ -233,27 +233,27 @@
 .Combobox__input--error {
   border: 1px solid var(--combobox-input-error-border-color);
   box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Combobox__input--error:focus-within {
   border: 1px solid var(--combobox-input-error-border-color);
   box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
-    0px 0px 5px var(--field-border-color-error-focus-glow),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Combobox__input--error:focus-within:hover {
   border: 1px solid var(--combobox-input-error-border-color);
   box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
-    0px 0px 5px var(--field-border-color-error-focus-glow),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Combobox__input--error:hover {
   border: 1px solid var(--combobox-input-error-border-color);
   box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .ComboboxListbox__empty {

@@ -97,8 +97,8 @@ textarea:focus,
   outline: 0;
   border: 1px solid var(--field-border-color-focus);
   box-shadow: 0 0 0 1px var(--field-border-color-focus),
-    0px 0px 5px var(--field-border-color-focus-glow),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--field-border-color-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input:hover,
@@ -122,8 +122,8 @@ textarea:focus:hover,
 [role='spinbutton']:focus:hover {
   border: 1px solid var(--field-border-color-focus-hover);
   box-shadow: 0 0 0 1px var(--field-border-color-focus-hover),
-    0px 0px 5px var(--field-border-color-focus-glow),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--field-border-color-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error,
@@ -136,7 +136,7 @@ textarea.Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
   box-shadow: 0 0 0 1px var(--field-border-color-error),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Checkbox__overlay.Field--has-error {
@@ -170,8 +170,8 @@ textarea.Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
   border: 1px solid var(--field-border-color-error);
   box-shadow: 0 0 0 1px var(--field-border-color-error),
-    0px 0px 5px var(--field-border-color-error-focus-glow),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error:focus:hover,
