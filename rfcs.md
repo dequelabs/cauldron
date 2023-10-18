@@ -30,6 +30,6 @@ Some changes that would not need an RFC:
 
 ## The RFC Process
 
-The goal of our RFC process is to reach a consensus among the cauldron team on proposed changes, and to ensure that new features are congruent with the rest of Cauldron. The Cauldron team will have a recurring office hours meeting on the 1st Wednesday of each month, giving the team the opportunity to discuss any new RFCs that have been introduced and make comments. When an RFC is ready, a request for review can be posted in the `#cauldron` slack to request reviews for an RFC. Otherwise, RFCs will need a product owner approval and at least 2 approvals from members of the cauldron team.
+The goal of our RFC process is to reach a consensus among the Cauldron team on proposed changes and to ensure that new features are congruent with the rest of Cauldron. The Cauldron team will have a recurring office hours meeting on the 1st Wednesday of each month, giving the team the opportunity to discuss any new RFCs that have been introduced and make comments. When an RFC is ready, a request for review can be posted in the `#cauldron` slack to request reviews for an RFC. Otherwise, RFCs will need a product owner's approval and at least 2 approvals from members of the Cauldron team.
 
 Once a consensus has been reached for the proposed RFC, the `rfc` label will be removed from the issue and the proposed changes can then be implemented.
