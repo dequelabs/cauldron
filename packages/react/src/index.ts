@@ -98,7 +98,6 @@ export {
   PanelHeader,
   PanelContent
 } from './components/Panel';
-export { default as IssuePanel } from './components/IssuePanel';
 export { default as ProgressBar } from './components/ProgressBar';
 export {
   Address,
