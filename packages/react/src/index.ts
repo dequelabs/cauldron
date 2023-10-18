@@ -33,7 +33,6 @@ export {
 export { default as SkipLink } from './components/SkipLink';
 export { default as Button } from './components/Button';
 export { default as IconButton } from './components/IconButton';
-export { default as Pointout } from './components/Pointout';
 export { default as Toast } from './components/Toast';
 export { default as Link } from './components/Link';
 export { default as Loader } from './components/Loader';
