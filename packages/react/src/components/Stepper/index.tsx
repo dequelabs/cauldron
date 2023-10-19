@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TooltipTabstop from '../TooltipTabstop';
+import Icon from '../Icon';
 
 interface BaseStepProps extends React.LiHTMLAttributes<HTMLLIElement> {
   status: 'current' | 'complete' | 'future';
@@ -59,11 +60,16 @@ export const Step = (props: StepProps) => {
             association="aria-labelledby"
             aria-label={tooltipText}
           >
-            <div className="Stepper__step-indicator" />
+            <div className="Stepper__step-indicator">
+              {props.status === 'complete' && <Icon type={'check'} />}
+            </div>
           </TooltipTabstop>
         ) : (
           <>
-            <div className="Stepper__step-indicator" />
+            <div className="Stepper__step-indicator">
+              {props.status === 'complete' && <Icon type={'check'} />}
+            </div>
+
             {children ? (
               <div className="Stepper__step-label">{children}</div>
             ) : null}
