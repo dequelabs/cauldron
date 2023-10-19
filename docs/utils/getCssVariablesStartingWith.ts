@@ -1,9 +1,22 @@
+const isAllowedStyleSheet = (styleSheet: StyleSheet) => {
+  try {
+    return (
+      !styleSheet.href ||
+      new URL(styleSheet.href).origin === window.location.origin
+    );
+  } catch (ex) {
+    console.error(ex);
+  }
+
+  return false;
+};
+
 export function getCssVariablesStartingWith(prefix: string) {
   const cssVariables: { [key: string]: string } = {};
 
   // Iterate through all style sheets in the document
   for (const styleSheet of Array.from(document.styleSheets).filter(
-    (s) => !s.href || s.href.startsWith(window.location.origin)
+    isAllowedStyleSheet
   )) {
     try {
       if (styleSheet.cssRules) {
