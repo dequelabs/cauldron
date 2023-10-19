@@ -53,7 +53,7 @@ const main = async (): Promise<void> => {
 
     for (const theme of THEMES) {
       await page.evaluate(
-        theme => {
+        (theme) => {
           document.body.className = '';
           document.body.classList.add(`cauldron--theme-${theme}`);
         },
@@ -64,7 +64,7 @@ const main = async (): Promise<void> => {
       await Promise.race([
         await page.evaluate(
           () =>
-            new Promise(resolve =>
+            new Promise((resolve) =>
               // Typescript does not implement experimental apis but this should exist within puppeteer
               // see: https://github.com/microsoft/TypeScript/issues/21309
               (window as any).requestIdleCallback(resolve)
@@ -77,7 +77,9 @@ const main = async (): Promise<void> => {
         'wcag2a',
         'wcag2aa',
         'wcag21a',
-        'wcag21aa'
+        'wcag21aa',
+        'wcag22a',
+        'wcag22aa'
       ]);
       const { violations } = (await axe.analyze()) as AxeResults;
 
@@ -94,7 +96,7 @@ const main = async (): Promise<void> => {
 
       for (const { id, help, nodes } of violations) {
         console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
-        nodes.map(node => {
+        nodes.map((node) => {
           console.log(
             '  ↳',
             chalk.bgGreen(chalk.black(`${node.target}`)),
