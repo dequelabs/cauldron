@@ -25,7 +25,8 @@
   --field-icon-focus-color: var(--focus-light);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
-  --field-listbox-selected-background-color: var(--accent-secondary-active);
+  --field-listbox-selected-background-color: var(--gray-50);
+  --field-listbox-selected-text-color: #fff;
   --field-font-size: var(--text-size-small);
   --input-min-width: 250px;
   --checkbox-size: var(--icon-size);
@@ -56,7 +57,8 @@
   --field-icon-focus-color: var(--focus-dark);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
-  --field-listbox-selected-background-color: var(--accent-dark);
+  --field-listbox-selected-background-color: var(--accent-light);
+  --field-listbox-selected-text-color: var(--accent-medium);
 }
 
 input,
@@ -198,6 +200,7 @@ textarea.Field--has-error:focus:hover,
 [role='listbox']
   li[role='option']:is([aria-selected='true'], [aria-checked='true']) {
   background-color: var(--field-listbox-selected-background-color);
+  color: var(--field-listbox-selected-text-color);
 }
 
 .Error {
