@@ -59,7 +59,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^24.7.1",
-    "jest-axe": "^3.4.0",
+    "jest-axe": "^8.0.0",
     "jsdom": "^16.2.2",
     "jsdom-global": "^3.0.2",
     "nyc": "^15.0.1",

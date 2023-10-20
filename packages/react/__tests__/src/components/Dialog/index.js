@@ -45,6 +45,19 @@ test('focuses heading when "show" prop is updated from falsey to truthy', (done)
   });
 });
 
+test('associates dialog with heading', () => {
+  const dialog = mount(
+    <Dialog {...defaults} show={true}>
+      hello
+    </Dialog>
+  );
+  expect(dialog.find('[role="dialog"]').prop('aria-labelledby')).toBeTruthy();
+  expect(dialog.find('h2').prop('id')).toBeTruthy();
+  expect(dialog.find('[role="dialog"]').prop('aria-labelledby')).toEqual(
+    dialog.find('h2').prop('id')
+  );
+});
+
 test('calls onClose when clicked outside', () => {
   const onClose = jest.fn();
   const dialog = mount(
