@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.9.1](https://github.com/dequelabs/cauldron/compare/v5.9.0...v5.9.1) (2023-10-20)
+
+
+### Bug Fixes
+
+* **styles:** fix layout issues with dialog header when wrapping ([#1253](https://github.com/dequelabs/cauldron/issues/1253)) ([565d26c](https://github.com/dequelabs/cauldron/commit/565d26c14bf3343e7b9466ff7e44b48df50297ba))
+
 ## [5.9.0](https://github.com/dequelabs/cauldron/compare/v5.8.1...v5.9.0) (2023-10-16)
 
 
