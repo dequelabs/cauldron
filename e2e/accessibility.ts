@@ -17,7 +17,7 @@ const MAX_WIDTH = IS_CI ? 80 : process.stdout.columns - 8;
 const THEMES = ['light', 'dark'];
 const AXE_PATH = require.resolve('axe-core');
 const AXE_SOURCE = fs.readFileSync(AXE_PATH, 'utf8');
-const CONCURRENCY = parseInt(process.env.CONCURRENCY as string, 10) || 8;
+const CONCURRENCY = parseInt(process.env.CONCURRENCY as string, 10) || 10;
 
 let foundViolations = false;
 
