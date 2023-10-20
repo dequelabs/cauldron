@@ -3,6 +3,8 @@ name: PR preview cleanup
 on:
   pull_request:
     types: [closed]
+    branches-ignore:
+      - master
 
 jobs:
   deploy:
