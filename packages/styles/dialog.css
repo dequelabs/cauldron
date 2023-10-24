@@ -50,6 +50,8 @@
   justify-content: space-between;
   min-height: var(--dialog-header-height);
   font-weight: var(--font-weight-bold);
+  padding: var(--space-smallest) 0;
+  gap: var(--space-smallest);
 }
 
 .Dialog__heading,
@@ -73,6 +75,7 @@
   height: var(--dialog-close-button-size);
   width: var(--dialog-close-button-size);
   margin-right: var(--space-smallest);
+  flex-shrink: 0;
   position: relative;
 }
 

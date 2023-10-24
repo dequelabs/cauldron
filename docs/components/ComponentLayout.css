@@ -74,6 +74,10 @@ ul.Component__list li {
   margin: var(--space-half) 0;
 }
 
+ul.Component__list li a {
+  line-height: 1.4;
+}
+
 .Component {
   grid-row: 1;
   grid-column: 1;
