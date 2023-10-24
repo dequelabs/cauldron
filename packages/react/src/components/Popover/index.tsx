@@ -162,9 +162,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     useEffect(() => {
       if (show && popoverRef.current) {
         // Find the first focusable element inside the container
-        const firstFocusableElement = popoverRef.current.querySelector(
-          focusableSelector
-        );
+        const firstFocusableElement =
+          popoverRef.current.querySelector(focusableSelector);
 
         if (firstFocusableElement instanceof HTMLElement) {
           firstFocusableElement.focus();
@@ -252,6 +251,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             ref={popoverRef}
             role="dialog"
             style={styles.popper}
+            aria-labelledby={`${id}-label`}
             {...attributes.popper}
             {...props}
             {...additionalProps}
