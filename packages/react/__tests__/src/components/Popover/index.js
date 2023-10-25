@@ -256,7 +256,7 @@ test('variant="prompt" should return no axe violations', async () => {
 });
 
 test('should return no axe violations', async () => {
-  const wrapper = mount(<Wrapper />);
+  const wrapper = mount(<Wrapper infoText="popover" />);
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });
