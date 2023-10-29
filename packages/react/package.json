@@ -54,7 +54,6 @@
     "autoprefixer": "^9.7.6",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
-    "closest": "^0.0.1",
     "concurrently": "^5.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",

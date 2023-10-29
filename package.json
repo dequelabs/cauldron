@@ -77,7 +77,6 @@
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "chalk": "^4.1.2",
     "classnames": "^2.2.6",
-    "closest": "0.0.1",
     "concurrently": "^6.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^0.28.7",
