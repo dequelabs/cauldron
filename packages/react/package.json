@@ -98,6 +98,7 @@
     ],
     "testMatch": [
       "**/__tests__/src/**/*.js",
+      "**/__tests__/src/**/*.tsx",
       "**/__tests__/demo/**/*.js"
     ],
     "collectCoverageFrom": [
