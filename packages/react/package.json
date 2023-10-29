@@ -64,7 +64,6 @@
     "postcss-loader": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
     "rollup": "^2.23.0",
     "sinon": "^10.0.0",
     "ts-node": "^10.9.1",
