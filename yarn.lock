@@ -1515,13 +1515,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/http-server@^0.12.1":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@types/http-server/-/http-server-0.12.1.tgz#025f916420673f5ebc5ea48987aeae27776f02ac"
-  integrity sha512-OJ8zs0o8JuHo92KCCsLq4BqkHPi1+Aj2yoPQXJ18LPUxOA1lqKfgBLtHNAQTwwPzeBqyo+HDkWD91MkfOGvNJg==
-  dependencies:
-    "@types/connect" "*"
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
