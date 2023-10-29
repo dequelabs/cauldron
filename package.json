@@ -106,7 +106,6 @@
     "remark-gfm": "^3.0.1",
     "remark-mdx-frontmatter": "^2.1.1",
     "remark-mdx-toc": "^0.3.1",
-    "remark-toc": "^8.0.1",
     "rimraf": "^4.3.1",
     "slugify": "^1.6.5",
     "standard-version": "^9.1.1",
