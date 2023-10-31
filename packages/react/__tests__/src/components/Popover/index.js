@@ -256,7 +256,9 @@ test('variant="prompt" should return no axe violations', async () => {
 });
 
 test('should return no axe violations', async () => {
-  const wrapper = mount(<Wrapper tooltipProps={{ 'aria-label': 'popover' }} />);
+  const wrapper = mount(
+    <Wrapper tooltipProps={{ variant: 'prompt', 'aria-label': 'popover' }} />
+  );
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });

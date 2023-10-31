@@ -126,7 +126,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       initialPlacement;
 
     const additionalProps =
-      variant === 'prompt' ? { 'aria-labelledby': `${id}-label` } : {};
+      variant === 'prompt' && !props['aria-label']
+        ? { 'aria-labelledby': `${id}-label` }
+        : {};
 
     // Keep targetElement in sync with target prop
     useEffect(() => {
@@ -251,10 +253,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             ref={popoverRef}
             role="dialog"
             style={styles.popper}
-            aria-labelledby={`${id}-label`}
             {...attributes.popper}
-            {...props}
             {...additionalProps}
+            {...props}
           >
             <div
               className="Popover__popoverArrow"
