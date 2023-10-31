@@ -1,0 +1,49 @@
+name: VPAT
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * SUN' # At 00:00 on Sunday
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm config set "registry" "https://registry.npmjs.org/"
+      - run: |
+          yarn
+      - uses: dequelabs/action-vpat-report@main
+        with:
+          product-name: axe A11y Metrics POC
+          output-file: vpats/{DATE}-{PRODUCT}.md
+      - run: |
+          CAT0=$(gh issue list -S "label:CAT0 is:open" --json id -L 1000 --repo dequelabs/a11y-metrics-poc | jq '. | length')
+          CAT1=$(gh issue list -S "label:CAT1 is:open" --json id -L 1000 --repo dequelabs/a11y-metrics-poc | jq '. | length')
+          CAT2=$(gh issue list -S "label:CAT2 is:open" --json id -L 1000 --repo dequelabs/a11y-metrics-poc | jq '. | length')
+          CAT3=$(gh issue list -S "label:CAT3 is:open" --json id -L 1000 --repo dequelabs/a11y-metrics-poc | jq '. | length')
+          CAT4=$(gh issue list -S "label:CAT4 is:open" --json id -L 1000 --repo dequelabs/a11y-metrics-poc | jq '. | length')
+          A11Y_SCORE=$(( 100 - $CAT0 * 25 - $CAT1 * 20 - $CAT2 * 10 - $CAT4 * 5 ))
+          if [[ $A11Y_SCORE -gt $THRESHOLD ]] ; then
+            COLOR="green"
+          else
+            COLOR="red"
+          fi
+          echo "{\"schemaVersion\":1,\"label\":\"A11Y Metrics Score\",\"message\":\"$A11Y_SCORE\",\"color\":\"$COLOR\"}" > a11y_metrics.json
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          THRESHOLD: 50
+      - uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'docs: Generate a VPAT'
+          branch: auto-generate-vpat-report
+          base: develop
+          title: 'docs: Generate a VPAT'
+          body: |
+            This patch generates a VPAT based on this repository's currently open issues.
+            This PR was opened by a robot :robot: :tada:
