@@ -24,6 +24,7 @@ interface ComboboxOption {
   key?: string;
   label: string;
   value?: ComboboxValue;
+  formValue?: ComboboxValue;
   description?: string;
 }
 
@@ -91,6 +92,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onKeyDown,
       onFocus,
       onBlur,
+      name,
       renderNoResults,
       portal,
       ...props
@@ -102,6 +104,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
     const [selectedValue, setSelectedValue] = useState<string>(value || '');
+    const [formValue, setFormValue] = useState<string>();
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
       useState<ListboxOption | null>(null);
@@ -153,7 +156,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       }
 
       if (open && autocomplete === 'automatic' && !selectedValue) {
-        // Fire an Home keydown event on listbox to ensure the first item is selected
+        // Fire a Home keydown event on listbox to ensure the first item is selected
         triggerListboxKeyDown(Home);
       }
     }, [open]);
@@ -384,6 +387,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox', className)}
         ref={comboboxRef}
       >
+        {name && <input type="hidden" name={name} value={formValue} />}
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -430,10 +434,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         <ComboboxProvider
           autocomplete={autocomplete}
           inputValue={value}
+          formValue={formValue}
           selectedValue={selectedValue}
           matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
+          setFormValue={setFormValue}
         >
           {portal
             ? createPortal(

@@ -4,11 +4,13 @@ import { ComboboxValue } from './ComboboxOption';
 type ComboboxContext = {
   autocomplete: 'none' | 'manual' | 'automatic';
   inputValue: ComboboxValue;
+  formValue: ComboboxValue;
   selectedValue: ComboboxValue;
   matchingOptions: Map<HTMLElement, ComboboxOptionState>;
   setMatchingOptions: React.Dispatch<
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
   >;
+  setFormValue: React.Dispatch<React.SetStateAction<ComboboxValue>>;
   matches: (<T extends string = string>(value: T) => boolean) | boolean;
 };
 
@@ -26,19 +28,23 @@ type ComboboxProvider = {
 const ComboboxContext = createContext<ComboboxContext>({
   autocomplete: 'manual',
   inputValue: undefined,
+  formValue: undefined,
   selectedValue: undefined,
   matches: true,
   matchingOptions: new Map(),
-  setMatchingOptions: () => null
+  setMatchingOptions: () => null,
+  setFormValue: () => null
 });
 
 function ComboboxProvider({
   autocomplete,
   inputValue,
+  formValue,
   selectedValue,
   matches,
   matchingOptions,
   setMatchingOptions,
+  setFormValue,
   children
 }: ComboboxProvider): JSX.Element {
   const { Provider } = ComboboxContext as React.Context<ComboboxContext>;
@@ -46,21 +52,25 @@ function ComboboxProvider({
     () => ({
       autocomplete,
       inputValue,
+      formValue,
       selectedValue,
       matches:
         typeof matches === 'function' && !!inputValue
           ? (value) => matches(inputValue, value)
           : true,
       matchingOptions,
-      setMatchingOptions
+      setMatchingOptions,
+      setFormValue
     }),
     [
       autocomplete,
       inputValue,
+      formValue,
       selectedValue,
       matches,
       matchingOptions,
-      setMatchingOptions
+      setMatchingOptions,
+      setFormValue
     ]
   );
 
