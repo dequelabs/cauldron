@@ -1,0 +1,13 @@
+name: "Issue Labeler"
+on:
+  issues:
+    types: [opened, edited]
+jobs:
+  add_labels:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dequelabs/action-vpat-labels@main
+    - uses: dequelabs/action-a11y-issue-labeler@main
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        include-title: 1
