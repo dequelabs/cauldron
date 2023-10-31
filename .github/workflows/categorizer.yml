@@ -1,0 +1,12 @@
+name: "Issue Categorizer"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * SUN' # At 00:00 on Sunday
+jobs:
+  categorize:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dequelabs/action-a11y-issue-categorizer@main
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
