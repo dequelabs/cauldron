@@ -3,6 +3,8 @@ name: PR preview
 on:
   pull_request:
     types: [opened]
+    branches-ignore:
+      - master
 
 jobs:
   deploy:
