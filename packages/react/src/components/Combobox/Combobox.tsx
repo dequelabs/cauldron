@@ -374,7 +374,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         onActiveChange={handleActiveChange}
         ref={listboxRef}
         tabIndex={undefined}
-        aria-activedescendant=""
+        aria-activedescendant={undefined}
       >
         {comboboxOptions}
         {noMatchingOptions}
