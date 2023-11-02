@@ -25,6 +25,10 @@ const ComboboxMatch = ({
 }): JSX.Element => {
   const { inputValue } = useComboboxContext();
 
+  if (!text) {
+    return <span></span>;
+  }
+
   if (!inputValue?.length) {
     return <span>{text}</span>;
   }
