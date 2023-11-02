@@ -104,7 +104,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
     const [selectedValue, setSelectedValue] = useState<string>(value || '');
-    const [formValue, setFormValue] = useState<string>();
+    const [formValue, setFormValue] = useState<string | undefined>('');
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
       useState<ListboxOption | null>(null);
