@@ -20,7 +20,7 @@
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production yarn build",
-    "test": "jest --maxWorkers=1 --coverage"
+    "test": "jest --maxWorkers=4 --coverage"
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
