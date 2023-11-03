@@ -1,5 +1,12 @@
 name: 'Dependencies'
 description: 'Installs and builds dependencies for Cauldron'
+inputs:
+  packages-react:
+    type: boolean
+    default: false
+  packages-styles
+    type: boolean
+    default: false
 
 runs:
   using: 'composite'
@@ -10,7 +17,12 @@ runs:
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
     - run: |
+        echo '${INSTALL_PACKAGES_REACT}'
+        echo '${INSTALL_PACKAGES_STYLES}'
         yarn install --frozen-lockfile
         yarn install --cwd packages/react --frozen-lockfile
         yarn install --cwd packages/styles --frozen-lockfile
       shell: bash
+      env:
+        INSTALL_PACKAGES_REACT: ${{ inputs['packages-react'] }}
+        INSTALL_PACKAGES_STYLES: ${{ inputs['packages-styles'] }}
