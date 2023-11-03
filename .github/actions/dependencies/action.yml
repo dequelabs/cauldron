@@ -4,7 +4,7 @@ inputs:
   packages-react:
     type: boolean
     default: false
-  packages-styles
+  packages-styles:
     type: boolean
     default: false
 
