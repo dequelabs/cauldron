@@ -17,11 +17,13 @@ runs:
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
     - run: |
-        echo $INSTALL_PACKAGES_REACT
-        echo $INSTALL_PACKAGES_STYLES
         yarn install --frozen-lockfile
-        yarn install --cwd packages/react --frozen-lockfile
-        yarn install --cwd packages/styles --frozen-lockfile
+        if [[ "$INSTALL_PACKAGES_REACT" == "true" ]]; then
+          yarn install --cwd packages/react --frozen-lockfile;
+        fi
+        if [[ "$INSTALL_PACKAGES_STYLES" == "true" ]]; then
+          yarn install --cwd packages/styles --frozen-lockfile
+        fi
       shell: bash
       env:
         INSTALL_PACKAGES_REACT: ${{ inputs['packages-react'] }}
