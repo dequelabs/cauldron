@@ -17,8 +17,8 @@ runs:
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
     - run: |
-        echo '${INSTALL_PACKAGES_REACT}'
-        echo '${INSTALL_PACKAGES_STYLES}'
+        echo $INSTALL_PACKAGES_REACT
+        echo $INSTALL_PACKAGES_STYLES
         yarn install --frozen-lockfile
         yarn install --cwd packages/react --frozen-lockfile
         yarn install --cwd packages/styles --frozen-lockfile
