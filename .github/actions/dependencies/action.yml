@@ -22,8 +22,8 @@ runs:
     - name: Install packages/react dependencies
       run: yarn install --cwd packages/react --frozen-lockfile
       shell: bash
-      if: ${{ false }}
+      if: ${{ inputs.packages-styles == 1 }}
     - name: Install packages/styles dependencies
       run: yarn install --cwd packages/styles --frozen-lockfile
       shell: bash
-      if: ${{ inputs.packages-styles == 'true' }}
+      if: ${{ inputs.packages-styles == 1 }}
