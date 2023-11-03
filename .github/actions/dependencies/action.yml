@@ -9,5 +9,8 @@ runs:
         node-version: 18
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
-    - run: yarn ci
+    - run: |
+        yarn install --frozen-lockfile
+        yarn install --cwd packages/react --frozen-lockfile
+        yarn install --cwd packages/styles --frozen-lockfile
       shell: bash
