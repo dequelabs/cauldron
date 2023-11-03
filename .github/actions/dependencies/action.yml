@@ -10,3 +10,4 @@ runs:
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
     - run: yarn ci
+      shell: bash
