@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/dependencies
+        with:
+          packages-react: true
       - run: yarn lint
