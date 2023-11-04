@@ -14,8 +14,9 @@ jobs:
       - uses: ./.github/actions/dependencies
         with:
           packages-react: true
+          packages-styles: true
       - run: |
-          yarn build --cwd packages/react
+          yarn build
           yarn test --cwd packages/react
 
   a11y:
