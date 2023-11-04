@@ -14,4 +14,5 @@ jobs:
       - uses: ./.github/actions/dependencies
         with:
           packages-react: true
+          packages-styles: true
       - run: yarn lint
