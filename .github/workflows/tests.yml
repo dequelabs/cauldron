@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  react:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,17 +15,16 @@ jobs:
         with:
           packages-react: true
           packages-styles: true
-      - run: |
-          yarn build
-          yarn test --cwd packages/react
+      - run: yarn build
+
+  react:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: yarn test --cwd packages/react
 
   a11y:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/dependencies
-        with:
-          packages-react: true
-          packages-styles: true
-      - run: |
-          yarn test:a11y
+      - run: yarn test:a11y
