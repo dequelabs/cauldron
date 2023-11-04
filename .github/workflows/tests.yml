@@ -1,0 +1,19 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/dependencies
+        with:
+          packages-react
+      - run: |
+        yarn build --cwd packages/react
+        yarn test --cwd packages/react
