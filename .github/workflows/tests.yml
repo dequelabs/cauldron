@@ -15,5 +15,5 @@ jobs:
         with:
           packages-react
       - run: |
-        yarn build --cwd packages/react
-        yarn test --cwd packages/react
+          yarn build --cwd packages/react
+          yarn test --cwd packages/react
