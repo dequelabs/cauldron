@@ -15,7 +15,8 @@ jobs:
         with:
           packages-react: true
           packages-styles: true
-      - run: yarn build
+      - run: yarn build:react
+      - run: yarn build:styles
 
   react:
     needs: build
@@ -27,4 +28,5 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - run: yarn build:docs
       - run: yarn test:a11y
