@@ -8,7 +8,6 @@ on:
 jobs:
 
   react:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +18,6 @@ jobs:
       - run: yarn test
 
   a11y:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
