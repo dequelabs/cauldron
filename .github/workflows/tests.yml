@@ -21,8 +21,6 @@ jobs:
         with:
           name: dist
           path: |
-            node_modules
-            packages/**/node_modules
             packages/react/lib
             packages/style/dist
           retention-days: 1
