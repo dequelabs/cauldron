@@ -17,16 +17,31 @@ jobs:
           packages-styles: true
       - run: yarn build:react
       - run: yarn build:styles
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            node_modules
+            packages/**/node_modules
+            packages/react/lib
+            packages/style/dist
+          retention-days: 1
 
   react:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: yarn test --cwd packages/react
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+      - run: yarn test
 
   a11y:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
       - run: yarn build:docs
       - run: yarn test:a11y
