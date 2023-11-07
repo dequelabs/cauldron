@@ -76,6 +76,7 @@
   width: var(--dialog-close-button-size);
   margin-right: var(--space-smallest);
   flex-shrink: 0;
+  position: relative;
 }
 
 .Dialog__close:active {

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.10.0](https://github.com/dequelabs/cauldron/compare/v5.9.1...v5.10.0) (2023-11-07)
+
+
+### Features
+
+* **Combobox:** add custom formValue prop to ComboboxOption ([#1264](https://github.com/dequelabs/cauldron/issues/1264)) ([00c9b9b](https://github.com/dequelabs/cauldron/commit/00c9b9bc478f7668b2d691ebd4b43ca32ea62fce))
+
+
+### Bug Fixes
+
+* **react:** prevent error for ComboboxOption when text contents are empty ([#1268](https://github.com/dequelabs/cauldron/issues/1268)) ([db30496](https://github.com/dequelabs/cauldron/commit/db30496963e9f0058ea62881c148ccc81c471b41))
+* **styles:** fix incorrect focus ring on dialog close button ([#1257](https://github.com/dequelabs/cauldron/issues/1257)) ([42f3eff](https://github.com/dequelabs/cauldron/commit/42f3effca089fb927dd47ee48442425caa8b2ae1))
+* Updated light theme focus-glow to correct focus color  ([#1181](https://github.com/dequelabs/cauldron/issues/1181)) ([63a93bb](https://github.com/dequelabs/cauldron/commit/63a93bb88d5f4f4c10c46e98cd060e10a6697cf1)), closes [#918](https://github.com/dequelabs/cauldron/issues/918)
+
 ### [5.9.1](https://github.com/dequelabs/cauldron/compare/v5.9.0...v5.9.1) (2023-10-20)
 
 
