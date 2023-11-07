@@ -14,6 +14,7 @@ export type ComboboxValue = Exclude<ListboxValue, number>;
 interface ComboboxOptionProps extends React.HTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
   value?: ComboboxValue;
+  formValue?: ComboboxValue;
   description?: ContentNode;
   children: string;
 }
@@ -62,13 +63,15 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       id: propId,
       description,
       value: propValue,
+      formValue,
       ...props
     },
     ref
   ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { matches, setMatchingOptions } = useComboboxContext();
+    const { selectedValue, matches, setMatchingOptions, setFormValue } =
+      useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
@@ -103,6 +106,19 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         });
       }
     }, [isActive]);
+
+    useEffect(() => {
+      const comboboxValue =
+        typeof propValue !== 'undefined'
+          ? propValue
+          : comboboxOptionRef.current?.innerText;
+
+      if (selectedValue === comboboxValue) {
+        setFormValue(
+          typeof formValue === 'undefined' ? comboboxValue : formValue
+        );
+      }
+    }, [selectedValue, formValue]);
 
     useEffect(() => {
       if (isMatching) {
