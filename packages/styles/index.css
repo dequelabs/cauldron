@@ -27,10 +27,12 @@
 @import './line.css';
 @import './tabs.css';
 @import './tag.css';
+@import './tag-button.css';
 @import './table.css';
 @import './description-list.css';
 @import './stepper.css';
 @import './panel.css';
+@import './popover.css';
 @import './issue-panel.css';
 @import './navbar.css';
 @import './progressbar.css';
@@ -41,3 +43,4 @@
 @import './two-column-panel.css';
 @import './accordion.css';
 @import './notice.css';
+@import './combobox.css';

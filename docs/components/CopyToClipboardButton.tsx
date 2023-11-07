@@ -33,11 +33,13 @@ export default function CopyToClipboardButton({
   ...props
 }: CopyToClipboardButtonProps) {
   const ref = useRef<HTMLButtonElement>();
+  const toastRef = useRef<HTMLDivElement>();
   const [accessibleName, setAccessibleName] = useState(label);
   const [showToast, setShowToast] = useState(false);
   const handleClick = () => {
     copyTextToClipboard(value);
     setShowToast(true);
+    toastRef.current?.focus();
   };
 
   const handleDismiss = () => {
@@ -51,7 +53,7 @@ export default function CopyToClipboardButton({
     const elements = Array.from(
       document.querySelectorAll('[data-copy-example]')
     );
-    const index = elements.findIndex(element => element === ref.current);
+    const index = elements.findIndex((element) => element === ref.current);
     if (index !== -1 && elements.length) {
       setAccessibleName(`${label}, ${index + 1} of ${elements.length}`);
     }
@@ -67,7 +69,12 @@ export default function CopyToClipboardButton({
         onClick={handleClick}
         label={accessibleName}
       />
-      <Toast show={showToast} type="info" onDismiss={handleDismiss}>
+      <Toast
+        toastRef={toastRef}
+        show={showToast}
+        type="info"
+        onDismiss={handleDismiss}
+      >
         Example copied to clipboard!
       </Toast>
     </>

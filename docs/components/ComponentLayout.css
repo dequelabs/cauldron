@@ -22,6 +22,11 @@ main > section[aria-labelledby='on-this-page'] {
   position: sticky;
   top: var(--space-medium);
   align-self: start;
+  overflow-x: auto;
+  /* account for top + bottom bars and spacing when enforcing max-height for scroll behavior */
+  max-height: calc(
+    100vh - var(--top-bar-height) - var(--top-bar-height) - var(--space-large)
+  );
 }
 
 section[aria-labelledby='on-this-page'] > .toc {
@@ -67,6 +72,10 @@ ul.Component__list {
 
 ul.Component__list li {
   margin: var(--space-half) 0;
+}
+
+ul.Component__list li a {
+  line-height: 1.4;
 }
 
 .Component {

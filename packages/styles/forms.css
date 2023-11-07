@@ -11,7 +11,7 @@
   --field-border-color-error-hover: #c42f41;
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
-  --field-background-color-disabled: #f7f7f7;
+  --field-background-color-disabled: var(--light-workspace-color);
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
   --field-label-error-text-color: var(--error);
@@ -25,8 +25,12 @@
   --field-icon-focus-color: var(--focus-light);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
-  --field-listbox-selected-background-color: var(--accent-secondary-active);
+  --field-listbox-selected-background-color: var(--gray-50);
+  --field-listbox-selected-text-color: #fff;
+  --field-font-size: var(--text-size-small);
   --input-min-width: 250px;
+  --checkbox-size: var(--icon-size);
+  --radio-size: var(--icon-size);
 }
 
 .cauldron--theme-dark {
@@ -41,6 +45,7 @@
   --field-background-color-disabled: #5d676f;
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
+  --field-label-error-text-color: var(--error);
   --field-label-description-text-color: var(--accent-light);
   --field-icon-inactive-color: var(--white);
   --field-icon-active-color: rgba(212, 221, 224, 0.25);
@@ -51,7 +56,8 @@
   --field-icon-focus-color: var(--focus-dark);
   --field-error-text-color: var(--error);
   --field-error-border-color: var(--error);
-  --field-listbox-selected-background-color: var(--accent-dark);
+  --field-listbox-selected-background-color: var(--accent-light);
+  --field-listbox-selected-text-color: var(--accent-medium);
 }
 
 input,
@@ -188,6 +194,7 @@ textarea.Field--has-error:focus:hover,
 [role='listbox']
   li[role='option']:is([aria-selected='true'], [aria-checked='true']) {
   background-color: var(--field-listbox-selected-background-color);
+  color: var(--field-listbox-selected-text-color);
 }
 
 .Error {
@@ -317,7 +324,7 @@ textarea.Field--has-error:focus:hover,
 .Field__text-input {
   padding: var(--space-smallest);
   box-sizing: border-box;
-  font-size: var(--text-size-small);
+  font-size: var(--field-font-size);
   color: var(--field-content-color);
   min-width: min(var(--input-min-width), 100%);
 }
@@ -331,7 +338,7 @@ textarea.Field--has-error:focus:hover,
 .Field__textarea {
   display: block;
   min-height: 56px;
-  font-size: var(--text-size-small);
+  font-size: var(--field-font-size);
   min-width: min(var(--input-min-width), 100%);
   padding: var(--space-half);
   max-width: 500px;
@@ -351,9 +358,16 @@ textarea.Field--has-error:focus:hover,
   font-weight: var(--font-weight-normal);
   line-height: 1;
   margin-top: var(--space-half);
-  margin-left: calc(24px + 2px + var(--space-half));
   cursor: default;
   display: flex;
+}
+
+.Checkbox__wrap .Field__labelDescription {
+  margin-left: calc(var(--checkbox-size) + 2px + var(--space-half));
+}
+
+.Radio__wrap .Field__labelDescription {
+  margin-left: calc(var(--radio-size) + 2px + var(--space-half));
 }
 
 .Field__labelDescription + .Error {
@@ -381,6 +395,16 @@ textarea.Field--has-error:focus:hover,
 .Radio__overlay svg,
 .Checkbox__overlay svg {
   pointer-events: none;
+}
+
+.Radio__overlay svg {
+  height: var(--radio-size);
+  width: var(--radio-size);
+}
+
+.Checkbox__overlay svg {
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
 }
 
 .Radio__overlay:active:not(.Radio__overlay--disabled),

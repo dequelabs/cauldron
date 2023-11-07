@@ -48,11 +48,11 @@ import { Pointout } from '@deque/cauldron-react'
 
 ### Targeted First Time Point Outs
 
-First time point outs can specify a `target` prop that will dynamically position itself pointing to the target element on render. Under the hood, we are using Portals to render the element to `document.body` but you can customize the portal location by setting the `portal` prop with your own element or ref.
+First time point outs can specify a `target` prop that will dynamically position itself pointing to the target element on render. Under the hood, we are using Portals to render the element to `document.body` but you can customize the portal location by setting the `portal` prop with your element or ref.
 
 Positioning tracks `window.resize` events so that the First Time Point Out should always be positioned correctly no matter the context. If your component has a side effect where a target's position is changed that does not cause a trigger a resize, you can call `forceUpdate()` on the First Time Point out to reset the positioning.
 
-Please be aware that when using a `target` prop, the First Time Point Out's children are duplicated in order to address accessibility concerns. Any ids that are present in children will be sanitized in order to prevent duplicate ids from existing in the DOM. These ids will not be available to style, so it's recommended that you use classes or attribute to target styling instead.
+Please be aware that when using a `target` prop, the First Time Point Out's children are duplicated to address accessibility concerns. Any ids that are present in children will be sanitized to prevent duplicate ids from existing in the DOM. These ids will not be available to style, so it's recommended that you use classes or attributes to target styling instead.
 
 <Note>
   Any ids/attributes of children will be applied to the offscreen/screen-reader-only ftpo, so things like aria-labelledby and aria-describedby etc will still work as expected.

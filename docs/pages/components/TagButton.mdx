@@ -1,0 +1,73 @@
+---
+title: TagButton
+description: An interactive element that performs a programmable action when clicked by the user, displayed as a label and value with symbol image.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TagButton/index.tsx
+---
+
+import { TagButton } from '@deque/cauldron-react';
+
+```js
+import { TagButton } from '@deque/cauldron-react';
+```
+
+## Example
+
+```jsx example
+<TagButton
+  label="Label"
+  value="value"
+  onClick={() => console.log('test')}
+  icon="pencil"
+/>
+```
+
+## Props
+
+### TagButton
+
+<ComponentProps
+  className={true}
+  props={[
+    {
+      name: 'label',
+      required: true,
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Label for the tag button.'
+    },
+    {
+      name: 'value',
+      required: true,
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Value for the tag button.'
+    },
+    {
+      name: 'onClick',
+      required: true,
+      type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
+      description: 'a function that gets executed when a user clicks on an element.'
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      required: true,
+      description: 'Icon to use for the TagButton'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Button](./Button)
+- [Tag](./Tag)
