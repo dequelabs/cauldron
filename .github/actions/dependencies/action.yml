@@ -1,6 +1,9 @@
 name: 'Dependencies'
 description: 'Installs and builds dependencies for Cauldron'
 inputs:
+  root:
+    type: boolean
+    default: true
   packages-react:
     type: boolean
     default: false
@@ -19,6 +22,9 @@ runs:
     - name: Install root dependencies
       run: yarn install --frozen-lockfile
       shell: bash
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
+      if: ${{ inputs.root == true || inputs.root == 'true' }}
     - name: Install packages/react dependencies
       run: yarn install --cwd packages/react
       shell: bash
