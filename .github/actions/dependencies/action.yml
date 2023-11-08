@@ -22,8 +22,10 @@ runs:
     - name: Install packages/react dependencies
       run: yarn install --cwd packages/react
       shell: bash
-      if: ${{ inputs.packages-react == true }}
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
+      if: ${{ inputs.packages-react == true || inputs.packages-react == 'true' }}
     - name: Install packages/styles dependencies
       run: yarn install --cwd packages/styles
       shell: bash
-      if: ${{ inputs.packages-styles == true }}
+      if: ${{ inputs.packages-styles == true || inputs.packages-styles == 'true' }}
