@@ -1,22 +1,29 @@
 :root {
-  --alert-warning-background-color: #d93251;
-  --alert-warning-header-text-color: #fff;
+  --alert-default-color: #3c7aae;
+  --alert-warning-color: #d93251;
+
+  --alert-default-color-dark: #6cdaf2;
+  --alert-warning-color-dark: #fe6d6b;
 }
 
 .Alert .Dialog__header .Icon {
   padding-right: var(--space-smallest);
 }
 
+.Alert__default .Dialog__header .Icon {
+  color: var(--alert-default-color);
+}
+
+.Alert__default .Dialog__inner {
+  border: 3px solid var(--alert-default-color);
+}
+
+.Alert__warning .Dialog__header .Icon {
+  color: var(--alert-warning-color);
+}
+
 .Alert__warning .Dialog__inner {
-  border: 3px solid var(--alert-warning-background-color);
-}
-
-.Alert__warning .Dialog__header {
-  background-color: var(--alert-warning-background-color);
-}
-
-.Alert__warning .Dialog__heading {
-  color: var(--alert-warning-header-text-color);
+  border: 3px solid var(--alert-warning-color);
 }
 
 .Alert .Dialog__footer {
@@ -25,8 +32,26 @@
   display: flex;
   justify-content: center;
   background-color: transparent;
+  padding: 0 var(--space-large) var(--space-large);
 }
 
-.Alert__warning .Dialog__heading:focus {
-  border-bottom-color: var(--alert-warning-header-text-color);
+.cauldron--theme-dark .Alert__default .Dialog__header .Icon {
+  color: var(--alert-default-color-dark);
+}
+
+.cauldron--theme-dark .Alert__default .Dialog__inner {
+  border: 3px solid var(--alert-default-color-dark);
+}
+
+.cauldron--theme-dark .Alert__warning .Dialog__header .Icon {
+  color: var(--alert-warning-color-dark);
+}
+
+.cauldron--theme-dark .Alert__warning .Dialog__inner {
+  border: 3px solid var(--alert-warning-color-dark);
+}
+
+.cauldron--theme-dark .Alert .Dialog__footer {
+  border-top: none;
+  background: transparent;
 }

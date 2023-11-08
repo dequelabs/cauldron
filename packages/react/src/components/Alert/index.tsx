@@ -18,13 +18,14 @@ const Alert = ({
   <Dialog
     className={classnames(
       { Alert__warning: variant === 'warning' },
+      { Alert__default: variant === 'default' },
       'Alert',
       className
     )}
     heading={{
       text: (
         <React.Fragment>
-          <Icon type={variant === 'default' ? 'info-circle-alt' : 'caution'} />
+          <Icon type={variant === 'default' ? 'info-circle' : 'caution'} />
           {typeof heading === 'object' && 'text' in heading
             ? heading.text
             : heading}

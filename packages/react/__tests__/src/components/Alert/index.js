@@ -27,3 +27,12 @@ test('should return no axe violations', async () => {
   );
   expect(await axe(alert.html())).toHaveNoViolations();
 });
+
+test('should return no axe violations warning variant', async () => {
+  const alert = mount(
+    <Alert show={true} variant={'warning'} heading={'title'}>
+      Hello!
+    </Alert>
+  );
+  expect(await axe(alert.html())).toHaveNoViolations();
+});
