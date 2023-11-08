@@ -28,4 +28,6 @@ runs:
     - name: Install packages/styles dependencies
       run: yarn install --cwd packages/styles
       shell: bash
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
       if: ${{ inputs.packages-styles == true || inputs.packages-styles == 'true' }}
