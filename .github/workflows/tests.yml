@@ -25,5 +25,10 @@ jobs:
         with:
           packages-react: true
           packages-styles: true
+      - name: Build packages
+        run: |
+          NODE_ENV=production \
+            yarn --cwd packages/react build &
+            yarn --cwd packages/styles build
       - run: yarn build:docs
       - run: yarn test:a11y
