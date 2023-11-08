@@ -15,6 +15,9 @@ jobs:
         with:
           packages-react: true
           packages-styles: true
+      - name: Build packages
+        run: |
+          NODE_ENV=production yarn --cwd packages/react build
       - run: yarn test
 
   a11y:
