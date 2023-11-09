@@ -1,14 +1,19 @@
-name: Tests
+name: Release
 
 on:
   pull_request:
     branches:
       - develop
-  workflow_call:
+      # TODO: Use master instead of develop post testing
+      # - master
 
 jobs:
 
-  react:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
+  publish:
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,19 +25,21 @@ jobs:
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
-      - run: yarn test
+          NODE_ENV=production yarn --cwd packages/styles build
+      - run: echo "TODO: Publish to NPM"
 
-  a11y:
+  canary:
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/dependencies
         with:
+          root: false
           packages-react: true
           packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
-      - run: yarn build:docs
-      - run: yarn test:a11y
+      - run: echo "TODO: Publish Canary"
