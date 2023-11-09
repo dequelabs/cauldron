@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.11.0](https://github.com/dequelabs/cauldron/compare/v5.10.0...v5.11.0) (2023-11-09)
+
+
+### Features
+
+* **react:** sync alert modals with uxpin ([5cfcb57](https://github.com/dequelabs/cauldron/commit/5cfcb5756051d09578f78fb60b49b4ef073504ae))
+
+
+### Bug Fixes
+
+* review comments ([5e22461](https://github.com/dequelabs/cauldron/commit/5e2246189d32c042a5f5c0d80c31fd2fdb36c801))
+
 ## [5.10.0](https://github.com/dequelabs/cauldron/compare/v5.9.1...v5.10.0) (2023-11-07)
 
 
