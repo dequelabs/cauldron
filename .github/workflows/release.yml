@@ -1,11 +1,10 @@
 name: Release
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
-      # TODO: Use master instead of develop post testing
-      # - master
+      - master
 
 jobs:
 
@@ -13,10 +12,13 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   publish:
+    if: github.ref == 'refs/heads/master'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: 'master'
       - uses: ./.github/actions/dependencies
         with:
           root: false
@@ -29,10 +31,13 @@ jobs:
       # TODO: Publish to NPM
 
   canary:
+    if: github.ref == 'refs/heads/develop'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: 'develop'
       - uses: ./.github/actions/dependencies
         with:
           root: false
