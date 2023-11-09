@@ -1,29 +1,37 @@
 :root {
-  --alert-default-color: #3c7aae;
-  --alert-warning-color: #d93251;
+  --alert-warning-background-color: #d93251;
+  --alert-warning-header-text-color: #fff;
 
-  --alert-default-color-dark: #6cdaf2;
-  --alert-warning-color-dark: #fe6d6b;
+  --alert-border-color: var(--accent-primary);
+  --alert-warning-border-color: var(--accent-error);
+
+  --alert-icon-color: var(--accent-primary);
+  --alert-warning-icon-color: var(--accent-error);
+}
+
+.cauldron--theme-dark {
+  --alert-border-color: var(--accent-info);
+  --alert-warning-border-color: var(--accent-danger);
+
+  --alert-icon-color: var(--accent-info);
+  --alert-warning-icon-color: var(--accent-danger);
 }
 
 .Alert .Dialog__header .Icon {
   padding-right: var(--space-smallest);
+  color: var(--alert-icon-color);
 }
 
-.Alert__default .Dialog__header .Icon {
-  color: var(--alert-default-color);
-}
-
-.Alert__default .Dialog__inner {
-  border: 3px solid var(--alert-default-color);
+.Alert .Dialog__inner {
+  border: 3px solid var(--alert-border-color);
 }
 
 .Alert__warning .Dialog__header .Icon {
-  color: var(--alert-warning-color);
+  color: var(--alert-warning-icon-color);
 }
 
 .Alert__warning .Dialog__inner {
-  border: 3px solid var(--alert-warning-color);
+  border: 3px solid var(--alert-warning-border-color);
 }
 
 .Alert .Dialog__footer {
@@ -32,23 +40,6 @@
   display: flex;
   justify-content: center;
   background-color: transparent;
-  padding: 0 var(--space-large) var(--space-large);
-}
-
-.cauldron--theme-dark .Alert__default .Dialog__header .Icon {
-  color: var(--alert-default-color-dark);
-}
-
-.cauldron--theme-dark .Alert__default .Dialog__inner {
-  border: 3px solid var(--alert-default-color-dark);
-}
-
-.cauldron--theme-dark .Alert__warning .Dialog__header .Icon {
-  color: var(--alert-warning-color-dark);
-}
-
-.cauldron--theme-dark .Alert__warning .Dialog__inner {
-  border: 3px solid var(--alert-warning-color-dark);
 }
 
 .cauldron--theme-dark .Alert .Dialog__footer {

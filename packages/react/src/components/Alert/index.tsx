@@ -18,7 +18,6 @@ const Alert = ({
   <Dialog
     className={classnames(
       { Alert__warning: variant === 'warning' },
-      { Alert__default: variant === 'default' },
       'Alert',
       className
     )}
