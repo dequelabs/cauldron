@@ -10,6 +10,10 @@
 }
 
 .cauldron--theme-dark {
+  --dialog-background-color: var(--accent-medium);
+  --dialog-border-color: var(--gray-20);
+  --dialog-header-background-color: var(--accent-dark);
+  --dialog-footer-background-color: var(--accent-dark);
   --dialog-heading-text-color: #fff;
 }
 
@@ -157,9 +161,8 @@
 /* Dark Theme */
 
 .cauldron--theme-dark .Dialog__inner {
-  background-color: var(--accent-medium);
   color: var(--white);
-  border: 4px solid var(--gray-20);
+  border-width: 4px;
 }
 
 .cauldron--theme-dark .Dialog__header {
@@ -172,7 +175,6 @@
 
 .cauldron--theme-dark .Dialog__header,
 .cauldron--theme-dark .Dialog__footer {
-  background-color: var(--accent-dark);
   color: var(--gray-20);
 }
 
