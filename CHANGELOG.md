@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.12.0](https://github.com/dequelabs/cauldron/compare/v5.11.0...v5.12.0) (2023-11-10)
+
+
+### Features
+
+* **icons:** add step forward/back icons ([#1286](https://github.com/dequelabs/cauldron/issues/1286)) ([06dfa4e](https://github.com/dequelabs/cauldron/commit/06dfa4e82e24f195d107ce5dcd04c2af34e62bc8))
+
 ## [5.11.0](https://github.com/dequelabs/cauldron/compare/v5.10.0...v5.11.0) (2023-11-09)
 
 
