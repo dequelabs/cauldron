@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: 'master'
+        # with:
+        #   ref: 'master'
       - uses: ./.github/actions/dependencies
         with:
           root: false
@@ -52,8 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: 'develop'
+        # with:
+        #   ref: 'develop'
       - uses: ./.github/actions/dependencies
         with:
           root: false
