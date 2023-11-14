@@ -13,13 +13,13 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   publish:
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #   ref: 'master'
+        with:
+          ref: 'master'
       - uses: ./.github/actions/dependencies
         with:
           root: false
@@ -34,7 +34,7 @@ jobs:
           cd packages/styles
           PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next --dry-run
+          npm publish --tag=next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish @deque/cauldron-react
@@ -42,7 +42,7 @@ jobs:
           cd packages/react
           PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next --dry-run
+          npm publish --tag=next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
