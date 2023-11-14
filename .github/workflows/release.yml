@@ -5,7 +5,6 @@ on:
     branches:
       - develop
       - master
-      - use-github-actions
 
 jobs:
 
@@ -47,13 +46,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   canary:
-    # if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #   ref: 'develop'
+        with:
+          ref: 'develop'
       - uses: ./.github/actions/dependencies
         with:
           root: false
@@ -66,12 +65,12 @@ jobs:
       - name: Publish @deque/cauldron-styles
         run: |
           cd packages/styles
-          npm publish --dry-run
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
-          npm publish --dry-run
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
