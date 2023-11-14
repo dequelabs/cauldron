@@ -35,7 +35,7 @@ jobs:
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
@@ -43,7 +43,7 @@ jobs:
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
   canary:
     if: github.ref == 'refs/heads/develop'
@@ -67,10 +67,10 @@ jobs:
           cd packages/styles
           npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
           npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
