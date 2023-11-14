@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - master
+      - use-github-actions
 
 jobs:
 
@@ -12,7 +13,7 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   publish:
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
@@ -28,10 +29,25 @@ jobs:
         run: |
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
-      # TODO: Publish to NPM
+      - name: Publish @deque/cauldron-styles
+        run: |
+          cd packages/styles
+          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
+          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          npm publish --tag=next --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish @deque/cauldron-react
+        run: |
+          cd packages/react
+          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
+          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          npm publish --tag=next --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   canary:
-    if: github.ref == 'refs/heads/develop'
+    # if: github.ref == 'refs/heads/develop'
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
@@ -47,4 +63,15 @@ jobs:
         run: |
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
-      # TODO: Publish Canary
+      - name: Publish @deque/cauldron-styles
+        run: |
+          cd packages/styles
+          npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish @deque/cauldron-react
+        run: |
+          cd packages/react
+          npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
