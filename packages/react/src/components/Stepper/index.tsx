@@ -61,7 +61,7 @@ export const Step = (props: StepProps) => {
             aria-label={tooltipText}
           >
             <div className="Stepper__step-indicator">
-              {props.status === 'complete' && <Icon type={'check'} />}
+              {status === 'complete' && <Icon type="check" />}
             </div>
           </TooltipTabstop>
         ) : (
