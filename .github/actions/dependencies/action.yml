@@ -19,6 +19,7 @@ runs:
         node-version: 18
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
+        registry-url: 'https://registry.npmjs.org'
     - name: Install root dependencies
       run: yarn install --frozen-lockfile
       shell: bash
