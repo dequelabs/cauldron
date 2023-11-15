@@ -67,7 +67,7 @@ export const Step = (props: StepProps) => {
         ) : (
           <>
             <div className="Stepper__step-indicator">
-              {props.status === 'complete' && <Icon type={'check'} />}
+              {status === 'complete' && <Icon type="check" />}
             </div>
 
             {children ? (
