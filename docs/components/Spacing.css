@@ -1,0 +1,13 @@
+:root {
+  --spacing-list-base-size: 14px;
+  --spacing-example-color: #0077cc;
+}
+
+.cauldron--theme-dark {
+  --spacing-list-name-color: var(--gray-20);
+  --spacing-list-base-color: var(--gray-40);
+}
+
+.Spacing__example {
+  background: var(--spacing-example-color);
+}

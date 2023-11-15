@@ -7,6 +7,7 @@ import Icon from '../Icon';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
+import nextId from 'react-id-generator';
 import { isBrowser } from '../../utils/is-browser';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -43,6 +44,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
 
   private element: HTMLDivElement | null;
   private heading: HTMLHeadingElement | null;
+  private headingId: string = nextId('dialog-title-');
 
   constructor(props: DialogProps) {
     super(props);
@@ -133,6 +135,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
               }
               setRef(dialogRef, el);
             }}
+            aria-labelledby={this.headingId}
             {...other}
           >
             <div className="Dialog__inner">
@@ -141,6 +144,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
                   className="Dialog__heading"
                   ref={(el: HTMLHeadingElement) => (this.heading = el)}
                   tabIndex={-1}
+                  id={this.headingId}
                 >
                   {typeof heading === 'object' && 'text' in heading
                     ? heading.text

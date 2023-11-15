@@ -24,7 +24,7 @@ import {
   Icon,
   ThemeProvider
 } from '@deque/cauldron-react';
-import { components, pages } from './collections';
+import { components, foundations, pages } from './collections';
 import logo from './assets/img/logo.svg';
 import darkLogo from './assets/img/dark-logo.svg';
 import '@fontsource/roboto';
@@ -251,6 +251,15 @@ const App = () => {
             return <Route key={name} exact path={path} component={render} />;
           })}
           {components.map(({ name, path, Component, ...props }) => {
+            const render = () => (
+              <ComponentLayout {...props}>
+                <Component components={mdxComponents} />
+              </ComponentLayout>
+            );
+
+            return <Route key={name} exact path={path} component={render} />;
+          })}
+          {foundations.map(({ name, path, Component, ...props }) => {
             const render = () => (
               <ComponentLayout {...props}>
                 <Component components={mdxComponents} />

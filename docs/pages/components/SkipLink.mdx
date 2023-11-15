@@ -1,0 +1,44 @@
+---
+title: SkipLink
+description: A navigation component to provide quick access to main content or other areas of the page for screen reader and keyboard users.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SkipLink/index.tsx
+---
+
+import { SkipLink } from '@deque/cauldron-react'
+
+```jsx
+import { SkipLink } from '@deque/cauldron-react'
+```
+
+The skip link is visually located at the very top of the page, but it’s hidden. The link will be activated by navigating through the page with the Tab key based on its document location.
+
+## Example
+
+```jsx example
+<SkipLink target="#main-content" skipText="Skip to" targetText="Main page content" />
+```
+
+## Props
+
+<ComponentProps
+  props={[
+    {
+      name: 'target',
+      type: 'string',
+      required: true,
+      description: 'The id of the element to which a skip link navigates.'
+    },
+    {
+      name: 'skipText',
+      type: 'string',
+      description: 'Text label for the skip link',
+      default: 'Skip to'
+    },
+    {
+      name: 'targetText',
+      type: 'string',
+      description: 'Text label for the target',
+      default: 'Main Content'
+    }
+  ]}
+/>
