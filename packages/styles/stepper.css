@@ -1,14 +1,58 @@
-.Stepper {
+:root {
   --step-indicator-size: 1.867em;
   --step-line-height: 0.53em;
   --step-line-offset: 1.53em;
 
   --step-indicator-content-size: 1.067em;
 
+  --step-label-color: var(--gray-60);
+  --step-line-color: var(--accent-light);
+  --step-indicator-background: var(--accent-light);
+  --step-indicator-color: var(--gray-90);
+
+  --step-current-indicator-background: #fff;
+  --step-current-indicator-color: var(--accent-dark);
+  --step-current-indicator-shadow: 0 0 0 2px var(--accent-dark);
+  --step-current-complete-line-border-color: var(--accent-dark);
+
+  --step-complete-indicator-background: var(--accent-dark);
+  --step-complete-indicator-color: #fff;
+
+  --step-current-label-color: var(--gray-90);
+  --step-complete-indicator-svg-color: var(--accent-success);
+
+  --stepper-color: var(--gray-90);
+}
+
+/* Dark theme variables */
+.cauldron--theme-dark {
+  --step-label-color: var(--accent-light);
+  --step-line-color: var(--accent-medium);
+  --step-indicator-color: #fff;
+  --step-indicator-background: var(--accent-medium);
+
+  --step-current-indicator-background: #fff;
+  --step-current-indicator-color: var(--accent-dark);
+  --step-current-indicator-shadow: 0 0 0 2px var(--accent-dark),
+    0 0 0 4px var(--accent-info);
+  --step-current-complete-line-border-color: var(--accent-info);
+
+  --step-complete-indicator-background: var(--accent-info);
+  --step-complete-indicator-color: var(--accent-dark);
+
+  --step-current-label-color: #fff;
+  --step-complete-indicator-svg-color: #000;
+
+  --stepper-color: var(--accent-light);
+  --stepper-background-color: var(--accent-dark);
+}
+
+.Stepper {
   display: flex;
   padding: var(--space-medium);
   align-items: flex-start;
-  color: var(--gray-90);
+  color: var(--stepper-color);
+  background-color: var(--stepper-background-color);
   counter-reset: stepper;
   list-style-type: none;
   margin: 0 auto;
@@ -26,7 +70,7 @@
   left: calc(-50% + var(--step-line-offset));
   right: calc(50% + var(--step-line-offset));
   flex: 1 1 auto;
-  border-top: var(--step-line-height) solid var(--accent-light);
+  border-top: var(--step-line-height) solid var(--step-line-color);
 }
 
 .Stepper__step:first-child .Stepper__step-line {
@@ -43,15 +87,15 @@
   width: var(--step-indicator-size);
   height: var(--step-indicator-size);
   border-radius: 50%;
-  background: var(--accent-light);
-  color: var(--gray-90);
+  background: var(--step-indicator-background);
+  color: var(--step-indicator-color);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.Stepper__step-indicator::before {
+.Stepper__step-indicator:before {
   font-size: var(--text-size-small);
   counter-increment: stepper;
   content: counter(stepper);
@@ -62,87 +106,44 @@
   width: 100%;
   padding-top: var(--space-smallest);
   font-size: var(--text-size-smaller);
-  color: var(--gray-60);
+  color: var(--step-label-color);
 }
 
 /*
   status-specific styles
 */
 
-.Stepper__step--current .Stepper__step-indicator {
-  background: var(--white);
-  color: var(--accent-dark);
-  box-shadow: 0 0 0 2px var(--accent-dark);
+.Stepper__step--current-indicator {
+  background: var(--step-current-indicator-background);
+  color: var(--step-current-indicator-color);
+  box-shadow: var(--step-current-indicator-shadow);
 }
 
-.Stepper__step--current .Stepper__step-indicator:before {
+.Stepper__step--current-indicator:before {
   font-weight: var(--font-weight-medium);
 }
 
-.Stepper__step--current .Stepper__step-label {
+.Stepper__step--current-label {
   font-weight: var(--font-weight-medium);
-  color: var(--gray-90);
+  color: var(--step-current-label-color);
 }
 
-.Stepper__step--current .Stepper__step-line,
-.Stepper__step--complete .Stepper__step-line {
-  border-color: var(--accent-dark);
+.Stepper__step--current-line,
+.Stepper__step--complete-line {
+  border-color: var(--step-current-complete-line-border-color);
 }
 
-.Stepper__step--complete .Stepper__step-indicator {
-  background: var(--accent-dark);
-  color: var(--white);
+.Stepper__step--complete-indicator {
+  background: var(--step-complete-indicator-background);
+  color: var(--step-complete-indicator-color);
 }
 
-.Stepper__step--complete .Stepper__step-indicator::before {
+.Stepper__step--complete-indicator:before {
   content: '';
 }
 
-.Stepper__step--complete .Stepper__step-indicator svg {
+.Stepper__step--complete-indicator svg {
   height: var(--step-indicator-content-size);
   width: var(--step-indicator-content-size);
-  color: var(--accent-success);
-}
-
-/* Dark Theme */
-.cauldron--theme-dark .Stepper {
-  color: var(--accent-light);
-  background-color: var(--accent-dark);
-}
-
-.cauldron--theme-dark .Stepper__step-label {
-  color: var(--accent-light);
-}
-
-.cauldron--theme-dark .Stepper__step-line {
-  border-top: var(--step-line-height) solid var(--accent-medium);
-}
-
-.cauldron--theme-dark .Stepper__step-indicator {
-  color: var(--white);
-  background: var(--accent-medium);
-}
-
-.cauldron--theme-dark .Stepper__step--current .Stepper__step-indicator {
-  background: var(--white);
-  color: var(--accent-dark);
-  box-shadow: 0 0 0 2px var(--accent-dark), 0 0 0 4px var(--accent-info);
-}
-
-.cauldron--theme-dark .Stepper__step--current .Stepper__step-line,
-.cauldron--theme-dark .Stepper__step--complete .Stepper__step-line {
-  border-color: var(--accent-info);
-}
-
-.cauldron--theme-dark .Stepper__step--complete .Stepper__step-indicator {
-  background: var(--accent-info);
-  color: var(--accent-dark);
-}
-
-.cauldron--theme-dark .Stepper__step--current .Stepper__step-label {
-  color: var(--white);
-}
-
-.cauldron--theme-dark .Stepper__step--complete .Stepper__step-indicator svg {
-  color: var(--black);
+  color: var(--step-complete-indicator-svg-color);
 }

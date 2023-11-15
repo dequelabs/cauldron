@@ -46,7 +46,12 @@ export const Step = (props: StepProps) => {
       aria-current={status === 'current' ? 'step' : 'false'}
       {...liProps}
     >
-      <div className="Stepper__step-line" />
+      <div
+        className={classNames(
+          'Stepper__step-line',
+          `Stepper__step--${status}-line`
+        )}
+      />
       <div className="Stepper__step-content">
         {isTooltip ? (
           <TooltipTabstop
@@ -60,18 +65,35 @@ export const Step = (props: StepProps) => {
             association="aria-labelledby"
             aria-label={tooltipText}
           >
-            <div className="Stepper__step-indicator">
-              {status === 'complete' && <Icon type="check" />}
+            <div
+              className={classNames(
+                'Stepper__step-indicator',
+                `Stepper__step--${status}-indicator`
+              )}
+            >
+              {status === 'complete' && <Icon type={'check'} />}
             </div>
           </TooltipTabstop>
         ) : (
           <>
-            <div className="Stepper__step-indicator">
-              {status === 'complete' && <Icon type="check" />}
+            <div
+              className={classNames(
+                'Stepper__step-indicator',
+                `Stepper__step--${status}-indicator`
+              )}
+            >
+              {status === 'complete' && <Icon type={'check'} />}
             </div>
 
             {children ? (
-              <div className="Stepper__step-label">{children}</div>
+              <div
+                className={classNames(
+                  'Stepper__step-label',
+                  `Stepper__step--${status}-label`
+                )}
+              >
+                {children}
+              </div>
             ) : null}
           </>
         )}
