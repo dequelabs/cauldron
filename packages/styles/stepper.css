@@ -75,7 +75,7 @@
   box-shadow: 0 0 0 2px var(--accent-dark);
 }
 
-.Stepper__step--current .Stepper__step-indicator::before {
+.Stepper__step--current .Stepper__step-indicator:before {
   font-weight: var(--font-weight-medium);
 }
 
