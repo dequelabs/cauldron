@@ -19,7 +19,7 @@
     "predev": "yarn clean",
     "test": "yarn --cwd=packages/react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
-    "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react",
+    "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "release": "./scripts/release.sh"
   },
   "prettier": {
