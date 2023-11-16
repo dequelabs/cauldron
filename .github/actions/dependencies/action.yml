@@ -1,0 +1,40 @@
+name: 'Dependencies'
+description: 'Installs and builds dependencies for Cauldron'
+inputs:
+  root:
+    type: boolean
+    default: true
+  packages-react:
+    type: boolean
+    default: false
+  packages-styles:
+    type: boolean
+    default: false
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: yarn
+        cache-dependency-path: '**/yarn.lock'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install root dependencies
+      run: yarn install --frozen-lockfile
+      shell: bash
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
+      if: ${{ inputs.root == true || inputs.root == 'true' }}
+    - name: Install packages/react dependencies
+      run: yarn install --cwd packages/react
+      shell: bash
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
+      if: ${{ inputs.packages-react == true || inputs.packages-react == 'true' }}
+    - name: Install packages/styles dependencies
+      run: yarn install --cwd packages/styles
+      shell: bash
+      # Note: Checking for both boolean and string true values due to referenced bug:
+      # https://github.com/actions/runner/issues/2238
+      if: ${{ inputs.packages-styles == true || inputs.packages-styles == 'true' }}

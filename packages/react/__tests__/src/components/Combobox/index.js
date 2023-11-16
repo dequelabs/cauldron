@@ -873,6 +873,54 @@ test('should set selected value with "value" prop', () => {
   assertOptionIsSelected(1);
 });
 
+test('should not render hidden input when name is not provided', () => {
+  const wrapper = mount(
+    <Combobox value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').exists()).toBeFalsy();
+});
+
+test('should render hidden input with value from text contents of ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('Banana');
+});
+
+test('should render hidden input with value from value from ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption value="Apple">🍎</ComboboxOption>
+      <ComboboxOption value="Banana">🍌</ComboboxOption>
+      <ComboboxOption value="Cantaloupe">🍈</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('Banana');
+});
+
+test('should render hidden input with value from formValue from ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption formValue="1">Apple</ComboboxOption>
+      <ComboboxOption formValue="2">Banana</ComboboxOption>
+      <ComboboxOption formValue="3">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('2');
+});
+
 test('should support portal element for combobox listbos', () => {
   const element = document.createElement('div');
   const wrapper = mount(
