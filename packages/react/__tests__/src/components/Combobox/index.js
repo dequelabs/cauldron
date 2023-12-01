@@ -206,18 +206,27 @@ test('should render required combobox', () => {
 });
 
 test('should render combobox with error', () => {
+  const errorId = 'combo-error';
   const wrapper = mount(
-    <Combobox required error="You forgot to choose a value.">
+    <Combobox
+      id="combo"
+      aria-describedby="other-id"
+      required
+      error="You forgot to choose a value."
+    >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
     </Combobox>
   );
 
-  expect(wrapper.find('.Error').exists()).toBeTruthy();
-  expect(wrapper.find('.Error').text()).toEqual(
+  expect(wrapper.find(`#${errorId}`).exists()).toBeTruthy();
+  expect(wrapper.find(`#${errorId}`).text()).toEqual(
     'You forgot to choose a value.'
   );
+  expect(
+    wrapper.find('input').getDOMNode().getAttribute('aria-describedby')
+  ).toBe(`other-id ${errorId}`);
 });
 
 test('should open combobox listbox on click', () => {
@@ -258,6 +267,18 @@ test('should focus combobox input on click', () => {
     .simulate('click', { target: document.body });
   assertListboxIsOpen(true);
   expect(onFocus.calledOnce).toBeTruthy();
+});
+
+test('should allow an input ref to be passed to the combobox', () => {
+  const inputRef = React.createRef();
+  const wrapper = mount(
+    <Combobox inputRef={inputRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(inputRef.current).toBeTruthy();
+  expect(inputRef.current).toEqual(wrapper.find('input').getDOMNode());
 });
 
 test('should open combobox listbox on focus', () => {
