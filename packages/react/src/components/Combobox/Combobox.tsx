@@ -16,6 +16,7 @@ import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
+import tokenList from '../../utils/token-list';
 
 // Event Keys
 const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
@@ -51,6 +52,7 @@ interface ComboboxProps
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
@@ -95,6 +97,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       name,
       renderNoResults,
       portal,
+      inputRef: propInputRef = null,
+      'aria-describedby': ariaDescribedby,
       ...props
     },
     ref
@@ -110,7 +114,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       useState<ListboxOption | null>(null);
     const [id] = propId ? [propId] : useId(1, 'combobox');
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useSharedRef<HTMLInputElement>(propInputRef);
     const listboxRef = useRef<HTMLUListElement>(null);
     const isControlled = typeof propValue !== 'undefined';
     const isRequired = !!props.required;
@@ -381,6 +385,14 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       </Listbox>
     );
 
+    const errorId = `${id}-error`;
+    const inputProps = {
+      ...props,
+      'aria-describedby': error
+        ? tokenList(errorId, ariaDescribedby)
+        : ariaDescribedby
+    };
+
     return (
       <div
         id={id}
@@ -423,7 +435,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             aria-activedescendant={
               open && activeDescendant ? activeDescendant.element.id : undefined
             }
-            {...props}
+            {...inputProps}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             onFocus={handleFocus}
@@ -452,7 +464,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             : comboboxListbox}
         </ComboboxProvider>
         {hasError && (
-          <div className="Error" id={`${id}-error`}>
+          <div className="Error" id={errorId}>
             {error}
           </div>
         )}
