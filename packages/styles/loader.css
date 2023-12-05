@@ -19,12 +19,6 @@
   --loader-overlay-background-color: var(--accent-medium);
 }
 
-.Loader--large {
-  --loader-ring-size: 192px;
-  --loader-ring-thickness: 16px;
-  --loader-inner-ring-size: calc(var(--loader-ring-thickness) * 0.5);
-}
-
 .Loader {
   margin: 50px auto;
   position: relative;
@@ -95,11 +89,6 @@
   margin-bottom: var(--space-small);
 }
 
-.Loader__overlay--large .Loader__overlay__loader {
-  min-height: 192px;
-  min-width: 192px;
-}
-
 .Loader__overlay__label {
   color: var(--loader-text-color);
   font-size: var(--text-size-normal);
@@ -119,11 +108,6 @@
   color: var(--loader-logo-color);
   height: calc(var(--loader-ring-size) * 0.7);
   width: calc(var(--loader-ring-size) * 0.7);
-}
-
-.Loader__overlay--large svg {
-  height: 120px;
-  width: 120px;
 }
 
 @keyframes spin {
