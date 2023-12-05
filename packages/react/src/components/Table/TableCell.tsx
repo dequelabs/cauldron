@@ -1,5 +1,4 @@
 import React, { TdHTMLAttributes } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const TableCell = ({
@@ -13,9 +12,5 @@ const TableCell = ({
 );
 
 TableCell.displayName = 'TableCell';
-TableCell.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default TableCell;

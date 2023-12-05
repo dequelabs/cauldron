@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,9 +16,5 @@ const Card = ({ className, variant, ...other }: CardProps) => (
 );
 
 Card.displayName = 'Card';
-Card.propTypes = {
-  className: PropTypes.string,
-  variant: PropTypes.string
-};
 
 export default Card;

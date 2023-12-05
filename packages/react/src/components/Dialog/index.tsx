@@ -1,6 +1,5 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
@@ -8,6 +7,7 @@ import Icon from '../Icon';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
+import nextId from 'react-id-generator';
 import { isBrowser } from '../../utils/is-browser';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -42,22 +42,9 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     closeButtonText: 'Close'
   };
 
-  static propTypes = {
-    className: PropTypes.string,
-    show: PropTypes.bool,
-    dialogRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    onClose: PropTypes.func,
-    forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
-    closeButtonText: PropTypes.string,
-    portal: PropTypes.any
-  };
-
   private element: HTMLDivElement | null;
   private heading: HTMLHeadingElement | null;
+  private headingId: string = nextId('dialog-title-');
 
   constructor(props: DialogProps) {
     super(props);
@@ -148,6 +135,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
               }
               setRef(dialogRef, el);
             }}
+            aria-labelledby={this.headingId}
             {...other}
           >
             <div className="Dialog__inner">
@@ -156,6 +144,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
                   className="Dialog__heading"
                   ref={(el: HTMLHeadingElement) => (this.heading = el)}
                   tabIndex={-1}
+                  id={this.headingId}
                 >
                   {typeof heading === 'object' && 'text' in heading
                     ? heading.text
@@ -203,7 +192,7 @@ interface DialogAlignmentProps {
 }
 
 export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogContent = ({
   children,
@@ -223,14 +212,9 @@ const DialogContent = ({
   </div>
 );
 DialogContent.displayName = 'DialogContent';
-DialogContent.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-  align: PropTypes.string
-};
 
 export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogFooter = ({
   children,
@@ -250,9 +234,4 @@ const DialogFooter = ({
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
-DialogFooter.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-  align: PropTypes.string
-};
 export { Dialog, DialogContent, DialogFooter };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { OptionsMenuProps } from './OptionsMenu';
 import ClickOutsideListener from '../ClickOutsideListener';
 import classnames from 'classnames';
@@ -26,19 +25,6 @@ export default class OptionsMenuList extends React.Component<
     onSelect: () => {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {}
-  };
-
-  static propTypes = {
-    show: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    onClose: PropTypes.func,
-    className: PropTypes.string,
-    onSelect: PropTypes.func,
-    closeOnSelect: PropTypes.bool,
-    menuRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ])
   };
 
   private itemRefs: Array<HTMLLIElement | null>;
@@ -189,7 +175,7 @@ export default class OptionsMenuList extends React.Component<
           aria-expanded={show}
           role="menu"
           onClick={handleClick}
-          ref={el => {
+          ref={(el) => {
             this.menuRef = el;
             if (menuRef) {
               setRef(menuRef, el);

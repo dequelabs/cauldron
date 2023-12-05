@@ -1,6 +1,5 @@
 import { Cauldron } from '../../types';
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Tab from './Tab';
 import { useId } from 'react-id-generator';
@@ -34,7 +33,7 @@ const Tabs = ({
   const tabsRef = useRef<HTMLDivElement>(null);
 
   const tabs = React.Children.toArray(children).filter(
-    child => (child as React.ReactElement<any>).type === Tab
+    (child) => (child as React.ReactElement<any>).type === Tab
   );
 
   const tabCount = tabs.length;
@@ -97,9 +96,11 @@ const Tabs = ({
   };
 
   const tabComponents = tabs.map((child, index) => {
-    const { target, id: propId, ...other } = (child as React.ReactElement<
-      any
-    >).props;
+    const {
+      target,
+      id: propId,
+      ...other
+    } = (child as React.ReactElement<any>).props;
     const selected = index === activeIndex;
     const [id] = propId ? [propId] : useId(1, 'tab');
 
@@ -160,14 +161,5 @@ const Tabs = ({
 };
 
 Tabs.displayName = 'Tabs';
-Tabs.propTypes = {
-  children: PropTypes.node.isRequired,
-  'aria-label': PropTypes.string,
-  'aria-labelledby': PropTypes.string,
-  initialActiveIndex: PropTypes.number,
-  thin: PropTypes.bool,
-  orientation: PropTypes.string,
-  className: PropTypes.string
-};
 
 export default Tabs;

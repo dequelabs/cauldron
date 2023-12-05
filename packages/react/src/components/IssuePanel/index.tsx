@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import IconButton from '../IconButton';
 
@@ -11,7 +10,7 @@ const IssuePanel = ({
 }: {
   className?: string;
   title?: string;
-  actions?: typeof IconButton[];
+  actions?: (typeof IconButton)[];
   children: React.ReactNode;
 }) => {
   return (
@@ -30,9 +29,5 @@ const IssuePanel = ({
 };
 
 IssuePanel.displayName = 'IssuePanel';
-IssuePanel.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default IssuePanel;

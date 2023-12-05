@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import AriaIsolate from '../../utils/aria-isolate';
@@ -35,28 +34,6 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     focus: true,
     show: false,
     dismissible: true
-  };
-
-  static propTypes = {
-    // the ui to be added as the message of the toast
-    children: PropTypes.node.isRequired,
-    // "confirmation", "caution", or "action-needed"
-    type: PropTypes.string.isRequired,
-    // function to be exectued when toast is dismissed
-    onDismiss: PropTypes.func,
-    // text to be added as the aria-label of the "x" dismiss button (default: "Dismiss")
-    dismissText: PropTypes.string,
-    // an optional ref function to get a handle on the toast element
-    toastRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    // whether or not to focus the toast
-    focus: PropTypes.bool,
-    // whether or not to show the toast
-    show: PropTypes.bool,
-    // whether or not the toast is dismissible
-    dismissible: PropTypes.bool
   };
 
   static displayName = 'Toast';
@@ -140,7 +117,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
     return (
       <React.Fragment>
         <div
-          ref={el => {
+          ref={(el) => {
             this.el = el;
             setRef(toastRef, el);
           }}

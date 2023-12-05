@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import { isBrowser } from '../../utils/is-browser';
@@ -24,24 +23,6 @@ export default class SkipLink extends React.Component<
   static defaultProps = {
     skipText: 'Skip to',
     targetText: 'Main Content'
-  };
-
-  static propTypes = {
-    // enforce a valid id hash string (example: '#foo')
-    target: (
-      props: SkipLinkProps,
-      propName: keyof SkipLinkProps,
-      componentName: string
-    ) => {
-      const value = props[propName];
-      if (!value || typeof value !== 'string' || value[0] !== '#') {
-        return new Error(
-          `Invalid prop ${propName} supplied to ${componentName} (must be string starting with "#")`
-        );
-      }
-    },
-    skipText: PropTypes.string,
-    targetText: PropTypes.string
   };
 
   constructor(props: SkipLinkProps) {
