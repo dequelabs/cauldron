@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  workflow_call:
+
+jobs:
+
+  react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/dependencies
+        with:
+          root: false
+          packages-react: true
+          packages-styles: true
+      - name: Build packages
+        run: |
+          NODE_ENV=production yarn --cwd packages/react build
+      - run: yarn test
+
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/dependencies
+        with:
+          packages-react: true
+          packages-styles: true
+      - name: Build packages
+        run: |
+          NODE_ENV=production yarn --cwd packages/react build
+          NODE_ENV=production yarn --cwd packages/styles build
+      - run: yarn build:docs
+      - run: yarn test:a11y

@@ -206,18 +206,27 @@ test('should render required combobox', () => {
 });
 
 test('should render combobox with error', () => {
+  const errorId = 'combo-error';
   const wrapper = mount(
-    <Combobox required error="You forgot to choose a value.">
+    <Combobox
+      id="combo"
+      aria-describedby="other-id"
+      required
+      error="You forgot to choose a value."
+    >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
     </Combobox>
   );
 
-  expect(wrapper.find('.Error').exists()).toBeTruthy();
-  expect(wrapper.find('.Error').text()).toEqual(
+  expect(wrapper.find(`#${errorId}`).exists()).toBeTruthy();
+  expect(wrapper.find(`#${errorId}`).text()).toEqual(
     'You forgot to choose a value.'
   );
+  expect(
+    wrapper.find('input').getDOMNode().getAttribute('aria-describedby')
+  ).toBe(`other-id ${errorId}`);
 });
 
 test('should open combobox listbox on click', () => {
@@ -258,6 +267,18 @@ test('should focus combobox input on click', () => {
     .simulate('click', { target: document.body });
   assertListboxIsOpen(true);
   expect(onFocus.calledOnce).toBeTruthy();
+});
+
+test('should allow an input ref to be passed to the combobox', () => {
+  const inputRef = React.createRef();
+  const wrapper = mount(
+    <Combobox inputRef={inputRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(inputRef.current).toBeTruthy();
+  expect(inputRef.current).toEqual(wrapper.find('input').getDOMNode());
 });
 
 test('should open combobox listbox on focus', () => {
@@ -871,6 +892,54 @@ test('should set selected value with "value" prop', () => {
   combobox.simulate('focus');
   assertListboxIsOpen(true);
   assertOptionIsSelected(1);
+});
+
+test('should not render hidden input when name is not provided', () => {
+  const wrapper = mount(
+    <Combobox value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').exists()).toBeFalsy();
+});
+
+test('should render hidden input with value from text contents of ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('Banana');
+});
+
+test('should render hidden input with value from value from ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption value="Apple">🍎</ComboboxOption>
+      <ComboboxOption value="Banana">🍌</ComboboxOption>
+      <ComboboxOption value="Cantaloupe">🍈</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('Banana');
+});
+
+test('should render hidden input with value from formValue from ComboboxOption', () => {
+  const wrapper = mount(
+    <Combobox name="fruit" value="Banana">
+      <ComboboxOption formValue="1">Apple</ComboboxOption>
+      <ComboboxOption formValue="2">Banana</ComboboxOption>
+      <ComboboxOption formValue="3">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(wrapper.find('input[type="hidden"]').prop('value')).toEqual('2');
 });
 
 test('should support portal element for combobox listbos', () => {
