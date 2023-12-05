@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import focusable from 'focusable';
@@ -61,35 +60,6 @@ export default class Pointout extends React.Component<
     nextText: 'next',
     arrowPosition: 'top-left',
     position: 'center'
-  };
-
-  static propTypes = {
-    heading: PropTypes.node,
-    children: PropTypes.node.isRequired,
-    ftpRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    noArrow: function(props: PointoutProps, propName: keyof PointoutProps) {
-      if (props[propName] === true && typeof props['target'] !== 'undefined') {
-        return new Error(
-          'A "target" prop with "noArrow=true" is not currently supported.'
-        );
-      }
-    },
-    arrowPosition: PropTypes.string,
-    onClose: PropTypes.func,
-    dismissText: PropTypes.string,
-    className: PropTypes.string,
-    target: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    disableOffscreenPointout: PropTypes.bool,
-    portal: PropTypes.any,
-    previousButtonProps: PropTypes.any,
-    nextButtonProps: PropTypes.any,
-    closeButtonProps: PropTypes.any
   };
 
   private resizeDebounceId: number;
@@ -231,7 +201,7 @@ export default class Pointout extends React.Component<
     const offscreenFocusable = getFocusableElements(offscreenRef);
     const visibleFocusable = getFocusableElements(visibleRef);
     const elementIndex = offscreenFocusable.findIndex(
-      element => element === target
+      (element) => element === target
     );
 
     if (elementIndex === -1 || !visibleFocusable[elementIndex]) {
@@ -252,7 +222,7 @@ export default class Pointout extends React.Component<
     const offscreenFocusable = getFocusableElements(offscreenRef);
     const visibleFocusable = getFocusableElements(visibleRef);
     const elementIndex = offscreenFocusable.findIndex(
-      element => element === target
+      (element) => element === target
     );
 
     if (elementIndex === -1 || !visibleFocusable[elementIndex]) {
@@ -396,7 +366,7 @@ export default class Pointout extends React.Component<
         role={target ? undefined : 'region'}
         aria-labelledby={heading ? headingId : undefined}
         aria-hidden={!!target && !disableOffscreenPointout}
-        ref={el => (this.visibleRef = el)}
+        ref={(el) => (this.visibleRef = el)}
       >
         {noArrow ? null : (
           <div
@@ -470,7 +440,7 @@ export default class Pointout extends React.Component<
             className="Offscreen"
             role="region"
             aria-labelledby={heading ? headingId : undefined}
-            ref={el => (this.offscreenRef = el)}
+            ref={(el) => (this.offscreenRef = el)}
           >
             <button
               type="button"
@@ -481,7 +451,7 @@ export default class Pointout extends React.Component<
             <div
               className="Pointout__content"
               tabIndex={-1}
-              ref={el => (this.offscreenContentRef = el)}
+              ref={(el) => (this.offscreenContentRef = el)}
             >
               {heading &&
                 React.cloneElement(heading as React.ReactElement<any>, {

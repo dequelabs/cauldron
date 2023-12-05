@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import PanelTrigger from './PanelTrigger';
 import {
@@ -33,14 +32,6 @@ export default class ExpandCollapsePanel extends React.Component<
     onToggle: () => {}
   };
 
-  static propTypes = {
-    open: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    animationTiming: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-    onToggle: PropTypes.func
-  };
-
   readonly state: ExpandCollapsePanelState = {
     controlled: typeof this.props.open !== 'undefined',
     isOpen: typeof this.props.open !== 'undefined' ? this.props.open : false
@@ -63,8 +54,9 @@ export default class ExpandCollapsePanel extends React.Component<
   animateOpen = () => {
     const { current: panel } = this.panel;
     const { animationTiming } = this.props;
-    const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
-      .matches;
+    const prefersReducedMotion = matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
     if (!animationTiming || prefersReducedMotion) {
       this.setState({ isAnimating: false });
@@ -107,8 +99,9 @@ export default class ExpandCollapsePanel extends React.Component<
   animateClose = () => {
     const { current: panel } = this.panel;
     const { animationTiming } = this.props;
-    const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
-      .matches;
+    const prefersReducedMotion = matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
     if (!animationTiming || prefersReducedMotion) {
       this.setState({ isAnimating: false });
@@ -186,10 +179,10 @@ export default class ExpandCollapsePanel extends React.Component<
     } = this.props;
     const { isOpen, isAnimating, animationClass } = this.state;
     const trigger = React.Children.toArray(children).find(
-      child => (child as ReactElement<any>).type === PanelTrigger
+      (child) => (child as ReactElement<any>).type === PanelTrigger
     );
     const panelElements = React.Children.toArray(children).filter(
-      child =>
+      (child) =>
         typeof child === 'string' ||
         (child as ReactElement<any>).type !== PanelTrigger
     );
