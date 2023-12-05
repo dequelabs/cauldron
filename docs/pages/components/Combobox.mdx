@@ -213,6 +213,38 @@ function ComboboxControlledExample() {
 }
 ```
 
+## Form Values
+
+By default when `name` is set, the value submitted via form submissions for the given field name will be the `value` of the combobox input field or the inner text contents of the combobox option when `value` is omitted.
+
+```jsx example
+<FieldWrap>
+  <Combobox name="fruit" label="Fruit" defaultValue="Peach">
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+  </Combobox>
+</FieldWrap>
+```
+
+Alternatively, a custom `formValue` prop can be set for each combobox option to provide an opaque form value for form submissions, while still allowing for a different input value for the combobox input field.
+
+```jsx example
+<FieldWrap>
+  <Combobox name="fruit" label="Fruit" defaultValue="Peach">
+    <ComboboxOption value="Apple" formValue="1">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana" formValue="2">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber" formValue="3">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange" formValue="4">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach" formValue="5">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear" formValue="6">🍐 Pear</ComboboxOption>
+  </Combobox>
+</FieldWrap>
+```
+
 ## Autocomplete
 
 There are a couple of different methods to control the auto completion of the options in the listbox. By default, autocomplete is set to "manual" meaning selections will be filtered based on the value of the input, and a value will need to be manually selected via click or keypress to change the value of the input field.
@@ -312,7 +344,12 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
     name: 'portal',
     type: ['React.Ref<HTMLElement>', 'HTMLElement'],
     description: 'Alternative placement of combobox listbox. When not set, the listbox will be absolutely positioned inline.'
-  }
+  },
+  {
+    name: 'inputRef',
+    type: 'React.Ref<HTMLInputElement>',
+    description: 'Ref for the input.'
+  },
 ]} />
 
 ### ComboboxOption
@@ -322,6 +359,11 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
     name: 'value',
     type: 'string',
     description: 'Value to be applied to the combobox option. When omitted, value will default to the text content of the option.'
+  },
+  {
+    name: 'formValue',
+    type: 'string',
+    description: 'An optional custom value to be used for form submissions when the "name" prop is provided for Combobox.'
   },
   {
     name: 'disabled',

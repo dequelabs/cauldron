@@ -1,5 +1,4 @@
 import React, { Ref, useState, useRef, useEffect, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
@@ -84,7 +83,7 @@ const RadioGroup = forwardRef(
               name={name}
               value={radioValue}
               id={id}
-              ref={input => {
+              ref={(input) => {
                 if (!input) {
                   return;
                 }
@@ -151,33 +150,6 @@ const RadioGroup = forwardRef(
     );
   }
 );
-
-RadioGroup.propTypes = {
-  name: PropTypes.string,
-  radios: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      labelDescription: PropTypes.string
-    }).isRequired
-  ).isRequired,
-  hasLabel: (
-    props: { [key: string]: string },
-    _propName: string,
-    componentName: string
-  ): null | Error => {
-    if (!props['aria-label'] && !props['aria-labelledby']) {
-      return new Error(
-        `${componentName} must have an "aria-label" or "aria-labelledby" prop`
-      );
-    }
-    return null;
-  },
-  className: PropTypes.string,
-  defaultValue: PropTypes.string,
-  onChange: PropTypes.func
-};
 
 RadioGroup.displayName = 'RadioGroup';
 

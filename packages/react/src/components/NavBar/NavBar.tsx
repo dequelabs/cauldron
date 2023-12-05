@@ -5,7 +5,6 @@ import React, {
   KeyboardEventHandler
 } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import { useId } from 'react-id-generator';
 
@@ -97,12 +96,5 @@ const NavBar = ({
 };
 
 NavBar.displayName = 'NavBar';
-NavBar.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  collapsed: PropTypes.bool,
-  navTriggerLabel: PropTypes.string,
-  propId: PropTypes.string
-};
 
 export default NavBar;

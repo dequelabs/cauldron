@@ -1,5 +1,4 @@
 import React, { forwardRef, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon, { IconType } from '../Icon';
 import { ContentNode } from '../../types';
@@ -42,17 +41,5 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
 );
 
 Notice.displayName = 'Notice';
-Notice.propTypes = {
-  children: PropTypes.node,
-  type: PropTypes.oneOf(['caution', 'info', 'danger']),
-  // @ts-expect-error
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.element
-  ]),
-  // @ts-expect-error
-  icon: PropTypes.string
-};
 
 export default Notice;

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import keyname from 'keyname';
 import Scrim from '../Scrim';
@@ -24,13 +23,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   static defaultProps = {
     className: '',
     show: false
-  };
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    onDismiss: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    show: PropTypes.bool
   };
 
   private navList = React.createRef<HTMLUListElement>();
@@ -124,14 +116,8 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     const { animateClass, wide } = this.state;
     // disabling no-unused-vars to prevent onDismiss from being passed through to dom element
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {
-      children,
-      className,
-      show,
-      onDismiss,
-      navProps,
-      ...other
-    } = this.props;
+    const { children, className, show, onDismiss, navProps, ...other } =
+      this.props;
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
       <Fragment>
