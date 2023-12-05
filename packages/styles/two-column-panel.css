@@ -260,7 +260,12 @@
 
   .TwoColumnPanel--hide .TwoColumnPanel__Left,
   .TwoColumnPanel--show .TwoColumnPanel__Left {
-    margin-left: calc(var(--two-column-panel-left-column-width) * -1);
+    max-width: 100%;
+    /* This will constrain the component to the max-width of its container, as well as adjusting the offset margin to the max negative value to prevent incorrect offset when the max-width is less than the column width. */
+    margin-left: max(
+      calc(var(--two-column-panel-left-column-width) * -1),
+      calc(100% * -1)
+    );
     animation: none;
     opacity: 1;
   }

@@ -14,6 +14,7 @@
   --gray-20: #f2f2f2;
   --gray-30: #e0e0e0;
   --gray-40: #cccccc;
+  --gray-50: #757575;
   --gray-60: #666666;
   --gray-80: #4d4d4d;
   --gray-90: #333333;
@@ -37,8 +38,11 @@
   --accent-info-active: #a7e9f7;
   --accent-primary: #3c7aae;
   --accent-primary-active: #316091;
+  --accent-error-disabled: #db6379;
+  --accent-primary-disabled: #78a6d8;
   --accent-secondary: var(--gray-20);
   --accent-secondary-active: var(--gray-30);
+  --light-workspace-color: #f7f7f7;
   --focus-light: #b51ad1;
   --focus-dark: #f5a4ff;
   --issue-critical: var(--accent-danger);
@@ -65,21 +69,21 @@
   --info: var(--accent-info-light);
   --success: var(--accent-success-light);
   --focus-active: rgba(215, 30, 247, 0.25);
-  --focus-glow: rgba(193, 27, 222, 0.75);
+  --focus-glow: rgba(181, 26, 209, 0.75);
   --metric-accent-low: var(--accent-danger-light);
   --metric-accent-mid: #8ba6c5;
   --metric-accent-full: var(--accent-success);
 
   /* spacing (padding/margin) */
+  --space-quarter: 2px;
+  --space-half: 4px;
+  --space-three-quarters: 6px;
   --space-smallest: 8px;
   --space-smaller: 12px;
   --space-small: 16px;
   --space-medium: 18px;
   --space-large: 24px;
   --space-largest: 32px;
-  --space-half: 4px;
-  --space-three-quarters: 6px;
-  --space-quarter: 2px;
   --space-large-with-underborder: 18px 24px;
   --space-gutter: 40px;
 
@@ -135,6 +139,12 @@
   /* radio card */
   --radio-card-width: 255px;
   --radio-card-height: 229px;
+
+  /* target size */
+  /* Note: target-size is deprecated, use --target-size-enhanced or --target-size-minimum */
+  --target-size: 44px;
+  --target-size-enhanced: var(--target-size);
+  --target-size-minimum: 24px;
 }
 
 .cauldron--theme-dark {

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface NavItemProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -34,8 +33,5 @@ const NavItem = ({
 };
 
 NavItem.displayName = 'NavItem';
-NavItem.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 export default NavItem;

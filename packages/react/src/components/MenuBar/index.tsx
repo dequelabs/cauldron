@@ -1,5 +1,4 @@
 import React, { Children, cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import keyname from 'keyname';
 import { isWide } from '../../utils/viewport';
 
@@ -17,13 +16,6 @@ export default class TopBar extends React.Component<
   MenuBarProps,
   MenuBarState
 > {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    thin: PropTypes.bool,
-    hasTrigger: PropTypes.bool
-  };
-
   static defaultProps = {
     thin: false,
     hasTrigger: false
@@ -117,7 +109,9 @@ export default class TopBar extends React.Component<
       menuItems.shift();
     }
 
-    const currentIndex = menuItems.findIndex(menuitem => menuitem === e.target);
+    const currentIndex = menuItems.findIndex(
+      (menuitem) => menuitem === e.target
+    );
     if (currentIndex === -1 || (key !== 'left' && key !== 'right')) {
       return;
     }

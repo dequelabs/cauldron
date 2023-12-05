@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Offscreen from '../Offscreen';
 import classNames from 'classnames';
 
@@ -21,10 +20,6 @@ const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
     );
   }
 );
-
-Loader.propTypes = {
-  className: PropTypes.string
-};
 
 Loader.displayName = 'Loader';
 

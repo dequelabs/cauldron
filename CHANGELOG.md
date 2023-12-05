@@ -2,6 +2,89 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.13.0](https://github.com/dequelabs/cauldron/compare/v5.12.0...v5.13.0) (2023-12-01)
+
+
+### Features
+
+* **Combobox:** allow combobox to take an input ref ([#1297](https://github.com/dequelabs/cauldron/issues/1297)) ([6dd5a34](https://github.com/dequelabs/cauldron/commit/6dd5a3404e743f0ec246056c2fe81666e064ce1c))
+* **Dialog:** ensure that dialogs are labelled by their heading ([#1260](https://github.com/dequelabs/cauldron/issues/1260)) ([e08b517](https://github.com/dequelabs/cauldron/commit/e08b5178d26dddcac433c170dd411820194121b0))
+
+## [5.12.0](https://github.com/dequelabs/cauldron/compare/v5.11.0...v5.12.0) (2023-11-10)
+
+
+### Features
+
+* **icons:** add step forward/back icons ([#1286](https://github.com/dequelabs/cauldron/issues/1286)) ([06dfa4e](https://github.com/dequelabs/cauldron/commit/06dfa4e82e24f195d107ce5dcd04c2af34e62bc8))
+
+## [5.11.0](https://github.com/dequelabs/cauldron/compare/v5.10.0...v5.11.0) (2023-11-09)
+
+
+### Features
+
+* **react:** sync alert modals with uxpin ([5cfcb57](https://github.com/dequelabs/cauldron/commit/5cfcb5756051d09578f78fb60b49b4ef073504ae))
+
+
+### Bug Fixes
+
+* review comments ([5e22461](https://github.com/dequelabs/cauldron/commit/5e2246189d32c042a5f5c0d80c31fd2fdb36c801))
+
+## [5.10.0](https://github.com/dequelabs/cauldron/compare/v5.9.1...v5.10.0) (2023-11-07)
+
+
+### Features
+
+* **Combobox:** add custom formValue prop to ComboboxOption ([#1264](https://github.com/dequelabs/cauldron/issues/1264)) ([00c9b9b](https://github.com/dequelabs/cauldron/commit/00c9b9bc478f7668b2d691ebd4b43ca32ea62fce))
+
+
+### Bug Fixes
+
+* **react:** prevent error for ComboboxOption when text contents are empty ([#1268](https://github.com/dequelabs/cauldron/issues/1268)) ([db30496](https://github.com/dequelabs/cauldron/commit/db30496963e9f0058ea62881c148ccc81c471b41))
+* **styles:** fix incorrect focus ring on dialog close button ([#1257](https://github.com/dequelabs/cauldron/issues/1257)) ([42f3eff](https://github.com/dequelabs/cauldron/commit/42f3effca089fb927dd47ee48442425caa8b2ae1))
+* Updated light theme focus-glow to correct focus color  ([#1181](https://github.com/dequelabs/cauldron/issues/1181)) ([63a93bb](https://github.com/dequelabs/cauldron/commit/63a93bb88d5f4f4c10c46e98cd060e10a6697cf1)), closes [#918](https://github.com/dequelabs/cauldron/issues/918)
+
+### [5.9.1](https://github.com/dequelabs/cauldron/compare/v5.9.0...v5.9.1) (2023-10-20)
+
+
+### Bug Fixes
+
+* **styles:** fix layout issues with dialog header when wrapping ([#1253](https://github.com/dequelabs/cauldron/issues/1253)) ([565d26c](https://github.com/dequelabs/cauldron/commit/565d26c14bf3343e7b9466ff7e44b48df50297ba))
+
+## [5.9.0](https://github.com/dequelabs/cauldron/compare/v5.8.1...v5.9.0) (2023-10-16)
+
+
+### Features
+
+* **Modal:** sync modal styles with pattern library and include alignment props ([#1236](https://github.com/dequelabs/cauldron/issues/1236)) ([3563505](https://github.com/dequelabs/cauldron/commit/356350519c56e2bf60f9c63a3796508fd454a268))
+* **Popover:** add new component ([#1171](https://github.com/dequelabs/cauldron/issues/1171)) ([b09c14c](https://github.com/dequelabs/cauldron/commit/b09c14c1021068985abc35f8a5d946a040ea700c))
+* **react:** add Combobox component ([#1180](https://github.com/dequelabs/cauldron/issues/1180)) ([4d29227](https://github.com/dequelabs/cauldron/commit/4d292274916c7399fd2b9ccc4daf6ca7d1968432))
+* **react:** add Listbox component ([#1167](https://github.com/dequelabs/cauldron/issues/1167)) ([2562efe](https://github.com/dequelabs/cauldron/commit/2562efe585ad2d351dce721808dea9957b3b8a75))
+* **styles:** apply a fixed size to radio/checkbox inherited from icon-size ([#1195](https://github.com/dequelabs/cauldron/issues/1195)) ([c7e293c](https://github.com/dequelabs/cauldron/commit/c7e293cc0a1907af5929d83c02fc30e3ba05bc78))
+* **styles:** update focus-dark color to better contrast against different backgrounds ([#1194](https://github.com/dequelabs/cauldron/issues/1194)) ([e27cfd1](https://github.com/dequelabs/cauldron/commit/e27cfd137f2ccd54ea46c114ab513632ce3b7dcc))
+* **styles:** update styles for Code component ([#1199](https://github.com/dequelabs/cauldron/issues/1199)) ([5921a8e](https://github.com/dequelabs/cauldron/commit/5921a8e624140fa987dbb63f89f78e1870c285dc))
+* **TagButton:** add new tag button component ([#1191](https://github.com/dequelabs/cauldron/issues/1191)) ([033b4e8](https://github.com/dequelabs/cauldron/commit/033b4e816c59e800b883b09f0b7764fd0728e7b1))
+
+
+### Bug Fixes
+
+* corrected color of button tags on hover in light theme. ([#1162](https://github.com/dequelabs/cauldron/issues/1162)) ([b0d3b50](https://github.com/dequelabs/cauldron/commit/b0d3b5016cb8f19f46540882e94186bf32f6c03c))
+* **react:** ensure that no results get announced for NVDA ([#1200](https://github.com/dequelabs/cauldron/issues/1200)) ([2093334](https://github.com/dequelabs/cauldron/commit/20933343c6216b028e41c77d490fbbca8d56d524))
+* **react:** prevent esm modules from appearing in cjs dist ([#1207](https://github.com/dequelabs/cauldron/issues/1207)) ([29e23f8](https://github.com/dequelabs/cauldron/commit/29e23f8951d96b860aa4526811736bb3027b9214))
+* **styles:** align Notice icon to top when text is wrapped ([#1225](https://github.com/dequelabs/cauldron/issues/1225)) ([f20fcb4](https://github.com/dequelabs/cauldron/commit/f20fcb40342c3e0881d062ba67db7bc24ee70d9b))
+* **styles:** deprecation notices for table sort button styles ([#793](https://github.com/dequelabs/cauldron/issues/793)) ([5655cf1](https://github.com/dequelabs/cauldron/commit/5655cf1ae91d26e7a8dab85ea8bd3b05ef6b8b85))
+* **styles:** fix color contrast for selected listbox options ([#1226](https://github.com/dequelabs/cauldron/issues/1226)) ([1e651e5](https://github.com/dequelabs/cauldron/commit/1e651e5c38976832bf7d1573207b27cd9643f82c))
+* **styles:** fix color contrast issue for required text on TextField with error ([#1182](https://github.com/dequelabs/cauldron/issues/1182)) ([e151162](https://github.com/dequelabs/cauldron/commit/e1511621cdf3789b809a21869f501c68ddd60065))
+* **styles:** fix color contrast issue with selected Combobox text ([#1235](https://github.com/dequelabs/cauldron/issues/1235)) ([06862aa](https://github.com/dequelabs/cauldron/commit/06862aa3b2301b787b28a50110467799817244e9))
+* **styles:** prevent overflow for TwoColumnPanel left container at narrow viewports ([#1234](https://github.com/dequelabs/cauldron/issues/1234)) ([53b0649](https://github.com/dequelabs/cauldron/commit/53b06494753199f458878c60aa86a2cdda38f155))
+* tooltip content cut off at reflow ([#1230](https://github.com/dequelabs/cauldron/issues/1230)) ([8f4cfab](https://github.com/dequelabs/cauldron/commit/8f4cfabf83bd84b6e92cb698daebea124ac7a125))
+
+### [5.8.1](https://github.com/dequelabs/cauldron/compare/v5.8.0...v5.8.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* **react:** prevent esm modules from appearing in cjs dist ([#1207](https://github.com/dequelabs/cauldron/issues/1207)) ([fdec72f](https://github.com/dequelabs/cauldron/commit/fdec72f4318c95998eeb35e87f99471b64b6358e))
+
 ## [5.8.0](https://github.com/dequelabs/cauldron/compare/v5.7.1...v5.8.0) (2023-09-05)
 
 

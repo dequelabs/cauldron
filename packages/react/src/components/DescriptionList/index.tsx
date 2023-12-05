@@ -1,11 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-const commonPropTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 interface DescriptionProps {
   children: React.ReactNode;
@@ -33,7 +27,6 @@ export const DescriptionList = ({
 );
 
 DescriptionList.displayName = 'DescriptionList';
-DescriptionList.propTypes = commonPropTypes;
 
 export const DescriptionListItem = ({
   children,
@@ -46,7 +39,6 @@ export const DescriptionListItem = ({
 );
 
 DescriptionListItem.displayName = 'DescriptionListItem';
-DescriptionListItem.propTypes = commonPropTypes;
 
 export const DescriptionTerm = ({
   children,
@@ -59,7 +51,6 @@ export const DescriptionTerm = ({
 );
 
 DescriptionTerm.displayName = 'DescriptionTerm';
-DescriptionTerm.propTypes = commonPropTypes;
 
 export const DescriptionDetails = ({
   children,
@@ -72,4 +63,3 @@ export const DescriptionDetails = ({
 );
 
 DescriptionDetails.displayName = 'DescriptionDetails';
-DescriptionDetails.propTypes = commonPropTypes;

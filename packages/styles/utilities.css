@@ -62,6 +62,21 @@
   font-weight: var(--font-weight-ultra-bold);
 }
 
+.text--align-left {
+  text-align: left !important;
+  justify-content: left !important;
+}
+
+.text--align-center {
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+.text--align-right {
+  text-align: right !important;
+  justify-content: right !important;
+}
+
 body .is--hidden {
   display: none;
 }

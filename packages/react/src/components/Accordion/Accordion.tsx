@@ -5,7 +5,6 @@ import ExpandCollapsePanel, {
   PanelTrigger
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
-import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -115,23 +114,6 @@ const Accordion = ({
 Accordion.displayName = 'Accordion';
 AccordionContent.displayName = 'AccordionContent';
 AccordionTrigger.displayName = 'AccordionTrigger';
-
-Accordion.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
-};
-
-AccordionTrigger.propTypes = {
-  children: PropTypes.node,
-  heading: PropTypes.shape({
-    level: PropTypes.number
-  })
-};
-
-AccordionContent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };

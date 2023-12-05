@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Placement } from '@popperjs/core';
 import IconButton from '../IconButton';
 import { ContentNode } from '../../types';
-import * as CustomPropTypes from '../../propTypes';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
@@ -117,23 +115,5 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
 );
 
 Pagination.displayName = 'Pagination';
-Pagination.propTypes = {
-  totalItems: PropTypes.number.isRequired,
-  itemsPerPage: PropTypes.number,
-  currentPage: PropTypes.number,
-  statusLabel: PropTypes.element,
-  firstPageLabel: CustomPropTypes.contentNode,
-  previousPageLabel: CustomPropTypes.contentNode,
-  nextPageLabel: CustomPropTypes.contentNode,
-  lastPageLabel: CustomPropTypes.contentNode,
-  onNextPageClick: PropTypes.func,
-  onPreviousPageClick: PropTypes.func,
-  onFirstPageClick: PropTypes.func,
-  onLastPageClick: PropTypes.func,
-  // @ts-expect-error
-  tooltipPlacement: PropTypes.string,
-  className: PropTypes.string,
-  thin: PropTypes.bool
-};
 
 export default Pagination;

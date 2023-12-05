@@ -1,12 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/light';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/light';
 import classNames from 'classnames';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
-import css from 'react-syntax-highlighter/dist/esm/languages/hljs/css';
-import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
-import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml';
+import js from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
+import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
+import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
@@ -14,9 +13,8 @@ SyntaxHighlighter.registerLanguage('html', xml);
 SyntaxHighlighter.registerLanguage('yaml', yaml);
 
 // HACK: This is a workaround for a bug in react-syntax-highlighter's types.
-const Highlighter = SyntaxHighlighter as React.ComponentType<
-  SyntaxHighlighterProps
->;
+const Highlighter =
+  SyntaxHighlighter as React.ComponentType<SyntaxHighlighterProps>;
 
 type Props = {
   children: string;
@@ -31,7 +29,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   className,
   scrollable = false,
   ...props
-}) => {
+}: Props) => {
   const ref = useRef<HTMLPreElement>(null);
   const [scrollableRegion, setScrollableRegion] = useState(false);
   // react-syntax-highlighter does not provide direct access to its dom elements
@@ -81,13 +79,5 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
 };
 
 Code.displayName = 'Code';
-
-Code.propTypes = {
-  children: PropTypes.string.isRequired,
-  language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
-  className: PropTypes.string,
-  tabIndex: PropTypes.number,
-  scrollable: PropTypes.bool
-};
 
 export default Code;

@@ -24,9 +24,9 @@ afterEach(() => {
   mountNode = null;
 });
 
-const update = async wrapper => {
+const update = async (wrapper) => {
   await act(async () => {
-    await new Promise(resolve => setImmediate(resolve));
+    await new Promise((resolve) => setImmediate(resolve));
     wrapper.update();
   });
 };
@@ -78,6 +78,7 @@ const WrapperPrompt = ({ buttonProps = {}, tooltipProps = {} }) => {
         target={ref}
         show
         onClose={onClose}
+        infoText="popover"
         {...tooltipProps}
       />
     </React.Fragment>
@@ -96,10 +97,7 @@ test('should auto-generate id', async () => {
   const id = wrapper.find('.Popover').props().id;
   expect(id).toBeTruthy();
   expect(id).toEqual(
-    wrapper
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-controls')
+    wrapper.find('button').getDOMNode().getAttribute('aria-controls')
   );
 });
 
@@ -107,19 +105,13 @@ test('should attach attribute aria-expanded correctly based on shown state', asy
   const wrapper = mount(<Wrapper />);
   await update(wrapper);
   expect(
-    wrapper
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-expanded')
+    wrapper.find('button').getDOMNode().getAttribute('aria-expanded')
   ).toBeTruthy();
 
   const shownStateFalsy = mount(<Wrapper tooltipProps={{ show: false }} />);
 
   expect(
-    shownStateFalsy
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-expanded')
+    shownStateFalsy.find('button').getDOMNode().getAttribute('aria-expanded')
   ).toBeFalsy();
 });
 
@@ -138,10 +130,7 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   await update(wrapper);
   expect(wrapper.find('.Popover').props().id).toEqual('popoverid');
   expect(
-    wrapper
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-describedby')
+    wrapper.find('button').getDOMNode().getAttribute('aria-describedby')
   ).toEqual('foo popoverid');
 });
 
@@ -267,7 +256,9 @@ test('variant="prompt" should return no axe violations', async () => {
 });
 
 test('should return no axe violations', async () => {
-  const wrapper = mount(<Wrapper />);
+  const wrapper = mount(
+    <Wrapper tooltipProps={{ variant: 'prompt', 'aria-label': 'popover' }} />
+  );
   await update(wrapper);
   expect(await axe(wrapper.html())).toHaveNoViolations();
 });
@@ -341,9 +332,6 @@ test('aria-labelledby is set correctly for prompt variant', async () => {
   const id = wrapper.find('.Popover').props().id;
 
   expect(`${id}-label`).toEqual(
-    wrapper
-      .find('.Popover')
-      .getDOMNode()
-      .getAttribute('aria-labelledby')
+    wrapper.find('.Popover').getDOMNode().getAttribute('aria-labelledby')
   );
 });

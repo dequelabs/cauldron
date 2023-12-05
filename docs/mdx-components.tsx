@@ -15,6 +15,7 @@ import {
 import Example from './components/Example';
 import ComponentProps from './components/ComponentProps';
 import Note from './components/Note';
+import CssParamsTable from './components/CssParamsTable';
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: number;
@@ -103,7 +104,8 @@ const mdxComponents = {
   ),
   Example,
   ComponentProps,
-  Note
+  Note,
+  CssParamsTable
 };
 
 export default mdxComponents;

@@ -2,7 +2,11 @@ import React from 'react';
 import { setImmediate } from 'timers/promises';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import Dialog from 'src/components/Dialog';
+import {
+  default as Dialog,
+  DialogContent,
+  DialogFooter
+} from 'src/components/Dialog';
 import axe from '../../../axe';
 
 const defaults = { show: false, heading: { text: 'hi' } };
@@ -14,7 +18,7 @@ test('returns null if passed a falsey "show" prop', () => {
   expect(dialog.html()).toBe(null);
 });
 
-test('focuses heading when mounted with a truthy "show" prop', done => {
+test('focuses heading when mounted with a truthy "show" prop', (done) => {
   const dialog = mount(
     <Dialog {...defaults} show={true}>
       hello
@@ -29,7 +33,7 @@ test('focuses heading when mounted with a truthy "show" prop', done => {
   }, 10);
 });
 
-test('focuses heading when "show" prop is updated from falsey to truthy', done => {
+test('focuses heading when "show" prop is updated from falsey to truthy', (done) => {
   const dialog = mount(<Dialog {...defaults}>{'hello'}</Dialog>);
 
   dialog.setProps({ show: true }, () => {
@@ -39,6 +43,19 @@ test('focuses heading when "show" prop is updated from falsey to truthy', done =
       done();
     }, 10);
   });
+});
+
+test('associates dialog with heading', () => {
+  const dialog = mount(
+    <Dialog {...defaults} show={true}>
+      hello
+    </Dialog>
+  );
+  expect(dialog.find('[role="dialog"]').prop('aria-labelledby')).toBeTruthy();
+  expect(dialog.find('h2').prop('id')).toBeTruthy();
+  expect(dialog.find('[role="dialog"]').prop('aria-labelledby')).toEqual(
+    dialog.find('h2').prop('id')
+  );
 });
 
 test('calls onClose when clicked outside', () => {
@@ -145,6 +162,38 @@ test('deactivates aria isolate on unmount', async () => {
   dialog.unmount();
   await setImmediate();
   expect(deactivate.called).toBe(true);
+});
+
+test('should set alignment on dialog content', () => {
+  const wrapper = mount(<DialogContent align="left" />);
+
+  expect(wrapper.find('.Dialog__content').hasClass('text--align-left')).toEqual(
+    true
+  );
+  wrapper.setProps({ align: 'center' });
+  expect(
+    wrapper.find('.Dialog__content').hasClass('text--align-center')
+  ).toEqual(true);
+  wrapper.setProps({ align: 'right' });
+  expect(
+    wrapper.find('.Dialog__content').hasClass('text--align-right')
+  ).toEqual(true);
+});
+
+test('should set alignment on dialog footer', async () => {
+  const wrapper = mount(<DialogFooter align="left" />);
+
+  expect(wrapper.find('.Dialog__footer').hasClass('text--align-left')).toEqual(
+    true
+  );
+  wrapper.setProps({ align: 'center' });
+  expect(
+    wrapper.find('.Dialog__footer').hasClass('text--align-center')
+  ).toEqual(true);
+  wrapper.setProps({ align: 'right' });
+  expect(wrapper.find('.Dialog__footer').hasClass('text--align-right')).toEqual(
+    true
+  );
 });
 
 test('should return no axe violations', async () => {

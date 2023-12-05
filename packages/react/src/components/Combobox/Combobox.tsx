@@ -16,6 +16,7 @@ import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
+import tokenList from '../../utils/token-list';
 
 // Event Keys
 const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
@@ -24,6 +25,7 @@ interface ComboboxOption {
   key?: string;
   label: string;
   value?: ComboboxValue;
+  formValue?: ComboboxValue;
   description?: string;
 }
 
@@ -50,6 +52,7 @@ interface ComboboxProps
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
@@ -60,10 +63,14 @@ const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   return value.toLowerCase().includes(inputValue.toLowerCase());
 };
 
-const ComboboxNoResults = (): JSX.Element => {
+const ComboboxNoResults = ({
+  children
+}: {
+  children?: React.ReactNode;
+}): JSX.Element => {
   return (
-    <div className="ComboboxListbox__empty" aria-live="polite">
-      No results found.
+    <div className="ComboboxListbox__empty" role="alert" aria-live="polite">
+      {children || 'No results found.'}
     </div>
   );
 };
@@ -87,8 +94,11 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       onKeyDown,
       onFocus,
       onBlur,
+      name,
       renderNoResults,
       portal,
+      inputRef: propInputRef = null,
+      'aria-describedby': ariaDescribedby,
       ...props
     },
     ref
@@ -98,12 +108,13 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
     const [selectedValue, setSelectedValue] = useState<string>(value || '');
+    const [formValue, setFormValue] = useState<string | undefined>('');
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
       useState<ListboxOption | null>(null);
     const [id] = propId ? [propId] : useId(1, 'combobox');
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useSharedRef<HTMLInputElement>(propInputRef);
     const listboxRef = useRef<HTMLUListElement>(null);
     const isControlled = typeof propValue !== 'undefined';
     const isRequired = !!props.required;
@@ -149,7 +160,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
       }
 
       if (open && autocomplete === 'automatic' && !selectedValue) {
-        // Fire an Home keydown event on listbox to ensure the first item is selected
+        // Fire a Home keydown event on listbox to ensure the first item is selected
         triggerListboxKeyDown(Home);
       }
     }, [open]);
@@ -341,9 +352,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const NoMatchingOptions = React.useMemo(
       () =>
         React.isValidElement(renderNoResults)
-          ? () => renderNoResults
+          ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
           : typeof renderNoResults === 'function'
-          ? () => renderNoResults()
+          ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
           : ComboboxNoResults,
       [renderNoResults]
     );
@@ -367,12 +378,20 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         onActiveChange={handleActiveChange}
         ref={listboxRef}
         tabIndex={undefined}
-        aria-activedescendant=""
+        aria-activedescendant={undefined}
       >
         {comboboxOptions}
         {noMatchingOptions}
       </Listbox>
     );
+
+    const errorId = `${id}-error`;
+    const inputProps = {
+      ...props,
+      'aria-describedby': error
+        ? tokenList(errorId, ariaDescribedby)
+        : ariaDescribedby
+    };
 
     return (
       <div
@@ -380,6 +399,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox', className)}
         ref={comboboxRef}
       >
+        {name && <input type="hidden" name={name} value={formValue} />}
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -415,7 +435,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             aria-activedescendant={
               open && activeDescendant ? activeDescendant.element.id : undefined
             }
-            {...props}
+            {...inputProps}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             onFocus={handleFocus}
@@ -426,10 +446,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         <ComboboxProvider
           autocomplete={autocomplete}
           inputValue={value}
+          formValue={formValue}
           selectedValue={selectedValue}
           matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
+          setFormValue={setFormValue}
         >
           {portal
             ? createPortal(
@@ -442,7 +464,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             : comboboxListbox}
         </ComboboxProvider>
         {hasError && (
-          <div className="Error" id={`${id}-error`}>
+          <div className="Error" id={errorId}>
             {error}
           </div>
         )}

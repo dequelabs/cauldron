@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
@@ -82,13 +81,6 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     );
   }
 );
-
-LoaderOverlay.propTypes = {
-  className: PropTypes.string,
-  label: PropTypes.string,
-  focusOnInitialRender: PropTypes.bool,
-  children: PropTypes.node
-};
 
 LoaderOverlay.displayName = 'LoaderOverlay';
 
