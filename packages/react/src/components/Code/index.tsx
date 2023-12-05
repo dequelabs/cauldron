@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/light';
 import classNames from 'classnames';
@@ -30,7 +29,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   className,
   scrollable = false,
   ...props
-}) => {
+}: Props) => {
   const ref = useRef<HTMLPreElement>(null);
   const [scrollableRegion, setScrollableRegion] = useState(false);
   // react-syntax-highlighter does not provide direct access to its dom elements
@@ -80,13 +79,5 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
 };
 
 Code.displayName = 'Code';
-
-Code.propTypes = {
-  children: PropTypes.string.isRequired,
-  language: PropTypes.oneOf(['javascript', 'css', 'html', 'yaml']),
-  className: PropTypes.string,
-  tabIndex: PropTypes.number,
-  scrollable: PropTypes.bool
-};
 
 export default Code;

@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clickLink from '../MenuItem/click-link';
 
 export interface SideBarItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
+  className?: string;
   autoClickLink?: boolean;
 }
 
 const SideBarItem: React.ComponentType<
   React.PropsWithChildren<SideBarItemProps>
-> = ({ children, autoClickLink, ...other }) => {
+> = ({ children, autoClickLink, ...other }: SideBarItemProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!autoClickLink) {
       return;
@@ -29,10 +29,6 @@ const SideBarItem: React.ComponentType<
 SideBarItem.displayName = 'SideBarItem';
 SideBarItem.defaultProps = {
   autoClickLink: true
-};
-SideBarItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  autoClickLink: PropTypes.bool
 };
 
 export default SideBarItem;

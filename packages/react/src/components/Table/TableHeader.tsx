@@ -1,5 +1,4 @@
 import React, { ThHTMLAttributes } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
@@ -72,13 +71,5 @@ const TableHeader = ({
 };
 
 TableHeader.displayName = 'TableHeader';
-TableHeader.propTypes = {
-  children: PropTypes.node.isRequired,
-  sortDirection: PropTypes.string,
-  onSort: PropTypes.func,
-  className: PropTypes.string,
-  sortAscendingAnnouncement: PropTypes.string,
-  sortDescendingAnnouncement: PropTypes.string
-};
 
 export default TableHeader;

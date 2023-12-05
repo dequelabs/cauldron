@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon, { IconType } from '../Icon';
 import Card, { CardContent } from '../Card';
@@ -87,7 +86,7 @@ const RadioCardGroup = ({
             name={name}
             value={radioValue}
             id={id}
-            ref={input => {
+            ref={(input) => {
               if (!input) {
                 return;
               }
@@ -146,33 +145,6 @@ const RadioCardGroup = ({
       {radioButtons}
     </div>
   );
-};
-
-RadioCardGroup.propTypes = {
-  name: PropTypes.string,
-  radios: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      cardImg: PropTypes.element.isRequired,
-      cardIcon: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  hasLabel: (
-    props: { [key: string]: string },
-    propName: string,
-    componentName: string
-  ) => {
-    if (!props['aria-label'] && !props['aria-labelledby']) {
-      return new Error(
-        `${componentName} must have an "aria-label" or "aria-labelledby" prop`
-      );
-    }
-  },
-  className: PropTypes.string,
-  defaultValue: PropTypes.string,
-  onChange: PropTypes.func
 };
 
 RadioCardGroup.displayName = 'RadioCardGroup';

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useId } from 'react-id-generator';
 
@@ -27,10 +26,5 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
 );
 
 TabPanel.displayName = 'TabPanel';
-TabPanel.propTypes = {
-  id: PropTypes.string,
-  children: PropTypes.node,
-  className: PropTypes.string
-};
 
 export default TabPanel;
