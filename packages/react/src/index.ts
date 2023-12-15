@@ -57,12 +57,6 @@ export {
   TooltipContent
 } from './components/Tooltip';
 export { default as TooltipTabstop } from './components/TooltipTabstop';
-export {
-  default as Card,
-  CardHeader,
-  CardContent,
-  CardFooter
-} from './components/Card';
 export { default as TextField } from './components/TextField';
 export { default as ClickOutsideListener } from './components/ClickOutsideListener';
 export {
