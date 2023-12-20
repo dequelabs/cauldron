@@ -8,9 +8,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### ⚠ BREAKING CHANGES
 
 * **react:** Removed variant property from Loader/LoaderOverlay components.
-
-### Features
-
 * **react,styles:** remove Card component and styles ([#1248](https://github.com/dequelabs/cauldron/issues/1248)) ([9b55195](https://github.com/dequelabs/cauldron/commit/9b5519502d706d3e67a7122185c4b24e8c241eba))
 * **react,styles:** remove IssuePanel component and styles ([#1246](https://github.com/dequelabs/cauldron/issues/1246)) ([b78f5e7](https://github.com/dequelabs/cauldron/commit/b78f5e76abd6519f07d43eb58f06df7408a2345a))
 * **react,styles:** remove Pointout component and styles ([#1247](https://github.com/dequelabs/cauldron/issues/1247)) ([7b5349d](https://github.com/dequelabs/cauldron/commit/7b5349dcb0cb92753d825dae07f82f2ac3442e2e))
