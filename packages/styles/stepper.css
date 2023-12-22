@@ -1,9 +1,9 @@
 :root {
-  --step-indicator-size: 1.867em;
-  --step-line-height: 0.53em;
-  --step-line-offset: 1.53em;
+  --step-indicator-size: 1.75rem;
+  --step-line-height: 0.5rem;
+  --step-line-offset: 1.438rem;
 
-  --step-indicator-content-size: 1.067em;
+  --step-indicator-content-size: 1rem;
 
   --step-label-color: var(--gray-60);
   --step-line-color: var(--accent-light);
