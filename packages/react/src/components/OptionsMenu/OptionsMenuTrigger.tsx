@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export interface OptionsMenuTriggerProps
@@ -26,15 +25,6 @@ function OptionsMenuTriggerComponent({
     />
   );
 }
-
-OptionsMenuTriggerComponent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  triggerRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.any })
-  ])
-};
 
 export default React.forwardRef(function OptionsMenuTrigger(
   props: OptionsMenuTriggerProps,

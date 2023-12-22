@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import Offscreen from '../Offscreen';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { IconType, iconTypes } from './types';
 
@@ -29,7 +28,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       }
 
       import(`./icons/${name}.svg`)
-        .then(icon => {
+        .then((icon) => {
           isMounted.current && setIcon(() => icon.default);
         })
         .catch(() => {
@@ -58,13 +57,6 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     );
   }
 );
-
-Icon.propTypes = {
-  label: PropTypes.string,
-  className: PropTypes.string,
-  // @ts-expect-error
-  type: PropTypes.string.isRequired
-};
 
 Icon.displayName = 'Icon';
 

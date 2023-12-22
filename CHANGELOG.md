@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.13.0](https://github.com/dequelabs/cauldron/compare/v5.12.0...v5.13.0) (2023-12-01)
+
+
+### Features
+
+* **Combobox:** allow combobox to take an input ref ([#1297](https://github.com/dequelabs/cauldron/issues/1297)) ([6dd5a34](https://github.com/dequelabs/cauldron/commit/6dd5a3404e743f0ec246056c2fe81666e064ce1c))
+* **Dialog:** ensure that dialogs are labelled by their heading ([#1260](https://github.com/dequelabs/cauldron/issues/1260)) ([e08b517](https://github.com/dequelabs/cauldron/commit/e08b5178d26dddcac433c170dd411820194121b0))
+
 ## [5.12.0](https://github.com/dequelabs/cauldron/compare/v5.11.0...v5.12.0) (2023-11-10)
 
 

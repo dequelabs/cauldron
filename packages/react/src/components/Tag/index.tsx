@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 interface TagProps {
@@ -13,10 +12,6 @@ export const TagLabel = ({ children, className, ...other }: TagProps) => (
   </div>
 );
 TagLabel.displayName = 'TagLabel';
-TagLabel.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 const Tag = ({ children, className, ...other }: TagProps) => (
   <div className={classNames('Tag', className)} {...other}>
@@ -24,8 +19,4 @@ const Tag = ({ children, className, ...other }: TagProps) => (
   </div>
 );
 Tag.displayName = 'Tag';
-Tag.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 export default Tag;
