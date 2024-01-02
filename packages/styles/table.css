@@ -39,7 +39,16 @@
   background: var(--table-header-background-color);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
-  border-bottom: 3px solid var(--table-row-border-color);
+  border-bottom: 2px solid var(--table-row-border-color);
+}
+
+.TableBody .TableHeader {
+  border-bottom-width: 1px;
+  border-right: 2px solid var(--table-row-border-color);
+}
+
+.TableBody .TableRow:last-child .TableHeader {
+  border-bottom: none;
 }
 
 .TableHeader[aria-sort] {
@@ -122,6 +131,11 @@
 
 .Table--border .TableHeader {
   border-bottom: 2px solid var(--gray-40);
+}
+
+.Table--border .TableBody .TableHeader {
+  border-bottom-width: 1px;
+  border-right: 2px solid var(--table-row-border-color);
 }
 
 .cauldron--theme-dark .Table--border,
