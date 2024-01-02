@@ -1,6 +1,5 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
@@ -41,20 +40,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     onClose: noop,
     forceAction: false,
     closeButtonText: 'Close'
-  };
-
-  static propTypes = {
-    className: PropTypes.string,
-    show: PropTypes.bool,
-    dialogRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    onClose: PropTypes.func,
-    forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
-    closeButtonText: PropTypes.string,
-    portal: PropTypes.any
   };
 
   private element: HTMLDivElement | null;
@@ -207,7 +192,7 @@ interface DialogAlignmentProps {
 }
 
 export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogContent = ({
   children,
@@ -227,14 +212,9 @@ const DialogContent = ({
   </div>
 );
 DialogContent.displayName = 'DialogContent';
-DialogContent.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-  align: PropTypes.string
-};
 
 export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
-  DialogAlignmentProps;
+  DialogAlignmentProps & { className?: string };
 
 const DialogFooter = ({
   children,
@@ -254,9 +234,4 @@ const DialogFooter = ({
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
-DialogFooter.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-  align: PropTypes.string
-};
 export { Dialog, DialogContent, DialogFooter };

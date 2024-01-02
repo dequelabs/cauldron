@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
-type BreadcrumbItemProps = React.HTMLAttributes<HTMLSpanElement>;
+type BreadcrumbItemProps = React.HTMLAttributes<HTMLSpanElement> & {
+  className?: string;
+};
 
 const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>( // eslint-disable-line react/display-name
   ({ className, children, ...props }: BreadcrumbItemProps, ref) => (
@@ -16,7 +17,4 @@ const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>( // eslint-d
     </span>
   )
 );
-BreadcrumbItem.propTypes = {
-  className: PropTypes.string
-};
 export default BreadcrumbItem;

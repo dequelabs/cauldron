@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import rndid from '../../utils/rndid';
 import tokenList from '../../utils/token-list';
@@ -38,23 +37,6 @@ export default class TextField extends React.Component<
     fieldRef: () => {},
     requiredText: 'Required',
     multiline: false
-  };
-
-  static propTypes = {
-    label: PropTypes.node.isRequired,
-    id: PropTypes.string,
-    error: PropTypes.node,
-    defaultValue: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    fieldRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    required: PropTypes.bool,
-    requiredText: PropTypes.string, // support localized required text
-    multiline: PropTypes.bool,
-    'aria-describedby': PropTypes.string
   };
 
   private inputId: string;

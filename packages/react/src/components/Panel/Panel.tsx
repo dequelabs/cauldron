@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, ReactNode, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import rndid from '../../utils/rndid';
 
@@ -76,13 +75,5 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
 );
 
 Panel.displayName = 'Panel';
-Panel.propTypes = {
-  children: PropTypes.node.isRequired,
-  // @ts-expect-error
-  heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
-  className: PropTypes.string,
-  padding: PropTypes.bool,
-  collapsed: PropTypes.bool
-};
 
 export default Panel;

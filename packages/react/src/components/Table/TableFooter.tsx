@@ -1,5 +1,4 @@
 import React, { HTMLAttributes } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const TableFooter = ({
@@ -13,9 +12,5 @@ const TableFooter = ({
 );
 
 TableFooter.displayName = 'TableFooter';
-TableFooter.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default TableFooter;
