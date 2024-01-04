@@ -6,15 +6,22 @@ type ProgressBarProps = {
   progress: number;
   progressMax?: number;
   progressMin?: number;
+  thin?: boolean;
 } & Cauldron.LabelProps &
   React.HTMLAttributes<HTMLDivElement>;
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ progress = 0, progressMax = 100, progressMin = 0, ...props }, ref) => {
+  (
+    { progress = 0, progressMax = 100, progressMin = 0, thin, ...props },
+    ref
+  ) => {
     const { className, ...otherProps } = props;
     return (
       <div
-        className={classnames('ProgressBar', className)}
+        className={classnames(className, {
+          ProgressBar: true,
+          'ProgressBar--thin': thin
+        })}
         role="progressbar"
         aria-valuemin={progressMin}
         aria-valuemax={progressMax}

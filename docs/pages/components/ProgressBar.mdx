@@ -17,6 +17,14 @@ import { ProgressBar } from '@deque/cauldron-react'
 <ProgressBar
   aria-label="Progress %"
   progress={75}
+  thin
+/>
+```
+
+```jsx example
+<ProgressBar
+  aria-label="Progress %"
+  progress={75}
 />
 ```
 
@@ -121,5 +129,11 @@ function ProgressExample() {
       type: 'string',
       description: 'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
+    {
+      name: 'thin',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Thinner visual style of icon button.'
+    }
   ]}
 />

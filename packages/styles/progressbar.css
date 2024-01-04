@@ -1,13 +1,15 @@
 :root {
-  --progress-bar-background-color: var(--accent-dark);
-  --progress-bar-fill-color: var(--accent-info-light);
+  --progress-bar-background-color: var(--white);
+  --progress-bar-fill-color: var(--accent-primary);
+  --progress-bar-border-color: var(--gray-40);
   --progress-bar-animation-timing: 150ms;
 }
 
 .ProgressBar {
   background-color: var(--progress-bar-background-color);
-  padding: 2px;
+  padding: var(--space-half);
   border-radius: calc((var(--space-small) * 0.5) + 2px);
+  border: 1px solid var(--progress-bar-border-color);
   margin-bottom: var(--space-smallest);
 }
 
@@ -17,4 +19,17 @@
   height: var(--space-small);
   min-width: var(--space-small);
   transition: width linear var(--progress-bar-animation-timing);
+}
+
+.ProgressBar--thin .ProgressBar--fill {
+  height: var(--space-smallest);
+}
+
+.cauldron--theme-dark {
+  --progress-bar-background-color: var(--accent-dark);
+  --progress-bar-fill-color: var(--accent-info-light);
+}
+
+.cauldron--theme-dark .ProgressBar {
+  border: none;
 }
