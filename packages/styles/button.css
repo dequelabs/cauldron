@@ -18,6 +18,8 @@
   --button-text-color-light: var(--white);
   --button-focus-ring-color: var(--focus-light);
   --button-thin-height: 23px;
+
+  --button-height: 36px;
 }
 
 .Button--primary,
@@ -31,7 +33,7 @@
   padding: 0 16px;
   position: relative;
   text-align: center;
-  min-height: 36px;
+  min-height: var(--button-height);
   min-width: 100px;
   display: inline-grid;
   grid-auto-flow: column;

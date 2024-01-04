@@ -74,8 +74,6 @@ If there are multiple icon buttons with the same label, the visible label text c
 
 ### Large
 
-Large icon button use exactly the same settings as usual variant, but the size is used to be 36px
-
 ```jsx example
 <IconButton variant="error" icon="pencil" label="Edit" large />
 <IconButton variant="error" icon="pencil" label="Edit" disabled large />
@@ -132,6 +130,12 @@ Large icon button use exactly the same settings as usual variant, but the size i
       defaultValue: 'document.body',
       description: 'The parent element to place the Tooltip in.'
     },
+    {
+      name: 'large',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Larger visual style of icon button.'
+    }
   ]}
 />
 

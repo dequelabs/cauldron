@@ -1,15 +1,4 @@
 :root {
-  --icon-button-content-color-light-disabled: #ccc;
-  --icon-button-background-color-light: #dadada;
-  --icon-button-background-color-light-active: #c2c2c2;
-  --icon-button-outline-color-light: var(--icon-button-background-color-light);
-
-  --icon-button-content-color-dark-disabled: #fff 40%;
-  --icon-button-background-color-dark: var(--accent-medium);
-  --icon-button-background-color-dark-disabled: var(--accent-medium);
-  --icon-button-background-color-dark-active: var(--accent-dark);
-  --icon-button-outline-color-dark: var(--icon-button-background-color-dark);
-
   /* Primary */
   --icon-button-primary-color: var(--button-text-color-light);
   --icon-button-background-color-primary: var(
@@ -20,7 +9,7 @@
   );
   --icon-button-outline-color-primary: var(--button-outline-color-primary);
 
-  --icon-button-large-size: 36px;
+  --icon-button-large-height: var(--button-height);
 
   /* Secondary */
   --icon-button-secondary-color: var(--button-text-color-dark);
@@ -36,6 +25,27 @@
   /* Error */
   --icon-button-background-color-error: var(--button-background-color-error);
   --icon-button-outline-color-error: var(--button-outline-color-error);
+  --icon-button-background-color-error-active: var(
+    --button-background-color-error-active
+  );
+
+  /* Deprecated variables */
+  --icon-button-content-color-light-disabled: #ccc;
+  --icon-button-background-color-light: #dadada;
+  --icon-button-background-color-light-active: #c2c2c2;
+  --icon-button-outline-color-light: var(--icon-button-background-color-light);
+
+  --icon-button-content-color-dark-disabled: #fff 40%;
+  --icon-button-background-color-dark: var(--accent-medium);
+  --icon-button-background-color-dark-disabled: var(--accent-medium);
+  --icon-button-background-color-dark-active: var(--accent-dark);
+  --icon-button-outline-color-dark: var(--icon-button-background-color-dark);
+  --icon-button-background-color-secondary-disabled: var(
+    --button-background-color-secondary-disabled
+  );
+  --icon-button-background-color-error-disabled: var(
+    --button-background-color-error-disabled
+  );
 }
 
 .IconButton {
@@ -87,8 +97,8 @@ a.IconButton {
 }
 
 .IconButton--large {
-  height: var(--icon-button-large-size);
-  width: var(--icon-button-large-size);
+  height: var(--icon-button-large-height);
+  width: var(--icon-button-large-height);
 }
 
 .IconButton--secondary[aria-disabled='true'],
@@ -154,7 +164,7 @@ a.IconButton {
 }
 
 .IconButton--error:active {
-  background-color: var(--button-background-color-error-active);
+  background-color: var(--icon-button-background-color-error-active);
 }
 
 /* Dark Theme */
@@ -162,12 +172,15 @@ a.IconButton {
 .cauldron--theme-dark {
   --icon-button-icon-color: var(--white);
   --icon-button-outline-shadow-color: var(--accent-medium);
+  --icon-button-disabled-color: var(--dark-workspace-color);
+  --icon-button-active-color: var(--accent-medium);
 
   /* Primary */
   --icon-button-primary-color: var(--white);
   --icon-button-background-color-primary: var(--accent-medium);
   --icon-button-background-color-primary-active: var(--accent-info-active);
   --icon-button-outline-color-primary: var(--accent-info);
+  --icon-button-border-color-primary: var(--accent-info);
 
   /* Secondary */
   --icon-button-border-color-secondary: var(--accent-light);
@@ -178,11 +191,12 @@ a.IconButton {
 
   /* Error */
   --icon-button-background-color-error: var(--accent-medium);
+  --icon-button-border-color-error: var(--accent-danger);
   --icon-button-outline-color-error: var(--accent-danger);
 }
 
 .cauldron--theme-dark .IconButton--primary {
-  border: 2px solid var(--accent-info);
+  border: 2px solid var(--icon-button-border-color-primary);
 }
 
 .cauldron--theme-dark .IconButton--secondary {
@@ -190,47 +204,47 @@ a.IconButton {
 }
 
 .cauldron--theme-dark .IconButton--error {
-  border: 2px solid var(--accent-danger);
+  border: 2px solid var(--icon-button-border-color-error);
 }
 
-.cauldron--theme-dark .IconButton--primary[aria-disabled='true'],
-.cauldron--theme-dark .IconButton--primary[disabled],
-.cauldron--theme-dark .IconButton--secondary[aria-disabled='true'],
-.cauldron--theme-dark .IconButton--secondary[disabled],
-.cauldron--theme-dark .IconButton--error[aria-disabled='true'],
-.cauldron--theme-dark .IconButton--error[disabled] {
-  color: var(--dark-workspace-color);
+.cauldron--theme-dark
+  .IconButton--primary:is([aria-disabled='true'], [disabled]),
+.cauldron--theme-dark
+  .IconButton--secondary:is([aria-disabled='true'], [disabled]),
+.cauldron--theme-dark
+  .IconButton--error:is([aria-disabled='true'], [disabled]) {
+  color: var(--icon-button-disabled-color);
 }
 
 .cauldron--theme-dark .IconButton--primary:active,
 .cauldron--theme-dark .IconButton--secondary:active,
 .cauldron--theme-dark .IconButton--error:active {
-  color: var(--accent-medium);
+  color: var(--icon-button-active-color);
 }
 
 .cauldron--theme-dark
   .IconButton--primary:not([disabled]):not(
     [aria-disabled='true']
   ):hover:before {
-  box-shadow: 0px 0px 0px 1px var(--icon-button-outline-shadow-color),
-    0px 0px 0px 2px var(--icon-button-outline-color-primary);
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-primary);
 }
 
 .cauldron--theme-dark
   .IconButton--secondary:not([disabled]):not(
     [aria-disabled='true']
   ):hover:before {
-  box-shadow: 0px 0px 0px 1px var(--icon-button-outline-shadow-color),
-    0px 0px 0px 2px var(--icon-button-outline-color-secondary);
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-secondary);
 }
 
 .cauldron--theme-dark
   .IconButton--error:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0px 0px 0px 1px var(--icon-button-outline-shadow-color),
-    0px 0px 0px 2px var(--icon-button-outline-color-error);
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-error);
 }
 
 .cauldron--theme-dark .IconButton:focus:before {
-  box-shadow: 0px 0px 0px 2px var(--icon-button-outline-shadow-color),
-    0px 0px 0px 4px var(--button-focus-ring-color, --focus);
+  box-shadow: 0 0 0 2px var(--icon-button-outline-shadow-color),
+    0 0 0 4px var(--button-focus-ring-color, --focus);
 }
