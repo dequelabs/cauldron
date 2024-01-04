@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Button from '../../../../src/components/Button';
-import Icon from '../../../../src/components/Icon';
-import * as axe from '../../../axe';
+import Button from '../../../src/components/Button';
+import Icon from '../../../src/components/Icon';
+import axe from '../../axe';
 
 test('should render primary button', () => {
   render(

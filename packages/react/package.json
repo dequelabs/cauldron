@@ -50,6 +50,7 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/jest-axe": "^3.5.4",
+    "@types/jest": "^24.7.1",
     "@types/react-syntax-highlighter": "^15.5.2",
     "autoprefixer": "^9.7.6",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -95,12 +96,12 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "<rootDir>__tests__/setupTests.js"
+      "<rootDir>__tests__/setupTests.ts"
     ],
     "testMatch": [
       "**/__tests__/src/**/*.js",
-      "**/__tests__/src/**/*.tsx",
-      "**/__tests__/demo/**/*.js"
+      "**/__tests__/demo/**/*.js",
+      "**/src/components/**/*.test.tsx"
     ],
     "collectCoverageFrom": [
       "**/src/**/*.{ts,tsx}"
