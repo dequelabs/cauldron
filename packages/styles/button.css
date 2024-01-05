@@ -107,7 +107,7 @@ button.Link {
   background-color: var(--button-background-color-primary-disabled);
 }
 
-.Button--primary:active {
+.Button--primary:not([disabled]):not([aria-disabled='true']):active {
   background: var(--button-background-color-primary-active);
 }
 
@@ -123,7 +123,7 @@ button.Link {
   background-color: var(--button-background-color-secondary-disabled);
 }
 
-.Button--secondary:active {
+.Button--secondary:not([disabled]):not([aria-disabled='true']):active {
   background-color: var(--button-background-color-secondary-active);
 }
 
@@ -140,7 +140,7 @@ button.Link {
   background-color: var(--button-background-color-error-disabled);
 }
 
-.Button--error:active {
+.Button--error:not([disabled]):not([aria-disabled='true']):active {
   background-color: var(--button-background-color-error-active);
 }
 
@@ -236,12 +236,15 @@ button.Link {
   color: var(--dark-workspace-color);
 }
 
-.cauldron--theme-dark .Button--primary:active,
-.cauldron--theme-dark .Button--secondary:active {
+.cauldron--theme-dark
+  .Button--primary:not([disabled]):not([aria-disabled='true']):active,
+.cauldron--theme-dark
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):active {
   color: var(--accent-medium);
 }
 
-.cauldron--theme-dark .Button--error:active {
+.cauldron--theme-dark
+  .Button--error:not([disabled]):not([aria-disabled='true']):active {
   background-color: #fea7a6;
   color: var(--accent-medium);
 }
