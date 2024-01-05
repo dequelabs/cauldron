@@ -5,9 +5,15 @@
   --progress-bar-animation-timing: 150ms;
 }
 
+.cauldron--theme-dark {
+  --progress-bar-background-color: var(--accent-dark);
+  --progress-bar-fill-color: var(--accent-info-light);
+  --progress-bar-border-color: var(--progress-bar-background-color);
+}
+
 .ProgressBar {
   background-color: var(--progress-bar-background-color);
-  padding: var(--space-half);
+  padding: 3px;
   border-radius: calc((var(--space-small) * 0.5) + 2px);
   border: 1px solid var(--progress-bar-border-color);
   margin-bottom: var(--space-smallest);
@@ -22,14 +28,5 @@
 }
 
 .ProgressBar--thin .ProgressBar--fill {
-  height: var(--space-smallest);
-}
-
-.cauldron--theme-dark {
-  --progress-bar-background-color: var(--accent-dark);
-  --progress-bar-fill-color: var(--accent-info-light);
-}
-
-.cauldron--theme-dark .ProgressBar {
-  border: none;
+  height: 8px;
 }

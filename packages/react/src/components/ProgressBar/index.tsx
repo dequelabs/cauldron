@@ -18,7 +18,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     const { className, ...otherProps } = props;
     return (
       <div
-        className={classnames(className, 'Progressbar', {
+        className={classnames(className, 'ProgressBar', {
           'ProgressBar--thin': thin
         })}
         role="progressbar"
