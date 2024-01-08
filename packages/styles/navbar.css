@@ -26,7 +26,6 @@
   align-items: center;
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
-  border-bottom: 1px solid var(--top-nav-border-bottom-color);
 }
 
 .NavBar > ul {
@@ -34,6 +33,7 @@
   list-style-type: none;
   display: flex;
   z-index: var(--z-index-top-nav);
+  border-bottom: 1px solid var(--top-nav-border-bottom-color);
 }
 
 .NavBar > ul > li {
@@ -45,7 +45,6 @@
   display: flex;
   align-items: center;
   background-color: var(--top-nav-background-color);
-  border-bottom: 1px solid var(--top-nav-border-bottom-color);
   border-right: 1px solid var(--top-nav-box-shadow-color);
   transition: background-color 0.3s ease;
 }
@@ -146,6 +145,12 @@
 
 .NavBar--collapsed > .NavBar__trigger .Icon {
   margin-right: var(--space-smallest);
+}
+
+@media (max-width: 64rem) {
+  .NavBar {
+    padding: 0 var(--space-small);
+  }
 }
 
 @media (max-width: 61.25rem) {
