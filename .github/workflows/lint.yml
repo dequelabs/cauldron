@@ -1,0 +1,15 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/dependencies
+      - run: yarn lint

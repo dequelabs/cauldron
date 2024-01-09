@@ -1,6 +1,5 @@
 import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 
 export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -22,10 +21,5 @@ const PanelHeader = forwardRef<HTMLDivElement, PanelHeaderProps>(
 );
 
 PanelHeader.displayName = 'PanelHeader';
-
-PanelHeader.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default PanelHeader;

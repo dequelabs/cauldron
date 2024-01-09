@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "5.9.1",
+  "version": "6.0.0",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -19,7 +19,7 @@
     "predev": "yarn clean",
     "test": "yarn --cwd=packages/react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
-    "postinstall": "yarn --cwd=packages/styles && yarn --cwd=packages/react",
+    "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "release": "./scripts/release.sh"
   },
   "prettier": {

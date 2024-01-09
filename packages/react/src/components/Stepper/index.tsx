@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TooltipTabstop from '../TooltipTabstop';
 
@@ -76,13 +75,6 @@ export const Step = (props: StepProps) => {
 
 Step.displayName = 'Step';
 
-Step.propTypes = {
-  children: PropTypes.node,
-  tooltip: PropTypes.node,
-  tooltipText: PropTypes.string,
-  className: PropTypes.string
-};
-
 interface StepperProps {
   children: React.ReactNode;
   className?: string;
@@ -95,10 +87,5 @@ const Stepper = ({ children, className, ...other }: StepperProps) => (
 );
 
 Stepper.displayName = 'Stepper';
-
-Stepper.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default Stepper;

@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
@@ -9,7 +8,6 @@ import useSharedRef from '../../utils/useSharedRef';
 
 export interface LoaderOverlayProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'large' | 'small';
   label?: string;
   focusOnInitialRender?: boolean;
   children?: React.ReactNode;
@@ -20,7 +18,6 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
   (
     {
       className,
-      variant,
       label,
       children,
       focusOnInitialRender,
@@ -66,21 +63,13 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     return (
       <Wrapper {...wrapperProps}>
         <div
-          className={classNames(
-            'Loader__overlay',
-            className,
-            variant === 'large'
-              ? 'Loader__overlay--large'
-              : variant === 'small'
-              ? 'Loader__overlay--small'
-              : ''
-          )}
+          className={classNames('Loader__overlay', className)}
           ref={overlayRef}
           tabIndex={-1}
           {...other}
         >
           <div className="Loader__overlay__loader">
-            <Loader variant={variant} />
+            <Loader />
             <AxeLoader />
           </div>
           {label ? (
@@ -92,14 +81,6 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     );
   }
 );
-
-LoaderOverlay.propTypes = {
-  className: PropTypes.string,
-  variant: PropTypes.oneOf(['large', 'small']),
-  label: PropTypes.string,
-  focusOnInitialRender: PropTypes.bool,
-  children: PropTypes.node
-};
 
 LoaderOverlay.displayName = 'LoaderOverlay';
 

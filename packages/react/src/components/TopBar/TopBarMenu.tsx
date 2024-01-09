@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MenuItem from '../MenuItem';
 import { OptionsMenuList } from '../OptionsMenu';
 import classnames from 'classnames';
@@ -28,11 +27,6 @@ export default class TopBarMenu extends React.Component<
     onKeyDown: () => {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     menuItemRef: () => {}
-  };
-
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired
   };
 
   state: TopBarMenuState = {
@@ -79,10 +73,10 @@ export default class TopBarMenu extends React.Component<
     const { open } = state;
 
     const menu = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === OptionsMenuList
+      (child) => (child as React.ReactElement<any>).type === OptionsMenuList
     );
     const otherChildren = React.Children.toArray(children).filter(
-      child =>
+      (child) =>
         typeof child === 'string' ||
         (child as React.ReactElement<any>).type !== OptionsMenuList
     );
@@ -90,7 +84,7 @@ export default class TopBarMenu extends React.Component<
     return (
       <MenuItem
         {...other}
-        menuItemRef={el => {
+        menuItemRef={(el) => {
           this.menuItemRef = el;
           setRef(props.menuItemRef, el);
         }}

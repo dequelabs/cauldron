@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 interface TabProps extends React.HTMLAttributes<HTMLLIElement> {
   target: React.RefObject<HTMLDivElement> | HTMLElement;
@@ -18,10 +17,5 @@ const Tab = React.forwardRef<HTMLLIElement, TabProps>(
 );
 
 Tab.displayName = 'Tab';
-Tab.propTypes = {
-  target: PropTypes.any.isRequired,
-  id: PropTypes.string,
-  children: PropTypes.node
-};
 
 export default Tab;

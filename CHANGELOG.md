@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/dequelabs/cauldron/compare/v5.13.0...v6.0.0) (2023-12-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **react:** Removed variant property from Loader/LoaderOverlay components.
+* **react,styles:** remove Card component and styles ([#1248](https://github.com/dequelabs/cauldron/issues/1248)) ([9b55195](https://github.com/dequelabs/cauldron/commit/9b5519502d706d3e67a7122185c4b24e8c241eba))
+* **react,styles:** remove IssuePanel component and styles ([#1246](https://github.com/dequelabs/cauldron/issues/1246)) ([b78f5e7](https://github.com/dequelabs/cauldron/commit/b78f5e76abd6519f07d43eb58f06df7408a2345a))
+* **react,styles:** remove Pointout component and styles ([#1247](https://github.com/dequelabs/cauldron/issues/1247)) ([7b5349d](https://github.com/dequelabs/cauldron/commit/7b5349dcb0cb92753d825dae07f82f2ac3442e2e))
+* **react:** remove large overlay ([#1205](https://github.com/dequelabs/cauldron/issues/1205)) ([e93ae35](https://github.com/dequelabs/cauldron/commit/e93ae35e849e875a2d11efd0c05118cf8a9323a7))
+* **react:** remove PropTypes from all react components ([8540614](https://github.com/dequelabs/cauldron/commit/8540614b7e99ffa97affab628ed4e50a800b5a67))
+
+## [5.13.0](https://github.com/dequelabs/cauldron/compare/v5.12.0...v5.13.0) (2023-12-01)
+
+
+### Features
+
+* **Combobox:** allow combobox to take an input ref ([#1297](https://github.com/dequelabs/cauldron/issues/1297)) ([6dd5a34](https://github.com/dequelabs/cauldron/commit/6dd5a3404e743f0ec246056c2fe81666e064ce1c))
+* **Dialog:** ensure that dialogs are labelled by their heading ([#1260](https://github.com/dequelabs/cauldron/issues/1260)) ([e08b517](https://github.com/dequelabs/cauldron/commit/e08b5178d26dddcac433c170dd411820194121b0))
+
+## [5.12.0](https://github.com/dequelabs/cauldron/compare/v5.11.0...v5.12.0) (2023-11-10)
+
+
+### Features
+
+* **icons:** add step forward/back icons ([#1286](https://github.com/dequelabs/cauldron/issues/1286)) ([06dfa4e](https://github.com/dequelabs/cauldron/commit/06dfa4e82e24f195d107ce5dcd04c2af34e62bc8))
+
+## [5.11.0](https://github.com/dequelabs/cauldron/compare/v5.10.0...v5.11.0) (2023-11-09)
+
+
+### Features
+
+* **react:** sync alert modals with uxpin ([5cfcb57](https://github.com/dequelabs/cauldron/commit/5cfcb5756051d09578f78fb60b49b4ef073504ae))
+
+
+### Bug Fixes
+
+* review comments ([5e22461](https://github.com/dequelabs/cauldron/commit/5e2246189d32c042a5f5c0d80c31fd2fdb36c801))
+
+## [5.10.0](https://github.com/dequelabs/cauldron/compare/v5.9.1...v5.10.0) (2023-11-07)
+
+
+### Features
+
+* **Combobox:** add custom formValue prop to ComboboxOption ([#1264](https://github.com/dequelabs/cauldron/issues/1264)) ([00c9b9b](https://github.com/dequelabs/cauldron/commit/00c9b9bc478f7668b2d691ebd4b43ca32ea62fce))
+
+
+### Bug Fixes
+
+* **react:** prevent error for ComboboxOption when text contents are empty ([#1268](https://github.com/dequelabs/cauldron/issues/1268)) ([db30496](https://github.com/dequelabs/cauldron/commit/db30496963e9f0058ea62881c148ccc81c471b41))
+* **styles:** fix incorrect focus ring on dialog close button ([#1257](https://github.com/dequelabs/cauldron/issues/1257)) ([42f3eff](https://github.com/dequelabs/cauldron/commit/42f3effca089fb927dd47ee48442425caa8b2ae1))
+* Updated light theme focus-glow to correct focus color  ([#1181](https://github.com/dequelabs/cauldron/issues/1181)) ([63a93bb](https://github.com/dequelabs/cauldron/commit/63a93bb88d5f4f4c10c46e98cd060e10a6697cf1)), closes [#918](https://github.com/dequelabs/cauldron/issues/918)
+
 ### [5.9.1](https://github.com/dequelabs/cauldron/compare/v5.9.0...v5.9.1) (2023-10-20)
 
 
