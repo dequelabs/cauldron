@@ -2,7 +2,7 @@
 name: Accessibility Violation
 about: Document an accessibility violation to be fixed
 title: '[A11Y] '
-labels: ['A11Y', 'PROD: a11y-poc']
+labels: ['accessibility']
 assignees: ''
 ---
 
@@ -63,9 +63,7 @@ Example: steps to reproduce the behavior:
 
 <!-- Select any / all that apply by putting an `x` in the `[ ]` like so `[x]` -->
 
-- [ ] Exists in Production
 - [ ] Discovered during VPAT
-- [ ] Discovered by Customer <!-- Provide link to customer ticket below -->
 - [ ] Found using NVDA
 - [ ] Found using Chrome Screen Reader
 - [ ] Found with special configuration <!-- Specify the additional config below -->
