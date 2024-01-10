@@ -53,10 +53,15 @@
   width: 44px;
 }
 
-.RadioCardGroup__Card.Card--simple {
+.RadioCardGroup__Card {
   width: var(--radio-card-width);
   height: var(--radio-card-height);
   align-content: center;
+}
+
+.RadioCardGroup__Card .Panel__Content {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .RadioCardGroup__Card:hover {
@@ -91,4 +96,8 @@
 
 .cauldron--theme-dark .RadioCardGroup__Icon.Icon svg {
   color: var(--accent-success);
+}
+
+.cauldron--theme-dark .RadioCardGroup__Card {
+  background-color: var(--dark-workspace-color);
 }

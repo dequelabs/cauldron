@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import setRef from '../../utils/setRef';
 
 export interface ClickOutsideListenerProps<
@@ -12,22 +11,12 @@ export interface ClickOutsideListenerProps<
   target?: T;
 }
 
-export default class ClickOutsideListener extends React.Component<
-  ClickOutsideListenerProps
-> {
+export default class ClickOutsideListener extends React.Component<ClickOutsideListenerProps> {
   static displayName = 'ClickOutsideListener';
 
   static defaultProps = {
     mouseEvent: 'click',
     touchEvent: 'touchend'
-  };
-
-  static propTypes = {
-    children: PropTypes.node,
-    target: PropTypes.any,
-    onClickOutside: PropTypes.func.isRequired,
-    mouseEvent: PropTypes.oneOf(['mousedown', 'click', 'mouseup', false]),
-    touchEvent: PropTypes.oneOf(['touchstart', 'touchend', false])
   };
 
   private nodeRef: HTMLElement | null;

@@ -1,6 +1,5 @@
 import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 
 export interface PanelContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,11 +28,5 @@ const PanelContent = forwardRef<HTMLDivElement, PanelContentProps>(
 );
 
 PanelContent.displayName = 'PanelContent';
-
-PanelContent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  padding: PropTypes.bool
-};
 
 export default PanelContent;

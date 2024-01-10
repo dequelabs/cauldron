@@ -12,7 +12,6 @@ import React, {
   MutableRefObject,
   HTMLProps
 } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
@@ -109,21 +108,6 @@ const IconButton = forwardRef(
     );
   }
 ) as PolymorphicIconButton;
-
-IconButton.propTypes = {
-  // @ts-expect-error
-  as: PropTypes.elementType,
-  // @ts-expect-error
-  icon: PropTypes.string.isRequired,
-  label: PropTypes.node.isRequired,
-  // @ts-expect-error
-  tooltipPlacement: PropTypes.string,
-  // @ts-expect-error
-  tooltipVariant: PropTypes.string,
-  tooltipPortal: PropTypes.any,
-  // @ts-expect-error
-  variant: PropTypes.string
-};
 
 IconButton.displayName = 'IconButton';
 

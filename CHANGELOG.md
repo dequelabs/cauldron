@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/dequelabs/cauldron/compare/v5.13.0...v6.0.0) (2023-12-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **react:** Removed variant property from Loader/LoaderOverlay components.
+* **react,styles:** remove Card component and styles ([#1248](https://github.com/dequelabs/cauldron/issues/1248)) ([9b55195](https://github.com/dequelabs/cauldron/commit/9b5519502d706d3e67a7122185c4b24e8c241eba))
+* **react,styles:** remove IssuePanel component and styles ([#1246](https://github.com/dequelabs/cauldron/issues/1246)) ([b78f5e7](https://github.com/dequelabs/cauldron/commit/b78f5e76abd6519f07d43eb58f06df7408a2345a))
+* **react,styles:** remove Pointout component and styles ([#1247](https://github.com/dequelabs/cauldron/issues/1247)) ([7b5349d](https://github.com/dequelabs/cauldron/commit/7b5349dcb0cb92753d825dae07f82f2ac3442e2e))
+* **react:** remove large overlay ([#1205](https://github.com/dequelabs/cauldron/issues/1205)) ([e93ae35](https://github.com/dequelabs/cauldron/commit/e93ae35e849e875a2d11efd0c05118cf8a9323a7))
+* **react:** remove PropTypes from all react components ([8540614](https://github.com/dequelabs/cauldron/commit/8540614b7e99ffa97affab628ed4e50a800b5a67))
+
+## [5.13.0](https://github.com/dequelabs/cauldron/compare/v5.12.0...v5.13.0) (2023-12-01)
+
+
+### Features
+
+* **Combobox:** allow combobox to take an input ref ([#1297](https://github.com/dequelabs/cauldron/issues/1297)) ([6dd5a34](https://github.com/dequelabs/cauldron/commit/6dd5a3404e743f0ec246056c2fe81666e064ce1c))
+* **Dialog:** ensure that dialogs are labelled by their heading ([#1260](https://github.com/dequelabs/cauldron/issues/1260)) ([e08b517](https://github.com/dequelabs/cauldron/commit/e08b5178d26dddcac433c170dd411820194121b0))
+
 ## [5.12.0](https://github.com/dequelabs/cauldron/compare/v5.11.0...v5.12.0) (2023-11-10)
 
 

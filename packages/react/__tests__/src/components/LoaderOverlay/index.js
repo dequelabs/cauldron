@@ -13,30 +13,6 @@ test('handles classNames/additional attributes properly', () => {
   expect(node.getAttribute('role')).toBe('alert');
 });
 
-test('handles variants', () => {
-  const small = mount(
-    <LoaderOverlay
-      className="baz"
-      role="alert"
-      label="loading"
-      variant="small"
-    />
-  );
-  const large = mount(
-    <LoaderOverlay
-      className="baz"
-      role="alert"
-      label="loading"
-      variant="large"
-    />
-  );
-  const smallNode = small.getDOMNode();
-  const largeNode = large.getDOMNode();
-
-  expect(smallNode.classList.contains('Loader__overlay--small')).toBe(true);
-  expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
-});
-
 test('handles focus', () => {
   const loaderOverlay = mount(
     <LoaderOverlay

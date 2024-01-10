@@ -27,7 +27,9 @@ import {
 } from '@deque/cauldron-react'
 ```
 
-## Default
+## Examples
+
+### Default
 
 ```jsx example
 <Table>
@@ -101,7 +103,7 @@ import {
 </Table>
 ```
 
-## Bordered
+### Bordered
 
 ```jsx example
 <Table variant="border">
@@ -137,7 +139,7 @@ import {
 </Table>
 ```
 
-## Bordered with Footer
+### Bordered with Footer
 
 ```jsx example
 <Table variant="border">
@@ -180,7 +182,7 @@ import {
 </Table>
 ```
 
-## Sortable
+### Sortable
 
 export const tableData = [
   {
@@ -267,6 +269,70 @@ function SortableTableExample() {
 <Note>
   As a best practice, when a table has sorted columns an author should indicate which column is currently sorted by setting the sort direction for the active sorted column.
 </Note>
+
+### With Row Headings
+
+```jsx example
+<Table>
+  <TableBody>
+    <TableRow>
+      <TableHeader scope="row">City</TableHeader>
+      <TableCell>Budapest</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Country</TableHeader>
+      <TableCell>Hungary</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Planet</TableHeader>
+      <TableCell>Earth</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### With Row and Column Headings
+
+```jsx example
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableCell />
+      <TableHeader scope="col">Monday</TableHeader>
+      <TableHeader scope="col">Tuesday</TableHeader>
+      <TableHeader scope="col">Wednesday</TableHeader>
+      <TableHeader scope="col">Thursday</TableHeader>
+      <TableHeader scope="col">Friday</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableHeader scope="row">Ends with Day</TableHeader>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Middle of Week</TableHeader>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Next to Weekend</TableHeader>
+      <TableCell>Yes</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
 
 ## Props
 
