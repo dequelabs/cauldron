@@ -127,9 +127,9 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   setActive(await component.getByText('Active'));
   await component.getByText('Focus').focus();
 
-  await expect(component).toHaveScreenshot('button--thin--secondary');
+  await expect(component).toHaveScreenshot('button[thin][secondary]');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark-button--thin--secondary');
+  await expect(component).toHaveScreenshot('dark--button[thin][secondary]');
 });
 
 test('should have screenshot for Button[variant="error"]', async ({
