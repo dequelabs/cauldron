@@ -3,26 +3,30 @@
   --accordion-trigger-background-color-expanded: var(--white);
   --accordion-trigger-text-color: var(--gray-90);
   --accordion-trigger-text-color-hover: var(--accent-primary);
-  --accordion-trigger-box-shadow-hover: var(--accent-primary);
+  --accordion-trigger-box-shadow-expanded: var(--accent-primary);
   --accordion-trigger-border-color: var(--gray-40);
   --accordion-trigger-icon-color: var(--gray-90);
   --accordion-panel-background-color: var(--white);
-  --accordion-panel-text-color: var(--gray-90);
+  --accordion-panel-text-color: var(--gray-80);
   --accordion-panel-border-color: var(--gray-40);
   --accordion-box-shadow-color: rgba(0, 0, 0, 0.15);
 }
 
 .cauldron--theme-dark {
   --accordion-trigger-background-color: var(--accent-medium);
-  --accordion-trigger-background-color-expanded: var(--accent-dark);
-  --accordion-trigger-text-color: var(--white);
-  --accordion-trigger-text-color-hover: var(--accent-light);
-  --accordion-trigger-box-shadow-hover: var(--accent-info);
+  --accordion-trigger-background-color-expanded: var(--accent-medium);
+  --accordion-trigger-text-color: var(--accent-light);
+  --accordion-trigger-text-color-hover: var(--white);
+  --accordion-trigger-box-shadow-expanded: var(--accent-info);
   --accordion-trigger-border-color: var(--stroke-dark);
   --accordion-trigger-icon-color: var(--white);
   --accordion-panel-background-color: var(--accent-medium);
-  --accordion-panel-text-color: var(--white);
+  --accordion-panel-text-color: var(--accent-light);
   --accordion-panel-border-color: var(--stroke-dark);
+}
+
+.Accordion:has(.Accordion__trigger[aria-expanded='true']) {
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.15));
 }
 
 .Accordion > :is(h1, h2, h3, h4, h5, h6):first-of-type {
@@ -32,38 +36,41 @@
 .Accordion__trigger,
 button.Accordion__trigger {
   background-color: var(--accordion-trigger-background-color);
-  padding: calc(var(--space-small) - var(--space-half));
+  padding: var(--space-small);
   width: 100%;
   display: flex;
   align-items: center;
   border-radius: 3px;
   border: 1px solid var(--accordion-trigger-border-color);
   font-size: var(--text-size-small);
+  font-weight: var(--font-weight-normal);
   margin-top: var(--space-small);
   color: var(--accordion-trigger-text-color);
   text-decoration: underline solid var(--accordion-trigger-text-color);
 }
 
 .Accordion__trigger[aria-expanded='true'] {
+  box-shadow: inset 5px 0 0 var(--accordion-trigger-box-shadow-expanded);
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   background: var(--accordion-trigger-background-color-expanded);
 }
 
 .Accordion__trigger:hover {
-  box-shadow: inset 8px 0 0 -4px var(--accordion-trigger-box-shadow-hover);
   color: var(--accordion-trigger-text-color-hover);
   transition: all 0.2s ease-in-out;
   text-decoration: underline solid var(--accordion-trigger-text-color-hover);
 }
 
-.Accordion__trigger:hover .Icon {
-  color: var(--accordion-trigger-icon-color);
-}
-
 .Accordion .Icon {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.2s;
+  color: var(--accordion-trigger-icon-color);
+}
+
+.Accordion .Icon svg {
+  height: var(--space-small);
+  width: var(--space-small);
 }
 
 .Accordion__panel {
@@ -73,5 +80,4 @@ button.Accordion__trigger {
   border: 1px solid var(--accordion-panel-border-color);
   border-top: 0;
   border-radius: 0 0 3px 3px;
-  box-shadow: 0 2px 3px 0 var(--accordion-box-shadow-color);
 }
