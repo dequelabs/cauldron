@@ -23,6 +23,22 @@ jobs:
           NODE_ENV=production yarn --cwd packages/react build
       - run: yarn test
 
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/dependencies
+        with:
+          root: true
+          packages-react: true
+          packages-styles: true
+      - name: Build packages
+        run: |
+          NODE_ENV=production yarn --cwd packages/react build
+          NODE_ENV=production yarn --cwd packages/styles build
+      - name: Screenshot testing
+        run: npm run screenshots
+          
   a11y:
     runs-on: ubuntu-latest
     steps:
