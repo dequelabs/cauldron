@@ -5,3 +5,5 @@ packages/react/lib
 .DS_Store
 yarn-error.log
 .vscode/
+
+playwright/.cache
