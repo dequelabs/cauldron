@@ -36,9 +36,10 @@ jobs:
         run: |
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
-          yarn add --dev playwright
       - name: Screenshot testing
-        run: npm run screenshots
+        run: |
+          yarn screenshots:docker
+          yarn screenshots
           
   a11y:
     runs-on: ubuntu-latest
