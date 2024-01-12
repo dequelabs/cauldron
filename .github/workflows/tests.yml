@@ -46,6 +46,7 @@ jobs:
         with:
           name: screenshot-test-results
           path: ./e2e/test-results
+          retention-days: 14
           
   a11y:
     runs-on: ubuntu-latest
