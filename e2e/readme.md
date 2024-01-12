@@ -31,9 +31,7 @@ yarn screenshots
 Component testing is done in [`screenshots.test.tsx`](./screenshots.test.tsx). Non-interactive components can render a single component for screenshots:
 
 ```tsx
-test('should have screenshot for Component', async ({ mount, page }) => {
-  const component = await mount(<Component prop="a" variant="b" />);
-});
+const component = await mount(<Component prop="a" variant="b" />);
 ```
 
 There are additional helpers available under [`e2e/helpers`](./helpers/playwright.ts) for things like setting the current Cauldron theme. In order to provide sufficient coverage, components should have snapshots for both light and dark Cauldron themes:
@@ -47,19 +45,17 @@ await expect(component).toHaveScreenshot('dark--component');
 For interactive components, remember to test all the different states (focus, hover, disabled, etc):
 
 ```tsx
-test('should have screenshot for Button', async ({ mount, page }) => {
-  const component = await mount(
-    <div>
-      <Button>Button</Button>
-      <Button>Hover</Button>
-      <Button>Active</Button>
-      <Button>Focus</Button>
-      <Button disabled>Disabled</Button>
-    </div>
-  );
+const component = await mount(
+  <div>
+    <Button>Button</Button>
+    <Button>Hover</Button>
+    <Button>Active</Button>
+    <Button>Focus</Button>
+    <Button disabled>Disabled</Button>
+  </div>
+);
 
-  await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
-  await component.getByText('Focus').focus();
-});
+await component.getByText('Hover').hover();
+setActive(await component.getByText('Active'));
+await component.getByText('Focus').focus();
 ```
