@@ -42,6 +42,7 @@ jobs:
           yarn screenshots
       - name: Screenshot test results
         uses: actions/upload-artifact@v3
+        if: failure()
         with:
           name: screenshot-test-results
           path: ./e2e/test-results
