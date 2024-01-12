@@ -4,7 +4,7 @@ import { defineConfig, devices } from '@playwright/experimental-ct-react17';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  preserveOutput: 'never',
+  preserveOutput: 'failures-only',
   testDir: './e2e',
   outputDir: './e2e/test-results',
   snapshotDir: './e2e/screenshots',
