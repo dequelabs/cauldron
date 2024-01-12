@@ -6,6 +6,7 @@ import { defineConfig, devices } from '@playwright/experimental-ct-react17';
 export default defineConfig({
   preserveOutput: 'never',
   testDir: './e2e',
+  outputDir: './e2e/test-results',
   snapshotDir: './e2e/screenshots',
   snapshotPathTemplate: '{snapshotDir}/{arg}.png',
   timeout: 10 * 1000,

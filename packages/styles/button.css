@@ -20,6 +20,10 @@
   --button-thin-height: 23px;
 }
 
+.Button--primary {
+  background-color: red !important;
+}
+
 .Button--primary,
 .Button--secondary,
 .Button--clear,

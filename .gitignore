@@ -7,3 +7,4 @@ yarn-error.log
 .vscode/
 
 playwright/.cache
+e2e/test-results

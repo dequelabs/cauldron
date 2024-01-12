@@ -40,6 +40,11 @@ jobs:
         run: |
           yarn screenshots:docker
           yarn screenshots
+      - name: Screenshot test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshot-test-results
+          path: ./e2e/test-results
           
   a11y:
     runs-on: ubuntu-latest
