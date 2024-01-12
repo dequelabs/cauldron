@@ -36,7 +36,7 @@ test('should have screenshot for Component', async ({ mount, page }) => {
 });
 ```
 
-There are additional helpers available under [`e2e/helpers`](./e2e/helpers/playwright.ts) for things like setting the current Cauldron theme. In order to provide sufficient coverage, components should have snapshots for both light and dark Cauldron themes:
+There are additional helpers available under [`e2e/helpers`](./helpers/playwright.ts) for things like setting the current Cauldron theme. In order to provide sufficient coverage, components should have snapshots for both light and dark Cauldron themes:
 
 ```tsx
 await expect(component).toHaveScreenshot('component');
