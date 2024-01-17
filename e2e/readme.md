@@ -2,7 +2,7 @@
 
 ## Accessibility
 
-TBD
+axe-core is automatically run against Cauldron documentation with [axe-puppeteer](https://www.npmjs.com/package/@axe-core/puppeteer). Each link in the navigation is visited and automatic scans are run against that page for both light and dark themes for WCAG 2.2 AA.
 
 ## Snapshot Testing
 
