@@ -219,7 +219,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const handleComboboxOptionClick = useCallback(() => {
       // maintain focus on the input
-      inputRef.current?.focus();
+      if (inputRef.current !== document.activeElement) {
+        inputRef.current?.focus();
+      }
     }, []);
 
     const handleBlur = useCallback(
