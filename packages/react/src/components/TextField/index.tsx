@@ -72,6 +72,7 @@ export default class TextField extends React.Component<
       requiredText,
       multiline,
       'aria-describedby': ariaDescribedby,
+      children,
       ...other
     } = this.props;
     // typescript can't infer the type so it's complaining about

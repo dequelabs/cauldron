@@ -2,6 +2,12 @@ import React from 'react';
 import { test, expect } from '@playwright/experimental-ct-react17';
 import { setTheme, setActive } from './helpers/playwright';
 import Button from '../packages/react/src/components/Button';
+// import IconButton from '../packages/react/src/components/IconButton';
+import FieldWrap from '../packages/react/src/components/FieldWrap';
+import TextField from '../packages/react/src/components/TextField';
+import Select from '../packages/react/src/components/Select';
+// import Checkbox from '../packages/react/src/components/Checkbox';
+// import { default as Combobox, ComboboxOption } from '../packages/react/src/components/Combobox';
 
 test.beforeEach(({ page }) => {
   setTheme(page, 'light');
@@ -209,3 +215,168 @@ test('should have screenshot for Button[variant="tag"]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[variant=tag]');
 });
+
+test('should have screenshot for TextField', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <TextField label="TextField" value="text field value" />
+      <TextField label="Hover" value="text field value" />
+      <TextField label="Focus" value="text field value" />
+      <TextField label="Disabled" value="text field value" disabled />
+    </FieldWrap>
+  );
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('textfield');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--textfield');
+});
+
+test('should have screenshot for TextField[error]', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <TextField
+        label="TextField"
+        value="text field value"
+        error="This field has an error."
+      />
+      <TextField
+        label="Hover"
+        value="text field value"
+        error="This field has an error."
+      />
+      <TextField
+        label="Focus"
+        value="text field value"
+        error="This field has an error."
+      />
+      <TextField
+        label="Disabled"
+        value="text field value"
+        error="This field has an error."
+        disabled
+      />
+    </FieldWrap>
+  );
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('textfield[error]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--textfield[error]');
+});
+
+test('should have screenshot for Select', async ({ mount, page }) => {
+  const options = [
+    { key: 'apple', value: 'Apple' },
+    { key: 'banana', value: 'Banana' },
+    { key: 'cucumber', value: 'Cucumber' }
+  ];
+  const component = await mount(
+    <FieldWrap>
+      <Select options={options} label="Select" />
+      <Select options={options} label="Hover" />
+      <Select options={options} label="Focus" />
+    </FieldWrap>
+  );
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('select');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--select');
+});
+
+test('should have screenshot for Select[error]', async ({ mount, page }) => {
+  const options = [
+    { key: 'apple', value: 'Apple' },
+    { key: 'banana', value: 'Banana' },
+    { key: 'cucumber', value: 'Cucumber' }
+  ];
+  const component = await mount(
+    <FieldWrap>
+      <Select
+        options={options}
+        label="Select"
+        error="This field has an error."
+      />
+      <Select
+        options={options}
+        label="Hover"
+        error="This field has an error."
+      />
+      <Select
+        options={options}
+        label="Focus"
+        error="This field has an error."
+      />
+    </FieldWrap>
+  );
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('select[error]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--select[error]');
+});
+
+// test('should have screenshot for Combobox', async ({
+//   mount,
+//   page
+// }) => {
+//   const options = [
+
+//   ]
+//   await page.addStyleTag({
+//     content: `.Combobox__listbox { position: relative: !important; }`
+//   })
+//   const component = await mount(
+//     <FieldWrap>
+//       <Combobox label="Combobox">
+//         <ComboboxOption>Apple</ComboboxOption>
+//         <ComboboxOption>Banana</ComboboxOption>
+//         <ComboboxOption>Cucumber</ComboboxOption>
+//       </Combobox>
+//     </FieldWrap>
+//   );
+
+//   console.log(await page.evaluate(() => document.documentElement.outerHTML))
+
+//   await component.getByRole('combobox').focus();
+
+//   await expect(component).toHaveScreenshot('combobox');
+//   await setTheme(page, 'dark');
+//   await expect(component).toHaveScreenshot('dark--combobox]');
+// })
+
+// test.only('should have screenshot for IconButton[variant="primary"]', async ({
+//   mount,
+//   page
+// }) => {
+//   const component = await mount(
+//     <div>
+//       <IconButton icon="pencil" variant="primary" label="Primary" />
+//       <IconButton icon="pencil" label="Hover" />
+//       <IconButton icon="pencil" label="Active" />
+//       <IconButton icon="pencil" label="Focus" />
+//       <IconButton icon="pencil" variant="primary" disabled label="Disabled" />
+//     </div>
+//   );
+// console.log(await component.innerHTML())
+// console.log(await page.evaluate(() => document.body.innerHTML))
+//   await component.locator('.IconButton').hover();
+//   // setActive(await component.locator('.IconButton'));
+//   // await component
+//   //   .locator('.IconButton')
+//   //   .press('Space', { delay: 1000, noWaitAfter: true });
+//   // await component.locator('.IconButton').focus();
+
+//   await expect(component).toHaveScreenshot('iconbutton[variant=primary]');
+//   await setTheme(page, 'dark');
+//   await expect(component).toHaveScreenshot('dark--iconbutton[variant=primary]');
+// });

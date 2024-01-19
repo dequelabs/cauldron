@@ -17,6 +17,18 @@ export default defineConfig({
   reporter: 'line',
   use: {
     ctPort: 3100
+    // ctViteConfig: {
+    //   esbuild: {
+    //     loader: 'jsx'
+    //   },
+    //   optimizeDeps: {
+    //     esbuildOptions: {
+    //       loader: {
+    //         '.js': 'jsx'
+    //       }
+    //     }
+    //   }
+    // }
   },
   projects: [
     {
