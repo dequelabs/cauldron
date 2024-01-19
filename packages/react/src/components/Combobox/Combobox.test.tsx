@@ -894,9 +894,7 @@ test('should support portal element for combobox listbox', () => {
       <ComboboxOption>Cantaloupe</ComboboxOption>
     </Combobox>
   );
-  expect(
-    element.contains(element.querySelector('[role="listbox"]'))
-  ).toBeTruthy();
+  expect(within(element).getByRole('listbox')).toBeTruthy();
 });
 
 test('should support portal element ref for combobox listbox', () => {
