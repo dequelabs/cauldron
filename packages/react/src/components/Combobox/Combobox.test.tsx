@@ -542,7 +542,7 @@ test('should set input value to empty string on open with selected option', () =
   fireEvent.blur(combobox);
   assertListboxIsOpen(false);
   fireEvent.focus(combobox);
-  expect(screen.getByRole('combobox').getAttribute('value')).toEqual('');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 });
 
 test('should restore input value to selected value on close with selected option', () => {
@@ -562,7 +562,7 @@ test('should restore input value to selected value on close with selected option
   assertListboxIsOpen(false);
   fireEvent.focus(combobox);
   fireEvent.blur(combobox);
-  expect(screen.getByRole('combobox').getAttribute('value')).toEqual('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
 });
 
 test('should handle selection with "click" event', () => {
@@ -781,7 +781,7 @@ test('should set selected value to active descendent when autocomplete="automati
   assertListboxIsOpen(true);
   fireArrowDownKeyPress();
   fireEvent.blur(combobox);
-  expect(screen.getByRole('combobox').getAttribute('value')).toEqual('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
 });
 
 test('should use id from props when set', () => {
@@ -807,7 +807,7 @@ test('should set selected value with "defaultValue" prop', () => {
   );
   const combobox = screen.getByRole('combobox');
 
-  expect(screen.getByRole('combobox').getAttribute('value')).toEqual('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
 
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
@@ -824,7 +824,7 @@ test('should set selected value with "value" prop', () => {
   );
   const combobox = screen.getByRole('combobox');
 
-  expect(screen.getByRole('combobox').getAttribute('value')).toEqual('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
 
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
