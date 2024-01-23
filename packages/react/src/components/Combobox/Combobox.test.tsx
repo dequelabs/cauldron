@@ -470,6 +470,34 @@ test('should set aria-activedescendent for active combobox options', () => {
   assertOptionIsActive(2);
 });
 
+test('should set aria-activedescendent value with "value" prop', () => {
+  render(
+    <Combobox label="label" value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  assertOptionIsActive(1);
+});
+
+test('should set aria-activedescendent value with "defaultValue" prop', () => {
+  render(
+    <Combobox label="label" defaultValue="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  assertOptionIsActive(1);
+});
+
 test('should prevent default event on home/end keypress', () => {
   const preventDefault = spy();
   render(

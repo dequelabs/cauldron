@@ -166,8 +166,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [open]);
 
     useEffect(() => {
+      const [element, option] =
+        Array.from(matchingOptions.entries()).find(
+          ([, { selected }]) => selected
+        ) || [];
       if (autocomplete === 'manual') {
-        setActiveDescendant(null);
+        setActiveDescendant(!element ? null : { element, ...option });
       } else if (
         autocomplete === 'automatic' &&
         matchingOptions.size &&
