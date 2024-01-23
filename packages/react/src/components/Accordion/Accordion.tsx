@@ -84,7 +84,7 @@ const Accordion = ({
   }
 
   return (
-    <div className={'Accordion'} {...props}>
+    <div className="Accordion" {...props}>
       <ExpandCollapsePanel
         id={panelElement.props.id || `${elementId}-panel`}
         open={open}
