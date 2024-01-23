@@ -10,6 +10,9 @@
   --accordion-panel-text-color: var(--gray-80);
   --accordion-panel-border-color: var(--gray-40);
   --accordion-box-shadow-color: rgba(0, 0, 0, 0.15);
+
+  /* Deprecated variables */
+  --accordion-trigger-box-shadow-hover: var(--accent-primary);
 }
 
 .cauldron--theme-dark {
@@ -23,6 +26,9 @@
   --accordion-panel-background-color: var(--accent-medium);
   --accordion-panel-text-color: var(--accent-light);
   --accordion-panel-border-color: var(--stroke-dark);
+
+  /* Deprecated variables */
+  --accordion-trigger-box-shadow-hover: var(--accent-info);
 }
 
 .Accordion:has(.Accordion__trigger[aria-expanded='true']) {
@@ -69,8 +75,8 @@ button.Accordion__trigger {
 }
 
 .Accordion .Icon svg {
-  height: var(--space-small);
-  width: var(--space-small);
+  height: 16px;
+  width: 16px;
 }
 
 .Accordion__panel {
