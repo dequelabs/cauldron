@@ -78,8 +78,11 @@
   border: 1px solid var(--combobox-input-border-color);
 }
 
-.Combobox__input:hover,
-.cauldron--theme-dark .Combobox__input:hover {
+.cauldron--theme-dark .Combobox__input--error {
+  border: 1px solid var(--combobox-input-error-border-color);
+}
+
+.Combobox__input:hover {
   border-color: var(--combobox-input-border-hover-color);
 }
 
