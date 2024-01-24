@@ -251,8 +251,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         const escKeypress = event.key === Escape;
         const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
 
-        if ([Home, End].includes(event.key)) {
+        if (
           // prevent the page from scrolling and allow start/end option activation
+          [Home, End].includes(event.key) ||
+          // prevent combobox from submitting any forms when the listbox is expanded
+          (enterKeypress && open)
+        ) {
           event.preventDefault();
         }
 

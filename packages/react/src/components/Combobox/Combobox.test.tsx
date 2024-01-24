@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  waitFor,
-  fireEvent,
-  createEvent
-} from '@testing-library/react';
+import { render, screen, fireEvent, createEvent } from '@testing-library/react';
 import { within } from '@testing-library/dom';
 import { spy } from 'sinon';
 import Combobox from './Combobox';
@@ -442,6 +436,65 @@ test('should close combobox listbox when selecting option via keypress', () => {
   fireEvent.keyDown(combobox, { key: 'ArrowDown' });
   fireEvent.keyDown(combobox, { key: 'Enter' });
   assertListboxIsOpen(false);
+});
+
+test('should prevent default with enter keypress and open listbox', () => {
+  const preventDefault = spy();
+  render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  const fireSyntheticEvent = (type: keyof typeof createEvent, options = {}) => {
+    const event = createEvent[type](combobox, options);
+    // rtl doesn't let us mock preventDefault
+    // see: https://github.com/testing-library/react-testing-library/issues/572
+    event.preventDefault = preventDefault;
+    fireEvent(combobox, event);
+  };
+
+  assertListboxIsOpen(false);
+  fireSyntheticEvent('focus', { preventDefault });
+  expect(preventDefault.notCalled).toBeTruthy();
+  assertListboxIsOpen(true);
+  fireSyntheticEvent('keyDown', { key: 'ArrowDown', preventDefault });
+  expect(preventDefault.notCalled).toBeTruthy();
+  fireSyntheticEvent('keyDown', { key: 'Enter', preventDefault });
+  assertListboxIsOpen(false);
+  expect(preventDefault.calledOnce).toBeTruthy();
+});
+
+test('should not prevent default with enter keypress and closed listbox', () => {
+  const preventDefault = spy();
+  render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  const fireSyntheticEvent = (type: keyof typeof createEvent, options = {}) => {
+    const event = createEvent[type](combobox, options);
+    // rtl doesn't let us mock preventDefault
+    // see: https://github.com/testing-library/react-testing-library/issues/572
+    event.preventDefault = preventDefault;
+    fireEvent(combobox, event);
+  };
+
+  assertListboxIsOpen(false);
+  fireSyntheticEvent('focus', { preventDefault });
+  expect(preventDefault.notCalled).toBeTruthy();
+  assertListboxIsOpen(true);
+  fireSyntheticEvent('keyDown', { preventDefault, key: 'Escape' });
+  assertListboxIsOpen(false);
+  fireSyntheticEvent('keyDown', { preventDefault, key: 'Enter' });
+  expect(preventDefault.notCalled).toBeTruthy();
 });
 
 test('should set aria-activedescendent for active combobox options', () => {
