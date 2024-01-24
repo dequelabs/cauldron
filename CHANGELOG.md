@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/dequelabs/cauldron/compare/v6.0.0...v6.1.0) (2024-01-24)
+
+
+### Features
+
+* synced tabs with uxpin ([#1292](https://github.com/dequelabs/cauldron/issues/1292)) ([403a38d](https://github.com/dequelabs/cauldron/commit/403a38d4cc3388d453be20c8308b0c20db94c119))
+
+
+### Bug Fixes
+
+* **Combobox:** prevent default event  when Combobox listbox is expanded on enter keypress ([#1319](https://github.com/dequelabs/cauldron/issues/1319)) ([6de7685](https://github.com/dequelabs/cauldron/commit/6de7685ab576bf8d1a2edb36051486576a046cb4))
+* **Combobox:** set aria-activedescendant correctly when listbox is expanded with selected value ([#1320](https://github.com/dequelabs/cauldron/issues/1320)) ([3a04d8b](https://github.com/dequelabs/cauldron/commit/3a04d8b8ec3b2821ce33a3667266732841c22df5))
+* **react,styles:** keep rest background for disabled:active button state ([#1310](https://github.com/dequelabs/cauldron/issues/1310)) ([ca3aa82](https://github.com/dequelabs/cauldron/commit/ca3aa821bb47efbf7c2aac28d22937b599d8bc89))
+* **style:** removed double bottom border and added padding for < 64 rem ([#1303](https://github.com/dequelabs/cauldron/issues/1303)) ([c37994c](https://github.com/dequelabs/cauldron/commit/c37994cd2b1a02ddd8086d27d9e76380ac8775ec))
+* **styles:** use correct border for table headers with row headings ([#1308](https://github.com/dequelabs/cauldron/issues/1308)) ([b991497](https://github.com/dequelabs/cauldron/commit/b9914978995b7a75e8f4e0bd411d90b2752be992))
+* **style:** synced stepper with pattern library ([#1251](https://github.com/dequelabs/cauldron/issues/1251)) ([7c3f70b](https://github.com/dequelabs/cauldron/commit/7c3f70bef1ab2a8d88e891752e032d5ed27c9083))
+* **style:** Synced styles and added large variant of IconButton ([#1304](https://github.com/dequelabs/cauldron/issues/1304)) ([e5868a1](https://github.com/dequelabs/cauldron/commit/e5868a15a355d351d3d64f041aa609e3e81b8a29))
+* **style:** synced text field styles with pattern library ([#1206](https://github.com/dequelabs/cauldron/issues/1206)) ([51a804a](https://github.com/dequelabs/cauldron/commit/51a804a162fa2482529e443a0a41808c1ce2fa78))
+
 ## [6.0.0](https://github.com/dequelabs/cauldron/compare/v5.13.0...v6.0.0) (2023-12-20)
 
 
