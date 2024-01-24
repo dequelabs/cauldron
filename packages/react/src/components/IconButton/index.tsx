@@ -25,6 +25,7 @@ export interface IconButtonOwnProps {
   tooltipVariant?: TooltipProps['variant'];
   tooltipPortal?: TooltipProps['portal'];
   variant?: 'primary' | 'secondary' | 'error';
+  large?: boolean;
 }
 
 type PolymorphicIconButton = Polymorphic.ForwardRefComponent<
@@ -52,6 +53,7 @@ const IconButton = forwardRef(
       variant = 'secondary',
       disabled,
       tabIndex = 0,
+      large,
       ...other
     }: any,
     ref
@@ -81,7 +83,8 @@ const IconButton = forwardRef(
             IconButton: true,
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
-            'IconButton--error': variant === 'error'
+            'IconButton--error': variant === 'error',
+            'IconButton--large': large
           })}
           ref={internalRef}
           disabled={disabled}
