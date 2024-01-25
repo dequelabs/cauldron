@@ -78,8 +78,11 @@
   border: 1px solid var(--combobox-input-border-color);
 }
 
-.Combobox__input:hover,
-.cauldron--theme-dark .Combobox__input:hover {
+.cauldron--theme-dark .Combobox__input--error {
+  border: 1px solid var(--combobox-input-error-border-color);
+}
+
+.Combobox__input:hover {
   border-color: var(--combobox-input-border-hover-color);
 }
 
@@ -91,10 +94,11 @@
 
 .Combobox__input:focus-within {
   border: 1px solid var(--combobox-input-border-focus-color);
-  box-shadow: 0 0 0 2px var(--combobox-input-border-focus-color),
+  box-shadow: 0 0 0 1px var(--combobox-input-border-focus-color),
     0 0 5px var(--combobox-input-border-focus-glow-color),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
 .Combobox__arrow {
   width: 2rem;
   display: flex;
@@ -232,13 +236,28 @@
 
 .Combobox__input--error {
   border: 1px solid var(--combobox-input-error-border-color);
+  box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Combobox__input--error:focus-within {
   border: 1px solid var(--combobox-input-error-border-color);
-  box-shadow: 0 0 0 1px var(--combobox-input-error-focus-border-color),
-    inset 0 2px 3px 0 rgba(0, 0, 0, 0.05),
-    0 0 5px 0 var(--combobox-input-error-focus-border-glow-color);
+  box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.Combobox__input--error:focus-within:hover {
+  border: 1px solid var(--combobox-input-error-border-color);
+  box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.Combobox__input--error:hover {
+  border: 1px solid var(--combobox-input-error-border-color);
+  box-shadow: 0 0 0 1px var(--combobox-input-error-border-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .ComboboxListbox__empty {
