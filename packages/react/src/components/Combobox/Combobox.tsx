@@ -75,7 +75,7 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
+const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
   (
     {
       id: propId,
