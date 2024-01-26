@@ -1,0 +1,87 @@
+---
+title: Timeline
+description: A list component to display a list of events or items in chronological order.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Timeline/Timeline.tsx
+---
+
+import { Timeline, TimelineItem, Icon } from '@deque/cauldron-react'
+
+```js
+import { Timeline, TimelineItem } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+```jsx example
+<Timeline>
+  <TimelineItem>
+    <strong>Wake Up</strong>
+    <div>8am</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Eat Breakfast</strong>
+    <div>8:15am</div>
+    <div>Avocado Toast</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Take Shower</strong>
+    <div>8:45am</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Work</strong>
+    <div>9am</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Lunch</strong>
+    <div>11:30am</div>
+    <div>BLT</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Dinner</strong>
+    <div>5:30pm</div>
+    <div>Vegetable Stir Fry</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Chill and Relax</strong>
+    <div>6:30pm</div>
+  </TimelineItem>
+  <TimelineItem>
+    <strong>Sleep</strong>
+    <div>11pm</div>
+  </TimelineItem>
+</Timeline>
+```
+
+### Custom Icon 
+
+```jsx example
+<Timeline>
+  <TimelineItem icon={<Icon type="arrow-circle-down" />}>Item with custom icon</TimelineItem>
+  <TimelineItem>Item with default mark</TimelineItem>
+  <TimelineItem>Item with default mark</TimelineItem>
+  <TimelineItem icon={<Icon type="check-solid" />}>Item with custom icon</TimelineItem>
+</Timeline>
+```
+
+## Props
+
+### Timeline
+
+<ComponentProps
+  className={true}
+  children={true}
+/>
+
+### TimelineItem
+
+<ComponentProps
+  className={true}
+  children={true}
+  props={[{
+    name: 'icon',
+    type: 'React.ReactElement',
+    description: 'Optional element to display as icon instead of the default mark'
+  }]}
+/>

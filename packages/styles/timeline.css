@@ -1,0 +1,61 @@
+:root {
+  --timeline-icon-color: var(--accent-success-dark);
+  --timeline-separator-color: var(--gray-40);
+}
+
+.cauldron--theme-dark {
+  --timeline-icon-color: var(--accent-success-light);
+  --timeline-separator-color: #54636f;
+}
+
+.Timeline {
+  margin: 0;
+  padding: 0;
+}
+
+.Timeline:is(ol) {
+  list-style-type: none;
+}
+
+.TimelineItem {
+  display: flex;
+  margin-left: var(--space-smaller);
+}
+
+.TimelineItem:not(:last-child) {
+  min-height: 3.75rem;
+  padding-bottom: var(--space-half);
+}
+
+.TimelineItem__separator {
+  display: flex;
+  flex-direction: column;
+  width: 18px;
+  --icon-size: 18px;
+}
+
+.TimelineItem__separator:empty:before,
+.TimelineItem__separator > * {
+  transform: translateX(calc(-50% + 2px));
+  margin-bottom: var(--space-smallest);
+  max-width: 18px;
+}
+
+.TimelineItem__separator:empty:before {
+  content: '';
+  display: block;
+  height: 8px;
+  width: 8px;
+  margin-top: var(--space-half);
+  border-radius: 50%;
+  background-color: var(--timeline-icon-color);
+}
+
+.TimelineItem:not(:last-child) .TimelineItem__separator:after {
+  content: '';
+  display: block;
+  flex: 1;
+  width: 4px;
+  border-radius: 2px;
+  background-color: var(--timeline-separator-color);
+}
