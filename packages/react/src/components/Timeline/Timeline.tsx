@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-type TimelineProps = React.HTMLAttributes<HTMLOListElement>;
+interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {}
 
 export default function Timeline({
   className,

@@ -25,7 +25,7 @@
 
 .TimelineItem:not(:last-child) {
   min-height: 3.75rem;
-  padding-bottom: var(--space-half);
+  padding-bottom: var(--space-smaller);
 }
 
 .TimelineItem__separator {
