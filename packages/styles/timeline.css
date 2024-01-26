@@ -1,10 +1,11 @@
 :root {
-  --timeline-icon-color: var(--accent-success-dark);
+  --timeline-mark-color: var(--accent-success-dark);
   --timeline-separator-color: var(--gray-40);
+  --timeline-icon-size: 18px;
 }
 
 .cauldron--theme-dark {
-  --timeline-icon-color: var(--accent-success-light);
+  --timeline-mark-color: var(--accent-success-light);
   --timeline-separator-color: #54636f;
 }
 
@@ -30,15 +31,15 @@
 .TimelineItem__separator {
   display: flex;
   flex-direction: column;
-  width: 18px;
-  --icon-size: 18px;
+  width: var(--timeline-icon-size);
+  --icon-size: var(--timeline-icon-size);
 }
 
 .TimelineItem__separator:empty:before,
 .TimelineItem__separator > * {
   transform: translateX(calc(-50% + 2px));
   margin-bottom: var(--space-smallest);
-  max-width: 18px;
+  max-width: var(--timeline-icon-size);
 }
 
 .TimelineItem__separator:empty:before {
@@ -48,7 +49,7 @@
   width: 8px;
   margin-top: var(--space-half);
   border-radius: 50%;
-  background-color: var(--timeline-icon-color);
+  background-color: var(--timeline-mark-color);
 }
 
 .TimelineItem:not(:last-child) .TimelineItem__separator:after {
