@@ -4,7 +4,7 @@ description: A list component to display a list of events or items in chronologi
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Timeline/Timeline.tsx
 ---
 
-import { Timeline, TimelineItem, Icon } from '@deque/cauldron-react'
+import { Timeline, TimelineItem, Icon, Panel } from '@deque/cauldron-react'
 
 ```js
 import { Timeline, TimelineItem } from '@deque/cauldron-react'
@@ -44,6 +44,40 @@ import { Timeline, TimelineItem } from '@deque/cauldron-react'
     <div>11pm</div>
   </TimelineItem>
 </Timeline>
+```
+
+```jsx example
+<Panel>
+    <Timeline>
+    <TimelineItem>
+        <strong>Wake Up</strong>
+        <div>8am</div>
+    </TimelineItem>
+    <TimelineItem>
+        <strong>Eat Breakfast</strong>
+        <div>8:30am</div>
+        <div>Avocado Toast</div>
+    </TimelineItem>
+    <TimelineItem>
+        <strong>Work</strong>
+        <div>9am</div>
+    </TimelineItem>
+    <TimelineItem>
+        <strong>Lunch</strong>
+        <div>11:30am</div>
+        <div>BLT</div>
+    </TimelineItem>
+    <TimelineItem>
+        <strong>Dinner</strong>
+        <div>5:30pm</div>
+        <div>Vegetable Stir Fry</div>
+    </TimelineItem>
+    <TimelineItem>
+        <strong>Sleep</strong>
+        <div>11pm</div>
+    </TimelineItem>
+    </Timeline>
+</Panel>
 ```
 
 ### Custom Icon 
