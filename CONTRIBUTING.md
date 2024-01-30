@@ -39,6 +39,10 @@ Local development setup is documented in [this project's readme](./README.md#dev
 
 General [component guidelines](https://cauldron.dequelabs.com/component-guidelines) and [style guidelines](https://cauldron.dequelabs.com/style-guidelines) live within our documentation.
 
+- Use well-structured semantic markup over `aria-*` attributes
+- Don't specify units for zero values, e.g. `padding: 0px;`, instead you can omit the unit, e.g. `padding: 0;`
+- Avoid using css prefixes (e.g. `-webkit` or `-moz`) unless absolutely necessary. [autoprefixer](https://github.com/postcss/autoprefixer) should automatically handle prefixes.
+
 ### Tools Used
 
 - [React](https://react.dev/)
@@ -84,7 +88,7 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 
 ### Server-side Rendering Compatibility
 
-Every Cauldron component needs to be compatible with server-side rendering (SSR). This means that a component should be able to render in an SSR environment such as [Gatsby.js](https://www.gatsbyjs.com/) or [Next.js](https://nextjs.org/). This means avoiding DOM globals like `document` or `window` that are not available in an SSR environment.
+Every Cauldron component needs to be compatible with server-side rendering (SSR). A component should be able to render in an SSR environment such as [Gatsby.js](https://www.gatsbyjs.com/) or [Next.js](https://nextjs.org/) while avoiding DOM globals like `document` or `window` that are not available in these environments.
 
 Cauldron uses [`eslint-plugin-ssr-friendly`](https://github.com/kopiro/eslint-plugin-ssr-friendly) to help prevent the accidental misuse of DOM globals. An additional [utility](./packages/react/src/utils/is-browser.ts) is available to help guard against using DOM globals:
 
