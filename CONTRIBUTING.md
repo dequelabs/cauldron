@@ -104,11 +104,14 @@ export default function SomeComponent() {
 
 ### Linting
 
-The files in this project are formatted by Prettier and linted with ESLint. Both are run when code is committed (as a pre-commit hook). Additionally, you can run ESLint manually:
+The files in this project are formatted by Prettier and linted with ESLint. Both are run when code is committed (as a pre-commit hook).
 
-```sh
-$ yarn lint
-```
+#### Running Lint Manually
+
+| Command              | Description                             |
+| :------------------- | :-------------------------------------- |
+| `yarn lint`          | Runs eslint against everything          |
+| `yarn lint -- --fix` | Automatically fixes some linting errors |
 
 ## Icons
 
