@@ -4,7 +4,7 @@ type Theme = 'light' | 'dark';
 
 interface ProviderProps {
   children: React.ReactNode;
-  context?: HTMLElement | null;
+  context?: HTMLElement;
   initialTheme?: Theme;
 }
 
@@ -29,7 +29,7 @@ const ThemeContext = createContext<State & Methods>({
 const ThemeProvider = ({
   children,
   // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-  context = document.body,
+  context = document?.body,
   initialTheme = 'light'
 }: ProviderProps) => {
   const [theme, setTheme] = useState<Theme>(initialTheme);
