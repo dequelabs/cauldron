@@ -4,7 +4,7 @@ type Theme = 'light' | 'dark';
 
 interface ProviderProps {
   children: React.ReactNode;
-  context?: HTMLElement;
+  context?: HTMLElement | null;
   initialTheme?: Theme;
 }
 
@@ -28,18 +28,19 @@ const ThemeContext = createContext<State & Methods>({
 
 const ThemeProvider = ({
   children,
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
   context = document.body,
   initialTheme = 'light'
 }: ProviderProps) => {
   const [theme, setTheme] = useState<Theme>(initialTheme);
   const getThemeFromContext = () =>
-    context.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
+    context?.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
   const toggleTheme = () =>
     setTheme(getThemeFromContext() === 'dark' ? 'light' : 'dark');
 
   useEffect(() => {
-    context.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
-    context.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
+    context?.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
+    context?.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
   }, [context, theme]);
 
   // Use a MutationObserver to track changes to the classes outside of the context of React
@@ -55,6 +56,10 @@ const ThemeProvider = ({
   };
 
   useEffect(() => {
+    if (!context) {
+      return;
+    }
+
     const observer = new MutationObserver(handleMutation);
     observer.observe(context, {
       childList: false,

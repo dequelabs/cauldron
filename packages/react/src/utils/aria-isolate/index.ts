@@ -6,7 +6,8 @@ export default class AriaIsolate {
   private affectedElements: HTMLElement[];
 
   constructor(el: HTMLElement) {
-    if (!(el instanceof HTMLElement)) {
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-constructor
+    if (typeof HTMLElement === 'undefined' || !(el instanceof HTMLElement)) {
       throw new Error(
         'AriaIsolate must be instantiated with a valid HTML element'
       );
@@ -45,7 +46,7 @@ export default class AriaIsolate {
    * from everything affected by 'activate'
    */
   deactivate() {
-    this.affectedElements.forEach(affected =>
+    this.affectedElements.forEach((affected) =>
       affected.removeAttribute('aria-hidden')
     );
     this.affectedElements = [];

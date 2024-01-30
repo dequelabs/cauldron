@@ -278,7 +278,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           </div>
         </ClickOutsideListener>
       </FocusTrap>,
-      (portal && 'current' in portal ? portal.current : portal) || document.body
+      // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+      (portal && 'current' in portal ? portal.current : portal) ||
+        document?.body
     );
   }
 );
