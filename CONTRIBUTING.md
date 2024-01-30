@@ -162,10 +162,8 @@ We use [jest-axe](https://www.npmjs.com/package/jest-axe) to run axe in our unit
 
 ```jsx
 test('should return no axe violations', async () => {
-  render(
-    <SomeCauldronComponent ref={ref}>
-  );
-  const component = screen.getByRole('button')
+  render(<SomeCauldronComponent ref={ref} />);
+  const component = screen.getByRole('button');
   expect(await axe(component)).toHaveNoViolations();
 });
 ```
