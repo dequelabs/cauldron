@@ -29,7 +29,7 @@ As Cauldron is first and foremost a design system for building products at Deque
 
 ### Discussing proprietary features
 
-This is a public repo, so care needs to be taken to not include details or screenshots for unannounced or unreleased features in Deque products. Any issues or pull requests need to describe work without including specific business logic or feature details directly related to Deque products. If context is necessary to implement a specific Cauldron feature, _\[TODO: determine process to discuss private things and list it here\]_
+This is a public repo, so care needs to be taken to not include details or screenshots for unannounced or unreleased features in Deque products. Any issues or pull requests need to describe work without including specific business logic or feature details directly related to Deque products. If context is necessary to implement a specific Cauldron feature, please open an issue in the private [cauldron-team repo](https://github.com/dequelabs/cauldron-team/issues) and link to it via the issue or pull request.
 
 ### Setup
 
