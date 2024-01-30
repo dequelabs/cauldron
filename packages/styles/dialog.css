@@ -110,8 +110,8 @@
 }
 
 .Dialog__close svg {
-  height: 100%;
-  width: 100%;
+  /* match icon size with height/width of button */
+  --icon-size: 100%;
 }
 
 .cauldron--theme-dark .Dialog__close {
