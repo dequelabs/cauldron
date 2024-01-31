@@ -177,9 +177,11 @@ test('should return no axe violations', async () => {
 
 #### Running Tests
 
-| Command     | Description         |
-| :---------- | :------------------ |
-| `yarn test` | Runs all unit tests |
+| Command                   | Description                                        |
+| :------------------------ | :------------------------------------------------- |
+| `yarn test`               | Runs all unit tests                                |
+| `yarn test ComponentName` | Runs tests matching component name                 |
+| `yarn test:a11y`          | Runs e2e accessibility tests against documentation |
 
 ## Documentation
 
