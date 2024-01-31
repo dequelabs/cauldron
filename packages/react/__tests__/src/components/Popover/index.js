@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { act } from 'react-dom/test-utils';
+import { setImmediate } from 'timers/promises';
 import { mount } from 'enzyme';
 import Popover from 'src/components/Popover';
 import axe from '../../../axe';
@@ -26,7 +27,7 @@ afterEach(() => {
 
 const update = async (wrapper) => {
   await act(async () => {
-    await new Promise((resolve) => setImmediate(resolve));
+    await setImmediate();
     wrapper.update();
   });
 };

@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { setImmediate } from 'timers/promises';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import Tabs, { Tab, TabPanel } from 'src/components/Tabs';
@@ -7,9 +8,9 @@ import { act } from 'react-dom/test-utils';
 
 const ariaLabel = 'I am a label';
 
-const update = async wrapper => {
+const update = async (wrapper) => {
   await act(async () => {
-    await new Promise(resolve => setImmediate(resolve));
+    await setImmediate();
     wrapper.update();
   });
 };
@@ -167,52 +168,22 @@ test('displays correct tabpanel when clicking a tab', async () => {
   const MountedTabs = mount(<TabswithRef />);
   await update(MountedTabs);
 
-  MountedTabs.find('Tab')
-    .at(1)
-    .simulate('click');
+  MountedTabs.find('Tab').at(1).simulate('click');
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists()
   ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
+  expect(MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists());
 
-  MountedTabs.find('Tab')
-    .at(2)
-    .simulate('click');
+  MountedTabs.find('Tab').at(2).simulate('click');
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists()
   ).toBe(false);
 });
 
@@ -272,22 +243,12 @@ test('displays correct tabpanel when clicking a tab with a customized id', async
   const MountedTabs = mount(<TabswithRef />);
   await update(MountedTabs);
 
-  MountedTabs.find('Tab')
-    .at(1)
-    .simulate('click');
+  MountedTabs.find('Tab').at(1).simulate('click');
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists()
   ).toBe(false);
 });
 
@@ -322,90 +283,38 @@ test('displays correct tabpanel when pressing left, right, home, or end keys', a
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists()
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
   await update(MountedTabs);
 
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists()
   ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
+  expect(MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists());
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'End' });
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists()
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'Home' });
   await update(MountedTabs);
 
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists()
   ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(2)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
+  expect(MountedTabs.find('TabPanel').at(2).find('.TabPanel--hidden').exists());
 });
 
 test('does not do anything when pressing keys other than left, right, home, or end', async () => {
@@ -435,17 +344,9 @@ test('does not do anything when pressing keys other than left, right, home, or e
   await update(MountedTabs);
 
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists()
   ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
 });
 
 test('displays correct tabpanel when pressing left, right, home, or end keys with customized id', async () => {
@@ -474,34 +375,18 @@ test('displays correct tabpanel when pressing left, right, home, or end keys wit
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });
   await update(MountedTabs);
 
+  expect(MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists());
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists()
   ).toBe(false);
 
   MountedTabs.find('.Tablist').simulate('keydown', { key: 'ArrowLeft' });
   await update(MountedTabs);
 
   expect(
-    MountedTabs.find('TabPanel')
-      .at(0)
-      .find('.TabPanel--hidden')
-      .exists()
+    MountedTabs.find('TabPanel').at(0).find('.TabPanel--hidden').exists()
   ).toBe(false);
-  expect(
-    MountedTabs.find('TabPanel')
-      .at(1)
-      .find('.TabPanel--hidden')
-      .exists()
-  );
+  expect(MountedTabs.find('TabPanel').at(1).find('.TabPanel--hidden').exists());
 });
 
 test('calls onChange prop when active tab is changed', async () => {
@@ -520,10 +405,7 @@ test('calls onChange prop when active tab is changed', async () => {
   act(() => {
     const wrapper = mount(<TabsWithOnChange />);
     expect(onChange.notCalled).toEqual(true);
-    wrapper
-      .find('Tab')
-      .at(1)
-      .simulate('click');
+    wrapper.find('Tab').at(1).simulate('click');
   });
 
   expect(onChange.calledOnce).toEqual(true);
