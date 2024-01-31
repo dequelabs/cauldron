@@ -7,13 +7,14 @@
    - [Tools Used](#tools-used)
    - [Structure](#structure)
    - [Quality Checklist](#quality-checklist)
-   - [Icons](#icons)
    - [Server-side Rendering Compatibility](#server-side-rendering-compatibility)
    - [Linting](#linting)
+   - [Icons](#icons)
+   - [Commit Messages](#commit-messages)
+   - [Pull Requests](#pull-requests)
    - [Testing Strategies](#testing-strategies)
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
-   - [Commit Messages](#commit-messages)
 1. [Documentation](#documentation)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
@@ -108,12 +109,12 @@ The files in this project are formatted by Prettier and linted with ESLint. Both
 
 #### Running Lint Manually
 
-| Command              | Description                             |
-| :------------------- | :-------------------------------------- |
-| `yarn lint`          | Runs eslint against everything          |
-| `yarn lint -- --fix` | Automatically fixes some linting errors |
+| Command           | Description                             |
+| :---------------- | :-------------------------------------- |
+| `yarn lint`       | Runs eslint against everything          |
+| `yarn lint --fix` | Automatically fixes some linting errors |
 
-## Icons
+### Icons
 
 Icons are located in [packages/react/src/components/Icon/icons](./packages/react/src/components/Icon/icons). To add a new icon, follow the following steps:
 
@@ -146,6 +147,16 @@ Cauldron aims to avoid shipping [breaking changes](#breaking-changes) on a regul
 |                      | Adding a css variable                                                 | `minor`            |
 |                      | Removing a css variable                                               | `major` (breaking) |
 |                      | Modifying css properties                                              | `patch` or `minor` |
+
+### Pull Requests
+
+We aim to review pull requests within a day or two. If your changes are time sensitive, feel free to request an expedited review on GitHub or reach out in the private `#cauldron` slack channel.
+
+Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
+
+#### Previewing Changes
+
+Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened, and will be deleted when closed.
 
 ### Testing Strategies
 
