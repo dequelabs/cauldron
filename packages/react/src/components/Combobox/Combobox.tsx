@@ -463,12 +463,14 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setMatchingOptions={setMatchingOptions}
           setFormValue={setFormValue}
         >
-          {portal
+          {portal && typeof document !== 'undefined'
             ? createPortal(
                 comboboxListbox,
+                // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                 portal instanceof HTMLElement
                   ? portal
                   : portal.current ||
+                      // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                       /* istanbul ignore next: default fallback value */ document.body
               )
             : comboboxListbox}
