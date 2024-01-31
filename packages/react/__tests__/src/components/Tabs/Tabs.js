@@ -188,6 +188,8 @@ test('displays correct tabpanel when clicking a tab', async () => {
 });
 
 test('focuses tab active tab with keyboard activation', async () => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const TabsCompoonent = () => {
     const tabPanel1 = useRef(null);
     const tabPanel2 = useRef(null);
@@ -212,7 +214,7 @@ test('focuses tab active tab with keyboard activation', async () => {
     );
   };
 
-  const wrapper = mount(<TabsCompoonent />);
+  const wrapper = mount(<TabsCompoonent />, { attachTo: mountElement });
   await update(wrapper);
 
   wrapper.find('.Tablist').simulate('keydown', { key: 'ArrowRight' });

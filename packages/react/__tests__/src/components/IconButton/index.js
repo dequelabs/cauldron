@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { createRef } from 'react';
 import { setImmediate } from 'timers/promises';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
@@ -75,27 +75,10 @@ test('should return no axe violations', async () => {
 });
 
 test('supports ref prop', async () => {
-  const TestElement = () => {
-    const ref = useRef(null);
-    return (
-      <>
-        <IconButton id="test-id" icon="pencil" label="Edit" ref={ref} />
-        <button
-          id="test-button"
-          onClick={() => {
-            ref.current.focus();
-          }}
-        >
-          Test
-        </button>
-      </>
-    );
-  };
-
-  const mountedElement = mount(<TestElement />);
-  await update(mountedElement);
-  mountedElement.find('#test-button').simulate('click');
-  expect(document.activeElement.id).toBe('test-id');
+  const ref = createRef();
+  mount(<IconButton id="test-id" icon="pencil" label="Edit" ref={ref} />);
+  expect(ref.current instanceof HTMLButtonElement).toBeTruthy();
+  expect(ref.current.getAttribute('id')).toEqual('test-id');
 });
 
 test('should not render tooltip when disabled prop is true', async () => {

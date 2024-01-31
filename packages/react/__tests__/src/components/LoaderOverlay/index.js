@@ -13,7 +13,9 @@ test('handles classNames/additional attributes properly', () => {
   expect(node.getAttribute('role')).toBe('alert');
 });
 
-test('handles focus', () => {
+test('handles focus', (done) => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const loaderOverlay = mount(
     <LoaderOverlay
       className="baz"
@@ -22,38 +24,48 @@ test('handles focus', () => {
       focusOnInitialRender
     >
       Some text
-    </LoaderOverlay>
+    </LoaderOverlay>,
+    { attachTo: mountElement }
   );
 
   setTimeout(() => {
     expect(document.activeElement).toBe(loaderOverlay.getDOMNode());
+    done();
   });
 });
 
-test('handles not being focused', () => {
+test('handles not being focused', (done) => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const loaderOverlay = mount(
     <LoaderOverlay className="baz" role="alert" label="loading">
       Some text
-    </LoaderOverlay>
+    </LoaderOverlay>,
+    { attachTo: mountElement }
   );
 
   setTimeout(() => {
     expect(document.activeElement).not.toBe(loaderOverlay.getDOMNode());
+    done();
   });
 });
 
 test('handles being passed a ref', () => {
-  const loaderRef = React.createRef(null);
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
+  const loaderRef = React.createRef();
 
   const loaderOverlay = mount(
     <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>
       Some text
-    </LoaderOverlay>
+    </LoaderOverlay>,
+    { attachTo: mountElement }
   );
 
-  setTimeout(() => {
-    expect(document.activeElement).toStrictEqual(loaderOverlay.getDOMNode());
-  });
+  expect(loaderRef.current instanceof HTMLDivElement).toBeTruthy();
+  expect(loaderRef.current.getAttribute('class')).toEqual(
+    'Loader__overlay baz'
+  );
 });
 
 test('traps focus', () => {

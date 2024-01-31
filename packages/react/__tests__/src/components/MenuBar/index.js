@@ -31,12 +31,15 @@ test('supports falsy children', () => {
 });
 
 test('handles left arrow', () => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const wrapper = mount(
     <MenuBar>
       <TopBarItem>1</TopBarItem>
       <TopBarItem>2</TopBarItem>
       <TopBarItem>3</TopBarItem>
-    </MenuBar>
+    </MenuBar>,
+    { attachTo: mountElement }
   );
   const menuItems = wrapper.find('[role="menuitem"]');
   // from 2nd to 1st
@@ -56,12 +59,15 @@ test('handles left arrow', () => {
 });
 
 test('handles right arrow', () => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const wrapper = mount(
     <MenuBar>
       <TopBarItem>1</TopBarItem>
       <TopBarItem>2</TopBarItem>
       <TopBarItem>3</TopBarItem>
-    </MenuBar>
+    </MenuBar>,
+    { attachTo: mountElement }
   );
   const menuItems = wrapper.find('[role="menuitem"]');
   // from 1st to 2nd

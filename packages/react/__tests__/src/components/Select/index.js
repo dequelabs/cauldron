@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { createRef } from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import Select from 'src/components/Select';
@@ -55,32 +55,19 @@ test('sets option attributes properly', () => {
 });
 
 test('passes ref properly', () => {
-  const TestElement = () => {
-    const selectRef = useRef(null);
-    return (
-      <>
-        <Select
-          {...defaultProps}
-          id="test-id"
-          ref={selectRef}
-          defaultValue="a"
-          options={[{ key: '1', value: 'a' }]}
-        />
-        <button
-          id="test-button"
-          onClick={() => {
-            selectRef.current.focus();
-          }}
-        >
-          Test
-        </button>
-      </>
-    );
-  };
+  const ref = createRef();
+  mount(
+    <Select
+      {...defaultProps}
+      id="test-id"
+      ref={ref}
+      defaultValue="a"
+      options={[{ key: '1', value: 'a' }]}
+    />
+  );
 
-  const mountedElement = mount(<TestElement />);
-  mountedElement.find('#test-button').simulate('click');
-  expect(document.activeElement.id).toBe('test-id');
+  expect(ref.current instanceof HTMLSelectElement).toBeTruthy();
+  expect(ref.current.getAttribute('id')).toEqual('test-id');
 });
 
 test('passes children properly', () => {
