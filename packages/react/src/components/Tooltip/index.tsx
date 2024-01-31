@@ -213,7 +213,8 @@ export default function Tooltip({
               {children}
             </div>,
             (portal && 'current' in portal ? portal.current : portal) ||
-              document.body
+              // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+              document?.body
           )
         : null}
     </>
