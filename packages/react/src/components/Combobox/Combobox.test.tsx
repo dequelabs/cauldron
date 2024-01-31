@@ -759,6 +759,7 @@ test('should render results not found when no options match when autocomplete="m
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
   fireEvent.change(combobox, { target: { value: 'x' } });
+  expect(screen.queryAllByRole('listbox').length).toEqual(0);
   expect(screen.queryAllByRole('option').length).toEqual(0);
   expect(screen.queryByText('No results found.')).toBeTruthy();
 });
@@ -1060,9 +1061,7 @@ test('should have no axe violations with value and expanded', async () => {
   expect(results).toHaveNoViolations();
 });
 
-// This currently raises an issue and will be fixed in the following issue:
-// https://github.com/dequelabs/cauldron/issues/1330
-test.skip('should have no axe violations with no matching results', async () => {
+test('should have no axe violations with no matching results', async () => {
   const comboboxRef = createRef<HTMLDivElement>();
   render(
     <Combobox label="label" ref={comboboxRef}>

@@ -378,8 +378,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
         })}
-        role="listbox"
-        aria-labelledby={`${id}-label`}
+        role={noMatchingOptions ? 'presentation' : 'listbox'}
+        aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
         value={selectedValue}
         onMouseDown={handleComboboxOptionMouseDown}
