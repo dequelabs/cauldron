@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { render, screen, fireEvent, createEvent } from '@testing-library/react';
 import { within } from '@testing-library/dom';
 import { spy } from 'sinon';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import Combobox from './Combobox';
 import ComboboxGroup from './ComboboxGroup';
 import ComboboxOption from './ComboboxOption';
@@ -990,4 +991,93 @@ test('should support portal element ref for combobox listbox', () => {
   expect(
     element.contains(element.querySelector('[role="listbox"]'))
   ).toBeTruthy();
+});
+
+test('should have no axe violations when not expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" ref={comboboxRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" ref={comboboxRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with active combobox item', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" ref={comboboxRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+  fireEvent.keyDown(screen.getByRole('combobox'), { key: 'ArrowDown' });
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with value and expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" ref={comboboxRef} value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+// This currently raises an issue and will be fixed in the following issue:
+// https://github.com/dequelabs/cauldron/issues/1330
+test.skip('should have no axe violations with no matching results', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" ref={comboboxRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+  fireEvent.change(screen.getByRole('combobox'), {
+    target: { value: 'orange' }
+  });
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
 });
