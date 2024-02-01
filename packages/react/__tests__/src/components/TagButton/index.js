@@ -1,4 +1,5 @@
 import React from 'react';
+import { setImmediate } from 'timers/promises';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import TagButton from 'src/components/TagButton';
@@ -6,7 +7,7 @@ import axe from '../../../axe';
 
 const update = async (wrapper) => {
   await act(async () => {
-    await new Promise((resolve) => setImmediate(resolve));
+    await setImmediate();
     wrapper.update();
   });
 };

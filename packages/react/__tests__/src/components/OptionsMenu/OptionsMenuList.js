@@ -41,10 +41,7 @@ test('handles up/down keydowns', () => {
   );
   expect(wrapper.state('itemIndex')).toBe(0);
 
-  const li = wrapper
-    .find('li')
-    .at(0)
-    .getDOMNode();
+  const li = wrapper.find('li').at(0).getDOMNode();
 
   li.dispatchEvent(
     new KeyboardEvent('keydown', { which: down, bubbles: true })
@@ -113,10 +110,7 @@ test('handles enter / space keydowns', () => {
       <li>option 2</li>
     </OptionsMenuList>
   );
-  const element = wrapper
-    .find('li')
-    .at(0)
-    .getDOMNode();
+  const element = wrapper.find('li').at(0).getDOMNode();
   element.addEventListener('click', clickHandler);
   wrapper
     .find('li')
@@ -160,7 +154,7 @@ test('fires onSelect when menu item is selected with space', () => {
   const itemNode = item.getDOMNode();
 
   // Synthetic events that call delegated events apparently don't bubble correctly in enzyme
-  itemNode.addEventListener('click', event => {
+  itemNode.addEventListener('click', (event) => {
     item.simulate('click', event);
   });
 
@@ -189,7 +183,7 @@ test('fires onSelect when menu item is selected with enter', () => {
   const itemNode = item.getDOMNode();
 
   // Synthetic events that call delegated events apparently don't bubble correctly in enzyme
-  itemNode.addEventListener('click', event => {
+  itemNode.addEventListener('click', (event) => {
     item.simulate('click', event);
   });
 
@@ -214,10 +208,7 @@ test('fires onClose when menu item is selected', () => {
     </OptionsMenuList>
   );
 
-  wrapper
-    .find('li')
-    .at(0)
-    .simulate('click');
+  wrapper.find('li').at(0).simulate('click');
 
   expect(onClose).toBeCalled();
 });
@@ -231,10 +222,7 @@ test('does not fire onClose when menu item is selected and default prevented', (
     </OptionsMenuList>
   );
 
-  wrapper
-    .find('li')
-    .at(0)
-    .simulate('click', { defaultPrevented: true });
+  wrapper.find('li').at(0).simulate('click', { defaultPrevented: true });
 
   expect(onClose).not.toBeCalled();
 });
@@ -248,10 +236,7 @@ test('does not fire onClose when menu item is selected and closeOnSelect is fals
     </OptionsMenuList>
   );
 
-  wrapper
-    .find('li')
-    .at(0)
-    .simulate('click');
+  wrapper.find('li').at(0).simulate('click');
 
   expect(onClose).not.toBeCalled();
 });
@@ -268,10 +253,7 @@ test('should click child links when clicking on list item', () => {
   );
 
   const item = wrapper.find('li').at(0);
-  wrapper
-    .find('a')
-    .getDOMNode()
-    .addEventListener('click', onClick);
+  wrapper.find('a').getDOMNode().addEventListener('click', onClick);
   item.simulate('click');
 
   expect(onClick).toBeCalledTimes(1);
@@ -289,13 +271,10 @@ test('should click child links with keypress events', () => {
   );
 
   const item = wrapper.find('li').at(0);
-  wrapper
-    .find('a')
-    .getDOMNode()
-    .addEventListener('click', onClick);
+  wrapper.find('a').getDOMNode().addEventListener('click', onClick);
   item
     .getDOMNode()
-    .addEventListener('click', event => item.simulate('click', event));
+    .addEventListener('click', (event) => item.simulate('click', event));
   item
     .getDOMNode()
     .dispatchEvent(
@@ -317,26 +296,20 @@ test('should passthrough classname to menuitem', () => {
 });
 
 test('handles updates to `itemIndex` state', () => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   expect.assertions(1);
   const wrapper = mount(
     <OptionsMenuList {...defaultProps} show={true}>
       <li>option 1</li>
       <li>option 2</li>
-    </OptionsMenuList>
+    </OptionsMenuList>,
+    { attachTo: mountElement }
   );
   // focus the first item
-  wrapper
-    .find('li')
-    .at(0)
-    .getDOMNode()
-    .focus();
+  wrapper.find('li').at(0).getDOMNode().focus();
   wrapper.setState({ itemIndex: 1 });
-  expect(document.activeElement).toBe(
-    wrapper
-      .find('li')
-      .at(1)
-      .getDOMNode()
-  );
+  expect(document.activeElement).toBe(wrapper.find('li').at(1).getDOMNode());
 });
 
 test('should return no axe violations', async () => {

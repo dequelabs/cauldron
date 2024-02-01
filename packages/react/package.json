@@ -47,7 +47,7 @@
     "@testing-library/react": "11.1.2",
     "@types/classnames": "^2.2.10",
     "@types/enzyme-adapter-react-16": "^1.0.9",
-    "@types/jest": "^24.7.1",
+    "@types/jest": "^29.5.11",
     "@types/jest-axe": "^3.5.4",
     "@types/node": "^17.0.42",
     "@types/react": "^18.0.12",
@@ -60,8 +60,9 @@
     "concurrently": "^5.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "jest": "^24.7.1",
+    "jest": "^29.7.0",
     "jest-axe": "^8.0.0",
+    "jest-environment-jsdom": "^29.7.0",
     "nyc": "^15.0.1",
     "postcss-cli": "^7.1.1",
     "postcss-import": "^12.0.1",
@@ -70,6 +71,7 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.23.0",
     "sinon": "^10.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.0.0"
   },
   "repository": {
@@ -95,24 +97,5 @@
       "coverage",
       "test/**/*.js"
     ]
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>__tests__/setupTests.ts"
-    ],
-    "testMatch": [
-      "**/__tests__/src/**/*.js",
-      "**/__tests__/demo/**/*.js",
-      "**/src/components/**/*.test.tsx"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/__tests__/styleMock.js",
-      "react-syntax-highlighter/dist/esm/light": "<rootDir>/__tests__/reactSyntaxHighlighterMock.js",
-      "react-syntax-highlighter/dist/esm/languages/hljs/(.*)": "<rootDir>/__tests__/hljsMock.js",
-      "\\.svg$": "<rootDir>/__tests__/svgMock.js"
-    }
   }
 }

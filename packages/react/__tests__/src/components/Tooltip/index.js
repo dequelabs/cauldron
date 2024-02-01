@@ -1,17 +1,18 @@
 import React, { useRef } from 'react';
+import { setImmediate } from 'timers/promises';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import Tooltip, { TooltipHead, TooltipContent } from 'src/components/Tooltip';
 import axe from '../../../axe';
 
-const update = async wrapper => {
+const update = async (wrapper) => {
   await act(async () => {
-    await new Promise(resolve => setImmediate(resolve));
+    await setImmediate();
     wrapper.update();
   });
 };
 
-const sleep = (ms = 100) => new Promise(r => setTimeout(r, ms));
+const sleep = (ms = 100) => new Promise((r) => setTimeout(r, ms));
 
 // eslint-disable-next-line react/prop-types
 const Wrapper = ({ buttonProps = {}, tooltipProps = {} }) => {
@@ -59,10 +60,7 @@ test('should auto-generate id', async () => {
   const id = wrapper.find('.Tooltip').props().id;
   expect(id).toBeTruthy();
   expect(id).toEqual(
-    wrapper
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-describedby')
+    wrapper.find('button').getDOMNode().getAttribute('aria-describedby')
   );
 });
 
@@ -74,10 +72,7 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   await update(wrapper);
   expect(wrapper.find('.Tooltip').props().id).toEqual('tooltipid');
   expect(
-    wrapper
-      .find('button')
-      .getDOMNode()
-      .getAttribute('aria-describedby')
+    wrapper.find('button').getDOMNode().getAttribute('aria-describedby')
   ).toEqual('foo tooltipid');
 });
 
