@@ -2,13 +2,13 @@ import type { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>__tests__/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setupTests.ts'],
   testMatch: [
     '**/__tests__/src/**/*.js',
     '**/__tests__/demo/**/*.js',
     '**/src/components/**/*.test.tsx'
   ],
-  collectCoverageFrom: ['src/**/*.{ts.tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/components/**/*.{tsx,ts}'],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__tests__/styleMock.js',
     'react-syntax-highlighter/dist/esm/light':
