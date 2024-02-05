@@ -26,7 +26,7 @@
 
 Cauldron is Deque's design system / pattern library for building accessible ui as part of our products as Deque. Cauldron consists of several parts, [react](./packages/react), [styles](./packages/styles), and [documentation](./docs).
 
-As Cauldron is first and foremost a design system for building products at Deque, this means we won't necessarily have 1:1 parity with other design systems. Patterns that don't exist in Deque product ui won't be added as a component within the design system.
+As Cauldron is first and foremost a design system for building products at Deque, this means we won't necessarily have 1:1 parity with other design systems. Patterns that don't exist in Deque product UI won't be added as a component within the design system.
 
 ### Discussing proprietary features
 
@@ -42,7 +42,7 @@ General [component guidelines](https://cauldron.dequelabs.com/component-guidelin
 
 - Use well-structured semantic markup over `aria-*` attributes
 - Don't specify units for zero values, e.g. `padding: 0px;`, instead you can omit the unit, e.g. `padding: 0;`
-- Avoid using css prefixes (e.g. `-webkit` or `-moz`) unless absolutely necessary. [autoprefixer](https://github.com/postcss/autoprefixer) should automatically handle prefixes.
+- Avoid using CSS prefixes (e.g. `-webkit` or `-moz`) unless absolutely necessary. [autoprefixer](https://github.com/postcss/autoprefixer) should automatically handle prefixes.
 
 ### Tools Used
 
@@ -63,9 +63,9 @@ General [component guidelines](https://cauldron.dequelabs.com/component-guidelin
 ```
 ├─ packages/react/src/components
 │  └─ Combobox/
-│     ├─ index.ts           # exports the component and sub components
+│     ├─ index.ts           # exports the component and subcomponents
 │     ├─ Combobox.tsx       # main component file
-│     ├─ ComboboxItem.tsx   # sub component file
+│     ├─ ComboboxItem.tsx   # subcomponent file
 │     └─ Combobox.test.tsx  # unit/behavior tests
 └─ packages/react/styles
    ├─ index.css             # global styles export
@@ -81,8 +81,8 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 - Does the component cover all of the necessary variations within scope? (i.e. default, primary, secondary)
 - Does the component cover all of the necessary interactive states? (i.e. active, focus, expanded, disabled)
 - Does the component account for different layouts within different viewports? (i.e. responsiveness, media queries, overflow)
-- Does the component api match the current design patterns of components? (i.e. props, events, callbacks)
-- Does the component only implement features that fall within our browser support, or implement these features via progressive enhancement? (TODO: determine browser support)
+- Does the component API match the current design patterns of components? (i.e. props, events, callbacks)
+- Does the component only implement features that fall within our browser support or implement these features via progressive enhancement? (TODO: determine browser support)
 - Does the component have appropriate documentation?
 - Does the component support customizing text labels or content for translations?
 - Does the component need usability testing?
@@ -150,27 +150,27 @@ Cauldron aims to avoid shipping [breaking changes](#breaking-changes) on a regul
 
 ### Pull Requests
 
-We aim to review pull requests within a day or two. If your changes are time sensitive, feel free to request an expedited review on GitHub or reach out in the private `#cauldron` slack channel.
+We aim to review pull requests within a day or two. If your changes are time-sensitive, feel free to request an expedited review on GitHub or reach out in the private `#cauldron` slack channel.
 
 Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
 
 #### Previewing Changes
 
-Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened, and will be deleted when closed.
+Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened and will be deleted when closed.
 
 ### Testing Strategies
 
-Testing methodology should account for both testing the interface of a component as input/output testing and with how an end-user would interact with the component. Ideally, implementation details are avoided unless necessary. Examples below of things to consider when writing tests for a component:
+The testing methodology should account for both testing the interface of a component as input/output testing and how an end-user would interact with the component. Ideally, implementation details are avoided unless necessary. Examples below of things to consider when writing tests for a component:
 
 - Including all variants in tests (i.e. default, primary, secondary)
 - Including different interactive states (i.e. focus, expanded, disabled)
-- Including testing different behaviors for functionality related to different layouts (i.e. i.e. responsiveness, media queries, overflow)
+- Including testing different behaviors for functionality related to different layouts (i.e. responsiveness, media queries, overflow)
 - Component api and events (i.e. callbacks, click, keyboard events)
 - Running axe against various variants and states
 
 ### Unit Tests
 
-Cauldron uses [Jest](https://jestjs.io/) as its test runner to run unit tests along with [enzymejs](https://enzymejs.github.io/enzyme) (deprecated) and [react testing library](https://testing-library.com/docs/react-testing-library/intro/). We are currently in the process of migrating tests away from enzyme to react testing library so no new tests should be using enzyme.
+Cauldron uses [Jest](https://jestjs.io/) as its test runner to run unit tests along with [Enzyme](https://enzymejs.github.io/enzyme) (deprecated) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). We are currently in the process of migrating tests away from Enzyme to React Testing Library so no new tests should be using Enzyme.
 
 ### Accessibility Testing
 
