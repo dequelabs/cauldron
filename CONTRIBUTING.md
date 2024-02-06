@@ -166,7 +166,7 @@ The testing methodology should account for both testing the interface of a compo
 - Including all variants in tests (i.e. default, primary, secondary)
 - Including different interactive states (i.e. focus, expanded, disabled)
 - Including testing different behaviors for functionality related to different layouts (i.e. responsiveness, media queries, overflow)
-- Component api and events (i.e. callbacks, click, keyboard events)
+- Component api and events (i.e. callbacks, click / keyboard events)
 - Running axe against various variants and states
 
 ### Unit Tests
