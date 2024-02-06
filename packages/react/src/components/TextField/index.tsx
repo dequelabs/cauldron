@@ -13,7 +13,7 @@ export interface TextFieldProps
     value: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  fieldRef: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
+  fieldRef?: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
   requiredText?: string;
   multiline?: boolean;
 }
@@ -72,6 +72,7 @@ export default class TextField extends React.Component<
       requiredText,
       multiline,
       'aria-describedby': ariaDescribedby,
+      className,
       ...other
     } = this.props;
     // typescript can't infer the type so it's complaining about
@@ -99,7 +100,7 @@ export default class TextField extends React.Component<
           )}
         </label>
         <Field
-          className={classNames({
+          className={classNames(className, {
             'Field__text-input': !multiline,
             Field__textarea: multiline,
             'Field--has-error': error
