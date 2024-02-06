@@ -82,7 +82,8 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 - Does the component cover all of the necessary interactive states? (i.e. active, focus, expanded, disabled)
 - Does the component account for different layouts within different viewports? (i.e. responsiveness, media queries, overflow)
 - Does the component API match the current design patterns of components? (i.e. props, events, callbacks)
-- Does the component only implement features that fall within our browser support or implement these features via progressive enhancement? (TODO: determine browser support)
+- Does the component only implement features that fall within our browser support or implement these features via progressive enhancement?
+- Does the component support both light and dark themes?
 - Does the component have appropriate documentation?
 - Does the component support customizing text labels or content for translations?
 - Does the component need usability testing?
