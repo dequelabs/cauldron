@@ -139,6 +139,18 @@ test('should support name prop', () => {
   });
 });
 
+test('should support name prop with multiline', () => {
+  render(
+    <form data-testid="form">
+      <TextField label="text field" name="text" value="bananas" multiline />
+    </form>
+  );
+  const form = screen.getByTestId('form');
+  expect(form).toHaveFormValues({
+    text: 'bananas'
+  });
+});
+
 test('should update input value when uncontrolled', async () => {
   const user = userEvent.setup();
   const input = renderTextField();
