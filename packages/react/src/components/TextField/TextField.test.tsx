@@ -127,6 +127,18 @@ test('should support className prop', () => {
   );
 });
 
+test('should support name prop', () => {
+  render(
+    <form>
+      <TextField label="text field" name="text" value="bananas" />
+    </form>
+  );
+  const form = screen.getByRole('form');
+  expect(form).toHaveFormValues({
+    text: 'bananas'
+  });
+});
+
 test('should update input value when uncontrolled', async () => {
   const user = userEvent.setup();
   const input = renderTextField();
