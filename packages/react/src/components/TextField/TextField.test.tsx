@@ -129,11 +129,11 @@ test('should support className prop', () => {
 
 test('should support name prop', () => {
   render(
-    <form>
+    <form data-test-id="form">
       <TextField label="text field" name="text" value="bananas" />
     </form>
   );
-  const form = screen.getByRole('form');
+  const form = screen.getByTestId('form');
   expect(form).toHaveFormValues({
     text: 'bananas'
   });
