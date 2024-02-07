@@ -119,3 +119,42 @@ test('should support className prop', () => {
     'banana'
   );
 });
+
+test('should have no axe violations with textfield', async () => {
+  const input = renderTextField();
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with multiline textfield', async () => {
+  const input = renderTextField({ multiline: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with required textfield', async () => {
+  const input = renderTextField({ required: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with required multiline textfield', async () => {
+  const input = renderTextField({ multiline: true, required: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when textfield has errors', async () => {
+  const input = renderTextField({ error: 'this field has an error' });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when multiline textfield has errors', async () => {
+  const input = renderTextField({
+    error: 'this field has an error',
+    multiline: true
+  });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
