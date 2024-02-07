@@ -22,10 +22,11 @@ const renderTextField = ({
 };
 
 test('should render textfield', () => {
-  const input = renderTextField();
+  const input = renderTextField({ label: 'this is a text field' });
   expect(input).toHaveValue('');
   expect(input).toHaveDisplayValue('');
   expect(input.tagName).toBe('INPUT');
+  expect(screen.queryByText('this is a text field')).toBeInTheDocument();
 });
 
 test('should render textfield with default value', () => {
@@ -61,10 +62,14 @@ test('should render error textfield', () => {
 });
 
 test('should render multiline textfield', () => {
-  const input = renderTextField({ multiline: true });
+  const input = renderTextField({
+    label: 'this is a textarea field',
+    multiline: true
+  });
   expect(input).toHaveValue('');
   expect(input).toHaveDisplayValue('');
   expect(input.tagName).toBe('TEXTAREA');
+  expect(screen.queryByText('this is a textarea field')).toBeInTheDocument();
 });
 
 test('should render multiline textfield with default value', () => {
