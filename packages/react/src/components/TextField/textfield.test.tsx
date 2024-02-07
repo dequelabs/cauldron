@@ -25,6 +25,7 @@ test('should render textfield', () => {
   const input = renderTextField();
   expect(input).toHaveValue('');
   expect(input).toHaveDisplayValue('');
+  expect(input.tagName).toBe('INPUT');
 });
 
 test('should render textfield with default value', () => {
@@ -63,6 +64,7 @@ test('should render multiline textfield', () => {
   const input = renderTextField({ multiline: true });
   expect(input).toHaveValue('');
   expect(input).toHaveDisplayValue('');
+  expect(input.tagName).toBe('TEXTAREA');
 });
 
 test('should render multiline textfield with default value', () => {
