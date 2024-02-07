@@ -127,7 +127,10 @@ export default class TextField extends React.Component<
 
   onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (this.props.onChange) {
-      this.props.onChange(this.input?.value || '', e);
+      this.props.onChange(
+        this.input?.value || /* istanbul ignore next: default value */ '',
+        e
+      );
     }
 
     if (typeof this.props.value !== 'undefined') {

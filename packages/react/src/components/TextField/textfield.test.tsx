@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
-import { render, screen, fireEvent, createEvent } from '@testing-library/react';
-import { within } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
 import TextField from './';
@@ -120,6 +120,64 @@ test('should support className prop', () => {
     'Field__text-input',
     'banana'
   );
+});
+
+test('should update input value when uncontrolled', async () => {
+  const user = userEvent.setup();
+  const input = renderTextField();
+
+  await user.type(input, 'hello world');
+  expect(input).toHaveValue('hello world');
+  expect(input).toHaveDisplayValue('hello world');
+});
+
+test('should not update input value when controlled', async () => {
+  const user = userEvent.setup();
+  const input = renderTextField({ value: 'bananas' });
+
+  await user.type(input, 'hello world');
+  expect(input).toHaveValue('bananas');
+  expect(input).toHaveDisplayValue('bananas');
+});
+
+test('should update multiline input value when uncontrolled', async () => {
+  const user = userEvent.setup();
+  const input = renderTextField({ multiline: true });
+
+  await user.type(input, 'hello world');
+  expect(input).toHaveValue('hello world');
+  expect(input).toHaveDisplayValue('hello world');
+});
+
+test('should not update multiline input value when controlled', async () => {
+  const user = userEvent.setup();
+  const input = renderTextField({ value: 'bananas', multiline: true });
+
+  await user.type(input, 'hello world');
+  expect(input).toHaveValue('bananas');
+  expect(input).toHaveDisplayValue('bananas');
+});
+
+test('should call onChange with input', async () => {
+  const user = userEvent.setup();
+  const onChange = spy();
+  const input = renderTextField({ onChange });
+
+  expect(onChange.notCalled).toBeTruthy();
+  await user.type(input, 'hello world');
+  expect(onChange.callCount).toEqual('hello world'.length);
+  expect(onChange.lastCall.firstArg).toEqual('hello world');
+});
+
+test('should call onChange with multiline input', async () => {
+  const user = userEvent.setup();
+  const onChange = spy();
+  const input = renderTextField({ onChange, multiline: true });
+
+  expect(onChange.notCalled).toBeTruthy();
+  await user.type(input, 'hello world');
+  expect(onChange.callCount).toEqual('hello world'.length);
+  expect(onChange.lastCall.firstArg).toEqual('hello world');
 });
 
 test('should have no axe violations with textfield', async () => {
