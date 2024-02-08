@@ -18,7 +18,9 @@ const renderCheckbox = ({
 }: CheckboxProps = {}): HTMLInputElement => {
   render(<Checkbox id="checkbox-id" label={label || 'checkbox'} {...props} />);
   // no individual assertions needed, as this should throw if the element does not exist
-  return screen.getByRole('checkbox', { name: label as string });
+  return screen.getByRole('checkbox', {
+    name: label as string
+  }) as HTMLInputElement;
 };
 
 test('should render unchecked checkbox', () => {
