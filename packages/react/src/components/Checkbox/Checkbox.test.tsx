@@ -54,9 +54,72 @@ test('should render error checkbox', () => {
   ).toBeInTheDocument();
 });
 
+test('should toggle checkbox correctly', async () => {
+  const user = userEvent.setup();
+  const input = renderCheckbox();
+  const checkboxIcon = input.parentElement!.querySelector(
+    '.Checkbox__overlay'
+  ) as HTMLElement;
+  expect(checkboxIcon).toHaveClass('Icon--checkbox-unchecked');
+  expect(checkboxIcon).not.toHaveClass('Icon--checkbox-checked');
+  expect(input).not.toBeChecked();
+
+  await user.click(checkboxIcon);
+  expect(checkboxIcon).not.toHaveClass('Icon--checkbox-unchecked');
+  expect(checkboxIcon).toHaveClass('Icon--checkbox-checked');
+});
+
+test('should handle focus correctly', () => {
+  const onFocus = spy();
+  const input = renderCheckbox({ onFocus });
+  const checkboxIcon = input.parentElement!.querySelector(
+    '.Checkbox__overlay'
+  ) as HTMLElement;
+  expect(checkboxIcon).not.toHaveClass('.Checkbox__overlay--focused');
+  expect(onFocus.notCalled).toBeTruthy();
+
+  input.focus();
+  expect(checkboxIcon).toHaveClass('Checkbox__overlay--focused');
+  expect(onFocus.calledOnce).toBeTruthy();
+});
+
+test('should handle blur correctly', () => {
+  const onBlur = spy();
+  const input = renderCheckbox({ onBlur, checked: true });
+  const checkboxIcon = input.parentElement!.querySelector(
+    '.Checkbox__overlay'
+  ) as HTMLElement;
+  expect(checkboxIcon).not.toHaveClass('.Checkbox__overlay--focused');
+  expect(onBlur.notCalled).toBeTruthy();
+
+  input.focus();
+  input.blur();
+  expect(checkboxIcon).not.toHaveClass('Checkbox__overlay--focused');
+  expect(onBlur.calledOnce).toBeTruthy();
+});
+
+test('should handle onChange correctly', async () => {
+  const user = userEvent.setup();
+  const onChange = spy();
+  const input = renderCheckbox({ onChange });
+
+  expect(onChange.notCalled).toBeTruthy();
+  await user.click(input);
+  expect(onChange.calledOnce).toBeTruthy();
+});
+
 test('should support ref prop', () => {
   const ref = createRef<HTMLInputElement>();
   render(<Checkbox id="id" label="checkbox" ref={ref} />);
+  expect(ref.current).toBeInstanceOf(HTMLInputElement);
+  expect(ref.current).toEqual(
+    screen.queryByRole('checkbox', { name: 'checkbox' })
+  );
+});
+
+test('should support checkboxRef prop', () => {
+  const ref = createRef<HTMLInputElement>();
+  render(<Checkbox id="id" label="checkbox" checkboxRef={ref} />);
   expect(ref.current).toBeInstanceOf(HTMLInputElement);
   expect(ref.current).toEqual(
     screen.queryByRole('checkbox', { name: 'checkbox' })
@@ -105,6 +168,12 @@ test('should have no axe violations with unchecked checkbox', async () => {
 
 test('should have no axe violations with checked checkbox', async () => {
   const input = renderCheckbox({ checked: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with disabled checkbox', async () => {
+  const input = renderCheckbox({ disabled: true });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });
