@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import { render, screen, fireEvent, createEvent } from '@testing-library/react';
 import { within } from '@testing-library/dom';
 import { spy } from 'sinon';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
 import Combobox from './Combobox';
 import ComboboxGroup from './ComboboxGroup';
 import ComboboxOption from './ComboboxOption';
