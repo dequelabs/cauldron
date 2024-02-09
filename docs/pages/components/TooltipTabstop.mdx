@@ -1,0 +1,92 @@
+---
+title: TooltipTabstop
+description: A keyboard-accesible tooltip for non-interactive elements.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TooltipTabstop/index.tsx
+---
+
+import { TooltipTabstop, Icon } from '@deque/cauldron-react'
+
+```js
+import { TooltipTabstop } from '@deque/cauldron-react'
+```
+
+This component allows for a keyboard user to access additional information or descriptions for a non-interactive element. Some examples of this would be a help icon that provides additional context for a particular feature, or a progress item that provides numeric steps with additional contextual information about each step.
+
+<Note>
+  Be sure to always include an accessible name if rendering something visual that does not have any text content, like an image or an icon - or else the underlying button will be inaccessible to users using assistive technology (AT).
+</Note>
+
+## Examples
+
+### Help Icon
+
+```jsx example
+<TooltipTabstop
+  tooltip={`Here's some additional things that you should know about this thing.`}
+>
+  <Icon type="question-circle" label="Additional Help"/>
+</TooltipTabstop>
+```
+
+### Progress Steps
+
+```jsx example
+<ol className="ExampleProgress">
+  <li>
+    <TooltipTabstop tooltip={`Step 1: Current`}>
+      1
+    </TooltipTabstop>
+  </li>
+  <li>
+    <TooltipTabstop tooltip={`Step 2: Future`}>
+      2
+    </TooltipTabstop>
+  </li>
+  <li>
+    <TooltipTabstop tooltip={`Step 3: Future`}>
+      3
+    </TooltipTabstop>
+  </li>
+</ol>
+```
+
+## Props
+
+<ComponentProps
+  children={{ required: true }}
+  props={[
+    {
+      name: 'tooltip',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Child content of the tooltip component.',
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)',
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      description: 'The position of the tooltip relative to its target element.',
+      defaultValue: 'auto'
+    },
+    {
+      name: 'variant',
+      type: 'string',
+      description: 'The style of tooltip to display.',
+      defaultValue: 'text'
+    },
+    {
+      name: 'portal',
+      type: ['Ref', 'HTMLElement'],
+      description: 'The parent element to place the tooltip in.',
+      defaultValue: 'document.body'
+    }
+  ]}
+/>
+
+## Related Components
+
+* [Tooltip](./Tooltip)

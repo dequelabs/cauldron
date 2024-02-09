@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { createRef } from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import Select from 'src/components/Select';
@@ -29,10 +29,9 @@ const withCustomOptions = (otherProps = {}) => {
 test('renders the expected UI', () => {
   const wrapper = withCustomOptions();
 
-  expect(wrapper.find('.Field__select--label')).toBeTruthy();
-  expect(wrapper.find('.Field__select--required')).toBeTruthy();
-  expect(wrapper.find('.Field__select')).toBeTruthy();
-  expect(wrapper.find('.Field__option')).toBeTruthy();
+  expect(wrapper.find('.Field__label').text()).toBe(defaultProps.name);
+  expect(wrapper.find('.Field__select').exists()).toBe(true);
+  expect(wrapper.find('.Field__option').length).toBe(4);
   expect(wrapper.find('.Field__required-text').exists()).toBe(false);
   expect(wrapper.find('.Error').exists()).toBe(false);
 });
@@ -56,32 +55,19 @@ test('sets option attributes properly', () => {
 });
 
 test('passes ref properly', () => {
-  const TestElement = () => {
-    const selectRef = useRef(null);
-    return (
-      <>
-        <Select
-          {...defaultProps}
-          id="test-id"
-          ref={selectRef}
-          defaultValue="a"
-          options={[{ key: '1', value: 'a' }]}
-        />
-        <button
-          id="test-button"
-          onClick={() => {
-            selectRef.current.focus();
-          }}
-        >
-          Test
-        </button>
-      </>
-    );
-  };
+  const ref = createRef();
+  mount(
+    <Select
+      {...defaultProps}
+      id="test-id"
+      ref={ref}
+      defaultValue="a"
+      options={[{ key: '1', value: 'a' }]}
+    />
+  );
 
-  const mountedElement = mount(<TestElement />);
-  mountedElement.find('#test-button').simulate('click');
-  expect(document.activeElement.id).toBe('test-id');
+  expect(ref.current instanceof HTMLSelectElement).toBeTruthy();
+  expect(ref.current.getAttribute('id')).toEqual('test-id');
 });
 
 test('passes children properly', () => {
@@ -212,4 +198,9 @@ test('fires onChange when change occurs', () => {
 
   select.find('select').simulate('change');
   expect(onChange.called).toBe(true);
+});
+
+test('renders a ReactNode as a label', () => {
+  const wrapper = withCustomOptions({ label: <span>Foo</span> });
+  expect(wrapper.find('.Field__label').text()).toBe('Foo');
 });

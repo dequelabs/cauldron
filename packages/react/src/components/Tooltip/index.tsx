@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
@@ -11,6 +10,7 @@ const TIP_HIDE_DELAY = 100;
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  className?: string;
   target: React.RefObject<HTMLElement> | HTMLElement;
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby';
@@ -66,7 +66,10 @@ export default function Tooltip({
       placement: initialPlacement,
       modifiers: [
         { name: 'preventOverflow', options: { padding: 8 } },
-        { name: 'flip' },
+        {
+          name: 'flip',
+          options: { fallbackPlacements: ['left', 'right', 'top', 'bottom'] }
+        },
         { name: 'offset', options: { offset: [0, 8] } },
         { name: 'arrow', options: { padding: 5, element: arrowElement } }
       ]
@@ -210,7 +213,8 @@ export default function Tooltip({
               {children}
             </div>,
             (portal && 'current' in portal ? portal.current : portal) ||
-              document.body
+              // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+              document?.body
           )
         : null}
     </>
@@ -219,26 +223,21 @@ export default function Tooltip({
 
 Tooltip.displayName = 'Tooltip';
 
-Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
-  target: PropTypes.any.isRequired,
-  association: PropTypes.oneOf(['aria-labelledby', 'aria-describedby']),
-  show: PropTypes.bool,
-  placement: PropTypes.string,
-  variant: PropTypes.string,
-  portal: PropTypes.any
-};
+interface TooltipHeadProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
 
-export const TooltipHead = ({
-  className,
-  ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
+export const TooltipHead = ({ className, ...other }: TooltipHeadProps) => (
   <div className={classnames('TooltipHead', className)} {...other} />
 );
+
+interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
 
 export const TooltipContent = ({
   className,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
+}: TooltipContentProps) => (
   <div className={classnames('TooltipContent', className)} {...other} />
 );

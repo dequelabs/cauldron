@@ -1,0 +1,42 @@
+---
+title: Scrim
+description: A component to draw attention to a section of the page and overlay the viewport.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Scrim/index.tsx
+---
+
+import { Scrim, Button } from '@deque/cauldron-react'
+
+```js
+import { Scrim } from '@deque/cauldron-react'
+```
+
+A scrim is a component that is a semi-transparent overlay over the viewport to provide emphasis, focus, or draw attention to certain information. This is most commonly used as a backdrop for dialogs, modals, and other elements that need primary focus on the page.
+
+<Note>
+  It is recommended that a focus trap is used to contain keyboard focus within the element that has primary focus. [Alert](./Alert) and [Modal](./Modal) both use [react-focus-trap](https://www.npmjs.com/package/focus-trap-react) to manage focus. If `Scrim` is being used with other components, a focus trap may be needed to prevent certain keyboard accessibility issues.
+</Note>
+
+## Example
+
+```jsx example
+  <Scrim show />
+  <Button>Primary Button</Button>
+```
+
+## Props
+
+<ComponentProps
+  props={[
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'The visible state of the Scrim.',
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Alert](./Alert)
+- [Modal](./Modal)
+- [LoaderOverlay](./LoaderOverlay)

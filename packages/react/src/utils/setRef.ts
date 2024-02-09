@@ -1,5 +1,5 @@
 // used for components that need to access and set the ref
-export default function setRef<T>(ref: React.Ref<T>, element: T) {
+export default function setRef<T>(ref: React.Ref<T> | undefined, element: T) {
   if (!ref) return;
 
   if (typeof ref === 'function') {

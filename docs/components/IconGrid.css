@@ -1,0 +1,53 @@
+.IconGrid ul {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-auto-rows: 1fr;
+  list-style-type: none;
+  gap: var(--space-small);
+}
+
+.IconGrid li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-smallest);
+}
+
+.IconGrid .Icon {
+  align-self: auto;
+}
+
+.IconGrid__label {
+  font-size: var(--text-size-smallest);
+  margin-top: var(--space-half);
+}
+
+.IconGrid__NoResults {
+  text-align: center;
+}
+
+@media (max-width: 48rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(5, auto);
+  }
+}
+
+@media (max-width: 40rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+
+@media (max-width: 32rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media (max-width: 24rem) {
+  .IconGrid ul {
+    grid-template-columns: repeat(2, auto);
+  }
+}

@@ -10,7 +10,7 @@ test('passes classNames through', () => {
 
 test('supports linkRef', () => {
   let element;
-  mount(<Link linkRef={el => (element = el)} />);
+  mount(<Link linkRef={(el) => (element = el)} />);
   expect(element instanceof HTMLAnchorElement).toBe(true);
 });
 
@@ -28,6 +28,11 @@ test('handles variant="button"', () => {
 test('handles variant="button-secondary"', () => {
   const link = shallow(<Link variant="button-secondary">hi</Link>);
   expect(link.is('.Button--secondary')).toBe(true);
+});
+
+test('handles thin', () => {
+  const link = shallow(<Link thin>hi</Link>);
+  expect(link.is('.Button--thin')).toBe(true);
 });
 
 test('should return no axe violations', async () => {

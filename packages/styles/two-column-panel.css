@@ -33,13 +33,15 @@
 }
 
 .TwoColumnPanel__Header {
-  padding: 0 var(--space-small);
+  /* The -2px is to account for the borders that are outside of the element and will make it line up with the left panel when there's only one line of text */
+  padding: calc(var(--space-small) - 2px);
   border-bottom: 1px solid var(--two-column-panel-border-color);
-  height: var(--two-column-panel-header-height);
-  line-height: var(--two-column-panel-header-height);
+  min-height: var(--two-column-panel-header-height);
   font-weight: 500;
   color: var(--two-column-panel-header-text-color);
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .TwoColumnPanel__Left {
@@ -176,12 +178,16 @@
   margin-bottom: 0;
 }
 
+.TwoColumnPanel__ButtonToggle {
+  display: flex;
+}
+
 .TwoColumnPanel__ButtonToggle button,
 .TwoColumnPanel__Close button {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid var(--two-column-panel-border-color);
-  height: var(--two-column-panel-header-height);
+  min-height: var(--two-column-panel-header-height);
   width: var(--two-column-panel-header-height);
 }
 
@@ -254,7 +260,12 @@
 
   .TwoColumnPanel--hide .TwoColumnPanel__Left,
   .TwoColumnPanel--show .TwoColumnPanel__Left {
-    margin-left: calc(var(--two-column-panel-left-column-width) * -1);
+    max-width: 100%;
+    /* This will constrain the component to the max-width of its container, as well as adjusting the offset margin to the max negative value to prevent incorrect offset when the max-width is less than the column width. */
+    margin-left: max(
+      calc(var(--two-column-panel-left-column-width) * -1),
+      calc(100% * -1)
+    );
     animation: none;
     opacity: 1;
   }

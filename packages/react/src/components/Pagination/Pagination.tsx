@@ -1,32 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Placement } from '@popperjs/core';
 import IconButton from '../IconButton';
-import TooltipTabstop from '../TooltipTabstop';
-import Icon from '../Icon';
+import { ContentNode } from '../../types';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
-  statusLabel?: React.ReactNode;
-  firstPageLabel?: string;
-  previousPageLabel?: string;
-  nextPageLabel?: string;
-  lastPageLabel?: string;
-  onNextPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onPreviousPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onFirstPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
-  onLastPageClick?: (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => void;
+  statusLabel?: ContentNode;
+  firstPageLabel?: ContentNode;
+  previousPageLabel?: ContentNode;
+  nextPageLabel?: ContentNode;
+  lastPageLabel?: ContentNode;
+  onNextPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onPreviousPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onFirstPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onLastPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   tooltipPlacement?: Placement;
   thin?: boolean;
   className?: string;
@@ -69,45 +59,23 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       >
         <ul>
           <li>
-            {isFirstPage ? (
-              <TooltipTabstop
-                className="IconButton"
-                hideElementOnHidden
-                association="aria-labelledby"
-                tooltip={firstPageLabel}
-                placement={tooltipPlacement}
-              >
-                <Icon type="chevron-double-left" />
-              </TooltipTabstop>
-            ) : (
-              <IconButton
-                icon="chevron-double-left"
-                tooltipPlacement={tooltipPlacement}
-                label={firstPageLabel}
-                onClick={onFirstPageClick}
-              />
-            )}
+            <IconButton
+              icon="chevron-double-left"
+              tooltipPlacement={tooltipPlacement}
+              label={firstPageLabel}
+              aria-disabled={isFirstPage}
+              onClick={isFirstPage ? undefined : onFirstPageClick}
+            />
           </li>
 
           <li>
-            {isFirstPage ? (
-              <TooltipTabstop
-                className="IconButton"
-                hideElementOnHidden
-                association="aria-labelledby"
-                tooltip={previousPageLabel}
-                placement={tooltipPlacement}
-              >
-                <Icon type="chevron-left" />
-              </TooltipTabstop>
-            ) : (
-              <IconButton
-                icon="chevron-left"
-                tooltipPlacement={tooltipPlacement}
-                label={previousPageLabel}
-                onClick={onPreviousPageClick}
-              />
-            )}
+            <IconButton
+              icon="chevron-left"
+              tooltipPlacement={tooltipPlacement}
+              label={previousPageLabel}
+              aria-disabled={isFirstPage}
+              onClick={isFirstPage ? undefined : onPreviousPageClick}
+            />
           </li>
 
           <li>
@@ -122,45 +90,23 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           </li>
 
           <li>
-            {isLastPage ? (
-              <TooltipTabstop
-                className="IconButton"
-                hideElementOnHidden
-                association="aria-labelledby"
-                tooltip={nextPageLabel}
-                placement={tooltipPlacement}
-              >
-                <Icon type="chevron-right" />
-              </TooltipTabstop>
-            ) : (
-              <IconButton
-                icon="chevron-right"
-                tooltipPlacement={tooltipPlacement}
-                label={nextPageLabel}
-                onClick={onNextPageClick}
-              />
-            )}
+            <IconButton
+              icon="chevron-right"
+              tooltipPlacement={tooltipPlacement}
+              label={nextPageLabel}
+              aria-disabled={isLastPage}
+              onClick={isLastPage ? undefined : onNextPageClick}
+            />
           </li>
 
           <li>
-            {isLastPage ? (
-              <TooltipTabstop
-                className="IconButton"
-                hideElementOnHidden
-                association="aria-labelledby"
-                tooltip={lastPageLabel}
-                placement={tooltipPlacement}
-              >
-                <Icon type="chevron-double-right" />
-              </TooltipTabstop>
-            ) : (
-              <IconButton
-                icon="chevron-double-right"
-                tooltipPlacement={tooltipPlacement}
-                label={lastPageLabel}
-                onClick={onLastPageClick}
-              />
-            )}
+            <IconButton
+              icon="chevron-double-right"
+              tooltipPlacement={tooltipPlacement}
+              label={lastPageLabel}
+              aria-disabled={isLastPage}
+              onClick={isLastPage ? undefined : onLastPageClick}
+            />
           </li>
         </ul>
       </div>
@@ -169,22 +115,5 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
 );
 
 Pagination.displayName = 'Pagination';
-Pagination.propTypes = {
-  totalItems: PropTypes.number.isRequired,
-  itemsPerPage: PropTypes.number,
-  currentPage: PropTypes.number,
-  statusLabel: PropTypes.element,
-  firstPageLabel: PropTypes.string,
-  previousPageLabel: PropTypes.string,
-  nextPageLabel: PropTypes.string,
-  lastPageLabel: PropTypes.string,
-  onNextPageClick: PropTypes.func,
-  onPreviousPageClick: PropTypes.func,
-  onFirstPageClick: PropTypes.func,
-  onLastPageClick: PropTypes.func,
-  // @ts-expect-error
-  tooltipPlacement: PropTypes.string,
-  className: PropTypes.string
-};
 
 export default Pagination;

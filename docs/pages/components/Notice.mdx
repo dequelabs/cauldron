@@ -1,0 +1,152 @@
+---
+title: Notice
+description: A notification banner - similar to a Toast, but allows for more flexible positioning and control.
+source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Notice/Notice.tsx
+---
+
+import { useState } from 'react';
+import { Notice, Icon, Button } from '@deque/cauldron-react';
+
+```js
+import { Notice } from '@deque/cauldron-react';
+```
+
+The `Notice` component is used to display a notification banner. It is similar to the [Toast](./Toast) component,
+but can be used in more flexible ways.
+
+For example, the `Notice` component can be used to display a notification banner within a [Panel](./Panel) component
+or anywhere else in the DOM without needing to be absolutely/statically positioned.
+
+## Examples
+
+There are two variants of the `Notice` component: `info` and `caution`. The `info` variant is used to display general
+information, while the `caution` variant is used to display a warning. Depending on the variant, the background color
+and icon will change (can be overwritten).
+
+### Info
+
+```jsx example
+<Notice type="info" title="Information">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Caution
+
+```jsx example
+<Notice type="caution" title="Caution">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Danger
+
+```jsx example
+<Notice type="danger" title="Danger!">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Thin
+
+Rendering a `Notice` that appears as a thin bar can be accomplished by only passing a `title` prop, or only passing a child.
+
+```jsx example
+<Notice
+  type="caution"
+  title="Caution, about to tread into dangerous territory"
+/>
+```
+
+### Notice Title
+
+```jsx example
+<Notice type="info" title={<h4>Information</h4>}>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Customizing Icon
+
+If you would like to customize the preset icon/type variants, the `icon` prop can be used with any [Cauldron
+Icon Type](/components/icon).
+
+```jsx example
+<Notice type="caution" title="Dynamo!" icon="bolt">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Dismissable
+
+```jsx example
+function DismissableNotice() {
+  const [dismissed, setDismissed] = useState(false);
+  const handleDismiss = () => {
+    setDismissed(true);
+    setTimeout(() => setDismissed(false), 2000);
+  };
+
+  return dismissed ? null : (
+    <Notice type="info" title="Information">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+        porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et
+        faucibus arcu condimentum sed.
+      </p>
+      <Button variant="link" onClick={handleDismiss}>
+        dismiss
+      </Button>
+    </Notice>
+  );
+}
+```
+
+## Props
+
+<ComponentProps
+  children="true"
+  props={[
+    {
+      name: 'type',
+      type: ['info', 'caution', 'danger'],
+      defaultValue: 'info',
+      description:
+        'Notice preset variant that sets both the background color and Icon type (optionally overwritable)'
+    },
+    {
+      name: 'title',
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description:
+        'Any valid React node (e.g., string, boolean, ReactElement, etc.)',
+      required: true
+    },
+    {
+      name: 'icon',
+      type: ['IconType', 'string'],
+      description:
+        'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons'
+    }
+  ]}
+  refType="HTMLDivElement"
+/>
+
+## Related Components
+
+- [Toast](./Toast)

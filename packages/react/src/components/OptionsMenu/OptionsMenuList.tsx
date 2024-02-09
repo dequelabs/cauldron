@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { OptionsMenuProps } from './OptionsMenu';
 import ClickOutsideListener from '../ClickOutsideListener';
 import classnames from 'classnames';
@@ -22,21 +21,10 @@ export default class OptionsMenuList extends React.Component<
 > {
   static defaultProps = {
     closeOnSelect: true,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onSelect: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onClose: () => {}
-  };
-
-  static propTypes = {
-    show: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    onClose: PropTypes.func,
-    className: PropTypes.string,
-    onSelect: PropTypes.func,
-    closeOnSelect: PropTypes.bool,
-    menuRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ])
   };
 
   private itemRefs: Array<HTMLLIElement | null>;
@@ -172,6 +160,7 @@ export default class OptionsMenuList extends React.Component<
 
     // Key event is being handled in componentDidMount
     /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
       <ClickOutsideListener
         onClickOutside={this.handleClickOutside}
@@ -182,11 +171,11 @@ export default class OptionsMenuList extends React.Component<
           {...other}
           className={classnames('OptionsMenu__list', className)}
           /* aria-expanded is not correct usage here, but the pattern library
-             currently styles the open state of the menu. based on this attribute */
+          currently styles the open state of the menu. based on this attribute */
           aria-expanded={show}
           role="menu"
           onClick={handleClick}
-          ref={el => {
+          ref={(el) => {
             this.menuRef = el;
             if (menuRef) {
               setRef(menuRef, el);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Main from '../Main';
 import Layout from '../Layout';
 
@@ -11,26 +10,11 @@ export interface WorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default class Workspace extends React.Component<WorkspaceProps> {
   static defaultProps = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     workspaceRef: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     layoutRef: () => {},
     noSideBar: false
-  };
-
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object,
-      PropTypes.string
-    ]).isRequired,
-    workspaceRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    layoutRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    noSideBar: PropTypes.bool
   };
 
   componentDidMount() {

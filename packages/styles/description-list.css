@@ -3,8 +3,8 @@
   --data-list-value-background-color: var(--white);
   --data-list-border-color: var(--gray-40);
   --data-list-text-color: var(--gray-90);
-  --data-list-value-text-color: var(--gray-80);
-  --data-list-space: 11px;
+  --data-list-value-text-color: var(--gray-90);
+  --data-list-space: var(--space-small);
   --data-list-value-width: 187px;
 }
 
@@ -22,7 +22,7 @@
   border-radius: 3px;
   border: 1px solid var(--data-list-border-color);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  margin-bottom: var(--space-small) 0;
+  margin-bottom: var(--space-small);
 }
 
 .DescriptionList.DescriptionList--collapsed {
@@ -44,7 +44,7 @@
 
 .DescriptionList--collapsed .DescriptionList__item {
   border: 0;
-  margin-bottom: var(--space-small);
+  margin-bottom: 12px;
   display: block;
   background-color: var(--data-list-value-background-color);
 }
@@ -77,6 +77,7 @@
   background-color: transparent;
   width: auto;
   border-right: none;
+  margin-bottom: 2px;
 }
 
 .DescriptionList__details {
@@ -84,6 +85,7 @@
   color: var(--data-list-value-text-color);
   background-color: var(--data-list-value-background-color);
   font-weight: var(--font-weight-normal);
+  word-break: break-word;
 }
 
 .DescriptionList__term,
@@ -105,4 +107,14 @@
 .cauldron--theme-dark .DescriptionList__details,
 .cauldron--theme-dark .DescriptionList--collapsed .DescriptionList__term {
   color: var(--white);
+}
+
+@media screen and (max-width: 32rem) {
+  .DescriptionList {
+    margin-bottom: 0;
+    box-shadow: none;
+    border-bottom: 0;
+    border-left: 1px solid var(--gray-40);
+    border-right: 1px solid var(--gray-40);
+  }
 }

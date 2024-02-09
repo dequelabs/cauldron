@@ -1,11 +1,37 @@
+:root {
+  --code-text-color: var(--accent-primary-active);
+  --code-border-color: var(--stroke-light);
+  --code-background-color: var(--background-light);
+}
+
+.cauldron--theme-dark {
+  --code-text-color: var(--accent-light);
+  --code-background-color: var(--accent-dark);
+  --code-border-color: var(--stroke-dark);
+}
+
 .Code.hljs {
   display: block;
+  padding: var(--space-smaller);
+  background: var(--code-background-color);
+  border: 1px solid var(--code-border-color);
+  border-radius: 3px;
+  color: var(--code-text-color);
+  word-break: break-all;
+}
+
+.Code--scrollable {
   overflow-x: auto;
-  padding: 0.5em;
-  background: var(--gray-20);
-  color: var(--gray-90);
-  border: 1px solid var(--gray-40);
-  color: var(--accent-primary-active);
+}
+
+.Code code {
+  /* important needed to override inline styles */
+  white-space: break-spaces !important;
+}
+
+.Code--scrollable code {
+  /* important needed to override inline styles */
+  white-space: pre !important;
 }
 
 .Code .hljs-comment {
@@ -14,7 +40,7 @@
 }
 
 .Code .hljs-quote {
-  color: #969896;
+  color: #666666;
   font-style: italic;
 }
 
@@ -74,11 +100,11 @@
 .Code .hljs-subst,
 .Code .hljs-meta,
 .Code .hljs-link {
-  color: #f99157;
+  color: #8a3500;
 }
 
 .Code .hljs-deletion {
-  color: #dc322f;
+  color: #c92e40;
 }
 
 .Code .hljs-formula {
@@ -90,11 +116,6 @@
 }
 
 /* Dark Theme */
-.cauldron--theme-dark .Code.hljs {
-  background: var(--accent-dark);
-  color: var(--accent-light);
-  border: 1px solid transparent;
-}
 
 .cauldron--theme-dark .Code .hljs-string {
   color: #8abeb7;
@@ -108,6 +129,14 @@
   color: #cc99cc;
 }
 
+.cauldron--theme-dark .Code .hljs-symbol,
+.cauldron--theme-dark .Code .hljs-bullet,
+.cauldron--theme-dark .Code .hljs-subst,
+.cauldron--theme-dark .Code .hljs-meta,
+.cauldron--theme-dark .Code .hljs-link {
+  color: #f99157;
+}
+
 .cauldron--theme-dark .Code .hljs-comment {
   color: #9f9f9f;
 }
@@ -119,6 +148,11 @@
 .Code .hljs-name,
 .Code .hljs-section {
   color: var(--accent-primary-active);
+}
+
+.cauldron--theme-dark .Code .hljs-name,
+.cauldron--theme-dark .Code .hljs-section {
+  color: #79a7d9;
 }
 
 .cauldron--theme-dark .Code .hljs-variable,

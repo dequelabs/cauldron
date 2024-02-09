@@ -1,0 +1,59 @@
+---
+title: Layout
+description: A wrapper component for content.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Layout/index.tsx
+---
+
+import { Layout } from '@deque/cauldron-react'
+
+## Usage
+
+<Note>
+  The `Workspace` component is a convenience wrapper around the `Layout` and `Main` components. It is important to note that the `Layout` component should not wrap the `TopBar` or `Sidebar` components.
+</Note>
+
+### With Workspace
+
+`Workspace` provides access to the `Layout` component with `layoutRef`
+
+```jsx
+export function AppExample() {
+  const layoutRef = useRef();
+  return (
+    <div class="App">
+      <TopBar>...</TopBar>
+      <Workspace layoutRef={layoutRef} />
+        <h1>Hello World!</h1>
+      </Workspace>
+    </div>
+  );
+}
+```
+
+### Advanced Usage
+
+For more flexible options, you can compose your own layout with `Main` and `Layout`:
+
+```jsx
+export function AppExample() {
+  return (
+    <div class="App">
+      <TopBar>...</TopBar>
+      <Layout>
+        <Main>
+          <h1>Hello World!</h1>
+        </Main>
+      </Layout>
+    </div>
+  );
+}
+```
+
+## Props
+<ComponentProps className={true} children={{ required: true }} props={[
+  {
+    name: 'layoutRef',
+    type: 'function',
+    description: 'Ref function for the Layout element'
+  }
+]} />

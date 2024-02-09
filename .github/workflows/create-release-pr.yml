@@ -1,0 +1,21 @@
+name: Create Release PR
+
+on: [workflow_dispatch]
+
+jobs:
+  create_release:
+    name: Create Release PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: yarn
+      - name: Release
+        run: yarn run release
+        env:
+          COMMIT_BODY_HEADER: ":robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md)) \n\n"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

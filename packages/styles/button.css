@@ -18,6 +18,8 @@
   --button-text-color-light: var(--white);
   --button-focus-ring-color: var(--focus-light);
   --button-thin-height: 23px;
+
+  --button-height: 36px;
 }
 
 .Button--primary,
@@ -31,8 +33,7 @@
   padding: 0 16px;
   position: relative;
   text-align: center;
-  text-transform: uppercase;
-  min-height: 36px;
+  min-height: var(--button-height);
   min-width: 100px;
   display: inline-grid;
   grid-auto-flow: column;
@@ -47,6 +48,7 @@
 
 button.Link {
   cursor: pointer;
+  font-size: inherit;
 }
 
 .Button--primary:focus,
@@ -88,13 +90,12 @@ button.Link {
 }
 
 .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--button-outline-color-primary);
+  box-shadow: 0 0 0 1px var(--button-outline-color-secondary);
 }
 
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
-.Button--error:focus:before,
-.Button--tag:focus:before {
+.Button--error:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
 
@@ -108,7 +109,7 @@ button.Link {
   background-color: var(--button-background-color-primary-disabled);
 }
 
-.Button--primary:active {
+.Button--primary:not([disabled]):not([aria-disabled='true']):active {
   background: var(--button-background-color-primary-active);
 }
 
@@ -124,7 +125,7 @@ button.Link {
   background-color: var(--button-background-color-secondary-disabled);
 }
 
-.Button--secondary:active {
+.Button--secondary:not([disabled]):not([aria-disabled='true']):active {
   background-color: var(--button-background-color-secondary-active);
 }
 
@@ -141,7 +142,7 @@ button.Link {
   background-color: var(--button-background-color-error-disabled);
 }
 
-.Button--error:active {
+.Button--error:not([disabled]):not([aria-disabled='true']):active {
   background-color: var(--button-background-color-error-active);
 }
 
@@ -186,7 +187,6 @@ button.Link {
   min-height: var(--button-thin-height);
   min-width: 100px;
   font-size: var(--text-size-smallest);
-  line-height: var(--text-size-smallest);
   padding: 0 16px;
 }
 
@@ -238,12 +238,15 @@ button.Link {
   color: var(--dark-workspace-color);
 }
 
-.cauldron--theme-dark .Button--primary:active,
-.cauldron--theme-dark .Button--secondary:active {
+.cauldron--theme-dark
+  .Button--primary:not([disabled]):not([aria-disabled='true']):active,
+.cauldron--theme-dark
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):active {
   color: var(--accent-medium);
 }
 
-.cauldron--theme-dark .Button--error:active {
+.cauldron--theme-dark
+  .Button--error:not([disabled]):not([aria-disabled='true']):active {
   background-color: #fea7a6;
   color: var(--accent-medium);
 }

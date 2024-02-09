@@ -1,0 +1,419 @@
+---
+title: Table
+description: A container for tabular data (information presented in a two-dimensional table comprised of rows and columns of cells containing data).
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Table/Table.tsx
+---
+
+import { useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableFooter
+} from '@deque/cauldron-react'
+
+```js
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableFooter
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+```jsx example
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">First Name</TableHeader>
+      <TableHeader scope="col">Last Name</TableHeader>
+      <TableHeader scope="col">Email</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Frank</TableCell>
+      <TableCell>Zappa</TableCell>
+      <TableCell>frank@zappa.io</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Duane</TableCell>
+      <TableCell>Allman</TableCell>
+      <TableCell>duane@almond.biz</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Yamandu</TableCell>
+      <TableCell>Costa</TableCell>
+      <TableCell>yamandu_costa@gmail.br</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jimmy</TableCell>
+      <TableCell>Herring</TableCell>
+      <TableCell>jamesHerring@hotmail.gov</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+<Note>
+  Table width by default is set to 100%. If a different max-width is desired, you can simply use your own CSS or `--table-width` to apply it.
+</Note>
+
+```jsx example
+<Table style={{ '--table-width': '75%' }}>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">First Name</TableHeader>
+      <TableHeader scope="col">Last Name</TableHeader>
+      <TableHeader scope="col">Email</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Frank</TableCell>
+      <TableCell>Zappa</TableCell>
+      <TableCell>frank@zappa.io</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Duane</TableCell>
+      <TableCell>Allman</TableCell>
+      <TableCell>duane@almond.biz</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Yamandu</TableCell>
+      <TableCell>Costa</TableCell>
+      <TableCell>yamandu_costa@gmail.br</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jimmy</TableCell>
+      <TableCell>Herring</TableCell>
+      <TableCell>jamesHerring@hotmail.gov</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### Bordered
+
+```jsx example
+<Table variant="border">
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">First Name</TableHeader>
+      <TableHeader scope="col">Last Name</TableHeader>
+      <TableHeader scope="col">Email</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Frank</TableCell>
+      <TableCell>Zappa</TableCell>
+      <TableCell>frank@zappa.io</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Duane</TableCell>
+      <TableCell>Allman</TableCell>
+      <TableCell>duane@almond.biz</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Yamandu</TableCell>
+      <TableCell>Costa</TableCell>
+      <TableCell>yamandu_costa@gmail.br</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jimmy</TableCell>
+      <TableCell>Herring</TableCell>
+      <TableCell>jamesHerring@hotmail.gov</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### Bordered with Footer
+
+```jsx example
+<Table variant="border">
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">First Name</TableHeader>
+      <TableHeader scope="col">Last Name</TableHeader>
+      <TableHeader scope="col">Email</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Frank</TableCell>
+      <TableCell>Zappa</TableCell>
+      <TableCell>frank@zappa.io</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Duane</TableCell>
+      <TableCell>Allman</TableCell>
+      <TableCell>duane@almond.biz</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Yamandu</TableCell>
+      <TableCell>Costa</TableCell>
+      <TableCell>yamandu_costa@gmail.br</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jimmy</TableCell>
+      <TableCell>Herring</TableCell>
+      <TableCell>jamesHerring@hotmail.gov</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell>This is a table footer.</TableCell>
+      <TableCell>It can be used to provide additional</TableCell>
+      <TableCell>information about the table.</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>
+```
+
+### Sortable
+
+export const tableData = [
+  {
+    first_name: 'Frank',
+    last_name: 'Zappa',
+    email: 'frank@zappa.io'
+  },
+  {
+    first_name: 'Duane',
+    last_name: 'Allman',
+    email: 'duane@almond.biz'
+  },
+  {
+    first_name: 'Yamandu',
+    last_name: 'Costa',
+    email: 'yamandu_costa@gmail.br'
+  },
+  {
+    first_name: 'Jimmy',
+    last_name: 'Herring',
+    email: 'jamesHerring@hotmail.gov'
+  }
+];
+
+```jsx example
+function SortableTableExample() {
+  const [sort, setSort] = useState([null, 'none']);
+  const [sortBy, sortDirection] = sort;
+
+  const comparator = data =>
+    data.sort((a, b) =>
+      (sortDirection === 'ascending' ? a[sortBy] : b[sortBy]).localeCompare(
+        sortDirection === 'ascending' ? b[sortBy] : a[sortBy]
+      )
+    );
+
+  const sortedData = sortBy ? comparator(tableData) : tableData;
+
+  const getCurrentSortDirection = column => column === sortBy ? sortDirection : 'none';
+  const getNextSortDirection = column =>
+    column === sortBy && sortDirection === 'ascending'
+      ? 'descending'
+      : 'ascending';
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col">First Name</TableHeader>
+          <TableHeader
+            scope="col"
+            sortDirection={getCurrentSortDirection('last_name')}
+            onSort={() => {
+              setSort(['last_name', getNextSortDirection('last_name')]);
+            }}
+          >
+            Last Name
+          </TableHeader>
+          <TableHeader
+            scope="col"
+            sortDirection={getCurrentSortDirection('email')}
+            onSort={() => {
+              setSort(['email', getNextSortDirection('email')]);
+            }}
+          >
+            Email
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {sortedData.map(contact => (
+          <TableRow>
+            <TableCell>{contact.first_name}</TableCell>
+            <TableCell>{contact.last_name}</TableCell>
+            <TableCell>{contact.email}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+<Note>
+  As a best practice, when a table has sorted columns an author should indicate which column is currently sorted by setting the sort direction for the active sorted column.
+</Note>
+
+### With Row Headings
+
+```jsx example
+<Table>
+  <TableBody>
+    <TableRow>
+      <TableHeader scope="row">City</TableHeader>
+      <TableCell>Budapest</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Country</TableHeader>
+      <TableCell>Hungary</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Planet</TableHeader>
+      <TableCell>Earth</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### With Row and Column Headings
+
+```jsx example
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableCell />
+      <TableHeader scope="col">Monday</TableHeader>
+      <TableHeader scope="col">Tuesday</TableHeader>
+      <TableHeader scope="col">Wednesday</TableHeader>
+      <TableHeader scope="col">Thursday</TableHeader>
+      <TableHeader scope="col">Friday</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableHeader scope="row">Ends with Day</TableHeader>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Middle of Week</TableHeader>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row">Next to Weekend</TableHeader>
+      <TableCell>Yes</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Props
+
+### Table
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'variant',
+      type: 'bordered',
+      description: 'Use the bordered variant of Table'
+    }
+  ]}
+/>
+
+### TableHeader
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'sortDirection',
+      type: 'string',
+      description: 'The directions of the sorting, including `ascending`, `descending`, and `none`. They match the values of `aria-sort`.',
+      defaultValue: 'none'
+    },
+    {
+      name: 'sortAscendingAnnouncement',
+      type: 'string',
+      description: 'The message read to screen readers when the header changes to ascending.',
+      defaultValue: 'sorted ascending'
+    },
+    {
+      name: 'sortDescendingAnnouncement',
+      type: 'string',
+      description: 'The message read to screen readers when the header changes to descending.',
+      defaultValue: 'sorted ascending'
+    },
+    {
+      name: 'onSort',
+      type: 'function',
+      description: 'The function that the implementer passes in to control the change of sort direction.',
+      defaultValue: 'sorted ascending'
+    }
+  ]}
+/>
+
+### TableHead
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### TableBody
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### TableFooter
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### TableRow
+
+<ComponentProps
+  children={true}
+  className={true}
+/>
+
+### TableCell
+
+<ComponentProps
+  children={true}
+  className={true}
+/>

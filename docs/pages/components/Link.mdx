@@ -1,0 +1,84 @@
+---
+title: Link
+description: An interactive component that creates a hyperlink to other web pages, files, email addresses, locations on the same page, etc.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Link/index.tsx
+---
+
+import { Link, Button } from '@deque/cauldron-react';
+
+```js
+import { Link } from '@deque/cauldron-react';
+```
+
+## Examples
+
+### Link
+
+The default variant for the `Link` component.
+
+```jsx example
+<Link href="#">I am a link</Link>
+```
+
+### Button
+
+When you need a semantic link with the visual appearance of a button. A `Link` component should use the `button` variant for a page's primary action(s).
+
+```jsx example
+<Link href="#" variant="button">
+  I am a link that looks like a primary button
+</Link>
+```
+
+### Button (secondary)
+
+When you need a semantic link with the visual appearance of a secondary button. A `Link` component should use the `button-secondary` variant for a page's non-primary action(s).
+
+An example of a secondary button is a "Cancel" button next to a "Submit" button on a form.
+
+```jsx example
+<Link href="#" variant="button-secondary">
+  I am a link that looks like a secondary button
+</Link>
+```
+
+### Button (with thin modifier)
+
+A link with visual styling applied to make it look like a button with reduced height.
+
+```jsx example
+<Link href="#" variant="button" thin>
+  I am a link that looks like a thin primary button
+</Link>
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[
+    {
+      name: 'variant',
+      type: ['button', 'button-secondary'],
+      description: 'Visual style of the button.'
+    },
+    {
+      name: 'thin',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Thinner visual style of button.'
+    },
+    {
+      name: 'buttonRef',
+      type: 'function',
+      description:
+        'Ref function for the button element. Use this to access the button element directly.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Button](./Button)

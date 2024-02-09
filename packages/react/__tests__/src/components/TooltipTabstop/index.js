@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { setImmediate } from 'timers/promises';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import TooltipTabstop from 'src/components/TooltipTabstop';
 import axe from '../../../axe';
 
-const update = async wrapper => {
+const update = async (wrapper) => {
   await act(async () => {
-    await new Promise(resolve => setImmediate(resolve));
+    await setImmediate();
     wrapper.update();
   });
 };

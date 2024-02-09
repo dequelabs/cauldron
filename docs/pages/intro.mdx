@@ -1,0 +1,62 @@
+---
+title: "Cauldron React: Accessible Components Library"
+name: Introduction
+path: /
+index: 1
+---
+
+## Purpose
+
+Friends don’t let friends ship inaccessible code! Cauldron is designed with accessibility in mind, including styles covering everything from typography to colors, and React components that are designed to be inclusive of all users. Additionally, Cauldron's React components are designed to include full screen reader and keyboard navigation support.
+
+The design and interactions shown throughout this site are intended to show how Deque provides accessible experiences for the users of our own products - through the use of common, accessible components like these.
+
+## Usage
+
+Deque's design system contains two main libraries: Cauldron React, and Cauldron styles. Cauldron React is an accessible React component library, while Cauldron Styles contains the accessible styles for these components and more!
+
+### Installation
+
+To start using Cauldron React, install the packages with your package manager of choice:
+
+#### npm
+
+```js
+npm install @deque/cauldron-react @deque/cauldron-styles
+```
+
+#### yarn
+
+```js
+yarn add @deque/cauldron-react @deque/cauldron-styles
+```
+
+#### Peer Dependencies
+
+There are a few additional packages that you will need to install:
+
+- `react` at `16.x` or higher
+- `react-dom` at `16.x` or higher
+
+### Setup
+
+Once installed, you will need to add include cauldron's styles somewhere in the top level of your application. You will also need to load the required font family of Roboto before cauldron styles. This can be using [google fonts](https://fonts.google.com/specimen/Roboto) or with something like [fontsource](https://fontsource.org/fonts/roboto):
+
+An example of this using the [fontsource](https://fontsource.org/fonts/roboto) package and loading cauldron styles as follows:
+
+```js
+import '@fontsource/roboto' // defaults as font-weight 400
+import '@fontsource/roboto/500.css'
+import '@deque/cauldron-styles'
+import '@deque/cauldron-react/lib/cauldron.css'
+```
+
+## Contribute
+
+If you're interested in contributing to Cauldron, you can check out our [contribution guide](https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md) as well as our [code of conduct](https://github.com/dequelabs/cauldron/blob/develop/CODE_OF_CONDUCT.md).
+
+Did you find a bug or have a feature request? [Open an issue!](https://github.com/dequelabs/cauldron/issues/new/choose)
+
+## More Accessibility Tools
+
+Don't stop here! Check out [Deque Systems' axe Tools](https://www.deque.com/axe/) for all of your accessibility needs!

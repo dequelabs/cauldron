@@ -2,8 +2,9 @@
   --table-header-text-color: var(--gray-90);
   --table-header-background-color: var(--gray-20);
   --table-header-sorting-background-color: #caddec;
-  --table-header-sorting-text-color: var(--gray-90);
   --table-header-background-color-hover: #dddddd;
+  /* --table-header-sorting-text-color will be deprecated */
+  --table-header-sorting-text-color: var(--gray-90);
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
   --table-row-border-color: var(--gray-40);
@@ -15,8 +16,9 @@
 .cauldron--theme-dark {
   --table-header-text-color: var(--white);
   --table-header-background-color: var(--accent-dark);
-  --table-header-sorting-background-color: #53636e;
+  /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--white);
+  --table-header-sorting-background-color: #53636e;
   --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-medium);
@@ -29,7 +31,7 @@
   font-size: var(--text-size-small);
   border-collapse: collapse;
   text-align: left;
-  width: 100%;
+  width: var(--table-width, 100%);
   overflow-wrap: break-word;
 }
 
@@ -38,6 +40,15 @@
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
   border-bottom: 2px solid var(--table-row-border-color);
+}
+
+.TableBody .TableHeader {
+  border-bottom-width: 1px;
+  border-right: 2px solid var(--table-row-border-color);
+}
+
+.TableBody .TableRow:last-child .TableHeader {
+  border-bottom: none;
 }
 
 .TableHeader[aria-sort] {
@@ -53,7 +64,7 @@
   color: var(--table-header-text-color);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: var(--table-space) var(--space-smallest);
 }
 
@@ -69,9 +80,10 @@
 .TableHeader--sort-ascending,
 .TableHeader--sort-descending {
   background: var(--table-header-sorting-background-color);
-  border-bottom: 2px solid var(--table-header-sorting-border-color);
+  border-bottom: 3px solid var(--table-header-sorting-border-color);
 }
 
+/* These styles are not applying and will be deprecated */
 .TableHeader--sort-ascending .TableHeader__sort-button,
 .TableHeader--sort-decscending .TableHeader__sort-button {
   color: var(--table-header-sorting-text-color);
@@ -89,7 +101,8 @@
 }
 
 .TableCell,
-.TableHeader {
+.TableHeader,
+.TableFooter {
   padding: var(--table-space) var(--space-smallest);
 }
 
@@ -101,14 +114,39 @@
   box-shadow: var(--table-box-shadow);
 }
 
+.TableCell {
+  color: var(--gray-90);
+}
+
+.cauldron--theme-dark .TableCell {
+  color: var(--white);
+}
+
 .Table--border,
 .Table--border .TableHeader,
+.Table--border .TableFooter,
 .Table--border .TableCell {
   border: 1px solid var(--gray-40);
 }
 
+.Table--border .TableHeader {
+  border-bottom: 2px solid var(--gray-40);
+}
+
+.Table--border .TableBody .TableHeader {
+  border-bottom-width: 1px;
+  border-right: 2px solid var(--table-row-border-color);
+}
+
 .cauldron--theme-dark .Table--border,
 .cauldron--theme-dark .Table--border .TableHeader,
+.cauldron--theme-dark .Table--border .TableFooter,
 .cauldron--theme-dark .Table--border .TableCell {
   border-color: var(--stroke-dark);
+}
+
+.TableFooter .TableCell {
+  background: var(--table-header-background-color);
+  font-weight: var(--font-weight-medium);
+  color: var(--table-header-text-color);
 }

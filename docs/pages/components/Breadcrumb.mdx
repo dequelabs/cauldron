@@ -1,0 +1,69 @@
+---
+title: Breadcrumb
+description: The Breadcrumb component displays a list of links within a hierarchy and allows navigation back through them.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Breadcrumb/Breadcrumb.tsx
+---
+
+import { Icon, Breadcrumb, BreadcrumbLink, BreadcrumbItem } from '@deque/cauldron-react'
+
+```js
+import {
+  Breadcrumb,
+  BreadcrumbLink,
+  BreadcrumbItem
+} from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Basic
+
+```jsx example
+<Breadcrumb aria-label="Breadcrumb">
+  <BreadcrumbLink href="/one">One</BreadcrumbLink>
+  <BreadcrumbLink href="/two">Two</BreadcrumbLink>
+  <BreadcrumbLink href="/three">Three</BreadcrumbLink>
+  <BreadcrumbItem aria-current="true">Four</BreadcrumbItem>
+</Breadcrumb>
+```
+
+### Custom Separators
+
+```jsx example
+<Breadcrumb aria-label="Breadcrumb" separator={<Icon type="chevron-double-right" />}>
+  <BreadcrumbLink href="#">One</BreadcrumbLink>
+  <BreadcrumbLink href="#">Two</BreadcrumbLink>
+  <BreadcrumbLink href="#">Three</BreadcrumbLink>
+  <BreadcrumbItem aria-current="true">Four</BreadcrumbItem>
+</Breadcrumb>
+```
+
+## Props
+
+### Breadcrumb
+
+<ComponentProps
+  children={true}
+  refType="HTMLElement"
+  props={[
+    {
+      name: 'separator',
+      type: 'React.ReactNode',
+      defaultValue: "'/'"
+    }
+  ]}
+/>
+
+### BreadcrumbLink
+
+<ComponentProps
+  children={true}
+  refType="HTMLLinkElement"
+/>
+
+### BreadcrumbItem
+
+<ComponentProps
+  children={true}
+  refType="HTMLSpanElement"
+/>

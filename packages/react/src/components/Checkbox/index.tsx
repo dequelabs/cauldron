@@ -31,6 +31,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       checkboxRef,
       className,
       onChange,
+      onFocus,
+      onBlur,
       'aria-describedby': ariaDescribedby,
       disabled = false,
       checked = false,
@@ -69,7 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <>
+      <div className="Checkbox__wrap">
         <div className={classNames('Checkbox is--flex-row', className)}>
           <input
             id={id}
@@ -77,8 +79,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             type="checkbox"
             checked={isChecked}
             disabled={disabled}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(e): void => {
+              setFocused(true);
+              if (typeof onFocus === 'function') {
+                onFocus(e);
+              }
+            }}
+            onBlur={(e): void => {
+              setFocused(false);
+              if (typeof onBlur === 'function') {
+                onBlur(e);
+              }
+            }}
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
               setIsChecked(e.target.checked);
@@ -89,7 +101,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {...other}
           />
           <label
-            className={classNames('Field__label', {
+            className={classNames('Field__label Checkbox__label', {
               'Field__label--disabled': disabled
             })}
             htmlFor={id}
@@ -112,18 +124,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               }
             }}
           />
-          {labelDescription && (
-            <span id={labelDescriptionId} className="Field__labelDescription">
-              {labelDescription}
-            </span>
-          )}
-          {error && (
-            <div id={errorId} className="Error">
-              {error}
-            </div>
-          )}
         </div>
-      </>
+        {labelDescription && (
+          <span id={labelDescriptionId} className="Field__labelDescription">
+            {labelDescription}
+          </span>
+        )}
+        {error && (
+          <div id={errorId} className="Error">
+            {error}
+          </div>
+        )}
+      </div>
     );
   }
 );

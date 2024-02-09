@@ -1,31 +1,46 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import PropTypes from 'prop-types';
+
+type Theme = 'light' | 'dark';
 
 interface ProviderProps {
   children: React.ReactNode;
   context?: HTMLElement;
-  initialTheme?: string;
+  initialTheme?: Theme;
 }
 
 const LIGHT_THEME_CLASS = 'cauldron--theme-light';
 const DARK_THEME_CLASS = 'cauldron--theme-dark';
 
-const ThemeContext = createContext({});
+interface State {
+  theme: Theme;
+}
+
+interface Methods {
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<State & Methods>({
+  theme: 'light',
+  toggleTheme: () => {
+    throw new Error('ThemeContext not initialized');
+  }
+});
 
 const ThemeProvider = ({
   children,
-  context = document.body,
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+  context = document?.body,
   initialTheme = 'light'
 }: ProviderProps) => {
-  const [theme, setTheme] = useState(initialTheme);
+  const [theme, setTheme] = useState<Theme>(initialTheme);
   const getThemeFromContext = () =>
-    context.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
+    context?.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
   const toggleTheme = () =>
     setTheme(getThemeFromContext() === 'dark' ? 'light' : 'dark');
 
   useEffect(() => {
-    context.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
-    context.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
+    context?.classList.toggle(LIGHT_THEME_CLASS, theme === 'light');
+    context?.classList.toggle(DARK_THEME_CLASS, theme === 'dark');
   }, [context, theme]);
 
   // Use a MutationObserver to track changes to the classes outside of the context of React
@@ -41,6 +56,10 @@ const ThemeProvider = ({
   };
 
   useEffect(() => {
+    if (!context) {
+      return;
+    }
+
     const observer = new MutationObserver(handleMutation);
     observer.observe(context, {
       childList: false,
@@ -68,10 +87,5 @@ const ThemeProvider = ({
 function useThemeContext() {
   return useContext(ThemeContext);
 }
-
-ThemeProvider.propTypes = {
-  children: PropTypes.any,
-  initialTheme: PropTypes.string
-};
 
 export { ThemeContext, ThemeProvider, useThemeContext };

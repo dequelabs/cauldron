@@ -1,36 +1,35 @@
 :root {
+  /* Primary */
+  --icon-button-primary-color: var(--button-text-color-light);
   --icon-button-background-color-primary: var(
     --button-background-color-primary
-  );
-  --icon-button-background-color-primary-disabled: var(
-    --button-background-color-primary-disabled
   );
   --icon-button-background-color-primary-active: var(
     --button-background-color-primary-active
   );
   --icon-button-outline-color-primary: var(--button-outline-color-primary);
 
+  --icon-button-large-height: var(--button-height);
+
+  /* Secondary */
+  --icon-button-secondary-color: var(--button-text-color-dark);
   --icon-button-background-color-secondary: var(
     --button-background-color-secondary
-  );
-  --icon-button-background-color-secondary-disabled: var(
-    --button-background-color-secondary-disabled
   );
   --icon-button-background-color-secondary-active: var(
     --button-background-color-secondary-active
   );
   --icon-button-outline-color-secondary: var(--button-outline-color-secondary);
-  --icon-button-border-color-secondary: #dadada;
+  --icon-button-border-color-secondary: var(--gray-40);
 
+  /* Error */
   --icon-button-background-color-error: var(--button-background-color-error);
-  --icon-button-background-color-error-disabled: var(
-    --button-background-color-error-disabled
-  );
+  --icon-button-outline-color-error: var(--button-outline-color-error);
   --icon-button-background-color-error-active: var(
     --button-background-color-error-active
   );
-  --icon-button-outline-color-error: var(--button-outline-color-error);
 
+  /* Deprecated variables */
   --icon-button-content-color-light-disabled: #ccc;
   --icon-button-background-color-light: #dadada;
   --icon-button-background-color-light-active: #c2c2c2;
@@ -41,6 +40,12 @@
   --icon-button-background-color-dark-disabled: var(--accent-medium);
   --icon-button-background-color-dark-active: var(--accent-dark);
   --icon-button-outline-color-dark: var(--icon-button-background-color-dark);
+  --icon-button-background-color-secondary-disabled: var(
+    --button-background-color-secondary-disabled
+  );
+  --icon-button-background-color-error-disabled: var(
+    --button-background-color-error-disabled
+  );
 }
 
 .IconButton {
@@ -48,6 +53,7 @@
   display: inline-flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
   height: var(--button-thin-height);
   width: var(--button-thin-height);
   border-radius: 3px;
@@ -58,9 +64,15 @@
   padding: 0;
 }
 
+/* Ensure both <a> and <button> IconButtons are aligned correctly. See #846. */
+a.IconButton {
+  vertical-align: middle;
+  line-height: unset;
+}
+
 .IconButton .Icon {
-  width: 100%;
-  height: 100%;
+  height: var(--space-small);
+  width: var(--space-small);
   pointer-events: none;
 }
 
@@ -84,21 +96,26 @@
   pointer-events: none;
 }
 
-.IconButton--secondary[aria-disabled='true'],
-.IconButton--secondary[disabled] {
+.IconButton--large {
+  height: var(--icon-button-large-height);
+  width: var(--icon-button-large-height);
+}
+
+.IconButton--secondary:is([aria-disabled='true'], [disabled]),
+.IconButton--secondary:is([aria-disabled='true'], [disabled]):active {
   color: var(--disabled);
   background-color: var(--button-background-color-secondary-disabled);
   cursor: default;
 }
 
-.IconButton--primary[aria-disabled='true'],
-.IconButton--primary[disabled] {
+.IconButton--primary:is([aria-disabled='true'], [disabled]),
+.IconButton--primary:is([aria-disabled='true'], [disabled]):active {
   background-color: var(--button-background-color-primary-disabled);
   cursor: default;
 }
 
-.IconButton--error[aria-disabled='true'],
-.IconButton--error[disabled] {
+.IconButton--error:is([aria-disabled='true'], [disabled]),
+.IconButton--error:is([aria-disabled='true'], [disabled]):active {
   color: var(--button-text-color-light);
   background-color: var(--button-background-color-error-disabled);
   cursor: default;
@@ -110,7 +127,7 @@
 
 .IconButton--primary {
   background-color: var(--icon-button-background-color-primary);
-  color: var(--button-text-color-light);
+  color: var(--icon-button-primary-color);
 }
 
 .IconButton--primary:not([disabled]):not([aria-disabled='true']):hover:before {
@@ -124,10 +141,12 @@
 .IconButton--secondary {
   border: 1px solid var(--icon-button-border-color-secondary);
   background-color: var(--icon-button-background-color-secondary);
-  color: var(--button-text-color-dark);
+  color: var(--icon-button-secondary-color);
 }
 
-.IconButton--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+.IconButton--secondary:not([disabled]):not(
+    [aria-disabled='true']
+  ):hover:before {
   box-shadow: 0 0 0 1px var(--icon-button-outline-color-secondary);
 }
 
@@ -151,55 +170,89 @@
 /* Dark Theme */
 
 .cauldron--theme-dark {
-  --icon-button-border-color-secondary: var(--accent-medium);
-  --icon-button-background-color-secondary: var(--accent-medium);
-  --icon-button-background-color-primary: var(--gray-20);
   --icon-button-icon-color: var(--white);
-}
+  --icon-button-outline-shadow-color: var(--accent-medium);
+  --icon-button-disabled-color: var(--dark-workspace-color);
+  --icon-button-active-color: var(--accent-medium);
 
-.cauldron--theme-dark .IconButton--error {
-  background-color: var(--accent-dark);
-  color: var(--white);
+  /* Primary */
+  --icon-button-primary-color: var(--white);
+  --icon-button-background-color-primary: var(--accent-medium);
+  --icon-button-background-color-primary-active: var(--accent-info-active);
+  --icon-button-outline-color-primary: var(--accent-info);
+  --icon-button-border-color-primary: var(--accent-info);
+
+  /* Secondary */
+  --icon-button-border-color-secondary: var(--accent-light);
+  --icon-button-background-color-secondary: var(--accent-medium);
+  --icon-button-secondary-color: var(--white);
+  --icon-button-background-color-secondary-active: var(--accent-light);
+  --icon-button-outline-color-secondary: var(--accent-light);
+
+  /* Error */
+  --icon-button-background-color-error: var(--accent-medium);
+  --icon-button-border-color-error: var(--accent-danger);
+  --icon-button-outline-color-error: var(--accent-danger);
+  --icon-button-background-color-error-active: var(
+    --button-background-color-error-active
+  );
 }
 
 .cauldron--theme-dark .IconButton--primary {
-  color: var(--gray-90);
-}
-
-.cauldron--theme-dark .IconButton--primary[aria-disabled='true'],
-.cauldron--theme-dark .IconButton--primary[disabled] {
-  background-color: var(--gray-20);
-  color: var(--gray-40);
-}
-
-.cauldron--theme-dark .IconButton--secondary[aria-disabled='true'],
-.cauldron--theme-dark .IconButton--secondary[disabled] {
-  color: #5d676f;
+  border: 2px solid var(--icon-button-border-color-primary);
 }
 
 .cauldron--theme-dark .IconButton--secondary {
-  color: var(--white);
+  border-width: 2px;
 }
 
 .cauldron--theme-dark .IconButton--error {
-  background-color: var(--accent-danger);
-  color: var(--accent-dark);
-}
-
-.cauldron--theme-dark .IconButton--primary:active {
-  background-color: #e5ebec;
-}
-
-.cauldron--theme-dark .IconButton--secondary:active {
-  background-color: var(--accent-dark);
+  border: 2px solid var(--icon-button-border-color-error);
 }
 
 .cauldron--theme-dark
-  .IconButton--primary:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--accent-light);
+  .IconButton--primary:is([aria-disabled='true'], [disabled]),
+.cauldron--theme-dark
+  .IconButton--secondary:is([aria-disabled='true'], [disabled]),
+.cauldron--theme-dark
+  .IconButton--error:is([aria-disabled='true'], [disabled]) {
+  color: var(--icon-button-disabled-color);
+}
+
+.cauldron--theme-dark .IconButton--primary:active,
+.cauldron--theme-dark .IconButton--secondary:active,
+.cauldron--theme-dark .IconButton--error:active {
+  color: var(--icon-button-active-color);
 }
 
 .cauldron--theme-dark
-  .IconButton--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--white);
+  .IconButton:is([aria-disabled='true'], [disabled]):active {
+  color: var(--icon-button-disabled-color);
+}
+
+.cauldron--theme-dark
+  .IconButton--primary:not([disabled]):not(
+    [aria-disabled='true']
+  ):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-primary);
+}
+
+.cauldron--theme-dark
+  .IconButton--secondary:not([disabled]):not(
+    [aria-disabled='true']
+  ):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-secondary);
+}
+
+.cauldron--theme-dark
+  .IconButton--error:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-error);
+}
+
+.cauldron--theme-dark .IconButton:focus:before {
+  box-shadow: 0 0 0 2px var(--icon-button-outline-shadow-color),
+    0 0 0 4px var(--button-focus-ring-color, --focus);
 }

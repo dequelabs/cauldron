@@ -1,0 +1,16 @@
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'chore'
+    groups:
+      # Any updates not caught by the group config will get individual PRs
+      gha-low-risk:
+        update-types:
+          - 'minor'
+          - 'patch'

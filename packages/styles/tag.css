@@ -9,7 +9,7 @@
   --tag-text-color: var(--white);
   --tag-label-text-color: var(--accent-light);
   --tag-background-color: var(--accent-medium);
-  --tag-border-color: var(--accent-medium);
+  --tag-border-color: var(--stroke-dark);
 }
 
 .Tag {
@@ -18,11 +18,10 @@
   font-size: var(--text-size-smaller);
   border: 1px solid var(--tag-border-color);
   border-radius: 11px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 2px 8px;
-  width: 90px;
   font-weight: var(--font-weight-medium);
 }
 

@@ -12,7 +12,6 @@ import React, {
   MutableRefObject,
   HTMLProps
 } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
@@ -26,6 +25,7 @@ export interface IconButtonOwnProps {
   tooltipVariant?: TooltipProps['variant'];
   tooltipPortal?: TooltipProps['portal'];
   variant?: 'primary' | 'secondary' | 'error';
+  large?: boolean;
 }
 
 type PolymorphicIconButton = Polymorphic.ForwardRefComponent<
@@ -53,6 +53,7 @@ const IconButton = forwardRef(
       variant = 'secondary',
       disabled,
       tabIndex = 0,
+      large,
       ...other
     }: any,
     ref
@@ -82,7 +83,8 @@ const IconButton = forwardRef(
             IconButton: true,
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
-            'IconButton--error': variant === 'error'
+            'IconButton--error': variant === 'error',
+            'IconButton--large': large
           })}
           ref={internalRef}
           disabled={disabled}
@@ -91,7 +93,7 @@ const IconButton = forwardRef(
           {...other}
         >
           <Icon type={icon} />
-          <Offscreen>{label}</Offscreen>
+          {disabled && <Offscreen>{label}</Offscreen>}
         </Component>
         {!disabled && (
           <Tooltip
@@ -109,22 +111,6 @@ const IconButton = forwardRef(
     );
   }
 ) as PolymorphicIconButton;
-
-IconButton.propTypes = {
-  // @ts-expect-error
-  as: PropTypes.elementType,
-  // @ts-expect-error
-  icon: PropTypes.string.isRequired,
-  // @ts-expect-error
-  label: PropTypes.node.isRequired,
-  // @ts-expect-error
-  tooltipPlacement: PropTypes.string,
-  // @ts-expect-error
-  tooltipVariant: PropTypes.string,
-  tooltipPortal: PropTypes.any,
-  // @ts-expect-error
-  variant: PropTypes.string
-};
 
 IconButton.displayName = 'IconButton';
 

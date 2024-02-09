@@ -33,7 +33,6 @@ export {
 export { default as SkipLink } from './components/SkipLink';
 export { default as Button } from './components/Button';
 export { default as IconButton } from './components/IconButton';
-export { default as Pointout } from './components/Pointout';
 export { default as Toast } from './components/Toast';
 export { default as Link } from './components/Link';
 export { default as Loader } from './components/Loader';
@@ -58,12 +57,6 @@ export {
   TooltipContent
 } from './components/Tooltip';
 export { default as TooltipTabstop } from './components/TooltipTabstop';
-export {
-  default as Card,
-  CardHeader,
-  CardContent,
-  CardFooter
-} from './components/Card';
 export { default as TextField } from './components/TextField';
 export { default as ClickOutsideListener } from './components/ClickOutsideListener';
 export {
@@ -75,13 +68,15 @@ export { default as Code } from './components/Code';
 export { default as LoaderOverlay } from './components/LoaderOverlay';
 export { default as Line } from './components/Line';
 export { default as Tag, TagLabel } from './components/Tag';
+export { default as TagButton } from './components/TagButton';
 export {
   default as Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
+  TableFooter
 } from './components/Table';
 export { default as Tabs, Tab, TabPanel } from './components/Tabs';
 export {
@@ -91,8 +86,11 @@ export {
   DescriptionDetails
 } from './components/DescriptionList';
 export { default as Stepper, Step } from './components/Stepper';
-export { default as Panel } from './components/Panel';
-export { default as IssuePanel } from './components/IssuePanel';
+export {
+  default as Panel,
+  PanelHeader,
+  PanelContent
+} from './components/Panel';
 export { default as ProgressBar } from './components/ProgressBar';
 export {
   Address,
@@ -114,6 +112,22 @@ export {
   ColumnRight,
   ColumnList
 } from './components/TwoColumnPanel';
+export { default as Notice } from './components/Notice';
+
+export {
+  default as Listbox,
+  ListboxOption,
+  ListboxGroup
+} from './components/Listbox';
+export {
+  default as Combobox,
+  ComboboxOption,
+  ComboboxGroup
+} from './components/Combobox';
+
+export { default as Popover } from './components/Popover';
+
+export { default as Timeline, TimelineItem } from './components/Timeline';
 
 /**
  * Helpers / Utils

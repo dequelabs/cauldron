@@ -1,0 +1,86 @@
+---
+title: LoaderOverlay
+description: A component to indicate that a section or component of the page is currently loading.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/LoaderOverlay/index.tsx
+---
+
+import { useState, useRef } from 'react'
+import { LoaderOverlay, Button, Scrim } from '@deque/cauldron-react'
+
+```js
+import { LoaderOverlay } from '@deque/cauldron-react'
+```
+
+## Example
+
+It is expected that you choose one of the following:
+
+- Set focus to the loader by using `focusOnInitialRender` or by using `ref` to manually set focus, then after loading is complete shift focus to something logical
+- Add `role="alert"` to the `LoaderOverlay`
+
+If you need to block access to the rest of the page the `focusTrap` will prevent keyboard access, while rendering a `Scrim` component will prevent mouse access.
+
+```jsx example
+function LoaderOverlayExample() {
+  const buttonRef = useRef(null)
+  const [loading, setLoading] = useState(false)
+  const showLoader = () => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      buttonRef.current?.focus()
+    }, 5000)
+  }
+  return (
+    <>
+      <Button ref={buttonRef} onClick={showLoader}>Show Loader for 5 Seconds</Button>
+      {loading && (
+        <>
+          <Scrim show />
+          <LoaderOverlay focusTrap focusOnInitialRender>
+            <p>
+              Explanatory secondary text goes here. Let them know what's happening, alright?
+            </p>
+          </LoaderOverlay>
+        </>
+      )}
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'label',
+      type: 'string',
+      description: 'A primary label for the loader',
+    },
+    {
+      name: 'focusOnInitialRender',
+      type: 'boolean',
+      description: 'Whether or not to focus the loader on initial render.'
+    },
+    {
+      name: 'focusTrap',
+      type: 'boolean',
+      description: 'Conditionally wrap the overlay in a focus trap.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'loaderRef',
+      type: 'React.RefObject<HTMLDivElement>',
+      description: 'Ref object for element. Using ref is preferred.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Loader](./Loader)
+- [Scrim](./Scrim)

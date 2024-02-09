@@ -6,7 +6,6 @@
 @import './button.css';
 @import './icon-button.css';
 @import './dialog.css';
-@import './pointout.css';
 @import './utilities.css';
 @import './forms.css';
 @import './link.css';
@@ -15,7 +14,6 @@
 @import './select.css';
 @import './side-bar.css';
 @import './radio-card.css';
-@import './card.css';
 @import './toast.css';
 @import './tooltip.css';
 @import './tooltip-tabstop.css';
@@ -27,11 +25,12 @@
 @import './line.css';
 @import './tabs.css';
 @import './tag.css';
+@import './tag-button.css';
 @import './table.css';
 @import './description-list.css';
 @import './stepper.css';
 @import './panel.css';
-@import './issue-panel.css';
+@import './popover.css';
 @import './navbar.css';
 @import './progressbar.css';
 @import './icon.css';
@@ -40,3 +39,6 @@
 @import './breadcrumb.css';
 @import './two-column-panel.css';
 @import './accordion.css';
+@import './notice.css';
+@import './combobox.css';
+@import './timeline.css';

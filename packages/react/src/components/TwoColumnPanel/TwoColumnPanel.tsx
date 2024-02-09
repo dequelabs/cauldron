@@ -48,13 +48,23 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const columnRightRef = useRef<HTMLDivElement>(null);
 
     const columnLeft = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === ColumnLeft
+      (child) => (child as React.ReactElement<any>).type === ColumnLeft
     );
 
     const togglePanel = () => {
+      const prefersReducedMotion =
+        'matchMedia' in window &&
+        typeof matchMedia === 'function' &&
+        matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       if (isCollapsed) {
         setShowPanel(true);
+      } else if (prefersReducedMotion) {
+        // Immediately collapse the panel as we do not need to wait for css
+        // transitions to complete
+        setShowPanel(false);
       }
+
       // Set collapsed state on next tick so css transitions can be applied
       requestAnimationFrame(() => {
         const collapsed = !isCollapsed;
@@ -102,15 +112,19 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
-        { id, ref, tabIndex: -1 },
+        { id, ref, tabIndex: -1 } as React.ComponentProps<typeof ColumnLeft>,
         children.map((child, index) =>
-          cloneElement(child as React.ReactElement, { key: `left-${index}` })
+          cloneElement(child as React.ReactElement, {
+            key: (child as React.ReactElement).key
+              ? (child as React.ReactElement).key
+              : `left-${index}`
+          })
         )
       );
     }
 
     const columnRight = React.Children.toArray(children).find(
-      child => (child as React.ReactElement<any>).type === ColumnRight
+      (child) => (child as React.ReactElement<any>).type === ColumnRight
     );
 
     let ColumnRightComponent;
@@ -149,9 +163,13 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnRightComponent = cloneElement(
         columnRight,
-        { ref, tabIndex: -1 },
+        { ref, tabIndex: -1 } as React.ComponentProps<typeof ColumnRight>,
         children.map((child, index) =>
-          cloneElement(child as React.ReactElement, { key: `right-${index}` })
+          cloneElement(child as React.ReactElement, {
+            key: (child as React.ReactElement).key
+              ? (child as React.ReactElement).key
+              : `right-${index}`
+          })
         )
       );
     }

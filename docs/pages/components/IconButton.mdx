@@ -1,0 +1,146 @@
+---
+title: IconButton
+description: An interactive element that performs a programmable action when activated by the user displayed as a symbol image.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/IconButton/index.tsx
+---
+
+import { IconButton, Offscreen } from '@deque/cauldron-react'
+
+```js
+import { IconButton } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Secondary
+
+Secondary icon buttons are the default variant for the `IconButton` component.
+
+```jsx example
+<IconButton icon="pencil" label="Edit" />
+<IconButton icon="pencil" label="Edit" disabled />
+```
+
+### Primary
+
+Primary icon buttons are used to indicate a primary action.
+
+```jsx example
+<IconButton variant="primary" icon="pencil" label="Edit" />
+<IconButton variant="primary" icon="pencil" label="Edit" disabled />
+```
+
+### Error
+
+Error buttons are used to indicate potentially dangerous actions.
+
+```jsx example
+<IconButton variant="error" icon="pencil" label="Edit" />
+<IconButton variant="error" icon="pencil" label="Edit" disabled />
+```
+
+### Tooltip Placement
+
+Tooltip placement has a default value of `auto`, but can be fixed to a certain position if needed.
+
+```jsx example
+<IconButton icon="trash" label="Delete" tooltipPlacement="bottom" />
+```
+
+### Tooltip Variant
+
+The tooltip style can also be customized.
+
+```jsx example
+<IconButton icon="info-circle" label="More Information" tooltipVariant="info" />
+```
+
+### Offscreen Text
+
+If there are multiple icon buttons with the same label, the visible label text can be combined with `Offscreen` to provide additional context to users using assistive technology (AT).
+
+```jsx example
+<div class="users">
+  <div>
+    User: Jason 
+    <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
+  </div>
+  <div>
+    User: Harris 
+    <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
+  </div>
+</div>
+```
+
+### Large
+
+```jsx example
+<IconButton variant="error" icon="pencil" label="Edit" large />
+<IconButton variant="error" icon="pencil" label="Edit" disabled large />
+<IconButton variant="secondary" icon="pencil" label="Edit" large />
+<IconButton variant="secondary" icon="pencil" label="Edit" disabled large />
+<IconButton variant="primary" icon="pencil" label="Edit" large />
+<IconButton variant="primary" icon="pencil" label="Edit" disabled large />
+```
+
+## Props
+
+<ComponentProps
+  refType="HTMLButtonElement"
+  props={[
+    {
+      name: 'icon',
+      type: 'string',
+      required: true,
+      description: 'Icon to use for the IconButton'
+    },
+    {
+      name: 'label',
+      type: 'string',
+      required: true,
+      description: 'Label to be displayed for the tooltip and as the accessible name.'
+    },
+    {
+      name: 'variant',
+      type: ['primary', 'secondary', 'error'],
+      defaultValue: 'secondary',
+      description: 'Visual style of the IconButton.'
+    },
+    {
+      name: 'as',
+      type: 'ElementType',
+      defaultValue: 'button',
+      description: 'Component to render the IconButton as.'
+    },
+    {
+      name: 'tooltipPlacement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'The position of the tooltip relative to its target element.'
+    },
+    {
+      name: 'tooltipVariant',
+      type: ['info', 'text', 'big'],
+      defaultValue: 'text',
+      description: 'The style of tooltip to display.'
+    },
+    {
+      name: 'tooltipPortal',
+      type: ['React.Ref', 'HTMLElement'],
+      defaultValue: 'document.body',
+      description: 'The parent element to place the Tooltip in.'
+    },
+    {
+      name: 'large',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Larger visual style of icon button.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Button](./Button)
+- [Icon](./Icon)
+- [Tooltip](./Tooltip)

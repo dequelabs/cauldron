@@ -28,38 +28,36 @@ describe('Pagination', () => {
           wrapper
             .find('button')
             .at(0)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         expect(
           wrapper
             .find('button')
             .at(1)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         expect(
           wrapper
             .find('button')
             .at(2)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(3)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
-        wrapper
-          .find('button')
-          .at(0)
-          .simulate('click');
-        wrapper
-          .find('button')
-          .at(1)
-          .simulate('click');
+        wrapper.find('button').at(0).simulate('click');
+        wrapper.find('button').at(1).simulate('click');
 
         expect(onFirstPageClick.callCount).toBe(0);
         expect(onPreviousPageClick.callCount).toBe(0);
@@ -82,38 +80,36 @@ describe('Pagination', () => {
           wrapper
             .find('button')
             .at(0)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(1)
-            .is('[aria-disabled="true"]')
-        ).toBe(false);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('false');
 
         expect(
           wrapper
             .find('button')
             .at(2)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
         expect(
           wrapper
             .find('button')
             .at(3)
-            .is('[aria-disabled="true"]')
-        ).toBe(true);
+            .getDOMNode()
+            .getAttribute('aria-disabled')
+        ).toBe('true');
 
-        wrapper
-          .find('button')
-          .at(2)
-          .simulate('click');
-        wrapper
-          .find('button')
-          .at(3)
-          .simulate('click');
+        wrapper.find('button').at(2).simulate('click');
+        wrapper.find('button').at(3).simulate('click');
 
         expect(onNextPageClick.callCount).toBe(0);
         expect(onLastPageClick.callCount).toBe(0);
@@ -150,40 +146,28 @@ describe('Pagination', () => {
       );
 
       // click the first page button
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click');
+      wrapper.find('button').at(0).simulate('click');
       expect(onFirstPageClick.callCount).toBe(1);
       expect(onPreviousPageClick.callCount).toBe(0);
       expect(onNextPageClick.callCount).toBe(0);
       expect(onLastPageClick.callCount).toBe(0);
 
       // click the prev page button
-      wrapper
-        .find('button')
-        .at(1)
-        .simulate('click');
+      wrapper.find('button').at(1).simulate('click');
       expect(onFirstPageClick.callCount).toBe(1);
       expect(onPreviousPageClick.callCount).toBe(1);
       expect(onNextPageClick.callCount).toBe(0);
       expect(onLastPageClick.callCount).toBe(0);
 
       // click the next page button
-      wrapper
-        .find('button')
-        .at(2)
-        .simulate('click');
+      wrapper.find('button').at(2).simulate('click');
       expect(onFirstPageClick.callCount).toBe(1);
       expect(onPreviousPageClick.callCount).toBe(1);
       expect(onNextPageClick.callCount).toBe(1);
       expect(onLastPageClick.callCount).toBe(0);
 
       // click the last page button
-      wrapper
-        .find('button')
-        .at(3)
-        .simulate('click');
+      wrapper.find('button').at(3).simulate('click');
       expect(onFirstPageClick.callCount).toBe(1);
       expect(onPreviousPageClick.callCount).toBe(1);
       expect(onNextPageClick.callCount).toBe(1);
@@ -235,18 +219,12 @@ describe('Pagination', () => {
       expect(testPageStatus1.pageStart).toStrictEqual(21);
       expect(testPageStatus1.pageEnd).toStrictEqual(30);
       // click the next page button
-      wrapper
-        .find('button')
-        .at(3)
-        .simulate('click');
+      wrapper.find('button').at(3).simulate('click');
       expect(testPageStatus1.currentPage).toStrictEqual(4);
       expect(testPageStatus1.pageStart).toStrictEqual(31);
       expect(testPageStatus1.pageEnd).toStrictEqual(40);
       //change the itemsPerPage
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click');
+      wrapper.find('button').at(0).simulate('click');
       expect(testPagination1.itemsPerPage).toBe(25);
       expect(testPagination1.currentPage).toBe(1);
       expect(testPageStatus1.currentPage).toStrictEqual(1);
@@ -280,37 +258,25 @@ describe('Pagination', () => {
       expect(testPageStatus.pageEnd).toStrictEqual(30);
 
       // click the prev page button
-      wrapper
-        .find('button')
-        .at(1)
-        .simulate('click');
+      wrapper.find('button').at(1).simulate('click');
       expect(testPageStatus.currentPage).toStrictEqual(2);
       expect(testPageStatus.pageStart).toStrictEqual(11);
       expect(testPageStatus.pageEnd).toStrictEqual(20);
 
       // click the next page button
-      wrapper
-        .find('button')
-        .at(2)
-        .simulate('click');
+      wrapper.find('button').at(2).simulate('click');
       expect(testPageStatus.currentPage).toStrictEqual(3);
       expect(testPageStatus.pageStart).toStrictEqual(21);
       expect(testPageStatus.pageEnd).toStrictEqual(30);
 
       // click the first page button
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click');
+      wrapper.find('button').at(0).simulate('click');
       expect(testPageStatus.currentPage).toStrictEqual(1);
       expect(testPageStatus.pageStart).toStrictEqual(1);
       expect(testPageStatus.pageEnd).toStrictEqual(10);
 
       // click the last page button
-      wrapper
-        .find('button')
-        .at(3)
-        .simulate('click');
+      wrapper.find('button').at(3).simulate('click');
       expect(testPageStatus.currentPage).toStrictEqual(50);
       expect(testPageStatus.pageStart).toStrictEqual(491);
       expect(testPageStatus.pageEnd).toStrictEqual(500);

@@ -5,13 +5,11 @@ import React, {
   KeyboardEventHandler
 } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import { useId } from 'react-id-generator';
 
-interface NavBarProps {
+interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  initialActiveIndex?: number;
   className?: string;
   collapsed?: boolean;
   navTriggerLabel?: string;
@@ -23,7 +21,8 @@ const NavBar = ({
   className,
   collapsed = false,
   navTriggerLabel = 'MAIN MENU',
-  propId
+  propId,
+  ...props
 }: NavBarProps) => {
   const navRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -69,6 +68,7 @@ const NavBar = ({
         'NavBar--collapsed': collapsed
       })}
       ref={navRef}
+      {...props}
     >
       {collapsed && (
         <button
@@ -96,12 +96,5 @@ const NavBar = ({
 };
 
 NavBar.displayName = 'NavBar';
-NavBar.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  collapsed: PropTypes.bool,
-  navTriggerLabel: PropTypes.string,
-  propId: PropTypes.string
-};
 
 export default NavBar;

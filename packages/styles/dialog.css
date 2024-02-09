@@ -1,10 +1,20 @@
 :root {
-  --dialog-background-color: var(--white);
-  --dialog-border-color: #ccc;
-  --dialog-header-background-color: var(--button-background-color-secondary);
+  --dialog-background-color: #fff;
+  --dialog-border-color: var(--gray-40);
+  --dialog-header-background-color: var(--gray-20);
+  --dialog-footer-background-color: var(--gray-20);
+  --dialog-heading-text-color: var(--header-text-color-dark);
   --dialog-padding: var(--space-small);
-  --dialog-header-height: 42px;
-  --target-size: 44px;
+  --dialog-header-height: 2.625rem;
+  --dialog-close-button-size: var(--target-size-minimum);
+}
+
+.cauldron--theme-dark {
+  --dialog-background-color: var(--accent-medium);
+  --dialog-border-color: var(--gray-20);
+  --dialog-header-background-color: var(--accent-dark);
+  --dialog-footer-background-color: var(--accent-dark);
+  --dialog-heading-text-color: #fff;
 }
 
 .Dialog {
@@ -33,7 +43,7 @@
   border: 1px solid var(--dialog-border-color);
   z-index: var(--z-index-dialog);
   position: relative;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .Dialog__header {
@@ -42,29 +52,16 @@
   border-bottom: 1px solid var(--dialog-border-color);
   align-items: center;
   justify-content: space-between;
-  height: var(--dialog-header-height);
-  text-transform: uppercase;
+  min-height: var(--dialog-header-height);
   font-weight: var(--font-weight-bold);
+  padding: var(--space-smallest) 0;
+  gap: var(--space-smallest);
 }
 
 .Dialog__heading,
 .Dialog__close {
   margin: 0;
   font-size: var(--text-size-small);
-  height: calc(var(--dialog-header-height) - 8px);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-}
-
-.Dialog__heading:focus,
-.Dialog__close:focus,
-.Dialog__close:hover {
-  border-bottom-color: var(--text-color-base);
-  outline: none;
-}
-
-.Dialog__close:focus {
-  border-top: 4px solid transparent;
 }
 
 .Dialog__heading {
@@ -74,14 +71,51 @@
 }
 
 .Dialog__close {
-  color: var(--text-color-base);
-  width: var(--dialog-header-height);
+  color: var(--dialog-heading-text-color);
   background-color: initial;
+  border: 1px solid var(--dialog-border-color);
+  border-radius: 3px;
+  padding: 0;
+  height: var(--dialog-close-button-size);
+  width: var(--dialog-close-button-size);
+  margin-right: var(--space-smallest);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.Dialog__close:active {
+  background-color: var(--dialog-border-color);
+}
+
+.Dialog__close:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.cauldron--theme-dark .Dialog__close:before {
+  top: -3px;
+  right: -3px;
+  bottom: -3px;
+  left: -3px;
+}
+
+.Dialog__close:is(:hover, :focus):before {
+  box-shadow: 0 0 0 1px var(--dialog-heading-text-color);
 }
 
 .Dialog__close svg {
-  height: 24px;
-  width: 24px;
+  /* match icon size with height/width of button */
+  --icon-size: 100%;
+}
+
+.cauldron--theme-dark .Dialog__close {
+  border-width: 2px;
 }
 
 .Dialog__content {
@@ -97,9 +131,9 @@
 }
 
 .Dialog__footer {
-  background-color: #fff;
+  background-color: var(--dialog-footer-background-color);
   border-top: 1px solid var(--dialog-border-color);
-  padding: calc(var(--space-small) - 4px) var(--dialog-padding);
+  padding: var(--dialog-padding);
 }
 
 /**
@@ -107,24 +141,7 @@
 */
 
 .Modal--info .Dialog__header {
-  border: none;
   background-color: transparent;
-  height: auto;
-  align-items: flex-start;
-}
-
-.Modal--info .Dialog__close {
-  padding: var(--space-three-quarters);
-  height: var(--target-size);
-  width: var(--target-size);
-}
-
-.Modal--info .Dialog__heading {
-  flex: 1;
-  justify-content: center;
-  height: auto;
-  padding-top: var(--space-large);
-  margin-left: var(--target-size);
 }
 
 .Modal--info .Dialog__content {
@@ -136,6 +153,7 @@
 .Modal--info .Dialog__footer {
   display: flex;
   justify-content: center;
+  background-color: transparent;
   border-top: none;
   padding-top: 0;
 }
@@ -143,22 +161,20 @@
 /* Dark Theme */
 
 .cauldron--theme-dark .Dialog__inner {
-  background-color: var(--accent-medium);
   color: var(--white);
-  border: 4px solid var(--gray-20);
+  border-width: 4px;
 }
 
 .cauldron--theme-dark .Dialog__header {
-  border-bottom: 1px solid #5d676f;
+  border-bottom: 1px solid var(--stroke-dark);
 }
 
 .cauldron--theme-dark .Dialog__footer {
-  border-top: 1px solid #5d676f;
+  border-top: 1px solid var(--stroke-dark);
 }
 
 .cauldron--theme-dark .Dialog__header,
 .cauldron--theme-dark .Dialog__footer {
-  background-color: var(--accent-dark);
   color: var(--gray-20);
 }
 
@@ -166,20 +182,14 @@
   color: var(--gray-20);
 }
 
-.cauldron--theme-dark .Dialog__heading:focus,
-.cauldron--theme-dark .Dialog__close:focus,
-.cauldron--theme-dark .Dialog__close:hover {
-  border-bottom-color: var(--white);
+.cauldron--theme-dark .Dialog__close:active {
+  color: var(--accent-medium);
 }
 
 .cauldron--theme-dark .Modal--info .Dialog__header,
 .cauldron--theme-dark .Modal--info .Dialog__content,
 .cauldron--theme-dark .Modal--info .Dialog__footer {
-  background-color: var(--accent-medium);
-}
-
-.cauldron--theme-dark .Modal--info .Dialog__header {
-  border-bottom: none;
+  background-color: transparent;
 }
 
 .cauldron--theme-dark .Modal--info .Dialog__footer {

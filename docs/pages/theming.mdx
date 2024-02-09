@@ -1,0 +1,57 @@
+---
+title: Theming
+name: Theming
+path: /theming
+---
+
+## Implementing Cauldron Theming
+
+Cauldron supports light and dark themes of all of its various components. Cauldron defaults to "light" themed components; to support "dark" themed components one of the following methods must be implemented.
+
+## ThemeProvider
+
+To give components access to the current theme, `ThemeProvider` must be added somewhere in the root of your application, wrapping all of cauldron's rendered components:
+
+```jsx
+import { ThemeProvider } from '@deque/cauldron-react'
+
+export default function App() {
+  return (
+    <ThemeProvider initialTheme="light">
+      <div>...</div>
+    </ThemeProvider>
+  )
+}
+```
+
+The initial theme can be set with the values `light` or `dark`.
+
+When using the `ThemeProvider`, a theme context object is also included to be able to access what the current theme is:
+
+```jsx
+import { useThemeContext, Button } from '@deque/cauldron-react'
+
+export default function MyComponent() {
+  const { theme, toggleTheme } = useThemeContext()
+
+  return (
+    <div>
+      Current Theme: {theme}
+      <Button onClick={toggleTheme}>Toggle Theme</Button>
+    </div>
+  )
+}
+```
+
+## Global CSS Class
+
+Alternatively, if you are not using React and just using the styled components, the theme can be set by using a global CSS class somewhere in the root of your DOM using the global class `cauldron--theme-dark` or `cauldron--theme-light` for the desired theme:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body class="cauldron--theme-dark">
+    <div id="app">...</div>
+  </body>
+</html>
+```

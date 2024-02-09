@@ -1,5 +1,14 @@
+:root {
+  --breadcrumb-separator-color: var(--gray-60);
+}
+
+.cauldron--theme-dark {
+  --breadcrumb-separator-color: var(--accent-light);
+}
+
 .Breadcrumb ol {
-  display: flex;
+  display: block;
+  word-break: break-all;
   align-items: center;
   list-style-type: none;
   padding: 0;
@@ -7,16 +16,18 @@
 }
 
 .Breadcrumb__Separator {
-  color: var(--gray-40);
   padding: 0 var(--space-half);
+  color: var(--breadcrumb-separator-color);
 }
 
 .Breadcrumb__Link {
   font-weight: 400;
   padding: 0;
+  display: inline;
 }
 
 .Breadcrumb__Item {
   font-weight: 500;
   color: var(--link-text-color);
+  display: inline;
 }

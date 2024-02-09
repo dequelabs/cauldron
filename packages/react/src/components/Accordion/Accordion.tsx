@@ -5,7 +5,6 @@ import ExpandCollapsePanel, {
   PanelTrigger
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
-import PropTypes from 'prop-types';
 
 export interface AccordionTriggerProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -52,16 +51,18 @@ const Accordion = ({
   animationTiming,
   ...props
 }: AccordionProps) => {
+  const elementId = useId();
+
   const childrenArray = React.Children.toArray(children);
 
   const trigger = childrenArray.find(
-    child =>
+    (child) =>
       typeof child === 'string' ||
       (child as React.ReactElement<any>).type === AccordionTrigger
-  );
+  ) as unknown as typeof AccordionTrigger;
 
   const panelElement = childrenArray.find(
-    child =>
+    (child) =>
       typeof child === 'string' ||
       (child as React.ReactElement<any>).type === AccordionContent
   );
@@ -82,10 +83,6 @@ const Accordion = ({
     return null;
   }
 
-  const { className: triggerClassName, ...triggerProps } = trigger.props;
-
-  const elementId = useId();
-
   return (
     <div className="Accordion" {...props}>
       <ExpandCollapsePanel
@@ -98,10 +95,13 @@ const Accordion = ({
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
-          className={classnames('Accordion__trigger', trigger.props.className)}
+          className={classnames(
+            'Accordion__trigger',
+            (trigger.props as AccordionTriggerProps).className
+          )}
           aria-controls={panelElement.props.id || `${elementId}-panel`}
-          heading={trigger.props.heading}
-          {...trigger.props}
+          heading={(trigger.props as AccordionTriggerProps).heading}
+          {...(trigger.props as AccordionTriggerProps)}
         >
           {trigger}
         </PanelTrigger>
@@ -114,23 +114,6 @@ const Accordion = ({
 Accordion.displayName = 'Accordion';
 AccordionContent.displayName = 'AccordionContent';
 AccordionTrigger.displayName = 'AccordionTrigger';
-
-Accordion.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
-};
-
-AccordionTrigger.propTypes = {
-  children: PropTypes.node,
-  heading: PropTypes.shape({
-    level: PropTypes.number
-  })
-};
-
-AccordionContent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
 
 export default Accordion;
 export { Accordion, AccordionTrigger, AccordionContent };

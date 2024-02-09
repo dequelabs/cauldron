@@ -9,7 +9,7 @@
   --top-bar-accent-error: var(--accent-danger);
   --top-bar-accent-success: #62e86b;
   --top-bar-accent-warning-other: var(--accent-danger-light);
-  --top-bar-height: 69px;
+  --top-bar-height: 70px;
   --top-bar-height-thin: 43px;
 }
 
@@ -170,4 +170,10 @@
 .cauldron--theme-dark .TopBar > ul > li:focus-within:before,
 .cauldron--theme-dark .TopBar > ul > li:hover:before {
   background-color: var(--top-bar-text-color);
+}
+
+@media (max-width: 71.25rem) {
+  .TopBar > ul {
+    border: 0;
+  }
 }

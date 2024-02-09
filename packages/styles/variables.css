@@ -8,11 +8,13 @@
   /* color palette */
   --white: #ffffff;
   --dark-workspace-color: #53636e;
+  --stroke-light: #b3bfc6;
   --stroke-dark: #5d676f;
   --gray-10: #fdfdfe;
   --gray-20: #f2f2f2;
   --gray-30: #e0e0e0;
   --gray-40: #cccccc;
+  --gray-50: #757575;
   --gray-60: #666666;
   --gray-80: #4d4d4d;
   --gray-90: #333333;
@@ -20,6 +22,7 @@
   --accent-medium: #283640;
   --accent-light: #d4dde0;
   --accent-success: #a5db75;
+  --accent-success-high-contrast: #4fa630;
   --accent-success-light: #d1ffa4;
   --accent-success-dark: #57a711;
   --accent-error: #d93251;
@@ -29,17 +32,22 @@
   --accent-warning: #ffdd75;
   --accent-warning-light: #ffa1a1;
   --accent-caution: #ffe69f;
+  --accent-warning-dark: #b88a00;
   --accent-info: #6cdaf2;
   --accent-info-light: #83e4fa;
+  --accent-info-active: #a7e9f7;
   --accent-primary: #3c7aae;
   --accent-primary-active: #316091;
+  --accent-error-disabled: #db6379;
+  --accent-primary-disabled: #78a6d8;
   --accent-secondary: var(--gray-20);
   --accent-secondary-active: var(--gray-30);
-  --focus-light: #c11bde;
-  --focus-dark: #eb94ff;
+  --light-workspace-color: #f7f7f7;
+  --focus-light: #b51ad1;
+  --focus-dark: #f5a4ff;
   --issue-critical: var(--accent-danger);
-  --issue-serious: #ed9a55;
-  --issue-moderate: var(--accent-warning);
+  --issue-serious: var(--accent-warning);
+  --issue-moderate: #f0c4f8;
   --issue-minor: var(--gray-20);
 
   /* text colours */
@@ -48,6 +56,9 @@
   --text-color-light-disabled: rgba(255, 255, 255, 0.5);
   --header-text-color: var(--gray-80);
   --header-text-color-dark: var(--gray-90);
+
+  /* background colours */
+  --background-light: #f0f2f5;
 
   /* accents */
   --error: var(--accent-error);
@@ -58,20 +69,21 @@
   --info: var(--accent-info-light);
   --success: var(--accent-success-light);
   --focus-active: rgba(215, 30, 247, 0.25);
-  --focus-glow: rgba(193, 27, 222, 0.75);
+  --focus-glow: rgba(181, 26, 209, 0.75);
   --metric-accent-low: var(--accent-danger-light);
   --metric-accent-mid: #8ba6c5;
   --metric-accent-full: var(--accent-success);
 
   /* spacing (padding/margin) */
+  --space-quarter: 2px;
+  --space-half: 4px;
+  --space-three-quarters: 6px;
   --space-smallest: 8px;
+  --space-smaller: 12px;
   --space-small: 16px;
   --space-medium: 18px;
   --space-large: 24px;
-  --space-largest: 29px;
-  --space-half: 4px;
-  --space-three-quarters: 6px;
-  --space-quarter: 2px;
+  --space-largest: 32px;
   --space-large-with-underborder: 18px 24px;
   --space-gutter: 40px;
 
@@ -80,12 +92,16 @@
   --text-size-larger: 56px;
   --text-size-large: 45px;
   --text-size-large-medium: 34px;
+  --text-size-medium-large: 32px;
   --text-size-medium: 24px;
   --text-small-medium: 20px;
   --text-size-normal: 18px;
   --text-size-small: 15px;
   --text-size-smaller: 13px;
   --text-size-smallest: 12px;
+
+  /* fonts */
+  --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;
 
   /* font weight */
   --font-weight-thin: 100;
@@ -94,6 +110,9 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
   --font-weight-ultra-bold: 900;
+
+  /* icon sizes */
+  --icon-size: 24px;
 
   /* dimensions */
   --border-width: 6px;
@@ -120,6 +139,12 @@
   /* radio card */
   --radio-card-width: 255px;
   --radio-card-height: 229px;
+
+  /* target size */
+  /* Note: target-size is deprecated, use --target-size-enhanced or --target-size-minimum */
+  --target-size: 44px;
+  --target-size-enhanced: var(--target-size);
+  --target-size-minimum: 24px;
 }
 
 .cauldron--theme-dark {

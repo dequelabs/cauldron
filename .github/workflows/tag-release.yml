@@ -1,0 +1,24 @@
+name: Tag version
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tag_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'master'
+      - run: |
+          git config user.name attest-team-ci
+          git config user.email aciattestteamci@deque.com
+          VERSION=$(node -p 'require("./package.json").version')
+          if [ -z "$VERSION" ]; then
+            echo "VERSION cannot be empty"
+            exit 1
+          fi
+          git tag -a "v$VERSION" -m "v$VERSION"
+          git push origin "refs/tags/v$VERSION"

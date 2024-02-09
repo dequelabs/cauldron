@@ -16,7 +16,8 @@
 
 .Field__select--wrapper {
   position: relative;
-  min-width: var(--select-width);
+  width: var(--select-width);
+  max-width: 100%;
 }
 
 .arrow-down {
@@ -35,6 +36,7 @@
   width: 100%;
   min-height: var(--select-min-height);
   padding: var(--space-three-quarters) var(--space-smallest);
+  padding-right: var(--space-large);
   border: 1px solid var(--field-border-color);
   font-family: Roboto;
   font-weight: normal;

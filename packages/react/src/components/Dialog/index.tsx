@@ -1,6 +1,5 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
@@ -8,6 +7,7 @@ import Icon from '../Icon';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
 import setRef from '../../utils/setRef';
+import nextId from 'react-id-generator';
 import { isBrowser } from '../../utils/is-browser';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,7 +31,9 @@ interface DialogState {
   isolator?: AriaIsolate;
 }
 
-const noop = () => {};
+const noop = () => {
+  //not empty
+};
 
 export default class Dialog extends React.Component<DialogProps, DialogState> {
   static defaultProps = {
@@ -40,22 +42,9 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     closeButtonText: 'Close'
   };
 
-  static propTypes = {
-    className: PropTypes.string,
-    show: PropTypes.bool,
-    dialogRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any })
-    ]),
-    onClose: PropTypes.func,
-    forceAction: PropTypes.bool,
-    heading: PropTypes.oneOfType([PropTypes.object, PropTypes.node]).isRequired,
-    closeButtonText: PropTypes.string,
-    portal: PropTypes.any
-  };
-
   private element: HTMLDivElement | null;
   private heading: HTMLHeadingElement | null;
+  private headingId: string = nextId('dialog-title-');
 
   constructor(props: DialogProps) {
     super(props);
@@ -70,6 +59,11 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     if (this.props.show) {
       this.attachIsolator(() => setTimeout(this.focusHeading));
     }
+  }
+
+  componentWillUnmount() {
+    const { isolator } = this.state;
+    isolator?.deactivate();
   }
 
   componentDidUpdate(prevProps: DialogProps) {
@@ -134,13 +128,14 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
             className={classNames('Dialog', className, {
               'Dialog--show': show
             })}
-            ref={el => {
+            ref={(el) => {
               this.element = el;
               if (!dialogRef) {
                 return;
               }
               setRef(dialogRef, el);
             }}
+            aria-labelledby={this.headingId}
             {...other}
           >
             <div className="Dialog__inner">
@@ -149,6 +144,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
                   className="Dialog__heading"
                   ref={(el: HTMLHeadingElement) => (this.heading = el)}
                   tabIndex={-1}
+                  id={this.headingId}
                 >
                   {typeof heading === 'object' && 'text' in heading
                     ? heading.text
@@ -170,8 +166,8 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   }
 
   close() {
+    this.state.isolator?.deactivate();
     if (this.props.show) {
-      this.state.isolator?.deactivate();
       this.props.onClose?.();
     }
   }
@@ -191,26 +187,51 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   }
 }
 
+interface DialogAlignmentProps {
+  align?: 'left' | 'center' | 'right';
+}
+
+export type DialogContentProps = React.HTMLAttributes<HTMLDivElement> &
+  DialogAlignmentProps & { className?: string };
+
 const DialogContent = ({
   children,
   className,
+  align,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={classNames('Dialog__content', className)} {...other}>
+}: DialogContentProps) => (
+  <div
+    className={classNames('Dialog__content', className, {
+      'text--align-left': align === 'left',
+      'text--align-center': align === 'center',
+      'text--align-right': align === 'right'
+    })}
+    {...other}
+  >
     {children}
   </div>
 );
 DialogContent.displayName = 'DialogContent';
 
+export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &
+  DialogAlignmentProps & { className?: string };
+
 const DialogFooter = ({
   children,
   className,
+  align,
   ...other
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={classNames('Dialog__footer', className)} {...other}>
+}: DialogFooterProps) => (
+  <div
+    className={classNames('Dialog__footer', className, {
+      'text--align-left': align === 'left',
+      'text--align-center': align === 'center',
+      'text--align-right': align === 'right'
+    })}
+    {...other}
+  >
     {children}
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
-
 export { Dialog, DialogContent, DialogFooter };

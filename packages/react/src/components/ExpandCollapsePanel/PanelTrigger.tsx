@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon, { IconType } from '../Icon';
 
@@ -54,16 +53,6 @@ const PanelTrigger = ({
       </button>
     </Header>
   );
-};
-
-PanelTrigger.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  open: PropTypes.bool,
-  iconExpanded: PropTypes.string,
-  iconCollapsed: PropTypes.string,
-  heading: PropTypes.shape({
-    level: PropTypes.number
-  })
 };
 
 PanelTrigger.displayName = 'PanelTrigger';
