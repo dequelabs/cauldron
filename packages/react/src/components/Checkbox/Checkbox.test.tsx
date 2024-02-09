@@ -79,6 +79,7 @@ test('should handle focus correctly', () => {
   expect(onFocus.notCalled).toBeTruthy();
 
   input.focus();
+  expect(input).toHaveFocus();
   expect(checkboxIcon).toHaveClass('Checkbox__overlay--focused');
   expect(onFocus.calledOnce).toBeTruthy();
 });
@@ -94,6 +95,7 @@ test('should handle blur correctly', () => {
 
   input.focus();
   input.blur();
+  expect(input).not.toHaveFocus();
   expect(checkboxIcon).not.toHaveClass('Checkbox__overlay--focused');
   expect(onBlur.calledOnce).toBeTruthy();
 });
