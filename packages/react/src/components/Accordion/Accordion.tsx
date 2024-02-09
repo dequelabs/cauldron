@@ -93,8 +93,8 @@ const Accordion = ({
         {...panelElement.props}
       >
         <PanelTrigger
-          iconCollapsed="triangle-solid-right"
-          iconExpanded="triangle-solid-down"
+          iconCollapsed="triangle-right"
+          iconExpanded="triangle-down"
           className={classnames(
             'Accordion__trigger',
             (trigger.props as AccordionTriggerProps).className

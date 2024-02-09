@@ -16,8 +16,7 @@ const ICONS_WITH_DIRECTIONS = [
   'arrow-circle',
   'chevron',
   'chevron-double',
-  'triangle',
-  'triangle-solid'
+  'triangle'
 ];
 const DIRECTIONS = ['up', 'down', 'left', 'right'];
 
