@@ -63,7 +63,7 @@ describe('Table components', () => {
       tableFooter
     ];
 
-    tableItems.forEach(wrapper => {
+    tableItems.forEach((wrapper) => {
       expect(!!wrapper.children().length).toBe(true);
     });
   });
@@ -105,7 +105,7 @@ describe('Table components', () => {
       tableFooter
     ];
 
-    tableItems.forEach(wrapper => {
+    tableItems.forEach((wrapper) => {
       expect(wrapper.is('[data-foo="true"]')).toBe(true);
     });
 

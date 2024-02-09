@@ -18,7 +18,7 @@ let resizeObserverListener;
 beforeEach(() => {
   document.body.innerHTML = '<div id="fixture"></div>';
   global.ResizeObserver = global.ResizeObserver || (() => null);
-  sandbox.stub(global, 'ResizeObserver').callsFake(listener => {
+  sandbox.stub(global, 'ResizeObserver').callsFake((listener) => {
     resizeObserverListener = listener;
     return {
       observe: sandbox.stub(),

@@ -13,9 +13,31 @@ test('handles classNames/additional attributes properly', () => {
   expect(node.getAttribute('role')).toBe('alert');
 });
 
-test('handles focus', (done) => {
-  const mountElement = document.createElement('div');
-  document.body.appendChild(mountElement);
+test('handles variants', () => {
+  const small = mount(
+    <LoaderOverlay
+      className="baz"
+      role="alert"
+      label="loading"
+      variant="small"
+    />
+  );
+  const large = mount(
+    <LoaderOverlay
+      className="baz"
+      role="alert"
+      label="loading"
+      variant="large"
+    />
+  );
+  const smallNode = small.getDOMNode();
+  const largeNode = large.getDOMNode();
+
+  expect(smallNode.classList.contains('Loader__overlay--small')).toBe(true);
+  expect(largeNode.classList.contains('Loader__overlay--large')).toBe(true);
+});
+
+test('handles focus automatically when focusOnInitialRender is set to ’true’', () => {
   const loaderOverlay = mount(
     <LoaderOverlay
       className="baz"
@@ -55,7 +77,7 @@ test('handles being passed a ref', () => {
   document.body.appendChild(mountElement);
   const loaderRef = React.createRef();
 
-  const loaderOverlay = mount(
+  mount(
     <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>
       Some text
     </LoaderOverlay>,

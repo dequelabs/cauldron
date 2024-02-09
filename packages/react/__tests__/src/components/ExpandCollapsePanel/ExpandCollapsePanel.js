@@ -25,7 +25,7 @@ afterEach(() => {
   sandbox.restore();
 });
 
-const isVisible = element => {
+const isVisible = (element) => {
   const node = element.getDOMNode().parentNode;
   // Ideally we would test against actual DOM, but short-cutting to use `is-hidden`
   // which should have the appropriate styles to be actually hidden
@@ -58,12 +58,7 @@ test('should passthrough props', () => {
     </ExpandCollapsePanel>
   );
 
-  expect(
-    wrapper
-      .find('[data-test]')
-      .parent()
-      .props().foo
-  ).toBe('bar');
+  expect(wrapper.find('[data-test]').parent().props().foo).toBe('bar');
 });
 
 test('should have hidden content when collapsed', () => {
@@ -76,7 +71,7 @@ test('should have hidden content when collapsed', () => {
   expect(isVisible(wrapper.find('[data-test]'))).toBeFalsy();
 });
 
-test('should have visible content when expanded', done => {
+test('should have visible content when expanded', (done) => {
   const wrapper = mount(
     <ExpandCollapsePanel animationTiming={1}>
       <div data-test>foo</div>
@@ -112,10 +107,7 @@ test('should call onToggle when toggled', () => {
   );
 
   // Manually calling the `onClick` prop here because of Enzyme oddness
-  wrapper
-    .find(PanelTrigger)
-    .props()
-    .onClick({ which: 1 });
+  wrapper.find(PanelTrigger).props().onClick({ which: 1 });
   expect(handleToggle).toBeCalledWith(expect.objectContaining({ which: 1 }));
 });
 
@@ -127,17 +119,14 @@ test('trigger should open panel collapsed panel', () => {
     </ExpandCollapsePanel>
   );
 
-  wrapper
-    .find(PanelTrigger)
-    .props()
-    .onClick();
+  wrapper.find(PanelTrigger).props().onClick();
 
   setTimeout(() => {
     expect(isVisible(wrapper.find('[data-test]'))).toBeTruthy();
   });
 });
 
-test('trigger should close expanded panel', done => {
+test('trigger should close expanded panel', (done) => {
   const wrapper = mount(
     <ExpandCollapsePanel animationTiming={1}>
       <PanelTrigger />
@@ -146,10 +135,7 @@ test('trigger should close expanded panel', done => {
   );
 
   wrapper.setState({ isOpen: true });
-  wrapper
-    .find(PanelTrigger)
-    .props()
-    .onClick();
+  wrapper.find(PanelTrigger).props().onClick();
 
   setTimeout(() => {
     expect(isVisible(wrapper.find('[data-test]'))).toBeFalsy();
@@ -157,7 +143,7 @@ test('trigger should close expanded panel', done => {
   });
 });
 
-test('should clean up injected styletags', done => {
+test('should clean up injected styletags', (done) => {
   const cleanup = jest.spyOn(stylesheets, 'removeStyleTag');
   const wrapper = mount(
     <ExpandCollapsePanel animationTiming={1}>
@@ -174,7 +160,7 @@ test('should clean up injected styletags', done => {
   });
 });
 
-test('should not run open animations if timing is not set', done => {
+test('should not run open animations if timing is not set', (done) => {
   const setStyle = jest.spyOn(stylesheets, 'setStyle');
   const wrapper = mount(
     <ExpandCollapsePanel animationTiming={0}>
@@ -182,10 +168,7 @@ test('should not run open animations if timing is not set', done => {
       <div data-test />
     </ExpandCollapsePanel>
   );
-  wrapper
-    .find(PanelTrigger)
-    .props()
-    .onClick();
+  wrapper.find(PanelTrigger).props().onClick();
 
   setTimeout(() => {
     expect(setStyle).not.toBeCalled();
@@ -194,7 +177,7 @@ test('should not run open animations if timing is not set', done => {
   });
 });
 
-test('should not run close animations if timing is not set', done => {
+test('should not run close animations if timing is not set', (done) => {
   const setStyle = jest.spyOn(stylesheets, 'setStyle');
   const wrapper = mount(
     <ExpandCollapsePanel animationTiming={0}>
@@ -203,10 +186,7 @@ test('should not run close animations if timing is not set', done => {
     </ExpandCollapsePanel>
   );
   wrapper.setState({ isOpen: true });
-  wrapper
-    .find(PanelTrigger)
-    .props()
-    .onClick();
+  wrapper.find(PanelTrigger).props().onClick();
 
   setTimeout(() => {
     expect(setStyle).not.toBeCalled();

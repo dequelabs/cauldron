@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import Notice from 'src/components/Notice';
 import axe from '../../../axe';
 
-test('handles rendering without errors', done => {
+test('handles rendering without errors', (done) => {
   const wrapper = mount(<Notice />);
   expect(wrapper.find('Notice').length).toBe(1);
   done();

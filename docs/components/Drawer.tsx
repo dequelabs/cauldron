@@ -50,14 +50,14 @@ export default function Drawer({
     const elements = drawerRef.current?.querySelectorAll(focusable) || [];
 
     if (!open) {
-      Array.from(elements).forEach(element => {
+      Array.from(elements).forEach((element) => {
         // Note: we just need an typed element to act as an element
         // with a tabIndex attribute
         (element as HTMLInputElement).tabIndex = -1;
       });
     } else {
       triggerElement.current = document.activeElement as HTMLElement;
-      Array.from(elements).forEach(element => {
+      Array.from(elements).forEach((element) => {
         const tabIndexAttr = Number(element.getAttribute('tabindex'));
         (element as HTMLInputElement).tabIndex =
           typeof tabIndexAttr === 'number' ? tabIndexAttr : 0;

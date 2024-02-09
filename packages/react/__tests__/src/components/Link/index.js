@@ -10,7 +10,7 @@ test('passes classNames through', () => {
 
 test('supports linkRef', () => {
   let element;
-  mount(<Link linkRef={el => (element = el)} />);
+  mount(<Link linkRef={(el) => (element = el)} />);
   expect(element instanceof HTMLAnchorElement).toBe(true);
 });
 
