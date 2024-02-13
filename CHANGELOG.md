@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/dequelabs/cauldron/compare/v6.1.0...v6.2.0) (2024-02-13)
+
+
+### Features
+
+* **react,styles:** add Timeline component ([#1325](https://github.com/dequelabs/cauldron/issues/1325)) ([6628503](https://github.com/dequelabs/cauldron/commit/6628503713cbcdc289bb6d736cdd689670da52b7))
+
+
+### Bug Fixes
+
+* **Combobox:** fix incorrect type for Combobox ref ([#1326](https://github.com/dequelabs/cauldron/issues/1326)) ([c2d49bd](https://github.com/dequelabs/cauldron/commit/c2d49bda4b1a4136482192601ecbc9aa911664dc))
+* **react:** fix incorrect aria when Combobox has no results ([#1332](https://github.com/dequelabs/cauldron/issues/1332)) ([023ddac](https://github.com/dequelabs/cauldron/commit/023ddacc9fa08a35542afb6b866277d727d11c67))
+* **react:** fix misuse of dom globals preventing ssr usage ([#1328](https://github.com/dequelabs/cauldron/issues/1328)) ([ef37e97](https://github.com/dequelabs/cauldron/commit/ef37e97726dfcc1af2d2cc8f3957a172479797e9))
+* **react:** use default hover cursor when checkboxes are disabled ([#1340](https://github.com/dequelabs/cauldron/issues/1340)) ([3818823](https://github.com/dequelabs/cauldron/commit/3818823b0c60df33555a10cd96c97f4e3c29aad1))
+* **styles:** fix incorrect icon size with Dialog close buttons ([#1327](https://github.com/dequelabs/cauldron/issues/1327)) ([f877edf](https://github.com/dequelabs/cauldron/commit/f877edfdd24548af977bd62cf57bb561f8d7a957))
+* **TextField:** prevent className clobbering on TextField input ([#1338](https://github.com/dequelabs/cauldron/issues/1338)) ([9bf6c09](https://github.com/dequelabs/cauldron/commit/9bf6c09d6a70fb95a3992ba223e79043cf906dfb))
+
 ## [6.1.0](https://github.com/dequelabs/cauldron/compare/v6.0.0...v6.1.0) (2024-01-24)
 
 
