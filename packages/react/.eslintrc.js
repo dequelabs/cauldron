@@ -1,0 +1,15 @@
+module.exports = {
+  extends: ['../../.eslintrc.js', 'plugin:ssr-friendly/recommended'],
+  plugins: ['ssr-friendly'],
+  overrides: [
+    {
+      files: ['__tests__/**/*', '**/*.test.[j|t]sx?'],
+      rules: {
+        'ssr-friendly/no-dom-globals-in-module-scope': 'off',
+        'ssr-friendly/no-dom-globals-in-constructor': 'off',
+        'ssr-friendly/no-dom-globals-in-react-cc-render': 'off',
+        'ssr-friendly/no-dom-globals-in-react-fc': 'off'
+      }
+    }
+  ]
+};

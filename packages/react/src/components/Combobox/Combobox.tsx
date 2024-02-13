@@ -75,7 +75,7 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
+const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
   (
     {
       id: propId,
@@ -378,8 +378,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
         })}
-        role="listbox"
-        aria-labelledby={`${id}-label`}
+        role={noMatchingOptions ? 'presentation' : 'listbox'}
+        aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
         value={selectedValue}
         onMouseDown={handleComboboxOptionMouseDown}
@@ -463,12 +463,14 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setMatchingOptions={setMatchingOptions}
           setFormValue={setFormValue}
         >
-          {portal
+          {portal && typeof document !== 'undefined'
             ? createPortal(
                 comboboxListbox,
+                // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                 portal instanceof HTMLElement
                   ? portal
                   : portal.current ||
+                      // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                       /* istanbul ignore next: default fallback value */ document.body
               )
             : comboboxListbox}

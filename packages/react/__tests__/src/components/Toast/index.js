@@ -14,11 +14,14 @@ beforeEach(() => {
   document.activeElement.blur();
 });
 
-test('handles initial show prop on mount', done => {
+test('handles initial show prop on mount', (done) => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const wrapper = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
-    </Toast>
+    </Toast>,
+    { attachTo: mountElement }
   );
 
   setTimeout(() => {
@@ -28,7 +31,7 @@ test('handles initial show prop on mount', done => {
   }); // wait for animation timeouts / async setState calls
 });
 
-test('handles transition from falsey show to truthy show prop', done => {
+test('handles transition from falsey show to truthy show prop', (done) => {
   const wrapper = mount(<Toast {...defaultProps}>{'hi'}</Toast>);
   expect(wrapper.find('.Toast').hasClass('FadeIn--flex')).toBeFalsy();
 
@@ -41,7 +44,7 @@ test('handles transition from falsey show to truthy show prop', done => {
   }); // wait for animation timeouts / async setState calls
 });
 
-test('handles transition from truthy show to falsey show prop', done => {
+test('handles transition from truthy show to falsey show prop', (done) => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
@@ -54,10 +57,7 @@ test('handles transition from truthy show to falsey show prop', done => {
     // there is a bug relating to enzyme's hasClass so I am forced to use `getDOMNode()` here
     // see https://github.com/airbnb/enzyme/issues/1170
     expect(
-      wrapper
-        .find('.Toast')
-        .getDOMNode()
-        .classList.contains('is--hidden')
+      wrapper.find('.Toast').getDOMNode().classList.contains('is--hidden')
     ).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
@@ -80,12 +80,7 @@ test('confirmation renders the expected UI and icon', () => {
     </Toast>
   );
   expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
-  expect(
-    confirmation
-      .find('Icon')
-      .at(0)
-      .prop('type')
-  ).toBe('check-circle');
+  expect(confirmation.find('Icon').at(0).prop('type')).toBe('check-circle');
 });
 
 test('confirmation renders the expected UI and icon', () => {
@@ -95,12 +90,7 @@ test('confirmation renders the expected UI and icon', () => {
     </Toast>
   );
   expect(confirmation.find('.Toast.Toast--success').exists()).toBeTruthy();
-  expect(
-    confirmation
-      .find('Icon')
-      .at(0)
-      .prop('type')
-  ).toBe('check-circle');
+  expect(confirmation.find('Icon').at(0).prop('type')).toBe('check-circle');
 });
 
 test('caution renders the expected UI and icon', () => {
@@ -110,12 +100,7 @@ test('caution renders the expected UI and icon', () => {
     </Toast>
   );
   expect(caution.find('.Toast.Toast--warning').exists()).toBeTruthy();
-  expect(
-    caution
-      .find('Icon')
-      .at(0)
-      .prop('type')
-  ).toBe('caution');
+  expect(caution.find('Icon').at(0).prop('type')).toBe('caution');
 });
 
 test('error renders the expected UI and icon', () => {
@@ -125,12 +110,7 @@ test('error renders the expected UI and icon', () => {
     </Toast>
   );
   expect(caution.find('.Toast.Toast--error').exists()).toBeTruthy();
-  expect(
-    caution
-      .find('Icon')
-      .at(0)
-      .prop('type')
-  ).toBe('caution');
+  expect(caution.find('Icon').at(0).prop('type')).toBe('caution');
 });
 
 test('info renders the expected UI and icon', () => {
@@ -140,15 +120,10 @@ test('info renders the expected UI and icon', () => {
     </Toast>
   );
   expect(info.find('.Toast.Toast--info').exists()).toBeTruthy();
-  expect(
-    info
-      .find('Icon')
-      .at(0)
-      .prop('type')
-  ).toBe('info-circle-alt');
+  expect(info.find('Icon').at(0).prop('type')).toBe('info-circle-alt');
 });
 
-test('action-needed renders epxected UI, icon, and scrim (no close)', done => {
+test('action-needed renders epxected UI, icon, and scrim (no close)', (done) => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true} type={'action-needed'}>
       {'hi'}
@@ -157,19 +132,14 @@ test('action-needed renders epxected UI, icon, and scrim (no close)', done => {
 
   setTimeout(() => {
     expect(wrapper.find('.Toast.Toast--error').exists()).toBeTruthy();
-    expect(
-      wrapper
-        .find('Icon')
-        .at(0)
-        .prop('type')
-    ).toBe('no');
+    expect(wrapper.find('Icon').at(0).prop('type')).toBe('no');
     expect(wrapper.find('.Toast__dismiss').exists()).toBeFalsy();
     expect(wrapper.find('.Scrim--light').exists()).toBeTruthy();
     done();
   }); // wait for animation timeouts / async setState calls
 });
 
-test('clicking the dismiss button properly dismisses toast', done => {
+test('clicking the dismiss button properly dismisses toast', (done) => {
   let called = false;
   const wrapper = mount(
     <Toast {...defaultProps} show={true} onDismiss={() => (called = true)}>
@@ -183,11 +153,14 @@ test('clicking the dismiss button properly dismisses toast', done => {
   }, 10);
 });
 
-test('toast should be focused by default', done => {
+test('toast should be focused by default', (done) => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   const wrapper = mount(
     <Toast {...defaultProps} show={true}>
       {'hi'}
-    </Toast>
+    </Toast>,
+    { attachTo: mountElement }
   );
   setTimeout(() => {
     expect(wrapper.getDOMNode()).toBe(document.activeElement);
@@ -195,11 +168,14 @@ test('toast should be focused by default', done => {
   }, 10);
 });
 
-test('toast should not be focused with falsey focus prop', done => {
+test('toast should not be focused with falsey focus prop', (done) => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
   mount(
     <Toast {...defaultProps} show={true} focus={false}>
       {'hi'}
-    </Toast>
+    </Toast>,
+    { attachTo: mountElement }
   );
   setTimeout(() => {
     expect(document.body).toBe(document.activeElement);
@@ -258,7 +234,7 @@ test('should return no axe violations', async () => {
   expect(await axe(info.html())).toHaveNoViolations();
 });
 
-test('dismiss control is not rendered when dismissible is `false`', done => {
+test('dismiss control is not rendered when dismissible is `false`', (done) => {
   const wrapper = mount(
     <Toast {...defaultProps} show={true} type="info" dismissible={false}>
       {'hi'}
