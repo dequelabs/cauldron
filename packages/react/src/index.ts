@@ -127,6 +127,8 @@ export {
 
 export { default as Popover } from './components/Popover';
 
+export { default as Timeline, TimelineItem } from './components/Timeline';
+
 /**
  * Helpers / Utils
  */

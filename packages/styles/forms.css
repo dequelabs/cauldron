@@ -439,11 +439,13 @@ textarea.Field--has-error:focus:hover,
 .Radio__overlay--disabled.Icon--radio-checked,
 .Checkbox__overlay--disabled.Icon--checkbox-checked {
   color: var(--field-icon-checked-disabled-color);
+  cursor: default;
 }
 
 .Checkbox__overlay--disabled.Icon--checkbox-unchecked,
 .Radio__overlay--disabled.Icon--radio-unchecked {
   color: var(--field-icon-unchecked-disabled-color);
+  cursor: default;
 }
 
 .Field__label:hover ~ .Radio__overlay:not(.Radio__overlay--disabled),
