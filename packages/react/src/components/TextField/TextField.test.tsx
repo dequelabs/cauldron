@@ -18,7 +18,9 @@ const renderTextField = ({
 }: TextFieldProps = {}): HTMLInputElement => {
   render(<TextField label={label || 'text field'} {...props} />);
   // no individual assertions needed, as this should throw if the element does not exist
-  return screen.getByRole('textbox', { name: label as string });
+  return screen.getByRole('textbox', {
+    name: label as string
+  }) as HTMLInputElement;
 };
 
 test('should render textfield', () => {
