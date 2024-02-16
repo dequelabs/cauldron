@@ -1,8 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "__tests__/setupTests.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declarationDir": "lib",
+    "declaration": true
   }
 }
