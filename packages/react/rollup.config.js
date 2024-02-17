@@ -22,7 +22,16 @@ export default {
     chunkFileNames: '[name].js'
   },
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json',
+      exclude: [
+        './__tests__',
+        '**.test.ts',
+        '**.test.tsx',
+        './src/setupTests.ts',
+        './src/axe.ts'
+      ]
+    }),
     commonjs(),
     svgr({
       svgoConfig: {
