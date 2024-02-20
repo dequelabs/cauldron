@@ -113,7 +113,6 @@ export {
   ColumnList
 } from './components/TwoColumnPanel';
 export { default as Notice } from './components/Notice';
-
 export {
   default as Listbox,
   ListboxOption,
@@ -124,10 +123,9 @@ export {
   ComboboxOption,
   ComboboxGroup
 } from './components/Combobox';
-
 export { default as Popover } from './components/Popover';
-
 export { default as Timeline, TimelineItem } from './components/Timeline';
+export { default as TextEllipsis } from './components/TextEllipsis';
 
 /**
  * Helpers / Utils

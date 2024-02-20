@@ -1,0 +1,17 @@
+.TextEllipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.TextEllipsis:where([role='button']) {
+  display: block;
+  text-align: inherit;
+  user-select: inherit;
+}
+
+.TextEllipsis--multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
