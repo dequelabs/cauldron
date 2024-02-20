@@ -17,7 +17,6 @@ export interface RadioGroupProps
   value?: any;
   inline?: boolean;
   onChange?: (radio: RadioItem, input: HTMLElement) => void;
-  hasLabel?: never;
 }
 
 const RadioGroup = forwardRef(

@@ -3,7 +3,7 @@ module.exports = {
   plugins: ['ssr-friendly'],
   overrides: [
     {
-      files: ['__tests__/**/*', '**/*.test.[j|t]sx?'],
+      files: ['__tests__/**/*', '**/*.test.[j|t]sx?', 'src/setupTests.ts'],
       rules: {
         'ssr-friendly/no-dom-globals-in-module-scope': 'off',
         'ssr-friendly/no-dom-globals-in-constructor': 'off',

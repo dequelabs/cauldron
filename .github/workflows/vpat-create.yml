@@ -1,0 +1,35 @@
+name: VPAT Generate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'master'
+      - uses: ./.github/actions/dependencies
+        with:
+          root: false
+          packages-react: false
+          packages-styles: false
+      - name: Generate VPAT file
+        uses: dequelabs/action-vpat-report@main
+        with:
+          product-name: Cauldron
+          output-file: vpats/{DATE}-{PRODUCT}.md
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: Generate a VPAT'
+          branch: auto-generate-vpat-report
+          base: develop
+          title: 'chore: Generate a VPAT'
+          body: |
+            This patch generates a VPAT based on this repository's currently open issues.
+            This PR was opened by a robot :robot: :tada:
