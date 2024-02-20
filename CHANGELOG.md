@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.2.1](https://github.com/dequelabs/cauldron/compare/v6.2.0...v6.2.1) (2024-02-20)
+
+
+### Bug Fixes
+
+* **react:** restore missing types from lib ([#1348](https://github.com/dequelabs/cauldron/issues/1348)) ([edb685a](https://github.com/dequelabs/cauldron/commit/edb685a396ca8ad0262ef0812a42a38cf49d51ef))
+
 ## [6.2.0](https://github.com/dequelabs/cauldron/compare/v6.1.0...v6.2.0) (2024-02-13)
 
 
