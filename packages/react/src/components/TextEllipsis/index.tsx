@@ -79,7 +79,6 @@ const TextEllipsis = React.forwardRef(
             'TextEllipsis--multiline': !!maxLines
           })}
           ref={sharedRef}
-          role="button"
           {...props}
         >
           {children}
