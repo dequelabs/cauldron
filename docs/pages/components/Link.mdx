@@ -58,23 +58,24 @@ A link with visual styling applied to make it look like a button with reduced he
   children={{
     required: true
   }}
+  refType="HTMLAnchorElement"
   props={[
     {
       name: 'variant',
       type: ['button', 'button-secondary'],
-      description: 'Visual style of the button.'
+      description: 'Visual style of the link as a button variant.'
     },
     {
       name: 'thin',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Thinner visual style of button.'
+      description: 'Thinner visual style of link as a button variant.'
     },
     {
-      name: 'buttonRef',
+      name: 'linkRef',
       type: 'function',
       description:
-        'Ref function for the button element. Use this to access the button element directly.'
+        'Ref function for the link element. Use this to access the link element directly.'
     }
   ]}
 />
