@@ -171,7 +171,10 @@ The testing methodology should account for both testing the interface of a compo
 
 ### Unit Tests
 
-Cauldron uses [Jest](https://jestjs.io/) as its test runner to run unit tests along with [Enzyme](https://enzymejs.github.io/enzyme) (deprecated) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). We are currently in the process of migrating tests away from Enzyme to React Testing Library so no new tests should be using React Testing Library.
+Cauldron uses [Jest](https://jestjs.io/) as its test runner to run unit tests along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
+
+> [!IMPORTANT]   
+> We are currently in the process of migrating existing tests away from Enzyme to React Testing Library. New tests should **not** be written in Enzyme.
 
 ### Accessibility Testing
 
