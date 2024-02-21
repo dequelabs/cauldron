@@ -54,13 +54,12 @@ const TextEllipsis = React.forwardRef(
             return;
           }
 
-          setShowTooltip((overflow) => {
-            const hasOverflow =
-              typeof maxLines === 'number'
-                ? overflowElement.clientHeight < overflowElement.scrollHeight
-                : overflowElement.offsetWidth < overflowElement.scrollWidth;
-            return overflow !== hasOverflow ? hasOverflow : overflow;
-          });
+          const hasOverflow =
+            typeof maxLines === 'number'
+              ? overflowElement.clientHeight < overflowElement.scrollHeight
+              : overflowElement.offsetWidth < overflowElement.scrollWidth;
+
+          setShowTooltip(hasOverflow);
         });
       };
 
