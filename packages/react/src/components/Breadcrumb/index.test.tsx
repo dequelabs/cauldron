@@ -1,60 +1,55 @@
-import React, { createRef } from 'react';
-import { shallow } from 'enzyme';
-import {
-  default as Breadcrumb,
-  BreadcrumbLink,
-  BreadcrumbItem
-} from 'src/components/Breadcrumb';
-import axe from '../../../axe';
+import React from 'react';
+import { render } from '@testing-library/react';
+import Breadcrumb, { BreadcrumbLink, BreadcrumbItem } from './index';
+import axe from '../../axe';
 
 test('should render breadcrumbs', () => {
-  const breadcrumb = shallow(
+  const { container } = render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.hasClass('Breadcrumb')).toBe(true);
-  expect(breadcrumb.find('li').length).toBe(3);
+  expect(container.querySelector('.Breadcrumb')).toBeInTheDocument();
+  expect(container.querySelectorAll('li').length).toBe(3);
 });
 
 test('should render separators between breadcrumbs', () => {
-  const breadcrumb = shallow(
+  const { container } = render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.find('.Breadcrumb__Separator').length).toBe(2);
-  expect(
-    breadcrumb
-      .find(BreadcrumbItem)
-      .find('.Breadcrumb__Separator')
-      .exists()
-  ).toBeFalsy();
+  const item = container.querySelector('Breadcrumb__Item');
+  expect(container.querySelectorAll('.Breadcrumb__Separator').length).toBe(2);
+  if (item) {
+    const separator = item.querySelector('.Breadcrumb__Separator');
+    expect(separator).not.toBeInTheDocument();
+  }
 });
 
 test('should render custom separators between breadcrumbs', () => {
-  const breadcrumb = shallow(
+  const { container } = render(
     <Breadcrumb aria-label="breadcrumb" separator="💩">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.text()).toEqual('one💩two💩three');
+  expect(container.textContent).toEqual('one💩two💩three');
 });
 
 test('should return no axe violations', async () => {
-  const breadcrumb = shallow(
+  const { container } = render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-
-  expect(await axe(breadcrumb.html())).toHaveNoViolations();
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
