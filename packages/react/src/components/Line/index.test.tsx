@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Line from '../../../src/components/Line';
+import Line from './index';
 import axe from '../../axe';
 
 test('passes classNames through', () => {
