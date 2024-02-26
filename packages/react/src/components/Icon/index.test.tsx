@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 import { render } from '@testing-library/react';
-import Icon from './index';
+import Icon from './';
 
 test('handles classNames properly', () => {
   const { container } = render(<Icon type="add-user" className="baz" />);
