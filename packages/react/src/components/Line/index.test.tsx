@@ -5,7 +5,7 @@ import axe from '../../axe';
 
 test('passes classNames through', () => {
   const { container } = render(<Line className="baz" />);
-  expect(container.firstChild).toHaveClass('baz');
+  expect(container.firstChild).toHaveClass('Line', 'baz');
 });
 
 test('should return no axe violations', async () => {
