@@ -58,16 +58,8 @@ describe('DescriptionList components', () => {
         a
       </DescriptionList>
     );
-    render(
-      <DescriptionTerm data-testid="term" data-foo="term">
-        a
-      </DescriptionTerm>
-    );
-    render(
-      <DescriptionDetails data-testid="detail" data-foo="detail">
-        a
-      </DescriptionDetails>
-    );
+    render(<DescriptionTerm data-foo="term">a</DescriptionTerm>);
+    render(<DescriptionDetails data-foo="detail">a</DescriptionDetails>);
 
     expect(screen.getByTestId('dl')).toHaveAttribute('data-foo', 'list');
     expect(screen.getByRole('term')).toHaveAttribute('data-foo', 'term');
