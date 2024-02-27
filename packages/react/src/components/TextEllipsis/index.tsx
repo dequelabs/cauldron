@@ -7,6 +7,7 @@ interface TextEllipsisProps extends React.HTMLAttributes<HTMLDivElement> {
   children: string;
   maxLines?: number;
   as?: React.ElementType;
+  refProp?: string;
   tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
 }
 
@@ -20,9 +21,9 @@ const TextEllipsis = React.forwardRef(
       tooltipProps,
       ...props
     }: TextEllipsisProps,
-    ref: Ref<HTMLDivElement>
+    ref: Ref<HTMLElement>
   ) => {
-    let Element: React.ElementType<any> = 'div';
+    let Element: React.ElementType<unknown> = 'div';
     const sharedRef = useSharedRef<HTMLElement>(ref);
     const [showTooltip, setShowTooltip] = useState(false);
 

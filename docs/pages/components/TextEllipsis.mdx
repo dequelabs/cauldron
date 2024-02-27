@@ -32,10 +32,10 @@ Truncation should **not** be used on headers, labels, error messages, or notific
 <TextEllipsis>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TextEllipsis>
 ```
 
-If your component is a Button, Link, or some other kind of interactive element with a `tabIndex`, you _must_ provide your component as a Polymorphic component using the `as` prop:
+If your component is a Button, Link, or some other kind of interactive element with a `tabIndex`, you _must_ provide your component as a Polymorphic component using the `as` prop to avoid nesting interactive elements:
 
 ```jsx example
-
+<TextEllipsis as={Link}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TextEllipsis>
 ```
 
 ### Multi-line Ellipsis
@@ -50,9 +50,28 @@ If your component is a Button, Link, or some other kind of interactive element w
 
 <ComponentProps
   children={{
-    required: true
+    required: true,
+    type: 'string'
   }}
-  props={[]}
+  refType="HTMLElement"
+  props={[
+    {
+      name: 'maxLines',
+      type: 'number',
+      defaultValue: '1',
+      description: 'Sets the maximum number of display line before truncation.'
+    },
+    {
+      name: 'as',
+      type: ['React.ElementType', 'string'],
+      description: 'A component to render the TextEllipsis as.',
+    },
+    {
+      name: 'tooltipProps',
+      type: 'object',
+      description: 'Props to pass and configure the displayed tooltip.'
+    }
+  ]}
 />
 
 ## Related Components
