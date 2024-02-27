@@ -5,7 +5,7 @@ import {
   DescriptionListItem,
   DescriptionTerm,
   DescriptionDetails
-} from './index';
+} from './';
 import axe from '../../axe';
 
 describe('DescriptionList components', () => {
