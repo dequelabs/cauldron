@@ -10,71 +10,71 @@ import axe from '../../axe';
 
 describe('DescriptionList components', () => {
   test('renders a dl element', () => {
-    const { container } = render(<DescriptionList>a</DescriptionList>);
-    const dl = container.querySelector('dl');
-    expect(dl).toBeInTheDocument();
+    render(<DescriptionList data-testid="dl">a</DescriptionList>);
+    expect(screen.getByTestId('dl').tagName).toBe('DL');
+    expect(screen.getByTestId('dl')).toBeInTheDocument();
   });
 
   test('renders a dt element', () => {
-    const { container } = render(<DescriptionTerm>a</DescriptionTerm>);
-    const dt = container.querySelector('dt');
-    expect(dt).toBeInTheDocument();
+    render(<DescriptionTerm>a</DescriptionTerm>);
+    expect(screen.getByRole('term')).toBeInTheDocument();
   });
 
   test('renders a dd element', () => {
-    const { container } = render(<DescriptionDetails>a</DescriptionDetails>);
-    const dd = container.querySelector('dd');
-    expect(dd).toBeInTheDocument();
+    render(<DescriptionDetails>a</DescriptionDetails>);
+    expect(screen.getByRole('definition')).toBeInTheDocument();
   });
 
   test('handles uncollapsed prop', () => {
-    const { container } = render(<DescriptionList>a</DescriptionList>);
-    const dl = container.querySelector('dl');
-    expect(dl).not.toHaveClass('DescriptionList--collapsed');
+    render(<DescriptionList data-testid="dl">a</DescriptionList>);
+    expect(screen.getByTestId('dl')).not.toHaveClass(
+      'DescriptionList--collapsed'
+    );
   });
 
   test('handles collapsed prop', () => {
-    const { container } = render(
-      <DescriptionList collapsed>a</DescriptionList>
+    render(
+      <DescriptionList data-testid="dl" collapsed>
+        a
+      </DescriptionList>
     );
-    const dl = container.querySelector('dl');
-    expect(dl).toHaveClass('DescriptionList--collapsed');
+    expect(screen.getByTestId('dl')).toHaveClass('DescriptionList--collapsed');
   });
 
   test('passes classNames through', () => {
     render(<DescriptionList className="a">a</DescriptionList>);
-    const dl = screen.getByText('a');
-    expect(dl).toHaveClass('a');
+    expect(screen.getByText(/a/i)).toHaveClass('a');
 
     render(<DescriptionTerm className="b">b</DescriptionTerm>);
-    const dt = screen.getByText('b');
-    expect(dt).toHaveClass('b');
+    expect(screen.getByText(/b/i)).toHaveClass('b');
 
     render(<DescriptionDetails className="c">c</DescriptionDetails>);
-    const dd = screen.getByText('c');
-    expect(dd).toHaveClass('c');
+    expect(screen.getByText(/c/i)).toHaveClass('c');
   });
 
   test('passes props through', () => {
-    const dl = render(
-      <DescriptionList data-testid="list" data-foo="list">
+    render(
+      <DescriptionList data-testid="dl" data-foo="list">
         a
       </DescriptionList>
     );
-    const dt = render(
+    render(
       <DescriptionTerm data-testid="term" data-foo="term">
         a
       </DescriptionTerm>
     );
-    const dd = render(
+    render(
       <DescriptionDetails data-testid="detail" data-foo="detail">
         a
       </DescriptionDetails>
     );
 
-    expect(dl.getByTestId('list')).toHaveAttribute('data-foo', 'list');
-    expect(dt.getByTestId('term')).toHaveAttribute('data-foo', 'term');
-    expect(dd.getByTestId('detail')).toHaveAttribute('data-foo', 'detail');
+    expect(screen.getByTestId('dl')).toHaveAttribute('data-foo', 'list');
+    expect(screen.getByRole('term')).toHaveAttribute('data-foo', 'term');
+    expect(screen.getByRole('definition')).toHaveAttribute(
+      'data-foo',
+      'detail'
+    );
   });
 
   test('returns no axe violations', async () => {
