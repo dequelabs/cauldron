@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import { render } from '@testing-library/react';
 import Icon from './';
+import axe from '../../axe';
 
 test('handles classNames properly', () => {
   const { container } = render(<Icon type="add-user" className="baz" />);
@@ -23,4 +24,10 @@ test('should support ref prop', () => {
   const ref = createRef<HTMLDivElement>();
   render(<Icon type="close" ref={ref} />);
   expect(ref.current).toBeInstanceOf(HTMLSpanElement);
+});
+
+test('should return no axe violations', async () => {
+  const { container } = render(<Icon type="check" label="Fred" />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
