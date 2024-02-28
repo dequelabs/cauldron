@@ -1,0 +1,12 @@
+:root {
+  --search-field-search-icon-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --search-field-search-icon-color: var(--accent-light);
+}
+
+.Field__search-icon {
+  color: var(--search-field-search-icon-color);
+  margin-left: 8px;
+}

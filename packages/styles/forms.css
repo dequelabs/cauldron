@@ -12,6 +12,7 @@
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
   --field-background-color-disabled: var(--light-workspace-color);
+  --field-placeholder-color: var(--gray-60);
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
   --field-label-error-text-color: var(--error);
@@ -44,6 +45,7 @@
   --field-border-color-error: var(--accent-danger);
   --field-border-color-error-hover: #fea7a6;
   --field-background-color-disabled: #5d676f;
+  --field-placeholder-color: #74818b;
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
   --field-label-error-text-color: var(--error);

@@ -17,6 +17,7 @@ import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 import tokenList from '../../utils/token-list';
+import TextFieldWrapper from '../internal/TextFieldWrapper';
 
 // Event Keys
 const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
@@ -373,6 +374,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       <NoMatchingOptions />
     );
 
+    console.log({ open });
     const comboboxListbox = (
       <Listbox
         className={classnames('Combobox__listbox', {
@@ -424,10 +426,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           )}
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-        <div
-          className={classnames('Combobox__input', {
-            'Combobox__input--error': hasError
-          })}
+        <TextFieldWrapper
+          className={hasError ? 'TextFieldWrapper--error' : ''}
           // We're handling click here to open the listbox when the wrapping element is clicked,
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
@@ -452,7 +452,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             onBlur={handleBlur}
           />
           <span className="Combobox__arrow" />
-        </div>
+        </TextFieldWrapper>
         <ComboboxProvider
           autocomplete={autocomplete}
           inputValue={value}
