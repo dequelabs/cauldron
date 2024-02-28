@@ -374,7 +374,6 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       <NoMatchingOptions />
     );
 
-    console.log({ open });
     const comboboxListbox = (
       <Listbox
         className={classnames('Combobox__listbox', {
