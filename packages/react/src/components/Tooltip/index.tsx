@@ -179,7 +179,19 @@ export default function Tooltip({
         [id, attrText].filter(Boolean).join(' ')
       );
     }
-  }, [targetElement, id]);
+
+    return () => {
+      if (targetElement) {
+        const associationValue = targetElement?.getAttribute(association);
+        const updatedValue =
+          associationValue
+            ?.split(' ')
+            .filter((associationId) => associationId !== id)
+            .join(' ') || '';
+        targetElement.setAttribute(association, updatedValue);
+      }
+    };
+  }, [targetElement, id, association]);
 
   return (
     <>
