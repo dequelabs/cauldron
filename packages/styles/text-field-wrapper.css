@@ -17,7 +17,6 @@
   );
   --text-field-wrapper-font-size: var(--field-font-size);
   --text-field-wrapper-font-color: var(--field-content-color);
-  --text-field-wrapper-placeholder-color: var(--field-placeholder-color);
 }
 
 .cauldron--theme-dark {
@@ -38,8 +37,6 @@
     --field-border-color-focus-glow
   );
   --text-field-wrapper-font-color: var(--field-content-color);
-  --text-field-wrapper-placeholder-color: var(--field-content-color);
-  --text-field-wrapper-placeholder-color: var(--field-placeholder-color);
 }
 
 .TextFieldWrapper input:is(*, :focus, :hover) {
@@ -77,12 +74,6 @@
   font-size: var(--text-field-wrapper-font-size);
   color: var(--text-field-wrapper-font-color);
   margin-right: 1.25rem;
-}
-
-.TextFieldWrapper input[type='text']::placeholder,
-.TextFieldWrapper input[type='search']::placeholder {
-  color: var(--text-field-wrapper-placeholder-color);
-  font-style: italic;
 }
 
 .TextFieldWrapper:focus-within {
