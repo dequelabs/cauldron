@@ -1,128 +1,93 @@
-import React, { ChangeEvent } from 'react';
+import React, {
+  useState,
+  useRef,
+  ChangeEvent,
+  InputHTMLAttributes,
+  ReactNode,
+  forwardRef,
+  ForwardRefRenderFunction
+} from 'react';
 import classNames from 'classnames';
 
-import setRef from '../../utils/setRef';
-import Offscreen from '../Offscreen';
-import randomId from '../../utils/rndid';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
+import randomId from '../../utils/rndid';
+import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 
-export interface SearchFieldProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
-  label: React.ReactNode;
+interface SearchFieldProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  label: ReactNode;
+  value?: string;
   defaultValue?: string;
-  onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
-  fieldRef?: React.Ref<HTMLInputElement>;
+  onChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
   hideLabel?: boolean;
-  field?: boolean;
+  isForm?: boolean;
 }
 
-interface SearchFieldState {
-  value: string | number | string[] | undefined;
-}
+const SearchField: ForwardRefRenderFunction<
+  HTMLInputElement,
+  SearchFieldProps
+> = (
+  {
+    label,
+    defaultValue = '',
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onChange = () => {},
+    hideLabel = false,
+    placeholder = 'Search...',
+    isForm = true,
+    id,
+    value: propsValue,
+    ...otherProps
+  },
+  ref
+) => {
+  const [value, setValue] = useState<string | number | undefined>(
+    typeof propsValue !== 'undefined' ? propsValue : defaultValue
+  );
+  const inputId = useRef(id || randomId()).current;
 
-export default class SearchField extends React.Component<
-  SearchFieldProps,
-  SearchFieldState
-> {
-  static displayName = 'SearchField';
-  static defaultProps = {
-    defaultValue: null,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onChange: () => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    fieldRef: () => {},
-    hideLabel: false,
-    placeholder: 'Search...',
-    field: true
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (onChange) {
+      onChange(newValue, e);
+    }
+
+    if (typeof propsValue === 'undefined') {
+      setValue(newValue);
+    }
   };
 
-  private inputId: string;
-  private input: HTMLInputElement | null;
+  const Field = isForm ? 'form' : 'div';
 
-  constructor(props: SearchFieldProps) {
-    super(props);
-    this.inputId = this.props.id || randomId();
-    this.state = {
-      value:
-        typeof this.props.value !== 'undefined'
-          ? (this.props.value as string)
-          : this.props.defaultValue || ''
-    };
-    this.onChange = this.onChange.bind(this);
-  }
+  return (
+    <Field role={isForm ? 'search' : undefined} className="Field__wrapper">
+      <label className={'Field__label'} htmlFor={inputId}>
+        {hideLabel ? <Offscreen>{label}</Offscreen> : <span>{label}</span>}
+      </label>
+      <TextFieldWrapper
+        className={
+          otherProps.disabled ? 'TextFieldWrapper--disabled' : undefined
+        }
+      >
+        <Icon
+          type="magnifying-glass"
+          aria-hidden="true"
+          className="Field__search-icon"
+        />
+        <input
+          id={inputId}
+          value={value}
+          onChange={handleChange}
+          placeholder={placeholder}
+          ref={ref}
+          {...otherProps}
+          className={classNames(otherProps.className, 'Field__text-input')}
+          type="search"
+        />
+      </TextFieldWrapper>
+    </Field>
+  );
+};
 
-  render() {
-    const isRequired = !!this.props.required;
-    // disabling `no-unused-vars` to prevent specific
-    // props from being passed through to the input
-    const {
-      label,
-      fieldRef,
-      value,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      defaultValue,
-      hideLabel,
-      placeholder,
-      field,
-      'aria-describedby': ariaDescribedby,
-      className,
-      disabled,
-      ...other
-    } = this.props;
-
-    const Field = field ? 'form' : 'div';
-
-    return (
-      <Field role={field ? 'search' : ''} className="Field__wrapper">
-        <label
-          className={classNames('Field__label', {
-            'Field__label--is-required': isRequired
-          })}
-          htmlFor={this.inputId}
-        >
-          {hideLabel ? <Offscreen>{label}</Offscreen> : <span>{label}</span>}
-        </label>
-        <TextFieldWrapper
-          className={disabled ? 'TextFieldWrapper--disabled' : undefined}
-        >
-          <Icon type="magnifying-glass" className="Field__search-icon" />
-          <input
-            type="search"
-            className={classNames(className, 'Field__text-input')}
-            id={this.inputId}
-            aria-describedby={ariaDescribedby}
-            disabled={disabled}
-            value={typeof value !== 'undefined' ? value : this.state.value}
-            onChange={this.onChange}
-            placeholder={placeholder}
-            ref={(input: HTMLInputElement | null) => {
-              this.input = input;
-              setRef(fieldRef, input);
-            }}
-            {...other}
-          />
-        </TextFieldWrapper>
-      </Field>
-    );
-  }
-
-  onChange(e: ChangeEvent<HTMLInputElement>) {
-    if (this.props.onChange) {
-      this.props.onChange(
-        this.input?.value || /* istanbul ignore next: default value */ '',
-        e
-      );
-    }
-
-    if (typeof this.props.value !== 'undefined') {
-      return;
-    }
-
-    this.setState({
-      value: this.input?.value
-    });
-  }
-}
+export default forwardRef(SearchField);
