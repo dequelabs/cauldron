@@ -42,7 +42,7 @@ const SearchField: ForwardRefRenderFunction<
   },
   ref
 ) => {
-  const [value, setValue] = useState<string | number | undefined>(
+  const [value, setValue] = useState<string | undefined>(
     typeof propsValue !== 'undefined' ? propsValue : defaultValue
   );
   const inputId = useRef(id || randomId()).current;
