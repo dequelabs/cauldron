@@ -1,4 +1,20 @@
 :root {
+  --combobox-input-border-color: var(--field-border-color);
+  --combobox-input-background-color: var(--field-background-color);
+  --combobox-input-border-focus-color: var(--field-border-color-focus);
+  --combobox-input-border-hover-color: var(--field-border-color-focus-hover);
+  --combobox-input-border-focus-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --combobox-input-error-border-color: var(--field-border-color-error);
+  --combobox-input-error-focus-border-color: var(
+    --field-border-color-error-hover
+  );
+  --combobox-input-error-focus-border-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --combobox-input-font-size: var(--field-font-size);
+  --combobox-input-font-color: var(--field-content-color);
   --combobox-listbox-border-color: var(--gray-40);
   --combobox-listbox-background-color: #fff;
   --combobox-option-font-color: var(--gray-90);
@@ -12,6 +28,22 @@
 }
 
 .cauldron--theme-dark {
+  --combobox-input-border-color: var(--field-border-color);
+  --combobox-input-background-color: var(--field-background-color);
+  --combobox-input-border-focus-color: var(--field-border-color-focus);
+  --combobox-input-border-hover-color: var(--field-border-color-focus-hover);
+  --combobox-input-border-focus-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --combobox-input-error-border-color: var(--field-border-color-error);
+  --combobox-input-error-focus-border-color: var(
+      --combobox-input-error-focus-border-color
+    ),
+    var(--field-border-color-error-hover);
+  --combobox-input-error-focus-border-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --combobox-input-font-color: var(--field-content-color);
   --combobox-option-font-color: var(--text-color-light);
   --combobox-option-hover-background-color: var(--accent-dark);
   --combobox-option-description-font-color: var(--accent-light);
@@ -20,16 +52,99 @@
   --combobox-option-selected-icon-color: var(--accent-success-light);
 }
 
+.Combobox .TextFieldWrapper {
+  --text-field-wrapper-border-color: var(
+    --combobox-input-border-color,
+    var(--field-border-color)
+  );
+  --text-field-wrapper-background-color: var(
+    --combobox-input-background-color,
+    var(--field-background-color)
+  );
+  --text-field-wrapper-border-focus-color: var(
+    --combobox-input-border-focus-color,
+    var(--field-border-color-focus)
+  );
+  --text-field-wrapper-border-hover-color: var(
+    --combobox-input-border-hover-color,
+    var(--field-border-color-focus-hover)
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --combobox-input-border-focus-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-error-border-color: var(
+    --combobox-input-error-border-color,
+    var(--field-border-color-error)
+  );
+  --text-field-wrapper-error-focus-border-color: var(
+    --combobox-input-error-focus-border-color,
+    var(--field-border-color-error-hover)
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --combobox-input-error-focus-border-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-font-size: var(
+    --combobox-input-font-size,
+    var(--field-font-size)
+  );
+  --text-field-wrapper-font-color: var(
+    --combobox-input-font-color,
+    var(--field-content-color)
+  );
+}
+
+.cauldron--theme-dark .Combobox .TextFieldWrapper {
+  --text-field-wrapper-border-color: var(
+    --combobox-input-border-color,
+    var(--field-border-color)
+  );
+  --text-field-wrapper-background-color: var(
+    --combobox-input-background-color,
+    var(--field-background-color)
+  );
+  --text-field-wrapper-border-focus-color: var(
+    --combobox-input-border-focus-color,
+    var(--field-border-color-focus)
+  );
+  --text-field-wrapper-border-hover-color: var(
+    --combobox-input-border-hover-color,
+    var(--field-border-color-focus-hover)
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --combobox-input-border-focus-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-error-border-color: var(
+    --combobox-input-error-border-color,
+    var(--field-border-color-error)
+  );
+  --text-field-wrapper-error-focus-border-color: var(
+    --combobox-input-error-focus-border-color,
+    var(--field-border-color-error-hover)
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --combobox-input-error-focus-border-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-font-size: var(
+    --combobox-input-font-size,
+    var(--field-font-size)
+  );
+  --text-field-wrapper-font-color: var(
+    --combobox-input-font-color,
+    var(--field-content-color)
+  );
+}
+
 .Combobox {
   --field-listbox-selected-background-color: transparent;
   position: relative;
 }
 
-.Combobox input:is(*, :focus, :hover) {
-  border: none;
-  box-shadow: none;
-  margin: initial;
-  padding: var(--space-smallest);
+.Combobox .TextFieldWrapper input[type='text'] {
+  margin-right: 1.25rem;
 }
 
 .Combobox__arrow {

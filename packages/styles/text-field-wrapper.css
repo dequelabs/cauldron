@@ -1,4 +1,4 @@
-:root {
+.TextFieldWrapper {
   --text-field-wrapper-border-color: var(--field-border-color);
   --text-field-wrapper-background-color: var(--field-background-color);
   --text-field-wrapper-border-focus-color: var(--field-border-color-focus);
@@ -69,11 +69,9 @@
   border-color: var(--text-field-wrapper-border-hover-color);
 }
 
-.TextFieldWrapper input[type='text'],
-.TextFieldWrapper input[type='search'] {
+.TextFieldWrapper input {
   font-size: var(--text-field-wrapper-font-size);
   color: var(--text-field-wrapper-font-color);
-  margin-right: 1.25rem;
 }
 
 .TextFieldWrapper:focus-within {

@@ -426,7 +426,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
-          className={classNames({ 'TextFieldWrapper--error' : hasError })}
+          className={classnames({ 'TextFieldWrapper--error': hasError })}
           // We're handling click here to open the listbox when the wrapping element is clicked,
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
