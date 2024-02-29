@@ -1,20 +1,17 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { ReactNode, MouseEvent } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 export interface TextFieldWrapperProps {
+  children: React.ReactNode;
   className?: string;
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
-  children: ReactNode;
 }
 
 const TextFieldWrapper = ({
   className,
-  onClick,
-  children
+  children,
+  ...otherProps
 }: TextFieldWrapperProps) => (
-  <div onClick={onClick} className={classNames('TextFieldWrapper', className)}>
+  <div className={classNames('TextFieldWrapper', className)} {...otherProps}>
     {children}
   </div>
 );
