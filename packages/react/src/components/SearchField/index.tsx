@@ -67,7 +67,7 @@ const SearchField: ForwardRefRenderFunction<
       </label>
       <TextFieldWrapper
         className={
-          otherProps.disabled ? 'TextFieldWrapper--disabled' : undefined
+          classNames({ 'TextFieldWrapper--disabled': otherProps.disabled })
         }
       >
         <Icon
