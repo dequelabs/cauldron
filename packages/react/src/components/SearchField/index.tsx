@@ -8,9 +8,9 @@ import React, {
   ForwardRefRenderFunction
 } from 'react';
 import classNames from 'classnames';
+import { useId } from 'react-id-generator';
 
 import TextFieldWrapper from '../internal/TextFieldWrapper';
-import randomId from '../../utils/rndid';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 
@@ -24,7 +24,7 @@ interface SearchFieldProps
   isForm?: boolean;
 }
 
-const SearchField: ForwardRefRenderFunction<
+const SearchFieldComponent: ForwardRefRenderFunction<
   HTMLInputElement,
   SearchFieldProps
 > = (
@@ -36,16 +36,18 @@ const SearchField: ForwardRefRenderFunction<
     hideLabel = false,
     placeholder = 'Search...',
     isForm = true,
-    id,
-    value: propsValue,
+    id: propId,
+    value: propValue,
     ...otherProps
   },
   ref
 ) => {
   const [value, setValue] = useState<string | undefined>(
-    typeof propsValue !== 'undefined' ? propsValue : defaultValue
+    typeof propValue !== 'undefined' ? propValue : defaultValue
   );
-  const inputId = useRef(id || randomId()).current;
+
+  const [id] = propId ? [propId] : useId(1, 'search-field');
+  const inputId = useRef(id).current;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -53,7 +55,9 @@ const SearchField: ForwardRefRenderFunction<
       onChange(newValue, e);
     }
 
-    if (typeof propsValue === 'undefined') {
+    const isControlled = typeof propValue !== 'undefined';
+
+    if (isControlled) {
       setValue(newValue);
     }
   };
@@ -62,13 +66,19 @@ const SearchField: ForwardRefRenderFunction<
 
   return (
     <Field role={isForm ? 'search' : undefined} className="Field__wrapper">
-      <label className={'Field__label'} htmlFor={inputId}>
-        {hideLabel ? <Offscreen>{label}</Offscreen> : label}
-      </label>
+      {hideLabel ? (
+        <Offscreen>
+          <label htmlFor={inputId}>{label}</label>
+        </Offscreen>
+      ) : (
+        <label className={'Field__label'} htmlFor={inputId}>
+          {label}
+        </label>
+      )}
       <TextFieldWrapper
-        className={
-          classNames({ 'TextFieldWrapper--disabled': otherProps.disabled })
-        }
+        className={classNames({
+          'TextFieldWrapper--disabled': otherProps.disabled
+        })}
       >
         <Icon
           type="magnifying-glass"
@@ -90,4 +100,6 @@ const SearchField: ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(SearchField);
+const SearchField = forwardRef(SearchFieldComponent);
+SearchField.displayName = 'SearchField';
+export default SearchField;
