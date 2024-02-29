@@ -43,6 +43,18 @@ import { SearchField } from '@deque/cauldron-react';
 </FieldWrap>
 ```
 
+### Usage in Form
+
+By default, SearchField is wrapped in a `<form role="search">` to provide better accessibility hints to users of assistive technology. If your search field needs to be placed inside of an existing form, you must use isForm="false".
+
+```jsx example
+<form role="search">
+  <FieldWrap>
+    <SearchField label="Nested in Form" isForm={false} />
+  </FieldWrap>
+</form>
+```
+
 ## Props
 
 <ComponentProps
