@@ -82,6 +82,7 @@
 .TextFieldWrapper input[type='text']::placeholder,
 .TextFieldWrapper input[type='search']::placeholder {
   color: var(--text-field-wrapper-placeholder-color);
+  font-style: italic;
 }
 
 .TextFieldWrapper:focus-within {
