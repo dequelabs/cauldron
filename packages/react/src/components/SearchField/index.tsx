@@ -63,7 +63,7 @@ const SearchField: ForwardRefRenderFunction<
   return (
     <Field role={isForm ? 'search' : undefined} className="Field__wrapper">
       <label className={'Field__label'} htmlFor={inputId}>
-        {hideLabel ? <Offscreen>{label}</Offscreen> : <span>{label}</span>}
+        {hideLabel ? <Offscreen>{label}</Offscreen> : label}
       </label>
       <TextFieldWrapper
         className={
