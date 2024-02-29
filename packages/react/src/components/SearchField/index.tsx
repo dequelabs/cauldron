@@ -49,7 +49,7 @@ const SearchField: ForwardRefRenderFunction<
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if (onChange) {
+    if (typeof onChange === 'function') {
       onChange(newValue, e);
     }
 
