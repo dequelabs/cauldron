@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface TextFieldWrapperProps {
+export interface TextFieldWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
 }
