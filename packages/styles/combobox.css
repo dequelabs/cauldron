@@ -52,7 +52,7 @@
   --combobox-option-selected-icon-color: var(--accent-success-light);
 }
 
-.Combobox .TextFieldWrapper {
+.Combobox :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
     --combobox-input-border-color,
     var(--field-border-color)
