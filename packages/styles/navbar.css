@@ -26,7 +26,6 @@
   align-items: center;
   background-color: var(--top-nav-background-color);
   color: var(--top-nav-text-color);
-  border-left: 1px solid var(--top-nav-border-bottom-color);
 }
 
 .NavBar > ul {
@@ -48,6 +47,10 @@
   border-bottom: 1px solid var(--top-nav-border-bottom-color);
   border-right: 1px solid var(--top-nav-box-shadow-color);
   transition: background-color 0.3s ease;
+}
+
+.NavBar:not(.NavBar--collapsed) > ul > li:first-child {
+  border-left: 1px solid var(--top-nav-box-shadow-color);
 }
 
 .NavBar > ul > .NavItem {
@@ -94,7 +97,6 @@
   align-items: flex-start;
   flex-direction: column;
   height: auto;
-  border-left: none;
 }
 
 .NavBar--collapsed > ul {
@@ -152,7 +154,7 @@
 
 @media (max-width: 64rem) {
   .NavBar:not(.NavBar--collapsed) {
-    margin: 0 var(--space-small);
+    padding: 0 var(--space-small);
   }
 }
 
