@@ -44,12 +44,17 @@ test('should render SearchField', () => {
 
 test('should render visible label when hideLabel is false (default)', () => {
   render();
-  expect(screen.getByText('search field')).not.toHaveClass('Offscreen');
+  expect(screen.getByText('search field').parentElement).not.toHaveClass(
+    'Offscreen'
+  );
 });
 
 test('should render hidden label when hideLabel is true', () => {
   render({ hideLabel: true });
-  expect(screen.getByText('search field')).toHaveClass('Offscreen');
+  // the parent of the element with text "search field" should have the class "Offscreen"
+  expect(screen.getByText('search field').parentElement).toHaveClass(
+    'Offscreen'
+  );
 });
 
 test('should render input with default placeholder text when no placeholder is provided', () => {

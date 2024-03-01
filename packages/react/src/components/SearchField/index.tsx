@@ -58,20 +58,32 @@ const SearchFieldComponent: ForwardRefRenderFunction<
     const isControlled = typeof propValue !== 'undefined';
 
     if (isControlled) {
-      setValue(newValue);
+      return;
     }
+
+    setValue(newValue);
   };
 
   const Field = isForm ? 'form' : 'div';
 
   return (
-    <Field role={isForm ? 'search' : undefined} className="Field__wrapper">
+    <Field
+      role={isForm ? 'search' : undefined}
+      className="Field__wrapper"
+      aria-labelledby={`${inputId}-label`}
+    >
       {hideLabel ? (
         <Offscreen>
-          <label htmlFor={inputId}>{label}</label>
+          <label htmlFor={inputId} id={`${inputId}-label`}>
+            {label}
+          </label>
         </Offscreen>
       ) : (
-        <label className={'Field__label'} htmlFor={inputId}>
+        <label
+          className={'Field__label'}
+          htmlFor={inputId}
+          id={`${inputId}-label`}
+        >
           {label}
         </label>
       )}
