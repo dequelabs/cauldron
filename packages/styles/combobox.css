@@ -95,7 +95,7 @@
   );
 }
 
-.cauldron--theme-dark .Combobox .TextFieldWrapper {
+.cauldron--theme-dark .Combobox :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
     --combobox-input-border-color,
     var(--field-border-color)
