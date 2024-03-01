@@ -69,7 +69,7 @@ const SearchFieldComponent: ForwardRefRenderFunction<
   return (
     <Field
       role={isForm ? 'search' : undefined}
-      className="Field__wrapper"
+      className="SearchField"
       aria-labelledby={`${inputId}-label`}
     >
       {hideLabel ? (
