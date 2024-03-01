@@ -10,8 +10,8 @@ jobs:
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         include-title: 1
-        label-customer: ""
-        label-production: ""
+        label-customer: "bug"
+        label-production: "bug"
         label-vpat: "vpat"
         label-a11y: "accessibility"
         label-blocker: "vpat:blocker"
