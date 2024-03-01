@@ -66,7 +66,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       <Field
         role={isForm ? 'search' : undefined}
         className="SearchField"
-        aria-labelledby={`${inputId}-label`}
+        aria-labelledby={isForm ? `${inputId}-label` : undefined}
       >
         {hideLabel ? (
           <Offscreen>
@@ -88,7 +88,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             'TextFieldWrapper--disabled': otherProps.disabled
           })}
         >
-          <Icon type="magnifying-glass" className="Field__search-icon" />
+          <Icon type="magnifying-glass" className="SearchField__search-icon" />
           <input
             id={inputId}
             value={value}

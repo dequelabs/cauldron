@@ -1,4 +1,3 @@
-
 .SearchField :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
     --search-input-border-color,
@@ -85,7 +84,11 @@
   );
 }
 
-.Field__search-icon {
+.SearchField__search-icon {
   color: var(--search-icon-color);
+  margin-left: var(--space-smallest);
+}
+
+.SearchField input::-webkit-search-cancel-button {
   margin-left: var(--space-smallest);
 }

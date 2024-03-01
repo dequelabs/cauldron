@@ -87,40 +87,40 @@
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.TextFieldWrapper.TextFieldWrapper--error:focus-within {
+.TextFieldWrapper--error:focus-within {
   border: 1px solid var(--text-field-wrapper-error-border-color);
   box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
     0 0 5px var(--field-border-color-error-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.TextFieldWrapper.TextFieldWrapper--error:focus-within:hover {
+.TextFieldWrapper--error:focus-within:hover {
   border: 1px solid var(--text-field-wrapper-error-border-color);
   box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
     0 0 5px var(--field-border-color-error-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.TextFieldWrapper.TextFieldWrapper--error:hover {
+.TextFieldWrapper--error:hover {
   border: 1px solid var(--text-field-wrapper-error-border-color);
   box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.TextFieldWrapper:has(input:is([disabled],[aria-disabled="true"])),
+.TextFieldWrapper:has(input:is([disabled], [aria-disabled='true'])),
 .TextFieldWrapper--disabled {
   background-color: var(--field-background-color-disabled);
   border: 1px solid var(--field-border-color);
 }
 
-.TextFieldWrapper.TextFieldWrapper--diabled:focus-within {
+.TextFieldWrapper--diabled:focus-within {
   border: 1px solid var(--field-border-color);
 }
 
-.TextFieldWrapper.TextFieldWrapper--diabled:focus-within:hover {
+.TextFieldWrapper--diabled:focus-within:hover {
   border: 1px solid var(--field-border-color);
 }
 
-.TextFieldWrapper.TextFieldWrapper--diabled:hover {
+.TextFieldWrapper--diabled:hover {
   border: 1px solid var(--field-border-color);
 }
