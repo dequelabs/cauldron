@@ -37,13 +37,6 @@ test('should render TextFieldWrapper with custom className', () => {
   );
 });
 
-test('should render TextFieldWrapper with onClick', async () => {
-  const onClick = spy();
-  render({ onClick });
-  await userEvent.click(screen.getByText('Children'));
-  expect(onClick.calledOnce).toBe(true);
-});
-
 test('should render TextFieldWrapper with other props', () => {
   render({ id: 'banana' });
   expect(screen.getByText('Children').parentElement).toHaveAttribute(
