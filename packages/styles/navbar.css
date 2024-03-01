@@ -151,8 +151,8 @@
 }
 
 @media (max-width: 64rem) {
-  .NavBar {
-    padding: 0 var(--space-small);
+  .NavBar:not(.NavBar--collapsed) {
+    margin: 0 var(--space-small);
   }
 }
 
