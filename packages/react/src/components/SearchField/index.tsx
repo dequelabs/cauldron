@@ -80,7 +80,7 @@ const SearchFieldComponent: ForwardRefRenderFunction<
         </Offscreen>
       ) : (
         <label
-          className={'Field__label'}
+          className="Field__label"
           htmlFor={inputId}
           id={`${inputId}-label`}
         >
