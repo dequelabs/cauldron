@@ -42,7 +42,7 @@
   );
 }
 
-.cauldron--theme-dark .Field__wrapper .TextFieldWrapper {
+.cauldron--theme-dark .SearchField :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
     --search-input-border-color,
     var(--field-border-color)
