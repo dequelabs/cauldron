@@ -1,5 +1,5 @@
 
-.Field__wrapper .TextFieldWrapper {
+.SearchField :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
     --search-input-border-color,
     var(--field-border-color)
