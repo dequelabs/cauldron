@@ -123,7 +123,7 @@ test('should render disabled SearchField', () => {
   expect(input).toBeDisabled();
 });
 
-test('should support fieldRef prop', () => {
+test('should support ref prop', () => {
   const ref = createRef<HTMLInputElement>();
   render({ ref });
 
