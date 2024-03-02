@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { TabPanel } from './';
-import { debug } from 'console';
 
 test('should render tab panel with two paragraphs correctly', async () => {
   const TabPanelwithRef = () => {
