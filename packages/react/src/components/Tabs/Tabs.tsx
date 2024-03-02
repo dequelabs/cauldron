@@ -6,6 +6,7 @@ import { useId } from 'react-id-generator';
 import useDidUpdate from '../../utils/use-did-update';
 
 type TabsProps = {
+  id?: string;
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
