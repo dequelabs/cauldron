@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { TabPanel } from './';
+import { debug } from 'console';
 
-test('should render tab panel with two paragraphs correctly', () => {
+test('should render tab panel with two paragraphs correctly', async () => {
   const TabPanelwithRef = () => {
     const ref = useRef(null);
     return (
@@ -16,31 +17,34 @@ test('should render tab panel with two paragraphs correctly', () => {
   };
 
   render(<TabPanelwithRef />);
-  waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')).toHaveLength(2);
+  await waitFor(() => {
+    expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
   });
 });
 
-test('should pass classNames through', () => {
+test('should pass classNames through', async () => {
   const TabPanelwithRef = () => {
     const ref = useRef(null);
     return <TabPanel ref={ref} className="find--me" />;
   };
 
   render(<TabPanelwithRef />);
-  waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')).toHaveClass('find--me');
+  await waitFor(() => {
+    expect(screen.getByRole('tabpanel')).toHaveClass('find--me');
   });
 });
 
-test('should pass id through', () => {
+test('should pass id through', async () => {
   const TabPanelwithRef = () => {
     const ref = useRef(null);
     return <TabPanel ref={ref} id="I am a panelId" />;
   };
 
   render(<TabPanelwithRef />);
-  waitFor(() => {
-    expect(screen.queryByTestId('I am a panelId')).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByRole('tabpanel')).toHaveAttribute(
+      'id',
+      'I am a panelId'
+    );
   });
 });
