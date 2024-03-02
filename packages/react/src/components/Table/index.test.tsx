@@ -259,7 +259,7 @@ test('should render triangle down Icon and descending message when sortDirection
   expect(screen.getByRole('status').closest('.Icon--table-sort-descending'));
 });
 
-test('should call onSort when sort button is clicked', () => {
+test('should call onSort when sort button is clicked', async () => {
   const onSortMock = jest.fn();
 
   render(
@@ -276,13 +276,13 @@ test('should call onSort when sort button is clicked', () => {
 
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
-  waitFor(() => {
+  await userEvent.click(button);
+  await waitFor(() => {
     expect(onSortMock).toHaveBeenCalledTimes(1);
   });
 });
 
-test('should maintain focus on the sort button after it is clicked', () => {
+test('should maintain focus on the sort button after it is clicked', async () => {
   render(
     <Table>
       <TableHead>
@@ -301,8 +301,8 @@ test('should maintain focus on the sort button after it is clicked', () => {
 
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
-  waitFor(() => {
+  await userEvent.click(button);
+  await waitFor(() => {
     expect(button).toHaveFocus();
   });
 });
