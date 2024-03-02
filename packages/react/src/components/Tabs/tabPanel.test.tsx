@@ -17,7 +17,7 @@ test('should render tab panel with two paragraphs correctly', () => {
 
   render(<TabPanelwithRef />);
   waitFor(() => {
-    expect(screen.getAllByRole('paragraph')).toHaveLength(2);
+    expect(screen.getAllByRole('tabpanel')).toHaveLength(2);
   });
 });
 
@@ -29,7 +29,7 @@ test('should pass classNames through', () => {
 
   render(<TabPanelwithRef />);
   waitFor(() => {
-    expect(screen.getAllByRole('paragraph')).toHaveClass('find--me');
+    expect(screen.getAllByRole('tabpanel')).toHaveClass('find--me');
   });
 });
 
