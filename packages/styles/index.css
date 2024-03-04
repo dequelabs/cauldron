@@ -1,6 +1,7 @@
 @import './variables.css';
 @import './base.css';
 @import './layout.css';
+@import './text-field-wrapper.css';
 @import './alert.css';
 @import './animation.css';
 @import './button.css';
@@ -43,4 +44,3 @@
 @import './combobox.css';
 @import './timeline.css';
 @import './search-field.css';
-@import './text-field-wrapper.css';

@@ -4,82 +4,82 @@
     var(--field-border-color)
   );
   --text-field-wrapper-background-color: var(
-    --search-input-background-color,
+    --search-field-background-color,
     var(--field-background-color)
   );
   --text-field-wrapper-border-focus-color: var(
-    --search-input-border-focus-color,
+    --search-field-border-focus-color,
     var(--field-border-color-focus)
   );
   --text-field-wrapper-border-hover-color: var(
-    --search-input-border-hover-color,
+    --search-field-border-hover-color,
     var(--field-border-color-focus-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
-    --search-input-border-focus-glow-color,
+    --search-field-border-focus-glow-color,
     var(--field-border-color-focus-glow)
   );
   --text-field-wrapper-error-border-color: var(
-    --search-input-error-border-color,
+    --search-field-error-border-color,
     var(--field-border-color-error)
   );
   --text-field-wrapper-error-focus-border-color: var(
-    --search-input-error-focus-border-color,
+    --search-field-error-focus-border-color,
     var(--field-border-color-error-hover)
   );
   --text-field-wrapper-error-focus-border-glow-color: var(
-    --search-input-error-focus-border-glow-color,
+    --search-field-error-focus-border-glow-color,
     var(--field-border-color-focus-glow)
   );
   --text-field-wrapper-font-size: var(
-    --search-input-font-size,
+    --search-field-font-size,
     var(--field-font-size)
   );
   --text-field-wrapper-font-color: var(
-    --search-input-font-color,
+    --search-field-font-color,
     var(--field-content-color)
   );
 }
 
 .cauldron--theme-dark .SearchField :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(
-    --search-input-border-color,
+    --search-field-border-color,
     var(--field-border-color)
   );
   --text-field-wrapper-background-color: var(
-    --search-input-background-color,
+    --search-field-background-color,
     var(--field-background-color)
   );
   --text-field-wrapper-border-focus-color: var(
-    --search-input-border-focus-color,
+    --search-field-border-focus-color,
     var(--field-border-color-focus)
   );
   --text-field-wrapper-border-hover-color: var(
-    --search-input-border-hover-color,
+    --search-field-border-hover-color,
     var(--field-border-color-focus-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
-    --search-input-border-focus-glow-color,
+    --search-field-border-focus-glow-color,
     var(--field-border-color-focus-glow)
   );
   --text-field-wrapper-error-border-color: var(
-    --search-input-error-border-color,
+    --search-field-error-border-color,
     var(--field-border-color-error)
   );
   --text-field-wrapper-error-focus-border-color: var(
-    --search-input-error-focus-border-color,
+    --search-field-error-focus-border-color,
     var(--field-border-color-error-hover)
   );
   --text-field-wrapper-error-focus-border-glow-color: var(
-    --search-input-error-focus-border-glow-color,
+    --search-field-error-focus-border-glow-color,
     var(--field-border-color-focus-glow)
   );
   --text-field-wrapper-font-size: var(
-    --search-input-font-size,
+    --search-field-font-size,
     var(--field-font-size)
   );
   --text-field-wrapper-font-color: var(
-    --search-input-font-color,
+    --search-field-font-color,
     var(--field-content-color)
   );
 }
