@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import TooltipTabstop from './';
 import axe from '../../axe';
 
-test('should successfully render without errors', async () => {
+test('should render without errors', async () => {
   render(<TooltipTabstop tooltip="World">Hello</TooltipTabstop>);
 
   await waitFor(() => {
