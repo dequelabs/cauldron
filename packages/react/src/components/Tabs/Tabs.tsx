@@ -22,6 +22,7 @@ type TabsProps = {
 } & Cauldron.LabelProps;
 
 const Tabs = ({
+  id,
   children,
   thin,
   orientation = 'horizontal',
@@ -150,6 +151,7 @@ const Tabs = ({
       ref={tabsRef}
     >
       <ul
+        id={id}
         role="tablist"
         className="Tablist"
         {...labelProp}
