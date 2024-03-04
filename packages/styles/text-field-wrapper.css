@@ -19,7 +19,7 @@
   --text-field-wrapper-font-color: var(--field-content-color);
 }
 
-.cauldron--theme-dark {
+.cauldron--theme-dark :where(.TextFieldWrapper) {
   --text-field-wrapper-border-color: var(--field-border-color);
   --text-field-wrapper-background-color: var(--field-background-color);
   --text-field-wrapper-border-focus-color: var(--field-border-color-focus);
