@@ -38,8 +38,10 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     }: SearchFieldProps,
     ref
   ) => {
+    const isControlled = typeof propValue !== 'undefined';
+
     const [value, setValue] = useState<string | undefined>(
-      typeof propValue !== 'undefined' ? propValue : defaultValue
+      isControlled ? propValue : defaultValue
     );
 
     const [id] = propId ? [propId] : useId(1, 'search-field');
@@ -50,8 +52,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       if (typeof onChange === 'function') {
         onChange(newValue, e);
       }
-
-      const isControlled = typeof propValue !== 'undefined';
 
       if (isControlled) {
         return;
