@@ -85,7 +85,7 @@
 }
 
 .SearchField__search-icon {
-  color: var(--search-icon-color);
+  color: var(--search-field-icon-color);
   margin-left: var(--space-smallest);
 }
 
