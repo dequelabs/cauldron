@@ -43,18 +43,20 @@ test('should render SearchField', () => {
 });
 
 test('should render visible label when hideLabel is false (default)', () => {
-  render();
+  const input = render();
+  // the parent of the element with text "search field" should have the class "Offscreen"
   expect(screen.getByText('search field').parentElement).not.toHaveClass(
     'Offscreen'
   );
+  expect(input).toHaveAccessibleName('search field');
 });
 
 test('should render hidden label when hideLabel is true', () => {
-  render({ hideLabel: true });
-  // the parent of the element with text "search field" should have the class "Offscreen"
+  const input = render({ hideLabel: true });
   expect(screen.getByText('search field').parentElement).toHaveClass(
     'Offscreen'
   );
+  expect(input).toHaveAccessibleName('search field');
 });
 
 test('should render input with default placeholder text when no placeholder is provided', () => {
@@ -148,8 +150,26 @@ test('should support name prop', () => {
   expect(input).toHaveDisplayValue('bananas');
 });
 
-test('should have no axe violations with SearchField', async () => {
+test('SearchField should have no axe violations with default params', async () => {
   const input = render();
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('SearchField should have no axe violations with hideLabel set to true', async () => {
+  const input = render({ hideLabel: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('SearchField should have no axe violations with isForm set to false', async () => {
+  const input = render({ isForm: false });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('SearchField should have no axe violations with disabled set to true', async () => {
+  const input = render({ disabled: true });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });
