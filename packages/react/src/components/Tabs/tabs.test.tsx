@@ -6,13 +6,13 @@ import axe from '../../axe';
 const ariaLabel = 'I am a label';
 
 test('should render tabs without errors when mounted', async () => {
-  expect(() =>
-    render(
-      <Tabs aria-label={ariaLabel}>
-        <div />
-      </Tabs>
-    )
-  ).not.toThrow();
+  render(
+    <Tabs aria-label={ariaLabel}>
+      <div />
+    </Tabs>
+  );
+
+  expect(screen.getByRole('tablist').parentElement).toBeInTheDocument();
 });
 
 test('should render children with a tab', () => {
@@ -241,7 +241,7 @@ test('should display correct TabPanel when clicking a tab with a customized id',
   });
 });
 
-test('displays correct tabpanel when pressing left, right, home, or end keys', async () => {
+test('should display correct tabpanel when pressing left, right, home, or end keys', async () => {
   const TabswithRef = () => {
     const ref = useRef(null);
     const ref2 = useRef(null);
