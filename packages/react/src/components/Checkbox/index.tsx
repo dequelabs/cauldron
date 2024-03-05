@@ -10,7 +10,7 @@ import React, {
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
 import Icon from '../Icon';
-import tokenList from '../../utils/token-list';
+import { addIdRef } from '../../utils/idRefs';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -63,11 +63,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     let ariaDescribedbyId = ariaDescribedby;
 
     if (error) {
-      ariaDescribedbyId = tokenList(errorId, ariaDescribedbyId);
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, errorId);
     }
 
     if (labelDescription) {
-      ariaDescribedbyId = tokenList(labelDescriptionId, ariaDescribedbyId);
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, errorId);
     }
 
     return (

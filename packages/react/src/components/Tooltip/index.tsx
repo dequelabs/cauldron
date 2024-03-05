@@ -5,6 +5,7 @@ import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
+import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -172,23 +173,15 @@ export default function Tooltip({
 
   // Keep the target's id in sync
   useEffect(() => {
-    const attrText = targetElement?.getAttribute(association);
-    if (!attrText?.includes(id || '')) {
-      targetElement?.setAttribute(
-        association,
-        [id, attrText].filter(Boolean).join(' ')
-      );
+    const refIds = targetElement?.getAttribute(association);
+    if (!hasIdRef(refIds, id)) {
+      targetElement?.setAttribute(association, addIdRef(refIds, id));
     }
 
     return () => {
       if (targetElement) {
-        const associationValue = targetElement?.getAttribute(association);
-        const updatedValue =
-          associationValue
-            ?.split(' ')
-            .filter((associationId) => associationId !== id)
-            .join(' ') || '';
-        targetElement.setAttribute(association, updatedValue);
+        const refIds = targetElement.getAttribute(association);
+        targetElement.setAttribute(association, removeIdRef(refIds, id));
       }
     };
   }, [targetElement, id, association]);
