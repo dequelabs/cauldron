@@ -28,11 +28,12 @@ test('does not set aria-hidden if a label is provided', () => {
 
 test('sets expected role attributes given an aria-label', () => {
   render(<Loader data-testid="loader" label="bananas" />);
-  expect(screen.getByTestId('loader')).toHaveAttribute('role', 'alert');
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveTextContent('bananas');
 });
 
 test('supports ref={React.createRef()}', () => {
-  const ref = React.createRef();
+  const ref = React.createRef<HTMLDivElement>();
   render(<Loader ref={ref} />);
   expect(ref.current).toBeDefined();
 });
