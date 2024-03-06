@@ -67,7 +67,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     if (labelDescription) {
-      ariaDescribedbyId = addIdRef(ariaDescribedbyId, errorId);
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, labelDescriptionId);
     }
 
     return (
