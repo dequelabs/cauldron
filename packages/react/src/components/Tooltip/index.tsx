@@ -173,15 +173,15 @@ export default function Tooltip({
 
   // Keep the target's id in sync
   useEffect(() => {
-    const refIds = targetElement?.getAttribute(association);
-    if (!hasIdRef(refIds, id)) {
-      targetElement?.setAttribute(association, addIdRef(refIds, id));
+    const idRefs = targetElement?.getAttribute(association);
+    if (!hasIdRef(idRefs, id)) {
+      targetElement?.setAttribute(association, addIdRef(idRefs, id));
     }
 
     return () => {
       if (targetElement) {
-        const refIds = targetElement.getAttribute(association);
-        targetElement.setAttribute(association, removeIdRef(refIds, id));
+        const idRefs = targetElement.getAttribute(association);
+        targetElement.setAttribute(association, removeIdRef(idRefs, id));
       }
     };
   }, [targetElement, id, association]);

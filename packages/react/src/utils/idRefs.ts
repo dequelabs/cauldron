@@ -1,8 +1,8 @@
 type IdRefs = string | null | undefined;
 
 /**
- * Returns a unique set of ref ids from the provided id string
- * @param ids - id string
+ * Returns a unique set of id refs from the provided string
+ * @param ids - string of id refs
  */
 export default function idRefs(ids: IdRefs): Set<string> {
   if (!ids || !ids.trim()) {
@@ -12,8 +12,8 @@ export default function idRefs(ids: IdRefs): Set<string> {
 }
 
 /**
- * Returns an updated idRef string with the provided id value added
- * @param ids - id string
+ * Returns an updated id ref string with the provided id value added
+ * @param ids - string of id refs
  * @param id - id to add
  */
 export function addIdRef(ids: IdRefs, id: string): string {
@@ -21,8 +21,8 @@ export function addIdRef(ids: IdRefs, id: string): string {
 }
 
 /**
- * Returns an updated idRef string with the provided id value removed
- * @param ids - id string
+ * Returns an updated id ref string with the provided id value removed
+ * @param ids - string of id refs
  * @param id - id to remove
  */
 export function removeIdRef(_ids: IdRefs, id: string): string {
@@ -32,8 +32,8 @@ export function removeIdRef(_ids: IdRefs, id: string): string {
 }
 
 /**
- * Returns if a idRef string contains the provided id value
- * @param ids - id string
+ * Returns if an id ref string contains the provided id value
+ * @param ids - string of id refs
  * @param id - id to check if it exists in the provided idRef string
  */
 export function hasIdRef(ids: IdRefs, id: string): boolean {
