@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { TabPanel } from './';
 import axe from '../../axe';
@@ -23,15 +23,14 @@ test('should pass id through', () => {
   expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'I am a panelId');
 });
 
-test('should support ref', () => {
-  const ref = React.createRef();
+test('should support ref', async () => {
+  const ref = React.createRef<HTMLDivElement>();
   const TabPanelwithRef = () => {
-    const ref = useRef(null);
     return <TabPanel ref={ref}>Content</TabPanel>;
   };
 
   render(<TabPanelwithRef />);
-  waitFor(() => {
+  await waitFor(() => {
     expect(ref.current).toBeInTheDocument();
     expect(ref.current).toHaveTextContent('Content');
   });
