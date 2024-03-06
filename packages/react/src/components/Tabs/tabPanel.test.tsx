@@ -1,49 +1,50 @@
 import React, { useRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { TabPanel } from './';
+import axe from '../../axe';
 
-test('should render tab panel with two paragraphs correctly', async () => {
+test('should render tab panel with two paragraphs correctly', () => {
+  render(
+    <TabPanel>
+      <p>a simple paragraph</p>
+      <p>a complicated paragraph</p>
+    </TabPanel>
+  );
+  expect(screen.getByRole('tabpanel')).toBeInTheDocument();
+});
+
+test('should pass classNames through', () => {
+  render(<TabPanel className="find--me" />);
+  expect(screen.getByRole('tabpanel')).toHaveClass('TabPanel', 'find--me');
+});
+
+test('should pass id through', () => {
+  render(<TabPanel id="I am a panelId" />);
+  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'I am a panelId');
+});
+
+test('should support ref', () => {
+  const ref = React.createRef();
   const TabPanelwithRef = () => {
     const ref = useRef(null);
-    return (
-      <div ref={ref}>
-        <TabPanel>
-          <p>a simple paragraph</p>
-          <p>a complicated paragraph</p>
-        </TabPanel>
-      </div>
-    );
+    return <TabPanel ref={ref}>Content</TabPanel>;
   };
 
   render(<TabPanelwithRef />);
-  await waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
+  waitFor(() => {
+    expect(ref.current).toBeInTheDocument();
+    expect(ref.current).toHaveTextContent('Content');
   });
 });
 
-test('should pass classNames through', async () => {
-  const TabPanelwithRef = () => {
-    const ref = useRef(null);
-    return <TabPanel ref={ref} className="find--me" />;
-  };
+test('returns no axe violations', async () => {
+  render(
+    <TabPanel>
+      <p>a simple paragraph</p>
+      <p>a complicated paragraph</p>
+    </TabPanel>
+  );
 
-  render(<TabPanelwithRef />);
-  await waitFor(() => {
-    expect(screen.getByRole('tabpanel')).toHaveClass('find--me');
-  });
-});
-
-test('should pass id through', async () => {
-  const TabPanelwithRef = () => {
-    const ref = useRef(null);
-    return <TabPanel ref={ref} id="I am a panelId" />;
-  };
-
-  render(<TabPanelwithRef />);
-  await waitFor(() => {
-    expect(screen.getByRole('tabpanel')).toHaveAttribute(
-      'id',
-      'I am a panelId'
-    );
-  });
+  const results = await axe(screen.getByRole('tabpanel'));
+  expect(results).toHaveNoViolations();
 });
