@@ -74,6 +74,10 @@
   color: var(--text-field-wrapper-font-color);
 }
 
+.TextFieldWrapper > :not(input) {
+  flex-shrink: 0;
+}
+
 .TextFieldWrapper:focus-within {
   border: 1px solid var(--text-field-wrapper-border-focus-color);
   box-shadow: 0 0 0 1px var(--text-field-wrapper-border-focus-color),
