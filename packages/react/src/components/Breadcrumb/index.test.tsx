@@ -1,60 +1,58 @@
-import React, { createRef } from 'react';
-import { shallow } from 'enzyme';
-import {
-  default as Breadcrumb,
-  BreadcrumbLink,
-  BreadcrumbItem
-} from 'src/components/Breadcrumb';
-import axe from '../../../axe';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Breadcrumb, { BreadcrumbLink, BreadcrumbItem } from './';
+import axe from '../../axe';
 
 test('should render breadcrumbs', () => {
-  const breadcrumb = shallow(
+  render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.hasClass('Breadcrumb')).toBe(true);
-  expect(breadcrumb.find('li').length).toBe(3);
+  expect(
+    screen.getByRole('navigation', { name: 'breadcrumb' })
+  ).toBeInTheDocument();
+  expect(screen.queryAllByRole('listitem')).toHaveLength(3);
 });
 
 test('should render separators between breadcrumbs', () => {
-  const breadcrumb = shallow(
+  render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.find('.Breadcrumb__Separator').length).toBe(2);
   expect(
-    breadcrumb
-      .find(BreadcrumbItem)
-      .find('.Breadcrumb__Separator')
-      .exists()
-  ).toBeFalsy();
+    screen.getByRole('navigation', { name: 'breadcrumb' })
+  ).toHaveTextContent('one/two/three');
 });
 
 test('should render custom separators between breadcrumbs', () => {
-  const breadcrumb = shallow(
+  render(
     <Breadcrumb aria-label="breadcrumb" separator="💩">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-  expect(breadcrumb.text()).toEqual('one💩two💩three');
+  expect(
+    screen.getByRole('navigation', { name: 'breadcrumb' })
+  ).toHaveTextContent('one💩two💩three');
 });
 
 test('should return no axe violations', async () => {
-  const breadcrumb = shallow(
+  render(
     <Breadcrumb aria-label="breadcrumb">
       <BreadcrumbLink href="#">one</BreadcrumbLink>
       <BreadcrumbLink href="#">two</BreadcrumbLink>
       <BreadcrumbItem>three</BreadcrumbItem>
     </Breadcrumb>
   );
-
-  expect(await axe(breadcrumb.html())).toHaveNoViolations();
+  const results = await axe(
+    screen.getByRole('navigation', { name: 'breadcrumb' })
+  );
+  expect(results).toHaveNoViolations();
 });

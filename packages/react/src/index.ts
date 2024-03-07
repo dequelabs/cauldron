@@ -58,6 +58,7 @@ export {
 } from './components/Tooltip';
 export { default as TooltipTabstop } from './components/TooltipTabstop';
 export { default as TextField } from './components/TextField';
+export { default as SearchField } from './components/SearchField';
 export { default as ClickOutsideListener } from './components/ClickOutsideListener';
 export {
   default as ExpandCollapsePanel,
