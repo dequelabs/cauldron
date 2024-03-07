@@ -1,0 +1,128 @@
+---
+title: SearchField
+description: A form element that allows users to type in text for searching.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SearchField/index.tsx
+---
+
+import { SearchField, FieldWrap } from '@deque/cauldron-react';
+
+```js
+import { SearchField } from '@deque/cauldron-react';
+```
+
+<Note>
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `SearchField`
+  component has been designed specifically to only be used when rendered as a
+  child of this component, and may not be completely accessible if rendered
+  outside of `FieldWrap`.
+</Note>
+
+## Examples
+
+### Resting
+
+```jsx example
+<FieldWrap>
+  <SearchField label="Resting" />
+</FieldWrap>
+```
+
+### Disabled
+
+```jsx example
+<FieldWrap>
+  <SearchField label="Disabled" disabled />
+</FieldWrap>
+```
+
+### Label Hidden
+
+```jsx example
+<FieldWrap>
+  <SearchField label="Hidden" hideLabel />
+</FieldWrap>
+```
+
+### Usage in Form
+
+By default, SearchField is wrapped in a `<form role="search">` to provide better accessibility hints to users of assistive technology. If your search field needs to be placed inside of an existing form, you must use isForm="false".
+
+```jsx example
+<form role="search">
+  <FieldWrap>
+    <SearchField label="Nested in Form" isForm={false} />
+  </FieldWrap>
+</form>
+```
+
+### SearchField with trailing children
+
+We include trailing children to allow for additional input context to be provided, such as texts, buttons, icons, etc. The trailing children will be placed at the right end of SearchField.
+
+```jsx example
+<FieldWrap>
+  <SearchField 
+    label="Search Field with trailing children" 
+    trailingChildren={
+      <span style={{ marginRight: '8px' }}>
+        <strong>1</strong> of <strong>1</strong>
+      </span>
+    }
+  />
+</FieldWrap>
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  refType="HTMLInputElement"
+  props={[
+    {
+      name: 'label',
+      type: 'ContentNode',
+      required: true,
+      description: 'Label for the field.'
+    },
+    {
+      name: 'defaultValue',
+      type: 'string',
+      description:
+        'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
+    },
+    {
+      name: 'value',
+      type: 'string',
+      description:
+        'The value to be applied to the field. Used for "controlled" fields.'
+    },
+    {
+      name: 'onChange',
+      type: 'function',
+      description: "Callback function when the field's value changes."
+    },
+    {
+      name: 'hideLabel',
+      type: 'boolean',
+      description: 'If true, the label will be rendered off-screen.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'isForm',
+      type: 'boolean',
+      description:
+        'If true, the label and input will be rendered in a `<form>` tag. If false, the label and input will be rendered in a `<div>` tag.',
+      defaultValue: 'true'
+    },
+    {
+      name: 'trailingChildren',
+      type: 'ReactNode',
+      description:
+        'If provided, the children will be slotted into the right end of the field.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [FieldWrap](./FieldWrap)
