@@ -6,7 +6,8 @@ const config: Config = {
   testMatch: [
     '**/__tests__/src/**/*.js',
     '**/__tests__/demo/**/*.js',
-    '**/src/components/**/*.test.tsx'
+    '**/src/components/**/*.test.tsx',
+    '**/src/utils/**/*.test.ts'
   ],
   collectCoverageFrom: ['<rootDir>/src/components/**/*.{tsx,ts}'],
   moduleNameMapper: {

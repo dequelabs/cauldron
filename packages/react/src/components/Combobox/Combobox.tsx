@@ -16,7 +16,7 @@ import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
-import tokenList from '../../utils/token-list';
+import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 
 // Event Keys
@@ -400,7 +400,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const inputProps = {
       ...props,
       'aria-describedby': error
-        ? tokenList(errorId, ariaDescribedby)
+        ? addIdRef(ariaDescribedby, errorId)
         : ariaDescribedby
     };
 
