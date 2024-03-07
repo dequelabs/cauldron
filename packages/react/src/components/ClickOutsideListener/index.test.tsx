@@ -22,11 +22,11 @@ afterEach(() => {
 });
 
 test('should render children with the text when using ClickOutsideListener', () => {
+  const onClickOutside = jest.fn();
   const children = <div>Hello World</div>;
 
   const { getByText } = render(
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    <ClickOutsideListener onClickOutside={() => {}}>
+    <ClickOutsideListener onClickOutside={onClickOutside}>
       {children}
     </ClickOutsideListener>
   );
@@ -189,8 +189,7 @@ test('should remove event listeners when props change', () => {
 
 test('should not remove event listeners when event props do not change', () => {
   const removeEventListeners = jest.fn();
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const onClickOutside = () => {};
+  const onClickOutside = jest.fn();
 
   const { getByTestId } = render(
     <ClickOutsideListener onClickOutside={onClickOutside} mouseEvent="click">
