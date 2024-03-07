@@ -61,9 +61,14 @@ We include trailing children to allow for additional input context to be provide
 
 ```jsx example
 <FieldWrap>
-  <SearchField label="Search Field with trailing children" trailingChildren={<span style={{ marginRight: '8px'}}>
-    <strong>1</strong> of <strong>1</strong>
-  </span>} />
+  <SearchField 
+    label="Search Field with trailing children" 
+    trailingChildren={
+      <span style={{ marginRight: '8px' }}>
+        <strong>1</strong> of <strong>1</strong>
+      </span>
+    }
+  />
 </FieldWrap>
 ```
 
