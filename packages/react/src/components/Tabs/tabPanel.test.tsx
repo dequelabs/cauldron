@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { TabPanel } from './';
 import axe from '../../axe';
 
@@ -25,15 +25,10 @@ test('should pass id through', () => {
 
 test('should support ref', async () => {
   const ref = React.createRef<HTMLDivElement>();
-  const TabPanelwithRef = () => {
-    return <TabPanel ref={ref}>Content</TabPanel>;
-  };
+  render(<TabPanel ref={ref}>Content</TabPanel>);
 
-  render(<TabPanelwithRef />);
-  await waitFor(() => {
-    expect(ref.current).toBeInTheDocument();
-    expect(ref.current).toHaveTextContent('Content');
-  });
+  expect(ref.current).toBeInTheDocument();
+  expect(ref.current).toHaveTextContent('Content');
 });
 
 test('returns no axe violations', async () => {
