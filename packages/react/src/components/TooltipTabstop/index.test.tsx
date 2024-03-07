@@ -4,21 +4,16 @@ import userEvent from '@testing-library/user-event';
 import TooltipTabstop from './';
 import axe from '../../axe';
 
-test('should render without errors', async () => {
+test('should render without errors', () => {
   render(<TooltipTabstop tooltip="World">Hello</TooltipTabstop>);
-
-  await waitFor(() => {
-    expect(screen.getByText('Hello')).toBeInTheDocument();
-  });
+  expect(screen.getByText('Hello')).toBeInTheDocument();
 });
 
 test('should display tooltip on hover', async () => {
   render(<TooltipTabstop tooltip="World">Hello</TooltipTabstop>);
 
   await userEvent.hover(screen.getByText('Hello'));
-  await waitFor(() => {
-    expect(screen.getByText('World')).toBeInTheDocument();
-  });
+  expect(screen.getByText('World')).toBeInTheDocument();
 });
 
 test(' should return no axe violations', async () => {
