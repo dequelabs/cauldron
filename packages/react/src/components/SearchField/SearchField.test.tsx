@@ -3,6 +3,7 @@ import { render as testingRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
+import IconButton from '../IconButton';
 
 import SearchField from './';
 
@@ -18,6 +19,12 @@ const defaultProps = {
   label: 'search field',
   ref: undefined
 };
+
+const MyComponent = () => (
+  <span>
+    <strong>1</strong> of <strong>10</strong>
+  </span>
+);
 
 const render = ({
   label,
@@ -151,28 +158,46 @@ test('should support name prop', () => {
 });
 
 test('SearchField should render trailingChildren as a component', async () => {
-  const MyComponent = () => <div className="component">I am a component</div>;
-  render({
-    trailingChildren: <MyComponent />
+  const input = render({
+    trailingChildren: (
+      <IconButton
+        icon="chevron-up"
+        variant="secondary"
+        label="go to previous match"
+      />
+    )
   });
 
-  expect(screen.getByText('I am a component')).toHaveClass('component');
+  expect(
+    input.parentElement!.contains(
+      screen.getByRole('button', {
+        name: 'go to previous match'
+      })
+    )
+  ).toBeTruthy;
 });
 
 test('SearchField should render trailingChildren as a string', async () => {
-  render({
-    trailingChildren: 'I am a component'
+  const input = render({
+    trailingChildren: 'I am a string'
   });
 
-  expect(screen.getByText('I am a component')).toBeInTheDocument();
+  expect(input.parentElement!.contains(screen.getByText('I am a string')))
+    .toBeTruthy;
 });
 
 test('SearchField should render trailingChildren as an element', async () => {
-  render({
-    trailingChildren: <div className="element">I am a component</div>
+  const input = render({
+    trailingChildren: <button type="button">I am a button</button>
   });
 
-  expect(screen.getByText('I am a component')).toHaveClass('element');
+  expect(
+    input.parentElement!.contains(
+      screen.getByRole('button', {
+        name: 'I am a button'
+      })
+    )
+  ).toBeTruthy;
 });
 
 test('SearchField should have no axe violations with default params', async () => {
@@ -188,13 +213,13 @@ test('SearchField should have no axe violations with hideLabel set to true', asy
 });
 
 test('SearchField should have no axe violations with isForm set to false', async () => {
-  const input = render({ isForm: false });
+  const input = render({ isForm: false, trailingChildren: <MyComponent /> });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });
 
 test('SearchField should have no axe violations with disabled set to true', async () => {
-  const input = render({ disabled: true });
+  const input = render({ disabled: true, trailingChildren: <MyComponent /> });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });

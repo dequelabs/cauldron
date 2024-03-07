@@ -55,11 +55,13 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
 </form>
 ```
 
-### SearchField with trailingChildren
+### SearchField with trailing children
+
+We include a right-oriented "slot" to allow for additional input context to be provided, such as texts, buttons, icons, etc. To achieve this, SearchField takes an additional prop named trailingChildren, which will be "slotted" into the component as a child of TextFieldWrapper after the native input.
 
 ```jsx example
 <FieldWrap>
-  <SearchField label="Search Field with trailingChildren" trailingChildren={<span class="page">
+  <SearchField label="Search Field with trailing children" trailingChildren={<span class="page">
     <strong>1</strong> of <strong>1</strong>
   </span>} />
 </FieldWrap>
@@ -109,7 +111,7 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
     },
     {
       name: 'trailingChildren',
-      type: ['ReactNode, string'],
+      type: 'ReactNode',
       description:
         'If provided, the children will be slotted into the right end of the field.'
     }
