@@ -32,7 +32,7 @@ test('sets expected role attributes given an aria-label', () => {
   expect(screen.getByRole('alert')).toHaveTextContent('bananas');
 });
 
-test('supports ref={React.createRef()}', () => {
+test('supports ref prop', () => {
   const ref = React.createRef<HTMLDivElement>();
   render(<Loader ref={ref} />);
   expect(ref.current).toBeDefined();
