@@ -150,6 +150,31 @@ test('should support name prop', () => {
   expect(input).toHaveDisplayValue('bananas');
 });
 
+test('SearchField should render trailingChildren as a component', async () => {
+  const MyComponent = () => <div className="component">I am a component</div>;
+  render({
+    trailingChildren: <MyComponent />
+  });
+
+  expect(screen.getByText('I am a component')).toHaveClass('component');
+});
+
+test('SearchField should render trailingChildren as a string', async () => {
+  render({
+    trailingChildren: 'I am a component'
+  });
+
+  expect(screen.getByText('I am a component')).toBeInTheDocument();
+});
+
+test('SearchField should render trailingChildren as an element', async () => {
+  render({
+    trailingChildren: <div className="element">I am a component</div>
+  });
+
+  expect(screen.getByText('I am a component')).toHaveClass('element');
+});
+
 test('SearchField should have no axe violations with default params', async () => {
   const input = render();
   const results = await axe(input);

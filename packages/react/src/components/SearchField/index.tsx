@@ -21,6 +21,7 @@ interface SearchFieldProps
   onChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
   hideLabel?: boolean;
   isForm?: boolean;
+  trailingChildren?: React.ReactNode | string;
 }
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
@@ -34,6 +35,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       isForm = true,
       id: propId,
       value: propValue,
+      trailingChildren,
       ...otherProps
     }: SearchFieldProps,
     ref
@@ -99,6 +101,12 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             className={classNames(otherProps.className, 'Field__text-input')}
             type="search"
           />
+          {trailingChildren &&
+            (typeof trailingChildren === 'string' ? (
+              <span>{trailingChildren}</span>
+            ) : (
+              trailingChildren
+            ))}
         </TextFieldWrapper>
       </Field>
     );

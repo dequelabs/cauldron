@@ -151,6 +151,11 @@ h6:has(> .Permalink):hover .Permalink,
   margin: var(--space-large);
 }
 
+.SearchField .TextFieldWrapper .page {
+  flex-shrink: 0;
+  margin-right: var(--space-smallest);
+}
+
 @media (max-width: 64rem) {
   .Content {
     grid-template-columns: 1fr;

@@ -4,7 +4,7 @@ description: A form element that allows users to type in text for searching.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SearchField/index.tsx
 ---
 
-import { SearchField, FieldWrap } from '@deque/cauldron-react';
+import { SearchField, FieldWrap, IconButton } from '@deque/cauldron-react';
 
 ```js
 import { SearchField } from '@deque/cauldron-react';
@@ -55,6 +55,16 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
 </form>
 ```
 
+### SearchField with trailingChildren
+
+```jsx example
+<FieldWrap>
+  <SearchField label="Search Field with trailingChildren" trailingChildren={<span class="page">
+    <strong>1</strong> of <strong>1</strong>
+  </span>} />
+</FieldWrap>
+```
+
 ## Props
 
 <ComponentProps
@@ -96,6 +106,12 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
       description:
         'If true, the label and input will be rendered in a `<form>` tag. If false, the label and input will be rendered in a `<div>` tag.',
       defaultValue: 'true'
+    },
+    {
+      name: 'trailingChildren',
+      type: ['ReactNode, string'],
+      description:
+        'if provided, the children will be slotted into the right end of the field.'
     }
   ]}
 />
