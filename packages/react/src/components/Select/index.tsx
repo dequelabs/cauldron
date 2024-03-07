@@ -1,7 +1,7 @@
 import React, { Ref, useEffect, useState } from 'react';
 import uid from '../../utils/rndid';
 import classNames from 'classnames';
-import tokenList from '../../utils/token-list';
+import { addIdRef } from '../../utils/idRefs';
 import { ContentNode } from '../../types';
 
 export interface SelectOption {
@@ -90,7 +90,7 @@ const Select = React.forwardRef(
     }
 
     if (error) {
-      dynamicProps['aria-describedby'] = tokenList(errorId, ariaDescribedby);
+      dynamicProps['aria-describedby'] = addIdRef(ariaDescribedby, errorId);
     }
 
     // In order to support controlled selects, we
