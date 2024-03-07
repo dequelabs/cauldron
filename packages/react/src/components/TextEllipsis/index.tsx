@@ -84,11 +84,7 @@ const TextEllipsis = React.forwardRef(
           {children}
         </Element>
         {showTooltip && (
-          <Tooltip
-            target={sharedRef}
-            association="aria-labelledby"
-            {...tooltipProps}
-          >
+          <Tooltip target={sharedRef} association="none" {...tooltipProps}>
             {children}
           </Tooltip>
         )}
