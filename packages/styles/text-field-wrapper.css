@@ -1,0 +1,130 @@
+.TextFieldWrapper {
+  --text-field-wrapper-border-color: var(--field-border-color);
+  --text-field-wrapper-background-color: var(--field-background-color);
+  --text-field-wrapper-border-focus-color: var(--field-border-color-focus);
+  --text-field-wrapper-border-hover-color: var(
+    --field-border-color-focus-hover
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --text-field-wrapper-error-border-color: var(--field-border-color-error);
+  --text-field-wrapper-error-focus-border-color: var(
+    --field-border-color-error-hover
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --text-field-wrapper-font-size: var(--field-font-size);
+  --text-field-wrapper-font-color: var(--field-content-color);
+}
+
+.cauldron--theme-dark :where(.TextFieldWrapper) {
+  --text-field-wrapper-border-color: var(--field-border-color);
+  --text-field-wrapper-background-color: var(--field-background-color);
+  --text-field-wrapper-border-focus-color: var(--field-border-color-focus);
+  --text-field-wrapper-border-hover-color: var(
+    --field-border-color-focus-hover
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --text-field-wrapper-error-border-color: var(--field-border-color-error);
+  --text-field-wrapper-error-focus-border-color: var(
+    --field-border-color-error-hover
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --field-border-color-focus-glow
+  );
+  --text-field-wrapper-font-color: var(--field-content-color);
+}
+
+.TextFieldWrapper input:is(*, :focus, :hover) {
+  border: none;
+  box-shadow: none;
+  margin: initial;
+  padding: var(--space-smallest);
+}
+
+.TextFieldWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--text-field-wrapper-border-color);
+  border-bottom: 1px solid var(--field-border-color-underline);
+  margin-bottom: var(--space-half);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--text-field-wrapper-background-color);
+}
+
+.cauldron--theme-dark .TextFieldWrapper {
+  border: 1px solid var(--text-field-wrapper-border-color);
+}
+
+.cauldron--theme-dark .TextFieldWrapper--error {
+  border: 1px solid var(--text-field-wrapper-error-border-color);
+}
+
+.TextFieldWrapper:hover {
+  border-color: var(--text-field-wrapper-border-hover-color);
+}
+
+.TextFieldWrapper input {
+  font-size: var(--text-field-wrapper-font-size);
+  color: var(--text-field-wrapper-font-color);
+}
+
+.TextFieldWrapper > :not(input) {
+  flex-shrink: 0;
+}
+
+.TextFieldWrapper:focus-within {
+  border: 1px solid var(--text-field-wrapper-border-focus-color);
+  box-shadow: 0 0 0 1px var(--text-field-wrapper-border-focus-color),
+    0 0 5px var(--text-field-wrapper-border-focus-glow-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.TextFieldWrapper--error {
+  border: 1px solid var(--text-field-wrapper-error-border-color);
+  box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.TextFieldWrapper--error:focus-within {
+  border: 1px solid var(--text-field-wrapper-error-border-color);
+  box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.TextFieldWrapper--error:focus-within:hover {
+  border: 1px solid var(--text-field-wrapper-error-border-color);
+  box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.TextFieldWrapper--error:hover {
+  border: 1px solid var(--text-field-wrapper-error-border-color);
+  box-shadow: 0 0 0 1px var(--text-field-wrapper-error-border-color),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.TextFieldWrapper:has(input:is([disabled], [aria-disabled='true'])),
+.TextFieldWrapper--disabled {
+  background-color: var(--field-background-color-disabled);
+  border: 1px solid var(--field-border-color);
+}
+
+.TextFieldWrapper--diabled:focus-within {
+  border: 1px solid var(--field-border-color);
+}
+
+.TextFieldWrapper--diabled:focus-within:hover {
+  border: 1px solid var(--field-border-color);
+}
+
+.TextFieldWrapper--diabled:hover {
+  border: 1px solid var(--field-border-color);
+}
