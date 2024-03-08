@@ -11,6 +11,12 @@ module.exports = {
         'ssr-friendly/no-dom-globals-in-react-fc': 'off',
         'react/display-name': 'off'
       }
+    },
+    {
+      files: ['__tests__/**/*'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
+      }
     }
   ]
 };
