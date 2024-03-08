@@ -35,6 +35,14 @@ import { SearchField } from '@deque/cauldron-react';
 </FieldWrap>
 ```
 
+### Error
+
+```jsx example
+<FieldWrap>
+  <SearchField label="Error" error="This field has an error" />
+</FieldWrap>
+```
+
 ### Label Hidden
 
 ```jsx example
@@ -61,8 +69,8 @@ We include trailing children to allow for additional input context to be provide
 
 ```jsx example
 <FieldWrap>
-  <SearchField 
-    label="Search Field with trailing children" 
+  <SearchField
+    label="Search Field with trailing children"
     trailingChildren={
       <span style={{ marginRight: '8px' }}>
         <strong>1</strong> of <strong>1</strong>
@@ -113,6 +121,11 @@ We include trailing children to allow for additional input context to be provide
       description:
         'If true, the label and input will be rendered in a `<form>` tag. If false, the label and input will be rendered in a `<div>` tag.',
       defaultValue: 'true'
+    },
+    {
+      name: 'error',
+      type: 'ReactNode',
+      description: 'Error message for the search field, if provided.'
     },
     {
       name: 'trailingChildren',

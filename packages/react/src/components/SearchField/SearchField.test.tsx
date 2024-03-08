@@ -200,6 +200,11 @@ test('SearchField should render trailingChildren as an element', async () => {
   ).toBeTruthy;
 });
 
+test('SearchField should render error message', async () => {
+  render({ error: 'something went wrong!' });
+  expect(screen.getByText('something went wrong!')).toHaveClass('Error');
+});
+
 test('SearchField should have no axe violations with default params', async () => {
   const input = render();
   const results = await axe(input);
@@ -213,13 +218,25 @@ test('SearchField should have no axe violations with hideLabel set to true', asy
 });
 
 test('SearchField should have no axe violations with isForm set to false', async () => {
-  const input = render({ isForm: false, trailingChildren: <MyComponent /> });
+  const input = render({ isForm: false });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });
 
 test('SearchField should have no axe violations with disabled set to true', async () => {
-  const input = render({ disabled: true, trailingChildren: <MyComponent /> });
+  const input = render({ disabled: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('SearchField should have no axe violations with trailingChildren', async () => {
+  const input = render({ trailingChildren: <MyComponent /> });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('SearchField should have no axe violations with error message', async () => {
+  const input = render({ error: 'something went wrong!' });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });

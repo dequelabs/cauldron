@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { useId } from 'react-id-generator';
+import { addIdRef } from '../../utils/idRefs';
 
 import type { ContentNode } from '../../types';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
@@ -21,6 +22,7 @@ interface SearchFieldProps
   onChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
   hideLabel?: boolean;
   isForm?: boolean;
+  error?: React.ReactNode;
   trailingChildren?: React.ReactNode;
 }
 
@@ -35,7 +37,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       isForm = true,
       id: propId,
       value: propValue,
+      error = null,
       trailingChildren,
+      'aria-describedby': ariaDescribedby,
       ...otherProps
     }: SearchFieldProps,
     ref
@@ -46,8 +50,15 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       isControlled ? propValue : defaultValue
     );
 
-    const [id] = propId ? [propId] : useId(1, 'search-field');
-    const inputId = useRef(id).current;
+    const [idForInput] = propId ? [propId] : useId(1, 'search-field');
+    const [idForError] = useId(1, 'search-field-error');
+    const inputId = useRef(idForInput).current;
+    const errorId = useRef(idForError).current;
+    const inputProps = {
+      'aria-describedby': error
+        ? addIdRef(ariaDescribedby, errorId)
+        : ariaDescribedby
+    };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
@@ -91,7 +102,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         )}
         <TextFieldWrapper
           className={classNames({
-            'TextFieldWrapper--disabled': otherProps.disabled
+            'TextFieldWrapper--disabled': otherProps.disabled,
+            'TextFieldWrapper--error': error
           })}
         >
           <Icon type="magnifying-glass" className="SearchField__search-icon" />
@@ -101,12 +113,18 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             onChange={handleChange}
             placeholder={placeholder}
             ref={ref}
+            {...inputProps}
             {...otherProps}
             className={classNames(otherProps.className, 'Field__text-input')}
             type="search"
           />
           {trailingChildren}
         </TextFieldWrapper>
+        {error && (
+          <div className="Error" id={errorId}>
+            {error}
+          </div>
+        )}
       </Field>
     );
   }
