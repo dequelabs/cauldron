@@ -112,3 +112,19 @@ test('should return no axe violations', async () => {
   const results = await axe(screen.getByTestId('text-ellipsis'));
   expect(results).toHaveNoViolations();
 });
+
+test('should return no axe violations when text has ellipsis', async () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientWidth').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollWidth').value(200);
+  render(<TextEllipsis>Hello World</TextEllipsis>);
+  const results = await axe(screen.getByRole('button'));
+  expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations when text has multiline ellipsis', async () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientHeight').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollHeight').value(200);
+  render(<TextEllipsis maxLines={2}>Hello World</TextEllipsis>);
+  const results = await axe(screen.getByRole('button'));
+  expect(results).toHaveNoViolations();
+});
