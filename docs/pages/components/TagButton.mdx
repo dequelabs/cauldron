@@ -12,12 +12,38 @@ import { TagButton } from '@deque/cauldron-react';
 
 ## Example
 
+### Icon Position Right (Default)
+
 ```jsx example
 <TagButton
   label="Label"
   value="value"
   onClick={() => console.log('test')}
-  icon="pencil"
+  icon="close"
+/>
+```
+
+### Icon Position Left
+
+```jsx example
+<TagButton
+  label="Label"
+  value="value"
+  position="left"
+  onClick={() => console.log('test')}
+  icon="close"
+/>
+```
+
+### Icon Position Center
+
+```jsx example
+<TagButton
+  label="Label"
+  value="value"
+  position="center"
+  onClick={() => console.log('test')}
+  icon="close"
 />
 ```
 
@@ -56,13 +82,20 @@ import { TagButton } from '@deque/cauldron-react';
       name: 'onClick',
       required: true,
       type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-      description: 'a function that gets executed when a user clicks on an element.'
+      description:
+        'a function that gets executed when a user clicks on an element.'
     },
     {
       name: 'icon',
       type: 'string',
       required: true,
       description: 'Icon to use for the TagButton'
+    },
+    {
+      name: 'position',
+      type: 'string',
+      defaultValue: 'right',
+      description: 'Position of the icon in the TagButton'
     }
   ]}
 />

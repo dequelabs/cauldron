@@ -1,16 +1,25 @@
 :root {
-  --tag-button-icon-size: 15px;
+  --tag-button-icon-size: 18px;
 }
 
 .TagButton {
   vertical-align: middle;
 }
 
-.TagButton__icon {
+.Icon-right {
   margin-left: var(--space-half);
 }
 
-.TagButton__icon svg {
+.Icon-left {
+  margin-right: var(--space-half);
+}
+
+.Icon-center {
+  margin-left: var(--space-quarter);
+  margin-right: var(--space-quarter);
+}
+
+.TagButton .TagButton__icon svg {
   width: var(--tag-button-icon-size);
   height: var(--tag-button-icon-size);
 }

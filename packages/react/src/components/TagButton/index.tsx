@@ -9,12 +9,20 @@ interface TagButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   label: ContentNode;
   value: ContentNode;
   icon: IconType;
+  position?: 'left' | 'right' | 'center';
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const TagButton = React.forwardRef(
   (
-    { label, value, icon, className, ...rest }: TagButtonProps,
+    {
+      label,
+      value,
+      icon,
+      position = 'right',
+      className,
+      ...rest
+    }: TagButtonProps,
     ref: Ref<HTMLButtonElement>
   ) => {
     return (
@@ -24,9 +32,26 @@ const TagButton = React.forwardRef(
         ref={ref}
         {...rest}
       >
+        {position === 'left' && (
+          <Icon
+            className={classNames('TagButton__icon', 'Icon-left')}
+            type={icon}
+          />
+        )}
         <TagLabel>{label}</TagLabel>
+        {position === 'center' && (
+          <Icon
+            className={classNames('TagButton__icon', 'Icon-center')}
+            type={icon}
+          />
+        )}
         {value}
-        <Icon className="TagButton__icon" type={icon} />
+        {position === 'right' && (
+          <Icon
+            className={classNames('TagButton__icon', 'Icon-right')}
+            type={icon}
+          />
+        )}
       </Button>
     );
   }
