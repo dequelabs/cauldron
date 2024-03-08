@@ -33,9 +33,10 @@ test('should render children', () => {
 test('should not display tooltip with no overflow', () => {
   sandbox.stub(global.HTMLDivElement.prototype, 'clientWidth').value(100);
   sandbox.stub(global.HTMLDivElement.prototype, 'scrollWidth').value(100);
-  render(<TextEllipsis>Hello World</TextEllipsis>);
+  render(<TextEllipsis data-testid="text-ellipsis">Hello World</TextEllipsis>);
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  expect(screen.getByTestId('text-ellipsis')).not.toHaveAttribute('tabindex');
 });
 
 test('should display tooltip with overflow', async () => {
@@ -46,6 +47,7 @@ test('should display tooltip with overflow', async () => {
   const button = screen.queryByRole('button') as HTMLButtonElement;
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   expect(button).toBeInTheDocument();
+  expect(button).toHaveAttribute('tabindex', '0');
   expect(button).toHaveAttribute('aria-disabled', 'true');
   act(() => {
     button.focus();
@@ -56,9 +58,14 @@ test('should display tooltip with overflow', async () => {
 test('should not display tooltip with no multiline overflow', () => {
   sandbox.stub(global.HTMLDivElement.prototype, 'clientHeight').value(100);
   sandbox.stub(global.HTMLDivElement.prototype, 'scrollHeight').value(100);
-  render(<TextEllipsis maxLines={2}>Hello World</TextEllipsis>);
+  render(
+    <TextEllipsis data-testid="text-ellipsis" maxLines={2}>
+      Hello World
+    </TextEllipsis>
+  );
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  expect(screen.getByTestId('text-ellipsis')).not.toHaveAttribute('tabindex');
 });
 
 test('should display tooltip with multiline overflow', () => {
@@ -69,6 +76,7 @@ test('should display tooltip with multiline overflow', () => {
   const button = screen.queryByRole('button') as HTMLButtonElement;
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   expect(button).toBeInTheDocument();
+  expect(button).toHaveAttribute('tabindex', '0');
   expect(button).toHaveAttribute('aria-disabled', 'true');
   act(() => {
     button.focus();
