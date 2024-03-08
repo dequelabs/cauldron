@@ -23,7 +23,7 @@ const TextEllipsis = React.forwardRef(
     }: TextEllipsisProps,
     ref: Ref<HTMLElement>
   ) => {
-    let Element: React.ElementType<unknown> = 'div';
+    let Element: React.ElementType<any> = 'div';
     const sharedRef = useSharedRef<HTMLElement>(ref);
     const [showTooltip, setShowTooltip] = useState(false);
 
@@ -58,7 +58,7 @@ const TextEllipsis = React.forwardRef(
           const hasOverflow =
             typeof maxLines === 'number'
               ? overflowElement.clientHeight < overflowElement.scrollHeight
-              : overflowElement.offsetWidth < overflowElement.scrollWidth;
+              : overflowElement.clientWidth < overflowElement.scrollWidth;
 
           setShowTooltip(hasOverflow);
         });
