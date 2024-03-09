@@ -1,7 +1,6 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import NavItem from './NavItem';
-import NavBar from './NavBar';
+import NavBar, { NavItem } from './';
 import axe from '../../axe';
 
 test('should render without error', () => {
