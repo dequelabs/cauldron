@@ -45,7 +45,6 @@ test('should render li element with span and text', () => {
   expect(screen.getByRole('listitem')).toContainElement(
     screen.getByText('Foo')
   );
-  expect(screen.getByText('Foo')).toHaveTextContent('Foo');
 });
 
 test('should render with tooltip tabstops and set the aria-current attribute', () => {
