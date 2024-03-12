@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/react';
 import TooltipTabstop from './';
 import axe from '../../axe';
 
@@ -12,11 +11,13 @@ test('should render without errors', () => {
 test('should display tooltip on hover', async () => {
   render(<TooltipTabstop tooltip="World">Hello</TooltipTabstop>);
 
-  await userEvent.hover(screen.getByText('Hello'));
-  expect(screen.getByText('World')).toBeInTheDocument();
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  await fireEvent.focusIn(screen.getByRole('button'));
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(screen.getByRole('button')).toHaveAccessibleDescription('World');
 });
 
-test(' should return no axe violations', async () => {
+test('should return no axe violations', async () => {
   const { container } = render(
     <TooltipTabstop tooltip="World">Hello</TooltipTabstop>
   );
