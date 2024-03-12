@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import rndid from '../../utils/rndid';
-import tokenList from '../../utils/token-list';
 import setRef from '../../utils/setRef';
+import { addIdRef } from '../../utils/idRefs';
 
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -81,7 +81,7 @@ export default class TextField extends React.Component<
     const Field: any = multiline ? 'textarea' : 'input';
     const inputProps = {
       'aria-describedby': error
-        ? tokenList(this.errorId, ariaDescribedby)
+        ? addIdRef(ariaDescribedby, this.errorId)
         : ariaDescribedby
     };
 

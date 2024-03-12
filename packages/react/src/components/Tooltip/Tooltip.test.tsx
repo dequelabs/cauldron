@@ -145,6 +145,30 @@ test('should support association prop', () => {
   expect(screen.queryByRole('button')).toHaveAccessibleName('Hello Tooltip');
 });
 
+test('should clean up association when tooltip is no longer rendered', () => {
+  const ShowTooltip = ({ show = true }: { show?: boolean }) => {
+    const ref = createRef<HTMLButtonElement>();
+    return (
+      <>
+        <button ref={ref}>button</button>
+        {show && (
+          <Tooltip id="tooltip" target={ref} show>
+            Hello Tooltip
+          </Tooltip>
+        )}
+      </>
+    );
+  };
+  const { rerender } = render(<ShowTooltip />);
+  expect(screen.getByRole('button').getAttribute('aria-describedby')).toContain(
+    'tooltip'
+  );
+  rerender(<ShowTooltip show={false} />);
+  expect(
+    screen.getByRole('button').getAttribute('aria-describedby')
+  ).not.toContain('tooltip');
+});
+
 test('should return no axe violations with default variant', async () => {
   const { container } = renderTooltip();
   const results = await axe(container);
