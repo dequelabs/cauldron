@@ -38,6 +38,10 @@ If your component is a Button, Link, or some other kind of interactive element w
 <TextEllipsis as={Link}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TextEllipsis>
 ```
 
+<Note>
+  When using the `as` property it is expected the element getting passed in is an interactive element. Passing an element that is not interactive will result in accessibility issues.
+</Note>
+
 ### Multi-line Ellipsis
 
 ```jsx example
