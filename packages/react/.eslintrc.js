@@ -3,12 +3,19 @@ module.exports = {
   plugins: ['ssr-friendly'],
   overrides: [
     {
-      files: ['__tests__/**/*', '**/*.test.[j|t]sx?', 'src/setupTests.ts'],
+      files: ['__tests__/**/*', '**/*/*.test.{j,t}sx', 'src/setupTests.ts'],
       rules: {
         'ssr-friendly/no-dom-globals-in-module-scope': 'off',
         'ssr-friendly/no-dom-globals-in-constructor': 'off',
         'ssr-friendly/no-dom-globals-in-react-cc-render': 'off',
-        'ssr-friendly/no-dom-globals-in-react-fc': 'off'
+        'ssr-friendly/no-dom-globals-in-react-fc': 'off',
+        'react/display-name': 'off'
+      }
+    },
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
       }
     }
   ]
