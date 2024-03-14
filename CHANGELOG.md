@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/dequelabs/cauldron/compare/v6.2.1...v6.3.0) (2024-03-14)
+
+
+### Features
+
+* **react,styles:** add SearchField and internal TextFieldWrapper components ([#1372](https://github.com/dequelabs/cauldron/issues/1372)) ([46b16a1](https://github.com/dequelabs/cauldron/commit/46b16a14b8ec5fc1480cefa5ba4dd2ad8c478cbc))
+* **react:** Add property to include trailing children for SearchField component ([#1385](https://github.com/dequelabs/cauldron/issues/1385)) ([88e97f1](https://github.com/dequelabs/cauldron/commit/88e97f1950a23b62fe5a4b2a7c3e9750e26fb397))
+* **react:** add ref support to Link ([#1357](https://github.com/dequelabs/cauldron/issues/1357)) ([5d92f1e](https://github.com/dequelabs/cauldron/commit/5d92f1e2b49f6a5ce814de4c996c285c79d4fab4))
+* **react:** Add TextEllipsis utility component ([#1354](https://github.com/dequelabs/cauldron/issues/1354)) ([3e6e4cd](https://github.com/dequelabs/cauldron/commit/3e6e4cd8aa661f3b81bcdddbd538f77706f23283))
+
+
+### Bug Fixes
+
+* **react:** ensure Tooltip cleans up association id after removal ([#1370](https://github.com/dequelabs/cauldron/issues/1370)) ([595b9fb](https://github.com/dequelabs/cauldron/commit/595b9fbc6d1a1dde87c0ff54d7c26c6f5e135241))
+
 ### [6.2.1](https://github.com/dequelabs/cauldron/compare/v6.2.0...v6.2.1) (2024-02-20)
 
 

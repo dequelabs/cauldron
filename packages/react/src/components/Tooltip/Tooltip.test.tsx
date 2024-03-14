@@ -94,7 +94,6 @@ test('should hide tooltip on target element blur', async () => {
 });
 
 test('should hide tooltip on escape keypress', async () => {
-  const user = userEvent.setup();
   // @ts-expect-error force show to override existing show value
   renderTooltip({ tooltipProps: { show: null } });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
@@ -143,6 +142,12 @@ test('should support portal prop', () => {
 test('should support association prop', () => {
   renderTooltip({ tooltipProps: { association: 'aria-labelledby' } });
   expect(screen.queryByRole('button')).toHaveAccessibleName('Hello Tooltip');
+});
+
+test('should not add association when association is set to "none"', () => {
+  renderTooltip({ tooltipProps: { association: 'none' } });
+  expect(screen.queryByRole('button')).not.toHaveProperty('aria-describedby');
+  expect(screen.queryByRole('button')).not.toHaveProperty('aria-labelledby');
 });
 
 test('should clean up association when tooltip is no longer rendered', () => {
