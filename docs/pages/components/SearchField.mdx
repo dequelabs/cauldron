@@ -55,6 +55,23 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
 </form>
 ```
 
+### SearchField with trailing children
+
+We include trailing children to allow for additional input context to be provided, such as texts, buttons, icons, etc. The trailing children will be placed at the right end of SearchField.
+
+```jsx example
+<FieldWrap>
+  <SearchField 
+    label="Search Field with trailing children" 
+    trailingChildren={
+      <span style={{ marginRight: '8px' }}>
+        <strong>1</strong> of <strong>1</strong>
+      </span>
+    }
+  />
+</FieldWrap>
+```
+
 ## Props
 
 <ComponentProps
@@ -96,6 +113,12 @@ By default, SearchField is wrapped in a `<form role="search">` to provide better
       description:
         'If true, the label and input will be rendered in a `<form>` tag. If false, the label and input will be rendered in a `<div>` tag.',
       defaultValue: 'true'
+    },
+    {
+      name: 'trailingChildren',
+      type: 'ReactNode',
+      description:
+        'If provided, the children will be slotted into the right end of the field.'
     }
   ]}
 />
