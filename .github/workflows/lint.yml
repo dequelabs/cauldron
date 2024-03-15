@@ -16,4 +16,7 @@ jobs:
           root: true
           packages-react: true
       - run: yarn lint
-      - run: yarn typecheck
+      - name: typecheck
+        run: |
+          yarn --cwd packages/react build
+          yarn typecheck

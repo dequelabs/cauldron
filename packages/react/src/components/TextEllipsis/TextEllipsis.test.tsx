@@ -124,8 +124,8 @@ test('should support as prop', () => {
       Hello World
     </TextEllipsis>
   );
-  expect(screen.getByRole('button')).not.toBeInTheDocument();
-  expect(screen.getByRole('link')).toBeInTheDocument();
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  expect(screen.queryByRole('link')).toBeInTheDocument();
 });
 
 test('should return no axe violations', async () => {
