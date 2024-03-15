@@ -35,7 +35,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
   <TestComponent
     as="div"
     ref={htmlDivRef}
-    // @ts-expect-error
+    // @ts-expect-error "href" should not be allowed on "div"
     href="/somewhere"
     value={1}
   >
@@ -48,7 +48,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
   <TestComponent
     as="div"
     ref={htmlDivRef}
-    // @ts-expect-error
+    // @ts-expect-error 'value="one"' is not a valid prop
     value="one"
   >
     hello
@@ -60,7 +60,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
   <TestComponent
     as="div"
     ref={htmlDivRef}
-    // @ts-expect-error
+    // @ts-expect-error "anotherValue" is not a valid prop
     anotherValue="one"
   >
     hello
@@ -76,7 +76,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
 
 // React element with missing extended prop
 () => (
-  // @ts-expect-error
+  // @ts-expect-error component is missing a required prop
   <TestComponent as={AnotherComponent} value={1}>
     hello
   </TestComponent>
@@ -87,7 +87,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
   <TestComponent
     as={AnotherComponent}
     value={1}
-    // @ts-expect-error
+    // @ts-expect-error "anotherValue" is not a valid prop
     anotherValue={1}
   >
     hello
