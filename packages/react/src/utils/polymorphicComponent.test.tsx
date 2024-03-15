@@ -100,7 +100,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     as={AnotherComponent}
     value={1}
     anotherValue="one"
-    // @ts-expect-error
+    // @ts-expect-error "extraProp" is not a valid prop
     extraProp={true}
   >
     hello
