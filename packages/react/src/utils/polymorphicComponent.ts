@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import * as React from 'react';
+import type * as React from 'react';
 
 type Merge<P1 = {}, P2 = {}> = Omit<P1, keyof P2> & P2;
 
