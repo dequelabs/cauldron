@@ -120,7 +120,7 @@ test('should support as prop', () => {
     )
   );
   render(
-    <TextEllipsis as={Link} href="wef" foo="bar">
+    <TextEllipsis as={Link} href="/somewhere" foo="bar">
       Hello World
     </TextEllipsis>
   );
