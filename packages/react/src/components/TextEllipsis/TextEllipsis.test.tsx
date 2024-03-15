@@ -108,9 +108,10 @@ test('should support ref prop', () => {
 });
 
 test('should support as prop', () => {
-  interface P extends React.PropsWithChildren {
+  type P = React.PropsWithChildren<{
     foo: string;
-  }
+  }> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement>;
   const Link = React.forwardRef<HTMLAnchorElement, P>(
     ({ children, ...props }, ref) => (
       <a ref={ref} {...props}>
@@ -123,7 +124,8 @@ test('should support as prop', () => {
       Hello World
     </TextEllipsis>
   );
-  expect(screen.getByRole('button')).toBeInTheDocument();
+  expect(screen.getByRole('button')).not.toBeInTheDocument();
+  expect(screen.getByRole('link')).toBeInTheDocument();
 });
 
 test('should return no axe violations', async () => {
