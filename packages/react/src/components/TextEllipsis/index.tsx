@@ -1,12 +1,16 @@
-import React, { Ref, useEffect, useState } from 'react';
+import React, { type Ref, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import useSharedRef from '../../utils/useSharedRef';
 import Tooltip, { type TooltipProps } from '../Tooltip';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 
-interface TextEllipsisProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TextEllipsisProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   children: string;
   maxLines?: number;
-  as?: React.ElementType;
   refProp?: string;
   tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
 }
@@ -91,7 +95,7 @@ const TextEllipsis = React.forwardRef(
       </>
     );
   }
-);
+) as PolymorphicComponent<TextEllipsisProps>;
 
 TextEllipsis.displayName = 'TextEllipsis';
 

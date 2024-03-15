@@ -1,18 +1,22 @@
 import React from 'react';
 import classNames from 'classnames';
+import type {
+  PolymorphicComponent,
+  PolymorphicProps
+} from '../../utils/polymorphicComponent';
 
-interface Props extends React.HTMLAttributes<HTMLElement> {
+interface FieldWrapProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   children: React.ReactNode;
-  as?: React.ElementType | string;
 }
 
-const FieldWrap = React.forwardRef<HTMLElement, Props>(
+const FieldWrap = React.forwardRef<HTMLElement, FieldWrapProps>(
   ({ children, className, as: Component = 'div', ...props }, ref) => (
     <Component ref={ref} className={classNames('Panel', className)} {...props}>
       {children}
     </Component>
   )
-);
+) as PolymorphicComponent<FieldWrapProps>;
 
 FieldWrap.displayName = 'FieldWrap';
 

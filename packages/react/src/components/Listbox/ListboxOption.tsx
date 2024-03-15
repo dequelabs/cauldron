@@ -3,11 +3,15 @@ import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { useListboxContext } from './ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 
 export type ListboxValue = Readonly<string | number | undefined>;
 
-interface ListboxOptionsProps extends React.HTMLAttributes<HTMLElement> {
-  as?: React.ElementType | string;
+interface ListboxOptionProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   value?: ListboxValue;
   disabled?: boolean;
   activeClass?: string;
@@ -17,7 +21,7 @@ function isElementPreceding(a: Element, b: Element) {
   return !!(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING);
 }
 
-const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
+const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
   (
     {
       id: propId,
@@ -114,7 +118,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionsProps>(
       </Component>
     );
   }
-);
+) as PolymorphicComponent<ListboxOptionProps>;
 
 ListboxOption.displayName = 'ListboxOption';
 
