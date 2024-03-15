@@ -17,12 +17,6 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-var-requires': 'off'
       }
-    },
-    {
-      files: ['src/utils/polymorphicComponent.ts'],
-      rules: {
-        '@typescript-eslint/ban-types': 'off'
-      }
     }
   ]
 };
