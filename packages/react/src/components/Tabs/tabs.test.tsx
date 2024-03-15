@@ -446,6 +446,8 @@ test('returns no axe vialation with thin variant', async () => {
 });
 
 test('returns no axe vialation with vertical variant', async () => {
+  const panelStyles = { minHeight: '10rem' };
+
   const TabswithRef = () => {
     const ref = useRef(null);
     const ref2 = useRef(null);
@@ -453,10 +455,10 @@ test('returns no axe vialation with vertical variant', async () => {
       <Tabs aria-label={ariaLabel} orientation="vertical">
         <Tab target={ref}>option 1</Tab>
         <Tab target={ref2}>option 2</Tab>
-        <TabPanel ref={ref}>
+        <TabPanel style={panelStyles} ref={ref}>
           <p>Panel 1</p>
         </TabPanel>
-        <TabPanel ref={ref2}>
+        <TabPanel style={panelStyles} ref={ref2}>
           <p>Panel 2</p>
         </TabPanel>
       </Tabs>
