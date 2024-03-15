@@ -4,6 +4,8 @@ import type {
   PolymorphicComponent
 } from './polymorphicComponent';
 
+/* prop types */
+
 interface BaseComponentProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   value: number;
@@ -13,20 +15,35 @@ interface DifferentComponentProps {
   anotherValue: string;
 }
 
+type ConstrainedComponentProps = PolymorphicProps<
+  React.HTMLAttributes<HTMLHeadingElement>,
+  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+>;
+
+/* test components */
+
 const TestComponent = React.forwardRef<HTMLDivElement, BaseComponentProps>(
   (props, ref) => {
     return <></>;
   }
 ) as PolymorphicComponent<BaseComponentProps>;
 
+const ConstrainedComponent = React.forwardRef<
+  HTMLHeadingElement,
+  ConstrainedComponentProps
+>(({ as = 'h1' }, ref) => {
+  return <></>;
+}) as PolymorphicComponent<ConstrainedComponentProps>;
+
 const AnotherComponent = (props: DifferentComponentProps) => <></>;
+
 const htmlDivRef = React.createRef<HTMLDivElement>();
 const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
 
 // Intrinsic element with valid props
 () => (
   <TestComponent as="a" ref={htmlAnchorRef} href="/somewhere" value={1}>
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -39,7 +56,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     href="/somewhere"
     value={1}
   >
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -51,7 +68,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     // @ts-expect-error 'value="one"' is not a valid prop
     value="one"
   >
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -63,14 +80,14 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     // @ts-expect-error "anotherValue" is not a valid prop
     anotherValue="one"
   >
-    hello
+    bananas
   </TestComponent>
 );
 
 // React element with valid props
 () => (
   <TestComponent as={AnotherComponent} value={1} anotherValue="one">
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -78,7 +95,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
 () => (
   // @ts-expect-error component is missing a required prop
   <TestComponent as={AnotherComponent} value={1}>
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -90,7 +107,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     // @ts-expect-error "anotherValue" is not a valid prop
     anotherValue={1}
   >
-    hello
+    bananas
   </TestComponent>
 );
 
@@ -103,6 +120,19 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     // @ts-expect-error "extraProp" is not a valid prop
     extraProp={true}
   >
-    hello
+    bananas
   </TestComponent>
+);
+
+// Constrained component
+() => <ConstrainedComponent as="h2">bananas</ConstrainedComponent>;
+
+// Constrained component invalid intrinsic element
+() => (
+  <ConstrainedComponent
+    // @ts-expect-error because "div" is not an allowed element
+    as="div"
+  >
+    bananas
+  </ConstrainedComponent>
 );

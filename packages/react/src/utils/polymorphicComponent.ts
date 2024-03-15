@@ -15,7 +15,10 @@ export type PolymorphicComponentProps<
   ElementType extends keyof JSX.IntrinsicElements
     ? // Support intrinsic elements, e.g. as="a", as="button", as="div"...
       React.PropsWithRef<JSX.IntrinsicElements[ElementType]>
-    : {},
+    : ElementType extends React.ElementType
+    ? // Support components, e.g. as={MyComponent}
+      React.ComponentPropsWithRef<ElementType>
+    : never,
   PolymorphicProps<Props, ElementType>
 >;
 
