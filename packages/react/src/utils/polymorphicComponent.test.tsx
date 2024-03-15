@@ -2,7 +2,7 @@ import React from 'react';
 import type {
   PolymorphicProps,
   PolymorphicComponent
-} from './PolymorphicComponent';
+} from './polymorphicComponent';
 
 interface BaseComponentProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
@@ -30,7 +30,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
   </TestComponent>
 );
 
-// Intrinsic element with unsupported instrinsic prop
+// Intrinsic element with unsupported intrinsic prop
 () => (
   <TestComponent
     as="div"
