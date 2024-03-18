@@ -6,11 +6,7 @@ import axe from '../../axe';
 const defaults = { show: false, heading: <span>Default Alert</span> };
 
 test('should return null when passed a falsey "show" prop', () => {
-  render(
-    <Alert {...defaults} show>
-      Test Alert
-    </Alert>
-  );
+  render(<Alert {...defaults}>Test Alert</Alert>);
 
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
