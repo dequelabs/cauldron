@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Tabs, { Tab } from './';
+import axe from '../../axe';
 
 const ariaLabel = 'I am a label';
 
@@ -67,4 +68,33 @@ test('should pass aria-selected through and render aria-selected properly', asyn
     'aria-selected',
     'true'
   );
+});
+
+test('should pass ref through', async () => {
+  const tabRef1 = React.createRef<HTMLDivElement>();
+  const ref = React.createRef<HTMLLIElement>();
+
+  render(
+    <Tab target={tabRef1} ref={ref}>
+      Test Tab
+    </Tab>
+  );
+
+  expect(ref.current).toBeTruthy();
+  expect(ref.current).toBeInstanceOf(HTMLLIElement);
+});
+
+test('returns no axe violations', async () => {
+  const ref = React.createRef<HTMLDivElement>();
+
+  const { container } = render(
+    <Tabs aria-label={ariaLabel}>
+      <Tab target={ref} id={'I am a tabId'} role="tab">
+        <p>a simple paragraph</p>
+      </Tab>
+    </Tabs>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
