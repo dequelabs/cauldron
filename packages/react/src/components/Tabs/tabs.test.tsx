@@ -213,37 +213,6 @@ test('should focus the active tab with keyboard activation', async () => {
   });
 });
 
-test('should display correct TabPanel when clicking a tab with a customized id', async () => {
-  const TabswithRef = () => {
-    const ref = useRef(null);
-    const ref2 = useRef(null);
-
-    return (
-      <>
-        <Tabs aria-label={ariaLabel} id="customized-id">
-          <Tab target={ref}>option 1</Tab>
-          <Tab target={ref2}>option 2</Tab>
-        </Tabs>
-        <TabPanel ref={ref}>
-          <p>Panel 1</p>
-        </TabPanel>
-        <TabPanel ref={ref2}>
-          <p>Panel 2</p>
-        </TabPanel>
-      </>
-    );
-  };
-
-  render(<TabswithRef />);
-  fireEvent.click(screen.getAllByRole('tab')[1]);
-  await waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')[0]).toHaveClass('TabPanel--hidden');
-    expect(screen.getAllByRole('tabpanel')[1]).not.toHaveClass(
-      'TabPanel--hidden'
-    );
-  });
-});
-
 test('should display correct tabpanel when pressing left, right, home, or end keys', async () => {
   const TabswithRef = () => {
     const ref = useRef(null);
@@ -329,44 +298,6 @@ test('should not do anything when pressing keys other than left, right, home, or
 
   render(<TabswithRef />);
   fireEvent.keyDown(screen.getByRole('tablist'), { key: 'ArrowDown' });
-  await waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')[0]).not.toHaveClass(
-      'TabPanel--hidden'
-    );
-    expect(screen.getAllByRole('tabpanel')[1]).toHaveClass('TabPanel--hidden');
-  });
-});
-
-test('should display correct TabPanel when pressing left, right, home, or end keys with customized id', async () => {
-  const TabswithRef = () => {
-    const ref = useRef(null);
-    const ref2 = useRef(null);
-    return (
-      <>
-        <Tabs aria-label={ariaLabel} id="I am a customized-id">
-          <Tab target={ref}>option 1</Tab>
-          <Tab target={ref2}>option 2</Tab>
-        </Tabs>
-        <TabPanel ref={ref}>
-          <p>Panel 1</p>
-        </TabPanel>
-        <TabPanel ref={ref2}>
-          <p>Panel 2</p>
-        </TabPanel>
-      </>
-    );
-  };
-
-  render(<TabswithRef />);
-  fireEvent.keyDown(screen.getByRole('tablist'), { key: 'ArrowRight' });
-  await waitFor(() => {
-    expect(screen.getAllByRole('tabpanel')[0]).toHaveClass('TabPanel--hidden');
-    expect(screen.getAllByRole('tabpanel')[1]).not.toHaveClass(
-      '.TabPanel--hidden'
-    );
-  });
-
-  fireEvent.keyDown(screen.getByRole('tablist'), { key: 'ArrowLeft' });
   await waitFor(() => {
     expect(screen.getAllByRole('tabpanel')[0]).not.toHaveClass(
       'TabPanel--hidden'

@@ -6,7 +6,6 @@ import { useId } from 'react-id-generator';
 import useDidUpdate from '../../utils/use-did-update';
 
 type TabsProps = {
-  id?: string;
   children: React.ReactNode;
   initialActiveIndex?: number;
   thin?: boolean;
@@ -22,7 +21,6 @@ type TabsProps = {
 } & Cauldron.LabelProps;
 
 const Tabs = ({
-  id,
   children,
   thin,
   orientation = 'horizontal',
@@ -151,7 +149,6 @@ const Tabs = ({
       ref={tabsRef}
     >
       <ul
-        id={id}
         role="tablist"
         className="Tablist"
         {...labelProp}
