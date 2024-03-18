@@ -99,13 +99,13 @@ test('should pass classNames through', () => {
   const firstTableHeader = tableHeaders[0];
   const firstTableCell = tableCells[0];
 
-  expect(table).toHaveClass('my-table');
-  expect(tableHead).toHaveClass('my-table-head');
-  expect(tableBody).toHaveClass('my-table-body');
-  expect(firstTableRow).toHaveClass('my-table-row');
-  expect(firstTableHeader).toHaveClass('my-table-header');
-  expect(firstTableCell).toHaveClass('my-table-cell');
-  expect(tableFooter).toHaveClass('my-table-footer');
+  expect(table).toHaveClass('Table', 'my-table');
+  expect(tableHead).toHaveClass('TableHead', 'my-table-head');
+  expect(tableBody).toHaveClass('TableBody', 'my-table-body');
+  expect(firstTableRow).toHaveClass('TableRow', 'my-table-row');
+  expect(firstTableHeader).toHaveClass('TableHeader', 'my-table-header');
+  expect(firstTableCell).toHaveClass('TableCell', 'my-table-cell');
+  expect(tableFooter).toHaveClass('TableFooter', 'my-table-footer');
 });
 
 test('should pass arbitrary props through', () => {
@@ -180,7 +180,7 @@ test('should render with border variant', () => {
     </Table>
   );
 
-  expect(screen.getByRole('table')).toHaveClass('Table--border');
+  expect(screen.getByRole('table')).toHaveClass('Table', 'Table--border');
 });
 
 test('should render sort button and icons with sortDirection and onSort in Table', () => {
@@ -214,7 +214,14 @@ test('should render className "TableHeader--sorting" when actively sorting', () 
     </Table>
   );
 
-  expect(screen.getByRole('status').closest('.TableHeader--sort-ascending'));
+  expect(screen.getByRole('columnheader')).toHaveAttribute(
+    'aria-sort',
+    'ascending'
+  );
+  expect(screen.getByRole('columnheader')).toHaveClass(
+    'TableHeader',
+    'TableHeader--sort-ascending'
+  );
 });
 
 test('should render triangle up Icon and ascending message when sortDirection is ascending', () => {
@@ -234,7 +241,7 @@ test('should render triangle up Icon and ascending message when sortDirection is
     </Table>
   );
 
-  expect(screen.getByText('up and away')).toBeInTheDocument();
+  expect(screen.getByRole('status')).toHaveTextContent('up and away');
   expect(screen.getByRole('status').closest('.Icon--table-sort-ascending'));
 });
 
@@ -255,7 +262,7 @@ test('should render triangle down Icon and descending message when sortDirection
     </Table>
   );
 
-  expect(screen.getByText('down below')).toBeInTheDocument();
+  expect(screen.getByRole('status')).toHaveTextContent('down below');
   expect(screen.getByRole('status').closest('.Icon--table-sort-descending'));
 });
 
@@ -309,6 +316,54 @@ test('should maintain focus on the sort button after it is clicked', async () =>
 
 test('returns 0 axe violations', async () => {
   const { container } = renderDefaultTable();
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('returns 0 axe violations without any sorting', async () => {
+  const { container } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'none'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('returns 0 axe violations with ascending sorting', async () => {
+  const { container } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'ascending'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('returns 0 axe violations with descending sorting', async () => {
+  const { container } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'descending'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
