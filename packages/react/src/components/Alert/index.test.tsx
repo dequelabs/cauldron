@@ -3,10 +3,14 @@ import { render, screen } from '@testing-library/react';
 import Alert from './';
 import axe from '../../axe';
 
-const defaults = { show: false, heading: { text: 'hi' } };
+const defaults = { show: false, heading: <span>Default Alert</span> };
 
 test('should return null when passed a falsey "show" prop', () => {
-  render(<Alert {...defaults}>Test Alert</Alert>);
+  render(
+    <Alert {...defaults} show>
+      Test Alert
+    </Alert>
+  );
 
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
@@ -45,7 +49,7 @@ test('should show modal when passed a truthy "show" prop', () => {
 
 test('should return no axe violations', async () => {
   const { container } = render(
-    <Alert show heading="title">
+    <Alert {...defaults} show>
       Hello!
     </Alert>
   );
@@ -56,7 +60,7 @@ test('should return no axe violations', async () => {
 
 test('should return no axe violations warning variant', async () => {
   const { container } = render(
-    <Alert show variant="warning" heading="title">
+    <Alert {...defaults} show variant="warning">
       Hello!
     </Alert>
   );
