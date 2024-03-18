@@ -12,4 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/dependencies
+        with:
+          root: true
+          packages-react: true
       - run: yarn lint
+      - name: typecheck
+        run: |
+          yarn --cwd packages/react build
+          yarn typecheck

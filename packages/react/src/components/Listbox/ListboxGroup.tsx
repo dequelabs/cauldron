@@ -1,9 +1,13 @@
 import { ContentNode } from '../../types';
 import React, { forwardRef } from 'react';
 import { useId } from 'react-id-generator';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 
-interface ListboxGroupProps extends React.HTMLAttributes<HTMLElement> {
-  as?: React.ElementType | string;
+interface ListboxGroupProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   groupLabelProps?: React.HTMLAttributes<HTMLLIElement>;
   label: ContentNode;
 }
@@ -30,7 +34,7 @@ const ListboxGroup = forwardRef<HTMLElement, ListboxGroupProps>(
       </Component>
     );
   }
-);
+) as PolymorphicComponent<ListboxGroupProps>;
 
 ListboxGroup.displayName = 'ListboxGroup';
 

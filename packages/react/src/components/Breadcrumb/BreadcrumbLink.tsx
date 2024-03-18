@@ -1,10 +1,13 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 
-interface BreadcrumbLinkProps
-  extends Omit<React.LinkHTMLAttributes<HTMLLinkElement>, 'as'> {
-  as?: React.ElementType;
-}
+type BreadcrumbLinkProps = PolymorphicProps<
+  React.LinkHTMLAttributes<HTMLLinkElement>
+>;
 
 const BreadcrumbLink = forwardRef<HTMLElement, BreadcrumbLinkProps>(
   (
@@ -24,7 +27,7 @@ const BreadcrumbLink = forwardRef<HTMLElement, BreadcrumbLinkProps>(
       {children}
     </ElementType>
   )
-);
+) as PolymorphicComponent<BreadcrumbLinkProps>;
 
 BreadcrumbLink.displayName = 'BreadcrumbLink';
 export default BreadcrumbLink;

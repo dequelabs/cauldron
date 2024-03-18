@@ -15,6 +15,7 @@
     "dev:docs": "webpack-dev-server",
     "fmt": "prettier --write \"e2e/*.ts\" \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
     "lint": "eslint . --quiet",
+    "typecheck": "yarn --cwd=packages/react tsc --noEmit --skipLibCheck",
     "prebuild": "yarn clean",
     "predev": "yarn clean",
     "test": "yarn --cwd=packages/react test",

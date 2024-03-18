@@ -108,11 +108,24 @@ test('should support ref prop', () => {
 });
 
 test('should support as prop', () => {
-  const Button = React.forwardRef<HTMLButtonElement, React.PropsWithChildren>(
-    ({ children }, ref) => <button ref={ref}>{children}</button>
+  type P = React.PropsWithChildren<{
+    foo: string;
+  }> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement>;
+  const Link = React.forwardRef<HTMLAnchorElement, P>(
+    ({ children, ...props }, ref) => (
+      <a ref={ref} {...props}>
+        {children}
+      </a>
+    )
   );
-  render(<TextEllipsis as={Button}>Hello World</TextEllipsis>);
-  expect(screen.getByRole('button')).toBeInTheDocument();
+  render(
+    <TextEllipsis as={Link} href="/somewhere" foo="bar">
+      Hello World
+    </TextEllipsis>
+  );
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  expect(screen.queryByRole('link')).toBeInTheDocument();
 });
 
 test('should return no axe violations', async () => {
