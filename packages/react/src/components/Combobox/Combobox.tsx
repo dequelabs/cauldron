@@ -16,7 +16,8 @@ import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
-import tokenList from '../../utils/token-list';
+import { addIdRef } from '../../utils/idRefs';
+import TextFieldWrapper from '../internal/TextFieldWrapper';
 
 // Event Keys
 const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
@@ -75,7 +76,7 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
+const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
   (
     {
       id: propId,
@@ -166,8 +167,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     }, [open]);
 
     useEffect(() => {
+      const [element, option] =
+        Array.from(matchingOptions.entries()).find(
+          ([, { selected }]) => selected
+        ) || [];
       if (autocomplete === 'manual') {
-        setActiveDescendant(null);
+        setActiveDescendant(!element ? null : { element, ...option });
       } else if (
         autocomplete === 'automatic' &&
         matchingOptions.size &&
@@ -219,7 +224,9 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const handleComboboxOptionClick = useCallback(() => {
       // maintain focus on the input
-      inputRef.current?.focus();
+      if (inputRef.current !== document.activeElement) {
+        inputRef.current?.focus();
+      }
     }, []);
 
     const handleBlur = useCallback(
@@ -245,8 +252,12 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         const escKeypress = event.key === Escape;
         const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
 
-        if ([Home, End].includes(event.key)) {
+        if (
           // prevent the page from scrolling and allow start/end option activation
+          [Home, End].includes(event.key) ||
+          // prevent combobox from submitting any forms when the listbox is expanded
+          (enterKeypress && open)
+        ) {
           event.preventDefault();
         }
 
@@ -368,8 +379,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
         })}
-        role="listbox"
-        aria-labelledby={`${id}-label`}
+        role={noMatchingOptions ? 'presentation' : 'listbox'}
+        aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
         value={selectedValue}
         onMouseDown={handleComboboxOptionMouseDown}
@@ -389,7 +400,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const inputProps = {
       ...props,
       'aria-describedby': error
-        ? tokenList(errorId, ariaDescribedby)
+        ? addIdRef(ariaDescribedby, errorId)
         : ariaDescribedby
     };
 
@@ -414,10 +425,8 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           )}
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-        <div
-          className={classnames('Combobox__input', {
-            'Combobox__input--error': hasError
-          })}
+        <TextFieldWrapper
+          className={classnames({ 'TextFieldWrapper--error': hasError })}
           // We're handling click here to open the listbox when the wrapping element is clicked,
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
@@ -442,7 +451,7 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             onBlur={handleBlur}
           />
           <span className="Combobox__arrow" />
-        </div>
+        </TextFieldWrapper>
         <ComboboxProvider
           autocomplete={autocomplete}
           inputValue={value}
@@ -453,12 +462,14 @@ const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           setMatchingOptions={setMatchingOptions}
           setFormValue={setFormValue}
         >
-          {portal
+          {portal && typeof document !== 'undefined'
             ? createPortal(
                 comboboxListbox,
+                // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                 portal instanceof HTMLElement
                   ? portal
                   : portal.current ||
+                      // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                       /* istanbul ignore next: default fallback value */ document.body
               )
             : comboboxListbox}

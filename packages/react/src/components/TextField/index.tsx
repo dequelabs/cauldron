@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import rndid from '../../utils/rndid';
-import tokenList from '../../utils/token-list';
 import setRef from '../../utils/setRef';
+import { addIdRef } from '../../utils/idRefs';
 
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -13,7 +13,7 @@ export interface TextFieldProps
     value: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  fieldRef: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
+  fieldRef?: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
   requiredText?: string;
   multiline?: boolean;
 }
@@ -73,6 +73,7 @@ export default class TextField extends React.Component<
       multiline,
       'aria-describedby': ariaDescribedby,
       children,
+      className,
       ...other
     } = this.props;
     // typescript can't infer the type so it's complaining about
@@ -81,7 +82,7 @@ export default class TextField extends React.Component<
     const Field: any = multiline ? 'textarea' : 'input';
     const inputProps = {
       'aria-describedby': error
-        ? tokenList(this.errorId, ariaDescribedby)
+        ? addIdRef(ariaDescribedby, this.errorId)
         : ariaDescribedby
     };
 
@@ -100,7 +101,7 @@ export default class TextField extends React.Component<
           )}
         </label>
         <Field
-          className={classNames({
+          className={classNames(className, {
             'Field__text-input': !multiline,
             Field__textarea: multiline,
             'Field--has-error': error
@@ -127,7 +128,10 @@ export default class TextField extends React.Component<
 
   onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (this.props.onChange) {
-      this.props.onChange(this.input?.value || '', e);
+      this.props.onChange(
+        this.input?.value || /* istanbul ignore next: default value */ '',
+        e
+      );
     }
 
     if (typeof this.props.value !== 'undefined') {

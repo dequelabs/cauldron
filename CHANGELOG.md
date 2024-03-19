@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/dequelabs/cauldron/compare/v6.2.1...v6.3.0) (2024-03-14)
+
+
+### Features
+
+* **react,styles:** add SearchField and internal TextFieldWrapper components ([#1372](https://github.com/dequelabs/cauldron/issues/1372)) ([46b16a1](https://github.com/dequelabs/cauldron/commit/46b16a14b8ec5fc1480cefa5ba4dd2ad8c478cbc))
+* **react:** Add property to include trailing children for SearchField component ([#1385](https://github.com/dequelabs/cauldron/issues/1385)) ([88e97f1](https://github.com/dequelabs/cauldron/commit/88e97f1950a23b62fe5a4b2a7c3e9750e26fb397))
+* **react:** add ref support to Link ([#1357](https://github.com/dequelabs/cauldron/issues/1357)) ([5d92f1e](https://github.com/dequelabs/cauldron/commit/5d92f1e2b49f6a5ce814de4c996c285c79d4fab4))
+* **react:** Add TextEllipsis utility component ([#1354](https://github.com/dequelabs/cauldron/issues/1354)) ([3e6e4cd](https://github.com/dequelabs/cauldron/commit/3e6e4cd8aa661f3b81bcdddbd538f77706f23283))
+
+
+### Bug Fixes
+
+* **react:** ensure Tooltip cleans up association id after removal ([#1370](https://github.com/dequelabs/cauldron/issues/1370)) ([595b9fb](https://github.com/dequelabs/cauldron/commit/595b9fbc6d1a1dde87c0ff54d7c26c6f5e135241))
+
+### [6.2.1](https://github.com/dequelabs/cauldron/compare/v6.2.0...v6.2.1) (2024-02-20)
+
+
+### Bug Fixes
+
+* **react:** restore missing types from lib ([#1348](https://github.com/dequelabs/cauldron/issues/1348)) ([edb685a](https://github.com/dequelabs/cauldron/commit/edb685a396ca8ad0262ef0812a42a38cf49d51ef))
+
+## [6.2.0](https://github.com/dequelabs/cauldron/compare/v6.1.0...v6.2.0) (2024-02-13)
+
+
+### Features
+
+* **react,styles:** add Timeline component ([#1325](https://github.com/dequelabs/cauldron/issues/1325)) ([6628503](https://github.com/dequelabs/cauldron/commit/6628503713cbcdc289bb6d736cdd689670da52b7))
+
+
+### Bug Fixes
+
+* **Combobox:** fix incorrect type for Combobox ref ([#1326](https://github.com/dequelabs/cauldron/issues/1326)) ([c2d49bd](https://github.com/dequelabs/cauldron/commit/c2d49bda4b1a4136482192601ecbc9aa911664dc))
+* **react:** fix incorrect aria when Combobox has no results ([#1332](https://github.com/dequelabs/cauldron/issues/1332)) ([023ddac](https://github.com/dequelabs/cauldron/commit/023ddacc9fa08a35542afb6b866277d727d11c67))
+* **react:** fix misuse of dom globals preventing ssr usage ([#1328](https://github.com/dequelabs/cauldron/issues/1328)) ([ef37e97](https://github.com/dequelabs/cauldron/commit/ef37e97726dfcc1af2d2cc8f3957a172479797e9))
+* **react:** use default hover cursor when checkboxes are disabled ([#1340](https://github.com/dequelabs/cauldron/issues/1340)) ([3818823](https://github.com/dequelabs/cauldron/commit/3818823b0c60df33555a10cd96c97f4e3c29aad1))
+* **styles:** fix incorrect icon size with Dialog close buttons ([#1327](https://github.com/dequelabs/cauldron/issues/1327)) ([f877edf](https://github.com/dequelabs/cauldron/commit/f877edfdd24548af977bd62cf57bb561f8d7a957))
+* **TextField:** prevent className clobbering on TextField input ([#1338](https://github.com/dequelabs/cauldron/issues/1338)) ([9bf6c09](https://github.com/dequelabs/cauldron/commit/9bf6c09d6a70fb95a3992ba223e79043cf906dfb))
+
+## [6.1.0](https://github.com/dequelabs/cauldron/compare/v6.0.0...v6.1.0) (2024-01-24)
+
+
+### Features
+
+* synced tabs with uxpin ([#1292](https://github.com/dequelabs/cauldron/issues/1292)) ([403a38d](https://github.com/dequelabs/cauldron/commit/403a38d4cc3388d453be20c8308b0c20db94c119))
+
+
+### Bug Fixes
+
+* **Combobox:** prevent default event  when Combobox listbox is expanded on enter keypress ([#1319](https://github.com/dequelabs/cauldron/issues/1319)) ([6de7685](https://github.com/dequelabs/cauldron/commit/6de7685ab576bf8d1a2edb36051486576a046cb4))
+* **Combobox:** set aria-activedescendant correctly when listbox is expanded with selected value ([#1320](https://github.com/dequelabs/cauldron/issues/1320)) ([3a04d8b](https://github.com/dequelabs/cauldron/commit/3a04d8b8ec3b2821ce33a3667266732841c22df5))
+* **react,styles:** keep rest background for disabled:active button state ([#1310](https://github.com/dequelabs/cauldron/issues/1310)) ([ca3aa82](https://github.com/dequelabs/cauldron/commit/ca3aa821bb47efbf7c2aac28d22937b599d8bc89))
+* **style:** removed double bottom border and added padding for < 64 rem ([#1303](https://github.com/dequelabs/cauldron/issues/1303)) ([c37994c](https://github.com/dequelabs/cauldron/commit/c37994cd2b1a02ddd8086d27d9e76380ac8775ec))
+* **styles:** use correct border for table headers with row headings ([#1308](https://github.com/dequelabs/cauldron/issues/1308)) ([b991497](https://github.com/dequelabs/cauldron/commit/b9914978995b7a75e8f4e0bd411d90b2752be992))
+* **style:** synced stepper with pattern library ([#1251](https://github.com/dequelabs/cauldron/issues/1251)) ([7c3f70b](https://github.com/dequelabs/cauldron/commit/7c3f70bef1ab2a8d88e891752e032d5ed27c9083))
+* **style:** Synced styles and added large variant of IconButton ([#1304](https://github.com/dequelabs/cauldron/issues/1304)) ([e5868a1](https://github.com/dequelabs/cauldron/commit/e5868a15a355d351d3d64f041aa609e3e81b8a29))
+* **style:** synced text field styles with pattern library ([#1206](https://github.com/dequelabs/cauldron/issues/1206)) ([51a804a](https://github.com/dequelabs/cauldron/commit/51a804a162fa2482529e443a0a41808c1ce2fa78))
+
 ## [6.0.0](https://github.com/dequelabs/cauldron/compare/v5.13.0...v6.0.0) (2023-12-20)
 
 

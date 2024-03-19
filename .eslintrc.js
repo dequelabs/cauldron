@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
@@ -32,20 +33,5 @@ module.exports = {
     react: {
       version: '16'
     }
-  },
-  overrides: [
-    {
-      files: '**/*/__tests__/**/*.js',
-      globals: {
-        jest: true,
-        test: true,
-        expect: true,
-        afterEach: true,
-        afterAll: true,
-        beforeEach: true,
-        beforeAll: true
-      }
-    },
-    { files: '*.js', rules: { '@typescript-eslint/no-var-requires': 'off' } }
-  ]
+  }
 };

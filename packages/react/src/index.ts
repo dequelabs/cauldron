@@ -58,6 +58,7 @@ export {
 } from './components/Tooltip';
 export { default as TooltipTabstop } from './components/TooltipTabstop';
 export { default as TextField } from './components/TextField';
+export { default as SearchField } from './components/SearchField';
 export { default as ClickOutsideListener } from './components/ClickOutsideListener';
 export {
   default as ExpandCollapsePanel,
@@ -113,7 +114,6 @@ export {
   ColumnList
 } from './components/TwoColumnPanel';
 export { default as Notice } from './components/Notice';
-
 export {
   default as Listbox,
   ListboxOption,
@@ -124,8 +124,9 @@ export {
   ComboboxOption,
   ComboboxGroup
 } from './components/Combobox';
-
 export { default as Popover } from './components/Popover';
+export { default as Timeline, TimelineItem } from './components/Timeline';
+export { default as TextEllipsis } from './components/TextEllipsis';
 
 /**
  * Helpers / Utils

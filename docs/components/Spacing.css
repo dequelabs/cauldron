@@ -6,6 +6,7 @@
 .cauldron--theme-dark {
   --spacing-list-name-color: var(--gray-20);
   --spacing-list-base-color: var(--gray-40);
+  --spacing-example-color: var(--accent-light);
 }
 
 .Spacing__example {

@@ -5,6 +5,8 @@
 
 .Icon svg {
   display: block;
+  height: var(--icon-size);
+  width: var(--icon-size);
 }
 
 /* Icon--down is the default orientation */

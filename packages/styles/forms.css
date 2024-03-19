@@ -12,6 +12,7 @@
   --field-border-color-error-focus-glow: rgba(217, 50, 81, 0.7);
   --field-border-color-disabled: rgba(204, 204, 204, 0.25);
   --field-background-color-disabled: var(--light-workspace-color);
+  --field-placeholder-color: var(--gray-50);
   --field-required-text-color: var(--gray-60);
   --field-label-text-color: var(--gray-90);
   --field-label-error-text-color: var(--error);
@@ -36,6 +37,7 @@
 .cauldron--theme-dark {
   --field-background-color: var(--accent-medium);
   --field-content-color: var(--white);
+  --field-border-color: #74818b;
   --field-border-color-hover: var(--accent-info-light);
   --field-border-color-focus: var(--accent-info);
   --field-border-color-focus-hover: var(--accent-info-light);
@@ -43,6 +45,7 @@
   --field-border-color-error: var(--accent-danger);
   --field-border-color-error-hover: #fea7a6;
   --field-background-color-disabled: #5d676f;
+  --field-placeholder-color: #8c9fab;
   --field-required-text-color: var(--white);
   --field-label-text-color: var(--white);
   --field-label-error-text-color: var(--error);
@@ -97,7 +100,7 @@ textarea:focus,
 [role='spinbutton']:focus {
   outline: 0;
   border: 1px solid var(--field-border-color-focus);
-  box-shadow: 0 0 0 2px var(--field-border-color-focus),
+  box-shadow: 0 0 0 1px var(--field-border-color-focus),
     0 0 5px var(--field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -122,6 +125,15 @@ textarea:focus:hover,
 [role='listbox']:focus:hover,
 [role='spinbutton']:focus:hover {
   border: 1px solid var(--field-border-color-focus-hover);
+  box-shadow: 0 0 0 1px var(--field-border-color-focus-hover),
+    0 0 5px var(--field-border-color-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--field-placeholder-color);
+  font-style: italic;
 }
 
 input.Field--has-error,
@@ -133,6 +145,8 @@ textarea.Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
+  box-shadow: 0 0 0 1px var(--field-border-color-error),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Checkbox__overlay.Field--has-error {
@@ -165,9 +179,9 @@ textarea.Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
   border: 1px solid var(--field-border-color-error);
-  box-shadow: 0 0 0 1px var(--field-border-color-error-hover),
-    inset 0 2px 3px 0 rgba(0, 0, 0, 0.05),
-    0 0 5px 0 var(--field-border-color-error-focus-glow);
+  box-shadow: 0 0 0 1px var(--field-border-color-error),
+    0 0 5px var(--field-border-color-error-focus-glow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error:focus:hover,
@@ -433,11 +447,13 @@ textarea.Field--has-error:focus:hover,
 .Radio__overlay--disabled.Icon--radio-checked,
 .Checkbox__overlay--disabled.Icon--checkbox-checked {
   color: var(--field-icon-checked-disabled-color);
+  cursor: default;
 }
 
 .Checkbox__overlay--disabled.Icon--checkbox-unchecked,
 .Radio__overlay--disabled.Icon--radio-unchecked {
   color: var(--field-icon-unchecked-disabled-color);
+  cursor: default;
 }
 
 .Field__label:hover ~ .Radio__overlay:not(.Radio__overlay--disabled),
