@@ -1,10 +1,3 @@
-/**
- * Unfortunately, eslint does not recognize the Polymorphic component has propTypes set
- *
- * We might be able to remove this if we upgrade eslint and associated plugins
- * See: https://github.com/dequelabs/cauldron/issues/451
- */
-/* eslint-disable react/prop-types */
 import React, {
   useRef,
   forwardRef,
@@ -13,12 +6,17 @@ import React, {
   HTMLProps
 } from 'react';
 import classnames from 'classnames';
-import * as Polymorphic from '../../utils/polymorphic-type';
 import Icon, { IconType } from '../Icon';
 import Tooltip, { TooltipProps } from '../Tooltip';
 import Offscreen from '../Offscreen';
+import {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
+import { HTMLAttributes } from 'enzyme';
 
-export interface IconButtonOwnProps {
+export interface IconButtonProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLButtonElement>, 'button'> {
   icon: IconType;
   label: React.ReactNode;
   tooltipPlacement?: TooltipProps['placement'];
@@ -28,18 +26,6 @@ export interface IconButtonOwnProps {
   large?: boolean;
 }
 
-type PolymorphicIconButton = Polymorphic.ForwardRefComponent<
-  'button',
-  IconButtonOwnProps
->;
-
-/**
- * Unfortunately, eslint does not recognize that this Polymorphic component has a displayName set
- *
- * We might be able to remove this if we upgrade eslint and associated plugins
- * See: https://github.com/dequelabs/cauldron/issues/451
- */
-// eslint-disable-next-line react/display-name
 const IconButton = forwardRef(
   (
     {
@@ -110,7 +96,7 @@ const IconButton = forwardRef(
       </React.Fragment>
     );
   }
-) as PolymorphicIconButton;
+) as PolymorphicComponent<IconButtonProps, 'button'>;
 
 IconButton.displayName = 'IconButton';
 
