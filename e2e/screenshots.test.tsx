@@ -7,7 +7,10 @@ import FieldWrap from '../packages/react/src/components/FieldWrap';
 import TextField from '../packages/react/src/components/TextField';
 import Select from '../packages/react/src/components/Select';
 // import Checkbox from '../packages/react/src/components/Checkbox';
-// import { default as Combobox, ComboboxOption } from '../packages/react/src/components/Combobox';
+import {
+  default as Combobox,
+  ComboboxOption
+} from '../packages/react/src/components/Combobox';
 
 test.beforeEach(({ page }) => {
   setTheme(page, 'light');
@@ -325,34 +328,71 @@ test('should have screenshot for Select[error]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('dark--select[error]');
 });
 
-// test('should have screenshot for Combobox', async ({
-//   mount,
-//   page
-// }) => {
-//   const options = [
+test('should have screenshot for Combobox', async ({ mount, page }) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+  });
+  const component = await mount(
+    <FieldWrap>
+      <Combobox label="Combobox">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Hover">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Focus">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
 
-//   ]
-//   await page.addStyleTag({
-//     content: `.Combobox__listbox { position: relative: !important; }`
-//   })
-//   const component = await mount(
-//     <FieldWrap>
-//       <Combobox label="Combobox">
-//         <ComboboxOption>Apple</ComboboxOption>
-//         <ComboboxOption>Banana</ComboboxOption>
-//         <ComboboxOption>Cucumber</ComboboxOption>
-//       </Combobox>
-//     </FieldWrap>
-//   );
+  await component.getByRole('combobox', { name: 'Focus' }).focus();
+  await component.getByRole('combobox', { name: 'Hover' }).hover();
 
-//   console.log(await page.evaluate(() => document.documentElement.outerHTML))
+  await expect(component).toHaveScreenshot('combobox');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--combobox');
+});
 
-//   await component.getByRole('combobox').focus();
+test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+  });
+  const component = await mount(
+    <FieldWrap>
+      <Combobox label="Combobox" error="This field has an error.">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Hover" error="This field has an error.">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Focus" error="This field has an error.">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
 
-//   await expect(component).toHaveScreenshot('combobox');
-//   await setTheme(page, 'dark');
-//   await expect(component).toHaveScreenshot('dark--combobox]');
-// })
+  await component.getByRole('combobox', { name: 'Focus' }).focus();
+  await component.getByRole('combobox', { name: 'Hover' }).hover();
+
+  await expect(component).toHaveScreenshot('combobox[error]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--combobox[error]');
+});
 
 // test.only('should have screenshot for IconButton[variant="primary"]', async ({
 //   mount,
