@@ -1,16 +1,18 @@
 import React from 'react';
 import { test, expect } from '@playwright/experimental-ct-react17';
 import { setTheme, setActive } from './helpers/playwright';
-import Button from '../packages/react/src/components/Button';
-// import IconButton from '../packages/react/src/components/IconButton';
-import FieldWrap from '../packages/react/src/components/FieldWrap';
-import TextField from '../packages/react/src/components/TextField';
-import Select from '../packages/react/src/components/Select';
-// import Checkbox from '../packages/react/src/components/Checkbox';
 import {
-  default as Combobox,
-  ComboboxOption
-} from '../packages/react/src/components/Combobox';
+  Button,
+  IconButton,
+  FieldWrap,
+  TextField,
+  SearchField,
+  Select,
+  Checkbox,
+  Combobox,
+  ComboboxOption,
+  RadioGroup
+} from '../packages/react/lib';
 
 test.beforeEach(({ page }) => {
   setTheme(page, 'light');
@@ -219,6 +221,89 @@ test('should have screenshot for Button[variant="tag"]', async ({
   await expect(component).toHaveScreenshot('dark--button[variant=tag]');
 });
 
+test('should have screenshot for IconButton[variant="secondary"]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // we don't want to capture the visibility of tooltips here, just the icon button itself
+    content: `.Tooltip { visibility: hidden !important }`
+  });
+  const component = await mount(
+    <div>
+      <IconButton icon="pencil" label="IconButton" />
+      <IconButton icon="pencil" label="Hover" />
+      <IconButton icon="pencil" label="Focus" />
+      <IconButton icon="pencil" label="Active" />
+      <IconButton icon="pencil" label="Disabled" disabled />
+    </div>
+  );
+
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(await component.getByLabel('Active'));
+  await component.getByRole('button', { name: 'Focus' }).focus();
+
+  await expect(component).toHaveScreenshot('iconbutton[variant=secondary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--iconbutton[variant=secondary]'
+  );
+});
+
+test('should have screenshot for IconButton[variant="primary"]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // we don't want to capture the visibility of tooltips here, just the icon button itself
+    content: `.Tooltip { visibility: hidden !important }`
+  });
+  const component = await mount(
+    <div>
+      <IconButton icon="pencil" label="IconButton" variant="primary" />
+      <IconButton icon="pencil" label="Hover" variant="primary" />
+      <IconButton icon="pencil" label="Focus" variant="primary" />
+      <IconButton icon="pencil" label="Active" variant="primary" />
+      <IconButton icon="pencil" label="Disabled" variant="primary" disabled />
+    </div>
+  );
+
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(await component.getByLabel('Active'));
+  await component.getByRole('button', { name: 'Focus' }).focus();
+
+  await expect(component).toHaveScreenshot('iconbutton[variant=primary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--iconbutton[variant=primary]');
+});
+
+test('should have screenshot for IconButton[variant="error"]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // we don't want to capture the visibility of tooltips here, just the icon button itself
+    content: `.Tooltip { visibility: hidden !important }`
+  });
+  const component = await mount(
+    <div>
+      <IconButton icon="pencil" label="IconButton" variant="error" />
+      <IconButton icon="pencil" label="Hover" variant="error" />
+      <IconButton icon="pencil" label="Focus" variant="error" />
+      <IconButton icon="pencil" label="Active" variant="error" />
+      <IconButton icon="pencil" label="Disabled" variant="error" disabled />
+    </div>
+  );
+
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(await component.getByText('Active'));
+  await component.getByRole('button', { name: 'Focus' }).focus();
+
+  await expect(component).toHaveScreenshot('iconbutton[variant=error]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--iconbutton[variant=error]');
+});
+
 test('should have screenshot for TextField', async ({ mount, page }) => {
   const component = await mount(
     <FieldWrap>
@@ -270,6 +355,24 @@ test('should have screenshot for TextField[error]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('textfield[error]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--textfield[error]');
+});
+
+test('should have screenshot for SearchField', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <SearchField label="SearchField" value="search field value" />
+      <SearchField label="Hover" value="search field value" />
+      <SearchField label="Focus" value="search field value" />
+      <SearchField label="Disabled" value="search field value" disabled />
+    </FieldWrap>
+  );
+
+  await component.getByRole('search', { name: 'Hover' }).hover();
+  await component.getByRole('search', { name: 'Focus' }).focus();
+
+  await expect(component).toHaveScreenshot('searchfield');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--searchfield');
 });
 
 test('should have screenshot for Select', async ({ mount, page }) => {
@@ -392,6 +495,118 @@ test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('combobox[error]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--combobox[error]');
+});
+
+test('should have screenshot for Checkbox', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <Checkbox id="checkbox" label="Checkbox" />
+      <Checkbox id="checkbox-hover" label="Hover" />
+      <Checkbox id="checkbox-focus" label="Focus" />
+      <Checkbox id="checkbox-active" label="Active" />
+      <Checkbox id="checkbox-disabled" label="Disabled" disabled />
+    </FieldWrap>
+  );
+
+  await component.getByRole('checkbox', { name: 'Focus' }).focus();
+  await component.getByText('Hover').hover();
+  setActive(
+    await component.locator('.Checkbox__wrap:nth-child(4) .Checkbox__overlay')
+  );
+
+  await expect(component).toHaveScreenshot('checkbox');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--checkbox');
+});
+
+test('should have screenshot for Checkbox[checked]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <FieldWrap>
+      <Checkbox id="checkbox" label="Checkbox" checked />
+      <Checkbox id="checkbox-hover" label="Hover" checked />
+      <Checkbox id="checkbox-focus" label="Focus" checked />
+      <Checkbox id="checkbox-active" label="Active" checked />
+      <Checkbox id="checkbox-disabled" label="Disabled" checked disabled />
+    </FieldWrap>
+  );
+
+  await component.getByRole('checkbox', { name: 'Focus' }).focus();
+  await component.getByText('Hover').hover();
+  setActive(
+    await component.locator('.Checkbox__wrap:nth-child(4) .Checkbox__overlay')
+  );
+
+  await expect(component).toHaveScreenshot('checkbox[checked]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--checkbox[checked]');
+});
+
+test('should have screenshot for RadioGroup', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <RadioGroup
+        aria-label="radios"
+        name="radios"
+        radios={[
+          { id: 'radio', label: 'Radio' },
+          { id: 'radio-hover', label: 'Hover' },
+          { id: 'radio-focus', label: 'Focus' },
+          { id: 'radio-active', label: 'Active' },
+          { id: 'radio-disabled', label: 'Disabled', disabled: true }
+        ]}
+      />
+    </FieldWrap>
+  );
+
+  await component.getByRole('radio', { name: 'Focus' }).focus();
+  await component.getByText('Hover').hover();
+  setActive(
+    await component.locator('.Radio__wrap:nth-child(4) .Radio__overlay')
+  );
+
+  await expect(component).toHaveScreenshot('radiogroup');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--radiogroup');
+});
+
+test('should have screenshot for RadioGroup[checked]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <FieldWrap>
+      <RadioGroup
+        aria-label="radios"
+        name="radios"
+        radios={[
+          { id: 'radio', label: 'Radio', value: 'checked' },
+          { id: 'radio-hover', label: 'Hover', value: 'checked' },
+          { id: 'radio-focus', label: 'Focus', value: 'checked' },
+          { id: 'radio-active', label: 'Active', value: 'checked' },
+          {
+            id: 'radio-disabled',
+            label: 'Disabled',
+            value: 'checked',
+            disabled: true
+          }
+        ]}
+        value="checked"
+      />
+    </FieldWrap>
+  );
+
+  await component.getByRole('radio', { name: 'Focus' }).focus();
+  await component.getByText('Hover').hover();
+  setActive(
+    await component.locator('.Radio__wrap:nth-child(4) .Radio__overlay')
+  );
+
+  await expect(component).toHaveScreenshot('radiogroup[checked]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--radiogroup[checked]');
 });
 
 // test.only('should have screenshot for IconButton[variant="primary"]', async ({

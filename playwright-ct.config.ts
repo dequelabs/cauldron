@@ -16,19 +16,15 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'line',
   use: {
-    ctPort: 3100
-    // ctViteConfig: {
-    //   esbuild: {
-    //     loader: 'jsx'
-    //   },
-    //   optimizeDeps: {
-    //     esbuildOptions: {
-    //       loader: {
-    //         '.js': 'jsx'
-    //       }
-    //     }
-    //   }
-    // }
+    ctPort: 3100,
+    ctViteConfig: {
+      build: {
+        commonjsOptions: {
+          // see: https://github.com/rollup/plugins/tree/master/packages/commonjs#include
+          include: undefined
+        }
+      }
+    }
   },
   projects: [
     {
