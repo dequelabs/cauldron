@@ -102,7 +102,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             placeholder={placeholder}
             ref={ref}
             {...otherProps}
-            className={classNames(otherProps.className, 'Field__text-input')}
             type="search"
           />
           {trailingChildren}
