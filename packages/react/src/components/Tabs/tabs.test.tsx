@@ -86,7 +86,10 @@ test('should pass classNames through', async () => {
 
   render(<TabswithRef />);
   await waitFor(() => {
-    expect(screen.getByRole('tablist').parentElement).toHaveClass('find--me');
+    expect(screen.getByRole('tablist').parentElement).toHaveClass(
+      'Tabs',
+      'find--me'
+    );
   });
 });
 
@@ -106,7 +109,7 @@ test('should render with aria-label prop', () => {
   };
 
   render(<TabswithRef />);
-  expect(screen.getByRole('tablist')).toHaveAttribute('aria-label', 'find-me');
+  expect(screen.getByRole('tablist')).toHaveAccessibleName('find-me');
 });
 
 test('should render with aria-labelledby prop', () => {
@@ -120,14 +123,14 @@ test('should render with aria-labelledby prop', () => {
         <TabPanel ref={ref}>
           <p>Panel 1</p>
         </TabPanel>
+        <p id="find-me">Label for the tablist</p>
       </>
     );
   };
 
   render(<TabswithRef />);
-  expect(screen.getByRole('tablist')).toHaveAttribute(
-    'aria-labelledby',
-    'find-me'
+  expect(screen.getByRole('tablist')).toHaveAccessibleName(
+    'Label for the tablist'
   );
 });
 
