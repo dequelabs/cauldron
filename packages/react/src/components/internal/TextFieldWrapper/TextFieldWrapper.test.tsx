@@ -52,7 +52,7 @@ test('should render TextFieldWrapper with other props', () => {
 
 test('should have no axe violations with TextFieldWrapper', async () => {
   const { container } = render(
-    <TextFieldWrapper className="banana">
+    <TextFieldWrapper>
       <p>Children</p>
     </TextFieldWrapper>
   );
