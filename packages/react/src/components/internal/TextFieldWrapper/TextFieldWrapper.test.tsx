@@ -1,44 +1,49 @@
 import React from 'react';
-import { render as testingRender, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
 
 import TextFieldWrapper, { TextFieldWrapperProps } from './';
 
-type RenderProps = Partial<TextFieldWrapperProps> & {
-  [key: string]: any;
-};
-
-const render = ({ className, children, ...otherProps }: RenderProps = {}) =>
-  testingRender(
-    <TextFieldWrapper className={className} {...otherProps}>
-      {children || <p>Children</p>}
+test('should render children', () => {
+  render(
+    <TextFieldWrapper>
+      <p>Children</p>
     </TextFieldWrapper>
   );
-
-test('should render children', () => {
-  render();
   expect(screen.getByText('Children')).toBeInTheDocument();
 });
 
-test('should render TextFieldWrapper with default className', () => {
-  render();
-  expect(screen.getByText('Children').parentElement).toHaveClass(
-    'TextFieldWrapper'
+test('should support className prop', () => {
+  render(
+    <TextFieldWrapper className="banana">
+      <input />
+    </TextFieldWrapper>
   );
-});
-
-test('should render TextFieldWrapper with custom className', () => {
-  render({ className: 'banana' });
-  expect(screen.getByText('Children').parentElement).toHaveClass(
+  expect(screen.getByRole('textbox').parentElement).toHaveClass(
     'TextFieldWrapper',
     'banana'
   );
 });
 
+test('should support ref prop', () => {
+  const ref = React.createRef<HTMLDivElement>();
+  render(
+    <TextFieldWrapper className="banana" ref={ref}>
+      <input />
+    </TextFieldWrapper>
+  );
+  expect(ref.current).toBeDefined();
+  expect(ref.current).toBeInstanceOf(HTMLDivElement);
+});
+
 test('should render TextFieldWrapper with other props', () => {
-  render({ id: 'banana' });
+  render(
+    <TextFieldWrapper id="banana">
+      <input />
+    </TextFieldWrapper>
+  );
   expect(screen.getByText('Children').parentElement).toHaveAttribute(
     'id',
     'banana'
@@ -46,6 +51,10 @@ test('should render TextFieldWrapper with other props', () => {
 });
 
 test('should have no axe violations with TextFieldWrapper', async () => {
-  const { container } = render();
+  const { container } = render(
+    <TextFieldWrapper className="banana">
+      <input />
+    </TextFieldWrapper>
+  );
   expect(await axe(container)).toHaveNoViolations();
 });
