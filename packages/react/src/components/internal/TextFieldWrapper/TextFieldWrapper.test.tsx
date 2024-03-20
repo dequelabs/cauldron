@@ -44,7 +44,7 @@ test('should render TextFieldWrapper with other props', () => {
       <input />
     </TextFieldWrapper>
   );
-  expect(screen.getByText('Children').parentElement).toHaveAttribute(
+  expect(screen.getByRole('textbox').parentElement).toHaveAttribute(
     'id',
     'banana'
   );
@@ -53,7 +53,7 @@ test('should render TextFieldWrapper with other props', () => {
 test('should have no axe violations with TextFieldWrapper', async () => {
   const { container } = render(
     <TextFieldWrapper className="banana">
-      <input />
+      <p>Children</p>
     </TextFieldWrapper>
   );
   expect(await axe(container)).toHaveNoViolations();
