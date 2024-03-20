@@ -146,7 +146,7 @@ test('should support className prop', () => {
   render({ label: 'search field', className: 'banana' });
   expect(
     screen.getByRole('searchbox', { name: 'search field' }).parentElement
-  ).toHaveClass('Field__text-input', 'banana');
+  ).toHaveClass('TextFieldWrapper', 'banana');
 });
 
 test('should support name prop', () => {
