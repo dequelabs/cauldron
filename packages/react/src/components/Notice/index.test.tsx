@@ -90,11 +90,6 @@ test('should return no axe violations', async () => {
     </>
   );
 
-  const infoAxeResults = await axe(container.innerHTML);
-  const cautionAxeResults = await axe(container.innerHTML);
-  const dangerAxeResults = await axe(container.innerHTML);
-
-  expect(infoAxeResults).toHaveNoViolations();
-  expect(cautionAxeResults).toHaveNoViolations();
-  expect(dangerAxeResults).toHaveNoViolations();
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
