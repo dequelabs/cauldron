@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.3.1](https://github.com/dequelabs/cauldron/compare/v6.3.0...v6.3.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* **react:** consolidate polymorphic types to allow for better typehints and code linting when using polymorphic components ([#1414](https://github.com/dequelabs/cauldron/issues/1414)) ([2fa4aa0](https://github.com/dequelabs/cauldron/commit/2fa4aa021a5a78256f22561abf7a22af7aea0300))
+* **react:** prevent search field input from inheriting unintended styles from default TextField ([#1425](https://github.com/dequelabs/cauldron/issues/1425)) ([c76774e](https://github.com/dequelabs/cauldron/commit/c76774e83fefebc5c2b95dff81ef9c6a498ddca6))
+
 ## [6.3.0](https://github.com/dequelabs/cauldron/compare/v6.2.1...v6.3.0) (2024-03-14)
 
 
