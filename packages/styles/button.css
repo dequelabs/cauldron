@@ -17,7 +17,7 @@
   --button-text-color-dark: var(--gray-90);
   --button-text-color-light: var(--white);
   --button-focus-ring-color: var(--focus-light);
-  --button-thin-height: 23px;
+  --button-thin-height: var(--target-size-minimum);
 
   --button-height: 36px;
 }
