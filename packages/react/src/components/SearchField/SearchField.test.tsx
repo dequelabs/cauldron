@@ -1,4 +1,4 @@
-import React, { createRef, ComponentProps } from 'react';
+import React, { createRef, ComponentProps, useState } from 'react';
 import { render as testingRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
@@ -125,6 +125,29 @@ test('should call onChange with input', async () => {
   await user.type(input, 'hello world');
   expect(onChange.callCount).toEqual('hello world'.length);
   expect(onChange.lastCall.firstArg).toEqual('hello world');
+});
+
+test('should change controlled value with onChange', async () => {
+  const ControllableWrapper = () => {
+    const [search, setSearch] = useState('');
+
+    return (
+      <SearchField
+        label="controlled field"
+        value={search}
+        onChange={(value) => setSearch(value)}
+      />
+    );
+  };
+
+  const user = userEvent.setup();
+  const { getByRole } = testingRender(<ControllableWrapper />);
+
+  const input = getByRole('searchbox', { name: 'controlled field' });
+
+  expect(input).toHaveValue('');
+  await user.type(input, 'user input');
+  expect(input).toHaveValue('user input');
 });
 
 test('should render disabled SearchField', () => {

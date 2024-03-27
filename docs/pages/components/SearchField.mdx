@@ -4,6 +4,7 @@ description: A form element that allows users to type in text for searching.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SearchField/index.tsx
 ---
 
+import { useState } from 'react';
 import { SearchField, FieldWrap } from '@deque/cauldron-react';
 
 ```js
@@ -70,6 +71,24 @@ We include trailing children to allow for additional input context to be provide
     }
   />
 </FieldWrap>
+```
+
+### Controllable
+
+```jsx example
+function ControllableSearchFieldExample() {
+  const [search, setSearch] = useState("");
+
+  return (
+    <FieldWrap>
+      <SearchField
+        label="Controllable"
+        value={search}
+        onChange={(value) => setSearch(value)}
+      />
+    </FieldWrap>
+  );
+}
 ```
 
 ## Props
