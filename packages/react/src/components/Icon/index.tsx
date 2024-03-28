@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import Offscreen from '../Offscreen';
 import classNames from 'classnames';
-import { IconType, iconTypes } from './types';
+import { type IconType, iconTypes } from './types';
 
 export { IconType, iconTypes };
 

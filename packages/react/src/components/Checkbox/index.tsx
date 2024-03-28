@@ -36,6 +36,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       'aria-describedby': ariaDescribedby,
       disabled = false,
       checked = false,
+      children,
       ...other
     }: CheckboxProps,
     ref
