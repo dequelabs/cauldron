@@ -126,7 +126,9 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
         >
           <div className="Toast__message">
             <Icon type={typeMap[type].icon} />
-            <div className="Toast__message-content">{children}</div>
+            <div className="Toast__message-content" aria-live="polite">
+              {children}
+            </div>
           </div>
           {type !== 'action-needed' && dismissible && (
             <button
