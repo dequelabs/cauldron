@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/experimental-ct-react17';
 import { setTheme, setActive } from './helpers/playwright';
 import {
   Button,
+  Link,
   IconButton,
   FieldWrap,
   TextField,
@@ -253,6 +254,99 @@ test('should have screenshot for Button[variant="tag"]', async ({
   await expect(component).toHaveScreenshot('button[variant=tag]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[variant=tag]');
+});
+
+test('should have screenshot for Link', async ({ mount, page }) => {
+  const component = await mount(
+    <div>
+      <Link href="http://acme.biz">Link</Link>
+      <Link href="http://acme.biz">Hover</Link>
+      <Link href="http://acme.biz">Focus</Link>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('link');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--link');
+});
+
+test('should have screenshot for Link[variant=button]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Link href="http://acme.biz" variant="button">
+        Link
+      </Link>
+      <Link href="http://acme.biz" variant="button">
+        Hover
+      </Link>
+      <Link href="http://acme.biz" variant="button">
+        Active
+      </Link>
+      <Link href="http://acme.biz" variant="button">
+        Focus
+      </Link>
+      <Link
+        href="http://acme.biz"
+        variant="button-secondary"
+        aria-disabled="true"
+      >
+        Disabled
+      </Link>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('link[variant=button]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--link[variant=button]');
+});
+
+test('should have screenshot for Link[variant=button-secondary]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Link href="http://acme.biz" variant="button-secondary">
+        Link
+      </Link>
+      <Link href="http://acme.biz" variant="button-secondary">
+        Hover
+      </Link>
+      <Link href="http://acme.biz" variant="button-secondary">
+        Active
+      </Link>
+      <Link href="http://acme.biz" variant="button-secondary">
+        Focus
+      </Link>
+      <Link
+        href="http://acme.biz"
+        variant="button-secondary"
+        aria-disabled="true"
+      >
+        Disabled
+      </Link>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('link[variant=button-secondary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--link[variant=button-secondary]'
+  );
 });
 
 test('should have screenshot for IconButton[variant="secondary"]', async ({
@@ -642,30 +736,3 @@ test('should have screenshot for RadioGroup[checked]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--radiogroup[checked]');
 });
-
-// test.only('should have screenshot for IconButton[variant="primary"]', async ({
-//   mount,
-//   page
-// }) => {
-//   const component = await mount(
-//     <div>
-//       <IconButton icon="pencil" variant="primary" label="Primary" />
-//       <IconButton icon="pencil" label="Hover" />
-//       <IconButton icon="pencil" label="Active" />
-//       <IconButton icon="pencil" label="Focus" />
-//       <IconButton icon="pencil" variant="primary" disabled label="Disabled" />
-//     </div>
-//   );
-// console.log(await component.innerHTML())
-// console.log(await page.evaluate(() => document.body.innerHTML))
-//   await component.locator('.IconButton').hover();
-//   // setActive(await component.locator('.IconButton'));
-//   // await component
-//   //   .locator('.IconButton')
-//   //   .press('Space', { delay: 1000, noWaitAfter: true });
-//   // await component.locator('.IconButton').focus();
-
-//   await expect(component).toHaveScreenshot('iconbutton[variant=primary]');
-//   await setTheme(page, 'dark');
-//   await expect(component).toHaveScreenshot('dark--iconbutton[variant=primary]');
-// });
