@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.3.0",
+  "version": "6.3.1",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -83,7 +83,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-ssr-friendly": "^1.3.0",
-    "express": "^4.17.3",
+    "express": "^4.19.2",
     "focusable": "^2.3.0",
     "fontsource-lato": "^4.0.0",
     "fontsource-roboto": "^3.0.3",
