@@ -330,7 +330,7 @@ test('should have screenshot for IconButton[variant="error"]', async ({
   );
 
   await component.getByRole('button', { name: 'Hover' }).hover();
-  setActive(await component.getByText('Active'));
+  setActive(await component.getByLabel('Active'));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('iconbutton[variant=error]');

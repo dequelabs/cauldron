@@ -17,7 +17,7 @@ yarn screenshots:docker
 To update existing snapshots run:
 
 ```sh
-npm run screenshots --update-screenshots
+yarn screenshots --update-snapshots
 ```
 
 Finally, to run screenshot comparison tests run:
