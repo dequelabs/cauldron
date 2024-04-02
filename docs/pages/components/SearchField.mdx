@@ -73,18 +73,22 @@ We include trailing children to allow for additional input context to be provide
 </FieldWrap>
 ```
 
-### Controllable
+### Controlled
+`SearchField` can also be controlled, by setting the `value` prop and updating the value from event callbacks.
 
 ```jsx example
-function ControllableSearchFieldExample() {
-  const [search, setSearch] = useState("");
+function ControlledSearchFieldExample() {
+  const [value, setValue] = useState('Banana');
+  const handleChange = (value) => {
+    setValue(value);
+  };
 
   return (
     <FieldWrap>
       <SearchField
-        label="Controllable"
-        value={search}
-        onChange={(value) => setSearch(value)}
+        label="Controlled"
+        value={value}
+        onChange={handleChange}
       />
     </FieldWrap>
   );

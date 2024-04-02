@@ -128,20 +128,23 @@ test('should call onChange with input', async () => {
 });
 
 test('should change controlled value with onChange', async () => {
-  const ControllableWrapper = () => {
-    const [search, setSearch] = useState('');
+  const ControlledWrapper = () => {
+    const [value, setValue] = useState('');
+    const handleChange = (newValue: string) => {
+      setValue(newValue);
+    };
 
     return (
       <SearchField
         label="controlled field"
-        value={search}
-        onChange={(value) => setSearch(value)}
+        value={value}
+        onChange={handleChange}
       />
     );
   };
 
   const user = userEvent.setup();
-  const { getByRole } = testingRender(<ControllableWrapper />);
+  const { getByRole } = testingRender(<ControlledWrapper />);
 
   const input = getByRole('searchbox', { name: 'controlled field' });
 
