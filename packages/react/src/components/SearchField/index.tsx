@@ -98,7 +98,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           <Icon type="magnifying-glass" className="SearchField__search-icon" />
           <input
             id={inputId}
-            value={value}
+            value={isControlled ? propValue : value}
             onChange={handleChange}
             placeholder={placeholder}
             ref={ref}
