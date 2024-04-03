@@ -90,6 +90,7 @@ test('should support custom status label text', () => {
   );
 
   expect(screen.getByText('hello world')).toHaveAttribute('id', 'foo');
+  expect(screen.getByRole('log')).toHaveTextContent('hello world');
 });
 
 test('should call on { Next, Previous, First, Last } click as expected', () => {
