@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.3.2](https://github.com/dequelabs/cauldron/compare/v6.3.1...v6.3.2) (2024-04-03)
+
+
+### Bug Fixes
+
+* fix toast bug where screen readers dont read toast ([#1437](https://github.com/dequelabs/cauldron/issues/1437)) ([80b7d36](https://github.com/dequelabs/cauldron/commit/80b7d36634ec9a9e094c09e0edeafa635d6f1c18))
+* **react:** update input value for SearchField in controlled case ([#1433](https://github.com/dequelabs/cauldron/issues/1433)) ([9a49861](https://github.com/dequelabs/cauldron/commit/9a498617be23ee60443c2b12b57a8182f6434649)), closes [#1432](https://github.com/dequelabs/cauldron/issues/1432)
+
 ### [6.3.1](https://github.com/dequelabs/cauldron/compare/v6.3.0...v6.3.1) (2024-03-21)
 
 
