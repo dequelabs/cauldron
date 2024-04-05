@@ -39,7 +39,7 @@ function Heading({ level, children, ...props }: HeadingProps) {
   );
 }
 
-function Link({ href, ...props }: React.LinkHTMLAttributes<HTMLLinkElement>) {
+function Link({ href, ...props }: React.AnchorHTMLAttributes<HTMLLinkElement>) {
   const external = href.indexOf('://') > 0 || href.indexOf('//') === 0;
   return external ? (
     <CauldronLink href={href} {...props} />

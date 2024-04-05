@@ -6,7 +6,7 @@ import type {
 } from '../../utils/polymorphicComponent';
 
 type BreadcrumbLinkProps = PolymorphicProps<
-  React.LinkHTMLAttributes<HTMLLinkElement>
+  React.AnchorHTMLAttributes<HTMLLinkElement>
 >;
 
 const BreadcrumbLink = forwardRef<HTMLElement, BreadcrumbLinkProps>(
