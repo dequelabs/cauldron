@@ -3,6 +3,7 @@ import path from 'path';
 
 export async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate(
+    // @ts-expect-error
     (theme: string) => {
       const themes: Record<string, string> = {
         light: 'cauldron--theme-light',
@@ -20,6 +21,12 @@ export async function setTheme(page: Page, theme: 'light' | 'dark') {
 
 export async function setActive(locator: Locator) {
   const elementHandle = await locator.elementHandle();
+  if (!elementHandle) {
+    console.warn(`No element found for locator ${locator.toString()}`);
+    return;
+  }
+
+  // @ts-expect-error
   const page = elementHandle._parent._page;
   const session = await page.context().newCDPSession(page);
 
