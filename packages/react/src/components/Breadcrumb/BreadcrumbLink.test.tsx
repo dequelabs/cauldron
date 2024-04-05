@@ -4,7 +4,7 @@ import { BreadcrumbLink } from './';
 import axe from '../../axe';
 
 const CustomLinkComponent = (
-  props: React.HTMLAnchorAttributes<HTMLAnchorElement>
+  props: React.AnchorHTMLAttributes<HTMLAnchorElement>
 ): JSX.Element => (
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   <a data-testid="custom" {...props} />
