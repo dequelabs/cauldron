@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/screenshots.e2e.tsx"],
+  "exclude": ["node_modules", "src/**/*.e2e.tsx"],
   "compilerOptions": {
     "skipLibCheck": true,
     "declarationDir": "lib",
