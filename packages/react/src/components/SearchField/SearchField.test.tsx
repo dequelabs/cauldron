@@ -1,4 +1,4 @@
-import React, { createRef, ComponentProps } from 'react';
+import React, { createRef, ComponentProps, useState } from 'react';
 import { render as testingRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
@@ -127,6 +127,32 @@ test('should call onChange with input', async () => {
   expect(onChange.lastCall.firstArg).toEqual('hello world');
 });
 
+test('should change controlled value with onChange', async () => {
+  const ControlledWrapper = () => {
+    const [value, setValue] = useState('');
+    const handleChange = (newValue: string) => {
+      setValue(newValue);
+    };
+
+    return (
+      <SearchField
+        label="controlled field"
+        value={value}
+        onChange={handleChange}
+      />
+    );
+  };
+
+  const user = userEvent.setup();
+  const { getByRole } = testingRender(<ControlledWrapper />);
+
+  const input = getByRole('searchbox', { name: 'controlled field' });
+
+  expect(input).toHaveValue('');
+  await user.type(input, 'user input');
+  expect(input).toHaveValue('user input');
+});
+
 test('should render disabled SearchField', () => {
   const input = render({ disabled: true });
   expect(input).toBeDisabled();
@@ -144,10 +170,9 @@ test('should support ref prop', () => {
 
 test('should support className prop', () => {
   render({ label: 'search field', className: 'banana' });
-  expect(screen.getByRole('searchbox', { name: 'search field' })).toHaveClass(
-    'Field__text-input',
-    'banana'
-  );
+  expect(
+    screen.getByRole('searchbox', { name: 'search field' }).parentElement
+  ).toHaveClass('TextFieldWrapper', 'banana');
 });
 
 test('should support name prop', () => {

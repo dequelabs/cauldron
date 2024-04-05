@@ -27,6 +27,7 @@ interface SearchFieldProps
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
+      className,
       label,
       defaultValue = '',
       onChange,
@@ -36,7 +37,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       id: propId,
       value: propValue,
       trailingChildren,
-      ...otherProps
+      ...inputProps
     }: SearchFieldProps,
     ref
   ) => {
@@ -90,19 +91,18 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           </label>
         )}
         <TextFieldWrapper
-          className={classNames({
-            'TextFieldWrapper--disabled': otherProps.disabled
+          className={classNames(className, {
+            'TextFieldWrapper--disabled': inputProps.disabled
           })}
         >
           <Icon type="magnifying-glass" className="SearchField__search-icon" />
           <input
             id={inputId}
-            value={value}
+            value={isControlled ? propValue : value}
             onChange={handleChange}
             placeholder={placeholder}
             ref={ref}
-            {...otherProps}
-            className={classNames(otherProps.className, 'Field__text-input')}
+            {...inputProps}
             type="search"
           />
           {trailingChildren}
