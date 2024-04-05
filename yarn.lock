@@ -1589,29 +1589,29 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@playwright/experimental-ct-core@1.42.1":
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.42.1.tgz#71977062a6e41820c331e548c6812628f519ed33"
-  integrity sha512-wBS6pzgJwRuK0MwgiooamLW0prQLgT0RAhxooeMyqU97VbDI5aYuuynlxobJDDymU4HcOKARg2rG8h6jX7ShrA==
+"@playwright/experimental-ct-core@1.43.0":
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.43.0.tgz#0edfb8def77261d4d1262d9c8f17f38e8577d648"
+  integrity sha512-kLYMqvHY0D30AsggB6xtit6KCnGtPLMIpfxqTqXFbbHUgfdrW3bberjzAN9sfuranbcgqwO4uxAvilo0fHXuWw==
   dependencies:
-    playwright "1.42.1"
-    playwright-core "1.42.1"
-    vite "^5.0.12"
+    playwright "1.43.0"
+    playwright-core "1.43.0"
+    vite "^5.0.13"
 
-"@playwright/experimental-ct-react17@^1.42.1":
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.42.1.tgz#a82a38bcf352f109ca58358262d86f8de19fb4df"
-  integrity sha512-AX0K9UipyDsCsURMYkoeP7DdO1Y/PS2/qKngzlD5D3OKAkY/Ru4U5qYFwYC/U8qdQDjjsBWYd0s3l8urwqwT7Q==
+"@playwright/experimental-ct-react17@^1.43.0":
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.43.0.tgz#0bb0255eb934f71c9525ef6f0e3c60c97988f033"
+  integrity sha512-4MZ88OJDCovPVIRUq4ejVlrTDGgQkw5n+CpInBwKg8fQkuVe+SLRgih8P/mujiz9a3rhAQTsXz+UEpqbzS24nA==
   dependencies:
-    "@playwright/experimental-ct-core" "1.42.1"
+    "@playwright/experimental-ct-core" "1.43.0"
     "@vitejs/plugin-react" "^4.2.1"
 
-"@playwright/test@^1.42.1":
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.42.1.tgz#9eff7417bcaa770e9e9a00439e078284b301f31c"
-  integrity sha512-Gq9rmS54mjBL/7/MvBaNOBwbfnh7beHvS6oS4srqXFcQHpQCV1+c8JXWE8VLPyRDhgS3H8x8A7hztqI9VnwrAQ==
+"@playwright/test@^1.43.0":
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.43.0.tgz#5d90f247b26d404dd5d81c60f9c7c5e5159eb664"
+  integrity sha512-Ebw0+MCqoYflop7wVKj711ccbNlrwTBCtjY5rlbiY9kHL2bCYxq+qltK6uPsVBGGAOb033H2VO0YobcQVxoW7Q==
   dependencies:
-    playwright "1.42.1"
+    playwright "1.43.0"
 
 "@rollup/rollup-android-arm-eabi@4.13.0":
   version "4.13.0"
@@ -8350,17 +8350,17 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-playwright-core@1.42.1:
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.42.1.tgz#13c150b93c940a3280ab1d3fbc945bc855c9459e"
-  integrity sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==
+playwright-core@1.43.0:
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.43.0.tgz#d8079acb653abebb0b63062e432479647a4e1271"
+  integrity sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==
 
-playwright@1.42.1, playwright@^1.42.1:
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.42.1.tgz#79c828b51fe3830211137550542426111dc8239f"
-  integrity sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg==
+playwright@1.43.0, playwright@^1.43.0:
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.43.0.tgz#2c2efd4ee2a25defd8c24c98ccb342bdd9d435f5"
+  integrity sha512-SiOKHbVjTSf6wHuGCbqrEyzlm6qvXcv7mENP+OZon1I07brfZLGdfWV0l/efAzVx7TF3Z45ov1gPEkku9q25YQ==
   dependencies:
-    playwright-core "1.42.1"
+    playwright-core "1.43.0"
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -8938,10 +8938,10 @@ postcss@^8.4.17:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@^8.4.36:
-  version "8.4.37"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.37.tgz#4505f992cd0c20e03d25f13b31901640b2db731a"
-  integrity sha512-7iB/v/r7Woof0glKLH8b1SPHrsX7uhdO+Geb41QpF/+mWZHU3uxxSlN+UXGVit1PawOYDToO+AbZzhBzWRDwbQ==
+postcss@^8.4.38:
+  version "8.4.38"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.38.tgz#b387d533baf2054288e337066d81c6bee9db9e0e"
+  integrity sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==
   dependencies:
     nanoid "^3.3.7"
     picocolors "^1.0.0"
@@ -10960,13 +10960,13 @@ vfile@^5.0.0:
     unist-util-stringify-position "^3.0.0"
     vfile-message "^3.0.0"
 
-vite@^5.0.12:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.2.tgz#b98f8de352d22e21d99508274ddd053ef82bf238"
-  integrity sha512-FWZbz0oSdLq5snUI0b6sULbz58iXFXdvkZfZWR/F0ZJuKTSPO7v72QPXt6KqYeMFb0yytNp6kZosxJ96Nr/wDQ==
+vite@^5.0.13:
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.8.tgz#a99e09939f1a502992381395ce93efa40a2844aa"
+  integrity sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==
   dependencies:
     esbuild "^0.20.1"
-    postcss "^8.4.36"
+    postcss "^8.4.38"
     rollup "^4.13.0"
   optionalDependencies:
     fsevents "~2.3.3"
