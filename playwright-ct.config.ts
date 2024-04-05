@@ -6,7 +6,7 @@ import { defineConfig, devices } from '@playwright/experimental-ct-react17';
 export default defineConfig({
   preserveOutput: 'failures-only',
   testDir: './',
-  testMatch: /screenshots\.test\.tsx?$/i,
+  testMatch: /screenshots\.(e2e|test)\.tsx?$/i,
   outputDir: './e2e/test-results',
   snapshotDir: './e2e/screenshots',
   snapshotPathTemplate: '{snapshotDir}/{arg}.png',
