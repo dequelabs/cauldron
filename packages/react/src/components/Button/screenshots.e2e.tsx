@@ -1,7 +1,7 @@
 import React from 'react';
 import { test, expect } from '../../../../../e2e/screenshots';
 import { setActive, setTheme } from '../../../../../e2e/helpers/playwright';
-import { Button } from '../../../lib';
+import { Button } from '../../../';
 
 test('should have screenshot for Button[variant="primary"]', async ({
   mount,
