@@ -39,12 +39,12 @@ test('should pass id through', async () => {
   const ref = React.createRef<HTMLDivElement>();
 
   render(
-    <Tab target={ref} id={'I am a tabId'}>
+    <Tab target={ref} id="I-am-a-tabId">
       option 1
     </Tab>
   );
 
-  expect(screen.getByRole('tab')).toHaveAttribute('id', 'I am a tabId');
+  expect(screen.getByRole('tab')).toHaveAttribute('id', 'I-am-a-tabId');
 });
 
 test('should pass aria-selected through and render aria-selected properly', async () => {
@@ -89,7 +89,7 @@ test('returns no axe violations', async () => {
 
   const { container } = render(
     <Tabs aria-label={ariaLabel}>
-      <Tab target={ref} id={'I am a tabId'} role="tab">
+      <Tab target={ref} id="I-am-a-tabId">
         <p>a simple paragraph</p>
       </Tab>
     </Tabs>
