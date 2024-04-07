@@ -9,7 +9,7 @@ test('should render tab with a paragraph correctly', async () => {
   const ref = React.createRef<HTMLDivElement>();
 
   render(
-    <Tab target={ref} id={'I am a tabId'}>
+    <Tab target={ref} id="I-am-a-tabId">
       <p>a simple paragraph</p>
     </Tab>
   );
