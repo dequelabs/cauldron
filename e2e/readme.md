@@ -28,7 +28,9 @@ yarn screenshots
 
 ### Testing Components
 
-Component testing is done in [`screenshots.test.tsx`](./screenshots.test.tsx). Non-interactive components can render a single component for screenshots:
+Component testing is done individually for each component in [`packages/react/src/components/[ComponentName].e2e.tsx`](../packages/react/src/components/Button/screenshots.e2e.tsx).
+
+Non-interactive components can render a single component for screenshots:
 
 ```tsx
 const component = await mount(<Component prop="a" variant="b" />);
