@@ -7,6 +7,18 @@ type SkipLinkProps = {
   [key: string]: any;
 };
 
+let target: HTMLDivElement;
+
+beforeEach(() => {
+  target = window.document.createElement('div');
+  target.id = 'main-content';
+  window.document.body.appendChild(target);
+});
+
+afterEach(() => {
+  window.document.body.removeChild(target);
+});
+
 const renderDefaultSkipLink = (props: SkipLinkProps = {}) => {
   return render(
     <SkipLink
@@ -20,10 +32,6 @@ const renderDefaultSkipLink = (props: SkipLinkProps = {}) => {
 
 test('should focus main content when SkipLink is clicked', () => {
   expect.assertions(2);
-
-  const target = window.document.createElement('div');
-  target.id = 'main-content';
-  window.document.body.appendChild(target);
 
   renderDefaultSkipLink();
 
