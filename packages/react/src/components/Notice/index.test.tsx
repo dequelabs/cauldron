@@ -75,19 +75,33 @@ test('should allow a ref to be forwarded', () => {
   expect(ref.current).toBeTruthy();
 });
 
-test('should return no axe violations', async () => {
+test('should return no axe violations with type="info"', async () => {
   const { container } = render(
-    <>
-      <Notice type="info" title="foo">
-        bar
-      </Notice>
-      <Notice type="caution" title="foo">
-        bar
-      </Notice>
-      <Notice type="danger" title="foo">
-        bar
-      </Notice>
-    </>
+    <Notice type="info" title="foo">
+      bar
+    </Notice>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations with type="caution"', async () => {
+  const { container } = render(
+    <Notice type="caution" title="foo">
+      bar
+    </Notice>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations with type="danger"', async () => {
+  const { container } = render(
+    <Notice type="danger" title="foo">
+      bar
+    </Notice>
   );
 
   const results = await axe(container);
