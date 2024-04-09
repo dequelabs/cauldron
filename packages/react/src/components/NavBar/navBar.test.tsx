@@ -68,7 +68,7 @@ test('should render navTriggerLabel properly', () => {
     </NavBar>
   );
 
-  expect(screen.getByText('I am a label')).toBeInTheDocument();
+  expect(screen.getByRole('button')).toHaveAccessibleName('I am a label');
 });
 
 test('should render aria-controls prop on trigger button', () => {
