@@ -23,6 +23,7 @@ jobs:
         with:
           product-name: Cauldron
           output-file: vpats/{DATE}-{PRODUCT}.md
+          vpat-label: vpat
       - uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
