@@ -27,6 +27,38 @@ function copyTextToClipboard(text: string) {
   return copied;
 }
 
+// Note: eventually we want to natively handle multiple toasts, but for now we will limit the copy toast notification
+// to only display a single notification to prevent weird focus issues
+const notificationsMap = new Map<Symbol, React.ComponentProps<Toast>>();
+function CopyNotificationToast(
+  props: React.ComponentProps<Toast>
+): JSX.Element {
+  const { show, onDismiss } = props;
+  const id = useMemo(() => Symbol('toast'), []);
+  const [deferredShow, setDeferredShow] = useState(false);
+
+  useEffect(() => {
+    if (show) {
+      Array.from(notificationsMap.values()).forEach(({ onDismiss }) => {
+        // force any open toasts to dismiss themselves
+        onDismiss();
+      });
+      notificationsMap.set(id, props);
+      // toast sets show via set timeout, so this matches the behavior to avoid a race condition
+      setTimeout(() => setDeferredShow(show));
+    } else {
+      notificationsMap.delete(id);
+      setDeferredShow(false);
+    }
+
+    return () => {
+      notificationsMap.delete(id);
+    };
+  }, [show]);
+
+  return <Toast {...props} show={deferredShow} />;
+}
+
 export default function CopyToClipboardButton({
   value,
   label = 'copy to clipboard',
@@ -69,14 +101,14 @@ export default function CopyToClipboardButton({
         onClick={handleClick}
         label={accessibleName}
       />
-      <Toast
+      <CopyNotificationToast
         toastRef={toastRef}
         show={showToast}
         type="info"
         onDismiss={handleDismiss}
       >
         Example copied to clipboard!
-      </Toast>
+      </CopyNotificationToast>
     </>
   );
 }
