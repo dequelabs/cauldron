@@ -123,6 +123,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             setRef(toastRef, el);
           }}
           {...defaultProps}
+          {...otherProps}
           className={defaultProps.className}
         >
           <div className="Toast__message">
