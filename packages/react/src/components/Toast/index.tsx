@@ -5,7 +5,7 @@ import AriaIsolate from '../../utils/aria-isolate';
 import { typeMap, tabIndexHandler } from './utils';
 import setRef from '../../utils/setRef';
 
-export interface ToastProps {
+export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
   type: 'confirmation' | 'caution' | 'error' | 'action-needed' | 'info';
   onDismiss: () => void;
   dismissText?: string;
@@ -106,7 +106,8 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
         'Toast',
         `Toast--${typeMap[type].className}`,
         animationClass,
-        { 'Toast--non-dismissible': !dismissible }
+        { 'Toast--non-dismissible': !dismissible },
+        otherProps.className
       )
     };
 
@@ -122,7 +123,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
             setRef(toastRef, el);
           }}
           {...defaultProps}
-          {...otherProps}
+          className={defaultProps.className}
         >
           <div className="Toast__message">
             <Icon type={typeMap[type].icon} />

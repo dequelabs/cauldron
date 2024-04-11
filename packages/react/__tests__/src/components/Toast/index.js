@@ -246,3 +246,16 @@ test('dismiss control is not rendered when dismissible is `false`', (done) => {
     done();
   }); // wait for animation timeouts / async setState calls
 });
+
+test.only('allows for custom class names', () => {
+  const mountElement = document.createElement('div');
+  document.body.appendChild(mountElement);
+  const wrapper = mount(
+    <Toast {...defaultProps} show={true} className="custom-class" type="info">
+      {'hi'}
+    </Toast>,
+    { attachTo: mountElement }
+  );
+
+  expect(wrapper.find('.Toast').hasClass('custom-class')).toBeTruthy();
+});
