@@ -247,7 +247,7 @@ test('dismiss control is not rendered when dismissible is `false`', (done) => {
   }); // wait for animation timeouts / async setState calls
 });
 
-test.only('allows for custom class names', () => {
+test('allows for custom class names', () => {
   const mountElement = document.createElement('div');
   document.body.appendChild(mountElement);
   const wrapper = mount(
