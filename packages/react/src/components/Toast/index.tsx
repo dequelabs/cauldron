@@ -93,6 +93,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
       focus,
       show,
       dismissible,
+      className,
       ...otherProps
     } = this.props;
     const scrim =
@@ -107,7 +108,7 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
         `Toast--${typeMap[type].className}`,
         animationClass,
         { 'Toast--non-dismissible': !dismissible },
-        otherProps.className
+        className
       )
     };
 
@@ -124,7 +125,6 @@ export default class Toast extends React.Component<ToastProps, ToastState> {
           }}
           {...defaultProps}
           {...otherProps}
-          className={defaultProps.className}
         >
           <div className="Toast__message">
             <Icon type={typeMap[type].icon} />
