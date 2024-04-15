@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { IconButton, Toast } from '@deque/cauldron-react';
 
 interface CopyToClipboardButtonProps
