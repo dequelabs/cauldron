@@ -23,6 +23,7 @@ jobs:
           npx update-browserslist-db@latest
           npm exec --prefix packages/react update-browserslist-db@latest
           npm exec --prefix packages/styles update-browserslist-db@latest
+          git add .
           git commit -m 'chore: update browserlist database'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
