@@ -1,10 +1,6 @@
 name: Update Browserslist Database
 
 on:
-  # TODO: TESTING REMOVE THIS BEFORE MERGING
-  push:
-    branches:
-      - browserlist-update-db-action
   schedule:
     # run on the 1st of every month
     - cron: '15 3 1 * *'
