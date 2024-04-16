@@ -29,80 +29,73 @@ afterEach(() => {
 
 Object.entries(toastTypes).forEach(([key, value]) => {
   test(`should correctly render toast with type="${value}" when dismissed, but mounted`, async () => {
-    const toast = React.createRef<HTMLDivElement>();
-
     render(
       <Toast
-        toastRef={toast}
         show={false}
         type={key as keyof typeof toastTypes}
+        data-testid="toast"
       >
         {testString}
       </Toast>
     );
-
-    expect(toast.current).toHaveClass(`Toast Toast--${value} is--hidden`);
-    expect(toast.current).toHaveTextContent(testString);
+    const toast = screen.getByTestId('toast');
+    expect(toast).toHaveClass(`Toast Toast--${value} is--hidden`);
+    expect(toast).toHaveTextContent(testString);
   });
 
   test(`should include the correct classes with a type="${value}" toast and show is true`, async () => {
-    const toast = React.createRef<HTMLDivElement>();
-
     render(
-      <Toast toastRef={toast} type={key as keyof typeof toastTypes} show>
+      <Toast type={key as keyof typeof toastTypes} show data-testid="toast">
         {testString}
       </Toast>
     );
-
-    expect(toast.current).toBeInTheDocument();
-    expect(toast.current).toHaveClass(`Toast Toast--${value} FadeIn--flex`);
+    const toast = screen.getByTestId('toast');
+    expect(toast).toBeInTheDocument();
+    expect(toast).toHaveClass(`Toast Toast--${value} FadeIn--flex`);
   });
 
   test('should transition from hidden to shown', async () => {
-    const toast = React.createRef<HTMLDivElement>();
     let show = false;
 
     render(
-      <Toast toastRef={toast} type="info" show={show}>
+      <Toast type="info" show={show} data-testid="toast">
         {testString}
       </Toast>
     );
-
-    expect(toast.current).toHaveClass('Toast Toast--info is--hidden');
+    const toast = screen.getByTestId('toast');
+    expect(toast).toHaveClass('Toast Toast--info is--hidden');
     show = true;
     setTimeout(() => {
-      expect(toast.current).toHaveClass('Toast Toast--info FadeIn--flex');
+      expect(toast).toHaveClass('Toast Toast--info FadeIn--flex');
     }, 300);
   });
 
   test(`type="${value}" toast should transition from shown to hidden`, async () => {
-    const toast = React.createRef<HTMLDivElement>();
     let show = true;
 
     render(
-      <Toast toastRef={toast} type="info" show={show}>
+      <Toast type="info" show={show} data-testid="toast">
         {testString}
       </Toast>
     );
 
-    expect(toast.current).toHaveClass('Toast Toast--info FadeIn--flex');
+    const toast = screen.getByTestId('toast');
+    expect(toast).toHaveClass('Toast Toast--info FadeIn--flex');
     show = false;
     setTimeout(() => {
-      expect(toast.current).toHaveClass('Toast Toast--info is--hidden');
+      expect(toast).toHaveClass('Toast Toast--info is--hidden');
     }, 300);
   });
 
   test(`renders the correct icon for toast type="${value}"`, async () => {
-    const toast = React.createRef<HTMLDivElement>();
-
     render(
-      <Toast toastRef={toast} type={key as keyof typeof toastTypes} show>
+      <Toast type={key as keyof typeof toastTypes} show data-testid="toast">
         {testString}
       </Toast>
     );
-
-    expect(toast.current).toBeInTheDocument();
-    expect(toast.current?.childNodes[0].firstChild).toHaveClass(
+    const toast = screen.getByTestId('toast');
+    expect(toast).toBeInTheDocument();
+    expect(toast.childNodes[0].firstChild).toHaveClass(
       `Icon Icon--${toastIcons[key as keyof typeof toastTypes]}`
     );
   });
@@ -118,55 +111,48 @@ Object.entries(toastTypes).forEach(([key, value]) => {
 });
 
 test('should render toast with more than a string as children', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   render(
-    <Toast toastRef={toast} type="info">
+    <Toast type="info" data-testid="toast">
       <a href="https://someurl.com">Link to some website</a>
     </Toast>
   );
 
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
   await waitFor(() => {
-    expect(toast.current).toHaveTextContent('Link to some website');
+    expect(toast).toHaveTextContent('Link to some website');
   });
 });
 
 test('should render toast with focus when `focus` prop is `true`', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   render(
-    <Toast toastRef={toast} show type="info" focus>
+    <Toast show type="info" focus data-testid="toast">
       {testString}
     </Toast>
   );
-
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
   await waitFor(() => {
-    expect(toast.current).toHaveFocus();
+    expect(toast).toHaveFocus();
   });
 });
 
 test('should render toast without focus and role="alert" when `focus` prop is `false`', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   render(
-    <Toast toastRef={toast} show type="info" focus={false}>
+    <Toast show type="info" focus={false}>
       {testString}
     </Toast>
   );
 
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByRole('alert');
 
   await waitFor(() => {
-    const alert = screen.getByRole('alert');
-    expect(alert).toBeInTheDocument();
-    expect(alert).not.toHaveFocus();
+    expect(toast).toBeInTheDocument();
+    expect(toast).not.toHaveFocus();
   });
 });
 
 test('should render toast with dismiss button', async () => {
-  const toast = React.createRef<HTMLDivElement>();
   const setState = jest.fn();
   jest
     .spyOn(React, 'useState')
@@ -175,18 +161,18 @@ test('should render toast with dismiss button', async () => {
     );
   render(
     <Toast
-      toastRef={toast}
       show={true}
       type="info"
       dismissible={true}
       dismissText="dismiss"
       onDismiss={() => setState(false)}
+      data-testid="toast"
     >
       {testString}
     </Toast>
   );
-
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
 
   await waitFor(() => {
     expect(screen.getByRole('button')).toBeInTheDocument();
@@ -194,23 +180,20 @@ test('should render toast with dismiss button', async () => {
 });
 
 test('should render a non-dismissable toast when dismissible is false', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   render(
-    <Toast toastRef={toast} show type="info" dismissible={false}>
+    <Toast show type="info" dismissible={false} data-testid="toast">
       {testString}
     </Toast>
   );
 
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
   await waitFor(() => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });
 
 test('should dismiss toast when dismiss button is clicked', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   const user = userEvent.setup();
   const setState = jest.fn();
   jest
@@ -220,18 +203,18 @@ test('should dismiss toast when dismiss button is clicked', async () => {
     );
   render(
     <Toast
-      toastRef={toast}
       show={true}
       type="info"
       dismissible={true}
       dismissText="dismiss"
       onDismiss={() => setState(false)}
+      data-testid="toast"
     >
       {testString}
     </Toast>
   );
-
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
   expect(setState).not.toHaveBeenCalled();
 
   await user.click(screen.getByRole('button'));
@@ -243,21 +226,17 @@ test('should dismiss toast when dismiss button is clicked', async () => {
 });
 
 test('non-dismissible toast has no accessibility issues', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
-  render(
-    <Toast toastRef={toast} show type="info" dismissible={false}>
+  const { container } = render(
+    <Toast show type="info" dismissible={false}>
       {testString}
     </Toast>
   );
 
-  const results = await axe(toast.current as HTMLElement);
+  const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
 
 test('deactivates aria isolate on unmount', async () => {
-  const toast = React.createRef<HTMLDivElement>();
-
   const setState = jest.fn();
 
   jest
@@ -268,18 +247,19 @@ test('deactivates aria isolate on unmount', async () => {
   const isolator = jest.spyOn(AriaIsolate.prototype, 'deactivate');
   render(
     <Toast
-      toastRef={toast}
       show={true}
       type="info"
       dismissible={true}
       dismissText="dismiss"
       onDismiss={() => setState(false)}
+      data-testid="toast"
     >
       {testString}
     </Toast>
   );
 
-  expect(toast.current).toBeInTheDocument();
+  const toast = screen.getByTestId('toast');
+  expect(toast).toBeInTheDocument();
 
   const user = userEvent.setup();
 
@@ -298,7 +278,7 @@ test('deactivates aria isolate on unmount', async () => {
 
 test('renders children within the "Toast__message-content" div', async () => {
   const { container } = render(
-    <Toast show type="info">
+    <Toast show type="info" data-testid="toast">
       {testString}
     </Toast>
   );
