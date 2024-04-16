@@ -11,16 +11,18 @@ on:
   workflow_call:
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Update Browserlist Database
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        npx update-browserslist-db@latest
-        npm exec --prefix packages/react update-browserslist-db@latest
-        npm exec --prefix packages/styles update-browserslist-db@latest
-        git commit -m 'chore: update browserlist database'
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v6
+
+  update-browserlist-db:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Browserlist Database
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          npx update-browserslist-db@latest
+          npm exec --prefix packages/react update-browserslist-db@latest
+          npm exec --prefix packages/styles update-browserslist-db@latest
+          git commit -m 'chore: update browserlist database'
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
