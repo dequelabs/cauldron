@@ -1,0 +1,25 @@
+name: Update Browserslist Database
+
+on:
+  # TODO: TESTING REMOVE THIS BEFORE MERGING
+  push:
+    branches:
+      - browserlist-update-db-action
+  schedule:
+    # run on the 1st of every month
+    - cron: '15 3 1 * *'
+  workflow_call:
+
+jobs:
+
+  - uses: actions/checkout@v4
+  - name: Update Browserlist Database
+    run: |
+      git config user.name github-actions
+      git config user.email github-actions@github.com
+      npx update-browserslist-db@latest
+      npm exec --prefix packages/react update-browserslist-db@latest
+      npm exec --prefix packages/styles update-browserslist-db@latest
+      git commit -m 'chore: update browserlist database'
+  - name: Create Pull Request
+    uses: peter-evans/create-pull-request@v6
