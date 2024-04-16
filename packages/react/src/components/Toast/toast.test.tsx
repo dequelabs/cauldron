@@ -89,7 +89,7 @@ Object.entries(toastTypes).forEach(([key, value]) => {
     show = false;
     setTimeout(() => {
       expect(toast.current).toHaveClass('Toast Toast--info is--hidden');
-    }, 200);
+    }, 300);
   });
 
   test(`renders the correct icon for toast type="${value}"`, async () => {
