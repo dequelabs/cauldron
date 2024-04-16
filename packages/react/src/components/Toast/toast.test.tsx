@@ -306,19 +306,3 @@ test('renders children within the "Toast__message-content" div', async () => {
   const elements = container.querySelectorAll('.Toast__message-content');
   expect(elements).toHaveLength(1);
 });
-
-// test('handles initial show prop on mount', async () => {});
-// test('handles transition from falsey show to truthy show prop', async () => {});
-// test('handles transition from truthy show to falsey show prop', async () => {});
-
-// test('confirmation renders the expected UI and icon', async () => {});
-// test('confirmation renders the expected UI and icon', async () => {});
-// test('caution renders the expected UI and icon', async () => {});
-// test('error renders the expected UI and icon', async () => {});
-// test('info renders the expected UI and icon', async () => {});
-// test('action-needed renders epxected UI, icon, and scrim (no close)', async () => {});
-// test('clicking the dismiss button properly dismisses toast', async () => {});
-// test('toast should be focused by default', async () => {});
-// test('toast should not be focused with falsey focus prop', async () => {});
-// test('dismiss control is not rendered when dismissible is `false`', async () => {});
-// test('deactivates aria isolate on unmount', async () => {});
