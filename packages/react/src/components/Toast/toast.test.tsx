@@ -153,19 +153,12 @@ test('should render toast without focus and role="alert" when `focus` prop is `f
 });
 
 test('should render toast with dismiss button', async () => {
-  const setState = jest.fn();
-  jest
-    .spyOn(React, 'useState')
-    .mockImplementationOnce(
-      () => [undefined, setState] as [unknown, React.Dispatch<unknown>]
-    );
   render(
     <Toast
       show={true}
       type="info"
       dismissible={true}
       dismissText="dismiss"
-      onDismiss={() => setState(false)}
       data-testid="toast"
     >
       {testString}
@@ -195,19 +188,14 @@ test('should render a non-dismissable toast when dismissible is false', async ()
 
 test('should dismiss toast when dismiss button is clicked', async () => {
   const user = userEvent.setup();
-  const setState = jest.fn();
-  jest
-    .spyOn(React, 'useState')
-    .mockImplementationOnce(
-      () => [undefined, setState] as [unknown, React.Dispatch<unknown>]
-    );
+  const onDismiss = jest.fn();
   render(
     <Toast
       show={true}
       type="info"
       dismissible={true}
       dismissText="dismiss"
-      onDismiss={() => setState(false)}
+      onDismiss={onDismiss}
       data-testid="toast"
     >
       {testString}
@@ -215,13 +203,12 @@ test('should dismiss toast when dismiss button is clicked', async () => {
   );
   const toast = screen.getByTestId('toast');
   expect(toast).toBeInTheDocument();
-  expect(setState).not.toHaveBeenCalled();
+  expect(onDismiss).not.toHaveBeenCalled();
 
   await user.click(screen.getByRole('button'));
 
   await waitFor(() => {
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith(false);
+    expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -237,13 +224,6 @@ test('non-dismissible toast has no accessibility issues', async () => {
 });
 
 test('deactivates aria isolate on unmount', async () => {
-  const setState = jest.fn();
-
-  jest
-    .spyOn(React, 'useState')
-    .mockImplementationOnce(
-      () => [undefined, setState] as [unknown, React.Dispatch<unknown>]
-    );
   const isolator = jest.spyOn(AriaIsolate.prototype, 'deactivate');
   render(
     <Toast
@@ -251,7 +231,6 @@ test('deactivates aria isolate on unmount', async () => {
       type="info"
       dismissible={true}
       dismissText="dismiss"
-      onDismiss={() => setState(false)}
       data-testid="toast"
     >
       {testString}
@@ -264,13 +243,10 @@ test('deactivates aria isolate on unmount', async () => {
   const user = userEvent.setup();
 
   expect(isolator).not.toHaveBeenCalled();
-  expect(setState).not.toHaveBeenCalled();
 
   await user.click(screen.getByRole('button'));
 
   setTimeout(() => {
-    expect(setState).toHaveBeenCalledTimes(1);
-    expect(setState).toHaveBeenCalledWith(false);
     expect(isolator).toHaveBeenCalledTimes(1);
     expect(isolator).toHaveBeenCalledWith(false);
   }, 100);
