@@ -55,35 +55,48 @@ Object.entries(toastTypes).forEach(([key, value]) => {
   });
 
   test('should transition from hidden to shown', async () => {
-    let show = false;
-
-    render(
-      <Toast type="info" show={show} data-testid="toast">
+    const { rerender } = render(
+      <Toast type="info" show={false} data-testid="toast">
         {testString}
       </Toast>
     );
-    const toast = screen.getByTestId('toast');
-    expect(toast).toHaveClass('Toast Toast--info is--hidden');
-    show = true;
-    setTimeout(() => {
-      expect(toast).toHaveClass('Toast Toast--info FadeIn--flex');
-    }, 300);
+
+    expect(screen.getByTestId('toast')).toHaveClass(
+      'Toast Toast--info is--hidden'
+    );
+
+    rerender(
+      <Toast type="info" show={true} data-testid="toast">
+        {testString}
+      </Toast>
+    );
+
+    expect(screen.getByTestId('toast')).toHaveClass(
+      'Toast Toast--info FadeIn--flex'
+    );
   });
 
   test(`type="${value}" toast should transition from shown to hidden`, async () => {
-    let show = true;
-
-    render(
-      <Toast type="info" show={show} data-testid="toast">
+    const { rerender } = render(
+      <Toast type="info" show={true} data-testid="toast">
         {testString}
       </Toast>
     );
 
-    const toast = screen.getByTestId('toast');
-    expect(toast).toHaveClass('Toast Toast--info FadeIn--flex');
-    show = false;
+    expect(screen.getByTestId('toast')).toHaveClass(
+      'Toast Toast--info FadeIn--flex'
+    );
+
+    rerender(
+      <Toast type="info" show={false} data-testid="toast">
+        {testString}
+      </Toast>
+    );
+
     setTimeout(() => {
-      expect(toast).toHaveClass('Toast Toast--info is--hidden');
+      expect(screen.getByTestId('toast')).toHaveClass(
+        'Toast Toast--info is--hidden'
+      );
     }, 300);
   });
 
