@@ -1,39 +1,39 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Scrim from './';
 import axe from '../../axe';
 
 test('should fade scrim in when initial truthy show prop is provided', async () => {
-  render(<Scrim show={true} />);
+  const { container } = render(<Scrim show={true} />);
 
-  expect(screen.getAllByRole('generic')[1]).toHaveClass('Scrim--show');
+  expect(container.querySelector('.Scrim')).toHaveClass('Scrim--show');
   await waitFor(() => {
-    expect(screen.getAllByRole('generic')[1]).toHaveClass(
+    expect(container.querySelector('.Scrim')).toHaveClass(
       'Scrim--show Scrim--fade-in'
     );
   });
 });
 
 test('should call fadeIn when show prop updates from falsey to truthy', async () => {
-  const { rerender } = render(<Scrim show={false} />);
+  const { container, rerender } = render(<Scrim show={false} />);
 
-  expect(screen.getAllByRole('generic')[1]).toBeUndefined();
+  expect(container.querySelector('.Scrim')).toBeNull();
 
   rerender(<Scrim show={true} />);
 
-  expect(screen.getAllByRole('generic')[1]).toHaveClass('Scrim--show');
+  expect(container.querySelector('.Scrim')).toHaveClass('Scrim--show');
   await waitFor(() => {
-    expect(screen.getAllByRole('generic')[1]).toHaveClass(
+    expect(container.querySelector('.Scrim')).toHaveClass(
       'Scrim--show Scrim--fade-in'
     );
   });
 });
 
 test('should call fadeOut when show prop updates from truthy to falsey', async () => {
-  const { rerender } = render(<Scrim show={true} />);
+  const { container, rerender } = render(<Scrim show={true} />);
 
   await waitFor(() => {
-    expect(screen.getAllByRole('generic')[1]).toHaveClass(
+    expect(container.querySelector('.Scrim')).toHaveClass(
       'Scrim--show Scrim--fade-in'
     );
   });
@@ -41,13 +41,13 @@ test('should call fadeOut when show prop updates from truthy to falsey', async (
   rerender(<Scrim show={false} />);
 
   await waitFor(() => {
-    expect(screen.getAllByRole('generic')[1]).toBeUndefined();
+    expect(container.querySelector('.Scrim')).toBeNull();
   });
 });
 
 test('should return null when given a falsey show prop', () => {
-  render(<Scrim show={false} />);
-  expect(screen.getAllByRole('generic')[1]).toBeUndefined();
+  const { container } = render(<Scrim show={false} />);
+  expect(container.querySelector('.Scrim')).toBeNull();
 });
 
 test('returns no axe violations', async () => {
