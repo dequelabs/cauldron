@@ -152,7 +152,20 @@ test('should not hide NavItems when focusing inside nav', () => {
   expect(screen.getByRole('listitem')).toBeInTheDocument();
 });
 
-test('returns no axe violations', async () => {
+test('returns no axe violations when collapsed is true', async () => {
+  const { container } = render(
+    <NavBar collapsed>
+      <NavItem active>
+        <p>I am a child</p>
+      </NavItem>
+    </NavBar>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('returns no axe violations when collapsed is false', async () => {
   const { container } = render(
     <NavBar>
       <NavItem active>
