@@ -1,0 +1,34 @@
+name: Update Browserslist Database
+
+on:
+  schedule:
+    # run on the 1st of every month
+    - cron: '15 3 1 * *'
+  workflow_call:
+
+jobs:
+
+  update-browserlist-db:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Browserlist Database
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          npx update-browserslist-db@latest
+          cd packages/react && npx update-browserslist-db@latest
+          cd ../styles && npx update-browserslist-db@latest
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: |
+            yarn.lock
+            packages/*/yarn.lock
+          commit-message: 'chore: update browserlist database'
+          branch: update-browserlist-database
+          base: develop
+          title: 'chore: update browserlist database'
+          body: |
+            This patch updates any outdated browserlist databases.
+            This PR was opened automatically by a robot :robot: :tada:
