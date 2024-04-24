@@ -86,7 +86,7 @@ const IconButton = forwardRef(
       if (!!tooltipPlacement || !!tooltipVariant || !!tooltipPortal) {
         React.useEffect(() => {
           console.warn(
-            'IconButton: The following props are deprecated: tooltipPlacement, tooltipVariant, tooltipPortal. ' +
+            '[IconButton] The following props are deprecated: tooltipPlacement, tooltipVariant, tooltipPortal. ' +
               'See https://cauldron.dequelabs.com/components/IconButton for recommended replacement.'
           );
         }, []);
