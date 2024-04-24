@@ -14,10 +14,7 @@ it('should render button', () => {
 });
 
 it('should render a "as" an anchor', () => {
-  render(
-    // @ts-expect-error this technically should be allowed
-    <IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />
-  );
+  render(<IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />);
   const button = screen.queryByRole('link', { name: 'Edit' });
   expect(button).toBeInTheDocument();
   expect(button).not.toHaveAttribute('role');
@@ -126,10 +123,10 @@ test('should return no axe violations when rendered as CustomElement', async () 
     return <div data-testid="custom" ref={ref} {...props}></div>;
   });
   render(
-    // @ts-expect-error this technically should be allowed
     <IconButton
       icon="pencil"
       label="Edit"
+      // @ts-expect-error this technically should be allowed
       as={CustomButton}
       href="/somewhere"
     />
