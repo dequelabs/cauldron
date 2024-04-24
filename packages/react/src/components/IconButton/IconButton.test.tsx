@@ -96,6 +96,9 @@ it('should support tooltipProps', () => {
       />
     </>
   );
+  // Note: this test is a bit obtuse since by default Tooltip overrides
+  // aria-labelledby so we're testing the "none" association to ensure
+  // we can set our own custom aria-label when necessary
   expect(screen.queryByRole('button')).toHaveAccessibleName('custom name');
 });
 
