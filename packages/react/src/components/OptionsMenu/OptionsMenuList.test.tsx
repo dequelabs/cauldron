@@ -271,6 +271,19 @@ test('should focus child links with keydown events', () => {
   expect(onClick).toHaveBeenCalledTimes(1);
 });
 
+test('should call onClose when an item is selected and closeOnSelect is true', () => {
+  render(
+    <OptionsMenuList {...defaultProps} closeOnSelect={true}>
+      <li>option 1</li>
+      <li>option 2</li>
+    </OptionsMenuList>
+  );
+
+  fireEvent.click(screen.getAllByRole('menuitem')[0]);
+
+  expect(defaultProps.onClose).toBeCalled();
+});
+
 test('should return no axe violations', async () => {
   const { container } = render(
     <OptionsMenuList {...defaultProps} show={true}>
