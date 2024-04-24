@@ -213,19 +213,14 @@ test('should not fire onClose when menu item is selected and default prevented',
     cancelable: true
   });
 
+  event.preventDefault();
+
   render(
     <OptionsMenuList {...defaultProps}>
       <li>option 1</li>
       <li>option 2</li>
     </OptionsMenuList>
   );
-
-  // This prevents the default action from happening when the menu item is selected
-  Object.defineProperty(event, 'defaultPrevented', {
-    get() {
-      return true;
-    }
-  });
 
   screen.getAllByRole('menuitem')[0].dispatchEvent(event);
 
