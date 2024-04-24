@@ -13,14 +13,23 @@ import {
   PolymorphicProps,
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
-import { HTMLAttributes } from 'enzyme';
 
 export interface IconButtonProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLButtonElement>, 'button'> {
   icon: IconType;
   label: React.ReactNode;
+  tooltipProps?: Omit<TooltipProps, 'children' | 'target'>;
+  /**
+   * @deprecated use `tooltipProps.placement` instead
+   */
   tooltipPlacement?: TooltipProps['placement'];
+  /**
+   * @deprecated use `tooltipProps.variant` instead
+   */
   tooltipVariant?: TooltipProps['variant'];
+  /**
+   * @deprecated use `tooltipProps.portal` instead
+   */
   tooltipPortal?: TooltipProps['portal'];
   variant?: 'primary' | 'secondary' | 'error';
   large?: boolean;
@@ -32,9 +41,10 @@ const IconButton = forwardRef(
       as: Component = 'button',
       icon,
       label,
-      tooltipPlacement = 'auto',
+      tooltipPlacement,
       tooltipVariant,
       tooltipPortal,
+      tooltipProps: tooltipPropsProp = {},
       className,
       variant = 'secondary',
       disabled,
@@ -44,7 +54,7 @@ const IconButton = forwardRef(
     }: any,
     ref
   ): JSX.Element => {
-    const internalRef = useRef() as MutableRefObject<any>;
+    const internalRef = useRef() as MutableRefObject<HTMLElement>;
     useImperativeHandle(ref, () => internalRef.current);
 
     // Configure additional properties based on the type of the Component
@@ -61,6 +71,26 @@ const IconButton = forwardRef(
         accessibilityProps['aria-disabled'] = disabled;
       }
     }
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (!!tooltipPlacement || !!tooltipVariant || !!tooltipPortal) {
+        React.useEffect(() => {
+          console.warn(
+            'IconButton: The following tooltip props are deprecated: tooltipPlacement, tooltipVariant, tooltipPortal. ' +
+              'See https://cauldron.dequelabs.com/components/IconButton for recommended replacement.'
+          );
+        }, []);
+      }
+    }
+
+    const tooltipProps: Omit<TooltipProps, 'children' | 'target'> = {
+      placement: tooltipPlacement || 'auto',
+      variant: tooltipVariant,
+      portal: tooltipPortal,
+      association: 'aria-labelledby',
+      hideElementOnHidden: true,
+      ...tooltipPropsProp
+    };
 
     return (
       <React.Fragment>
@@ -82,14 +112,7 @@ const IconButton = forwardRef(
           {disabled && <Offscreen>{label}</Offscreen>}
         </Component>
         {!disabled && (
-          <Tooltip
-            target={internalRef}
-            placement={tooltipPlacement}
-            variant={tooltipVariant}
-            portal={tooltipPortal}
-            association="aria-labelledby"
-            hideElementOnHidden
-          >
+          <Tooltip target={internalRef} {...tooltipProps}>
             {label}
           </Tooltip>
         )}
