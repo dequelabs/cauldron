@@ -15,10 +15,14 @@ import {
 } from '../../utils/polymorphicComponent';
 
 export interface IconButtonProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLButtonElement>, 'button'> {
+  extends PolymorphicProps<
+    React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>,
+    'button' | 'a'
+  > {
   icon: IconType;
   label: React.ReactNode;
   tooltipProps?: Omit<TooltipProps, 'children' | 'target'>;
+  disabled?: boolean;
   /**
    * @deprecated use `tooltipProps.placement` instead
    */
@@ -34,6 +38,12 @@ export interface IconButtonProps
   variant?: 'primary' | 'secondary' | 'error';
   large?: boolean;
 }
+
+const isButton = (
+  component: PolymorphicProps['as']
+): component is React.ElementType<HTMLButtonElement> => component === 'button';
+const looksLikeLink = (props: any): props is { to?: string; href?: string } =>
+  'to' in props || 'href' in props;
 
 const IconButton = forwardRef(
   (
@@ -51,7 +61,7 @@ const IconButton = forwardRef(
       tabIndex = 0,
       large,
       ...other
-    }: any,
+    }: IconButtonProps,
     ref
   ): JSX.Element => {
     const internalRef = useRef() as MutableRefObject<HTMLElement>;
@@ -60,12 +70,12 @@ const IconButton = forwardRef(
     // Configure additional properties based on the type of the Component
     // for accessibility
     const accessibilityProps: HTMLProps<HTMLElement> = {};
-    if (Component === 'button') {
+    if (isButton(Component)) {
       accessibilityProps.type = 'button';
     } else {
       // We don't need to set an anchor's role, since it would be redundant
       if (Component !== 'a') {
-        accessibilityProps.role = other.href || other.to ? 'link' : 'button';
+        accessibilityProps.role = looksLikeLink(other) ? 'link' : 'button';
       }
       if (disabled) {
         accessibilityProps['aria-disabled'] = disabled;
@@ -102,6 +112,7 @@ const IconButton = forwardRef(
             'IconButton--error': variant === 'error',
             'IconButton--large': large
           })}
+          // @ts-expect-error the concrete type is unknown, so HTMLElement is expected
           ref={internalRef}
           disabled={disabled}
           tabIndex={disabled ? -1 : tabIndex}
@@ -119,7 +130,7 @@ const IconButton = forwardRef(
       </React.Fragment>
     );
   }
-) as PolymorphicComponent<IconButtonProps, 'button'>;
+) as PolymorphicComponent<IconButtonProps, 'button' | 'a'>;
 
 IconButton.displayName = 'IconButton';
 

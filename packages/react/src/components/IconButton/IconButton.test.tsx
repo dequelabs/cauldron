@@ -27,7 +27,6 @@ it('should be disabled', () => {
 
 it('should use aria-disabled for non-buttons when disabled', () => {
   render(
-    // @ts-expect-error this technically should be allowed
     <IconButton icon="pencil" label="Edit" as="a" href="/somewhere" disabled />
   );
   expect(screen.queryByRole('link')).not.toBeDisabled();
@@ -107,10 +106,7 @@ test('should return no axe violations', async () => {
 });
 
 test('should return no axe violations when rendered as anchor', async () => {
-  render(
-    // @ts-expect-error this technically should be allowed
-    <IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />
-  );
+  render(<IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />);
   const results = await axe(screen.getByRole('link'));
   expect(results).toHaveNoViolations();
 });
