@@ -56,15 +56,13 @@ The default tooltip can be modified by setting the relevant props configuration 
 If there are multiple icon buttons with the same label, the visible label text can be combined with `Offscreen` to provide additional context to users using assistive technology (AT).
 
 ```jsx example
-<div class="users">
-  <div>
-    User: Jason 
-    <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
-  </div>
-  <div>
-    User: Harris 
-    <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
-  </div>
+<div>
+  User: Jason 
+  <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
+</div>
+<div>
+  User: Harris 
+  <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
 </div>
 ```
 
