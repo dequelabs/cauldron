@@ -72,6 +72,7 @@ export default class TextField extends React.Component<
       requiredText,
       multiline,
       'aria-describedby': ariaDescribedby,
+      children,
       className,
       ...other
     } = this.props;

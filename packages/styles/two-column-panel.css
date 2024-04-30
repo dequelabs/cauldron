@@ -138,22 +138,25 @@
   background: var(--two-column-panel-group-heading-background-color);
   text-transform: uppercase;
   font-size: var(--text-size-smaller);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   padding: var(--space-smallest) var(--space-small);
   color: var(--two-column-panel-group-heading-text-color);
   position: sticky;
   top: 0;
 }
 
-.TwoColumnPanel__GroupHeader h1,
-.TwoColumnPanel__GroupHeader h2,
-.TwoColumnPanel__GroupHeader h3,
-.TwoColumnPanel__GroupHeader h4,
-.TwoColumnPanel__GroupHeader h5,
-.TwoColumnPanel__GroupHeader h6 {
+.TwoColumnPanel__Header :is(h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+  font-size: inherit;
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  padding: 0;
+}
+
+.TwoColumnPanel__GroupHeader :is(h1, h2, h3, h4, h5, h6) {
   color: inherit;
   font-size: var(--text-size-smaller);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   margin: 0;
   padding: 0;
 }
