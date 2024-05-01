@@ -39,20 +39,16 @@ Error buttons are used to indicate potentially dangerous actions.
 <IconButton variant="error" icon="pencil" label="Edit" disabled />
 ```
 
-### Tooltip Placement
+### Tooltip Customization
 
-Tooltip placement has a default value of `auto`, but can be fixed to a certain position if needed.
-
-```jsx example
-<IconButton icon="trash" label="Delete" tooltipPlacement="bottom" />
-```
-
-### Tooltip Variant
-
-The tooltip style can also be customized.
+The default tooltip can be modified by setting the relevant props configuration from [Tooltip](./Tooltip). This includes all props except for `children` and `target`.
 
 ```jsx example
-<IconButton icon="info-circle" label="More Information" tooltipVariant="info" />
+<IconButton 
+  icon="trash"
+  label="Delete" 
+  tooltipProps={{ placement: 'bottom', variant: 'info' }} 
+/>
 ```
 
 ### Offscreen Text
@@ -60,15 +56,13 @@ The tooltip style can also be customized.
 If there are multiple icon buttons with the same label, the visible label text can be combined with `Offscreen` to provide additional context to users using assistive technology (AT).
 
 ```jsx example
-<div class="users">
-  <div>
-    User: Jason 
-    <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
-  </div>
-  <div>
-    User: Harris 
-    <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
-  </div>
+<div>
+  User: Jason 
+  <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
+</div>
+<div>
+  User: Harris 
+  <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
 </div>
 ```
 
@@ -113,22 +107,30 @@ If there are multiple icon buttons with the same label, the visible label text c
       description: 'Component to render the IconButton as.'
     },
     {
+      name: 'tooltipProps',
+      type: 'object',
+      description: 'Props to pass and configure the displayed tooltip.'
+    },
+    {
       name: 'tooltipPlacement',
       type: 'string',
+      deprecated: true,
       defaultValue: 'auto',
-      description: 'The position of the tooltip relative to its target element.'
+      description: 'Deprecated, use "tooltipProps.placement" instead.'
     },
     {
       name: 'tooltipVariant',
       type: ['info', 'text', 'big'],
+      deprecated: true,
       defaultValue: 'text',
-      description: 'The style of tooltip to display.'
+      description: 'Deprecated, use "tooltipProps.variant" instead.'
     },
     {
       name: 'tooltipPortal',
       type: ['React.Ref', 'HTMLElement'],
+      deprecated: true,
       defaultValue: 'document.body',
-      description: 'The parent element to place the Tooltip in.'
+      description: 'Deprecated, use "tooltipProps.portal" instead.'
     },
     {
       name: 'large',
