@@ -5,7 +5,7 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useState } from 'react';
-import { Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
+import { FieldWrap, Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
 
 ```js
 import { 
@@ -95,20 +95,24 @@ Controlled listboxes require updating the value to reflect the newly selected st
 ```jsx example
 function ControlledListboxExample() {
   const [value, setValue] = useState('Two');
-  const handleSelect = ({ value }) => setValue(value);
+  const handleSelectionChange = ({ value, previousValue }) => {
+    console.log(value, previousValue);
+    setValue(value);
+  };
+
   return (
-    <>
+    <FieldWrap>
       <div id="listbox-controlled-example">Controlled Listbox</div>
       <Listbox 
         aria-labelledby="listbox-controlled-example" 
         value={value}
-        onSelect={handleSelect}
+        onSelectionChange={handleSelectionChange}
       >
         <ListboxOption>One</ListboxOption>
         <ListboxOption>Two</ListboxOption>
         <ListboxOption>Three</ListboxOption>
       </Listbox>
-    </>
+    </FieldWrap>
   );
 }
 ```
@@ -126,6 +130,32 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
     <ListboxOption>Three</ListboxOption>
   </Listbox>
 </>
+```
+### Multiselect
+
+```jsx example
+function MultiselectListboxExample() {
+  const [value, setValue] = useState(['Two']);
+  const handleSelectionChange = ({ value, previousValue }) => {
+      console.log(value, previousValue);
+      setValue(value);
+  };
+  return (
+    <FieldWrap>
+      <div id="listbox-multiselect-example">Multiselect Listbox</div>
+      <Listbox 
+        aria-labelledby="listbox-multiselect-example" 
+        value={value}
+        onSelectionChange={handleSelectionChange}
+        multiselect
+      >
+        <ListboxOption>One</ListboxOption>
+        <ListboxOption>Two</ListboxOption>
+        <ListboxOption>Three</ListboxOption>
+      </Listbox>
+    </FieldWrap>
+  );
+}
 ```
 
 ## Props

@@ -899,7 +899,7 @@ test('should set selected value with "defaultValue" prop', () => {
 
 test('should set selected value with "value" prop', () => {
   render(
-    <Combobox label="label" value="Banana">
+    <Combobox label="label" inputValue="Banana" value="Banana">
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
@@ -916,7 +916,7 @@ test('should set selected value with "value" prop', () => {
 
 test('should not render hidden input when name is not provided', () => {
   render(
-    <Combobox label="label" value="Banana">
+    <Combobox label="label" inputValue="Banana" value="Banana">
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
@@ -928,7 +928,7 @@ test('should not render hidden input when name is not provided', () => {
 
 test('should render hidden input with value from text contents of ComboboxOption', () => {
   render(
-    <Combobox label="label" name="fruit" value="Banana">
+    <Combobox label="label" name="fruit" inputValue="Banana" value="Banana">
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
@@ -942,7 +942,7 @@ test('should render hidden input with value from text contents of ComboboxOption
 
 test('should render hidden input with value from value from ComboboxOption', () => {
   render(
-    <Combobox label="label" name="fruit" value="Banana">
+    <Combobox label="label" name="fruit" inputValue="Banana" value="Banana">
       <ComboboxOption value="Apple">🍎</ComboboxOption>
       <ComboboxOption value="Banana">🍌</ComboboxOption>
       <ComboboxOption value="Cantaloupe">🍈</ComboboxOption>
@@ -956,7 +956,7 @@ test('should render hidden input with value from value from ComboboxOption', () 
 
 test('should render hidden input with value from formValue from ComboboxOption', () => {
   render(
-    <Combobox label="label" name="fruit" value="Banana">
+    <Combobox label="label" name="fruit" inputValue="Banana" value="Banana">
       <ComboboxOption formValue="1">Apple</ComboboxOption>
       <ComboboxOption formValue="2">Banana</ComboboxOption>
       <ComboboxOption formValue="3">Cantaloupe</ComboboxOption>

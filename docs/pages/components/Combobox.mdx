@@ -190,7 +190,7 @@ function ComboboxControlledExample() {
   const handleChange = ({ target }) => {
     setValue(target.value);
   };
-  const handleSelectionChange = ({ value }) => {
+  const handleSelectionChange = ({ value, previousValue }) => {
     setValue(value);
   };
   return (
@@ -245,6 +245,84 @@ Alternatively, a custom `formValue` prop can be set for each combobox option to 
 </FieldWrap>
 ```
 
+## Multiselect
+
+### Multiselect With Options
+
+```jsx example
+function ComboboxWithOptionsMultiselectExample() {
+  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState([]);
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSelectionChange = ({ value, previousValue }) => {
+    setValue(value);
+  };
+
+  const options = [
+    { label: 'Red', value: 'Red' },
+    { label: 'Orange', value: 'Orange' },
+    { label: 'Yellow', value: 'Yellow' },
+    { label: 'Green', value: 'Green' },
+    { label: 'Blue', value: 'Blue' }
+  ];
+  return (
+    <FieldWrap>
+      <Combobox
+        label="Favorite Color"
+        options={options}
+        inputValue={inputValue}
+        value={value}
+        onChange={handleChange}
+        onSelectionChange={handleSelectionChange}
+        multiselect
+      />
+    </FieldWrap>
+  )
+}
+```
+
+### Multiselect With Children
+
+```jsx example
+function ComboboxWithChildrenMultiselectExample() {
+  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState([]);
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSelectionChange = ({ value, previousValue }) => {
+    setValue(value);
+  };
+
+  return (
+    <FieldWrap>
+      <Combobox
+        name="fruit"
+        label="Fruit"
+        inputValue={inputValue}
+        value={value}
+        onChange={handleChange}
+        onSelectionChange={handleSelectionChange}
+        multiselect
+      >
+        <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+        <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+        <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+        <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+        <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+        <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+}
+```
+
 ## Autocomplete
 
 There are a couple of different methods to control the auto completion of the options in the listbox. By default, autocomplete is set to "manual" meaning selections will be filtered based on the value of the input, and a value will need to be manually selected via click or keypress to change the value of the input field.
@@ -294,13 +372,18 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
     description: 'Array of objects mapping to Combobox options. Alternatively, "ComboboxOption" can be used as children instead of this prop.'
   },
   {
-    name: 'value',
+    name: 'inputValue',
     type: 'string',
+    description: 'Initial value to be applied to the combobox input field. Optionally used for "uncontrolled" comboboxes.'
+  },
+  {
+    name: 'value',
+    type: ['string', 'string[]'],
     description: 'Initial value to be applied to the combobox. Optionally used for "uncontrolled" comboboxes.'
   },
   {
     name: 'defaultValue',
-    type: 'string',
+    type: ['string', 'string[]'],
     description: 'Value to be applied to the combobox. Optionally used for "controlled" comboboxes.'
   },
   {
@@ -308,6 +391,12 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
     type: ['none', 'manual', 'automatic'],
     defaultValue: 'manual',
     description: 'Sets the autocompletion type of the Combobox listbox.'
+  },
+  {
+    name: 'multiselect',
+    type: 'boolean',
+    defaultValue: 'false',
+    description: 'Sets the combobox to multiselect mode.'
   },
   {
     name: 'onChange',

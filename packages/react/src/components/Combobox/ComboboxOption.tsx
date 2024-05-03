@@ -70,8 +70,13 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
   ): JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { selectedValue, matches, setMatchingOptions, setFormValue } =
-      useComboboxContext();
+    const {
+      multiselect,
+      selectedValue,
+      matches,
+      setMatchingOptions,
+      setFormValue
+    } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
@@ -80,7 +85,12 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     const isActive =
       !!active?.element && active.element === comboboxOptionRef.current;
     const isSelected =
-      !!selected?.element && selected.element === comboboxOptionRef.current;
+      !!selected &&
+      (Array.isArray(selected)
+        ? selected.findIndex(
+            (opt) => opt.element === comboboxOptionRef.current
+          ) !== -1
+        : selected.element === comboboxOptionRef.current);
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
       (typeof matches === 'function' && matches(children));
@@ -113,10 +123,23 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
           ? propValue
           : comboboxOptionRef.current?.innerText;
 
-      if (selectedValue === comboboxValue) {
-        setFormValue(
-          typeof formValue === 'undefined' ? comboboxValue : formValue
-        );
+      if (!multiselect) {
+        if (selectedValue === comboboxValue) {
+          setFormValue(
+            typeof formValue === 'undefined' ? comboboxValue : formValue
+          );
+        }
+      } else {
+        if ((selectedValue as ComboboxValue[]).includes(comboboxValue)) {
+          setFormValue((prev) => {
+            const formValueToSet =
+              typeof formValue === 'undefined' ? comboboxValue : formValue;
+
+            if (!prev?.includes(formValueToSet)) {
+              return prev ? prev + ',' + formValueToSet : formValueToSet;
+            }
+          });
+        }
       }
     }, [selectedValue, formValue]);
 
