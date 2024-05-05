@@ -4,56 +4,44 @@ import Panel, { PanelHeader, PanelContent } from './';
 import axe from '../../axe';
 
 test('should render the default heading level', () => {
-  render(<Panel heading={'Title'}>Content</Panel>);
+  render(<Panel heading="Title">Content</Panel>);
 
-  expect(screen.getByRole('heading', { name: 'Title' }).tagName).toBe('H2');
+  expect(
+    screen.queryByRole('heading', { name: 'Title', level: 2 })
+  ).toBeInTheDocument();
   expect(screen.getByText('Content')).toBeInTheDocument();
 });
 
 test('should render a custom heading level', () => {
   render(<Panel heading={{ text: 'Title', level: 3 }}>Content</Panel>);
 
-  expect(screen.getByRole('heading', { name: 'Title' }).tagName).toBe('H3');
+  expect(
+    screen.queryByRole('heading', { name: 'Title', level: 3 })
+  ).toBeInTheDocument();
   expect(screen.getByText('Content')).toBeInTheDocument();
 });
 
-test('should render the label the panel by the heading by default', () => {
-  render(<Panel heading={'Title'}>Content</Panel>);
+test('should render the heading as an accessible region', () => {
+  render(<Panel heading="Title">Content</Panel>);
 
-  const panel = screen.getByRole('region');
-  const heading = screen.getByRole('heading', { name: 'Title' });
-  const body = screen.getByText('Content');
-
-  const headingId = heading.getAttribute('id');
-  const ariaLabelledBy = panel.getAttribute('aria-labelledby');
-
-  expect(heading.tagName).toBe('H2');
-  expect(ariaLabelledBy).toBe(headingId);
-  expect(body).toBeInTheDocument();
+  expect(screen.queryByRole('region')).toHaveAccessibleName('Title');
 });
 
-test('should render the label the panel by the heading id', () => {
+test('should render with custom id', () => {
   render(
     <Panel heading={{ id: 'heading123', text: 'Title', level: 2 }}>
       Content
     </Panel>
   );
 
-  const panel = screen.getByRole('region');
-  const heading = screen.getByRole('heading', { name: 'Title' });
-  const body = screen.getByText('Content');
-
-  const headingId = heading.getAttribute('id');
-  const ariaLabelledBy = panel.getAttribute('aria-labelledby');
-
-  expect(heading.tagName).toBe('H2');
-  expect(ariaLabelledBy).toBe(headingId);
-  expect(body).toBeInTheDocument();
+  expect(
+    screen.queryByRole('heading', { name: 'Title', level: 2 })
+  ).toHaveAttribute('id', 'heading123');
 });
 
 test('should render with custom attribute', () => {
   render(
-    <Panel heading={'Title'} aria-label="Custom Label">
+    <Panel heading="Title" aria-label="Custom Label">
       Content
     </Panel>
   );
@@ -66,7 +54,7 @@ test('should render with custom attribute', () => {
 
 test('should add the collapsed class when collapsed prop is true', () => {
   render(
-    <Panel heading={'Title'} collapsed>
+    <Panel heading="Title" collapsed>
       Content
     </Panel>
   );
@@ -78,7 +66,7 @@ test('should forward a ref to Panel component', () => {
   const ref = React.createRef<HTMLDivElement>();
 
   render(
-    <Panel ref={ref} heading={'Title'}>
+    <Panel ref={ref} heading="Title">
       Content
     </Panel>
   );
@@ -114,7 +102,7 @@ test('should forward a ref to PanelContent component', () => {
 
 test('should accept a boolean padding prop in Panel component', () => {
   render(
-    <Panel heading={'Title'} padding={false}>
+    <Panel heading="Title" padding={false}>
       Content
     </Panel>
   );
@@ -124,7 +112,7 @@ test('should accept a boolean padding prop in Panel component', () => {
 
 test('should accept a boolean padding prop in PanelContent component', () => {
   render(
-    <Panel heading={'Title'}>
+    <Panel heading="Title">
       <PanelHeader>Header</PanelHeader>
       <PanelContent padding={false}>Content</PanelContent>
     </Panel>
