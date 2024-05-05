@@ -1,17 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import TagButton from './';
-import { IconType } from '../Icon';
 import axe from '../../axe';
 
-type TagButtonProps = {
-  icon: IconType;
-  label: string;
-  value: string;
-  onClick: () => void;
-};
-
-const defaultProps: TagButtonProps = {
+const defaultProps: React.ComponentProps<typeof TagButton> = {
   icon: 'pencil',
   label: 'Label: ',
   value: 'value',
@@ -34,7 +26,7 @@ test('should render a button', () => {
 test('should support className prop', () => {
   renderDefaultTagButton({ className: 'foo' });
 
-  expect(screen.getByRole('button')).toHaveClass('foo');
+  expect(screen.getByRole('button')).toHaveClass('TagButton', 'foo');
 });
 
 test('should support onClick prop', () => {
