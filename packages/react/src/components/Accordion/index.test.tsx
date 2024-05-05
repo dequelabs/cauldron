@@ -34,7 +34,7 @@ test('should pass through props', () => {
     </Accordion>
   );
 
-  expect(screen.getByRole('region')).toBeInTheDocument();
+  expect(screen.getByRole('region')).toHaveAttribute('role', 'region');
 });
 
 test('should render with a trigger and panel element', () => {
@@ -87,7 +87,7 @@ test('should not render the panel element when closed', () => {
   );
 
   setTimeout(() => {
-    expect(screen.queryByTestId('content')).toBeNull();
+    expect(screen.queryByTestId('content')).not.toBeInTheDocument();
   });
 });
 
