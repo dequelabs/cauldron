@@ -1,0 +1,94 @@
+.SearchField :where(.TextFieldWrapper) {
+  --text-field-wrapper-border-color: var(
+    --search-field-border-color,
+    var(--field-border-color)
+  );
+  --text-field-wrapper-background-color: var(
+    --search-field-background-color,
+    var(--field-background-color)
+  );
+  --text-field-wrapper-border-focus-color: var(
+    --search-field-border-focus-color,
+    var(--field-border-color-focus)
+  );
+  --text-field-wrapper-border-hover-color: var(
+    --search-field-border-hover-color,
+    var(--field-border-color-focus-hover)
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --search-field-border-focus-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-error-border-color: var(
+    --search-field-error-border-color,
+    var(--field-border-color-error)
+  );
+  --text-field-wrapper-error-focus-border-color: var(
+    --search-field-error-focus-border-color,
+    var(--field-border-color-error-hover)
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --search-field-error-focus-border-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-font-size: var(
+    --search-field-font-size,
+    var(--field-font-size)
+  );
+  --text-field-wrapper-font-color: var(
+    --search-field-font-color,
+    var(--field-content-color)
+  );
+}
+
+.cauldron--theme-dark .SearchField :where(.TextFieldWrapper) {
+  --text-field-wrapper-border-color: var(
+    --search-field-border-color,
+    var(--field-border-color)
+  );
+  --text-field-wrapper-background-color: var(
+    --search-field-background-color,
+    var(--field-background-color)
+  );
+  --text-field-wrapper-border-focus-color: var(
+    --search-field-border-focus-color,
+    var(--field-border-color-focus)
+  );
+  --text-field-wrapper-border-hover-color: var(
+    --search-field-border-hover-color,
+    var(--field-border-color-focus-hover)
+  );
+  --text-field-wrapper-border-focus-glow-color: var(
+    --search-field-border-focus-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-error-border-color: var(
+    --search-field-error-border-color,
+    var(--field-border-color-error)
+  );
+  --text-field-wrapper-error-focus-border-color: var(
+    --search-field-error-focus-border-color,
+    var(--field-border-color-error-hover)
+  );
+  --text-field-wrapper-error-focus-border-glow-color: var(
+    --search-field-error-focus-border-glow-color,
+    var(--field-border-color-focus-glow)
+  );
+  --text-field-wrapper-font-size: var(
+    --search-field-font-size,
+    var(--field-font-size)
+  );
+  --text-field-wrapper-font-color: var(
+    --search-field-font-color,
+    var(--field-content-color)
+  );
+}
+
+.SearchField__search-icon {
+  color: var(--search-field-icon-color);
+  margin-left: var(--space-smallest);
+}
+
+.SearchField input::-webkit-search-cancel-button {
+  margin-left: var(--space-smallest);
+}

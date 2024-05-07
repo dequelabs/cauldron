@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "6.1.0",
+  "version": "6.3.2",
   "license": "MPL-2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "homepage": "https://cauldron.dequelabs.com/",
@@ -16,7 +16,7 @@
   "scripts": {
     "build": "yarn build:lib && yarn build:css",
     "prebuild:lib": "node scripts/buildIconTypes.js",
-    "build:lib": "rollup -c && tsc --declaration --emitDeclarationOnly --outDir lib",
+    "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production yarn build",

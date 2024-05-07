@@ -156,6 +156,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
           'ComboboxOption--disabled': disabled
         })}
         activeClass="ComboboxOption--active"
+        // @ts-expect-error use HTMLElement even though the underlying element is an li element
         ref={comboboxOptionRef}
         disabled={disabled}
         id={id}

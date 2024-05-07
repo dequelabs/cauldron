@@ -8,13 +8,18 @@ import React, {
 import { ListboxProvider } from './ListboxContext';
 import type { ListboxOption } from './ListboxContext';
 import type { ListboxValue } from './ListboxOption';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 import useSharedRef from '../../utils/useSharedRef';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
 interface ListboxProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'> {
-  as?: React.ElementType | string;
+  extends PolymorphicProps<
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>
+  > {
   value?: ListboxValue;
   navigation?: 'cycle' | 'bound';
   onSelectionChange?: <T extends HTMLElement = HTMLElement>({
@@ -212,7 +217,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       </Component>
     );
   }
-);
+) as PolymorphicComponent<ListboxProps>;
 
 Listbox.displayName = 'Listbox';
 

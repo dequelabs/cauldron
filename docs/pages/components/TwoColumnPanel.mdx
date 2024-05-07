@@ -32,6 +32,10 @@ import {
 
 `TwoColumnPanel` takes in a set of columns, `ColumnLeft` and `ColumnRight` with the left column containing the list of items to choose from and the right column intended to be the currently selected item. It is expected that accessible names are provided for both of the left/right columns via `aria-label` or `aria-labelledby`.
 
+<Note>
+  The heading levels provided in the below examples are the typical heading levels used for `TwoColumnPanel`. The appropriate heading levels will need to be set within context of the content of which `TwoColumnPanel` is placed.
+</Note>
+
 ```jsx example
 function TwoColumnPanelExample() {
   const [selected, setSelected] = useState(1);
@@ -69,7 +73,9 @@ function TwoColumnPanelExample() {
   return (
     <TwoColumnPanel>
       <ColumnLeft aria-labelledby="sidebar">
-        <ColumnHeader id="sidebar">Items</ColumnHeader>
+        <ColumnHeader id="sidebar">
+          <h2>Items</h2>
+        </ColumnHeader>
         <nav aria-labelledby="sidebar">
           <ul>
             {items.map(item => (
@@ -152,9 +158,11 @@ function TwoColumnPanelGroupedItemsExample() {
   return (
     <TwoColumnPanel>
       <ColumnLeft aria-labelledby="group-heading">
-        <ColumnHeader>Grouped Items</ColumnHeader>
+        <ColumnHeader id="group-heading">
+          <h2>Grouped Items</h2>
+        </ColumnHeader>
         <ColumnList>
-          <ColumnGroupHeader id="group-heading">
+          <ColumnGroupHeader>
             <h3>Optional group heading</h3>
           </ColumnGroupHeader>
           <nav aria-labelledby="group-heading">
