@@ -255,9 +255,45 @@ test('should set selected value with "value" prop when listbox option uses value
   expect(selectedOption).toHaveAttribute('aria-selected', 'true');
 });
 
+test('should set selected value with "value" prop when listbox option uses value prop multiselect', () => {
+  render(
+    <Listbox value={['b', 'd']} multiselect>
+      <ListboxOption value="a">Apple</ListboxOption>
+      <ListboxOption value="b">Banana</ListboxOption>
+      <ListboxOption value="c">Cantaloupe</ListboxOption>
+      <ListboxOption value="d">Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const firstSelectedOption = screen.getByRole('option', { name: 'Banana' });
+  expect(firstSelectedOption).toHaveAttribute('aria-selected', 'true');
+
+  const secondSelectedOption = screen.getByRole('option', {
+    name: 'Dragon Fruit'
+  });
+  expect(secondSelectedOption).toHaveAttribute('aria-selected', 'true');
+});
+
 test('should not change selected value when listbox is controlled', () => {
   render(
     <Listbox value="b">
+      <ListboxOption value="a">Apple</ListboxOption>
+      <ListboxOption value="b">Banana</ListboxOption>
+      <ListboxOption value="c">Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.click(screen.getByRole('option', { name: 'Cantaloupe' }));
+
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+});
+
+test('should not change selected value when listbox is controlled multiselect', () => {
+  render(
+    <Listbox value={['b']} multiselect>
       <ListboxOption value="a">Apple</ListboxOption>
       <ListboxOption value="b">Banana</ListboxOption>
       <ListboxOption value="c">Cantaloupe</ListboxOption>
@@ -516,6 +552,60 @@ test('should handle listbox selection with "click" event', () => {
   expect(onSelectionChange).toHaveBeenCalledTimes(1);
   expect(onSelectionChange).toHaveBeenCalledWith(
     expect.objectContaining({ value: 'Cantaloupe' })
+  );
+});
+
+test('should handle listbox selection with "click" event for multiselect', () => {
+  const onSelectionChange = jest.fn();
+
+  render(
+    <Listbox onSelectionChange={onSelectionChange} multiselect>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  expect(onSelectionChange).not.toHaveBeenCalled();
+
+  fireEvent.click(screen.getByRole('option', { name: 'Cantaloupe' }));
+
+  expect(onSelectionChange).toHaveBeenCalledTimes(1);
+  expect(onSelectionChange).toHaveBeenLastCalledWith(
+    expect.objectContaining({ value: ['Cantaloupe'] })
+  );
+  fireEvent.click(screen.getByRole('option', { name: 'Dragon Fruit' }));
+  expect(onSelectionChange).toHaveBeenCalledTimes(2);
+  expect(onSelectionChange).toHaveBeenLastCalledWith(
+    expect.objectContaining({ value: ['Cantaloupe', 'Dragon Fruit'] })
+  );
+});
+
+test('should unselect when clicking again on same option for multiselect', () => {
+  const onSelectionChange = jest.fn();
+
+  render(
+    <Listbox onSelectionChange={onSelectionChange} multiselect>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  expect(onSelectionChange).not.toHaveBeenCalled();
+
+  fireEvent.click(screen.getByRole('option', { name: 'Cantaloupe' }));
+
+  expect(onSelectionChange).toHaveBeenCalledTimes(1);
+  expect(onSelectionChange).toHaveBeenLastCalledWith(
+    expect.objectContaining({ value: ['Cantaloupe'] })
+  );
+  fireEvent.click(screen.getByRole('option', { name: 'Cantaloupe' }));
+  expect(onSelectionChange).toHaveBeenCalledTimes(2);
+  expect(onSelectionChange).toHaveBeenLastCalledWith(
+    expect.objectContaining({ value: [] })
   );
 });
 

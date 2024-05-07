@@ -32,20 +32,16 @@ interface ComboboxOption {
   description?: string;
 }
 
-interface ComboboxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'defaultValue'
-  > {
+type ComboboxProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'value' | 'defaultValue'
+> & {
   label: ContentNode;
   options?: ComboboxOption[];
   inputValue?: string;
-  value?: ComboboxValue | ComboboxValue[];
-  defaultValue?: ComboboxValue | ComboboxValue[];
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
   autocomplete?: 'none' | 'manual' | 'automatic';
-  multiselect?: boolean;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>({
     target,
     value,
@@ -59,7 +55,18 @@ interface ComboboxProps
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
-}
+} & (
+    | {
+        value?: ComboboxValue;
+        defaultValue?: ComboboxValue;
+        multiselect?: false;
+      }
+    | {
+        value?: ComboboxValue[];
+        defaultValue?: ComboboxValue[];
+        multiselect: true;
+      }
+  );
 
 const getComboboxValue = (
   listboxValue: ListboxValue | ListboxValue[]
@@ -94,8 +101,8 @@ const ComboboxNoResults = ({
 };
 
 const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
-  (
-    {
+  (props, ref): JSX.Element => {
+    const {
       id: propId,
       className,
       label,
@@ -119,10 +126,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       portal,
       inputRef: propInputRef = null,
       'aria-describedby': ariaDescribedby,
-      ...props
-    },
-    ref
-  ): JSX.Element => {
+      ...rest
+    } = props;
     const [value, setValue] = useState<ComboboxValue | ComboboxValue[]>(
       defaultValue || propValue || (multiselect ? [] : '')
     );
@@ -132,7 +137,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     >(new Map());
     const [selectedValue, setSelectedValue] = useState<
       ComboboxValue | ComboboxValue[]
-    >(value || multiselect ? [] : '');
+    >(value);
     const [formValue, setFormValue] = useState<string | undefined>('');
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
@@ -191,6 +196,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         if (!isValueSameAsSelected) {
           setValue(selectedValue);
         }
+
+        if (!multiselect && inputValue !== selectedValue) {
+          setInputValue((selectedValue as ComboboxValue) || '');
+        }
       }
 
       if (!open) {
@@ -245,7 +254,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         }
       }
     }, [
-      value,
+      inputValue,
       selectedValue,
       multiselect,
       isAutoComplete,
@@ -305,7 +314,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             setSelectedValue(stringValue);
           } else {
             const nextValue = (prev: ComboboxValue | ComboboxValue[]) => {
-              const next = new Set(prev);
+              const next = new Set(Array.isArray(prev) ? prev : [prev]);
               next.add(stringValue);
               return Array.from(next);
             };
@@ -468,11 +477,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       [renderNoResults]
     );
 
-    const noMatchingOptions = !!value?.length && !matchingOptions.size && (
+    const noMatchingOptions = !!inputValue?.length && !matchingOptions.size && (
       <NoMatchingOptions />
     );
 
     const comboboxListbox = (
+      // @ts-expect-error value is expected to be ComboboxValue | ComboboxValue[], but incorrectly inferred as ListboxValue[] | undefined
       <Listbox
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
@@ -489,6 +499,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         tabIndex={undefined}
         aria-activedescendant={undefined}
         multiselect={multiselect}
+        aria-multiselectable={
+          noMatchingOptions ? undefined : String(multiselect)
+        }
       >
         {comboboxOptions}
         {noMatchingOptions}
@@ -497,7 +510,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
     const errorId = `${id}-error`;
     const inputProps = {
-      ...props,
+      ...rest,
       'aria-describedby': error
         ? addIdRef(ariaDescribedby, errorId)
         : ariaDescribedby

@@ -394,6 +394,27 @@ test('should close combobox listbox when selecting option via click', async () =
   assertListboxIsOpen(false);
 });
 
+test('should close combobox listbox when selecting option via click multiselect', async () => {
+  render(
+    <Combobox label="label" multiselect>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  assertListboxIsOpen(false);
+
+  fireEvent.focus(screen.getByRole('combobox'));
+  assertListboxIsOpen(true);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  fireEvent.click(screen.getByRole('combobox'));
+  assertListboxIsOpen(true);
+  fireEvent.click(screen.getAllByRole('option')[1]);
+
+  assertListboxIsOpen(false);
+});
+
 test('should prevent default on combobox listbox option via mousedown', () => {
   const preventDefault = spy();
   render(
@@ -671,6 +692,34 @@ test('should handle selection with "click" event', () => {
   assertOptionIsSelected(0);
 });
 
+test('should handle selection with "click" event multiselect', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" onSelectionChange={onSelectionChange} multiselect>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Banana']);
+  assertOptionIsSelected(1);
+  fireEvent.click(combobox);
+  fireEvent.click(screen.getAllByRole('option')[2]);
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Banana',
+    'Cantaloupe'
+  ]);
+  assertOptionIsSelected(1);
+  assertOptionIsSelected(2);
+});
+
 test('should handle selection with "enter" keydown event', () => {
   const onSelectionChange = spy();
   render(
@@ -897,6 +946,22 @@ test('should set selected value with "defaultValue" prop', () => {
   assertOptionIsSelected(1);
 });
 
+test('should set selected value with "defaultValue" prop multiple', () => {
+  render(
+    <Combobox label="label" defaultValue={['Banana', 'Cantaloupe']} multiselect>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  assertOptionIsSelected(1);
+  assertOptionIsSelected(2);
+});
+
 test('should set selected value with "value" prop', () => {
   render(
     <Combobox label="label" inputValue="Banana" value="Banana">
@@ -912,6 +977,29 @@ test('should set selected value with "value" prop', () => {
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
   assertOptionIsSelected(1);
+});
+
+test('should set selected value with "value" prop multiple', () => {
+  render(
+    <Combobox
+      label="label"
+      inputValue="Banana"
+      value={['Banana', 'Cantaloupe']}
+      multiselect
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  assertOptionIsSelected(1);
+  assertOptionIsSelected(2);
 });
 
 test('should not render hidden input when name is not provided', () => {
@@ -1048,6 +1136,28 @@ test('should have no axe violations with value and expanded', async () => {
   const comboboxRef = createRef<HTMLDivElement>();
   render(
     <Combobox label="label" ref={comboboxRef} value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with value and expanded multiselect', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      ref={comboboxRef}
+      value={['Banana', 'Cantaloupe']}
+      multiselect
+    >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
