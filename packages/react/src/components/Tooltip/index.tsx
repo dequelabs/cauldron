@@ -5,6 +5,7 @@ import { useId } from 'react-id-generator';
 import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
+import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -13,7 +14,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   target: React.RefObject<HTMLElement> | HTMLElement;
   variant?: 'text' | 'info' | 'big';
-  association?: 'aria-labelledby' | 'aria-describedby';
+  association?: 'aria-labelledby' | 'aria-describedby' | 'none';
   show?: boolean | undefined;
   placement?: Placement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
@@ -58,6 +59,7 @@ export default function Tooltip({
     null
   );
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
+  const hasAriaAssociation = association !== 'none';
 
   const { styles, attributes, update } = usePopper(
     targetElement,
@@ -172,14 +174,20 @@ export default function Tooltip({
 
   // Keep the target's id in sync
   useEffect(() => {
-    const attrText = targetElement?.getAttribute(association);
-    if (!attrText?.includes(id || '')) {
-      targetElement?.setAttribute(
-        association,
-        [id, attrText].filter(Boolean).join(' ')
-      );
+    if (hasAriaAssociation) {
+      const idRefs = targetElement?.getAttribute(association);
+      if (!hasIdRef(idRefs, id)) {
+        targetElement?.setAttribute(association, addIdRef(idRefs, id));
+      }
     }
-  }, [targetElement, id]);
+
+    return () => {
+      if (targetElement && hasAriaAssociation) {
+        const idRefs = targetElement.getAttribute(association);
+        targetElement.setAttribute(association, removeIdRef(idRefs, id));
+      }
+    };
+  }, [targetElement, id, association]);
 
   return (
     <>

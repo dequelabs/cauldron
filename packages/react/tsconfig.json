@@ -1,8 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "__tests__/setupTests.ts"],
-  "exclude": ["node_modules"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/**/*.e2e.tsx"],
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declarationDir": "lib",
+    "declaration": true
   }
 }
