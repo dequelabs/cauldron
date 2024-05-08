@@ -2,18 +2,51 @@
   --select-min-height: 33px;
   --select-width: 300px;
   --select-arrow-spacing: 10px;
+  --select-field-text-color: var(--field-content-color);
+  --select-field-border-color: var(--field-border-color);
+  --select-field-border-color-focus: var(--field-border-color-focus);
+  --select-field-border-color-focus-glow: var(--field-border-color-focus-glow);
+  --select-field-border-color-hover: var(--field-border-color-hover);
+  --select-field-border-color-error-hover: var(
+    --field-border-color-error-hover
+  );
+  --select-field-border-color-error: var(--field-border-color-error);
+  --select-field-background-color-disabled: var(
+    --field-background-color-disabled
+  );
+  --select-field-border-color-error-focus-glow: var(
+    --field-border-color-error-focus-glow
+  );
+}
+
+.cauldron--theme-dark {
+  --select-field-text-color: var(--field-content-color);
+  --select-field-border-color: var(--field-border-color);
+  --select-field-border-color-focus: var(--field-border-color-focus);
+  --select-field-border-color-focus-glow: var(--field-border-color-focus-glow);
+  --select-field-border-color-hover: var(--field-border-color-hover);
+  --select-field-border-color-error-hover: var(
+    --field-border-color-error-hover
+  );
+  --select-field-border-color-error: var(--field-border-color-error);
+  --select-field-background-color-disabled: var(
+    --field-background-color-disabled
+  );
+  --select-field-border-color-error-focus-glow: var(
+    --field-border-color-error-focus-glow
+  );
 }
 
 .Field__select {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--space-small);
+  color: var(--select-field-text-color);
 }
 
-.cauldron--theme-light .Field__select--disabled select {
-  background: var(--field-background-color-disabled);
-  color: var(--gray-60);
-  border-color: var(--gray-40);
+.Field__select--disabled select {
+  background: var(--select-field-background-color-disabled);
+  border-color: var(--select-field-border-color);
 }
 
 .Field__select--wrapper {
@@ -30,7 +63,7 @@
   right: var(--select-arrow-spacing);
   border-left: var(--space-half) solid transparent;
   border-right: var(--space-half) solid transparent;
-  border-top: var(--space-three-quarters) solid var(--field-content-color);
+  border-top: var(--space-three-quarters) solid var(--select-field-text-color);
   pointer-events: none;
 }
 
@@ -39,59 +72,53 @@
   min-height: var(--select-min-height);
   padding: var(--space-three-quarters) var(--space-smallest);
   padding-right: var(--space-large);
-  border: 1px solid var(--field-border-color);
+  border: 1px solid var(--select-field-border-color);
   font-family: Roboto;
   font-weight: normal;
   font-style: normal;
   font-size: var(--text-size-small);
-  color: var(--field-content-color);
+  color: var(--select-field-text-color);
   text-decoration: rgb(102, 102, 102);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   appearance: none;
 }
 
-.Field__select--wrapper select:not([disabled]):hover {
-  border-color: var(--field-border-color-hover);
+.Field__select--wrapper:not(.Field--has-error)
+  select:not([disabled]):not([required]):hover {
+  border-color: var(--select-field-border-color-hover);
 }
 
 .Field__select--wrapper select:focus {
-  border-color: var(--field-border-color-focus);
-  box-shadow: 0 0 0 1px var(--field-border-color-focus),
-    0 0 5px var(--field-border-color-focus-glow),
+  border-color: var(--select-field-border-color-focus);
+  box-shadow: 0 0 0 1px var(--select-field-border-color-focus),
+    0 0 5px var(--select-field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Field__select--wrapper select:focus:hover {
-  border-color: var(--field-border-color-focus-hover);
+  border-color: var(--select-field-border-color-focus-hover);
 }
 
 .Field__select--wrapper select:invalid,
 .Field--has-error select {
-  border-width: var(--space-quarter);
-  border-color: var(--field-border-color-error);
+  border-width: 2px;
+  border-color: var(--select-field-border-color-error);
 }
 
 .Field__select--wrapper.Field--has-error select:hover {
-  border-color: var(--field-border-color-error-hover);
+  border-color: var(--select-field-border-color-error-hover);
 }
 
 .Field__select--wrapper select:invalid:focus,
 .Field__select--wrapper.Field--has-error select:focus {
-  border-width: var(--space-quarter);
-  border-color: var(--field-border-color-error);
+  border-width: 2px;
+  border-color: var(--select-field-border-color-error);
   box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0 inset,
-    var(--field-border-color-error-focus-glow) 0 0 4px 0;
+    var(--select-field-border-color-error) 0 0 0 1px,
+    var(--select-field-border-color-error-focus-glow) 0 0 4px 0;
 }
 
 .Field__select--wrapper select:invalid:focus:hover,
 .Field__select--wrapper.Field--has-error select:focus:hover {
-  border-color: var(--field-border-color-error-hover);
-}
-
-.cauldron--theme-dark .Field__select--wrapper select:invalid:focus:hover,
-.cauldron--theme-dark
-  .Field__select--wrapper.Field--has-error
-  select:focus:hover {
-  box-shadow: 0px 0px 5px var(--accent-danger),
-    inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-color: var(--select-field-border-color-error-hover);
 }
