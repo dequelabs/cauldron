@@ -22,7 +22,7 @@
     "test:a11y": "ts-node e2e/accessibility.ts",
     "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "screenshots": "docker run --rm --ipc=host -v $(pwd)/playwright-ct.config.ts:/app/playwright-ct.config.ts -v $(pwd)/packages:/app/packages -v $(pwd)/e2e:/app/e2e -v $(pwd)/e2e:/app/e2e cauldron-playwright-e2e-screenshots",
-    "screenshots:docker": "docker build --build-arg playwright_version=$(npm view playwright version) . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile",
+    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile",
     "release": "./scripts/release.sh"
   },
   "prettier": {
@@ -56,8 +56,8 @@
     "@fontsource/pt-mono": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
     "@mdx-js/loader": "^2.3.0",
-    "@playwright/experimental-ct-react17": "^1.43.0",
-    "@playwright/test": "^1.43.0",
+    "@playwright/experimental-ct-react17": "^1.44.0",
+    "@playwright/test": "^1.44.0",
     "@types/classnames": "^2.2.9",
     "@types/express": "^4.17.13",
     "@types/node": "^18.0.0",
@@ -97,7 +97,7 @@
     "mini-css-extract-plugin": "^2.7.2",
     "node-fetch": "^3.3.0",
     "p-queue": "^6",
-    "playwright": "^1.43.0",
+    "playwright": "^1.44.0",
     "postcss-cli": "^6.0.1",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
