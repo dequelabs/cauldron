@@ -32,22 +32,26 @@ interface ComboboxOption {
   description?: string;
 }
 
-type ComboboxProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'value' | 'defaultValue'
-> & {
+interface ComboboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'value' | 'defaultValue'
+  > {
   label: ContentNode;
   options?: ComboboxOption[];
   inputValue?: string;
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
   autocomplete?: 'none' | 'manual' | 'automatic';
+  value?: ComboboxValue | ComboboxValue[];
+  defaultValue?: ComboboxValue | ComboboxValue[];
+  multiselect?: boolean;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>({
     target,
     value,
     previousValue
   }: {
-    target: T | undefined;
+    target: T;
     value: ComboboxValue | ComboboxValue[];
     previousValue: ComboboxValue | ComboboxValue[];
   }) => void;
@@ -55,18 +59,7 @@ type ComboboxProps = Omit<
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
-} & (
-    | {
-        value?: ComboboxValue;
-        defaultValue?: ComboboxValue;
-        multiselect?: false;
-      }
-    | {
-        value?: ComboboxValue[];
-        defaultValue?: ComboboxValue[];
-        multiselect: true;
-      }
-  );
+}
 
 const getComboboxValue = (
   listboxValue: ListboxValue | ListboxValue[]
@@ -482,7 +475,6 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     );
 
     const comboboxListbox = (
-      // @ts-expect-error value is expected to be ComboboxValue | ComboboxValue[], but incorrectly inferred as ListboxValue[] | undefined
       <Listbox
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
@@ -499,9 +491,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         tabIndex={undefined}
         aria-activedescendant={undefined}
         multiselect={multiselect}
-        aria-multiselectable={
-          noMatchingOptions ? undefined : String(multiselect)
-        }
+        aria-multiselectable={noMatchingOptions ? undefined : multiselect}
       >
         {comboboxOptions}
         {noMatchingOptions}

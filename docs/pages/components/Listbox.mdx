@@ -96,7 +96,6 @@ Controlled listboxes require updating the value to reflect the newly selected st
 function ControlledListboxExample() {
   const [value, setValue] = useState('Two');
   const handleSelectionChange = ({ value, previousValue }) => {
-    console.log(value, previousValue);
     setValue(value);
   };
 
@@ -137,7 +136,6 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
 function MultiselectListboxExample() {
   const [value, setValue] = useState(['Two']);
   const handleSelectionChange = ({ value, previousValue }) => {
-      console.log(value, previousValue);
       setValue(value);
   };
   return (

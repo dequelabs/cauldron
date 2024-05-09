@@ -112,27 +112,23 @@
 }
 
 .Combobox .TextFieldWrapper {
+  min-height: 32px;
   flex-wrap: wrap;
+  gap: var(--space-half);
+  padding-inline: var(--space-smallest);
+  padding-block: var(--space-half);
 }
 
 .Combobox .TextFieldWrapper input[type='text'] {
   margin-right: 1.25rem;
   flex-grow: 1;
   width: unset;
-  min-width: var(--input-min-width);
+  padding: unset;
 }
 
 .Combobox__selected-tag {
-  margin-block: var(--space-smallest);
-}
-
-.Combobox__selected-tag:first-of-type {
-  margin-left: var(--space-smallest);
-}
-
-.Combobox__selected-tag .TagButton__icon svg {
-  width: 16px;
-  height: 16px;
+  margin-left: 0 !important;
+  --icon-size: 16px;
 }
 
 .Combobox__arrow {
@@ -141,6 +137,7 @@
   justify-content: center;
   position: absolute;
   right: 0;
+  top: 12px;
   pointer-events: none;
 }
 
