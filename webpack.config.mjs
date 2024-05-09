@@ -62,12 +62,12 @@ const config = {
         ]
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|png)$/,
         type: 'asset/resource',
         generator: {
           filename: 'public/fonts/[name][ext]'
         }
-      }
+      },
     ]
   },
   resolve: {

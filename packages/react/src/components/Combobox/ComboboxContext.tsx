@@ -11,7 +11,7 @@ type ComboboxContext = {
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
   >;
   setFormValue: React.Dispatch<React.SetStateAction<ComboboxValue>>;
-  matches: (<T extends string = string>(value: T) => boolean) | boolean;
+  matches: (<T extends string = string>(...value: T[]) => boolean) | boolean;
 };
 
 export type ComboboxOptionState = {
@@ -21,7 +21,9 @@ export type ComboboxOptionState = {
 
 type ComboboxProvider = {
   children: React.ReactNode;
-  matches: ((inputValue: string, value: string) => boolean) | boolean;
+  matches:
+    | ((inputValue: string, value: string, description?: string) => boolean)
+    | boolean;
 } & Omit<ComboboxContext, 'matches'>;
 
 /* istanbul ignore next */
@@ -56,7 +58,7 @@ function ComboboxProvider({
       selectedValue,
       matches:
         typeof matches === 'function' && !!inputValue
-          ? (value) => matches(inputValue, value)
+          ? (value, description) => matches(inputValue, value, description)
           : true,
       matchingOptions,
       setMatchingOptions,

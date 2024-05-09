@@ -237,6 +237,11 @@
   border-radius: 50%;
 }
 
+.ComboboxOption img {
+  height: 6em;
+  width: 6em;
+}
+
 .ComboboxOption__match {
   text-decoration: underline;
   font-style: normal;
