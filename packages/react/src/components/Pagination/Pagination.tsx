@@ -61,7 +61,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             <IconButton
               icon="chevron-double-left"
-              tooltipPlacement={tooltipPlacement}
+              tooltipProps={{ placement: tooltipPlacement }}
               label={firstPageLabel}
               aria-disabled={isFirstPage}
               onClick={isFirstPage ? undefined : onFirstPageClick}
@@ -71,7 +71,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             <IconButton
               icon="chevron-left"
-              tooltipPlacement={tooltipPlacement}
+              tooltipProps={{ placement: tooltipPlacement }}
               label={previousPageLabel}
               aria-disabled={isFirstPage}
               onClick={isFirstPage ? undefined : onPreviousPageClick}
@@ -79,7 +79,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           </li>
 
           <li>
-            <span role="log" aria-atomic="true">
+            <span role="log" aria-atomic="true" aria-live="polite">
               {statusLabel || (
                 <span>
                   Showing <strong>{itemStart}</strong> to{' '}
@@ -92,7 +92,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             <IconButton
               icon="chevron-right"
-              tooltipPlacement={tooltipPlacement}
+              tooltipProps={{ placement: tooltipPlacement }}
               label={nextPageLabel}
               aria-disabled={isLastPage}
               onClick={isLastPage ? undefined : onNextPageClick}
@@ -102,7 +102,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
           <li>
             <IconButton
               icon="chevron-double-right"
-              tooltipPlacement={tooltipPlacement}
+              tooltipProps={{ placement: tooltipPlacement }}
               label={lastPageLabel}
               aria-disabled={isLastPage}
               onClick={isLastPage ? undefined : onLastPageClick}
