@@ -28,6 +28,7 @@ interface ComboboxOption {
   value?: ComboboxValue;
   formValue?: ComboboxValue;
   description?: string;
+  imageURL?: string;
 }
 
 interface ComboboxProps
@@ -54,6 +55,7 @@ interface ComboboxProps
   renderNoResults?: (() => JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
+  variant?: 'default' | 'advanced';
 }
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
@@ -62,6 +64,21 @@ const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
     return true;
   }
   return value.toLowerCase().includes(inputValue.toLowerCase());
+};
+
+const advancedAutoCompleteMatches = (
+  inputValue: string,
+  value: string,
+  description?: string
+) => {
+  // istanbul ignore if
+  if (!value || !description) {
+    return true;
+  }
+  return (
+    value.toLowerCase().includes(inputValue.toLowerCase()) ||
+    description.toLowerCase().includes(inputValue.toLowerCase())
+  );
 };
 
 const ComboboxNoResults = ({
@@ -98,6 +115,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       name,
       renderNoResults,
       portal,
+      variant,
       inputRef: propInputRef = null,
       'aria-describedby': ariaDescribedby,
       ...props
@@ -120,6 +138,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const isControlled = typeof propValue !== 'undefined';
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
+    const isAdvancedCombobox = variant === 'advanced';
     const hasError = !!error;
 
     const comboboxOptions =
@@ -457,7 +476,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           inputValue={value}
           formValue={formValue}
           selectedValue={selectedValue}
-          matches={!isAutoComplete || defaultAutoCompleteMatches}
+          matches={
+            !isAutoComplete ||
+            (isAdvancedCombobox
+              ? advancedAutoCompleteMatches
+              : defaultAutoCompleteMatches)
+          }
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
           setFormValue={setFormValue}
