@@ -22,7 +22,7 @@
     "test:a11y": "ts-node e2e/accessibility.ts",
     "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "screenshots": "docker run --rm --ipc=host -v $(pwd)/playwright-ct.config.ts:/app/playwright-ct.config.ts -v $(pwd)/packages:/app/packages -v $(pwd)/e2e:/app/e2e -v $(pwd)/e2e:/app/e2e cauldron-playwright-e2e-screenshots",
-    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile",
+    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(npm list --depth=0 playwright | grep playwright | cut -f2 -d '@')",
     "release": "./scripts/release.sh"
   },
   "prettier": {

@@ -1,4 +1,4 @@
-ARG playwright_version=1.44.0
+ARG playwright_version=latest
 FROM mcr.microsoft.com/playwright:v$playwright_version-jammy
 
 WORKDIR /app
