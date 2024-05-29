@@ -239,6 +239,11 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             /* istanbul ignore next: default value */ '';
           setValue(stringValue);
           setSelectedValue(stringValue);
+          onSelectionChange?.({
+            target: activeDescendant.element,
+            value: stringValue,
+            previousValue: value
+          });
         }
       },
       [autocomplete, activeDescendant, onBlur]

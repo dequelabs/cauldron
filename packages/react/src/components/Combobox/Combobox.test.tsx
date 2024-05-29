@@ -707,6 +707,36 @@ test('should handle selection with "enter" keydown event', () => {
   fireEnterKeyPress();
 });
 
+test('should handle selection when autocomplete="automatic" and combobox input is blurred', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox
+      label="label"
+      onSelectionChange={onSelectionChange}
+      value=""
+      autocomplete="automatic"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const fireArrowDownKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireArrowDownKeyPress();
+  fireEvent.blur(combobox);
+  expect(onSelectionChange.calledOnce).toBeTruthy();
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
+});
+
 test('should always render all options when autocomplete="none"', () => {
   render(
     <Combobox label="label" autocomplete="none">
