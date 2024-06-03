@@ -7,18 +7,18 @@ import { axe } from 'jest-axe';
 const user = userEvent.setup();
 
 test('clicks first direct child link given a click', async () => {
-  expect.assertions(1);
-  let clicked = false;
+  const onClick = sinon.spy();
   render(
     <MenuItem>
-      <a href="/foo" onClick={() => (clicked = true)}>
+      <a href="/foo" onClick={onClick}>
         Foo
       </a>
     </MenuItem>
   );
 
+  expect(onClick.calledOnce).toBeFalse();
   await user.click(screen.getByRole('link', { name: 'Foo' }));
-  expect(clicked).toBeTruthy();
+  expect(onClick.calledOnce).toBeTruthy();
 });
 
 test('calls onClick prop', async () => {
