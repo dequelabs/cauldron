@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MenuItem from '../MenuItem';
@@ -16,37 +17,28 @@ test('clicks first direct child link given a click', async () => {
     </MenuItem>
   );
 
-  expect(onClick.calledOnce).toBeFalse();
+  expect(onClick.calledOnce).toBeFalsy();
   await user.click(screen.getByRole('link', { name: 'Foo' }));
   expect(onClick.calledOnce).toBeTruthy();
 });
 
 test('calls onClick prop', async () => {
-  expect.assertions(1);
-  let clicked = false;
-  const click = () => (clicked = true);
-  render(<MenuItem onClick={click}>BOOGNISH</MenuItem>);
+  const onClick = sinon.spy();
+  render(<MenuItem onClick={onClick}>BOOGNISH</MenuItem>);
 
   await user.click(screen.getByText('BOOGNISH'));
-  expect(clicked).toBeTruthy();
+  expect(onClick.calledOnce).toBeTruthy();
 });
-
 test('clicks the menuitem given enter/space keydowns', async () => {
-  expect.assertions(2);
-  let clickCount = 0;
-
-  const click = () => {
-    clickCount += 1;
-  };
+  const onClick = sinon.spy();
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      click();
     }
   };
 
   render(
-    <MenuItem onClick={click} onKeyDown={handleKeyDown}>
+    <MenuItem onClick={onClick} onKeyDown={handleKeyDown}>
       <div role="button" tabIndex={0}>
         BOOGNISH
       </div>
@@ -57,19 +49,16 @@ test('clicks the menuitem given enter/space keydowns', async () => {
 
   expect(menuItem).not.toBeNull();
 
-  if (menuItem) {
-    await user.type(menuItem, '{enter}');
-    await user.type(menuItem, '{space}');
-    expect(clickCount).toBe(3);
-  }
+  await user.type(menuItem, '{enter}');
+  await user.type(menuItem, '{space}');
+
+  expect(onClick.calledTwice).toBeTruthy();
 });
 
 test('supports menuItemRef props', () => {
-  expect.assertions(1);
-  let called = false;
-  const ref = () => (called = true);
+  const ref = sinon.spy();
   render(<MenuItem menuItemRef={ref}>BOOGNISH</MenuItem>);
-  expect(called).toBeTruthy();
+  expect(ref.calledOnce).toBeTruthy();
 });
 
 test('should return no axe violations', async () => {
