@@ -129,6 +129,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           key={option.key || index}
           id={`${id}-option-${index + 1}`}
           description={option.description}
+          value={option.value || option.label}
         >
           {option.label}
         </ComboboxOption>
