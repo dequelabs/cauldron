@@ -439,6 +439,66 @@ test('should close combobox listbox when selecting option via keypress', () => {
   assertListboxIsOpen(false);
 });
 
+test('should set combobox value when selecting option via mousedown when passed children', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via keypress when passed children', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via mousedown when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via keypress when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
 test('should prevent default with enter keypress and open listbox', () => {
   const preventDefault = spy();
   render(
