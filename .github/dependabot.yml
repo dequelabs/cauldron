@@ -15,7 +15,7 @@ updates:
           - 'patch'
   - package-ecosystem: "npm"
     directory: "/"
-    schdule: "weekly"
+    schedule: "weekly"
     commit-message:
       prefix: "chore"
     groups:
