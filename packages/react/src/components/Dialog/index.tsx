@@ -18,9 +18,10 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   forceAction?: boolean;
   heading:
+    | string
     | React.ReactElement<any>
     | {
-        text: React.ReactElement<any>;
+        text: React.ReactElement<any> | string;
         level: number | undefined;
       };
   closeButtonText?: string;
