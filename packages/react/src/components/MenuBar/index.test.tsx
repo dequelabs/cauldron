@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import axe from '../../axe';
 import MenuBar from '../MenuBar';
 import { TopBarItem } from '../TopBar';
+import * as viewportUtils from '../../utils/viewport';
 
 const [right, left] = [39, 37];
 const child = (
@@ -29,7 +29,7 @@ test('supports falsy children', () => {
 });
 
 test('handles left arrow', async () => {
-  const { getAllByRole } = render(
+  render(
     <MenuBar>
       <TopBarItem>test-1</TopBarItem>
       <TopBarItem>test-2</TopBarItem>
@@ -37,7 +37,8 @@ test('handles left arrow', async () => {
     </MenuBar>
   );
 
-  const menuItems = getAllByRole('menuitem');
+  const menuItems = screen.getAllByRole('menuitem');
+
   fireEvent.keyDown(menuItems[1], { key: 'ArrowLeft', keyCode: left });
   await waitFor(() => {
     expect(menuItems[0]).toHaveFocus();
@@ -52,7 +53,7 @@ test('handles left arrow', async () => {
 });
 
 test('handles right arrow', async () => {
-  const { getAllByRole } = render(
+  render(
     <MenuBar>
       <TopBarItem>test-1</TopBarItem>
       <TopBarItem>test-2</TopBarItem>
@@ -60,7 +61,7 @@ test('handles right arrow', async () => {
     </MenuBar>
   );
 
-  const menuItems = getAllByRole('menuitem');
+  const menuItems = screen.getAllByRole('menuitem');
   fireEvent.keyDown(menuItems[1], { key: 'ArrowRight', keyCode: right });
   await waitFor(() => {
     expect(menuItems[2]).toHaveFocus();
@@ -97,4 +98,27 @@ test('should return no axe violations', async () => {
   // Perform accessibility test
   const results = await axe(container);
   expect(results).toHaveNoViolations();
+});
+
+test('handles thin state', () => {
+  render(
+    <MenuBar thin>
+      <TopBarItem>1</TopBarItem>
+    </MenuBar>
+  );
+
+  expect(document.body).toHaveClass('TopBar--thin');
+});
+
+test('handles wide state', () => {
+  jest.spyOn(viewportUtils, 'isWide').mockReturnValue(true);
+
+  render(
+    <MenuBar>
+      <TopBarItem>1</TopBarItem>
+    </MenuBar>
+  );
+
+  expect(document.body).not.toHaveClass('TopBar--thin');
+  jest.restoreAllMocks();
 });
