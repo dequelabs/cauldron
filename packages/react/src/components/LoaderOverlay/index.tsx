@@ -44,12 +44,9 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
 
     useEffect(() => {
       if (!!focusOnInitialRender && overlayRef.current) {
-        setTimeout(() => {
-          return overlayRef.current?.focus();
-        });
+        overlayRef.current.focus();
       }
-      return;
-    }, [overlayRef.current]);
+    }, []);
 
     const Wrapper = focusTrap ? FocusTrap : React.Fragment;
     const wrapperProps = focusTrap
