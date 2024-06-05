@@ -17,7 +17,8 @@ interface ListboxOptionProps
   activeClass?: string;
 }
 
-function isElementPreceding(a: Element, b: Element) {
+function isElementPreceding(a?: Element, b?: Element) {
+  if (!a || !b) return false;
   return !!(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING);
 }
 
@@ -39,10 +40,14 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const { active, selected, setOptions, onSelect } = useListboxContext();
     const listboxOptionRef = useSharedRef<HTMLElement>(ref);
     const [id] = propId ? [propId] : useId(1, 'listbox-option');
-    const isActive =
-      active !== null && active.element === listboxOptionRef.current;
+    const isActive = active && active.element === listboxOptionRef.current;
     const isSelected =
-      selected !== null && selected.element === listboxOptionRef.current;
+      selected &&
+      (Array.isArray(selected)
+        ? selected.findIndex(
+            (sel) => sel.element === listboxOptionRef.current
+          ) !== -1
+        : selected.element === listboxOptionRef.current);
     const optionValue =
       typeof value !== 'undefined'
         ? value
@@ -52,9 +57,13 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
       const element = listboxOptionRef.current;
 
       setOptions((options) => {
-        const option = { element, value: optionValue };
         // istanbul ignore next
         if (!element) return options;
+
+        const option = {
+          element,
+          value: typeof value !== 'undefined' ? value : element.innerText
+        };
 
         // Elements are frequently appended, so check to see if the newly rendered
         // element follows the last element first before any other checks
@@ -68,14 +77,11 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
           return [...options, option];
         }
 
-        for (const opt of options) {
+        for (let i = 0; i < options.length; i++) {
+          const opt = options[i];
+
           if (isElementPreceding(element, opt.element)) {
-            const index = options.indexOf(opt);
-            return [
-              ...options.slice(0, index),
-              option,
-              ...options.slice(index)
-            ];
+            return [...options.slice(0, i), option, ...options.slice(i)];
           }
         }
 
@@ -98,7 +104,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
         onSelect({ element: listboxOptionRef.current, value: optionValue });
         onClick?.(event);
       },
-      [optionValue]
+      [optionValue, onSelect]
     );
 
     return (

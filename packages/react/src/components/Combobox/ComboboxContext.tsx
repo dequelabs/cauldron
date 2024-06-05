@@ -3,9 +3,10 @@ import { ComboboxValue } from './ComboboxOption';
 
 type ComboboxContext = {
   autocomplete: 'none' | 'manual' | 'automatic';
+  multiselect: boolean;
   inputValue: ComboboxValue;
   formValue: ComboboxValue;
-  selectedValue: ComboboxValue;
+  selectedValue: ComboboxValue | ComboboxValue[];
   matchingOptions: Map<HTMLElement, ComboboxOptionState>;
   setMatchingOptions: React.Dispatch<
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
@@ -27,6 +28,7 @@ type ComboboxProvider = {
 /* istanbul ignore next */
 const ComboboxContext = createContext<ComboboxContext>({
   autocomplete: 'manual',
+  multiselect: false,
   inputValue: undefined,
   formValue: undefined,
   selectedValue: undefined,
@@ -38,6 +40,7 @@ const ComboboxContext = createContext<ComboboxContext>({
 
 function ComboboxProvider({
   autocomplete,
+  multiselect,
   inputValue,
   formValue,
   selectedValue,
@@ -51,6 +54,7 @@ function ComboboxProvider({
   const contextValue: ComboboxContext = useMemo(
     () => ({
       autocomplete,
+      multiselect,
       inputValue,
       formValue,
       selectedValue,
@@ -64,6 +68,7 @@ function ComboboxProvider({
     }),
     [
       autocomplete,
+      multiselect,
       inputValue,
       formValue,
       selectedValue,
