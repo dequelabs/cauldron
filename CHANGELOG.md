@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.4.1](https://github.com/dequelabs/cauldron/compare/v6.4.0...v6.4.1) (2024-06-05)
+
+
+### Bug Fixes
+
+* **Combobox:** fix issue where autocomplete automatic does not fire selection event ([#1493](https://github.com/dequelabs/cauldron/issues/1493)) ([0f061da](https://github.com/dequelabs/cauldron/commit/0f061da64bba7fe5c48ac43b75c8c4877d67c25e))
+* **IconButton:** loosen polymorphic type to allow for any type of JSXElement ([#1494](https://github.com/dequelabs/cauldron/issues/1494)) ([0408555](https://github.com/dequelabs/cauldron/commit/040855523776cb753787654634a0cf2a1ebd30e0))
+* **react:** make focusOnInitialRender work without setTimeout ([#1486](https://github.com/dequelabs/cauldron/issues/1486)) ([fc280bd](https://github.com/dequelabs/cauldron/commit/fc280bd3433011c4c265c3f7ce8784a13fc7cfe0))
+* set `value` rather than `label` when using `onChange` and `onSelectionChange` with `Combobox` ([#1500](https://github.com/dequelabs/cauldron/issues/1500)) ([9defe04](https://github.com/dequelabs/cauldron/commit/9defe04ed5b2741201d6d6ce2036f3815a78a7aa))
+* **styles:** fix issue where field focus ring did not provide enough contrast ([#1489](https://github.com/dequelabs/cauldron/issues/1489)) ([adefb4a](https://github.com/dequelabs/cauldron/commit/adefb4a77a4e18172e92db1cccfae446a25d86ca))
+
 ## [6.4.0](https://github.com/dequelabs/cauldron/compare/v6.3.2...v6.4.0) (2024-05-16)
 
 
