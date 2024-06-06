@@ -38,7 +38,11 @@ test('should not hide outside content when not shown', async () => {
   div.innerHTML = 'content';
   div.setAttribute('data-testid', 'outside');
   document.body.appendChild(div);
-  render(<Dialog {...defaultProps}>Test Dialog</Dialog>);
+  render(
+    <Dialog {...defaultProps} show={false}>
+      Test Dialog
+    </Dialog>
+  );
   await waitFor(() =>
     expect(screen.getByTestId('outside')).not.toHaveAttribute(
       'aria-hidden',
@@ -95,7 +99,7 @@ test('should have accessible name from heading', () => {
 });
 
 // TODO: Figure out why this test doesn't run
-test.skip('should call "onClose" when clicked outside', async () => {
+test.only('should call "onClose" when clicked outside', async () => {
   const user = userEvent.setup();
   const onClose = spy();
   render(
