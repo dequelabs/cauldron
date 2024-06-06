@@ -38,6 +38,9 @@ test('handles left arrow', async () => {
   );
 
   const menuItems = screen.getAllByRole('menuitem');
+  const menuBar = screen.getByRole('menubar');
+
+  expect(menuBar).toBeTruthy();
 
   fireEvent.keyDown(menuItems[1], { key: 'ArrowLeft', keyCode: left });
   await waitFor(() => {
@@ -62,6 +65,10 @@ test('handles right arrow', async () => {
   );
 
   const menuItems = screen.getAllByRole('menuitem');
+  const menuBar = screen.getByRole('menubar');
+
+  expect(menuBar).toBeTruthy();
+
   fireEvent.keyDown(menuItems[1], { key: 'ArrowRight', keyCode: right });
   await waitFor(() => {
     expect(menuItems[2]).toHaveFocus();
