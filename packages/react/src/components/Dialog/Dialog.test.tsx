@@ -99,7 +99,7 @@ test('should have accessible name from heading', () => {
 });
 
 // TODO: Figure out why this test doesn't run
-test.only('should call "onClose" when clicked outside', async () => {
+test.skip('should call "onClose" when clicked outside', async () => {
   const user = userEvent.setup();
   const onClose = spy();
   render(
