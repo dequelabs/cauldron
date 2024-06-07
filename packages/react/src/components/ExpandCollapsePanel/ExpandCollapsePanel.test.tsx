@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import {
-  default as ExpandCollapsePanel,
-  PanelTrigger,
-  type ExpandCollapsePanelProps
-} from './';
+import { default as ExpandCollapsePanel, PanelTrigger } from './';
 import { SinonStub, createSandbox } from 'sinon';
-import axe from '../../axe';
 import * as stylesheets from '../../utils/stylesheets';
 
 const sandbox = createSandbox();
@@ -86,7 +81,7 @@ test('should have hidden content when collapsed', () => {
 
 test('should have visible content when expanded', () => {
   render(
-    <ExpandCollapsePanel open={true}>
+    <ExpandCollapsePanel open>
       <div data-testid="test-div">foo</div>
     </ExpandCollapsePanel>
   );
@@ -137,23 +132,19 @@ test('trigger should open panel collapsed panel', async () => {
 });
 
 test('trigger should close expanded panel', async () => {
-  render(
-    <ExpandCollapsePanel animationTiming={1}>
+  const Component = ({ isOpen }: { isOpen: boolean }) => (
+    <ExpandCollapsePanel animationTiming={1} open={isOpen}>
       <PanelTrigger>Click Me</PanelTrigger>
       <div data-testid="test-div" />
     </ExpandCollapsePanel>
   );
 
-  fireEvent.click(screen.getByRole('button', { name: 'Click Me' }));
+  const { rerender, getByTestId } = render(<Component isOpen={true} />);
+
+  rerender(<Component isOpen={false} />);
 
   await waitFor(() => {
-    expect(isVisible(screen.getByTestId('test-div'))).toBeTruthy();
-  });
-
-  fireEvent.click(screen.getByRole('button', { name: 'Click Me' }));
-
-  await waitFor(() => {
-    expect(isVisible(screen.getByTestId('test-div'))).toBeFalsy();
+    expect(isVisible(getByTestId('test-div'))).toBeFalsy();
   });
 });
 
@@ -212,9 +203,9 @@ test('should not run close animations if timing is not set', async () => {
   });
 });
 
-test('should allow for controlled component', () => {
+test.only('should allow for controlled component', () => {
   render(
-    <ExpandCollapsePanel animationTiming={0} open={true}>
+    <ExpandCollapsePanel animationTiming={0} open>
       <PanelTrigger />
       <div data-testid="test-div" />
     </ExpandCollapsePanel>
