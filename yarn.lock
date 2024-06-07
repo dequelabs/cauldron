@@ -1589,29 +1589,29 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@playwright/experimental-ct-core@1.43.0":
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.43.0.tgz#0edfb8def77261d4d1262d9c8f17f38e8577d648"
-  integrity sha512-kLYMqvHY0D30AsggB6xtit6KCnGtPLMIpfxqTqXFbbHUgfdrW3bberjzAN9sfuranbcgqwO4uxAvilo0fHXuWw==
+"@playwright/experimental-ct-core@1.44.0":
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.44.0.tgz#ec1b491a5afc4f2de811abd5129ee219c4b629a2"
+  integrity sha512-0PnvZVIrZW079Q+nyX5cz+MHpWd7G5t+cdtrAjREUk0+BbJ2A/KXnuHdtmw/OVrqQjwMxUWdSv9hXpi2lnOJYA==
   dependencies:
-    playwright "1.43.0"
-    playwright-core "1.43.0"
-    vite "^5.0.13"
+    playwright "1.44.0"
+    playwright-core "1.44.0"
+    vite "^5.2.8"
 
-"@playwright/experimental-ct-react17@^1.43.0":
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.43.0.tgz#0bb0255eb934f71c9525ef6f0e3c60c97988f033"
-  integrity sha512-4MZ88OJDCovPVIRUq4ejVlrTDGgQkw5n+CpInBwKg8fQkuVe+SLRgih8P/mujiz9a3rhAQTsXz+UEpqbzS24nA==
+"@playwright/experimental-ct-react17@^1.44.0":
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.44.0.tgz#5ec60b218ca71265e433889c7f0b2757ea7115b8"
+  integrity sha512-I7YNVEICpvtxu9THkx9j9+KsaSPiAx09mbJlwQVi4xlFytAoPivjlm8DU8u7Eex5aNO/MSx4eSCCU1onxy2HXQ==
   dependencies:
-    "@playwright/experimental-ct-core" "1.43.0"
+    "@playwright/experimental-ct-core" "1.44.0"
     "@vitejs/plugin-react" "^4.2.1"
 
-"@playwright/test@^1.43.0":
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.43.0.tgz#5d90f247b26d404dd5d81c60f9c7c5e5159eb664"
-  integrity sha512-Ebw0+MCqoYflop7wVKj711ccbNlrwTBCtjY5rlbiY9kHL2bCYxq+qltK6uPsVBGGAOb033H2VO0YobcQVxoW7Q==
+"@playwright/test@^1.44.0":
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.44.0.tgz#ac7a764b5ee6a80558bdc0fcbc525fcb81f83465"
+  integrity sha512-rNX5lbNidamSUorBhB4XZ9SQTjAqfe5M+p37Z8ic0jPFBMo5iCtQz1kRWkEMg+rYOKSlVycpQmpqjSFq7LXOfg==
   dependencies:
-    playwright "1.43.0"
+    playwright "1.44.0"
 
 "@rollup/rollup-android-arm-eabi@4.13.0":
   version "4.13.0"
@@ -3109,15 +3109,10 @@ caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001521.tgz#fcd1bc5f3923aefa6197b96872eba7d6d0e5e4eb"
   integrity sha512-bT9eOOwKYX6jDKXXtAhfiYefkaGArsDgmRQ77tGpdtHply4DcyuirrNhPRlUQQ48IQ2RTU5M1LSCY6m1AnGwBA==
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001517:
-  version "1.0.30001521"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001521.tgz#e9930cf499f7c1e80334b6c1fbca52e00d889e56"
-  integrity sha512-fnx1grfpEOvDGH+V17eccmNjucGUnCbP6KL+l5KqBIerp26WK/+RQ7CIDE37KGJjaPyqWXXlFUyKiWmvdNNKmQ==
-
-caniuse-lite@^1.0.30001565:
-  version "1.0.30001576"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001576.tgz#893be772cf8ee6056d6c1e2d07df365b9ec0a5c4"
-  integrity sha512-ff5BdakGe2P3SQsMsiqmt1Lc8221NR1VzHj5jXN5vBny9A6fpze94HiVV/n7XRosOlsShJcvMv5mdnpjOGCEgg==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001565:
+  version "1.0.30001625"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001625.tgz"
+  integrity sha512-4KE9N2gcRH+HQhpeiRZXd+1niLB/XNLAhSy4z7fI8EzcbcPoAqjNInxVHTiTwWfTIV4w096XG8OtCOCQQKPv3w==
 
 ccount@^2.0.0:
   version "2.0.1"
@@ -8350,17 +8345,17 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-playwright-core@1.43.0:
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.43.0.tgz#d8079acb653abebb0b63062e432479647a4e1271"
-  integrity sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==
+playwright-core@1.44.0:
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.44.0.tgz#316c4f0bca0551ffb88b6eb1c97bc0d2d861b0d5"
+  integrity sha512-ZTbkNpFfYcGWohvTTl+xewITm7EOuqIqex0c7dNZ+aXsbrLj0qI8XlGKfPpipjm0Wny/4Lt4CJsWJk1stVS5qQ==
 
-playwright@1.43.0, playwright@^1.43.0:
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.43.0.tgz#2c2efd4ee2a25defd8c24c98ccb342bdd9d435f5"
-  integrity sha512-SiOKHbVjTSf6wHuGCbqrEyzlm6qvXcv7mENP+OZon1I07brfZLGdfWV0l/efAzVx7TF3Z45ov1gPEkku9q25YQ==
+playwright@1.44.0, playwright@^1.44.0:
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.44.0.tgz#22894e9b69087f6beb639249323d80fe2b5087ff"
+  integrity sha512-F9b3GUCLQ3Nffrfb6dunPOkE5Mh68tR7zN32L4jCk4FjQamgesGay7/dAAe1WaMEGV04DkdJfcJzjoCKygUaRQ==
   dependencies:
-    playwright-core "1.43.0"
+    playwright-core "1.44.0"
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -10960,10 +10955,10 @@ vfile@^5.0.0:
     unist-util-stringify-position "^3.0.0"
     vfile-message "^3.0.0"
 
-vite@^5.0.13:
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.8.tgz#a99e09939f1a502992381395ce93efa40a2844aa"
-  integrity sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==
+vite@^5.2.8:
+  version "5.2.11"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.11.tgz#726ec05555431735853417c3c0bfb36003ca0cbd"
+  integrity sha512-HndV31LWW05i1BLPMUCE1B9E9GFbOu1MbenhS58FuK6owSO5qHm7GiCotrNY1YE5rMeQSFBGmT5ZaLEjFizgiQ==
   dependencies:
     esbuild "^0.20.1"
     postcss "^8.4.38"

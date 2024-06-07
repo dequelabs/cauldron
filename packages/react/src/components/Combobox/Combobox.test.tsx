@@ -439,6 +439,66 @@ test('should close combobox listbox when selecting option via keypress', () => {
   assertListboxIsOpen(false);
 });
 
+test('should set combobox value when selecting option via mousedown when passed children', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via keypress when passed children', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via mousedown when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set combobox value when selecting option via keypress when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
 test('should prevent default with enter keypress and open listbox', () => {
   const preventDefault = spy();
   render(
@@ -705,6 +765,36 @@ test('should handle selection with "enter" keydown event', () => {
   assertOptionIsSelected(1);
   fireArrowDownKeyPress();
   fireEnterKeyPress();
+});
+
+test('should handle selection when autocomplete="automatic" and combobox input is blurred', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox
+      label="label"
+      onSelectionChange={onSelectionChange}
+      value=""
+      autocomplete="automatic"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  const fireArrowDownKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireArrowDownKeyPress();
+  fireEvent.blur(combobox);
+  expect(onSelectionChange.calledOnce).toBeTruthy();
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
 });
 
 test('should always render all options when autocomplete="none"', () => {
