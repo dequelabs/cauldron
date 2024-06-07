@@ -145,8 +145,7 @@ textarea.Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
   border: 1px solid var(--field-border-color-error);
-  box-shadow: 0 0 0 1px var(--field-border-color-error),
-    inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .Checkbox__overlay.Field--has-error {
@@ -168,6 +167,8 @@ textarea.Field--has-error:hover,
 [role='listbox'].Field--has-error:hover,
 [role='spinbutton'].Field--has-error:hover {
   border-color: var(--field-border-color-error-hover);
+  box-shadow: 0 0 0 1px var(--field-border-color-error),
+    inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error:focus,

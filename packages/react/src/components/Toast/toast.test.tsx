@@ -1,4 +1,5 @@
 import React from 'react';
+import { setTimeout } from 'timers/promises';
 import { render, screen, waitFor } from '@testing-library/react';
 import Toast, { type ToastProps } from './';
 import axe from '../../axe';
@@ -39,7 +40,7 @@ Object.entries(toastTypes).forEach(([key, value]) => {
       </Toast>
     );
     const toast = screen.getByTestId('toast');
-    expect(toast).toHaveClass(`Toast Toast--${value} is--hidden`);
+    expect(toast).toHaveClass('Toast', `Toast--${value}`, 'is--hidden');
     expect(toast).toHaveTextContent(testString);
   });
 
@@ -51,7 +52,7 @@ Object.entries(toastTypes).forEach(([key, value]) => {
     );
     const toast = screen.getByTestId('toast');
     expect(toast).toBeInTheDocument();
-    expect(toast).toHaveClass(`Toast Toast--${value} FadeIn--flex`);
+    expect(toast).toHaveClass('Toast', `Toast--${value}`, 'FadeIn--flex');
   });
 
   test('should transition from hidden to shown', async () => {
@@ -62,7 +63,9 @@ Object.entries(toastTypes).forEach(([key, value]) => {
     );
 
     expect(screen.getByTestId('toast')).toHaveClass(
-      'Toast Toast--info is--hidden'
+      'Toast',
+      'Toast--info',
+      'is--hidden'
     );
 
     rerender(
@@ -84,7 +87,9 @@ Object.entries(toastTypes).forEach(([key, value]) => {
     );
 
     expect(screen.getByTestId('toast')).toHaveClass(
-      'Toast Toast--info FadeIn--flex'
+      'Toast',
+      'Toast--info',
+      'FadeIn--flex'
     );
 
     rerender(
@@ -93,11 +98,14 @@ Object.entries(toastTypes).forEach(([key, value]) => {
       </Toast>
     );
 
-    setTimeout(() => {
+    // wait for animation tiemouts / async setState calls
+    await setTimeout(undefined, () => {
       expect(screen.getByTestId('toast')).toHaveClass(
-        'Toast Toast--info is--hidden'
+        'Toast',
+        'Toast--info',
+        'is--hidden'
       );
-    }, 300);
+    });
   });
 
   test(`renders the correct icon for toast type="${value}"`, async () => {
@@ -109,7 +117,8 @@ Object.entries(toastTypes).forEach(([key, value]) => {
     const toast = screen.getByTestId('toast');
     expect(toast).toBeInTheDocument();
     expect(toast.childNodes[0].firstChild).toHaveClass(
-      `Icon Icon--${toastIcons[key as keyof typeof toastTypes]}`
+      'Icon',
+      `Icon--${toastIcons[key as keyof typeof toastTypes]}`
     );
   });
 
@@ -259,10 +268,11 @@ test('deactivates aria isolate on unmount', async () => {
 
   await user.click(screen.getByRole('button'));
 
-  setTimeout(() => {
+  // wait for animation timeouts / async setState calls
+  await setTimeout(undefined, () => {
     expect(isolator).toHaveBeenCalledTimes(1);
     expect(isolator).toHaveBeenCalledWith(false);
-  }, 100);
+  });
 });
 
 test('renders children within the "Toast__message-content" div', async () => {

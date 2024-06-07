@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.4.1](https://github.com/dequelabs/cauldron/compare/v6.4.0...v6.4.1) (2024-06-05)
+
+
+### Bug Fixes
+
+* **Combobox:** fix issue where autocomplete automatic does not fire selection event ([#1493](https://github.com/dequelabs/cauldron/issues/1493)) ([0f061da](https://github.com/dequelabs/cauldron/commit/0f061da64bba7fe5c48ac43b75c8c4877d67c25e))
+* **IconButton:** loosen polymorphic type to allow for any type of JSXElement ([#1494](https://github.com/dequelabs/cauldron/issues/1494)) ([0408555](https://github.com/dequelabs/cauldron/commit/040855523776cb753787654634a0cf2a1ebd30e0))
+* **react:** make focusOnInitialRender work without setTimeout ([#1486](https://github.com/dequelabs/cauldron/issues/1486)) ([fc280bd](https://github.com/dequelabs/cauldron/commit/fc280bd3433011c4c265c3f7ce8784a13fc7cfe0))
+* set `value` rather than `label` when using `onChange` and `onSelectionChange` with `Combobox` ([#1500](https://github.com/dequelabs/cauldron/issues/1500)) ([9defe04](https://github.com/dequelabs/cauldron/commit/9defe04ed5b2741201d6d6ce2036f3815a78a7aa))
+* **styles:** fix issue where field focus ring did not provide enough contrast ([#1489](https://github.com/dequelabs/cauldron/issues/1489)) ([adefb4a](https://github.com/dequelabs/cauldron/commit/adefb4a77a4e18172e92db1cccfae446a25d86ca))
+
+## [6.4.0](https://github.com/dequelabs/cauldron/compare/v6.3.2...v6.4.0) (2024-05-16)
+
+
+### Features
+
+* **react:** deprecate individual tooltip props for IconButton replacing with tooltipProps ([#1465](https://github.com/dequelabs/cauldron/issues/1465)) ([b5ed8b0](https://github.com/dequelabs/cauldron/commit/b5ed8b0dbe520c34ca46dd775194ee56e3d7a960))
+* **react:** support use of custom classNames with Toast component ([#1447](https://github.com/dequelabs/cauldron/issues/1447)) ([ea1aa6d](https://github.com/dequelabs/cauldron/commit/ea1aa6dc54e79d0c09817b7cff744802f52b196b))
+* **styles:** adjust button thin height to minimally be set to 24px ([#1420](https://github.com/dequelabs/cauldron/issues/1420)) ([8ee7748](https://github.com/dequelabs/cauldron/commit/8ee7748b840a11b845524bca9244165c96b154b6))
+* **styles:** allow arbitrary heading levels to be styled consistently for TwoColumnPanel headers ([#1454](https://github.com/dequelabs/cauldron/issues/1454)) ([3ee3378](https://github.com/dequelabs/cauldron/commit/3ee3378c33a4d027c6574b176208280b510cb312))
+
+
+### Bug Fixes
+
+* **react:** fix BreadcrumbLink type interface to correctly allow for polymorphic anchor components ([#1441](https://github.com/dequelabs/cauldron/issues/1441)) ([fd12436](https://github.com/dequelabs/cauldron/commit/fd12436069a6cfa025ce91c66892b23654262309))
+* **styles:** fix issue with text overflow leading to timeline details to be misaligned ([#1479](https://github.com/dequelabs/cauldron/issues/1479)) ([6b5e676](https://github.com/dequelabs/cauldron/commit/6b5e67668c07c32346f7b2647d8ecfbc2601f410))
+
 ### [6.3.2](https://github.com/dequelabs/cauldron/compare/v6.3.1...v6.3.2) (2024-04-03)
 
 
