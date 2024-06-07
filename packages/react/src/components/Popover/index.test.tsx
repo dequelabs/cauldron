@@ -26,19 +26,26 @@ const Wrapper = ({
   tooltipProps = {}
 }: {
   buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
-  tooltipProps?: Partial<PopoverProps>;
+  tooltipProps?: Omit<Partial<PopoverProps>, 'variant'>;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
+
   return (
     <React.Fragment>
       <button ref={ref} {...buttonProps}>
         button
       </button>
-      <Popover target={ref} show onClose={onClose} {...tooltipProps}>
+      <Popover
+        variant="custom"
+        aria-labelledby="test-popover-title"
+        target={ref}
+        show
+        onClose={onClose}
+        {...tooltipProps}
+      >
         Hello World
       </Popover>
-      <div data-test></div>
     </React.Fragment>
   );
 };
@@ -49,7 +56,13 @@ const WrapperPopoverWithElements = () => {
   return (
     <React.Fragment>
       <button ref={ref}>button</button>
-      <Popover target={ref} show onClose={onClose}>
+      <Popover
+        variant="custom"
+        aria-labelledby="test-popover-title"
+        target={ref}
+        show
+        onClose={onClose}
+      >
         <button data-testid="foo1">Foo1</button>
         <button data-testid="foo2">Foo2</button>
         <button data-testid="foo3">Foo3</button>
@@ -64,21 +77,24 @@ const WrapperPrompt = ({
   tooltipProps = {}
 }: {
   buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
-  tooltipProps?: Partial<PopoverProps>;
+  tooltipProps?: Omit<Partial<PopoverProps>, 'variant'>;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
+  const onApply = jest.fn();
+
   return (
     <React.Fragment>
       <button ref={ref} {...buttonProps}>
         button
       </button>
       <Popover
+        show
         variant="prompt"
         target={ref}
-        show
-        onClose={onClose}
         infoText="popover"
+        onApply={onApply}
+        onClose={onClose}
         {...tooltipProps}
       />
     </React.Fragment>
@@ -149,7 +165,7 @@ test('first element inside the popover container should have focus', async () =>
 });
 
 test('should render two buttons (Apply/Close) for prompt variant', async () => {
-  render(<Wrapper tooltipProps={{ variant: 'prompt' }} />);
+  render(<WrapperPrompt />);
   const closeBtn = screen.getByText('Close');
   const applyBtn = screen.getByText('Apply');
   expect(closeBtn).toBeInTheDocument();
@@ -158,18 +174,14 @@ test('should render two buttons (Apply/Close) for prompt variant', async () => {
 
 test('onClose should be called, when close button in prompt popover is clicked', async () => {
   const handleClose = jest.fn();
-  render(
-    <WrapperPrompt tooltipProps={{ variant: 'prompt', onClose: handleClose }} />
-  );
+  render(<WrapperPrompt tooltipProps={{ onClose: handleClose }} />);
   fireEvent.click(screen.getByText('Close'));
   await waitFor(() => expect(handleClose).toHaveBeenCalled());
 });
 
 test('onApply should be called, when apply button in prompt popover is clicked', async () => {
   const applyFunc = jest.fn();
-  render(
-    <WrapperPrompt tooltipProps={{ variant: 'prompt', onApply: applyFunc }} />
-  );
+  render(<WrapperPrompt tooltipProps={{ onApply: applyFunc }} />);
   fireEvent.click(screen.getByText('Apply'));
   await waitFor(() => expect(applyFunc).toHaveBeenCalled());
 });
@@ -177,11 +189,7 @@ test('onApply should be called, when apply button in prompt popover is clicked',
 test('text for apply/close buttons are rendered correct', async () => {
   const closeButtonText = 'Specific text to close popover';
   const applyButtonText = 'Specific text to apply popover';
-  render(
-    <WrapperPrompt
-      tooltipProps={{ variant: 'prompt', closeButtonText, applyButtonText }}
-    />
-  );
+  render(<WrapperPrompt tooltipProps={{ closeButtonText, applyButtonText }} />);
   expect(screen.getByText(closeButtonText)).toBeInTheDocument();
   expect(screen.getByText(applyButtonText)).toBeInTheDocument();
 });
@@ -193,7 +201,7 @@ test('variant="prompt" should return no axe violations', async () => {
 
 test('should return no axe violations', async () => {
   const { container } = render(
-    <Wrapper tooltipProps={{ variant: 'prompt', 'aria-label': 'popover' }} />
+    <WrapperPrompt tooltipProps={{ 'aria-label': 'popover' }} />
   );
   expect(await axe(container)).toHaveNoViolations();
 });
@@ -204,7 +212,14 @@ test('should use parent-provided ref', () => {
   const onClose = jest.fn();
 
   render(
-    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+    <Popover
+      variant="custom"
+      aria-labelledby="title-popover-title"
+      ref={parentRef}
+      target={ref}
+      show
+      onClose={onClose}
+    >
       Hello World
     </Popover>
   );
@@ -214,7 +229,7 @@ test('should use parent-provided ref', () => {
 });
 
 test('activates aria isolate on show', () => {
-  const parentRef = React.createRef();
+  const parentRef = React.createRef<HTMLDivElement>();
   const ref = React.createRef<HTMLButtonElement>();
   const onClose = jest.fn();
 
@@ -227,7 +242,14 @@ test('activates aria isolate on show', () => {
     .mockImplementation(deactivateFn);
 
   render(
-    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+    <Popover
+      variant="custom"
+      aria-labelledby="title-popover-title"
+      ref={parentRef}
+      target={ref}
+      show
+      onClose={onClose}
+    >
       Hello World
     </Popover>
   );
@@ -238,7 +260,7 @@ test('activates aria isolate on show', () => {
 });
 
 test('deactivates aria isolate on hide', () => {
-  const parentRef = React.createRef();
+  const parentRef = React.createRef<HTMLDivElement>();
   const ref = React.createRef<HTMLButtonElement>();
   const onClose = jest.fn();
   const activateFn = jest.fn();
@@ -250,7 +272,14 @@ test('deactivates aria isolate on hide', () => {
     .mockImplementation(deactivateFn);
 
   const { rerender } = render(
-    <Popover ref={parentRef} target={ref} show onClose={onClose}>
+    <Popover
+      variant="custom"
+      aria-labelledby="title-popover-title"
+      ref={parentRef}
+      target={ref}
+      show
+      onClose={onClose}
+    >
       Hello World
     </Popover>
   );
@@ -258,7 +287,14 @@ test('deactivates aria isolate on hide', () => {
   expect(activateFn).toBeCalled();
 
   rerender(
-    <Popover ref={parentRef} target={ref} show={false} onClose={onClose}>
+    <Popover
+      variant="custom"
+      aria-labelledby="title-popover-title"
+      ref={parentRef}
+      target={ref}
+      show={false}
+      onClose={onClose}
+    >
       Hello World
     </Popover>
   );
