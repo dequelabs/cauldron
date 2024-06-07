@@ -129,6 +129,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           key={option.key || index}
           id={`${id}-option-${index + 1}`}
           description={option.description}
+          value={option.value}
         >
           {option.label}
         </ComboboxOption>
@@ -239,6 +240,11 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             /* istanbul ignore next: default value */ '';
           setValue(stringValue);
           setSelectedValue(stringValue);
+          onSelectionChange?.({
+            target: activeDescendant.element,
+            value: stringValue,
+            previousValue: value
+          });
         }
       },
       [autocomplete, activeDescendant, onBlur]

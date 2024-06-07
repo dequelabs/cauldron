@@ -40,10 +40,7 @@ it('should add button role for custom components', () => {
   ) {
     return <div data-testid="custom" ref={ref} {...props}></div>;
   });
-  render(
-    // @ts-expect-error this technically should be allowed
-    <IconButton icon="pencil" label="Edit" as={CustomButton} />
-  );
+  render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
   expect(screen.getByTestId('custom')).toBeInTheDocument();
   expect(screen.getByTestId('custom')).toHaveAttribute('role', 'button');
   expect(screen.getByTestId('custom')).toHaveAttribute('tabIndex', '0');
@@ -121,15 +118,7 @@ test('should return no axe violations when rendered as CustomElement', async () 
   ) {
     return <div data-testid="custom" ref={ref} {...props}></div>;
   });
-  render(
-    <IconButton
-      icon="pencil"
-      label="Edit"
-      // @ts-expect-error this technically should be allowed
-      as={CustomButton}
-      href="/somewhere"
-    />
-  );
+  render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
   const results = await axe(screen.getByTestId('custom'));
   expect(results).toHaveNoViolations();
 });
