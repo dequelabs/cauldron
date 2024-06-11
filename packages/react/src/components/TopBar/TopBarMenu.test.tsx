@@ -123,7 +123,7 @@ test('should close menu with right key', () => {
   render(
     <MenuBar>
       <MenuItem>a</MenuItem>
-      <TopBarMenu {...defaultProps} data-testid="test-top-bar">
+      <TopBarMenu {...defaultProps}>
         Menu
         {optionsMenu}
       </TopBarMenu>
