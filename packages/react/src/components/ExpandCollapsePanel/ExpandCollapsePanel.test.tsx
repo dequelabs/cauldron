@@ -55,9 +55,8 @@ test('should render multiple children', () => {
 });
 
 test('should passthrough props', () => {
-  const props = { foo: 'bar' };
   render(
-    <ExpandCollapsePanel {...props}>
+    <ExpandCollapsePanel title="foo">
       <div data-testid="test-div" />
     </ExpandCollapsePanel>
   );
@@ -66,7 +65,7 @@ test('should passthrough props', () => {
   const parent = testDiv.parentElement;
 
   expect(parent).not.toBeNull();
-  expect(parent).toHaveAttribute('foo', 'bar');
+  expect(parent).toHaveAttribute('title', 'foo');
 });
 
 test('should have hidden content when collapsed', () => {
@@ -203,7 +202,7 @@ test('should not run close animations if timing is not set', async () => {
   });
 });
 
-test.only('should allow for controlled component', () => {
+test('should allow for controlled component', () => {
   render(
     <ExpandCollapsePanel animationTiming={0} open>
       <PanelTrigger />
