@@ -7,9 +7,12 @@ const config: Config = {
     '**/__tests__/src/**/*.js',
     '**/__tests__/demo/**/*.js',
     '**/src/components/**/*.test.tsx',
-    '**/src/utils/**/*.test.ts'
+    '**/src/utils/**/*.test.{ts,tsx}'
   ],
-  collectCoverageFrom: ['<rootDir>/src/components/**/*.{tsx,ts}'],
+  collectCoverageFrom: [
+    '<rootDir>/src/components/**/*.{tsx,ts}',
+    '<rootDir>/src/utils/**/*.{tsx,ts}'
+  ],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__tests__/styleMock.js',
     'react-syntax-highlighter/dist/esm/light':
