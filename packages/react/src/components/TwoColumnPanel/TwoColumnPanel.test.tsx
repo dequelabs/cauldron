@@ -8,7 +8,8 @@ import {
 } from './';
 import SkipLink from '../SkipLink';
 import axe from '../../axe';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const sandbox = createSandbox();
 const mediaAddEventListener = sandbox.stub();
@@ -150,7 +151,7 @@ test('should render collapsed TwoColumnPanel', () => {
   expect(columnRightToggleButton).not.toBeInTheDocument();
 });
 
-test('should collapse panel when prefers-reduced-motion: reduce is set', () => {
+test('should collapse panel when prefers-reduced-motion: reduce is set', async () => {
   matchMediaStub.withArgs('(prefers-reduced-motion: reduce)').returns({
     matches: true,
     addEventListener: noop,
@@ -192,7 +193,7 @@ test('should collapse panel when prefers-reduced-motion: reduce is set', () => {
     </TwoColumnPanel>
   );
 
-  fireEvent.click(
+  await userEvent.click(
     within(screen.getByTestId('column-right')).getByRole('button', {
       name: /test-hide-panel/
     })
