@@ -246,7 +246,7 @@ test('should click child links with click events', () => {
   expect(onClick).toBeCalledTimes(1);
 });
 
-test('should focus child links with keydown events', () => {
+test('should call onClick handler when Enter key is pressed on a link', () => {
   const onClick = jest.fn();
   const event = new KeyboardEvent('keydown', {
     key: 'Enter',
