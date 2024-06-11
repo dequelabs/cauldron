@@ -6,13 +6,12 @@ let toast: HTMLElement | null;
 let targets: HTMLElement[];
 
 beforeEach(() => {
-  {
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-  }
   const { container } = render(
     <div>
       <div className="toaster"></div>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
       <div className="zero" tabIndex={0}></div>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
       <div className="minus-one" tabIndex={-1}></div>
     </div>
   );
