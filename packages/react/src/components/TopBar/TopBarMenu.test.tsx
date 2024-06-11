@@ -36,29 +36,30 @@ test('should render children', () => {
 });
 
 test('should pass-through props', () => {
-  const restProps = { foo: 'bar' };
   render(
-    <TopBarMenu data-testid="test-top-bar" {...defaultProps} {...restProps}>
+    <TopBarMenu {...defaultProps} title="foo">
+      Menu
       {optionsMenu}
     </TopBarMenu>
   );
 
-  const menu = screen.getByTestId('test-top-bar');
-  expect(menu).toHaveAttribute('foo', 'bar');
+  const menu = screen.getByRole('menuitem', { name: /menu/i });
+  expect(menu).toHaveAttribute('title', 'foo');
 });
 
 test('should open menu with down key', () => {
   render(
     <MenuBar>
       <MenuItem>a</MenuItem>
-      <TopBarMenu {...defaultProps} data-testid="test-top-bar">
+      <TopBarMenu {...defaultProps}>
+        Menu
         {optionsMenu}
       </TopBarMenu>
       <MenuItem>b</MenuItem>
     </MenuBar>
   );
 
-  const menu = screen.getByTestId('test-top-bar');
+  const menu = screen.getByRole('menuitem', { name: /menu/i });
 
   fireEvent.keyDown(menu, {
     key: downKey,
@@ -73,18 +74,15 @@ test('should call onKeyDown with down key', () => {
   render(
     <MenuBar>
       <MenuItem>a</MenuItem>
-      <TopBarMenu
-        {...defaultProps}
-        data-testid="test-top-bar"
-        onKeyDown={handleKeyDown}
-      >
+      <TopBarMenu {...defaultProps} onKeyDown={handleKeyDown}>
+        Menu
         {optionsMenu}
       </TopBarMenu>
       <MenuItem>b</MenuItem>
     </MenuBar>
   );
 
-  const menu = screen.getByTestId('test-top-bar');
+  const menu = screen.getByRole('menuitem', { name: /menu/i });
 
   fireEvent.keyDown(menu, {
     key: downKey,
@@ -98,14 +96,15 @@ test('should close menu with left key', () => {
   render(
     <MenuBar>
       <MenuItem>a</MenuItem>
-      <TopBarMenu {...defaultProps} data-testid="test-top-bar">
+      <TopBarMenu {...defaultProps}>
+        Menu
         {optionsMenu}
       </TopBarMenu>
       <MenuItem>b</MenuItem>
     </MenuBar>
   );
 
-  const menu = screen.getByTestId('test-top-bar');
+  const menu = screen.getByRole('menuitem', { name: /menu/i });
 
   // open menu
   fireEvent.click(menu);
@@ -125,13 +124,14 @@ test('should close menu with right key', () => {
     <MenuBar>
       <MenuItem>a</MenuItem>
       <TopBarMenu {...defaultProps} data-testid="test-top-bar">
+        Menu
         {optionsMenu}
       </TopBarMenu>
       <MenuItem>b</MenuItem>
     </MenuBar>
   );
 
-  const menu = screen.getByTestId('test-top-bar');
+  const menu = screen.getByRole('menuitem', { name: /menu/i });
 
   // open menu
   fireEvent.click(menu);
