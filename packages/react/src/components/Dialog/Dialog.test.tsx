@@ -98,8 +98,7 @@ test('should have accessible name from heading', () => {
   );
 });
 
-// TODO: Figure out why this test doesn't run
-test.skip('should call "onClose" when clicked outside', async () => {
+test('should call "onClose" when clicked outside', async () => {
   const user = userEvent.setup();
   const onClose = spy();
   render(
@@ -121,7 +120,6 @@ test('should not call "onClose" when dialog is not currently shown', async () =>
       Test Dialog
     </Dialog>
   );
-
   await user.click(document.body);
   await waitFor(() => expect(onClose.notCalled).toBeTruthy());
 });

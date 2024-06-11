@@ -118,6 +118,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     const Dialog = (
       <FocusTrap
         focusTrapOptions={{
+          allowOutsideClick: true,
           onDeactivate: this.close,
           escapeDeactivates: !forceAction,
           fallbackFocus: '.Dialog__heading'
