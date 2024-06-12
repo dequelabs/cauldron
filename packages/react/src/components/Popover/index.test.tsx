@@ -4,14 +4,11 @@ import axe from '../../axe';
 import Popover from '../Popover';
 import AriaIsolate from '../../utils/aria-isolate';
 
-import type { PopoverProps } from '../Popover';
-
 let wrapperNode: HTMLDivElement | null;
 beforeEach(() => {
   wrapperNode = document.createElement('div');
   wrapperNode.innerHTML = `
-    <button data-test>Click Me!</button>
-    <div></div>
+    <button>Click Me!</button>
   `;
   document.body.appendChild(wrapperNode);
 });
@@ -26,13 +23,13 @@ const Wrapper = ({
   tooltipProps = {}
 }: {
   buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
-  tooltipProps?: Omit<Partial<PopoverProps>, 'variant'>;
+  tooltipProps?: Omit<Partial<React.ComponentProps<typeof Popover>>, 'variant'>;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
 
   return (
-    <React.Fragment>
+    <>
       <button ref={ref} {...buttonProps}>
         button
       </button>
@@ -46,7 +43,7 @@ const Wrapper = ({
       >
         Hello World
       </Popover>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -67,7 +64,7 @@ const WrapperPopoverWithElements = () => {
         <button data-testid="foo2">Foo2</button>
         <button data-testid="foo3">Foo3</button>
       </Popover>
-      <div data-testid></div>
+      <div>Hello World!</div>
     </React.Fragment>
   );
 };
@@ -77,7 +74,7 @@ const WrapperPrompt = ({
   tooltipProps = {}
 }: {
   buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
-  tooltipProps?: Omit<Partial<PopoverProps>, 'variant'>;
+  tooltipProps?: Omit<Partial<React.ComponentProps<typeof Popover>>, 'variant'>;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
@@ -85,9 +82,7 @@ const WrapperPrompt = ({
 
   return (
     <React.Fragment>
-      <button ref={ref} {...buttonProps}>
-        button
-      </button>
+      <button {...buttonProps}>button</button>
       <Popover
         show
         variant="prompt"
@@ -108,7 +103,7 @@ test('renders without blowing up', async () => {
 
 test('should auto-generate id', async () => {
   render(<Wrapper />);
-  const popover = screen.getByText('Hello World').closest('.Popover');
+  const popover = screen.getByRole('dialog');
   const button = screen.getByText('button');
   expect(popover).toBeTruthy();
   const id = popover?.getAttribute('id');
@@ -118,16 +113,28 @@ test('should auto-generate id', async () => {
 
 test('should attach attribute aria-expanded correctly based on shown state', async () => {
   const { rerender } = render(<Wrapper />);
-  const button = screen.getByText('button');
-  expect(button.getAttribute('aria-expanded')).toBe('true');
 
+  expect(
+    screen.queryByRole('button', {
+      name: 'button',
+      hidden: true,
+      expanded: true
+    })
+  ).toBeInTheDocument();
   rerender(<Wrapper tooltipProps={{ show: false }} />);
-  expect(button.getAttribute('aria-expanded')).toBe('false');
+  expect(
+    screen.queryByRole('button', {
+      name: 'button',
+      hidden: false,
+      expanded: false
+    })
+  ).toBeInTheDocument();
 });
 
 test('should support adding className to tooltip', async () => {
   render(<Wrapper tooltipProps={{ className: 'foo' }} />);
-  const popover = screen.getByText('Hello World').closest('.Popover');
+  const popover = screen.getByRole('dialog');
+  expect(popover).toBeTruthy();
   expect(popover).toHaveClass('Popover');
   expect(popover).toHaveClass('foo');
 });
@@ -136,7 +143,7 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   const buttonProps = { 'aria-describedby': 'foo popoverid' };
   const tooltipProps = { id: 'popoverid' };
   render(<Wrapper buttonProps={buttonProps} tooltipProps={tooltipProps} />);
-  const popover = screen.getByText('Hello World').closest('.Popover');
+  const popover = screen.getByRole('dialog');
   const button = screen.getByText('button');
   expect(popover).toHaveAttribute('id', 'popoverid');
   expect(button.getAttribute('aria-describedby')).toEqual('foo popoverid');
@@ -160,7 +167,8 @@ test('should call onClose on clicking outside', async () => {
 
 test('first element inside the popover container should have focus', async () => {
   render(<WrapperPopoverWithElements />);
-  const firstElement = screen.getByTestId('foo1');
+
+  const firstElement = await screen.findByTestId('foo1');
   await waitFor(() => expect(firstElement).toHaveFocus());
 });
 
@@ -223,9 +231,8 @@ test('should use parent-provided ref', () => {
       Hello World
     </Popover>
   );
-  expect(parentRef.current).toBe(
-    screen.getByText('Hello World').closest('.Popover')
-  );
+
+  expect(parentRef.current).toBe(screen.getByRole('dialog'));
 });
 
 test('activates aria isolate on show', () => {
@@ -305,7 +312,8 @@ test('deactivates aria isolate on hide', () => {
 
 test('aria-labelledby is set correctly for prompt variant', async () => {
   render(<WrapperPrompt />);
-  const popover = screen.getByText('popover').closest('.Popover');
+  const popover = screen.getByRole('dialog', { name: /popover/i });
+  expect(popover).toBeTruthy();
   const id = popover?.getAttribute('id');
   expect(`${id}-label`).toEqual(popover?.getAttribute('aria-labelledby'));
 });
