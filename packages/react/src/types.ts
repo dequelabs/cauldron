@@ -1,4 +1,4 @@
-import type { ReactElement, ReactFragment, ReactPortal } from 'react';
+import type { ReactElement, ReactPortal } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Cauldron {
@@ -11,9 +11,4 @@ export namespace Cauldron {
  * This type is meant to ensure that a prop can actually be rendered as content.
  * Explicit equivalent of Exclude<ReactNode, boolean | null | undefined>
  */
-export type ContentNode =
-  | string
-  | number
-  // | ReactFragment
-  | ReactPortal
-  | ReactElement;
+export type ContentNode = string | number | ReactPortal | ReactElement;
