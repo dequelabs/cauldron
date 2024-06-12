@@ -16,8 +16,7 @@ import {
 
 export interface IconButtonProps
   extends PolymorphicProps<
-    React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>,
-    'button' | 'a'
+    React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>
   > {
   icon: IconType;
   label: React.ReactNode;
@@ -112,7 +111,6 @@ const IconButton = forwardRef(
             'IconButton--error': variant === 'error',
             'IconButton--large': large
           })}
-          // @ts-expect-error the concrete type is unknown, so HTMLElement is expected
           ref={internalRef}
           disabled={disabled}
           tabIndex={disabled ? -1 : tabIndex}
@@ -130,7 +128,7 @@ const IconButton = forwardRef(
       </React.Fragment>
     );
   }
-) as PolymorphicComponent<IconButtonProps, 'button' | 'a'>;
+) as PolymorphicComponent<IconButtonProps>;
 
 IconButton.displayName = 'IconButton';
 
