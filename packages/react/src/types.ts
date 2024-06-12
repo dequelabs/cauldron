@@ -1,4 +1,4 @@
-import type { ReactElement, Fragment, ReactPortal } from 'react';
+import type { ReactElement, ReactFragment, ReactPortal } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Cauldron {
@@ -14,6 +14,6 @@ export namespace Cauldron {
 export type ContentNode =
   | string
   | number
-  | typeof Fragment
+  // | ReactFragment
   | ReactPortal
   | ReactElement;
