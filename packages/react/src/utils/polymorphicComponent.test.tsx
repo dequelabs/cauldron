@@ -143,7 +143,3 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
     bananas
   </ConstrainedComponent>
 );
-
-test('polymorphicComponent', () => {
-  // avoid `yarn test` error (Your test suite must contain at least one test.)
-});
