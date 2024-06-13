@@ -117,7 +117,6 @@ export default class TopBar extends React.Component<
     }
 
     e.preventDefault();
-
     let adjacentIndex = key === 'left' ? currentIndex - 1 : currentIndex + 1;
     // circular arrow focus
     if (adjacentIndex === -1) {
