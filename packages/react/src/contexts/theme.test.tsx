@@ -72,7 +72,7 @@ test('it provides toggleTheme functionality', () => {
 
 test('handles mutations', () => {
   renderProvider();
-  expect(observe).toHaveBeenCalled;
+  expect(observe).toHaveBeenCalled();
   act(() => {
     document.body.classList.add('cauldron--theme-dark');
   });
