@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  getByText
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { default as ExpandCollapsePanel, PanelTrigger } from './';
 import { SinonStub, createSandbox } from 'sinon';
 import * as stylesheets from '../../utils/stylesheets';
@@ -34,7 +28,7 @@ export const isVisible = (element: HTMLElement): boolean => {
   if (!node) {
     throw new Error('Element has no parent');
   }
-  // Assuming that the 'is--hidden' class is used to hide the element0и
+  // Assuming that the 'is--hidden' class is used to hide the element
   return !node.classList.contains('is--hidden');
 };
 
@@ -131,9 +125,9 @@ test('trigger should open panel collapsed panel', async () => {
 
   fireEvent.click(screen.getByRole('button', { name: /click me/i }));
 
-  await waitFor(() => {
-    expect(isVisible(screen.getByText(/test div/i))).toBeTruthy();
-  });
+  await waitFor(() =>
+    expect(isVisible(screen.getByText(/test div/i))).toBeTruthy()
+  );
 });
 
 test('trigger should close expanded panel', async () => {
@@ -148,9 +142,7 @@ test('trigger should close expanded panel', async () => {
 
   rerender(<Component isOpen={false} />);
 
-  await waitFor(() => {
-    expect(isVisible(getByText(/test div/i))).toBeFalsy();
-  });
+  await waitFor(() => expect(isVisible(getByText(/test div/i))).toBeFalsy());
 });
 
 test('should clean up injected styletags', async () => {
@@ -159,17 +151,19 @@ test('should clean up injected styletags', async () => {
   const { unmount } = render(
     <ExpandCollapsePanel animationTiming={1}>
       <PanelTrigger>Click Me</PanelTrigger>
-      <div />
+      <div>Test Div</div>
     </ExpandCollapsePanel>
   );
 
-  fireEvent.click(screen.getByRole('button', { name: 'Click Me' }));
+  fireEvent.click(screen.getByRole('button', { name: /click me/i }));
+
+  await waitFor(() =>
+    expect(isVisible(screen.getByText(/test div/i))).toBeTruthy()
+  );
 
   unmount();
 
-  await waitFor(() => {
-    expect(cleanup).toBeCalled();
-  });
+  await waitFor(() => expect(cleanup).toBeCalled());
 });
 
 test('should not run open animations if timing is not set', async () => {
@@ -182,12 +176,15 @@ test('should not run open animations if timing is not set', async () => {
     </ExpandCollapsePanel>
   );
 
-  fireEvent.click(screen.getByRole('button', { name: 'Click Me' }));
+  expect(isVisible(screen.getByText(/test div/i))).toBeFalsy();
 
-  await waitFor(() => {
-    expect(setStyle).not.toBeCalled();
-    expect(isVisible(screen.getByText(/test div/i))).toBeTruthy();
-  });
+  fireEvent.click(screen.getByRole('button', { name: /click me/i }));
+
+  await waitFor(() =>
+    expect(isVisible(screen.getByText(/test div/i))).toBeTruthy()
+  );
+
+  expect(setStyle).not.toBeCalled();
 });
 
 test('should not run close animations if timing is not set', async () => {
@@ -200,12 +197,13 @@ test('should not run close animations if timing is not set', async () => {
     </ExpandCollapsePanel>
   );
 
-  fireEvent.doubleClick(screen.getByRole('button', { name: 'Click Me' }));
+  fireEvent.click(screen.getByRole('button', { name: /click me/i }));
 
-  await waitFor(() => {
-    expect(setStyle).not.toBeCalled();
-    expect(isVisible(screen.getByText(/test div/i))).toBeFalsy();
-  });
+  await waitFor(() =>
+    expect(isVisible(screen.getByText(/test div/i))).toBeFalsy()
+  );
+
+  expect(setStyle).not.toBeCalled();
 });
 
 test('should allow for controlled component', () => {
@@ -236,16 +234,12 @@ test('should not run open/close animations when prefers reduced motion is enable
   // open animation
   fireEvent.click(screen.getByRole('button', { name: /click me/i }));
 
-  await waitFor(() => {
-    expect(setStyle).not.toBeCalled();
-    expect(isVisible(screen.getByText(/foo/i))).toBeTruthy();
-  });
+  await waitFor(() => expect(isVisible(screen.getByText(/foo/i))).toBeTruthy());
+  expect(setStyle).not.toBeCalled();
 
   // close animation
   fireEvent.click(screen.getByRole('button', { name: /click me/i }));
 
-  await waitFor(() => {
-    expect(setStyle).not.toBeCalled();
-    expect(isVisible(screen.getByText(/foo/i))).toBeFalsy();
-  });
+  await waitFor(() => expect(isVisible(screen.getByText(/foo/i))).toBeFalsy());
+  expect(setStyle).not.toBeCalled();
 });
