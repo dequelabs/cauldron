@@ -197,7 +197,7 @@ test('should not run close animations if timing is not set', async () => {
     </ExpandCollapsePanel>
   );
 
-  fireEvent.click(screen.getByRole('button', { name: /click me/i }));
+  fireEvent.doubleClick(screen.getByRole('button', { name: /click me/i }));
 
   await waitFor(() =>
     expect(isVisible(screen.getByText(/test div/i))).toBeFalsy()
