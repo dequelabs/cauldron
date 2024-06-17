@@ -30,18 +30,21 @@ const Wrapper = ({
 
   return (
     <>
+      <h2 id="popover-title">Popover title</h2>
       <button ref={ref} {...buttonProps}>
         button
       </button>
       <Popover
         variant="custom"
-        aria-labelledby="test-popover-title"
-        target={ref}
         show
+        target={ref}
         onClose={onClose}
+        aria-labelledby="popover-title"
         {...tooltipProps}
       >
-        Hello World
+        <div>
+          <span>Popover content</span>
+        </div>
       </Popover>
     </>
   );
@@ -60,11 +63,13 @@ const WrapperPopoverWithElements = () => {
         show
         onClose={onClose}
       >
-        <button data-testid="foo1">Foo1</button>
-        <button data-testid="foo2">Foo2</button>
-        <button data-testid="foo3">Foo3</button>
+        <div>
+          <h2 id="test-popover-title">Popover title</h2>
+          <button data-testid="foo1">Foo1</button>
+          <button data-testid="foo2">Foo2</button>
+          <button data-testid="foo3">Foo3</button>
+        </div>
       </Popover>
-      <div>Hello World!</div>
     </React.Fragment>
   );
 };
@@ -87,7 +92,7 @@ const WrapperPrompt = ({
         show
         variant="prompt"
         target={ref}
-        infoText="popover"
+        infoText="popover info text"
         onApply={onApply}
         onClose={onClose}
         {...tooltipProps}
@@ -98,7 +103,7 @@ const WrapperPrompt = ({
 
 test('renders without blowing up', async () => {
   render(<Wrapper />);
-  expect(screen.getByText('Hello World')).toBeTruthy();
+  expect(screen.getByText('Popover content')).toBeTruthy();
 });
 
 test('should auto-generate id', async () => {
@@ -203,15 +208,97 @@ test('text for apply/close buttons are rendered correct', async () => {
 });
 
 test('variant="prompt" should return no axe violations', async () => {
-  const { container } = render(<WrapperPrompt />);
-  expect(await axe(container)).toHaveNoViolations();
+  const { baseElement } = render(<WrapperPrompt />);
+  expect(await axe(baseElement)).toHaveNoViolations();
 });
 
-test('should return no axe violations', async () => {
-  const { container } = render(
+test('should return no axe violations when aria-label provided for variant="prompt"', async () => {
+  const { baseElement } = render(
     <WrapperPrompt tooltipProps={{ 'aria-label': 'popover' }} />
   );
-  expect(await axe(container)).toHaveNoViolations();
+  expect(await axe(baseElement)).toHaveNoViolations();
+});
+
+test('should return no axe violations when aria-label provided for variant="custom"', async () => {
+  const Component = () => {
+    const onClose = jest.fn();
+    const target = useRef<HTMLButtonElement>(null);
+
+    return (
+      <Popover
+        variant="custom"
+        aria-label="popover"
+        show
+        target={target}
+        onClose={onClose}
+      >
+        <div>
+          <h2 id="popover-title">Popover Title</h2>
+          <p>Popover content</p>
+        </div>
+      </Popover>
+    );
+  };
+
+  const { baseElement } = render(<Component />);
+
+  expect(await axe(baseElement)).toHaveNoViolations();
+});
+
+test('should have no axe violations when aria-labelledby provided for variant="custom"', async () => {
+  const Component = () => {
+    const onClose = jest.fn();
+    const target = useRef<HTMLButtonElement>(null);
+
+    return (
+      <>
+        <h2 id="popover-title">Popover Title</h2>
+        <Popover
+          variant="custom"
+          aria-labelledby="popover-title"
+          show
+          target={target}
+          onClose={onClose}
+        >
+          <div>
+            <p>Popover content</p>
+          </div>
+        </Popover>
+      </>
+    );
+  };
+
+  const { baseElement } = render(<Component />);
+  expect(await axe(baseElement)).toHaveNoViolations();
+});
+
+test('should have no axe violations for prompt variant', async () => {
+  const { baseElement } = render(<WrapperPrompt />);
+  expect(await axe(baseElement)).toHaveNoViolations();
+});
+
+test('aria-labelleddby should exist for variant="custom"', async () => {
+  render(<Wrapper />);
+
+  const popover = screen.getByRole('dialog');
+  const ariaLabelledById = popover.getAttribute('aria-labelledby');
+
+  expect(ariaLabelledById).toBeTruthy();
+});
+
+test('aria-labelleddby should not exist if aria-label provided for variant="prompt"', async () => {
+  render(
+    <WrapperPrompt
+      tooltipProps={{
+        'aria-label': 'test-popover-title'
+      }}
+    />
+  );
+
+  const popover = screen.getByRole('dialog');
+  const ariaLabelledById = popover.getAttribute('aria-labelledby');
+
+  expect(ariaLabelledById).toBeNull();
 });
 
 test('should use parent-provided ref', () => {
