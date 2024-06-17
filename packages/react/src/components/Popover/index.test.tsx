@@ -87,7 +87,7 @@ const WrapperPrompt = ({
         show
         variant="prompt"
         target={ref}
-        infoText="popover"
+        infoText="popover info text"
         onApply={onApply}
         onClose={onClose}
         {...tooltipProps}
@@ -207,11 +207,52 @@ test('variant="prompt" should return no axe violations', async () => {
   expect(await axe(container)).toHaveNoViolations();
 });
 
-test('should return no axe violations', async () => {
+test('should return no axe violations when aria-label provided for variant="prompt"', async () => {
   const { container } = render(
     <WrapperPrompt tooltipProps={{ 'aria-label': 'popover' }} />
   );
   expect(await axe(container)).toHaveNoViolations();
+});
+
+test('should return no axe violations when aria-label provided for variant="custom"', async () => {
+  const { container } = render(
+    <WrapperPrompt tooltipProps={{ 'aria-label': 'popover' }} />
+  );
+  expect(await axe(container)).toHaveNoViolations();
+});
+
+test('should have no axe violations for custom variant', async () => {
+  const { container } = render(<Wrapper />);
+  expect(await axe(container)).toHaveNoViolations();
+});
+
+test('should have no axe violations for prompt variant', async () => {
+  const { container } = render(<WrapperPrompt />);
+  expect(await axe(container)).toHaveNoViolations();
+});
+
+test('aria-labelleddby should exist for variant="custom"', async () => {
+  render(<Wrapper />);
+
+  const popover = screen.getByRole('dialog');
+  const ariaLabelledById = popover.getAttribute('aria-labelledby');
+
+  expect(ariaLabelledById).toBeTruthy();
+});
+
+test('aria-labelleddby should not exist if aria-label provided for variant="prompt"', async () => {
+  render(
+    <WrapperPrompt
+      tooltipProps={{
+        'aria-label': 'test-popover-title'
+      }}
+    />
+  );
+
+  const popover = screen.getByRole('dialog');
+  const ariaLabelledById = popover.getAttribute('aria-labelledby');
+
+  expect(ariaLabelledById).toBeNull();
 });
 
 test('should use parent-provided ref', () => {
