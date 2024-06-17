@@ -8,7 +8,11 @@ import { axe } from 'jest-axe';
 const user = userEvent.setup();
 
 test('clicks first direct child link given a click', async () => {
-  const onClick = sinon.spy();
+  const onClick = sinon.spy(
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      event.preventDefault(); // Prevent default navigation behavior
+    }
+  );
   render(
     <MenuItem>
       <a href="/foo" onClick={onClick}>
@@ -17,8 +21,10 @@ test('clicks first direct child link given a click', async () => {
     </MenuItem>
   );
 
+  const link = screen.getByRole('link', { name: 'Foo' });
+
   expect(onClick.calledOnce).toBeFalsy();
-  await user.click(screen.getByRole('link', { name: 'Foo' }));
+  await userEvent.click(link);
   expect(onClick.calledOnce).toBeTruthy();
 });
 
