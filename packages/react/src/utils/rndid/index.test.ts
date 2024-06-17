@@ -1,4 +1,4 @@
-import rndid from 'src/utils/rndid';
+import rndid from './';
 
 test('returns a unique string', () => {
   let hasDuplicates = false;
