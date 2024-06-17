@@ -1,12 +1,6 @@
-function injectStyleTag(content?: string): HTMLStyleElement {
-  const tag = document.createElement('style');
+import { injectStyleTag, setStyle, removeStyleTag } from '../stylesheets';
 
-  if (content) {
-    tag.textContent = content;
-  }
-  document.head.appendChild(tag);
-  return tag;
-}
+const cssString = '.foo { background: #000;';
 
 describe('Stylesheet Utilities', () => {
   afterEach(() => {
@@ -15,23 +9,21 @@ describe('Stylesheet Utilities', () => {
 
   test('should inject style tag in head', () => {
     const tag = injectStyleTag();
+
     expect(document.head.querySelector('style')).toBe(tag);
   });
 
   test('should append cssString to style tag in head', () => {
-    const cssString = '.foo { background: #000; }';
-    const tag = injectStyleTag(cssString);
+    const tag = injectStyleTag();
+    setStyle(tag, cssString);
+
     expect(tag).toHaveTextContent(cssString);
   });
 
   test('remove style tag from head', () => {
-    const tag = injectStyleTag('.foo { background: #000; }');
-
-    expect(tag).toBeInTheDocument();
-
-    if (tag.parentNode) {
-      tag.parentNode.removeChild(tag);
-    }
+    const tag = injectStyleTag();
+    setStyle(tag, cssString);
+    removeStyleTag(tag);
 
     expect(document.head.querySelectorAll('style').length).toBe(0);
   });
