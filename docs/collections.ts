@@ -38,6 +38,7 @@ const collections: Collections = (require as any)
           default: Component,
           title,
           path,
+          frontmatter,
           ...props
         } = require(`./pages/${name}.mdx`);
         const component = {
@@ -46,6 +47,7 @@ const collections: Collections = (require as any)
           Component,
           path: path || `/${name}`,
           filepath,
+          ...frontmatter,
           ...props
         };
         collections.pages.push(component);
@@ -55,6 +57,7 @@ const collections: Collections = (require as any)
           default: Component,
           title,
           path,
+          frontmatter,
           ...props
         } = require(`./pages/components/${name}.mdx`);
         const component = {
@@ -63,6 +66,7 @@ const collections: Collections = (require as any)
           Component,
           path: path || `/components/${name}`,
           filepath,
+          ...frontmatter,
           ...props
         };
         collections.components.push(component);
@@ -72,6 +76,7 @@ const collections: Collections = (require as any)
           default: Component,
           title,
           path,
+          frontmatter,
           ...props
         } = require(`./pages/foundations/${name}.mdx`);
         const component = {
@@ -80,6 +85,7 @@ const collections: Collections = (require as any)
           Component,
           path: path || `/foundations/${name}`,
           filepath,
+          ...frontmatter,
           ...props
         };
         collections.foundations.push(component);
