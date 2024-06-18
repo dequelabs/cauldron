@@ -24,3 +24,7 @@ updates:
         patterns:
           - "playwright"
           - "@playwright/*"
+    ignore:
+      # Prevent updates to ESM-only versions
+      - dependency-name: 'log-symbols'
+        versions: ['>=5.0.0']
