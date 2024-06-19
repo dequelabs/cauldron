@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { default as ExpandCollapsePanel, PanelTrigger } from './';
 import { SinonStub, createSandbox } from 'sinon';
+import axe from '../../axe';
 import * as stylesheets from '../../utils/stylesheets';
 
 const sandbox = createSandbox();
@@ -242,4 +243,16 @@ test('should not run open/close animations when prefers reduced motion is enable
 
   await waitFor(() => expect(isVisible(screen.getByText(/foo/i))).toBeFalsy());
   expect(setStyle).not.toBeCalled();
+});
+
+test('should return no axe violations', async () => {
+  const { container } = render(
+    <ExpandCollapsePanel animationTiming={500}>
+      <PanelTrigger>Click Me</PanelTrigger>
+      <div>foo</div>
+    </ExpandCollapsePanel>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
