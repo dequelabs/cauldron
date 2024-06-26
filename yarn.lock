@@ -5356,10 +5356,10 @@ fontsource-lato@^4.0.0:
   resolved "https://registry.yarnpkg.com/fontsource-lato/-/fontsource-lato-4.0.0.tgz#cdd93644f12ed4c326f84d871cef7b3732cd801e"
   integrity sha512-YviJ8Dh/Mk5IDbnrcWwolx4kRFJOEYvzWoFkBtjebj8mXocIh7RVtk31IdRAW7/ZNb6oOPm2WtE1gpBvTRsN7g==
 
-fontsource-roboto@^3.0.3:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-3.1.5.tgz#d5da8bac968db7911e20fd2fb6c227d405f86cba"
-  integrity sha512-DXSE7/F/6AsKcRJX4VSi3bGrEx0xiaqieeV2W7UH9JFk6tt1U86NoWwy2iNPoUzGtEyQsasilwhTrMJm7wM+Ew==
+fontsource-roboto@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-4.0.0.tgz#35eacd4fb8d90199053c0eec9b34a57fb79cd820"
+  integrity sha512-zD6L8nvdWRcwSgp4ojxFchG+MPj8kXXQKDEAH9bfhbxy+lkpvpC1WgAK0lCa4dwobv+hvAe0uyHaawcgH7WH/g==
 
 for-each@^0.3.3:
   version "0.3.3"
