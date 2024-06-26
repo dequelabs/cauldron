@@ -164,7 +164,7 @@ test('should close menu when click outside event occurs', () => {
 
 test('should return no axe violations when hidden', async () => {
   const { container } = render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu trigger={trigger} show={false}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
