@@ -53,7 +53,7 @@
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@fontsource/lato": "^4.5.0",
-    "@fontsource/pt-mono": "^4.5.0",
+    "@fontsource/pt-mono": "^5.0.13",
     "@fontsource/roboto": "^4.5.1",
     "@mdx-js/loader": "^2.3.0",
     "@playwright/experimental-ct-react17": "^1.45.0",
