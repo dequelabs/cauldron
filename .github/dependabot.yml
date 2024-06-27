@@ -24,6 +24,10 @@ updates:
         patterns:
           - "playwright"
           - "@playwright/*"
+      update-babel:
+        patterns:
+          - "babel-*"
+          - "@babel/*"
     ignore:
       # Prevent updates to ESM-only versions
       - dependency-name: 'log-symbols'
