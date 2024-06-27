@@ -51,7 +51,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.22.5",
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.5",
+    "@babel/preset-typescript": "^7.24.7",
     "@fontsource/lato": "^4.5.0",
     "@fontsource/pt-mono": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
