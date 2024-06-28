@@ -1418,10 +1418,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.5.10.tgz#1ab3d33282e605886e4a8b4c32b1f230a4cb5ea6"
   integrity sha512-2hYR6r661Cq9B8zugtu6yxuOKqrVhAgfOSaPSq8XoxbC4ebsl0KOTy/vPoP+9U7JuQVLfrmikirW4a9Z0nDUug==
 
-"@fontsource/pt-mono@^4.5.0":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-4.5.11.tgz#5f2db9d4184571507b46499ce5a77bba68d5477e"
-  integrity sha512-WS5IuinkjjzMHSpevPdAle99NCVfodZsIzF1oX21zRaoWvqW0fsFzoKgJ0qpx9xXWHIOdkyJLn1xB7iCkCD7+Q==
+"@fontsource/pt-mono@^5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.0.13.tgz#6bd0a829c003ac3023005aeb2bc44f2efab3a7fb"
+  integrity sha512-NtMGff1LXR1pBfUtQThxKconIbAKXMiYVNwSUREEgYpSYuV+N0KpBnvqeKUPgaWg+2i6Ht7orqn9CbqdIKQNIQ==
 
 "@fontsource/roboto@^4.5.1":
   version "4.5.8"
@@ -5350,16 +5350,6 @@ follow-redirects@^1.0.0:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
-
-fontsource-lato@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/fontsource-lato/-/fontsource-lato-4.0.0.tgz#cdd93644f12ed4c326f84d871cef7b3732cd801e"
-  integrity sha512-YviJ8Dh/Mk5IDbnrcWwolx4kRFJOEYvzWoFkBtjebj8mXocIh7RVtk31IdRAW7/ZNb6oOPm2WtE1gpBvTRsN7g==
-
-fontsource-roboto@^3.0.3:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-3.1.5.tgz#d5da8bac968db7911e20fd2fb6c227d405f86cba"
-  integrity sha512-DXSE7/F/6AsKcRJX4VSi3bGrEx0xiaqieeV2W7UH9JFk6tt1U86NoWwy2iNPoUzGtEyQsasilwhTrMJm7wM+Ew==
 
 for-each@^0.3.3:
   version "0.3.3"
