@@ -1,14 +1,14 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import {
-  default as OptionsMenu,
-  OptionsMenuItem
-} from 'src/components/OptionsMenu';
-import axe from '../../../axe';
+import { render, screen, fireEvent } from '@testing-library/react';
+import OptionsMenu, { OptionsMenuItem } from './';
+import axe from '../../axe';
 
 const defaultMenuProps = {
-  // eslint-disable-next-line react/display-name
-  trigger: props => (
+  trigger: (
+    props: React.JSX.IntrinsicAttributes &
+      React.ClassAttributes<HTMLButtonElement> &
+      React.ButtonHTMLAttributes<HTMLButtonElement>
+  ) => (
     <button {...props} type="button">
       thingy
     </button>
@@ -17,34 +17,43 @@ const defaultMenuProps = {
 
 test('should call onSelect when menuitem is clicked', () => {
   const onSelect = jest.fn();
-  const optionsMenu = mount(
+
+  render(
     <OptionsMenu {...defaultMenuProps}>
       <OptionsMenuItem onSelect={onSelect}>option 1</OptionsMenuItem>
     </OptionsMenu>
   );
-  optionsMenu.find('li').simulate('click', {});
+
+  fireEvent.click(screen.getByRole('menuitem'));
+
   expect(onSelect).toBeCalled();
 });
 
 test('should not call onSelect when menuitem is disabled', () => {
   const onSelect = jest.fn();
-  const optionsMenu = mount(
+
+  render(
     <OptionsMenu {...defaultMenuProps}>
       <OptionsMenuItem onSelect={onSelect} disabled>
         option 1
       </OptionsMenuItem>
     </OptionsMenu>
   );
-  optionsMenu.find('li').simulate('click');
+
+  fireEvent.click(screen.getByRole('menuitem'));
+
   expect(onSelect).not.toBeCalled();
 });
 
 test('should return no axe violations', async () => {
-  const optionsMenu = mount(
+  const onSelect = jest.fn();
+
+  const { container } = render(
     <OptionsMenu {...defaultMenuProps}>
-      <OptionsMenuItem>option 1</OptionsMenuItem>
-      <OptionsMenuItem>option 2</OptionsMenuItem>
+      <OptionsMenuItem onSelect={onSelect}>option 1</OptionsMenuItem>
+      <OptionsMenuItem onSelect={onSelect}>option 2</OptionsMenuItem>
     </OptionsMenu>
   );
-  expect(await axe(optionsMenu.html())).toHaveNoViolations();
+
+  expect(await axe(container)).toHaveNoViolations();
 });
