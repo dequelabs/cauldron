@@ -1,0 +1,6 @@
+.ImpactBadge {
+  height: var(--target-size-minimum);
+  border-radius: 999px;
+  background-color: var(--issue-serious);
+  display: inline-flex;
+}
