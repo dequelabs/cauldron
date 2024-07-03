@@ -7,11 +7,11 @@ This monorepo contains the following packages:
 - cauldron-styles ([`packages/styles`](packages/styles/README.md))
 - cauldron-react ([`packages/react`](packages/react/README.md))
 
-It also contains the documentation / demo app (see `docs/`)
+It also contains the documentation/demo app (see `docs/`)
 
 ## purpose
 
-Friends don’t let friends ship inaccessible code! These accessible packages include everything from typography and colors, to components like custom form controls. The design and interactions shown throughout this site are intended to show how Deque provides accessible experiences for the users of our own products - through the use of common, accessible components like these.
+Friends don’t let friends ship inaccessible code! These accessible packages include everything from typography and colors to components like custom form controls. The design and interactions shown throughout this site are intended to show how Deque provides accessible experiences for the users of our products - through the use of common, accessible components like these.
 
 ## usage
 
@@ -43,7 +43,7 @@ $ yarn build
 $ yarn dev
 ```
 
-navigate browser to http://localhost:8003/
+navigate the browser to http://localhost:8003/
 
 ### run tests
 
