@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.4.2](https://github.com/dequelabs/cauldron/compare/v6.4.1...v6.4.2) (2024-07-10)
+
+
+### Bug Fixes
+
+* **Dialog:** switch dialog tests to react testing library and fix heading type ([#1501](https://github.com/dequelabs/cauldron/issues/1501)) ([3b7a548](https://github.com/dequelabs/cauldron/commit/3b7a548163d0e0d78c79e7fdba0d79b60e004724))
+* **react:** fix incorrect React.Fragment for ContentNode type ([#1521](https://github.com/dequelabs/cauldron/issues/1521)) ([2f7e190](https://github.com/dequelabs/cauldron/commit/2f7e190a85a96c9b6eb5ee64002f4341bdd08d19))
+* **react:** use capture phase instead of bubble phase for esc keypress on Tooltip ([#1569](https://github.com/dequelabs/cauldron/issues/1569)) ([1bc0e02](https://github.com/dequelabs/cauldron/commit/1bc0e02ab25d6fbb900896394de59da3fe3c2916))
+
 ### [6.4.1](https://github.com/dequelabs/cauldron/compare/v6.4.0...v6.4.1) (2024-06-05)
 
 
