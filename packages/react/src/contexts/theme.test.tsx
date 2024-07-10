@@ -1,16 +1,24 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import sinon from 'sinon';
-import { ThemeProvider, useThemeContext } from 'src/contexts/theme';
+import { ThemeProvider, useThemeContext } from './theme';
+import { render } from '@testing-library/react';
 
-let theme, toggleTheme, observe, disconnect, trigger;
+let theme: string,
+  toggleTheme: () => void,
+  observe: jest.Mock,
+  disconnect: jest.Mock,
+  trigger: (mutations: MutationRecord[]) => void;
 
-global.MutationObserver = class MutationObserver {
-  constructor(handler) {
-    this.observe = sinon.spy();
-    this.disconnect = sinon.spy();
-    // add a trigger method so we can simulate a mutation
+global.MutationObserver = class {
+  observe: jest.Mock;
+  disconnect: jest.Mock;
+  takeRecords: jest.Mock;
+  trigger: (mutations: MutationRecord[]) => void;
+
+  constructor(handler: any) {
+    this.observe = jest.fn();
+    this.disconnect = jest.fn();
+    this.takeRecords = jest.fn();
     this.trigger = handler;
 
     observe = this.observe;
@@ -27,8 +35,8 @@ const ThemeTester = () => {
   return <div />;
 };
 
-const mountWrapper = (themeProviderProps = {}) => {
-  return mount(
+const renderProvider = (themeProviderProps = {}) => {
+  return render(
     <ThemeProvider {...themeProviderProps}>
       <ThemeTester />
     </ThemeProvider>
@@ -36,7 +44,7 @@ const mountWrapper = (themeProviderProps = {}) => {
 };
 
 test('it exposes the current theme (defaulting to light)', () => {
-  mountWrapper();
+  renderProvider();
   expect(theme).toBe('light');
   expect(document.body.classList.contains('cauldron--theme-light')).toBe(true);
 });
@@ -45,7 +53,7 @@ test('it handles alternate contexts and initial themes', () => {
   const div = document.createElement('div');
   document.body.appendChild(div);
 
-  mountWrapper({
+  renderProvider({
     context: div,
     initialTheme: 'dark'
   });
@@ -54,7 +62,7 @@ test('it handles alternate contexts and initial themes', () => {
 });
 
 test('it provides toggleTheme functionality', () => {
-  mountWrapper();
+  renderProvider();
   expect(theme).toBe('light');
   act(() => toggleTheme());
   expect(theme).toBe('dark');
@@ -63,8 +71,8 @@ test('it provides toggleTheme functionality', () => {
 });
 
 test('handles mutations', () => {
-  mountWrapper();
-  expect(observe.called).toBe(true);
+  renderProvider();
+  expect(observe).toHaveBeenCalled();
   act(() => {
     document.body.classList.add('cauldron--theme-dark');
   });
@@ -75,13 +83,25 @@ test('handles mutations', () => {
         type: 'attributes',
         attributeName: 'class'
       }
-    ])
+    ] as MutationRecord[])
   );
   expect(theme).toBe('dark');
 });
 
 test('disconnects mutation observer when unmounted', () => {
-  const wrapper = mountWrapper();
-  wrapper.unmount();
-  expect(disconnect.called).toBe(true);
+  const { unmount } = renderProvider();
+  unmount();
+  expect(disconnect).toHaveBeenCalled();
+});
+
+test('throw an exception, without provider', () => {
+  const Component = () => {
+    const { toggleTheme } = useThemeContext();
+    toggleTheme();
+    return <></>;
+  };
+
+  expect(() => {
+    render(<Component />);
+  }).toThrow();
 });

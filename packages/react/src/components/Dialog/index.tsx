@@ -18,9 +18,10 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   forceAction?: boolean;
   heading:
+    | string
     | React.ReactElement<any>
     | {
-        text: React.ReactElement<any>;
+        text: React.ReactElement<any> | string;
         level: number | undefined;
       };
   closeButtonText?: string;
@@ -117,6 +118,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     const Dialog = (
       <FocusTrap
         focusTrapOptions={{
+          allowOutsideClick: true,
           onDeactivate: this.close,
           escapeDeactivates: !forceAction,
           fallbackFocus: '.Dialog__heading'
