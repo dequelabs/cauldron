@@ -89,7 +89,7 @@ const main = async (): Promise<void> => {
                   (window as any).requestIdleCallback(resolve)
                 )
             ),
-            await page.waitForTimeout(5000)
+            await new Promise((resolve) => setTimeout(resolve, 5000))
           ]);
 
           const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
