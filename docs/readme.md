@@ -1,6 +1,6 @@
 # Documentation
 
-Cauldron documentation is a mix of [mdxjs](https://mdxjs.com/) and custom react components to scaffold documentation.
+Cauldron documentation is a mix of [mdxjs](https://mdxjs.com/) and custom React components to scaffold documentation.
 
 ## Structure
 
@@ -10,7 +10,7 @@ Cauldron documentation is a mix of [mdxjs](https://mdxjs.com/) and custom react 
 ├── Demo/               # Deprecated documentation, do not use
 ├── pages/              # MDX components mapping to specific pages in documentation
 │   └── components/     # MDX component level documentation
-├── utils/              # Shared utilites for documentation
+├── utils/              # Shared utilities for documentation
 ├── mdx-components.tsx  # Used to allow for rendering of html tags for custom components (see https://mdxjs.com/table-of-components/)
 └── remark-plugins.tsx  # Remark plugins to transform markdown ast - mainly used to support things like TOCs and front matter
 ```
@@ -21,9 +21,9 @@ To add documentation for a component, add a `.mdx` file to `pages/components` wi
 
 - `title` - Will be used as the title and primary heading of the component
 - `description` - A short description of the component
-- `source` - A url to the github source of the component
+- `source` - A URL to the GitHub source of the component
 
-An example of frontmatter for the Button component as follows:
+An example of frontmatter for the Button component is as follows:
 
 ```md
 ---
@@ -35,14 +35,14 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 
 Frontmatter can also include:
 
-- `deprecated` - boolean value flagging the component as deprecated (which displays a tag and displays component in a separate deprecated section)
-- `path` - Used when the url path needs to be different than the default name of the mdx file
+- `deprecated` - boolean value flagging the component as deprecated (which displays a tag and displays the component in a separate deprecated section)
+- `path` - Used when the URL path needs to be different than the default name of the MDX file
 
 ### Writing Good Documentation
 
 Good documentation should try to cover different use cases for the component, and include the when, why, and how of a component. This includes things like:
 
 - Showing examples of a component with different variants and states
-- Calling out specific accessibility requirements if there's a common need for a component to set things like labels or ids
+- Calling out specific accessibility requirements if there's a common need for a component to set things like labels or IDs
 - Including documentation for all of the component props
 - Providing references to other components that may be related
