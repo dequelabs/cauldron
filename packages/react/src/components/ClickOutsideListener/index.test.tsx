@@ -66,7 +66,7 @@ test('should call onClickOutside with event', () => {
     }
   );
 
-  const event = new MouseEvent('click', { bubbles: true });
+  const event = new MouseEvent('mouseup', { bubbles: true });
   fireEvent(screen.getByTestId('link'), event);
   expect(onClickOutside).toHaveBeenCalledWith(event);
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import OptionsMenuList from './';
 import axe from '../../axe';
 
@@ -128,7 +129,9 @@ test('should call onClose given tab keydown', () => {
   expect(defaultProps.onClose).toBeCalled();
 });
 
-test('should call onClose when clicked outside', () => {
+test('should call onClose when clicked outside', async () => {
+  const user = userEvent.setup();
+
   render(
     <OptionsMenuList {...defaultProps} show={true}>
       <li>option 1</li>
@@ -136,7 +139,7 @@ test('should call onClose when clicked outside', () => {
     </OptionsMenuList>
   );
 
-  fireEvent.click(document.body);
+  await user.click(document.body);
 
   expect(defaultProps.onClose).toBeCalled();
 });

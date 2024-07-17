@@ -5,7 +5,7 @@ import resolveElement from '../../utils/resolveElement';
 export interface ClickOutsideListenerProps<
   T extends HTMLElement = HTMLElement
 > {
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   onClickOutside: (e: MouseEvent | TouchEvent) => void;
   mouseEvent?: 'mousedown' | 'click' | 'mouseup' | false;
   touchEvent?: 'touchstart' | 'touchend' | false;
