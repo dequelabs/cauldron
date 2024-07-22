@@ -1,0 +1,38 @@
+:root {
+  --text-size-base: 16px;
+
+  /* headings */
+
+  --text-size-heading-1: 1.875rem; /* 30px */
+  --text-size-heading-2: 1.5rem; /* 24px */
+  --text-size-heading-3: 1.25rem; /* 20px */
+  --text-size-heading-4: 1.125rem; /* 18px */
+  --text-size-heading-5: 1rem; /* 16px */
+  --text-size-heading-6: 1rem; /* 16px */
+
+  --line-height-heading-1: 1.3;
+  --line-height-heading-2: 1.3;
+  --line-height-heading-3: 1.3;
+  --line-height-heading-4: 1.5;
+  --line-height-heading-5: 1.5;
+  --line-height-heading-6: 1.5;
+
+  /* weights */
+  --font-weight-semi-bold: 600;
+
+  /* display */
+
+  --text-size-display-stat: 2.5rem; /* 36px */
+  --text-size-display-stat-small: 1.875; /* 30px */
+
+  --line-height-display-stat: 1.3;
+
+  /* buttons */
+  --text-size-button: 1rem; /* 16px */
+
+  /* body */
+  --text-size-body: 1rem; /* 16px */
+  --text-size-body-small: 0.875rem; /* 14px */
+  --line-height-body: 1.5;
+  --line-height-body-small: 1.7;
+}

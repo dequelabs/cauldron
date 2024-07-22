@@ -82,7 +82,7 @@ a {
 }
 
 p {
-  line-height: 1.618;
+  line-height: var(--line-height-body);
 }
 
 .cauldron--theme-dark h1,
