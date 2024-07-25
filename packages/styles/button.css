@@ -163,12 +163,14 @@ button.Link {
   height: calc(var(--button-thin-height) - 8px);
 }
 
+/* Usage of .DefinitionButton is deprecated and no longer supported */
 .DefinitionButton {
   display: inline;
   vertical-align: baseline;
   position: relative;
 }
 
+/* Usage of .DefinitionButton is deprecated and no longer supported */
 .DefinitionButton button {
   background-color: transparent;
   color: var(--text-color-base);
