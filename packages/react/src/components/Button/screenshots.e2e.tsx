@@ -1,7 +1,7 @@
 import React from 'react';
 import { test, expect } from '../../../../../e2e/screenshots';
 import { setActive, setTheme } from '../../../../../e2e/helpers/playwright';
-import { Button } from '../../../';
+import { Button, Icon } from '../../../';
 
 test('should have screenshot for Button[variant="primary"]', async ({
   mount,
@@ -101,7 +101,7 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   const component = await mount(
     <div>
       <Button variant="secondary" thin>
-        Primary
+        Secondary
       </Button>
       <Button variant="secondary" thin>
         Hover
@@ -126,6 +126,75 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   await expect(component).toHaveScreenshot('button[thin][secondary]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[thin][secondary]');
+});
+
+test('should have screenshot for Button with leading icon', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="secondary">
+        <Icon type="plus" /> Leading Icon
+      </Button>
+      <Button variant="secondary">
+        <Icon type="plus" /> Hover
+      </Button>
+      <Button variant="secondary">
+        <Icon type="plus" /> Active
+      </Button>
+      <Button variant="secondary">
+        <Icon type="plus" /> Focus
+      </Button>
+      <Button variant="secondary" disabled>
+        <Icon type="plus" />
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button-leading-icon');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button-leading-icon');
+});
+
+test('should have screenshot for Button with trailing icon', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="secondary">
+        Trailing Icon <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary">
+        {' '}
+        Hover <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary">
+        Active <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary">
+        Focus <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary" disabled>
+        Disabled
+        <Icon type="chevron-down" />
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button-trailing-icon');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button-trailing-icon');
 });
 
 test('should have screenshot for Button[variant="error"]', async ({
