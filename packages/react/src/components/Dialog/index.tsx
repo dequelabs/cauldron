@@ -32,6 +32,11 @@ interface DialogState {
   isolator?: AriaIsolate;
 }
 
+type DialogEvent = 'added' | 'removed';
+
+const isEscape = (event: KeyboardEvent) =>
+  event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
+
 const noop = () => {
   //not empty
 };
@@ -53,11 +58,13 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     this.close = this.close.bind(this);
     this.focusHeading = this.focusHeading.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.bindKeyboardEvents = this.bindKeyboardEvents.bind(this);
     this.state = {};
   }
 
   componentDidMount() {
     if (this.props.show) {
+      this.bindKeyboardEvents('added');
       this.attachIsolator(() => setTimeout(this.focusHeading));
     }
   }
@@ -65,12 +72,15 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   componentWillUnmount() {
     const { isolator } = this.state;
     isolator?.deactivate();
+    this.bindKeyboardEvents('removed');
   }
 
   componentDidUpdate(prevProps: DialogProps) {
     if (!prevProps.show && this.props.show) {
       this.attachIsolator(this.focusHeading);
+      this.bindKeyboardEvents('added');
     } else if (prevProps.show && !this.props.show) {
+      this.bindKeyboardEvents('removed');
       this.close();
     }
   }
@@ -119,8 +129,6 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       <FocusTrap
         focusTrapOptions={{
           allowOutsideClick: true,
-          onDeactivate: this.close,
-          escapeDeactivates: !forceAction,
           fallbackFocus: '.Dialog__heading'
         }}
       >
@@ -186,6 +194,28 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       this.heading.focus();
     }
     this.state.isolator?.activate();
+  }
+
+  bindKeyboardEvents(event: DialogEvent) {
+    const handleEscape = (keyboardEvent: KeyboardEvent) => {
+      if (!keyboardEvent.defaultPrevented && isEscape(keyboardEvent)) {
+        this.close();
+      }
+    };
+
+    const portal = this.props.portal || document.body;
+    const targetElement =
+      portal instanceof HTMLElement ? portal : portal.current;
+    switch (event) {
+      case 'added': {
+        targetElement?.addEventListener('keyup', handleEscape);
+        break;
+      }
+      case 'removed': {
+        targetElement?.removeEventListener('keyup', handleEscape);
+        break;
+      }
+    }
   }
 }
 
