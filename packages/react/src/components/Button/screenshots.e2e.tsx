@@ -197,6 +197,75 @@ test('should have screenshot for Button with trailing icon', async ({
   await expect(component).toHaveScreenshot('dark--button-trailing-icon');
 });
 
+test('should have screenshot for Button[thin] with leading icon', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="secondary" thin>
+        <Icon type="plus" /> Leading Icon
+      </Button>
+      <Button variant="secondary" thin>
+        <Icon type="plus" /> Hover
+      </Button>
+      <Button variant="secondary" thin>
+        <Icon type="plus" /> Active
+      </Button>
+      <Button variant="secondary" thin>
+        <Icon type="plus" /> Focus
+      </Button>
+      <Button variant="secondary" thin disabled>
+        <Icon type="plus" />
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[thin]-leading-icon');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[thin]-leading-icon');
+});
+
+test('should have screenshot for Button[thin] with trailing icon', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="secondary" thin>
+        Trailing Icon <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary" thin>
+        {' '}
+        Hover <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary" thin>
+        Active <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary" thin>
+        Focus <Icon type="chevron-down" />{' '}
+      </Button>
+      <Button variant="secondary" thin disabled>
+        Disabled
+        <Icon type="chevron-down" />
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[thin]-trailing-icon');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[thin]-trailing-icon');
+});
+
 test('should have screenshot for Button[variant="error"]', async ({
   mount,
   page
