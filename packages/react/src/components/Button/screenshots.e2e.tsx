@@ -101,7 +101,7 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   const component = await mount(
     <div>
       <Button variant="secondary" thin>
-        Primary
+        Secondary
       </Button>
       <Button variant="secondary" thin>
         Hover
@@ -126,6 +126,66 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   await expect(component).toHaveScreenshot('button[thin][secondary]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[thin][secondary]');
+});
+
+test('should have screenshot for Button[variant="tertiary"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="tertiary">Tertiary</Button>
+      <Button variant="tertiary">Hover</Button>
+      <Button variant="tertiary">Active</Button>
+      <Button variant="tertiary">Focus</Button>
+      <Button variant="tertiary" disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[variant=tertiary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[variant=tertiary]');
+});
+
+test('should have screenshot for Button[thin][variant="tertiary"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="tertiary" thin>
+        Tertiary
+      </Button>
+      <Button variant="tertiary" thin>
+        Hover
+      </Button>
+      <Button variant="tertiary" thin>
+        Active
+      </Button>
+      <Button variant="tertiary" thin>
+        Focus
+      </Button>
+      <Button variant="tertiary" thin disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[thin][tertiary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[thin][tertiary]');
 });
 
 test('should have screenshot for Button[variant="error"]', async ({
