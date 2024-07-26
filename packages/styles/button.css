@@ -17,7 +17,8 @@
   --button-text-size: var(--text-size-body);
   --button-thin-text-size: var(--text-size-body-small);
   --button-text-color-dark: var(--gray-90);
-  --button-text-color-light: var(--white);
+  --button-text-color-light: #fff;
+  --button-text-color-disabled: var(--disabled);
   --button-focus-ring-color: var(--focus-light);
   --button-thin-height: var(--target-size-minimum);
 
@@ -26,6 +27,7 @@
 
 .Button--primary,
 .Button--secondary,
+.Button--tertiary,
 .Button--clear,
 .Button--error {
   border-radius: 3px;
@@ -55,6 +57,7 @@ button.Link {
 
 .Button--primary:focus,
 .Button--secondary:focus,
+.Button--tertiary:focus,
 .Button--clear:focus,
 .Button--error:focus {
   outline: none;
@@ -62,6 +65,7 @@ button.Link {
 
 .Button--primary:before,
 .Button--secondary:before,
+.Button--tertiary:before,
 .Button--clear:before,
 .Button--error:before,
 .Button--tag:before {
@@ -83,7 +87,8 @@ button.Link {
   box-shadow: 0 0 0 1px var(--button-outline-color-primary);
 }
 
-.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--button-outline-color-secondary);
 }
 
@@ -97,6 +102,7 @@ button.Link {
 
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
+.Button--tertiary:focus:before,
 .Button--error:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
@@ -115,19 +121,29 @@ button.Link {
   background: var(--button-background-color-primary-active);
 }
 
-.Button--secondary {
+.Button--secondary,
+.Button--tertiary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
   border: 1px solid var(--field-border-color);
 }
 
-.Button--secondary[aria-disabled='true'],
-.Button--secondary[disabled] {
-  color: var(--disabled);
+.Button--tertiary:is(:not(:hover, :focus), [disabled], [aria-disabled='true']) {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.Button--secondary:is([aria-disabled='true'], [disabled]) {
+  color: var(--button-text-color-disabled);
   background-color: var(--button-background-color-secondary-disabled);
 }
 
-.Button--secondary:not([disabled]):not([aria-disabled='true']):active {
+.Button--tertiary:is([aria-disabled='true'], [disabled]) {
+  color: var(--button-text-color-disabled);
+}
+
+.Button--secondary:not([disabled], [aria-disabled='true']):active,
+.Button--tertiary:not([disabled], [aria-disabled='true']):active {
   background-color: var(--button-background-color-secondary-active);
 }
 
@@ -148,13 +164,13 @@ button.Link {
   background-color: var(--button-background-color-error-active);
 }
 
-.Button--tag[aria-disabled='true'],
-.Button--tag[disabled] {
+.Button--tag:is([disabled], [aria-disabled='true']) {
   color: var(--disabled);
 }
 
 .Button--primary .Icon,
 .Button--secondary .Icon,
+.Button--tertiary .Icon,
 .Button--clear .Icon,
 .Button--error .Icon {
   margin: 0 -4px;
@@ -226,26 +242,33 @@ button.Link {
   border: 2px solid var(--accent-light);
 }
 
+.cauldron--theme-dark .Button--tertiary {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--tertiary:not(:hover, :focus) {
+  color: #fff;
+}
+
 .cauldron--theme-dark .Button--error {
   background-color: var(--accent-medium);
-  color: var(--white);
+  color: #fff;
   border: 2px solid var(--accent-danger);
 }
 
-.cauldron--theme-dark .Button--primary[aria-disabled='true'],
-.cauldron--theme-dark .Button--primary[disabled],
-.cauldron--theme-dark .Button--secondary[aria-disabled='true'],
-.cauldron--theme-dark .Button--secondary[disabled],
-.cauldron--theme-dark .Button--error[aria-disabled='true'],
-.cauldron--theme-dark .Button--error[disabled],
-.cauldron--theme-dark .Button--tag[disabled] {
+.cauldron--theme-dark .Button--primary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--secondary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--error:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--tag:is([disabled], [aria-disabled='true']) {
   color: var(--dark-workspace-color);
 }
 
 .cauldron--theme-dark
   .Button--primary:not([disabled]):not([aria-disabled='true']):active,
 .cauldron--theme-dark
-  .Button--secondary:not([disabled]):not([aria-disabled='true']):active {
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):active,
+.cauldron--theme-dark
+  .Button--tertiary:not([disabled]):not([aria-disabled='true']):active {
   color: var(--accent-medium);
 }
 
@@ -260,7 +283,7 @@ button.Link {
 }
 
 .cauldron--theme-dark button.Link:hover {
-  color: var(--white);
+  color: #fff;
 }
 
 .cauldron--theme-dark
@@ -270,7 +293,9 @@ button.Link {
 }
 
 .cauldron--theme-dark
-  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.cauldron--theme-dark
+  .Button--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-light);
 }
@@ -285,4 +310,8 @@ button.Link {
   .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-info);
+}
+
+.cauldron--theme-dark .Button--tertiary:is([disabled], [aria-disabled='true']) {
+  color: #74818b;
 }
