@@ -162,9 +162,8 @@ button.Link {
   background-color: var(--button-background-color-error-active);
 }
 
-.Button--tag[aria-disabled='true'],
-.Button--tag[disabled] {
-  color: var(--button-text-color-disabled);
+.Button--tag:is([disabled], [aria-disabled='true']) {
+  color: var(--disabled);
 }
 
 .Button--primary .Icon,
@@ -253,15 +252,10 @@ button.Link {
   border: 2px solid var(--accent-danger);
 }
 
-.cauldron--theme-dark .Button--primary[aria-disabled='true'],
-.cauldron--theme-dark .Button--primary[disabled],
-.cauldron--theme-dark .Button--secondary[aria-disabled='true'],
-.cauldron--theme-dark .Button--secondary[disabled],
-.cauldron--theme-dark .Button--tertiary[aria-disabled='true'],
-.cauldron--theme-dark .Button--tertiary[disabled],
-.cauldron--theme-dark .Button--error[aria-disabled='true'],
-.cauldron--theme-dark .Button--error[disabled],
-.cauldron--theme-dark .Button--tag[disabled] {
+.cauldron--theme-dark .Button--primary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--secondary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--error:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--tag:is([disabled], [aria-disabled='true']) {
   color: var(--dark-workspace-color);
 }
 
