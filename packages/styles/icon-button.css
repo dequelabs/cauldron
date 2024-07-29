@@ -146,28 +146,32 @@ a.IconButton {
 }
 
 .IconButton--secondary,
-.IconButton--tertiary {
+.IconButton--tertiary,
+.IconButton--tertiary:is(:active) {
   border: 1px solid var(--icon-button-border-color-secondary);
   background-color: var(--icon-button-background-color-secondary);
   color: var(--icon-button-secondary-color);
 }
 
 .IconButton--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
-.IconButton--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
+.IconButton--tertiary:not([disabled]):not([aria-disabled='true']):is(
+    :hover
+  ):before {
   box-shadow: 0 0 0 1px var(--icon-button-outline-color-secondary);
 }
 
-.IconButton--secondary:active {
-  background-color: var(--icon-button-background-color-secondary-active);
-}
-
 .IconButton--tertiary:is(
-    :not(:hover, :focus),
+    :not(:hover, :focus, :active),
     [disabled],
     [aria-disabled='true']
   ) {
   border-color: transparent;
   background-color: transparent;
+}
+
+.IconButton--secondary:active,
+.IconButton--tertiary:active {
+  background-color: var(--icon-button-background-color-secondary-active);
 }
 
 .IconButton--error {
