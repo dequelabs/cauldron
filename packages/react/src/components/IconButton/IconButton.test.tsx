@@ -13,6 +13,30 @@ it('should render button', () => {
   expect(button).toHaveTextContent('');
 });
 
+it('should render secondary variant', () => {
+  render(<IconButton icon="pencil" label="Edit" variant="secondary" />);
+  const button = screen.getByRole('button', { name: 'Edit' });
+  expect(button).toHaveClass('IconButton--secondary');
+});
+
+it('should render primary variant', () => {
+  render(<IconButton icon="pencil" label="Edit" variant="primary" />);
+  const button = screen.getByRole('button', { name: 'Edit' });
+  expect(button).toHaveClass('IconButton--primary');
+});
+
+it('should render tertiary variant', () => {
+  render(<IconButton icon="pencil" label="Edit" variant="tertiary" />);
+  const button = screen.getByRole('button', { name: 'Edit' });
+  expect(button).toHaveClass('IconButton--tertiary');
+});
+
+it('should render error variant', () => {
+  render(<IconButton icon="pencil" label="Edit" variant="error" />);
+  const button = screen.getByRole('button', { name: 'Edit' });
+  expect(button).toHaveClass('IconButton--error');
+});
+
 it('should render a "as" an anchor', () => {
   render(<IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />);
   const button = screen.queryByRole('link', { name: 'Edit' });
