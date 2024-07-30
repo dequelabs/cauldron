@@ -14,32 +14,36 @@
   --button-background-color-error-active: var(--accent-error-active);
   --button-outline-color-error: var(--error);
 
+  --button-text-size: var(--text-size-body);
+  --button-thin-text-size: var(--text-size-body-small);
   --button-text-color-dark: var(--gray-90);
-  --button-text-color-light: var(--white);
+  --button-text-color-light: #fff;
+  --button-text-color-disabled: var(--disabled);
   --button-focus-ring-color: var(--focus-light);
   --button-thin-height: var(--target-size-minimum);
 
-  --button-height: 36px;
+  --button-height: 2.25rem;
 }
 
 .Button--primary,
 .Button--secondary,
+.Button--tertiary,
 .Button--clear,
 .Button--error {
   border-radius: 3px;
   border: 1px solid transparent;
-  font-size: var(--text-size-small);
+  font-size: var(--button-text-size);
   box-sizing: border-box;
-  padding: 0 16px;
+  padding: 0 var(--space-small);
   position: relative;
   text-align: center;
   min-height: var(--button-height);
-  min-width: 100px;
+  min-width: 6.25rem;
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
-  gap: 8px;
+  gap: var(--space-smallest);
 }
 
 .Button--tag {
@@ -53,6 +57,7 @@ button.Link {
 
 .Button--primary:focus,
 .Button--secondary:focus,
+.Button--tertiary:focus,
 .Button--clear:focus,
 .Button--error:focus {
   outline: none;
@@ -60,6 +65,7 @@ button.Link {
 
 .Button--primary:before,
 .Button--secondary:before,
+.Button--tertiary:before,
 .Button--clear:before,
 .Button--error:before,
 .Button--tag:before {
@@ -81,7 +87,8 @@ button.Link {
   box-shadow: 0 0 0 1px var(--button-outline-color-primary);
 }
 
-.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+.Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--button-outline-color-secondary);
 }
 
@@ -95,6 +102,7 @@ button.Link {
 
 .Button--primary:focus:before,
 .Button--secondary:focus:before,
+.Button--tertiary:focus:before,
 .Button--error:focus:before {
   box-shadow: 0 0 1px 2px var(--button-focus-ring-color, --focus);
 }
@@ -113,19 +121,29 @@ button.Link {
   background: var(--button-background-color-primary-active);
 }
 
-.Button--secondary {
+.Button--secondary,
+.Button--tertiary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
   border: 1px solid var(--field-border-color);
 }
 
-.Button--secondary[aria-disabled='true'],
-.Button--secondary[disabled] {
-  color: var(--disabled);
+.Button--tertiary:is(:not(:hover, :focus), [disabled], [aria-disabled='true']) {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.Button--secondary:is([aria-disabled='true'], [disabled]) {
+  color: var(--button-text-color-disabled);
   background-color: var(--button-background-color-secondary-disabled);
 }
 
-.Button--secondary:not([disabled]):not([aria-disabled='true']):active {
+.Button--tertiary:is([aria-disabled='true'], [disabled]) {
+  color: var(--button-text-color-disabled);
+}
+
+.Button--secondary:not([disabled], [aria-disabled='true']):active,
+.Button--tertiary:not([disabled], [aria-disabled='true']):active {
   background-color: var(--button-background-color-secondary-active);
 }
 
@@ -146,13 +164,13 @@ button.Link {
   background-color: var(--button-background-color-error-active);
 }
 
-.Button--tag[aria-disabled='true'],
-.Button--tag[disabled] {
+.Button--tag:is([disabled], [aria-disabled='true']) {
   color: var(--disabled);
 }
 
 .Button--primary .Icon,
 .Button--secondary .Icon,
+.Button--tertiary .Icon,
 .Button--clear .Icon,
 .Button--error .Icon {
   margin: 0 -4px;
@@ -163,16 +181,18 @@ button.Link {
   height: calc(var(--button-thin-height) - 8px);
 }
 
+/* Usage of .DefinitionButton is deprecated and no longer supported */
 .DefinitionButton {
   display: inline;
   vertical-align: baseline;
   position: relative;
 }
 
+/* Usage of .DefinitionButton is deprecated and no longer supported */
 .DefinitionButton button {
   background-color: transparent;
   color: var(--text-color-base);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
   border-bottom: 1px dotted;
   display: inline-block;
   margin: 0 2px;
@@ -185,9 +205,9 @@ button.Link {
 
 .Button--thin {
   min-height: var(--button-thin-height);
-  min-width: 100px;
-  font-size: var(--text-size-smallest);
-  padding: 0 16px;
+  min-width: 6.25rem;
+  font-size: var(--button-thin-text-size);
+  padding: 0 var(--space-small);
 }
 
 [class*='Button--'] + [class*='Button--'] {
@@ -222,26 +242,33 @@ button.Link {
   border: 2px solid var(--accent-light);
 }
 
+.cauldron--theme-dark .Button--tertiary {
+  color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--tertiary:not(:hover, :focus) {
+  color: #fff;
+}
+
 .cauldron--theme-dark .Button--error {
   background-color: var(--accent-medium);
-  color: var(--white);
+  color: #fff;
   border: 2px solid var(--accent-danger);
 }
 
-.cauldron--theme-dark .Button--primary[aria-disabled='true'],
-.cauldron--theme-dark .Button--primary[disabled],
-.cauldron--theme-dark .Button--secondary[aria-disabled='true'],
-.cauldron--theme-dark .Button--secondary[disabled],
-.cauldron--theme-dark .Button--error[aria-disabled='true'],
-.cauldron--theme-dark .Button--error[disabled],
-.cauldron--theme-dark .Button--tag[disabled] {
+.cauldron--theme-dark .Button--primary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--secondary:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--error:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--tag:is([disabled], [aria-disabled='true']) {
   color: var(--dark-workspace-color);
 }
 
 .cauldron--theme-dark
   .Button--primary:not([disabled]):not([aria-disabled='true']):active,
 .cauldron--theme-dark
-  .Button--secondary:not([disabled]):not([aria-disabled='true']):active {
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):active,
+.cauldron--theme-dark
+  .Button--tertiary:not([disabled]):not([aria-disabled='true']):active {
   color: var(--accent-medium);
 }
 
@@ -256,7 +283,7 @@ button.Link {
 }
 
 .cauldron--theme-dark button.Link:hover {
-  color: var(--white);
+  color: #fff;
 }
 
 .cauldron--theme-dark
@@ -266,7 +293,9 @@ button.Link {
 }
 
 .cauldron--theme-dark
-  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before {
+  .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
+.cauldron--theme-dark
+  .Button--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-light);
 }
@@ -281,4 +310,8 @@ button.Link {
   .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-info);
+}
+
+.cauldron--theme-dark .Button--tertiary:is([disabled], [aria-disabled='true']) {
+  color: #74818b;
 }

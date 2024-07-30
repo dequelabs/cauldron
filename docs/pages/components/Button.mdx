@@ -28,6 +28,14 @@ Secondary buttons are used for actions that are not the primary action.
 <Button variant="secondary">Secondary</Button>
 ```
 
+### Tertiary
+
+Tertiary buttons are an alternate style of button with less visual prominence than primary or secondary actions.
+
+```jsx example
+<Button variant="tertiary">Tertiary</Button>
+```
+
 ### Error
 
 Error buttons are used to indicate potentially dangerous actions.
@@ -90,7 +98,7 @@ When you need a semantic button with the visual appearance of a link.
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'error', 'link', 'tag'],
+      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag'],
       defaultValue: 'primary',
       description: 'Visual style of the button.'
     },
