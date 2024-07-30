@@ -21,7 +21,6 @@
 }
 
 .Breadcrumb__Link {
-  font-weight: inherit;
   padding: 0;
   display: inline;
 }
@@ -32,6 +31,6 @@
   display: inline;
 }
 
-.Breadcrumb__Item:not(:last-child) {
-  font-weight: var(--font-weight-semi-bold);
+.Breadcrumb__Item:last-child {
+  font-weight: var(--font-weight-normal);
 }
