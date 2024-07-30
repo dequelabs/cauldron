@@ -14,13 +14,15 @@
   --button-background-color-error-active: var(--accent-error-active);
   --button-outline-color-error: var(--error);
 
+  --button-text-size: var(--text-size-body);
+  --button-thin-text-size: var(--text-size-body-small);
   --button-text-color-dark: var(--gray-90);
   --button-text-color-light: #fff;
   --button-text-color-disabled: var(--disabled);
   --button-focus-ring-color: var(--focus-light);
   --button-thin-height: var(--target-size-minimum);
 
-  --button-height: 36px;
+  --button-height: 2.25rem;
 }
 
 .Button--primary,
@@ -30,18 +32,18 @@
 .Button--error {
   border-radius: 3px;
   border: 1px solid transparent;
-  font-size: var(--text-size-small);
+  font-size: var(--button-text-size);
   box-sizing: border-box;
-  padding: 0 16px;
+  padding: 0 var(--space-small);
   position: relative;
   text-align: center;
   min-height: var(--button-height);
-  min-width: 100px;
+  min-width: 6.25rem;
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
-  gap: 8px;
+  gap: var(--space-smallest);
 }
 
 .Button--tag {
@@ -190,7 +192,7 @@ button.Link {
 .DefinitionButton button {
   background-color: transparent;
   color: var(--text-color-base);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
   border-bottom: 1px dotted;
   display: inline-block;
   margin: 0 2px;
@@ -203,9 +205,9 @@ button.Link {
 
 .Button--thin {
   min-height: var(--button-thin-height);
-  min-width: 100px;
-  font-size: var(--text-size-smallest);
-  padding: 0 16px;
+  min-width: 6.25rem;
+  font-size: var(--button-thin-text-size);
+  padding: 0 var(--space-small);
 }
 
 [class*='Button--'] + [class*='Button--'] {

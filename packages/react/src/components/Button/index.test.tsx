@@ -25,7 +25,7 @@ test('should render secondary button', () => {
   expect(SecondaryButton).toHaveClass('Button--secondary');
 });
 
-test('should render secondary button', () => {
+test('should render tertiary button', () => {
   render(<Button variant="tertiary">tertiary</Button>);
   const TertiaryButton = screen.getByRole('button', { name: 'tertiary' });
   expect(TertiaryButton).toHaveClass('Button--tertiary');
