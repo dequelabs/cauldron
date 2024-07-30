@@ -4,10 +4,10 @@ description: A styled component with text representing a keyword, label, or prop
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Tag/index.tsx
 ---
 
-import { Tag, TagLabel} from '@deque/cauldron-react'
+import { Tag, TagLabel } from '@deque/cauldron-react';
 
 ```js
-import { Tag } from '@deque/cauldron-react'
+import { Tag } from '@deque/cauldron-react';
 ```
 
 ## Example
@@ -22,19 +22,36 @@ import { Tag } from '@deque/cauldron-react'
 
 ```jsx example
 <Tag>
-  <TagLabel>
-    Label:
-  </TagLabel>
+  <TagLabel>Label:</TagLabel>
   value
 </Tag>
 ```
 
+### Small variant
+
+```jsx example
+<Tag variant="small">
+  <TagLabel>Label:</TagLabel>
+  value
+</Tag>
+```
 
 ## Props
 
 ### Tag
 
-<ComponentProps children={true} className={true} />
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'variant',
+      type: ['default', 'small'],
+      defaultValue: 'default',
+      description: 'Visual style of the tag.'
+    }
+  ]}
+/>
 
 ### TagLabel
 

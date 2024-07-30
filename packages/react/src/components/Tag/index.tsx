@@ -4,6 +4,7 @@ import classNames from 'classnames';
 interface TagProps {
   children: React.ReactNode;
   className?: string;
+  variant?: 'default' | 'small';
 }
 
 export const TagLabel = ({ children, className, ...other }: TagProps) => (
@@ -13,8 +14,18 @@ export const TagLabel = ({ children, className, ...other }: TagProps) => (
 );
 TagLabel.displayName = 'TagLabel';
 
-const Tag = ({ children, className, ...other }: TagProps) => (
-  <div className={classNames('Tag', className)} {...other}>
+const Tag = ({
+  children,
+  className,
+  variant = 'default',
+  ...other
+}: TagProps) => (
+  <div
+    className={classNames('Tag', className, {
+      'Tag--small': variant === 'small'
+    })}
+    {...other}
+  >
     {children}
   </div>
 );
