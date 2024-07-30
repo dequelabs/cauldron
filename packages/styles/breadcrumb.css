@@ -21,13 +21,17 @@
 }
 
 .Breadcrumb__Link {
-  font-weight: 400;
+  font-weight: inherit;
   padding: 0;
   display: inline;
 }
 
 .Breadcrumb__Item {
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--link-text-color);
   display: inline;
+}
+
+.Breadcrumb__Item:not(:last-child) {
+  font-weight: var(--font-weight-semi-bold);
 }
