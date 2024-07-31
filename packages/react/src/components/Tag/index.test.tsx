@@ -34,6 +34,12 @@ test('passes arbitrary props through', () => {
   expect(screen.getByText('hi')).toHaveAttribute('data-bar', 'yes');
 });
 
+test.only('should render small tag', () => {
+  render(<Tag size="small">bye</Tag>);
+  const SmallTag = screen.getByText('bye');
+  expect(SmallTag).toHaveClass('Tag--small');
+});
+
 test('should return no axe violations', async () => {
   const { container } = render(
     <Tag>

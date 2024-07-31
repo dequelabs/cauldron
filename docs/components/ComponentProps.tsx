@@ -52,7 +52,7 @@ function TableProps({ children, className, refType, props }: Props) {
             <TableCell>
               children{' '}
               {(children as Record<string, unknown>)?.required && (
-                <Tag>Required</Tag>
+                <Tag size="small">Required</Tag>
               )}
             </TableCell>
             <TableCell>

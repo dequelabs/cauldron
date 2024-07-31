@@ -4,6 +4,7 @@
 
 .TagButton {
   vertical-align: middle;
+  font-size: inherit;
 }
 
 .TagButton__icon {
