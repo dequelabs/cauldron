@@ -127,6 +127,7 @@ export {
 export { default as Popover } from './components/Popover';
 export { default as Timeline, TimelineItem } from './components/Timeline';
 export { default as TextEllipsis } from './components/TextEllipsis';
+export { default as CopyButton } from './components/CopyButton';
 
 /**
  * Helpers / Utils
