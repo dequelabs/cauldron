@@ -6,6 +6,7 @@
 
   --tag-height: var(--button-height);
   --tag-small-height: 1.5rem;
+  --tag-font-size: var(--text-size-body-small);
 }
 
 .cauldron--theme-dark {
@@ -26,6 +27,7 @@
   padding: 0 var(--space-smallest);
   min-height: var(--tag-height);
   font-weight: var(--font-weight-medium);
+  font-size: var(--tag-font-size);
 }
 
 .Tag--small {
