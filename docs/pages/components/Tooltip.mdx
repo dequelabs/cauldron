@@ -161,7 +161,13 @@ function BigTooltipExample() {
     {
       name: 'show',
       type: 'boolean',
-      description: 'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
+      description: 'Manually control the show state of the tooltip.'
+    },
+    {
+      name: 'defaultShow',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Sets the initial show state of the tooltip when initially rendered.'
     },
     {
       name: 'placement',
