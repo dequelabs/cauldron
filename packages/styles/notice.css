@@ -33,6 +33,22 @@
   font-size: var(--text-size-smaller);
 }
 
+.Notice--default {
+  display: grid;
+  padding: var(--space-large);
+  grid-template-columns: auto 1fr;
+  gap: var(--space-small);
+  align-items: start;
+}
+
+.Notice--condensed {
+  display: grid;
+  padding: var(--space-small);
+  grid-template-columns: 1fr;
+  gap: var(--space-smallest);
+  align-items: start;
+}
+
 .Notice .Notice__title,
 .Notice .Notice__title > :is(h1, h2, h3, h4, h5, h6) {
   display: flex;

@@ -112,6 +112,48 @@ function DismissableNotice() {
 }
 ```
 
+## Variants
+
+The Notice component now includes a variant prop that allows for two display styles: default and condensed.
+
+### Default variant
+
+The default variant displays the notice with a larger padding and a two-column layout.
+
+```jsx example
+<Notice variant="default" type="info" title="Information">
+  Forem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero
+  et velit interdum, ac aliquet odio mattis.
+  <ul>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+  </ul>
+  <Button variant="link">Dismiss</Button>
+</Notice>
+```
+
+### Condensed variant
+
+The condensed variant of the Notice component uses smaller padding and a single-column layout.
+
+```jsx example
+<Notice variant="condensed" type="info" title="Information">
+  Forem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero
+  et velit interdum, ac aliquet odio mattis.
+  <ul>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+    <li>List item</li>
+  </ul>
+  <Button variant="link">Dismiss</Button>
+</Notice>
+```
+
 ## Props
 
 <ComponentProps
@@ -142,6 +184,13 @@ function DismissableNotice() {
       type: ['IconType', 'string'],
       description:
         'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons'
+    },
+    {
+      name: 'variant',
+      type: ['default', 'condensed'],
+      defaultValue: 'default',
+      description:
+        'Controls the layout and padding of the Notice component. "default" uses a larger padding and a two-column layout, while "condensed" uses smaller padding and a single-column layout.'
     }
   ]}
   refType="HTMLDivElement"

@@ -107,3 +107,31 @@ test('should return no axe violations with type="danger"', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
+
+test('should render with the default variant', () => {
+  render(
+    <Notice data-testid="notice" variant="default" title="Default Variant">
+      Default content
+    </Notice>
+  );
+
+  const element = screen.getByTestId('notice');
+  expect(element).toBeInTheDocument();
+
+  expect(element).toHaveClass('Notice--default');
+  expect(element).toHaveTextContent('Default Variant');
+});
+
+test('should render with the condensed variant', () => {
+  render(
+    <Notice data-testid="notice" variant="condensed" title="Condensed Variant">
+      Condensed content
+    </Notice>
+  );
+
+  const element = screen.getByTestId('notice');
+  expect(element).toBeInTheDocument();
+
+  expect(element).toHaveClass('Notice--condensed');
+  expect(element).toHaveTextContent('Condensed Variant');
+});
