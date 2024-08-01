@@ -5,6 +5,7 @@ import Offscreen from '../Offscreen';
 import Tooltip from '../Tooltip';
 import Icon from '../Icon';
 import useSharedRef from '../../utils/useSharedRef';
+import copyTextToClipboard from '../../utils/copyTextToClipboard';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
@@ -20,26 +21,6 @@ export interface CopyButtonProps
   hideVisibleLabel?: boolean;
   tooltipPlacement?: React.ComponentProps<typeof Tooltip>['placement'];
   onCopy?: (text: string) => void;
-}
-
-function copyTextToClipboard(text: string) {
-  const element = document.createElement('textarea');
-  element.value = text;
-  element.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(element);
-
-  element.select();
-
-  let copied;
-  try {
-    copied = document.execCommand('copy');
-  } catch (ex) {
-    copied = false;
-  }
-
-  element.remove();
-
-  return copied;
 }
 
 const NOTIFICATION_TIMEOUT_MS = 2000;
@@ -96,8 +77,8 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         >
           {notificationLabel}
         </Tooltip>
-        <Offscreen role="region" aria-live="polite">
-          {copied ? notificationLabel : null}
+        <Offscreen aria-live="polite">
+          {copied ? notificationLabel : ' '}
         </Offscreen>
       </>
     );
