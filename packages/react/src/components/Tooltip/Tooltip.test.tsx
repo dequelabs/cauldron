@@ -1,6 +1,12 @@
 import React, { createRef } from 'react';
 import { setTimeout } from 'timers/promises';
-import { render, screen, fireEvent, getByRole } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  getByRole,
+  waitFor
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
@@ -27,7 +33,7 @@ const renderTooltip = ({
       <button ref={ref} {...buttonProps}>
         button
       </button>
-      <Tooltip target={ref} show {...props}>
+      <Tooltip target={ref} defaultShow={true} {...props}>
         {children ?? 'Hello Tooltip'}
       </Tooltip>
     </>
@@ -65,37 +71,35 @@ test('should not overwrite user provided ids', () => {
 });
 
 test('should show tooltip on target element focus', async () => {
-  // @ts-expect-error force show to override existing show value
-  renderTooltip({ tooltipProps: { show: null } });
+  renderTooltip({ tooltipProps: { defaultShow: false } });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   await fireEvent.focusIn(screen.getByRole('button'));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
 test('should show tooltip on target element hover', async () => {
-  // @ts-expect-error force show to override existing show value
-  renderTooltip({ tooltipProps: { show: null } });
+  renderTooltip({ tooltipProps: { defaultShow: false } });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   await fireEvent.mouseEnter(screen.getByRole('button'));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
 test('should hide tooltip on target element blur', async () => {
-  // @ts-expect-error force show to override existing show value
-  renderTooltip({ tooltipProps: { show: null } });
+  renderTooltip({ tooltipProps: { defaultShow: false } });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   await fireEvent.focusIn(screen.getByRole('button'));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   await fireEvent.focusOut(screen.getByRole('button'));
   // Note: Tooltip does not immediately hide, but is delayed by 100ms
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  await setTimeout(100);
-  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  });
 });
 
 test('should hide tooltip on escape keypress', async () => {
-  // @ts-expect-error force show to override existing show value
-  renderTooltip({ tooltipProps: { show: null } });
+  renderTooltip({ tooltipProps: { defaultShow: false } });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   await fireEvent.focusIn(screen.getByRole('button'));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
@@ -111,7 +115,9 @@ test('should fire the "cauldron:tooltip:show" custom event when tooltip is shown
   button.addEventListener('cauldron:tooltip:show', show);
   await fireEvent.focusIn(screen.getByRole('button'));
 
-  expect(show.calledOnce).toBeTruthy();
+  await waitFor(() => {
+    expect(show.calledOnce).toBeTruthy();
+  });
 });
 
 test('should fire the "cauldron:tooltip:hide" custom event when tooltip is hidden', async () => {
@@ -121,10 +127,10 @@ test('should fire the "cauldron:tooltip:hide" custom event when tooltip is hidde
   const button = screen.getByRole('button');
   button.addEventListener('cauldron:tooltip:hide', hide);
   await fireEvent.focusOut(screen.getByRole('button'));
-  // Note: Tooltip does not immediately hide, but is delayed by 100ms
-  await setTimeout(100);
 
-  expect(hide.calledOnce).toBeTruthy();
+  await waitFor(() => {
+    expect(hide.calledOnce).toBeTruthy();
+  });
 });
 
 test('should support className prop', () => {
@@ -139,7 +145,28 @@ test('should support portal prop', () => {
   expect(getByRole(portal, 'tooltip')).toBeTruthy();
 });
 
-test('should support association prop', () => {
+test('should support show prop', () => {
+  const ShowTooltip = ({ show }: { show?: boolean }) => {
+    const ref = createRef<HTMLButtonElement>();
+    return (
+      <>
+        <button ref={ref}>button</button>
+        {show && (
+          <Tooltip id="tooltip" target={ref} show={show}>
+            Hello Tooltip
+          </Tooltip>
+        )}
+      </>
+    );
+  };
+
+  const { rerender } = render(<ShowTooltip show={true} />);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  rerender(<ShowTooltip show={false} />);
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+});
+
+test('should support association prop', async () => {
   renderTooltip({ tooltipProps: { association: 'aria-labelledby' } });
   expect(screen.queryByRole('button')).toHaveAccessibleName('Hello Tooltip');
 });
