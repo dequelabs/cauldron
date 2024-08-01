@@ -33,6 +33,7 @@ export default function Example({ children, raw, ...props }: ExampleProps) {
           ref={ref}
           data-copy-example
           value={raw}
+          notificationLabel="copied"
           hideVisibleLabel
           thin
         >

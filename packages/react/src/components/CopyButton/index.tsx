@@ -1,4 +1,6 @@
 import React, { forwardRef, useState, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import classnames from 'classnames';
 import { ContentNode } from '../../types';
 import Button from '../Button';
 import Offscreen from '../Offscreen';
@@ -59,9 +61,17 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       };
     }, [copied]);
 
+    // The visibility of the tooltip only needs to be controlled
+    // when we are visually displaying the notification label
+    const showTooltip =
+      hideVisibleLabel && !copied ? undefined : copied ? true : false;
+
     return (
       <>
         <Button
+          className={classnames({
+            'Button--condensed': hideVisibleLabel
+          })}
           ref={copyButtonRef}
           variant={variant}
           onClick={handleClick}
@@ -74,12 +84,18 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           target={copyButtonRef}
           placement={tooltipPlacement}
           association="none"
+          show={showTooltip}
         >
           {hideVisibleLabel && !copied ? children : notificationLabel}
         </Tooltip>
-        <Offscreen aria-live="polite">
-          {copied ? notificationLabel : ' '}
-        </Offscreen>
+        {typeof document !== 'undefined' &&
+          createPortal(
+            <Offscreen aria-live="polite">
+              {copied ? notificationLabel : ' '}
+            </Offscreen>,
+            // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+            document.body
+          )}
       </>
     );
   }
