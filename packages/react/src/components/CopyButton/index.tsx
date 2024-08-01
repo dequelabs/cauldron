@@ -75,7 +75,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           placement={tooltipPlacement}
           association="none"
         >
-          {notificationLabel}
+          {hideVisibleLabel && !copied ? children : notificationLabel}
         </Tooltip>
         <Offscreen aria-live="polite">
           {copied ? notificationLabel : ' '}
