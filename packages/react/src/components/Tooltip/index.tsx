@@ -147,7 +147,7 @@ export default function Tooltip({
     };
 
     const targetElement = document.body;
-    if (showTooltip) {
+    if (showTooltip && typeof showProp !== 'boolean') {
       targetElement.addEventListener('keyup', handleEscape, { capture: true });
     } else {
       targetElement.removeEventListener('keyup', handleEscape, {
@@ -160,7 +160,7 @@ export default function Tooltip({
         capture: true
       });
     };
-  }, [showTooltip]);
+  }, [showTooltip, showProp]);
 
   // Handle hover and focus events for the targetElement
   useEffect(() => {
