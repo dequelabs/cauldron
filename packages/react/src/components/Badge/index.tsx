@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../Icon';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
