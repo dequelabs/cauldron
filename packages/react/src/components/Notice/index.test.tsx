@@ -108,9 +108,31 @@ test('should return no axe violations with type="danger"', async () => {
   expect(results).toHaveNoViolations();
 });
 
+test('should return no axe violations with the default variant', async () => {
+  const { container } = render(
+    <Notice data-testid="notice" title="Default Variant">
+      Default content
+    </Notice>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations with the condensed variant', async () => {
+  const { container } = render(
+    <Notice data-testid="notice" variant="condensed" title="Condensed Variant">
+      Condensed content
+    </Notice>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
 test('should render with the default variant', () => {
   render(
-    <Notice data-testid="notice" variant="default" title="Default Variant">
+    <Notice data-testid="notice" title="Default Variant">
       Default content
     </Notice>
   );
@@ -118,7 +140,7 @@ test('should render with the default variant', () => {
   const element = screen.getByTestId('notice');
   expect(element).toBeInTheDocument();
 
-  expect(element).toHaveClass('Notice--default');
+  expect(element).not.toHaveClass('Notice--condensed');
   expect(element).toHaveTextContent('Default Variant');
 });
 

@@ -34,18 +34,14 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
       <div
         className={classNames('Notice', {
           [`Notice--${type}`]: type,
-          [`Notice--${variant}`]: variant
+          [`Notice--condensed`]: variant === 'condensed'
         })}
         ref={ref}
         {...otherProps}
       >
-        <div className="Notice__icon">
-          <Icon type={icon || (iconTypeMap[type] as IconType)} />
-        </div>
-        <div className="Notice__content-wrapper">
-          <div className="Notice__title">{title}</div>
-          {children && <div className="Notice__content">{children}</div>}
-        </div>
+        <Icon type={icon || (iconTypeMap[type] as IconType)} />
+        <div className="Notice__title">{title}</div>
+        {children && <div className="Notice__content">{children}</div>}
       </div>
     );
   }
