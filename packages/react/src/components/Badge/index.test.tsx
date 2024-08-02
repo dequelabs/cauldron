@@ -19,8 +19,8 @@ test('passes classNames through', () => {
       hi
     </Badge>
   );
-  expect(screen.getByText('hi')).toHaveClass('baz');
-  expect(screen.getByText('Badge:')).toHaveClass('jazz');
+  expect(screen.getByText('hi')).toHaveClass('Badge', 'baz');
+  expect(screen.getByText('Badge:')).toHaveClass('Badge__Label', 'jazz');
 });
 
 test('passes arbitrary props through', () => {
@@ -32,6 +32,12 @@ test('passes arbitrary props through', () => {
   );
   expect(screen.getByText('bye')).toHaveAttribute('data-foo', 'true');
   expect(screen.getByText('hi')).toHaveAttribute('data-bar', 'yes');
+});
+
+test('should render small badge', () => {
+  render(<Badge size="small">bye</Badge>);
+  const SmallBadge = screen.getByText('bye');
+  expect(SmallBadge).toHaveClass('Badge--small');
 });
 
 test('should return no axe violations', async () => {

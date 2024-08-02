@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-interface BadgeProps extends React.HTMLAttributes<HTMLElement> {
+interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   size?: 'default' | 'small';
 }
 
-interface BadgeLabelProps extends React.HTMLAttributes<HTMLElement> {
+interface BadgeLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -21,20 +21,18 @@ export const BadgeLabel = ({
 );
 BadgeLabel.displayName = 'BadgeLabel';
 
-const Badge = ({
-  children,
-  className,
-  size = 'default',
-  ...other
-}: BadgeProps) => (
-  <div
-    className={classNames('Badge', className, {
-      'Badge--small': size === 'small'
-    })}
-    {...other}
-  >
-    {children}
-  </div>
+const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+  ({ children, className, size = 'default', ...other }, ref) => (
+    <div
+      className={classNames('Badge', className, {
+        'Badge--small': size === 'small'
+      })}
+      ref={ref}
+      {...other}
+    >
+      {children}
+    </div>
+  )
 );
 Badge.displayName = 'Badge';
 export default Badge;
