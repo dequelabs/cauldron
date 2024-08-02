@@ -21,7 +21,6 @@ export default function Example({ children, raw, ...props }: ExampleProps) {
     if (index !== -1 && elements.length) {
       setAccessibleName(`${label}, ${index + 1} of ${elements.length}`);
     }
-    console.log(index, ref.current);
   }, [raw]);
 
   return (
