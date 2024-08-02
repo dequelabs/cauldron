@@ -30,7 +30,7 @@ export default async function copyTextToClipboard(
     selection?.addRange(range);
 
     try {
-      document.execCommand('copy');
+      document.execCommand(text);
       copied = true;
     } catch (ex) {
       // no fallback
