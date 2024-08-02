@@ -1,0 +1,68 @@
+---
+title: Badge
+description: Badge is a container component intended to present content with an optional leading icon with a text label.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Badge/index.tsx
+---
+
+import { Badge, BadgeLabel } from '@deque/cauldron-react';
+
+```js
+import { Badge, BadgeLabel } from '@deque/cauldron-react';
+```
+
+## Example
+
+### Default
+
+```jsx example
+<Badge>Value</Badge>
+```
+
+### Badge with Label
+
+```jsx example
+<Badge>
+  <BadgeLabel>Label:</BadgeLabel>
+  value
+</Badge>
+```
+
+### Small size
+
+```jsx example
+<Badge size="small">
+  <BadgeLabel>Label:</BadgeLabel>
+  value
+</Badge>
+```
+
+### Badge with icon
+
+```jsx example
+<Badge>
+  <Icon type="chevron-double-up" />
+  <BadgeLabel>Label:</BadgeLabel>
+  value
+</Badge>
+```
+
+## Props
+
+### Badge
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'size',
+      type: ['default', 'small'],
+      defaultValue: 'default',
+      description: 'Visual style of the tag.'
+    },
+  ]}
+/>
+
+### BadgeLabel
+
+<ComponentProps children={true} className={true} />
