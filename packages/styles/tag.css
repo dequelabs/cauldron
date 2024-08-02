@@ -1,6 +1,5 @@
 :root {
   --tag-text-color: var(--gray-90);
-  --tag-label-text-color: var(--gray-60);
   --tag-background-color: var(--background-light);
   --tag-border-color: var(--gray-30);
 
@@ -26,7 +25,6 @@
   align-items: center;
   padding: 0 var(--space-smallest);
   min-height: var(--tag-height);
-  font-weight: var(--font-weight-medium);
   font-size: var(--tag-font-size);
 }
 
@@ -36,7 +34,6 @@
 }
 
 .Tag__label {
-  color: var(--tag-label-text-color);
   margin-right: 3px;
   font-weight: var(--font-weight-medium);
 }
