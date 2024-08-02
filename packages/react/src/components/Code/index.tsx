@@ -6,6 +6,8 @@ import js from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
 import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
 import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
 import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
+import type { ContentNode } from '../../types';
+import Button, { ButtonProps } from '../Button';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
@@ -21,6 +23,9 @@ type Props = {
   language?: 'javascript' | 'css' | 'html' | 'yaml';
   className?: string;
   scrollable?: boolean;
+  label?: ContentNode;
+  allowCopy?: boolean;
+  copyButtonProps?: React.HTMLAttributes<HTMLButtonElement>;
 } & SyntaxHighlighterProps &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -28,6 +33,9 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   children,
   className,
   scrollable = false,
+  label,
+  allowCopy = false,
+  copyButtonProps,
   ...props
 }: Props) => {
   const ref = useRef<HTMLPreElement>(null);
@@ -38,6 +46,13 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   const PreWithRef = (preProps: React.HTMLAttributes<HTMLPreElement>) => (
     <pre {...preProps} ref={ref} />
   );
+
+  const handleCopy = () => {
+    if (ref.current) {
+      const text = ref.current.innerText;
+      navigator.clipboard.writeText(text);
+    }
+  };
 
   useEffect(() => {
     let observer: ResizeObserver;
@@ -64,17 +79,33 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   }, [scrollable]);
 
   return (
-    <Highlighter
-      {...props}
-      PreTag={PreWithRef}
-      useInlineStyles={false}
-      className={classNames('Code', className, {
-        'Code--scrollable': scrollable
-      })}
-      tabIndex={scrollableRegion ? 0 : undefined}
-    >
-      {children}
-    </Highlighter>
+    <>
+      {(label || allowCopy) && (
+        <div className="CodeWrapper">
+          {label && <div id="code-label">{label}</div>}
+          {allowCopy && (
+            <Button
+              variant="tertiary"
+              onClick={handleCopy}
+              {...copyButtonProps}
+            >
+              {copyButtonProps?.children || 'Copy'}
+            </Button>
+          )}
+        </div>
+      )}
+      <Highlighter
+        {...props}
+        PreTag={PreWithRef}
+        useInlineStyles={false}
+        className={classNames('Code', className, {
+          'Code--scrollable': scrollable
+        })}
+        tabIndex={scrollableRegion ? 0 : undefined}
+      >
+        {children}
+      </Highlighter>
+    </>
   );
 };
 
