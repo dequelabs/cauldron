@@ -50,3 +50,14 @@ test('should return no axe violations', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
+
+test('should return no axe violations for `small` size', async () => {
+  const { container } = render(
+    <Badge size="small">
+      <BadgeLabel>Label:</BadgeLabel> value
+    </Badge>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
