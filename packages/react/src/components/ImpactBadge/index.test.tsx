@@ -5,7 +5,11 @@ import ImpactBadge from './';
 
 test('should render critical `ImpactBadge`', () => {
   render(<ImpactBadge type="critical" />);
-  expect(screen.getByText(/critical/i)).toHaveClass('Badge', 'Badge--critical');
+  expect(screen.getByText(/critical/i)).toHaveClass(
+    'ImpactBadge',
+    'ImpactBadge--critical',
+    'Badge'
+  );
 });
 
 test('should render correct icon for `critical` type', () => {
@@ -18,7 +22,11 @@ test('should render correct icon for `critical` type', () => {
 
 test('should render serious `ImpactBadge`', () => {
   render(<ImpactBadge type="serious" />);
-  expect(screen.getByText(/serious/i)).toHaveClass('Badge', 'Badge--serious');
+  expect(screen.getByText(/serious/i)).toHaveClass(
+    'ImpactBadge',
+    'ImpactBadge--serious',
+    'Badge'
+  );
 });
 
 test('should render correct icon for `serious` type', () => {
@@ -31,7 +39,11 @@ test('should render correct icon for `serious` type', () => {
 
 test('should render moderate `ImpactBadge`', () => {
   render(<ImpactBadge type="moderate" />);
-  expect(screen.getByText(/moderate/i)).toHaveClass('Badge', 'Badge--moderate');
+  expect(screen.getByText(/moderate/i)).toHaveClass(
+    'ImpactBadge',
+    'ImpactBadge--moderate',
+    'Badge'
+  );
 });
 
 test('should render correct icon for `moderate` type', () => {
@@ -44,7 +56,11 @@ test('should render correct icon for `moderate` type', () => {
 
 test('should render minor `ImpactBadge`', () => {
   render(<ImpactBadge type="minor" />);
-  expect(screen.getByText(/minor/i)).toHaveClass('Badge', 'Badge--minor');
+  expect(screen.getByText(/minor/i)).toHaveClass(
+    'ImpactBadge',
+    'ImpactBadge--minor',
+    'Badge'
+  );
 });
 
 test('should render correct icon for `minor` type', () => {
@@ -58,8 +74,9 @@ test('should render correct icon for `minor` type', () => {
 test('passes classNames through', () => {
   render(<ImpactBadge type="critical" className="foo" />);
   expect(screen.getByText(/critical/i)).toHaveClass(
+    'ImpactBadge',
+    'ImpactBadge--critical',
     'Badge',
-    'Badge--critical',
     'foo'
   );
 });
@@ -72,7 +89,7 @@ test('passes arbitrary props through', () => {
 test('should render small `ImpactBadge`', () => {
   render(<ImpactBadge type="critical" size="small" />);
   const SmallBadge = screen.getByText(/critical/i);
-  expect(SmallBadge).toHaveClass('Badge--small');
+  expect(SmallBadge).toHaveClass('ImpactBadge', 'Badge--small');
 });
 
 test('should render custom lable', () => {

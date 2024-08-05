@@ -31,7 +31,7 @@ const ImpactBadge = forwardRef<HTMLDivElement, ImpactBadgeProps>(
   ({ type, label, className, ...other }, ref) => {
     return (
       <Badge
-        className={classNames(`Badge--${type}`, className)}
+        className={classNames(`ImpactBadge`, `ImpactBadge--${type}`, className)}
         ref={ref}
         {...other}
       >
