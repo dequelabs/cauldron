@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   size?: 'default' | 'small';
 }
