@@ -276,24 +276,16 @@ describe('when a tooltip is rendered within the dialog', () => {
     return { user, dialog, button, getTooltip };
   };
 
-  test('it should render the tooltip on hover', async () => {
+  test('it should close the tooltip but not the dialog on escape', async () => {
     const { user, dialog, button, getTooltip } = renderTooltipInDialog();
 
     expect(dialog).toBeVisible();
-
     expect(getTooltip()).not.toBeInTheDocument();
 
     await user.hover(button);
 
     expect(getTooltip()).toBeInTheDocument();
-  });
 
-  test('it should close the tooltip but not the dialog on escape', async () => {
-    const { user, dialog, button, getTooltip } = renderTooltipInDialog();
-
-    expect(dialog).toBeVisible();
-
-    await user.hover(button);
     await user.keyboard('{Escape}');
 
     expect(getTooltip()).not.toBeInTheDocument();
