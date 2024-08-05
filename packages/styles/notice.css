@@ -9,8 +9,6 @@
   --notice-border-color: var(--accent-dark);
   --notice-link-hover-color: var(--accent-medium);
   --notice-icon-size: 1rem;
-  --notice-border-thickness: 1px;
-  --notice-border-radius: 4px;
 }
 
 .Notice--info {
@@ -31,8 +29,8 @@
   gap: var(--space-small);
   padding: var(--space-large);
   align-items: start;
-  border-radius: var(--notice-border-radius);
-  border: var(--notice-border-thickness) solid var(--notice-border-color);
+  border-radius: 4px;
+  border: 1px solid var(--notice-border-color);
   background-color: var(--notice-background-color);
   color: var(--notice-text-color);
 }
@@ -55,7 +53,6 @@
 .Notice .Notice__title > :is(h1, h2, h3, h4, h5, h6) {
   display: flex;
   align-items: flex-start;
-  font-size: var(--text-size-small);
   font-weight: var(--notice-title-font-weight);
   margin: 0;
   padding: 0;
@@ -63,7 +60,7 @@
   color: var(--notice-title-text-color);
 }
 
-.Notice .Notice__content-wrapper {
+.Notice .Notice__content {
   margin-top: var(--space-smallest);
 }
 
@@ -82,7 +79,6 @@
 .Notice button.Link,
 .Notice a.Link {
   color: var(--accent-dark);
-  font-size: var(--text-size-small);
   font-weight: var(--font-weight-light);
   text-decoration: underline;
 }
@@ -98,7 +94,7 @@
   color: var(--notice-link-hover-color);
 }
 
-.Notice .Notice__content-wrapper > p:first-of-type {
+.Notice .Notice__content > p:first-of-type {
   margin-top: 0;
   margin-bottom: var(--space-smallest);
 }
