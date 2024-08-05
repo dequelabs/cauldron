@@ -10,15 +10,14 @@ interface BadgeLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const BadgeLabel = ({
-  children,
-  className,
-  ...other
-}: BadgeLabelProps) => (
-  <div className={classNames('Badge__Label', className)} {...other}>
-    {children}
-  </div>
+export const BadgeLabel = forwardRef<HTMLDivElement, BadgeLabelProps>(
+  ({ children, className, ...other }, ref) => (
+    <div ref={ref} className={classNames('Badge__Label', className)} {...other}>
+      {children}
+    </div>
+  )
 );
+
 BadgeLabel.displayName = 'BadgeLabel';
 
 const Badge = forwardRef<HTMLDivElement, BadgeProps>(
