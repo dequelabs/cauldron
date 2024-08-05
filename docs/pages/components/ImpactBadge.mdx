@@ -1,0 +1,64 @@
+---
+title: ImpactBadge
+description: The ImpactBadge is an extension of the Badge component is designed to indicate the type of impact
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ImpactBadge/index.tsx
+---
+
+import { ImpactBadge } from '@deque/cauldron-react';
+
+```js
+import { ImpactBadge } from '@deque/cauldron-react';
+```
+
+## Example
+
+### Critical
+
+```jsx example
+<ImpactBadge type="critical" />
+<ImpactBadge type="critical" size="small" style={{ marginLeft: 'var(--space-half)' }} />
+```
+
+### Serious
+
+```jsx example
+<ImpactBadge type="serious" />
+<ImpactBadge type="serious" size="small" style={{ marginLeft: 'var(--space-half)' }} />
+```
+
+### Moderate
+
+```jsx example
+<ImpactBadge type="moderate" />
+<ImpactBadge type="moderate" size="small" style={{ marginLeft: 'var(--space-half)' }} />
+```
+
+### Minor
+
+```jsx example
+<ImpactBadge type="minor" />
+<ImpactBadge type="minor" size="small" style={{ marginLeft: 'var(--space-half)' }} />
+```
+
+## Props
+
+### ImpactBadge
+
+<ComponentProps
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'type',
+      type: ['critical', 'serious', 'moderate', 'minor'],
+      description: 'Variant of impact level',
+      required: true
+    },
+    {
+      name: 'size',
+      type: ['default', 'small'],
+      defaultValue: 'default',
+      description: 'Visual style of the tag.'
+    }
+  ]}
+/>

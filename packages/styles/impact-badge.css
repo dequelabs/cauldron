@@ -1,0 +1,33 @@
+:root {
+  --impact-badge-critical-background-color: #fea7a6;
+  --impact-badge-critical-border-color: var(--accent-error-disabled);
+
+  --impact-badge-serious-background-color: var(--accent-caution);
+  --impact-badge-serious-border-color: var(--accent-warning);
+
+  --impact-badge-moderate-background-color: var(--issue-moderate);
+  --impact-badge-moderate-border-color: #eb94ff;
+
+  --impact-badge-minor-background-color: var(--issue-minor);
+  --impact-badge-minor-border-color: var(--gray-30);
+}
+
+.Badge--critical {
+  --badge-background-color: var(--impact-badge-critical-background-color);
+  --badge-border-color: var(--impact-badge-critical-border-color);
+}
+
+.Badge--serious {
+  --badge-background-color: var(--impact-badge-serious-background-color);
+  --badge-border-color: var(--impact-badge-serious-border-color);
+}
+
+.Badge--moderate {
+  --badge-background-color: var(--impact-badge-moderate-background-color);
+  --badge-border-color: var(--impact-badge-moderate-border-color);
+}
+
+.Badge--minor {
+  --badge-background-color: var(--impact-badge-minor-background-color);
+  --badge-border-color: var(--impact-badge-minor-border-color);
+}
