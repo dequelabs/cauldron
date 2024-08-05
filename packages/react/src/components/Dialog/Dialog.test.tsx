@@ -234,18 +234,36 @@ test('should set alignment on dialog footer', () => {
   expect(footer).toHaveClass('text--align-right');
 });
 
-test('it should call "onClose" when escape is pressed', async () => {
-  const user = userEvent.setup();
-  const onClose = spy();
-  render(
-    <Dialog {...defaultProps} onClose={onClose}>
-      Test Dialog
-    </Dialog>
-  );
+describe('when "forceAction" is false', () => {
+  test('it should call "onClose" when escape is pressed', async () => {
+    const user = userEvent.setup();
+    const onClose = jest.fn();
+    render(
+      <Dialog {...defaultProps} onClose={onClose} forceAction={false}>
+        Test Dialog
+      </Dialog>
+    );
 
-  expect(onClose.notCalled).toBeTruthy();
-  await user.keyboard('{Escape}');
-  await waitFor(() => expect(onClose.calledOnce).toBeTruthy());
+    expect(onClose).not.toHaveBeenCalled();
+    await user.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('when "forceAction" is true', () => {
+  test('it should not call "onClose" when escape is pressed', async () => {
+    const user = userEvent.setup();
+    const onClose = jest.fn();
+    render(
+      <Dialog {...defaultProps} onClose={onClose} forceAction={true}>
+        Test Dialog
+      </Dialog>
+    );
+
+    expect(onClose).not.toHaveBeenCalled();
+    await user.keyboard('{Escape}');
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
 
 describe('when a tooltip is rendered within the dialog', () => {
@@ -266,12 +284,12 @@ describe('when a tooltip is rendered within the dialog', () => {
 
     const user = userEvent.setup();
 
-    const doc = render(<CustomTooltipDialog />);
+    render(<CustomTooltipDialog />);
 
-    const dialog = doc.getByRole('dialog', { name: /tooltip dialog/i });
-    const button = doc.getByRole('button', { name: /show tooltip/i });
+    const dialog = screen.getByRole('dialog', { name: /tooltip dialog/i });
+    const button = screen.getByRole('button', { name: /show tooltip/i });
     const getTooltip = () =>
-      doc.queryByRole('tooltip', { name: /hello tooltip/i });
+      screen.queryByRole('tooltip', { name: /hello tooltip/i });
 
     return { user, dialog, button, getTooltip };
   };
