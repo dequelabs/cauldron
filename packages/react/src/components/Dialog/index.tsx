@@ -32,6 +32,9 @@ interface DialogState {
   isolator?: AriaIsolate;
 }
 
+const isEscape = (event: KeyboardEvent) =>
+  event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
+
 const noop = () => {
   //not empty
 };
@@ -53,11 +56,13 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     this.close = this.close.bind(this);
     this.focusHeading = this.focusHeading.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleEscape = this.handleEscape.bind(this);
     this.state = {};
   }
 
   componentDidMount() {
     if (this.props.show) {
+      this.attachEventListeners();
       this.attachIsolator(() => setTimeout(this.focusHeading));
     }
   }
@@ -65,12 +70,15 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
   componentWillUnmount() {
     const { isolator } = this.state;
     isolator?.deactivate();
+    this.removeEventListeners();
   }
 
   componentDidUpdate(prevProps: DialogProps) {
     if (!prevProps.show && this.props.show) {
       this.attachIsolator(this.focusHeading);
+      this.attachEventListeners();
     } else if (prevProps.show && !this.props.show) {
+      this.removeEventListeners();
       this.close();
     }
   }
@@ -119,8 +127,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       <FocusTrap
         focusTrapOptions={{
           allowOutsideClick: true,
-          onDeactivate: this.close,
-          escapeDeactivates: !forceAction,
+          escapeDeactivates: false,
           fallbackFocus: '.Dialog__heading'
         }}
       >
@@ -186,6 +193,29 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
       this.heading.focus();
     }
     this.state.isolator?.activate();
+  }
+
+  private handleEscape(keyboardEvent: KeyboardEvent) {
+    if (!keyboardEvent.defaultPrevented && isEscape(keyboardEvent)) {
+      this.close();
+    }
+  }
+
+  private attachEventListeners() {
+    const { forceAction } = this.props;
+    if (!forceAction) {
+      const portal = this.props.portal || document.body;
+      const targetElement =
+        portal instanceof HTMLElement ? portal : portal.current;
+      targetElement?.addEventListener('keyup', this.handleEscape);
+    }
+  }
+
+  private removeEventListeners() {
+    const portal = this.props.portal || document.body;
+    const targetElement =
+      portal instanceof HTMLElement ? portal : portal.current;
+    targetElement?.removeEventListener('keyup', this.handleEscape);
   }
 }
 
