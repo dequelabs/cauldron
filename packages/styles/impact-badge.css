@@ -1,8 +1,8 @@
 :root {
-  --impact-badge-critical-background-color: #fea7a6;
+  --impact-badge-critical-background-color: var(--issue-critical);
   --impact-badge-critical-border-color: var(--accent-error-disabled);
 
-  --impact-badge-serious-background-color: var(--accent-caution);
+  --impact-badge-serious-background-color: var(--issue-serious);
   --impact-badge-serious-border-color: var(--accent-warning);
 
   --impact-badge-moderate-background-color: var(--issue-moderate);

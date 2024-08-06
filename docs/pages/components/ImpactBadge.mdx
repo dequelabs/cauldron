@@ -16,28 +16,29 @@ import { ImpactBadge } from '@deque/cauldron-react';
 
 ```jsx example
 <ImpactBadge type="critical" />
-<ImpactBadge type="critical" size="small" style={{ marginLeft: 'var(--space-half)' }} />
 ```
 
 ### Serious
 
 ```jsx example
 <ImpactBadge type="serious" />
-<ImpactBadge type="serious" size="small" style={{ marginLeft: 'var(--space-half)' }} />
 ```
 
 ### Moderate
 
 ```jsx example
 <ImpactBadge type="moderate" />
-<ImpactBadge type="moderate" size="small" style={{ marginLeft: 'var(--space-half)' }} />
 ```
 
 ### Minor
 
 ```jsx example
 <ImpactBadge type="minor" />
-<ImpactBadge type="minor" size="small" style={{ marginLeft: 'var(--space-half)' }} />
+```
+
+### Small size
+```jsx example
+<ImpactBadge type="minor" size="small" />
 ```
 
 ## Props
@@ -59,6 +60,12 @@ import { ImpactBadge } from '@deque/cauldron-react';
       type: ['default', 'small'],
       defaultValue: 'default',
       description: 'Visual style of the tag.'
-    }
+    },
+    {
+      name: 'label',
+      type: 'ContentNode',
+      required: false,
+      description: 'Label for the ImpactBadge element.'
+    },
   ]}
 />

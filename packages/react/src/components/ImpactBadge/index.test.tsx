@@ -92,14 +92,33 @@ test('should render small `ImpactBadge`', () => {
   expect(SmallBadge).toHaveClass('ImpactBadge', 'Badge--small');
 });
 
-test('should render custom lable', () => {
+test('should render custom label', () => {
   render(<ImpactBadge type="critical" label="custom label" />);
   const CustomLabel = screen.getByText(/custom label/i);
   expect(CustomLabel).toBeInTheDocument();
+  expect(screen.queryByText(/critical/i)).not.toBeInTheDocument();
 });
 
 test('should return no axe violations', async () => {
-  const { container } = render(<ImpactBadge type="critical" />);
+  const { container } = render(
+    <>
+      <ImpactBadge type="critical" />
+      <ImpactBadge type="serious" />
+      <ImpactBadge type="moderate" />
+      <ImpactBadge type="minor" />
+
+      <ImpactBadge type="critical" size="small" />
+      <ImpactBadge type="serious" size="small" />
+      <ImpactBadge type="moderate" size="small" />
+      <ImpactBadge type="minor" size="small" />
+
+      <ImpactBadge
+        type="minor"
+        size="small"
+        label={'Custom Impact: Custom Minor'}
+      />
+    </>
+  );
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();

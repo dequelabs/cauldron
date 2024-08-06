@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import Badge, { BadgeLabel, BadgeProps } from '../Badge';
+import Badge, { BadgeLabel } from '../Badge';
 
 import { ContentNode } from '../../types';
 import Icon, { IconType } from '../Icon';
@@ -8,7 +8,8 @@ import classNames from 'classnames';
 
 type ImpactType = 'critical' | 'serious' | 'moderate' | 'minor';
 
-interface ImpactBadgeProps extends Omit<BadgeProps, 'children'> {
+interface ImpactBadgeProps
+  extends Omit<React.ComponentProps<typeof Badge>, 'children'> {
   type: ImpactType;
   label?: ContentNode;
 }
@@ -36,8 +37,12 @@ const ImpactBadge = forwardRef<HTMLDivElement, ImpactBadgeProps>(
         {...other}
       >
         <Icon type={iconByType[type]} />
-        <BadgeLabel>{label || 'Impact:'}</BadgeLabel>
-        {typeValues[type]}
+        {label || (
+          <>
+            <BadgeLabel>Impact:</BadgeLabel>
+            {typeValues[type]}
+          </>
+        )}
       </Badge>
     );
   }
