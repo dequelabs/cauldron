@@ -54,7 +54,7 @@
     "@babel/preset-typescript": "^7.24.7",
     "@fontsource/lato": "^4.5.0",
     "@fontsource/pt-mono": "^5.0.13",
-    "@fontsource/roboto": "^4.5.1",
+    "@fontsource/roboto": "^5.0.14",
     "@mdx-js/loader": "^2.3.0",
     "@playwright/experimental-ct-react17": "^1.46.0",
     "@playwright/test": "^1.46.0",
