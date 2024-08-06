@@ -24,6 +24,17 @@ import { Pagination } from '@deque/cauldron-react'
 <Pagination totalItems={15} thin />
 ```
 
+### Hiding Start and End Pagination Buttons
+
+Using `hideStartEndPagination` prop, you can hide the "First" and "Last" page buttons.
+
+```jsx example
+<Pagination
+  totalItems={30}
+  hideStartEndPagination
+/>
+```
+
 ### Customizing Pagination Labels
 
 The pagination component sets labels by default, but these labels can be overridden if you need to customize the labels based on the types of items that are being displayed or to provide the labels in a different locale.
@@ -157,6 +168,12 @@ The pagination hook returns an object containing the properties `pagination`, a 
       name: 'thin',
       type: 'boolean',
       description: 'Displays pagination with "thin" modifier (reduces the height of buttons and spacing)'
+    },
+    {
+      name: 'hideStartEndPagination',
+      type: 'boolean',
+      description: 'Hides "First page" and "Last page" buttons. Shows only "Next\Previous" buttons',
+      defaultValue: 'false'
     }
   ]}
 />
