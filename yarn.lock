@@ -1531,29 +1531,29 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@playwright/experimental-ct-core@1.45.3":
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.45.3.tgz#ab7ce11681c94f98399feb2a284a43be4aec877f"
-  integrity sha512-uYcWBxRPu2G2Mj2e+XUxRBzRNnG/Yz0A5DVWFewiG3qEfC92MaGYGxmzKeFeU9NcMA2fWwaqB3XWHXjn9qSM5Q==
+"@playwright/experimental-ct-core@1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.46.0.tgz#646fddab48597f41848fe3ffef6c6e49ec3fbb08"
+  integrity sha512-4bHw+P0ub0A/B6tbiqLQFwvaR+wsH5fE2yt1rxWg/dtE8uGhqEeAav9TX7j4PmILM86R3Le21h94wdDIHyeJBA==
   dependencies:
-    playwright "1.45.3"
-    playwright-core "1.45.3"
+    playwright "1.46.0"
+    playwright-core "1.46.0"
     vite "^5.2.8"
 
-"@playwright/experimental-ct-react17@^1.45.3":
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.45.3.tgz#128f074cd6c688313556d9ba8fd251477596b43b"
-  integrity sha512-KD01wy9x56UL+eygvLkLzRe0av/uYD7LLmKcBQBRg+moYeXPkSbhMnj7caSdnFEU2G8KzCHrCu2BOTG+OQ0pgA==
+"@playwright/experimental-ct-react17@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.46.0.tgz#7993b09f8a75ea22363133b748c62aeaab9928a9"
+  integrity sha512-JnmC3jWhqcnZEUEiHnEkVVlDN95bQARNskVKvDy9Vv3dQSe1MNzEJ+dGPqd2RH43cr3uGGDCMV17j4wC2jbZZA==
   dependencies:
-    "@playwright/experimental-ct-core" "1.45.3"
+    "@playwright/experimental-ct-core" "1.46.0"
     "@vitejs/plugin-react" "^4.2.1"
 
-"@playwright/test@^1.45.3":
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.45.3.tgz#22e9c38b3081d6674b28c6e22f784087776c72e5"
-  integrity sha512-UKF4XsBfy+u3MFWEH44hva1Q8Da28G6RFtR2+5saw+jgAFQV5yYnB1fu68Mz7fO+5GJF3wgwAIs0UelU8TxFrA==
+"@playwright/test@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.46.0.tgz#ccea6d22c40ee7fa567e4192fafbdf2a907e2714"
+  integrity sha512-/QYft5VArOrGRP5pgkrfKksqsKA6CEFyGQ/gjNe6q0y4tZ1aaPfq4gIjudr1s3D+pXyrPRdsy4opKDrjBabE5w==
   dependencies:
-    playwright "1.45.3"
+    playwright "1.46.0"
 
 "@puppeteer/browsers@2.2.3":
   version "2.2.3"
@@ -9258,17 +9258,17 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-playwright-core@1.45.3:
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.45.3.tgz#e77bc4c78a621b96c3e629027534ee1d25faac93"
-  integrity sha512-+ym0jNbcjikaOwwSZycFbwkWgfruWvYlJfThKYAlImbxUgdWFO2oW70ojPm4OpE4t6TAo2FY/smM+hpVTtkhDA==
+playwright-core@1.46.0:
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.46.0.tgz#2336ac453a943abf0dc95a76c117f9d3ebd390eb"
+  integrity sha512-9Y/d5UIwuJk8t3+lhmMSAJyNP1BUC/DqP3cQJDQQL/oWqAiuPTLgy7Q5dzglmTLwcBRdetzgNM/gni7ckfTr6A==
 
-playwright@1.45.3, playwright@^1.44.0:
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.45.3.tgz#75143f73093a6e1467f7097083d2f0846fb8dd2f"
-  integrity sha512-QhVaS+lpluxCaioejDZ95l4Y4jSFCsBvl2UZkpeXlzxmqS+aABr5c82YmfMHrL6x27nvrvykJAFpkzT2eWdJww==
+playwright@1.46.0, playwright@^1.44.0:
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.46.0.tgz#c7ff490deae41fc1e814bf2cb62109dd9351164d"
+  integrity sha512-XYJ5WvfefWONh1uPAUAi0H2xXV5S3vrtcnXe6uAOgdGi3aSpqOSXX08IAjXW34xitfuOJsvXU5anXZxPSEQiJw==
   dependencies:
-    playwright-core "1.45.3"
+    playwright-core "1.46.0"
   optionalDependencies:
     fsevents "2.3.2"
 
