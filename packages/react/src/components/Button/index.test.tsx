@@ -25,6 +25,12 @@ test('should render secondary button', () => {
   expect(SecondaryButton).toHaveClass('Button--secondary');
 });
 
+test('should render tertiary button', () => {
+  render(<Button variant="tertiary">tertiary</Button>);
+  const TertiaryButton = screen.getByRole('button', { name: 'tertiary' });
+  expect(TertiaryButton).toHaveClass('Button--tertiary');
+});
+
 test('should render error button', () => {
   render(<Button variant="error">error</Button>);
   const ErrorButton = screen.getByRole('button', { name: 'error' });
@@ -65,6 +71,9 @@ test('should return no axe violations', async () => {
     <>
       <Button>primary</Button>
       <Button variant="primary">primary</Button>
+      <Button variant="secondary">secondary</Button>
+      <Button variant="tertiary">tertiary</Button>
+      <Button variant="error">error</Button>
       <Button variant="link">link</Button>
       <Button>
         <Icon type="bolt" />

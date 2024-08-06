@@ -30,6 +30,16 @@ Primary icon buttons are used to indicate a primary action.
 <IconButton variant="primary" icon="pencil" label="Edit" disabled />
 ```
 
+### Tertiary
+
+Tertiary buttons are an alternate style of button with less visual prominence than primary or secondary actions.
+
+```jsx example
+<IconButton variant="tertiary" icon="pencil" label="Edit" />
+<IconButton variant="tertiary" icon="pencil" label="Edit" disabled />
+```
+
+
 ### Error
 
 Error buttons are used to indicate potentially dangerous actions.
@@ -75,6 +85,8 @@ If there are multiple icon buttons with the same label, the visible label text c
 <IconButton variant="secondary" icon="pencil" label="Edit" disabled large />
 <IconButton variant="primary" icon="pencil" label="Edit" large />
 <IconButton variant="primary" icon="pencil" label="Edit" disabled large />
+<IconButton variant="tertiary" icon="pencil" label="Edit" large />
+<IconButton variant="tertiary" icon="pencil" label="Edit" disabled large />
 ```
 
 ## Props
@@ -96,7 +108,7 @@ If there are multiple icon buttons with the same label, the visible label text c
     },
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'error'],
+      type: ['primary', 'secondary', 'tertiary', 'error'],
       defaultValue: 'secondary',
       description: 'Visual style of the IconButton.'
     },

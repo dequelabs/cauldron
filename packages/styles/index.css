@@ -1,4 +1,5 @@
 @import './variables.css';
+@import './typography.css';
 @import './base.css';
 @import './layout.css';
 @import './utilities.css';
@@ -45,3 +46,4 @@
 @import './timeline.css';
 @import './search-field.css';
 @import './text-ellipsis.css';
+@import './badge.css';
