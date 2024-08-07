@@ -8,6 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   totalItems: number;
   itemsPerPage?: number;
   currentPage?: number;
+  hideStartEndPagination?: boolean;
   statusLabel?: ContentNode;
   firstPageLabel?: ContentNode;
   previousPageLabel?: ContentNode;
@@ -28,6 +29,7 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
       totalItems,
       itemsPerPage = 10,
       currentPage = 1,
+      hideStartEndPagination = false,
       statusLabel,
       firstPageLabel = 'First page',
       previousPageLabel = 'Previous page',
@@ -58,15 +60,17 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
         {...other}
       >
         <ul>
-          <li>
-            <IconButton
-              icon="chevron-double-left"
-              tooltipProps={{ placement: tooltipPlacement }}
-              label={firstPageLabel}
-              aria-disabled={isFirstPage}
-              onClick={isFirstPage ? undefined : onFirstPageClick}
-            />
-          </li>
+          {!hideStartEndPagination && (
+            <li>
+              <IconButton
+                icon="chevron-double-left"
+                tooltipProps={{ placement: tooltipPlacement }}
+                label={firstPageLabel}
+                aria-disabled={isFirstPage}
+                onClick={isFirstPage ? undefined : onFirstPageClick}
+              />
+            </li>
+          )}
 
           <li>
             <IconButton
@@ -99,15 +103,17 @@ const Pagination = React.forwardRef<HTMLDivElement, Props>(
             />
           </li>
 
-          <li>
-            <IconButton
-              icon="chevron-double-right"
-              tooltipProps={{ placement: tooltipPlacement }}
-              label={lastPageLabel}
-              aria-disabled={isLastPage}
-              onClick={isLastPage ? undefined : onLastPageClick}
-            />
-          </li>
+          {!hideStartEndPagination && (
+            <li>
+              <IconButton
+                icon="chevron-double-right"
+                tooltipProps={{ placement: tooltipPlacement }}
+                label={lastPageLabel}
+                aria-disabled={isLastPage}
+                onClick={isLastPage ? undefined : onLastPageClick}
+              />
+            </li>
+          )}
         </ul>
       </div>
     );

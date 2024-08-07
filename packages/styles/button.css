@@ -255,6 +255,10 @@ button.Link {
   color: var(--accent-light);
 }
 
+.cauldron--theme-dark .Button--tertiary:is(:hover, :active, :focus) {
+  border: 2px solid var(--accent-light);
+}
+
 .cauldron--theme-dark .Button--tertiary:not(:hover, :focus) {
   color: #fff;
 }
