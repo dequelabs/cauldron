@@ -142,6 +142,7 @@ export default function Tooltip({
         event.key === 'Esc' ||
         event.keyCode === 27
       ) {
+        event.preventDefault();
         setShowTooltip(false);
       }
     };
