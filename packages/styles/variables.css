@@ -27,6 +27,7 @@
   --accent-success-dark: #57a711;
   --accent-error: #d93251;
   --accent-error-active: #c92e40;
+  --accent-danger-active: #fea7a6;
   --accent-danger: #fe6d6b;
   --accent-danger-light: #f7846c;
   --accent-warning: #ffdd75;
@@ -45,8 +46,8 @@
   --light-workspace-color: #f7f7f7;
   --focus-light: #b51ad1;
   --focus-dark: #f5a4ff;
-  --issue-critical: var(--accent-danger);
-  --issue-serious: var(--accent-warning);
+  --issue-critical: var(--accent-danger-active);
+  --issue-serious: var(--accent-caution);
   --issue-moderate: #f0c4f8;
   --issue-minor: var(--gray-20);
 
