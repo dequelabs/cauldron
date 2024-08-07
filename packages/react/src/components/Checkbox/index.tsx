@@ -1,7 +1,6 @@
 import React, {
   InputHTMLAttributes,
   forwardRef,
-  Ref,
   useState,
   useEffect,
   useRef,
@@ -9,7 +8,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
-import Icon from '../Icon';
+import Icon, { IconType } from '../Icon';
 import { addIdRef } from '../../utils/idRefs';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,7 +17,8 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   labelDescription?: React.ReactNode;
   error?: React.ReactNode;
   customIcon?: React.ReactNode;
-  checkboxRef?: Ref<HTMLInputElement>;
+  checkboxRef?: React.ForwardedRef<HTMLInputElement>;
+  indeterminate?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -36,6 +36,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       'aria-describedby': ariaDescribedby,
       disabled = false,
       checked = false,
+      indeterminate = false,
       children,
       ...other
     }: CheckboxProps,
@@ -43,16 +44,27 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ): JSX.Element => {
     const [isChecked, setIsChecked] = useState(checked);
     const [focused, setFocused] = useState(false);
-    const checkRef = useRef<HTMLInputElement>(null);
+    const checkRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
       setIsChecked(checked);
     }, [checked]);
 
     const refProp = ref || checkboxRef;
-    if (typeof refProp === 'function') {
-      refProp(checkRef.current);
-    }
+
+    const refCallback = (elem: HTMLInputElement | null): void => {
+      checkRef.current = elem;
+
+      if (refProp && typeof refProp === 'function') {
+        refProp(elem);
+      } else if (refProp) {
+        refProp.current = elem;
+      }
+
+      if (elem) {
+        elem.indeterminate = indeterminate;
+      }
+    };
 
     const { errorId, labelDescriptionId } = useMemo(() => {
       return {
@@ -71,12 +83,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       ariaDescribedbyId = addIdRef(ariaDescribedbyId, labelDescriptionId);
     }
 
+    const iconType: IconType = indeterminate
+      ? 'checkbox-indeterminate'
+      : isChecked
+      ? 'checkbox-checked'
+      : 'checkbox-unchecked';
+
     return (
       <div className="Checkbox__wrap">
         <div className={classNames('Checkbox is--flex-row', className)}>
           <input
             id={id}
-            ref={typeof refProp === 'function' || !refProp ? checkRef : refProp}
+            ref={refCallback}
             type="checkbox"
             checked={isChecked}
             disabled={disabled}
@@ -92,6 +110,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 onBlur(e);
               }
             }}
+            aria-checked={
+              indeterminate ? 'mixed' : isChecked ? 'true' : 'false'
+            }
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
               setIsChecked(e.target.checked);
@@ -115,11 +136,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               'Checkbox__overlay--focused': focused,
               'Field--has-error': error
             })}
-            type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
+            type={iconType}
             aria-hidden="true"
             onClick={(): void => {
               if (refProp && typeof refProp !== 'function') {
-                refProp?.current?.click();
+                refProp.current?.click();
               } else {
                 checkRef.current?.click();
               }

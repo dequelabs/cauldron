@@ -20,6 +20,11 @@
   --field-icon-inactive-color: var(--gray-90);
   --field-icon-active-color: rgba(60, 122, 174, 0.25);
   --field-icon-error-active-color: rgba(217, 50, 81, 0.25);
+  --field-icon-indeterminate-color: var(--accent-primary);
+  --field-icon-indeterminate-disabled-color: var(
+    --accent-primary-dsiabled,
+    #78a6d8
+  );
   --field-icon-checked-color: var(--accent-primary);
   --field-icon-checked-disabled-color: var(--accent-primary-dsiabled, #78a6d8);
   --field-icon-unchecked-disabled-color: var(--gray-40);
@@ -433,6 +438,15 @@ textarea.Field--has-error:focus:hover,
   top: 8px;
   left: 8px;
   appearance: none;
+}
+
+.Checkbox__overlay.Icon--checkbox-indeterminate {
+  color: var(--field-icon-indeterminate-color);
+}
+
+.Checkbox__overlay--disabled.Icon--checkbox-indeterminate {
+  color: var(--field-icon-indeterminate-disabled-color);
+  cursor: default;
 }
 
 .Checkbox__overlay.Checkbox__overlay--focused,

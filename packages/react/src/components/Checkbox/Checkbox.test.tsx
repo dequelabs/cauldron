@@ -46,6 +46,29 @@ test('should render disabled checked checkbox', () => {
   expect(input).toBeChecked();
 });
 
+test('should render indeterminate checkbox', () => {
+  const ref = createRef<HTMLInputElement>();
+  render(<Checkbox id="id" label="checkbox" ref={ref} indeterminate />);
+  expect(ref.current).toBeInstanceOf(HTMLInputElement);
+  expect(ref.current?.indeterminate).toBeTruthy();
+  expect(ref.current).toEqual(
+    screen.queryByRole('checkbox', { name: 'checkbox' })
+  );
+});
+
+test('should render disabled indeterminate checkbox', () => {
+  const ref = createRef<HTMLInputElement>();
+  render(
+    <Checkbox id="id" label="checkbox" ref={ref} disabled indeterminate />
+  );
+  expect(ref.current).toBeInstanceOf(HTMLInputElement);
+  expect(ref.current?.indeterminate).toBeTruthy();
+  expect(ref.current).toBeDisabled();
+  expect(ref.current).toEqual(
+    screen.queryByRole('checkbox', { name: 'checkbox' })
+  );
+});
+
 test('should render error checkbox', () => {
   const input = renderCheckbox({ error: 'you should check this checkbox' });
   expect(input).toHaveAccessibleDescription('you should check this checkbox');
