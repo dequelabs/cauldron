@@ -69,6 +69,8 @@ export { default as Code } from './components/Code';
 export { default as LoaderOverlay } from './components/LoaderOverlay';
 export { default as Line } from './components/Line';
 export { default as Tag, TagLabel } from './components/Tag';
+export { default as Badge, BadgeLabel } from './components/Badge';
+export { default as ImpactBadge } from './components/ImpactBadge';
 export { default as TagButton } from './components/TagButton';
 export {
   default as Table,

@@ -34,7 +34,7 @@ export interface IconButtonProps
    * @deprecated use `tooltipProps.portal` instead
    */
   tooltipPortal?: TooltipProps['portal'];
-  variant?: 'primary' | 'secondary' | 'error';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'error';
   large?: boolean;
 }
 
@@ -108,6 +108,7 @@ const IconButton = forwardRef(
             IconButton: true,
             'IconButton--primary': variant === 'primary',
             'IconButton--secondary': variant === 'secondary',
+            'IconButton--tertiary': variant === 'tertiary',
             'IconButton--error': variant === 'error',
             'IconButton--large': large
           })}

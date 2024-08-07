@@ -272,3 +272,21 @@ test('returns no axe violations', async () => {
   const { container } = render(<Pagination totalItems={500} currentPage={3} />);
   expect(await axe(container)).toHaveNoViolations();
 });
+
+test('should show start and end pagination buttons when hideStartEndPagination is not provided', () => {
+  render(<Pagination totalItems={18} currentPage={1} />);
+
+  expect(screen.getByText('First page')).toBeInTheDocument();
+  expect(screen.getByText('Previous page')).toBeInTheDocument();
+  expect(screen.getByText('Next page')).toBeInTheDocument();
+  expect(screen.getByText('Last page')).toBeInTheDocument();
+});
+
+test('should hide start and end pagination buttons when hideStartEndPagination is true', () => {
+  render(<Pagination totalItems={18} currentPage={1} hideStartEndPagination />);
+
+  expect(screen.queryByText('First page')).not.toBeInTheDocument();
+  expect(screen.queryByText('Last page')).not.toBeInTheDocument();
+  expect(screen.getByText('Previous page')).toBeInTheDocument();
+  expect(screen.getByText('Next page')).toBeInTheDocument();
+});

@@ -3,6 +3,8 @@
 1. [Getting Started](#getting-started)
    - [Discussing Proprietary Features](#discussing-proprietary-features)
    - [Setup](#setup)
+1. [Adding New Components](#adding-new-components)
+   - [Process for New Components](#process-for-new-components) 
 1. [Developing Components](#developing-components)
    - [Tools Used](#tools-used)
    - [Structure](#structure)
@@ -19,7 +21,7 @@
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
    - [Styles](#styles)
-   - [Deprecating](#deprectating)
+   - [Deprecating](#deprecating)
    - [Removal](#removal)
 
 ## Getting Started
@@ -35,6 +37,53 @@ This is a public repo, so care needs to be taken to not include details or scree
 ### Setup
 
 Local development setup is documented in [this project's readme](./README.md#development)
+
+## Adding New Components
+
+One of Cauldron's primary goals is to provide high quality, stable, reusable components. This process is intentially slow because it is a critical front-end infrastructure of Deque's products.
+
+As such, components that land in Cauldron tend to have several, if not all of the following qualities:
+
+- Likely to be used more than once
+- Solves a single problem particularly well
+- Provides a similar interface to established Cauldron components
+- Does not rely on product specific dependencies or patterns
+- Does not contain side effects (like data fetching)
+- A single pattern that is replacing multiple existing patterns within products
+- Upstreaming an existing common shared pattern that exists in products
+
+There is a natural friction between the speed at which Cauldron moves as a design system, and how products need to quickly iterate and release new features. We want to strike a balance between avoiding "junk" in our design system, but still allowing for Deque products to develop without Cauldron being a bottleneck.
+
+### Process for New Components
+
+For a new component to be added to Cauldron, the below workflow describes the desired process for a new Component:
+
+<details>
+   <summary>Workflow chart describing process and steps to getting a component added to Cauldron</summary>
+
+   ![workflow chart describing process and steps to getting a component added to Cauldron](./docs/assets/img/new-component-workflow.png)
+
+</details>
+
+<details>
+  <summary>Long description for the above flow chart</summary>
+  
+1. Does a component already exist in Cauldron? If yes, go to 2. If no, go to 3.
+2. Does it fully support your use case? If yes, the component is ready to use. If no, continue:
+    - Create an RFC to make changes to Cauldron
+    - A technical and design review is performed by the Cauldron team
+    - Continue to 6.
+3. Does a similar component already exist in Cauldron? If yes, go to 2. If no, go to 4.
+4. Does something similar exist for shared product ui? If yes, go to 8. If no, go to 5.
+5. Is this a general use pattern? If yes, complete steps under 2. If no, go to 7. If you're unsure, have a conversation with the Cauldron team to help determine general use and repeat this step.
+6. Was the RFC accepted? If no, build component in shared product ui. If yes, continue:
+    - Team submits PR(s) to Cauldron according to the accepted proposal
+    - A new release of Cauldron is cut
+    - Component is ready to use
+7. Can the pattern be made more general use? If yes, go to 9. If no, build the pattern as a one-off pattern.
+8. Does it fully support your use case? If yes, use existing shared product ui component. If no, build component in shared product ui.
+9. Does the pattern depend on propietary information? If yes, build component in shared product ui (launchpad). If no, complete steps under 2.
+</details>
 
 ## Developing Components
 
