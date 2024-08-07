@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { createSandbox } from 'sinon';
 import Code from './';
@@ -14,13 +15,6 @@ beforeEach(() => {
       observe: sandbox.stub(),
       disconnect: sandbox.stub()
     };
-  });
-
-  // Mock the clipboard API
-  Object.assign(navigator, {
-    clipboard: {
-      writeText: jest.fn()
-    }
   });
 });
 
@@ -123,13 +117,16 @@ test('should render copy button when allowCopy is true', () => {
   expect(getByText('Copy')).toBeInTheDocument();
 });
 
-test('should copy code to clipboard when copy button is clicked', () => {
-  jest.spyOn(navigator.clipboard, 'writeText');
+test('should copy code to clipboard when copy button is clicked', async () => {
+  const user = userEvent.setup();
+  const clipboardWriteText = jest.spyOn(
+    global.navigator.clipboard,
+    'writeText'
+  );
   const { getByText } = render(
     <Code language="javascript" allowCopy>{`var some = "javascript"`}</Code>
   );
-  fireEvent.click(getByText('Copy'));
-  expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-    'var some = "javascript"'
-  );
+  const btn = getByText('Copy');
+  await user.click(btn);
+  expect(clipboardWriteText).toHaveBeenCalledWith('var some = "javascript"');
 });

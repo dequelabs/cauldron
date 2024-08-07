@@ -8,6 +8,7 @@ import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
 import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
 import type { ContentNode } from '../../types';
 import Button, { ButtonProps } from '../Button';
+import { useId } from 'react-id-generator';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
@@ -25,7 +26,7 @@ type Props = {
   scrollable?: boolean;
   label?: ContentNode;
   allowCopy?: boolean;
-  copyButtonProps?: React.HTMLAttributes<HTMLButtonElement>;
+  copyButtonProps?: ButtonProps;
 } & SyntaxHighlighterProps &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -40,6 +41,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
 }: Props) => {
   const ref = useRef<HTMLPreElement>(null);
   const [scrollableRegion, setScrollableRegion] = useState(false);
+  const [id] = useId(1, 'code');
   // react-syntax-highlighter does not provide direct access to its dom elements
   // via refs, but we can specify the wrapping tags to bypass this limitation
   // see: https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/335
@@ -81,8 +83,12 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   return (
     <>
       {(label || allowCopy) && (
-        <div className="CodeWrapper">
-          {label && <div id="code-label">{label}</div>}
+        <div className="Code__Header">
+          {label && (
+            <div>
+              <span id={`${id}-label`}>{label}</span>
+            </div>
+          )}
           {allowCopy && (
             <Button
               variant="tertiary"
