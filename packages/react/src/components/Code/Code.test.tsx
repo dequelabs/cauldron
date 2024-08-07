@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { createSandbox } from 'sinon';
 import Code from './';
@@ -19,6 +20,7 @@ beforeEach(() => {
 
 afterEach(() => {
   sandbox.restore();
+  jest.resetAllMocks();
 });
 
 test('should render Code block', () => {
@@ -84,4 +86,47 @@ test('should return no axe violations when scrollable', async () => {
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations with label and copy button', async () => {
+  const { container } = render(
+    <Code
+      language="javascript"
+      label="Code Block Label"
+      allowCopy
+    >{`var some = "javascript"`}</Code>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should render label when provided', () => {
+  const { getByText } = render(
+    <Code
+      language="javascript"
+      label="Code Block Label"
+    >{`var some = "javascript"`}</Code>
+  );
+  expect(getByText('Code Block Label')).toBeInTheDocument();
+});
+
+test('should render copy button when allowCopy is true', () => {
+  const { getByText } = render(
+    <Code language="javascript" allowCopy>{`var some = "javascript"`}</Code>
+  );
+  expect(getByText('Copy')).toBeInTheDocument();
+});
+
+test('should copy code to clipboard when copy button is clicked', async () => {
+  const user = userEvent.setup();
+  const clipboardWriteText = jest.spyOn(
+    global.navigator.clipboard,
+    'writeText'
+  );
+  const { getByText } = render(
+    <Code language="javascript" allowCopy>{`var some = "javascript"`}</Code>
+  );
+  const btn = getByText('Copy');
+  await user.click(btn);
+  expect(clipboardWriteText).toHaveBeenCalledWith('var some = "javascript"');
 });
