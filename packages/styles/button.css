@@ -210,6 +210,15 @@ button.Link {
   padding: 0 var(--space-small);
 }
 
+.Button--condensed {
+  min-width: var(--button-height);
+  padding: 0;
+}
+
+.Button--condensed:is(.Button--thin) {
+  min-width: var(--button-thin-height);
+}
+
 [class*='Button--'] + [class*='Button--'] {
   margin-left: var(--space-smallest);
 }

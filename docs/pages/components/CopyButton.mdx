@@ -1,0 +1,99 @@
+---
+title: CopyButton
+description: An interactive component that copies the provided value to the user's clipboard when clicked.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/CopyButton/index.tsx
+---
+
+import { CopyButton } from '@deque/cauldron-react'
+
+```js
+import { CopyButton } from '@deque/cauldron-react'
+```
+
+## Examples
+
+### Default
+
+```jsx example
+<CopyButton value="text to copy" />
+```
+
+### Label
+
+Both the accessible name and the notification label can be customized.
+
+```jsx example
+<CopyButton 
+  value="body { color: green; }"
+  notificationLabel="CSS Selector Copied!"
+>
+  Copy CSS Selector
+</CopyButton>
+```
+
+### Hide Visible Label
+
+When space is limited, the visible label of the button can be optionally hidden, with the label show on hover or focus with a tooltip.
+
+```jsx example
+<CopyButton 
+  value="text to copy" 
+  hideVisibleLabel
+/>
+```
+
+### Variants
+
+`CopyButton` is an extension of `Button` and limited variants are available to be used:
+
+```jsx example
+<CopyButton variant="primary" value="text to copy" />
+<CopyButton variant="secondary" value="text to copy" thin />
+```
+
+## Props
+
+Unless otherwise noted, prop types are inherited from [Button](./Button).
+
+<ComponentProps
+  children={{
+    type: 'ContentNode',
+    description: 'The accessible name of the button. Defaults to "Copy".'
+  }}
+  refType="HTMLButtonElement"
+  props={[
+    {
+      name: 'value',
+      required: true,
+      description: 'The text to copy upon activation of the button.'
+    },
+    {
+      name: 'variant',
+      type: ['primary', 'secondary', 'tertiary'],
+      defaultValue: 'tertiary',
+      description: 'Visual style of the button.'
+    },
+    {
+      name: 'notificationLabel',
+      type: 'ContentNode',
+      defaultValue: '"Copied"',
+      description: 'The status notification that appears after the text has been copied.'
+    },
+    {
+      name: 'tooltipPlacement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'The placement of the tooltip relative to the button.'
+    },
+    {
+      name: 'onCopy',
+      type: 'function',
+      description: 'Callback function invoked with the value of the copied text after the text has been copied.'
+    }
+
+  ]}
+/>
+
+## Related Components
+
+- [Button](./Button)
