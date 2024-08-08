@@ -20,11 +20,6 @@
   --field-icon-inactive-color: var(--gray-90);
   --field-icon-active-color: rgba(60, 122, 174, 0.25);
   --field-icon-error-active-color: rgba(217, 50, 81, 0.25);
-  --field-icon-indeterminate-color: var(--accent-primary);
-  --field-icon-indeterminate-disabled-color: var(
-    --accent-primary-dsiabled,
-    #78a6d8
-  );
   --field-icon-checked-color: var(--accent-primary);
   --field-icon-checked-disabled-color: var(--accent-primary-dsiabled, #78a6d8);
   --field-icon-unchecked-disabled-color: var(--gray-40);
@@ -440,12 +435,14 @@ textarea.Field--has-error:focus:hover,
   appearance: none;
 }
 
-.Checkbox__overlay.Icon--checkbox-indeterminate {
-  color: var(--field-icon-indeterminate-color);
+.Checkbox input[type='checkbox']:indeterminate ~ .Checkbox__overlay.Icon {
+  color: var(--field-icon-checked-color);
 }
 
-.Checkbox__overlay--disabled.Icon--checkbox-indeterminate {
-  color: var(--field-icon-indeterminate-disabled-color);
+.Checkbox
+  input[type='checkbox']:indeterminate
+  ~ .Checkbox__overlay--disabled.Icon {
+  color: var(--field-icon-checked-disabled-color);
   cursor: default;
 }
 
@@ -474,6 +471,29 @@ textarea.Field--has-error:focus:hover,
 .Field__label:hover ~ .Radio__overlay:not(.Radio__overlay--disabled),
 .Radio__overlay:hover:not(.Radio__overlay--disabled) {
   border: 1px solid currentColor;
+}
+
+.Checkbox input[type='checkbox']:indeterminate ~ .Checkbox__overlay:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: calc(var(--icon-size) - 8px);
+  width: calc(var(--icon-size) - 8px);
+  background: currentColor;
+  transform: translate(4px, 4px);
+}
+
+.Checkbox input[type='checkbox']:indeterminate ~ .Checkbox__overlay:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: calc(var(--icon-size) / 3);
+  background-color: var(--workspace-background-color);
+  transform: translate(
+    calc(var(--icon-size) / 3),
+    calc(var(--icon-size) / 2 * -1 - 1.5px)
+  );
 }
 
 .Checkbox input[type='checkbox'] {

@@ -43,28 +43,23 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ref
   ): JSX.Element => {
     const [isChecked, setIsChecked] = useState(checked);
+    const [isIndeterminate, setIsIndeterminate] = useState(indeterminate);
     const [focused, setFocused] = useState(false);
-    const checkRef = useRef<HTMLInputElement | null>(null);
+    const checkRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
       setIsChecked(checked);
     }, [checked]);
 
+    useEffect(() => {
+      setIsIndeterminate(indeterminate);
+    }, [indeterminate]);
+
     const refProp = ref || checkboxRef;
 
-    const refCallback = (elem: HTMLInputElement | null): void => {
-      checkRef.current = elem;
-
-      if (refProp && typeof refProp === 'function') {
-        refProp(elem);
-      } else if (refProp) {
-        refProp.current = elem;
-      }
-
-      if (elem) {
-        elem.indeterminate = indeterminate;
-      }
-    };
+    if (typeof refProp === 'function') {
+      refProp(checkRef.current);
+    }
 
     const { errorId, labelDescriptionId } = useMemo(() => {
       return {
@@ -83,18 +78,29 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       ariaDescribedbyId = addIdRef(ariaDescribedbyId, labelDescriptionId);
     }
 
-    const iconType: IconType = indeterminate
-      ? 'checkbox-indeterminate'
-      : isChecked
+    const iconType: IconType = isChecked
       ? 'checkbox-checked'
       : 'checkbox-unchecked';
+
+    useEffect(() => {
+      let input: HTMLInputElement | null;
+      if (refProp && typeof refProp !== 'function') {
+        input = refProp.current;
+      } else {
+        input = checkRef.current;
+      }
+
+      if (input) {
+        input.indeterminate = isIndeterminate;
+      }
+    }, [isIndeterminate, refProp, checkRef]);
 
     return (
       <div className="Checkbox__wrap">
         <div className={classNames('Checkbox is--flex-row', className)}>
           <input
             id={id}
-            ref={refCallback}
+            ref={typeof refProp === 'function' || !refProp ? checkRef : refProp}
             type="checkbox"
             checked={isChecked}
             disabled={disabled}
@@ -110,11 +116,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 onBlur(e);
               }
             }}
-            aria-checked={
-              indeterminate ? 'mixed' : isChecked ? 'true' : 'false'
-            }
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
+              if (isIndeterminate) {
+                setIsIndeterminate(false);
+              }
               setIsChecked(e.target.checked);
               if (onChange) {
                 onChange(e);

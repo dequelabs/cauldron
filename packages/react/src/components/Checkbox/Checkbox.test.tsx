@@ -47,26 +47,14 @@ test('should render disabled checked checkbox', () => {
 });
 
 test('should render indeterminate checkbox', () => {
-  const ref = createRef<HTMLInputElement>();
-  render(<Checkbox id="id" label="checkbox" ref={ref} indeterminate />);
-  expect(ref.current).toBeInstanceOf(HTMLInputElement);
-  expect(ref.current?.indeterminate).toBeTruthy();
-  expect(ref.current).toEqual(
-    screen.queryByRole('checkbox', { name: 'checkbox' })
-  );
+  const input = renderCheckbox({ indeterminate: true });
+  expect(input).toBePartiallyChecked();
 });
 
 test('should render disabled indeterminate checkbox', () => {
-  const ref = createRef<HTMLInputElement>();
-  render(
-    <Checkbox id="id" label="checkbox" ref={ref} disabled indeterminate />
-  );
-  expect(ref.current).toBeInstanceOf(HTMLInputElement);
-  expect(ref.current?.indeterminate).toBeTruthy();
-  expect(ref.current).toBeDisabled();
-  expect(ref.current).toEqual(
-    screen.queryByRole('checkbox', { name: 'checkbox' })
-  );
+  const input = renderCheckbox({ disabled: true, indeterminate: true });
+  expect(input).toBeDisabled();
+  expect(input).toBePartiallyChecked();
 });
 
 test('should render error checkbox', () => {
@@ -199,6 +187,18 @@ test('should have no axe violations with checked checkbox', async () => {
 
 test('should have no axe violations with disabled checkbox', async () => {
   const input = renderCheckbox({ disabled: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with indeterminate checkbox', async () => {
+  const input = renderCheckbox({ indeterminate: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with disabled indeterminate checkbox', async () => {
+  const input = renderCheckbox({ disabled: true, indeterminate: true });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });
