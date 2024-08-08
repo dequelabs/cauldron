@@ -1,21 +1,26 @@
 import React, { useRef } from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import axe from '../../axe';
 import Popover from '../Popover';
 import AriaIsolate from '../../utils/aria-isolate';
 
 let wrapperNode: HTMLDivElement | null;
+let mountNode: HTMLElement | null;
 beforeEach(() => {
   wrapperNode = document.createElement('div');
   wrapperNode.innerHTML = `
     <button>Click Me!</button>
+    <div id="#mount"></div>
   `;
   document.body.appendChild(wrapperNode);
+  mountNode = document.getElementById('mount');
 });
 
 afterEach(() => {
   document.body.innerHTML = '';
   wrapperNode = null;
+  mountNode = null;
 });
 
 const Wrapper = ({
@@ -163,10 +168,13 @@ test('should call onClose on escape keypress', async () => {
 
 test('should call onClose on clicking outside', async () => {
   const onClose = jest.fn();
-  render(<Wrapper tooltipProps={{ onClose }} />);
+  const user = userEvent.setup();
+  render(<Wrapper tooltipProps={{ onClose }} />, {
+    container: mountNode as HTMLElement
+  });
   const outsideButton = await screen.findByText(/Click Me!/i);
   expect(outsideButton).toBeTruthy();
-  fireEvent.click(outsideButton);
+  await user.click(outsideButton);
   await waitFor(() => expect(onClose).toBeCalled());
 });
 

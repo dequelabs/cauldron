@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import OptionsMenu from './';
 import axe from '../../axe';
 
@@ -117,7 +118,9 @@ test('should click trigger with down key on trigger', () => {
   expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
 });
 
-test('should focus trigger on close', () => {
+test('should focus trigger on close', async () => {
+  const user = userEvent.setup();
+
   render(
     <OptionsMenu trigger={trigger}>
       <li className="foo">option 1</li>
@@ -126,8 +129,8 @@ test('should focus trigger on close', () => {
 
   const button = screen.getByRole('button');
 
-  fireEvent.click(button);
-  fireEvent.click(button); // to close
+  await user.click(button); // opens menu
+  await user.click(button); // closes menu
   expect(button).toHaveFocus();
 });
 
@@ -147,7 +150,9 @@ test('should call onClose when closed', () => {
   expect(onClose).toBeCalled();
 });
 
-test('should close menu when click outside event occurs', () => {
+test('should close menu when click outside event occurs', async () => {
+  const user = userEvent.setup();
+
   render(
     <>
       <button>Click me!</button>
@@ -156,9 +161,10 @@ test('should close menu when click outside event occurs', () => {
       </OptionsMenu>
     </>
   );
-  fireEvent.click(screen.getByRole('button', { name: 'trigger' }));
+
+  await user.click(screen.getByRole('button', { name: 'trigger' }));
   expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'true');
-  fireEvent.click(screen.getByRole('button', { name: 'Click me!' }));
+  await user.click(screen.getByRole('button', { name: 'Click me!' }));
   expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'false');
 });
 
