@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
-import Icon, { IconType } from '../Icon';
+import Icon, { type IconType } from '../Icon';
 import { addIdRef } from '../../utils/idRefs';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
