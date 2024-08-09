@@ -1,7 +1,6 @@
 import React, {
   InputHTMLAttributes,
   forwardRef,
-  Ref,
   useState,
   useEffect,
   useRef,
@@ -9,7 +8,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
-import Icon from '../Icon';
+import Icon, { type IconType } from '../Icon';
 import { addIdRef } from '../../utils/idRefs';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,7 +17,8 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   labelDescription?: React.ReactNode;
   error?: React.ReactNode;
   customIcon?: React.ReactNode;
-  checkboxRef?: Ref<HTMLInputElement>;
+  checkboxRef?: React.ForwardedRef<HTMLInputElement>;
+  indeterminate?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -36,12 +36,14 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       'aria-describedby': ariaDescribedby,
       disabled = false,
       checked = false,
+      indeterminate = false,
       children,
       ...other
     }: CheckboxProps,
     ref
   ): JSX.Element => {
     const [isChecked, setIsChecked] = useState(checked);
+    const [isIndeterminate, setIsIndeterminate] = useState(indeterminate);
     const [focused, setFocused] = useState(false);
     const checkRef = useRef<HTMLInputElement>(null);
 
@@ -49,7 +51,12 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       setIsChecked(checked);
     }, [checked]);
 
+    useEffect(() => {
+      setIsIndeterminate(indeterminate);
+    }, [indeterminate]);
+
     const refProp = ref || checkboxRef;
+
     if (typeof refProp === 'function') {
       refProp(checkRef.current);
     }
@@ -70,6 +77,23 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     if (labelDescription) {
       ariaDescribedbyId = addIdRef(ariaDescribedbyId, labelDescriptionId);
     }
+
+    const iconType: IconType = isChecked
+      ? 'checkbox-checked'
+      : 'checkbox-unchecked';
+
+    useEffect(() => {
+      let input: HTMLInputElement | null;
+      if (refProp && typeof refProp !== 'function') {
+        input = refProp.current;
+      } else {
+        input = checkRef.current;
+      }
+
+      if (input) {
+        input.indeterminate = isIndeterminate;
+      }
+    }, [isIndeterminate, refProp, checkRef]);
 
     return (
       <div className="Checkbox__wrap">
@@ -94,6 +118,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }}
             aria-describedby={ariaDescribedbyId}
             onChange={(e): void => {
+              if (isIndeterminate) {
+                setIsIndeterminate(false);
+              }
               setIsChecked(e.target.checked);
               if (onChange) {
                 onChange(e);
@@ -115,11 +142,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               'Checkbox__overlay--focused': focused,
               'Field--has-error': error
             })}
-            type={isChecked ? 'checkbox-checked' : 'checkbox-unchecked'}
+            type={iconType}
             aria-hidden="true"
             onClick={(): void => {
               if (refProp && typeof refProp !== 'function') {
-                refProp?.current?.click();
+                refProp.current?.click();
               } else {
                 checkRef.current?.click();
               }

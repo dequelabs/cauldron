@@ -49,3 +49,33 @@ test('should have screenshot for Checkbox[checked]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--checkbox[checked]');
 });
+
+test('should have screenshot for Checkbox[indeterminate]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <FieldWrap>
+      <Checkbox id="checkbox" label="Checkbox" indeterminate />
+      <Checkbox id="checkbox-hover" label="Hover" indeterminate />
+      <Checkbox id="checkbox-focus" label="Focus" indeterminate />
+      <Checkbox id="checkbox-active" label="Active" indeterminate />
+      <Checkbox
+        id="checkbox-disabled"
+        label="Disabled"
+        indeterminate
+        disabled
+      />
+    </FieldWrap>
+  );
+
+  await component.getByRole('checkbox', { name: 'Focus' }).focus();
+  await component.getByText('Hover').hover();
+  setActive(
+    await component.locator('.Checkbox__wrap:nth-child(4) .Checkbox__overlay')
+  );
+
+  await expect(component).toHaveScreenshot('checkbox[indeterminate]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--checkbox[indeterminate]');
+});
