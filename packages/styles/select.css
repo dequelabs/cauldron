@@ -16,8 +16,13 @@
 
 .Field__select--wrapper {
   position: relative;
-  width: var(--select-width);
   max-width: 100%;
+}
+
+@media only screen and (min-width: 321px) {
+  .Field__select--wrapper {
+    width: var(--select-width);
+  }
 }
 
 .arrow-down {
