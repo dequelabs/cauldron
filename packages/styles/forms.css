@@ -489,7 +489,7 @@ textarea.Field--has-error:focus:hover,
   position: absolute;
   height: 3px;
   width: calc(var(--icon-size) / 3);
-  background-color: var(--workspace-background-color);
+  background-color: var(--field-background-color);
   transform: translate(
     calc(var(--icon-size) / 3),
     calc(var(--icon-size) / 2 * -1 - 1.5px)
