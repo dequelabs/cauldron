@@ -41,6 +41,7 @@ body.cauldron--theme-dark {
   display: flex;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+  align-items: flex-start;
 }
 
 .Component__example__code pre.Code {

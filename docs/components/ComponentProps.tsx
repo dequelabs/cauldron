@@ -52,7 +52,7 @@ function TableProps({ children, className, refType, props }: Props) {
             <TableCell>
               children{' '}
               {(children as Record<string, unknown>)?.required && (
-                <Tag>Required</Tag>
+                <Tag size="small">Required</Tag>
               )}
             </TableCell>
             <TableCell>
@@ -81,8 +81,8 @@ function TableProps({ children, className, refType, props }: Props) {
           ) => (
             <TableRow key={name}>
               <TableCell>
-                {name} {required && <Tag>Required</Tag>}{' '}
-                {deprecated && <Tag>deprecated</Tag>}
+                {name} {required && <Tag size="small">Required</Tag>}{' '}
+                {deprecated && <Tag size="small">deprecated</Tag>}
               </TableCell>
               <TableCell>
                 {Array.isArray(type) ? type.join(' | ') : type}
@@ -124,7 +124,7 @@ function DescriptionListProps({
               <DescriptionDetails>
                 children{' '}
                 {(children as Record<string, unknown>)?.required && (
-                  <Tag>Required</Tag>
+                  <Tag size="small">Required</Tag>
                 )}
               </DescriptionDetails>
             </DescriptionListItem>
@@ -173,8 +173,8 @@ function DescriptionListProps({
               <DescriptionListItem>
                 <DescriptionTerm>Name</DescriptionTerm>
                 <DescriptionDetails>
-                  {name} {required && <Tag>Required</Tag>}{' '}
-                  {deprecated && <Tag>deprecated</Tag>}
+                  {name} {required && <Tag size="small">Required</Tag>}{' '}
+                  {deprecated && <Tag size="small">deprecated</Tag>}
                 </DescriptionDetails>
               </DescriptionListItem>
               <DescriptionListItem>
