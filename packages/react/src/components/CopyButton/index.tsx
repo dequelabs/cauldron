@@ -30,6 +30,7 @@ const NOTIFICATION_TIMEOUT_MS = 2000;
 const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   (
     {
+      className,
       value,
       variant = 'tertiary',
       children = 'Copy',
@@ -69,7 +70,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     return (
       <>
         <Button
-          className={classnames({
+          className={classnames(className, {
             'Button--condensed': hideVisibleLabel
           })}
           ref={copyButtonRef}

@@ -143,23 +143,23 @@ test('should call "onCopy" after copy action', async () => {
   expect(onCopy).toBeCalledWith('copy text');
 });
 
-test('should return no axe violations', async () => {
-  const { container } = render(
-    <>
-      <CopyButton value="copy" />
-    </>
+test('should handle className prop', () => {
+  render(<CopyButton value="copy" className="bananas" />);
+  expect(screen.getByRole('button', { name: 'Copy' })).toHaveClass(
+    'Button--tertiary',
+    'bananas'
   );
+});
+
+test('should return no axe violations', async () => {
+  const { container } = render(<CopyButton value="copy" />);
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
 
 test('should return no axe violations when `hideVisibleLabel` is set', async () => {
-  const { container } = render(
-    <>
-      <CopyButton value="copy" hideVisibleLabel />
-    </>
-  );
+  const { container } = render(<CopyButton value="copy" hideVisibleLabel />);
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -167,11 +167,7 @@ test('should return no axe violations when `hideVisibleLabel` is set', async () 
 
 test('should return no axe violations when copied', async () => {
   const user = userEvent.setup();
-  const { container } = render(
-    <>
-      <CopyButton value="copy" hideVisibleLabel />
-    </>
-  );
+  const { container } = render(<CopyButton value="copy" hideVisibleLabel />);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
 
   const results = await axe(container);
