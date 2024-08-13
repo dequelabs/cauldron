@@ -72,6 +72,35 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
+### Indeterminate Checkbox
+
+```jsx example
+<FieldWrap>
+  <Checkbox
+    indeterminate
+    id="checkbox-indeterminate"
+    label="Indeterminate Checkbox"
+    name="indeterminate-checkbox"
+    value="1"
+  />
+</FieldWrap>
+```
+
+### Indeterminate Disabled Checkbox
+
+```jsx example
+<FieldWrap>
+  <Checkbox
+    indeterminate
+    disabled
+    id="checkbox-indeterminate-disabled"
+    label="Indeterminate Disabled Checkbox"
+    name="indeterminate-disabled-checkbox"
+    value="1"
+  />
+</FieldWrap>
+```
+
 ### Error Checkbox
 
 ```jsx example
@@ -251,6 +280,12 @@ import { Checkbox } from '@deque/cauldron-react'
       name: 'disabled',
       type: 'boolean',
       description: 'If the checkbox should be disabled.',
+      defaultValue: 'false'
+    },
+    {
+      name: 'indeterminate',
+      type: 'boolean',
+      description: 'If the checkbox should be indeterminate.',
       defaultValue: 'false'
     },
     {
