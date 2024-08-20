@@ -7,8 +7,8 @@ import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
 import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
 import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
 import type { ContentNode } from '../../types';
-import Button, { ButtonProps } from '../Button';
 import { useId } from 'react-id-generator';
+import CopyButton, { CopyButtonProps } from '../CopyButton';
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
@@ -26,7 +26,7 @@ type Props = {
   scrollable?: boolean;
   label?: ContentNode;
   allowCopy?: boolean;
-  copyButtonProps?: ButtonProps;
+  copyButtonProps?: CopyButtonProps;
 } & SyntaxHighlighterProps &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -48,13 +48,6 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
   const PreWithRef = (preProps: React.HTMLAttributes<HTMLPreElement>) => (
     <pre {...preProps} ref={ref} />
   );
-
-  const handleCopy = () => {
-    if (ref.current) {
-      const text = ref.current.innerText;
-      navigator.clipboard.writeText(text);
-    }
-  };
 
   useEffect(() => {
     let observer: ResizeObserver;
@@ -89,15 +82,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
               <span id={`${id}-label`}>{label}</span>
             </div>
           )}
-          {allowCopy && (
-            <Button
-              variant="tertiary"
-              onClick={handleCopy}
-              {...copyButtonProps}
-            >
-              {copyButtonProps?.children || 'Copy'}
-            </Button>
-          )}
+          {allowCopy && <CopyButton value={children} {...copyButtonProps} />}
         </div>
       )}
       <Highlighter
