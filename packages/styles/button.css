@@ -80,7 +80,7 @@ button.Link {
 }
 
 .Button--tag:before {
-  border-radius: 11px;
+  border-radius: var(--button-height);
 }
 
 .Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
@@ -210,6 +210,15 @@ button.Link {
   padding: 0 var(--space-small);
 }
 
+.Button--condensed {
+  min-width: var(--button-height);
+  padding: 0;
+}
+
+.Button--condensed:is(.Button--thin) {
+  min-width: var(--button-thin-height);
+}
+
 [class*='Button--'] + [class*='Button--'] {
   margin-left: var(--space-smallest);
 }
@@ -244,6 +253,10 @@ button.Link {
 
 .cauldron--theme-dark .Button--tertiary {
   color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--tertiary:is(:hover, :active, :focus) {
+  border: 2px solid var(--accent-light);
 }
 
 .cauldron--theme-dark .Button--tertiary:not(:hover, :focus) {

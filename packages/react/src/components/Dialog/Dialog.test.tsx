@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { render, screen, within, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import Dialog, { DialogContent, DialogFooter } from './';
+import TooltipTabstop from '../TooltipTabstop';
 import axe from '../../axe';
-import { userEvent } from '@testing-library/user-event';
 
 const defaultProps: Omit<React.ComponentProps<typeof Dialog>, 'children'> = {
   show: true,
@@ -231,6 +232,83 @@ test('should set alignment on dialog footer', () => {
   expect(footer).toHaveClass('text--align-center');
   rerender(<DialogFooter align="right" />);
   expect(footer).toHaveClass('text--align-right');
+});
+
+describe('when "forceAction" is false', () => {
+  test('it should call "onClose" when escape is pressed', async () => {
+    const user = userEvent.setup();
+    const onClose = jest.fn();
+    render(
+      <Dialog {...defaultProps} onClose={onClose} forceAction={false}>
+        Test Dialog
+      </Dialog>
+    );
+
+    expect(onClose).not.toHaveBeenCalled();
+    await user.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('when "forceAction" is true', () => {
+  test('it should not call "onClose" when escape is pressed', async () => {
+    const user = userEvent.setup();
+    const onClose = jest.fn();
+    render(
+      <Dialog {...defaultProps} onClose={onClose} forceAction={true}>
+        Test Dialog
+      </Dialog>
+    );
+
+    expect(onClose).not.toHaveBeenCalled();
+    await user.keyboard('{Escape}');
+    expect(onClose).not.toHaveBeenCalled();
+  });
+});
+
+describe('when a tooltip is rendered within the dialog', () => {
+  const renderTooltipInDialog = () => {
+    const CustomTooltipDialog = () => {
+      const [show, setShow] = useState(true);
+
+      return (
+        <Dialog
+          heading={'Tooltip Dialog'}
+          show={show}
+          onClose={() => setShow(false)}
+        >
+          <TooltipTabstop tooltip="Hello Tooltip">show tooltip</TooltipTabstop>
+        </Dialog>
+      );
+    };
+
+    const user = userEvent.setup();
+
+    render(<CustomTooltipDialog />);
+
+    const dialog = screen.getByRole('dialog', { name: /tooltip dialog/i });
+    const button = screen.getByRole('button', { name: /show tooltip/i });
+    const getTooltip = () =>
+      screen.queryByRole('tooltip', { name: /hello tooltip/i });
+
+    return { user, dialog, button, getTooltip };
+  };
+
+  test('it should close the tooltip but not the dialog on escape', async () => {
+    const { user, dialog, button, getTooltip } = renderTooltipInDialog();
+
+    expect(dialog).toBeVisible();
+    expect(getTooltip()).not.toBeInTheDocument();
+
+    await user.hover(button);
+
+    expect(getTooltip()).toBeInTheDocument();
+
+    await user.keyboard('{Escape}');
+
+    expect(getTooltip()).not.toBeInTheDocument();
+    expect(dialog).toBeVisible();
+  });
 });
 
 test('should return no axe violations', async () => {

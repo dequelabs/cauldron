@@ -16,6 +16,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby' | 'none';
   show?: boolean | undefined;
+  defaultShow?: boolean;
   placement?: Placement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   hideElementOnHidden?: boolean;
@@ -46,14 +47,15 @@ export default function Tooltip({
   target,
   association = 'aria-describedby',
   variant = 'text',
-  show: initialShow = false,
+  show: showProp,
+  defaultShow = false,
   hideElementOnHidden = false,
   className,
   ...props
 }: TooltipProps): JSX.Element {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [showTooltip, setShowTooltip] = useState(!!initialShow);
+  const [showTooltip, setShowTooltip] = useState(!!showProp || defaultShow);
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [tooltipElement, setTooltipElement] = useState<HTMLElement | null>(
     null
@@ -107,6 +109,10 @@ export default function Tooltip({
         fireCustomEvent(false, targetElement);
       }, TIP_HIDE_DELAY);
     }
+
+    return () => {
+      clearTimeout(hideTimeoutRef.current as unknown as number);
+    };
   }, [targetElement]);
 
   // Keep targetElement in sync with target prop
@@ -115,6 +121,12 @@ export default function Tooltip({
       target && 'current' in target ? target.current : target;
     setTargetElement(targetElement);
   }, [target]);
+
+  useEffect(() => {
+    if (typeof showProp === 'boolean') {
+      setShowTooltip(showProp);
+    }
+  }, [showProp]);
 
   // Get popper placement
   const placement: Placement =
@@ -130,12 +142,13 @@ export default function Tooltip({
         event.key === 'Esc' ||
         event.keyCode === 27
       ) {
+        event.preventDefault();
         setShowTooltip(false);
       }
     };
 
     const targetElement = document.body;
-    if (showTooltip) {
+    if (showTooltip && typeof showProp !== 'boolean') {
       targetElement.addEventListener('keyup', handleEscape, { capture: true });
     } else {
       targetElement.removeEventListener('keyup', handleEscape, {
@@ -148,14 +161,16 @@ export default function Tooltip({
         capture: true
       });
     };
-  }, [showTooltip]);
+  }, [showTooltip, showProp]);
 
   // Handle hover and focus events for the targetElement
   useEffect(() => {
-    targetElement?.addEventListener('mouseenter', show);
-    targetElement?.addEventListener('mouseleave', hide);
-    targetElement?.addEventListener('focusin', show);
-    targetElement?.addEventListener('focusout', hide);
+    if (typeof showProp !== 'boolean') {
+      targetElement?.addEventListener('mouseenter', show);
+      targetElement?.addEventListener('mouseleave', hide);
+      targetElement?.addEventListener('focusin', show);
+      targetElement?.addEventListener('focusout', hide);
+    }
 
     return () => {
       targetElement?.removeEventListener('mouseenter', show);
@@ -163,18 +178,20 @@ export default function Tooltip({
       targetElement?.removeEventListener('focusin', show);
       targetElement?.removeEventListener('focusout', hide);
     };
-  }, [targetElement, show, hide]);
+  }, [targetElement, show, hide, showProp]);
 
   // Handle hover events for the tooltipElement
   useEffect(() => {
-    tooltipElement?.addEventListener('mouseenter', show);
-    tooltipElement?.addEventListener('mouseleave', hide);
+    if (typeof showProp !== 'boolean') {
+      tooltipElement?.addEventListener('mouseenter', show);
+      tooltipElement?.addEventListener('mouseleave', hide);
+    }
 
     return () => {
       tooltipElement?.removeEventListener('mouseenter', show);
       tooltipElement?.removeEventListener('mouseleave', hide);
     };
-  }, [tooltipElement, show, hide]);
+  }, [tooltipElement, show, hide, showProp]);
 
   // Keep the target's id in sync
   useEffect(() => {
