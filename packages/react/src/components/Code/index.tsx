@@ -26,7 +26,7 @@ type Props = {
   scrollable?: boolean;
   label?: ContentNode;
   allowCopy?: boolean;
-  copyButtonProps?: CopyButtonProps;
+  copyButtonProps?: React.ComponentProps<typeof CopyButtonProps>;
 } & SyntaxHighlighterProps &
   React.HTMLAttributes<HTMLDivElement>;
 
