@@ -15,7 +15,6 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-smaller) 0;
-  border-bottom: 1px solid var(--stroke-light);
 }
 
 .Code.hljs {
