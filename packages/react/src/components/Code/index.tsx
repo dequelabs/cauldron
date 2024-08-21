@@ -78,9 +78,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
       {(label || allowCopy) && (
         <div className="Code__Header">
           {label && (
-            <div>
-              <span id={`${id}-label`}>{label}</span>
-            </div>
+            <span id={`${id}-label`}>{label}</span>
           )}
           {allowCopy && <CopyButton value={children} {...copyButtonProps} />}
         </div>
