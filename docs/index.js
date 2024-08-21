@@ -34,6 +34,10 @@ import '@fontsource/roboto/700.css';
 import '@fontsource/lato';
 import '@fontsource/pt-mono';
 
+import screenshot from './assets/img/screenshot.png';
+import screenshot2 from './assets/img/screenshot2.png';
+import screenshot3 from './assets/img/screenshot3.png';
+
 // styles
 import '../packages/styles';
 import '@deque/cauldron-react/cauldron.css';
