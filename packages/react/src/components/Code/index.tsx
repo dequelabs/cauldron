@@ -26,7 +26,7 @@ type Props = {
   scrollable?: boolean;
   label?: ContentNode;
   allowCopy?: boolean;
-  copyButtonProps?: React.ComponentProps<typeof CopyButtonProps>;
+  copyButtonProps?: React.ComponentProps<typeof CopyButton>;
 } & SyntaxHighlighterProps &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -77,9 +77,7 @@ const Code: React.ComponentType<React.PropsWithChildren<Props>> = ({
     <>
       {(label || allowCopy) && (
         <div className="Code__Header">
-          {label && (
-            <span id={`${id}-label`}>{label}</span>
-          )}
+          {label && <span id={`${id}-label`}>{label}</span>}
           {allowCopy && <CopyButton value={children} {...copyButtonProps} />}
         </div>
       )}

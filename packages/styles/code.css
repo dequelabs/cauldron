@@ -14,7 +14,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-smaller) 0;
+  margin-bottom: var(--space-smallest);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-body);
 }
 
 .Code.hljs {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { createSandbox } from 'sinon';
@@ -101,20 +101,20 @@ test('should return no axe violations with label and copy button', async () => {
 });
 
 test('should render label when provided', () => {
-  const { getByText } = render(
+  render(
     <Code
       language="javascript"
       label="Code Block Label"
     >{`var some = "javascript"`}</Code>
   );
-  expect(getByText('Code Block Label')).toBeInTheDocument();
+  expect(screen.getByText('Code Block Label')).toBeInTheDocument();
 });
 
 test('should render copy button when allowCopy is true', () => {
-  const { getByText } = render(
+  render(
     <Code language="javascript" allowCopy>{`var some = "javascript"`}</Code>
   );
-  expect(getByText('Copy')).toBeInTheDocument();
+  expect(screen.getByText('Copy')).toBeInTheDocument();
 });
 
 test('should copy code to clipboard when copy button is clicked', async () => {
@@ -123,10 +123,10 @@ test('should copy code to clipboard when copy button is clicked', async () => {
     global.navigator.clipboard,
     'writeText'
   );
-  const { getByText } = render(
+  render(
     <Code language="javascript" allowCopy>{`var some = "javascript"`}</Code>
   );
-  const btn = getByText('Copy');
+  const btn = screen.getByText('Copy');
   await user.click(btn);
   expect(clipboardWriteText).toHaveBeenCalledWith('var some = "javascript"');
 });
