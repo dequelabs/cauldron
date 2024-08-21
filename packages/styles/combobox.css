@@ -8,7 +8,7 @@
   --combobox-option-min-height: 2.625rem;
   --combobox-group-label-background-color: var(--gray-20);
   --combobox-group-label-font-size: var(--text-size-smaller);
-  --combobox-option-selected-icon-color: var(--accent-success-dark);
+  --combobox-option-selected-icon-color: var(--accent-primary);
 }
 
 .cauldron--theme-dark {
@@ -17,7 +17,7 @@
   --combobox-option-description-font-color: var(--accent-light);
   --combobox-listbox-background-color: var(--accent-medium);
   --combobox-group-label-background-color: var(--accent-dark);
-  --combobox-option-selected-icon-color: var(--accent-success-light);
+  --combobox-option-selected-icon-color: var(--accent-info);
 }
 
 .Combobox :where(.TextFieldWrapper) {
