@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.6.1](https://github.com/dequelabs/cauldron/compare/v6.6.0...v6.6.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* **styles:** combobox option active icon color ([#1642](https://github.com/dequelabs/cauldron/issues/1642)) ([8cea852](https://github.com/dequelabs/cauldron/commit/8cea852157023c8b5019c68336bc5bfd1a2f8448))
+
 ## [6.6.0](https://github.com/dequelabs/cauldron/compare/v6.5.0...v6.6.0) (2024-08-13)
 
 
