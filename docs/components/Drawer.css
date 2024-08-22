@@ -1,4 +1,4 @@
-body.TopBar--thin .Drawer {
+/*body.TopBar--thin .Drawer {
   --top-bar-height: var(--top-bar-height-thin);
 }
 
@@ -14,3 +14,4 @@ body.TopBar--thin .Drawer {
 .Drawer--open {
   transform: translateX(0);
 }
+*/

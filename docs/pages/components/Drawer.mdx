@@ -1,0 +1,71 @@
+---
+title: Drawer
+description: A primitive component with an initially hidden off-screen container to provide quick access to additional content or information.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Drawer/index.tsx
+---
+
+import { useState } from 'react'
+import { Drawer, IconButton, Select, Panel } from '@deque/cauldron-react'
+
+```js
+import { Drawer } from '@deque/cauldron-react'
+```
+
+## Examples
+
+```jsx example
+function DrawerExample() {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  return (
+    <>
+      <IconButton label="Toggle Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <Drawer open={open} onClose={toggleOpen} position="left">
+        <Panel style={{ height: '100vh' }}>You opened me!</Panel>
+      </Drawer>
+    </>
+  )
+}
+```
+
+### Position
+
+A drawer is positioned on the edge of its relative container (typically the `body` element) and can be configured to appear from any edge.
+
+```jsx example
+function DrawerPositionExample() {
+  const [position, setPosition] = useState('left');
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  const handleChange = ({ target }) => setPosition(target.value);
+
+  return (
+    <>
+      <Select label="Position" onChange={handleChange} value={position}>
+        <option value="top">Top</option>
+        <option value="bottom">Bottom</option>
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+      </Select>
+      <IconButton label="Toggle Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <Drawer open={open} onClose={toggleOpen} position={position}>
+        <Panel style={{ height: ['left', 'right'].includes(position) && '100vh', width: ['top', 'bottom'].includes(position) && '100vw' }}>You opened me!</Panel>
+      </Drawer>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  props={[  ]}
+/>
+
+## Related Components
+
+- [ClickOutsideListener](./ClickOutsideListener)
+- [Scrim](./Scrim)

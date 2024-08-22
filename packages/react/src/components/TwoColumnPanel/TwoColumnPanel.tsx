@@ -16,6 +16,7 @@ import ColumnLeft from './ColumnLeft';
 import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
 import SkipLink from '../SkipLink';
+import useEscapeKey from '../../utils/useEscapeKey';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   initialCollapsed?: boolean;
@@ -213,6 +214,14 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         mediaQueryList.removeEventListener('change', listener);
       };
     }, []);
+
+    useEscapeKey(
+      () => setCollapsed(true),
+      {
+        active: isFocusTrap
+      },
+      [setCollapsed]
+    );
 
     useEffect(() => {
       const handleEscape = (event: KeyboardEvent) => {

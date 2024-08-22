@@ -5,7 +5,6 @@ import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
 import { Cauldron } from '../../types';
-
 import classnames from 'classnames';
 import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
@@ -13,6 +12,7 @@ import FocusTrap from 'focus-trap-react';
 import focusableSelector from '../../utils/focusable-selector';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
+import useEscapeKey from '../../utils/useEscapeKey';
 
 export type PopoverVariant = 'prompt' | 'custom';
 
@@ -176,28 +176,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [show, popoverRef.current]);
 
     useEffect(() => {
-      const handleEscape = (event: KeyboardEvent) => {
-        if (
-          event.key === 'Escape' ||
-          event.key === 'Esc' ||
-          event.keyCode === 27
-        ) {
-          handleClosePopover();
-        }
-      };
-
-      if (show) {
-        document.body.addEventListener('keyup', handleEscape);
-      } else {
-        document.body.removeEventListener('keyup', handleEscape);
-      }
-
-      return () => {
-        document.body.removeEventListener('keyup', handleEscape);
-      };
-    }, [show]);
-
-    useEffect(() => {
       const attrText = targetElement?.getAttribute('aria-controls');
       const hasPopupAttr = targetElement?.getAttribute('aria-haspopup');
 
@@ -228,6 +206,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         onClose();
       }
     };
+
+    useEscapeKey(
+      () => handleClosePopover(),
+      {
+        active: show
+      },
+      [handleClosePopover]
+    );
 
     if (!show || !isBrowser()) return null;
 

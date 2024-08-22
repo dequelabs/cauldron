@@ -1,0 +1,55 @@
+.Drawer {
+  position: fixed;
+  max-height: 100vh;
+  max-width: 100vw;
+  z-index: 1000;
+  /*  z-index: calc(var(--z-index-scrim) + 1);*/
+  transition: transform ease-in-out 250ms;
+}
+
+.Drawer--top,
+.Drawer--bottom {
+  max-height: var(--drawer-height, auto);
+  min-width: 100%;
+}
+
+.Drawer--left,
+.Drawer--right {
+  max-width: var(--drawer-width, auto);
+  min-height: 100%;
+}
+
+.Drawer--top {
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.Drawer--bottom {
+  bottom: 0;
+  transform: translateY(100%);
+}
+
+.Drawer--left {
+  top: 0;
+  transform: translateX(-100%);
+}
+
+.Drawer--right {
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+}
+
+.Drawer--open:is(.Drawer--top, .Drawer--bottom) {
+  transform: translateX(0);
+}
+
+.Drawer--open:is(.Drawer--left, .Drawer--right) {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Drawer {
+    transition: none !important;
+  }
+}

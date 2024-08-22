@@ -6,6 +6,7 @@ import { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
 import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
+import useEscapeKey from '../../utils/useEscapeKey';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -135,33 +136,13 @@ export default function Tooltip({
     initialPlacement;
 
   // Only listen to key ups when the tooltip is visible
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (
-        event.key === 'Escape' ||
-        event.key === 'Esc' ||
-        event.keyCode === 27
-      ) {
-        event.preventDefault();
-        setShowTooltip(false);
-      }
-    };
-
-    const targetElement = document.body;
-    if (showTooltip && typeof showProp !== 'boolean') {
-      targetElement.addEventListener('keyup', handleEscape, { capture: true });
-    } else {
-      targetElement.removeEventListener('keyup', handleEscape, {
-        capture: true
-      });
-    }
-
-    return () => {
-      targetElement.removeEventListener('keyup', handleEscape, {
-        capture: true
-      });
-    };
-  }, [showTooltip, showProp]);
+  useEscapeKey(
+    (event) => {
+      event.preventDefault();
+      setShowTooltip(false);
+    },
+    { capture: true, active: showTooltip && typeof showProp !== 'boolean' }
+  );
 
   // Handle hover and focus events for the targetElement
   useEffect(() => {
