@@ -20,3 +20,21 @@ if (
     }
   });
 }
+
+if (!('clipboard' in global.navigator)) {
+  Object.defineProperty(global.navigator, 'clipboard', {
+    value: {
+      writeText: async () => null
+    },
+    configurable: true,
+    writable: true
+  });
+}
+
+if (!('execCommand' in global.document)) {
+  Object.defineProperty(global.document, 'execCommand', {
+    value: () => null,
+    configurable: true,
+    writable: true
+  });
+}

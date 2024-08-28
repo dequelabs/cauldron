@@ -1,8 +1,11 @@
 :root {
   --tag-text-color: var(--gray-90);
-  --tag-label-text-color: var(--gray-60);
-  --tag-background-color: var(--gray-20);
-  --tag-border-color: var(--gray-90);
+  --tag-background-color: var(--background-light);
+  --tag-border-color: var(--gray-30);
+
+  --tag-height: var(--button-height);
+  --tag-small-height: 1.5rem;
+  --tag-font-size: var(--text-size-body-small);
 }
 
 .cauldron--theme-dark {
@@ -15,18 +18,22 @@
 .Tag {
   color: var(--tag-text-color);
   background-color: var(--tag-background-color);
-  font-size: var(--text-size-smaller);
   border: 1px solid var(--tag-border-color);
-  border-radius: 11px;
+  border-radius: var(--tag-height);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 8px;
-  font-weight: var(--font-weight-medium);
+  padding: 0 var(--space-smallest);
+  min-height: var(--tag-height);
+  font-size: var(--tag-font-size);
+}
+
+.Tag--small {
+  border-radius: var(--tag-small-height);
+  min-height: var(--tag-small-height);
 }
 
 .Tag__label {
-  color: var(--tag-label-text-color);
   margin-right: 3px;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
 }

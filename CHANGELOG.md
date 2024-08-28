@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.6.1](https://github.com/dequelabs/cauldron/compare/v6.6.0...v6.6.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* **styles:** combobox option active icon color ([#1642](https://github.com/dequelabs/cauldron/issues/1642)) ([8cea852](https://github.com/dequelabs/cauldron/commit/8cea852157023c8b5019c68336bc5bfd1a2f8448))
+
+## [6.6.0](https://github.com/dequelabs/cauldron/compare/v6.5.0...v6.6.0) (2024-08-13)
+
+
+### Features
+
+* **react:** add CopyButton component ([#1603](https://github.com/dequelabs/cauldron/issues/1603)) ([c570ece](https://github.com/dequelabs/cauldron/commit/c570eceb5fa743ffff7ff75ea907652aa6968a42))
+* **react:** add indeterminate support to checkbox ([#1621](https://github.com/dequelabs/cauldron/issues/1621)) ([c49bfd2](https://github.com/dequelabs/cauldron/commit/c49bfd2bb0e8f48574a7e3d81f2e324aa43df949)), closes [#479](https://github.com/dequelabs/cauldron/issues/479) [#479](https://github.com/dequelabs/cauldron/issues/479)
+* **styles,react:** added size prop to tag and synced with designs ([#1602](https://github.com/dequelabs/cauldron/issues/1602)) ([946b10d](https://github.com/dequelabs/cauldron/commit/946b10da549e65374f2e9623506f732e57b7ab0d))
+
 ## [6.5.0](https://github.com/dequelabs/cauldron/compare/v6.4.2...v6.5.0) (2024-08-07)
 
 
