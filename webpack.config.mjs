@@ -95,7 +95,7 @@ if (isProd) {
   );
 
   config.optimization = {
-    minimizer: [new CssMinimizerPlugin({}), new TerserPlugin()]
+    minimizer: [new CssMinimizerPlugin({})]
   };
 }
 
