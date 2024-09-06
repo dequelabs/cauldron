@@ -1,5 +1,7 @@
 ARG playwright_version=latest
 FROM mcr.microsoft.com/playwright:v$playwright_version-jammy
+ARG playwright_version
+RUN echo $playwright_version
 
 WORKDIR /app
 COPY ./yarn.lock ./
@@ -8,6 +10,7 @@ COPY ./e2e ./e2e
 COPY ./packages ./packages
 COPY ./playwright ./playwright
 COPY ./playwright-ct.config.ts ./playwright-ct.config.ts
+RUN echo $playwright_verison
 RUN yarn add --prefix \
     playwright@$playwright_version \
     @playwright/test@$playwright_version \
