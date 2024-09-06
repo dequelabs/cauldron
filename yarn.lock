@@ -1583,29 +1583,29 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@playwright/experimental-ct-core@1.47.0":
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.47.0.tgz#01524b8c19af4a2300bd0a693f37d5367fc4b1e1"
-  integrity sha512-IgZBGLREGUqTEXwb8Kh0vEG+/CHHf7EtpivAVoaO8cPzEfZU0LMlyjBaQk0ry5LDD65BZ9DwhTfMYMekAqWXMg==
+"@playwright/experimental-ct-core@1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-core/-/experimental-ct-core-1.46.0.tgz#646fddab48597f41848fe3ffef6c6e49ec3fbb08"
+  integrity sha512-4bHw+P0ub0A/B6tbiqLQFwvaR+wsH5fE2yt1rxWg/dtE8uGhqEeAav9TX7j4PmILM86R3Le21h94wdDIHyeJBA==
   dependencies:
-    playwright "1.47.0"
-    playwright-core "1.47.0"
+    playwright "1.46.0"
+    playwright-core "1.46.0"
     vite "^5.2.8"
 
-"@playwright/experimental-ct-react17@^1.47.0":
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.47.0.tgz#a00de1be912113e23a07ca2df3c7d1d29b19d5fd"
-  integrity sha512-WOeEXx4PzZ2Qa6BYAw0c0gZFKBfYN4x1Jesf8Q9Tp6UA8Ye/7NgRjOfZzh7NqE8KWWyj4Dun4kZbFQr+lV5YQg==
+"@playwright/experimental-ct-react17@1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/experimental-ct-react17/-/experimental-ct-react17-1.46.0.tgz#7993b09f8a75ea22363133b748c62aeaab9928a9"
+  integrity sha512-JnmC3jWhqcnZEUEiHnEkVVlDN95bQARNskVKvDy9Vv3dQSe1MNzEJ+dGPqd2RH43cr3uGGDCMV17j4wC2jbZZA==
   dependencies:
-    "@playwright/experimental-ct-core" "1.47.0"
+    "@playwright/experimental-ct-core" "1.46.0"
     "@vitejs/plugin-react" "^4.2.1"
 
-"@playwright/test@^1.47.0":
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.47.0.tgz#69fc55b10754147cc20021afbfa05747d4961bf0"
-  integrity sha512-SgAdlSwYVpToI4e/IH19IHHWvoijAYH5hu2MWSXptRypLSnzj51PcGD+rsOXFayde4P9ZLi+loXVwArg6IUkCA==
+"@playwright/test@1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.46.0.tgz#ccea6d22c40ee7fa567e4192fafbdf2a907e2714"
+  integrity sha512-/QYft5VArOrGRP5pgkrfKksqsKA6CEFyGQ/gjNe6q0y4tZ1aaPfq4gIjudr1s3D+pXyrPRdsy4opKDrjBabE5w==
   dependencies:
-    playwright "1.47.0"
+    playwright "1.46.0"
 
 "@puppeteer/browsers@2.2.3":
   version "2.2.3"
@@ -9233,22 +9233,22 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
+playwright-core@1.46.0:
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.46.0.tgz#2336ac453a943abf0dc95a76c117f9d3ebd390eb"
+  integrity sha512-9Y/d5UIwuJk8t3+lhmMSAJyNP1BUC/DqP3cQJDQQL/oWqAiuPTLgy7Q5dzglmTLwcBRdetzgNM/gni7ckfTr6A==
+
 playwright-core@1.46.1:
   version "1.46.1"
   resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.46.1.tgz#28f3ab35312135dda75b0c92a3e5c0e7edb9cc8b"
   integrity sha512-h9LqIQaAv+CYvWzsZ+h3RsrqCStkBHlgo6/TJlFst3cOTlLghBQlJwPOZKQJTKNaD3QIB7aAVQ+gfWbN3NXB7A==
 
-playwright-core@1.47.0:
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.47.0.tgz#b54ec060fd83e5c2e46b63986b5ebb5e96ace427"
-  integrity sha512-1DyHT8OqkcfCkYUD9zzUTfg7EfTd+6a8MkD/NWOvjo0u/SCNd5YmY/lJwFvUZOxJbWNds+ei7ic2+R/cRz/PDg==
-
-playwright@1.47.0:
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.47.0.tgz#fb9b028883fad11362f9ff63ce7ba44bda0bf626"
-  integrity sha512-jOWiRq2pdNAX/mwLiwFYnPHpEZ4rM+fRSQpRHwEwZlP2PUANvL3+aJOF/bvISMhFD30rqMxUB4RJx9aQbfh4Ww==
+playwright@1.46.0:
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.46.0.tgz#c7ff490deae41fc1e814bf2cb62109dd9351164d"
+  integrity sha512-XYJ5WvfefWONh1uPAUAi0H2xXV5S3vrtcnXe6uAOgdGi3aSpqOSXX08IAjXW34xitfuOJsvXU5anXZxPSEQiJw==
   dependencies:
-    playwright-core "1.47.0"
+    playwright-core "1.46.0"
   optionalDependencies:
     fsevents "2.3.2"
 
