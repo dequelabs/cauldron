@@ -22,6 +22,10 @@ yarn add @deque/cauldron-react @deque/cauldron-styles
 
 To get started, follow our [usage guide](https://cauldron.dequelabs.com/#usage) that includes setup instructions and necessary dependencies. Further documentation is also available at [cauldron.dequelabs.com](https://cauldron.dequelabs.com) that includes documentation for every available Cauldron component.
 
+## Attribution
+
+Some Cauldron icons use Font Awesome Free and Font Awesome Pro. Their licenses can be found here: [Font Awesome Free License](https://fontawesome.com/license/free) and [Font Awesome Pro License](https://fontawesome.com/license).
+
 ## Contribute
 
 If you're interested in contributing to Cauldron, you can check out our [contribution guide](https://github.com/dequelabs/cauldron/blob/develop/CONTRIBUTING.md) as well as our [code of conduct](https://github.com/dequelabs/cauldron/blob/develop/CODE_OF_CONDUCT.md).
