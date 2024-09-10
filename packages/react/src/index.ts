@@ -48,7 +48,7 @@ export {
   SelectOption,
   SelectProps
 } from './components/Select';
-export { default as RadioGroup } from './components/RadioGroup';
+export { default as RadioGroup, type RadioItem } from './components/RadioGroup';
 export { default as RadioCardGroup } from './components/RadioCardGroup';
 export { default as Checkbox } from './components/Checkbox';
 export {
