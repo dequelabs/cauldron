@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.7.0](https://github.com/dequelabs/cauldron/compare/v6.6.1...v6.7.0) (2024-09-11)
+
+
+### Features
+
+* **icon:** images icon ([#1649](https://github.com/dequelabs/cauldron/issues/1649)) ([411482d](https://github.com/dequelabs/cauldron/commit/411482df40038b27cd7bfbeceb2eba9571a24540))
+* **react:** added copy code functionality to `Code` component ([#1608](https://github.com/dequelabs/cauldron/issues/1608)) ([b21d38c](https://github.com/dequelabs/cauldron/commit/b21d38caf974f34bb0371258cdae17c61d7ca92d))
+* **styles:** synced `notice` styles ([#1665](https://github.com/dequelabs/cauldron/issues/1665)) ([1ed6c8f](https://github.com/dequelabs/cauldron/commit/1ed6c8fa7d06b1018ec31b8cc01ff2bee50260e9))
+
 ### [6.6.1](https://github.com/dequelabs/cauldron/compare/v6.6.0...v6.6.1) (2024-08-21)
 
 
