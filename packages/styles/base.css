@@ -78,7 +78,6 @@ button,
 
 a {
   color: var(--link-text-color);
-  font-weight: var(--font-weight-medium);
 }
 
 p {
