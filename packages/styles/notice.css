@@ -9,18 +9,24 @@
   --notice-border-color: var(--accent-dark);
   --notice-link-hover-color: var(--accent-medium);
   --notice-icon-size: 1rem;
+  --notice-info-border-color: var(--accent-primary-disabled);
+  --notice-caution-border-color: var(--accent-warning);
+  --notice-danger-border-color: var(--accent-error-disabled);
 }
 
 .Notice--info {
   --notice-background-color: var(--notice-info-color);
+  --notice-border-color: var(--notice-info-border-color);
 }
 
 .Notice--caution {
   --notice-background-color: var(--notice-caution-color);
+  --notice-border-color: var(--notice-caution-border-color);
 }
 
 .Notice--danger {
   --notice-background-color: var(--notice-danger-color);
+  --notice-border-color: var(--notice-danger-border-color);
 }
 
 .Notice {
