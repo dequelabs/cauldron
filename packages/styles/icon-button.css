@@ -48,6 +48,7 @@
   --icon-button-background-color-error-disabled: var(
     --button-background-color-error-disabled
   );
+  --icon-button-icon-size: var(--icon-size);
 }
 
 .IconButton {
@@ -73,8 +74,8 @@ a.IconButton {
 }
 
 .IconButton .Icon {
-  height: var(--space-small);
-  width: var(--space-small);
+  height: calc(var(--icon-button-icon-size) - 8px);
+  width: calc(var(--icon-button-icon-size) - 8px);
   pointer-events: none;
 }
 
@@ -101,6 +102,11 @@ a.IconButton {
 .IconButton--large {
   height: var(--icon-button-large-height);
   width: var(--icon-button-large-height);
+}
+
+.IconButton--large .Icon {
+  height: var(--icon-button-icon-size);
+  width: var(--icon-button-icon-size);
 }
 
 .IconButton--secondary:is([aria-disabled='true'], [disabled]),
