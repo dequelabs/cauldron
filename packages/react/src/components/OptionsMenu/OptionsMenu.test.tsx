@@ -91,19 +91,23 @@ test('should support menuRef prop', () => {
   expect(menuRef.current).toEqual(screen.getByRole('menu'));
 });
 
-test('should toggle menu on trigger clicks', () => {
+test('should toggle menu on trigger clicks', async () => {
+  const user = userEvent.setup();
   render(
     <OptionsMenu trigger={trigger}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
 
-  fireEvent.click(screen.getByRole('button'));
-  expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+  const button = screen.getByRole('button');
+
+  await user.click(button);
+  expect(button).toHaveAttribute('aria-expanded', 'true');
   expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'true');
 
-  fireEvent.click(screen.getByRole('button'));
-  expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false');
+  await user.click(button);
+
+  expect(button).toHaveAttribute('aria-expanded', 'false');
   expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'false');
 });
 
@@ -114,8 +118,10 @@ test('should click trigger with down key on trigger', () => {
     </OptionsMenu>
   );
 
-  fireEvent.keyDown(screen.getByRole('button'), { keyCode: 40 });
-  expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+  const button = screen.getByRole('button');
+
+  fireEvent.keyDown(button, { keyCode: 40 });
+  expect(button).toHaveAttribute('aria-expanded', 'true');
 });
 
 test('should focus trigger on close', async () => {
@@ -134,7 +140,8 @@ test('should focus trigger on close', async () => {
   expect(button).toHaveFocus();
 });
 
-test('should call onClose when closed', () => {
+test('should call onClose when closed', async () => {
+  const user = userEvent.setup();
   const onClose = jest.fn();
 
   render(
@@ -145,7 +152,7 @@ test('should call onClose when closed', () => {
 
   const option = screen.getByRole('menuitem');
 
-  fireEvent.click(option);
+  await user.click(option);
 
   expect(onClose).toBeCalled();
 });
