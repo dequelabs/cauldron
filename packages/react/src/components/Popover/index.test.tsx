@@ -285,7 +285,7 @@ test('should have no axe violations for prompt variant', async () => {
   expect(await axe(baseElement)).toHaveNoViolations();
 });
 
-test('aria-labelleddby should exist for variant="custom"', async () => {
+test('aria-labelledby should exist for variant="custom"', async () => {
   render(<Wrapper />);
 
   const popover = screen.getByRole('dialog');
@@ -294,7 +294,7 @@ test('aria-labelleddby should exist for variant="custom"', async () => {
   expect(ariaLabelledById).toBeTruthy();
 });
 
-test('aria-labelleddby should not exist if aria-label provided for variant="prompt"', async () => {
+test('aria-labelledby should not exist if aria-label provided for variant="prompt"', async () => {
   render(
     <WrapperPrompt
       tooltipProps={{
