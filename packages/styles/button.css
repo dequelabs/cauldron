@@ -53,6 +53,7 @@
 button.Link {
   cursor: pointer;
   font-size: inherit;
+  font-weight: var(--font-weight-medium);
 }
 
 .Button--primary:focus,
