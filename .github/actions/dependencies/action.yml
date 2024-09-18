@@ -14,9 +14,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 22
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
         registry-url: 'https://registry.npmjs.org'
