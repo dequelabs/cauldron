@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type DependencyList } from 'react';
 
 const isEscapeKey = (event: KeyboardEvent) =>
   event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
@@ -12,24 +12,25 @@ const isEscapeKey = (event: KeyboardEvent) =>
  * useEscapeKey(() => close())
  */
 export default function useEscapeKey(
-  callback: (event: KeyboardEvent) => void,
-  options?: {
+  options: {
+    callback: (event: KeyboardEvent) => void;
+    target?: HTMLElement;
     active?: boolean;
     event?: 'keydown' | 'keypress' | 'keyup';
-    target?: HTMLElement;
     defaultPrevented?: boolean;
     capture?: boolean;
   },
-  dependencies: unknown[] = []
+  dependencies: DependencyList = []
 ) {
-  const event = options?.event || 'keyup';
-  const target = options?.target || document.body;
-  const active = typeof options?.active === 'boolean' ? options.active : true;
+  const callback = options.callback;
+  const event = options.event || 'keyup';
+  const target = options.target || document.body;
+  const active = typeof options.active === 'boolean' ? options.active : true;
 
   useEffect(() => {
     const eventListener = (event: KeyboardEvent) => {
       if (
-        isEscapeKey(event) && options?.defaultPrevented
+        isEscapeKey(event) && options.defaultPrevented
           ? !event.defaultPrevented
           : true
       ) {

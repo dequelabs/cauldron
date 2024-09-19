@@ -216,8 +216,8 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     }, []);
 
     useEscapeKey(
-      () => setCollapsed(true),
       {
+        callback: () => setCollapsed(true),
         active: isFocusTrap
       },
       [setCollapsed]

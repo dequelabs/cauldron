@@ -208,8 +208,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     };
 
     useEscapeKey(
-      () => handleClosePopover(),
       {
+        callback: handleClosePopover,
         active: show
       },
       [handleClosePopover]

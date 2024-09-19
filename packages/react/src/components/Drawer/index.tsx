@@ -58,7 +58,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       }
     }, [open]);
 
-    useEscapeKey(() => onClose(), { active: open, defaultPrevented: true }, [
+    useEscapeKey({ callback: onClose, active: open, defaultPrevented: true }, [
       onClose
     ]);
 
@@ -96,8 +96,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         </FocusTrap>
         <Scrim show={!!open && !hideScrim} />
       </>,
-      // eslint-disable-next-line
       (portal && 'current' in portal ? portal.current : portal) ||
+        // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document?.body
     );
   }

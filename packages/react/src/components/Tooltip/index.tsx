@@ -136,13 +136,14 @@ export default function Tooltip({
     initialPlacement;
 
   // Only listen to key ups when the tooltip is visible
-  useEscapeKey(
-    (event) => {
+  useEscapeKey({
+    callback: (event) => {
       event.preventDefault();
       setShowTooltip(false);
     },
-    { capture: true, active: showTooltip && typeof showProp !== 'boolean' }
-  );
+    capture: true,
+    active: showTooltip && typeof showProp !== 'boolean'
+  });
 
   // Handle hover and focus events for the targetElement
   useEffect(() => {
