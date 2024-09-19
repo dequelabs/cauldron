@@ -35,9 +35,8 @@ export default function useEscapeKey<T extends HTMLElement = HTMLElement>(
   useEffect(() => {
     const eventListener = (event: KeyboardEvent) => {
       if (
-        isEscapeKey(event) && options.defaultPrevented
-          ? !event.defaultPrevented
-          : true
+        isEscapeKey(event) &&
+        (options.defaultPrevented ? !event.defaultPrevented : true)
       ) {
         callback(event);
       }

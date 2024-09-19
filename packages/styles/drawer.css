@@ -2,8 +2,7 @@
   position: fixed;
   max-height: 100vh;
   max-width: 100vw;
-  z-index: 1000;
-  /*  z-index: calc(var(--z-index-scrim) + 1);*/
+  z-index: var(--z-index-drawer);
   transition: transform ease-in-out 250ms;
 }
 

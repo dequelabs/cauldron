@@ -89,6 +89,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               aria-hidden={!active}
               style={{ visibility: !active ? 'hidden' : undefined }}
               tabIndex={-1}
+              {...props}
             >
               {children}
             </div>

@@ -7,10 +7,10 @@ import focusable from 'focusable';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
-import Drawer from './components/Drawer';
 import Navigation from './components/Navigation';
 import {
   Code,
+  Drawer,
   TopBar,
   MenuBar,
   TopBarTrigger,
@@ -221,8 +221,8 @@ const App = () => {
       </TopBar>
       <div className="Content">
         <Drawer
-          active={drawerIsActive}
           open={show}
+          position="left"
           onClose={() => setState({ show: false })}
         >
           <Navigation

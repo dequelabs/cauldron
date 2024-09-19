@@ -15,6 +15,8 @@
 }
 
 .Navigation {
+  margin-top: var(--top-bar-height);
+  max-height: calc(100vh - var(--top-bar-height));
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);
   border-right: 1px solid var(--docs-navigation-divider-color);
