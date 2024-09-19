@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import setRef from '../../utils/setRef';
 
 export interface ClickOutsideListenerProps<
@@ -8,90 +8,77 @@ export interface ClickOutsideListenerProps<
   onClickOutside: (e: MouseEvent | TouchEvent) => void;
   mouseEvent?: 'mousedown' | 'click' | 'mouseup' | false;
   touchEvent?: 'touchstart' | 'touchend' | false;
-  target?: T;
+  target?: T | React.RefObject<T> | React.MutableRefObject<T>;
 }
 
-export default class ClickOutsideListener extends React.Component<ClickOutsideListenerProps> {
-  static displayName = 'ClickOutsideListener';
+function ClickOutsideListener(
+  {
+    children,
+    mouseEvent = 'mouseup',
+    touchEvent = 'touchend',
+    target,
+    onClickOutside = () => null
+  }: ClickOutsideListenerProps,
+  ref: React.ForwardedRef<HTMLElement>
+): JSX.Element | null {
+  const childElementRef = useRef<HTMLElement>();
 
-  static defaultProps = {
-    mouseEvent: 'click',
-    touchEvent: 'touchend'
-  };
-
-  private nodeRef: HTMLElement | null;
-
-  handleEvent = (event: MouseEvent | TouchEvent) => {
-    const { nodeRef, props } = this;
-    const { onClickOutside, target } = props;
-
+  const handleEvent = (event: MouseEvent | TouchEvent) => {
     if (event.defaultPrevented) {
       return;
     }
 
     const eventTarget = event.target as HTMLElement;
+
+    if (target && (target instanceof HTMLElement || 'current' in target)) {
+      const elementTarget =
+        target instanceof HTMLElement ? target : target.current;
+      if (!elementTarget?.contains(eventTarget)) {
+        onClickOutside(event);
+      }
+
+      // If a target is passed in via a prop, we defer to utilizing that
+      // target instead of a child element target
+      return;
+    }
+
     if (
-      (target && !target.contains(eventTarget)) ||
-      (nodeRef && !nodeRef.contains(eventTarget))
+      childElementRef.current &&
+      !childElementRef.current.contains(eventTarget)
     ) {
       onClickOutside(event);
     }
   };
 
-  componentDidMount() {
-    this.attachEventListeners();
-  }
-
-  componentDidUpdate(prevProps: ClickOutsideListenerProps) {
-    const { mouseEvent, touchEvent } = this.props;
-    if (
-      prevProps.mouseEvent !== mouseEvent ||
-      prevProps.touchEvent !== touchEvent
-    ) {
-      this.removeEventListeners(prevProps.mouseEvent, prevProps.touchEvent);
-      this.attachEventListeners();
-    }
-  }
-
-  componentWillUnmount() {
-    const { mouseEvent, touchEvent } = this.props;
-    this.removeEventListeners(mouseEvent, touchEvent);
-  }
-
-  private attachEventListeners = () => {
-    const { mouseEvent, touchEvent } = this.props;
-    typeof mouseEvent === 'string' &&
-      document.addEventListener(mouseEvent, this.handleEvent);
-    typeof touchEvent === 'string' &&
-      document.addEventListener(touchEvent, this.handleEvent);
-  };
-
-  private removeEventListeners = (
-    mouseEvent: ClickOutsideListenerProps['mouseEvent'],
-    touchEvent: ClickOutsideListenerProps['touchEvent']
-  ) => {
-    typeof mouseEvent === 'string' &&
-      document.removeEventListener(mouseEvent, this.handleEvent);
-    typeof touchEvent === 'string' &&
-      document.removeEventListener(touchEvent, this.handleEvent);
-  };
-
-  resolveRef = (node: HTMLElement) => {
-    this.nodeRef = node;
-
-    setRef;
+  const resolveRef = (node: HTMLElement) => {
+    childElementRef.current = node;
+    // Ref for this component should pass-through to the child node
+    setRef(ref, node);
     // If child has its own ref, we want to update
     // its ref with the newly cloned node
-    const { ref } = this.props.children as any;
-    setRef(ref, node);
+    const { ref: childRef } = children as any;
+    setRef(childRef, node);
   };
 
-  render() {
-    const { props, resolveRef } = this;
-    return !props.children
-      ? null
-      : React.cloneElement(props.children as any, {
-          ref: resolveRef
-        });
-  }
+  useEffect(() => {
+    typeof mouseEvent === 'string' &&
+      document.addEventListener(mouseEvent, handleEvent);
+    typeof touchEvent === 'string' &&
+      document.addEventListener(touchEvent, handleEvent);
+
+    return () => {
+      typeof mouseEvent === 'string' &&
+        document.removeEventListener(mouseEvent, handleEvent);
+      typeof touchEvent === 'string' &&
+        document.removeEventListener(touchEvent, handleEvent);
+    };
+  }, [mouseEvent, touchEvent]);
+
+  return !children
+    ? null
+    : React.cloneElement(children as React.ReactElement, { ref: resolveRef });
 }
+
+ClickOutsideListener.displayName = 'ClickOutsideListener';
+
+export default React.forwardRef(ClickOutsideListener);

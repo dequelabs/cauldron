@@ -230,15 +230,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     };
 
     if (!show || !isBrowser()) return null;
-
     return createPortal(
-      <FocusTrap
-        focusTrapOptions={{
-          allowOutsideClick: true,
-          fallbackFocus: '.Popover__borderLeft'
-        }}
+      <ClickOutsideListener
+        onClickOutside={handleClickOutside}
+        target={popoverRef}
       >
-        <ClickOutsideListener onClickOutside={handleClickOutside}>
+        <FocusTrap
+          focusTrapOptions={{
+            allowOutsideClick: true,
+            fallbackFocus: '.Popover__borderLeft'
+          }}
+        >
           <div
             id={id}
             className={classnames(
@@ -276,8 +278,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               children
             )}
           </div>
-        </ClickOutsideListener>
-      </FocusTrap>,
+        </FocusTrap>
+      </ClickOutsideListener>,
       (portal && 'current' in portal ? portal.current : portal) ||
         // Dependent on "isBrowser" check above:
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc

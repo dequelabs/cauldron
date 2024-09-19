@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import ClickOutsideListener from './';
 
 let wrapperNode: HTMLDivElement | null;
@@ -35,16 +36,20 @@ test('should render children with the text when using ClickOutsideListener', () 
   expect(renderedChild).toBeInTheDocument();
 });
 
-test('should call onClickOutside when clicked outside', () => {
+test('should call onClickOutside when clicked outside', async () => {
   const onClickOutside = jest.fn();
+  const user = userEvent.setup();
 
   render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
-  fireEvent.click(screen.getByRole('link', { name: 'Click Me!' }));
+  await user.click(screen.getByRole('link', { name: 'Click Me!' }));
   expect(onClickOutside).toBeCalled();
 });
 
@@ -54,10 +59,13 @@ test('should call onClickOutside with event', () => {
   render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
-  const event = new MouseEvent('click', { bubbles: true });
+  const event = new MouseEvent('mouseup', { bubbles: true });
   fireEvent(screen.getByTestId('link'), event);
   expect(onClickOutside).toHaveBeenCalledWith(event);
 });
@@ -68,7 +76,10 @@ test('should call onClickOutside when touched outside', () => {
   render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new TouchEvent('touchend', { bubbles: true });
@@ -76,16 +87,20 @@ test('should call onClickOutside when touched outside', () => {
   expect(onClickOutside).toHaveBeenCalledTimes(1);
 });
 
-test('should not call onClickOutside when clicked inside', () => {
+test('should not call onClickOutside when clicked inside', async () => {
   const onClickOutside = jest.fn();
+  const user = userEvent.setup();
 
   render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div>Click me!</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
-  fireEvent.click(screen.getByText('Click me!'));
+  await user.click(screen.getByText('Click me!'));
   expect(onClickOutside).not.toBeCalled();
 });
 
@@ -95,7 +110,10 @@ test('should not call onClickOutside when touched inside', () => {
   render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div data-testid="test">Touch me!</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new TouchEvent('touchend');
@@ -112,7 +130,10 @@ test('should allow mouseEvent to be changed', () => {
       mouseEvent="mousedown"
     >
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new MouseEvent('mousedown', { bubbles: true });
@@ -126,7 +147,10 @@ test('should allow mouseEvent to be false', () => {
   render(
     <ClickOutsideListener onClickOutside={onClickOutside} mouseEvent={false}>
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new MouseEvent('click', { bubbles: true });
@@ -143,7 +167,10 @@ test('should allow touchEvent to be changed', () => {
       touchEvent="touchstart"
     >
       <div>div</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new TouchEvent('touchstart', { bubbles: true });
@@ -157,7 +184,10 @@ test('should allow touchEvent to be false', () => {
   render(
     <ClickOutsideListener onClickOutside={onClickOutside} touchEvent={false}>
       <div>div</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   const event = new TouchEvent('touchend', { bubbles: true });
@@ -165,16 +195,20 @@ test('should allow touchEvent to be false', () => {
   expect(onClickOutside).not.toBeCalled();
 });
 
-test('should remove event listeners when props change', () => {
+test('should remove event listeners when props change', async () => {
   const onClickOutside = jest.fn();
+  const user = userEvent.setup();
 
   const { rerender } = render(
     <ClickOutsideListener onClickOutside={onClickOutside}>
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
-  fireEvent.click(screen.getByTestId('link'));
+  await user.click(screen.getByTestId('link'));
   expect(onClickOutside).toHaveBeenCalledTimes(1);
 
   rerender(
@@ -183,7 +217,7 @@ test('should remove event listeners when props change', () => {
     </ClickOutsideListener>
   );
 
-  fireEvent.click(screen.getByTestId('link'));
+  await user.click(screen.getByTestId('link'));
   expect(onClickOutside).toHaveBeenCalledTimes(1);
 });
 
@@ -194,7 +228,10 @@ test('should not remove event listeners when event props do not change', () => {
   const { getByTestId } = render(
     <ClickOutsideListener onClickOutside={onClickOutside} mouseEvent="click">
       <div>bar</div>
-    </ClickOutsideListener>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
   );
 
   fireEvent.click(getByTestId('link'));

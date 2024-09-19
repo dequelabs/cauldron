@@ -167,6 +167,7 @@ test('should call onClose on clicking outside', async () => {
   const outsideButton = await screen.findByText(/Click Me!/i);
   expect(outsideButton).toBeTruthy();
   fireEvent.click(outsideButton);
+  fireEvent.mouseUp(outsideButton);
   await waitFor(() => expect(onClose).toBeCalled());
 });
 
