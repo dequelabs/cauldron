@@ -212,7 +212,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         callback: handleClosePopover,
         active: show
       },
-      [handleClosePopover]
+      [show]
     );
 
     if (!show || !isBrowser()) return null;

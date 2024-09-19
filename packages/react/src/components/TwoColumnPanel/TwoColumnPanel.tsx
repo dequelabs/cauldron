@@ -4,8 +4,7 @@ import React, {
   cloneElement,
   isValidElement,
   useRef,
-  useLayoutEffect,
-  useEffect
+  useLayoutEffect
 } from 'react';
 import { useId } from 'react-id-generator';
 import FocusTrap from 'focus-trap-react';
@@ -222,29 +221,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       },
       [setCollapsed]
     );
-
-    useEffect(() => {
-      const handleEscape = (event: KeyboardEvent) => {
-        if (
-          event.key === 'Escape' ||
-          event.key === 'Esc' ||
-          event.keyCode === 27
-        ) {
-          setCollapsed(true);
-        }
-      };
-
-      const targetElement = document.body;
-      if (isFocusTrap) {
-        targetElement.addEventListener('keyup', handleEscape);
-      } else {
-        targetElement.removeEventListener('keyup', handleEscape);
-      }
-
-      return () => {
-        targetElement.removeEventListener('keyup', handleEscape);
-      };
-    }, [isFocusTrap]);
 
     const handleClickOutside = () => {
       if (!isCollapsed && isFocusTrap) {
