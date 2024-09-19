@@ -4,7 +4,7 @@
    - [Discussing Proprietary Features](#discussing-proprietary-features)
    - [Setup](#setup)
 1. [Adding New Components](#adding-new-components)
-   - [Process for New Components](#process-for-new-components) 
+   - [Process for New Components](#process-for-new-components)
 1. [Developing Components](#developing-components)
    - [Tools Used](#tools-used)
    - [Structure](#structure)
@@ -40,7 +40,7 @@ Local development setup is documented in [this project's readme](./README.md#dev
 
 ## Adding New Components
 
-One of Cauldron's primary goals is to provide high quality, stable, reusable components. This process is intentially slow because it is a critical front-end infrastructure of Deque's products.
+One of Cauldron's primary goals is to provide high quality, stable, reusable components. This process is intentionally slow because it is a critical front-end infrastructure of Deque's products.
 
 As such, components that land in Cauldron tend to have several, if not all of the following qualities:
 
@@ -61,7 +61,7 @@ For a new component to be added to Cauldron, the below workflow describes the de
 <details>
    <summary>Workflow chart describing process and steps to getting a component added to Cauldron</summary>
 
-   ![workflow chart describing process and steps to getting a component added to Cauldron](./docs/assets/img/new-component-workflow.png)
+![workflow chart describing process and steps to getting a component added to Cauldron](./docs/assets/img/new-component-workflow.png)
 
 </details>
 
