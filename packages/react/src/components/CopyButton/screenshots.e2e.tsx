@@ -69,7 +69,7 @@ test('should have screenshot for CopyButton[thin]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('dark--copybutton[thin]');
 });
 
-test.only('should have screenshot for CopyButton[condensed]', async ({
+test('should have screenshot for CopyButton[condensed]', async ({
   mount,
   page
 }) => {
