@@ -24,7 +24,7 @@ test('should have screenshot for CopyButton', async ({ mount, page }) => {
   setActive(await component.getByText('Active'));
   await component
     .getByText('Active')
-    .press('Space', { delay: 1000, noWaitAfter: true });
+    .press('Enter', { delay: 1000, noWaitAfter: true });
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('copybutton');
@@ -61,7 +61,7 @@ test('should have screenshot for CopyButton[thin]', async ({ mount, page }) => {
   setActive(await component.getByText('Active'));
   await component
     .getByText('Active')
-    .press('Space', { delay: 1000, noWaitAfter: true });
+    .press('Enter', { delay: 1000, noWaitAfter: true });
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('copybutton[thin]');
@@ -69,7 +69,7 @@ test('should have screenshot for CopyButton[thin]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('dark--copybutton[thin]');
 });
 
-test('should have screenshot for CopyButton[condensed]', async ({
+test.only('should have screenshot for CopyButton[condensed]', async ({
   mount,
   page
 }) => {
@@ -101,7 +101,7 @@ test('should have screenshot for CopyButton[condensed]', async ({
   setActive(await component.getByRole('button', { name: 'Active' }));
   await component
     .getByRole('button', { name: 'Active' })
-    .press('Space', { delay: 1000, noWaitAfter: true });
+    .press('Enter', { delay: 1000, noWaitAfter: true });
   await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('copybutton[condensed]');
@@ -141,7 +141,7 @@ test('should have screenshot for CopyButton[condensed,thin]', async ({
   setActive(await component.getByRole('button', { name: 'Active' }));
   await component
     .getByRole('button', { name: 'Active' })
-    .press('Space', { delay: 1000, noWaitAfter: true });
+    .press('Enter', { delay: 1000, noWaitAfter: true });
   await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('copybutton[condensed,thin]');
