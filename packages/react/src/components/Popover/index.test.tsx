@@ -5,31 +5,12 @@ import axe from '../../axe';
 import Popover from '../Popover';
 import AriaIsolate from '../../utils/aria-isolate';
 
-let wrapperNode: HTMLDivElement | null;
-let mountNode: HTMLElement | null;
-beforeEach(() => {
-  wrapperNode = document.createElement('div');
-  wrapperNode.innerHTML = `
-    <button>Click Me!</button>
-    <div id="#mount"></div>
-  `;
-  document.body.appendChild(wrapperNode);
-  mountNode = document.getElementById('mount');
-});
-
-afterEach(() => {
-  document.body.innerHTML = '';
-  wrapperNode = null;
-  mountNode = null;
-});
-
-const Wrapper = ({
-  buttonProps = {},
-  tooltipProps = {}
-}: {
+interface PopoverProps {
   buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
   tooltipProps?: Omit<Partial<React.ComponentProps<typeof Popover>>, 'variant'>;
-}) => {
+}
+
+const Wrapper = ({ buttonProps = {}, tooltipProps = {} }: PopoverProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
 
@@ -37,7 +18,7 @@ const Wrapper = ({
     <>
       <h2 id="popover-title">Popover title</h2>
       <button ref={ref} {...buttonProps}>
-        button
+        Popover button
       </button>
       <Popover
         variant="custom"
@@ -58,8 +39,9 @@ const Wrapper = ({
 const WrapperPopoverWithElements = () => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
+
   return (
-    <React.Fragment>
+    <>
       <button ref={ref}>button</button>
       <Popover
         variant="custom"
@@ -75,23 +57,20 @@ const WrapperPopoverWithElements = () => {
           <button data-testid="foo3">Foo3</button>
         </div>
       </Popover>
-    </React.Fragment>
+    </>
   );
 };
 
 const WrapperPrompt = ({
   buttonProps = {},
   tooltipProps = {}
-}: {
-  buttonProps?: React.HTMLAttributes<HTMLButtonElement>;
-  tooltipProps?: Omit<Partial<React.ComponentProps<typeof Popover>>, 'variant'>;
-}) => {
+}: PopoverProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const onClose = jest.fn();
   const onApply = jest.fn();
 
   return (
-    <React.Fragment>
+    <>
       <button {...buttonProps}>button</button>
       <Popover
         show
@@ -102,7 +81,7 @@ const WrapperPrompt = ({
         onClose={onClose}
         {...tooltipProps}
       />
-    </React.Fragment>
+    </>
   );
 };
 
@@ -114,7 +93,7 @@ test('renders without blowing up', async () => {
 test('should auto-generate id', async () => {
   render(<Wrapper />);
   const popover = screen.getByRole('dialog');
-  const button = screen.getByText('button');
+  const button = screen.getByText('Popover button');
   expect(popover).toBeTruthy();
   const id = popover?.getAttribute('id');
   expect(id).toBeTruthy();
@@ -126,7 +105,7 @@ test('should attach attribute aria-expanded correctly based on shown state', asy
 
   expect(
     screen.queryByRole('button', {
-      name: 'button',
+      name: 'Popover button',
       hidden: true,
       expanded: true
     })
@@ -134,7 +113,7 @@ test('should attach attribute aria-expanded correctly based on shown state', asy
   rerender(<Wrapper tooltipProps={{ show: false }} />);
   expect(
     screen.queryByRole('button', {
-      name: 'button',
+      name: 'Popover button',
       hidden: false,
       expanded: false
     })
@@ -154,7 +133,7 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   const tooltipProps = { id: 'popoverid' };
   render(<Wrapper buttonProps={buttonProps} tooltipProps={tooltipProps} />);
   const popover = screen.getByRole('dialog');
-  const button = screen.getByText('button');
+  const button = screen.getByText('Popover button');
   expect(popover).toHaveAttribute('id', 'popoverid');
   expect(button.getAttribute('aria-describedby')).toEqual('foo popoverid');
 });
@@ -169,12 +148,8 @@ test('should call onClose on escape keypress', async () => {
 test('should call onClose on clicking outside', async () => {
   const onClose = jest.fn();
   const user = userEvent.setup();
-  render(<Wrapper tooltipProps={{ onClose }} />, {
-    container: mountNode as HTMLElement
-  });
-  const outsideButton = await screen.findByText(/Click Me!/i);
-  expect(outsideButton).toBeTruthy();
-  await user.click(outsideButton);
+  render(<Wrapper tooltipProps={{ onClose }} />);
+  await user.click(document.body);
   await waitFor(() => expect(onClose).toBeCalled());
 });
 
@@ -197,13 +172,23 @@ test('onClose should be called, when close button in prompt popover is clicked',
   const handleClose = jest.fn();
   render(<WrapperPrompt tooltipProps={{ onClose: handleClose }} />);
   fireEvent.click(screen.getByText('Close'));
-  await waitFor(() => expect(handleClose).toHaveBeenCalled());
+  await waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
+});
+
+test('close opened popover when clicking on the popover trigger button', async () => {
+  const handleClose = jest.fn();
+  render(<Wrapper tooltipProps={{ onClose: handleClose }} />);
+  const popoverTriggerButton = screen.getByText('Popover button');
+  const popoverContent = screen.getByText('Popover content');
+  fireEvent.click(popoverTriggerButton);
+  expect(popoverContent).not.toBeInTheDocument();
 });
 
 test('onApply should be called, when apply button in prompt popover is clicked', async () => {
   const applyFunc = jest.fn();
+  const user = userEvent.setup();
   render(<WrapperPrompt tooltipProps={{ onApply: applyFunc }} />);
-  fireEvent.click(screen.getByText('Apply'));
+  await user.click(screen.getByText('Apply'));
   await waitFor(() => expect(applyFunc).toHaveBeenCalled());
 });
 
