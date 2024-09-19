@@ -11,12 +11,12 @@ const isEscapeKey = (event: KeyboardEvent) =>
  * @example
  * useEscapeKey(() => close())
  */
-export default function useEscapeKey(
+export default function useEscapeKey<T extends HTMLElement = HTMLElement>(
   options: {
     callback: (event: KeyboardEvent) => void;
-    target?: HTMLElement;
     active?: boolean;
     event?: 'keydown' | 'keypress' | 'keyup';
+    target?: T | React.RefObject<T> | React.MutableRefObject<T>;
     defaultPrevented?: boolean;
     capture?: boolean;
   },
@@ -24,7 +24,12 @@ export default function useEscapeKey(
 ) {
   const callback = options.callback;
   const event = options.event || 'keyup';
-  const target = options.target || document.body;
+  const target = options.target
+    ? 'current' in options.target
+      ? options.target.current
+      : options.target
+    : document.body;
+
   const active = typeof options.active === 'boolean' ? options.active : true;
 
   useEffect(() => {
@@ -39,11 +44,11 @@ export default function useEscapeKey(
     };
 
     if (active) {
-      target.addEventListener(event, eventListener, options?.capture);
+      target?.addEventListener(event, eventListener, options?.capture);
     }
 
     return () => {
-      target.removeEventListener(event, eventListener, options?.capture);
+      target?.removeEventListener(event, eventListener, options?.capture);
     };
   }, [active, event, target, ...dependencies]);
 }
