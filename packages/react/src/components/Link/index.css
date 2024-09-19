@@ -1,7 +1,7 @@
 a.Button--primary,
 a.Button--secondary,
 a.Button--thin {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
 }
 
 a.Button--primary,
