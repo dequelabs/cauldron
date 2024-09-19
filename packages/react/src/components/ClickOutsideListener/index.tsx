@@ -14,7 +14,7 @@ export interface ClickOutsideListenerProps<
 function ClickOutsideListener(
   {
     children,
-    mouseEvent = 'mouseup',
+    mouseEvent = 'click',
     touchEvent = 'touchend',
     target,
     onClickOutside = () => null
