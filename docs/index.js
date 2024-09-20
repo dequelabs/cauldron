@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
-import focusable from 'focusable';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
@@ -54,23 +53,11 @@ const App = () => {
   const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
   const { theme, toggleTheme } = useThemeContext();
 
-  const focusTopBarMenuItem = () => {
-    if (!topBarMenuItem) {
-      return;
-    }
-
-    topBarMenuItem?.focus();
-  };
-
   const onTriggerClick = (e) => {
     const { show } = state;
 
     if (e) {
       e.preventDefault();
-    }
-
-    if (show && topBarTrigger?.current) {
-      topBarTrigger?.current?.focus();
     }
 
     setState({ show: !show });
@@ -115,14 +102,6 @@ const App = () => {
     );
   };
 
-  useEffect(() => {
-    document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
-
-    return () => {
-      document.removeEventListener('focusTopBarMenu', focusTopBarMenuItem);
-    };
-  }, []);
-
   const { show, thin } = state;
 
   const [drawerIsActive, setDrawerIsActive] = useState(false);
@@ -141,21 +120,6 @@ const App = () => {
       mediaQueryList.removeEventListener('change', listener);
     };
   }, []);
-
-  useEffect(() => {
-    if (state.show) {
-      // Focus on the first focusable navigation item
-      navigationRef.current?.querySelector('a')?.focus();
-    } else {
-      workspaceRef.current?.focus();
-    }
-  }, [state.show]);
-
-  useEffect(() => {
-    const firstFocusableElement =
-      workspaceRef.current?.querySelector(focusable);
-    setWorkspaceTabIndex(!firstFocusableElement ? 0 : -1);
-  });
 
   const Drawer = drawerIsActive
     ? DrawerComponent
@@ -228,10 +192,12 @@ const App = () => {
           className="NavigationDrawer"
           open={show}
           position="left"
-          trapFocus
+          focusTrap
+          focusInitial={navigationRef}
           onClose={() => setState({ show: false })}
         >
           <Navigation
+            key="navigation"
             id="navigation"
             ref={navigationRef}
             contentRef={workspaceRef}

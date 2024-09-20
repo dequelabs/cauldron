@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, ClickOutsideListener, Scrim } from '@deque/cauldron-react';
+import { Icon, Scrim } from '@deque/cauldron-react';
 import { Link, useLocation } from 'react-router-dom';
 import { components, pages, foundations } from '../collections';
 import './Navigation.css';
