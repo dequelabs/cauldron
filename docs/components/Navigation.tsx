@@ -38,11 +38,11 @@ const NavigationLink = ({
 
 interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   contentRef: React.RefObject<HTMLElement>;
-  onClick?: () => void;
+  onNavigation?: () => void;
 }
 
 function Navigation(
-  { contentRef, onClick = () => {}, ...props }: NavigationProps,
+  { contentRef, onNavigation = () => {}, ...props }: NavigationProps,
   ref: React.Ref<HTMLElement>
 ) {
   const location = useLocation();
@@ -58,7 +58,7 @@ function Navigation(
       }
     }
 
-    onClick();
+    onNavigation();
   };
 
   const activeComponents = components.filter(

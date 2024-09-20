@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import setRef from '../../utils/setRef';
+import getElementOrRef from '../../utils/getElementOrRef';
 
 export interface ClickOutsideListenerProps<
   T extends HTMLElement = HTMLElement
@@ -29,13 +30,10 @@ function ClickOutsideListener(
     }
 
     const eventTarget = event.target as HTMLElement;
+    const elementTarget = getElementOrRef(target);
 
-    if (target && (target instanceof HTMLElement || 'current' in target)) {
-      const elementTarget =
-        target instanceof HTMLElement ? target : target.current;
-      if (!elementTarget?.contains(eventTarget)) {
-        onClickOutside(event);
-      }
+    if (target && !elementTarget?.contains(eventTarget)) {
+      onClickOutside(event);
 
       // If a target is passed in via a prop, we defer to utilizing that
       // target instead of a child element target

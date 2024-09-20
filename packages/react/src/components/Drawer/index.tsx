@@ -2,8 +2,10 @@ import React, {
   forwardRef,
   useState,
   useEffect,
+  useLayoutEffect,
   useCallback,
-  useRef
+  useRef,
+  useMemo
 } from 'react';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
@@ -13,21 +15,19 @@ import ClickOutsideListener from '../ClickOutsideListener';
 import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
 import focusableSelector from '../../utils/focusable-selector';
+import getElementOrRef from '../../utils/getElementOrRef';
 
-interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DrawerProps<T extends HTMLElement = HTMLElement>
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
   open?: boolean;
   hideScrim?: boolean;
   focusTrap?: boolean;
-  focusInitial?:
-    | HTMLElement
-    | React.RefObject<HTMLElement>
-    | React.MutableRefObject<HTMLElement>;
-  focusReturn?:
-    | HTMLElement
-    | React.RefObject<HTMLElement>
-    | React.MutableRefObject<HTMLElement>;
+  focusOptions: {
+    initialFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
+    returnFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
+  };
   onClose?: () => void;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -41,8 +41,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       open = false,
       hideScrim = false,
       focusTrap = false,
-      focusInitial,
-      focusReturn,
+      focusOptions = {},
       portal,
       onClose = () => null,
       style,
@@ -51,16 +50,11 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     ref
   ) => {
     const drawerRef = useSharedRef(ref);
-    const initialFocusRef = useRef<HTMLElement | undefined>(
-      focusInitial && 'current' in focusInitial
-        ? focusInitial.current
-        : focusInitial
-    );
-    const focusReturnRef = useRef<HTMLElement | undefined>(
-      focusReturn && 'current' in focusReturn
-        ? focusReturn.current
-        : focusReturn
-    );
+    const previousActiveElementRef = useRef<HTMLElement>(
+      null
+    ) as React.MutableRefObject<HTMLElement | null>;
+    const { initialFocus: focusInitial, returnFocus: focusReturn } =
+      focusOptions;
     const [isTransitioning, setIsTransitioning] = useState(!!open);
 
     const handleClose = useCallback(() => {
@@ -82,6 +76,36 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       setIsTransitioning(true);
     }, [open]);
 
+    useLayoutEffect(() => {
+      if (open) {
+        previousActiveElementRef.current =
+          document.activeElement as HTMLElement;
+
+        const initialFocusElement = getElementOrRef(focusInitial);
+        if (initialFocusElement) {
+          initialFocusElement.focus();
+        } else {
+          const focusable = drawerRef.current?.querySelector(
+            focusableSelector
+          ) as HTMLElement;
+          if (focusable) {
+            focusable.focus();
+          } else {
+            // fallback focus
+            drawerRef.current?.focus();
+          }
+        }
+      } else if (previousActiveElementRef.current) {
+        const returnFocusElement = getElementOrRef(focusReturn);
+        if (returnFocusElement) {
+          returnFocusElement.focus();
+        } else {
+          // fallback focus
+          previousActiveElementRef.current?.focus();
+        }
+      }
+    }, [open, focusInitial, focusReturn]);
+
     useEscapeKey(
       { callback: handleClose, active: open, defaultPrevented: true },
       [onClose]
@@ -101,15 +125,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               allowOutsideClick: true,
               escapeDeactivates: false,
               clickOutsideDeactivates: false,
-              initialFocus: () => {
-                if (initialFocusRef.current) {
-                  initialFocusRef.current.focus();
-                  return false;
-                }
-              },
-              setReturnFocus: (previousActiveElement) => {
-                return focusReturnRef.current || previousActiveElement;
-              }
+              initialFocus: false,
+              setReturnFocus: false
             }}
           >
             <div
@@ -126,6 +143,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
                 visibility: !open && !isTransitioning ? 'hidden' : undefined,
                 ...style
               }}
+              tabIndex={-1}
               {...props}
             >
               {children}

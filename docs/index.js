@@ -48,6 +48,7 @@ const App = () => {
   });
   const [topBarMenuItem, setTopBarMenuItem] = useState(null);
   const workspaceRef = useRef(null);
+  const focusReturnRef = useRef(null);
   const navigationRef = useRef(null);
   const topBarTrigger = useRef();
   const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
@@ -121,6 +122,11 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // ensure focus return always "resets" after a navigation
+    focusReturnRef.current = null;
+  });
+
   const Drawer = drawerIsActive
     ? DrawerComponent
     : (props) => <Fragment>{props.children}</Fragment>;
@@ -193,16 +199,21 @@ const App = () => {
           open={show}
           position="left"
           focusTrap
-          focusInitial={navigationRef}
+          focusOptions={{
+            initialFocus: navigationRef,
+            returnFocus: focusReturnRef
+          }}
           onClose={() => setState({ show: false })}
         >
           <Navigation
-            key="navigation"
             id="navigation"
             ref={navigationRef}
             contentRef={workspaceRef}
             tabIndex={-1}
-            onClick={() => setState({ show: false })}
+            onNavigation={() => {
+              setState({ show: false });
+              focusReturnRef.current = workspaceRef.current;
+            }}
           />
         </Drawer>
         <Workspace
