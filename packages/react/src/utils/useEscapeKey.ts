@@ -1,4 +1,5 @@
 import { useEffect, type DependencyList } from 'react';
+import resolveElement from './resolveElement';
 
 const isEscapeKey = (event: KeyboardEvent) =>
   event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
@@ -24,12 +25,7 @@ export default function useEscapeKey<T extends HTMLElement = HTMLElement>(
 ) {
   const callback = options.callback;
   const event = options.event || 'keyup';
-  const target = options.target
-    ? 'current' in options.target
-      ? options.target.current
-      : options.target
-    : document.body;
-
+  const target = resolveElement(options.target) || document.body;
   const active = typeof options.active === 'boolean' ? options.active : true;
 
   useEffect(() => {

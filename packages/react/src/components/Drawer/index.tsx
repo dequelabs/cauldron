@@ -14,7 +14,7 @@ import ClickOutsideListener from '../ClickOutsideListener';
 import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
 import focusableSelector from '../../utils/focusable-selector';
-import getElementOrRef from '../../utils/getElementOrRef';
+import resolveElement from '../../utils/resolveElement';
 
 interface DrawerProps<T extends HTMLElement = HTMLElement>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -49,6 +49,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     ref
   ) => {
     const drawerRef = useSharedRef(ref);
+    const openRef = useRef(!!open);
     const previousActiveElementRef = useRef<HTMLElement>(
       null
     ) as React.MutableRefObject<HTMLElement | null>;
@@ -72,15 +73,19 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }, [setIsTransitioning]);
 
     useEffect(() => {
-      setIsTransitioning(true);
-    }, [open]);
+      if (openRef.current !== open) {
+        setIsTransitioning(true);
+      }
+
+      openRef.current = open;
+    }, [open, setIsTransitioning]);
 
     useLayoutEffect(() => {
       if (open) {
         previousActiveElementRef.current =
           document.activeElement as HTMLElement;
 
-        const initialFocusElement = getElementOrRef(focusInitial);
+        const initialFocusElement = resolveElement(focusInitial);
         if (initialFocusElement) {
           initialFocusElement.focus();
         } else {
@@ -95,7 +100,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           }
         }
       } else if (previousActiveElementRef.current) {
-        const returnFocusElement = getElementOrRef(focusReturn);
+        const returnFocusElement = resolveElement(focusReturn);
         if (returnFocusElement) {
           returnFocusElement.focus();
         } else {

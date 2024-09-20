@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import setRef from '../../utils/setRef';
-import getElementOrRef from '../../utils/getElementOrRef';
+import resolveElement from '../../utils/resolveElement';
 
 export interface ClickOutsideListenerProps<
   T extends HTMLElement = HTMLElement
@@ -30,7 +30,7 @@ function ClickOutsideListener(
     }
 
     const eventTarget = event.target as HTMLElement;
-    const elementTarget = getElementOrRef(target);
+    const elementTarget = resolveElement(target);
 
     if (target && !elementTarget?.contains(eventTarget)) {
       onClickOutside(event);
