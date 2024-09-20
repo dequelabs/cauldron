@@ -142,7 +142,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
                 visibility: !open && !isTransitioning ? 'hidden' : undefined,
                 ...style
               }}
-              tabIndex={-1}
+              tabIndex={open ? -1 : undefined}
               {...props}
             >
               {children}
