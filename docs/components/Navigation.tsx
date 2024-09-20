@@ -38,12 +38,11 @@ const NavigationLink = ({
 
 interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   contentRef: React.RefObject<HTMLElement>;
-  active?: boolean;
   onClick?: () => void;
 }
 
 function Navigation(
-  { contentRef, active = true, onClick = () => {}, ...props }: NavigationProps,
+  { contentRef, onClick = () => {}, ...props }: NavigationProps,
   ref: React.Ref<HTMLElement>
 ) {
   const location = useLocation();
@@ -78,7 +77,6 @@ function Navigation(
           text={name}
           active={isActive}
           onClick={handleClick}
-          tabIndex={!active ? -1 : undefined}
         />
       </li>
     );

@@ -14,9 +14,17 @@
   --docs-navigation-divider-color: var(--stroke-dark);
 }
 
+body.TopBar--thin .NavigationDrawer {
+  --top-bar-height: var(--top-bar-height-thin);
+}
+
+.NavigationDrawer {
+  --drawer-top: var(--top-bar-height);
+  --drawer-height: calc(100vh - var(--top-bar-height));
+  overflow-y: auto;
+}
+
 .Navigation {
-  margin-top: var(--top-bar-height);
-  max-height: calc(100vh - var(--top-bar-height));
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);
   border-right: 1px solid var(--docs-navigation-divider-color);

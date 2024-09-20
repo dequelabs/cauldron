@@ -10,7 +10,7 @@ import ComponentLayout from './components/ComponentLayout';
 import Navigation from './components/Navigation';
 import {
   Code,
-  Drawer,
+  Drawer as DrawerComponent,
   TopBar,
   MenuBar,
   TopBarTrigger,
@@ -157,6 +157,10 @@ const App = () => {
     setWorkspaceTabIndex(!firstFocusableElement ? 0 : -1);
   });
 
+  const Drawer = drawerIsActive
+    ? DrawerComponent
+    : (props) => <Fragment>{props.children}</Fragment>;
+
   return (
     <Router>
       <Helmet
@@ -221,17 +225,18 @@ const App = () => {
       </TopBar>
       <div className="Content">
         <Drawer
+          className="NavigationDrawer"
           open={show}
           position="left"
+          trapFocus
           onClose={() => setState({ show: false })}
         >
           <Navigation
             id="navigation"
-            active={show || !drawerIsActive}
             ref={navigationRef}
             contentRef={workspaceRef}
+            tabIndex={-1}
             onClick={() => setState({ show: false })}
-            aria-hidden={!show && drawerIsActive}
           />
         </Drawer>
         <Workspace

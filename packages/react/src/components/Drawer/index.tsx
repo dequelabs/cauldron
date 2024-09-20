@@ -10,9 +10,9 @@ import useSharedRef from '../../utils/useSharedRef';
 interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
-  focusTrap?: boolean;
   open?: boolean;
   hideScrim?: boolean;
+  trapFocus?: boolean;
   onClose?: () => void;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
@@ -22,10 +22,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     {
       children,
       className,
-      open = false,
       position,
-      focusTrap,
+      open = false,
       hideScrim = false,
+      trapFocus = false,
       portal,
       onClose = () => null,
       ...props
@@ -53,7 +53,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }, [open]);
 
     const handleClickOutside = useCallback(() => {
-      if (open) {
+      if (open && typeof onClose === 'function') {
         onClose();
       }
     }, [open]);
@@ -64,21 +64,20 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
     return createPortal(
       <>
-        <FocusTrap
-          active={!!focusTrap}
-          focusTrapOptions={{
-            escapeDeactivates: false,
-            clickOutsideDeactivates: false,
-            fallbackFocus: drawerRef.current
-          }}
+        <ClickOutsideListener
+          onClickOutside={handleClickOutside}
+          mouseEvent={open ? undefined : false}
+          touchEvent={open ? undefined : false}
         >
-          <ClickOutsideListener
-            onClickOutside={handleClickOutside}
-            mouseEvent={open ? undefined : false}
-            touchEvent={open ? undefined : false}
+          <FocusTrap
+            active={!!trapFocus && open}
+            focusTrapOptions={{
+              escapeDeactivates: false,
+              clickOutsideDeactivates: false,
+              fallbackFocus: drawerRef.current
+            }}
           >
             <div
-              ref={drawerRef}
               className={classnames(className, 'Drawer', {
                 'Drawer--open': open,
                 'Drawer--top': position === 'top',
@@ -93,8 +92,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             >
               {children}
             </div>
-          </ClickOutsideListener>
-        </FocusTrap>
+          </FocusTrap>
+        </ClickOutsideListener>
         <Scrim show={!!open && !hideScrim} />
       </>,
       (portal && 'current' in portal ? portal.current : portal) ||
