@@ -4,8 +4,7 @@ import React, {
   useEffect,
   useLayoutEffect,
   useCallback,
-  useRef,
-  useMemo
+  useRef
 } from 'react';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
