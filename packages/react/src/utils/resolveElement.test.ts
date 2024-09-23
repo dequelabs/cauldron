@@ -1,5 +1,17 @@
 import { createRef, type MutableRefObject } from 'react';
+import { createSandbox } from 'sinon';
 import resolveElement from './resolveElement';
+
+const sandbox = createSandbox();
+
+beforeEach(() => {
+  // prevent console.warn in hook from getting invoked here
+  sandbox.stub(console, 'warn').callsFake(() => null);
+});
+
+afterEach(() => {
+  sandbox.restore();
+});
 
 test('should return element', () => {
   expect(resolveElement(document.body)).toBe(document.body);
