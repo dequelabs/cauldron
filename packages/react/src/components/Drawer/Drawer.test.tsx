@@ -308,9 +308,9 @@ test('should return no axe violations when open', async () => {
   expect(results).toHaveNoViolations();
 });
 
-test('should return no axe violations when open', async () => {
+test('should return no axe violations when closed', async () => {
   render(
-    <Drawer position="left" open data-testid="drawer">
+    <Drawer position="left" data-testid="drawer">
       Children
     </Drawer>
   );
