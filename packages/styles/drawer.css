@@ -24,7 +24,7 @@
 }
 
 .Drawer--bottom {
-  top: var(--drawer-bottom, 0);
+  bottom: var(--drawer-bottom, 0);
   transform: translateY(100%);
 }
 

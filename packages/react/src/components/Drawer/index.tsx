@@ -23,7 +23,7 @@ interface DrawerProps<T extends HTMLElement = HTMLElement>
   open?: boolean;
   hideScrim?: boolean;
   focusTrap?: boolean;
-  focusOptions: {
+  focusOptions?: {
     initialFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
     returnFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
   };

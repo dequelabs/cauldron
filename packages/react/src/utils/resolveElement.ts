@@ -20,11 +20,5 @@ export default function resolveElement<T extends Element = Element>(
     return elementOrRef.current;
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    console.warn(
-      'An element or ref was passed into "resolveElement" that was not an instance of Element.'
-    );
-  }
-
   return null;
 }

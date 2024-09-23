@@ -127,6 +127,7 @@ const App = () => {
     focusReturnRef.current = null;
   });
 
+  // Only render the collapse-able drawer component when there is space to do so
   const Drawer = drawerIsActive
     ? DrawerComponent
     : (props) => <Fragment>{props.children}</Fragment>;
