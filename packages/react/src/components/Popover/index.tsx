@@ -189,6 +189,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [targetElement, id, show]);
 
     const handleClickOutside = () => {
+      // console.log("should the initial click be calling handleClickOutside?");
+      // console.log('handleClickOutside', show);
       if (show) {
         handleClosePopover();
       }
