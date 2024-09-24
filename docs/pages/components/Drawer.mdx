@@ -5,7 +5,7 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useState } from 'react'
-import { Drawer, IconButton, Select, Panel } from '@deque/cauldron-react'
+import { Drawer, IconButton, Select, Panel, Button } from '@deque/cauldron-react'
 
 ```js
 import { Drawer } from '@deque/cauldron-react'
@@ -47,7 +47,7 @@ function DrawerPositionExample() {
         <option value="left">Left</option>
         <option value="right">Right</option>
       </Select>
-      <IconButton label="Toggle Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <IconButton label="Toggle Position Drawer" icon="hamburger-menu" onClick={toggleOpen} />
       <Drawer open={open} onClose={toggleOpen} position={position}>
         <Panel style={{ height: ['left', 'right'].includes(position) && '100vh', width: ['top', 'bottom'].includes(position) && '100vw' }}>You opened me!</Panel>
       </Drawer>
@@ -56,13 +56,82 @@ function DrawerPositionExample() {
 }
 ```
 
+### Focus
+
+The Drawer component can also be contain focus via a focus trap when the `focusTrap` property is set to true.
+
+```jsx example
+function DrawerFocusExample() {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  return (
+    <>
+      <IconButton label="Toggle Focus Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <Drawer open={open} onClose={toggleOpen} position="left" focusTrap>
+        <Panel style={{ height: '100vh' }}>
+          <p>
+            You opened me!
+          </p>
+          <Button variant="primary">Ok</Button>
+          <Button variant="tertiary">Nevermind</Button>
+        </Panel>
+      </Drawer>
+    </>
+  )
+}
+```
+
+Advanced focus configuration can also be set via `focusOptions` and `focusOptions.initialFocus` and `focusOptions.focusReturn`. By default, focus will return to the triggering element when no `focusReturn` element is set.
+
 ## Props
 
 <ComponentProps
   children={{
     required: true
   }}
-  props={[  ]}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'position',
+      type: ['top', 'bottom', 'left', 'right'],
+      description: 'The anchor position of the Drawer. Sets where the Drawer will appear when opened.',
+      required: true
+    },
+    {
+      name: 'open',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Sets the current "open" state of the Drawer.'
+    },
+    {
+      name: 'hideScrim',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Hides the scrim element when the Drawer is open.'
+    },
+    {
+      name: 'focusTrap',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Traps focus in the Drawer when open.'
+    },
+    {
+      name: 'focusOptions',
+      type: 'object',
+      description: 'Advanced customization of focus state when the Drawer open state changes.'
+    },
+    {
+      name: 'onClose',
+      type: 'function',
+      description: 'Callback function when the Drawer is closed.'
+    },
+    {
+      name: 'portal',
+      type: ['Element', 'React.RefObject<Element>'],
+      defaultValue: 'document.body',
+      description: 'Sets the container in which the Drawer is rendered.'
+    }
+  ]}
 />
 
 ## Related Components
