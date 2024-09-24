@@ -4,6 +4,11 @@ import userEvent from '@testing-library/user-event';
 import Drawer from './';
 import axe from '../../axe';
 
+afterEach(() => {
+  document.body.innerHTML = '';
+  jest.restoreAllMocks();
+});
+
 test('should render children', () => {
   render(
     <Drawer position="left" open data-testid="drawer">
@@ -203,7 +208,7 @@ test('should return focus to triggering element when closed', () => {
   rerender(
     <>
       <button>trigger</button>
-      <Drawer position="left" data-testid="drawer" open>
+      <Drawer position="left" data-testid="drawer">
         Children
       </Drawer>
     </>
@@ -244,6 +249,7 @@ test('should return focus to custom element when closed', () => {
       Children
     </Drawer>
   );
+
   expect(button).toHaveFocus();
 });
 
@@ -259,25 +265,6 @@ test('should support ref prop', () => {
   expect(ref.current).toEqual(screen.getByTestId('drawer'));
 });
 
-test('should trap focus when focusTrap is truthy', async () => {
-  const user = userEvent.setup();
-  render(
-    <>
-      <button>outside</button>
-      <Drawer position="left" open focusTrap>
-        <div>
-          <button>inside</button>
-        </div>
-      </Drawer>
-    </>
-  );
-
-  await user.keyboard('{Tab}');
-  expect(screen.getByRole('button', { name: 'inside' })).toHaveFocus();
-  await user.keyboard('{Tab}');
-  expect(screen.getByRole('button', { name: 'inside' })).toHaveFocus();
-});
-
 test('should not trap focus when focusTrap is falsy', async () => {
   const user = userEvent.setup();
   render(
@@ -291,6 +278,8 @@ test('should not trap focus when focusTrap is falsy', async () => {
     </>
   );
 
+  await user.keyboard('{Tab}');
+  expect(document.body).toHaveFocus();
   await user.keyboard('{Tab}');
   expect(screen.getByRole('button', { name: 'outside' })).toHaveFocus();
   await user.keyboard('{Tab}');

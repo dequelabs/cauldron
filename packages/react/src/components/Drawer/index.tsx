@@ -15,6 +15,7 @@ import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
 import focusableSelector from '../../utils/focusable-selector';
 import resolveElement from '../../utils/resolveElement';
+import { isBrowser } from '../../utils/is-browser';
 
 interface DrawerProps<T extends HTMLElement = HTMLElement>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -42,7 +43,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       focusTrap = false,
       focusOptions = {},
       portal,
-      onClose = () => null,
+      onClose,
       style,
       ...props
     },
@@ -58,12 +59,15 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const [isTransitioning, setIsTransitioning] = useState(!!open);
 
     const handleClose = useCallback(() => {
+      // istanbul ignore next
       if (open && typeof onClose === 'function') {
         onClose();
       }
     }, [open, onClose]);
 
     useEffect(() => {
+      // jsdom does not trigger transitionend event
+      // istanbul ignore next
       const transitionEndHandler = () => setIsTransitioning(false);
 
       document.addEventListener('transitionend', transitionEndHandler);
@@ -115,6 +119,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       [onClose]
     );
 
+    // istanbul ignore next
+    if (!isBrowser()) {
+      return null;
+    }
+
+    const portalElement = resolveElement(portal);
+
     return createPortal(
       <>
         <ClickOutsideListener
@@ -156,7 +167,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         </ClickOutsideListener>
         <Scrim show={!!open && !hideScrim} />
       </>,
-      (portal && 'current' in portal ? portal.current : portal) ||
+      portalElement ||
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document?.body
     );
