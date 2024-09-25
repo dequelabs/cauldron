@@ -1,0 +1,43 @@
+---
+title: BottomSheet
+description: A primitive component with an initially hidden off-screen container anchored to the bottom of the page to provide quick access to additional content or information.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/BottomSheet/index.tsx
+---
+
+import { useState } from 'react'
+import { BottomSheet, IconButton, Icon, Button } from '@deque/cauldron-react'
+
+```js
+import { BottomSheet } from '@deque/cauldron-react'
+```
+
+## Examples
+
+```jsx example
+function BottomSheetExample() {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  return (
+    <>
+      <IconButton label="Toggle Bottom Sheet" icon="hamburger-menu" onClick={toggleOpen} />
+      <BottomSheet label="Bottom Sheet Title" open={open} onClose={toggleOpen}>
+        Contents
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+## Props
+
+<ComponentProps
+  children={{
+    required: true
+  }}
+  refType="HTMLDivElement"
+  props={[]}
+/>
+
+## Related Components
+
+- [Drawer](./Drawer)
