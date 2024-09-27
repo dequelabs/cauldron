@@ -137,8 +137,7 @@ it('should use capture', () => {
   expect(addEventListener.mock.lastCall?.[2]).toEqual(true);
 });
 
-// TODO: fix this test
-it.skip('should check for default prevented', async () => {
+it('should check for default prevented', () => {
   const callback = jest.fn();
   renderHook(() =>
     useEscapeKey({
@@ -147,22 +146,19 @@ it.skip('should check for default prevented', async () => {
     })
   );
 
-  const fireKeyUpEvent = (preventDefault: boolean) => {
+  const fireKeyUpEvent = (defaultPrevented: boolean) => {
     const event = createEvent.keyUp(document.body, { key: 'Escape' });
-    // rtl doesn't let us mock preventDefault
+    // rtl doesn't let us mock defaultPrevented
     // see: https://github.com/testing-library/react-testing-library/issues/572
-    // @ts-expect-error not mocking function but
-    event.preventDefault = preventDefault;
+    Object.defineProperty(event, 'defaultPrevented', {
+      get: () => defaultPrevented,
+      enumerable: true
+    });
     fireEvent(document.body, event);
   };
 
-  await fireEvent.keyUp(document.body, {
-    key: 'Escape',
-    defaultPrevented: true
-  });
-  // fireKeyUpEvent(true)
+  fireKeyUpEvent(true);
   expect(callback).not.toBeCalled();
-  // fireKeyUpEvent(false)
-  await fireEvent.keyUp(document.body, { key: 'Escape' });
-  expect(callback).toBeCalled();
+  fireKeyUpEvent(false);
+  expect(callback).toBeCalledTimes(1);
 });

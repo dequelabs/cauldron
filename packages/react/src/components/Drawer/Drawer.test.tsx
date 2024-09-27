@@ -265,19 +265,23 @@ test('should support ref prop', () => {
   expect(ref.current).toEqual(screen.getByTestId('drawer'));
 });
 
-test('should not trap focus when focusTrap is falsy', async () => {
+test('should not trap focus when behavior is non-modal', async () => {
   const user = userEvent.setup();
   render(
     <>
       <button>outside</button>
-      <Drawer position="left" open focusTrap={false}>
+      <Drawer position="left" behavior="non-modal" open>
         <div>
           <button>inside</button>
         </div>
       </Drawer>
     </>
   );
-
+  
+  expect(screen.getByRole('button', { name: 'outside' })).not.toHaveAttribute(
+    'aria-hidden',
+    'true'
+  );
   await user.keyboard('{Tab}');
   expect(document.body).toHaveFocus();
   await user.keyboard('{Tab}');

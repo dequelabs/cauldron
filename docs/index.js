@@ -199,7 +199,6 @@ const App = () => {
           className="NavigationDrawer"
           open={show}
           position="left"
-          focusTrap
           focusOptions={{
             initialFocus: navigationRef,
             returnFocus: focusReturnRef

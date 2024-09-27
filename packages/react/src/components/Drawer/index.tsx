@@ -15,6 +15,7 @@ import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
 import focusableSelector from '../../utils/focusable-selector';
 import resolveElement from '../../utils/resolveElement';
+import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
 
 interface DrawerProps<T extends HTMLElement = HTMLElement>
@@ -22,8 +23,7 @@ interface DrawerProps<T extends HTMLElement = HTMLElement>
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
   open?: boolean;
-  hideScrim?: boolean;
-  focusTrap?: boolean;
+  behavior?: 'modal' | 'non-modal';
   focusOptions?: {
     initialFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
     returnFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
@@ -39,8 +39,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       className,
       position,
       open = false,
-      hideScrim = false,
-      focusTrap = false,
+      behavior = 'modal',
       focusOptions = {},
       portal,
       onClose,
@@ -57,6 +56,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const { initialFocus: focusInitial, returnFocus: focusReturn } =
       focusOptions;
     const [isTransitioning, setIsTransitioning] = useState(!!open);
+    const isModal = behavior === 'modal';
 
     const handleClose = useCallback(() => {
       // istanbul ignore next
@@ -83,6 +83,23 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
       openRef.current = open;
     }, [open, setIsTransitioning]);
+
+    useEffect(() => {
+      if (!isModal) {
+        return;
+      }
+
+      const isolator = new AriaIsolate(drawerRef.current);
+      if (open) {
+        isolator.activate();
+      } else {
+        isolator.deactivate();
+      }
+
+      return () => {
+        isolator.deactivate();
+      };
+    }, [isModal, open]);
 
     useLayoutEffect(() => {
       if (open) {
@@ -135,19 +152,20 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           target={drawerRef}
         >
           <FocusTrap
-            active={!!focusTrap && open}
+            active={!!isModal && !!open}
             focusTrapOptions={{
               allowOutsideClick: true,
               escapeDeactivates: false,
               clickOutsideDeactivates: false,
               initialFocus: false,
-              setReturnFocus: false
+              setReturnFocus: false,
+              fallbackFocus: () => drawerRef.current
             }}
           >
             <div
               ref={drawerRef}
               className={classnames(className, 'Drawer', {
-                'Drawer--open': open,
+                'Drawer--open': !!open,
                 'Drawer--top': position === 'top',
                 'Drawer--bottom': position === 'bottom',
                 'Drawer--left': position === 'left',
@@ -165,7 +183,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             </div>
           </FocusTrap>
         </ClickOutsideListener>
-        <Scrim show={!!open && !hideScrim} />
+        <Scrim show={!!open && !!isModal} />
       </>,
       portalElement ||
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc

@@ -56,24 +56,23 @@ function DrawerPositionExample() {
 }
 ```
 
-### Focus
+### Behavior
 
-The Drawer component can also be contain focus via a focus trap when the `focusTrap` property is set to true.
+By default, the Drawer component has a `behavior="modal"`, trapping focus and making other content hidden from the user behind a backdrop. The behavior can be changed to a non-modal behavior to not trap focus in instances where the drawer does not cover content with `behavior="non-modal"`
 
 ```jsx example
-function DrawerFocusExample() {
+function DrawerNonModalExample() {
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen(!open);
   return (
     <>
-      <IconButton label="Toggle Focus Drawer" icon="hamburger-menu" onClick={toggleOpen} />
-      <Drawer open={open} onClose={toggleOpen} position="left" focusTrap>
+      <IconButton label="Toggle Non-Modal Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <Drawer open={open} onClose={toggleOpen} position="left" behavior="non-modal">
+
         <Panel style={{ height: '100vh' }}>
           <p>
             You opened me!
           </p>
-          <Button variant="primary">Ok</Button>
-          <Button variant="tertiary">Nevermind</Button>
         </Panel>
       </Drawer>
     </>
@@ -104,16 +103,10 @@ Advanced focus configuration can also be set via `focusOptions` and `focusOption
       description: 'Sets the current "open" state of the Drawer.'
     },
     {
-      name: 'hideScrim',
-      type: 'boolean',
-      defaultValue: 'false',
-      description: 'Hides the scrim element when the Drawer is open.'
-    },
-    {
-      name: 'focusTrap',
-      type: 'boolean',
-      defaultValue: 'false',
-      description: 'Traps focus in the Drawer when open.'
+      name: 'behavior',
+      type: ['modal', 'non-modal'],
+      defaultValue: 'modal',
+      description: 'When set to "modal", the drawer will act as a modal dialog displaying a backdrop behind the drawer and trapping focus within the drawer. Otherwise, "non-modal" behavior will not trap focus and will allow the user to interact with content outside of the drawer.'
     },
     {
       name: 'focusOptions',
