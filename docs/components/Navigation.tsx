@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, ClickOutsideListener, Scrim } from '@deque/cauldron-react';
+import { Icon, Scrim } from '@deque/cauldron-react';
 import { Link, useLocation } from 'react-router-dom';
 import { components, pages, foundations } from '../collections';
 import './Navigation.css';
@@ -38,12 +38,11 @@ const NavigationLink = ({
 
 interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   contentRef: React.RefObject<HTMLElement>;
-  active?: boolean;
-  onClick?: () => void;
+  onNavigation?: () => void;
 }
 
 function Navigation(
-  { contentRef, active = true, onClick = () => {}, ...props }: NavigationProps,
+  { contentRef, onNavigation = () => {}, ...props }: NavigationProps,
   ref: React.Ref<HTMLElement>
 ) {
   const location = useLocation();
@@ -59,7 +58,7 @@ function Navigation(
       }
     }
 
-    onClick();
+    onNavigation();
   };
 
   const activeComponents = components.filter(
@@ -78,7 +77,6 @@ function Navigation(
           text={name}
           active={isActive}
           onClick={handleClick}
-          tabIndex={!active ? -1 : undefined}
         />
       </li>
     );
