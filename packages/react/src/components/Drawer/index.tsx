@@ -23,8 +23,7 @@ interface DrawerProps<T extends HTMLElement = HTMLElement>
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
   open?: boolean;
-  hideScrim?: boolean;
-  focusTrap?: boolean;
+  modal?: boolean;
   focusOptions?: {
     initialFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
     returnFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
@@ -40,8 +39,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       className,
       position,
       open = false,
-      hideScrim = false,
-      focusTrap = false,
+      modal = false,
       focusOptions = {},
       portal,
       onClose,
@@ -86,7 +84,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }, [open, setIsTransitioning]);
 
     useEffect(() => {
-      if (!focusTrap) {
+      if (!modal) {
         return;
       }
 
@@ -100,7 +98,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       return () => {
         isolator.deactivate();
       };
-    }, [focusTrap, open]);
+    }, [modal, open]);
 
     useLayoutEffect(() => {
       if (open) {
@@ -153,7 +151,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           target={drawerRef}
         >
           <FocusTrap
-            active={!!focusTrap && open}
+            active={!!modal && open}
             focusTrapOptions={{
               allowOutsideClick: true,
               escapeDeactivates: false,
@@ -183,7 +181,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             </div>
           </FocusTrap>
         </ClickOutsideListener>
-        <Scrim show={!!open && !hideScrim} />
+        <Scrim show={!!open && !!modal} />
       </>,
       portalElement ||
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
