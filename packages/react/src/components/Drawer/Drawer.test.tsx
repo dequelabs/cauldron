@@ -278,6 +278,10 @@ test('should not trap focus when focusTrap is falsy', async () => {
     </>
   );
 
+  expect(screen.getByRole('button', { name: 'outside' })).not.toHaveAttribute(
+    'aria-hidden',
+    'true'
+  );
   await user.keyboard('{Tab}');
   expect(document.body).toHaveFocus();
   await user.keyboard('{Tab}');

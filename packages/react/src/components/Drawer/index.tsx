@@ -15,6 +15,7 @@ import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
 import focusableSelector from '../../utils/focusable-selector';
 import resolveElement from '../../utils/resolveElement';
+import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
 
 interface DrawerProps<T extends HTMLElement = HTMLElement>
@@ -83,6 +84,23 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
       openRef.current = open;
     }, [open, setIsTransitioning]);
+
+    useEffect(() => {
+      if (!focusTrap) {
+        return;
+      }
+
+      const isolator = new AriaIsolate(drawerRef.current);
+      if (open) {
+        isolator.activate();
+      } else {
+        isolator.deactivate();
+      }
+
+      return () => {
+        isolator.deactivate();
+      };
+    }, [focusTrap, open]);
 
     useLayoutEffect(() => {
       if (open) {
