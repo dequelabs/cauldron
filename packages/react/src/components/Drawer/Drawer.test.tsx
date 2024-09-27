@@ -265,12 +265,12 @@ test('should support ref prop', () => {
   expect(ref.current).toEqual(screen.getByTestId('drawer'));
 });
 
-test('should not trap focus when modal is falsy', async () => {
+test('should not trap focus when behavior is non-modal', async () => {
   const user = userEvent.setup();
   render(
     <>
       <button>outside</button>
-      <Drawer position="left" open modal={false}>
+      <Drawer position="left" behavior="non-modal" open>
         <div>
           <button>inside</button>
         </div>
