@@ -60,15 +60,15 @@ function ClickOutsideListener(
 
   useEffect(() => {
     typeof mouseEvent === 'string' &&
-      document.addEventListener(mouseEvent, handleEvent);
+      document.addEventListener(mouseEvent, handleEvent, true);
     typeof touchEvent === 'string' &&
-      document.addEventListener(touchEvent, handleEvent);
+      document.addEventListener(touchEvent, handleEvent, true);
 
     return () => {
       typeof mouseEvent === 'string' &&
-        document.removeEventListener(mouseEvent, handleEvent);
+        document.removeEventListener(mouseEvent, handleEvent, true);
       typeof touchEvent === 'string' &&
-        document.removeEventListener(touchEvent, handleEvent);
+        document.removeEventListener(touchEvent, handleEvent, true);
     };
   }, [mouseEvent, touchEvent]);
 
