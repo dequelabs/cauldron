@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { useId } from 'react-id-generator';
 import classnames from 'classnames';
 import Drawer from '../Drawer';
@@ -11,7 +11,10 @@ type BottomSheetProps = {
   closeButtonText?: ContentNode;
   open?: boolean;
 } & React.HTMLAttributes<HTMLDivElement> &
-  Pick<React.ComponentProps<typeof Drawer>, 'open' | 'onClose'>;
+  Pick<
+    React.ComponentProps<typeof Drawer>,
+    'open' | 'onClose' | 'focusOptions'
+  >;
 
 const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
   (
@@ -22,6 +25,7 @@ const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
       closeButtonText = 'Close',
       open = false,
       onClose,
+      focusOptions,
       ...props
     },
     ref
@@ -37,11 +41,12 @@ const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
 
     return (
       <Drawer
+        behavior="modal"
         position="bottom"
         open={open}
-        focusTrap
         focusOptions={{
-          initialFocus: bottomSheetRef
+          initialFocus: bottomSheetRef,
+          ...focusOptions
         }}
         onClose={handleClose}
         {...props}
