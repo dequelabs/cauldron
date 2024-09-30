@@ -2,9 +2,7 @@
   --text-field-wrapper-border-color: var(--field-border-color);
   --text-field-wrapper-background-color: var(--field-background-color);
   --text-field-wrapper-border-focus-color: var(--field-border-color-focus);
-  --text-field-wrapper-border-hover-color: var(
-    --field-border-color-focus-hover
-  );
+  --text-field-wrapper-border-hover-color: var(--field-border-color-hover);
   --text-field-wrapper-border-focus-glow-color: var(
     --field-border-color-focus-glow
   );
@@ -51,7 +49,8 @@
   display: flex;
   align-items: center;
   border: 1px solid var(--text-field-wrapper-border-color);
-  border-bottom: 1px solid var(--field-border-color-underline);
+  /* border-bottom: 1px solid var(--field-border-color-underline); */
+  border-radius: var(--field-border-radius);
   margin-bottom: var(--space-half);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   background-color: var(--text-field-wrapper-background-color);
@@ -71,6 +70,7 @@
 }
 
 .TextFieldWrapper input {
+  border-radius: var(--field-border-radius);
   font-size: var(--text-field-wrapper-font-size);
   color: var(--text-field-wrapper-font-color);
 }

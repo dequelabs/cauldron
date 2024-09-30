@@ -13,7 +13,7 @@
   );
   --text-field-wrapper-border-hover-color: var(
     --search-field-border-hover-color,
-    var(--field-border-color-focus-hover)
+    var(--field-border-color-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
     --search-field-border-focus-glow-color,
@@ -91,4 +91,9 @@
 
 .SearchField input::-webkit-search-cancel-button {
   margin-left: var(--space-smallest);
+}
+
+.SearchField input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
