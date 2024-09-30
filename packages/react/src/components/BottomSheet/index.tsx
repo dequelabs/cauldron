@@ -13,7 +13,7 @@ type BottomSheetProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   Pick<
     React.ComponentProps<typeof Drawer>,
-    'open' | 'onClose' | 'focusOptions'
+    'open' | 'onClose' | 'focusOptions' | 'portal'
   >;
 
 const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
@@ -41,15 +41,15 @@ const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
 
     return (
       <Drawer
-        behavior="modal"
-        position="bottom"
         open={open}
+        onClose={handleClose}
         focusOptions={{
           initialFocus: bottomSheetRef,
           ...focusOptions
         }}
-        onClose={handleClose}
         {...props}
+        behavior="modal"
+        position="bottom"
       >
         <div
           ref={bottomSheetRef}

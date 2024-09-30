@@ -277,7 +277,6 @@ test('should not trap focus when behavior is non-modal', async () => {
       </Drawer>
     </>
   );
-  
   expect(screen.getByRole('button', { name: 'outside' })).not.toHaveAttribute(
     'aria-hidden',
     'true'
