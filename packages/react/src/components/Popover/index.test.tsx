@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import axe from '../../axe';
 import Popover from '../Popover';
+import Button from '../Button';
 import AriaIsolate from '../../utils/aria-isolate';
 
 interface PopoverProps {
@@ -11,19 +12,24 @@ interface PopoverProps {
 }
 
 const Wrapper = ({ buttonProps = {}, tooltipProps = {} }: PopoverProps) => {
-  const ref = useRef<HTMLButtonElement>(null);
-  const onClose = jest.fn();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [show, setShow] = useState(true);
+  const onClose = jest.fn(() => setShow(!show));
 
   return (
     <>
       <h2 id="popover-title">Popover title</h2>
-      <button ref={ref} {...buttonProps}>
+      <Button
+        buttonRef={buttonRef}
+        onClick={() => setShow(!show)}
+        {...buttonProps}
+      >
         Popover button
-      </button>
+      </Button>
       <Popover
         variant="custom"
-        show
-        target={ref}
+        show={show}
+        target={buttonRef}
         onClose={onClose}
         aria-labelledby="popover-title"
         {...tooltipProps}
@@ -175,11 +181,11 @@ test('onClose should be called, when close button in prompt popover is clicked',
   await waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
 });
 
-test('close opened popover when clicking on the popover trigger button', async () => {
-  const handleClose = jest.fn();
-  render(<Wrapper tooltipProps={{ onClose: handleClose }} />);
+test('close popover when clicking on the popover trigger button', async () => {
+  render(<Wrapper />);
   const popoverTriggerButton = screen.getByText('Popover button');
   const popoverContent = screen.getByText('Popover content');
+  expect(popoverContent).toBeInTheDocument();
   fireEvent.click(popoverTriggerButton);
   expect(popoverContent).not.toBeInTheDocument();
 });
