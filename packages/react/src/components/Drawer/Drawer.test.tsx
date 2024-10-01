@@ -159,12 +159,19 @@ test('should set focus to custom element when opened', () => {
       data-testid="drawer"
       focusOptions={{ initialFocus: ref.current as HTMLElement }}
     >
-      <button>focus me</button>
+      <button>no focus me</button>
+      <button ref={ref}>focus me</button>
     </Drawer>
   );
 
   rerender(
-    <Drawer position="left" data-testid="drawer" open>
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref.current as HTMLElement }}
+      open
+    >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
   );
@@ -180,12 +187,19 @@ test('should set focus to custom ref element', () => {
       data-testid="drawer"
       focusOptions={{ initialFocus: ref }}
     >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
   );
 
   rerender(
-    <Drawer position="left" data-testid="drawer" open>
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref }}
+      open
+    >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
   );
