@@ -126,7 +126,7 @@ button.Link {
 .Button--tertiary {
   background-color: var(--button-background-color-secondary);
   color: var(--button-text-color-dark);
-  border: 1px solid var(--field-border-color);
+  border: 1px solid var(--gray-40);
 }
 
 .Button--tertiary:is(:not(:hover, :focus), [disabled], [aria-disabled='true']) {
