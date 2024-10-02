@@ -11,8 +11,10 @@ const trigger = (props: React.HTMLAttributes<HTMLButtonElement>) => (
 );
 
 test('should render menu', () => {
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li>option 1</li>
       <li>option 2</li>
     </OptionsMenu>
@@ -23,8 +25,10 @@ test('should render menu', () => {
 });
 
 test('should render children', () => {
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li>option 1</li>
       <li>option 2</li>
     </OptionsMenu>
@@ -34,8 +38,10 @@ test('should render children', () => {
 });
 
 test('should render trigger prop', () => {
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -44,8 +50,10 @@ test('should render trigger prop', () => {
 });
 
 test('should support className prop', () => {
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger} className="bananas">
+    <OptionsMenu onSelect={onSelect} trigger={trigger} className="bananas">
       <li>option 1</li>
       <li>option 2</li>
     </OptionsMenu>
@@ -57,13 +65,15 @@ test('should support className prop', () => {
 });
 
 test('should support align prop', () => {
+  const onSelect = jest.fn();
+
   render(
     <>
-      <OptionsMenu trigger={trigger} align="left">
+      <OptionsMenu onSelect={onSelect} trigger={trigger} align="left">
         <li>option 1</li>
         <li>option 2</li>
       </OptionsMenu>
-      <OptionsMenu trigger={trigger} align="right">
+      <OptionsMenu onSelect={onSelect} trigger={trigger} align="right">
         <li>option 1</li>
         <li>option 2</li>
       </OptionsMenu>
@@ -80,8 +90,10 @@ test('should support align prop', () => {
 
 test('should support menuRef prop', () => {
   const menuRef = React.createRef<HTMLUListElement>();
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger} menuRef={menuRef}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger} menuRef={menuRef}>
       <li>option 1</li>
       <li>option 2</li>
     </OptionsMenu>
@@ -93,8 +105,10 @@ test('should support menuRef prop', () => {
 
 test('should toggle menu on trigger clicks', async () => {
   const user = userEvent.setup();
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -112,8 +126,10 @@ test('should toggle menu on trigger clicks', async () => {
 });
 
 test('should click trigger with down key on trigger', () => {
+  const onSelect = jest.fn();
+
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -126,9 +142,10 @@ test('should click trigger with down key on trigger', () => {
 
 test('should focus trigger on close', async () => {
   const user = userEvent.setup();
+  const onSelect = jest.fn();
 
   render(
-    <OptionsMenu trigger={trigger}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -143,9 +160,10 @@ test('should focus trigger on close', async () => {
 test('should call onClose when closed', async () => {
   const user = userEvent.setup();
   const onClose = jest.fn();
+  const onSelect = jest.fn();
 
   render(
-    <OptionsMenu trigger={trigger} onClose={onClose}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger} onClose={onClose}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -159,11 +177,12 @@ test('should call onClose when closed', async () => {
 
 test('should close menu when click outside event occurs', async () => {
   const user = userEvent.setup();
+  const onSelect = jest.fn();
 
   render(
     <>
       <button>Click me!</button>
-      <OptionsMenu trigger={trigger}>
+      <OptionsMenu onSelect={onSelect} trigger={trigger}>
         <li className="foo">option 1</li>
       </OptionsMenu>
     </>
@@ -176,8 +195,9 @@ test('should close menu when click outside event occurs', async () => {
 });
 
 test('should return no axe violations when hidden', async () => {
+  const onSelect = jest.fn();
   const { container } = render(
-    <OptionsMenu trigger={trigger} show={false}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger} show={false}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
@@ -186,8 +206,9 @@ test('should return no axe violations when hidden', async () => {
 });
 
 test('should return no axe violations when shown', async () => {
+  const onSelect = jest.fn();
   const { container } = render(
-    <OptionsMenu trigger={trigger} show={true}>
+    <OptionsMenu onSelect={onSelect} trigger={trigger} show={true}>
       <li className="foo">option 1</li>
     </OptionsMenu>
   );
