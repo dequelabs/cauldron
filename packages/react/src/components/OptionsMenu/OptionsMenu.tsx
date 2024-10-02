@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import OptionsMenuWrapper from './OptionsMenuWrapper';
 import OptionsMenuList from './OptionsMenuList';
 import setRef from '../../utils/setRef';
@@ -28,45 +28,34 @@ export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   children: React.ReactNode;
 }
 
-interface OptionsMenuState {
-  show: boolean;
-}
-
 type AllOptionsMenuProps = OptionsMenuProps &
   React.HTMLAttributes<HTMLLIElement>;
 
-export default class OptionsMenu extends Component<
-  AllOptionsMenuProps,
-  OptionsMenuState
-> {
-  static defaultProps = {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onClose: () => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onSelect: () => {},
-    align: 'right'
+const OptionsMenu = ({
+  children,
+  className,
+  closeOnSelect,
+  menuRef,
+  trigger,
+  align = 'right',
+  onClose = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  onSelect = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  ...other
+}: AllOptionsMenuProps) => {
+  const [show, setShow] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const toggleMenu = () => {
+    setShow(!show);
   };
 
-  private triggerRef: React.RefObject<HTMLButtonElement>;
-
-  constructor(props: AllOptionsMenuProps) {
-    super(props);
-    this.state = { show: false };
-    this.triggerRef = React.createRef();
-  }
-
-  toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    this.setState(({ show }) => ({ show: !show }));
-  };
-
-  handleClose = () => {
-    const { onClose = OptionsMenu.defaultProps.onClose } = this.props;
-    this.setState({ show: false });
+  const handleClose = () => {
+    setShow(false);
     onClose();
-    this.triggerRef.current?.focus();
+    triggerRef.current?.focus();
   };
 
-  handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+  const handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     const { which, target } = event;
     if (which === down) {
       event.preventDefault();
@@ -74,45 +63,30 @@ export default class OptionsMenu extends Component<
     }
   };
 
-  render() {
-    const { toggleMenu, triggerRef, handleTriggerKeyDown } = this;
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      children,
-      className,
-      closeOnSelect,
-      menuRef,
-      trigger,
-      align,
-      onClose,
-      ...other
-    } = this.props;
+  return (
+    <OptionsMenuWrapper align={align} className={className}>
+      {trigger &&
+        trigger({
+          onClick: toggleMenu,
+          'aria-expanded': show,
+          ref: triggerRef,
+          onKeyDown: handleTriggerKeyDown
+        })}
+      <OptionsMenuList
+        show={show}
+        menuRef={(el) => {
+          if (menuRef) {
+            setRef(menuRef, el);
+          }
+        }}
+        onClose={handleClose}
+        onSelect={onSelect}
+        {...other}
+      >
+        {children}
+      </OptionsMenuList>
+    </OptionsMenuWrapper>
+  );
+};
 
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-    const { show } = this.state;
-
-    return (
-      <OptionsMenuWrapper align={align} className={className}>
-        {trigger &&
-          trigger({
-            onClick: toggleMenu,
-            'aria-expanded': show,
-            ref: triggerRef,
-            onKeyDown: handleTriggerKeyDown
-          })}
-        <OptionsMenuList
-          show={show}
-          menuRef={(el) => {
-            if (menuRef) {
-              setRef(menuRef, el);
-            }
-          }}
-          onClose={this.handleClose}
-          {...other}
-        >
-          {children}
-        </OptionsMenuList>
-      </OptionsMenuWrapper>
-    );
-  }
-}
+export default OptionsMenu;
