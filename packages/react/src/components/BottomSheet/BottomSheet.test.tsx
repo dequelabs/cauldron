@@ -135,6 +135,7 @@ test('should set focus to custom element when opened', () => {
       data-testid="bottomsheet"
       focusOptions={{ initialFocus: ref.current as HTMLElement }}
     >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );
@@ -146,6 +147,7 @@ test('should set focus to custom element when opened', () => {
       focusOptions={{ initialFocus: ref.current as HTMLElement }}
       open
     >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );
@@ -161,6 +163,7 @@ test('should set focus to custom ref element', () => {
       data-testid="bottomsheet"
       focusOptions={{ initialFocus: ref }}
     >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );
@@ -172,6 +175,7 @@ test('should set focus to custom ref element', () => {
       focusOptions={{ initialFocus: ref }}
       open
     >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );

@@ -34,6 +34,7 @@ const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
     const [labelId] = useId(1, 'bottom-sheet-label');
 
     const handleClose = useCallback(() => {
+      // istanbul ignore else
       if (typeof onClose === 'function') {
         onClose();
       }
