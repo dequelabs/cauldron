@@ -19,7 +19,7 @@ test('should call onSelect when menuitem is clicked', () => {
   const onSelect = jest.fn();
 
   render(
-    <OptionsMenu {...defaultMenuProps}>
+    <OptionsMenu {...defaultMenuProps} onSelect={onSelect}>
       <OptionsMenuItem onSelect={onSelect}>option 1</OptionsMenuItem>
     </OptionsMenu>
   );
@@ -33,7 +33,7 @@ test('should not call onSelect when menuitem is disabled', () => {
   const onSelect = jest.fn();
 
   render(
-    <OptionsMenu {...defaultMenuProps}>
+    <OptionsMenu {...defaultMenuProps} onSelect={onSelect}>
       <OptionsMenuItem onSelect={onSelect} disabled>
         option 1
       </OptionsMenuItem>
@@ -49,7 +49,7 @@ test('should return no axe violations', async () => {
   const onSelect = jest.fn();
 
   const { container } = render(
-    <OptionsMenu {...defaultMenuProps}>
+    <OptionsMenu {...defaultMenuProps} onSelect={onSelect}>
       <OptionsMenuItem onSelect={onSelect}>option 1</OptionsMenuItem>
       <OptionsMenuItem onSelect={onSelect}>option 2</OptionsMenuItem>
     </OptionsMenu>
