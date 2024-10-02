@@ -18,7 +18,7 @@ const defaultProps = {
 };
 
 const optionsMenu = (
-  <OptionsMenuList onClose={noop}>
+  <OptionsMenuList onClose={noop} onSelect={noop}>
     <li>option 1</li>
     <li>option 2</li>
   </OptionsMenuList>
