@@ -95,7 +95,7 @@ const OptionsMenuList = ({
     }
   };
 
-  const handleClickOutside = () => {
+  const handleClickOutside = (e: MouseEvent | TouchEvent) => {
     if (show) {
       onClose();
     }
