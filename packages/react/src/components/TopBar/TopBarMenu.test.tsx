@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { OptionsMenuList } from '../OptionsMenu';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TopBarMenu from './TopBarMenu';
@@ -17,8 +17,10 @@ const defaultProps = {
   id: 'foo'
 };
 
+const triggerRef = createRef<HTMLButtonElement>();
+
 const optionsMenu = (
-  <OptionsMenuList onClose={noop} onSelect={noop}>
+  <OptionsMenuList triggerRef={triggerRef} onClose={noop} onSelect={noop}>
     <li>option 1</li>
     <li>option 2</li>
   </OptionsMenuList>
