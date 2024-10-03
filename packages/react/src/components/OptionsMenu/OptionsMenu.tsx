@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import OptionsMenuWrapper from './OptionsMenuWrapper';
 import OptionsMenuList from './OptionsMenuList';
 import setRef from '../../utils/setRef';
@@ -73,6 +73,7 @@ const OptionsMenu = ({
           onKeyDown: handleTriggerKeyDown
         })}
       <OptionsMenuList
+        triggerRef={triggerRef}
         show={show}
         menuRef={(el) => {
           if (menuRef) {

@@ -9,6 +9,7 @@ const [up, down, tab, enter, space, esc] = [38, 40, 9, 13, 32, 27];
 export interface OptionsMenuListProps
   extends Omit<OptionsMenuProps, 'trigger'> {
   className?: string;
+  triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
 const OptionsMenuList = ({
@@ -16,6 +17,7 @@ const OptionsMenuList = ({
   menuRef,
   show,
   className,
+  triggerRef,
   onClose = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   onSelect = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   closeOnSelect = true,
@@ -96,6 +98,11 @@ const OptionsMenuList = ({
   };
 
   const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+    const target = e.target as Node;
+    const triggerElement = triggerRef.current;
+    if (target === triggerElement || triggerElement?.contains(target)) {
+      return;
+    }
     if (show) {
       onClose();
     }
