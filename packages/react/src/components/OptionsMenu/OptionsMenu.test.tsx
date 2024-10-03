@@ -113,7 +113,7 @@ test('should toggle menu on trigger clicks', async () => {
     </OptionsMenu>
   );
 
-  const button = screen.getByRole('button');
+  const button = screen.getByRole('button', { name: 'trigger' });
 
   await user.click(button);
   expect(button).toHaveAttribute('aria-expanded', 'true');
