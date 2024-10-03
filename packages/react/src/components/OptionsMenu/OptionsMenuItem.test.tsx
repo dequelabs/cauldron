@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import OptionsMenu, { OptionsMenuItem } from './';
 import axe from '../../axe';
 
@@ -15,7 +16,8 @@ const defaultMenuProps = {
   )
 };
 
-test('should call onSelect when menuitem is clicked', () => {
+test('should call onSelect when menuitem is clicked', async () => {
+  const user = userEvent.setup();
   const onSelect = jest.fn();
 
   render(
@@ -24,23 +26,25 @@ test('should call onSelect when menuitem is clicked', () => {
     </OptionsMenu>
   );
 
-  fireEvent.click(screen.getByRole('menuitem'));
+  await user.click(screen.getByRole('menuitem'));
 
   expect(onSelect).toBeCalled();
 });
 
-test('should not call onSelect when menuitem is disabled', () => {
+test('should not call onSelect when menuitem is disabled', async () => {
+  const user = userEvent.setup();
+  const menuOnSelect = jest.fn();
   const onSelect = jest.fn();
 
   render(
-    <OptionsMenu {...defaultMenuProps} onSelect={onSelect}>
+    <OptionsMenu {...defaultMenuProps} onSelect={menuOnSelect}>
       <OptionsMenuItem onSelect={onSelect} disabled>
         option 1
       </OptionsMenuItem>
     </OptionsMenu>
   );
 
-  fireEvent.click(screen.getByRole('menuitem'));
+  await user.click(screen.getByRole('menuitem'));
 
   expect(onSelect).not.toBeCalled();
 });
