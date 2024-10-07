@@ -32,5 +32,11 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
     }
-  ]
+  ],
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixels: 0,
+      threshold: 0
+    }
+  }
 });
