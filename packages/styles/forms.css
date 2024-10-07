@@ -39,7 +39,7 @@
   --field-background-color: var(--accent-medium);
   --field-content-color: var(--white);
   --field-border-color: #74818b;
-  --field-border-color-hover: var(--accent-info-light);
+  --field-border-color-hover: var(--accent-light);
   --field-border-color-focus: var(--accent-info);
   --field-border-color-focus-hover: var(--accent-info-light);
   --field-border-color-focus-glow: var(--accent-info);

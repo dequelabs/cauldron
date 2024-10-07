@@ -56,7 +56,7 @@
   );
   --text-field-wrapper-border-hover-color: var(
     --search-field-border-hover-color,
-    var(--field-border-color-focus-hover)
+    var(--field-border-color-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
     --search-field-border-focus-glow-color,
