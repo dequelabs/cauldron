@@ -1,5 +1,6 @@
 ARG playwright_version=latest
 FROM mcr.microsoft.com/playwright:v$playwright_version-jammy
+ARG playwright_version
 
 WORKDIR /app
 COPY ./yarn.lock ./
