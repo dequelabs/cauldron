@@ -56,9 +56,7 @@ For custom purposes, you can use the "custom" variant, which is the default.
 ```jsx example
 function CustomPopoverExample() {
   const [show, setShow] = useState(false);
-  const onTogglePopover = () => {
-    setShow(!show);
-  }
+  const onTogglePopover = () => setShow(!show);
   const buttonRef = useRef();
 
   return (
