@@ -21,6 +21,7 @@ export interface NoticeProps
 const Notice = forwardRef<HTMLDivElement, NoticeProps>(
   (
     {
+      className,
       type = 'info',
       title,
       icon,
@@ -32,7 +33,7 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
   ) => {
     return (
       <div
-        className={classNames('Notice', {
+        className={classNames('Notice', className, {
           [`Notice--${type}`]: type,
           [`Notice--condensed`]: variant === 'condensed'
         })}

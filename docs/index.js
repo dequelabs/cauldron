@@ -3,14 +3,13 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
-import focusable from 'focusable';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
-import Drawer from './components/Drawer';
 import Navigation from './components/Navigation';
 import {
   Code,
+  Drawer as DrawerComponent,
   TopBar,
   MenuBar,
   TopBarTrigger,
@@ -49,28 +48,17 @@ const App = () => {
   });
   const [topBarMenuItem, setTopBarMenuItem] = useState(null);
   const workspaceRef = useRef(null);
+  const focusReturnRef = useRef(null);
   const navigationRef = useRef(null);
   const topBarTrigger = useRef();
   const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
   const { theme, toggleTheme } = useThemeContext();
-
-  const focusTopBarMenuItem = () => {
-    if (!topBarMenuItem) {
-      return;
-    }
-
-    topBarMenuItem?.focus();
-  };
 
   const onTriggerClick = (e) => {
     const { show } = state;
 
     if (e) {
       e.preventDefault();
-    }
-
-    if (show && topBarTrigger?.current) {
-      topBarTrigger?.current?.focus();
     }
 
     setState({ show: !show });
@@ -115,14 +103,6 @@ const App = () => {
     );
   };
 
-  useEffect(() => {
-    document.addEventListener('focusTopBarMenu', focusTopBarMenuItem);
-
-    return () => {
-      document.removeEventListener('focusTopBarMenu', focusTopBarMenuItem);
-    };
-  }, []);
-
   const { show, thin } = state;
 
   const [drawerIsActive, setDrawerIsActive] = useState(false);
@@ -143,19 +123,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (state.show) {
-      // Focus on the first focusable navigation item
-      navigationRef.current?.querySelector('a')?.focus();
-    } else {
-      workspaceRef.current?.focus();
-    }
-  }, [state.show]);
-
-  useEffect(() => {
-    const firstFocusableElement =
-      workspaceRef.current?.querySelector(focusable);
-    setWorkspaceTabIndex(!firstFocusableElement ? 0 : -1);
+    // ensure focus return always "resets" after a navigation
+    focusReturnRef.current = null;
   });
+
+  // Only render the collapse-able drawer component when there is space to do so
+  const Drawer = drawerIsActive
+    ? DrawerComponent
+    : (props) => <Fragment>{props.children}</Fragment>;
 
   return (
     <Router>
@@ -221,17 +196,24 @@ const App = () => {
       </TopBar>
       <div className="Content">
         <Drawer
-          active={drawerIsActive}
+          className="NavigationDrawer"
           open={show}
+          position="left"
+          focusOptions={{
+            initialFocus: navigationRef,
+            returnFocus: focusReturnRef
+          }}
           onClose={() => setState({ show: false })}
         >
           <Navigation
             id="navigation"
-            active={show || !drawerIsActive}
             ref={navigationRef}
             contentRef={workspaceRef}
-            onClick={() => setState({ show: false })}
-            aria-hidden={!show && drawerIsActive}
+            tabIndex={-1}
+            onNavigation={() => {
+              setState({ show: false });
+              focusReturnRef.current = workspaceRef.current;
+            }}
           />
         </Drawer>
         <Workspace
