@@ -3,7 +3,7 @@ import { test, expect } from '../../../../../e2e/screenshots';
 import { setTheme } from '../../../../../e2e/helpers/playwright';
 import { BottomSheet } from '../../../';
 
-test.only('should have screenshot for BottomSheet', async ({ mount, page }) => {
+test('should have screenshot for BottomSheet', async ({ mount, page }) => {
   /*
    * because the BottomSheet is absolutely positioned, customizing the viewport
    * and padding styles is needed to ensure we're only capturing the necessary
