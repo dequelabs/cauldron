@@ -4,6 +4,7 @@ description: A container component that typically contains information about the
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TopBar/TopBar.tsx
 ---
 
+import { useRef } from 'react'
 import {
   TopBar,
   MenuBar,
@@ -60,35 +61,43 @@ import {
 In addition to navigational items, the `MenuBar` can also contain a dropdown menu with items when composed with `TopBarMenu` and `OptionsMenuList`:
 
 ```jsx example
-<TopBar>
-  <MenuBar>
-    <TopBarItem>
-      <a className="MenuItem__logo" href="#" tabIndex={-1}>
-        <img src="/public/fonts/logo.svg" alt="" />
-        Cauldron
-      </a>
-    </TopBarItem>
-    <TopBarItem>
-      <a href="#" tabIndex={-1}>
-        Item 1
-      </a>
-    </TopBarItem>
-    <TopBarMenu>
-      Menu <Icon type="chevron-down" />
-      <OptionsMenuList>
-        <OptionsMenuItem>
-          Menu Item 1
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 2
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 3
-        </OptionsMenuItem>
-      </OptionsMenuList>
-    </TopBarMenu>
-  </MenuBar>
-</TopBar>
+function TopBarWithOptionsMenuList () {
+  const menuTriggerRef = useRef(null);
+
+  return (
+    <TopBar>
+      <MenuBar>
+        <TopBarItem>
+          <a className="MenuItem__logo" href="#" tabIndex={-1}>
+            <img src="/public/fonts/logo.svg" alt="" />
+            Cauldron
+          </a>
+        </TopBarItem>
+        <TopBarItem>
+          <a href="#" tabIndex={-1}>
+            Item 1
+          </a>
+        </TopBarItem>
+        <TopBarMenu menuItemRef={(el) => {
+          menuTriggerRef.current = el
+        }}>
+          Menu <Icon type="chevron-down" />
+          <OptionsMenuList triggerRef={menuTriggerRef}>
+            <OptionsMenuItem>
+              Menu Item 1
+            </OptionsMenuItem>
+            <OptionsMenuItem>
+              Menu Item 2
+            </OptionsMenuItem>
+            <OptionsMenuItem>
+              Menu Item 3
+            </OptionsMenuItem>
+          </OptionsMenuList>
+        </TopBarMenu>
+      </MenuBar>
+    </TopBar>
+  )
+}
 ```
 
 
