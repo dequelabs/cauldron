@@ -18,7 +18,7 @@ import resolveElement from '../../utils/resolveElement';
 import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
 
-interface DrawerProps<T extends HTMLElement = HTMLElement>
+export interface DrawerProps<T extends HTMLElement = HTMLElement>
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
