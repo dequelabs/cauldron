@@ -131,6 +131,7 @@ export { default as Timeline, TimelineItem } from './components/Timeline';
 export { default as TextEllipsis } from './components/TextEllipsis';
 export { default as CopyButton } from './components/CopyButton';
 export { default as Drawer } from './components/Drawer';
+export { default as BottomSheet } from './components/BottomSheet';
 
 /**
  * Helpers / Utils

@@ -68,6 +68,7 @@ function DrawerNonModalExample() {
     <>
       <IconButton label="Toggle Non-Modal Drawer" icon="hamburger-menu" onClick={toggleOpen} />
       <Drawer open={open} onClose={toggleOpen} position="left" behavior="non-modal">
+
         <Panel style={{ height: '100vh' }}>
           <p>
             You opened me!

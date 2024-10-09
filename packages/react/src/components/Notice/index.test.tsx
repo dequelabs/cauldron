@@ -75,6 +75,11 @@ test('should allow a ref to be forwarded', () => {
   expect(ref.current).toBeTruthy();
 });
 
+test('should support className prop', () => {
+  render(<Notice className="bananas" data-testid="notice" title={''} />);
+  expect(screen.getByTestId('notice')).toHaveClass('bananas', 'Notice');
+});
+
 test('should return no axe violations with type="info"', async () => {
   const { container } = render(
     <Notice type="info" title="foo">

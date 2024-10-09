@@ -152,15 +152,27 @@ test('should set focus to focusable element when opened', () => {
 });
 
 test('should set focus to custom element when opened', () => {
+  const ref = React.createRef<HTMLButtonElement>();
   const { rerender } = render(
-    <Drawer position="left" data-testid="drawer">
-      <button>focus me</button>
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref.current as HTMLElement }}
+    >
+      <button>no focus me</button>
+      <button ref={ref}>focus me</button>
     </Drawer>
   );
 
   rerender(
-    <Drawer position="left" data-testid="drawer" open>
-      <button>focus me</button>
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref.current as HTMLElement }}
+      open
+    >
+      <button>no focus me</button>
+      <button ref={ref}>focus me</button>
     </Drawer>
   );
   expect(screen.getByTestId('drawer')).not.toHaveFocus();
@@ -170,13 +182,24 @@ test('should set focus to custom element when opened', () => {
 test('should set focus to custom ref element', () => {
   const ref = React.createRef<HTMLButtonElement>();
   const { rerender } = render(
-    <Drawer position="left" data-testid="drawer">
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref }}
+    >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
   );
 
   rerender(
-    <Drawer position="left" data-testid="drawer" open>
+    <Drawer
+      position="left"
+      data-testid="drawer"
+      focusOptions={{ initialFocus: ref }}
+      open
+    >
+      <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
   );
