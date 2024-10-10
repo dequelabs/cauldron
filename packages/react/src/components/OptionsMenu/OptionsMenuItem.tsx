@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 export interface OptionsMenuItemProps
   extends Pick<
@@ -11,39 +11,39 @@ export interface OptionsMenuItemProps
   onSelect: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-class OptionsMenuItemComponent extends React.Component<OptionsMenuItemProps> {
-  static defaultProps = {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onSelect: () => {}
-  };
-
-  handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    const { disabled, onSelect } = this.props;
+function OptionsMenuItemComponent({
+  disabled,
+  className,
+  menuItemRef,
+  onSelect = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  ...other
+}: OptionsMenuItemProps) {
+  function handleClick(event: React.MouseEvent<HTMLElement>) {
     if (!disabled) {
       onSelect(event);
     }
-  };
-
-  render() {
-    const { handleClick, props } = this;
-    const { menuItemRef, disabled, onSelect, ...other } = props;
-    return (
-      // keydown happens in OptionsMenu which proxies to click
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-      <li
-        role="menuitem"
-        ref={menuItemRef}
-        aria-disabled={disabled}
-        onClick={handleClick}
-        {...other}
-      />
-    );
   }
+
+  return (
+    // keydown happens in OptionsMenu which proxies to click
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <li
+      role="menuitem"
+      ref={menuItemRef}
+      aria-disabled={disabled}
+      onClick={handleClick}
+      className={className}
+      {...other}
+    />
+  );
 }
 
-export default React.forwardRef(function OptionsMenuItem(
-  props: OptionsMenuItemProps,
-  ref: React.Ref<HTMLLIElement>
-) {
-  return <OptionsMenuItemComponent menuItemRef={ref} {...props} />;
-});
+const OptionsMenuItem = forwardRef<HTMLLIElement, OptionsMenuItemProps>(
+  ({ ...props }, ref) => (
+    <OptionsMenuItemComponent menuItemRef={ref} {...props} />
+  )
+);
+
+OptionsMenuItem.displayName = 'OptionsMenuItem';
+
+export default OptionsMenuItem;
