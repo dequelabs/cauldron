@@ -43,6 +43,7 @@
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
+  justify-content: center;
   gap: var(--space-smallest);
 }
 
