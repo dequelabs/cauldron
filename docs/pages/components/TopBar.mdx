@@ -62,7 +62,6 @@ In addition to navigational items, the `MenuBar` can also contain a dropdown men
 
 ```jsx example
 function TopBarWithOptionsMenuList () {
-  const menuTriggerRef = useRef(null);
 
   return (
     <TopBar>
@@ -78,11 +77,9 @@ function TopBarWithOptionsMenuList () {
             Item 1
           </a>
         </TopBarItem>
-        <TopBarMenu menuItemRef={(el) => {
-          menuTriggerRef.current = el
-        }}>
+        <TopBarMenu>
           Menu <Icon type="chevron-down" />
-          <OptionsMenuList triggerRef={menuTriggerRef}>
+          <OptionsMenuList>
             <OptionsMenuItem>
               Menu Item 1
             </OptionsMenuItem>

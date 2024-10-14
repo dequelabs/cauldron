@@ -9,7 +9,6 @@ const [up, down, tab, enter, space, esc] = [38, 40, 9, 13, 32, 27];
 export interface OptionsMenuListProps
   extends Omit<OptionsMenuProps, 'trigger'> {
   className?: string;
-  triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
 const OptionsMenuList = ({
@@ -17,7 +16,6 @@ const OptionsMenuList = ({
   menuRef,
   show,
   className,
-  triggerRef,
   onClose = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   onSelect = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   closeOnSelect = true,
@@ -26,12 +24,17 @@ const OptionsMenuList = ({
   const [itemIndex, setItemIndex] = useState(0);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
   const menuRefInternal = useRef<HTMLUListElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (show && itemRefs.current.length) {
       // handles opens
+      triggerRef.current = document.activeElement as HTMLButtonElement;
       itemRefs.current[0]?.focus();
       setItemIndex(0);
+    }
+    if (!show) {
+      triggerRef.current = null;
     }
   }, [show]);
 
@@ -104,6 +107,7 @@ const OptionsMenuList = ({
       return;
     }
     if (show) {
+      e.preventDefault();
       onClose();
     }
   };

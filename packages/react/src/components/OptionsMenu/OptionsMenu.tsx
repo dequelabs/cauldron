@@ -45,7 +45,11 @@ const OptionsMenu = ({
   const [show, setShow] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = () => {
+  const toggleMenu = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.defaultPrevented) {
+      return;
+    }
+
     setShow(!show);
   };
 
@@ -73,7 +77,6 @@ const OptionsMenu = ({
           onKeyDown: handleTriggerKeyDown
         })}
       <OptionsMenuList
-        triggerRef={triggerRef}
         show={show}
         menuRef={(el) => {
           if (menuRef) {
