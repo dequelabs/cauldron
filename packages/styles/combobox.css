@@ -35,7 +35,7 @@
   );
   --text-field-wrapper-border-hover-color: var(
     --combobox-input-border-hover-color,
-    var(--field-border-color-focus-hover)
+    var(--field-border-color-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
     --combobox-input-border-focus-glow-color,
@@ -78,7 +78,7 @@
   );
   --text-field-wrapper-border-hover-color: var(
     --combobox-input-border-hover-color,
-    var(--field-border-color-focus-hover)
+    var(--field-border-color-hover)
   );
   --text-field-wrapper-border-focus-glow-color: var(
     --combobox-input-border-focus-glow-color,

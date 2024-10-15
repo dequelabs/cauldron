@@ -38,6 +38,7 @@
   padding: var(--space-three-quarters) var(--space-smallest);
   padding-right: var(--space-large);
   border: 1px solid var(--field-border-color);
+  border-radius: var(--field-border-radius);
   font-family: Roboto;
   font-weight: normal;
   font-style: normal;
