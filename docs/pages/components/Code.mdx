@@ -66,6 +66,18 @@ By default, Code components will wrap code forcing breaks where it can. If the o
 </Code>
 ```
 
+### Allow Copy
+
+Adds block with label and copy button that allows to copy code to clipboard.
+
+```jsx example
+<Code allowCopy label="Example Code Heading">
+ {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
+  Hello World
+</div>`}
+</Code>
+```
+
 ## Props
 
 <ComponentProps
@@ -82,6 +94,22 @@ By default, Code components will wrap code forcing breaks where it can. If the o
       type: 'boolean',
       default: 'false',
       description: 'Preserve the original markup, forcing the component to scroll when it overflows.'
+    },
+    {
+      name: 'label',
+      type: 'React.ContentNode',
+      description: 'Label for the code heading'
+    },
+    {
+      name: 'copyButtonProps',
+      type: 'React.ComponentProps<CopyButton>',
+      description: 'Properties to be applied to CopyButton'
+    },
+    {
+      name: 'allowCopy',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prop to add CopyButton that copies code to the clipboard.'
     }
   ]}
 />

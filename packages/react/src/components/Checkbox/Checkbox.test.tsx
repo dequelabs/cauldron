@@ -46,6 +46,17 @@ test('should render disabled checked checkbox', () => {
   expect(input).toBeChecked();
 });
 
+test('should render indeterminate checkbox', () => {
+  const input = renderCheckbox({ indeterminate: true });
+  expect(input).toBePartiallyChecked();
+});
+
+test('should render disabled indeterminate checkbox', () => {
+  const input = renderCheckbox({ disabled: true, indeterminate: true });
+  expect(input).toBeDisabled();
+  expect(input).toBePartiallyChecked();
+});
+
 test('should render error checkbox', () => {
   const input = renderCheckbox({ error: 'you should check this checkbox' });
   expect(input).toHaveAccessibleDescription('you should check this checkbox');
@@ -176,6 +187,18 @@ test('should have no axe violations with checked checkbox', async () => {
 
 test('should have no axe violations with disabled checkbox', async () => {
   const input = renderCheckbox({ disabled: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with indeterminate checkbox', async () => {
+  const input = renderCheckbox({ indeterminate: true });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with disabled indeterminate checkbox', async () => {
+  const input = renderCheckbox({ disabled: true, indeterminate: true });
   const results = await axe(input);
   expect(results).toHaveNoViolations();
 });

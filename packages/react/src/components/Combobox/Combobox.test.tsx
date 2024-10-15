@@ -743,7 +743,7 @@ test('should handle selection with "enter" keydown event', () => {
   const combobox = screen.getByRole('combobox');
 
   // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
-  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  // work correctly within jsdom so we fire the events directly on listbox
   const fireArrowDownKeyPress = () =>
     fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
   const fireEnterKeyPress = () =>
@@ -784,7 +784,7 @@ test('should handle selection when autocomplete="automatic" and combobox input i
   const combobox = screen.getByRole('combobox');
 
   // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
-  // work correctly within jsdom/enzyme so we fire the events directly on listbox
+  // work correctly within jsdom so we fire the events directly on listbox
   const fireArrowDownKeyPress = () =>
     fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
 

@@ -14,6 +14,16 @@
   --docs-navigation-divider-color: var(--stroke-dark);
 }
 
+body.TopBar--thin .NavigationDrawer {
+  --top-bar-height: var(--top-bar-height-thin);
+}
+
+.NavigationDrawer {
+  --drawer-top: var(--top-bar-height);
+  --drawer-height: calc(100vh - var(--top-bar-height));
+  overflow-y: auto;
+}
+
 .Navigation {
   width: var(--menu-width);
   background-color: var(--docs-navigation-background-color);

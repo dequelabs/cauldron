@@ -145,6 +145,32 @@ function BigTooltipExample() {
 }
 ```
 
+### Advanced Usage
+
+The tooltip can be controlled by manually setting the value of the `show` prop.
+
+```jsx example
+function ControlledTooltip() {
+  const button = useRef();
+  return (
+    <>
+      <Button variant="secondary" ref={button}>
+        Button
+      </Button>
+      <Tooltip target={button} show={true}>
+        Tooltip
+      </Tooltip>
+    </>
+  )
+}
+```
+
+<Note>
+
+Manually setting `show` means the tooltip _will not_ automatically hide or show based on input events coming from the target. This is most likely not the desired default behavior, so avoid setting `show` unless you are sure of what you are doing. 
+
+</Note>
+
 ## Props
 
 <ComponentProps
@@ -161,7 +187,13 @@ function BigTooltipExample() {
     {
       name: 'show',
       type: 'boolean',
-      description: 'Manually control the show state of the tooltip. (Note: there is a known issue where only the initial value of `show` is respected.)'
+      description: 'Manually control the show state of the tooltip.'
+    },
+    {
+      name: 'defaultShow',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Sets the initial show state of the tooltip when initially rendered.'
     },
     {
       name: 'placement',

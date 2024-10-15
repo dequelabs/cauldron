@@ -1,11 +1,8 @@
 /* global window */
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import '@testing-library/jest-dom';
 import 'jest-axe/extend-expect';
 import { configureAxe } from 'jest-axe';
 
-configure({ adapter: new Adapter() });
 configureAxe({
   rules: {
     region: { enabled: false }
@@ -21,5 +18,23 @@ if (
     get() {
       return this.textContent;
     }
+  });
+}
+
+if (!('clipboard' in global.navigator)) {
+  Object.defineProperty(global.navigator, 'clipboard', {
+    value: {
+      writeText: async () => null
+    },
+    configurable: true,
+    writable: true
+  });
+}
+
+if (!('execCommand' in global.document)) {
+  Object.defineProperty(global.document, 'execCommand', {
+    value: () => null,
+    configurable: true,
+    writable: true
   });
 }

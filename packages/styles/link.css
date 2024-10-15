@@ -12,8 +12,6 @@
 .Link {
   text-decoration: underline;
   color: var(--link-text-color);
-  font-weight: var(--font-weight-medium);
-  display: inline-block;
   padding: var(--space-quarter);
   background: transparent;
   vertical-align: baseline;
@@ -29,10 +27,9 @@
   outline-offset: 0;
 }
 
-p .Link {
-  margin: 0 2px;
-  display: inline;
-  text-decoration: underline;
-  color: var(--link-text-color);
-  font-weight: var(--font-weight-normal);
+.Link:has(.Icon) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-half);
+  flex-wrap: wrap;
 }

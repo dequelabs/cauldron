@@ -20,7 +20,7 @@ test('should have screenshot for Combobox', async ({ mount, page }) => {
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-      <Combobox label="Focus">
+      <Combobox label="Focus" value="Apple">
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
@@ -53,7 +53,7 @@ test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-      <Combobox label="Focus" error="This field has an error.">
+      <Combobox label="Focus" error="This field has an error." value="Apple">
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>

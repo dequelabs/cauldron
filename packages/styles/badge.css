@@ -1,0 +1,43 @@
+:root {
+  --badge-text-color: var(--gray-90);
+  --badge-background-color: transparent;
+  --badge-border-color: var(--gray-30);
+
+  --badge-height: var(--button-height);
+  --badge-small-height: 1.5rem;
+
+  --badge-font-size: 1rem;
+}
+
+.cauldron--theme-dark {
+  --badge-text-color: var(--white);
+  --badge-background-color: var(--accent-medium);
+  --badge-border-color: var(--stroke-dark);
+}
+
+.Badge {
+  color: var(--badge-text-color);
+  background-color: var(--badge-background-color);
+  border: 1px solid var(--badge-border-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--space-small) 0 var(--space-smaller);
+  min-height: var(--badge-height);
+  border-radius: var(--badge-height);
+  font-size: var(--badge-font-size);
+}
+
+.Badge--small {
+  border-radius: var(--badge-small-height);
+  min-height: var(--badge-small-height);
+}
+
+.Badge__Label {
+  margin-right: 3px;
+  font-weight: var(--font-weight-medium);
+}
+
+.Badge .Icon {
+  margin: 0 var(--space-half) 0 -4px;
+}

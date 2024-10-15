@@ -4,8 +4,7 @@ import React, {
   cloneElement,
   isValidElement,
   useRef,
-  useLayoutEffect,
-  useEffect
+  useLayoutEffect
 } from 'react';
 import { useId } from 'react-id-generator';
 import FocusTrap from 'focus-trap-react';
@@ -16,6 +15,7 @@ import ColumnLeft from './ColumnLeft';
 import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
 import SkipLink from '../SkipLink';
+import useEscapeKey from '../../utils/useEscapeKey';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   initialCollapsed?: boolean;
@@ -214,28 +214,13 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       };
     }, []);
 
-    useEffect(() => {
-      const handleEscape = (event: KeyboardEvent) => {
-        if (
-          event.key === 'Escape' ||
-          event.key === 'Esc' ||
-          event.keyCode === 27
-        ) {
-          setCollapsed(true);
-        }
-      };
-
-      const targetElement = document.body;
-      if (isFocusTrap) {
-        targetElement.addEventListener('keyup', handleEscape);
-      } else {
-        targetElement.removeEventListener('keyup', handleEscape);
-      }
-
-      return () => {
-        targetElement.removeEventListener('keyup', handleEscape);
-      };
-    }, [isFocusTrap]);
+    useEscapeKey(
+      {
+        callback: () => setCollapsed(true),
+        active: isFocusTrap
+      },
+      [setCollapsed]
+    );
 
     const handleClickOutside = () => {
       if (!isCollapsed && isFocusTrap) {

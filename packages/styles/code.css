@@ -10,6 +10,15 @@
   --code-border-color: var(--stroke-dark);
 }
 
+.Code__Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-smallest);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-body);
+}
+
 .Code.hljs {
   display: block;
   padding: var(--space-smaller);

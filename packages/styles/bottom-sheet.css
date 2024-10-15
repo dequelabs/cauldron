@@ -1,0 +1,33 @@
+:root {
+  --bottom-sheet-width: 40rem;
+  --bottom-sheet-background-color: #fff;
+}
+
+.cauldron--theme-dark {
+  --bottom-sheet-background-color: var(--accent-medium);
+  --bottom-sheet-text-color: #fff;
+}
+
+.BottomSheet {
+  max-width: var(--bottom-sheet-width);
+  color: var(--bottom-sheet-text-color);
+  background-color: var(--bottom-sheet-background-color);
+  margin: 0 auto;
+  border-top-left-radius: var(--space-small);
+  border-top-right-radius: var(--space-small);
+  padding: var(--space-large) var(--space-small);
+}
+
+.BottomSheet__title {
+  font-weight: var(--font-weight-medium);
+}
+
+.BottomSheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-small);
+  border-bottom: 1px solid var(--gray-30);
+  padding-bottom: var(--space-small);
+  margin-bottom: var(--space-small);
+}

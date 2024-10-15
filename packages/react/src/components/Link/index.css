@@ -1,8 +1,14 @@
 a.Button--primary,
+a.Button--secondary,
+a.Button--thin {
+  font-weight: var(--font-weight-medium);
+}
+
+a.Button--primary,
 a.Button--secondary {
   text-decoration: none;
-  padding: 9px 18px;
 }
+
 a.Button--thin {
-  padding: 0 16px;
+  padding: 0 var(--space-small);
 }

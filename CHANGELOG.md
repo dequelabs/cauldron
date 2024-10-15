@@ -2,6 +2,81 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.8.0](https://github.com/dequelabs/cauldron/compare/v6.7.0...v6.8.0) (2024-10-08)
+
+
+### Features
+
+* **ClickOutsideListener:** refactor and allow for ref targets ([#1687](https://github.com/dequelabs/cauldron/issues/1687)) ([8f770f3](https://github.com/dequelabs/cauldron/commit/8f770f32e46104312a50bc26d81f8c53e0a6c036))
+* **icon:** added `broken-image` icon ([#1700](https://github.com/dequelabs/cauldron/issues/1700)) ([d64ab15](https://github.com/dequelabs/cauldron/commit/d64ab15b841b12bd15c427b722e71ad9eede0f2e))
+* **react,styles:** add BottomSheet component ([#1694](https://github.com/dequelabs/cauldron/issues/1694)) ([5a2f12d](https://github.com/dequelabs/cauldron/commit/5a2f12d4e47970e809238328a9d8df1afe26ba3c))
+* **react,styles:** add Drawer component ([#1646](https://github.com/dequelabs/cauldron/issues/1646)) ([4be82cb](https://github.com/dequelabs/cauldron/commit/4be82cb3f7943c67330aef2f2d47215d83e5f294))
+* **styles:** synced Link component ([#1675](https://github.com/dequelabs/cauldron/issues/1675)) ([8ff3885](https://github.com/dequelabs/cauldron/commit/8ff3885e5a1b06dbf41a80e728da85cf6b77f9b8))
+
+
+### Bug Fixes
+
+* **docker:** use the default value of playwright_version ARG declared before the first FROM ([#1704](https://github.com/dequelabs/cauldron/issues/1704)) ([fbd45e8](https://github.com/dequelabs/cauldron/commit/fbd45e8c95c596139647e766c49da18c499c8dbb))
+* **Notice:** allow className to be passed into Notice component ([#1702](https://github.com/dequelabs/cauldron/issues/1702)) ([cb86dd3](https://github.com/dequelabs/cauldron/commit/cb86dd32fc28fbb024d4c3007d5d2697eec7bf69))
+* **react:** fix incorrect icon size for IconButton[large] ([#1655](https://github.com/dequelabs/cauldron/issues/1655)) ([b2cf09f](https://github.com/dequelabs/cauldron/commit/b2cf09f331c845f2e15bb98484930501581ee73a))
+
+## [6.7.0](https://github.com/dequelabs/cauldron/compare/v6.6.1...v6.7.0) (2024-09-11)
+
+
+### Features
+
+* **icon:** images icon ([#1649](https://github.com/dequelabs/cauldron/issues/1649)) ([411482d](https://github.com/dequelabs/cauldron/commit/411482df40038b27cd7bfbeceb2eba9571a24540))
+* **react:** added copy code functionality to `Code` component ([#1608](https://github.com/dequelabs/cauldron/issues/1608)) ([b21d38c](https://github.com/dequelabs/cauldron/commit/b21d38caf974f34bb0371258cdae17c61d7ca92d))
+* **styles:** synced `notice` styles ([#1665](https://github.com/dequelabs/cauldron/issues/1665)) ([1ed6c8f](https://github.com/dequelabs/cauldron/commit/1ed6c8fa7d06b1018ec31b8cc01ff2bee50260e9))
+
+### [6.6.1](https://github.com/dequelabs/cauldron/compare/v6.6.0...v6.6.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* **styles:** combobox option active icon color ([#1642](https://github.com/dequelabs/cauldron/issues/1642)) ([8cea852](https://github.com/dequelabs/cauldron/commit/8cea852157023c8b5019c68336bc5bfd1a2f8448))
+
+## [6.6.0](https://github.com/dequelabs/cauldron/compare/v6.5.0...v6.6.0) (2024-08-13)
+
+
+### Features
+
+* **react:** add CopyButton component ([#1603](https://github.com/dequelabs/cauldron/issues/1603)) ([c570ece](https://github.com/dequelabs/cauldron/commit/c570eceb5fa743ffff7ff75ea907652aa6968a42))
+* **react:** add indeterminate support to checkbox ([#1621](https://github.com/dequelabs/cauldron/issues/1621)) ([c49bfd2](https://github.com/dequelabs/cauldron/commit/c49bfd2bb0e8f48574a7e3d81f2e324aa43df949)), closes [#479](https://github.com/dequelabs/cauldron/issues/479) [#479](https://github.com/dequelabs/cauldron/issues/479)
+* **styles,react:** added size prop to tag and synced with designs ([#1602](https://github.com/dequelabs/cauldron/issues/1602)) ([946b10d](https://github.com/dequelabs/cauldron/commit/946b10da549e65374f2e9623506f732e57b7ab0d))
+
+## [6.5.0](https://github.com/dequelabs/cauldron/compare/v6.4.2...v6.5.0) (2024-08-07)
+
+
+### Features
+
+* added prop to hide\show first\last pages for `Pagination` ([#1616](https://github.com/dequelabs/cauldron/issues/1616)) ([eb0a056](https://github.com/dequelabs/cauldron/commit/eb0a056f127f7712727e0d9e38a09468742ca271))
+* **react:** `ImpactBadge` component ([#1612](https://github.com/dequelabs/cauldron/issues/1612)) ([53ae3d0](https://github.com/dequelabs/cauldron/commit/53ae3d05aeb1b6263b33faf44c576ced7c814608))
+* **react:** add Button tertiary variant ([#1592](https://github.com/dequelabs/cauldron/issues/1592)) ([40759db](https://github.com/dequelabs/cauldron/commit/40759dba9c0e1431ada465eac4d6cf9b155cc6dd))
+* **react:** add IconButton tertiary variant ([#1598](https://github.com/dequelabs/cauldron/issues/1598)) ([c0101d7](https://github.com/dequelabs/cauldron/commit/c0101d733714387bd5931d64ea854115fa1d5c07))
+* **react:** added badge component ([#1610](https://github.com/dequelabs/cauldron/issues/1610)) ([37be24a](https://github.com/dequelabs/cauldron/commit/37be24aa45d75248bb11bdc3ad8408c15b0c3096))
+* **react:** fix show prop and add defaultShow prop ([#1606](https://github.com/dequelabs/cauldron/issues/1606)) ([f1f0163](https://github.com/dequelabs/cauldron/commit/f1f016388543360dc6a525037d583dc3b8f72835))
+* **styles:** added new typography system ([#1584](https://github.com/dequelabs/cauldron/issues/1584)) ([41dad21](https://github.com/dequelabs/cauldron/commit/41dad212a92bef7e31ce446835984110b85b2c29))
+* **styles:** adjust button typography and text sizes ([#1596](https://github.com/dequelabs/cauldron/issues/1596)) ([31c9c18](https://github.com/dequelabs/cauldron/commit/31c9c18a2b6a023b3134fe4b9e41d797ed9481b9))
+* **styles:** flag DefinitionButton as a deprecated class ([#1593](https://github.com/dequelabs/cauldron/issues/1593)) ([2657ce8](https://github.com/dequelabs/cauldron/commit/2657ce8bab2446496b82d65f1f16e13dee257b26))
+
+
+### Bug Fixes
+
+* **Button:** fix missing border for tertiary buttons in dark mode ([#1611](https://github.com/dequelabs/cauldron/issues/1611)) ([256641b](https://github.com/dequelabs/cauldron/commit/256641b5883108529152d2a299088dcc6f7ef146))
+* **react:** Dialog closes instead of contained tooltip on escape key ([#1594](https://github.com/dequelabs/cauldron/issues/1594)) ([a3f374a](https://github.com/dequelabs/cauldron/commit/a3f374a622ff1aace2cb9bba19a9a793ddfadb6e))
+* **styles:** synced breadcrumb with design ([#1600](https://github.com/dequelabs/cauldron/issues/1600)) ([f51057b](https://github.com/dequelabs/cauldron/commit/f51057b7e9f32b459ee2181c8edb7d7b6500cdd1))
+* synced `Notice` component with design ([#1605](https://github.com/dequelabs/cauldron/issues/1605)) ([9eab948](https://github.com/dequelabs/cauldron/commit/9eab948b599b57a6bae4e637536012d6d8d54146))
+
+### [6.4.2](https://github.com/dequelabs/cauldron/compare/v6.4.1...v6.4.2) (2024-07-10)
+
+
+### Bug Fixes
+
+* **Dialog:** switch dialog tests to react testing library and fix heading type ([#1501](https://github.com/dequelabs/cauldron/issues/1501)) ([3b7a548](https://github.com/dequelabs/cauldron/commit/3b7a548163d0e0d78c79e7fdba0d79b60e004724))
+* **react:** fix incorrect React.Fragment for ContentNode type ([#1521](https://github.com/dequelabs/cauldron/issues/1521)) ([2f7e190](https://github.com/dequelabs/cauldron/commit/2f7e190a85a96c9b6eb5ee64002f4341bdd08d19))
+* **react:** use capture phase instead of bubble phase for esc keypress on Tooltip ([#1569](https://github.com/dequelabs/cauldron/issues/1569)) ([1bc0e02](https://github.com/dequelabs/cauldron/commit/1bc0e02ab25d6fbb900896394de59da3fe3c2916))
+
 ### [6.4.1](https://github.com/dequelabs/cauldron/compare/v6.4.0...v6.4.1) (2024-06-05)
 
 
