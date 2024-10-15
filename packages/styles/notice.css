@@ -32,7 +32,7 @@
 .Notice {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--space-small);
+  gap: 0 var(--space-small);
   padding: var(--space-large);
   align-items: start;
   border-radius: 4px;
