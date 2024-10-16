@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.9.0](https://github.com/dequelabs/cauldron/compare/v6.8.0...v6.9.0) (2024-10-16)
+
+
+### Features
+
+* **ClickOutsideListener:** refactor and allow for ref targets ([#1687](https://github.com/dequelabs/cauldron/issues/1687)) ([8f770f3](https://github.com/dequelabs/cauldron/commit/8f770f32e46104312a50bc26d81f8c53e0a6c036))
+* **icon:** added `broken-image` icon ([#1700](https://github.com/dequelabs/cauldron/issues/1700)) ([d64ab15](https://github.com/dequelabs/cauldron/commit/d64ab15b841b12bd15c427b722e71ad9eede0f2e))
+* **react,styles:** add BottomSheet component ([#1694](https://github.com/dequelabs/cauldron/issues/1694)) ([5a2f12d](https://github.com/dequelabs/cauldron/commit/5a2f12d4e47970e809238328a9d8df1afe26ba3c))
+* **react,styles:** add Drawer component ([#1646](https://github.com/dequelabs/cauldron/issues/1646)) ([4be82cb](https://github.com/dequelabs/cauldron/commit/4be82cb3f7943c67330aef2f2d47215d83e5f294))
+* **styles:** synced Link component ([#1675](https://github.com/dequelabs/cauldron/issues/1675)) ([8ff3885](https://github.com/dequelabs/cauldron/commit/8ff3885e5a1b06dbf41a80e728da85cf6b77f9b8))
+* **styles:** synced TextField component with designs ([#1696](https://github.com/dequelabs/cauldron/issues/1696)) ([1971a3b](https://github.com/dequelabs/cauldron/commit/1971a3b448aa8a26369ec4bd1f4974433af547e2))
+
+
+### Bug Fixes
+
+* **docker:** use the default value of playwright_version ARG declared before the first FROM ([#1704](https://github.com/dequelabs/cauldron/issues/1704)) ([fbd45e8](https://github.com/dequelabs/cauldron/commit/fbd45e8c95c596139647e766c49da18c499c8dbb))
+* **Notice:** allow className to be passed into Notice component ([#1702](https://github.com/dequelabs/cauldron/issues/1702)) ([cb86dd3](https://github.com/dequelabs/cauldron/commit/cb86dd32fc28fbb024d4c3007d5d2697eec7bf69))
+* **react:** fix incorrect icon size for IconButton[large] ([#1655](https://github.com/dequelabs/cauldron/issues/1655)) ([b2cf09f](https://github.com/dequelabs/cauldron/commit/b2cf09f331c845f2e15bb98484930501581ee73a))
+* **styles:** fix content alignment for button containing icons ([#1713](https://github.com/dequelabs/cauldron/issues/1713)) ([683a8c9](https://github.com/dequelabs/cauldron/commit/683a8c93875a545b9eaf9e6e1f2f84d87aa172bd))
+* **styles:** fix spacing between title and content for notice component ([#1722](https://github.com/dequelabs/cauldron/issues/1722)) ([906a352](https://github.com/dequelabs/cauldron/commit/906a3520067fb15cf2959f64773fbb2778c4d7f0))
+* **styles:** spacing between icon and text within badge ([#1724](https://github.com/dequelabs/cauldron/issues/1724)) ([62992eb](https://github.com/dequelabs/cauldron/commit/62992eb193649088e1ee4020e92a54b77b746793))
+
 ## [6.8.0](https://github.com/dequelabs/cauldron/compare/v6.7.0...v6.8.0) (2024-10-08)
 
 
