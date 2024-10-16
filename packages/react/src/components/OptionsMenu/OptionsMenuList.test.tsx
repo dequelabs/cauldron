@@ -146,13 +146,33 @@ test('should call onClose when clicked outside', async () => {
   const onSelect = jest.fn();
   const user = userEvent.setup();
 
-  render(
-    <OptionsMenuList {...defaultProps} show={true} onSelect={onSelect}>
-      <li>option 1</li>
-      <li>option 2</li>
-    </OptionsMenuList>
+  const { rerender } = render(
+    <>
+      <button data-testid="trigger">Trigger</button>
+      <OptionsMenuList {...defaultProps} show={false} onSelect={onSelect}>
+        <li>option 1</li>
+        <li>option 2</li>
+      </OptionsMenuList>
+    </>
   );
 
+  // Focus the trigger button
+  const triggerButton = screen.getByTestId('trigger');
+  triggerButton.focus();
+  expect(triggerButton).toHaveFocus();
+
+  // Rerender with show=true
+  rerender(
+    <>
+      <button data-testid="trigger">Trigger</button>
+      <OptionsMenuList {...defaultProps} show={true} onSelect={onSelect}>
+        <li>option 1</li>
+        <li>option 2</li>
+      </OptionsMenuList>
+    </>
+  );
+
+  // Simulate clicking outside
   await user.click(document.body);
 
   expect(defaultProps.onClose).toBeCalled();
