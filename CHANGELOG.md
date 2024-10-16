@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.10.0](https://github.com/dequelabs/cauldron/compare/v6.9.0...v6.10.0) (2024-10-16)
+
+
+### Features
+
+* **react:** support react 17 ([#1680](https://github.com/dequelabs/cauldron/issues/1680)) ([453f7da](https://github.com/dequelabs/cauldron/commit/453f7da615342c04c437f68dc8ab4396dee775cc))
+
 ## [6.9.0](https://github.com/dequelabs/cauldron/compare/v6.8.0...v6.9.0) (2024-10-16)
 
 
