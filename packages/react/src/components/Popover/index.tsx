@@ -188,7 +188,10 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     }, [targetElement, id, show]);
 
-    const handleClickOutside = () => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (e.target === targetElement) {
+        return;
+      }
       if (show) {
         handleClosePopover();
       }
