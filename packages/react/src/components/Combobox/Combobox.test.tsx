@@ -515,6 +515,9 @@ test('should prevent default with enter keypress and open listbox', () => {
     // rtl doesn't let us mock preventDefault
     // see: https://github.com/testing-library/react-testing-library/issues/572
     event.preventDefault = preventDefault;
+    if (type === 'focus') {
+      fireEvent.focusIn(combobox);
+    }
     fireEvent(combobox, event);
   };
 
@@ -545,6 +548,9 @@ test('should not prevent default with enter keypress and closed listbox', () => 
     // rtl doesn't let us mock preventDefault
     // see: https://github.com/testing-library/react-testing-library/issues/572
     event.preventDefault = preventDefault;
+    if (type === 'focus') {
+      fireEvent.focusIn(combobox);
+    }
     fireEvent(combobox, event);
   };
 

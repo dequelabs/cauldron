@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { OptionsMenuProps } from './OptionsMenu';
 import ClickOutsideListener from '../ClickOutsideListener';
 import classnames from 'classnames';
@@ -11,56 +11,43 @@ export interface OptionsMenuListProps
   className?: string;
 }
 
-interface OptionsMenuListState {
-  itemIndex: number;
-}
+const OptionsMenuList = ({
+  children,
+  menuRef,
+  show,
+  className,
+  onClose = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  onSelect = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  closeOnSelect = true,
+  ...other
+}: OptionsMenuListProps) => {
+  const [itemIndex, setItemIndex] = useState(0);
+  const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const menuRefInternal = useRef<HTMLUListElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
-export default class OptionsMenuList extends React.Component<
-  OptionsMenuListProps,
-  OptionsMenuListState
-> {
-  static defaultProps = {
-    closeOnSelect: true,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onSelect: () => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onClose: () => {}
-  };
-
-  private itemRefs: Array<HTMLLIElement | null>;
-  private menuRef: HTMLUListElement | null;
-
-  constructor(props: OptionsMenuProps) {
-    super(props);
-    this.itemRefs = [];
-    this.state = { itemIndex: 0 };
-  }
-
-  componentDidUpdate(
-    prevProps: OptionsMenuProps,
-    prevState: OptionsMenuListState
-  ) {
-    const { itemIndex } = this.state;
-    const { show } = this.props;
-
-    if (!prevProps.show && show && this.itemRefs.length) {
+  useEffect(() => {
+    if (show && itemRefs.current.length) {
       // handles opens
-      this.itemRefs[0]?.focus();
-      this.setState({ itemIndex: 0 });
-    } else if (prevState.itemIndex !== itemIndex) {
-      // handle up/down arrows
-      this.itemRefs[itemIndex]?.focus();
+      triggerRef.current = document.activeElement as HTMLButtonElement;
+      itemRefs.current[0]?.focus();
+      setItemIndex(0);
     }
-  }
+    if (!show) {
+      triggerRef.current = null;
+    }
+  }, [show]);
 
-  private handleKeyDown = (e: KeyboardEvent) => {
-    const { onClose = OptionsMenuList.defaultProps.onClose } = this.props;
+  useEffect(() => {
+    itemRefs.current[itemIndex]?.focus();
+  }, [itemIndex]);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
     const { which, target } = e;
     switch (which) {
       case up:
       case down: {
-        const { itemIndex } = this.state;
-        const itemCount = this.itemRefs.length;
+        const itemCount = itemRefs.current.length;
         let newIndex = which === 38 ? itemIndex - 1 : itemIndex + 1;
 
         // circularity
@@ -71,21 +58,16 @@ export default class OptionsMenuList extends React.Component<
         }
 
         e.preventDefault();
-        this.setState({
-          itemIndex: newIndex
-        });
-
+        setItemIndex(newIndex);
         break;
       }
       case esc:
         onClose();
-
         break;
       case enter:
       case space:
         e.preventDefault();
         (target as HTMLElement).click();
-
         break;
       case tab:
         e.preventDefault();
@@ -93,14 +75,22 @@ export default class OptionsMenuList extends React.Component<
     }
   };
 
-  private handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    const { menuRef, props } = this;
-    const { onSelect, onClose = OptionsMenuList.defaultProps.onClose } = props;
-    if (menuRef && menuRef.contains(e.target as HTMLElement)) {
-      if (!e.defaultPrevented && props.closeOnSelect) {
+  useEffect(() => {
+    const currentMenuRef = menuRefInternal.current;
+    currentMenuRef?.addEventListener('keydown', handleKeyDown);
+    return () => {
+      currentMenuRef?.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (
+      menuRefInternal.current &&
+      menuRefInternal.current.contains(e.target as HTMLElement)
+    ) {
+      if (!e.defaultPrevented && closeOnSelect) {
         onClose();
       }
-
       onSelect(e);
     }
 
@@ -110,82 +100,65 @@ export default class OptionsMenuList extends React.Component<
     }
   };
 
-  private handleClickOutside = () => {
-    const { onClose = OptionsMenuList.defaultProps.onClose, show } = this.props;
+  const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+    const target = e.target as Node;
+    const triggerElement = triggerRef.current;
+    if (target === triggerElement || triggerElement?.contains(target)) {
+      return;
+    }
     if (show) {
+      e.preventDefault();
       onClose();
     }
   };
 
-  componentDidMount() {
-    // see https://github.com/dequelabs/cauldron-react/issues/150
-    this.menuRef?.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    this.menuRef?.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  render() {
-    const { props, handleClick } = this;
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      children,
-      menuRef,
-      show,
-      className,
-      onClose,
-      onSelect,
-      closeOnSelect,
-      ...other
-    } = props;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-
-    const items = React.Children.toArray(children).map((child, i) => {
-      const { className, ...other } = (child as React.ReactElement<any>).props;
-      return React.cloneElement(child as React.ReactElement<any>, {
-        key: `list-item-${i}`,
-        className: classnames('OptionsMenu__list-item', className),
-        tabIndex: -1,
-        role: 'menuitem',
-        ref: (el: HTMLLIElement) => (this.itemRefs[i] = el),
-        ...other
-      });
+  const items = React.Children.toArray(children).map((child, i) => {
+    const { className: childClassName, ...childProps } = (
+      child as React.ReactElement<any>
+    ).props;
+    return React.cloneElement(child as React.ReactElement<any>, {
+      key: `list-item-${i}`,
+      className: classnames('OptionsMenu__list-item', childClassName),
+      tabIndex: -1,
+      role: 'menuitem',
+      ref: (el: HTMLLIElement) => (itemRefs.current[i] = el),
+      ...childProps
     });
+  });
 
-    // This allows the ClickOutsideListener to only be activated when the menu is
-    // currently open. This prevents an obscure behavior where the activation of a
-    // different menu would cause all menus to close
-    const clickOutsideEventActive = !show ? false : undefined;
+  // This allows the ClickOutsideListener to only be activated when the menu is
+  // currently open. This prevents an obscure behavior where the activation of a
+  // different menu would cause all menus to close
+  const clickOutsideEventActive = !show ? false : undefined;
 
-    // Key event is being handled in componentDidMount
-    /* eslint-disable jsx-a11y/click-events-have-key-events */
-    /* eslint-disable jsx-a11y/role-supports-aria-props */
-    return (
-      <ClickOutsideListener
-        onClickOutside={this.handleClickOutside}
-        mouseEvent={clickOutsideEventActive}
-        touchEvent={clickOutsideEventActive}
+  // Key event is being handled in the useEffect above
+  /* eslint-disable jsx-a11y/click-events-have-key-events */
+  /* eslint-disable jsx-a11y/role-supports-aria-props */
+  return (
+    <ClickOutsideListener
+      onClickOutside={handleClickOutside}
+      mouseEvent={clickOutsideEventActive}
+      touchEvent={clickOutsideEventActive}
+    >
+      <ul
+        {...other}
+        className={classnames('OptionsMenu__list', className)}
+        /* aria-expanded is not correct usage here, but the pattern library
+        currently styles the open state of the menu based on this attribute */
+        aria-expanded={show}
+        role="menu"
+        onClick={handleClick}
+        ref={(el) => {
+          menuRefInternal.current = el;
+          if (menuRef) {
+            setRef(menuRef, el);
+          }
+        }}
       >
-        <ul
-          {...other}
-          className={classnames('OptionsMenu__list', className)}
-          /* aria-expanded is not correct usage here, but the pattern library
-          currently styles the open state of the menu. based on this attribute */
-          aria-expanded={show}
-          role="menu"
-          onClick={handleClick}
-          ref={(el) => {
-            this.menuRef = el;
-            if (menuRef) {
-              setRef(menuRef, el);
-            }
-          }}
-        >
-          {items}
-        </ul>
-      </ClickOutsideListener>
-    );
-    /* eslint-enable jsx-a11y/click-events-have-key-events */
-  }
-}
+        {items}
+      </ul>
+    </ClickOutsideListener>
+  );
+};
+
+export default OptionsMenuList;
