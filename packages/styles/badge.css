@@ -38,6 +38,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-.Badge .Icon {
+.Badge > .Icon {
   margin: 0 var(--space-half) 0 -4px;
 }
