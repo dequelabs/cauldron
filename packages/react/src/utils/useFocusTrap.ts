@@ -129,7 +129,7 @@ function createFocusTrap(
     if (elementContains(targetElement, focusTrapMetadata.lastFocusedElement)) {
       focusTrapMetadata.lastFocusedElement?.focus();
     } else if (focusableElements.length) {
-      focusableElements.pop()?.focus();
+      focusableElements[0]?.focus();
     }
   };
 
