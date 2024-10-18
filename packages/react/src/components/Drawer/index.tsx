@@ -1,19 +1,18 @@
+import type { ElementOrRef } from '../../types';
 import React, {
   forwardRef,
   useState,
   useEffect,
-  useLayoutEffect,
   useCallback,
   useRef
 } from 'react';
 import { createPortal } from 'react-dom';
-import FocusTrap from 'focus-trap-react';
 import classnames from 'classnames';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import useEscapeKey from '../../utils/useEscapeKey';
 import useSharedRef from '../../utils/useSharedRef';
-import focusableSelector from '../../utils/focusable-selector';
+import useFocusTrap from '../../utils/useFocusTrap';
 import resolveElement from '../../utils/resolveElement';
 import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
@@ -25,8 +24,8 @@ export interface DrawerProps<T extends HTMLElement = HTMLElement>
   open?: boolean;
   behavior?: 'modal' | 'non-modal';
   focusOptions?: {
-    initialFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
-    returnFocus?: T | React.RefObject<T> | React.MutableRefObject<T>;
+    initialFocus?: ElementOrRef<T>;
+    returnFocus?: ElementOrRef<T>;
   };
   onClose?: () => void;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
@@ -50,9 +49,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   ) => {
     const drawerRef = useSharedRef(ref);
     const openRef = useRef(!!open);
-    const previousActiveElementRef = useRef<HTMLElement>(
-      null
-    ) as React.MutableRefObject<HTMLElement | null>;
     const { initialFocus: focusInitial, returnFocus: focusReturn } =
       focusOptions;
     const [isTransitioning, setIsTransitioning] = useState(!!open);
@@ -101,36 +97,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       };
     }, [isModal, open]);
 
-    useLayoutEffect(() => {
-      if (open) {
-        previousActiveElementRef.current =
-          document.activeElement as HTMLElement;
-
-        const initialFocusElement = resolveElement(focusInitial);
-        if (initialFocusElement) {
-          initialFocusElement.focus();
-        } else {
-          const focusable = drawerRef.current?.querySelector(
-            focusableSelector
-          ) as HTMLElement;
-          if (focusable) {
-            focusable.focus();
-          } else {
-            // fallback focus
-            drawerRef.current?.focus();
-          }
-        }
-      } else if (previousActiveElementRef.current) {
-        const returnFocusElement = resolveElement(focusReturn);
-        if (returnFocusElement) {
-          returnFocusElement.focus();
-        } else {
-          // fallback focus
-          previousActiveElementRef.current?.focus();
-        }
-      }
-    }, [open, focusInitial, focusReturn]);
-
     useEscapeKey(
       { callback: handleClose, active: open, defaultPrevented: true },
       [onClose]
@@ -140,6 +106,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     if (!isBrowser()) {
       return null;
     }
+
+    useFocusTrap(drawerRef, {
+      disabled: !isModal || !open,
+      initialFocusElement: focusInitial || drawerRef,
+      returnFocus: true,
+      returnFocusElement: focusReturn
+    });
 
     const portalElement = resolveElement(portal);
 
@@ -151,37 +124,25 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           touchEvent={open ? undefined : false}
           target={drawerRef}
         >
-          <FocusTrap
-            active={!!isModal && !!open}
-            focusTrapOptions={{
-              allowOutsideClick: true,
-              escapeDeactivates: false,
-              clickOutsideDeactivates: false,
-              initialFocus: false,
-              setReturnFocus: false,
-              fallbackFocus: () => drawerRef.current
+          <div
+            ref={drawerRef}
+            className={classnames(className, 'Drawer', {
+              'Drawer--open': !!open,
+              'Drawer--top': position === 'top',
+              'Drawer--bottom': position === 'bottom',
+              'Drawer--left': position === 'left',
+              'Drawer--right': position === 'right'
+            })}
+            aria-hidden={!open || undefined}
+            style={{
+              visibility: !open && !isTransitioning ? 'hidden' : undefined,
+              ...style
             }}
+            tabIndex={open ? -1 : undefined}
+            {...props}
           >
-            <div
-              ref={drawerRef}
-              className={classnames(className, 'Drawer', {
-                'Drawer--open': !!open,
-                'Drawer--top': position === 'top',
-                'Drawer--bottom': position === 'bottom',
-                'Drawer--left': position === 'left',
-                'Drawer--right': position === 'right'
-              })}
-              aria-hidden={!open || undefined}
-              style={{
-                visibility: !open && !isTransitioning ? 'hidden' : undefined,
-                ...style
-              }}
-              tabIndex={open ? -1 : undefined}
-              {...props}
-            >
-              {children}
-            </div>
-          </FocusTrap>
+            {children}
+          </div>
         </ClickOutsideListener>
         <Scrim show={!!open && !!isModal} />
       </>,
