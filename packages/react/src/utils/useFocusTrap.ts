@@ -108,17 +108,11 @@ function createFocusTrap(
 
     // If focus reaches the trap guards, we need to wrap focus around to the leading
     // or trailing focusable element depending on which guard obtained focus
-    if (focusableElements.length) {
-      if (eventTarget === startGuard) {
-        focusableElements.reverse()[0]?.focus();
-        return;
-      } else if (eventTarget === endGuard) {
-        focusableElements[0]?.focus();
-        return;
-      }
-    } else {
-      // if there are no focusable elements, just focus the container
-      (targetElement as HTMLElement).focus();
+    if (eventTarget === startGuard) {
+      focusableElements.reverse()[0]?.focus();
+      return;
+    } else if (eventTarget === endGuard) {
+      focusableElements[0]?.focus();
       return;
     }
 
@@ -129,6 +123,9 @@ function createFocusTrap(
       focusTrapMetadata.lastFocusedElement?.focus();
     } else if (focusableElements.length) {
       focusableElements[0]?.focus();
+    } else {
+      // if there are no focusable elements, just focus the container
+      (targetElement as HTMLElement).focus();
     }
   };
 
