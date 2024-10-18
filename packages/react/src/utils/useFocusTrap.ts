@@ -192,13 +192,14 @@ export default function useFocusTrap<
      */
     returnFocusElement?: ElementOrRef<FocusElement>;
   } = {}
-): void {
+): React.Ref<FocusTrap> {
   const {
     disabled = false,
     returnFocus = false,
     initialFocusElement: initialFocusElementOrRef,
     returnFocusElement
   } = options;
+  const focusTrap = useRef<FocusTrap | null>(null);
   const returnFocusElementRef =
     useRef<HTMLElement>() as React.MutableRefObject<HTMLElement | null>;
 
@@ -224,13 +225,16 @@ export default function useFocusTrap<
 
     returnFocusElementRef.current = getActiveElement(targetElement);
 
-    const focusTrap = createFocusTrap(targetElement, initialFocusElement);
+    focusTrap.current = createFocusTrap(targetElement, initialFocusElement);
 
     return () => {
-      focusTrap.destroy();
+      focusTrap.current?.destroy();
+      focusTrap.current = null;
       if (returnFocus) {
         restoreFocusToReturnFocusElement();
       }
     };
   }, [target, disabled]);
+
+  return focusTrap;
 }
