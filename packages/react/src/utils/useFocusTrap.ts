@@ -69,7 +69,6 @@ function createFocusTrap(
   targetElement: Element,
   initialFocusElement: HTMLElement | null
 ): FocusTrap {
-  const suspended = false;
   const startGuard = createTrapGuard();
   const endGuard = createTrapGuard();
   targetElement.insertAdjacentElement('beforebegin', startGuard);
@@ -78,7 +77,7 @@ function createFocusTrap(
   const focusTrapMetadata: FocusTrapMetadata = {
     targetElement,
     lastFocusedElement: null,
-    suspended
+    suspended: false
   };
 
   const focusListener = (event: FocusEvent) => {
@@ -170,9 +169,8 @@ export default function useFocusTrap<
   target: ElementOrRef<TargetElement>,
   options: {
     /**
-     * When set to true, the focus will remain trapped within the target
-     * element preventing focus from moving to focusaable elements outside
-     * of the target.
+     * When set to false, deactivates the focus trap. This can be necessary if
+     * a component needs to conditionally manage focus traps.
      */
     disabled?: boolean;
     /**
@@ -192,7 +190,7 @@ export default function useFocusTrap<
      */
     returnFocusElement?: ElementOrRef<FocusElement>;
   } = {}
-): React.Ref<FocusTrap> {
+): React.RefObject<Readonly<FocusTrap>> {
   const {
     disabled = false,
     returnFocus = false,
