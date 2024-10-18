@@ -40,20 +40,20 @@ function elementContains(
     return false;
   }
 
-  if (containerElement.contains(targetElement)) {
-    return true;
+  if (containerElement.getRootNode() === targetElement.getRootNode()) {
+    return containerElement.contains(targetElement);
   }
 
-  if (containerElement.getRootNode() !== targetElement.getRootNode()) {
-    let root = targetElement.getRootNode();
-    while (root && root !== containerElement.getRootNode()) {
-      if (root.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-        // likely a shadow root, and we need to get the host
-        root = (root as ShadowRoot).host;
-      }
+  let root = targetElement.getRootNode();
+  while (root && root !== containerElement.getRootNode()) {
+    if (root.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      // likely a shadow root, and we need to get the host
+      root = (root as ShadowRoot).host;
+    } else {
+      break;
     }
-    return root && containerElement.contains(root);
   }
+  return root && containerElement.contains(root);
 
   return false;
 }
@@ -150,6 +150,8 @@ function createFocusTrap(
     destroy: () => {
       document.removeEventListener('focus', focusListener, true);
       removeFocusTrapFromStack(focusTrapMetadata);
+      startGuard.parentNode?.removeChild(startGuard);
+      endGuard.parentNode?.removeChild(endGuard);
       // If there are any remaining focus traps in the stack, we need
       // to unsuspend the most recently added focus trap
       if (focusTrapStack.length) {
@@ -190,7 +192,7 @@ export default function useFocusTrap<
 ): React.RefObject<Readonly<FocusTrap>> {
   const {
     disabled = false,
-    returnFocus = false,
+    returnFocus = true,
     initialFocusElement: initialFocusElementOrRef,
     returnFocusElement
   } = options;
@@ -200,6 +202,7 @@ export default function useFocusTrap<
 
   function restoreFocusToReturnFocusElement() {
     const resolvedReturnFocusElement = resolveElement(returnFocusElement);
+    console.log({ resolvedReturnFocusElement });
     if (resolvedReturnFocusElement instanceof HTMLElement) {
       resolvedReturnFocusElement.focus();
     } else {
