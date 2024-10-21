@@ -142,6 +142,12 @@ function createFocusTrap(
 
   if (initialFocusElement) {
     initialFocusElement.focus();
+  } else {
+    // Try to find a suitable focus element
+    const focusableElements = Array.from(
+      targetElement?.querySelectorAll(focusable) || []
+    ) as HTMLElement[];
+    focusableElements[0]?.focus();
   }
 
   return {

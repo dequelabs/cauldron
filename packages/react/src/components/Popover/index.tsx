@@ -8,11 +8,10 @@ import { Cauldron } from '../../types';
 import classnames from 'classnames';
 import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
-import FocusTrap from 'focus-trap-react';
-import focusableSelector from '../../utils/focusable-selector';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 import useEscapeKey from '../../utils/useEscapeKey';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 export type PopoverVariant = 'prompt' | 'custom';
 
@@ -162,18 +161,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [popoverRef.current]);
 
     useEffect(() => {
-      if (show && popoverRef.current) {
-        // Find the first focusable element inside the container
-        const firstFocusableElement =
-          popoverRef.current.querySelector(focusableSelector);
-
-        if (firstFocusableElement instanceof HTMLElement) {
-          firstFocusableElement.focus();
-        }
-      }
-
       targetElement?.setAttribute('aria-expanded', Boolean(show).toString());
-    }, [show, popoverRef.current]);
+    }, [show]);
 
     useEffect(() => {
       const attrText = targetElement?.getAttribute('aria-controls');
@@ -218,55 +207,45 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       [show]
     );
 
+    useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
+
     if (!show || !isBrowser()) return null;
 
     return createPortal(
-      <FocusTrap
-        focusTrapOptions={{
-          allowOutsideClick: true,
-          fallbackFocus: '.Popover__borderLeft'
-        }}
-      >
-        <ClickOutsideListener onClickOutside={handleClickOutside}>
+      <ClickOutsideListener onClickOutside={handleClickOutside}>
+        <div
+          id={id}
+          className={classnames('Popover', `Popover--${placement}`, className, {
+            'Popover--hidden': !show,
+            'Popover--prompt': variant === 'prompt'
+          })}
+          ref={popoverRef}
+          role="dialog"
+          style={styles.popper}
+          {...attributes.popper}
+          {...additionalProps}
+          {...props}
+        >
           <div
-            id={id}
-            className={classnames(
-              'Popover',
-              `Popover--${placement}`,
-              className,
-              {
-                'Popover--hidden': !show,
-                'Popover--prompt': variant === 'prompt'
-              }
-            )}
-            ref={popoverRef}
-            role="dialog"
-            style={styles.popper}
-            {...attributes.popper}
-            {...additionalProps}
-            {...props}
-          >
-            <div
-              className="Popover__popoverArrow"
-              ref={setArrowElement}
-              style={styles.arrow}
+            className="Popover__popoverArrow"
+            ref={setArrowElement}
+            style={styles.arrow}
+          />
+          <div className="Popover__borderLeft" />
+          {variant === 'prompt' ? (
+            <PromptPopoverContent
+              applyButtonText={applyButtonText}
+              onApply={onApply}
+              closeButtonText={closeButtonText}
+              infoText={infoText || ''}
+              onClose={handleClosePopover}
+              infoTextId={`${id}-label`}
             />
-            <div className="Popover__borderLeft" />
-            {variant === 'prompt' ? (
-              <PromptPopoverContent
-                applyButtonText={applyButtonText}
-                onApply={onApply}
-                closeButtonText={closeButtonText}
-                infoText={infoText || ''}
-                onClose={handleClosePopover}
-                infoTextId={`${id}-label`}
-              />
-            ) : (
-              children
-            )}
-          </div>
-        </ClickOutsideListener>
-      </FocusTrap>,
+          ) : (
+            children
+          )}
+        </div>
+      </ClickOutsideListener>,
       (portal && 'current' in portal ? portal.current : portal) ||
         // Dependent on "isBrowser" check above:
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
