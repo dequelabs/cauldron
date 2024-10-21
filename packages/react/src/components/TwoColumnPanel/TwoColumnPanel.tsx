@@ -228,9 +228,8 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       }
     };
 
-    // Note: This is a WIP there's some small issues with focus return that still need to be investigated...
     useFocusTrap(columnLeftRef, {
-      disabled: !isFocusTrap
+      disabled: !showPanel || !isFocusTrap
     });
 
     return (

@@ -108,10 +108,10 @@ function createFocusTrap(
 
     // If focus reaches the trap guards, we need to wrap focus around to the leading
     // or trailing focusable element depending on which guard obtained focus
-    if (eventTarget === startGuard) {
+    if (focusableElements.length && eventTarget === startGuard) {
       focusableElements.reverse()[0]?.focus();
       return;
-    } else if (eventTarget === endGuard) {
+    } else if (focusableElements.length && eventTarget === endGuard) {
       focusableElements[0]?.focus();
       return;
     }
@@ -202,7 +202,6 @@ export default function useFocusTrap<
 
   function restoreFocusToReturnFocusElement() {
     const resolvedReturnFocusElement = resolveElement(returnFocusElement);
-    console.log({ resolvedReturnFocusElement });
     if (resolvedReturnFocusElement instanceof HTMLElement) {
       resolvedReturnFocusElement.focus();
     } else {
