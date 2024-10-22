@@ -22,7 +22,7 @@ export interface OptionsMenuProps extends OptionsMenuAlignmentProps {
   menuRef?: React.Ref<HTMLUListElement>;
   trigger?: (props: OptionsMenuRenderTriggerProps) => React.ReactNode;
   onClose?: () => void;
-  onSelect: (e: React.MouseEvent<HTMLElement>) => void;
+  onSelect?: (e: React.MouseEvent<HTMLElement>) => void;
   closeOnSelect?: boolean;
   show?: boolean;
   children: React.ReactNode;
