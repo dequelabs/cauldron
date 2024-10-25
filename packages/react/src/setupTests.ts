@@ -2,6 +2,9 @@
 import '@testing-library/jest-dom';
 import 'jest-axe/extend-expect';
 import { configureAxe } from 'jest-axe';
+import { TextEncoder } from 'util';
+
+global.TextEncoder = TextEncoder;
 
 configureAxe({
   rules: {
