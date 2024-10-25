@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.10.1](https://github.com/dequelabs/cauldron/compare/v6.10.0...v6.10.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* onSelect prop for OptionsMenu is optional ([#1734](https://github.com/dequelabs/cauldron/issues/1734)) ([9bd6636](https://github.com/dequelabs/cauldron/commit/9bd66364d7a79b1fa9e4ee09f0672efec835ee49))
+
 ## [6.10.0](https://github.com/dequelabs/cauldron/compare/v6.9.0...v6.10.0) (2024-10-16)
 
 
