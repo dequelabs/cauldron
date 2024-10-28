@@ -469,7 +469,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setFormValue={setFormValue}
         >
           {portal && typeof document !== 'undefined'
-            ? createPortal(
+            ? (createPortal(
                 comboboxListbox,
                 // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                 portal instanceof HTMLElement
@@ -477,7 +477,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
                   : portal.current ||
                       // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
                       /* istanbul ignore next: default fallback value */ document.body
-              )
+              ) as React.ReactNode)
             : comboboxListbox}
         </ComboboxProvider>
         {hasError && (
