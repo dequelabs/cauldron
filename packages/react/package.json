@@ -41,7 +41,7 @@
     "@babel/preset-typescript": "^7.22.5",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-dynamic-import-vars": "^1.4.2",
-    "@rollup/plugin-typescript": "^11.1.2",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@svgr/rollup": "^6.1.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
