@@ -51,7 +51,7 @@ interface ComboboxProps
     previousValue: ComboboxValue;
   }) => void;
   onActiveChange?: (option: ListboxOption) => void;
-  renderNoResults?: (() => JSX.Element) | React.ReactElement;
+  renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
 }
@@ -68,7 +68,7 @@ const ComboboxNoResults = ({
   children
 }: {
   children?: React.ReactNode;
-}): JSX.Element => {
+}): React.JSX.Element => {
   return (
     <div className="ComboboxListbox__empty" role="alert" aria-live="polite">
       {children || 'No results found.'}
@@ -103,7 +103,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       ...props
     },
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const [value, setValue] = useState<string>(defaultValue || propValue || '');
     const [matchingOptions, setMatchingOptions] = useState<
       Map<HTMLElement, ComboboxOptionState>

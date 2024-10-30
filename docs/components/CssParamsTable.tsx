@@ -13,7 +13,7 @@ import { getCssVariablesStartingWith } from '../utils/getCssVariablesStartingWit
 
 interface CssParamsTableProps {
   param?: string;
-  renderExample?: (name: string, value: string) => JSX.Element;
+  renderExample?: (name: string, value: string) => React.JSX.Element;
   formatName?: (name: string) => string;
 }
 
