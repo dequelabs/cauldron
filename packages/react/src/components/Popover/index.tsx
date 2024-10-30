@@ -271,7 +271,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         // Dependent on "isBrowser" check above:
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document.body
-    );
+    ) as JSX.Element;
   }
 );
 
