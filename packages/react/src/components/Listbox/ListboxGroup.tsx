@@ -23,7 +23,7 @@ const ListboxGroup = forwardRef<HTMLElement, ListboxGroupProps>(
       ...props
     },
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const [id] = propId ? [propId] : useId(1, 'listbox-group-label');
     return (
       <Component role="group" ref={ref} aria-labelledby={id} {...props}>

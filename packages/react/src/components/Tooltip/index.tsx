@@ -53,7 +53,7 @@ export default function Tooltip({
   hideElementOnHidden = false,
   className,
   ...props
-}: TooltipProps): JSX.Element {
+}: TooltipProps): React.JSX.Element {
   const [id] = propId ? [propId] : useId(1, 'tooltip');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showTooltip, setShowTooltip] = useState(!!showProp || defaultShow);
