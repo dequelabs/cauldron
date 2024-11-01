@@ -27,7 +27,26 @@
 }
 
 .Table {
-  table-layout: auto;
+  display: grid;
+  grid-template-columns: var(--table-grid-template-columns);
+}
+
+.TableHead,
+.TableBody,
+.TableFooter {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: -1 / 1;
+}
+
+.TableRow {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: -1 / 1;
+}
+
+.Table {
+  /*  table-layout: auto;*/
   font-size: var(--text-size-small);
   border-collapse: collapse;
   text-align: left;
@@ -98,6 +117,7 @@
   background: var(--table-cell-background-color);
   color: var(--table-cell-text-color);
   border-bottom: 1px solid var(--table-row-border-color);
+  align-content: end;
 }
 
 .TableCell,

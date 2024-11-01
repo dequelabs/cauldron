@@ -1,16 +1,21 @@
-import React, { ThHTMLAttributes } from 'react';
+import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
+import type { ColumnAlignment, ColumnWidth } from './Table';
+import { useTableLayout } from './TableContext';
 
 // these match aria-sort's values
 type SortDirection = 'ascending' | 'descending' | 'none';
 
-interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
+interface TableHeaderProps
+  extends Omit<React.ThHTMLAttributes<HTMLTableHeaderCellElement>, 'align'> {
   sortDirection?: SortDirection;
   onSort?: () => void;
   sortAscendingAnnouncement?: string;
   sortDescendingAnnouncement?: string;
+  align: ColumnAlignment;
+  width: ColumnWidth;
 }
 
 const TableHeader = ({
@@ -20,6 +25,8 @@ const TableHeader = ({
   className,
   sortAscendingAnnouncement = 'sorted ascending',
   sortDescendingAnnouncement = 'sorted descending',
+  align,
+  width,
   ...other
 }: TableHeaderProps) => {
   // When the sort direction changes, we want to announce the change in a live region
@@ -32,13 +39,34 @@ const TableHeader = ({
       ? sortDescendingAnnouncement
       : '';
 
+  const headerRef = useRef<HTMLTableHeaderCellElement>(null);
+  const { columns, registerColumn, unregisterColumn } = useTableLayout();
+
+  useEffect(() => {
+    const headerElement = headerRef.current!;
+    const row = headerElement.closest('tr');
+    if (!row || headerElement.getAttribute('scope') !== 'col') {
+      return;
+    }
+
+    // NOTE: We should determine the column order here
+    registerColumn(headerElement, { align, width });
+
+    return () => {
+      console.log('unregister');
+      unregisterColumn(headerElement);
+    };
+  }, [registerColumn, unregisterColumn]);
+
   return (
     <th
+      ref={headerRef}
       aria-sort={sortDirection}
       className={classNames('TableHeader', className, {
         'TableHeader--sort-ascending': sortDirection === 'ascending',
         'TableHeader--sort-descending': sortDirection === 'descending'
       })}
+      style={{ textAlign: align }}
       {...other}
     >
       {!!onSort && !!sortDirection ? (
