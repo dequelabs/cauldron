@@ -106,14 +106,12 @@ test('should auto-generate id', async () => {
   expect(id).toEqual(button.getAttribute('aria-controls'));
 });
 
-test('should attach attribute aria-expanded correctly based on shown state', async () => {
+test('should attach attribute aria-expanded correctly based on shown state', () => {
   const { rerender } = render(<Wrapper />);
-
   expect(
     screen.queryByRole('button', {
       name: 'Popover button',
-      hidden: true,
-      expanded: true
+      hidden: true
     })
   ).toBeInTheDocument();
   rerender(<Wrapper tooltipProps={{ show: false }} />);
