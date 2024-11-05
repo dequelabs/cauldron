@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import { render, screen, fireEvent, createEvent } from '@testing-library/react';
 import { within } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
 import Combobox from './Combobox';
@@ -379,6 +380,7 @@ test('should close combobox listbox on "blur"', () => {
 });
 
 test('should close combobox listbox when selecting option via click', async () => {
+  const user = userEvent.setup();
   render(
     <Combobox label="label">
       <ComboboxOption>Apple</ComboboxOption>
@@ -388,9 +390,9 @@ test('should close combobox listbox when selecting option via click', async () =
   );
 
   assertListboxIsOpen(false);
-  screen.getByRole('combobox').focus();
+  await user.tab();
   assertListboxIsOpen(true);
-  fireEvent.click(screen.getAllByRole('option')[0]);
+  await user.click(screen.getAllByRole('option')[0]);
   assertListboxIsOpen(false);
 });
 
