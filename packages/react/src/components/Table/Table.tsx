@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { TableProvider } from './TableContext';
 
@@ -18,16 +18,20 @@ export type ColumnWidth =
   | `${number}fr`;
 export type RowAlignment = 'start' | 'center';
 
-interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+type TableBaseProps = {
   layout: never;
   columns: never;
   variant?: 'border';
-}
+};
 
-interface TableGridProps extends Omit<TableProps, 'layout' | 'columns'> {
+type TableGridProps = {
   layout: 'grid';
   columns?: Array<Column> | number;
-}
+  variant?: 'border';
+};
+
+type TableProps = (TableBaseProps | Partial<TableGridProps>) &
+  React.TableHTMLAttributes<HTMLTableElement>;
 
 const Table = ({
   children,
@@ -37,7 +41,7 @@ const Table = ({
   columns: columnsProp = [],
   style,
   ...other
-}: TableProps | TableGridProps) => {
+}: TableProps) => {
   const isGridLayout = layout === 'grid';
   const columns: Column[] = useMemo(() => {
     if (typeof columnsProp === 'number') {
