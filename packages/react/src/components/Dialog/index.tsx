@@ -171,7 +171,7 @@ export default class Dialog extends React.Component<DialogProps, DialogState> {
     return createPortal(
       Dialog,
       ('current' in portal ? portal.current : portal) || document.body
-    ) as JSX.Element;
+    ) as React.JSX.Element;
   }
 
   close() {

@@ -93,7 +93,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       ...props
     }: PopoverProps,
     ref: Ref<HTMLDivElement>
-  ): JSX.Element | null => {
+  ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'popover');
 
     const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -271,7 +271,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         // Dependent on "isBrowser" check above:
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document.body
-    );
+    ) as React.JSX.Element;
   }
 );
 

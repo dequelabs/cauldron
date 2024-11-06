@@ -35,7 +35,7 @@ function ListboxProvider<T extends ListboxOption>({
   setOptions,
   onSelect,
   children
-}: ListboxProvider<T>): JSX.Element {
+}: ListboxProvider<T>): React.JSX.Element {
   const { Provider } = ListboxContext as unknown as React.Context<
     ListboxContext<T>
   >;
