@@ -107,7 +107,9 @@ const Select = React.forwardRef(
         >
           <span>{label}</span>
           {required && (
-            <span className="Field__required-text">{requiredText}</span>
+            <span className="Field__required-text" aria-hidden="true">
+              {requiredText}
+            </span>
           )}
         </label>
         <div
