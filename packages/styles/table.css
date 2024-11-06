@@ -37,7 +37,7 @@
 
 .TableGrid {
   display: grid;
-  grid-template-columns: var(--table-grid-template-columns);
+  grid-template-columns: var(--table-grid-template-columns, auto);
 }
 
 :where(.TableGrid) .TableHead,
@@ -136,9 +136,7 @@
 }
 
 .Table--border,
-.Table--border .TableHeader,
-.Table--border .TableFooter,
-.Table--border .TableCell {
+.Table--border :is(.TableHeader, .TableFooter, .TableCell) {
   border: 1px solid var(--gray-40);
 }
 
@@ -146,7 +144,8 @@
   border: none;
 }
 
-:where(.TableGrid).Table--border :is(tbody, thead, tfoot, tr) {
+:where(.TableGrid).Table--border
+  :is(.TableBody, .TableHead, .TableFooter, .TableRow) {
   grid-gap: 1px;
   background-color: var(--table-row-border-color);
 }
