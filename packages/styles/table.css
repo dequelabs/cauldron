@@ -38,6 +38,7 @@
 .TableGrid {
   display: grid;
   grid-template-columns: var(--table-grid-template-columns, auto);
+  grid-auto-rows: auto;
 }
 
 :where(.TableGrid) .TableHead,
