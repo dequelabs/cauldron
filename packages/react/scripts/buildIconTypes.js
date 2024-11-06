@@ -36,7 +36,7 @@ for (const file of files) {
 
   const name = file.replace('.svg', '');
   if (ICONS_WITH_DIRECTIONS.includes(name)) {
-    iconTypes.push(...DIRECTIONS.map(d => `${name}-${d}`));
+    iconTypes.push(...DIRECTIONS.map((d) => `${name}-${d}`));
   } else {
     iconTypes.push(name);
   }
@@ -51,11 +51,11 @@ fs.writeFileSync(
 
 /** IconType represents each valid icon type. */
 export type IconType =
-${iconTypes.map(i => `  | '${i}'`).join('\n')};
+${iconTypes.map((i) => `  | '${i}'`).join('\n')};
 
 /** iconTypes holds each valid icon type. */
 export const iconTypes = [
-${iconTypes.map(i => `  '${i}'`).join(',\n')}
+${iconTypes.map((i) => `  '${i}'`).join(',\n')}
 ];
 `.trim()
 );
