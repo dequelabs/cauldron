@@ -80,16 +80,18 @@ test('should toggle checkbox correctly', async () => {
   expect(checkboxIcon).toHaveClass('Icon--checkbox-checked');
 });
 
-test('should handle focus correctly', () => {
+test('should handle focus correctly', async () => {
+  const user = userEvent.setup();
   const onFocus = spy();
   const input = renderCheckbox({ onFocus });
   const checkboxIcon = input.parentElement!.querySelector(
     '.Checkbox__overlay'
   ) as HTMLElement;
+
   expect(checkboxIcon).not.toHaveClass('.Checkbox__overlay--focused');
   expect(onFocus.notCalled).toBeTruthy();
 
-  input.focus();
+  await user.tab(); // focus on the input
   expect(input).toHaveFocus();
   expect(checkboxIcon).toHaveClass('Checkbox__overlay--focused');
   expect(onFocus.calledOnce).toBeTruthy();

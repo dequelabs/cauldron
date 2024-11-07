@@ -46,7 +46,7 @@ function ComboboxProvider({
   setMatchingOptions,
   setFormValue,
   children
-}: ComboboxProvider): JSX.Element {
+}: ComboboxProvider): React.JSX.Element {
   const { Provider } = ComboboxContext as React.Context<ComboboxContext>;
   const contextValue: ComboboxContext = useMemo(
     () => ({

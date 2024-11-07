@@ -10,7 +10,7 @@ interface ComboboxGroupProps extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 const ComboboxGroup = forwardRef<HTMLUListElement, ComboboxGroupProps>(
-  ({ className, children, label, ...props }, ref): JSX.Element | null => {
+  ({ className, children, label, ...props }, ref): React.JSX.Element | null => {
     const { inputValue, autocomplete, matchingOptions } = useComboboxContext();
     const comboboxGroupRef = useSharedRef<HTMLUListElement>(ref);
 

@@ -5,7 +5,7 @@ import axe from '../../axe';
 
 const CustomLinkComponent = (
   props: React.AnchorHTMLAttributes<HTMLAnchorElement>
-): JSX.Element => (
+): React.JSX.Element => (
   // eslint-disable-next-line jsx-a11y/anchor-has-content
   <a data-testid="custom" {...props} />
 );
