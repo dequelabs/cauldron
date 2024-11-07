@@ -45,10 +45,7 @@
   grid-auto-rows: auto;
 }
 
-:where(.TableGrid) .TableHead,
-:where(.TableGrid) .TableBody,
-:where(.TableGrid) .TableFooter,
-:where(.TableGrid) .TableRow {
+:where(.TableGrid) :is(.TableHead, .TableBody, .TableFooter, .TableRow) {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: -1 / 1;
