@@ -7,15 +7,17 @@
   --table-header-sorting-text-color: var(--gray-90);
   --table-cell-text-color: var(--gray-60);
   --table-cell-background-color: var(--white);
-  --table-row-border-color: var(--gray-40);
-  --table-space: 11px;
+  --table-row-border-color: var(--gray-20);
+  --table-space: var(--space-small);
   --table-header-sorting-border-color: var(--gray-90);
   --table-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  --table-odd-row-background: var(--gray-10);
+  --table-sort-hover-focus-ring-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
   --table-header-text-color: var(--white);
-  --table-header-background-color: var(--accent-dark);
+  --table-header-background-color: var(--accent-medium);
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--white);
   --table-header-sorting-background-color: #53636e;
@@ -24,6 +26,8 @@
   --table-cell-background-color: var(--accent-medium);
   --table-row-border-color: #5d676f;
   --table-header-sorting-border-color: var(--accent-info);
+  --table-odd-row-background: var(--gray-90);
+  --table-sort-hover-focus-ring-color: var(--accent-light);
 }
 
 .Table {
@@ -54,16 +58,20 @@
   background: var(--table-header-background-color);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
-  border-bottom: 2px solid var(--table-row-border-color);
+  border-bottom: 1px solid var(--table-row-border-color);
 }
 
 .TableBody .TableHeader {
   border-bottom-width: 1px;
-  border-right: 2px solid var(--table-row-border-color);
+  border-right: 1px solid var(--table-row-border-color);
 }
 
 .TableBody .TableRow:last-child .TableHeader {
   border-bottom: none;
+}
+
+.TableBody .TableRow:nth-child(odd) .TableCell {
+  background: var(--table-odd-row-background);
 }
 
 .TableHeader[aria-sort] {
@@ -80,22 +88,16 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: var(--table-space) var(--space-smallest);
+  padding: var(--table-space) var(--space-large);
 }
 
 .TableHeader__sort-button:hover {
   cursor: pointer;
-  background-color: var(--table-header-background-color-hover);
+  box-shadow: inset 0 0 0 1px var(--table-sort-hover-focus-ring-color);
 }
 
 .TableHeader__sort-button:focus {
   outline-offset: unset;
-}
-
-.TableHeader--sort-ascending,
-.TableHeader--sort-descending {
-  background: var(--table-header-sorting-background-color);
-  border-bottom: 3px solid var(--table-header-sorting-border-color);
 }
 
 /* These styles are not applying and will be deprecated */
@@ -117,7 +119,7 @@
 
 .TableCell,
 .TableHeader {
-  padding: var(--table-space) var(--space-smallest);
+  padding: var(--table-space) var(--space-large);
 }
 
 .Table:not(.Table--border) .TableRow:last-child .TableCell {
@@ -152,12 +154,12 @@
 }
 
 .Table--border .TableHeader {
-  border-bottom: 2px solid var(--gray-40);
+  border-bottom: 1px solid var(--gray-40);
 }
 
 .Table--border .TableBody .TableHeader {
   border-bottom-width: 1px;
-  border-right: 2px solid var(--table-row-border-color);
+  border-right: 1px solid var(--table-row-border-color);
 }
 
 .cauldron--theme-dark .Table--border,
