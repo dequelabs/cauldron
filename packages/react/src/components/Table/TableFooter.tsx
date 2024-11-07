@@ -1,14 +1,20 @@
-import React, { HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-const TableFooter = ({
-  children,
-  className,
-  ...other
-}: HTMLAttributes<HTMLTableSectionElement>) => (
-  <tfoot className={classNames('TableFooter', className)} {...other}>
-    {children}
-  </tfoot>
+type TableFooterProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  className?: string;
+};
+
+const TableFooter = forwardRef<HTMLTableSectionElement, TableFooterProps>(
+  ({ children, className, ...other }, ref) => (
+    <tfoot
+      ref={ref}
+      className={classNames('TableFooter', className)}
+      {...other}
+    >
+      {children}
+    </tfoot>
+  )
 );
 
 TableFooter.displayName = 'TableFooter';

@@ -11,9 +11,9 @@ import Table, {
 } from './';
 import axe from '../../axe';
 
-const renderDefaultTable = () => {
+const renderDefaultTable = (props: React.ComponentProps<typeof Table> = {}) => {
   return render(
-    <Table className="my-table" data-foo="true">
+    <Table className="my-table" data-foo="true" {...props}>
       <TableHead data-testid="thead" className="my-table-head" data-foo="true">
         <TableRow className="my-table-row" data-foo="true">
           <TableHeader className="my-table-header" scope="col" data-foo="true">
@@ -162,6 +162,13 @@ test('should render the expected semantic HTML elements', () => {
   expect(firstTableHeader.tagName).toBe('TH');
   expect(firstTableCell.tagName).toBe('TD');
   expect(tableFooter.tagName).toBe('TFOOT');
+});
+
+test('should support ref prop', () => {
+  const ref = React.createRef<HTMLTableElement>();
+  renderDefaultTable({ ref });
+  expect(ref.current).toBeTruthy();
+  expect(ref.current).toEqual(screen.getByRole('table'));
 });
 
 test('should render with border variant', () => {
@@ -314,8 +321,75 @@ test('should maintain focus on the sort button after it is clicked', async () =>
   });
 });
 
-test('returns 0 axe violations', async () => {
+test('should support grid layout', () => {
+  renderDefaultTable({ layout: 'grid', columns: 2 });
+  const table = screen.getByRole('table');
+  expect(table).toHaveClass('Table', 'TableGrid');
+  expect(table).toHaveStyle('--table-grid-template-columns: auto auto');
+});
+
+test('should support column definitions with grid layout', () => {
+  renderDefaultTable({
+    layout: 'grid',
+    columns: [
+      { width: '1fr', align: 'start' },
+      { width: 'min-content', align: 'end' }
+    ]
+  });
+  const table = screen.getByRole('table');
+  expect(table).toHaveStyle('--table-grid-template-columns: 1fr min-content');
+  const tableHeaderCells = screen.getAllByRole('columnheader');
+  expect(tableHeaderCells[0]).toHaveStyle('text-align: start');
+  expect(tableHeaderCells[1]).toHaveStyle('text-align: end');
+  const tableCells = screen.getAllByRole('cell');
+  expect(tableCells[0]).toHaveStyle('text-align: start');
+  expect(tableCells[1]).toHaveStyle('text-align: end');
+});
+
+test('should apply colspan styles to cells in grid layout', () => {
+  render(
+    <Table layout="grid">
+      <TableBody>
+        <TableRow>
+          <TableCell data-testid="colspan-cell" colSpan={2}>
+            2
+          </TableCell>
+          <TableCell data-testid="cell">1</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  expect(screen.getByTestId('colspan-cell')).toHaveStyle('gridColumn: span 2');
+  expect(screen.getByTestId('cell')).not.toHaveStyle('gridColumn: span 1');
+});
+
+test('should apply rowspan styles to cells in grid layout', () => {
+  render(
+    <Table layout="grid">
+      <TableBody>
+        <TableRow>
+          <TableCell data-testid="rowspan-cell" rowSpan={2}>
+            2
+          </TableCell>
+          <TableCell data-testid="cell">1</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  expect(screen.getByTestId('rowspan-cell')).toHaveStyle('gridRow: span 2');
+  expect(screen.getByTestId('cell')).not.toHaveStyle('gridRow: span 1');
+});
+
+test('returns 0 axe violations for default table layout', async () => {
   const { container } = renderDefaultTable();
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('returns 0 axe violations for grid table layout', async () => {
+  const { container } = renderDefaultTable({ layout: 'grid' });
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });

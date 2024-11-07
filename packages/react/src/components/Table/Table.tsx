@@ -33,70 +33,79 @@ type TableGridProps = {
 type TableProps = (TableBaseProps | Partial<TableGridProps>) &
   React.TableHTMLAttributes<HTMLTableElement>;
 
-const Table = ({
-  children,
-  className,
-  variant,
-  layout,
-  columns: columnsProp = [],
-  style,
-  ...other
-}: TableProps) => {
-  const isGridLayout = layout === 'grid';
-  const columns: Column[] = useMemo(() => {
-    if (typeof columnsProp === 'number') {
-      return columnsProp > 0
-        ? Array(columnsProp).fill({ align: 'start' })
-        : [{ align: 'start' }];
-    }
+const Table = React.forwardRef<HTMLTableElement, TableProps>(
+  (
+    {
+      children,
+      className,
+      variant,
+      layout,
+      columns: columnsProp = [],
+      style,
+      ...other
+    },
+    ref
+  ) => {
+    const isGridLayout = layout === 'grid';
+    const columns: Column[] = useMemo(() => {
+      if (typeof columnsProp === 'number') {
+        return columnsProp > 0
+          ? Array(columnsProp).fill({ align: 'start' })
+          : [{ align: 'start' }];
+      }
 
-    return columnsProp;
-  }, [columnsProp]);
+      return columnsProp;
+    }, [columnsProp]);
 
-  const styleTemplateColumns = useMemo(() => {
-    if (layout !== 'grid') {
-      return;
-    }
+    const styleTemplateColumns = useMemo(() => {
+      if (layout !== 'grid') {
+        return;
+      }
 
-    if (!columns) {
-      return 'auto';
-    }
+      if (!columns) {
+        return 'auto';
+      }
 
-    return columns
-      .map(({ width }) => {
-        if (!width) {
-          return 'auto';
-        } else {
-          return width;
-        }
-      })
-      .join(' ');
-  }, [layout, columns]);
+      return columns
+        .map(({ width }) => {
+          if (!width) {
+            return 'auto';
+          } else {
+            return width;
+          }
+        })
+        .join(' ');
+    }, [layout, columns]);
 
-  const tableGridStyles: React.CSSProperties = isGridLayout
-    ? ({
-        '--table-grid-template-columns': styleTemplateColumns
-      } as React.CSSProperties)
-    : {};
+    const tableGridStyles: React.CSSProperties = isGridLayout
+      ? ({
+          '--table-grid-template-columns': styleTemplateColumns
+        } as React.CSSProperties)
+      : {};
 
-  return (
-    <table
-      style={{
-        ...tableGridStyles,
-        ...style
-      }}
-      className={classNames('Table', className, {
-        'Table--border': variant === 'border',
-        TableGrid: isGridLayout
-      })}
-      {...other}
-    >
-      <TableProvider layout={isGridLayout ? 'grid' : 'table'} columns={columns}>
-        {children}
-      </TableProvider>
-    </table>
-  );
-};
+    return (
+      <table
+        ref={ref}
+        style={{
+          ...tableGridStyles,
+          ...style
+        }}
+        className={classNames('Table', className, {
+          'Table--border': variant === 'border',
+          TableGrid: isGridLayout
+        })}
+        {...other}
+      >
+        <TableProvider
+          layout={isGridLayout ? 'grid' : 'table'}
+          columns={columns}
+        >
+          {children}
+        </TableProvider>
+      </table>
+    );
+  }
+);
 
 Table.displayName = 'Table';
 
