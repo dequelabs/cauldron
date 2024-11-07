@@ -35,7 +35,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
       ...props
     },
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const { active, selected, setOptions, onSelect } = useListboxContext();
     const listboxOptionRef = useSharedRef<HTMLElement>(ref);
     const [id] = propId ? [propId] : useId(1, 'listbox-option');

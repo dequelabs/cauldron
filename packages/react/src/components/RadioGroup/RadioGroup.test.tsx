@@ -151,7 +151,8 @@ test('should toggle radio correctly', async () => {
   expect(radioIcon).toHaveClass('Icon--radio-checked');
 });
 
-test('should handle focus correctly', () => {
+test('should handle focus correctly', async () => {
+  const user = userEvent.setup();
   const onFocus = spy();
   const [input] = renderRadioGroup({ onFocus });
   const radioIcon = input.parentElement!.querySelector(
@@ -160,7 +161,7 @@ test('should handle focus correctly', () => {
   expect(radioIcon).not.toHaveClass('.Radio__overlay--focused');
   expect(onFocus.notCalled).toBeTruthy();
 
-  input.focus();
+  await user.tab(); // focus on the input
   expect(input).toHaveFocus();
   expect(radioIcon).toHaveClass('Radio__overlay--focused');
   expect(onFocus.calledOnce).toBeTruthy();

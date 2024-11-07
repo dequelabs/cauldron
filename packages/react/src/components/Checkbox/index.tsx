@@ -41,7 +41,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       ...other
     }: CheckboxProps,
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const [isChecked, setIsChecked] = useState(checked);
     const [isIndeterminate, setIsIndeterminate] = useState(indeterminate);
     const [focused, setFocused] = useState(false);

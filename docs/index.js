@@ -1,22 +1,18 @@
 import React, { useRef, Fragment, useEffect, useState } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import classNames from 'classnames';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
 import ComponentLayout from './components/ComponentLayout';
 import Navigation from './components/Navigation';
 import {
-  Code,
   Drawer as DrawerComponent,
   TopBar,
   MenuBar,
   TopBarTrigger,
   TopBarItem,
   Workspace,
-  SideBar,
-  SideBarItem,
   SkipLink,
   OptionsMenuList,
   TopBarMenu,
@@ -276,10 +272,11 @@ const initialTheme =
   (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
     ? 'dark'
     : 'light');
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-render(
+root.render(
   <ThemeProvider initialTheme={initialTheme}>
     <App />
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 );

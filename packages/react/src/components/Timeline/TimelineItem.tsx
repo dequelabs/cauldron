@@ -10,7 +10,7 @@ export default function TimelineItem({
   children,
   icon,
   ...props
-}: TimelineItemProps): JSX.Element {
+}: TimelineItemProps): React.JSX.Element {
   return (
     <li className={classnames('TimelineItem', className)} {...props}>
       <span className="TimelineItem__separator">{icon}</span>
