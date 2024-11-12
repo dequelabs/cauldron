@@ -5,8 +5,6 @@ import { TableProvider } from './TableContext';
 export type Column = {
   align: ColumnAlignment;
   width?: ColumnWidth;
-  minWidth?: `${number}` | `${number}%`;
-  maxWidth?: `${number}` | `${number}%`;
 };
 export type ColumnAlignment = 'start' | 'center' | 'end';
 export type ColumnWidth =
