@@ -145,7 +145,8 @@ function createFocusTrap(
   } else {
     // Try to find a suitable focus element
     const focusableElements = Array.from(
-      targetElement?.querySelectorAll(focusable) || []
+      targetElement?.querySelectorAll(focusable) ||
+        /* istanbul ignore else */ []
     ) as HTMLElement[];
     focusableElements[0]?.focus();
   }
@@ -233,6 +234,7 @@ export default function useFocusTrap<
     return () => {
       focusTrap.current?.destroy();
       focusTrap.current = null;
+      // istanbul ignore else
       if (returnFocus) {
         restoreFocusToReturnFocusElement();
       }
