@@ -49,7 +49,8 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
     }, []);
 
     useFocusTrap(overlayRef, {
-      disabled: !focusTrap
+      disabled: !focusTrap,
+      initialFocusElement: overlayRef
     });
 
     return (
