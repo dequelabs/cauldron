@@ -65,13 +65,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
       }
 
       return columns
-        .map(({ width }) => {
-          if (!width) {
-            return 'auto';
-          } else {
-            return width;
-          }
-        })
+        .map(({ width }) => width || 'auto')
         .join(' ');
     }, [layout, columns]);
 
