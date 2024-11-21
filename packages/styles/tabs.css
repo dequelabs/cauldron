@@ -1,16 +1,19 @@
 :root {
-  --tabs-border-color: var(--stroke-light);
+  --tabs-border-color: var(--gray-20);
   --tab-shadow-color: var(--accent-primary);
   --tab-inactive-background-color: #fff;
-  --tab-inactive-text-color: var(--gray-80);
+  --tab-inactive-text-color: var(--gray-60);
   --tab-active-background-color: #fff;
   --tab-hover-background-color: var(--gray-20);
   --tab-panel-color: var(--gray-80);
-  --tabs-active-text-color: var(--gray-90);
+  --tab-panel-vertical-padding: var(--space-smaller) var(--space-largest)
+    var(--space-largest);
+  --tab-panel-horizontal-padding: var(--space-large) var(--space-small);
+  --tabs-active-text-color: var(--accent-primary-active);
 }
 
 .cauldron--theme-dark {
-  --tabs-border-color: var(--stroke-dark);
+  --tabs-border-color: var(--accent-dark);
   --tab-shadow-color: var(--accent-info);
   --tab-inactive-background-color: var(--accent-medium);
   --tab-inactive-text-color: var(--accent-light);
@@ -31,19 +34,23 @@
 .Tabs--vertical ~ .TabPanel {
   vertical-align: top;
   display: inline-block;
+  padding: var(--tab-panel-vertical-padding);
+}
+
+.Tabs--horizontal ~ .TabPanel {
+  padding: var(--tab-panel-horizontal-padding);
 }
 
 .Tabs--horizontal {
   width: 100%;
-  border: 1px solid var(--tabs-border-color);
+  border-bottom: 1px solid var(--tabs-border-color);
   background-color: var(--tab-inactive-background-color);
-  border-bottom: 0;
 }
 
 .Tablist {
   display: flex;
   flex-direction: row;
-  border-left: 1px solid var(--tabs-border-color);
+  border-right: 1px solid var(--tabs-border-color);
 }
 
 .Tabs--vertical .Tablist {
@@ -61,9 +68,6 @@
   height: 2.875rem;
   white-space: nowrap;
   list-style-type: none;
-  border-top: 1px solid var(--tabs-border-color);
-  border-right: 1px solid var(--tabs-border-color);
-  text-decoration: underline;
   background-color: var(--tab-inactive-background-color);
   color: var(--tab-inactive-text-color);
   padding: var(--space-small);
@@ -81,22 +85,18 @@
   border-top: 0;
 }
 
-.cauldron--theme-light .Tabs--vertical .Tab:last-child {
-  border-bottom: 1px solid var(--tabs-border-color);
-}
-
 .Tab:hover {
   cursor: pointer;
   background-color: var(--tab-hover-background-color);
-  color: var(--tabs-active-text-color);
+  font-weight: var(--font-weight-medium);
 }
 
 .Tab--active {
   color: var(--tabs-active-text-color);
   background-color: var(--tab-active-background-color);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
   text-decoration: none;
-  box-shadow: inset 0 4px 0 var(--tab-shadow-color);
+  box-shadow: inset 0 -2px 0 var(--tab-shadow-color);
   z-index: 1;
 }
 
@@ -105,15 +105,13 @@
 }
 
 .Tabs--vertical .Tab--active {
-  box-shadow: inset 4px 0 0 var(--tab-shadow-color);
+  box-shadow: inset 2px 0 0 var(--tab-shadow-color);
 }
 
 .TabPanel {
   overflow-wrap: break-word;
   color: var(--tab-panel-color);
   background-color: var(--tab-active-background-color);
-  border: 1px solid var(--tabs-border-color);
-  padding: 1rem;
 }
 
 .TabPanel > * {
@@ -126,5 +124,5 @@
 
 .Tabs--thin .Tab {
   height: 2.125rem;
-  padding: var(--space-smallest);
+  padding: var(--space-smallest) var(--space-small);
 }

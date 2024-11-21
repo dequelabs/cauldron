@@ -149,7 +149,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       portalElement ||
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document?.body
-    );
+    ) as React.JSX.Element;
   }
 );
 

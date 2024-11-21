@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { renderToString } from 'react-dom/server'; // convert the React element to HTML
 import Select from './';
 import axe from '../../axe';
 
@@ -198,8 +197,8 @@ test('Should return no axe violations', async () => {
 
   const select = <Select {...defaultProps} defaultValue="Bar" options={opts} />;
 
-  const html = renderToString(select);
-  expect(await axe(html)).toHaveNoViolations();
+  const { container } = render(select);
+  expect(await axe(container)).toHaveNoViolations();
 });
 
 test('Should return no axe violations for a disabled select', async () => {
@@ -215,8 +214,8 @@ test('Should return no axe violations for a disabled select', async () => {
     <Select {...defaultProps} disabled defaultValue="Bar" options={opts} />
   );
 
-  const html = renderToString(disabledSelect);
-  expect(await axe(html)).toHaveNoViolations();
+  const { container } = render(disabledSelect);
+  expect(await axe(container)).toHaveNoViolations();
 });
 
 test('Should return no axe violations for a required select', async () => {
@@ -232,8 +231,8 @@ test('Should return no axe violations for a required select', async () => {
     <Select {...defaultProps} required defaultValue="Bar" options={opts} />
   );
 
-  const html = renderToString(requiredSelect);
-  expect(await axe(html)).toHaveNoViolations();
+  const { container } = render(requiredSelect);
+  expect(await axe(container)).toHaveNoViolations();
 });
 
 test('Should return no axe violations for an error select', async () => {
@@ -255,6 +254,6 @@ test('Should return no axe violations for an error select', async () => {
     />
   );
 
-  const html = renderToString(errorSelect);
-  expect(await axe(html)).toHaveNoViolations();
+  const { container } = render(errorSelect);
+  expect(await axe(container)).toHaveNoViolations();
 });

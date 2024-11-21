@@ -62,7 +62,7 @@ const IconButton = forwardRef(
       ...other
     }: IconButtonProps,
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const internalRef = useRef() as MutableRefObject<HTMLElement>;
     useImperativeHandle(ref, () => internalRef.current);
 
