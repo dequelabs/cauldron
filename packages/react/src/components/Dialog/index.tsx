@@ -49,7 +49,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   ): React.ReactPortal | null => {
     const dialogRef = useSharedRef(dialogRefProp || ref);
     const [headingId] = useId(1, 'dialog-title-');
-    const elementRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const isolatorRef = useRef<AriaIsolate>();
 
@@ -83,9 +82,9 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     );
 
     useEffect(() => {
-      if (!show || !elementRef.current) return;
+      if (!show || !dialogRef.current) return;
 
-      isolatorRef.current = new AriaIsolate(elementRef.current);
+      isolatorRef.current = new AriaIsolate(dialogRef.current);
       setTimeout(focusHeading);
 
       return () => {
