@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
-import FocusTrap from 'focus-trap-react';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 import ClickOutsideListener from '../ClickOutsideListener';
 import AriaIsolate from '../../utils/aria-isolate';
-import setRef from '../../utils/setRef';
-import nextId from 'react-id-generator';
+import { useId } from 'react-id-generator';
 import { isBrowser } from '../../utils/is-browser';
+import useSharedRef from '../../utils/useSharedRef';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -28,196 +28,160 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 }
 
-interface DialogState {
-  isolator?: AriaIsolate;
-}
-
 const isEscape = (event: KeyboardEvent) =>
   event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
 
-const noop = () => {
-  //not empty
-};
-
-export default class Dialog extends React.Component<DialogProps, DialogState> {
-  static defaultProps = {
-    onClose: noop,
-    forceAction: false,
-    closeButtonText: 'Close'
-  };
-
-  private element: HTMLDivElement | null;
-  private heading: HTMLHeadingElement | null;
-  private headingId: string = nextId('dialog-title-');
-
-  constructor(props: DialogProps) {
-    super(props);
-
-    this.close = this.close.bind(this);
-    this.focusHeading = this.focusHeading.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.handleEscape = this.handleEscape.bind(this);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    if (this.props.show) {
-      this.attachEventListeners();
-      this.attachIsolator(() => setTimeout(this.focusHeading));
-    }
-  }
-
-  componentWillUnmount() {
-    const { isolator } = this.state;
-    isolator?.deactivate();
-    this.removeEventListeners();
-  }
-
-  componentDidUpdate(prevProps: DialogProps) {
-    if (!prevProps.show && this.props.show) {
-      this.attachIsolator(this.focusHeading);
-      this.attachEventListeners();
-    } else if (prevProps.show && !this.props.show) {
-      this.removeEventListeners();
-      this.close();
-    }
-  }
-
-  private attachIsolator(done: () => void) {
-    this.setState(
-      {
-        isolator: new AriaIsolate(this.element as HTMLElement)
-      },
-      done
-    );
-  }
-
-  render() {
-    const {
-      dialogRef,
-      forceAction,
+const Dialog = forwardRef<HTMLDivElement, DialogProps>(
+  (
+    {
+      dialogRef: dialogRefProp,
+      forceAction = false,
       className,
       children,
-      closeButtonText,
+      closeButtonText = 'Close',
       heading,
-      show,
+      show = false,
+      portal,
+      onClose = () => null,
       ...other
-    } = this.props;
+    },
+    ref
+  ): React.ReactPortal | null => {
+    const dialogRef = useSharedRef(dialogRefProp || ref);
+    const [headingId] = useId(1, 'dialog-title-');
+    const elementRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
+    const isolatorRef = useRef<AriaIsolate>();
+
+    const handleClose = useCallback(() => {
+      isolatorRef.current?.deactivate();
+      if (show) {
+        onClose();
+      }
+    }, [show, onClose]);
+
+    const handleClickOutside = useCallback(() => {
+      if (show && !forceAction) {
+        handleClose();
+      }
+    }, [show, forceAction, handleClose]);
+
+    const focusHeading = useCallback(() => {
+      if (headingRef.current) {
+        headingRef.current.focus();
+      }
+      isolatorRef.current?.activate();
+    }, []);
+
+    const handleEscape = useCallback(
+      (keyboardEvent: KeyboardEvent) => {
+        if (!keyboardEvent.defaultPrevented && isEscape(keyboardEvent)) {
+          handleClose();
+        }
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      if (!show || !elementRef.current) return;
+
+      isolatorRef.current = new AriaIsolate(elementRef.current);
+      setTimeout(focusHeading);
+
+      return () => {
+        isolatorRef.current?.deactivate();
+      };
+    }, [show, focusHeading]);
+
+    useEffect(() => {
+      if (!forceAction) {
+        const portalElement = portal
+          ? 'current' in portal
+            ? portal.current
+            : portal
+          : document.body;
+
+        if (show) {
+          portalElement?.addEventListener('keyup', handleEscape);
+        }
+
+        return () => {
+          portalElement?.removeEventListener('keyup', handleEscape);
+        };
+      }
+    }, [show, forceAction, portal, handleEscape]);
+
+    useFocusTrap(dialogRef, {
+      disabled: !show,
+      initialFocusElement: headingRef
+    });
 
     if (!show || !isBrowser()) {
       return null;
     }
 
-    const portal = this.props.portal || document.body;
+    const portalElement = portal
+      ? 'current' in portal
+        ? portal.current
+        : portal
+      : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+        document.body;
 
-    const close = !forceAction ? (
-      <button className="Dialog__close" type="button" onClick={this.close}>
+    const closeButton = !forceAction ? (
+      <button className="Dialog__close" type="button" onClick={handleClose}>
         <Icon type="close" aria-hidden="true" />
         <Offscreen>{closeButtonText}</Offscreen>
       </button>
     ) : null;
 
-    const Heading = `h${
-      typeof heading === 'object' && 'level' in heading && !!heading.level
+    const HeadingLevel = `h${
+      typeof heading === 'object' && 'level' in heading && heading.level
         ? heading.level
         : 2
     }` as 'h1';
 
-    const Dialog = (
-      <FocusTrap
-        focusTrapOptions={{
-          allowOutsideClick: true,
-          escapeDeactivates: false,
-          fallbackFocus: '.Dialog__heading'
-        }}
-      >
-        <ClickOutsideListener onClickOutside={this.handleClickOutside}>
-          <div
-            role="dialog"
-            className={classNames('Dialog', className, {
-              'Dialog--show': show
-            })}
-            ref={(el) => {
-              this.element = el;
-              if (!dialogRef) {
-                return;
-              }
-              setRef(dialogRef, el);
-            }}
-            aria-labelledby={this.headingId}
-            {...other}
-          >
-            <div className="Dialog__inner">
-              <div className="Dialog__header">
-                <Heading
-                  className="Dialog__heading"
-                  ref={(el: HTMLHeadingElement) => (this.heading = el)}
-                  tabIndex={-1}
-                  id={this.headingId}
-                >
-                  {typeof heading === 'object' && 'text' in heading
-                    ? heading.text
-                    : heading}
-                </Heading>
-                {close}
-              </div>
-              {children}
+    const dialog = (
+      <ClickOutsideListener onClickOutside={handleClickOutside}>
+        <div
+          role="dialog"
+          className={classNames('Dialog', className, {
+            'Dialog--show': show
+          })}
+          ref={dialogRef}
+          aria-labelledby={headingId}
+          {...other}
+        >
+          <div className="Dialog__inner">
+            <div className="Dialog__header">
+              <HeadingLevel
+                className="Dialog__heading"
+                ref={headingRef}
+                tabIndex={-1}
+                id={headingId}
+              >
+                {typeof heading === 'object' && 'text' in heading
+                  ? heading.text
+                  : heading}
+              </HeadingLevel>
+              {closeButton}
             </div>
+            {children}
           </div>
-        </ClickOutsideListener>
-      </FocusTrap>
+        </div>
+      </ClickOutsideListener>
     );
 
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     return createPortal(
-      Dialog,
-      ('current' in portal ? portal.current : portal) || document.body
-    ) as React.JSX.Element;
+      dialog,
+      portalElement || document.body
+    ) as React.ReactPortal;
   }
+);
 
-  close() {
-    this.state.isolator?.deactivate();
-    if (this.props.show) {
-      this.props.onClose?.();
-    }
-  }
+Dialog.displayName = 'Dialog';
 
-  handleClickOutside() {
-    const { show, forceAction } = this.props;
-    if (show && !forceAction) {
-      this.close();
-    }
-  }
-
-  focusHeading() {
-    if (this.heading) {
-      this.heading.focus();
-    }
-    this.state.isolator?.activate();
-  }
-
-  private handleEscape(keyboardEvent: KeyboardEvent) {
-    if (!keyboardEvent.defaultPrevented && isEscape(keyboardEvent)) {
-      this.close();
-    }
-  }
-
-  private attachEventListeners() {
-    const { forceAction } = this.props;
-    if (!forceAction) {
-      const portal = this.props.portal || document.body;
-      const targetElement =
-        portal instanceof HTMLElement ? portal : portal.current;
-      targetElement?.addEventListener('keyup', this.handleEscape);
-    }
-  }
-
-  private removeEventListeners() {
-    const portal = this.props.portal || document.body;
-    const targetElement =
-      portal instanceof HTMLElement ? portal : portal.current;
-    targetElement?.removeEventListener('keyup', this.handleEscape);
-  }
-}
+export default Dialog;
 
 interface DialogAlignmentProps {
   align?: 'left' | 'center' | 'right';
@@ -266,4 +230,5 @@ const DialogFooter = ({
   </div>
 );
 DialogFooter.displayName = 'DialogFooter';
+
 export { Dialog, DialogContent, DialogFooter };
