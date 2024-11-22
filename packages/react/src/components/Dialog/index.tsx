@@ -171,9 +171,9 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       </ClickOutsideListener>
     );
 
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     return createPortal(
       dialog,
+      // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
       portalElement || document.body
     ) as React.ReactPortal;
   }
