@@ -334,6 +334,115 @@ function SortableTableExample() {
 </Table>
 ```
 
+### Grid Layout
+
+The Table component supports an optional css grid layout that can specify column alignment and width definitions per column.
+
+```jsx example
+<Table 
+  layout="grid" 
+  columns={[
+    { width: 'max-content', align: 'start' }, 
+    { width: 'max-content', align: 'start' }, 
+    { width: '1fr', align: 'end' }
+  ]}>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">First Name</TableHeader>
+      <TableHeader scope="col">Last Name</TableHeader>
+      <TableHeader scope="col">Email</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Frank</TableCell>
+      <TableCell>Zappa</TableCell>
+      <TableCell>frank@zappa.io</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Duane</TableCell>
+      <TableCell>Allman</TableCell>
+      <TableCell>duane@almond.biz</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Yamandu</TableCell>
+      <TableCell>Costa</TableCell>
+      <TableCell>yamandu_costa@gmail.br</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jimmy</TableCell>
+      <TableCell>Herring</TableCell>
+      <TableCell>jamesHerring@hotmail.gov</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+For column alignments, all cells will be positioned according to the alignment specified for that column, defaulting to `start`: 
+
+<Table layout="grid" columns={[{ width: 'max-content', align: 'start' }, { align: 'start' }]}>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">Alignment Type</TableHeader>
+      <TableHeader scope="col">Description</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>`start`</TableCell>
+      <TableCell>Aligns all cells within the column to the start.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`center`</TableCell>
+      <TableCell>Aligns all cells within the column to the center.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`end`</TableCell>
+      <TableCell>Aligns all cells within the column to the center.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+For column sizing, the values are roughly equivalent to [track sizing for grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+ and the following values are supported:
+
+<Table layout="grid" columns={[{ width: 'max-content', align: 'start' }, { align: 'start' }]}>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">Width Type</TableHeader>
+      <TableHeader scope="col">Description</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>`auto`</TableCell>
+      <TableCell>Sizes the column between a range of `min-content` and `max-content`. </TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`max-content`</TableCell>
+      <TableCell>Will size the column respective to the largest cell.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`min-content`</TableCell>
+      <TableCell>Will size the column respective to the smallest cell.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`number`</TableCell>
+      <TableCell>Applies a fixed width to the column.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`<number>fr`</TableCell>
+      <TableCell>Applies a flex value that sizes a column proportional to the remaining space from other columns.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`<number>%`</TableCell>
+      <TableCell>Applies a percentage width to the column respective to the size of the table.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+For more advanced usage, the width value does not need to be specified as part of a column but can be specified using `--table-grid-template-columns` to set the respective column sizes relative to the content displayed within the table.
+
 ## Props
 
 ### Table
@@ -346,6 +455,16 @@ function SortableTableExample() {
       name: 'variant',
       type: 'bordered',
       description: 'Use the bordered variant of Table'
+    },
+    {
+      name: 'layout',
+      type: 'grid',
+      description: 'When set, uses a css grid layout instead of a table layout.'
+    },
+    {
+      name: 'columns',
+      type: ['Array<Column>', 'number'],
+      description: 'Only allowed when the table has a grid layout. Sets the column widths and alignments for each column.'
     }
   ]}
 />
@@ -379,6 +498,11 @@ function SortableTableExample() {
       type: 'function',
       description: 'The function that the implementer passes in to control the change of sort direction.',
       defaultValue: 'sorted ascending'
+    },
+    {
+      name: 'align',
+      type: ['start', 'center', 'end'],
+      description: 'Only allowed when the table has a grid layout. Overrides any column alignments for this table header.'
     }
   ]}
 />
@@ -416,4 +540,11 @@ function SortableTableExample() {
 <ComponentProps
   children={true}
   className={true}
+  props={[
+    {
+      name: 'align',
+      type: ['start', 'center', 'end'],
+      description: 'Only allowed when the table has a grid layout. Overrides any column alignments for this table cell.'
+    }
+  ]}
 />
