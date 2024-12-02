@@ -1,14 +1,16 @@
-import React, { HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-const TableHead = ({
-  children,
-  className,
-  ...other
-}: HTMLAttributes<HTMLTableSectionElement>) => (
-  <thead className={classNames('TableHead', className)} {...other}>
-    {children}
-  </thead>
+type TableHeadProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  className?: string;
+};
+
+const TableHead = forwardRef<HTMLTableSectionElement, TableHeadProps>(
+  ({ children, className, ...other }, ref) => (
+    <thead ref={ref} className={classNames('TableHead', className)} {...other}>
+      {children}
+    </thead>
+  )
 );
 
 TableHead.displayName = 'TableHead';

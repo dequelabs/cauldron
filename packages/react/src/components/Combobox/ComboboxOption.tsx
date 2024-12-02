@@ -23,7 +23,7 @@ const ComboboxMatch = ({
   children: text
 }: {
   children: string;
-}): JSX.Element => {
+}): React.JSX.Element => {
   const { inputValue } = useComboboxContext();
 
   if (!text) {
@@ -67,7 +67,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       ...props
     },
     ref
-  ): JSX.Element | null => {
+  ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
     const { selectedValue, matches, setMatchingOptions, setFormValue } =

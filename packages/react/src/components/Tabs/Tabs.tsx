@@ -28,7 +28,7 @@ const Tabs = ({
   className,
   onChange,
   ...labelProp
-}: TabsProps): JSX.Element => {
+}: TabsProps): React.JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const tabsRef = useRef<HTMLDivElement>(null);
 

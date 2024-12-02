@@ -9,7 +9,7 @@ export default function Timeline({
   className,
   children,
   ...props
-}: TimelineProps): JSX.Element {
+}: TimelineProps): React.JSX.Element {
   return (
     <ol className={classnames('Timeline', className)} {...props}>
       {children}

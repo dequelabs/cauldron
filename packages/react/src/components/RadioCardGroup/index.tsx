@@ -5,7 +5,7 @@ import Panel, { PanelContent } from '../Panel';
 
 export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
-  cardImg: JSX.Element;
+  cardImg: React.JSX.Element;
   cardIcon: IconType;
   value?: string;
 }
