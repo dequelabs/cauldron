@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.11.0](https://github.com/dequelabs/cauldron/compare/v6.10.1...v6.11.0) (2024-11-06)
+
+
+### Features
+
+* upgrade to react 18 ([#1731](https://github.com/dequelabs/cauldron/issues/1731)) ([745aebb](https://github.com/dequelabs/cauldron/commit/745aebb773cb357e50c5e9ff4dcd5bc0a1cd73fb)), closes [#631](https://github.com/dequelabs/cauldron/issues/631) [#1685](https://github.com/dequelabs/cauldron/issues/1685)
+
+### [6.10.1](https://github.com/dequelabs/cauldron/compare/v6.10.0...v6.10.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* onSelect prop for OptionsMenu is optional ([#1734](https://github.com/dequelabs/cauldron/issues/1734)) ([9bd6636](https://github.com/dequelabs/cauldron/commit/9bd66364d7a79b1fa9e4ee09f0672efec835ee49))
+
 ## [6.10.0](https://github.com/dequelabs/cauldron/compare/v6.9.0...v6.10.0) (2024-10-16)
 
 

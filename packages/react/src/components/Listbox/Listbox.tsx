@@ -60,7 +60,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       ...props
     },
     ref
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const [options, setOptions] = useState<ListboxOption[]>([]);
     const [activeOption, setActiveOption] = useState<ListboxOption | null>(
       null

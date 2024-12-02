@@ -12,7 +12,7 @@ const NavItem = ({
   active,
   'aria-current': ariaCurrent = true,
   ...other
-}: NavItemProps): JSX.Element => {
+}: NavItemProps): React.JSX.Element => {
   const additionalProps = {} as NavItemProps;
 
   if (active) {

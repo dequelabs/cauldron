@@ -52,7 +52,7 @@ function Link({
 }
 
 interface MDXComponentProps {
-  [key: string]: (props: unknown) => JSX.Element;
+  [key: string]: (props: unknown) => React.JSX.Element;
 }
 
 const mdxComponents = {
