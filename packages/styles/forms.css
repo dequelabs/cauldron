@@ -1,7 +1,7 @@
 :root {
   --field-background-color: var(--white);
   --field-content-color: var(--text-color-base);
-  --field-border-color: var(--gray-40);
+  --field-border-color: var(--gray-60);
   --field-border-color-underline: var(--gray-80);
   --field-border-color-hover: var(--gray-90);
   --field-border-color-focus: var(--accent-primary);

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.12.0](https://github.com/dequelabs/cauldron/compare/v6.11.0...v6.12.0) (2024-12-04)
+
+
+### Features
+
+* **react,styles:** add grid layout for table component ([#1748](https://github.com/dequelabs/cauldron/issues/1748)) ([983c89f](https://github.com/dequelabs/cauldron/commit/983c89f21b584f1cef2c405c9e2db03529edbec1))
+* **styles:** synced `table` ([#1745](https://github.com/dequelabs/cauldron/issues/1745)) ([4531fb6](https://github.com/dequelabs/cauldron/commit/4531fb687cf53a1f40aad11c1494b38b2b04038d))
+* **styles:** synced tabs with design ([#1741](https://github.com/dequelabs/cauldron/issues/1741)) ([242ac5d](https://github.com/dequelabs/cauldron/commit/242ac5d921b08476e1d65219c24c7ae0a9d432df))
+
+
+### Bug Fixes
+
+* **react:** fix non-text contrast with text fields ([#1756](https://github.com/dequelabs/cauldron/issues/1756)) ([afe4062](https://github.com/dequelabs/cauldron/commit/afe40620f9eaa560b55f03368034fd99d50068ec))
+
 ## [6.11.0](https://github.com/dequelabs/cauldron/compare/v6.10.1...v6.11.0) (2024-11-06)
 
 
