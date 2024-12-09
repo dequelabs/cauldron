@@ -1,9 +1,9 @@
 import React, { forwardRef, useEffect } from 'react';
-import FocusTrap from 'focus-trap-react';
 import classNames from 'classnames';
 import Loader from '../Loader';
 import AxeLoader from './axe-loader';
 import AriaIsolate from '../../utils/aria-isolate';
+import useFocusTrap from '../../utils/useFocusTrap';
 import useSharedRef from '../../utils/useSharedRef';
 
 export interface LoaderOverlayProps
@@ -48,33 +48,25 @@ const LoaderOverlay = forwardRef<HTMLDivElement, LoaderOverlayProps>(
       }
     }, []);
 
-    const Wrapper = focusTrap ? FocusTrap : React.Fragment;
-    const wrapperProps = focusTrap
-      ? {
-          focusTrapOptions: {
-            fallbackFocus: '.Loader__overlay'
-          }
-        }
-      : {};
+    useFocusTrap(overlayRef, {
+      disabled: !focusTrap,
+      initialFocusElement: overlayRef
+    });
 
     return (
-      <Wrapper {...wrapperProps}>
-        <div
-          className={classNames('Loader__overlay', className)}
-          ref={overlayRef}
-          tabIndex={-1}
-          {...other}
-        >
-          <div className="Loader__overlay__loader">
-            <Loader />
-            <AxeLoader />
-          </div>
-          {label ? (
-            <span className="Loader__overlay__label">{label}</span>
-          ) : null}
-          {children}
+      <div
+        className={classNames('Loader__overlay', className)}
+        ref={overlayRef}
+        tabIndex={-1}
+        {...other}
+      >
+        <div className="Loader__overlay__loader">
+          <Loader />
+          <AxeLoader />
         </div>
-      </Wrapper>
+        {label ? <span className="Loader__overlay__label">{label}</span> : null}
+        {children}
+      </div>
     );
   }
 );
