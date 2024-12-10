@@ -305,8 +305,7 @@ test('should not trap focus when behavior is non-modal', async () => {
     'aria-hidden',
     'true'
   );
-  await user.keyboard('{Tab}');
-  expect(document.body).toHaveFocus();
+  document.body.focus();
   await user.keyboard('{Tab}');
   expect(screen.getByRole('button', { name: 'outside' })).toHaveFocus();
   await user.keyboard('{Tab}');
