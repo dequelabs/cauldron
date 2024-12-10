@@ -66,9 +66,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     }, [show, forceAction, handleClose]);
 
     const focusHeading = useCallback(() => {
-      if (headingRef.current) {
-        headingRef.current.focus();
-      }
+      headingRef.current?.focus();
       isolatorRef.current?.activate();
     }, []);
 
