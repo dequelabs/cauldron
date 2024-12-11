@@ -15,10 +15,10 @@ type AnchoredOverlayProps<
   Overlay extends HTMLElement,
   Target extends HTMLElement
 > = {
-  /** Positional placement value to anchor the overlay element relative to its anchored target. */
-  placement: Placement | 'auto' | 'auto-start' | 'auto-end';
   /** A target element or ref to attach the overlay anchor element. */
   target: Target | React.MutableRefObject<Target> | React.RefObject<Target>;
+  /** Positional placement value to anchor the overlay element relative to its anchored target. */
+  placement: Placement | 'auto' | 'auto-start' | 'auto-end';
   /** Determines if the overlay anchor is currently visible. */
   open?: boolean;
   /** A callback function that is called when the overlay state changes. */
