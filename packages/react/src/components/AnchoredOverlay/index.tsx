@@ -4,8 +4,7 @@ import {
   useFloating,
   offset as offsetMiddleware,
   flip as flipMiddleware,
-  autoPlacement as autoPlacementMiddleware,
-  shift as shiftMiddleware
+  autoPlacement as autoPlacementMiddleware
 } from '@floating-ui/react-dom';
 import { type PolymorphicProps } from '../../utils/polymorphicComponent';
 import resolveElement from '../../utils/resolveElement';
@@ -78,8 +77,7 @@ const AnchoredOverlay = forwardRef(
           ? autoPlacementMiddleware({
               alignment: getAutoAlignment(initialPlacement)
             })
-          : flipMiddleware(),
-        shiftMiddleware()
+          : flipMiddleware()
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target),
