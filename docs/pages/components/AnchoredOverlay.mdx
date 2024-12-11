@@ -28,11 +28,19 @@ export const placements = [
 import { AnchoredOverlay } from '@deque/cauldron-react'
 ```
 
-`AnchoredOverlay` is a primitive component to display a floating overlay relative to a target anchor element. It is intentionally un-styled to be composed with other components, such as [Tooltip]('./Tooltip'), [Popover](./Popover), or via more complex overlay components.
+Under the hood, `AnchoredOverlay` uses [floating-ui](https://floating-ui.com/) to dynamically position an overlay element relative to a target element. It is intentionally un-styled to be composed with other components, such as [Tooltip]('./Tooltip'), [Popover](./Popover), or via more complex overlay components.
+
+<Note>
+  `AnchoredOverlay` is a positioning component and does not include built-in accessibility features like ARIA attributes, focus management, or keyboard interactions that would be needed for components like tooltips, dialogs, or popovers. When using `AnchoredOverlay`, you'll need to implement these accessibility patterns yourself based on your specific use case.
+</Note>
 
 ## Examples
 
 ### Placement
+
+By default, initial placement is set to `auto` when it is not set via props. However the placement can [dynamically change](https://floating-ui.com/docs/autoplacement) when using `auto` or [flip](https://floating-ui.com/docs/flip) when using positional placement. 
+
+If there are presentation elements that are dependent on the position of the `AnchoredOverlay`, you should use `onPlacementChange` to keep these presentation elements in sync with any updated placements.
 
 ```jsx example
 function AnchoredOverlayExample() {
@@ -124,4 +132,58 @@ function AnchoredOverlayWithOffsetExample() {
   )
 }
 ```
+
+## Props
+
+<ComponentProps
+  children={true}
+  className={true}
+  refType="HTMLElement"
+  props={[
+    {
+      name: 'target',
+      type: ['HTMLElement', 'React.MutableRefObject<HTMLElement>', 'React.RefObject<HTMLElement>'],
+      required: true,
+      description: 'A target element or ref to attach the overlay anchor element.'
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      defaultValue: 'auto',
+      description: 'Positional placement value to anchor the overlay element relative to its anchored target.'
+    },
+    {
+      name: 'open',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Determines if the overlay anchor is currently visible.'
+    },
+    {
+      name: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description: 'A callback function that is called when the overlay state changes.'
+    },
+    {
+      name: 'onPlacementChange',
+      type: '(placement: Placement) => void',
+      description: 'A callback function that is called when the placement of the overlay changes.'
+    },
+    {
+      name: 'offset',
+      type: 'number',
+      description: 'An optional offset number to position the anchor element from its anchored target.'
+    },
+    {
+      name: 'as',
+      type: 'React.ElementType',
+      defaultValue: 'div',
+      description: 'The element type to render as.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [Tooltip](./Tooltip)
+- [Popover](./Popover)
 
