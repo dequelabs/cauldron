@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Placement } from '@popperjs/core';
+import type AnchoredOverlay from '../AnchoredOverlay';
 import IconButton from '../IconButton';
 import { ContentNode } from '../../types';
 
@@ -18,7 +18,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onPreviousPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onFirstPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onLastPageClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  tooltipPlacement?: Placement;
+  tooltipPlacement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   thin?: boolean;
   className?: string;
 }

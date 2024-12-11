@@ -2,11 +2,10 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
 import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
-import { Placement } from '@popperjs/core';
-import { usePopper } from 'react-popper';
+import AnchoredOverlay from '../AnchoredOverlay';
 import { isBrowser } from '../../utils/is-browser';
 import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
-import useEscapeKey from '../../utils/useEscapeKey';
+import resolveElement from '../../utils/resolveElement';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -18,7 +17,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   association?: 'aria-labelledby' | 'aria-describedby' | 'none';
   show?: boolean | undefined;
   defaultShow?: boolean;
-  placement?: Placement;
+  placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   hideElementOnHidden?: boolean;
 }
@@ -57,52 +56,27 @@ export default function Tooltip({
   const [id] = propId ? [propId] : useId(1, 'tooltip');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showTooltip, setShowTooltip] = useState(!!showProp || defaultShow);
-  const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [tooltipElement, setTooltipElement] = useState<HTMLElement | null>(
     null
   );
-  const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
+  const [placement, setPlacement] = useState(initialPlacement);
   const hasAriaAssociation = association !== 'none';
-
-  const { styles, attributes, update } = usePopper(
-    targetElement,
-    tooltipElement,
-    {
-      placement: initialPlacement,
-      modifiers: [
-        { name: 'preventOverflow', options: { padding: 8 } },
-        {
-          name: 'flip',
-          options: { fallbackPlacements: ['left', 'right', 'top', 'bottom'] }
-        },
-        { name: 'offset', options: { offset: [0, 8] } },
-        { name: 'arrow', options: { padding: 5, element: arrowElement } }
-      ]
-    }
-  );
 
   // Show the tooltip
   const show: EventListener = useCallback(async () => {
+    const targetElement = resolveElement(target);
     // Clear the hide timeout if there was one pending
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
-    // Make sure we update the tooltip position when showing
-    // in case the target's position changed without popper knowing
-    if (update) {
-      await update();
-    }
     setShowTooltip(true);
     fireCustomEvent(true, targetElement);
-  }, [
-    targetElement,
-    // update starts off as null
-    update
-  ]);
+  }, [target]);
 
   // Hide the tooltip
   const hide: EventListener = useCallback(() => {
+    const targetElement = resolveElement(target);
     if (!hideTimeoutRef.current) {
       hideTimeoutRef.current = setTimeout(() => {
         hideTimeoutRef.current = null;
@@ -114,13 +88,6 @@ export default function Tooltip({
     return () => {
       clearTimeout(hideTimeoutRef.current as unknown as number);
     };
-  }, [targetElement]);
-
-  // Keep targetElement in sync with target prop
-  useEffect(() => {
-    const targetElement =
-      target && 'current' in target ? target.current : target;
-    setTargetElement(targetElement);
   }, [target]);
 
   useEffect(() => {
@@ -129,27 +96,9 @@ export default function Tooltip({
     }
   }, [showProp]);
 
-  // Get popper placement
-  const placement: Placement =
-    (attributes.popper &&
-      (attributes.popper['data-popper-placement'] as Placement)) ||
-    initialPlacement;
-
-  // Only listen to key ups when the tooltip is visible
-  useEscapeKey(
-    {
-      callback: (event) => {
-        event.preventDefault();
-        setShowTooltip(false);
-      },
-      capture: true,
-      active: showTooltip && typeof showProp !== 'boolean'
-    },
-    [setShowTooltip]
-  );
-
   // Handle hover and focus events for the targetElement
   useEffect(() => {
+    const targetElement = resolveElement(target);
     if (typeof showProp !== 'boolean') {
       targetElement?.addEventListener('mouseenter', show);
       targetElement?.addEventListener('mouseleave', hide);
@@ -163,7 +112,7 @@ export default function Tooltip({
       targetElement?.removeEventListener('focusin', show);
       targetElement?.removeEventListener('focusout', hide);
     };
-  }, [targetElement, show, hide, showProp]);
+  }, [target, show, hide, showProp]);
 
   // Handle hover events for the tooltipElement
   useEffect(() => {
@@ -180,6 +129,7 @@ export default function Tooltip({
 
   // Keep the target's id in sync
   useEffect(() => {
+    const targetElement = resolveElement(target);
     if (hasAriaAssociation) {
       const idRefs = targetElement?.getAttribute(association);
       if (!hasIdRef(idRefs, id)) {
@@ -193,14 +143,18 @@ export default function Tooltip({
         targetElement.setAttribute(association, removeIdRef(idRefs, id));
       }
     };
-  }, [targetElement, id, association]);
+  }, [target, id, association]);
 
   return (
     <>
       {(showTooltip || hideElementOnHidden) && isBrowser()
         ? createPortal(
-            <div
+            <AnchoredOverlay
               id={id}
+              target={target}
+              placement={initialPlacement}
+              onPlacementChange={setPlacement}
+              open={showTooltip && typeof showProp !== 'boolean'}
               className={classnames(
                 'Tooltip',
                 `Tooltip--${placement}`,
@@ -213,19 +167,12 @@ export default function Tooltip({
               )}
               ref={setTooltipElement}
               role="tooltip"
-              style={styles.popper}
-              {...attributes.popper}
+              offset={8}
               {...props}
             >
-              {variant !== 'big' && (
-                <div
-                  className="TooltipArrow"
-                  ref={setArrowElement}
-                  style={styles.arrow}
-                />
-              )}
+              {variant !== 'big' && <div className="TooltipArrow" />}
               {children}
-            </div>,
+            </AnchoredOverlay>,
             (portal && 'current' in portal ? portal.current : portal) ||
               // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
               document?.body

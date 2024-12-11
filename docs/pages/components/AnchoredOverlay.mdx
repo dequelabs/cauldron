@@ -1,0 +1,127 @@
+---
+title: AnchoredOverlay
+description: A component that displays an anchored layered element relative to a target element.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/AnchoredOverlay/index.tsx
+---
+
+import { useRef, useState } from 'react'
+import { Select, Button, AnchoredOverlay } from '@deque/cauldron-react'
+export const placements = [
+  'top',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'auto',
+  'auto-start',
+  'auto-end'
+]
+
+```jsx
+import { AnchoredOverlay } from '@deque/cauldron-react'
+```
+
+`AnchoredOverlay` is a primitive component to display a floating overlay relative to a target anchor element. It is intentionally un-styled to be composed with other components, such as [Tooltip]('./Tooltip'), [Popover](./Popover), or via more complex overlay components.
+
+## Examples
+
+### Placement
+
+```jsx example
+function AnchoredOverlayExample() {
+  const [placement, setPlacement] = useState('top')
+  const [open, setOpen] = useState(false)
+  const targetRef = useRef()
+  const handlePlacementChange = ({ target }) => setPlacement(target.value);
+  const toggleOpen = () => setOpen(!open)
+  const handleClose = () => setOpen(false)
+
+  return (
+    <>
+      <Select
+        label="Placement"
+        options={placements.map(placement => ({ value: placement }))}
+        onChange={handlePlacementChange}
+      />
+      <Button 
+        ref={targetRef} 
+        onFocus={toggleOpen}
+        onBlur={handleClose}
+        aria-describedby="anchored-overlay"
+      >
+        Anchor Element
+      </Button>
+      <AnchoredOverlay 
+        id="anchored-overlay"
+        target={targetRef} 
+        open={open}
+        placement={placement}
+        onOpenChange={openState => setOpen(openState)}
+        style={{ 
+          padding: 'var(--space-small)',
+          backgroundColor: 'var(--panel-background-color)', 
+          display: open ? 'block' : 'none' 
+        }}
+      >
+        Anchored Overlay Element with placement {placement}
+      </AnchoredOverlay>
+    </>
+  )
+}
+```
+
+### Offset
+
+Optionally, an `offset` value can be set which will offset the aligning edge of the overlay element relative to its anchor.
+
+```jsx example
+function AnchoredOverlayWithOffsetExample() {
+  const [placement, setPlacement] = useState('top')
+  const [open, setOpen] = useState(false)
+  const targetRef = useRef()
+  const handlePlacementChange = ({ target }) => setPlacement(target.value);
+  const toggleOpen = () => setOpen(!open)
+  const handleClose = () => setOpen(false)
+
+  return (
+    <>
+      <Select
+        label="Placement"
+        options={placements.map(placement => ({ value: placement }))}
+        onChange={handlePlacementChange}
+      />
+      <Button 
+        ref={targetRef} 
+        onFocus={toggleOpen}
+        onBlur={handleClose}
+        aria-describedby="anchored-overlay-offset"
+      >
+        Anchor Element
+      </Button>
+      <AnchoredOverlay 
+        id="anchored-overlay-offset"
+        target={targetRef} 
+        open={open}
+        placement={placement}
+        onOpenChange={openState => setOpen(openState)}
+        offset={20}
+        style={{ 
+          padding: 'var(--space-small)',
+          backgroundColor: 'var(--panel-background-color)', 
+          display: open ? 'block' : 'none' 
+        }}
+      >
+        Anchored Overlay Element with offset placement {placement}
+      </AnchoredOverlay>
+    </>
+  )
+}
+```
+
