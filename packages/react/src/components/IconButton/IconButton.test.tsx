@@ -131,7 +131,8 @@ test('should return no axe violations', async () => {
 
 test('should return no axe violations when rendered as anchor', async () => {
   render(<IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />);
-  const results = await axe(screen.getByRole('link'));
+  const button = await screen.findByRole('link');
+  const results = await axe(button);
   expect(results).toHaveNoViolations();
 });
 
@@ -142,7 +143,9 @@ test('should return no axe violations when rendered as CustomElement', async () 
   ) {
     return <div data-testid="custom" ref={ref} {...props}></div>;
   });
+
   render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
-  const results = await axe(screen.getByTestId('custom'));
+  const button = await screen.findByTestId('custom');
+  const results = await axe(button);
   expect(results).toHaveNoViolations();
 });
