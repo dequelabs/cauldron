@@ -155,6 +155,7 @@ export default function Tooltip({
               placement={initialPlacement}
               onPlacementChange={setPlacement}
               open={showTooltip && typeof showProp !== 'boolean'}
+              onOpenChange={setShowTooltip}
               className={classnames(
                 'Tooltip',
                 `Tooltip--${placement}`,
