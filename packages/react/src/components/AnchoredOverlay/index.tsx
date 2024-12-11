@@ -18,7 +18,7 @@ type AnchoredOverlayProps<
   /** A target element or ref to attach the overlay anchor element. */
   target: Target | React.MutableRefObject<Target> | React.RefObject<Target>;
   /** Positional placement value to anchor the overlay element relative to its anchored target. */
-  placement: Placement | 'auto' | 'auto-start' | 'auto-end';
+  placement?: Placement | 'auto' | 'auto-start' | 'auto-end';
   /** Determines if the overlay anchor is currently visible. */
   open?: boolean;
   /** A callback function that is called when the overlay state changes. */
@@ -30,11 +30,9 @@ type AnchoredOverlayProps<
   children?: React.ReactNode;
 } & PolymorphicProps<React.HTMLAttributes<Overlay>>;
 
-function getAutoAlignment(placement: string): 'start' | 'end' | null {
-  if (!placement.startsWith('auto')) {
-    return null;
-  }
-
+function getAutoAlignment(
+  placement: 'auto' | 'auto-start' | 'auto-end'
+): 'start' | 'end' | null {
   switch (placement) {
     case 'auto-start':
       return 'start';
@@ -69,13 +67,13 @@ const AnchoredOverlay = forwardRef(
     const { floatingStyles, placement } = useFloating({
       open,
       // default to initial placement on top when placement is auto
-      // @ts-expect-error auto placement is not a valid placement
+      // @ts-expect-error auto placement is not a valid placement for floating-ui
       placement: initialPlacement.startsWith('auto') ? 'top' : initialPlacement,
       middleware: [
         offsetMiddleware(offset ?? 0),
         initialPlacement.startsWith('auto')
           ? autoPlacementMiddleware({
-              alignment: getAutoAlignment(initialPlacement)
+              alignment: getAutoAlignment(initialPlacement as 'auto')
             })
           : flipMiddleware()
       ].filter(Boolean),
@@ -94,6 +92,7 @@ const AnchoredOverlay = forwardRef(
         // when an anchored overlay is open, we want to prevent other potential "escape"
         // keypress events, like the closing of modals from occurring
         event.preventDefault();
+        // istanbul ignore else
         if (typeof onOpenChange === 'function') {
           onOpenChange(!open);
         }
