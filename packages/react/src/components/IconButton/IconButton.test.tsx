@@ -1,11 +1,11 @@
 import React, { createRef } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import IconButton from './';
 
-it('should render button', () => {
+test('should render button', async () => {
   render(<IconButton icon="pencil" label="Edit" />);
-  const button = screen.getByRole('button', { name: 'Edit' });
+  const button = await screen.findByRole('button', { name: 'Edit' });
   expect(button).toBeInTheDocument();
   expect(button).toHaveAttribute('type', 'button');
   expect(button).toHaveAttribute('tabIndex', '0');
@@ -13,51 +13,52 @@ it('should render button', () => {
   expect(button).toHaveTextContent('');
 });
 
-it('should render secondary variant', () => {
+test('should render secondary variant', async () => {
   render(<IconButton icon="pencil" label="Edit" variant="secondary" />);
-  const button = screen.getByRole('button', { name: 'Edit' });
+  const button = await screen.findByRole('button', { name: 'Edit' });
   expect(button).toHaveClass('IconButton--secondary');
 });
 
-it('should render primary variant', () => {
+test('should render primary variant', async () => {
   render(<IconButton icon="pencil" label="Edit" variant="primary" />);
-  const button = screen.getByRole('button', { name: 'Edit' });
+  const button = await screen.findByRole('button', { name: 'Edit' });
   expect(button).toHaveClass('IconButton--primary');
 });
 
-it('should render tertiary variant', () => {
+test('should render tertiary variant', async () => {
   render(<IconButton icon="pencil" label="Edit" variant="tertiary" />);
-  const button = screen.getByRole('button', { name: 'Edit' });
+  const button = await screen.findByRole('button', { name: 'Edit' });
   expect(button).toHaveClass('IconButton--tertiary');
 });
 
-it('should render error variant', () => {
+test('should render error variant', async () => {
   render(<IconButton icon="pencil" label="Edit" variant="error" />);
-  const button = screen.getByRole('button', { name: 'Edit' });
+  const button = await screen.findByRole('button', { name: 'Edit' });
   expect(button).toHaveClass('IconButton--error');
 });
 
-it('should render a "as" an anchor', () => {
+test('should render a "as" an anchor', async () => {
   render(<IconButton icon="pencil" label="Edit" as="a" href="/somewhere" />);
-  const button = screen.queryByRole('link', { name: 'Edit' });
+  const button = await screen.findByRole('link', { name: 'Edit' });
   expect(button).toBeInTheDocument();
   expect(button).not.toHaveAttribute('role');
 });
 
-it('should be disabled', () => {
+test('should be disabled', async () => {
   render(<IconButton icon="pencil" label="Edit" disabled />);
-  expect(screen.queryByRole('button')).toBeDisabled();
+  expect(await screen.findByRole('button')).toBeDisabled();
 });
 
-it('should use aria-disabled for non-buttons when disabled', () => {
+test('should use aria-disabled for non-buttons when disabled', async () => {
   render(
     <IconButton icon="pencil" label="Edit" as="a" href="/somewhere" disabled />
   );
-  expect(screen.queryByRole('link')).not.toBeDisabled();
-  expect(screen.queryByRole('link')).toHaveAttribute('aria-disabled', 'true');
+  const link = await screen.findByRole('link');
+  expect(link).not.toBeDisabled();
+  expect(link).toHaveAttribute('aria-disabled', 'true');
 });
 
-it('should add button role for custom components', () => {
+test('should add button role for custom components', async () => {
   const CustomButton = React.forwardRef<HTMLDivElement>(function Component(
     props,
     ref
@@ -65,12 +66,13 @@ it('should add button role for custom components', () => {
     return <div data-testid="custom" ref={ref} {...props}></div>;
   });
   render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
-  expect(screen.getByTestId('custom')).toBeInTheDocument();
-  expect(screen.getByTestId('custom')).toHaveAttribute('role', 'button');
-  expect(screen.getByTestId('custom')).toHaveAttribute('tabIndex', '0');
+  const custom = await screen.findByTestId('custom');
+  expect(custom).toBeInTheDocument();
+  expect(custom).toHaveAttribute('role', 'button');
+  expect(custom).toHaveAttribute('tabIndex', '0');
 });
 
-it('should add link role when component behaves like a link', () => {
+test('should add link role when component behaves like a link', async () => {
   const CustomLink = React.forwardRef<HTMLDivElement>(function Component(
     props,
     ref
@@ -81,31 +83,38 @@ it('should add link role when component behaves like a link', () => {
     // @ts-expect-error this technically should be allowed
     <IconButton icon="pencil" label="Edit" as={CustomLink} to="/testing" />
   );
-  expect(screen.getByTestId('custom')).toBeInTheDocument();
-  expect(screen.getByTestId('custom')).toHaveAttribute('role', 'link');
-  expect(screen.getByTestId('custom')).toHaveAttribute('tabIndex', '0');
+  const custom = await screen.findByTestId('custom');
+  expect(custom).toBeInTheDocument();
+  expect(custom).toHaveAttribute('role', 'link');
+  expect(custom).toHaveAttribute('tabIndex', '0');
 });
 
-it('should not render tooltip when disabled prop is true', () => {
+test('should not render tooltip when disabled prop is true', () => {
   render(<IconButton icon="pencil" label="Edit" disabled />);
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   expect(screen.queryByRole('button')).toHaveAttribute('tabIndex', '-1');
   expect(screen.queryByRole('button')).toHaveAccessibleName('Edit');
 });
 
-it('should support className prop', () => {
+test('should support className prop', async () => {
   render(<IconButton className="bananas" icon="pencil" label="Edit" />);
-  expect(screen.queryByRole('button')).toHaveClass('IconButton', 'bananas');
+  expect(await screen.findByRole('button')).toHaveClass(
+    'IconButton',
+    'bananas'
+  );
 });
 
-it('should support ref prop', () => {
+test('should support ref prop', async () => {
   const ref = createRef<HTMLButtonElement>();
   render(<IconButton icon="pencil" label="Edit" ref={ref} />);
+  waitFor(() => {
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
   expect(ref.current).toBeTruthy();
   expect(ref.current).toEqual(screen.queryByRole('button'));
 });
 
-it('should support tooltipProps', () => {
+test('should support tooltipProps', async () => {
   render(
     <>
       <div id="foo">custom name</div>
@@ -120,12 +129,12 @@ it('should support tooltipProps', () => {
   // Note: this test is a bit obtuse since by default Tooltip overrides
   // aria-labelledby so we're testing the "none" association to ensure
   // we can set our own custom aria-label when necessary
-  expect(screen.queryByRole('button')).toHaveAccessibleName('custom name');
+  expect(await screen.findByRole('button')).toHaveAccessibleName('custom name');
 });
 
 test('should return no axe violations', async () => {
   render(<IconButton icon="pencil" label="Edit" />);
-  const results = await axe(screen.getByRole('button'));
+  const results = await axe(await screen.findByRole('button'));
   expect(results).toHaveNoViolations();
 });
 
