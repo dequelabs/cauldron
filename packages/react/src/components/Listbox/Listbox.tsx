@@ -16,38 +16,33 @@ import useSharedRef from '../../utils/useSharedRef';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
-interface ListboxProps
+interface BaseListboxProps
   extends PolymorphicProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
   > {
+  navigation?: 'cycle' | 'bound';
+  onActiveChange?: (option: ListboxOption) => void;
+}
+
+interface SingleSelectListboxProps extends BaseListboxProps {
+  multiselect?: false;
   value?: ListboxValue;
   defaultValue?: ListboxValue;
-  navigation?: 'cycle' | 'bound';
-  multiselect?: boolean;
-  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
-    value
-  }: {
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     previousValue: ListboxValue;
     value: ListboxValue;
   }) => void;
-  onActiveChange?: (option: ListboxOption) => void;
 }
 
-interface MultiselectListboxProps
-  extends Omit<
-    ListboxProps,
-    'multiselect' | 'value' | 'defaultValue' | 'onSelectionChange'
-  > {
+interface MultiSelectListboxProps extends BaseListboxProps {
   multiselect: true;
   value?: ListboxValue[];
   defaultValue?: ListboxValue[];
-  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
-    value
-  }: {
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
-    previousValue: Array<ListboxValue>;
-    value: Array<ListboxValue>;
+    previousValue: ListboxValue[];
+    value: ListboxValue[];
   }) => void;
 }
 
@@ -64,7 +59,10 @@ const optionMatchesValue = (option: ListboxOption, value: unknown): boolean =>
   typeof option.value !== 'undefined' &&
   option.value === value;
 
-const Listbox = forwardRef<HTMLElement, ListboxProps | MultiselectListboxProps>(
+const Listbox = forwardRef<
+  HTMLElement,
+  SingleSelectListboxProps | MultiSelectListboxProps
+>(
   (
     {
       as: Component = 'ul',
@@ -148,7 +146,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps | MultiselectListboxProps>(
         }
 
         if (multiselect) {
-          (onSelectionChange as MultiselectListboxProps['onSelectionChange'])?.(
+          (onSelectionChange as MultiSelectListboxProps['onSelectionChange'])?.(
             {
               target: option.element,
               value: optionIsSelected
@@ -163,7 +161,9 @@ const Listbox = forwardRef<HTMLElement, ListboxProps | MultiselectListboxProps>(
             }
           );
         } else {
-          (onSelectionChange as ListboxProps['onSelectionChange'])?.({
+          (
+            onSelectionChange as SingleSelectListboxProps['onSelectionChange']
+          )?.({
             target: option.element,
             value: option.value,
             previousValue: selectedOptions[0]?.value
@@ -285,7 +285,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps | MultiselectListboxProps>(
       </Component>
     );
   }
-) as PolymorphicComponent<ListboxProps>;
+) as PolymorphicComponent<SingleSelectListboxProps | MultiSelectListboxProps>;
 
 Listbox.displayName = 'Listbox';
 
