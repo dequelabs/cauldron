@@ -14,6 +14,7 @@ interface ListboxOptionProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   value?: ListboxValue;
   disabled?: boolean;
+  selected?: boolean;
   activeClass?: string;
 }
 
@@ -30,6 +31,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
       children,
       value,
       disabled,
+      selected: selectedProp,
       activeClass = 'ListboxOption--active',
       onClick,
       ...props
@@ -42,7 +44,12 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const isActive =
       active !== null && active.element === listboxOptionRef.current;
     const isSelected =
-      selected !== null && selected.element === listboxOptionRef.current;
+      typeof selectedProp === 'boolean'
+        ? selectedProp
+        : selected !== null &&
+          !!selected.find(
+            (option) => option.element === listboxOptionRef.current
+          );
     const optionValue =
       typeof value !== 'undefined'
         ? value
@@ -98,7 +105,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
         onSelect({ element: listboxOptionRef.current, value: optionValue });
         onClick?.(event);
       },
-      [optionValue]
+      [optionValue, onSelect, onClick]
     );
 
     return (

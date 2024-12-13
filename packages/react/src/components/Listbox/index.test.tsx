@@ -568,11 +568,177 @@ test('should retain selected value when options changes with defaultValue', () =
   assertListItemIsSelected(2);
 });
 
+test('should render multiselect listbox', () => {
+  render(
+    <Listbox multiselect>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('listbox')).toHaveAttribute(
+    'aria-multiselectable',
+    'true'
+  );
+});
+
+test('should allow multiple selections in uncontrolled multiselect listbox', () => {
+  render(
+    <Listbox multiselect>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.click(screen.getByRole('option', { name: 'Apple' }));
+  fireEvent.click(screen.getByRole('option', { name: 'Banana' }));
+
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+  expect(screen.getByRole('option', { name: 'Cantaloupe' })).toHaveAttribute(
+    'aria-selected',
+    'false'
+  );
+});
+
+test('should handle deselection in multiselect listbox', () => {
+  render(
+    <Listbox multiselect>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  const appleOption = screen.getByRole('option', { name: 'Apple' });
+
+  // Select then deselect
+  fireEvent.click(appleOption);
+  expect(appleOption).toHaveAttribute('aria-selected', 'true');
+
+  fireEvent.click(appleOption);
+  expect(appleOption).toHaveAttribute('aria-selected', 'false');
+});
+
+test('should handle controlled multiselect selection', () => {
+  const handleSelectionChange = jest.fn();
+
+  render(
+    <Listbox
+      multiselect
+      value={['Apple', 'Banana']}
+      onSelectionChange={handleSelectionChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+
+  fireEvent.click(screen.getByRole('option', { name: 'Cantaloupe' }));
+
+  expect(handleSelectionChange).toHaveBeenCalledWith(
+    expect.objectContaining({
+      value: ['Apple', 'Banana', 'Cantaloupe'],
+      previousValue: ['Apple', 'Banana']
+    })
+  );
+});
+
+test('should set initial values with defaultValue in multiselect', () => {
+  render(
+    <Listbox multiselect defaultValue={['Apple', 'Banana']}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  assertListItemIsSelected(0);
+  assertListItemIsSelected(1);
+  expect(screen.getByRole('option', { name: 'Cantaloupe' })).toHaveAttribute(
+    'aria-selected',
+    'false'
+  );
+});
+
+test('should handle keyboard selection in multiselect', () => {
+  const handleSelectionChange = jest.fn();
+
+  render(
+    <Listbox multiselect onSelectionChange={handleSelectionChange}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = screen.getByRole('listbox');
+  fireEvent.focus(listbox);
+
+  // Move to first item and select
+  simulateKeypress('ArrowDown');
+  fireEvent.keyDown(listbox, { key: 'Enter' });
+
+  // Move to second item and select
+  simulateKeypress('ArrowDown');
+  fireEvent.keyDown(listbox, { key: ' ' });
+
+  expect(handleSelectionChange).toHaveBeenCalledWith(
+    expect.objectContaining({
+      value: ['Banana', 'Cantaloupe'],
+      previousValue: ['Banana']
+    })
+  );
+  assertListItemIsSelected(1);
+  assertListItemIsSelected(2);
+});
+
 test('should return no axe violations', async () => {
   const { container } = render(
     <>
       <div id="listbox-grouped-example">Colors and Numbers</div>
       <Listbox as="div" aria-labelledby="listbox-grouped-example">
+        <ListboxGroup label="Colors">
+          <ListboxOption>Red</ListboxOption>
+          <ListboxOption disabled>Green</ListboxOption>
+          <ListboxOption>Blue</ListboxOption>
+        </ListboxGroup>
+        <ListboxGroup label="Numbers">
+          <ListboxOption>One</ListboxOption>
+          <ListboxOption>Two</ListboxOption>
+          <ListboxOption>Three</ListboxOption>
+        </ListboxGroup>
+      </Listbox>
+    </>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should return no axe violations with multiselect', async () => {
+  const { container } = render(
+    <>
+      <div id="listbox-grouped-example">Colors and Numbers</div>
+      <Listbox as="div" aria-labelledby="listbox-grouped-example" multiselect>
         <ListboxGroup label="Colors">
           <ListboxOption>Red</ListboxOption>
           <ListboxOption disabled>Green</ListboxOption>
