@@ -715,7 +715,7 @@ test('should return no axe violations', async () => {
   const { container } = render(
     <>
       <div id="listbox-grouped-example">Colors and Numbers</div>
-      <Listbox as="div" aria-labelledby="listbox-grouped-example">
+      <Listbox as="div" aria-labelledby="listbox-grouped-example" value="Red">
         <ListboxGroup label="Colors">
           <ListboxOption>Red</ListboxOption>
           <ListboxOption disabled>Green</ListboxOption>
@@ -738,7 +738,12 @@ test('should return no axe violations with multiselect', async () => {
   const { container } = render(
     <>
       <div id="listbox-grouped-example">Colors and Numbers</div>
-      <Listbox as="div" aria-labelledby="listbox-grouped-example" multiselect>
+      <Listbox
+        as="div"
+        aria-labelledby="listbox-grouped-example"
+        multiselect
+        value={['Red', 'One']}
+      >
         <ListboxGroup label="Colors">
           <ListboxOption>Red</ListboxOption>
           <ListboxOption disabled>Green</ListboxOption>
