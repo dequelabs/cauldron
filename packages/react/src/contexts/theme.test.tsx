@@ -42,6 +42,10 @@ const renderProvider = (themeProviderProps = {}) => {
   );
 };
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 test('it exposes the current theme (defaulting to light)', () => {
   renderProvider();
   expect(theme).toBe('light');
@@ -94,6 +98,10 @@ test('disconnects mutation observer when unmounted', () => {
 });
 
 test('throw an exception, without provider', () => {
+  // react will log an error when the context throws, but we don't want it
+  // to show up in our test output
+  jest.spyOn(console, 'error').mockImplementation(jest.fn());
+
   const Component = () => {
     const { toggleTheme } = useThemeContext();
     toggleTheme();
