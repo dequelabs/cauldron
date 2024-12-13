@@ -320,7 +320,7 @@ test('should return no axe violations when open', async () => {
     </Drawer>
   );
 
-  const results = await axe(screen.getByTestId('drawer'));
+  const results = await axe(await screen.findByTestId('drawer'));
   expect(results).toHaveNoViolations();
 });
 
@@ -331,6 +331,6 @@ test('should return no axe violations when closed', async () => {
     </Drawer>
   );
 
-  const results = await axe(screen.getByTestId('drawer'));
+  const results = await axe(await screen.findByTestId('drawer'));
   expect(results).toHaveNoViolations();
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import BottomSheet from './';
 import axe from '../../axe';
@@ -9,53 +9,56 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-test('should render label', () => {
+test('should render label', async () => {
   render(
     <BottomSheet label="Title" open>
       Children
     </BottomSheet>
   );
-  expect(screen.getByText('Title')).toBeInTheDocument();
+  const label = await screen.findByText('Title');
+  expect(label).toBeInTheDocument();
 });
 
-test('should render children', () => {
+test('should render children', async () => {
   render(
     <BottomSheet label="Title" open>
       Hello World
     </BottomSheet>
   );
-  expect(screen.getByText('Hello World')).toBeInTheDocument();
+  const content = await screen.findByText('Hello World');
+  expect(content).toBeInTheDocument();
 });
 
-test('should support className prop', () => {
+test('should support className prop', async () => {
   render(
     <BottomSheet label="Title" className="bananas" data-testid="bottomsheet">
       Children
     </BottomSheet>
   );
-  expect(screen.getByTestId('bottomsheet').firstElementChild).toHaveClass(
-    'BottomSheet',
-    'bananas'
-  );
+  const bottomsheet = await screen.findByTestId('bottomsheet');
+  expect(bottomsheet.firstElementChild).toHaveClass('BottomSheet', 'bananas');
 });
 
-test('should support open prop', () => {
+test('should support open prop', async () => {
   const { rerender } = render(
     <BottomSheet label="Title" data-testid="bottomsheet">
       Children
     </BottomSheet>
   );
-  const bottomsheet = screen.getByTestId('bottomsheet');
+  const bottomsheet = await screen.findByTestId('bottomsheet');
 
   expect(bottomsheet).not.toHaveClass('Drawer--open');
   expect(bottomsheet).not.toBeVisible();
+
   rerender(
     <BottomSheet label="Title" data-testid="bottomsheet" open>
       Children
     </BottomSheet>
   );
-  expect(bottomsheet).toHaveClass('Drawer--open');
-  expect(bottomsheet).toBeVisible();
+
+  const openBottomsheet = await screen.findByTestId('bottomsheet');
+  expect(openBottomsheet).toHaveClass('Drawer--open');
+  expect(openBottomsheet).toBeVisible();
 });
 
 test('should call onClose prop on esc keypress', async () => {
@@ -86,28 +89,33 @@ test('should call onClose prop on click outside', async () => {
   expect(onClose).toHaveBeenCalled();
 });
 
-test('should set focus to bottom sheet by default when opened', () => {
+test('should set focus to bottom sheet by default when opened', async () => {
   const { rerender } = render(
     <BottomSheet label="Title" data-testid="bottomsheet">
       Children
     </BottomSheet>
   );
 
-  expect(screen.getByTestId('bottomsheet')).not.toHaveFocus();
+  const initialSheet = await screen.findByTestId('bottomsheet');
+  expect(initialSheet).not.toHaveFocus();
+
   rerender(
     <BottomSheet label="Title" open data-testid="bottomsheet">
       Children
     </BottomSheet>
   );
-  expect(screen.getByTestId('bottomsheet').firstElementChild).toHaveFocus();
+
+  const openSheet = await screen.findByTestId('bottomsheet');
+  expect(openSheet.firstElementChild).toHaveFocus();
 });
 
-test('should set focus to focusable element when opened', () => {
+test('should set focus to focusable element when opened', async () => {
   const { rerender } = render(
     <BottomSheet label="Title" data-testid="bottomsheet">
       <button>focus me</button>
     </BottomSheet>
   );
+
   // button is initially hidden, but we can still get it to ensure it has focus
   const button = screen.getAllByRole('button', { hidden: true })[1];
 
@@ -123,11 +131,13 @@ test('should set focus to focusable element when opened', () => {
       <button>focus me</button>
     </BottomSheet>
   );
-  expect(screen.getByTestId('bottomsheet')).not.toHaveFocus();
+
+  const sheet = await screen.findByTestId('bottomsheet');
+  expect(sheet).not.toHaveFocus();
   expect(button).toHaveFocus();
 });
 
-test('should set focus to custom element when opened', () => {
+test('should set focus to custom element when opened', async () => {
   const ref = React.createRef<HTMLButtonElement>();
   const { rerender } = render(
     <BottomSheet
@@ -151,11 +161,14 @@ test('should set focus to custom element when opened', () => {
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );
-  expect(screen.getByTestId('bottomsheet')).not.toHaveFocus();
-  expect(screen.getByRole('button', { name: 'focus me' })).toHaveFocus();
+
+  const sheet = await screen.findByTestId('bottomsheet');
+  const focusButton = await screen.findByRole('button', { name: 'focus me' });
+  expect(sheet).not.toHaveFocus();
+  expect(focusButton).toHaveFocus();
 });
 
-test('should set focus to custom ref element', () => {
+test('should set focus to custom ref element', async () => {
   const ref = React.createRef<HTMLButtonElement>();
   const { rerender } = render(
     <BottomSheet
@@ -179,11 +192,13 @@ test('should set focus to custom ref element', () => {
       <button ref={ref}>focus me</button>
     </BottomSheet>
   );
-  expect(screen.getByTestId('bottomsheet')).not.toHaveFocus();
+
+  const sheet = await screen.findByTestId('bottomsheet');
+  expect(sheet).not.toHaveFocus();
   expect(ref.current).toHaveFocus();
 });
 
-test('should return focus to triggering element when closed', () => {
+test('should return focus to triggering element when closed', async () => {
   const { rerender } = render(
     <>
       <button>trigger</button>
@@ -193,8 +208,8 @@ test('should return focus to triggering element when closed', () => {
     </>
   );
 
-  // ensure the trigger element is initially focused
-  screen.getByRole('button', { name: 'trigger' }).focus();
+  const trigger = await screen.findByRole('button', { name: 'trigger' });
+  trigger.focus();
 
   rerender(
     <>
@@ -204,6 +219,7 @@ test('should return focus to triggering element when closed', () => {
       </BottomSheet>
     </>
   );
+
   rerender(
     <>
       <button>trigger</button>
@@ -213,10 +229,11 @@ test('should return focus to triggering element when closed', () => {
     </>
   );
 
-  expect(screen.getByRole('button', { name: 'trigger' })).toHaveFocus();
+  const finalTrigger = await screen.findByRole('button', { name: 'trigger' });
+  expect(finalTrigger).toHaveFocus();
 });
 
-test('should return focus to custom element when closed', () => {
+test('should return focus to custom element when closed', async () => {
   const button = document.createElement('button');
   document.body.appendChild(button);
 
@@ -229,6 +246,7 @@ test('should return focus to custom element when closed', () => {
       Children
     </BottomSheet>
   );
+
   rerender(
     <BottomSheet
       label="Title"
@@ -239,6 +257,7 @@ test('should return focus to custom element when closed', () => {
       Children
     </BottomSheet>
   );
+
   rerender(
     <BottomSheet
       label="Title"
@@ -249,10 +268,12 @@ test('should return focus to custom element when closed', () => {
     </BottomSheet>
   );
 
-  expect(button).toHaveFocus();
+  waitFor(() => {
+    expect(button).toHaveFocus();
+  });
 });
 
-test('should support ref prop', () => {
+test('should support ref prop', async () => {
   const ref = React.createRef<HTMLDivElement>();
   render(
     <BottomSheet label="Title" open ref={ref} data-testid="bottomsheet">
@@ -260,10 +281,11 @@ test('should support ref prop', () => {
     </BottomSheet>
   );
 
-  expect(ref.current).toBeInstanceOf(HTMLDivElement);
-  expect(ref.current).toEqual(
-    screen.getByTestId('bottomsheet').firstElementChild
-  );
+  waitFor(async () => {
+    const bottomsheet = await screen.findByTestId('bottomsheet');
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    expect(ref.current).toEqual(bottomsheet.firstElementChild);
+  });
 });
 
 test('should return no axe violations when open', async () => {
@@ -273,7 +295,8 @@ test('should return no axe violations when open', async () => {
     </BottomSheet>
   );
 
-  const results = await axe(screen.getByTestId('bottomsheet'));
+  const bottomsheet = await screen.findByTestId('bottomsheet');
+  const results = await axe(bottomsheet);
   expect(results).toHaveNoViolations();
 });
 
@@ -284,6 +307,7 @@ test('should return no axe violations when closed', async () => {
     </BottomSheet>
   );
 
-  const results = await axe(screen.getByTestId('bottomsheet'));
+  const bottomsheet = await screen.findByTestId('bottomsheet');
+  const results = await axe(bottomsheet);
   expect(results).toHaveNoViolations();
 });
