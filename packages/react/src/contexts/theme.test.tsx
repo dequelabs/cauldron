@@ -1,7 +1,6 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { ThemeProvider, useThemeContext } from './theme';
-import { render } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 
 let theme: string,
   toggleTheme: () => void,
