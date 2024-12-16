@@ -1,5 +1,9 @@
 import React, { createRef, ComponentProps, useState } from 'react';
-import { render as testingRender, screen } from '@testing-library/react';
+import {
+  render as testingRender,
+  screen,
+  waitFor
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
@@ -193,13 +197,17 @@ test('SearchField should render trailingChildren as a component', async () => {
     )
   });
 
+  waitFor(() => {
+    expect(input).toBeInTheDocument();
+  });
+
   expect(
     input.parentElement!.contains(
       screen.getByRole('button', {
         name: 'go to previous match'
       })
     )
-  ).toBeTruthy;
+  ).toBeTruthy();
 });
 
 test('SearchField should render trailingChildren as a string', async () => {
@@ -207,8 +215,9 @@ test('SearchField should render trailingChildren as a string', async () => {
     trailingChildren: 'I am a string'
   });
 
-  expect(input.parentElement!.contains(screen.getByText('I am a string')))
-    .toBeTruthy;
+  expect(
+    input.parentElement!.contains(screen.getByText('I am a string'))
+  ).toBeTruthy();
 });
 
 test('SearchField should render trailingChildren as an element', async () => {
@@ -222,7 +231,7 @@ test('SearchField should render trailingChildren as an element', async () => {
         name: 'I am a button'
       })
     )
-  ).toBeTruthy;
+  ).toBeTruthy();
 });
 
 test('SearchField should have no axe violations with default params', async () => {

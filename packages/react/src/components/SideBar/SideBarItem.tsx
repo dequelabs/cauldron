@@ -9,7 +9,7 @@ export interface SideBarItemProps extends React.HTMLAttributes<HTMLLIElement> {
 
 const SideBarItem: React.ComponentType<
   React.PropsWithChildren<SideBarItemProps>
-> = ({ children, autoClickLink, ...other }: SideBarItemProps) => {
+> = ({ children, autoClickLink = true, ...other }: SideBarItemProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!autoClickLink) {
       return;
@@ -27,8 +27,5 @@ const SideBarItem: React.ComponentType<
 };
 
 SideBarItem.displayName = 'SideBarItem';
-SideBarItem.defaultProps = {
-  autoClickLink: true
-};
 
 export default SideBarItem;
