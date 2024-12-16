@@ -628,6 +628,37 @@ test('should handle deselection in multiselect listbox', () => {
   expect(appleOption).toHaveAttribute('aria-selected', 'false');
 });
 
+test('should handle deselection selection with multiple selected options in multiselect listbox', () => {
+  const handleSelectionChange = jest.fn();
+
+  render(
+    <Listbox
+      multiselect
+      onSelectionChange={handleSelectionChange}
+      defaultValue={['Apple', 'Banana']}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = screen.getByRole('listbox');
+  fireEvent.focus(listbox);
+  fireEvent.keyDown(listbox, { key: 'Enter' });
+
+  expect(handleSelectionChange).toHaveBeenCalledWith(
+    expect.objectContaining({
+      value: ['Banana'],
+      previousValue: ['Apple', 'Banana']
+    })
+  );
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'false'
+  );
+});
+
 test('should handle controlled multiselect selection', () => {
   const handleSelectionChange = jest.fn();
 
