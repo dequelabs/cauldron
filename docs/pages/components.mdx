@@ -25,6 +25,7 @@ Components should generally be crafted using the following standards. There may 
 - Primitive/Pattern components should always use `React.forwardRef` to provide direct access to the component's primary element
 - All components should include a `displayName`
 - All components should be functional (i.e. do not use class components)
+- All components may not rely on `defaultProps` and should use default parameters instead
 - All components should be named using [Pascal case](https://en.wiktionary.org/wiki/Pascal_case)
 - All components should include typescript types for component props
 - Polymorphic components should support using `as` property providing the capability for components to render as a different component under the hood
