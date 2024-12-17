@@ -63,4 +63,5 @@ jobs:
       - run: yarn build:docs
       - run: |
           export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+          sudo chmod 4755 /opt/google/chrome/chrome-sandbox
           yarn test:a11y
