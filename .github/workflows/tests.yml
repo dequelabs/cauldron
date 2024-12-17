@@ -61,6 +61,9 @@ jobs:
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
       - run: yarn build:docs
+      # Newer versions of Ubuntu have increased security restrictions in which
+      # puppeteer is unable to launch without additional configuration
+      # See: https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
       - run: |
           export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
           sudo chmod 4755 /opt/google/chrome/chrome-sandbox
