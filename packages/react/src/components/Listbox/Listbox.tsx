@@ -137,9 +137,11 @@ const Listbox = forwardRef<
           } else {
             setSelectedOptions(
               optionIsSelected
-                ? selectedOptions.filter(
-                    (selected) => selected.element !== option.element
-                  )
+                ? [
+                    ...selectedOptions.filter(
+                      (selected) => selected.element !== option.element
+                    )
+                  ]
                 : [...selectedOptions, option]
             );
           }
@@ -170,7 +172,7 @@ const Listbox = forwardRef<
           });
         }
       },
-      [isControlled, selectedOptions]
+      [isControlled, selectedOptions, multiselect, onSelectionChange]
     );
 
     const handleKeyDown = useCallback(
@@ -236,7 +238,7 @@ const Listbox = forwardRef<
             break;
         }
       },
-      [options, activeOption, navigation]
+      [options, activeOption, navigation, handleSelect]
     );
 
     const handleFocus = useCallback(

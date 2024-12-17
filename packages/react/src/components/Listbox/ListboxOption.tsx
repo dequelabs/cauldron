@@ -105,7 +105,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
         onSelect({ element: listboxOptionRef.current, value: optionValue });
         onClick?.(event);
       },
-      [optionValue, onSelect, onClick]
+      [optionValue, onSelect, onClick, disabled]
     );
 
     return (
