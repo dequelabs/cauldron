@@ -41,8 +41,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const { active, selected, setOptions, onSelect } = useListboxContext();
     const listboxOptionRef = useSharedRef<HTMLElement>(ref);
     const [id] = propId ? [propId] : useId(1, 'listbox-option');
-    const isActive =
-      active !== null && active.element === listboxOptionRef.current;
+    const isActive = active?.element === listboxOptionRef.current;
     const isSelected =
       typeof selectedProp === 'boolean'
         ? selectedProp

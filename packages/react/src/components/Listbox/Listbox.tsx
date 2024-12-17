@@ -243,7 +243,7 @@ const Listbox = forwardRef<
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
-        if (!activeOption && !selectedOptions.length) {
+        if (!activeOption) {
           const firstOption = options.find(
             (option) => !isDisabledOption(option)
           );
@@ -252,7 +252,10 @@ const Listbox = forwardRef<
             setActiveOption(firstOption);
           }
           // istanbul ignore else
-        } else if (event.target === listboxRef.current) {
+        } else if (
+          selectedOptions.length &&
+          event.target === listboxRef.current
+        ) {
           setActiveOption(selectedOptions[0]);
         }
 
