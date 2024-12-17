@@ -52,5 +52,8 @@ test('should return null when given a falsey show prop', () => {
 
 test('returns no axe violations', async () => {
   const { container } = render(<Scrim show={true} />);
+  await waitFor(() => {
+    expect(container).toBeInTheDocument();
+  });
   expect(await axe(container)).toHaveNoViolations();
 });

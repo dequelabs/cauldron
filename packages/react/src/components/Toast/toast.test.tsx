@@ -98,13 +98,15 @@ Object.entries(toastTypes).forEach(([key, value]) => {
       </Toast>
     );
 
-    // wait for animation tiemouts / async setState calls
-    await setTimeout(undefined, () => {
-      expect(screen.getByTestId('toast')).toHaveClass(
-        'Toast',
-        'Toast--info',
-        'is--hidden'
-      );
+    // wait for animation timeouts / async setState calls
+    await waitFor(async () => {
+      await setTimeout(undefined, () => {
+        expect(screen.getByTestId('toast')).toHaveClass(
+          'Toast',
+          'Toast--info',
+          'is--hidden'
+        );
+      });
     });
   });
 
@@ -241,6 +243,9 @@ test('non-dismissible toast has no accessibility issues', async () => {
     </Toast>
   );
 
+  waitFor(() => {
+    expect(container).toBeInTheDocument();
+  });
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
