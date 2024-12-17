@@ -61,4 +61,6 @@ jobs:
           NODE_ENV=production yarn --cwd packages/react build
           NODE_ENV=production yarn --cwd packages/styles build
       - run: yarn build:docs
-      - run: yarn test:a11y
+      - run: |
+          export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+          yarn test:a11y
