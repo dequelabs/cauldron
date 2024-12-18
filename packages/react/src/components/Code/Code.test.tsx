@@ -10,7 +10,7 @@ const sandbox = createSandbox();
 beforeEach(() => {
   global.ResizeObserver = global.ResizeObserver || (() => null);
   sandbox.stub(global, 'ResizeObserver').callsFake((listener) => {
-    listener();
+    listener([]);
     return {
       observe: sandbox.stub(),
       disconnect: sandbox.stub()
