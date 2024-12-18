@@ -256,7 +256,7 @@ const Listbox = forwardRef<
           selectedOptions.length &&
           event.target === listboxRef.current
         ) {
-          setActiveOption(selectedOptions[0]);
+          setActiveOption(selectedOptions[selectedOptions.length - 1]);
         }
 
         onFocus?.(event);
