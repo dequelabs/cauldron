@@ -7,11 +7,10 @@ import classnames from 'classnames';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
-import FocusTrap from 'focus-trap-react';
-import focusableSelector from '../../utils/focusable-selector';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 import useEscapeKey from '../../utils/useEscapeKey';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 export type PopoverVariant = 'prompt' | 'custom';
 
@@ -138,18 +137,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [popoverRef.current]);
 
     useEffect(() => {
-      if (show && popoverRef.current) {
-        // Find the first focusable element inside the container
-        const firstFocusableElement =
-          popoverRef.current.querySelector(focusableSelector);
-
-        if (firstFocusableElement instanceof HTMLElement) {
-          firstFocusableElement.focus();
-        }
-      }
-
       targetElement?.setAttribute('aria-expanded', Boolean(show).toString());
-    }, [show, popoverRef.current]);
+    }, [show]);
 
     useEffect(() => {
       const attrText = targetElement?.getAttribute('aria-controls');
@@ -194,54 +183,49 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       [show]
     );
 
+    useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
+
     if (!show || !isBrowser()) return null;
 
     return createPortal(
-      <FocusTrap
-        focusTrapOptions={{
-          allowOutsideClick: true,
-          fallbackFocus: '.Popover__borderLeft'
-        }}
-      >
-        <ClickOutsideListener onClickOutside={handleClickOutside}>
-          <AnchoredOverlay
-            id={id}
-            className={classnames(
-              'Popover',
-              `Popover--${placement}`,
-              className,
-              {
-                'Popover--hidden': !show,
-                'Popover--prompt': variant === 'prompt'
-              }
-            )}
-            ref={popoverRef}
-            role="dialog"
-            target={target}
-            open={show}
-            placement={initialPlacement}
-            onPlacementChange={setPlacement}
-            offset={8}
-            {...additionalProps}
-            {...props}
-          >
-            <div className="Popover__popoverArrow" />
-            <div className="Popover__borderLeft" />
-            {variant === 'prompt' ? (
-              <PromptPopoverContent
-                applyButtonText={applyButtonText}
-                onApply={onApply}
-                closeButtonText={closeButtonText}
-                infoText={infoText || ''}
-                onClose={handleClosePopover}
-                infoTextId={`${id}-label`}
-              />
-            ) : (
-              children
-            )}
-          </AnchoredOverlay>
-        </ClickOutsideListener>
-      </FocusTrap>,
+      <ClickOutsideListener onClickOutside={handleClickOutside}>
+        <AnchoredOverlay
+          id={id}
+          className={classnames(
+            'Popover',
+            `Popover--${placement}`,
+            className,
+            {
+              'Popover--hidden': !show,
+              'Popover--prompt': variant === 'prompt'
+            }
+          )}
+          ref={popoverRef}
+          role="dialog"
+          target={target}
+          open={show}
+          placement={initialPlacement}
+          onPlacementChange={setPlacement}
+          offset={8}
+          {...additionalProps}
+          {...props}
+        >
+          <div className="Popover__popoverArrow" />
+          <div className="Popover__borderLeft" />
+          {variant === 'prompt' ? (
+            <PromptPopoverContent
+              applyButtonText={applyButtonText}
+              onApply={onApply}
+              closeButtonText={closeButtonText}
+              infoText={infoText || ''}
+              onClose={handleClosePopover}
+              infoTextId={`${id}-label`}
+            />
+          ) : (
+            children
+          )}
+        </AnchoredOverlay>
+      </ClickOutsideListener>,
       (portal && 'current' in portal ? portal.current : portal) ||
         // Dependent on "isBrowser" check above:
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
