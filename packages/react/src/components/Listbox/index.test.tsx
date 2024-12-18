@@ -647,13 +647,14 @@ test('should handle deselection selection with multiple selected options in mult
   fireEvent.focus(listbox);
   fireEvent.keyDown(listbox, { key: 'Enter' });
 
+  // the most recently selected item should be the initial active one
   expect(handleSelectionChange).toHaveBeenCalledWith(
     expect.objectContaining({
-      value: ['Banana'],
+      value: ['Apple'],
       previousValue: ['Apple', 'Banana']
     })
   );
-  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveAttribute(
     'aria-selected',
     'false'
   );
