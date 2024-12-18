@@ -1,11 +1,10 @@
 import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
 import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
-import { Placement } from '@popperjs/core';
-import { usePopper } from 'react-popper';
 import { isBrowser } from '../../utils/is-browser';
 import { Cauldron } from '../../types';
 import classnames from 'classnames';
+import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
 import AriaIsolate from '../../utils/aria-isolate';
@@ -20,7 +19,7 @@ type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
   variant?: PopoverVariant;
   show: boolean;
   onClose: () => void;
-  placement?: Placement;
+  placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 };
 
@@ -94,35 +93,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     ref: Ref<HTMLDivElement>
   ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'popover');
-
     const [targetElement, setTargetElement] = useState<HTMLElement | null>(
       null
     );
-
     const [isolator, setIsolator] = useState<AriaIsolate | null>(null);
-
     const popoverRef = useSharedRef<HTMLDivElement>(ref);
-
-    const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
-
-    const { styles, attributes } = usePopper(
-      targetElement,
-      popoverRef?.current,
-      {
-        placement: initialPlacement,
-        modifiers: [
-          { name: 'preventOverflow', options: { padding: 8 } },
-          { name: 'flip' },
-          { name: 'offset', options: { offset: [0, 8] } },
-          { name: 'arrow', options: { padding: 5, element: arrowElement } }
-        ]
-      }
-    );
-
-    const placement: Placement =
-      (attributes.popper &&
-        (attributes.popper['data-popper-placement'] as Placement)) ||
-      initialPlacement;
+    const [placement, setPlacement] = useState(initialPlacement);
 
     const additionalProps =
       variant === 'prompt' && !props['aria-label']
@@ -213,24 +189,28 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return createPortal(
       <ClickOutsideListener onClickOutside={handleClickOutside}>
-        <div
+        <AnchoredOverlay
           id={id}
-          className={classnames('Popover', `Popover--${placement}`, className, {
-            'Popover--hidden': !show,
-            'Popover--prompt': variant === 'prompt'
-          })}
+          className={classnames(
+            'Popover',
+            `Popover--${placement}`,
+            className,
+            {
+              'Popover--hidden': !show,
+              'Popover--prompt': variant === 'prompt'
+            }
+          )}
           ref={popoverRef}
           role="dialog"
-          style={styles.popper}
-          {...attributes.popper}
+          target={target}
+          open={show}
+          placement={initialPlacement}
+          onPlacementChange={setPlacement}
+          offset={8}
           {...additionalProps}
           {...props}
         >
-          <div
-            className="Popover__popoverArrow"
-            ref={setArrowElement}
-            style={styles.arrow}
-          />
+          <div className="Popover__popoverArrow" />
           <div className="Popover__borderLeft" />
           {variant === 'prompt' ? (
             <PromptPopoverContent
@@ -244,7 +224,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           ) : (
             children
           )}
-        </div>
+        </AnchoredOverlay>
       </ClickOutsideListener>,
       (portal && 'current' in portal ? portal.current : portal) ||
         // Dependent on "isBrowser" check above:

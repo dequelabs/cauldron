@@ -102,7 +102,7 @@ function ControlledListboxExample() {
       <Listbox 
         aria-labelledby="listbox-controlled-example" 
         value={value}
-        onSelect={handleSelect}
+        onSelectionChange={handleSelect}
       >
         <ListboxOption>One</ListboxOption>
         <ListboxOption>Two</ListboxOption>
@@ -127,6 +127,25 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
   </Listbox>
 </>
 ```
+
+### Multiselect
+
+Listboxes can also support multiple selection of listbox options.
+
+```jsx example
+<>
+  <div id="listbox-multiselect-example">Multiselect Listbox</div>
+  <Listbox aria-labelledby="listbox-multiselect-example" multiselect>
+    <ListboxOption>One</ListboxOption>
+    <ListboxOption>Two</ListboxOption>
+    <ListboxOption>Three</ListboxOption>
+  </Listbox>
+</>
+```
+
+<Note>
+  Multiselect Listbox components will pass in array values for the selected options in `onSelectionChange` and expect an array of values for `value` and `defaultValue` props.
+</Note>
 
 ## Props
 
@@ -179,6 +198,11 @@ Uncontrolled listboxes will automatically set `aria-selected="true"` for the sel
     name: 'disabled',
     type: 'boolean',
     description: 'When set, sets the listbox option as "aria-disabled="true" and removes the element from key navigation.'
+  },
+  {
+    name: 'selected',
+    type: 'boolean',
+    description: 'When set, sets the listbox option as "aria-selected="true".'
   },
   {
     name: 'activeClass',
