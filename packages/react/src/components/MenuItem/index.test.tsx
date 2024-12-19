@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MenuItem from '../MenuItem';
 import { axe } from 'jest-axe';
@@ -29,6 +29,7 @@ test('calls onClick prop', async () => {
   await user.click(screen.getByText('BOOGNISH'));
   expect(onClick.calledOnce).toBeTruthy();
 });
+
 test('clicks the menuitem given enter/space keydowns', async () => {
   const onClick = sinon.spy();
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -67,6 +68,9 @@ test('should return no axe violations', async () => {
       <MenuItem>Foo</MenuItem>
     </ul>
   );
+  await waitFor(() => {
+    expect(container).toBeInTheDocument();
+  });
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });

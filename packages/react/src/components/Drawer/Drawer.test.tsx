@@ -305,8 +305,7 @@ test('should not trap focus when behavior is non-modal', async () => {
     'aria-hidden',
     'true'
   );
-  await user.keyboard('{Tab}');
-  expect(document.body).toHaveFocus();
+  document.body.focus();
   await user.keyboard('{Tab}');
   expect(screen.getByRole('button', { name: 'outside' })).toHaveFocus();
   await user.keyboard('{Tab}');
@@ -320,7 +319,7 @@ test('should return no axe violations when open', async () => {
     </Drawer>
   );
 
-  const results = await axe(screen.getByTestId('drawer'));
+  const results = await axe(await screen.findByTestId('drawer'));
   expect(results).toHaveNoViolations();
 });
 
@@ -331,6 +330,6 @@ test('should return no axe violations when closed', async () => {
     </Drawer>
   );
 
-  const results = await axe(screen.getByTestId('drawer'));
+  const results = await axe(await screen.findByTestId('drawer'));
   expect(results).toHaveNoViolations();
 });

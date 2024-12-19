@@ -37,6 +37,7 @@
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
 .Popover__popoverArrow {
+  position: absolute;
   height: 0.1px;
   width: 0.1px;
 }
@@ -52,18 +53,22 @@
 
 /* Adjust position to try to center the arrow in the tooltip's border */
 [class*='Popover--top'] .Popover__popoverArrow {
+  left: 50%;
   bottom: -1px;
 }
 
 [class*='Popover--bottom'] .Popover__popoverArrow {
+  left: 50%;
   top: -1px;
 }
 
 [class*='Popover--left'] .Popover__popoverArrow {
+  top: 50%;
   right: -1px;
 }
 
 [class*='Popover--right'] .Popover__popoverArrow {
+  top: 50%;
   left: 0;
 }
 

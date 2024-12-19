@@ -7,7 +7,6 @@ import React, {
   useLayoutEffect
 } from 'react';
 import { useId } from 'react-id-generator';
-import FocusTrap from 'focus-trap-react';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import ClickOutsideListener from '../ClickOutsideListener';
@@ -16,6 +15,7 @@ import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
 import SkipLink from '../SkipLink';
 import useEscapeKey from '../../utils/useEscapeKey';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   initialCollapsed?: boolean;
@@ -228,6 +228,10 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       }
     };
 
+    useFocusTrap(columnLeftRef, {
+      disabled: !showPanel || !isFocusTrap
+    });
+
     return (
       <div
         className={classnames('TwoColumnPanel', className, {
@@ -238,15 +242,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         ref={ref}
       >
         <>
-          <FocusTrap
-            active={!isCollapsed && isFocusTrap}
-            focusTrapOptions={{
-              escapeDeactivates: true,
-              allowOutsideClick: true,
-              fallbackFocus: columnLeftRef.current as HTMLElement
-            }}
-            containerElements={[columnLeftRef.current as HTMLElement]}
-          />
           <ClickOutsideListener
             onClickOutside={handleClickOutside}
             target={columnLeftRef.current as HTMLElement}

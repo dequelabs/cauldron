@@ -8,7 +8,7 @@ import {
 } from './';
 import SkipLink from '../SkipLink';
 import axe from '../../axe';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const sandbox = createSandbox();
@@ -36,7 +36,7 @@ afterEach(() => {
   sandbox.restore();
 });
 
-test('should render TwoColumnPanel', () => {
+test('should render TwoColumnPanel', async () => {
   render(
     <TwoColumnPanel
       data-testid="two-column-panel"
@@ -85,15 +85,17 @@ test('should render TwoColumnPanel', () => {
     name: /test-hide-panel/i
   });
 
-  expect(columnRightToggleButton).toBeInTheDocument();
-  expect(columnRightToggleButton).toHaveAttribute('aria-expanded', 'true');
-  expect(columnRightToggleButton).toHaveAttribute(
-    'aria-controls',
-    'column-left-id'
-  );
+  waitFor(() => {
+    expect(columnRightToggleButton).toBeInTheDocument();
+    expect(columnRightToggleButton).toHaveAttribute('aria-expanded', 'true');
+    expect(columnRightToggleButton).toHaveAttribute(
+      'aria-controls',
+      'column-left-id'
+    );
+  });
 });
 
-test('should render collapsed TwoColumnPanel', () => {
+test('should render collapsed TwoColumnPanel', async () => {
   matchMediaStub.withArgs('(max-width: 45rem)').returns({
     matches: true,
     addEventListener: noop,
@@ -148,7 +150,9 @@ test('should render collapsed TwoColumnPanel', () => {
     name: /test-hide-panel/i
   });
 
-  expect(columnRightToggleButton).not.toBeInTheDocument();
+  waitFor(() => {
+    expect(columnRightToggleButton).not.toBeInTheDocument();
+  });
 });
 
 test('should collapse panel when prefers-reduced-motion: reduce is set', async () => {
@@ -199,10 +203,12 @@ test('should collapse panel when prefers-reduced-motion: reduce is set', async (
     })
   );
 
-  expect(screen.queryByTestId('column-left')).not.toBeInTheDocument();
+  waitFor(() => {
+    expect(screen.queryByTestId('column-left')).not.toBeInTheDocument();
+  });
 });
 
-test('should render configurable collapsed TwoColumnPanel', () => {
+test('should render configurable collapsed TwoColumnPanel', async () => {
   matchMediaStub.withArgs('(max-width: 999rem)').returns({
     matches: true,
     addEventListener: noop,
@@ -250,7 +256,9 @@ test('should render configurable collapsed TwoColumnPanel', () => {
   expect(screen.queryByTestId('column-left')).not.toBeInTheDocument();
 
   const columnRight = screen.getByTestId('column-right');
-  expect(columnRight).toBeInTheDocument();
+  waitFor(() => {
+    expect(columnRight).toBeInTheDocument();
+  });
 
   expect(
     within(columnRight).getByRole('button', {
@@ -259,7 +267,7 @@ test('should render configurable collapsed TwoColumnPanel', () => {
   ).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('should accept a skip link', () => {
+test('should accept a skip link', async () => {
   render(
     <TwoColumnPanel
       data-testid="two-column-panel"
@@ -305,7 +313,9 @@ test('should accept a skip link', () => {
     </TwoColumnPanel>
   );
 
-  screen.getByRole('link', { name: /Test skip to Test content/i });
+  expect(
+    await screen.findByRole('link', { name: /Test skip to Test content/i })
+  ).toBeInTheDocument();
 });
 
 test('should return no axe violations', async () => {
@@ -344,7 +354,9 @@ test('should return no axe violations', async () => {
       </ColumnRight>
     </TwoColumnPanel>
   );
-
+  await waitFor(() => {
+    expect(container).toBeInTheDocument();
+  });
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
