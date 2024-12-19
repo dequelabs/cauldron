@@ -10,6 +10,7 @@ import { type PolymorphicProps } from '../../utils/polymorphicComponent';
 import resolveElement from '../../utils/resolveElement';
 import useSharedRef from '../../utils/useSharedRef';
 import useEscapeKey from '../../utils/useEscapeKey';
+import useFocusTrap from '../../utils/useFocusTrap';
 
 type AnchoredOverlayProps<
   Overlay extends HTMLElement,
@@ -27,6 +28,10 @@ type AnchoredOverlayProps<
   onPlacementChange?: (placement: Placement) => void;
   /** An optional offset number to position the anchor element from its anchored target. */
   offset?: number;
+  /** When set, traps focus within the AnchoredOverlay. */
+  focusTrap?: boolean;
+  /** When `focusTrap` is true, optional arguments to configure the focus trap. */
+  focusTrapOptions?: Parameters<typeof useFocusTrap>[1];
   children?: React.ReactNode;
 } & PolymorphicProps<React.HTMLAttributes<Overlay>>;
 
@@ -56,6 +61,8 @@ const AnchoredOverlay = forwardRef(
       style,
       open = false,
       offset,
+      focusTrap,
+      focusTrapOptions,
       onOpenChange,
       onPlacementChange,
       ...props
@@ -97,6 +104,11 @@ const AnchoredOverlay = forwardRef(
           onOpenChange(!open);
         }
       }
+    });
+
+    useFocusTrap(ref, {
+      disabled: !focusTrap,
+      ...(focusTrap ? focusTrapOptions : {})
     });
 
     useEffect(() => {
