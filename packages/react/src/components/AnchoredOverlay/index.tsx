@@ -106,10 +106,7 @@ const AnchoredOverlay = forwardRef(
       }
     });
 
-    useFocusTrap(ref, {
-      disabled: !focusTrap,
-      ...(focusTrap ? focusTrapOptions : {})
-    });
+    useFocusTrap(ref, !focusTrap ? { disabled: true } : focusTrapOptions);
 
     useEffect(() => {
       if (typeof onPlacementChange === 'function') {
