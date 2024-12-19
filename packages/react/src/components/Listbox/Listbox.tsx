@@ -104,15 +104,19 @@ const Listbox = forwardRef<
           )
         );
         setSelectedOptions(matchingOptions);
-        setActiveOption(matchingOptions[0] || null);
+        if (!activeOption) {
+          setActiveOption(matchingOptions[0] || null);
+        }
       } else {
         const matchingOption = options.find((option) =>
           optionMatchesValue(option, listboxValue)
         );
         setSelectedOptions(matchingOption ? [matchingOption] : []);
-        setActiveOption(matchingOption || null);
+        if (!activeOption) {
+          setActiveOption(matchingOption || null);
+        }
       }
-    }, [isControlled, options, value, defaultValue]);
+    }, [isControlled, options, value, defaultValue, activeOption]);
 
     useEffect(() => {
       if (activeOption) {
