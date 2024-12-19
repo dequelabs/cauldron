@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
@@ -121,6 +121,76 @@ test('should call onPlacementChange with initial placement', () => {
   );
 
   expect(onPlacementChange).toHaveBeenCalledWith('top');
+});
+
+test('should not trap focus when focusTrap is false', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const user = userEvent.setup();
+
+  render(
+    <>
+      <button>Outside Before</button>
+      <AnchoredOverlay target={targetRef} open focusTrap={false}>
+        <button>Inside</button>
+      </AnchoredOverlay>
+      <button>Outside After</button>
+    </>
+  );
+
+  const buttons = screen.getAllByRole('button');
+
+  buttons[0].focus();
+  expect(buttons[0]).toHaveFocus();
+  await user.tab();
+  expect(buttons[1]).toHaveFocus();
+  await user.tab();
+  expect(buttons[2]).toHaveFocus();
+});
+
+test('should trap focus when focusTrap is true', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const user = userEvent.setup();
+
+  render(
+    <>
+      <button>Outside Before</button>
+      <AnchoredOverlay target={targetRef} open focusTrap data-testid="overlay">
+        <button>First</button>
+        <button>Second</button>
+        <button>Third</button>
+      </AnchoredOverlay>
+      <button>Outside After</button>
+    </>
+  );
+
+  const buttons = within(screen.getByTestId('overlay')).getAllByRole('button');
+
+  expect(buttons[0]).toHaveFocus();
+  await user.tab();
+  expect(buttons[1]).toHaveFocus();
+  await user.tab();
+  expect(buttons[2]).toHaveFocus();
+  await user.tab();
+  expect(buttons[0]).toHaveFocus();
+});
+
+test('should restore focus when focusTrap is unmounted', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const outsideButton = document.createElement('button');
+  document.body.appendChild(outsideButton);
+  outsideButton.focus();
+
+  const { unmount } = render(
+    <AnchoredOverlay target={targetRef} open focusTrap data-testid="overlay">
+      <button>Inside Button</button>
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByText('Inside Button')).toHaveFocus();
+  unmount();
+  expect(outsideButton).toHaveFocus();
+
+  document.body.removeChild(outsideButton);
 });
 
 test('should support ref prop', () => {
