@@ -9,9 +9,11 @@ const user = userEvent.setup();
 
 test('clicks first direct child link given a click', async () => {
   const onClick = sinon.spy();
+  // Note: Using a hash link instead of a url link because jsdom doesn't correctly
+  // support navigation and throws a noisy console error we don't care about
   render(
     <MenuItem>
-      <a href="/foo" onClick={onClick}>
+      <a href="#foo" onClick={onClick}>
         Foo
       </a>
     </MenuItem>

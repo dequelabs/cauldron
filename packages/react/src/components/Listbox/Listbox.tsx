@@ -104,15 +104,19 @@ const Listbox = forwardRef<
           )
         );
         setSelectedOptions(matchingOptions);
-        setActiveOption(matchingOptions[0] || null);
+        if (!activeOption) {
+          setActiveOption(matchingOptions[0] || null);
+        }
       } else {
         const matchingOption = options.find((option) =>
           optionMatchesValue(option, listboxValue)
         );
         setSelectedOptions(matchingOption ? [matchingOption] : []);
-        setActiveOption(matchingOption || null);
+        if (!activeOption) {
+          setActiveOption(matchingOption || null);
+        }
       }
-    }, [isControlled, options, value, defaultValue]);
+    }, [isControlled, options, value, defaultValue, activeOption]);
 
     useEffect(() => {
       if (activeOption) {
@@ -243,7 +247,10 @@ const Listbox = forwardRef<
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
-        if (!activeOption) {
+        if (
+          !activeOption ||
+          !options.some((option) => option.element === activeOption.element)
+        ) {
           const firstOption = options.find(
             (option) => !isDisabledOption(option)
           );
