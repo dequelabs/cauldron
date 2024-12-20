@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.14.0](https://github.com/dequelabs/cauldron/compare/v6.13.0...v6.14.0) (2024-12-20)
+
+
+### Features
+
+* **react:** add focusTrap options to AnchoredOverlay ([#1775](https://github.com/dequelabs/cauldron/issues/1775)) ([0a00d24](https://github.com/dequelabs/cauldron/commit/0a00d24f75b0183ee90e30f3e7362eeebc1c6847))
+
+
+### Bug Fixes
+
+* **react:** fix a11y active-descendant issue with controlled Listboxes ([#1776](https://github.com/dequelabs/cauldron/issues/1776)) ([897963b](https://github.com/dequelabs/cauldron/commit/897963ba1310fad155020bdb43738730d82f1283))
+* **react:** fix listbox focus issue when listbox options have changed ([#1777](https://github.com/dequelabs/cauldron/issues/1777)) ([55d370c](https://github.com/dequelabs/cauldron/commit/55d370c097b8ff0b9dab012d364253fc44ab8a17))
+
 ## [6.13.0](https://github.com/dequelabs/cauldron/compare/v6.12.0...v6.13.0) (2024-12-18)
 
 
