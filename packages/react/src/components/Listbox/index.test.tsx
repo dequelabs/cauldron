@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Listbox from './';
 import { ListboxGroup, ListboxOption } from './';
 import axe from '../../axe';
+import userEvent from '@testing-library/user-event';
 
 const assertListItemIsActive = (index: number) => {
   const activeOption = screen.getAllByRole('option')[index];
@@ -202,13 +203,49 @@ test('should set the first non-disabled option as active on focus', () => {
     </Listbox>
   );
 
-  fireEvent.focus(screen.getByRole('option', { name: 'Banana' }));
+  fireEvent.focus(screen.getByRole('listbox'));
   expect(screen.getByRole('option', { name: 'Banana' })).toHaveClass(
     'ListboxOption--active'
   );
   expect(screen.getByRole('listbox')).toHaveAttribute(
     'aria-activedescendant',
     screen.getByRole('option', { name: 'Banana' }).getAttribute('id')
+  );
+});
+
+test('should set the first non-disabled option as active on focus when the options have changed', () => {
+  const { rerender } = render(
+    <Listbox>
+      <ListboxOption disabled>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  waitFor(() => {
+    fireEvent.focus(screen.getByRole('listbox'));
+    expect(screen.getByRole('listbox')).toHaveFocus();
+  });
+
+  rerender(
+    <Listbox>
+      <ListboxOption disabled>Dragon Fruit</ListboxOption>
+      <ListboxOption>Elderberry</ListboxOption>
+      <ListboxOption>Fig</ListboxOption>
+    </Listbox>
+  );
+
+  waitFor(() => {
+    fireEvent.focus(screen.getByRole('listbox'));
+    expect(screen.getByRole('listbox')).toHaveFocus();
+  });
+
+  expect(screen.getByRole('option', { name: 'Elderberry' })).toHaveClass(
+    'ListboxOption--active'
+  );
+  expect(screen.getByRole('listbox')).toHaveAttribute(
+    'aria-activedescendant',
+    screen.getByRole('option', { name: 'Elderberry' }).getAttribute('id')
   );
 });
 

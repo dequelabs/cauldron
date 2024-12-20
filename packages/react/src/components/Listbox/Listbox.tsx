@@ -247,7 +247,10 @@ const Listbox = forwardRef<
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
-        if (!activeOption) {
+        if (
+          !activeOption ||
+          !options.some((option) => option.element === activeOption.element)
+        ) {
           const firstOption = options.find(
             (option) => !isDisabledOption(option)
           );
