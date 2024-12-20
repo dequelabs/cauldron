@@ -3,7 +3,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Listbox from './';
 import { ListboxGroup, ListboxOption } from './';
 import axe from '../../axe';
-import userEvent from '@testing-library/user-event';
 
 const assertListItemIsActive = (index: number) => {
   const activeOption = screen.getAllByRole('option')[index];
