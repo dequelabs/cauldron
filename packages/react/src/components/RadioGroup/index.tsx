@@ -9,7 +9,7 @@ export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface RadioGroupProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  extends Omit<React.HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
   name?: string;
   className?: string;
   radios: RadioItem[];
@@ -17,6 +17,7 @@ export interface RadioGroupProps
   value?: any;
   inline?: boolean;
   onChange?: (radio: RadioItem, input: HTMLElement) => void;
+  groupLabel: string;
 }
 
 const RadioGroup = forwardRef(
@@ -30,9 +31,10 @@ const RadioGroup = forwardRef(
       onChange = () => {},
       className,
       inline = false,
+      groupLabel,
       ...other
     }: RadioGroupProps,
-    ref: Ref<HTMLDivElement>
+    ref: Ref<HTMLFieldSetElement>
   ) => {
     const [currentValue, setCurrentValue] = useState<string | null>(
       value || defaultValue || null
@@ -138,14 +140,16 @@ const RadioGroup = forwardRef(
     inputs.current = [];
 
     return (
-      <div
-        className={classNames(className, { 'Radio--inline': inline })}
-        role="radiogroup"
+      <fieldset
+        className={classNames('Radio__fieldset', className, {
+          'Radio--inline': inline
+        })}
         ref={ref}
         {...other}
       >
+        <legend>{groupLabel}</legend>
         {radioButtons}
-      </div>
+      </fieldset>
     );
   }
 );

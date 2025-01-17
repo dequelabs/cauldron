@@ -391,6 +391,10 @@ textarea.Field--has-error:focus:hover,
   margin-top: var(--space-smallest);
 }
 
+.Radio__fieldset {
+  border: none;
+}
+
 .Radio__overlay,
 .Checkbox__overlay {
   border: 1px solid transparent;
