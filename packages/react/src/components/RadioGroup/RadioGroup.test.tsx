@@ -18,23 +18,26 @@ const defaultOptions: RadioGroupProps['radios'] = [
   { id: '3', label: 'Green', value: 'green' }
 ];
 
-const renderRadioGroup = ({
-  'aria-label': ariaLabel,
-  name,
-  radios,
-  ...props
-}: RadioGroupProps = {}): HTMLInputElement[] => {
+const renderRadioGroup = (props: RadioGroupProps = {}): HTMLInputElement[] => {
+  const {
+    'aria-label': ariaLabel = 'radio group',
+    name = 'radios',
+    radios = defaultOptions,
+    groupLabel = 'radio group',
+    ...rest
+  } = props;
+
   render(
     <RadioGroup
-      aria-label={ariaLabel || 'radio group'}
-      name={name || 'radios'}
-      radios={radios || defaultOptions}
-      {...props}
+      aria-label={ariaLabel}
+      name={name}
+      radios={radios}
+      groupLabel={groupLabel}
+      {...rest}
     />
   );
-  return screen.queryAllByRole('radio', {
-    name: ariaLabel as string
-  }) as HTMLInputElement[];
+
+  return screen.queryAllByRole('radio') as HTMLInputElement[];
 };
 
 test('should render radio group', () => {
@@ -54,7 +57,10 @@ test('shound render disabled radio group item', () => {
     ...defaultOptions,
     { id: '4', label: 'Yellow', value: 'yellow', disabled: true }
   ];
-  const inputs = renderRadioGroup({ radios: optionsWithDisabledOption });
+  const inputs = renderRadioGroup({
+    radios: optionsWithDisabledOption,
+    groupLabel: 'radio group'
+  });
   for (const index in defaultOptions) {
     expect(inputs[index]).not.toBeDisabled();
   }
@@ -69,6 +75,7 @@ test('should support value prop', () => {
         radios={defaultOptions}
         name="radios"
         value="green"
+        groupLabel="radio group"
       />
     </form>
   );
@@ -88,6 +95,7 @@ test('should support defaultValue prop', () => {
         radios={defaultOptions}
         name="radios"
         defaultValue="green"
+        groupLabel="radio group"
       />
     </form>
   );
@@ -110,7 +118,10 @@ test('should support labelDescription for radio group items', () => {
     ...defaultOptions,
     optionWithLabelDescription
   ];
-  const inputs = renderRadioGroup({ radios: optionsWithLabelDescription });
+  const inputs = renderRadioGroup({
+    radios: optionsWithLabelDescription,
+    groupLabel: 'radio group'
+  });
   expect(inputs[inputs.length - 1]).toHaveAccessibleDescription(
     optionWithLabelDescription.labelDescription
   );
@@ -120,19 +131,23 @@ test('should support labelDescription for radio group items', () => {
 });
 
 test('should support inline prop', () => {
-  renderRadioGroup({ inline: true });
+  renderRadioGroup({ inline: true, groupLabel: 'radio group' });
   expect(screen.getByRole('radiogroup')).toHaveClass('Radio--inline');
 });
 
 test('should support className prop', () => {
-  renderRadioGroup({ inline: true, className: 'banana' });
+  renderRadioGroup({
+    inline: true,
+    className: 'banana',
+    groupLabel: 'radio group'
+  });
   expect(screen.getByRole('radiogroup')).toHaveClass('Radio--inline', 'banana');
 });
 
 test('should support ref prop', () => {
-  const ref = createRef<HTMLDivElement>();
+  const ref = createRef<HTMLFieldSetElement>();
   renderRadioGroup({ ref });
-  expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  expect(ref.current).toBeInstanceOf(HTMLFieldSetElement);
   expect(ref.current).toEqual(screen.queryByRole('radiogroup'));
 });
 
@@ -154,7 +169,7 @@ test('should toggle radio correctly', async () => {
 test('should handle focus correctly', async () => {
   const user = userEvent.setup();
   const onFocus = spy();
-  const [input] = renderRadioGroup({ onFocus });
+  const [input] = renderRadioGroup({ onFocus, groupLabel: 'radio group' });
   const radioIcon = input.parentElement!.querySelector(
     '.Radio__overlay'
   ) as HTMLElement;
@@ -169,7 +184,7 @@ test('should handle focus correctly', async () => {
 
 test('should handle blur correctly', async () => {
   const onBlur = spy();
-  const [input] = renderRadioGroup({ onBlur });
+  const [input] = renderRadioGroup({ onBlur, groupLabel: 'radio group' });
   const radioIcon = input.parentElement!.querySelector(
     '.Radio__overlay'
   ) as HTMLElement;
@@ -188,7 +203,7 @@ test('should handle blur correctly', async () => {
 test('should handle onChange correctly', async () => {
   const user = userEvent.setup();
   const onChange = spy();
-  const [input] = renderRadioGroup({ onChange });
+  const [input] = renderRadioGroup({ onChange, groupLabel: 'radio group' });
 
   expect(onChange.notCalled).toBeTruthy();
   await user.click(input);
@@ -208,7 +223,10 @@ test('should have no axe violations with disabled radio item', async () => {
     ...defaultOptions,
     { id: '4', label: 'Yellow', value: 'yellow', disabled: true }
   ];
-  renderRadioGroup({ radios: optionsWithDisabledOption });
+  renderRadioGroup({
+    radios: optionsWithDisabledOption,
+    groupLabel: 'radio group'
+  });
   const group = screen.getByRole('radiogroup');
   const results = await axe(group);
   expect(results).toHaveNoViolations();
@@ -224,7 +242,10 @@ test('should have no axe violations with radio item and labelDescription', async
       labelDescription: 'like a banana'
     }
   ];
-  renderRadioGroup({ radios: optionsWithDisabledOption });
+  renderRadioGroup({
+    radios: optionsWithDisabledOption,
+    groupLabel: 'radio group'
+  });
   const group = screen.getByRole('radiogroup');
   const results = await axe(group);
   expect(results).toHaveNoViolations();

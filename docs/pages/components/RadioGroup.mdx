@@ -20,10 +20,12 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
+  {/* This label is visually rendered, but you could also just use groupLabel below. */}
   <div className="Field__label" id="gyros-label">Do you like gyros?</div>
   <RadioGroup
-    aria-labelledby="gyros-label"
     name="gyros"
+    aria-labelledby="gyros-label"
+    groupLabel="Gyros Question"
     radios={[
       {
         id: 'gyros-yes',
@@ -37,11 +39,11 @@ import { RadioGroup } from '@deque/cauldron-react'
       },
       {
         id: 'gyros-friday',
-        label: 'Only on fridays',
+        label: 'Only on Fridays',
         value: 'friday'
       }
     ]}
-    value="yes"
+    defaultValue="yes"
   />
 </FieldWrap>
 ```
@@ -89,9 +91,9 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
   <div className="Field__label" id="robot-label">Are you a robot?</div>
   <RadioGroup
     aria-labelledby="robot-label"
-    defaultValue="no"
-    name="robot"
+    groupLabel="Robot Check"
     inline
+    name="robot"
     radios={[
       {
         id: 'robot-yes',
@@ -102,6 +104,41 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
         id: 'robot-no',
         label: 'No',
         value: 'no'
+      }
+    ]}
+  />
+</FieldWrap>
+```
+
+### Descriptions and Disabled Radios
+
+Each radio supports a labelDescription that displays an extra line of text beneath its label, useful for clarifications or hints. The disabled property disallows selection.
+
+```jsx example
+<FieldWrap>
+  <RadioGroup
+    groupLabel="Movie Genres"
+    name="genres"
+    defaultValue="comedy"
+    radios={[
+      {
+        id: 'comedy',
+        label: 'Comedy',
+        value: 'comedy',
+        labelDescription: 'Make me laugh.'
+      },
+      {
+        id: 'horror',
+        label: 'Horror',
+        value: 'horror',
+        labelDescription: 'Scare me!'
+      },
+      {
+        id: 'romance',
+        label: 'Romance',
+        value: 'romance',
+        labelDescription: 'Love is in the air.',
+        disabled: true       // This option is not selectable
       }
     ]}
   />
@@ -133,6 +170,16 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
       name: 'name',
       type: 'string',
       description: 'The "name" value of the HTMLInputElement.'
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Optional additional class name(s) for the fieldset container.'
+    },
+    {
+      name: 'groupLabel',
+      type: 'string',
+      description: 'Displayed in the <legend>. If omitted, use aria-label or aria-labelledby to ensure the group is properly labeled.'
     },
     {
       name: 'defaultValue',

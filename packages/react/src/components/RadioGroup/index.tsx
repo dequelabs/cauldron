@@ -17,7 +17,7 @@ export interface RadioGroupProps
   value?: any;
   inline?: boolean;
   onChange?: (radio: RadioItem, input: HTMLElement) => void;
-  groupLabel: string;
+  groupLabel?: string;
 }
 
 const RadioGroup = forwardRef(
@@ -141,13 +141,14 @@ const RadioGroup = forwardRef(
 
     return (
       <fieldset
+        role="radiogroup"
         className={classNames('Radio__fieldset', className, {
           'Radio--inline': inline
         })}
         ref={ref}
         {...other}
       >
-        <legend>{groupLabel}</legend>
+        {groupLabel && <legend>{groupLabel}</legend>}
         {radioButtons}
       </fieldset>
     );
