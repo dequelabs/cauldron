@@ -35,7 +35,7 @@ export default function IconGrid() {
       // according to the aria spec, status is a live region and only dynamic
       // changes to content should be announced. We're artificially delaying the
       // status content in order to ensure this gets announced for AT users
-      setShowDelayedAnnouncement(true);
+      setTimeout(() => setShowDelayedAnnouncement(true), 100);
     }
   }, [noMatchesFound]);
 
