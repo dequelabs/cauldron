@@ -52,6 +52,20 @@
   position: relative;
 }
 
+.Button--badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-small) 0 var(--space-smaller);
+  background-color: var(--badge-background-color);
+  color: var(--gray-90);
+  border: 1px solid var(--badge-border-color);
+  border-radius: var(--badge-height);
+  font-size: var(--text-size-body);
+  font-weight: var(--font-weight-normal);
+  min-height: var(--badge-height);
+}
+
 button.Link {
   cursor: pointer;
   font-size: inherit;
@@ -71,7 +85,8 @@ button.Link {
 .Button--tertiary:before,
 .Button--clear:before,
 .Button--error:before,
-.Button--tag:before {
+.Button--tag:before,
+.Button--badge:before {
   content: '';
   position: absolute;
   top: -2px;
@@ -82,7 +97,8 @@ button.Link {
   pointer-events: none;
 }
 
-.Button--tag:before {
+.Button--tag:before,
+.Button--badge:before {
   border-radius: var(--button-height);
 }
 
@@ -99,7 +115,8 @@ button.Link {
   box-shadow: 0 0 0 1px var(--button-outline-color-error);
 }
 
-.Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
+.Button--tag:not([disabled]):not([aria-disabled='true']):hover:before,
+.Button--badge:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--button-outline-color-secondary);
 }
 
@@ -167,7 +184,8 @@ button.Link {
   background-color: var(--button-background-color-error-active);
 }
 
-.Button--tag:is([disabled], [aria-disabled='true']) {
+.Button--tag:is([disabled], [aria-disabled='true']),
+.Button--badge:is([disabled], [aria-disabled='true']) {
   color: var(--disabled);
 }
 
