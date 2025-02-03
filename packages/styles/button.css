@@ -58,7 +58,7 @@
   justify-content: center;
   padding: 0 var(--space-small) 0 var(--space-smaller);
   background-color: var(--badge-background-color);
-  color: var(--gray-90);
+  color: var(--badge-text-color);
   border: 1px solid var(--badge-border-color);
   border-radius: var(--badge-height);
   font-size: var(--text-size-body);
@@ -293,7 +293,8 @@ button.Link {
 .cauldron--theme-dark .Button--primary:is([disabled], [aria-disabled='true']),
 .cauldron--theme-dark .Button--secondary:is([disabled], [aria-disabled='true']),
 .cauldron--theme-dark .Button--error:is([disabled], [aria-disabled='true']),
-.cauldron--theme-dark .Button--tag:is([disabled], [aria-disabled='true']) {
+.cauldron--theme-dark .Button--tag:is([disabled], [aria-disabled='true']),
+.cauldron--theme-dark .Button--badge:is([disabled], [aria-disabled='true']) {
   color: var(--dark-workspace-color);
 }
 
