@@ -93,14 +93,7 @@ When you need a semantic button with the visual appearance of a link.
 </Button>
 ```
 
-### Disabled Badge with Label
 
-```jsx example
-<Button variant="badge" disabled>
-  <BadgeLabel>Label:</BadgeLabel>
-  value
-</Button>
-```
 
 ### Additional Button States
 
@@ -122,7 +115,7 @@ When you need a semantic button with the visual appearance of a link.
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag'],
+      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag', 'badge'],
       defaultValue: 'primary',
       description: 'Visual style of the button.'
     },

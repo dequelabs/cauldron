@@ -48,7 +48,8 @@
   gap: var(--space-smallest);
 }
 
-.Button--tag {
+.Button--tag,
+.Button--badge {
   position: relative;
 }
 
@@ -342,7 +343,9 @@ button.Link {
 }
 
 .cauldron--theme-dark
-  .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before {
+  .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before,
+.cauldron--theme-dark
+  .Button--badge:not([disabled]):not([aria-disabled='true']):hover:before {
   box-shadow: 0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-info);
 }
