@@ -67,7 +67,7 @@
   min-height: var(--badge-height);
 }
 
-.Button--badge:active {
+.Button--badge:not([disabled], [aria-disabled='true']):active {
   background-color: var(--button-background-color-secondary);
 }
 
