@@ -67,6 +67,10 @@
   min-height: var(--badge-height);
 }
 
+.Button--badge:active {
+  background-color: var(--button-background-color-secondary);
+}
+
 button.Link {
   cursor: pointer;
   font-size: inherit;
