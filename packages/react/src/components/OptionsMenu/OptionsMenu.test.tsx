@@ -117,8 +117,8 @@ test('should toggle menu on trigger clicks', async () => {
 
   await user.click(button);
   expect(button).toHaveAttribute('aria-expanded', 'true');
-  await user.click(button);
   expect(screen.getByRole('menu')).toHaveClass('OptionsMenu--expanded');
+  await user.click(button);
   expect(button).toHaveAttribute('aria-expanded', 'false');
   expect(screen.getByRole('menu')).not.toHaveClass('OptionsMenu--expanded');
 });
