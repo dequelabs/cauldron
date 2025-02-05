@@ -118,8 +118,9 @@ test('should toggle menu on trigger clicks', async () => {
   await user.click(button);
   expect(button).toHaveAttribute('aria-expanded', 'true');
   await user.click(button);
-  expect(button).toHaveAttribute('aria-expanded', 'false');
   expect(screen.getByRole('menu')).toHaveClass('OptionsMenu--expanded');
+  expect(button).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('menu')).not.toHaveClass('OptionsMenu--expanded');
 });
 
 test('should click trigger with down key on trigger', () => {
