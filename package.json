@@ -13,7 +13,7 @@
     "dev:react": "yarn --cwd=packages/react dev",
     "dev:styles": "yarn --cwd=packages/styles dev",
     "dev:docs": "webpack-dev-server",
-    "fmt": "prettier --write \"e2e/*.ts\" \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
+    "fmt": "prettier --write .",
     "lint": "eslint . --quiet",
     "typecheck": "yarn --cwd=packages/react tsc --noEmit --skipLibCheck",
     "prebuild": "yarn clean",

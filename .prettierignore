@@ -1,2 +1,4 @@
 # Ignore generated files
 CHANGELOG.md
+**/coverage/**
+packages/react/lib/**
