@@ -8,7 +8,7 @@ import {
   Address,
   AddressLine,
   AddressCityStateZip
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 
 ```jsx
 import {
@@ -22,7 +22,6 @@ import {
 ## Examples
 
 ### Full Address
-
 
 ```jsx example
 <Address>
@@ -53,17 +52,11 @@ import {
 
 ### Address
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### AddressLine
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### AddressCityStateZip
 
@@ -74,17 +67,20 @@ import {
     {
       name: 'city',
       type: 'string',
-      description: 'The city to be combined with state and zip in a single line.'
+      description:
+        'The city to be combined with state and zip in a single line.'
     },
     {
       name: 'state',
       type: 'string',
-      description: 'The state to be combined with city and zip in a single line.'
+      description:
+        'The state to be combined with city and zip in a single line.'
     },
     {
       name: 'zip',
       type: 'string',
-      description: 'The zip to be combined with city and state in a single line.'
+      description:
+        'The zip to be combined with city and state in a single line.'
     }
   ]}
 />

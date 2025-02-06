@@ -4,10 +4,10 @@ description: A segmented progress bar.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Stepper/index.tsx
 ---
 
-import { Stepper, Step } from '@deque/cauldron-react'
+import { Stepper, Step } from '@deque/cauldron-react';
 
 ```jsx
-import { Stepper, Step } from '@deque/cauldron-react'
+import { Stepper, Step } from '@deque/cauldron-react';
 ```
 
 Stepper is a segmented progress list that displays the current state of a multi-stepped process marking the currently active step with `aria-current="step"`. This component is commonly used in wizard-like workflows.
@@ -20,15 +20,9 @@ Each step can have a visible descriptive label describing each numerical step.
 
 ```jsx example
 <Stepper>
-  <Step status="current">
-    Select all stuff/things/such
-  </Step>
-  <Step status="future">
-    Analyze the stuff
-  </Step>
-  <Step status="future">
-    Review all of the things, stuff, such and etc.
-  </Step>
+  <Step status="current">Select all stuff/things/such</Step>
+  <Step status="future">Analyze the stuff</Step>
+  <Step status="future">Review all of the things, stuff, such and etc.</Step>
 </Stepper>
 ```
 
@@ -40,12 +34,22 @@ For more compact steppers, the additional descriptive information can be include
 <Stepper>
   <Step
     status="complete"
-    tooltip={<><div>Step 1: Foo</div><div>Status: Complete</div></>}
+    tooltip={
+      <>
+        <div>Step 1: Foo</div>
+        <div>Status: Complete</div>
+      </>
+    }
     tooltipText="Foo Complete"
   />
   <Step
     status="current"
-    tooltip={<><div>Step 2: Bar</div><div>Status: Current</div></>}
+    tooltip={
+      <>
+        <div>Step 2: Bar</div>
+        <div>Status: Current</div>
+      </>
+    }
     tooltipText="Bar Current"
   />
 </Stepper>
@@ -55,16 +59,14 @@ For more compact steppers, the additional descriptive information can be include
 
 ### Stepper
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### Step
 
 <ComponentProps
   children={{
-    description: 'children to be rendered as the step\'s visible label (if no visible label is desired, use the "tooltip" prop instead)'
+    description:
+      'children to be rendered as the step\'s visible label (if no visible label is desired, use the "tooltip" prop instead)'
   }}
   className={true}
   props={[
@@ -77,12 +79,13 @@ For more compact steppers, the additional descriptive information can be include
     {
       name: 'tooltip',
       type: 'React.ReactNode',
-      description: 'Tooltip content to be rendered with the tooltip tabstop on the step (no visible label will be rendered)'
+      description:
+        'Tooltip content to be rendered with the tooltip tabstop on the step (no visible label will be rendered)'
     },
     {
       name: 'tooltipText',
       type: 'string',
-      description: 'Text summary of the tooltip, used as the Step\’s aria-label'
+      description: 'Text summary of the tooltip, used as the Step’s aria-label'
     }
   ]}
 />

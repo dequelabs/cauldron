@@ -4,10 +4,10 @@ description: An interactive component that copies the provided value to the user
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/CopyButton/index.tsx
 ---
 
-import { CopyButton } from '@deque/cauldron-react'
+import { CopyButton } from '@deque/cauldron-react';
 
 ```js
-import { CopyButton } from '@deque/cauldron-react'
+import { CopyButton } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -23,7 +23,7 @@ import { CopyButton } from '@deque/cauldron-react'
 Both the accessible name and the notification label can be customized.
 
 ```jsx example
-<CopyButton 
+<CopyButton
   value="body { color: green; }"
   notificationLabel="CSS Selector Copied!"
 >
@@ -36,10 +36,7 @@ Both the accessible name and the notification label can be customized.
 When space is limited, the visible label of the button can be optionally hidden, with the label show on hover or focus with a tooltip.
 
 ```jsx example
-<CopyButton 
-  value="text to copy" 
-  hideVisibleLabel
-/>
+<CopyButton value="text to copy" hideVisibleLabel />
 ```
 
 ### Variants
@@ -91,7 +88,7 @@ Unless otherwise noted, prop types are inherited from [Button](./Button).
       description: 'Callback function invoked with the value of the copied text after the text has been copied.'
     }
 
-  ]}
+]}
 />
 
 ## Related Components

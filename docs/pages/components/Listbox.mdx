@@ -8,17 +8,17 @@ import { useState } from 'react';
 import { Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
 
 ```js
-import { 
-  Listbox, 
-  ListboxOption, 
-  ListboxGroup 
-} from '@deque/cauldron-react';
+import { Listbox, ListboxOption, ListboxGroup } from '@deque/cauldron-react';
 ```
 
 ## Examples
 
 <Note>
-  Listbox follows [aria practices](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for _Listbox_ but is not currently intended to be used by itself. This component's intended usage is to be composed with components that have keyboard-navigable items like [Combobox](./Combobox) and [OptionsMenu](./OptionsMenu).
+  Listbox follows [aria
+  practices](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for _Listbox_
+  but is not currently intended to be used by itself. This component's intended
+  usage is to be composed with components that have keyboard-navigable items
+  like [Combobox](./Combobox) and [OptionsMenu](./OptionsMenu).
 </Note>
 
 ### Listbox Options
@@ -99,8 +99,8 @@ function ControlledListboxExample() {
   return (
     <>
       <div id="listbox-controlled-example">Controlled Listbox</div>
-      <Listbox 
-        aria-labelledby="listbox-controlled-example" 
+      <Listbox
+        aria-labelledby="listbox-controlled-example"
         value={value}
         onSelectionChange={handleSelect}
       >
@@ -144,96 +144,124 @@ Listboxes can also support multiple selection of listbox options.
 ```
 
 <Note>
-  Multiselect Listbox components will pass in array values for the selected options in `onSelectionChange` and expect an array of values for `value` and `defaultValue` props.
+  Multiselect Listbox components will pass in array values for the selected
+  options in `onSelectionChange` and expect an array of values for `value` and
+  `defaultValue` props.
 </Note>
 
 ## Props
 
 ### Listbox
 
-<ComponentProps className={true} refType="HTMLUListElement" props={[
-  {
-    name: 'value',
-    type: ['string', 'number'],
-    description: 'Value to be applied to the listbox. Optionally used for "controlled" listboxes.'
-  },
-  {
-    name: 'defaultValue',
-    type: ['string', 'number'],
-    description: 'Initial value to be applied to the listbox. Optionally used for "uncontrolled" listboxes.'
-  },
-  {
-    name: 'onSelectionChange',
-    type: 'function',
-    description: 'Callback function that gets invoked when the selected value is changed.'
-  },
-  {
-    name: 'onActiveChange',
-    type: 'function',
-    description: 'Callback function that gets invoked when the current active option was changed.'
-  },
-  {
-    name: 'navigation',
-    type: ['bound', 'cycle'],
-    defaultValue: 'bound',
-    description: 'How keyboard navigation is handled when reaching the start/end of the list.'
-  },
-  {
-    name: 'as',
-    type: ['React.ElementType', 'string'],
-    description: 'A component to render the Listbox as.',
-    defaultValue: 'ul'
-  }
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLUListElement"
+  props={[
+    {
+      name: 'value',
+      type: ['string', 'number'],
+      description:
+        'Value to be applied to the listbox. Optionally used for "controlled" listboxes.'
+    },
+    {
+      name: 'defaultValue',
+      type: ['string', 'number'],
+      description:
+        'Initial value to be applied to the listbox. Optionally used for "uncontrolled" listboxes.'
+    },
+    {
+      name: 'onSelectionChange',
+      type: 'function',
+      description:
+        'Callback function that gets invoked when the selected value is changed.'
+    },
+    {
+      name: 'onActiveChange',
+      type: 'function',
+      description:
+        'Callback function that gets invoked when the current active option was changed.'
+    },
+    {
+      name: 'navigation',
+      type: ['bound', 'cycle'],
+      defaultValue: 'bound',
+      description:
+        'How keyboard navigation is handled when reaching the start/end of the list.'
+    },
+    {
+      name: 'as',
+      type: ['React.ElementType', 'string'],
+      description: 'A component to render the Listbox as.',
+      defaultValue: 'ul'
+    }
+  ]}
+/>
 
 ### ListboxOption
 
-<ComponentProps className={true} refType="HTMLLIElement" props={[
-  {
-    name: 'value',
-    type: ['string', 'number'],
-    description: 'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
-  },
-  {
-    name: 'disabled',
-    type: 'boolean',
-    description: 'When set, sets the listbox option as "aria-disabled="true" and removes the element from key navigation.'
-  },
-  {
-    name: 'selected',
-    type: 'boolean',
-    description: 'When set, sets the listbox option as "aria-selected="true".'
-  },
-  {
-    name: 'activeClass',
-    type: 'string',
-    defaultValue: 'ListboxOption--active',
-    description: 'When the listbox option becomes active, this class will be applied to the element.'
-  },
-  {
-    name: 'as',
-    type: ['React.ElementType', 'string'],
-    description: 'A component to render the ListboxOption as.',
-    defaultValue: 'li'
-  }
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLLIElement"
+  props={[
+    {
+      name: 'value',
+      type: ['string', 'number'],
+      description:
+        'Value to be applied to the listbox option. When omitted, value will default to the text content of the option.'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description:
+        'When set, sets the listbox option as "aria-disabled="true" and removes the element from key navigation.'
+    },
+    {
+      name: 'selected',
+      type: 'boolean',
+      description: 'When set, sets the listbox option as "aria-selected="true".'
+    },
+    {
+      name: 'activeClass',
+      type: 'string',
+      defaultValue: 'ListboxOption--active',
+      description:
+        'When the listbox option becomes active, this class will be applied to the element.'
+    },
+    {
+      name: 'as',
+      type: ['React.ElementType', 'string'],
+      description: 'A component to render the ListboxOption as.',
+      defaultValue: 'li'
+    }
+  ]}
+/>
 
 ### ListboxGroup
 
-<ComponentProps className={true} refType="HTMLUListElement" props={[
-  {
-    name: 'label',
-    required: true,
-    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
-    description: 'Label for the group of items.'
-  },
-  {
-    name: 'as',
-    type: ['React.ElementType', 'string'],
-    description: 'A component to render the ListboxGroup as.',
-    defaultValue: 'ul'
-  }
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLUListElement"
+  props={[
+    {
+      name: 'label',
+      required: true,
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Label for the group of items.'
+    },
+    {
+      name: 'as',
+      type: ['React.ElementType', 'string'],
+      description: 'A component to render the ListboxGroup as.',
+      defaultValue: 'ul'
+    }
+  ]}
+/>
 
 ## Related Components
 

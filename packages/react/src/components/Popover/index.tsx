@@ -191,15 +191,10 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       <ClickOutsideListener onClickOutside={handleClickOutside}>
         <AnchoredOverlay
           id={id}
-          className={classnames(
-            'Popover',
-            `Popover--${placement}`,
-            className,
-            {
-              'Popover--hidden': !show,
-              'Popover--prompt': variant === 'prompt'
-            }
-          )}
+          className={classnames('Popover', `Popover--${placement}`, className, {
+            'Popover--hidden': !show,
+            'Popover--prompt': variant === 'prompt'
+          })}
           ref={popoverRef}
           role="dialog"
           target={target}

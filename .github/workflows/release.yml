@@ -7,7 +7,6 @@ on:
       - master
 
 jobs:
-
   tests:
     uses: ./.github/workflows/tests.yml
 

@@ -7,7 +7,6 @@ on:
   workflow_call:
 
 jobs:
-
   update-browserlist-db:
     runs-on: ubuntu-latest
     steps:

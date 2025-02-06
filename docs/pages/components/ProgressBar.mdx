@@ -4,20 +4,17 @@ description: A component to display the progress of some activity.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ProgressBar/index.tsx
 ---
 
-import { useState, useEffect, useRef } from 'react'
-import { ProgressBar, Button } from '@deque/cauldron-react'
+import { useState, useEffect, useRef } from 'react';
+import { ProgressBar, Button } from '@deque/cauldron-react';
 
 ```jsx
-import { ProgressBar } from '@deque/cauldron-react'
+import { ProgressBar } from '@deque/cauldron-react';
 ```
 
 ## Examples
 
 ```jsx example
-<ProgressBar
-  aria-label="Progress %"
-  progress={75}
-/>
+<ProgressBar aria-label="Progress %" progress={75} />
 ```
 
 ```jsx example
@@ -76,15 +73,12 @@ function ProgressExample() {
 
   return (
     <>
-      <ProgressBar
-        aria-label="Animated Progres"
-        progress={progress}
-      />
+      <ProgressBar aria-label="Animated Progres" progress={progress} />
       <Button onClick={handleUpdateProgress} variant="secondary">
         Show Animated Progress
       </Button>
     </>
-  )
+  );
 }
 ```
 
@@ -114,12 +108,14 @@ function ProgressExample() {
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
-    },
+      description:
+        'A label for the ProgressBar is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    }
   ]}
 />

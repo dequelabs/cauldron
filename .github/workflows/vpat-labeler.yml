@@ -6,16 +6,16 @@ jobs:
   add_labels:
     runs-on: ubuntu-latest
     steps:
-    - uses: dequelabs/action-a11y-issue-labeler@main
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        include-title: 1
-        label-customer: "bug"
-        label-production: "bug"
-        label-vpat: "vpat"
-        label-a11y: "accessibility"
-        label-blocker: "vpat:blocker"
-        label-critical: "vpat:critical"
-        label-serious: "vpat:serious"
-        label-moderate: "vpat:moderate"
-        label-minor: "vpat:minor"
+      - uses: dequelabs/action-a11y-issue-labeler@main
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          include-title: 1
+          label-customer: 'bug'
+          label-production: 'bug'
+          label-vpat: 'vpat'
+          label-a11y: 'accessibility'
+          label-blocker: 'vpat:blocker'
+          label-critical: 'vpat:critical'
+          label-serious: 'vpat:serious'
+          label-moderate: 'vpat:moderate'
+          label-minor: 'vpat:minor'

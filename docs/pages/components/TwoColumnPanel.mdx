@@ -4,7 +4,7 @@ description: A container component intended to provide a navigable list of items
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TwoColumnPanel/TwoColumnPanel.tsx
 ---
 
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   TwoColumnPanel,
   ColumnLeft,
@@ -15,7 +15,7 @@ import {
   Breadcrumb,
   BreadcrumbLink,
   BreadcrumbItem
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 
 ```jsx
 import {
@@ -23,7 +23,7 @@ import {
   ColumnLeft,
   ColumnRight,
   ColumnHeader
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -33,7 +33,9 @@ import {
 `TwoColumnPanel` takes in a set of columns, `ColumnLeft` and `ColumnRight` with the left column containing the list of items to choose from and the right column intended to be the currently selected item. It is expected that accessible names are provided for both of the left/right columns via `aria-label` or `aria-labelledby`.
 
 <Note>
-  The heading levels provided in the below examples are the typical heading levels used for `TwoColumnPanel`. The appropriate heading levels will need to be set within context of the content of which `TwoColumnPanel` is placed.
+  The heading levels provided in the below examples are the typical heading
+  levels used for `TwoColumnPanel`. The appropriate heading levels will need to
+  be set within context of the content of which `TwoColumnPanel` is placed.
 </Note>
 
 ```jsx example
@@ -64,8 +66,8 @@ function TwoColumnPanelExample() {
     }
   ];
 
-  const selectedItem = items.find(item => item.id === selected);
-  const selectItem = id => event => {
+  const selectedItem = items.find((item) => item.id === selected);
+  const selectItem = (id) => (event) => {
     event.preventDefault();
     setSelected(id);
   };
@@ -78,11 +80,12 @@ function TwoColumnPanelExample() {
         </ColumnHeader>
         <nav aria-labelledby="sidebar">
           <ul>
-            {items.map(item => (
+            {items.map((item) => (
               <li key={item.id}>
                 <a
                   href={item.url}
-                  onClick={selectItem(item.id)} aria-current={item.id === selectedItem.id}
+                  onClick={selectItem(item.id)}
+                  aria-current={item.id === selectedItem.id}
                   aria-current={item.id === selectedItem.id}
                 >
                   {item.name}
@@ -95,12 +98,10 @@ function TwoColumnPanelExample() {
       </ColumnLeft>
       <ColumnRight aria-labelledby="item-header">
         <ColumnHeader id="item-header">{selectedItem?.name}</ColumnHeader>
-        <div>
-          {selectedItem?.contents}
-        </div>
+        <div>{selectedItem?.contents}</div>
       </ColumnRight>
     </TwoColumnPanel>
-  )
+  );
 }
 ```
 
@@ -147,10 +148,10 @@ function TwoColumnPanelGroupedItemsExample() {
   ];
 
   const selectedGroupItem = [...groupOne, ...groupTwo].find(
-    item => item.id === selectedGroup
+    (item) => item.id === selectedGroup
   );
 
-  const selectGroupItem = id => event => {
+  const selectGroupItem = (id) => (event) => {
     event.preventDefault();
     setSelectedGroupItem(id);
   };
@@ -167,7 +168,7 @@ function TwoColumnPanelGroupedItemsExample() {
           </ColumnGroupHeader>
           <nav aria-labelledby="group-heading">
             <ul>
-              {groupOne.map(item => (
+              {groupOne.map((item) => (
                 <li key={item.id}>
                   <a
                     href="#"
@@ -186,7 +187,7 @@ function TwoColumnPanelGroupedItemsExample() {
           </ColumnGroupHeader>
           <nav aria-labelledby="alternate-group-heading">
             <ul>
-              {groupTwo.map(item => (
+              {groupTwo.map((item) => (
                 <li key={item.id}>
                   <a
                     href={item.url}
@@ -207,15 +208,15 @@ function TwoColumnPanelGroupedItemsExample() {
           <Breadcrumb aria-label="content breadcrumbs">
             <BreadcrumbLink href="#">Context A</BreadcrumbLink>
             <BreadcrumbLink href="#">Context B</BreadcrumbLink>
-            <BreadcrumbItem id="group-contents-heading">Grouped {selectedGroupItem?.name}</BreadcrumbItem>
+            <BreadcrumbItem id="group-contents-heading">
+              Grouped {selectedGroupItem?.name}
+            </BreadcrumbItem>
           </Breadcrumb>
         </ColumnHeader>
-        <div>
-          {selectedGroupItem?.contents}
-        </div>
+        <div>{selectedGroupItem?.contents}</div>
       </ColumnRight>
     </TwoColumnPanel>
-  )
+  );
 }
 ```
 
@@ -238,13 +239,13 @@ function TwoColumnPanelGroupedItemsExample() {
       name: 'showCollapsedPanelLabel',
       type: 'string',
       description: 'Label for the show panel toggle control',
-      defaultValue: 'Show Panel',
+      defaultValue: 'Show Panel'
     },
     {
       name: 'hideCollapsedPanelLabel',
       type: 'string',
       description: 'Label for the hide panel toggle control',
-      defaultValue: 'Hide Panel',
+      defaultValue: 'Hide Panel'
     },
     {
       name: 'skipLink',
@@ -254,7 +255,8 @@ function TwoColumnPanelGroupedItemsExample() {
     {
       name: 'collapsedMediaQuery',
       type: 'string',
-      description: 'The TwoPanelColumn will collapse the ColumnLeft by default when this media query is active and display the ColumnLeft content via a slide-in element',
+      description:
+        'The TwoPanelColumn will collapse the ColumnLeft by default when this media query is active and display the ColumnLeft content via a slide-in element',
       defaultValue: '(max-width: 45rem)'
     }
   ]}
@@ -270,12 +272,14 @@ function TwoColumnPanelGroupedItemsExample() {
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for ColumnLeft is required. This means you must provide either an aria-label or aria-labelledby prop.'
     }
   ]}
 />
@@ -290,36 +294,26 @@ function TwoColumnPanelGroupedItemsExample() {
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for ColumnRight is required. This means you must provide either an aria-label or aria-labelledby prop.'
     }
   ]}
 />
 
 ### ColumnHeader
 
-<ComponentProps
-  children={true}
-  className={true}
-  refType="HTMLDivElement"
-/>
+<ComponentProps children={true} className={true} refType="HTMLDivElement" />
 
 ### ColumnList
 
-<ComponentProps
-  children={true}
-  className={true}
-  refType="HTMLDivElement"
-/>
+<ComponentProps children={true} className={true} refType="HTMLDivElement" />
 
 ### ColumnGroupHeader
 
-<ComponentProps
-  children={true}
-  className={true}
-  refType="HTMLDivElement"
-/>
+<ComponentProps children={true} className={true} refType="HTMLDivElement" />

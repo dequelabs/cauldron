@@ -4,16 +4,22 @@ description: A utility component to truncate long text and provide an alternativ
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TextEllipsis/index.tsx
 ---
 
-import { TextEllipsis, Link } from '@deque/cauldron-react'
+import { TextEllipsis, Link } from '@deque/cauldron-react';
 
 ```js
-import { TextEllipsis } from '@deque/cauldron-react'
+import { TextEllipsis } from '@deque/cauldron-react';
 ```
 
 `TextEllipsis` is a utility component to provide an accessible means of preventing overflow for text that does not fit within a constrained area.
 
 <Note>
-  This component should be used sparingly and only when absolutely necessary. While this component addresses specific accessibility issues ([1.4.10 Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html), [1.4.12 Text Spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html)) that may arise from overflowing text, ellipsizing text can still present usability issues to users as additional interaction is needed to show the full text content.
+  This component should be used sparingly and only when absolutely necessary.
+  While this component addresses specific accessibility issues ([1.4.10
+  Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html), [1.4.12 Text
+  Spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html)) that
+  may arise from overflowing text, ellipsizing text can still present usability
+  issues to users as additional interaction is needed to show the full text
+  content.
 </Note>
 
 Some good examples of where it's appropriate to use this component:
@@ -29,24 +35,31 @@ Truncation should **not** be used on headers, labels, error messages, or notific
 ### One-line Ellipsis
 
 ```jsx example
-<TextEllipsis>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TextEllipsis>
+<TextEllipsis>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</TextEllipsis>
 ```
 
 If your component is a Button, Link, or some other kind of interactive element with a `tabIndex`, you _must_ provide your component as a Polymorphic component using the `as` prop to avoid nesting interactive elements:
 
 ```jsx example
-<TextEllipsis as={Link}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TextEllipsis>
+<TextEllipsis as={Link}>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</TextEllipsis>
 ```
 
 <Note>
-  When using the `as` property it is expected the element getting passed in is an interactive element. Passing an element that is not interactive will result in accessibility issues.
+  When using the `as` property it is expected the element getting passed in is
+  an interactive element. Passing an element that is not interactive will result
+  in accessibility issues.
 </Note>
 
 ### Multi-line Ellipsis
 
 ```jsx example
 <TextEllipsis maxLines={2}>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua.
 </TextEllipsis>
 ```
 
@@ -68,7 +81,7 @@ If your component is a Button, Link, or some other kind of interactive element w
     {
       name: 'as',
       type: ['React.ElementType', 'string'],
-      description: 'A component to render the TextEllipsis as.',
+      description: 'A component to render the TextEllipsis as.'
     },
     {
       name: 'tooltipProps',

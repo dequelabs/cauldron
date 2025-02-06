@@ -4,12 +4,14 @@ description: A wrapper component for content.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Layout/index.tsx
 ---
 
-import { Layout } from '@deque/cauldron-react'
+import { Layout } from '@deque/cauldron-react';
 
 ## Usage
 
 <Note>
-  The `Workspace` component is a convenience wrapper around the `Layout` and `Main` components. It is important to note that the `Layout` component should not wrap the `TopBar` or `Sidebar` components.
+  The `Workspace` component is a convenience wrapper around the `Layout` and
+  `Main` components. It is important to note that the `Layout` component should
+  not wrap the `TopBar` or `Sidebar` components.
 </Note>
 
 ### With Workspace
@@ -50,10 +52,15 @@ export function AppExample() {
 ```
 
 ## Props
-<ComponentProps className={true} children={{ required: true }} props={[
-  {
-    name: 'layoutRef',
-    type: 'function',
-    description: 'Ref function for the Layout element'
-  }
-]} />
+
+<ComponentProps
+  className={true}
+  children={{ required: true }}
+  props={[
+    {
+      name: 'layoutRef',
+      type: 'function',
+      description: 'Ref function for the Layout element'
+    }
+  ]}
+/>

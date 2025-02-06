@@ -4,10 +4,10 @@ description: An interactive component that performs a programmable action when a
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Button/index.tsx
 ---
 
-import { Icon, Button, Code, BadgeLabel } from '@deque/cauldron-react'
+import { Icon, Button, Code, BadgeLabel } from '@deque/cauldron-react';
 
 ```js
-import { Button } from '@deque/cauldron-react'
+import { Button } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -93,8 +93,6 @@ When you need a semantic button with the visual appearance of a link.
 </Button>
 ```
 
-
-
 ### Additional Button States
 
 ```jsx example
@@ -115,7 +113,15 @@ When you need a semantic button with the visual appearance of a link.
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag', 'badge'],
+      type: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'error',
+        'link',
+        'tag',
+        'badge'
+      ],
       defaultValue: 'primary',
       description: 'Visual style of the button.'
     },

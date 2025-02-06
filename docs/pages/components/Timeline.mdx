@@ -4,10 +4,10 @@ description: A list component to display a list of events or items in chronologi
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Timeline/Timeline.tsx
 ---
 
-import { Timeline, TimelineItem, Icon } from '@deque/cauldron-react'
+import { Timeline, TimelineItem, Icon } from '@deque/cauldron-react';
 
 ```js
-import { Timeline, TimelineItem } from '@deque/cauldron-react'
+import { Timeline, TimelineItem } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -46,14 +46,18 @@ import { Timeline, TimelineItem } from '@deque/cauldron-react'
 </Timeline>
 ```
 
-### Custom Icon 
+### Custom Icon
 
 ```jsx example
 <Timeline>
-  <TimelineItem icon={<Icon type="arrow-circle-down" />}>Item with custom icon</TimelineItem>
+  <TimelineItem icon={<Icon type="arrow-circle-down" />}>
+    Item with custom icon
+  </TimelineItem>
   <TimelineItem>Item with default mark</TimelineItem>
   <TimelineItem>Item with default mark</TimelineItem>
-  <TimelineItem icon={<Icon type="check-solid" />}>Item with custom icon</TimelineItem>
+  <TimelineItem icon={<Icon type="check-solid" />}>
+    Item with custom icon
+  </TimelineItem>
 </Timeline>
 ```
 
@@ -61,19 +65,19 @@ import { Timeline, TimelineItem } from '@deque/cauldron-react'
 
 ### Timeline
 
-<ComponentProps
-  className={true}
-  children={true}
-/>
+<ComponentProps className={true} children={true} />
 
 ### TimelineItem
 
 <ComponentProps
   className={true}
   children={true}
-  props={[{
-    name: 'icon',
-    type: 'React.ReactElement',
-    description: 'Optional element to display as icon instead of the default mark'
-  }]}
+  props={[
+    {
+      name: 'icon',
+      type: 'React.ReactElement',
+      description:
+        'Optional element to display as icon instead of the default mark'
+    }
+  ]}
 />
