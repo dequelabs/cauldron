@@ -10,6 +10,8 @@
   --button-background-color-secondary-active: var(--gray-30);
   --button-border-color-secondary: var(--gray-40);
 
+  --button-background-color-badge-active: var(--gray-20);
+
   --button-background-color-error: var(--error);
   --button-background-color-error-disabled: #db6379;
   --button-background-color-error-active: var(--accent-error-active);
@@ -68,7 +70,7 @@
 }
 
 .Button--badge:not([disabled], [aria-disabled='true']):active {
-  background-color: var(--button-background-color-secondary);
+  background-color: var(--button-background-color-badge-active);
 }
 
 button.Link {
@@ -261,6 +263,8 @@ button.Link {
   --button-background-color-primary-active: #a7e9f7;
   --button-background-color-secondary-active: var(--accent-light);
   --button-background-color-error-active: #fea7a6;
+
+  --button-background-color-badge-active: var(--badge-background-color);
 
   --button-focus-ring-color: var(--focus-dark);
   --field-label-text-color: var(--accent-light);
