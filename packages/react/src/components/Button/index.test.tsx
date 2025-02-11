@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import Button from '../../../src/components/Button';
 import Icon from '../../../src/components/Icon';
 import axe from '../../axe';
+import { BadgeLabel } from '../Badge';
 
 test('should render primary button', () => {
   render(
@@ -47,6 +48,24 @@ test('should render button as tag', () => {
   render(<Button variant="tag">tag</Button>);
   const TagButton = screen.getByRole('button', { name: 'tag' });
   expect(TagButton).toHaveClass('Tag');
+});
+
+test('should render button as badge', () => {
+  render(<Button variant="badge">badge</Button>);
+  const BadgeButton = screen.getByRole('button', { name: 'badge' });
+  expect(BadgeButton).toHaveClass('Button--badge');
+});
+
+test('should support <BadgeLabel> as a child', () => {
+  render(
+    <Button>
+      <BadgeLabel>Label</BadgeLabel>
+      Value
+    </Button>
+  );
+  const button = screen.getByRole('button', { name: 'Label Value' });
+  const label = button.firstElementChild;
+  expect(label).toHaveTextContent('Label');
 });
 
 test('should handle <Icon /> as child', () => {

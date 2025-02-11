@@ -4,7 +4,7 @@ description: An interactive component that performs a programmable action when a
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Button/index.tsx
 ---
 
-import { Icon, Button, Code } from '@deque/cauldron-react'
+import { Icon, Button, Code, BadgeLabel } from '@deque/cauldron-react'
 
 ```js
 import { Button } from '@deque/cauldron-react'
@@ -78,6 +78,23 @@ When you need a semantic button with the visual appearance of a link.
 <Button variant="tag">Tag</Button>
 ```
 
+### Badge
+
+```jsx example
+<Button variant="badge">Badge</Button>
+```
+
+### Badge with Label
+
+```jsx example
+<Button variant="badge">
+  <BadgeLabel>Label:</BadgeLabel>
+  value
+</Button>
+```
+
+
+
 ### Additional Button States
 
 ```jsx example
@@ -98,7 +115,7 @@ When you need a semantic button with the visual appearance of a link.
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag'],
+      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag', 'badge'],
       defaultValue: 'primary',
       description: 'Visual style of the button.'
     },
@@ -118,3 +135,4 @@ When you need a semantic button with the visual appearance of a link.
 ## Related Components
 
 - [IconButton](./IconButton)
+- [Badge](./Badge)
