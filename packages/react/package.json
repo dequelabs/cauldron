@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "6.11.0",
+  "version": "6.14.0",
   "license": "MPL-2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "homepage": "https://cauldron.dequelabs.com/",
@@ -23,13 +23,11 @@
     "test": "jest --maxWorkers=1 --coverage"
   },
   "dependencies": {
-    "@popperjs/core": "^2.5.4",
+    "@floating-ui/react-dom": "^2.1.2",
     "classnames": "^2.2.6",
-    "focus-trap-react": "^10.2.3",
     "focusable": "^2.3.0",
     "keyname": "^0.1.0",
     "react-id-generator": "^3.0.1",
-    "react-popper": "^2.2.4",
     "react-syntax-highlighter": "^15.5.0",
     "tslib": "^2.4.0"
   },

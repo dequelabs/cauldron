@@ -336,7 +336,7 @@ function SortableTableExample() {
 
 ### Grid Layout
 
-The Table component supports an optional css grid layout that can specify column alignment and width definitions per column.
+The Table component supports an optional css grid layout that can specify column alignment and width and max-width definitions per column.
 
 ```jsx example
 <Table 
@@ -344,7 +344,7 @@ The Table component supports an optional css grid layout that can specify column
   columns={[
     { width: 'max-content', align: 'start' }, 
     { width: 'max-content', align: 'start' }, 
-    { width: '1fr', align: 'end' }
+    { width: 'auto', maxWidth: '250', align: 'end' }
   ]}>
   <TableHead>
     <TableRow>

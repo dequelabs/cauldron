@@ -346,6 +346,22 @@ test('should support column definitions with grid layout', () => {
   expect(tableCells[1]).toHaveStyle('text-align: end');
 });
 
+test('should support column definitions with maxWidth with grid layout', () => {
+  renderDefaultTable({
+    layout: 'grid',
+    columns: [
+      { width: '1fr', align: 'start' },
+      { width: 'min-content', align: 'end' },
+      { width: 'min-content', maxWidth: '789', align: 'end' },
+      { maxWidth: '789', align: 'end' }
+    ]
+  });
+  const table = screen.getByRole('table');
+  expect(table).toHaveStyle(
+    '--table-grid-template-columns: 1fr min-content minmax(min-content, 789px) minmax(auto, 789px)'
+  );
+});
+
 test('should apply colspan styles to cells in grid layout', () => {
   render(
     <Table layout="grid">

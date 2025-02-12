@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.14.0](https://github.com/dequelabs/cauldron/compare/v6.13.0...v6.14.0) (2024-12-20)
+
+
+### Features
+
+* **react:** add focusTrap options to AnchoredOverlay ([#1775](https://github.com/dequelabs/cauldron/issues/1775)) ([0a00d24](https://github.com/dequelabs/cauldron/commit/0a00d24f75b0183ee90e30f3e7362eeebc1c6847))
+
+
+### Bug Fixes
+
+* **react:** fix a11y active-descendant issue with controlled Listboxes ([#1776](https://github.com/dequelabs/cauldron/issues/1776)) ([897963b](https://github.com/dequelabs/cauldron/commit/897963ba1310fad155020bdb43738730d82f1283))
+* **react:** fix listbox focus issue when listbox options have changed ([#1777](https://github.com/dequelabs/cauldron/issues/1777)) ([55d370c](https://github.com/dequelabs/cauldron/commit/55d370c097b8ff0b9dab012d364253fc44ab8a17))
+
+## [6.13.0](https://github.com/dequelabs/cauldron/compare/v6.12.0...v6.13.0) (2024-12-18)
+
+
+### Features
+
+* **react,style:** add AnchoredOverlay component, refactor Tooltip and Popover to use AnchoredOverlay ([#1760](https://github.com/dequelabs/cauldron/issues/1760)) ([6773975](https://github.com/dequelabs/cauldron/commit/67739754b0c6368ec1db878ace917730db102797))
+* **react:** add max-width column configuration to Table grids ([#1770](https://github.com/dequelabs/cauldron/issues/1770)) ([dc7e4ac](https://github.com/dequelabs/cauldron/commit/dc7e4ac43be846ee6faa6b1cf878753aed1b6a31))
+* **react:** add multiselect to Listbox component ([#1763](https://github.com/dequelabs/cauldron/issues/1763)) ([afa8fb4](https://github.com/dequelabs/cauldron/commit/afa8fb4f89d43e453eccfa2c39587e4fee0bc9cf))
+* **react:** remove focus-trap-react replacing with internally managed focus traps ([#1730](https://github.com/dequelabs/cauldron/issues/1730)) ([775bed0](https://github.com/dequelabs/cauldron/commit/775bed0e4becc55af34e69495ee0b6e3db3a11be))
+
+
+### Bug Fixes
+
+* **react:** remove defaultProps from sidebar, use default parameters instead ([#1764](https://github.com/dequelabs/cauldron/issues/1764)) ([e4a3441](https://github.com/dequelabs/cauldron/commit/e4a3441d8497f656dbec6afa35a989a139d430e7))
+
+## [6.12.0](https://github.com/dequelabs/cauldron/compare/v6.11.0...v6.12.0) (2024-12-04)
+
+
+### Features
+
+* **react,styles:** add grid layout for table component ([#1748](https://github.com/dequelabs/cauldron/issues/1748)) ([983c89f](https://github.com/dequelabs/cauldron/commit/983c89f21b584f1cef2c405c9e2db03529edbec1))
+* **styles:** synced `table` ([#1745](https://github.com/dequelabs/cauldron/issues/1745)) ([4531fb6](https://github.com/dequelabs/cauldron/commit/4531fb687cf53a1f40aad11c1494b38b2b04038d))
+* **styles:** synced tabs with design ([#1741](https://github.com/dequelabs/cauldron/issues/1741)) ([242ac5d](https://github.com/dequelabs/cauldron/commit/242ac5d921b08476e1d65219c24c7ae0a9d432df))
+
+
+### Bug Fixes
+
+* **react:** fix non-text contrast with text fields ([#1756](https://github.com/dequelabs/cauldron/issues/1756)) ([afe4062](https://github.com/dequelabs/cauldron/commit/afe40620f9eaa560b55f03368034fd99d50068ec))
+
 ## [6.11.0](https://github.com/dequelabs/cauldron/compare/v6.10.1...v6.11.0) (2024-11-06)
 
 

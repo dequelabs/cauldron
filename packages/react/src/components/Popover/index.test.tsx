@@ -93,13 +93,13 @@ const WrapperPrompt = ({
 
 test('renders without blowing up', async () => {
   render(<Wrapper />);
-  expect(screen.getByText('Popover content')).toBeTruthy();
+  expect(await screen.findByText('Popover content')).toBeTruthy();
 });
 
 test('should auto-generate id', async () => {
   render(<Wrapper />);
-  const popover = screen.getByRole('dialog');
-  const button = screen.getByText('Popover button');
+  const popover = await screen.findByRole('dialog');
+  const button = await screen.findByText('Popover button');
   expect(popover).toBeTruthy();
   const id = popover?.getAttribute('id');
   expect(id).toBeTruthy();
@@ -126,7 +126,7 @@ test('should attach attribute aria-expanded correctly based on shown state', () 
 
 test('should support adding className to tooltip', async () => {
   render(<Wrapper tooltipProps={{ className: 'foo' }} />);
-  const popover = screen.getByRole('dialog');
+  const popover = await screen.findByRole('dialog');
   expect(popover).toBeTruthy();
   expect(popover).toHaveClass('Popover');
   expect(popover).toHaveClass('foo');
@@ -136,8 +136,8 @@ test('should not overwrite user provided id and aria-describedby', async () => {
   const buttonProps = { 'aria-describedby': 'foo popoverid' };
   const tooltipProps = { id: 'popoverid' };
   render(<Wrapper buttonProps={buttonProps} tooltipProps={tooltipProps} />);
-  const popover = screen.getByRole('dialog');
-  const button = screen.getByText('Popover button');
+  const popover = await screen.findByRole('dialog');
+  const button = await screen.findByText('Popover button');
   expect(popover).toHaveAttribute('id', 'popoverid');
   expect(button.getAttribute('aria-describedby')).toEqual('foo popoverid');
 });
@@ -277,7 +277,7 @@ test('should have no axe violations for prompt variant', async () => {
 test('aria-labelledby should exist for variant="custom"', async () => {
   render(<Wrapper />);
 
-  const popover = screen.getByRole('dialog');
+  const popover = await screen.findByRole('dialog');
   const ariaLabelledById = popover.getAttribute('aria-labelledby');
 
   expect(ariaLabelledById).toBeTruthy();

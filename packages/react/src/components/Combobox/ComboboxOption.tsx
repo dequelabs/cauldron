@@ -79,8 +79,11 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     });
     const isActive =
       !!active?.element && active.element === comboboxOptionRef.current;
-    const isSelected =
-      !!selected?.element && selected.element === comboboxOptionRef.current;
+    const isSelected = !!(
+      selected &&
+      !!selected[0]?.element &&
+      selected[0].element === comboboxOptionRef.current
+    );
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
       (typeof matches === 'function' && matches(children));

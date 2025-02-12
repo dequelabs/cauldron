@@ -9,7 +9,7 @@ const sandbox = createSandbox();
 beforeEach(() => {
   global.ResizeObserver = global.ResizeObserver || (() => null);
   sandbox.stub(global, 'ResizeObserver').callsFake((callback) => {
-    callback();
+    callback([]);
     return {
       observe: sandbox.stub(),
       disconnect: sandbox.stub()
@@ -52,7 +52,7 @@ test('should display tooltip with overflow', async () => {
   act(() => {
     button.focus();
   });
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(await screen.findByRole('tooltip')).toBeInTheDocument();
 });
 
 test('should not display tooltip with no multiline overflow', () => {
@@ -68,7 +68,7 @@ test('should not display tooltip with no multiline overflow', () => {
   expect(screen.getByTestId('text-ellipsis')).not.toHaveAttribute('tabindex');
 });
 
-test('should display tooltip with multiline overflow', () => {
+test('should display tooltip with multiline overflow', async () => {
   sandbox.stub(global.HTMLDivElement.prototype, 'clientHeight').value(100);
   sandbox.stub(global.HTMLDivElement.prototype, 'scrollHeight').value(200);
   render(<TextEllipsis maxLines={2}>Hello World</TextEllipsis>);
@@ -81,7 +81,7 @@ test('should display tooltip with multiline overflow', () => {
   act(() => {
     button.focus();
   });
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(await screen.findByRole('tooltip')).toBeInTheDocument();
 });
 
 test('should support className prop', () => {

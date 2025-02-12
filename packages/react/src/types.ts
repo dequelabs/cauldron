@@ -12,3 +12,8 @@ export namespace Cauldron {
  * Explicit equivalent of Exclude<ReactNode, boolean | null | undefined>
  */
 export type ContentNode = string | number | ReactPortal | ReactElement;
+
+export type ElementOrRef<E extends Element> =
+  | E
+  | React.RefObject<E>
+  | React.MutableRefObject<E>;

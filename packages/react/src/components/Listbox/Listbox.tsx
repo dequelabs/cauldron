@@ -16,20 +16,34 @@ import useSharedRef from '../../utils/useSharedRef';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
-interface ListboxProps
+interface BaseListboxProps
   extends PolymorphicProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
   > {
-  value?: ListboxValue;
   navigation?: 'cycle' | 'bound';
-  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
-    value
-  }: {
+  onActiveChange?: (option: ListboxOption) => void;
+}
+
+interface SingleSelectListboxProps extends BaseListboxProps {
+  multiselect?: false;
+  value?: ListboxValue;
+  defaultValue?: ListboxValue;
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     previousValue: ListboxValue;
     value: ListboxValue;
   }) => void;
-  onActiveChange?: (option: ListboxOption) => void;
+}
+
+interface MultiSelectListboxProps extends BaseListboxProps {
+  multiselect: true;
+  value?: ListboxValue[];
+  defaultValue?: ListboxValue[];
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
+    target: T;
+    previousValue: ListboxValue[];
+    value: ListboxValue[];
+  }) => void;
 }
 
 // id for listbox options should always be defined since it should
@@ -45,7 +59,10 @@ const optionMatchesValue = (option: ListboxOption, value: unknown): boolean =>
   typeof option.value !== 'undefined' &&
   option.value === value;
 
-const Listbox = forwardRef<HTMLElement, ListboxProps>(
+const Listbox = forwardRef<
+  HTMLElement,
+  SingleSelectListboxProps | MultiSelectListboxProps
+>(
   (
     {
       as: Component = 'ul',
@@ -53,6 +70,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       defaultValue,
       value,
       navigation = 'bound',
+      multiselect = false,
       onKeyDown,
       onFocus,
       onSelectionChange,
@@ -65,25 +83,40 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const [activeOption, setActiveOption] = useState<ListboxOption | null>(
       null
     );
-    const [selectedOption, setSelectedOption] = useState<ListboxOption | null>(
-      null
-    );
+    const [selectedOptions, setSelectedOptions] = useState<ListboxOption[]>([]);
     const listboxRef = useSharedRef<HTMLElement>(ref);
     const isControlled = typeof value !== 'undefined';
 
     useLayoutEffect(() => {
-      if (!isControlled && selectedOption) {
+      if (!isControlled && selectedOptions.length > 0) {
         return;
       }
 
       const listboxValue = isControlled ? value : defaultValue;
-      const matchingOption = options.find((option) =>
-        optionMatchesValue(option, listboxValue)
-      );
+      if (!listboxValue) {
+        return;
+      }
 
-      setSelectedOption(matchingOption || null);
-      setActiveOption(matchingOption || null);
-    }, [isControlled, options, value]);
+      if (multiselect) {
+        const matchingOptions = options.filter((option) =>
+          (listboxValue as ListboxValue[]).find((value) =>
+            optionMatchesValue(option, value)
+          )
+        );
+        setSelectedOptions(matchingOptions);
+        if (!activeOption) {
+          setActiveOption(matchingOptions[0] || null);
+        }
+      } else {
+        const matchingOption = options.find((option) =>
+          optionMatchesValue(option, listboxValue)
+        );
+        setSelectedOptions(matchingOption ? [matchingOption] : []);
+        if (!activeOption) {
+          setActiveOption(matchingOption || null);
+        }
+      }
+    }, [isControlled, options, value, defaultValue, activeOption]);
 
     useEffect(() => {
       if (activeOption) {
@@ -94,17 +127,56 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
     const handleSelect = useCallback(
       (option: ListboxOption) => {
         setActiveOption(option);
+        const optionIsSelected = selectedOptions.some(
+          (selected) => selected.element === option.element
+        );
+        const previousValues = selectedOptions.map(
+          (selected) => selected.value
+        );
+
         // istanbul ignore else
         if (!isControlled) {
-          setSelectedOption(option);
+          if (!multiselect) {
+            setSelectedOptions([option]);
+          } else {
+            setSelectedOptions(
+              optionIsSelected
+                ? [
+                    ...selectedOptions.filter(
+                      (selected) => selected.element !== option.element
+                    )
+                  ]
+                : [...selectedOptions, option]
+            );
+          }
         }
-        onSelectionChange?.({
-          target: option.element,
-          value: option.value,
-          previousValue: selectedOption?.value
-        });
+
+        if (multiselect) {
+          (onSelectionChange as MultiSelectListboxProps['onSelectionChange'])?.(
+            {
+              target: option.element,
+              value: optionIsSelected
+                ? selectedOptions
+                    .filter(
+                      (selectedOption) =>
+                        selectedOption.element !== option.element
+                    )
+                    .map((selectedOption) => selectedOption.value)
+                : [...previousValues, option.value],
+              previousValue: previousValues
+            }
+          );
+        } else {
+          (
+            onSelectionChange as SingleSelectListboxProps['onSelectionChange']
+          )?.({
+            target: option.element,
+            value: option.value,
+            previousValue: selectedOptions[0]?.value
+          });
+        }
       },
-      [isControlled, selectedOption]
+      [isControlled, selectedOptions, multiselect, onSelectionChange]
     );
 
     const handleKeyDown = useCallback(
@@ -170,12 +242,15 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
             break;
         }
       },
-      [options, activeOption, navigation]
+      [options, activeOption, navigation, handleSelect]
     );
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
-        if (!activeOption && !selectedOption) {
+        if (
+          !activeOption ||
+          !options.some((option) => option.element === activeOption.element)
+        ) {
           const firstOption = options.find(
             (option) => !isDisabledOption(option)
           );
@@ -184,13 +259,16 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
             setActiveOption(firstOption);
           }
           // istanbul ignore else
-        } else if (event.target === listboxRef.current) {
-          setActiveOption(selectedOption);
+        } else if (
+          selectedOptions.length &&
+          event.target === listboxRef.current
+        ) {
+          setActiveOption(selectedOptions[selectedOptions.length - 1]);
         }
 
         onFocus?.(event);
       },
-      [options, activeOption, selectedOption]
+      [options, activeOption, selectedOptions]
     );
 
     return (
@@ -200,6 +278,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
         tabIndex="0"
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
+        aria-multiselectable={multiselect ? true : undefined}
         aria-activedescendant={
           activeOption ? getOptionId(activeOption) : undefined
         }
@@ -208,7 +287,8 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
         <ListboxProvider
           options={options}
           active={activeOption}
-          selected={selectedOption}
+          multiselect={multiselect}
+          selected={selectedOptions}
           setOptions={setOptions}
           onSelect={handleSelect}
         >
@@ -217,7 +297,7 @@ const Listbox = forwardRef<HTMLElement, ListboxProps>(
       </Component>
     );
   }
-) as PolymorphicComponent<ListboxProps>;
+) as PolymorphicComponent<SingleSelectListboxProps | MultiSelectListboxProps>;
 
 Listbox.displayName = 'Listbox';
 

@@ -5,6 +5,7 @@ import { TableProvider } from './TableContext';
 export type Column = {
   align: ColumnAlignment;
   width?: ColumnWidth;
+  maxWidth?: ColumnWidth;
 };
 export type ColumnAlignment = 'start' | 'center' | 'end';
 export type ColumnWidth =
@@ -30,6 +31,19 @@ type TableGridProps = {
 
 type TableProps = (TableBaseProps | Partial<TableGridProps>) &
   React.TableHTMLAttributes<HTMLTableElement>;
+
+function parseColumnWidth(width?: ColumnWidth): string {
+  const number = Number(width);
+  if (!isNaN(number)) {
+    return `${number}px`;
+  }
+
+  if (!width) {
+    return 'auto';
+  }
+
+  return width;
+}
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
   (
@@ -65,7 +79,15 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
       }
 
       return columns
-        .map(({ width }) => width || 'auto')
+        .map(({ width, maxWidth }) => {
+          if (maxWidth) {
+            return `minmax(${parseColumnWidth(width)}, ${parseColumnWidth(
+              maxWidth
+            )})`;
+          }
+
+          return parseColumnWidth(width);
+        })
         .join(' ');
     }, [layout, columns]);
 

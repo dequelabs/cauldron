@@ -132,6 +132,7 @@ export { default as TextEllipsis } from './components/TextEllipsis';
 export { default as CopyButton } from './components/CopyButton';
 export { default as Drawer } from './components/Drawer';
 export { default as BottomSheet } from './components/BottomSheet';
+export { default as AnchoredOverlay } from './components/AnchoredOverlay';
 
 /**
  * Helpers / Utils

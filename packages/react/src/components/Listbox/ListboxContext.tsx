@@ -10,7 +10,8 @@ type ListboxOption<Element = HTMLElement, Value = string | number> = {
 type ListboxContext<T extends ListboxOption> = {
   options: T[];
   active: T | null;
-  selected: T | null;
+  selected: T[] | null;
+  multiselect: boolean;
   setOptions: React.Dispatch<React.SetStateAction<T[]>>;
   onSelect: (option: T) => void;
 };
@@ -24,6 +25,7 @@ const ListboxContext = createContext({
   options: [],
   active: null,
   selected: null,
+  multiselect: false,
   setOptions: () => null,
   onSelect: () => null
 });
@@ -32,6 +34,7 @@ function ListboxProvider<T extends ListboxOption>({
   options,
   active,
   selected,
+  multiselect,
   setOptions,
   onSelect,
   children
@@ -44,10 +47,11 @@ function ListboxProvider<T extends ListboxOption>({
       options,
       active,
       selected,
+      multiselect,
       setOptions,
       onSelect
     }),
-    [options, active, selected, setOptions]
+    [options, active, selected, multiselect, setOptions]
   );
 
   return <Provider value={value}>{children}</Provider>;

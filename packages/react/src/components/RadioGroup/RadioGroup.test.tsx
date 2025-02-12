@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
@@ -167,7 +167,7 @@ test('should handle focus correctly', async () => {
   expect(onFocus.calledOnce).toBeTruthy();
 });
 
-test('should handle blur correctly', () => {
+test('should handle blur correctly', async () => {
   const onBlur = spy();
   const [input] = renderRadioGroup({ onBlur });
   const radioIcon = input.parentElement!.querySelector(
@@ -176,9 +176,11 @@ test('should handle blur correctly', () => {
   expect(radioIcon).not.toHaveClass('.Radio__overlay--focused');
   expect(onBlur.notCalled).toBeTruthy();
 
-  input.focus();
-  input.blur();
-  expect(input).not.toHaveFocus();
+  await waitFor(() => {
+    input.focus();
+    input.blur();
+    expect(input).not.toHaveFocus();
+  });
   expect(radioIcon).not.toHaveClass('Radio__overlay--focused');
   expect(onBlur.calledOnce).toBeTruthy();
 });

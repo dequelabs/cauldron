@@ -51,24 +51,29 @@
 
 /* TooltipArrow needs some dimensions to accurately calculate its positioning */
 .TooltipArrow {
+  position: absolute;
   height: 0.1px;
   width: 0.1px;
 }
 
 /* Adjust position to try to center the arrow in the tooltip's border */
 [class*='Tooltip--top'] .TooltipArrow {
+  left: 50%;
   bottom: -1px;
 }
 
 [class*='Tooltip--bottom'] .TooltipArrow {
+  left: 50%;
   top: -1px;
 }
 
 [class*='Tooltip--left'] .TooltipArrow {
+  top: 50%;
   right: -1px;
 }
 
 [class*='Tooltip--right'] .TooltipArrow {
+  top: 50%;
   left: 0;
 }
 
