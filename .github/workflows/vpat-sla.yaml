@@ -2,7 +2,7 @@ name: 'VPAT SLA'
 on:
   pull_request:
   schedule:
-    run every day at 1:15 AM UTC
+    # run every day at 1:15 AM UTC
     - cron: '15 1 * * *'
 
 jobs:
