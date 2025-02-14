@@ -1,0 +1,57 @@
+name: 'VPAT SLA'
+on:
+  # TESTING! Remove this before going out
+  pull_request:
+  # schedule:
+    # run every day at 1:15 AM UTC
+    # - cron: '15 1 * * *'
+
+jobs:
+
+  vpat-blocker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          only-labels: 'vpat,vpat:blocker'
+          stale-issue-message: 'This VPAT issue has been open for 4 weeks without being resolved.'
+          days-before-issue-stale: 28
+          days-before-pr-stale: -1
+          days-before-close: -1
+          ignore-updates: true
+
+  vpat-critical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          only-labels: 'vpat,vpat:critical'
+          stale-issue-message: 'This VPAT issue has been open for 10 weeks without being resolved.'
+          days-before-issue-stale: 70
+          days-before-pr-stale: -1
+          days-before-close: -1
+          ignore-updates: true
+
+  vpat-serious:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          only-labels: 'vpat,vpat:serious'
+          stale-issue-message: 'This VPAT issue has been open for 20 weeks without being resolved.'
+          days-before-issue-stale: 140
+          days-before-pr-stale: -1
+          days-before-close: -1
+          ignore-updates: true
+
+  vpat-moderate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          only-labels: 'vpat,vpat:moderate'
+          stale-issue-message: 'This VPAT issue has been open for 30 weeks without being resolved.'
+          days-before-issue-stale: 210
+          days-before-pr-stale: -1
+          days-before-close: -1
+          ignore-updates: true
