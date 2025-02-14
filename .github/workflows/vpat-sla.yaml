@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          only-issue-labels: 'vpat,vpat:blocker'
+          only-labels: 'vpat,vpat:blocker'
           stale-issue-message: 'This VPAT issue has been open for 4 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
           days-before-issue-stale: 28
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          only-issue-labels: 'vpat,vpat:critical'
+          only-labels: 'vpat,vpat:critical'
           stale-issue-message: 'This VPAT issue has been open for 10 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
           days-before-issue-stale: 70
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          only-issue-labels: 'vpat,vpat:serious'
+          only-labels: 'vpat,vpat:serious'
           stale-issue-message: 'This VPAT issue has been open for 20 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
           days-before-issue-stale: 140
@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          only-issue-labels: 'vpat,vpat:moderate'
+          only-labels: 'vpat,vpat:moderate'
           stale-issue-message: 'This VPAT issue has been open for 30 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
           days-before-issue-stale: 210
