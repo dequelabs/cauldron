@@ -1,10 +1,9 @@
 name: 'VPAT SLA'
 on:
-  # TESTING! Remove this before going out
   pull_request:
-  # schedule:
-    # run every day at 1:15 AM UTC
-    # - cron: '15 1 * * *'
+  schedule:
+    run every day at 1:15 AM UTC
+    - cron: '15 1 * * *'
 
 jobs:
 
