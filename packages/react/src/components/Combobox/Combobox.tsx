@@ -427,7 +427,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         >
           <span>{label}</span>
           {isRequired && (
-            <span className="Field__required-text">{requiredText}</span>
+            <span className="Field__required-text" aria-hidden="true">
+              {requiredText}
+            </span>
           )}
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
