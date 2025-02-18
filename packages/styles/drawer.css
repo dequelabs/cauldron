@@ -1,7 +1,7 @@
 .Drawer {
   position: fixed;
   max-height: var(--drawer-height, 100vh);
-  max-width: var(--drawer-height, 100vw);
+  max-width: var(--drawer-width, 100vw);
   z-index: var(--z-index-drawer);
   transition: transform ease-in-out 250ms;
 }
