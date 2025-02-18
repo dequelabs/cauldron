@@ -437,3 +437,29 @@ test('should have screenshot for Button[variant="tag"]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[variant=tag]');
 });
+
+test('should have screenshot for Button[variant="badge"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="badge">Badge</Button>
+      <Button variant="badge">Hover</Button>
+      <Button variant="badge">Active</Button>
+      <Button variant="badge">Focus</Button>
+      <Button variant="badge" disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(await component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[variant=badge]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[variant=badge]');
+});

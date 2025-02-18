@@ -58,7 +58,7 @@
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
-.OptionsMenu__list[aria-expanded='true'] {
+.OptionsMenu__list:is(.OptionsMenu--expanded) {
   display: block;
 }
 
