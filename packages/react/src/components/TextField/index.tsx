@@ -97,7 +97,9 @@ export default class TextField extends React.Component<
         >
           <span>{label}</span>
           {isRequired && (
-            <span className="Field__required-text">{requiredText}</span>
+            <span className="Field__required-text" aria-hidden="true">
+              {requiredText}
+            </span>
           )}
         </label>
         <Field

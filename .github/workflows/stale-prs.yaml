@@ -1,0 +1,21 @@
+name: 'Close stale PRs'
+on:
+  schedule:
+    # run every day at 1:15 AM UTC
+    - cron: '15 1 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-pr-message: 'This pull request has been open for 30 days with no activity. If no further activity occurs, it will be closed in 14 days.'
+          close-pr-message: 'This pull request was closed because it has been inactive for 14 days since being marked as stale.'
+          stale-pr-label: 'stale'
+          exempt-pr-labels: 'dependencies'
+          days-before-pr-stale: 30
+          days-before-pr-close: 14
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
