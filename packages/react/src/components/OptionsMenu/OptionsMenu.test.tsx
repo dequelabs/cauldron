@@ -117,12 +117,10 @@ test('should toggle menu on trigger clicks', async () => {
 
   await user.click(button);
   expect(button).toHaveAttribute('aria-expanded', 'true');
-  expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'true');
-
+  expect(screen.getByRole('menu')).toHaveClass('OptionsMenu--expanded');
   await user.click(button);
-
   expect(button).toHaveAttribute('aria-expanded', 'false');
-  expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('menu')).not.toHaveClass('OptionsMenu--expanded');
 });
 
 test('should click trigger with down key on trigger', () => {
@@ -188,10 +186,12 @@ test('should close menu when click outside event occurs', async () => {
     </>
   );
 
-  await user.click(screen.getByRole('button', { name: 'trigger' }));
-  expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'true');
+  const triggerButton = screen.getByRole('button', { name: 'trigger' });
+  await user.click(triggerButton);
+  expect(triggerButton).toHaveAttribute('aria-expanded', 'true');
   await user.click(screen.getByRole('button', { name: 'Click me!' }));
-  expect(screen.getByRole('menu')).toHaveAttribute('aria-expanded', 'false');
+  expect(triggerButton).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByRole('menu')).not.toHaveClass('OptionsMenu--expanded');
 });
 
 test('should return no axe violations when hidden', async () => {
