@@ -4,10 +4,10 @@ description: An interactive element that performs a programmable action when act
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/IconButton/index.tsx
 ---
 
-import { IconButton, Offscreen } from '@deque/cauldron-react'
+import { IconButton, Offscreen } from '@deque/cauldron-react';
 
 ```js
-import { IconButton } from '@deque/cauldron-react'
+import { IconButton } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -39,7 +39,6 @@ Tertiary buttons are an alternate style of button with less visual prominence th
 <IconButton variant="tertiary" icon="pencil" label="Edit" disabled />
 ```
 
-
 ### Error
 
 Error buttons are used to indicate potentially dangerous actions.
@@ -54,10 +53,10 @@ Error buttons are used to indicate potentially dangerous actions.
 The default tooltip can be modified by setting the relevant props configuration from [Tooltip](./Tooltip). This includes all props except for `children` and `target`.
 
 ```jsx example
-<IconButton 
+<IconButton
   icon="trash"
-  label="Delete" 
-  tooltipProps={{ placement: 'bottom', variant: 'info' }} 
+  label="Delete"
+  tooltipProps={{ placement: 'bottom', variant: 'info' }}
 />
 ```
 
@@ -67,11 +66,11 @@ If there are multiple icon buttons with the same label, the visible label text c
 
 ```jsx example
 <div>
-  User: Jason 
+  User: Jason
   <IconButton icon="trash" label={<>Delete User <Offscreen>Jason</Offscreen></>} />
 </div>
 <div>
-  User: Harris 
+  User: Harris
   <IconButton icon="trash" label={<>Delete User <Offscreen>Harris</Offscreen></>} />
 </div>
 ```
@@ -104,7 +103,8 @@ If there are multiple icon buttons with the same label, the visible label text c
       name: 'label',
       type: 'string',
       required: true,
-      description: 'Label to be displayed for the tooltip and as the accessible name.'
+      description:
+        'Label to be displayed for the tooltip and as the accessible name.'
     },
     {
       name: 'variant',

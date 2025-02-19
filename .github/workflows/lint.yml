@@ -6,7 +6,6 @@ on:
       - develop
 
 jobs:
-
   eslint:
     runs-on: ubuntu-latest
     steps:
