@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.15.0](https://github.com/dequelabs/cauldron/compare/v6.14.0...v6.15.0) (2025-02-18)
+
+
+### Features
+
+* **a11y:** remove incorrect expanded attribute on OptionsMenu ([#1792](https://github.com/dequelabs/cauldron/issues/1792)) ([b60e295](https://github.com/dequelabs/cauldron/commit/b60e2954f41f5f62e87464265525a33cc0258626))
+* **button:** Add "badge" variant ([#1795](https://github.com/dequelabs/cauldron/issues/1795)) ([1653ddc](https://github.com/dequelabs/cauldron/commit/1653ddc785e18a7435abea6e359eaa935e453692))
+* **react:** hide required text in label for AT ([#1550](https://github.com/dequelabs/cauldron/issues/1550)) ([dfa0905](https://github.com/dequelabs/cauldron/commit/dfa0905e9635df670da68f336121215e50c77372))
+
+
+### Bug Fixes
+
+* **react:** deprecate RadioCardGroup component ([#1788](https://github.com/dequelabs/cauldron/issues/1788)) ([2c1219d](https://github.com/dequelabs/cauldron/commit/2c1219d1225de75d65b1c64a6a3e9df652ea35b4))
+* **styles:** fix incorrect drawer width variable usage ([#1803](https://github.com/dequelabs/cauldron/issues/1803)) ([df008fe](https://github.com/dequelabs/cauldron/commit/df008fea797a6b07ed2993eb7a7ed0e563e6da75))
+
 ## [6.14.0](https://github.com/dequelabs/cauldron/compare/v6.13.0...v6.14.0) (2024-12-20)
 
 
