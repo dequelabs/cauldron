@@ -28,7 +28,7 @@ export default function IconGrid() {
     inputRef.current?.focus();
   };
 
-  const noMatchesFound = filteredTypes.length;
+  const noMatchesFound = !filteredTypes.length;
 
   useEffect(() => {
     if (noMatchesFound) {
