@@ -82,7 +82,7 @@ For a new component to be added to Cauldron, the below workflow describes the de
     - Component is ready to use
 7. Can the pattern be made more general use? If yes, go to 9. If no, build the pattern as a one-off pattern.
 8. Does it fully support your use case? If yes, use existing shared product ui component. If no, build component in shared product ui.
-9. Does the pattern depend on propietary information? If yes, build component in shared product ui (launchpad). If no, complete steps under 2.
+9. Does the pattern depend on proprietary information? If yes, build component in shared product ui (launchpad). If no, complete steps under 2.
 </details>
 
 ## Developing Components
