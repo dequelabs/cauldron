@@ -15,8 +15,10 @@ interface ComboboxOptionProps extends React.HTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
   value?: ComboboxValue;
   formValue?: ComboboxValue;
-  description?: ContentNode;
+  description?: ContentNode | string;
   children: string;
+  imageURL?: string;
+  isAdvancedCombobox?: boolean;
 }
 
 const ComboboxMatch = ({
@@ -64,6 +66,8 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       description,
       value: propValue,
       formValue,
+      imageURL,
+      isAdvancedCombobox = false,
       ...props
     },
     ref
@@ -86,7 +90,8 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     );
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
-      (typeof matches === 'function' && matches(children));
+      (typeof matches === 'function' &&
+        matches(children, description as string));
 
     // istanbul ignore next
     useLayoutEffect(() => {
@@ -172,7 +177,8 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
             <div className="ComboboxOption__description">{description}</div>
           )}
         </span>
-        {isSelected ? <Icon type="check-solid" /> : null}
+        {!imageURL && isSelected ? <Icon type="check-solid" /> : null}
+        {imageURL ? <img src={imageURL} alt={'Option description'} /> : null}
       </ListboxOption>
     );
   }
