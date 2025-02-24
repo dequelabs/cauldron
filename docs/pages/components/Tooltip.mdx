@@ -4,11 +4,18 @@ description: A small text box that gives more information about a UI element whe
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Tooltip/index.tsx
 ---
 
-import { useRef } from 'react'
-import { Tooltip, TooltipHead, TooltipContent, Button, TextField, Line } from '@deque/cauldron-react'
+import { useRef } from 'react';
+import {
+  Tooltip,
+  TooltipHead,
+  TooltipContent,
+  Button,
+  TextField,
+  Line
+} from '@deque/cauldron-react';
 
 ```js
-import { Tooltip } from '@deque/cauldron-react'
+import { Tooltip } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -62,7 +69,7 @@ function TextTooltipExamples() {
         On your right
       </Tooltip>
     </>
-  )
+  );
 }
 ```
 
@@ -107,7 +114,7 @@ function InfoTooltipExamples() {
         Here’s an informational tooltip with more content on your right.
       </Tooltip>
     </>
-  )
+  );
 }
 ```
 
@@ -117,7 +124,7 @@ For more verbose tooltips, the `big` variant can be used.
 
 ```jsx example
 function BigTooltipExample() {
-  const password = useRef()
+  const password = useRef();
   return (
     <>
       <TextField fieldRef={password} label="Password" />
@@ -134,14 +141,12 @@ function BigTooltipExample() {
               Special characters are good, but remember all characters are
               special in their own way
             </li>
-            <li>
-              Make sure your passwords match...that should be obvious.
-            </li>
+            <li>Make sure your passwords match...that should be obvious.</li>
           </ul>
         </TooltipContent>
       </Tooltip>
     </>
-  )
+  );
 }
 ```
 
@@ -161,13 +166,13 @@ function ControlledTooltip() {
         Tooltip
       </Tooltip>
     </>
-  )
+  );
 }
 ```
 
 <Note>
 
-Manually setting `show` means the tooltip _will not_ automatically hide or show based on input events coming from the target. This is most likely not the desired default behavior, so avoid setting `show` unless you are sure of what you are doing. 
+Manually setting `show` means the tooltip _will not_ automatically hide or show based on input events coming from the target. This is most likely not the desired default behavior, so avoid setting `show` unless you are sure of what you are doing.
 
 </Note>
 
@@ -193,7 +198,8 @@ Manually setting `show` means the tooltip _will not_ automatically hide or show 
       name: 'defaultShow',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Sets the initial show state of the tooltip when initially rendered.'
+      description:
+        'Sets the initial show state of the tooltip when initially rendered.'
     },
     {
       name: 'placement',

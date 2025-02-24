@@ -13,14 +13,14 @@ Cauldron supports light and dark themes of all of its various components. Cauldr
 To give components access to the current theme, `ThemeProvider` must be added somewhere in the root of your application, wrapping all of cauldron's rendered components:
 
 ```jsx
-import { ThemeProvider } from '@deque/cauldron-react'
+import { ThemeProvider } from '@deque/cauldron-react';
 
 export default function App() {
   return (
     <ThemeProvider initialTheme="light">
       <div>...</div>
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -29,17 +29,17 @@ The initial theme can be set with the values `light` or `dark`.
 When using the `ThemeProvider`, a theme context object is also included to be able to access what the current theme is:
 
 ```jsx
-import { useThemeContext, Button } from '@deque/cauldron-react'
+import { useThemeContext, Button } from '@deque/cauldron-react';
 
 export default function MyComponent() {
-  const { theme, toggleTheme } = useThemeContext()
+  const { theme, toggleTheme } = useThemeContext();
 
   return (
     <div>
       Current Theme: {theme}
       <Button onClick={toggleTheme}>Toggle Theme</Button>
     </div>
-  )
+  );
 }
 ```
 

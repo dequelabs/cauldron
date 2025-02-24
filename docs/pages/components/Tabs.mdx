@@ -4,11 +4,11 @@ description: A component with multiple panels activated by an interactive tab li
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Tabs/Tabs.tsx
 ---
 
-import { useRef } from 'react'
-import { Tabs, Tab, TabPanel } from '@deque/cauldron-react'
+import { useRef } from 'react';
+import { Tabs, Tab, TabPanel } from '@deque/cauldron-react';
 
 ```jsx
-import { Tabs, Tab, TabPanel } from '@deque/cauldron-react'
+import { Tabs, Tab, TabPanel } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -19,9 +19,9 @@ By default, the tab list will be horizontal above the tab panel.
 
 ```jsx example
 function HorizontalTabs() {
-  const tabRef1 = useRef()
-  const tabRef2 = useRef()
-  const tabRef3 = useRef()
+  const tabRef1 = useRef();
+  const tabRef2 = useRef();
+  const tabRef3 = useRef();
 
   return (
     <>
@@ -30,17 +30,11 @@ function HorizontalTabs() {
         <Tab target={tabRef2}>Tab 2</Tab>
         <Tab target={tabRef3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={tabRef1}>
-        Panel for Horizontal Tabs (1)
-      </TabPanel>
-      <TabPanel ref={tabRef2}>
-        Panel for Horizontal Tabs (2)
-      </TabPanel>
-      <TabPanel ref={tabRef3}>
-        Panel for Horizontal Tabs (3)
-      </TabPanel>
+      <TabPanel ref={tabRef1}>Panel for Horizontal Tabs (1)</TabPanel>
+      <TabPanel ref={tabRef2}>Panel for Horizontal Tabs (2)</TabPanel>
+      <TabPanel ref={tabRef3}>Panel for Horizontal Tabs (3)</TabPanel>
     </>
-  )
+  );
 }
 ```
 
@@ -50,12 +44,12 @@ Alternatively, the tab list can also be placed vertically to the left of the tab
 
 ```jsx example
 function VerticalTabs() {
-  const tabRef1 = useRef()
-  const tabRef2 = useRef()
-  const tabRef3 = useRef()
+  const tabRef1 = useRef();
+  const tabRef2 = useRef();
+  const tabRef3 = useRef();
 
   // Panels need a min-height to match the # of tab items
-  const panelStyles = { minHeight: '10rem' }
+  const panelStyles = { minHeight: '10rem' };
 
   return (
     <>
@@ -74,7 +68,7 @@ function VerticalTabs() {
         Panel for Vertical Tabs (3)
       </TabPanel>
     </>
-  )
+  );
 }
 ```
 
@@ -84,9 +78,9 @@ Additionally, there is a `thin` variant with reduced spacing within the tab list
 
 ```jsx example
 function ThinTabs() {
-  const tabRef1 = useRef()
-  const tabRef2 = useRef()
-  const tabRef3 = useRef()
+  const tabRef1 = useRef();
+  const tabRef2 = useRef();
+  const tabRef3 = useRef();
 
   return (
     <>
@@ -95,17 +89,11 @@ function ThinTabs() {
         <Tab target={tabRef2}>Tab 2</Tab>
         <Tab target={tabRef3}>Tab 3</Tab>
       </Tabs>
-      <TabPanel ref={tabRef1}>
-        Panel for Thin Tabs (1)
-      </TabPanel>
-      <TabPanel ref={tabRef2}>
-        Panel for Thin Tabs (2)
-      </TabPanel>
-      <TabPanel ref={tabRef3}>
-        Panel for Thin Tabs (3)
-      </TabPanel>
+      <TabPanel ref={tabRef1}>Panel for Thin Tabs (1)</TabPanel>
+      <TabPanel ref={tabRef2}>Panel for Thin Tabs (2)</TabPanel>
+      <TabPanel ref={tabRef3}>Panel for Thin Tabs (3)</TabPanel>
     </>
-  )
+  );
 }
 ```
 
@@ -139,18 +127,21 @@ function ThinTabs() {
     {
       name: 'onChange',
       type: 'function',
-      description: 'Callback function that gets invoked when the active tab changes.'
+      description:
+        'Callback function that gets invoked when the active tab changes.'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop.'
-    },
+      description:
+        'A label for tabs is required. This means you must provide either an aria-label or aria-labelledby prop.'
+    }
   ]}
 />
 
@@ -165,15 +156,12 @@ function ThinTabs() {
       name: 'target',
       required: true,
       type: ['React.RefObject<HTMLDivElement>', 'HTMLElement'],
-      description: 'Pointer to the targeted TabPanel to display when the tab is active.'
+      description:
+        'Pointer to the targeted TabPanel to display when the tab is active.'
     }
   ]}
 />
 
 ### TabPanel
 
-<ComponentProps
-  children={true}
-  className={true}
-  refType="HTMLDivElement"
-/>
+<ComponentProps children={true} className={true} refType="HTMLDivElement" />

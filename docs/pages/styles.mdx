@@ -45,7 +45,10 @@ For modifiers, such as variants or states, these values would be delimited by tw
 Some flexibility in components may inevitably be needed, and this flexibility can be provided via [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). These variables can be a global variable, as defined in [variables.css](https://github.com/dequelabs/cauldron/blob/develop/packages/styles/variables.css) or locally in a component's individual CSS file.
 
 <Note>
-  Component level variables should not be set in `variables.css`, this is reserved for things that should apply globally across all cauldron components. If a component variable needs to use a global variable, it should use a cascading component variable that inherits from the global variable.
+  Component level variables should not be set in `variables.css`, this is
+  reserved for things that should apply globally across all cauldron components.
+  If a component variable needs to use a global variable, it should use a
+  cascading component variable that inherits from the global variable.
 </Note>
 
 A component variable name should be as descriptive as possible so that its intended usage is clear. This would mean including the component name, along with what property it sets, and any states or variants:

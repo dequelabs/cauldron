@@ -62,8 +62,8 @@ We include trailing children to allow for additional input context to be provide
 
 ```jsx example
 <FieldWrap>
-  <SearchField 
-    label="Search Field with trailing children" 
+  <SearchField
+    label="Search Field with trailing children"
     trailingChildren={
       <span style={{ marginRight: '8px' }}>
         <strong>1</strong> of <strong>1</strong>
@@ -74,6 +74,7 @@ We include trailing children to allow for additional input context to be provide
 ```
 
 ### Controlled
+
 `SearchField` can also be controlled, by setting the `value` prop and updating the value from event callbacks.
 
 ```jsx example
@@ -85,11 +86,7 @@ function ControlledSearchFieldExample() {
 
   return (
     <FieldWrap>
-      <SearchField
-        label="Controlled"
-        value={value}
-        onChange={handleChange}
-      />
+      <SearchField label="Controlled" value={value} onChange={handleChange} />
     </FieldWrap>
   );
 }
