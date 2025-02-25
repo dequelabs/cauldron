@@ -3,15 +3,16 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react';
 import { createPortal } from 'react-dom';
-import classnames from 'classnames';
 import { useId } from 'react-id-generator';
-import { ContentNode } from '../../types';
+import classnames from 'classnames';
 import Listbox from '../Listbox';
 import ComboboxOption from './ComboboxOption';
 import { ComboboxProvider } from './ComboboxContext';
+import type { ContentNode } from '../../types';
 import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
@@ -30,31 +31,38 @@ interface ComboboxOption {
   description?: string;
 }
 
-interface ComboboxProps
-  extends React.InputHTMLAttributes<
-    Omit<HTMLInputElement, 'value' | 'defaultValue'>
+interface BaseComboboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'value' | 'defaultValue'
   > {
   label: ContentNode;
   options?: ComboboxOption[];
-  value?: ComboboxValue;
-  defaultValue?: ComboboxValue;
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
   autocomplete?: 'none' | 'manual' | 'automatic';
-  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
-    target,
-    value,
-    previousValue
-  }: {
-    target: T;
-    value: ComboboxValue;
-    previousValue: ComboboxValue;
-  }) => void;
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
 }
+
+interface SingleSelectComboboxProps extends BaseComboboxProps {
+  value?: ComboboxValue;
+  defaultValue?: ComboboxValue;
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
+    target: T;
+    value: ComboboxValue;
+    previousValue: ComboboxValue;
+  }) => void;
+}
+
+type ListboxOnSelectionChange = Parameters<
+  Exclude<
+    React.ComponentPropsWithRef<typeof Listbox>['onSelectionChange'],
+    undefined
+  >
+>[0];
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   // istanbul ignore if
@@ -76,7 +84,7 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
+const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
   (
     {
       id: propId,
@@ -104,12 +112,17 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     },
     ref
   ): React.JSX.Element => {
-    const [value, setValue] = useState<string>(defaultValue || propValue || '');
     const [matchingOptions, setMatchingOptions] = useState<
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
-    const [selectedValue, setSelectedValue] = useState<string>(value || '');
-    const [formValue, setFormValue] = useState<string | undefined>('');
+    const [inputValue, setInputValue] = useState(
+      () => defaultValue || propValue || ''
+    );
+    const [selectedValues, setSelectedValues] = useState(() => {
+      const value = defaultValue || propValue;
+      return value ? [value] : [];
+    });
+    const [formValues, setFormValues] = useState<ComboboxValue[]>([]);
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
       useState<ListboxOption | null>(null);
@@ -130,12 +143,13 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           id={`${id}-option-${index + 1}`}
           description={option.description}
           value={option.value}
+          formValue={option.formValue}
         >
           {option.label}
         </ComboboxOption>
       ));
 
-    const triggerListboxKeyDown = React.useCallback(
+    const triggerListboxKeyDown = useCallback(
       (key: string) => {
         listboxRef.current?.dispatchEvent(
           new KeyboardEvent('keydown', {
@@ -153,15 +167,19 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         return;
       }
 
-      if (!open && selectedValue && value !== selectedValue) {
-        setValue(selectedValue);
+      if (
+        !open &&
+        selectedValues.length &&
+        !selectedValues.includes(inputValue)
+      ) {
+        setInputValue(selectedValues[selectedValues.length - 1]);
       }
 
       if (!open) {
         setActiveDescendant(null);
       }
 
-      if (open && autocomplete === 'automatic' && !selectedValue) {
+      if (open && autocomplete === 'automatic' && !selectedValues.length) {
         // Fire a Home keydown event on listbox to ensure the first item is selected
         triggerListboxKeyDown(Home);
       }
@@ -177,7 +195,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       } else if (
         autocomplete === 'automatic' &&
         matchingOptions.size &&
-        !selectedValue
+        !selectedValues.length
       ) {
         // Fire a home keydown event on listbox to ensure the first item is selected
         requestAnimationFrame(() => {
@@ -192,19 +210,27 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(true);
-          if (selectedValue && value === selectedValue && isAutoComplete) {
-            setValue('');
+          if (
+            selectedValues.length &&
+            selectedValues.includes(inputValue) &&
+            isAutoComplete
+          ) {
+            setInputValue('');
           }
         }
       },
-      [onFocus, value, selectedValue]
+      [onFocus, inputValue, selectedValues]
     );
 
     const handleInputClick = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
         setOpen(true);
-        if (selectedValue && value === selectedValue && isAutoComplete) {
-          setValue('');
+        if (
+          selectedValues.length &&
+          selectedValues.includes(inputValue) &&
+          isAutoComplete
+        ) {
+          setInputValue('');
         }
 
         if (event.target !== inputRef.current) {
@@ -212,7 +238,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           inputRef.current?.focus();
         }
       },
-      [value, selectedValue]
+      [inputValue, selectedValues]
     );
 
     const handleComboboxOptionMouseDown = useCallback(
@@ -235,15 +261,15 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         onBlur?.(event);
         setOpen(false);
         if (autocomplete === 'automatic' && activeDescendant) {
-          const stringValue =
+          const activeValue =
             activeDescendant.value?.toString() ||
             /* istanbul ignore next: default value */ '';
-          setValue(stringValue);
-          setSelectedValue(stringValue);
+          setInputValue(activeValue);
+          setSelectedValues([activeValue]);
           onSelectionChange?.({
             target: activeDescendant.element,
-            value: stringValue,
-            previousValue: value
+            value: activeValue,
+            previousValue: selectedValues[0]
           });
         }
       },
@@ -280,10 +306,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
         setOpen(true);
 
-        if (!open && arrowKeypress && selectedValue && isAutoComplete) {
+        if (!open && arrowKeypress && selectedValues.length && isAutoComplete) {
           // If the user opens the combobox again with a selected value
           // just clear out the field to restore filtering capabilities
-          setValue('');
+          setInputValue('');
         }
 
         // Space should not trigger selection since the user could be typing
@@ -305,12 +331,12 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           setOpen(false);
         }
       },
-      [onKeyDown, isAutoComplete, open, selectedValue, activeDescendant]
+      [onKeyDown, isAutoComplete, open, selectedValues, activeDescendant]
     );
 
     useEffect(() => {
       if (typeof propValue !== 'undefined') {
-        setValue(propValue);
+        setInputValue(propValue);
       }
     }, [propValue]);
 
@@ -319,7 +345,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         onChange?.(event);
         // istanbul ignore else
         if (!isControlled) {
-          setValue(event.target.value);
+          setInputValue(event.target.value);
         }
       },
       [isControlled, onChange]
@@ -330,25 +356,19 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         target,
         value: listboxValue,
         previousValue
-      }: Parameters<
-        Exclude<
-          React.ComponentProps<typeof Listbox>['onSelectionChange'],
-          undefined
-        >
-      >[0]) => {
-        const stringValue =
-          listboxValue?.toString() || /* istanbul ignore next */ '';
+      }: ListboxOnSelectionChange) => {
+        const value = listboxValue?.toString() || /* istanbul ignore next */ '';
 
         // istanbul ignore else
         if (!isControlled) {
-          setValue(stringValue);
+          setInputValue(value);
         }
 
-        setSelectedValue(stringValue);
+        setSelectedValues([value]);
 
         onSelectionChange?.({
           target,
-          value: stringValue,
+          value: value,
           previousValue: previousValue?.toString()
         });
 
@@ -366,7 +386,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       onActiveChange?.(option);
     }, []);
 
-    const NoMatchingOptions = React.useMemo(
+    const NoMatchingOptions = useMemo(
       () =>
         React.isValidElement(renderNoResults)
           ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
@@ -376,7 +396,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       [renderNoResults]
     );
 
-    const noMatchingOptions = !!value?.length && !matchingOptions.size && (
+    const noMatchingOptions = !!inputValue && !matchingOptions.size && (
       <NoMatchingOptions />
     );
 
@@ -388,7 +408,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         role={noMatchingOptions ? 'presentation' : 'listbox'}
         aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
-        value={selectedValue}
+        value={selectedValues[0]}
         onMouseDown={handleComboboxOptionMouseDown}
         onClick={handleComboboxOptionClick}
         onSelectionChange={handleSelectionChange}
@@ -396,6 +416,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         ref={listboxRef}
         tabIndex={undefined}
         aria-activedescendant={undefined}
+        multiselect={false}
       >
         {comboboxOptions}
         {noMatchingOptions}
@@ -416,7 +437,15 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         className={classnames('Combobox', className)}
         ref={comboboxRef}
       >
-        {name && <input type="hidden" name={name} value={formValue} />}
+        {name &&
+          formValues.map((formValue) => (
+            <input
+              type="hidden"
+              key={formValue}
+              name={name}
+              value={formValue}
+            />
+          ))}
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -443,7 +472,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
             type="text"
             id={`${id}-input`}
             ref={inputRef}
-            value={value}
+            value={inputValue}
             role="combobox"
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
@@ -462,13 +491,13 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         </TextFieldWrapper>
         <ComboboxProvider
           autocomplete={autocomplete}
-          inputValue={value}
-          formValue={formValue}
-          selectedValue={selectedValue}
+          inputValue={inputValue}
+          formValues={formValues}
+          selectedValues={selectedValues}
           matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
-          setFormValue={setFormValue}
+          setFormValues={setFormValues}
         >
           {portal && typeof document !== 'undefined'
             ? (createPortal(

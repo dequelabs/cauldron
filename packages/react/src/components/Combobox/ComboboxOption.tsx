@@ -70,7 +70,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
   ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { selectedValue, matches, setMatchingOptions, setFormValue } =
+    const { selectedValues, matches, setMatchingOptions, setFormValues } =
       useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
@@ -115,13 +115,15 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         typeof propValue !== 'undefined'
           ? propValue
           : comboboxOptionRef.current?.innerText;
+      const value =
+        typeof formValue === 'undefined' ? comboboxValue : formValue;
 
-      if (selectedValue === comboboxValue) {
-        setFormValue(
-          typeof formValue === 'undefined' ? comboboxValue : formValue
-        );
+      if (selectedValues.includes(comboboxValue)) {
+        setFormValues((prev) => prev.concat(value));
+      } else {
+        setFormValues((prev) => prev.filter((fv) => fv !== value));
       }
-    }, [selectedValue, formValue]);
+    }, [selectedValues, formValue]);
 
     useEffect(() => {
       if (isMatching) {
