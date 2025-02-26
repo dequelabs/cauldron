@@ -142,10 +142,9 @@ const OptionsMenuList = ({
     >
       <ul
         {...other}
-        className={classnames('OptionsMenu__list', className)}
-        /* aria-expanded is not correct usage here, but the pattern library
-        currently styles the open state of the menu based on this attribute */
-        aria-expanded={show}
+        className={classnames('OptionsMenu__list', className, {
+          'OptionsMenu--expanded': show
+        })}
         role="menu"
         onClick={handleClick}
         ref={(el) => {
