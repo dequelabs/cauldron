@@ -55,6 +55,18 @@ const assertOptionIsSelected = (index: number) => {
   );
 };
 
+const assertOptionsAreSelected = (...indexes: number[]) => {
+  const options = screen.queryAllByRole('option');
+  for (let i = 0; i < options.length; ++i) {
+    const selected = JSON.parse(options[i]?.getAttribute('aria-selected') + '');
+    if (indexes.includes(i)) {
+      expect(selected).toBeTruthy();
+    } else {
+      expect(selected).toBeFalsy();
+    }
+  }
+};
+
 test('should render combobox with options', () => {
   const options = [
     { value: 'Apple', label: 'Apple' },
@@ -396,6 +408,31 @@ test('should close combobox listbox when selecting option via click', async () =
   assertListboxIsOpen(false);
 });
 
+test('should select multiple combobox options via clicks', () => {
+  render(
+    <Combobox label="label" multiselect>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  fireEvent.blur(combobox);
+
+  const pills = screen.getAllByRole('button');
+  expect(pills).toHaveLength(2);
+  expect(pills[0]).toHaveAccessibleName('Apple');
+  expect(pills[1]).toHaveAccessibleName('Banana');
+});
+
 test('should prevent default on combobox listbox option via mousedown', () => {
   const preventDefault = spy();
   render(
@@ -424,6 +461,33 @@ test('should prevent default on combobox listbox option via mousedown', () => {
 });
 
 test('should close combobox listbox when selecting option via keypress', () => {
+  render(
+    <Combobox label="label" multiselect>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  fireEvent.blur(combobox);
+
+  const pills = screen.getAllByRole('button');
+  expect(pills).toHaveLength(2);
+  expect(pills[0]).toHaveAccessibleName('Apple');
+  expect(pills[1]).toHaveAccessibleName('Banana');
+});
+
+test('should select multiple combobox options via keypresses', () => {
   render(
     <Combobox label="label">
       <ComboboxOption>Apple</ComboboxOption>
@@ -456,6 +520,27 @@ test('should set combobox value when selecting option via mousedown when passed 
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
 });
 
+test('should set multiselect combobox value when selecting second option via mousedown when passed children', () => {
+  render(
+    <Combobox label="label" multiselect>
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
+});
+
 test('should set combobox value when selecting option via keypress when passed children', () => {
   render(
     <Combobox label="label">
@@ -472,6 +557,29 @@ test('should set combobox value when selecting option via keypress when passed c
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
 });
 
+test('should set multiselect combobox value when selecting second option via keypress when passed children', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption value="apple">Apple</ComboboxOption>
+      <ComboboxOption value="banana">Banana</ComboboxOption>
+      <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
+});
+
 test('should set combobox value when selecting option via mousedown when passed options', () => {
   const options = [
     { value: 'apple', label: 'Apple' },
@@ -484,6 +592,26 @@ test('should set combobox value when selecting option via mousedown when passed 
   fireEvent.focus(combobox);
   fireEvent.click(screen.getAllByRole('option')[0]);
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set multiselect combobox value when selecting second option via mousedown when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" multiselect options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
 });
 
 test('should set combobox value when selecting option via keypress when passed options', () => {
@@ -499,6 +627,28 @@ test('should set combobox value when selecting option via keypress when passed o
   fireEvent.keyDown(combobox, { key: 'ArrowDown' });
   fireEvent.keyDown(combobox, { key: 'Enter' });
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+});
+
+test('should set multiselect combobox value when selecting  second option via keypress when passed options', () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cantaloupe', label: 'Cantaloupe' }
+  ];
+  render(<Combobox label="label" multiselect options={options} />);
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+  fireEvent.keyDown(combobox, { key: 'Enter' });
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
 });
 
 test('should prevent default with enter keypress and open listbox', () => {
@@ -739,6 +889,87 @@ test('should handle selection with "click" event', () => {
   assertOptionIsSelected(0);
 });
 
+test('should handle multiple selections with "click" event', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" multiselect onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Banana']);
+  fireEvent.click(combobox);
+  fireEvent.click(screen.getAllByRole('option')[2]);
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Banana',
+    'Cantaloupe'
+  ]);
+});
+
+test('should remove selected option upon clicking on pill', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" multiselect onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Banana']);
+  fireEvent.click(combobox);
+  fireEvent.click(screen.getAllByRole('option')[2]);
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Banana',
+    'Cantaloupe'
+  ]);
+  fireEvent.click(screen.getByRole('button', { name: 'Banana' }));
+  expect(onSelectionChange.thirdCall.firstArg.value).toEqual(['Cantaloupe']);
+});
+
+test('should remove all selected options when clicking on pills', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" multiselect onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Banana']);
+  fireEvent.click(combobox);
+  fireEvent.click(screen.getAllByRole('option')[2]);
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Banana',
+    'Cantaloupe'
+  ]);
+  fireEvent.click(screen.getByRole('button', { name: 'Banana' }));
+  expect(onSelectionChange.thirdCall.firstArg.value).toEqual(['Cantaloupe']);
+  fireEvent.click(screen.getByRole('button', { name: 'Cantaloupe' }));
+  expect(onSelectionChange.getCalls()[3].firstArg.value).toEqual([]);
+});
+
 test('should handle selection with "enter" keydown event', () => {
   const onSelectionChange = spy();
   render(
@@ -775,6 +1006,43 @@ test('should handle selection with "enter" keydown event', () => {
   fireEnterKeyPress();
 });
 
+test('should handle multiple selections with "enter" keydown event', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" multiselect onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom so we fire the events directly on listbox
+  const fireArrowDownKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
+  const fireEnterKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Enter' });
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireArrowDownKeyPress();
+  fireEnterKeyPress();
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Apple']);
+  fireEvent.click(combobox);
+  fireArrowDownKeyPress();
+  fireEnterKeyPress();
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Apple',
+    'Banana'
+  ]);
+  fireEvent.click(combobox);
+  fireArrowDownKeyPress();
+  fireEnterKeyPress();
+});
+
 test('should handle selection when autocomplete="automatic" and combobox input is blurred', () => {
   const onSelectionChange = spy();
   render(
@@ -803,6 +1071,43 @@ test('should handle selection when autocomplete="automatic" and combobox input i
   fireEvent.blur(combobox);
   expect(onSelectionChange.calledOnce).toBeTruthy();
   expect(onSelectionChange.firstCall.firstArg.value).toEqual('Banana');
+});
+
+test('should handle multiple selections when autocomplete="automatic" and combobox input is blurred', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox
+      label="label"
+      onSelectionChange={onSelectionChange}
+      multiselect
+      autocomplete="automatic"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom so we fire the events directly on listbox
+  const fireArrowDownKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  expect(onSelectionChange.notCalled).toBeTruthy();
+  fireEvent.blur(combobox);
+  expect(onSelectionChange.callCount).toEqual(1);
+  expect(onSelectionChange.firstCall.firstArg.value).toEqual(['Apple']);
+
+  fireEvent.click(combobox);
+  fireArrowDownKeyPress();
+  fireEvent.blur(combobox);
+  expect(onSelectionChange.secondCall.firstArg.value).toEqual([
+    'Apple',
+    'Banana'
+  ]);
 });
 
 test('should always render all options when autocomplete="none"', () => {
@@ -995,6 +1300,23 @@ test('should set selected value with "defaultValue" prop', () => {
   assertOptionIsSelected(1);
 });
 
+test('should set multiple selected values with "defaultValue" prop', () => {
+  render(
+    <Combobox label="label" multiselect defaultValue={['Apple', 'Banana']}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  assertOptionsAreSelected(0, 1);
+});
+
 test('should set selected value with "value" prop', () => {
   render(
     <Combobox label="label" value="Banana">
@@ -1010,6 +1332,23 @@ test('should set selected value with "value" prop', () => {
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
   assertOptionIsSelected(1);
+});
+
+test('should set multiple selected values with "value" prop', () => {
+  render(
+    <Combobox label="label" multiselect value={['Apple', 'Banana']}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
+
+  fireEvent.focus(combobox);
+  assertListboxIsOpen(true);
+  assertOptionsAreSelected(0, 1);
 });
 
 test('should not render hidden input when name is not provided', () => {
@@ -1038,6 +1377,21 @@ test('should render hidden input with value from text contents of ComboboxOption
   ).toEqual('Banana');
 });
 
+test('should render multiple hidden inputs with value from text contents of ComboboxOption', () => {
+  const value = ['Apple', 'Banana'];
+  render(
+    <Combobox label="label" name="fruit" multiselect value={value}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  document.querySelectorAll('input[type="hidden"]').forEach((input, idx) => {
+    expect(input.getAttribute('value')).toEqual(value[idx]);
+  });
+});
+
 test('should render hidden input with value from value from ComboboxOption', () => {
   render(
     <Combobox label="label" name="fruit" value="Banana">
@@ -1052,6 +1406,21 @@ test('should render hidden input with value from value from ComboboxOption', () 
   ).toEqual('Banana');
 });
 
+test('should render multiple hidden inputs with value from value from ComboboxOption', () => {
+  const value = ['Apple', 'Banana'];
+  render(
+    <Combobox label="label" name="fruit" multiselect value={value}>
+      <ComboboxOption value="Apple">🍎</ComboboxOption>
+      <ComboboxOption value="Banana">🍌</ComboboxOption>
+      <ComboboxOption value="Cantaloupe">🍈</ComboboxOption>
+    </Combobox>
+  );
+
+  document.querySelectorAll('input[type="hidden"]').forEach((input, idx) => {
+    expect(input.getAttribute('value')).toEqual(value[idx]);
+  });
+});
+
 test('should render hidden input with value from formValue from ComboboxOption', () => {
   render(
     <Combobox label="label" name="fruit" value="Banana">
@@ -1064,6 +1433,22 @@ test('should render hidden input with value from formValue from ComboboxOption',
   expect(
     document.querySelector('input[type="hidden"]')?.getAttribute('value')
   ).toEqual('2');
+});
+
+test('should render multiple hidden inputs with value from formValue from ComboboxOption', () => {
+  const value = ['Apple', 'Banana'];
+  const formValue = ['1', '2'];
+  render(
+    <Combobox label="label" name="fruit" multiselect value={value}>
+      <ComboboxOption formValue="1">Apple</ComboboxOption>
+      <ComboboxOption formValue="2">Banana</ComboboxOption>
+      <ComboboxOption formValue="3">Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  document.querySelectorAll('input[type="hidden"]').forEach((input, idx) => {
+    expect(input.getAttribute('value')).toEqual(formValue[idx]);
+  });
 });
 
 test('should support portal element for combobox listbox', () => {
@@ -1146,6 +1531,51 @@ test('should have no axe violations with value and expanded', async () => {
   const comboboxRef = createRef<HTMLDivElement>();
   render(
     <Combobox label="label" ref={comboboxRef} value="Banana">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with multiple values and expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      ref={comboboxRef}
+      multiselect
+      value={['Apple', 'Banana']}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with multiple values, disabled, and expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      ref={comboboxRef}
+      multiselect
+      value={['Apple', 'Banana']}
+      disabled
+    >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>

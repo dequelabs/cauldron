@@ -81,8 +81,9 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       !!active?.element && active.element === comboboxOptionRef.current;
     const isSelected = !!(
       selected &&
-      !!selected[0]?.element &&
-      selected[0].element === comboboxOptionRef.current
+      selected.findIndex(
+        ({ element }) => element === comboboxOptionRef.current
+      ) !== -1
     );
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
@@ -118,11 +119,13 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       const value =
         typeof formValue === 'undefined' ? comboboxValue : formValue;
 
-      if (selectedValues.includes(comboboxValue)) {
-        setFormValues((prev) => prev.concat(value));
-      } else {
-        setFormValues((prev) => prev.filter((fv) => fv !== value));
-      }
+      setFormValues((prev) => {
+        const formValues = prev.filter((fv) => fv !== value);
+        if (selectedValues.includes(comboboxValue)) {
+          formValues.push(value);
+        }
+        return formValues;
+      });
     }, [selectedValues, formValue]);
 
     useEffect(() => {

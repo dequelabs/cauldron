@@ -36,6 +36,42 @@ test('should have screenshot for Combobox', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('dark--combobox');
 });
 
+test('should have screenshot for Combobox[multiselect]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+  });
+  const component = await mount(
+    <FieldWrap>
+      <Combobox label="Combobox" multiselect>
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Hover" multiselect>
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Focus" multiselect value={['Apple', 'Banana']}>
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+
+  await component.getByRole('combobox', { name: 'Focus' }).focus();
+  await component.getByRole('combobox', { name: 'Hover' }).hover();
+
+  await expect(component).toHaveScreenshot('combobox[multiselect]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--combobox[multiselect]');
+});
+
 test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
   await page.addStyleTag({
     // ensure screenshots are able to capture the boundaries of an expanded combobox

@@ -254,3 +254,24 @@
   padding: var(--space-smaller);
   text-align: center;
 }
+
+.Combobox__TextFieldWrapper--multiselect {
+  flex-wrap: wrap;
+  padding-right: var(--space-large);
+}
+
+.Combobox__TextFieldWrapper--multiselect input {
+  width: unset;
+}
+
+.Combobox__pill:first-of-type {
+  margin-left: var(--space-half);
+}
+
+.Combobox__pill {
+  margin-block: var(--space-half);
+}
+
+.Combobox__pill + .Combobox__pill {
+  margin-left: var(--space-half);
+}

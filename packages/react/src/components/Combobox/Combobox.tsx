@@ -19,9 +19,22 @@ import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
+import { ListboxValue } from '../Listbox/ListboxOption';
+import TagButton from '../TagButton';
+import { closestElement } from '../../utils/closestElement';
+import Button from '../Button';
 
 // Event Keys
-const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
+const [Enter, Escape, Home, End, Backspace, Delete] = [
+  'Enter',
+  'Escape',
+  'Home',
+  'End',
+  'Backspace',
+  'Delete'
+];
+
+const ArrowKeys = ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'];
 
 interface ComboboxOption {
   key?: string;
@@ -50,11 +63,27 @@ interface BaseComboboxProps
 interface SingleSelectComboboxProps extends BaseComboboxProps {
   value?: ComboboxValue;
   defaultValue?: ComboboxValue;
+  inputValue?: never;
+  defaultInputValue?: never;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     value: ComboboxValue;
     previousValue: ComboboxValue;
   }) => void;
+  multiselect?: false;
+}
+
+interface MultiSelectComboboxProps extends BaseComboboxProps {
+  value?: ComboboxValue[];
+  defaultValue?: ComboboxValue[];
+  inputValue?: ComboboxValue;
+  defaultInputValue?: ComboboxValue;
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
+    target: T;
+    value: ComboboxValue[];
+    previousValue: ComboboxValue[];
+  }) => void;
+  multiselect: true;
 }
 
 type ListboxOnSelectionChange = Parameters<
@@ -63,6 +92,9 @@ type ListboxOnSelectionChange = Parameters<
     undefined
   >
 >[0];
+
+type OnSingleSelectionChange = SingleSelectComboboxProps['onSelectionChange'];
+type OnMultiSelectionChange = MultiSelectComboboxProps['onSelectionChange'];
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   // istanbul ignore if
@@ -84,7 +116,39 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
+function nextToFocus(
+  elements: HTMLElement[],
+  fallback: HTMLElement,
+  focusedIdx: number,
+  direction: number
+): HTMLElement | null {
+  const elems = elements.concat(fallback);
+  if (direction === -1) {
+    return null;
+  }
+
+  const style = getComputedStyle(elems[focusedIdx]);
+  const margin =
+    parseInt(style.marginTop, 10) + parseInt(style.marginBottom, 10);
+
+  switch (direction) {
+    case 0:
+      return closestElement(elems, focusedIdx, 'down', margin);
+    case 1:
+      return closestElement(elems, focusedIdx, 'up', margin);
+    case 2:
+      return elems[Math.max(focusedIdx - 1, 0)];
+    case 3:
+      return elems[Math.min(focusedIdx + 1, elems.length - 1)];
+    default:
+      return elems[focusedIdx];
+  }
+}
+
+const Combobox = forwardRef<
+  HTMLDivElement,
+  SingleSelectComboboxProps | MultiSelectComboboxProps
+>(
   (
     {
       id: propId,
@@ -94,6 +158,9 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
       options = [],
       value: propValue,
       defaultValue,
+      inputValue: propInputValue,
+      defaultInputValue,
+      multiselect = false,
       requiredText = 'Required',
       error,
       autocomplete = 'manual',
@@ -108,6 +175,7 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
       portal,
       inputRef: propInputRef = null,
       'aria-describedby': ariaDescribedby,
+      disabled = false,
       ...props
     },
     ref
@@ -115,12 +183,15 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
     const [matchingOptions, setMatchingOptions] = useState<
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
-    const [inputValue, setInputValue] = useState(
-      () => defaultValue || propValue || ''
-    );
+    const [inputValue, setInputValue] = useState(() => {
+      const value = defaultValue || propValue;
+      const inputVal = defaultInputValue || propInputValue;
+      return (Array.isArray(value) ? inputVal : value) || '';
+    });
     const [selectedValues, setSelectedValues] = useState(() => {
       const value = defaultValue || propValue;
-      return value ? [value] : [];
+      if (!value) return [];
+      return Array.isArray(value) ? value : [value];
     });
     const [formValues, setFormValues] = useState<ComboboxValue[]>([]);
     const [open, setOpen] = useState(false);
@@ -130,7 +201,10 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
     const inputRef = useSharedRef<HTMLInputElement>(propInputRef);
     const listboxRef = useRef<HTMLUListElement>(null);
-    const isControlled = typeof propValue !== 'undefined';
+    const pillsRef = useRef<HTMLButtonElement[]>([]);
+    const isControlled =
+      typeof propValue !== 'undefined' &&
+      (multiselect ? typeof propInputValue !== 'undefined' : true);
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
@@ -172,7 +246,7 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
         selectedValues.length &&
         !selectedValues.includes(inputValue)
       ) {
-        setInputValue(selectedValues[selectedValues.length - 1]);
+        setInputValue(selectedValues[selectedValues.length - 1] || '');
       }
 
       if (!open) {
@@ -265,12 +339,29 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
             activeDescendant.value?.toString() ||
             /* istanbul ignore next: default value */ '';
           setInputValue(activeValue);
-          setSelectedValues([activeValue]);
-          onSelectionChange?.({
-            target: activeDescendant.element,
-            value: activeValue,
-            previousValue: selectedValues[0]
-          });
+
+          if (!multiselect) {
+            setSelectedValues([activeValue]);
+            (onSelectionChange as OnSingleSelectionChange)?.({
+              target: activeDescendant.element,
+              value: activeValue,
+              previousValue: selectedValues[0]
+            });
+          } else {
+            const idx = selectedValues.indexOf(activeValue);
+            const newSelectedValues = selectedValues.filter(
+              (v) => v !== activeValue
+            );
+            if (idx === -1) {
+              newSelectedValues.push(activeValue);
+            }
+            setSelectedValues(newSelectedValues);
+            (onSelectionChange as OnMultiSelectionChange)?.({
+              target: activeDescendant.element,
+              value: newSelectedValues,
+              previousValue: selectedValues
+            });
+          }
         }
       },
       [autocomplete, activeDescendant, onBlur]
@@ -282,7 +373,9 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
 
         const enterKeypress = event.key === Enter;
         const escKeypress = event.key === Escape;
-        const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
+        const deleteKeypress = event.key === Delete;
+        const backspaceKeypress = event.key === Backspace;
+        const arrowKeypress = ArrowKeys.includes(event.key);
 
         if (
           // prevent the page from scrolling and allow start/end option activation
@@ -305,6 +398,10 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
         }
 
         setOpen(true);
+
+        if (inputValue === '' && (backspaceKeypress || deleteKeypress)) {
+          pillsRef.current[pillsRef.current.length - 1]?.focus();
+        }
 
         if (!open && arrowKeypress && selectedValues.length && isAutoComplete) {
           // If the user opens the combobox again with a selected value
@@ -335,8 +432,12 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
     );
 
     useEffect(() => {
-      if (typeof propValue !== 'undefined') {
-        setInputValue(propValue);
+      if (isControlled) {
+        if (!multiselect) {
+          setInputValue((propValue as ComboboxValue) || '');
+        } else {
+          setInputValue((propInputValue as ComboboxValue) || '');
+        }
       }
     }, [propValue]);
 
@@ -351,26 +452,94 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
       [isControlled, onChange]
     );
 
-    const handleSelectionChange = useCallback(
-      ({
-        target,
-        value: listboxValue,
-        previousValue
-      }: ListboxOnSelectionChange) => {
-        const value = listboxValue?.toString() || /* istanbul ignore next */ '';
+    const handleRemove = useCallback(
+      (target: HTMLElement, value: ComboboxValue) => {
+        if (disabled) return;
 
-        // istanbul ignore else
+        const newSelectedValues = selectedValues.filter((v) => v !== value);
         if (!isControlled) {
-          setInputValue(value);
+          setInputValue(newSelectedValues[newSelectedValues.length - 1] || '');
         }
 
-        setSelectedValues([value]);
-
-        onSelectionChange?.({
+        setSelectedValues(newSelectedValues);
+        (onSelectionChange as OnMultiSelectionChange)?.({
           target,
-          value: value,
-          previousValue: previousValue?.toString()
+          value: newSelectedValues,
+          previousValue: selectedValues
         });
+      },
+      [disabled, isControlled, selectedValues, onSelectionChange]
+    );
+
+    const handlePillKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+
+        const deleteKeypress = event.key === Delete;
+        const backspaceKeypress = event.key === Backspace;
+
+        const focusedIdx = pillsRef.current.findIndex(
+          (p) => document.activeElement === p
+        );
+
+        const focusedPill = pillsRef.current[focusedIdx];
+
+        if (deleteKeypress || backspaceKeypress) {
+          if (disabled) return;
+          handleRemove(focusedPill, focusedPill.innerText);
+          const nextIdx = focusedIdx + 1;
+          if (nextIdx >= pillsRef.current.length) {
+            inputRef.current?.focus();
+          } else {
+            pillsRef.current[nextIdx].focus();
+          }
+          return;
+        }
+
+        const direction = ArrowKeys.indexOf(event.key);
+        nextToFocus(
+          pillsRef.current,
+          inputRef.current,
+          focusedIdx,
+          direction
+        )?.focus();
+      },
+      [disabled, pillsRef, handleRemove]
+    );
+
+    const handleSelectionChange = useCallback(
+      ({ target, value, previousValue }: ListboxOnSelectionChange) => {
+        if (!multiselect) {
+          const listboxValue = (value as ListboxValue)?.toString() || '';
+          const listboxPreviousValue =
+            (previousValue as ListboxValue)?.toString() || '';
+
+          // istanbul ignore else
+          if (!isControlled) {
+            setInputValue(listboxValue);
+          }
+
+          setSelectedValues([listboxValue]);
+          (onSelectionChange as OnSingleSelectionChange)?.({
+            target,
+            value: listboxValue,
+            previousValue: listboxPreviousValue
+          });
+        } else {
+          const listboxValue = value as ComboboxValue[];
+          const listboxPreviousValue = previousValue as ComboboxValue[];
+
+          if (!isControlled) {
+            setInputValue(listboxValue[listboxValue.length - 1] || '');
+          }
+
+          setSelectedValues(listboxValue);
+          (onSelectionChange as OnMultiSelectionChange)?.({
+            target,
+            value: listboxValue,
+            previousValue: listboxPreviousValue
+          });
+        }
 
         setOpen(false);
       },
@@ -401,6 +570,10 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
     );
 
     const comboboxListbox = (
+      // eslint-disable-next-line
+      // @ts-ignore
+      // multiselect & value props are passed to Listbox, but TS is unable to infer that
+      // it's a correct mapping from Combobox's multiselect & value props
       <Listbox
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
@@ -408,7 +581,7 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
         role={noMatchingOptions ? 'presentation' : 'listbox'}
         aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
-        value={selectedValues[0]}
+        value={multiselect ? selectedValues : selectedValues[0]}
         onMouseDown={handleComboboxOptionMouseDown}
         onClick={handleComboboxOptionClick}
         onSelectionChange={handleSelectionChange}
@@ -416,7 +589,7 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
         ref={listboxRef}
         tabIndex={undefined}
         aria-activedescendant={undefined}
-        multiselect={false}
+        multiselect={multiselect}
       >
         {comboboxOptions}
         {noMatchingOptions}
@@ -463,11 +636,49 @@ const Combobox = forwardRef<HTMLDivElement, SingleSelectComboboxProps>(
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
-          className={classnames({ 'TextFieldWrapper--error': hasError })}
+          className={classnames({
+            'Combobox__TextFieldWrapper--multiselect': multiselect,
+            'TextFieldWrapper--error': hasError
+          })}
           // We're handling click here to open the listbox when the wrapping element is clicked,
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
+          {multiselect &&
+            selectedValues.map((value, idx) => {
+              const refCallback = (elem: HTMLButtonElement | null) => {
+                if (elem) {
+                  pillsRef.current[idx] = elem;
+                } else {
+                  pillsRef.current.splice(idx, 1);
+                }
+              };
+
+              const handleClick = () =>
+                handleRemove(pillsRef.current[idx], value);
+
+              const commonProps = {
+                ref: refCallback,
+                key: value,
+                className: 'Combobox__pill',
+                tabIndex: -1,
+                onClick: handleClick,
+                onKeyDown: handlePillKeyDown
+              };
+
+              return !disabled ? (
+                <TagButton
+                  label=""
+                  value={value || ''}
+                  icon="close"
+                  {...commonProps}
+                />
+              ) : (
+                <Button disabled={disabled} {...commonProps}>
+                  {value}
+                </Button>
+              );
+            })}
           <input
             type="text"
             id={`${id}-input`}
