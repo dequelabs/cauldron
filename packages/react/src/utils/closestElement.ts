@@ -27,7 +27,7 @@ type Dir = 'up' | 'down';
 /**
  * Perform search for the closest element in the array of elements relative to the currently selected element.
  * Searches for the elements in the direction `dir`.
- * If the element couldn't be found, returns currenly selected element.
+ * If the element couldn't be found, returns currently selected element.
  * @param elements array of elements to search closest for
  * @param idx index of the currently selected element
  * @param dir direction of search
