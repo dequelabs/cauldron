@@ -119,7 +119,7 @@ const ComboboxNoResults = ({
 function nextToFocus(
   elements: HTMLElement[],
   fallback: HTMLElement,
-  focusedIdx: number,
+  focusedIndex: number,
   direction: number
 ): HTMLElement | null {
   const elems = elements.concat(fallback);
@@ -127,21 +127,21 @@ function nextToFocus(
     return null;
   }
 
-  const style = getComputedStyle(elems[focusedIdx]);
+  const style = getComputedStyle(elems[focusedIndex]);
   const margin =
     parseInt(style.marginTop, 10) + parseInt(style.marginBottom, 10);
 
   switch (direction) {
     case 0:
-      return closestElement(elems, focusedIdx, 'down', margin);
+      return closestElement(elems, focusedIndex, 'down', margin);
     case 1:
-      return closestElement(elems, focusedIdx, 'up', margin);
+      return closestElement(elems, focusedIndex, 'up', margin);
     case 2:
-      return elems[Math.max(focusedIdx - 1, 0)];
+      return elems[Math.max(focusedIndex - 1, 0)];
     case 3:
-      return elems[Math.min(focusedIdx + 1, elems.length - 1)];
+      return elems[Math.min(focusedIndex + 1, elems.length - 1)];
     default:
-      return elems[focusedIdx];
+      return elems[focusedIndex];
   }
 }
 
@@ -190,7 +190,9 @@ const Combobox = forwardRef<
     });
     const [selectedValues, setSelectedValues] = useState(() => {
       const value = defaultValue || propValue;
-      if (!value) return [];
+      if (!value) {
+        return [];
+      }
       return Array.isArray(value) ? value : [value];
     });
     const [formValues, setFormValues] = useState<ComboboxValue[]>([]);
@@ -348,11 +350,11 @@ const Combobox = forwardRef<
               previousValue: selectedValues[0]
             });
           } else {
-            const idx = selectedValues.indexOf(activeValue);
+            const activeValueIndex = selectedValues.indexOf(activeValue);
             const newSelectedValues = selectedValues.filter(
               (v) => v !== activeValue
             );
-            if (idx === -1) {
+            if (activeValueIndex === -1) {
               newSelectedValues.push(activeValue);
             }
             setSelectedValues(newSelectedValues);
@@ -399,7 +401,10 @@ const Combobox = forwardRef<
 
         setOpen(true);
 
-        if (inputValue === '' && (backspaceKeypress || deleteKeypress)) {
+        if (
+          inputValue === '' &&
+          (backspaceKeypress || deleteKeypress || event.key === 'ArrowLeft')
+        ) {
           pillsRef.current[pillsRef.current.length - 1]?.focus();
         }
 
@@ -478,20 +483,20 @@ const Combobox = forwardRef<
         const deleteKeypress = event.key === Delete;
         const backspaceKeypress = event.key === Backspace;
 
-        const focusedIdx = pillsRef.current.findIndex(
+        const focusedIndex = pillsRef.current.findIndex(
           (p) => document.activeElement === p
         );
 
-        const focusedPill = pillsRef.current[focusedIdx];
+        const focusedPill = pillsRef.current[focusedIndex];
 
         if (deleteKeypress || backspaceKeypress) {
           if (disabled) return;
           handleRemove(focusedPill, focusedPill.innerText);
-          const nextIdx = focusedIdx + 1;
-          if (nextIdx >= pillsRef.current.length) {
+          const nextIndex = focusedIndex + 1;
+          if (nextIndex >= pillsRef.current.length) {
             inputRef.current?.focus();
           } else {
-            pillsRef.current[nextIdx].focus();
+            pillsRef.current[nextIndex].focus();
           }
           return;
         }
@@ -500,7 +505,7 @@ const Combobox = forwardRef<
         nextToFocus(
           pillsRef.current,
           inputRef.current,
-          focusedIdx,
+          focusedIndex,
           direction
         )?.focus();
       },
@@ -571,7 +576,7 @@ const Combobox = forwardRef<
 
     const comboboxListbox = (
       // eslint-disable-next-line
-      // @ts-ignore
+      // @ts-expect-error
       // multiselect & value props are passed to Listbox, but TS is unable to infer that
       // it's a correct mapping from Combobox's multiselect & value props
       <Listbox
@@ -607,7 +612,11 @@ const Combobox = forwardRef<
     return (
       <div
         id={id}
-        className={classnames('Combobox', className)}
+        className={classnames(
+          'Combobox',
+          { 'Combobox--multiselect': multiselect },
+          className
+        )}
         ref={comboboxRef}
       >
         {name &&
@@ -636,26 +645,23 @@ const Combobox = forwardRef<
         </label>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
-          className={classnames({
-            'Combobox__TextFieldWrapper--multiselect': multiselect,
-            'TextFieldWrapper--error': hasError
-          })}
+          className={classnames({ 'TextFieldWrapper--error': hasError })}
           // We're handling click here to open the listbox when the wrapping element is clicked,
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
           {multiselect &&
-            selectedValues.map((value, idx) => {
+            selectedValues.map((value, index) => {
               const refCallback = (elem: HTMLButtonElement | null) => {
                 if (elem) {
-                  pillsRef.current[idx] = elem;
+                  pillsRef.current[index] = elem;
                 } else {
-                  pillsRef.current.splice(idx, 1);
+                  pillsRef.current.splice(index, 1);
                 }
               };
 
               const handleClick = () =>
-                handleRemove(pillsRef.current[idx], value);
+                handleRemove(pillsRef.current[index], value);
 
               const commonProps = {
                 ref: refCallback,

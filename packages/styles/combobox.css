@@ -255,13 +255,13 @@
   text-align: center;
 }
 
-.Combobox__TextFieldWrapper--multiselect {
+.Combobox--multiselect .TextFieldWrapper {
   flex-wrap: wrap;
   padding-right: var(--space-large);
 }
 
-.Combobox__TextFieldWrapper--multiselect input {
-  width: unset;
+.Combobox--multiselect .TextFieldWrapper input {
+  width: auto;
 }
 
 .Combobox__pill:first-of-type {
