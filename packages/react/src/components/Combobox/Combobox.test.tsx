@@ -429,8 +429,37 @@ test('should select multiple combobox options via clicks', () => {
 
   const pills = screen.getAllByRole('button');
   expect(pills).toHaveLength(2);
-  expect(pills[0]).toHaveAccessibleName('Apple');
-  expect(pills[1]).toHaveAccessibleName('Banana');
+  expect(pills[0]).toHaveAccessibleName('remove Apple');
+  expect(pills[1]).toHaveAccessibleName('remove Banana');
+});
+
+test('should select multiple combobox options via clicks, custom remove value aria label', () => {
+  render(
+    <Combobox
+      label="label"
+      removeValueAriaLabel="Remove and forget"
+      multiselect
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[0]);
+  fireEvent.blur(combobox);
+
+  fireEvent.focus(combobox);
+  fireEvent.click(screen.getAllByRole('option')[1]);
+  fireEvent.blur(combobox);
+
+  const pills = screen.getAllByRole('button');
+  expect(pills).toHaveLength(2);
+  expect(pills[0]).toHaveAccessibleName('Remove and forget Apple');
+  expect(pills[1]).toHaveAccessibleName('Remove and forget Banana');
 });
 
 test('should prevent default on combobox listbox option via mousedown', () => {
@@ -483,8 +512,8 @@ test('should close combobox listbox when selecting option via keypress', () => {
 
   const pills = screen.getAllByRole('button');
   expect(pills).toHaveLength(2);
-  expect(pills[0]).toHaveAccessibleName('Apple');
-  expect(pills[1]).toHaveAccessibleName('Banana');
+  expect(pills[0]).toHaveAccessibleName('remove Apple');
+  expect(pills[1]).toHaveAccessibleName('remove Banana');
 });
 
 test('should select multiple combobox options via keypresses', () => {
@@ -937,7 +966,7 @@ test('should remove selected option upon clicking on pill', () => {
     'Banana',
     'Cantaloupe'
   ]);
-  fireEvent.click(screen.getByRole('button', { name: 'Banana' }));
+  fireEvent.click(screen.getByRole('button', { name: 'remove Banana' }));
   expect(onSelectionChange.thirdCall.firstArg.value).toEqual(['Cantaloupe']);
 });
 
@@ -964,9 +993,9 @@ test('should remove all selected options when clicking on pills', () => {
     'Banana',
     'Cantaloupe'
   ]);
-  fireEvent.click(screen.getByRole('button', { name: 'Banana' }));
+  fireEvent.click(screen.getByRole('button', { name: 'remove Banana' }));
   expect(onSelectionChange.thirdCall.firstArg.value).toEqual(['Cantaloupe']);
-  fireEvent.click(screen.getByRole('button', { name: 'Cantaloupe' }));
+  fireEvent.click(screen.getByRole('button', { name: 'remove Cantaloupe' }));
   expect(onSelectionChange.getCalls()[3].firstArg.value).toEqual([]);
 });
 

@@ -21,7 +21,6 @@ import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import TagButton from '../TagButton';
-import { closestElement } from '../../utils/closestElement';
 import Button from '../Button';
 
 // Event Keys
@@ -65,6 +64,7 @@ interface SingleSelectComboboxProps extends BaseComboboxProps {
   defaultValue?: ComboboxValue;
   inputValue?: never;
   defaultInputValue?: never;
+  removeValueAriaLabel?: never;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     value: ComboboxValue;
@@ -78,6 +78,7 @@ interface MultiSelectComboboxProps extends BaseComboboxProps {
   defaultValue?: ComboboxValue[];
   inputValue?: ComboboxValue;
   defaultInputValue?: ComboboxValue;
+  removeValueAriaLabel?: string;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     value: ComboboxValue[];
@@ -127,15 +128,7 @@ function nextToFocus(
     return null;
   }
 
-  const style = getComputedStyle(elems[focusedIndex]);
-  const margin =
-    parseInt(style.marginTop, 10) + parseInt(style.marginBottom, 10);
-
   switch (direction) {
-    case 0:
-      return closestElement(elems, focusedIndex, 'down', margin);
-    case 1:
-      return closestElement(elems, focusedIndex, 'up', margin);
     case 2:
       return elems[Math.max(focusedIndex - 1, 0)];
     case 3:
@@ -160,6 +153,7 @@ const Combobox = forwardRef<
       defaultValue,
       inputValue: propInputValue,
       defaultInputValue,
+      removeValueAriaLabel = 'remove',
       multiselect = false,
       requiredText = 'Required',
       error,
@@ -210,6 +204,8 @@ const Combobox = forwardRef<
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
+    const pillKeys = useId(selectedValues.length, 'remove-value-');
+    const formValueKeys = useId(selectedValues.length, 'form-value-');
 
     const comboboxOptions =
       children ||
@@ -620,10 +616,10 @@ const Combobox = forwardRef<
         ref={comboboxRef}
       >
         {name &&
-          formValues.map((formValue) => (
+          formValues.map((formValue, index) => (
             <input
               type="hidden"
-              key={formValue}
+              key={formValueKeys[index]}
               name={name}
               value={formValue}
             />
@@ -665,7 +661,8 @@ const Combobox = forwardRef<
 
               const commonProps = {
                 ref: refCallback,
-                key: value,
+                key: pillKeys[index],
+                'aria-label': `${removeValueAriaLabel} ${value}`,
                 className: 'Combobox__pill',
                 tabIndex: -1,
                 onClick: handleClick,
@@ -680,7 +677,7 @@ const Combobox = forwardRef<
                   {...commonProps}
                 />
               ) : (
-                <Button disabled={disabled} {...commonProps}>
+                <Button variant="tag" disabled={disabled} {...commonProps}>
                   {value}
                 </Button>
               );
