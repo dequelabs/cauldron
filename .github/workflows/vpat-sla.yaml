@@ -14,6 +14,7 @@ jobs:
           only-labels: 'vpat,vpat:blocker'
           stale-issue-message: 'This VPAT issue has been open for 4 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
+          remove-issue-stale-when-updated: false
           days-before-issue-stale: 28
           days-before-pr-stale: -1
           days-before-close: -1
@@ -27,6 +28,7 @@ jobs:
           only-labels: 'vpat,vpat:critical'
           stale-issue-message: 'This VPAT issue has been open for 10 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
+          remove-issue-stale-when-updated: false
           days-before-issue-stale: 70
           days-before-pr-stale: -1
           days-before-close: -1
@@ -40,6 +42,7 @@ jobs:
           only-labels: 'vpat,vpat:serious'
           stale-issue-message: 'This VPAT issue has been open for 20 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
+          remove-issue-stale-when-updated: false
           days-before-issue-stale: 140
           days-before-pr-stale: -1
           days-before-close: -1
@@ -53,6 +56,7 @@ jobs:
           only-labels: 'vpat,vpat:moderate'
           stale-issue-message: 'This VPAT issue has been open for 30 weeks without being resolved.'
           stale-issue-label: 'vpat:sla'
+          remove-issue-stale-when-updated: false
           days-before-issue-stale: 210
           days-before-pr-stale: -1
           days-before-close: -1
