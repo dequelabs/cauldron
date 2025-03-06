@@ -549,7 +549,7 @@ test('should set combobox value when selecting option via mousedown when passed 
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
 });
 
-test('should set multiselect combobox value when selecting second option via mousedown when passed children', () => {
+test('should not set multiselect combobox value when selecting second option via mousedown when passed children', () => {
   render(
     <Combobox label="label" multiselect>
       <ComboboxOption value="apple">Apple</ComboboxOption>
@@ -562,12 +562,12 @@ test('should set multiselect combobox value when selecting second option via mou
 
   fireEvent.focus(combobox);
   fireEvent.click(screen.getAllByRole('option')[0]);
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
   fireEvent.blur(combobox);
 
   fireEvent.focus(combobox);
   fireEvent.click(screen.getAllByRole('option')[1]);
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 });
 
 test('should set combobox value when selecting option via keypress when passed children', () => {
@@ -623,7 +623,7 @@ test('should set combobox value when selecting option via mousedown when passed 
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
 });
 
-test('should set multiselect combobox value when selecting second option via mousedown when passed options', () => {
+test('should not set multiselect combobox value when selecting second option via mousedown when passed options', () => {
   const options = [
     { value: 'apple', label: 'Apple' },
     { value: 'banana', label: 'Banana' },
@@ -635,12 +635,12 @@ test('should set multiselect combobox value when selecting second option via mou
 
   fireEvent.focus(combobox);
   fireEvent.click(screen.getAllByRole('option')[0]);
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
   fireEvent.blur(combobox);
 
   fireEvent.focus(combobox);
   fireEvent.click(screen.getAllByRole('option')[1]);
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 });
 
 test('should set combobox value when selecting option via keypress when passed options', () => {
@@ -658,7 +658,7 @@ test('should set combobox value when selecting option via keypress when passed o
   expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
 });
 
-test('should set multiselect combobox value when selecting  second option via keypress when passed options', () => {
+test('should not set multiselect combobox value when selecting  second option via keypress when passed options', () => {
   const options = [
     { value: 'apple', label: 'Apple' },
     { value: 'banana', label: 'Banana' },
@@ -671,13 +671,13 @@ test('should set multiselect combobox value when selecting  second option via ke
   fireEvent.focus(combobox);
   fireEvent.keyDown(combobox, { key: 'ArrowDown' });
   fireEvent.keyDown(combobox, { key: 'Enter' });
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('apple');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
   fireEvent.blur(combobox);
 
   fireEvent.focus(combobox);
   fireEvent.keyDown(combobox, { key: 'ArrowDown' });
   fireEvent.keyDown(combobox, { key: 'Enter' });
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 });
 
 test('should prevent default with enter keypress and open listbox', () => {
@@ -1329,7 +1329,7 @@ test('should set selected value with "defaultValue" prop', () => {
   assertOptionIsSelected(1);
 });
 
-test('should set multiple selected values with "defaultValue" prop', () => {
+test('should not set multiple selected values with "defaultValue" prop', () => {
   render(
     <Combobox label="label" multiselect defaultValue={['Apple', 'Banana']}>
       <ComboboxOption>Apple</ComboboxOption>
@@ -1339,7 +1339,7 @@ test('should set multiple selected values with "defaultValue" prop', () => {
   );
   const combobox = screen.getByRole('combobox');
 
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);
@@ -1363,7 +1363,7 @@ test('should set selected value with "value" prop', () => {
   assertOptionIsSelected(1);
 });
 
-test('should set multiple selected values with "value" prop', () => {
+test('should not set multiple selected values with "value" prop', () => {
   render(
     <Combobox label="label" multiselect value={['Apple', 'Banana']}>
       <ComboboxOption>Apple</ComboboxOption>
@@ -1373,7 +1373,7 @@ test('should set multiple selected values with "value" prop', () => {
   );
   const combobox = screen.getByRole('combobox');
 
-  expect(screen.getByRole('combobox')).toHaveDisplayValue('Banana');
+  expect(screen.getByRole('combobox')).toHaveDisplayValue('');
 
   fireEvent.focus(combobox);
   assertListboxIsOpen(true);

@@ -264,14 +264,12 @@
   width: auto;
 }
 
-.Combobox__pill:first-of-type {
-  margin-left: var(--space-half);
+.Combobox__pillsWrapper {
+  display: flex;
+  padding: var(--space-half);
+  gap: var(--space-half);
 }
 
-.Combobox__pill {
-  margin-block: var(--space-half);
-}
-
-.Combobox__pill + .Combobox__pill {
-  margin-left: var(--space-half);
+.ComboboxPill + .ComboboxPill {
+  margin-left: 0;
 }

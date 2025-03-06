@@ -20,8 +20,7 @@ import useSharedRef from '../../utils/useSharedRef';
 import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
-import TagButton from '../TagButton';
-import Button from '../Button';
+import ComboboxPill from './ComboboxPill';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -33,7 +32,9 @@ const [Enter, Escape, Home, End, Backspace, Delete] = [
   'Delete'
 ];
 
-const ArrowKeys = ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'];
+const ArrowKeys = ['ArrowDown', 'ArrowUp'];
+
+const PillKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
 
 interface ComboboxOption {
   key?: string;
@@ -153,7 +154,7 @@ const Combobox = forwardRef<
       defaultValue,
       inputValue: propInputValue,
       defaultInputValue,
-      removeValueAriaLabel = 'remove',
+      removeValueAriaLabel,
       multiselect = false,
       requiredText = 'Required',
       error,
@@ -204,8 +205,6 @@ const Combobox = forwardRef<
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
-    const pillKeys = useId(selectedValues.length, 'remove-value-');
-    const formValueKeys = useId(selectedValues.length, 'form-value-');
 
     const comboboxOptions =
       children ||
@@ -241,6 +240,7 @@ const Combobox = forwardRef<
 
       if (
         !open &&
+        !multiselect &&
         selectedValues.length &&
         !selectedValues.includes(inputValue)
       ) {
@@ -458,9 +458,6 @@ const Combobox = forwardRef<
         if (disabled) return;
 
         const newSelectedValues = selectedValues.filter((v) => v !== value);
-        if (!isControlled) {
-          setInputValue(newSelectedValues[newSelectedValues.length - 1] || '');
-        }
 
         setSelectedValues(newSelectedValues);
         (onSelectionChange as OnMultiSelectionChange)?.({
@@ -469,11 +466,15 @@ const Combobox = forwardRef<
           previousValue: selectedValues
         });
       },
-      [disabled, isControlled, selectedValues, onSelectionChange]
+      [disabled, selectedValues, onSelectionChange]
     );
 
     const handlePillKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (!PillKeys.includes(event.key)) {
+          return;
+        }
+
         event.preventDefault();
 
         const deleteKeypress = event.key === Delete;
@@ -487,17 +488,17 @@ const Combobox = forwardRef<
 
         if (deleteKeypress || backspaceKeypress) {
           if (disabled) return;
-          handleRemove(focusedPill, focusedPill.innerText);
           const nextIndex = focusedIndex + 1;
           if (nextIndex >= pillsRef.current.length) {
             inputRef.current?.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }
+          handleRemove(focusedPill, focusedPill.innerText);
           return;
         }
 
-        const direction = ArrowKeys.indexOf(event.key);
+        const direction = PillKeys.indexOf(event.key);
         nextToFocus(
           pillsRef.current,
           inputRef.current,
@@ -529,10 +530,6 @@ const Combobox = forwardRef<
         } else {
           const listboxValue = value as ComboboxValue[];
           const listboxPreviousValue = previousValue as ComboboxValue[];
-
-          if (!isControlled) {
-            setInputValue(listboxValue[listboxValue.length - 1] || '');
-          }
 
           setSelectedValues(listboxValue);
           (onSelectionChange as OnMultiSelectionChange)?.({
@@ -617,12 +614,7 @@ const Combobox = forwardRef<
       >
         {name &&
           formValues.map((formValue, index) => (
-            <input
-              type="hidden"
-              key={formValueKeys[index]}
-              name={name}
-              value={formValue}
-            />
+            <input type="hidden" key={index} name={name} value={formValue} />
           ))}
         <label
           className={classnames('Field__label', {
@@ -646,42 +638,33 @@ const Combobox = forwardRef<
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
-          {multiselect &&
-            selectedValues.map((value, index) => {
-              const refCallback = (elem: HTMLButtonElement | null) => {
-                if (elem) {
-                  pillsRef.current[index] = elem;
-                } else {
-                  pillsRef.current.splice(index, 1);
-                }
-              };
+          {multiselect && (
+            <div className="Combobox__pillsWrapper">
+              {selectedValues.map((value, index) => {
+                const refCallback = (elem: HTMLButtonElement | null) => {
+                  if (elem) {
+                    pillsRef.current[index] = elem;
+                  } else {
+                    pillsRef.current.splice(index, 1);
+                  }
+                };
 
-              const handleClick = () =>
-                handleRemove(pillsRef.current[index], value);
+                const handleClick = () =>
+                  handleRemove(pillsRef.current[index], value);
 
-              const commonProps = {
-                ref: refCallback,
-                key: pillKeys[index],
-                'aria-label': `${removeValueAriaLabel} ${value}`,
-                className: 'Combobox__pill',
-                tabIndex: -1,
-                onClick: handleClick,
-                onKeyDown: handlePillKeyDown
-              };
-
-              return !disabled ? (
-                <TagButton
-                  label=""
-                  value={value || ''}
-                  icon="close"
-                  {...commonProps}
-                />
-              ) : (
-                <Button variant="tag" disabled={disabled} {...commonProps}>
-                  {value}
-                </Button>
-              );
-            })}
+                return (
+                  <ComboboxPill
+                    ref={refCallback}
+                    key={value}
+                    value={value}
+                    removeValueAriaLabel={removeValueAriaLabel}
+                    onClick={handleClick}
+                    onKeyDown={handlePillKeyDown}
+                  />
+                );
+              })}
+            </div>
+          )}
           <input
             type="text"
             id={`${id}-input`}
