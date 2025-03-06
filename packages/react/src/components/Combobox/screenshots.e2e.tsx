@@ -56,7 +56,12 @@ test('should have screenshot for Combobox[multiselect]', async ({
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-      <Combobox label="Disabled" multiselect value={['Apple', 'Banana']}>
+      <Combobox
+        label="Disabled"
+        disabled
+        multiselect
+        value={['Apple', 'Banana']}
+      >
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
