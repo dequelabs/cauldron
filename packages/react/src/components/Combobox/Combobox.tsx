@@ -528,20 +528,34 @@ const Combobox = forwardRef<
             previousValue: listboxPreviousValue
           });
         } else {
-          const listboxValue = value as ComboboxValue[];
           const listboxPreviousValue = previousValue as ComboboxValue[];
+          const listboxValue = value as ComboboxValue[];
 
-          setSelectedValues(listboxValue);
+          const previousValueSet = new Set(listboxPreviousValue);
+          const valueSet = new Set(listboxValue);
+
+          const removedValues = new Set(
+            listboxPreviousValue.filter((v) => !valueSet.has(v))
+          );
+          const addedValues = listboxValue.filter(
+            (v) => !previousValueSet.has(v)
+          );
+
+          const newSelectedValues = selectedValues
+            .filter((v) => !removedValues.has(v))
+            .concat(addedValues);
+
+          setSelectedValues(newSelectedValues);
           (onSelectionChange as OnMultiSelectionChange)?.({
             target,
-            value: listboxValue,
-            previousValue: listboxPreviousValue
+            value: newSelectedValues,
+            previousValue: selectedValues
           });
         }
 
         setOpen(false);
       },
-      [isControlled, onSelectionChange]
+      [isControlled, selectedValues, onSelectionChange]
     );
 
     const handleActiveChange = useCallback((option: ListboxOption) => {
