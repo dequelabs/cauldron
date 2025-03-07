@@ -1613,7 +1613,6 @@ test('should have no axe violations with multiple values, disabled, and expanded
 
   expect(comboboxRef.current).toBeTruthy();
   fireEvent.focus(screen.getByRole('combobox'));
-
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
 });

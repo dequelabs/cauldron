@@ -652,33 +652,31 @@ const Combobox = forwardRef<
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
-          {multiselect && (
-            <div className="Combobox__pillsWrapper">
-              {selectedValues.map((value, index) => {
-                const refCallback = (elem: HTMLButtonElement | null) => {
-                  if (elem) {
-                    pillsRef.current[index] = elem;
-                  } else {
-                    pillsRef.current.splice(index, 1);
-                  }
-                };
+          {multiselect &&
+            selectedValues.map((value, index) => {
+              const refCallback = (elem: HTMLButtonElement | null) => {
+                if (elem) {
+                  pillsRef.current[index] = elem;
+                } else {
+                  pillsRef.current.splice(index, 1);
+                }
+              };
 
-                const handleClick = () =>
-                  handleRemove(pillsRef.current[index], value);
+              const handleClick = () =>
+                handleRemove(pillsRef.current[index], value);
 
-                return (
-                  <ComboboxPill
-                    ref={refCallback}
-                    key={value}
-                    value={value}
-                    removeValueAriaLabel={removeValueAriaLabel}
-                    onClick={handleClick}
-                    onKeyDown={handlePillKeyDown}
-                  />
-                );
-              })}
-            </div>
-          )}
+              return (
+                <ComboboxPill
+                  ref={refCallback}
+                  key={value}
+                  value={value}
+                  removeValueAriaLabel={removeValueAriaLabel}
+                  disabled={disabled}
+                  onClick={handleClick}
+                  onKeyDown={handlePillKeyDown}
+                />
+              );
+            })}
           <input
             type="text"
             id={`${id}-input`}

@@ -257,6 +257,9 @@
 
 .Combobox--multiselect .TextFieldWrapper {
   flex-wrap: wrap;
+  gap: var(--space-half);
+  padding-left: var(--space-half);
+  padding-block: var(--space-half);
   padding-right: var(--space-large);
 }
 
@@ -264,12 +267,6 @@
   width: auto;
 }
 
-.Combobox__pillsWrapper {
-  display: flex;
-  padding: var(--space-half);
-  gap: var(--space-half);
-}
-
 .ComboboxPill + .ComboboxPill {
-  margin-left: 0;
+  margin: 0;
 }

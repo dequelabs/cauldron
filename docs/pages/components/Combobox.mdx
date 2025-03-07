@@ -314,6 +314,27 @@ Combobox can also support multiple selection of options.
 </FieldWrap>
 ```
 
+### Multiselect disabled
+
+```jsx example
+<FieldWrap>
+  <Combobox
+    label="Multiselect Disabled Combobox"
+    name="multiselect-disabled"
+    multiselect
+    disabled
+    defaultValue={['Apple', 'Banana']}
+  >
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+  </Combobox>
+</FieldWrap>
+```
+
 <Note>
   Multiselect Combobox components will pass in array values for the selected
   options in `onSelectionChange` and expect an array of values for `value` and
