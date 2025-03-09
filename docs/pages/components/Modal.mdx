@@ -4,11 +4,16 @@ description: A dismissable dialog component.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Modal/index.tsx
 ---
 
-import { useState } from 'react'
-import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+import { useState } from 'react';
+import {
+  Button,
+  Modal,
+  ModalContent,
+  ModalFooter
+} from '@deque/cauldron-react';
 
 ```jsx
-import { Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+import { Modal, ModalContent, ModalFooter } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -19,11 +24,13 @@ By default, modals display with a heading and a dismissable close action:
 
 ```jsx example
 function DefaultModalExample() {
-  const [show, setShow] = useState(false)
-  const toggleModal = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleModal}>Toggle Default Modal</Button>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Default Modal
+      </Button>
       <Modal heading="Default Modal" show={show} onClose={toggleModal}>
         <ModalContent>
           Modal content here, get your modal content here!
@@ -33,7 +40,7 @@ function DefaultModalExample() {
         </ModalFooter>
       </Modal>
     </>
-  )
+  );
 }
 ```
 
@@ -45,12 +52,19 @@ Alternatively, an info variant is available that is less opinionated in its styl
 
 ```jsx example
 function UnstyledModalExample() {
-  const [show, setShow] = useState(false)
-  const toggleModal = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleModal}>Toggle Info Modal</Button>
-      <Modal heading="Info Modal" variant="info" show={show} onClose={toggleModal}>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Info Modal
+      </Button>
+      <Modal
+        heading="Info Modal"
+        variant="info"
+        show={show}
+        onClose={toggleModal}
+      >
         <ModalContent>
           Modal content here, get your modal content here!
         </ModalContent>
@@ -59,7 +73,7 @@ function UnstyledModalExample() {
         </ModalFooter>
       </Modal>
     </>
-  )
+  );
 }
 ```
 
@@ -80,7 +94,8 @@ function UnstyledModalExample() {
       name: 'heading',
       type: ['React.ReactElement', 'object'],
       required: true,
-      description: 'Displayed in the heading at the top of the alert. Optionally include the heading level.'
+      description:
+        'Displayed in the heading at the top of the alert. Optionally include the heading level.'
     },
     {
       name: 'onClose',
@@ -117,11 +132,13 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
-  props={[{
-    name: 'align',
-    type: ['left', 'right', 'center'],
-    description: 'Set the alignment of modal content.'
-  }]}
+  props={[
+    {
+      name: 'align',
+      type: ['left', 'right', 'center'],
+      description: 'Set the alignment of modal content.'
+    }
+  ]}
 />
 
 ### ModalFooter
@@ -129,11 +146,13 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
-  props={[{
-    name: 'align',
-    type: ['left', 'right', 'center'],
-    description: 'Set the alignment of modal footer content.'
-  }]}
+  props={[
+    {
+      name: 'align',
+      type: ['left', 'right', 'center'],
+      description: 'Set the alignment of modal footer content.'
+    }
+  ]}
 />
 
 ## Related Components

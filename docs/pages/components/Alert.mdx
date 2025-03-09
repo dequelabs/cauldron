@@ -4,11 +4,16 @@ description: A component that displays an alert dialog to prompt for user action
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Alert/index.tsx
 ---
 
-import { useState } from 'react'
-import { Button, Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+import { useState } from 'react';
+import {
+  Button,
+  Alert,
+  AlertActions,
+  AlertContent
+} from '@deque/cauldron-react';
 
 ```jsx
-import { Alert, AlertActions, AlertContent } from '@deque/cauldron-react'
+import { Alert, AlertActions, AlertContent } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -19,22 +24,26 @@ Display an alert dialog that prompts the user to take action, by default this al
 
 ```jsx example
 function DefaultAlertExample() {
-  const [show, setShow] = useState(false)
-  const toggleAlert = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleAlert = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleAlert}>Toggle Alert</Button>
+      <Button variant="secondary" onClick={toggleAlert}>
+        Toggle Alert
+      </Button>
       <Alert heading="Default Alert" show={show}>
         <AlertContent>
           Just letting you know that something happened.
         </AlertContent>
         <AlertActions>
           <Button onClick={toggleAlert}>Ok</Button>
-          <Button variant="secondary" onClick={toggleAlert}>Close</Button>
+          <Button variant="secondary" onClick={toggleAlert}>
+            Close
+          </Button>
         </AlertActions>
       </Alert>
     </>
-  )
+  );
 }
 ```
 
@@ -44,22 +53,26 @@ If the user action is potentially dangerous, use a warning variant to indicate p
 
 ```jsx example
 function WarningAlertExample() {
-  const [show, setShow] = useState(false)
-  const toggleAlert = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleAlert = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleAlert}>Toggle Warning Alert</Button>
+      <Button variant="secondary" onClick={toggleAlert}>
+        Toggle Warning Alert
+      </Button>
       <Alert variant="warning" heading="Danger Zone" show={show}>
-        <AlertContent>
-          Welcome to the danger zone!
-        </AlertContent>
+        <AlertContent>Welcome to the danger zone!</AlertContent>
         <AlertActions>
-          <Button variant="error" onClick={toggleAlert}>Danger</Button>
-          <Button variant="secondary" onClick={toggleAlert}>Nevermind</Button>
+          <Button variant="error" onClick={toggleAlert}>
+            Danger
+          </Button>
+          <Button variant="secondary" onClick={toggleAlert}>
+            Nevermind
+          </Button>
         </AlertActions>
       </Alert>
     </>
-  )
+  );
 }
 ```
 
@@ -80,7 +93,8 @@ function WarningAlertExample() {
       name: 'heading',
       type: ['React.ReactElement', 'object'],
       required: true,
-      description: 'Displayed in the heading at the top of the alert. Optionally include the heading level.'
+      description:
+        'Displayed in the heading at the top of the alert. Optionally include the heading level.'
     },
     {
       name: 'onClose',
@@ -108,18 +122,11 @@ function WarningAlertExample() {
 
 ### AlertContent
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### AlertFooter
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
-
+<ComponentProps children={true} className={true} />
 
 ## Related Components
 

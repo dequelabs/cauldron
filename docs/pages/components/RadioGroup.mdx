@@ -4,14 +4,17 @@ description: An interactive component that lets users select a single option fro
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioGroup/index.tsx
 ---
 
-import { RadioGroup, FieldWrap, Code } from '@deque/cauldron-react'
+import { RadioGroup, FieldWrap, Code } from '@deque/cauldron-react';
 
 ```js
-import { RadioGroup } from '@deque/cauldron-react'
+import { RadioGroup } from '@deque/cauldron-react';
 ```
 
 <Note>
-  Use [FieldWrap](./FieldWrap) to wrap all input components. The `RadioGroup` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `RadioGroup`
+  component has been designed specifically to only be used when rendered as a
+  child of this component, and may not be completely accessible if rendered
+  outside of `FieldWrap`.
 </Note>
 
 ## Examples
@@ -20,7 +23,9 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="gyros-label">Do you like gyros?</div>
+  <div className="Field__label" id="gyros-label">
+    Do you like gyros?
+  </div>
   <RadioGroup
     aria-labelledby="gyros-label"
     name="gyros"
@@ -50,7 +55,9 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="pizza-label">Do you like pizza?</div>
+  <div className="Field__label" id="pizza-label">
+    Do you like pizza?
+  </div>
   <RadioGroup
     aria-labelledby="pizza-label"
     defaultValue="tuesday"
@@ -86,7 +93,9 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="robot-label">Are you a robot?</div>
+  <div className="Field__label" id="robot-label">
+    Are you a robot?
+  </div>
   <RadioGroup
     aria-labelledby="robot-label"
     defaultValue="no"
@@ -117,17 +126,20 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
       name: 'radios',
       type: 'array',
       required: true,
-      description: 'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
+      description:
+        'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'name',
@@ -137,17 +149,20 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
     {
       name: 'defaultValue',
       type: 'any',
-      description: 'The initial value of the radio group. Used when the RadioGroup is uncontrolled'
+      description:
+        'The initial value of the radio group. Used when the RadioGroup is uncontrolled'
     },
     {
       name: 'value',
       type: 'any',
-      description: 'The value of the radio group. Used when the RadioGroup is controlled.'
+      description:
+        'The value of the radio group. Used when the RadioGroup is controlled.'
     },
     {
       name: 'onChange',
       type: 'function',
-      description: 'This is required if using "controlled" input; otherwise it is optional'
+      description:
+        'This is required if using "controlled" input; otherwise it is optional'
     }
   ]}
 />

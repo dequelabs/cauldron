@@ -4,10 +4,10 @@ description: A component and hook that create pages out of a list of items.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Pagination/Pagination.tsx
 ---
 
-import { Pagination, usePagination } from '@deque/cauldron-react'
+import { Pagination, usePagination } from '@deque/cauldron-react';
 
 ```js
-import { Pagination } from '@deque/cauldron-react'
+import { Pagination } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -29,10 +29,7 @@ import { Pagination } from '@deque/cauldron-react'
 Using `hideStartEndPagination` prop, you can hide the "First" and "Last" page buttons.
 
 ```jsx example
-<Pagination
-  totalItems={30}
-  hideStartEndPagination
-/>
+<Pagination totalItems={30} hideStartEndPagination />
 ```
 
 ### Customizing Pagination Labels
@@ -48,7 +45,11 @@ The pagination component sets labels by default, but these labels can be overrid
   previousPageLabel="Previous Issue"
   nextPageLabel="Next Issue"
   lastPageLabel="Last Issue"
-  statusLabel={<span><strong>1</strong> of <strong>25</strong></span>}
+  statusLabel={
+    <span>
+      <strong>1</strong> of <strong>25</strong>
+    </span>
+  }
 />
 ```
 
@@ -61,8 +62,8 @@ function PaginationWithHook() {
   const { pagination } = usePagination({
     totalItems: 111,
     initialPageSize: 25
-  })
-  return <Pagination {...pagination} />
+  });
+  return <Pagination {...pagination} />;
 }
 ```
 
@@ -76,7 +77,8 @@ The pagination hook returns an object containing the properties `pagination`, a 
       name: 'totalItems',
       type: 'number',
       required: true,
-      description: 'The total number of items being rendered (not the total number of pages).'
+      description:
+        'The total number of items being rendered (not the total number of pages).'
     },
     {
       name: 'initialPageSize',
@@ -87,7 +89,8 @@ The pagination hook returns an object containing the properties `pagination`, a 
     {
       name: 'initialPage',
       type: 'number',
-      description: 'The (1-based) number of the page that pagination will start on.',
+      description:
+        'The (1-based) number of the page that pagination will start on.',
       defaultValue: 1
     }
   ]}
@@ -101,7 +104,8 @@ The pagination hook returns an object containing the properties `pagination`, a 
       name: 'totalItems',
       type: 'number',
       required: true,
-      description: 'The total number of items being rendered (not the total number of pages).'
+      description:
+        'The total number of items being rendered (not the total number of pages).'
     },
     {
       name: 'itemsPerPage',
@@ -116,27 +120,55 @@ The pagination hook returns an object containing the properties `pagination`, a 
     },
     {
       name: 'firstPageLabel',
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       defaultValue: 'First page',
-      description: 'The label text for the first page button (to be rendered as a tooltip).'
+      description:
+        'The label text for the first page button (to be rendered as a tooltip).'
     },
     {
       name: 'previousPageLabel',
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       defaultValue: 'Previous page',
-      description: 'The label text for the previous page button (to be rendered as a tooltip).'
+      description:
+        'The label text for the previous page button (to be rendered as a tooltip).'
     },
     {
       name: 'nextPageLabel',
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       defaultValue: 'Next page',
-      description: 'The label text for the next page button (to be rendered as a tooltip).'
+      description:
+        'The label text for the next page button (to be rendered as a tooltip).'
     },
     {
       name: 'lastPageLabel',
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       defaultValue: 'Last page',
-      description: 'The label text for the last page button (to be rendered as a tooltip).'
+      description:
+        'The label text for the last page button (to be rendered as a tooltip).'
     },
     {
       name: 'onNextPageClick',
@@ -161,18 +193,21 @@ The pagination hook returns an object containing the properties `pagination`, a 
     {
       name: 'tooltipPlacement',
       type: 'string',
-      description: 'The position of the tooltip relative to its target element.',
+      description:
+        'The position of the tooltip relative to its target element.',
       defaultValue: 'bottom'
     },
     {
       name: 'thin',
       type: 'boolean',
-      description: 'Displays pagination with "thin" modifier (reduces the height of buttons and spacing)'
+      description:
+        'Displays pagination with "thin" modifier (reduces the height of buttons and spacing)'
     },
     {
       name: 'hideStartEndPagination',
       type: 'boolean',
-      description: 'Hides "First page" and "Last page" buttons. Shows only "Next\Previous" buttons',
+      description:
+        'Hides "First page" and "Last page" buttons. Shows only "NextPrevious" buttons',
       defaultValue: 'false'
     }
   ]}

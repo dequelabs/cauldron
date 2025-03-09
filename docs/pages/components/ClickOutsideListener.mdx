@@ -4,10 +4,10 @@ description: A utility component to detect click events outside of a wrapped com
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ClickOutsideListener/index.tsx
 ---
 
-import { ClickOutsideListener, Button } from '@deque/cauldron-react'
+import { ClickOutsideListener, Button } from '@deque/cauldron-react';
 
 ```js
-import { ClickOutsideListener } from '@deque/cauldron-react'
+import { ClickOutsideListener } from '@deque/cauldron-react';
 ```
 
 ## Example
@@ -16,7 +16,7 @@ import { ClickOutsideListener } from '@deque/cauldron-react'
 <ClickOutsideListener onClickOutside={() => alert('You clicked outside!')}>
   <Button>Click Inside</Button>
 </ClickOutsideListener>
-````
+```
 
 ## Props
 
@@ -44,7 +44,8 @@ import { ClickOutsideListener } from '@deque/cauldron-react'
     {
       name: 'target',
       type: 'HTMLElement | React.RefObject | React.MutableRefObject',
-      description: 'Optional element to attach events to if wrapped child does not have an accessible ref.'
+      description:
+        'Optional element to attach events to if wrapped child does not have an accessible ref.'
     }
   ]}
 />

@@ -12,14 +12,10 @@ import {
   OptionsMenuList,
   OptionsMenuItem,
   Icon
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 
 ```jsx
-import {
-  TopBar,
-  TopBarItem,
-  TopBarMenu
-} from '@deque/cauldron-react'
+import { TopBar, TopBarItem, TopBarMenu } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -29,7 +25,11 @@ import {
 `TopBar` is a container component intended to wrap navigational items, actions, or other site-wide information. By default, it is position `fixed` to the top of your page and works in parallel with [Layout](./Layout) and [Workspace](./Workspace).
 
 <Note>
-  When using `MenuBar` within `TopBar`, `MenuBar` automatically sets `tabIndex="0"` on direct children. You _must_ set `tabindex="-1"` on any descendant components to prevent extra tabstops from occurring as `MenuBar` manages keyboard navigation automatically with <kbd>tab</kbd> and arrow key navigation.
+  When using `MenuBar` within `TopBar`, `MenuBar` automatically sets
+  `tabIndex="0"` on direct children. You _must_ set `tabindex="-1"` on any
+  descendant components to prevent extra tabstops from occurring as `MenuBar`
+  manages keyboard navigation automatically with <kbd>tab</kbd> and arrow key
+  navigation.
 </Note>
 
 ```jsx example
@@ -76,30 +76,20 @@ In addition to navigational items, the `MenuBar` can also contain a dropdown men
     <TopBarMenu>
       Menu <Icon type="chevron-down" />
       <OptionsMenuList>
-        <OptionsMenuItem>
-          Menu Item 1
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 2
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 3
-        </OptionsMenuItem>
+        <OptionsMenuItem>Menu Item 1</OptionsMenuItem>
+        <OptionsMenuItem>Menu Item 2</OptionsMenuItem>
+        <OptionsMenuItem>Menu Item 3</OptionsMenuItem>
       </OptionsMenuList>
     </TopBarMenu>
   </MenuBar>
 </TopBar>
 ```
 
-
 ## Props
 
 ### TopBar
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TopBarItem
 
@@ -121,7 +111,8 @@ In addition to navigational items, the `MenuBar` can also contain a dropdown men
       name: 'autoClickLink',
       type: 'boolean',
       defaultValue: 'true',
-      description: 'Automatically clicks links when a click occurs on TopBarItem.'
+      description:
+        'Automatically clicks links when a click occurs on TopBarItem.'
     },
     {
       name: 'menuItemRef',

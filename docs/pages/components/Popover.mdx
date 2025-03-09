@@ -1,14 +1,14 @@
 ---
 title: Popover
-description: A popover component is a user interface element designed to provide contextual information or actions in a compact and non-intrusive manner. 
+description: A popover component is a user interface element designed to provide contextual information or actions in a compact and non-intrusive manner.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Popover/index.tsx
 ---
 
-import { useRef, useState } from 'react'
-import { Popover, Button } from '@deque/cauldron-react'
+import { useRef, useState } from 'react';
+import { Popover, Button } from '@deque/cauldron-react';
 
 ```js
-import { Popover, Button } from '@deque/cauldron-react'
+import { Popover, Button } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -17,7 +17,7 @@ Cauldron's tooltip relies on [Floating UI](https://floating-ui.com/) to position
 
 ### Prompt Popover
 
-Prompt Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel, 
+Prompt Popovers are designed to display a popup with two buttons, the first to apply some action, the second to cancel,
 also popup contains information text to show some message to the user.
 Canceling the action will only close the popup window.
 
@@ -29,23 +29,23 @@ function PromptPopoverExample() {
 
   return (
     <>
-      <Button 
-        onClick={onTogglePopover} 
-        variant="secondary" 
+      <Button
+        onClick={onTogglePopover}
+        variant="secondary"
         buttonRef={buttonRef}
       >
         Prompt!
       </Button>
       <Popover
         variant="prompt"
-        target={buttonRef} 
-        placement="auto" 
-        show={show} 
+        target={buttonRef}
+        placement="auto"
+        show={show}
         onClose={onTogglePopover}
         infoText="Are you sure you want to exit this wizard? All changes will be lost."
       />
     </>
-  )
+  );
 }
 ```
 
@@ -61,19 +61,19 @@ function CustomPopoverExample() {
 
   return (
     <>
-      <Button 
-        onClick={onTogglePopover} 
-        variant="secondary" 
+      <Button
+        onClick={onTogglePopover}
+        variant="secondary"
         buttonRef={buttonRef}
       >
         Custom!
       </Button>
       <Popover
-        target={buttonRef} 
-        placement="auto" 
-        show={show} 
+        target={buttonRef}
+        placement="auto"
+        show={show}
         onClose={onTogglePopover}
-        aria-labelledby={"popover-title"}
+        aria-labelledby={'popover-title'}
       >
         <div>
           <h2 id="popover-title">Popover Title</h2>
@@ -84,7 +84,7 @@ function CustomPopoverExample() {
         </div>
       </Popover>
     </>
-  )
+  );
 }
 ```
 
@@ -93,7 +93,8 @@ function CustomPopoverExample() {
 <ComponentProps
   children={{
     required: false,
-    description: 'Please, note, if the variant is Custom - then children is required'
+    description:
+      'Please, note, if the variant is Custom - then children is required'
   }}
   props={[
     {
@@ -118,13 +119,15 @@ function CustomPopoverExample() {
       name: 'infoText',
       required: true,
       type: 'string',
-      description: 'Information text to show some warning or useful information in Prompt variant of the component. Please note that required is only for the "Prompt" variant.',
+      description:
+        'Information text to show some warning or useful information in Prompt variant of the component. Please note that required is only for the "Prompt" variant.'
     },
     {
       name: 'onApply',
       required: true,
       type: 'function',
-      description: 'Callback, which is used for the Apply button in the Prompt variant of the component. Please note, that this is only required for the "Prompt" variant',
+      description:
+        'Callback, which is used for the Apply button in the Prompt variant of the component. Please note, that this is only required for the "Prompt" variant'
     },
     {
       name: 'placement',
@@ -153,24 +156,28 @@ function CustomPopoverExample() {
     {
       name: 'applyButtonText',
       type: 'string',
-      description: 'Label for the button, which is used to apply action in Prompt variant of the popover',
+      description:
+        'Label for the button, which is used to apply action in Prompt variant of the popover',
       defaultValue: 'Apply'
     },
     {
       name: 'closeButtonText',
       type: 'string',
-      description: 'Label for the button, which is used to close popover in Prompt variant of the component',
+      description:
+        'Label for the button, which is used to close popover in Prompt variant of the component',
       defaultValue: 'Close'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
-    },
+      description:
+        'A label for Popover is required for non-custom variants. This means you must provide either an aria-label or aria-labelledby prop.'
+    }
   ]}
 />

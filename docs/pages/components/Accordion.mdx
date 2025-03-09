@@ -4,15 +4,19 @@ description: A component with a collapsible panel and an interactive heading to 
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Accordion/Accordion.tsx
 ---
 
-import { useState } from 'react'
-import { Accordion, AccordionTrigger, AccordionContent } from '@deque/cauldron-react'
-
-```jsx
-import { 
+import { useState } from 'react';
+import {
   Accordion,
   AccordionTrigger,
   AccordionContent
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
+
+```jsx
+import {
+  Accordion,
+  AccordionTrigger,
+  AccordionContent
+} from '@deque/cauldron-react';
 ```
 
 The `Accordion` is a styled component as a wrapper around `ExpandCollapsePanel`. Most of the interactive behavior comes from `ExpandCollapsePanel`.
@@ -65,7 +69,8 @@ function ControlledAccordion({ initialOpen = true }) {
     {
       name: 'onToggle',
       type: '(e: React.MouseEvent<HTMLButtonElement>) => void',
-      description: 'onToggle handler for the panel. The original event object will be passed.',
+      description:
+        'onToggle handler for the panel. The original event object will be passed.',
       defaultValue: 'function() {}'
     }
   ]}
@@ -81,7 +86,8 @@ function ControlledAccordion({ initialOpen = true }) {
     {
       name: 'heading',
       type: ['string', '{ level: number }'],
-      description: 'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.'
+      description:
+        'Sets a wrapper element for the trigger button with an appropriate heading level. If a heading level is not provided, a fragment is returned.'
     }
   ]}
 />
@@ -90,10 +96,7 @@ function ControlledAccordion({ initialOpen = true }) {
 
 `AccordionContent` extends `React.HTMLAttributes<HTMLDivElement>` and supports spreading of any props supported by the element, as well as:
 
-<ComponentProps
-  children={{ required: true }}
-  className={true}
-/>
+<ComponentProps children={{ required: true }} className={true} />
 
 ## Related Components
 
