@@ -99,7 +99,7 @@
     "postcss-cli": "^7.1.2",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "prettier": "^2",
+    "prettier": "^3",
     "puppeteer": "^22.12.1",
     "react": "^18",
     "react-dom": "^18",
