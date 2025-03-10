@@ -9,6 +9,8 @@
   --combobox-group-label-background-color: var(--gray-20);
   --combobox-group-label-font-size: var(--text-size-smaller);
   --combobox-option-selected-icon-color: var(--accent-primary);
+  --combobox-pill-height: 1.65rem;
+  --combobox-pill-icon-size: 18px;
 }
 
 .cauldron--theme-dark {
@@ -259,12 +261,16 @@
   flex-wrap: wrap;
   gap: var(--space-half);
   padding-left: var(--space-half);
-  padding-block: var(--space-half);
   padding-right: var(--space-large);
 }
 
 .Combobox--multiselect .TextFieldWrapper input {
   width: auto;
+}
+
+.ComboboxPill {
+  --tag-height: var(--combobox-pill-height);
+  --icon-size: var(--combobox-pill-icon-size);
 }
 
 .ComboboxPill + .ComboboxPill {

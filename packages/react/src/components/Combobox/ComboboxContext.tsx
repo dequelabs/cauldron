@@ -6,6 +6,8 @@ type ComboboxContext = {
   inputValue: ComboboxValue;
   formValues: ComboboxValue[];
   selectedValues: ComboboxValue[];
+  removeOptionLabels: string[];
+  setRemoveOptionLabels: React.Dispatch<React.SetStateAction<string[]>>;
   matchingOptions: Map<HTMLElement, ComboboxOptionState>;
   setMatchingOptions: React.Dispatch<
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
@@ -30,6 +32,8 @@ const ComboboxContext = createContext<ComboboxContext>({
   inputValue: undefined,
   formValues: [],
   selectedValues: [],
+  removeOptionLabels: [],
+  setRemoveOptionLabels: () => null,
   matches: true,
   matchingOptions: new Map(),
   setMatchingOptions: () => null,
@@ -41,6 +45,8 @@ function ComboboxProvider({
   inputValue,
   formValues,
   selectedValues,
+  removeOptionLabels,
+  setRemoveOptionLabels,
   matches,
   matchingOptions,
   setMatchingOptions,
@@ -54,6 +60,8 @@ function ComboboxProvider({
       inputValue,
       formValues,
       selectedValues,
+      removeOptionLabels,
+      setRemoveOptionLabels,
       matches:
         typeof matches === 'function' && !!inputValue
           ? (value) => matches(inputValue, value)
@@ -67,6 +75,8 @@ function ComboboxProvider({
       inputValue,
       formValues,
       selectedValues,
+      removeOptionLabels,
+      setRemoveOptionLabels,
       matches,
       matchingOptions,
       setMatchingOptions,

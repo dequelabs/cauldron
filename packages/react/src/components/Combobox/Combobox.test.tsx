@@ -435,14 +435,16 @@ test('should select multiple combobox options via clicks', () => {
 
 test('should select multiple combobox options via clicks, custom remove value aria label', () => {
   render(
-    <Combobox
-      label="label"
-      removeValueAriaLabel="Remove and forget"
-      multiselect
-    >
-      <ComboboxOption>Apple</ComboboxOption>
-      <ComboboxOption>Banana</ComboboxOption>
-      <ComboboxOption>Cantaloupe</ComboboxOption>
+    <Combobox label="label" multiselect>
+      <ComboboxOption removeOptionLabel="Remove and forget Apple">
+        Apple
+      </ComboboxOption>
+      <ComboboxOption removeOptionLabel="Remove and forget Banana">
+        Banana
+      </ComboboxOption>
+      <ComboboxOption removeOptionLabel="Remove and forget Cantaloupe">
+        Cantaloupe
+      </ComboboxOption>
     </Combobox>
   );
 

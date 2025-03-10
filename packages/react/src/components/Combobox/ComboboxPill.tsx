@@ -5,27 +5,24 @@ import Button from '../Button';
 
 interface ComboboxPillProps extends React.HTMLAttributes<HTMLButtonElement> {
   value: ComboboxValue;
-  removeValueAriaLabel?: string;
+  removeValueLabel?: string;
   disabled?: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ComboboxPill = forwardRef<HTMLButtonElement, ComboboxPillProps>(
-  (
-    { value, removeValueAriaLabel = 'remove', disabled = false, ...rest },
-    ref
-  ) => {
+  ({ value, removeValueLabel, disabled = false, ...rest }, ref) => {
     const commonProps = {
       ref,
-      'aria-label': `${removeValueAriaLabel} ${value}`,
+      'aria-label': removeValueLabel ? removeValueLabel : `remove ${value}`,
       className: 'ComboboxPill',
       tabIndex: -1
     };
 
     return !disabled ? (
       <TagButton
-        label=""
-        value={value || ''}
+        label={value || ''}
+        value=""
         icon="close"
         {...commonProps}
         {...rest}

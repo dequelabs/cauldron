@@ -32,9 +32,14 @@ const [Enter, Escape, Home, End, Backspace, Delete] = [
   'Delete'
 ];
 
-const ArrowKeys = ['ArrowDown', 'ArrowUp'];
+const [ArrowDown, ArrowUp, ArrowLeft, ArrowRight] = [
+  'ArrowDown',
+  'ArrowUp',
+  'ArrowLeft',
+  'ArrowRight'
+];
 
-const PillKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
+const PillKeys = [Backspace, Delete, ArrowLeft, ArrowRight];
 
 interface ComboboxOption {
   key?: string;
@@ -42,6 +47,7 @@ interface ComboboxOption {
   value?: ComboboxValue;
   formValue?: ComboboxValue;
   description?: string;
+  removeOptionLabel?: string;
 }
 
 interface BaseComboboxProps
@@ -65,7 +71,6 @@ interface SingleSelectComboboxProps extends BaseComboboxProps {
   defaultValue?: ComboboxValue;
   inputValue?: never;
   defaultInputValue?: never;
-  removeValueAriaLabel?: never;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     value: ComboboxValue;
@@ -79,7 +84,6 @@ interface MultiSelectComboboxProps extends BaseComboboxProps {
   defaultValue?: ComboboxValue[];
   inputValue?: ComboboxValue;
   defaultInputValue?: ComboboxValue;
-  removeValueAriaLabel?: string;
   onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
     target: T;
     value: ComboboxValue[];
@@ -122,17 +126,14 @@ function nextToFocus(
   elements: HTMLElement[],
   fallback: HTMLElement,
   focusedIndex: number,
-  direction: number
+  key: string
 ): HTMLElement | null {
   const elems = elements.concat(fallback);
-  if (direction === -1) {
-    return null;
-  }
 
-  switch (direction) {
-    case 2:
+  switch (key) {
+    case ArrowLeft:
       return elems[Math.max(focusedIndex - 1, 0)];
-    case 3:
+    case ArrowRight:
       return elems[Math.min(focusedIndex + 1, elems.length - 1)];
     default:
       return elems[focusedIndex];
@@ -154,7 +155,6 @@ const Combobox = forwardRef<
       defaultValue,
       inputValue: propInputValue,
       defaultInputValue,
-      removeValueAriaLabel,
       multiselect = false,
       requiredText = 'Required',
       error,
@@ -190,6 +190,7 @@ const Combobox = forwardRef<
       }
       return Array.isArray(value) ? value : [value];
     });
+    const [removeOptionLabels, setRemoveOptionLabels] = useState<string[]>([]);
     const [formValues, setFormValues] = useState<ComboboxValue[]>([]);
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
@@ -215,6 +216,7 @@ const Combobox = forwardRef<
           description={option.description}
           value={option.value}
           formValue={option.formValue}
+          removeOptionLabel={option.removeOptionLabel}
         >
           {option.label}
         </ComboboxOption>
@@ -373,7 +375,7 @@ const Combobox = forwardRef<
         const escKeypress = event.key === Escape;
         const deleteKeypress = event.key === Delete;
         const backspaceKeypress = event.key === Backspace;
-        const arrowKeypress = ArrowKeys.includes(event.key);
+        const listboxArrowKeypress = [ArrowUp, ArrowDown].includes(event.key);
 
         if (
           // prevent the page from scrolling and allow start/end option activation
@@ -399,12 +401,18 @@ const Combobox = forwardRef<
 
         if (
           inputValue === '' &&
-          (backspaceKeypress || deleteKeypress || event.key === 'ArrowLeft')
+          (backspaceKeypress || deleteKeypress || event.key === ArrowLeft) &&
+          pillsRef.current.length !== 0
         ) {
           pillsRef.current[pillsRef.current.length - 1]?.focus();
         }
 
-        if (!open && arrowKeypress && selectedValues.length && isAutoComplete) {
+        if (
+          !open &&
+          listboxArrowKeypress &&
+          selectedValues.length &&
+          isAutoComplete
+        ) {
           // If the user opens the combobox again with a selected value
           // just clear out the field to restore filtering capabilities
           setInputValue('');
@@ -453,9 +461,11 @@ const Combobox = forwardRef<
       [isControlled, onChange]
     );
 
-    const handleRemove = useCallback(
+    const handleRemovePill = useCallback(
       (target: HTMLElement, value: ComboboxValue) => {
-        if (disabled) return;
+        if (disabled) {
+          return;
+        }
 
         const newSelectedValues = selectedValues.filter((v) => v !== value);
 
@@ -494,19 +504,18 @@ const Combobox = forwardRef<
           } else {
             pillsRef.current[nextIndex].focus();
           }
-          handleRemove(focusedPill, focusedPill.innerText);
+          handleRemovePill(focusedPill, selectedValues[focusedIndex]);
           return;
         }
 
-        const direction = PillKeys.indexOf(event.key);
         nextToFocus(
           pillsRef.current,
           inputRef.current,
           focusedIndex,
-          direction
+          event.key
         )?.focus();
       },
-      [disabled, pillsRef, handleRemove]
+      [disabled, pillsRef, handleRemovePill]
     );
 
     const handleSelectionChange = useCallback(
@@ -544,6 +553,11 @@ const Combobox = forwardRef<
           const newSelectedValues = selectedValues
             .filter((v) => !removedValues.has(v))
             .concat(addedValues);
+
+          // istanbul ignore else
+          if (!isControlled) {
+            setInputValue('');
+          }
 
           setSelectedValues(newSelectedValues);
           (onSelectionChange as OnMultiSelectionChange)?.({
@@ -602,6 +616,7 @@ const Combobox = forwardRef<
         tabIndex={undefined}
         aria-activedescendant={undefined}
         multiselect={multiselect}
+        disabled={disabled}
       >
         {comboboxOptions}
         {noMatchingOptions}
@@ -663,14 +678,14 @@ const Combobox = forwardRef<
               };
 
               const handleClick = () =>
-                handleRemove(pillsRef.current[index], value);
+                handleRemovePill(pillsRef.current[index], value);
 
               return (
                 <ComboboxPill
                   ref={refCallback}
                   key={value}
                   value={value}
-                  removeValueAriaLabel={removeValueAriaLabel}
+                  removeValueLabel={removeOptionLabels[index]}
                   disabled={disabled}
                   onClick={handleClick}
                   onKeyDown={handlePillKeyDown}
@@ -703,6 +718,8 @@ const Combobox = forwardRef<
           inputValue={inputValue}
           formValues={formValues}
           selectedValues={selectedValues}
+          removeOptionLabels={removeOptionLabels}
+          setRemoveOptionLabels={setRemoveOptionLabels}
           matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}

@@ -16,6 +16,7 @@ interface ComboboxOptionProps extends React.HTMLAttributes<HTMLLIElement> {
   value?: ComboboxValue;
   formValue?: ComboboxValue;
   description?: ContentNode;
+  removeOptionLabel?: string;
   children: string;
 }
 
@@ -64,14 +65,20 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       description,
       value: propValue,
       formValue,
+      removeOptionLabel,
       ...props
     },
     ref
   ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { selectedValues, matches, setMatchingOptions, setFormValues } =
-      useComboboxContext();
+    const {
+      selectedValues,
+      setRemoveOptionLabels,
+      matches,
+      setMatchingOptions,
+      setFormValues
+    } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
@@ -125,6 +132,15 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
           formValues.push(value);
         }
         return formValues;
+      });
+
+      setRemoveOptionLabels((prev) => {
+        if (!removeOptionLabel) {
+          return prev;
+        }
+        return selectedValues.map((value, index) =>
+          value === comboboxValue ? removeOptionLabel : prev[index]
+        );
       });
     }, [selectedValues, formValue]);
 
