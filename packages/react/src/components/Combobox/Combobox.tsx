@@ -122,24 +122,6 @@ const ComboboxNoResults = ({
   );
 };
 
-function nextToFocus(
-  elements: HTMLElement[],
-  fallback: HTMLElement,
-  focusedIndex: number,
-  key: string
-): HTMLElement | null {
-  const elems = elements.concat(fallback);
-
-  switch (key) {
-    case ArrowLeft:
-      return elems[Math.max(focusedIndex - 1, 0)];
-    case ArrowRight:
-      return elems[Math.min(focusedIndex + 1, elems.length - 1)];
-    default:
-      return elems[focusedIndex];
-  }
-}
-
 const Combobox = forwardRef<
   HTMLDivElement,
   SingleSelectComboboxProps | MultiSelectComboboxProps
@@ -508,12 +490,21 @@ const Combobox = forwardRef<
           return;
         }
 
-        nextToFocus(
-          pillsRef.current,
-          inputRef.current,
-          focusedIndex,
-          event.key
-        )?.focus();
+        switch (event.key) {
+          case ArrowLeft:
+            pillsRef.current[Math.max(focusedIndex - 1, 0)].focus();
+            break;
+          case ArrowRight:
+            const nextIndexToFocus = focusedIndex + 1;
+            if (nextIndexToFocus === pillsRef.current.length) {
+              inputRef.current.focus();
+            } else {
+              pillsRef.current[
+                Math.min(nextIndexToFocus, pillsRef.current.length - 1)
+              ];
+            }
+            break;
+        }
       },
       [disabled, pillsRef, handleRemovePill]
     );
