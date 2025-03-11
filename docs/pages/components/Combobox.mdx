@@ -195,8 +195,8 @@ Comboboxes can also be controlled, by setting the `value` prop and updating the 
 ```jsx example
 function ComboboxControlledExample() {
   const [value, setValue] = useState('Peach');
-  const handleChange = (value) => {
-    setValue(value);
+  const handleChange = ({ target }) => {
+    setValue(target.value);
   };
   const handleSelectionChange = ({ value }) => {
     setValue(value);

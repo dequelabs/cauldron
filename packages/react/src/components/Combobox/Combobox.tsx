@@ -434,6 +434,9 @@ const Combobox = forwardRef<
 
     const handleChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (disabled) {
+          return;
+        }
         onChange?.(event);
         // istanbul ignore else
         if (!isControlled) {
@@ -676,7 +679,7 @@ const Combobox = forwardRef<
                   ref={refCallback}
                   key={value}
                   value={value}
-                  removeValueLabel={removeOptionLabels[index]}
+                  removeOptionLabel={removeOptionLabels[index]}
                   disabled={disabled}
                   onClick={handleClick}
                   onKeyDown={handlePillKeyDown}
@@ -689,6 +692,7 @@ const Combobox = forwardRef<
             ref={inputRef}
             value={inputValue}
             role="combobox"
+            disabled={disabled}
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}

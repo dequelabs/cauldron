@@ -5,16 +5,16 @@ import Button from '../Button';
 
 interface ComboboxPillProps extends React.HTMLAttributes<HTMLButtonElement> {
   value: ComboboxValue;
-  removeValueLabel?: string;
+  removeOptionLabel?: string;
   disabled?: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ComboboxPill = forwardRef<HTMLButtonElement, ComboboxPillProps>(
-  ({ value, removeValueLabel, disabled = false, ...rest }, ref) => {
+  ({ value, removeOptionLabel, disabled = false, ...rest }, ref) => {
     const commonProps = {
       ref,
-      'aria-label': removeValueLabel ? removeValueLabel : `remove ${value}`,
+      'aria-label': removeOptionLabel ? removeOptionLabel : `remove ${value}`,
       className: 'ComboboxPill',
       tabIndex: -1
     };
