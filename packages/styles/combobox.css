@@ -117,6 +117,10 @@
   margin-right: 1.25rem;
 }
 
+.Combobox .TextFieldWrapper input:is([disabled]) {
+  background-color: var(--field-background-color-disabled);
+}
+
 .Combobox__arrow {
   width: 2rem;
   display: flex;

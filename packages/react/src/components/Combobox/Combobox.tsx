@@ -415,11 +415,18 @@ const Combobox = forwardRef<
         triggerListboxKeyDown(event.key);
 
         // Close combobox with keyboard selections
-        if (enterKeypress && activeDescendant) {
+        if (enterKeypress && activeDescendant && !multiselect) {
           setOpen(false);
         }
       },
-      [onKeyDown, isAutoComplete, open, selectedValues, activeDescendant]
+      [
+        onKeyDown,
+        isAutoComplete,
+        open,
+        multiselect,
+        selectedValues,
+        activeDescendant
+      ]
     );
 
     useEffect(() => {
@@ -472,41 +479,42 @@ const Combobox = forwardRef<
 
         event.preventDefault();
 
-        const deleteKeypress = event.key === Delete;
-        const backspaceKeypress = event.key === Backspace;
+        const isDelete = event.key === Delete;
+        const isBackspace = event.key === Backspace;
+        const isArrowLeft = event.key === ArrowLeft;
+        const isArrowRight = event.key === ArrowRight;
 
         const focusedIndex = pillsRef.current.findIndex(
           (p) => document.activeElement === p
         );
 
-        const focusedPill = pillsRef.current[focusedIndex];
+        const pillsLength = pillsRef.current.length;
 
-        if (deleteKeypress || backspaceKeypress) {
-          if (disabled) return;
+        if (isDelete || isBackspace) {
+          if (disabled) {
+            return;
+          }
+
+          handleRemovePill(
+            pillsRef.current[focusedIndex],
+            selectedValues[focusedIndex]
+          );
+
           const nextIndex = focusedIndex + 1;
-          if (nextIndex >= pillsRef.current.length) {
-            inputRef.current?.focus();
+
+          if (nextIndex == pillsLength) {
+            inputRef.current.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }
-          handleRemovePill(focusedPill, selectedValues[focusedIndex]);
-          return;
-        }
+        } else if (isArrowLeft || isArrowRight) {
+          const nextIndex = Math.max(focusedIndex + (isArrowLeft ? -1 : 1), 0);
 
-        switch (event.key) {
-          case ArrowLeft:
-            pillsRef.current[Math.max(focusedIndex - 1, 0)].focus();
-            break;
-          case ArrowRight:
-            const nextIndexToFocus = focusedIndex + 1;
-            if (nextIndexToFocus === pillsRef.current.length) {
-              inputRef.current.focus();
-            } else {
-              pillsRef.current[
-                Math.min(nextIndexToFocus, pillsRef.current.length - 1)
-              ];
-            }
-            break;
+          if (isArrowRight && nextIndex === pillsLength) {
+            inputRef.current.focus();
+          } else {
+            pillsRef.current[nextIndex].focus();
+          }
         }
       },
       [disabled, pillsRef, handleRemovePill]
@@ -561,9 +569,11 @@ const Combobox = forwardRef<
           });
         }
 
-        setOpen(false);
+        if (!multiselect) {
+          setOpen(false);
+        }
       },
-      [isControlled, selectedValues, onSelectionChange]
+      [isControlled, multiselect, selectedValues, onSelectionChange]
     );
 
     const handleActiveChange = useCallback((option: ListboxOption) => {
