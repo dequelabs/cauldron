@@ -29,7 +29,7 @@ assignees: '@deque/cauldron-team,@deque/cauldron-codeowners'
 
 ### Interface / Props
 
-<!-- Provide example typescript interfaces necessary to understand the component's api including any required or default props: -->
+<!-- Provide example typescript interfaces necessary to understand the component's api, including any required or default props: -->
 
 ### Accessibility
 
