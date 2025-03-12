@@ -239,12 +239,16 @@ const Combobox = forwardRef<
         // Fire a Home keydown event on listbox to ensure the first item is selected
         triggerListboxKeyDown(Home);
       }
-    }, [open]);
+    }, [open, multiselect, autocomplete, selectedValues]);
 
     useEffect(() => {
+      const lastSelectedValue =
+        selectedValues.length !== 0
+          ? selectedValues[selectedValues.length - 1]
+          : undefined;
       const [element, option] =
         Array.from(matchingOptions.entries()).find(
-          ([, { selected }]) => selected
+          ([, { value }]) => value === lastSelectedValue
         ) || [];
       if (autocomplete === 'manual') {
         setActiveDescendant(!element ? null : { element, ...option });
@@ -258,7 +262,7 @@ const Combobox = forwardRef<
           triggerListboxKeyDown(Home);
         });
       }
-    }, [matchingOptions]);
+    }, [selectedValues, matchingOptions]);
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
@@ -280,7 +284,9 @@ const Combobox = forwardRef<
 
     const handleInputClick = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
-        setOpen(true);
+        if (!disabled) {
+          setOpen(true);
+        }
         if (
           selectedValues.length &&
           selectedValues.includes(inputValue) &&
@@ -294,7 +300,7 @@ const Combobox = forwardRef<
           inputRef.current?.focus();
         }
       },
-      [inputValue, selectedValues]
+      [disabled, inputValue, selectedValues]
     );
 
     const handleComboboxOptionMouseDown = useCallback(
@@ -346,7 +352,13 @@ const Combobox = forwardRef<
           }
         }
       },
-      [autocomplete, activeDescendant, onBlur]
+      [
+        autocomplete,
+        activeDescendant,
+        onBlur,
+        selectedValues,
+        onSelectionChange
+      ]
     );
 
     const handleKeyDown = useCallback(
@@ -437,7 +449,7 @@ const Combobox = forwardRef<
           setInputValue((propInputValue as ComboboxValue) || '');
         }
       }
-    }, [propValue]);
+    }, [multiselect, propValue, propInputValue]);
 
     const handleChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {

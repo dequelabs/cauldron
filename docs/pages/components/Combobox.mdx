@@ -297,9 +297,11 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 </FieldWrap>
 ```
 
-### Multiselect
+## Multiselect
 
 Combobox can also support multiple selection of options.
+
+### Multiselect Uncontrolled
 
 ```jsx example
 <FieldWrap>
@@ -335,6 +337,10 @@ Combobox can also support multiple selection of options.
 </FieldWrap>
 ```
 
+### Multiselect Controlled
+
+Multiselect Combobox can be controlled by passing `value` and `inputValue` props and updating them with `onSelectionChange` and `onChange`
+
 <Note>
   Multiselect Combobox components will pass in array values for the selected
   options in `onSelectionChange` and expect an array of values for `value` and
@@ -342,6 +348,38 @@ Combobox can also support multiple selection of options.
   additional props `inputValue` and `defaultInputValue` to control text input
   state.
 </Note>
+
+```jsx example
+function MultiselectComboboxControlledExample() {
+  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState(['Peach']);
+  const handleChange = ({ target }) => {
+    setInputValue(target.value);
+  };
+  const handleSelectionChange = ({ value }) => {
+    setValue(value);
+  };
+  return (
+    <FieldWrap>
+      <Combobox
+        label="Multi Fruit"
+        value={value}
+        inputValue={inputValue}
+        onChange={handleChange}
+        onSelectionChange={handleSelectionChange}
+        multiselect
+      >
+        <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+        <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+        <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+        <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+        <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+        <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+}
+```
 
 ## Props
 

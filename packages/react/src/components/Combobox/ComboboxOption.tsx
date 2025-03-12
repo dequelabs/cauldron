@@ -146,10 +146,15 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
 
     useEffect(() => {
       if (isMatching) {
+        const comboboxValue =
+          typeof propValue !== 'undefined'
+            ? propValue
+            : comboboxOptionRef.current?.innerText;
         setMatchingOptions((options) => {
           return new Map(
             options.set(comboboxOptionRef.current, {
-              value: children as string,
+              value: comboboxValue,
+              displayValue: children as string,
               selected: isSelected
             })
           );

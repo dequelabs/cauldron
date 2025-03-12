@@ -19,6 +19,7 @@ type ComboboxContext = {
 export type ComboboxOptionState = {
   selected: boolean;
   value: ComboboxValue;
+  displayValue: ComboboxValue;
 };
 
 type ComboboxProvider = {
