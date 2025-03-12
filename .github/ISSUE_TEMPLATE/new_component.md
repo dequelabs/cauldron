@@ -49,7 +49,7 @@ assignees: '@deque/cauldron-team,@deque/cauldron-codeowners'
 
 ### Variants (optional)
 
-<!-- Does the component require different variants implementations? If so, explain: -->
+<!-- Does the component require different variant implementations? If so, explain: -->
 
 ### Usage Examples
 
