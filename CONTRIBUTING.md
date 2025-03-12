@@ -203,7 +203,7 @@ We aim to review pull requests within a day or two. If your changes are time-sen
 
 Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
 
-New components that have visual components or any changes to [component snapshot testing screenshots](https://github.com/dequelabs/cauldron/blob/develop/e2e/readme.md#snapshot-testing) should have an approval from @dequelabs/cauldron-design.
+New components that have visual components or any changes to [component snapshot testing screenshots](https://github.com/dequelabs/cauldron/blob/develop/e2e/readme.md#snapshot-testing) should have an approval from [@dequelabs/cauldron-design](https://github.com/orgs/dequelabs/teams/cauldron-design).
 
 #### Previewing Changes
 
