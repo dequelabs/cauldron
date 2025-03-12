@@ -203,6 +203,8 @@ We aim to review pull requests within a day or two. If your changes are time-sen
 
 Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
 
+New components that have visual components or any changes to [component snapshot testing screenshots](https://github.com/dequelabs/cauldron/blob/develop/e2e/readme.md#snapshot-testing) should have an approval from @dequelabs/cauldron-design.
+
 #### Previewing Changes
 
 Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened and will be deleted when closed.
