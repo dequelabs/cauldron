@@ -3,24 +3,43 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react';
 import { createPortal } from 'react-dom';
-import classnames from 'classnames';
 import { useId } from 'react-id-generator';
-import { ContentNode } from '../../types';
+import classnames from 'classnames';
 import Listbox from '../Listbox';
 import ComboboxOption from './ComboboxOption';
 import { ComboboxProvider } from './ComboboxContext';
+import type { ContentNode } from '../../types';
 import type { ComboboxOptionState } from './ComboboxContext';
 import type { ComboboxValue } from './ComboboxOption';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import useSharedRef from '../../utils/useSharedRef';
 import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
+import { ListboxValue } from '../Listbox/ListboxOption';
+import ComboboxPill from './ComboboxPill';
 
 // Event Keys
-const [Enter, Escape, Home, End] = ['Enter', 'Escape', 'Home', 'End'];
+const [Enter, Escape, Home, End, Backspace, Delete] = [
+  'Enter',
+  'Escape',
+  'Home',
+  'End',
+  'Backspace',
+  'Delete'
+];
+
+const [ArrowDown, ArrowUp, ArrowLeft, ArrowRight] = [
+  'ArrowDown',
+  'ArrowUp',
+  'ArrowLeft',
+  'ArrowRight'
+];
+
+const PillKeys = [Backspace, Delete, ArrowLeft, ArrowRight];
 
 interface ComboboxOption {
   key?: string;
@@ -28,33 +47,60 @@ interface ComboboxOption {
   value?: ComboboxValue;
   formValue?: ComboboxValue;
   description?: string;
+  removeOptionLabel?: string;
 }
 
-interface ComboboxProps
-  extends React.InputHTMLAttributes<
-    Omit<HTMLInputElement, 'value' | 'defaultValue'>
+interface BaseComboboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'value' | 'defaultValue'
   > {
   label: ContentNode;
   options?: ComboboxOption[];
-  value?: ComboboxValue;
-  defaultValue?: ComboboxValue;
   requiredText?: React.ReactNode;
   error?: React.ReactNode;
   autocomplete?: 'none' | 'manual' | 'automatic';
-  onSelectionChange?: <T extends HTMLElement = HTMLElement>({
-    target,
-    value,
-    previousValue
-  }: {
-    target: T;
-    value: ComboboxValue;
-    previousValue: ComboboxValue;
-  }) => void;
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
 }
+
+interface SingleSelectComboboxProps extends BaseComboboxProps {
+  value?: ComboboxValue;
+  defaultValue?: ComboboxValue;
+  inputValue?: never;
+  defaultInputValue?: never;
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
+    target: T;
+    value: ComboboxValue;
+    previousValue: ComboboxValue;
+  }) => void;
+  multiselect?: false;
+}
+
+interface MultiSelectComboboxProps extends BaseComboboxProps {
+  value?: ComboboxValue[];
+  defaultValue?: ComboboxValue[];
+  inputValue?: ComboboxValue;
+  defaultInputValue?: ComboboxValue;
+  onSelectionChange?: <T extends HTMLElement = HTMLElement>(props: {
+    target: T;
+    value: ComboboxValue[];
+    previousValue: ComboboxValue[];
+  }) => void;
+  multiselect: true;
+}
+
+type ListboxOnSelectionChange = Parameters<
+  Exclude<
+    React.ComponentPropsWithRef<typeof Listbox>['onSelectionChange'],
+    undefined
+  >
+>[0];
+
+type OnSingleSelectionChange = SingleSelectComboboxProps['onSelectionChange'];
+type OnMultiSelectionChange = MultiSelectComboboxProps['onSelectionChange'];
 
 const defaultAutoCompleteMatches = (inputValue: string, value: string) => {
   // istanbul ignore if
@@ -76,7 +122,10 @@ const ComboboxNoResults = ({
   );
 };
 
-const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
+const Combobox = forwardRef<
+  HTMLDivElement,
+  SingleSelectComboboxProps | MultiSelectComboboxProps
+>(
   (
     {
       id: propId,
@@ -86,6 +135,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       options = [],
       value: propValue,
       defaultValue,
+      inputValue: propInputValue,
+      defaultInputValue,
+      multiselect = false,
       requiredText = 'Required',
       error,
       autocomplete = 'manual',
@@ -100,16 +152,28 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       portal,
       inputRef: propInputRef = null,
       'aria-describedby': ariaDescribedby,
+      disabled = false,
       ...props
     },
     ref
   ): React.JSX.Element => {
-    const [value, setValue] = useState<string>(defaultValue || propValue || '');
     const [matchingOptions, setMatchingOptions] = useState<
       Map<HTMLElement, ComboboxOptionState>
     >(new Map());
-    const [selectedValue, setSelectedValue] = useState<string>(value || '');
-    const [formValue, setFormValue] = useState<string | undefined>('');
+    const [inputValue, setInputValue] = useState(() => {
+      const value = defaultValue || propValue;
+      const inputVal = defaultInputValue || propInputValue;
+      return (Array.isArray(value) ? inputVal : value) || '';
+    });
+    const [selectedValues, setSelectedValues] = useState(() => {
+      const value = defaultValue || propValue;
+      if (!value) {
+        return [];
+      }
+      return Array.isArray(value) ? value : [value];
+    });
+    const [removeOptionLabels, setRemoveOptionLabels] = useState<string[]>([]);
+    const [formValues, setFormValues] = useState<ComboboxValue[]>([]);
     const [open, setOpen] = useState(false);
     const [activeDescendant, setActiveDescendant] =
       useState<ListboxOption | null>(null);
@@ -117,7 +181,10 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
     const inputRef = useSharedRef<HTMLInputElement>(propInputRef);
     const listboxRef = useRef<HTMLUListElement>(null);
-    const isControlled = typeof propValue !== 'undefined';
+    const pillsRef = useRef<HTMLButtonElement[]>([]);
+    const isControlled =
+      typeof propValue !== 'undefined' &&
+      (multiselect ? typeof propInputValue !== 'undefined' : true);
     const isRequired = !!props.required;
     const isAutoComplete = autocomplete !== 'none';
     const hasError = !!error;
@@ -130,12 +197,14 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           id={`${id}-option-${index + 1}`}
           description={option.description}
           value={option.value}
+          formValue={option.formValue}
+          removeOptionLabel={option.removeOptionLabel}
         >
           {option.label}
         </ComboboxOption>
       ));
 
-    const triggerListboxKeyDown = React.useCallback(
+    const triggerListboxKeyDown = useCallback(
       (key: string) => {
         listboxRef.current?.dispatchEvent(
           new KeyboardEvent('keydown', {
@@ -153,38 +222,47 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         return;
       }
 
-      if (!open && selectedValue && value !== selectedValue) {
-        setValue(selectedValue);
+      if (
+        !open &&
+        !multiselect &&
+        selectedValues.length &&
+        !selectedValues.includes(inputValue)
+      ) {
+        setInputValue(selectedValues[selectedValues.length - 1] || '');
       }
 
       if (!open) {
         setActiveDescendant(null);
       }
 
-      if (open && autocomplete === 'automatic' && !selectedValue) {
+      if (open && autocomplete === 'automatic' && !selectedValues.length) {
         // Fire a Home keydown event on listbox to ensure the first item is selected
         triggerListboxKeyDown(Home);
       }
-    }, [open]);
+    }, [open, multiselect, autocomplete, selectedValues]);
 
     useEffect(() => {
+      const lastSelectedValue =
+        selectedValues.length !== 0
+          ? selectedValues[selectedValues.length - 1]
+          : undefined;
       const [element, option] =
         Array.from(matchingOptions.entries()).find(
-          ([, { selected }]) => selected
+          ([, { value }]) => value === lastSelectedValue
         ) || [];
       if (autocomplete === 'manual') {
         setActiveDescendant(!element ? null : { element, ...option });
       } else if (
         autocomplete === 'automatic' &&
         matchingOptions.size &&
-        !selectedValue
+        !selectedValues.length
       ) {
         // Fire a home keydown event on listbox to ensure the first item is selected
         requestAnimationFrame(() => {
           triggerListboxKeyDown(Home);
         });
       }
-    }, [matchingOptions]);
+    }, [selectedValues, matchingOptions]);
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
@@ -192,19 +270,29 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(true);
-          if (selectedValue && value === selectedValue && isAutoComplete) {
-            setValue('');
+          if (
+            selectedValues.length &&
+            selectedValues.includes(inputValue) &&
+            isAutoComplete
+          ) {
+            setInputValue('');
           }
         }
       },
-      [onFocus, value, selectedValue]
+      [onFocus, inputValue, selectedValues]
     );
 
     const handleInputClick = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
-        setOpen(true);
-        if (selectedValue && value === selectedValue && isAutoComplete) {
-          setValue('');
+        if (!disabled) {
+          setOpen(true);
+        }
+        if (
+          selectedValues.length &&
+          selectedValues.includes(inputValue) &&
+          isAutoComplete
+        ) {
+          setInputValue('');
         }
 
         if (event.target !== inputRef.current) {
@@ -212,7 +300,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           inputRef.current?.focus();
         }
       },
-      [value, selectedValue]
+      [disabled, inputValue, selectedValues]
     );
 
     const handleComboboxOptionMouseDown = useCallback(
@@ -235,19 +323,42 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         onBlur?.(event);
         setOpen(false);
         if (autocomplete === 'automatic' && activeDescendant) {
-          const stringValue =
+          const activeValue =
             activeDescendant.value?.toString() ||
             /* istanbul ignore next: default value */ '';
-          setValue(stringValue);
-          setSelectedValue(stringValue);
-          onSelectionChange?.({
-            target: activeDescendant.element,
-            value: stringValue,
-            previousValue: value
-          });
+          setInputValue(activeValue);
+
+          if (!multiselect) {
+            setSelectedValues([activeValue]);
+            (onSelectionChange as OnSingleSelectionChange)?.({
+              target: activeDescendant.element,
+              value: activeValue,
+              previousValue: selectedValues[0]
+            });
+          } else {
+            const activeValueIndex = selectedValues.indexOf(activeValue);
+            const newSelectedValues = selectedValues.filter(
+              (v) => v !== activeValue
+            );
+            if (activeValueIndex === -1) {
+              newSelectedValues.push(activeValue);
+            }
+            setSelectedValues(newSelectedValues);
+            (onSelectionChange as OnMultiSelectionChange)?.({
+              target: activeDescendant.element,
+              value: newSelectedValues,
+              previousValue: selectedValues
+            });
+          }
         }
       },
-      [autocomplete, activeDescendant, onBlur]
+      [
+        autocomplete,
+        activeDescendant,
+        onBlur,
+        selectedValues,
+        onSelectionChange
+      ]
     );
 
     const handleKeyDown = useCallback(
@@ -256,7 +367,9 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
         const enterKeypress = event.key === Enter;
         const escKeypress = event.key === Escape;
-        const arrowKeypress = ['ArrowDown', 'ArrowUp'].includes(event.key);
+        const deleteKeypress = event.key === Delete;
+        const backspaceKeypress = event.key === Backspace;
+        const listboxArrowKeypress = [ArrowUp, ArrowDown].includes(event.key);
 
         if (
           // prevent the page from scrolling and allow start/end option activation
@@ -280,10 +393,23 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
 
         setOpen(true);
 
-        if (!open && arrowKeypress && selectedValue && isAutoComplete) {
+        if (
+          inputValue === '' &&
+          (backspaceKeypress || deleteKeypress || event.key === ArrowLeft) &&
+          pillsRef.current.length !== 0
+        ) {
+          pillsRef.current[pillsRef.current.length - 1]?.focus();
+        }
+
+        if (
+          !open &&
+          listboxArrowKeypress &&
+          selectedValues.length &&
+          isAutoComplete
+        ) {
           // If the user opens the combobox again with a selected value
           // just clear out the field to restore filtering capabilities
-          setValue('');
+          setInputValue('');
         }
 
         // Space should not trigger selection since the user could be typing
@@ -301,60 +427,165 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         triggerListboxKeyDown(event.key);
 
         // Close combobox with keyboard selections
-        if (enterKeypress && activeDescendant) {
+        if (enterKeypress && activeDescendant && !multiselect) {
           setOpen(false);
         }
       },
-      [onKeyDown, isAutoComplete, open, selectedValue, activeDescendant]
+      [
+        onKeyDown,
+        isAutoComplete,
+        open,
+        multiselect,
+        selectedValues,
+        activeDescendant
+      ]
     );
 
     useEffect(() => {
-      if (typeof propValue !== 'undefined') {
-        setValue(propValue);
+      if (isControlled) {
+        if (!multiselect) {
+          setInputValue((propValue as ComboboxValue) || '');
+        } else {
+          setInputValue((propInputValue as ComboboxValue) || '');
+        }
       }
-    }, [propValue]);
+    }, [multiselect, propValue, propInputValue]);
 
     const handleChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (disabled) {
+          return;
+        }
         onChange?.(event);
         // istanbul ignore else
         if (!isControlled) {
-          setValue(event.target.value);
+          setInputValue(event.target.value);
         }
       },
       [isControlled, onChange]
     );
 
-    const handleSelectionChange = useCallback(
-      ({
-        target,
-        value: listboxValue,
-        previousValue
-      }: Parameters<
-        Exclude<
-          React.ComponentProps<typeof Listbox>['onSelectionChange'],
-          undefined
-        >
-      >[0]) => {
-        const stringValue =
-          listboxValue?.toString() || /* istanbul ignore next */ '';
-
-        // istanbul ignore else
-        if (!isControlled) {
-          setValue(stringValue);
+    const handleRemovePill = useCallback(
+      (target: HTMLElement, value: ComboboxValue) => {
+        if (disabled) {
+          return;
         }
 
-        setSelectedValue(stringValue);
+        const newSelectedValues = selectedValues.filter((v) => v !== value);
 
-        onSelectionChange?.({
+        setSelectedValues(newSelectedValues);
+        (onSelectionChange as OnMultiSelectionChange)?.({
           target,
-          value: stringValue,
-          previousValue: previousValue?.toString()
+          value: newSelectedValues,
+          previousValue: selectedValues
         });
-
-        setOpen(false);
       },
-      [isControlled, onSelectionChange]
+      [disabled, selectedValues, onSelectionChange]
+    );
+
+    const handlePillKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (!PillKeys.includes(event.key)) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const isDelete = event.key === Delete;
+        const isBackspace = event.key === Backspace;
+        const isArrowLeft = event.key === ArrowLeft;
+        const isArrowRight = event.key === ArrowRight;
+
+        const focusedIndex = pillsRef.current.findIndex(
+          (p) => document.activeElement === p
+        );
+
+        const pillsLength = pillsRef.current.length;
+
+        if (isDelete || isBackspace) {
+          if (disabled) {
+            return;
+          }
+
+          handleRemovePill(
+            pillsRef.current[focusedIndex],
+            selectedValues[focusedIndex]
+          );
+
+          const nextIndex = focusedIndex + 1;
+
+          if (nextIndex == pillsLength) {
+            inputRef.current.focus();
+          } else {
+            pillsRef.current[nextIndex].focus();
+          }
+        } else if (isArrowLeft || isArrowRight) {
+          const nextIndex = Math.max(focusedIndex + (isArrowLeft ? -1 : 1), 0);
+
+          if (isArrowRight && nextIndex === pillsLength) {
+            inputRef.current.focus();
+          } else {
+            pillsRef.current[nextIndex].focus();
+          }
+        }
+      },
+      [disabled, pillsRef, handleRemovePill]
+    );
+
+    const handleSelectionChange = useCallback(
+      ({ target, value, previousValue }: ListboxOnSelectionChange) => {
+        if (!multiselect) {
+          const listboxValue = (value as ListboxValue)?.toString() || '';
+          const listboxPreviousValue =
+            (previousValue as ListboxValue)?.toString() || '';
+
+          // istanbul ignore else
+          if (!isControlled) {
+            setInputValue(listboxValue);
+          }
+
+          setSelectedValues([listboxValue]);
+          (onSelectionChange as OnSingleSelectionChange)?.({
+            target,
+            value: listboxValue,
+            previousValue: listboxPreviousValue
+          });
+        } else {
+          const listboxPreviousValue = previousValue as ComboboxValue[];
+          const listboxValue = value as ComboboxValue[];
+
+          const previousValueSet = new Set(listboxPreviousValue);
+          const valueSet = new Set(listboxValue);
+
+          const removedValues = new Set(
+            listboxPreviousValue.filter((v) => !valueSet.has(v))
+          );
+          const addedValues = listboxValue.filter(
+            (v) => !previousValueSet.has(v)
+          );
+
+          const newSelectedValues = selectedValues
+            .filter((v) => !removedValues.has(v))
+            .concat(addedValues);
+
+          // istanbul ignore else
+          if (!isControlled) {
+            setInputValue('');
+          }
+
+          setSelectedValues(newSelectedValues);
+          (onSelectionChange as OnMultiSelectionChange)?.({
+            target,
+            value: newSelectedValues,
+            previousValue: selectedValues
+          });
+        }
+
+        if (!multiselect) {
+          setOpen(false);
+        }
+      },
+      [isControlled, multiselect, selectedValues, onSelectionChange]
     );
 
     const handleActiveChange = useCallback((option: ListboxOption) => {
@@ -366,7 +597,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       onActiveChange?.(option);
     }, []);
 
-    const NoMatchingOptions = React.useMemo(
+    const NoMatchingOptions = useMemo(
       () =>
         React.isValidElement(renderNoResults)
           ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
@@ -376,11 +607,15 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
       [renderNoResults]
     );
 
-    const noMatchingOptions = !!value?.length && !matchingOptions.size && (
+    const noMatchingOptions = !!inputValue && !matchingOptions.size && (
       <NoMatchingOptions />
     );
 
     const comboboxListbox = (
+      // eslint-disable-next-line
+      // @ts-expect-error
+      // multiselect & value props are passed to Listbox, but TS is unable to infer that
+      // it's a correct mapping from Combobox's multiselect & value props
       <Listbox
         className={classnames('Combobox__listbox', {
           'Combobox__listbox--open': open
@@ -388,7 +623,7 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         role={noMatchingOptions ? 'presentation' : 'listbox'}
         aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
         id={`${id}-listbox`}
-        value={selectedValue}
+        value={multiselect ? selectedValues : selectedValues[0]}
         onMouseDown={handleComboboxOptionMouseDown}
         onClick={handleComboboxOptionClick}
         onSelectionChange={handleSelectionChange}
@@ -396,6 +631,8 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         ref={listboxRef}
         tabIndex={undefined}
         aria-activedescendant={undefined}
+        multiselect={multiselect}
+        disabled={disabled}
       >
         {comboboxOptions}
         {noMatchingOptions}
@@ -413,10 +650,17 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
     return (
       <div
         id={id}
-        className={classnames('Combobox', className)}
+        className={classnames(
+          'Combobox',
+          { 'Combobox--multiselect': multiselect },
+          className
+        )}
         ref={comboboxRef}
       >
-        {name && <input type="hidden" name={name} value={formValue} />}
+        {name &&
+          formValues.map((formValue, index) => (
+            <input type="hidden" key={index} name={name} value={formValue} />
+          ))}
         <label
           className={classnames('Field__label', {
             'Field__label--is-required': isRequired,
@@ -439,12 +683,38 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
           // there's already keyboard handlers to open the listbox on the input element
           onClick={handleInputClick}
         >
+          {multiselect &&
+            selectedValues.map((value, index) => {
+              const refCallback = (elem: HTMLButtonElement | null) => {
+                if (elem) {
+                  pillsRef.current[index] = elem;
+                } else {
+                  pillsRef.current.splice(index, 1);
+                }
+              };
+
+              const handleClick = () =>
+                handleRemovePill(pillsRef.current[index], value);
+
+              return (
+                <ComboboxPill
+                  ref={refCallback}
+                  key={value}
+                  value={value}
+                  removeOptionLabel={removeOptionLabels[index]}
+                  disabled={disabled}
+                  onClick={handleClick}
+                  onKeyDown={handlePillKeyDown}
+                />
+              );
+            })}
           <input
             type="text"
             id={`${id}-input`}
             ref={inputRef}
-            value={value}
+            value={inputValue}
             role="combobox"
+            disabled={disabled}
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}
@@ -462,13 +732,15 @@ const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
         </TextFieldWrapper>
         <ComboboxProvider
           autocomplete={autocomplete}
-          inputValue={value}
-          formValue={formValue}
-          selectedValue={selectedValue}
+          inputValue={inputValue}
+          formValues={formValues}
+          selectedValues={selectedValues}
+          removeOptionLabels={removeOptionLabels}
+          setRemoveOptionLabels={setRemoveOptionLabels}
           matches={!isAutoComplete || defaultAutoCompleteMatches}
           matchingOptions={matchingOptions}
           setMatchingOptions={setMatchingOptions}
-          setFormValue={setFormValue}
+          setFormValues={setFormValues}
         >
           {portal && typeof document !== 'undefined'
             ? (createPortal(
