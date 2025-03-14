@@ -91,7 +91,7 @@
     "log-symbols": "4",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-mdx": "^3.0.0",
-    "micromark-extension-mdxjs": "^1.0.0",
+    "micromark-extension-mdxjs": "^3.0.0",
     "mini-css-extract-plugin": "^2.9.1",
     "node-fetch": "^3.3.0",
     "p-queue": "^8",
