@@ -16,6 +16,7 @@ interface ComboboxOptionProps extends React.HTMLAttributes<HTMLLIElement> {
   value?: ComboboxValue;
   formValue?: ComboboxValue;
   description?: ContentNode;
+  removeOptionLabel?: string;
   children: string;
 }
 
@@ -64,14 +65,20 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       description,
       value: propValue,
       formValue,
+      removeOptionLabel,
       ...props
     },
     ref
   ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
     const { selected, active } = useListboxContext();
-    const { selectedValue, matches, setMatchingOptions, setFormValue } =
-      useComboboxContext();
+    const {
+      selectedValues,
+      setRemoveOptionLabels,
+      matches,
+      setMatchingOptions,
+      setFormValues
+    } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
     const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
       root: null,
@@ -81,8 +88,9 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       !!active?.element && active.element === comboboxOptionRef.current;
     const isSelected = !!(
       selected &&
-      !!selected[0]?.element &&
-      selected[0].element === comboboxOptionRef.current
+      selected.findIndex(
+        ({ element }) => element === comboboxOptionRef.current
+      ) !== -1
     );
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
@@ -115,20 +123,38 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         typeof propValue !== 'undefined'
           ? propValue
           : comboboxOptionRef.current?.innerText;
+      const value =
+        typeof formValue === 'undefined' ? comboboxValue : formValue;
 
-      if (selectedValue === comboboxValue) {
-        setFormValue(
-          typeof formValue === 'undefined' ? comboboxValue : formValue
+      setFormValues((prev) => {
+        const formValues = prev.filter((fv) => fv !== value);
+        if (selectedValues.includes(comboboxValue)) {
+          formValues.push(value);
+        }
+        return formValues;
+      });
+
+      setRemoveOptionLabels((prev) => {
+        if (!removeOptionLabel) {
+          return prev;
+        }
+        return selectedValues.map((value, index) =>
+          value === comboboxValue ? removeOptionLabel : prev[index]
         );
-      }
-    }, [selectedValue, formValue]);
+      });
+    }, [selectedValues, formValue]);
 
     useEffect(() => {
       if (isMatching) {
+        const comboboxValue =
+          typeof propValue !== 'undefined'
+            ? propValue
+            : comboboxOptionRef.current?.innerText;
         setMatchingOptions((options) => {
           return new Map(
             options.set(comboboxOptionRef.current, {
-              value: children as string,
+              value: comboboxValue,
+              displayValue: children as string,
               selected: isSelected
             })
           );

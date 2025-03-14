@@ -201,6 +201,8 @@ Cauldron aims to avoid shipping [breaking changes](#breaking-changes) on a regul
 
 We aim to review pull requests within a day or two. If your changes are time-sensitive, feel free to request an expedited review on GitHub or reach out in the private `#cauldron` slack channel.
 
+New components that have visual components or PRs that include visual changes to [component snapshot testing screenshots](https://github.com/dequelabs/cauldron/blob/develop/e2e/readme.md#snapshot-testing) should have an approval from [@dequelabs/cauldron-design](https://github.com/orgs/dequelabs/teams/cauldron-design).
+
 Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
 
 #### Previewing Changes

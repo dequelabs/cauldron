@@ -4,19 +4,22 @@ import { ComboboxValue } from './ComboboxOption';
 type ComboboxContext = {
   autocomplete: 'none' | 'manual' | 'automatic';
   inputValue: ComboboxValue;
-  formValue: ComboboxValue;
-  selectedValue: ComboboxValue;
+  formValues: ComboboxValue[];
+  selectedValues: ComboboxValue[];
+  removeOptionLabels: string[];
+  setRemoveOptionLabels: React.Dispatch<React.SetStateAction<string[]>>;
   matchingOptions: Map<HTMLElement, ComboboxOptionState>;
   setMatchingOptions: React.Dispatch<
     React.SetStateAction<Map<HTMLElement, ComboboxOptionState>>
   >;
-  setFormValue: React.Dispatch<React.SetStateAction<ComboboxValue>>;
+  setFormValues: React.Dispatch<React.SetStateAction<ComboboxValue[]>>;
   matches: (<T extends string = string>(value: T) => boolean) | boolean;
 };
 
 export type ComboboxOptionState = {
   selected: boolean;
   value: ComboboxValue;
+  displayValue: ComboboxValue;
 };
 
 type ComboboxProvider = {
@@ -28,23 +31,27 @@ type ComboboxProvider = {
 const ComboboxContext = createContext<ComboboxContext>({
   autocomplete: 'manual',
   inputValue: undefined,
-  formValue: undefined,
-  selectedValue: undefined,
+  formValues: [],
+  selectedValues: [],
+  removeOptionLabels: [],
+  setRemoveOptionLabels: () => null,
   matches: true,
   matchingOptions: new Map(),
   setMatchingOptions: () => null,
-  setFormValue: () => null
+  setFormValues: () => null
 });
 
 function ComboboxProvider({
   autocomplete,
   inputValue,
-  formValue,
-  selectedValue,
+  formValues,
+  selectedValues,
+  removeOptionLabels,
+  setRemoveOptionLabels,
   matches,
   matchingOptions,
   setMatchingOptions,
-  setFormValue,
+  setFormValues,
   children
 }: ComboboxProvider): React.JSX.Element {
   const { Provider } = ComboboxContext as React.Context<ComboboxContext>;
@@ -52,25 +59,29 @@ function ComboboxProvider({
     () => ({
       autocomplete,
       inputValue,
-      formValue,
-      selectedValue,
+      formValues,
+      selectedValues,
+      removeOptionLabels,
+      setRemoveOptionLabels,
       matches:
         typeof matches === 'function' && !!inputValue
           ? (value) => matches(inputValue, value)
           : true,
       matchingOptions,
       setMatchingOptions,
-      setFormValue
+      setFormValues
     }),
     [
       autocomplete,
       inputValue,
-      formValue,
-      selectedValue,
+      formValues,
+      selectedValues,
+      removeOptionLabels,
+      setRemoveOptionLabels,
       matches,
       matchingOptions,
       setMatchingOptions,
-      setFormValue
+      setFormValues
     ]
   );
 

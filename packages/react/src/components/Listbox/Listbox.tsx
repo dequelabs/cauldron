@@ -22,6 +22,7 @@ interface BaseListboxProps
   > {
   navigation?: 'cycle' | 'bound';
   onActiveChange?: (option: ListboxOption) => void;
+  disabled?: boolean;
 }
 
 interface SingleSelectListboxProps extends BaseListboxProps {
@@ -75,6 +76,7 @@ const Listbox = forwardRef<
       onFocus,
       onSelectionChange,
       onActiveChange,
+      disabled = false,
       ...props
     },
     ref
@@ -127,6 +129,10 @@ const Listbox = forwardRef<
     const handleSelect = useCallback(
       (option: ListboxOption) => {
         setActiveOption(option);
+        if (disabled) {
+          return;
+        }
+
         const optionIsSelected = selectedOptions.some(
           (selected) => selected.element === option.element
         );
