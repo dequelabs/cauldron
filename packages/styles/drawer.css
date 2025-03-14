@@ -3,7 +3,8 @@
   max-height: var(--drawer-height, 100vh);
   max-width: var(--drawer-width, 100vw);
   z-index: var(--z-index-drawer);
-  transition: transform ease-in-out 250ms;
+  transition: transform var(--drawer-animation-timing-function, ease-out)
+    var(--drawer-animation-timing, 250ms);
 }
 
 .Drawer--top,
