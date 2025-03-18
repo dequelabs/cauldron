@@ -2,7 +2,7 @@
   --tooltip-background-color: var(--gray-10);
   --tooltip-border-color: var(--gray-90);
   --tooltip-text-color: var(--gray-90);
-  --tooltip-box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px 0px;
+  --tooltip-box-shadow: var(--drop-shadow-overlay);
   --tooltip-info-background-color: var(--white);
   --tooltip-info-border-color: var(--accent-primary);
   --tooltip-info-text-color: var(--gray-90);

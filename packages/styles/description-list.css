@@ -21,7 +21,7 @@
   font-size: var(--text-size-small);
   border-radius: 3px;
   border: 1px solid var(--data-list-border-color);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--drop-shadow-raised);
   margin-bottom: var(--space-small);
 }
 

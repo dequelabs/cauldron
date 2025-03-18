@@ -4,19 +4,23 @@ description: An input component to display a list of suggested options.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Combobox/Combobox.tsx
 ---
 
-import { useState } from 'react'
-import { Combobox, ComboboxOption, ComboboxGroup, FieldWrap } from '@deque/cauldron-react'
-
-```js
-import { 
+import { useState } from 'react';
+import {
   Combobox,
   ComboboxOption,
-  ComboboxGroup
-} from '@deque/cauldron-react'
+  ComboboxGroup,
+  FieldWrap
+} from '@deque/cauldron-react';
+
+```js
+import { Combobox, ComboboxOption, ComboboxGroup } from '@deque/cauldron-react';
 ```
 
 <Note>
-  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Combobox` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Combobox`
+  component has been designed specifically to only be used when rendered as a
+  child of this component, and may not be completely accessible if rendered
+  outside of `FieldWrap`.
 </Note>
 
 ## Examples
@@ -33,12 +37,12 @@ function ComboboxWithOptionsPropExample() {
     { label: 'Yellow', value: 'Yellow' },
     { label: 'Green', value: 'Green' },
     { label: 'Blue', value: 'Blue' }
-  ]
+  ];
   return (
     <FieldWrap>
       <Combobox label="Favorite Color" options={options} />
     </FieldWrap>
-  )
+  );
 }
 ```
 
@@ -66,32 +70,32 @@ Combobox options can optionally include a description, which can be set via a pr
 ```jsx example
 <FieldWrap>
   <Combobox label="Select a Drink">
-    <ComboboxOption 
+    <ComboboxOption
       description="A monster of a barleywine, with a footprint of caramel and toffee."
       value="Bigfoot's Barleywine"
     >
       Bigfoot's Barleywine
     </ComboboxOption>
-    <ComboboxOption 
+    <ComboboxOption
       description="A hoppy explosion of citrus and pine, a true hopocalypse."
       value="Hopocalypse IPA"
     >
       Hopocalypse IPA
     </ComboboxOption>
-    <ComboboxOption 
+    <ComboboxOption
       description="A pot of liquid gold at the end of the rainbow."
       value="Leprechaun's Gold Lager"
     >
       Leprechaun's Gold Lager
     </ComboboxOption>
 
-    <ComboboxOption 
+    <ComboboxOption
       description="Delicate, effervescent, with a hint of mythical magic in every sip."
       value="Unicorn Tears Saison"
     >
       Unicorn Tears Saison
     </ComboboxOption>
-    <ComboboxOption 
+    <ComboboxOption
       description="Revive your taste buds with this undead burst of citrusy hops."
       value="Zombie Zest Pale Ale"
     >
@@ -117,7 +121,7 @@ Combobox options can optionally include a description, which can be set via a pr
 
 ```jsx example
 <FieldWrap>
-  <Combobox 
+  <Combobox
     label="Does this combobox have an error?"
     error="You must select an option."
     required
@@ -181,7 +185,11 @@ To set the initial value for uncontrolled Comboboxes, use `defaultValue`.
 Comboboxes can also be controlled, by setting the `value` prop and updating the value from event callbacks.
 
 <Note>
-  `onChange` and `onSelectionChange` have different behaviors, and special consideration needs to be made when `Combobox` is controlled. `onChange` gets called when the value of the input field changes from user input or selections while `onSelectionChange` is only called when a selection changes from the listbox.
+  `onChange` and `onSelectionChange` have different behaviors, and special
+  consideration needs to be made when `Combobox` is controlled. `onChange` gets
+  called when the value of the input field changes from user input or selections
+  while `onSelectionChange` is only called when a selection changes from the
+  listbox.
 </Note>
 
 ```jsx example
@@ -195,9 +203,9 @@ function ComboboxControlledExample() {
   };
   return (
     <FieldWrap>
-      <Combobox 
-        label="Fruit" 
-        value={value} 
+      <Combobox
+        label="Fruit"
+        value={value}
         onChange={handleChange}
         onSelectionChange={handleSelectionChange}
       >
@@ -235,12 +243,24 @@ Alternatively, a custom `formValue` prop can be set for each combobox option to 
 ```jsx example
 <FieldWrap>
   <Combobox name="fruit" label="Fruit" defaultValue="Peach">
-    <ComboboxOption value="Apple" formValue="1">🍎 Apple</ComboboxOption>
-    <ComboboxOption value="Banana" formValue="2">🍌 Banana</ComboboxOption>
-    <ComboboxOption value="Cucumber" formValue="3">🥒 Cucumber</ComboboxOption>
-    <ComboboxOption value="Orange" formValue="4">🍊 Orange</ComboboxOption>
-    <ComboboxOption value="Peach" formValue="5">🍑 Peach</ComboboxOption>
-    <ComboboxOption value="Pear" formValue="6">🍐 Pear</ComboboxOption>
+    <ComboboxOption value="Apple" formValue="1">
+      🍎 Apple
+    </ComboboxOption>
+    <ComboboxOption value="Banana" formValue="2">
+      🍌 Banana
+    </ComboboxOption>
+    <ComboboxOption value="Cucumber" formValue="3">
+      🥒 Cucumber
+    </ComboboxOption>
+    <ComboboxOption value="Orange" formValue="4">
+      🍊 Orange
+    </ComboboxOption>
+    <ComboboxOption value="Peach" formValue="5">
+      🍑 Peach
+    </ComboboxOption>
+    <ComboboxOption value="Pear" formValue="6">
+      🍐 Pear
+    </ComboboxOption>
   </Combobox>
 </FieldWrap>
 ```
@@ -277,116 +297,252 @@ When autocomplete is set to "automatic" the listbox will provide a filtered list
 </FieldWrap>
 ```
 
+## Multiselect
+
+Combobox can also support multiple selection of options.
+
+### Multiselect Uncontrolled
+
+```jsx example
+<FieldWrap>
+  <Combobox label="Multiselect Combobox" name="multiselect" multiselect>
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+  </Combobox>
+</FieldWrap>
+```
+
+### Multiselect Disabled
+
+```jsx example
+<FieldWrap>
+  <Combobox
+    label="Multiselect Disabled Combobox"
+    name="multiselect-disabled"
+    multiselect
+    disabled
+    defaultValue={['Apple', 'Banana']}
+  >
+    <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+    <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+    <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+    <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+    <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+    <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+  </Combobox>
+</FieldWrap>
+```
+
+### Multiselect Controlled
+
+Multiselect Combobox can be controlled by passing `value` and `inputValue` props and updating them with `onSelectionChange` and `onChange`
+
+<Note>
+  Multiselect Combobox components will pass in array values for the selected
+  options in `onSelectionChange` and expect an array of values for `value` and
+  `defaultValue` props. Also, in the mutliselect state combobox has an
+  additional props `inputValue` and `defaultInputValue` to control text input
+  state.
+</Note>
+
+```jsx example
+function MultiselectComboboxControlledExample() {
+  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState(['Peach']);
+  const handleChange = ({ target }) => {
+    setInputValue(target.value);
+  };
+  const handleSelectionChange = ({ value }) => {
+    setValue(value);
+  };
+  return (
+    <FieldWrap>
+      <Combobox
+        label="Multi Fruit"
+        value={value}
+        inputValue={inputValue}
+        onChange={handleChange}
+        onSelectionChange={handleSelectionChange}
+        multiselect
+      >
+        <ComboboxOption value="Apple">🍎 Apple</ComboboxOption>
+        <ComboboxOption value="Banana">🍌 Banana</ComboboxOption>
+        <ComboboxOption value="Cucumber">🥒 Cucumber</ComboboxOption>
+        <ComboboxOption value="Orange">🍊 Orange</ComboboxOption>
+        <ComboboxOption value="Peach">🍑 Peach</ComboboxOption>
+        <ComboboxOption value="Pear">🍐 Pear</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+}
+```
+
 ## Props
 
 ### Combobox
 
-<ComponentProps className={true} refType="HTMLDivElement" props={[
-  {
-    name: 'label',
-    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
-    required: true,
-    description: 'Label for the Combobox input field.'
-  },
-  {
-    name: 'options',
-    type: 'object',
-    description: 'Array of objects mapping to Combobox options. Alternatively, "ComboboxOption" can be used as children instead of this prop.'
-  },
-  {
-    name: 'value',
-    type: 'string',
-    description: 'Initial value to be applied to the combobox. Optionally used for "uncontrolled" comboboxes.'
-  },
-  {
-    name: 'defaultValue',
-    type: 'string',
-    description: 'Value to be applied to the combobox. Optionally used for "controlled" comboboxes.'
-  },
-  {
-    name: 'autocomplete',
-    type: ['none', 'manual', 'automatic'],
-    defaultValue: 'manual',
-    description: 'Sets the autocompletion type of the Combobox listbox.'
-  },
-  {
-    name: 'onChange',
-    type: 'function',
-    description: 'Callback function that gets invoked when the combobox input value is changed.'
-  },
-  {
-    name: 'onSelectionChange',
-    type: 'function',
-    description: 'Callback function that gets invoked when the selected value is changed.'
-  },
-  {
-    name: 'onActiveChange',
-    type: 'function',
-    description: 'Callback function that gets invoked when the current active option was changed.'
-  },
-  { 
-    name: 'error',
-    type: 'React.ReactNode',
-    description: 'Error message for the field, when needed.'
-  },
-  {
-    name: 'requiredText',
-    type: 'string',
-    defaultValue: 'Required',
-    description: 'Custom "required" text. Useful for localization.'
-  },
-  {
-    name: 'renderNoResults',
-    type: ['() => React.JSX.Element', 'React.Element'],
-    description: 'Render prop to customize the output when there are no matching results. Useful for localization.'
-  },
-  {
-    name: 'portal',
-    type: ['React.Ref<HTMLElement>', 'HTMLElement'],
-    description: 'Alternative placement of combobox listbox. When not set, the listbox will be absolutely positioned inline.'
-  },
-  {
-    name: 'inputRef',
-    type: 'React.Ref<HTMLInputElement>',
-    description: 'Ref for the input.'
-  },
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'label',
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      required: true,
+      description: 'Label for the Combobox input field.'
+    },
+    {
+      name: 'options',
+      type: 'object',
+      description:
+        'Array of objects mapping to Combobox options. Alternatively, "ComboboxOption" can be used as children instead of this prop.'
+    },
+    {
+      name: 'value',
+      type: ['string', 'string[]'],
+      description:
+        'Initial value to be applied to the combobox. Optionally used for "uncontrolled" comboboxes.'
+    },
+    {
+      name: 'defaultValue',
+      type: ['string', 'string[]'],
+      description:
+        'Value to be applied to the combobox. Optionally used for "controlled" comboboxes.'
+    },
+    {
+      name: 'autocomplete',
+      type: ['none', 'manual', 'automatic'],
+      defaultValue: 'manual',
+      description: 'Sets the autocompletion type of the Combobox listbox.'
+    },
+    {
+      name: 'multiselect',
+      type: 'boolean',
+      description: 'Sets the Combobox to multiselect'
+    },
+    {
+      name: 'onChange',
+      type: 'function',
+      description:
+        'Callback function that gets invoked when the combobox input value is changed.'
+    },
+    {
+      name: 'onSelectionChange',
+      type: 'function',
+      description:
+        'Callback function that gets invoked when the selected value is changed.'
+    },
+    {
+      name: 'onActiveChange',
+      type: 'function',
+      description:
+        'Callback function that gets invoked when the current active option was changed.'
+    },
+    {
+      name: 'error',
+      type: 'React.ReactNode',
+      description: 'Error message for the field, when needed.'
+    },
+    {
+      name: 'requiredText',
+      type: 'string',
+      defaultValue: 'Required',
+      description: 'Custom "required" text. Useful for localization.'
+    },
+    {
+      name: 'renderNoResults',
+      type: ['() => React.JSX.Element', 'React.Element'],
+      description:
+        'Render prop to customize the output when there are no matching results. Useful for localization.'
+    },
+    {
+      name: 'portal',
+      type: ['React.Ref<HTMLElement>', 'HTMLElement'],
+      description:
+        'Alternative placement of combobox listbox. When not set, the listbox will be absolutely positioned inline.'
+    },
+    {
+      name: 'inputRef',
+      type: 'React.Ref<HTMLInputElement>',
+      description: 'Ref for the input.'
+    }
+  ]}
+/>
 
 ### ComboboxOption
 
-<ComponentProps className={true} refType="HTMLLIElement" props={[
-  {
-    name: 'value',
-    type: 'string',
-    description: 'Value to be applied to the combobox option. When omitted, value will default to the text content of the option.'
-  },
-  {
-    name: 'formValue',
-    type: 'string',
-    description: 'An optional custom value to be used for form submissions when the "name" prop is provided for Combobox.'
-  },
-  {
-    name: 'disabled',
-    type: 'boolean',
-    description: 'When set, sets the combobox option as "aria-disabled="true" and removes the element from key navigation.'
-  },
-  {
-    name: 'description',
-    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
-    description: 'Additional text to display for the ComboboxOption.'
-  }
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLLIElement"
+  props={[
+    {
+      name: 'value',
+      type: 'string',
+      description:
+        'Value to be applied to the combobox option. When omitted, value will default to the text content of the option.'
+    },
+    {
+      name: 'formValue',
+      type: 'string',
+      description:
+        'An optional custom value to be used for form submissions when the "name" prop is provided for Combobox.'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description:
+        'When set, sets the combobox option as "aria-disabled="true" and removes the element from key navigation.'
+    },
+    {
+      name: 'description',
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Additional text to display for the ComboboxOption.'
+    },
+    {
+      name: 'removeOptionLabel',
+      type: 'string',
+      description:
+        'An optional custom value to be user for pills aria-label in multiselect mode'
+    }
+  ]}
+/>
 
 ### ComboboxGroup
 
-<ComponentProps className={true} refType="HTMLUListElement" props={[
-  {
-    name: 'label',
-    required: true,
-    type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
-    description: 'Label for the group of options.'
-  }
-]} />
+<ComponentProps
+  className={true}
+  refType="HTMLUListElement"
+  props={[
+    {
+      name: 'label',
+      required: true,
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Label for the group of options.'
+    }
+  ]}
+/>
 
 ## Related Components
 

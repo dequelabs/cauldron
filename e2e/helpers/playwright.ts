@@ -1,5 +1,4 @@
 import type { Page, Locator } from '@playwright/test';
-import path from 'path';
 
 export async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate(

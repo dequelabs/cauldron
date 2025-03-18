@@ -10,7 +10,7 @@
   --table-row-border-color: var(--gray-20);
   --table-space: var(--space-small);
   --table-header-sorting-border-color: var(--gray-90);
-  --table-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  --table-box-shadow: var(--drop-shadow-raised);
   --table-odd-row-background: var(--gray-10);
   --table-sort-hover-focus-ring-color: var(--gray-90);
 }
