@@ -69,7 +69,7 @@ const main = async (): Promise<void> => {
         const component = (url.split('/').pop() as string) || 'Index';
 
         try {
-          await page.goto(url);
+          await page.goto(url, { waitUntil: 'load' });
         } catch (ex) {
           console.log(url);
           console.log(ex);
