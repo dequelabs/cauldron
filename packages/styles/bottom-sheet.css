@@ -16,6 +16,7 @@
   border-top-left-radius: var(--space-small);
   border-top-right-radius: var(--space-small);
   padding: var(--space-large) var(--space-small);
+  box-shadow: var(--drop-shadow-overlay);
 }
 
 .BottomSheet__title {
