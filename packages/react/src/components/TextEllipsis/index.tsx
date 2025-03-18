@@ -7,12 +7,22 @@ import type {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 
-interface TextEllipsisProps
+interface TextEllipsisBaseProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   children: string;
   maxLines?: number;
   refProp?: string;
+  hideTooltip?: boolean;
+}
+
+interface TextEllipsisWithTooltipProps extends TextEllipsisBaseProps {
   tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
+}
+
+interface TextEllipsisWithoutTooltipProps extends TextEllipsisBaseProps {
+  tooltipProps: never;
+  /** Prevent TextEllipsis from showing a tooltip when the text is ellipsized. */
+  hideTooltip: true;
 }
 
 const TextEllipsis = React.forwardRef(
@@ -23,8 +33,9 @@ const TextEllipsis = React.forwardRef(
       maxLines,
       as,
       tooltipProps,
+      hideTooltip,
       ...props
-    }: TextEllipsisProps,
+    }: TextEllipsisWithTooltipProps | TextEllipsisWithoutTooltipProps,
     ref: Ref<HTMLElement>
   ) => {
     let Element: React.ElementType<any> = 'div';
@@ -33,7 +44,7 @@ const TextEllipsis = React.forwardRef(
 
     if (as) {
       Element = as;
-    } else if (showTooltip) {
+    } else if (showTooltip && !hideTooltip) {
       props = Object.assign(
         {
           role: 'button',
@@ -52,6 +63,10 @@ const TextEllipsis = React.forwardRef(
     }
 
     useEffect(() => {
+      if (hideTooltip) {
+        return;
+      }
+
       const listener: ResizeObserverCallback = () => {
         requestAnimationFrame(() => {
           const { current: overflowElement } = sharedRef;
@@ -74,7 +89,7 @@ const TextEllipsis = React.forwardRef(
       return () => {
         observer?.disconnect();
       };
-    }, []);
+    }, [hideTooltip]);
 
     return (
       <>
@@ -95,7 +110,9 @@ const TextEllipsis = React.forwardRef(
       </>
     );
   }
-) as PolymorphicComponent<TextEllipsisProps>;
+) as PolymorphicComponent<
+  TextEllipsisWithTooltipProps | TextEllipsisWithoutTooltipProps
+>;
 
 TextEllipsis.displayName = 'TextEllipsis';
 

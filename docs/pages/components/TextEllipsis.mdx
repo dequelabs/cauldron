@@ -50,6 +50,21 @@ If your component is a Button, Link, or some other kind of interactive element w
 </TextEllipsis>
 ```
 
+### Ellipsis Only
+
+Ellipsis can be applied to truncated text without showing the full text upon an additional interaction on the page, however this should _only_ be used if you know what you are doing and generally should be avoided.
+
+```jsx example
+<TextEllipsis hideTooltip>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</TextEllipsis>
+```
+
+<Note variant="warning">
+This prop should only be used in specific circumstances that comply with additional WCAG guidelines. Setting `hideTooltip={true}` should only be used when the full non-truncated text is available via a linked page. Incorrect usage of this property will result in an accessibility issue
+</Note>
+
+
 ## Props
 
 <ComponentProps
@@ -74,6 +89,11 @@ If your component is a Button, Link, or some other kind of interactive element w
       name: 'tooltipProps',
       type: 'object',
       description: 'Props to pass and configure the displayed tooltip.'
+    },
+    {
+      name: 'hideTooltip',
+      type: 'boolean',
+      description: 'Prevent TextEllipsis from showing a tooltip when the text is ellipsized.'
     }
   ]}
 />
