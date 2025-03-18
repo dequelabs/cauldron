@@ -68,7 +68,13 @@ const main = async (): Promise<void> => {
 
         const component = (url.split('/').pop() as string) || 'Index';
 
-        await page.goto(url);
+        try {
+          await page.goto(url);
+        } catch (ex) {
+          console.log(url);
+          console.log(ex);
+          throw ex;
+        }
 
         for (const theme of THEMES) {
           await page.evaluate(
