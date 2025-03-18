@@ -9,6 +9,7 @@
   --accordion-panel-background-color: var(--white);
   --accordion-panel-text-color: var(--gray-90);
   --accordion-panel-border-color: var(--gray-40);
+  /* deprecated, not used */
   --accordion-box-shadow-color: rgba(0, 0, 0, 0.15);
 }
 
@@ -73,5 +74,8 @@ button.Accordion__trigger {
   border: 1px solid var(--accordion-panel-border-color);
   border-top: 0;
   border-radius: 0 0 3px 3px;
-  box-shadow: 0 2px 3px 0 var(--accordion-box-shadow-color);
+}
+
+.Accordion:has(> button[aria-expanded='true']) {
+  box-shadow: var(--drop-shadow-raised);
 }

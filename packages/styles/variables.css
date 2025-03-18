@@ -139,6 +139,12 @@
   --target-size: 44px;
   --target-size-enhanced: var(--target-size);
   --target-size-minimum: 24px;
+
+  /* drop shadows */
+  --drop-shadow-overlay:
+    0 8px 8px -4px rgba(0, 0, 0, 0.04), 0 20px 24px -4px rgba(51, 51, 51, 0.08);
+  --drop-shadow-raised:
+    0 2px 4px -2px rgba(51, 51, 51, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
 .cauldron--theme-dark {

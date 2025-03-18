@@ -29,7 +29,7 @@
   border: 1px solid var(--two-column-panel-border-color);
   background-color: var(--two-column-panel-background-color);
   border-radius: var(--two-column-panel-border-radius);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--drop-shadow-raised);
 }
 
 .TwoColumnPanel__Header {
@@ -108,7 +108,8 @@
   ul
   li
   a[aria-current]:not([aria-current='false']):last-child {
-  box-shadow: inset 4px 0 0 var(--tab-shadow-color),
+  box-shadow:
+    inset 4px 0 0 var(--tab-shadow-color),
     0px 1px 0px 0px var(--two-column-panel-border-color);
 }
 
