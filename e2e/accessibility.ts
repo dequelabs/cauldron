@@ -69,10 +69,9 @@ const main = async (): Promise<void> => {
         const component = (url.split('/').pop() as string) || 'Index';
 
         try {
-          await page.goto(url, { waitUntil: 'networkidle0', timeout: 0 });
+          await page.goto(url, { waitUntil: 'networkidle0' });
         } catch (ex) {
           console.log(url);
-          console.log(ex);
           throw ex;
         }
 
