@@ -13,13 +13,9 @@ import { ClickOutsideListener } from '@deque/cauldron-react'
 ## Example
 
 ```jsx example
-function ClickOutsideListenerExample() {
-  return (
-    <ClickOutsideListener onClickOutside={() => console.log('Clicked outside!')}>
-      <Button>Click Inside</Button>
-    </ClickOutsideListener>
-  )
-}
+<ClickOutsideListener onClickOutside={() => console.log('You clicked outside!')}>
+  <Button>Click Inside</Button>
+</ClickOutsideListener>
 ````
 
 ## Props
