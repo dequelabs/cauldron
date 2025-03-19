@@ -12,7 +12,7 @@ interface TextEllipsisProps
   children: string;
   maxLines?: number;
   refProp?: string;
-  tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
+  tooltipProps?: Omit<TooltipProps, 'target' | 'association' | 'children'>;
 }
 
 const TextEllipsis = React.forwardRef(
