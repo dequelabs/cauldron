@@ -50,16 +50,7 @@ export default function IconGrid() {
         onChange={handleChange}
       />
       <div className="IconGrid">
-        {!noMatchesFound ? (
-          <ul>
-            {filteredTypes.map((type: string) => (
-              <li className="Panel" key={type}>
-                <Icon type={type as IconType} />
-                <div className="IconGrid__label">{type}</div>
-              </li>
-            ))}
-          </ul>
-        ) : (
+        {noMatchesFound ? (
           <Panel className="IconGrid__NoResults">
             <p role="status">
               {showDelayedAnnouncement ? (
@@ -72,6 +63,15 @@ export default function IconGrid() {
               Clear Search
             </Button>
           </Panel>
+        ) : (
+          <ul>
+            {filteredTypes.map((type: string) => (
+              <li className="Panel" key={type}>
+                <Icon type={type as IconType} />
+                <div className="IconGrid__label">{type}</div>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </>
