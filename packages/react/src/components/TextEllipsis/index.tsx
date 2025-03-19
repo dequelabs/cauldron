@@ -40,11 +40,12 @@ const TextEllipsis = React.forwardRef(
   ) => {
     let Element: React.ElementType<any> = 'div';
     const sharedRef = useSharedRef<HTMLElement>(ref);
-    const [showTooltip, setShowTooltip] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
+    const showTooltip = hasOverflow && !hideTooltip;
 
     if (as) {
       Element = as;
-    } else if (showTooltip && !hideTooltip) {
+    } else if (showTooltip) {
       props = Object.assign(
         {
           role: 'button',
@@ -74,12 +75,11 @@ const TextEllipsis = React.forwardRef(
             return;
           }
 
-          const hasOverflow =
+          setHasOverflow(
             typeof maxLines === 'number'
               ? overflowElement.clientHeight < overflowElement.scrollHeight
-              : overflowElement.clientWidth < overflowElement.scrollWidth;
-
-          setShowTooltip(hasOverflow);
+              : overflowElement.clientWidth < overflowElement.scrollWidth
+          );
         });
       };
 
