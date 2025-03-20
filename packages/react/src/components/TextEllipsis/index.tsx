@@ -12,11 +12,16 @@ interface TextEllipsisBaseProps
   children: string;
   maxLines?: number;
   refProp?: string;
+  /**
+   * Using this prop may introduce accessibility issues by hiding content from the user.
+   * Only use this prop if you have an alternative way to make the full text accessible.
+   */
   hideTooltip?: boolean;
 }
 
 interface TextEllipsisWithTooltipProps extends TextEllipsisBaseProps {
   tooltipProps?: Omit<TooltipProps, 'target' | 'association' | 'children'>;
+  hideTooltip: never;
 }
 
 interface TextEllipsisWithoutTooltipProps extends TextEllipsisBaseProps {
