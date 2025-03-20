@@ -16,7 +16,7 @@ interface TextEllipsisBaseProps
 }
 
 interface TextEllipsisWithTooltipProps extends TextEllipsisBaseProps {
-  tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
+  tooltipProps?: Omit<TooltipProps, 'target' | 'association' | 'children'>;
 }
 
 interface TextEllipsisWithoutTooltipProps extends TextEllipsisBaseProps {
