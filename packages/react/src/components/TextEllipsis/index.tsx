@@ -7,12 +7,26 @@ import type {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 
-interface TextEllipsisProps
+interface TextEllipsisBaseProps
   extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
   children: string;
   maxLines?: number;
   refProp?: string;
-  tooltipProps?: Omit<TooltipProps, 'target' | 'association'>;
+  /**
+   * Using this prop may introduce accessibility issues by hiding content from the user.
+   * Only use this prop if you have an alternative way to make the full text accessible.
+   */
+  hideTooltip?: boolean;
+}
+
+interface TextEllipsisWithTooltipProps extends TextEllipsisBaseProps {
+  tooltipProps?: Omit<TooltipProps, 'target' | 'association' | 'children'>;
+}
+
+interface TextEllipsisWithoutTooltipProps extends TextEllipsisBaseProps {
+  tooltipProps: never;
+  /** Prevent TextEllipsis from showing a tooltip when the text is ellipsized. */
+  hideTooltip: true;
 }
 
 const TextEllipsis = React.forwardRef(
@@ -23,13 +37,15 @@ const TextEllipsis = React.forwardRef(
       maxLines,
       as,
       tooltipProps,
+      hideTooltip,
       ...props
-    }: TextEllipsisProps,
+    }: TextEllipsisWithTooltipProps | TextEllipsisWithoutTooltipProps,
     ref: Ref<HTMLElement>
   ) => {
     let Element: React.ElementType<any> = 'div';
     const sharedRef = useSharedRef<HTMLElement>(ref);
-    const [showTooltip, setShowTooltip] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
+    const showTooltip = hasOverflow && !hideTooltip;
 
     if (as) {
       Element = as;
@@ -52,6 +68,10 @@ const TextEllipsis = React.forwardRef(
     }
 
     useEffect(() => {
+      if (hideTooltip) {
+        return;
+      }
+
       const listener: ResizeObserverCallback = () => {
         requestAnimationFrame(() => {
           const { current: overflowElement } = sharedRef;
@@ -59,12 +79,11 @@ const TextEllipsis = React.forwardRef(
             return;
           }
 
-          const hasOverflow =
+          setHasOverflow(
             typeof maxLines === 'number'
               ? overflowElement.clientHeight < overflowElement.scrollHeight
-              : overflowElement.clientWidth < overflowElement.scrollWidth;
-
-          setShowTooltip(hasOverflow);
+              : overflowElement.clientWidth < overflowElement.scrollWidth
+          );
         });
       };
 
@@ -74,7 +93,7 @@ const TextEllipsis = React.forwardRef(
       return () => {
         observer?.disconnect();
       };
-    }, []);
+    }, [hideTooltip]);
 
     return (
       <>
@@ -95,7 +114,9 @@ const TextEllipsis = React.forwardRef(
       </>
     );
   }
-) as PolymorphicComponent<TextEllipsisProps>;
+) as PolymorphicComponent<
+  TextEllipsisWithTooltipProps | TextEllipsisWithoutTooltipProps
+>;
 
 TextEllipsis.displayName = 'TextEllipsis';
 

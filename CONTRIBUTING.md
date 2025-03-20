@@ -82,7 +82,7 @@ For a new component to be added to Cauldron, the below workflow describes the de
     - Component is ready to use
 7. Can the pattern be made more general use? If yes, go to 9. If no, build the pattern as a one-off pattern.
 8. Does it fully support your use case? If yes, use existing shared product ui component. If no, build component in shared product ui.
-9. Does the pattern depend on propietary information? If yes, build component in shared product ui (launchpad). If no, complete steps under 2.
+9. Does the pattern depend on proprietary information? If yes, build component in shared product ui (launchpad). If no, complete steps under 2.
 </details>
 
 ## Developing Components
@@ -200,6 +200,8 @@ Cauldron aims to avoid shipping [breaking changes](#breaking-changes) on a regul
 ### Pull Requests
 
 We aim to review pull requests within a day or two. If your changes are time-sensitive, feel free to request an expedited review on GitHub or reach out in the private `#cauldron` slack channel.
+
+New components that have visual components or PRs that include visual changes to [component snapshot testing screenshots](https://github.com/dequelabs/cauldron/blob/develop/e2e/readme.md#snapshot-testing) should have an approval from [@dequelabs/cauldron-design](https://github.com/orgs/dequelabs/teams/cauldron-design).
 
 Once approved by a member of the Cauldron team, your pull request can be merged at any time but _must_ be squash merged.
 

@@ -70,7 +70,7 @@
   padding: var(--space-large) var(--space-small) var(--space-small)
     var(--space-small);
   z-index: var(--z-index-loader);
-  box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: var(--drop-shadow-overlay);
   font-size: var(--text-size-smaller);
   color: var(--text-color-base);
   text-align: center;
