@@ -84,6 +84,28 @@ test('should display tooltip with multiline overflow', async () => {
   expect(await screen.findByRole('tooltip')).toBeInTheDocument();
 });
 
+test('should not show tooltip when `hideTooltip` is set to true', async () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientHeight').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollHeight').value(200);
+  render(<TextEllipsis hideTooltip>Hello World</TextEllipsis>);
+
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+});
+
+test('should not show tooltip with multiline when `hideTooltip` is set to true', async () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientHeight').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollHeight').value(200);
+  render(
+    <TextEllipsis maxLines={2} hideTooltip>
+      Hello World
+    </TextEllipsis>
+  );
+
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+});
+
 test('should support className prop', () => {
   render(
     <TextEllipsis data-testid="text-ellipsis" className="bananas">
