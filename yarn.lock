@@ -1149,10 +1149,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
-"@fontsource/lato@^4.5.0":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.5.10.tgz#1ab3d33282e605886e4a8b4c32b1f230a4cb5ea6"
-  integrity sha512-2hYR6r661Cq9B8zugtu6yxuOKqrVhAgfOSaPSq8XoxbC4ebsl0KOTy/vPoP+9U7JuQVLfrmikirW4a9Z0nDUug==
+"@fontsource/lato@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.2.5.tgz#cf552f13a569aff28625d9d37db35ca26be7d594"
+  integrity sha512-d8aogKOul7a3eYG3UzTG8PB6A0D+6tlkFQCACmKQ7qTwB3XS6QmkSW1L0vYbVE9CfCRq/Zpb5sG3gNA6yJea/A==
 
 "@fontsource/pt-mono@^5.0.13":
   version "5.0.13"
