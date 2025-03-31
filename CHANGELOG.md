@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.16.0](https://github.com/dequelabs/cauldron/compare/v6.15.0...v6.16.0) (2025-03-20)
+
+
+### Features
+
+* **react, styles:** combobox component multiselect ([#1816](https://github.com/dequelabs/cauldron/issues/1816)) ([22d45de](https://github.com/dequelabs/cauldron/commit/22d45de41ed3643a2ba5e6aef256312e06e0fd27))
+* **react:** allow tooltip to be hidden for text ellipsis ([#1845](https://github.com/dequelabs/cauldron/issues/1845)) ([7b5a8cb](https://github.com/dequelabs/cauldron/commit/7b5a8cbd4b8ebb33b2b033dc4dfd55eced03bb67))
+* **styles:** drawer uses variables for transition and timing function ([3705a69](https://github.com/dequelabs/cauldron/commit/3705a69cebd1d7e604d82c46c9641d82750b6d48)), closes [#1834](https://github.com/dequelabs/cauldron/issues/1834)
+* **styles:** provide consistent drop shadow styles across all components ([#1832](https://github.com/dequelabs/cauldron/issues/1832)) ([a4cf47f](https://github.com/dequelabs/cauldron/commit/a4cf47f708dbb166a76655ada845f4acdff00576))
+
+
+### Bug Fixes
+
+* **react:** fix incorrect tooltipProps for TextEllipsis ([#1846](https://github.com/dequelabs/cauldron/issues/1846)) ([db12983](https://github.com/dequelabs/cauldron/commit/db12983af4e23cae12c3d874ae2e85c3d5db1b88))
+
 ## [6.15.0](https://github.com/dequelabs/cauldron/compare/v6.14.0...v6.15.0) (2025-02-18)
 
 
