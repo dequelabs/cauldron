@@ -9786,16 +9786,16 @@ remark-gfm@^4.0.1:
     remark-stringify "^11.0.0"
     unified "^11.0.0"
 
-remark-mdx-frontmatter@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/remark-mdx-frontmatter/-/remark-mdx-frontmatter-5.0.0.tgz#22c48c4758963701595082fd89157586caa5a372"
-  integrity sha512-kI75pshe27TM71R+0iX7C3p4MbGMdygkvSbrk1WYSar88WAwR2JfQilofcDGgDNFAWUo5IwTPyq9XvGpifTwqQ==
+remark-mdx-frontmatter@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/remark-mdx-frontmatter/-/remark-mdx-frontmatter-5.1.0.tgz#203c63f7772c3d80bf5f25ad4a01a5a1ecef9f4c"
+  integrity sha512-F2l+FydK/QVwYMC4niMYl4Kh83TIfoR4qV9ekh/riWRakTTyjcLLyKTBo9fVgEtOmTEfIrqWwiYIm42+I5PMfQ==
   dependencies:
     "@types/mdast" "^4.0.0"
-    estree-util-is-identifier-name "^3.0.0"
     estree-util-value-to-estree "^3.0.0"
     toml "^3.0.0"
     unified "^11.0.0"
+    unist-util-mdx-define "^1.0.0"
     yaml "^2.0.0"
 
 remark-mdx-toc@^0.3.1:
@@ -11561,6 +11561,19 @@ unist-util-is@^6.0.0:
   integrity sha512-2qCTHimwdxLfz+YzdGfkqNlH0tLi9xjTnHddPmJwtIG9MGsdbutfTc4P+haPD7l7Cjxf/WZj+we5qfVPvvxfYw==
   dependencies:
     "@types/unist" "^3.0.0"
+
+unist-util-mdx-define@^1.0.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/unist-util-mdx-define/-/unist-util-mdx-define-1.1.2.tgz#f25c46242ee5d1785ec5d2cd9cc4950cae72a05c"
+  integrity sha512-9ncH7i7TN5Xn7/tzX5bE3rXgz1X/u877gYVAUB3mLeTKYJmQHmqKTDBi6BTGXV7AeolBCI9ErcVsOt2qryoD0g==
+  dependencies:
+    "@types/estree" "^1.0.0"
+    "@types/hast" "^3.0.0"
+    "@types/mdast" "^4.0.0"
+    estree-util-is-identifier-name "^3.0.0"
+    estree-util-scope "^1.0.0"
+    estree-walker "^3.0.0"
+    vfile "^6.0.0"
 
 unist-util-position-from-estree@^2.0.0:
   version "2.0.0"
