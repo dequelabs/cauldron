@@ -4,7 +4,7 @@ description: An interactive component that toggles between checked and unchecked
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Checkbox/index.tsx
 ---
 
-import { Checkbox, FieldWrap } from '@deque/cauldron-react'
+import { Checkbox, FieldWrap, FieldGroup } from '@deque/cauldron-react'
 
 ```js
 import { Checkbox } from '@deque/cauldron-react'
@@ -115,46 +115,50 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
-### Checkbox List
+### Checkbox Group
 
 ```jsx example
 <FieldWrap role="group" aria-labelledby="checkbox-list-label">
-  <div className="Field__label" id="checkbox-list-label">Checkbox List Label</div>
-  <Checkbox
-    id="checkbox-list-unchecked"
-    label="Unchecked Checkbox"
-    name="unchecked-checkbox-list"
-    value="1"
-  />
-  <Checkbox
-    checked
-    id="checkbox-list-checked"
-    label="Checked Checkbox"
-    name="checked-checkbox-list"
-    value="1"
-  />
-  <Checkbox
-    disabled
-    id="checkbox-list-checkbox-disabled-unchecked"
-    label="Unchecked Disabled Checkbox"
-    name="disabled-checkbox-list-unchecked"
-    value="1"
-  />
-  <Checkbox
-    disabled
-    checked
-    id="checkbox-list-checkbox-disabled-checked"
-    label="Checked Disabled Checkbox"
-    name="disabled-checkbox-list-checked"
-    value="1"
-  />
-  <Checkbox
-    error="You must check this checkbox to continue"
-    id="checkbox-error-list"
-    label="Error Checkbox"
-    name="error-checkbox-list"
-    value="1"
-  />
+  <FieldGroup 
+    label="Checkbox Group Label" 
+    description="You must select one of the following:"
+  >
+    <Checkbox
+      id="checkbox-list-unchecked"
+      label="Unchecked Checkbox"
+      name="unchecked-checkbox-list"
+      value="1"
+    />
+    <Checkbox
+      checked
+      id="checkbox-list-checked"
+      label="Checked Checkbox"
+      name="checked-checkbox-list"
+      value="1"
+    />
+    <Checkbox
+      disabled
+      id="checkbox-list-checkbox-disabled-unchecked"
+      label="Unchecked Disabled Checkbox"
+      name="disabled-checkbox-list-unchecked"
+      value="1"
+    />
+    <Checkbox
+      disabled
+      checked
+      id="checkbox-list-checkbox-disabled-checked"
+      label="Checked Disabled Checkbox"
+      name="disabled-checkbox-list-checked"
+      value="1"
+    />
+    <Checkbox
+      error="You must check this checkbox to continue"
+      id="checkbox-error-list"
+      label="Error Checkbox"
+      name="error-checkbox-list"
+      value="1"
+    />
+  </FieldGroup>
 </FieldWrap>
 ```
 
@@ -187,51 +191,55 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
-### Checkbox with Description List
+### Checkbox Group with Descriptions
 
 ```jsx example
 <FieldWrap role="group" aria-labelledby="checkbox-list-with-description-label">
-  <div className="Field__label" id="checkbox-list-with-description-label">Checkbox with Description List Label</div>
-  <Checkbox
-    id="description-checkbox-list-unchecked"
-    label="Description Checkbox Unchecked"
-    labelDescription="Additional text to describe the checkbox"
-    name="description-checkbox-list-unchecked"
-    value="1"
-  />
-  <Checkbox
-  checked
-    id="description-checkbox-list-checked"
-    label="Description Checkbox Checked"
-    labelDescription="Additional text to describe the checkbox"
-    name="description-checkbox-list-checked"
-    value="1"
-  />
-  <Checkbox
-    disabled
-    id="description-checkbox-list-disabled-unchecked"
-    label="Description Checkbox Disabled Unchecked"
-    labelDescription="Additional text to describe the checkbox"
-    name="description-checkbox-list-disabled-unchecked"
-    value="1"
-  />
-  <Checkbox
-    disabled
+  <FieldGroup 
+    label="Checkbox Group with Descriptions Label" 
+    description="You must select one of the following:"
+  >
+    <Checkbox
+      id="description-checkbox-list-unchecked"
+      label="Description Checkbox Unchecked"
+      labelDescription="Additional text to describe the checkbox"
+      name="description-checkbox-list-unchecked"
+      value="1"
+    />
+    <Checkbox
     checked
-    id="description-checkbox-list-disabled-checked"
-    label="Description Checkbox Disabled Checked"
-    labelDescription="Additional text to describe the checkbox"
-    name="description-checkbox-list-disabled-checked"
-    value="1"
-  />
-  <Checkbox
-    error="You must check this checkbox to continue"
-    id="description-error-checkbox-list"
-    label="Description Error Checkbox"
-    labelDescription="Additional text to describe the checkbox"
-    name="description-error-checkbox-list"
-    value="1"
-  />
+      id="description-checkbox-list-checked"
+      label="Description Checkbox Checked"
+      labelDescription="Additional text to describe the checkbox"
+      name="description-checkbox-list-checked"
+      value="1"
+    />
+    <Checkbox
+      disabled
+      id="description-checkbox-list-disabled-unchecked"
+      label="Description Checkbox Disabled Unchecked"
+      labelDescription="Additional text to describe the checkbox"
+      name="description-checkbox-list-disabled-unchecked"
+      value="1"
+    />
+    <Checkbox
+      disabled
+      checked
+      id="description-checkbox-list-disabled-checked"
+      label="Description Checkbox Disabled Checked"
+      labelDescription="Additional text to describe the checkbox"
+      name="description-checkbox-list-disabled-checked"
+      value="1"
+    />
+    <Checkbox
+      error="You must check this checkbox to continue"
+      id="description-error-checkbox-list"
+      label="Description Error Checkbox"
+      labelDescription="Additional text to describe the checkbox"
+      name="description-error-checkbox-list"
+      value="1"
+    />
+  </FieldGroup>
 </FieldWrap>
 ```
 

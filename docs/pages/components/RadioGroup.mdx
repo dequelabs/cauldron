@@ -4,7 +4,7 @@ description: An interactive component that lets users select a single option fro
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioGroup/index.tsx
 ---
 
-import { RadioGroup, FieldWrap, Code } from '@deque/cauldron-react'
+import { RadioGroup, FieldWrap, FieldGroup, Code } from '@deque/cauldron-react'
 
 ```js
 import { RadioGroup } from '@deque/cauldron-react'
@@ -20,29 +20,30 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="gyros-label">Do you like gyros?</div>
-  <RadioGroup
-    aria-labelledby="gyros-label"
-    name="gyros"
-    radios={[
-      {
-        id: 'gyros-yes',
-        label: 'Yes!!',
-        value: 'yes'
-      },
-      {
-        id: 'gyros-no',
-        label: 'Nope.',
-        value: 'no'
-      },
-      {
-        id: 'gyros-friday',
-        label: 'Only on fridays',
-        value: 'friday'
-      }
-    ]}
-    value="yes"
-  />
+  <FieldGroup label="Do you like gyros?">
+    <RadioGroup
+      aria-labelledby="gyros-label"
+      name="gyros"
+      radios={[
+        {
+          id: 'gyros-yes',
+          label: 'Yes!!',
+          value: 'yes'
+        },
+        {
+          id: 'gyros-no',
+          label: 'Nope.',
+          value: 'no'
+        },
+        {
+          id: 'gyros-friday',
+          label: 'Only on fridays',
+          value: 'friday'
+        }
+      ]}
+      value="yes"
+    />
+  </FieldGroup>
 </FieldWrap>
 ```
 
@@ -50,33 +51,34 @@ import { RadioGroup } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="pizza-label">Do you like pizza?</div>
-  <RadioGroup
-    aria-labelledby="pizza-label"
-    defaultValue="tuesday"
-    name="pizza"
-    radios={[
-      {
-        id: 'yes',
-        label: 'Yes',
-        labelDescription: 'Of course you like pizza',
-        value: 'yes'
-      },
-      {
-        disabled: true,
-        id: 'no',
-        label: 'No',
-        labelDescription: 'Impossible, everyone likes pizza',
-        value: 'no'
-      },
-      {
-        id: 'tuesday',
-        label: 'Only on Tuesdays',
-        labelDescription: 'Pizza Tuesdays are rad',
-        value: 'tuesday'
-      }
-    ]}
-  />
+  <FieldGroup label="Do you like pizza?">
+    <RadioGroup
+      aria-labelledby="pizza-label"
+      defaultValue="tuesday"
+      name="pizza"
+      radios={[
+        {
+          id: 'yes',
+          label: 'Yes',
+          labelDescription: 'Of course you like pizza',
+          value: 'yes'
+        },
+        {
+          disabled: true,
+          id: 'no',
+          label: 'No',
+          labelDescription: 'Impossible, everyone likes pizza',
+          value: 'no'
+        },
+        {
+          id: 'tuesday',
+          label: 'Only on Tuesdays',
+          labelDescription: 'Pizza Tuesdays are rad',
+          value: 'tuesday'
+        }
+      ]}
+    />
+  </FieldGroup>
 </FieldWrap>
 ```
 
@@ -86,25 +88,26 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="robot-label">Are you a robot?</div>
-  <RadioGroup
-    aria-labelledby="robot-label"
-    defaultValue="no"
-    name="robot"
-    inline
-    radios={[
-      {
-        id: 'robot-yes',
-        label: 'Yes',
-        value: 'yes'
-      },
-      {
-        id: 'robot-no',
-        label: 'No',
-        value: 'no'
-      }
-    ]}
-  />
+  <FieldGroup label="Are you a robot?">
+    <RadioGroup
+      aria-labelledby="robot-label"
+      defaultValue="no"
+      name="robot"
+      inline
+      radios={[
+        {
+          id: 'robot-yes',
+          label: 'Yes',
+          value: 'yes'
+        },
+        {
+          id: 'robot-no',
+          label: 'No',
+          value: 'no'
+        }
+      ]}
+    />
+  </FieldGroup>
 </FieldWrap>
 ```
 

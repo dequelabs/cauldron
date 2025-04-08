@@ -1,0 +1,55 @@
+---
+title: FieldGroup
+description: A grouping component to group a set of related form controls.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldGroup/index.tsx
+---
+
+import { FieldWrap, FieldGroup, Checkbox } from '@deque/cauldron-react'
+
+```js
+import { FieldGroup } from '@deque/cauldron-react'
+```
+
+## Examples
+
+```jsx example
+<FieldGroup
+  label="Group Label"
+  description="Group Description"
+>
+  <Checkbox
+    id="checkbox-unchecked-1"
+    label="Unchecked Checkbox"
+    name="unchecked-checkbox"
+    value="1"
+  />
+  <Checkbox
+    id="checkbox-unchecked-2"
+    label="Unchecked Checkbox"
+    name="unchecked-checkbox"
+    value="1"
+  />
+  <Checkbox
+    id="checkbox-unchecked-3"
+    label="Unchecked Checkbox"
+    name="unchecked-checkbox"
+    value="1"
+  />
+</FieldGroup>
+```
+
+## Props
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[]}
+/>
+
+## Related Components
+
+- [TextField](./TextField)
+- [Select](./Select)
+- [RadioGroup](./RadioGroup)
+- [Checkbox](./Checkbox)
+- [Combobox](./Combobox)

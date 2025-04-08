@@ -100,7 +100,8 @@ textarea:focus,
 [role='spinbutton']:focus {
   outline: 0;
   border: 1px solid var(--field-border-color-focus);
-  box-shadow: 0 0 0 1px var(--field-border-color-focus),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-focus),
     0 0 5px var(--field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -125,7 +126,8 @@ textarea:focus:hover,
 [role='listbox']:focus:hover,
 [role='spinbutton']:focus:hover {
   border: 1px solid var(--field-border-color-focus-hover);
-  box-shadow: 0 0 0 1px var(--field-border-color-focus-hover),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-focus-hover),
     0 0 5px var(--field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -167,7 +169,8 @@ textarea.Field--has-error:hover,
 [role='listbox'].Field--has-error:hover,
 [role='spinbutton'].Field--has-error:hover {
   border-color: var(--field-border-color-error-hover);
-  box-shadow: 0 0 0 1px var(--field-border-color-error),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-error),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -180,7 +183,8 @@ textarea.Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
   border: 1px solid var(--field-border-color-error);
-  box-shadow: 0 0 0 1px var(--field-border-color-error),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-error),
     0 0 5px var(--field-border-color-error-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -291,6 +295,15 @@ textarea.Field--has-error:focus:hover,
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   cursor: default;
+}
+
+.Field__description {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: var(--text-size-small);
+  color: var(--field-label-description-text-color);
+  margin-bottom: var(--space-smallest);
 }
 
 .Field__label + .Checkbox__wrap {
