@@ -24,7 +24,8 @@ jobs:
       - run: yarn test
 
   screenshots:
-    runs-on: ubuntu-latest
+    # Test
+    runs-on: ubuntu-2204
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/dependencies
