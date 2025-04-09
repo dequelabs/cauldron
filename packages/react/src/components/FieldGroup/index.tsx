@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 
-type FieldGroupProps = {
+interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode;
   children: React.ReactNode;
   description?: React.ReactNode;
   error?: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>;
+}
 
-const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
-  /* eslint-disable-next-line */
+const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
   (
     { label, description, error, children, className, id: propId, ...props },
     ref
   ) => {
     const [id] = propId ? [propId] : useId(1, 'fieldgroup');
+    const groupProps = description
+      ? { 'aria-describedby': `${id}-description`, ...props }
+      : props;
     return (
       <div
         role="group"
-        aria-labelledby=""
+        aria-labelledby={`${id}-label`}
         className={classnames('FieldGroup', className)}
         ref={ref}
-        {...props}
+        {...groupProps}
       >
         <label id={`${id}-label`} className="Field__label">
           {label}
