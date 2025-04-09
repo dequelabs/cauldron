@@ -1,10 +1,11 @@
 ---
 title: FieldGroup
-description: A grouping component to group a set of related form controls.
+description: A grouping component to group a set of related form controls with a label, optional description, and optional error message.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldGroup/index.tsx
 ---
 
-import { FieldWrap, FieldGroup, Checkbox } from '@deque/cauldron-react'
+
+import { FieldGroup, TextField, RadioGroup, Checkbox } from '@deque/cauldron-react'
 
 ```js
 import { FieldGroup } from '@deque/cauldron-react'
@@ -12,28 +13,113 @@ import { FieldGroup } from '@deque/cauldron-react'
 
 ## Examples
 
+### Grouping Checkboxes
+
 ```jsx example
-<FieldGroup
-  label="Group Label"
-  description="Group Description"
+<FieldGroup label="Favorite way to prepare water">
+  <Checkbox 
+    id="grilled-water"
+    label="Grilled" 
+    name="prepare-water" 
+    value="grilled-water"
+    checked
+  />
+  <Checkbox 
+    id="toasted-water"
+    label="Toasted" 
+    name="prepare-water" 
+    value="toasted-water"
+  />
+  <Checkbox 
+    id="steamed-water"
+    label="Steamed" 
+    name="prepare-water" 
+    value="steamed-water"
+  />
+  <Checkbox 
+    id="fried-water"
+    label="Fried" 
+    name="prepare-water" 
+    value="fried-water"
+  />
+</FieldGroup>
+```
+
+### Grouping Radio Buttons
+
+```jsx example
+<FieldGroup label="How big is this thing?">
+  <RadioGroup
+    name="size"
+    radios={[
+      {
+        id: '1',
+        label: '1',
+        value: '1'
+      },
+      {
+        id: '2',
+        label: '2',
+        value: '2'
+      },
+      {
+        id: '3',
+        label: '3',
+        value: '3'
+      }
+    ]}
+  />
+</FieldGroup>
+```
+
+### With Description
+
+```jsx example
+<FieldGroup 
+  label="Checkboxes" 
+  description="Please check at least one checkbox"
 >
-  <Checkbox
-    id="checkbox-unchecked-1"
-    label="Unchecked Checkbox"
-    name="unchecked-checkbox"
-    value="1"
+  <Checkbox 
+    id="yes"
+    label="Yes" 
+    name="checkboxes" 
   />
-  <Checkbox
-    id="checkbox-unchecked-2"
-    label="Unchecked Checkbox"
-    name="unchecked-checkbox"
-    value="1"
+  <Checkbox 
+    id="no"
+    label="No" 
+    name="checkboxes" 
   />
-  <Checkbox
-    id="checkbox-unchecked-3"
-    label="Unchecked Checkbox"
-    name="unchecked-checkbox"
-    value="1"
+  <Checkbox 
+    id="why"
+    label="Why?" 
+    name="checkboxes" 
+  />
+</FieldGroup>
+```
+
+### With Error Message
+
+```jsx example
+<FieldGroup 
+  label="Please choose your favorite colors" 
+  description="Your favorite color can not be blue"
+  error="You cannot choose blue as one of your favorite colors"
+>
+  <Checkbox 
+    id="red"
+    label="Red" 
+    name="colors" 
+  />
+  <Checkbox 
+    id="blue"
+    label="Blue" 
+    name="colors"
+    checked
+  />
+  <Checkbox 
+    id="green"
+    label="Green" 
+    name="colors"
   />
 </FieldGroup>
 ```
@@ -43,7 +129,25 @@ import { FieldGroup } from '@deque/cauldron-react'
 <ComponentProps
   children={true}
   className={true}
-  props={[]}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Label text for the group of form elements.'
+    },
+    {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Optional descriptive text.'
+    },
+    {
+      name: 'error',
+      type: 'React.ReactNode',
+      description: 'Error message to display when validation fails for any of the form elements in the group.'
+    }
+  ]}
 />
 
 ## Related Components

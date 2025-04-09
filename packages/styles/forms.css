@@ -216,11 +216,17 @@ textarea.Field--has-error:focus:hover,
   color: var(--field-listbox-selected-text-color);
 }
 
-.Error {
+.Error,
+.Field__error {
   color: var(--field-error-text-color);
   text-align: left;
   font-size: var(--text-size-smallest);
   font-weight: var(--font-weight-normal);
+}
+
+.Field__error {
+  font-size: var(--text-size-small);
+  margin-bottom: var(--space-smallest);
 }
 
 .Checkbox__wrap .Error {
