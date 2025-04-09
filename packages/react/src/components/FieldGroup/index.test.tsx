@@ -42,14 +42,18 @@ test('should render with error message', () => {
     </FieldGroup>
   );
 
-  const error = screen.getByText('This field is required');
+  const error = screen.getByText('You must include both first and last name');
   expect(error).toBeInTheDocument();
   expect(error).toHaveClass('Field__error');
 });
 
 test('should use provided id', () => {
   render(
-    <FieldGroup id="custom-id" label="Group Label">
+    <FieldGroup
+      id="custom-id"
+      label="Group Label"
+      description="Group Description"
+    >
       <input type="text" placeholder="First Name" />
     </FieldGroup>
   );
@@ -58,11 +62,11 @@ test('should use provided id', () => {
     'aria-labelledby',
     'custom-id-label'
   );
-  expect(screen.getByText('Personal Information')).toHaveAttribute(
+  expect(screen.getByText('Group Label')).toHaveAttribute(
     'id',
     'custom-id-label'
   );
-  expect(screen.getByText('Please enter your full name')).toHaveAttribute(
+  expect(screen.getByText('Group Description')).toHaveAttribute(
     'id',
     'custom-id-description'
   );
@@ -84,10 +88,8 @@ test('should generate ids when not provided', () => {
   expect(labelId).not.toBeFalsy();
   expect(descriptionId).not.toBeFalsy();
 
-  expect(labelText.getAttribute('aria-labelledby')).toEqual(labelId);
-  expect(descriptionText.getAttribute('aria-describedby')).toEqual(
-    descriptionId
-  );
+  expect(labelText.getAttribute('id')).toEqual(labelId);
+  expect(descriptionText.getAttribute('id')).toEqual(descriptionId);
 });
 
 test('should support className', () => {
