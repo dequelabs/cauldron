@@ -31,6 +31,22 @@ test('should render with description', () => {
   expect(screen.getByText('Group Description')).toBeInTheDocument();
 });
 
+test('should set aria-describedby to both description and error IDs when both are provided', () => {
+  render(
+    <FieldGroup
+      id="custom-id"
+      label="Group Label"
+      description="Group Description"
+      error="Group Error"
+    >
+      <input type="text" placeholder="First Name" />
+    </FieldGroup>
+  );
+
+  const group = screen.getByRole('group');
+  expect(group).toHaveAccessibleDescription('Group Description Group Error');
+});
+
 test('should render with error message', () => {
   render(
     <FieldGroup

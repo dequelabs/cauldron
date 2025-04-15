@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
+import { addIdRef } from '../../utils/idRefs';
 
 interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode;
@@ -15,16 +16,24 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
     ref
   ) => {
     const [id] = propId ? [propId] : useId(1, 'fieldgroup');
-    const groupProps = description
-      ? { 'aria-describedby': `${id}-description`, ...props }
-      : props;
+
+    let ariaDescribedbyId = '';
+    if (description) {
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, `${id}-description`);
+    }
+
+    if (error) {
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, `${id}-error`);
+    }
+
     return (
       <div
         role="group"
-        aria-labelledby={`${id}-label`}
         className={classnames('FieldGroup', className)}
         ref={ref}
-        {...groupProps}
+        {...props}
+        aria-labelledby={`${id}-label`}
+        aria-describedby={ariaDescribedbyId ? ariaDescribedbyId : undefined}
       >
         <label id={`${id}-label`} className="Field__label">
           {label}
@@ -34,7 +43,11 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
             {description}
           </div>
         )}
-        {error && <div className="Field__error">{error}</div>}
+        {error && (
+          <div className="Field__error" id={`${id}-error`}>
+            {error}
+          </div>
+        )}
         {children}
       </div>
     );

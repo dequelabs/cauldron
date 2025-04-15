@@ -5,18 +5,32 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 
-import { FieldGroup, TextField, RadioGroup, Checkbox } from '@deque/cauldron-react'
+import { FieldGroup, TextField, RadioGroup, Checkbox, FieldWrap } from '@deque/cauldron-react'
 
 ```js
 import { FieldGroup } from '@deque/cauldron-react'
 ```
 
+The FieldGroup component is designed to create accessible groupings of related form controls with proper labeling and semantic structure. You should use `FieldGroup` when:
+
+- You need to group related form inputs that share a common purpose (like a set of checkboxes or radio buttons)
+- You need to apply a single label to multiple related form controls
+- You want to provide descriptive text that applies to an entire group of inputs
+- You need to display validation errors that apply to the entire group rather than individual inputs
+
+<Note>
+  `FieldGroup` automatically appends `-label` to any id specified for the `FieldGroup` to the displayed label. If you need to reference the label id for any reason, you can reference `${id}-label`. If you prefer to have your own custom label, you can specify your own id by passing in a wrapping element to the `label` prop, e.g. `label={<span id="my-id">label</span>}`
+</Note>
+
+
 ## Examples
 
 ### Grouping Checkboxes
 
+The `FieldGroup` component is typically used in conjunction with [`FieldWrap`](./FieldWrap), which provides consistent styling and layout for form fields. To use `FieldGroup`, you can either nest them, or use the `as` prop on `FieldWrap` as shown in the example below.
+
 ```jsx example
-<FieldGroup label="Favorite way to prepare water">
+<FieldWrap as={FieldGroup} label="Favorite way to prepare water">
   <Checkbox 
     id="grilled-water"
     label="Grilled" 
@@ -42,13 +56,15 @@ import { FieldGroup } from '@deque/cauldron-react'
     name="prepare-water" 
     value="fried-water"
   />
-</FieldGroup>
+</FieldWrap>
 ```
 
 ### Grouping Radio Buttons
 
+`RadioGroup` components should always be wrapped in a `FieldGroup` to ensure the set of radio controls has an associated group label.
+
 ```jsx example
-<FieldGroup label="How big is this thing?">
+<FieldWrap id="size" as={FieldGroup} label="How big is this thing?">
   <RadioGroup
     name="size"
     radios={[
@@ -69,13 +85,16 @@ import { FieldGroup } from '@deque/cauldron-react'
       }
     ]}
   />
-</FieldGroup>
+</FieldWrap>
 ```
 
 ### With Description
 
+Descriptions provide additional context or instructions for the entire group of inputs. Use them to clarify requirements or explain how the grouped inputs relate to each other.
+
 ```jsx example
-<FieldGroup 
+<FieldWrap
+  as={FieldGroup} 
   label="Checkboxes" 
   description="Please check at least one checkbox"
 >
@@ -94,13 +113,16 @@ import { FieldGroup } from '@deque/cauldron-react'
     label="Why?" 
     name="checkboxes" 
   />
-</FieldGroup>
+</FieldWrap>
 ```
 
 ### With Error Message
 
+When validation fails for a group of form controls, you can display an error message that applies to the entire group. This is especially useful for groups of checkboxes where at least one selection may be required, or when certain combinations of selections are invalid.
+
 ```jsx example
-<FieldGroup 
+<FieldWrap
+  as={FieldGroup} 
   label="Please choose your favorite colors" 
   description="Your favorite color can not be blue"
   error="You cannot choose blue as one of your favorite colors"
@@ -121,7 +143,7 @@ import { FieldGroup } from '@deque/cauldron-react'
     label="Green" 
     name="colors"
   />
-</FieldGroup>
+</FieldWrap>
 ```
 
 ## Props
@@ -130,24 +152,22 @@ import { FieldGroup } from '@deque/cauldron-react'
   children={true}
   className={true}
   refType="HTMLDivElement"
-  props={[
-    {
-      name: 'label',
-      type: 'React.ReactNode',
-      required: true,
-      description: 'Label text for the group of form elements.'
+  props={[{
+    name: 'label',
+    type: 'React.ReactNode',
+    required: true,
+    description: 'Label text for the group of form elements.'
     },
     {
-      name: 'description',
-      type: 'React.ReactNode',
-      description: 'Optional descriptive text.'
+    name: 'description',
+    type: 'React.ReactNode',
+    description: 'Optional descriptive text.'
     },
     {
-      name: 'error',
-      type: 'React.ReactNode',
-      description: 'Error message to display when validation fails for any of the form elements in the group.'
-    }
-  ]}
+    name: 'error',
+    type: 'React.ReactNode',
+    description: 'Error message to display when validation fails for any of the form elements in the group.'
+  }]}
 />
 
 ## Related Components

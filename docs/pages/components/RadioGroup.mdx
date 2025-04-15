@@ -19,66 +19,66 @@ import { RadioGroup } from '@deque/cauldron-react'
 ### Default
 
 ```jsx example
-<FieldWrap>
-  <FieldGroup id="gyros" label="Do you like gyros?">
-    <RadioGroup
-      aria-labelledby="gyros-label"
-      name="gyros"
-      radios={[
-        {
-          id: 'gyros-yes',
-          label: 'Yes!!',
-          value: 'yes'
-        },
-        {
-          id: 'gyros-no',
-          label: 'Nope.',
-          value: 'no'
-        },
-        {
-          id: 'gyros-friday',
-          label: 'Only on fridays',
-          value: 'friday'
-        }
-      ]}
-      value="yes"
-    />
-  </FieldGroup>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Do you like gyros?"
+>
+  <RadioGroup
+    name="gyros"
+    radios={[
+      {
+        id: 'gyros-yes',
+        label: 'Yes!!',
+        value: 'yes'
+      },
+      {
+        id: 'gyros-no',
+        label: 'Nope.',
+        value: 'no'
+      },
+      {
+        id: 'gyros-friday',
+        label: 'Only on fridays',
+        value: 'friday'
+      }
+    ]}
+    value="yes"
+  />
 </FieldWrap>
 ```
 
 ### With Descriptions
 
 ```jsx example
-<FieldWrap>
-  <FieldGroup id="pizza" label="Do you like pizza?">
-    <RadioGroup
-      aria-labelledby="pizza-label"
-      defaultValue="tuesday"
-      name="pizza"
-      radios={[
-        {
-          id: 'yes',
-          label: 'Yes',
-          labelDescription: 'Of course you like pizza',
-          value: 'yes'
-        },
-        {
-          disabled: true,
-          id: 'no',
-          label: 'No',
-          labelDescription: 'Impossible, everyone likes pizza',
-          value: 'no'
-        },
-        {
-          id: 'tuesday',
-          label: 'Only on Tuesdays',
-          labelDescription: 'Pizza Tuesdays are rad',
-          value: 'tuesday'
-        }
-      ]}
-    />
-  </FieldGroup>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Do you like pizza?"
+>
+  <RadioGroup
+    defaultValue="tuesday"
+    name="pizza"
+    radios={[
+      {
+        id: 'yes',
+        label: 'Yes',
+        labelDescription: 'Of course you like pizza',
+        value: 'yes'
+      },
+      {
+        disabled: true,
+        id: 'no',
+        label: 'No',
+        labelDescription: 'Impossible, everyone likes pizza',
+        value: 'no'
+      },
+      {
+        id: 'tuesday',
+        label: 'Only on Tuesdays',
+        labelDescription: 'Pizza Tuesdays are rad',
+        value: 'tuesday'
+      }
+    ]}
+  />
 </FieldWrap>
 ```
 
@@ -87,27 +87,27 @@ import { RadioGroup } from '@deque/cauldron-react'
 If your list of options is short, `RadioGroup` can optionally accept an `inline` prop to display the radio items in a horizontal orientation instead of vertically.
 
 ```jsx example
-<FieldWrap>
-  <FieldGroup id="robot" label="Are you a robot?">
-    <RadioGroup
-      aria-labelledby="robot-label"
-      defaultValue="no"
-      name="robot"
-      inline
-      radios={[
-        {
-          id: 'robot-yes',
-          label: 'Yes',
-          value: 'yes'
-        },
-        {
-          id: 'robot-no',
-          label: 'No',
-          value: 'no'
-        }
-      ]}
-    />
-  </FieldGroup>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Are you a robot?"
+>
+  <RadioGroup
+    defaultValue="no"
+    name="robot"
+    inline
+    radios={[
+      {
+        id: 'robot-yes',
+        label: 'Yes',
+        value: 'yes'
+      },
+      {
+        id: 'robot-no',
+        label: 'No',
+        value: 'no'
+      }
+    ]}
+  />
 </FieldWrap>
 ```
 
