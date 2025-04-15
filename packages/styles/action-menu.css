@@ -1,0 +1,41 @@
+:root {
+  --action-menu-border-color: var(--gray-30);
+  --action-menu-background-color: #fff;
+  --action-menu-item-active-background-color: var(--gray-20);
+}
+
+.cauldron--theme-dark {
+  --action-menu-background-color: var(--accent-medium);
+}
+
+.ActionMenu {
+  border: 1px solid var(--action-menu-border-color);
+  background-color: var(--action-menu-background-color);
+  padding: var(--space-smallest) 0;
+  border-radius: 8px;
+  max-width: var(--action-menu-width);
+  max-height: var(--action-menu-height);
+  box-shadow: var(--drop-shadow-overlay);
+  overflow-y: auto;
+}
+
+.ActionList > li {
+  list-style-type: none;
+}
+
+.ActionMenu > .ActionList {
+  outline: none;
+}
+
+.ActionListItem {
+  padding: var(--space-smallest);
+}
+
+.ActionListItem:hover {
+  background-color: var(--action-menu-item-active-background-color);
+}
+
+.ActionList:focus-within .ActionListItem--active {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
+
