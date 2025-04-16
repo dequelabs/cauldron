@@ -1,0 +1,55 @@
+:root {
+  --section-header-heading-font-weight: var(--font-weight-medium, 500);
+  --section-header-description-font-size: var(--text-size-base: 16px);
+  --section-header-description-color: var(--gray-60);
+  --section-header-heading-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --section-header-description-color: var(--accent-light);
+  --section-header-heading-color: var(--white);
+}
+
+.sectionHeaderContainerContext {
+  container-type: inline-size;
+}
+
+.SectionHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: var(--space-large, 24px);
+  gap: var(--space-small, 16px);
+}
+
+.SectionHeader__textSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-smallest, 8px);
+  flex: 1;
+}
+
+.SectionHeader__actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.SectionHeader__description {
+  color: var(--section-header-description-color);
+  font-size: var(--section-header-description-font-size);
+}
+
+.SectionHeader .SectionHeader__heading,
+.SectionHeader .SectionHeader__heading > :is(h2, h3, h4, h5, h6) {
+  color: var(--section-header-heading-color);
+  font-weight: var(--section-header-heading-font-weight);
+  margin: 0;
+  padding: 0;
+}
+
+@container (min-width: 48rem) {
+  .SectionHeader {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,63 @@
+:root {
+  --page-header-heading-font-weight: var(--font-weight-medium, 500);
+  --page-header-description-font-size: var(--text-size-base: 16px);
+  --page-header-overline-font-size: var(--text-size-base: 16px);
+  --page-header-overline-color: var(--gray-60);
+  --page-header-description-color: var(--gray-60);
+  --page-header-heading-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --page-header-overline-color: var(--accent-light);
+  --page-header-description-color: var(--accent-light);
+  --page-header-heading-color: var(--white);
+}
+
+.pageHeaderContainerContext {
+  container-type: inline-size;
+}
+
+.PageHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: var(--space-large, 24px);
+  gap: var(--space-small, 16px);
+}
+
+.PageHeader__textSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-smallest, 8px);
+  flex: 1;
+}
+
+.PageHeader__actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.PageHeader__overline {
+  color: var(--page-header-overline-color);
+  font-size: var(--page-header-overline-font-size);
+}
+
+.PageHeader__description {
+  color: var(--page-header-description-color);
+  font-size: var(--page-header-description-font-size);
+}
+
+.PageHeader .PageHeader__heading,
+.PageHeader .PageHeader__heading > :is(h1) {
+  color: var(--page-header-heading-color);
+  font-weight: var(--page-header-heading-font-weight);
+  margin: 0;
+  padding: 0;
+}
+
+@container (min-width: 48rem) {
+  .PageHeader {
+    flex-direction: row;
+  }
+}

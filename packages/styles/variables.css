@@ -100,6 +100,7 @@
   --text-size-small: 15px;
   --text-size-smaller: 13px;
   --text-size-smallest: 12px;
+  --text-size-base: 16px;
 
   /* fonts */
   --base-font-family: 'Roboto', Helvetica, Arial, sans-serif;

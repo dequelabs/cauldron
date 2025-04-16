@@ -1,0 +1,62 @@
+---
+heading: PageHeader
+description: A header component for pages, providing a heading and optional actions.
+source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/PageHeader/PageHeader.tsx
+---
+
+import { PageHeader, Button } from '@deque/cauldron-react';
+
+```js
+import { PageHeader } from '@deque/cauldron-react';
+```
+
+The `PageHeader` component is used to display a header for a page, typically including a heading and optional actions.
+
+## Examples
+
+### Basic Usage
+
+```jsx example
+<PageHeader heading="Page Title" />
+```
+
+### With Actions
+
+```jsx example
+<PageHeader
+  overline="Optional overline text"
+  heading="Page Title"
+  description="Optinal description text"
+>
+  <div>
+    <Button variant="primary">Save</Button>
+    <Button variant="secondary">Cancel</Button>
+  </div>
+</PageHeader>
+```
+
+### Custom Title
+
+```jsx example
+<PageHeader heading={<h1>Custom Page Title</h1>} overline="Optional overline text" />
+```
+
+## Props
+
+<ComponentProps
+  children="true"
+  props={[
+    {
+      name: 'heading',
+      type: ['string', 'ReactNode'],
+      description: 'The heading to display in the header.',
+      required: true
+    },
+    {
+      name: 'actions',
+      type: ['ReactNode'],
+      description: 'Optional actions to display in the header, such as buttons.'
+    }
+  ]}
+  refType="HTMLDivElement"
+/>
