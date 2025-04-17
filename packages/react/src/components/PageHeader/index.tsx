@@ -1,13 +1,12 @@
 import React, { forwardRef, ReactNode } from 'react';
+import SectionHeader from '../SectionHeader';
 import classNames from 'classnames';
 
-export type PageHeaderProps = {
-  heading: string;
+export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  heading: ReactNode;
   overline?: ReactNode;
   description?: ReactNode;
-  children?: React.ReactNode;
-  className?: string;
-};
+}
 
 const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
   (
@@ -21,32 +20,20 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
     }: PageHeaderProps,
     ref
   ) => {
-    return (
-      <div className="pageHeaderContainerContext">
-        <div
-          className={classNames('PageHeader', className)}
-          ref={ref}
-          {...otherProps}
-        >
-          <div className="PageHeader__textSection">
-            {overline && <div className="PageHeader__overline">{overline}</div>}
+    if (typeof heading === 'string') {
+      heading = <h1>{heading}</h1>;
+    }
 
-            {typeof heading === 'string' ? (
-              <h1 className="PageHeader__heading">{heading}</h1>
-            ) : (
-              React.cloneElement(
-                heading as React.ReactElement<HTMLHeadingElement>,
-                {
-                  className: 'PageHeader__heading'
-                }
-              )
-            )}
-            {description && (
-              <div className="PageHeader__description">{description}</div>
-            )}
-          </div>
-          {children && <div className="PageHeader__actions">{children}</div>}
-        </div>
+    return (
+      <div
+        className={classNames('PageHeader', className)}
+        ref={ref}
+        {...otherProps}
+      >
+        {overline && <p>{overline}</p>}
+        <SectionHeader heading={heading} description={description}>
+          {children}
+        </SectionHeader>
       </div>
     );
   }

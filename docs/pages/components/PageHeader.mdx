@@ -24,9 +24,9 @@ The `PageHeader` component is used to display a header for a page, typically inc
 
 ```jsx example
 <PageHeader
+  heading={<h2>Page Title</h2>}
   overline="Optional overline text"
-  heading="Page Title"
-  description="Optinal description text"
+  description="Optional description text"
 >
   <div>
     <Button variant="primary">Save</Button>
@@ -48,15 +48,24 @@ The `PageHeader` component is used to display a header for a page, typically inc
   props={[
     {
       name: 'heading',
-      type: ['string', 'ReactNode'],
+      type: 'React.ReactNode',
       description: 'The heading to display in the header.',
       required: true
     },
     {
-      name: 'actions',
-      type: ['ReactNode'],
-      description: 'Optional actions to display in the header, such as buttons.'
+      name: 'overline',
+      type: 'React.ReactNode',
+      description: 'Optional description to display abowe the heading.'
+    },
+    {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Optional description to display below the heading.'
     }
   ]}
   refType="HTMLDivElement"
 />
+
+## Related Components  
+
+- [SectionHeader](./SectionHeader)  

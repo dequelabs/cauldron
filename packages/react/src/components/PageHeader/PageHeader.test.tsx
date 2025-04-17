@@ -3,10 +3,20 @@ import { render, screen } from '@testing-library/react';
 import PageHeader from './';
 import axe from '../../axe';
 
+test('should support ref prop', () => {
+  const ref = React.createRef<HTMLDivElement>();
+  render(
+    <PageHeader heading="Page Title" ref={ref} data-testid="pageheader" />
+  );
+
+  expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  expect(ref.current).toEqual(screen.getByTestId('pageheader'));
+});
+
 test('should render heading', () => {
   render(<PageHeader heading="Page Title" />);
   expect(
-    screen.getByRole('heading', { name: 'Page Title' })
+    screen.getByRole('heading', { name: 'Page Title', level: 1 })
   ).toBeInTheDocument();
 });
 

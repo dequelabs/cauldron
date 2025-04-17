@@ -23,10 +23,7 @@ The `SectionHeader` component is used to display a header for sections, typicall
 ### With Actions
 
 ```jsx example
-<SectionHeader
-  heading="Section Title"
-  description="Optinal description text"
->
+<SectionHeader heading="Section Title" description="Optional description text">
   <div>
     <Button variant="primary">Save</Button>
     <Button variant="secondary">Cancel</Button>
@@ -37,9 +34,9 @@ The `SectionHeader` component is used to display a header for sections, typicall
 ### Custom Title
 
 ```jsx example
-<SectionHeader 
-  heading={<h3>Custom Section Title</h3>} 
-  description="Optinal description text"
+<SectionHeader
+  heading={<h3>Custom Section Title</h3>}
+  description="Optional description text"
 />
 ```
 
@@ -50,20 +47,19 @@ The `SectionHeader` component is used to display a header for sections, typicall
   props={[
     {
       name: 'heading',
-      type: ['string', 'ReactNode'],
+      type: 'React.ReactNode',
       description: 'The heading to display in the header.',
       required: true
     },
     {
       name: 'description',
-      type: ['ReactNode'],
+      type: 'React.ReactNode',
       description: 'Optional description to display below the heading.'
-    },
-    {
-      name: 'actions',
-      type: ['ReactNode'],
-      description: 'Optional actions to display in the header, such as buttons.'
     }
   ]}
   refType="HTMLDivElement"
 />
+
+## Related Components  
+
+- [PageHeader](./PageHeader)  

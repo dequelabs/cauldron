@@ -1,35 +1,28 @@
 import React, { forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 
-export interface SectionHeaderProps {
+export interface SectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   heading: ReactNode;
   description?: ReactNode;
-  children?: ReactNode;
-  className?: string;
 }
 
 const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
   ({ className, heading, description, children, ...otherProps }, ref) => {
+    if (typeof heading === 'string') {
+      heading = <h2>{heading}</h2>;
+    }
     return (
-      <div className="sectionHeaderContainerContext">
-        <div
-          className={classNames('SectionHeader', className)}
-          ref={ref}
-          {...otherProps}
-        >
-          <div className="SectionHeader__textSection">
-            {typeof heading === 'string' ? (
-              <h2 className="SectionHeader__heading">{heading}</h2>
-            ) : (
-              React.cloneElement(
-                heading as React.ReactElement<HTMLHeadingElement>,
-                {
-                  className: 'SectionHeader__heading'
-                }
-              )
-            )}
+      <div
+        className={classNames('SectionHeader', className)}
+        ref={ref}
+        {...otherProps}
+      >
+        <div className="SectionHeader__content">
+          <div className="SectionHeader__text-section">
+            {heading}
             {description && (
-              <div className="SectionHeader__description">{description}</div>
+              <p className="SectionHeader__description">{description}</p>
             )}
           </div>
           {children && <div className="SectionHeader__actions">{children}</div>}

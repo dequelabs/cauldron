@@ -1,31 +1,29 @@
 :root {
-  --section-header-heading-font-weight: var(--font-weight-medium, 500);
-  --section-header-description-font-size: var(--text-size-base: 16px);
   --section-header-description-color: var(--gray-60);
   --section-header-heading-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
   --section-header-description-color: var(--accent-light);
-  --section-header-heading-color: var(--white);
-}
-
-.sectionHeaderContainerContext {
-  container-type: inline-size;
+  --section-header-heading-color: #ffffff;
 }
 
 .SectionHeader {
+  container-type: inline-size;
+}
+
+.SectionHeader__content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: var(--space-large, 24px);
-  gap: var(--space-small, 16px);
+  padding-bottom: var(--space-large);
+  gap: var(--space-small);
 }
 
-.SectionHeader__textSection {
+.SectionHeader__text-section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-smallest, 8px);
+  gap: var(--space-smallest);
   flex: 1;
 }
 
@@ -35,21 +33,22 @@
   flex-wrap: wrap;
 }
 
-.SectionHeader__description {
+.SectionHeader .SectionHeader__content .SectionHeader__description {
+  margin: 0;
+  padding: 0;
   color: var(--section-header-description-color);
-  font-size: var(--section-header-description-font-size);
+  font-size: var(--text-size-base);
 }
 
-.SectionHeader .SectionHeader__heading,
-.SectionHeader .SectionHeader__heading > :is(h2, h3, h4, h5, h6) {
+.SectionHeader :is(h1, h2, h3, h4, h5, h6) {
   color: var(--section-header-heading-color);
-  font-weight: var(--section-header-heading-font-weight);
+  font-weight: var(--font-weight-medium);
   margin: 0;
   padding: 0;
 }
 
 @container (min-width: 48rem) {
-  .SectionHeader {
+  .SectionHeader__content {
     flex-direction: row;
   }
 }

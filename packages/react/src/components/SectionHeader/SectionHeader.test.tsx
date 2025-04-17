@@ -3,6 +3,20 @@ import { render, screen } from '@testing-library/react';
 import SectionHeader from './';
 import axe from '../../axe';
 
+test('should support ref prop', () => {
+  const ref = React.createRef<HTMLDivElement>();
+  render(
+    <SectionHeader
+      heading="Section Title"
+      ref={ref}
+      data-testid="sectionheader"
+    />
+  );
+
+  expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  expect(ref.current).toEqual(screen.getByTestId('sectionheader'));
+});
+
 test('should render heading as h2 when string is passed', () => {
   render(<SectionHeader heading="Section Title" />);
   expect(
