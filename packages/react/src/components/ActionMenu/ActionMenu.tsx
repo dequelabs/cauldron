@@ -61,6 +61,7 @@ function ActionMenu({
     [open]
   );
 
+  // @ts-expect-error for now...
   const triggerProps: React.HTMLAttributes<HTMLButtonElement> = useMemo(() => {
     return {
       ref: triggerRef,

@@ -31,6 +31,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     }, [onAction]);
 
     return (
+      // @ts-expect-error for now...
       <Listbox
         ref={ref}
         /* Listbox comes with an explicit role of "listbox", but we want to either
