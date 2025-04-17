@@ -13,6 +13,13 @@ test('should support ref prop', () => {
   expect(ref.current).toEqual(screen.getByTestId('pageheader'));
 });
 
+test('should render when heading passed as element but not as a string', () => {
+  render(<PageHeader heading={<h2>Custom Page Title</h2>} />);
+  expect(
+    screen.getByRole('heading', { name: 'Custom Page Title', level: 2 })
+  ).toBeInTheDocument();
+});
+
 test('should render heading', () => {
   render(<PageHeader heading="Page Title" />);
   expect(
