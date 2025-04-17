@@ -4,10 +4,12 @@ description: TBD
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ActionMenu/ActionMenu.tsx
 ---
 
-import { Button, ActionMenu, ActionList, ActionListItem } from '@deque/cauldron-react'
+import { useState } from 'react'
+import { Button, ActionMenu, ActionList, ActionListItem, ActionListGroup } from '@deque/cauldron-react'
 
 ## Examples
 
+### ActionMenu
 
 ```jsx example
 <ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
@@ -19,6 +21,91 @@ import { Button, ActionMenu, ActionList, ActionListItem } from '@deque/cauldron-
 </ActionMenu>
 ```
 
+### Group
+
+```jsx example
+<ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
+  <ActionList>
+    <ActionListGroup label="Group Label">
+      <ActionListItem>One</ActionListItem>
+      <ActionListItem>Two</ActionListItem>
+    </ActionListGroup>
+    <ActionListItem>Three</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### Only Group
+
+```jsx example
+<ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
+  <ActionList>
+    <ActionListGroup label="Group Label">
+      <ActionListItem>One</ActionListItem>
+      <ActionListItem>Two</ActionListItem>
+      <ActionListItem>Three</ActionListItem>
+    </ActionListGroup>
+  </ActionList>
+</ActionMenu>
+```
+
+### Selections (Single)
+
+```jsx example
+function SingleSelectExample() {
+  const options = ['One', 'Two', 'Three'];
+  const [selected, setSelected] = useState('One');
+  const handleAction = (key) => {
+    setSelected(key)
+  };
+
+  return (
+    <ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
+      <ActionList selectionType="single">
+        {options.map(value => (
+          <ActionListItem 
+            key={value} 
+            selected={selected === value}
+            onAction={() => handleAction(value)}
+          >
+            {value}
+          </ActionListItem>
+        ))}
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
+
+```jsx example
+function MultiSelectExample() {
+  const options = ['One', 'Two', 'Three'];
+  const [selected, setSelected] = useState([]);
+  const handleAction = (key) => {
+    if (selected.includes(key)) {
+      setSelected(selected.filter(v => v !== key ));
+    } else {
+      setSelected([...selected, key]);
+    }
+  };
+
+  return (
+    <ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
+      <ActionList selectionType="single">
+        {options.map(value => (
+          <ActionListItem 
+            key={value} 
+            selected={selected.includes(value)}
+            onAction={() => handleAction(value)}
+          >
+            {value}
+          </ActionListItem>
+        ))}
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
 ## Props
 
 <ComponentProps

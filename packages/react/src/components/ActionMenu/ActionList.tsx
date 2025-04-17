@@ -1,39 +1,34 @@
 import React, { forwardRef, useMemo } from 'react';
-import classnames from 'classnames'
+import classnames from 'classnames';
 import {
   type ActionListSelectionType,
   type onActionCallbackFunction,
-  ActionListProvider
-} from './ActionListContext'
-import ActionListItem from './ActionListItem'
-import Listbox from '../Listbox'
+  ActionListProvider,
+  useActionListContext
+} from './ActionListContext';
+import Listbox from '../Listbox';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
-  children: React.ReactNode
+  children: React.ReactNode;
   // children: Array<ActionListItem | ActionListLinkItem | ActionListGroup>
 
   /** Limits the amount of selections that can be made within an action list */
-  selectionType?: ActionListSelectionType | null
+  selectionType?: ActionListSelectionType | null;
 
   /** A callback function that is called when an action list item is selected. */
-  onAction?: onActionCallbackFunction
+  onAction?: onActionCallbackFunction;
 }
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
-  ({
-    selectionType = null,
-    onAction,
-    className,
-    children,
-    ...props
-  }, ref) => {
+  ({ selectionType = null, onAction, className, children, ...props }, ref) => {
+    const context = useActionListContext();
     const handleAction = useMemo(() => {
       if (typeof onAction !== 'function') {
-        return () => null
+        return () => null;
       }
 
-      return onAction
-    }, [onAction])
+      return onAction;
+    }, [onAction]);
 
     return (
       <Listbox
@@ -47,17 +42,13 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         {...props}
         navigation="bound"
       >
-        <ActionListProvider
-          role="menu"
-          selectionType={selectionType}
-          onAction={handleAction}
-        >
+        <ActionListProvider {...context} selectionType={selectionType}>
           {children}
         </ActionListProvider>
       </Listbox>
-    )
+    );
   }
-)
+);
 
 ActionList.displayName = 'ActionList';
 
