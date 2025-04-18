@@ -26,7 +26,10 @@ interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
-  ({ key, className, description, selected, onAction, children, ...props }) => {
+  (
+    { key, className, description, selected, onAction, children, ...props },
+    ref
+  ) => {
     const [id] = useId(1, 'action-list-item');
     const labelRef = useRef<HTMLSpanElement>(null);
     const {
@@ -57,9 +60,9 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       if (contextRole === 'menu') {
         switch (selectionType) {
           case 'single':
-            return 'menuitemcheckbox';
-          case 'multiple':
             return 'menuitemradio';
+          case 'multiple':
+            return 'menuitemcheckbox';
           default:
             return 'menuitem';
         }
@@ -74,6 +77,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
 
     return (
       <ListboxOption
+        ref={ref}
         key={key}
         id={id}
         role={role}

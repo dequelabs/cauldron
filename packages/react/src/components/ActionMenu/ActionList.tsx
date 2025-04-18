@@ -1,12 +1,14 @@
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import classnames from 'classnames';
+import type { ListboxOption } from '../Listbox/ListboxContext';
+import Listbox from '../Listbox';
 import {
   type ActionListSelectionType,
   type onActionCallbackFunction,
+  type onActionEvent,
   ActionListProvider,
   useActionListContext
 } from './ActionListContext';
-import Listbox from '../Listbox';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -20,15 +22,55 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
-  ({ selectionType = null, onAction, className, children, ...props }, ref) => {
+  (
+    {
+      selectionType = null,
+      onAction,
+      className,
+      children,
+      onKeyPress,
+      ...props
+    },
+    ref
+  ) => {
+    const [active, setActive] = useState<HTMLLIElement | HTMLAnchorElement>();
     const context = useActionListContext();
-    const handleAction = useMemo(() => {
-      if (typeof onAction !== 'function') {
-        return () => null;
-      }
 
-      return onAction;
-    }, [onAction]);
+    const handleActiveChange = useCallback((value: ListboxOption) => {
+      setActive(value?.element as HTMLLIElement | HTMLAnchorElement);
+    }, []);
+
+    const handleAction = useCallback(
+      (key: string, event: onActionEvent) => {
+        if (event.defaultPrevented) {
+          return;
+        }
+
+        if (typeof onAction === 'function') {
+          onAction(key, event);
+        }
+
+        if (typeof context.onAction === 'function') {
+          context.onAction(key, event);
+        }
+      },
+      [onAction, context.onAction]
+    );
+
+    const handleKeyUp = useCallback(
+      (event: React.KeyboardEvent<HTMLUListElement | HTMLAnchorElement>) => {
+        if (event.defaultPrevented) {
+          return;
+        }
+
+        // Since focus is managed in the action list using `aria-activedescendant`
+        // we want to simulate a keypress on the current active list item
+        if (event.key === 'Enter' || event.key === ' ') {
+          active?.click();
+        }
+      },
+      [active, onKeyPress]
+    );
 
     return (
       // @ts-expect-error for now...
@@ -38,12 +80,19 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
+        // aria-multiselectable is valid for listbox roles, but not list or menu roles
         aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         {...props}
+        onKeyUp={handleKeyUp}
+        onActiveChange={handleActiveChange}
         navigation="bound"
       >
-        <ActionListProvider {...context} selectionType={selectionType}>
+        <ActionListProvider
+          {...context}
+          onAction={handleAction}
+          selectionType={selectionType}
+        >
           {children}
         </ActionListProvider>
       </Listbox>

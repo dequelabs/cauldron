@@ -91,7 +91,7 @@ function MultiSelectExample() {
 
   return (
     <ActionMenu trigger={<Button variant="secondary">Click me!</Button>}>
-      <ActionList selectionType="single">
+      <ActionList selectionType="multiple">
         {options.map(value => (
           <ActionListItem 
             key={value} 

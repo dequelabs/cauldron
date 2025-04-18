@@ -18,18 +18,12 @@ interface ActionListGroupProps extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
-  ({ id: propId, label, className, children, selectionType, ...props }) => {
+  ({ id: propId, label, children, selectionType, ...props }, ref) => {
     const [id] = propId ? [propId] : useId(1, 'actionlist-group-label');
     const actionListContext = useActionListContext();
     return (
-      <li role="none">
-        <ListboxGroup
-          id={id}
-          className={classnames('ActionListGroup', className)}
-          label={label}
-          {...props}
-          as="ul"
-        >
+      <li ref={ref} role="none" {...props}>
+        <ListboxGroup id={id} className="ActionListGroup" label={label} as="ul">
           <ActionListProvider
             {...actionListContext}
             selectionType={selectionType || actionListContext.selectionType}
