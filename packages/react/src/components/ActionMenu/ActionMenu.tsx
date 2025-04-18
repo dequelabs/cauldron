@@ -7,8 +7,10 @@ import React, {
 } from 'react';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
-import { ActionListProvider } from './ActionListContext';
+import { type onActionEvent, ActionListProvider } from './ActionListContext';
 import { useId } from 'react-id-generator';
+
+const [ArrowDown] = ['ArrowDown'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -24,20 +26,21 @@ interface ActionMenuProps
   extends Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> {
   children: React.ReactElement;
   trigger: React.ReactElement | ActionMenuTriggerFunction;
-  closeOnAction?: boolean;
+  open?: boolean;
 }
 
 function ActionMenu({
   trigger,
   placement = 'bottom-start',
-  closeOnAction,
+  open: openProp,
   children: actionMenuList
 }: ActionMenuProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(!!openProp);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const actionMenuRef = useRef<HTMLElement>(null);
   const actionMenuListRef = useRef<HTMLElement>(null);
   const triggerId = useId(1, 'menu-trigger');
+  const isControlled = typeof openProp === 'boolean';
 
   const handleTriggerClick = useCallback(
     (
@@ -45,20 +48,22 @@ function ActionMenu({
         | React.MouseEvent<HTMLButtonElement>
         | React.KeyboardEvent<HTMLButtonElement>
     ) => {
-      if (!event.defaultPrevented) {
+      if (!event.defaultPrevented && !isControlled) {
         setOpen(!open);
       }
     },
-    [open]
+    [open, isControlled]
   );
 
-  const handleTriggerKeypress = useCallback(
+  const handleTriggerKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (!event.defaultPrevented && event.key === 'ArrowDown') {
-        setOpen(true);
+      if (event.key === ArrowDown && !isControlled && !open) {
+        // prevent page from scrolling if the user triggers the action menu
+        // via an "ArrowDown" key press
+        event.preventDefault();
       }
     },
-    [open]
+    [open, isControlled]
   );
 
   // @ts-expect-error for now...
@@ -67,10 +72,11 @@ function ActionMenu({
       ref: triggerRef,
       id: triggerId,
       onClick: handleTriggerClick,
-      onKeyPress: handleTriggerKeypress,
+      onKeyUpCapture: (event) => event.preventDefault,
+      onKeyDown: handleTriggerKeyDown,
       'aria-expanded': open ? true : undefined
     };
-  }, [handleTriggerClick, handleTriggerKeypress, open]);
+  }, [handleTriggerClick, open]);
 
   const actionMenuTrigger = React.isValidElement(trigger)
     ? React.cloneElement(trigger, triggerProps)
@@ -85,11 +91,14 @@ function ActionMenu({
     }
   }, []);
 
-  const handleAction = useCallback(() => {
-    if (closeOnAction) {
-      setOpen(false);
-    }
-  }, [closeOnAction]);
+  const handleAction = useCallback(
+    (key: string, event: onActionEvent) => {
+      if (!isControlled && !event.defaultPrevented) {
+        setOpen(false);
+      }
+    },
+    [isControlled]
+  );
 
   useEffect(() => {
     if (open) {
@@ -101,7 +110,11 @@ function ActionMenu({
 
   return (
     <>
-      <ClickOutsideListener onClickOutside={handleClickOutside}>
+      <ClickOutsideListener
+        onClickOutside={handleClickOutside}
+        mouseEvent={open ? undefined : false}
+        touchEvent={open ? undefined : false}
+      >
         {actionMenuTrigger}
       </ClickOutsideListener>
       <AnchoredOverlay

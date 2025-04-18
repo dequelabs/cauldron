@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import {
   type ActionListSelectionType,

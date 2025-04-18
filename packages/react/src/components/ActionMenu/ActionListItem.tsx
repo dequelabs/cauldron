@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useRef } from 'react';
+import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ListboxOption } from '../Listbox';
@@ -37,10 +37,16 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       onAction: onActionListAction,
       selectionType
     } = useActionListContext();
-    const handleAction = useMemo(() => {
-      return (event: onActionEvent) => {
+
+    const handleAction = useCallback(
+      (event: onActionEvent) => {
         if (event.defaultPrevented) {
           return;
+        }
+
+        if (selectionType === 'multiple') {
+          // If action list is part of an action menu, prevent the menu from closing
+          event.preventDefault();
         }
 
         if (typeof onAction === 'function') {
@@ -53,8 +59,9 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
             event
           );
         }
-      };
-    }, [onAction, onActionListAction]);
+      },
+      [onAction, onActionListAction]
+    );
 
     const role = useMemo(() => {
       if (contextRole === 'menu') {

@@ -12,7 +12,6 @@ import {
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
-  // children: Array<ActionListItem | ActionListLinkItem | ActionListGroup>
 
   /** Limits the amount of selections that can be made within an action list */
   selectionType?: ActionListSelectionType | null;
@@ -42,10 +41,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
-        if (event.defaultPrevented) {
-          return;
-        }
-
         if (typeof onAction === 'function') {
           onAction(key, event);
         }
