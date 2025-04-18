@@ -34,5 +34,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:dequelabs/cauldron is:pr created:>=2024-10-01 -author:app/dependabot feat OR fix in:title'
+      - name: output
+        shell: bash
         run: |
           cat issue_metricts.md
