@@ -33,4 +33,4 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:dequelabs/cauldron is:pr created:${{ env.start_date } -author:app/dependabot feat OR fix in:title'
+          SEARCH_QUERY: 'repo:dequelabs/cauldron is:pr created:${{ env.start_date }} -author:app/dependabot feat OR fix in:title'
