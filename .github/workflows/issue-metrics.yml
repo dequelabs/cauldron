@@ -37,4 +37,4 @@ jobs:
       - name: output
         shell: bash
         run: |
-          cat issue_metricts.md
+          cat issue_metrics.md
