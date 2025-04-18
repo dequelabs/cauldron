@@ -30,7 +30,7 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
         ref={ref}
         {...otherProps}
       >
-        {overline && <p>{overline}</p>}
+        {overline && <div className="PageHeader__overline">{overline}</div>}
         <SectionHeader heading={heading} description={description}>
           {children}
         </SectionHeader>

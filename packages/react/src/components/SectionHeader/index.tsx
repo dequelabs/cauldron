@@ -19,12 +19,10 @@ const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
         {...otherProps}
       >
         <div className="SectionHeader__content">
-          <div className="SectionHeader__text-section">
-            {heading}
-            {description && (
-              <p className="SectionHeader__description">{description}</p>
-            )}
-          </div>
+          {heading}
+          {description && (
+            <p className="SectionHeader__description">{description}</p>
+          )}
           {children && <div className="SectionHeader__actions">{children}</div>}
         </div>
       </div>

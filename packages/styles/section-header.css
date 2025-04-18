@@ -1,11 +1,9 @@
 :root {
   --section-header-description-color: var(--gray-60);
-  --section-header-heading-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
   --section-header-description-color: var(--accent-light);
-  --section-header-heading-color: #ffffff;
 }
 
 .SectionHeader {
@@ -13,35 +11,28 @@
 }
 
 .SectionHeader__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: var(--space-large);
-  gap: var(--space-small);
-}
-
-.SectionHeader__text-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-smallest);
-  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'heading'
+    'description'
+    'children';
 }
 
 .SectionHeader__actions {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  margin-top: var(--space-small);
+  grid-area: children;
 }
 
 .SectionHeader .SectionHeader__content .SectionHeader__description {
-  margin: 0;
+  margin: var(--space-smallest) 0 0 0;
   padding: 0;
   color: var(--section-header-description-color);
   font-size: var(--text-size-base);
+  grid-area: description;
 }
 
 .SectionHeader :is(h1, h2, h3, h4, h5, h6) {
-  color: var(--section-header-heading-color);
   font-weight: var(--font-weight-medium);
   margin: 0;
   padding: 0;
@@ -49,6 +40,16 @@
 
 @container (min-width: 48rem) {
   .SectionHeader__content {
-    flex-direction: row;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'heading children'
+      'description children';
+    align-items: start;
+  }
+
+  .SectionHeader__actions {
+    margin: 0;
+    align-self: center;
+    justify-self: end;
   }
 }
