@@ -1,7 +1,9 @@
-name: Monthly issue metrics
+name: Issue metrics
 on:
   workflow_dispatch:
   push:
+    branches:
+      - issue-metrics
 
 permissions:
   contents: read
