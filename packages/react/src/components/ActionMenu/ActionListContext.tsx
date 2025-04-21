@@ -1,20 +1,20 @@
 import React, { createContext, useContext, useMemo } from 'react';
 
 export type onActionEvent =
-  React.MouseEvent<HTMLLIElement | HTMLAnchorElement> |
-  React.KeyboardEvent<HTMLLIElement | HTMLAnchorElement>
+  | React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+  | React.KeyboardEvent<HTMLLIElement | HTMLAnchorElement>;
 
 export type onActionCallbackFunction = (
   key: string,
   event: onActionEvent
-) => void
+) => void;
 
-export type ActionListSelectionType = 'single' | 'multiple'
+export type ActionListSelectionType = 'single' | 'multiple';
 
 type ActionListContext = {
-  role: 'list' | 'menu'
-  selectionType: ActionListSelectionType | null
-  onAction: onActionCallbackFunction
+  role: 'list' | 'menu' | 'listbox';
+  selectionType: ActionListSelectionType | null;
+  onAction: onActionCallbackFunction;
 };
 
 type ActionListProviderProps = {
@@ -41,11 +41,7 @@ function ActionListProvider({
       selectionType,
       onAction
     }),
-    [
-      role,
-      selectionType,
-      onAction
-    ]
+    [role, selectionType, onAction]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;

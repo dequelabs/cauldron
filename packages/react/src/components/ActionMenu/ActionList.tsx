@@ -11,8 +11,7 @@ import {
   type ActionListSelectionType,
   type onActionCallbackFunction,
   type onActionEvent,
-  ActionListProvider,
-  useActionListContext
+  ActionListProvider
 } from './ActionListContext';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -33,7 +32,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
-    const context = useActionListContext();
 
     const handleActiveChange = useCallback((value: ListboxOption) => {
       activeElement.current = value?.element as
@@ -46,12 +44,8 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         if (typeof onAction === 'function') {
           onAction(key, event);
         }
-
-        if (typeof context.onAction === 'function') {
-          context.onAction(key, event);
-        }
       },
-      [onAction, context.onAction]
+      [onAction]
     );
 
     const handleKeyDown = useCallback(
@@ -86,7 +80,11 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         navigation="bound"
       >
         <ActionListProvider
-          {...context}
+          role={
+            (props.role as React.ComponentProps<
+              typeof ActionListProvider
+            >['role']) || 'list'
+          }
           onAction={handleAction}
           selectionType={selectionType}
         >

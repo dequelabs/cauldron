@@ -108,7 +108,7 @@ function SingleSelectionExample() {
   };
   
   return (
-    <ActionList selectionType="single" onAction={handleAction}>
+    <ActionList role="menu" selectionType="single" onAction={handleAction}>
       <ActionListItem selected={selected === 'First item'}>First item</ActionListItem>
       <ActionListItem selected={selected === 'Second item'}>Second item</ActionListItem>
       <ActionListItem selected={selected === 'Third item'}>Third item</ActionListItem>
@@ -134,7 +134,7 @@ function MultipleSelectionExample() {
   };
   
   return (
-    <ActionList selectionType="multiple" onAction={handleAction}>
+    <ActionList role="menu" selectionType="multiple" onAction={handleAction}>
       <ActionListItem selected={selected.includes('First item')}>First item</ActionListItem>
       <ActionListItem selected={selected.includes('Second item')}>Second item</ActionListItem>
       <ActionListItem selected={selected.includes('Third item')}>Third item</ActionListItem>
@@ -144,7 +144,7 @@ function MultipleSelectionExample() {
 ```
 
 <Note>
-  The `selectionType` property is important depending on which selection states are needed, as this controls the underlying aria properties that is communicated for users who use assistive technology.
+  The `selectionType` prop in combination with the `role` prop is important depending on what selection states are needed, as this controls the underlying aria properties that is communicated for users who use assistive technology.
 </Note>
 
 ## Props

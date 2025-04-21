@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
-import { type onActionEvent, ActionListProvider } from './ActionListContext';
+import type { onActionEvent } from './ActionListContext';
 import { useId } from 'react-id-generator';
 
 const [ArrowDown] = ['ArrowDown'];
@@ -128,17 +128,12 @@ function ActionMenu({
         offset={4}
         style={{ display: !open ? 'none' : undefined }}
       >
-        <ActionListProvider
-          role="menu"
-          selectionType={null}
-          onAction={handleAction}
-        >
-          {React.cloneElement(actionMenuList, {
-            ref: actionMenuListRef,
-            role: 'menu',
-            'aria-labelledby': triggerId
-          })}
-        </ActionListProvider>
+        {React.cloneElement(actionMenuList, {
+          ref: actionMenuListRef,
+          role: 'menu',
+          onAction: handleAction,
+          'aria-labelledby': triggerId
+        })}
       </AnchoredOverlay>
     </>
   );

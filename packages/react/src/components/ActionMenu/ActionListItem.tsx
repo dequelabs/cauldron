@@ -89,6 +89,8 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
           default:
             return 'menuitem';
         }
+      } else if (contextRole === 'listbox') {
+        return 'option';
       }
 
       // if no other appropriate role, just default to using the intrinsic role of "listitem"
