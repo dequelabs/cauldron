@@ -1,7 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { useId } from 'react-id-generator';
 import {
   type ActionListSelectionType,
+  type onActionCallbackFunction,
+  type onActionEvent,
   ActionListProvider,
   useActionListContext
 } from './ActionListContext';
@@ -14,17 +16,35 @@ interface ActionListGroupProps extends React.HTMLAttributes<HTMLLIElement> {
 
   /** Limits the amount of selections that can be made within an action group */
   selectionType: ActionListSelectionType;
+
+  /** A callback function that is called when an action list item is selected. */
+  onAction?: onActionCallbackFunction;
 }
 
 const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
-  ({ id: propId, label, children, selectionType, ...props }, ref) => {
+  ({ id: propId, label, children, selectionType, onAction, ...props }, ref) => {
     const [id] = propId ? [propId] : useId(1, 'actionlist-group-label');
     const actionListContext = useActionListContext();
+
+    const handleAction = useCallback(
+      (key: string, event: onActionEvent) => {
+        if (typeof onAction === 'function') {
+          onAction(key, event);
+        }
+
+        if (typeof actionListContext.onAction === 'function') {
+          actionListContext.onAction(key, event);
+        }
+      },
+      [onAction, actionListContext.onAction]
+    );
+
     return (
       <li ref={ref} role="none" {...props}>
         <ListboxGroup id={id} className="ActionListGroup" label={label} as="ul">
           <ActionListProvider
             {...actionListContext}
+            onAction={handleAction}
             selectionType={selectionType || actionListContext.selectionType}
           >
             {children}

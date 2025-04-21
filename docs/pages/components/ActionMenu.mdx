@@ -184,6 +184,61 @@ function MultiSelectionExample() {
 }
 ```
 
+### Mixed Selections
+
+An `ActionMenu` can also contain groupings that have different sets of selections.
+
+```jsx example
+function MixedSelectionExample() {
+  const [difficulty, setDifficulty] = useState('Standard');
+  const [colors, setColors] = useState(['Orange']);
+
+  const handleDifficultyAction = (key) => {
+    setDifficulty(key);
+  }
+
+  const handleColorsAction = (key) => {
+    if (colors.includes(key)) {
+      setColors(colors.filter(value => value !== key))
+    } else {
+      setColors([...colors, key])
+    }
+  }
+
+  return (
+    <ActionMenu
+      trigger={
+        <Button variant="secondary">
+          Setup
+          <Icon type="chevron-down" />
+        </Button>
+      }
+    >
+      <ActionList selectionType="multiple">
+        <ActionListGroup 
+          selectionType="single" 
+          label="Difficulty Level"
+          onAction={handleDifficultyAction}
+        >
+          <ActionListItem selected={difficulty === 'Standard'}>Standard</ActionListItem>
+          <ActionListItem selected={difficulty === 'Normal'}>Normal</ActionListItem>
+          <ActionListItem selected={difficulty === 'Expert'}>Expert</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup 
+          label="Allowed Fruit"
+          onAction={handleColorsAction}
+        >
+          <ActionListItem selected={colors.includes('Apple')}>Apple</ActionListItem>
+          <ActionListItem selected={colors.includes('Banana')}>Banana</ActionListItem>
+          <ActionListItem selected={colors.includes('Orange')}>Orange</ActionListItem>
+          <ActionListItem selected={colors.includes('Pineapple')}>Pineapple</ActionListItem>
+        </ActionListGroup>
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
+
 ### With Descriptions
 
 If the label of the action needs additional information, optional descriptive text can also be included:
