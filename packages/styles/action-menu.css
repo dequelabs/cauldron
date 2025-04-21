@@ -1,8 +1,9 @@
 :root {
   --action-menu-border-color: var(--gray-30);
   --action-menu-background-color: #fff;
-  --action-menu-item-active-background-color: var(--gray-20);
+  --action-list-item-active-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
+  --action-list-item-disabled-text-color: var(--gray-40);
 }
 
 .cauldron--theme-dark {
@@ -64,6 +65,8 @@
 }
 
 .ActionListItem {
+  --icon-size: 1rem;
+  --icon-spacing: 1.2rem;
   display: grid;
   align-items: flex-start;
   gap: var(--space-half);
@@ -72,24 +75,70 @@
   margin: 0 var(--space-half);
 }
 
-.ActionListItem:has(> .ActionListItem__selection) {
-  --selection-width: 1.2rem;
-  display: grid;
-  grid-template-columns: var(--selection-width) auto;
+.ActionListItem:is([aria-disabled='true']) {
+  color: var(--action-list-item-disabled-text-color);
+  cursor: not-allowed;
 }
 
 .ActionListItem:has(> .ActionListItem__selection) .ActionListItem__description {
   grid-column: 2;
 }
 
-.ActionListItem:hover {
-  background-color: var(--action-menu-item-active-background-color);
+.ActionListItem:hover:not([aria-disabled='true']) {
+  background-color: var(--action-list-item-active-background-color);
 }
 
-.ActionListItem__selection {
-  --icon-size: 1rem;
-  width: var(--selection-width);
+.ActionListItem__selection,
+.ActionListItem__leadingIcon,
+.ActionListItem__trailingIcon {
+  width: var(--icon-spacing);
+}
+
+.ActionListItem:has(> .ActionListItem__selection) {
+  grid-template-columns: var(--icon-spacing) auto;
+}
+
+:where(.ActionList:has(.ActionListItem__description))
+  :is(
+    .ActionListItem__selection,
+    .ActionListItem__leadingIcon,
+    .ActionListItem__trailingIcon
+  ) {
   grid-row: 1 / -1;
+}
+
+.ActionListItem:has(> .ActionListItem__leadingIcon) {
+  grid-template-columns: var(--icon-spacing) auto;
+}
+
+.ActionListItem:has(> .ActionListItem__trailingIcon) {
+  grid-template-columns: auto var(--icon-spacing);
+}
+
+.ActionListItem:has(> .ActionListItem__leadingIcon):has(
+    > .ActionListItem__trailingIcon
+  ) {
+  grid-template-columns: var(--icon-spacing) auto var(--icon-spacing);
+}
+
+.ActionListItem:has(> .ActionListItem__selection):has(
+    > .ActionListItem__leadingIcon
+  ) {
+  grid-template-columns: var(--icon-spacing) var(--icon-spacing) auto;
+}
+
+.ActionListItem:has(> .ActionListItem__selection):has(
+    > .ActionListItem__trailingIcon
+  ) {
+  grid-template-columns: var(--icon-spacing) auto var(--icon-spacing);
+}
+
+.ActionListItem:has(> .ActionListItem__selection):has(
+    > .ActionListItem__leadingIcon
+  ):has(> .ActionListItem__trailingIcon) {
+  grid-template-columns: var(--icon-spacing) var(--icon-spacing) auto var(
+      --icon-spacing
+    );
 }
 
 .ActionListItem:not([aria-checked='true']) .ActionListItem__selection {

@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ListboxOption } from '../Listbox';
 import { useActionListContext, type onActionEvent } from './ActionListContext';
-import Icon from '../Icon';
+import Icon, { type IconType } from '../Icon';
 
 interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
@@ -12,22 +12,38 @@ interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   key?: string;
 
-  /** Provides an additional description for the list item. */
+  /** Displays a leading for the action item. */
+  leadingIcon?: IconType;
+
+  /** Displays a leading for the action item.. */
+  trailingIcon?: IconType;
+
+  /** Provides an additional description for the action item. */
   description?: React.ReactNode;
 
-  /** Indicates if the current action list item is selected. */
+  /** Indicates if the current action item is selected. */
   selected?: boolean;
 
-  /** When an action list item is disabled, it cannot be selected or activated. */
+  /** When an action item is disabled, it cannot be selected or activated. */
   disabled?: boolean;
 
-  /** A callback function that is called when an action list item is selected. */
+  /** A callback function that is called when an action item is selected. */
   onAction?: (event: onActionEvent) => void;
 }
 
 const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
   (
-    { key, className, description, selected, onAction, children, ...props },
+    {
+      key,
+      className,
+      description,
+      selected,
+      leadingIcon,
+      trailingIcon,
+      onAction,
+      children,
+      ...props
+    },
     ref
   ) => {
     const [id] = useId(1, 'action-list-item');
@@ -100,11 +116,21 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
             <Icon type="check" />
           </span>
         )}
+        {leadingIcon && (
+          <span className="ActionListItem__leadingIcon">
+            <Icon type={leadingIcon} />
+          </span>
+        )}
         <span className="ActionListItem__label" ref={labelRef}>
           {children}
         </span>
         {description && (
           <span className="ActionListItem__description">{description}</span>
+        )}
+        {trailingIcon && (
+          <span className="ActionListItem__trailingIcon">
+            <Icon type={trailingIcon} />
+          </span>
         )}
       </ListboxOption>
     );

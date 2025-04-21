@@ -32,7 +32,7 @@ The `ActionMenu` component is a dropdown menu that displays an `ActionList` when
 
 ### Basic Usage
 
-A basic action menu with a button trigger:
+A simple action menu with a button trigger:
 
 ```jsx example
 <ActionMenu
@@ -63,6 +63,73 @@ The `trigger` property is a render function that can render any type of interact
     <ActionListItem>Copy</ActionListItem>
     <ActionListItem>Edit</ActionListItem>
     <ActionListItem>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### Disabled Items
+
+Items can also individually be disabled to prevent that action from occurring:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <IconButton variant="secondary" icon="kabob" label="More Options" />
+  }
+>
+  <ActionList>
+    <ActionListItem>Copy</ActionListItem>
+    <ActionListItem>Edit</ActionListItem>
+    <ActionListItem disabled>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### With Descriptions
+
+If the label of the action needs additional information, optional descriptive text can also be included:
+
+```jsx example
+<ActionMenu
+  trigger={<Button variant="secondary">Choose a Dessert</Button>}
+>
+  <ActionList>
+    <ActionListItem 
+      description="Warm chocolate cake with a gooey center that oozes when you dig in"
+    >
+      Molten Lava Cake
+    </ActionListItem>
+    <ActionListItem 
+      description="Crispy on the outside, chewy in the middle, with melted chocolate chips"
+    >
+      Cookie Sundae
+    </ActionListItem>
+    <ActionListItem 
+      description="Tangy, creamy cheesecake swirled with tart raspberry sauce"
+    >
+      Raspberry Cheesecake
+    </ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### With Icons
+
+An action item can optionally include a trailing or leading icon for an additional visual hint:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Actions
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListItem leadingIcon="copy">Copy</ActionListItem>
+    <ActionListItem leadingIcon="pencil">Edit</ActionListItem>
+    <ActionListItem leadingIcon="share">Share</ActionListItem>
   </ActionList>
 </ActionMenu>
 ```
@@ -237,34 +304,6 @@ function MixedSelectionExample() {
     </ActionMenu>
   )
 }
-```
-
-### With Descriptions
-
-If the label of the action needs additional information, optional descriptive text can also be included:
-
-```jsx example
-<ActionMenu
-  trigger={<Button variant="secondary">Choose a Dessert</Button>}
->
-  <ActionList>
-    <ActionListItem 
-      description="Warm chocolate cake with a gooey center that oozes when you dig in"
-    >
-      Molten Lava Cake
-    </ActionListItem>
-    <ActionListItem 
-      description="Crispy on the outside, chewy in the middle, with melted chocolate chips"
-    >
-      Cookie Sundae
-    </ActionListItem>
-    <ActionListItem 
-      description="Tangy, creamy cheesecake swirled with tart raspberry sauce"
-    >
-      Raspberry Cheesecake
-    </ActionListItem>
-  </ActionList>
-</ActionMenu>
 ```
 
 ## Props

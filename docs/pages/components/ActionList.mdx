@@ -30,13 +30,49 @@ The `ActionList` component is a versatile and accessible component for displayin
 
 ### Basic Usage
 
-A basic action list with clickable items:
+A simple action list with clickable items:
 
 ```jsx example
 <ActionList>
   <ActionListItem>Red</ActionListItem>
   <ActionListItem>Green</ActionListItem>
   <ActionListItem>Blue</ActionListItem>
+</ActionList>
+```
+
+### Disabled Items
+
+Items can also individually be disabled to prevent that action from occurring:
+
+```jsx example
+<ActionList>
+  <ActionListItem disabled>Red</ActionListItem>
+  <ActionListItem>Green</ActionListItem>
+  <ActionListItem>Blue</ActionListItem>
+</ActionList>
+```
+
+### With Descriptions
+
+If the label of the action needs additional information, optional descriptive text can also be included:
+
+```jsx example
+<ActionList>
+  <ActionListItem description="First item description">First item</ActionListItem>
+  <ActionListItem description="Second item description">Second item</ActionListItem>
+  <ActionListItem description="Third item description">Third item</ActionListItem>
+</ActionList>
+```
+
+### With Icons
+
+An action item can optionally include a trailing or leading icon for an additional visual hint:
+
+```jsx example
+<ActionList>
+  <ActionListItem leadingIcon="copy">Copy</ActionListItem>
+  <ActionListItem leadingIcon="pencil">Edit</ActionListItem>
+  <ActionListItem leadingIcon="trash" trailingIcon="caution">Delete</ActionListItem>
 </ActionList>
 ```
 
@@ -61,7 +97,7 @@ Items can be optionally grouped with a group label:
 
 ### Single Selection
 
-`ActionList` can support the selection of action items, with the `selectionType="single"` prop:
+An `ActionList` can function as a selectable list with selected states:
 
 ```jsx example
 function SingleSelectionExample() {
@@ -83,7 +119,7 @@ function SingleSelectionExample() {
 
 ### Multiple Selection
 
-`ActionList` can also support the selection of multiple action items, with the `selectionType="multiple"` prop:
+An `ActionList` can also support multiple selections:
 
 ```jsx example
 function MultipleSelectionExample() {
@@ -107,17 +143,9 @@ function MultipleSelectionExample() {
 }
 ```
 
-### With Descriptions
-
-If the label of the action needs additional information, optional descriptive text can also be included:
-
-```jsx example
-<ActionList>
-  <ActionListItem description="First item description">First item</ActionListItem>
-  <ActionListItem description="Second item description">Second item</ActionListItem>
-  <ActionListItem description="Third item description">Third item</ActionListItem>
-</ActionList>
-```
+<Note>
+  The `selectionType` property is important depending on which selection states are needed, as this controls the underlying aria properties that is communicated for users who use assistive technology.
+</Note>
 
 ## Props
 
@@ -158,16 +186,26 @@ If the label of the action needs additional information, optional descriptive te
       description: 'Additional descriptive text for the action item.'
     },
     {
-      name: 'selected',
-      type: 'boolean',
-      defaultValue: 'false',
-      description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
-    },
-    {
       name: 'disabled',
       type: 'boolean',
       defaultValue: 'false',
       description: 'Disable the action item.'
+    },
+    {
+      name: 'leadingIcon',
+      type: 'string',
+      description: 'Displays a leading for the action item. '
+    },
+    {
+      name: 'trailingIcon',
+      type: 'string',
+      description: 'Displays a trailing for the action item. '
+    },
+    {
+      name: 'selected',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
     },
     {
       name: 'onAction',
