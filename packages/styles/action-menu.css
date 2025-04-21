@@ -2,6 +2,7 @@
   --action-menu-border-color: var(--gray-30);
   --action-menu-background-color: #fff;
   --action-menu-item-active-background-color: var(--gray-20);
+  --action-list-item-description-color: var(--gray-60);
 }
 
 .cauldron--theme-dark {
@@ -43,9 +44,23 @@
   font-weight: var(--font-weight-medium);
 }
 
+.ActionList:focus {
+  outline: none;
+}
+
+.ActionList:focus-within .ActionListItem--active {
+  position: relative;
+  box-shadow: 0 0 0 2px var(--focus);
+  z-index: 1;
+}
+
 .ActionListGroup > li:first-child,
 .ActionListItem {
   padding: var(--space-smallest);
+}
+
+.ActionListGroup > li:first-child {
+  margin-left: var(--space-half);
 }
 
 .ActionListItem {
@@ -53,14 +68,12 @@
   align-items: center;
   gap: var(--space-half);
   cursor: pointer;
+  border-radius: 4px;
+  margin: 0 var(--space-half);
 }
 
 .ActionListItem:hover {
   background-color: var(--action-menu-item-active-background-color);
-}
-
-.ActionList:focus-within .ActionListItem--active {
-  box-shadow: inset 0 0 0 2px var(--focus);
 }
 
 .ActionListItem__selection {
@@ -70,4 +83,8 @@
 
 .ActionListItem:not([aria-checked='true']) .ActionListItem__selection {
   visibility: hidden;
+}
+
+.ActionListItem__description {
+  color: var(--action-list-item-description-color);
 }

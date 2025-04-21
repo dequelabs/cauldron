@@ -1,4 +1,9 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, {
+  type MutableRefObject,
+  forwardRef,
+  useCallback,
+  useRef
+} from 'react';
 import classnames from 'classnames';
 import type { ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
@@ -22,21 +27,18 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   (
-    {
-      selectionType = null,
-      onAction,
-      className,
-      children,
-      onKeyPress,
-      ...props
-    },
+    { selectionType = null, onAction, className, children, onKeyUp, ...props },
     ref
   ) => {
-    const [active, setActive] = useState<HTMLLIElement | HTMLAnchorElement>();
+    const activeElement = useRef<
+      HTMLLIElement | HTMLAnchorElement
+    >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
     const context = useActionListContext();
 
     const handleActiveChange = useCallback((value: ListboxOption) => {
-      setActive(value?.element as HTMLLIElement | HTMLAnchorElement);
+      activeElement.current = value?.element as
+        | HTMLLIElement
+        | HTMLAnchorElement;
     }, []);
 
     const handleAction = useCallback(
@@ -52,7 +54,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction, context.onAction]
     );
 
-    const handleKeyUp = useCallback(
+    const handleKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLUListElement | HTMLAnchorElement>) => {
         if (event.defaultPrevented) {
           return;
@@ -61,10 +63,10 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         // Since focus is managed in the action list using `aria-activedescendant`
         // we want to simulate a keypress on the current active list item
         if (event.key === 'Enter' || event.key === ' ') {
-          active?.click();
+          activeElement.current?.click();
         }
       },
-      [active, onKeyPress]
+      [onKeyUp]
     );
 
     return (
@@ -79,7 +81,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         {...props}
-        onKeyUp={handleKeyUp}
+        onKeyDown={handleKeyDown}
         onActiveChange={handleActiveChange}
         navigation="bound"
       >

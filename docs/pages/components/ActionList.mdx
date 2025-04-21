@@ -1,0 +1,204 @@
+---
+title: ActionList
+description: A component for displaying a list of actions that can be performed by the user, such as a menu of commands or a list of selectable items.
+source: https://github.com/your-org/your-repo/tree/main/packages/react/src/components/ActionMenu/ActionList.tsx
+---
+
+import { useState } from 'react'
+import { 
+  ActionList, 
+  ActionListItem, 
+  ActionListGroup, 
+  ActionMenu,
+  Button, 
+  Icon 
+} from '@deque/cauldron-react'
+
+```jsx
+import { 
+  ActionList, 
+  ActionListItem, 
+  ActionListGroup 
+} from '@deque/cauldron-react'
+```
+
+## Overview
+
+The `ActionList` component is a versatile and accessible component for displaying interactive lists of actions. It's commonly used for dropdown menus, command palettes, and selection lists. It provides consistent keyboard navigation, selection management, and accessibility features.
+
+## Examples
+
+### Basic Usage
+
+A basic action list with clickable items:
+
+```jsx example
+<ActionList>
+  <ActionListItem>Red</ActionListItem>
+  <ActionListItem>Green</ActionListItem>
+  <ActionListItem>Blue</ActionListItem>
+</ActionList>
+```
+
+### Grouping Items
+
+Items can be optionally grouped with a group label:
+
+```jsx example
+<ActionList>
+  <ActionListGroup label="Colors">
+    <ActionListItem>Red</ActionListItem>
+    <ActionListItem>Green</ActionListItem>
+    <ActionListItem>Blue</ActionListItem>
+  </ActionListGroup>
+  <ActionListGroup label="Numbers">
+    <ActionListItem>One</ActionListItem>
+    <ActionListItem>Two</ActionListItem>
+    <ActionListItem>Three</ActionListItem>
+  </ActionListGroup>
+</ActionList>
+```
+
+### Single Selection
+
+`ActionList` can support the selection of action items, with the `selectionType="single"` prop:
+
+```jsx example
+function SingleSelectionExample() {
+  const [selected, setSelected] = useState('First item');
+  
+  const handleAction = (key) => {
+    setSelected(key);
+  };
+  
+  return (
+    <ActionList selectionType="single" onAction={handleAction}>
+      <ActionListItem selected={selected === 'First item'}>First item</ActionListItem>
+      <ActionListItem selected={selected === 'Second item'}>Second item</ActionListItem>
+      <ActionListItem selected={selected === 'Third item'}>Third item</ActionListItem>
+    </ActionList>
+  );
+}
+```
+
+### Multiple Selection
+
+`ActionList` can also support the selection of multiple action items, with the `selectionType="multiple"` prop:
+
+```jsx example
+function MultipleSelectionExample() {
+  const [selected, setSelected] = useState(['First item']);
+  
+  const handleAction = (key, event) => {
+    setSelected(prev => {
+      if (prev.includes(key)) {
+        return prev.filter(item => item !== key);
+      }
+      return [...prev, key];
+    });
+  };
+  
+  return (
+    <ActionList selectionType="multiple" onAction={handleAction}>
+      <ActionListItem selected={selected === 'First item'}>First item</ActionListItem>
+      <ActionListItem selected={selected === 'Second item'}>Second item</ActionListItem>
+      <ActionListItem selected={selected === 'Third item'}>Third item</ActionListItem>
+    </ActionList>
+  );
+}
+```
+
+### With Descriptions
+
+If the label of the action needs additional information, optional descriptive text can also be included:
+
+```jsx example
+<ActionList>
+  <ActionListItem description="First item description">First item</ActionListItem>
+  <ActionListItem description="Second item description">Second item</ActionListItem>
+  <ActionListItem description="Third item description">Third item</ActionListItem>
+</ActionList>
+```
+
+## Props
+
+### ActionList
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'selectionType',
+      type: ['single', 'multiple', 'null'],
+      defaultValue: 'null',
+      description: 'Determines whether items can be selected, and if so, whether multiple selections are allowed.'
+    },
+    {
+      name: 'onAction',
+      type: '(key: string, event: React.MouseEvent | React.KeyboardEvent) => void',
+      description: 'Callback when an action item is selected.'
+    }
+  ]}
+/>
+
+### ActionListItem
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'key',
+      type: 'string',
+      description: 'Unique identifier for the action item. If not provided, the trimmed text content will be used.'
+    },
+    {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Additional descriptive text for the action item.'
+    },
+    {
+      name: 'selected',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Disable the action item.'
+    },
+    {
+      name: 'onAction',
+      type: '(event: React.MouseEvent | React.KeyboardEvent) => void',
+      description: 'Callback when this specific action item is selected.'
+    }
+  ]}
+/>
+
+### ActionListGroup
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'The heading text for the group.'
+    },
+    {
+      name: 'selectionType',
+      type: ['single', 'multiple', 'null'],
+      description: 'Overrides the parent ActionList selectionType for this group.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [ActionMenu](./ActionMenu)
+- [Listbox](./Listbox)
