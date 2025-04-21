@@ -89,20 +89,19 @@ function SingleSelectionExample() {
 function MultipleSelectionExample() {
   const [selected, setSelected] = useState(['First item']);
   
-  const handleAction = (key, event) => {
-    setSelected(prev => {
-      if (prev.includes(key)) {
-        return prev.filter(item => item !== key);
-      }
-      return [...prev, key];
-    });
+  const handleAction = (key) => {
+    if (selected.includes(key)) {
+      setSelected(selected.filter(value => value !== key))
+    } else {
+      setSelected([...selected, key])
+    }
   };
   
   return (
     <ActionList selectionType="multiple" onAction={handleAction}>
-      <ActionListItem selected={selected === 'First item'}>First item</ActionListItem>
-      <ActionListItem selected={selected === 'Second item'}>Second item</ActionListItem>
-      <ActionListItem selected={selected === 'Third item'}>Third item</ActionListItem>
+      <ActionListItem selected={selected.includes('First item')}>First item</ActionListItem>
+      <ActionListItem selected={selected.includes('Second item')}>Second item</ActionListItem>
+      <ActionListItem selected={selected.includes('Third item')}>Third item</ActionListItem>
     </ActionList>
   );
 }
@@ -201,4 +200,3 @@ If the label of the action needs additional information, optional descriptive te
 ## Related Components
 
 - [ActionMenu](./ActionMenu)
-- [Listbox](./Listbox)

@@ -64,12 +64,22 @@
 }
 
 .ActionListItem {
-  display: flex;
-  align-items: center;
+  display: grid;
+  align-items: flex-start;
   gap: var(--space-half);
   cursor: pointer;
   border-radius: 4px;
   margin: 0 var(--space-half);
+}
+
+.ActionListItem:has(> .ActionListItem__selection) {
+  --selection-width: 1.2rem;
+  display: grid;
+  grid-template-columns: var(--selection-width) auto;
+}
+
+.ActionListItem:has(> .ActionListItem__selection) .ActionListItem__description {
+  grid-column: 2;
 }
 
 .ActionListItem:hover {
@@ -78,7 +88,8 @@
 
 .ActionListItem__selection {
   --icon-size: 1rem;
-  width: 1.2rem;
+  width: var(--selection-width);
+  grid-row: 1 / -1;
 }
 
 .ActionListItem:not([aria-checked='true']) .ActionListItem__selection {
