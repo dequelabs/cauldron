@@ -28,17 +28,18 @@ The `PageHeader` component is used to display a header for a page, typically inc
   overline="Optional overline text"
   description="Optional description text"
 >
-  <div>
-    <Button variant="primary">Save</Button>
-    <Button variant="secondary">Cancel</Button>
-  </div>
+  <Button variant="primary">Save</Button>
+  <Button variant="secondary">Cancel</Button>
 </PageHeader>
 ```
 
 ### Custom Title
 
 ```jsx example
-<PageHeader heading={<h1>Custom Page Title</h1>} overline="Optional overline text" />
+<PageHeader
+  heading={<h1>Custom Page Title</h1>}
+  overline="Optional overline text"
+/>
 ```
 
 ## Props
@@ -66,6 +67,6 @@ The `PageHeader` component is used to display a header for a page, typically inc
   refType="HTMLDivElement"
 />
 
-## Related Components  
+## Related Components
 
-- [SectionHeader](./SectionHeader)  
+- [SectionHeader](./SectionHeader)
