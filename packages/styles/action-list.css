@@ -1,10 +1,12 @@
 :root {
+  --action-list-text-color: var(--text-color-base);
   --action-list-item-hover-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
   --action-list-item-disabled-text-color: var(--gray-40);
 }
 
 .cauldron--theme-dark {
+  --action-list-text-color: #fff;
   --action-list-item-description-color: var(--accent-light);
   --action-list-item-hover-background-color: var(--accent-medium);
   --action-list-item-disabled-text-color: rgba(255, 255, 255, 0.25);
@@ -14,6 +16,7 @@
 .ActionList:hover,
 .ActionList:focus,
 .ActionList:focus:hover {
+  color: var(--action-list-text-color);
   border: none;
   box-shadow: none;
   background: none;
@@ -69,7 +72,6 @@
   --icon-spacing: 1.2rem;
   display: grid;
   align-items: center;
-  justify-items: flex-start;
   gap: var(--space-half);
   cursor: pointer;
   border-radius: 4px;

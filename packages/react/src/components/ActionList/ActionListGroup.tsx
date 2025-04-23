@@ -15,7 +15,7 @@ interface ActionListGroupProps extends React.HTMLAttributes<HTMLLIElement> {
   label: ContentNode;
 
   /** Limits the amount of selections that can be made within an action group */
-  selectionType: ActionListSelectionType;
+  selectionType?: ActionListSelectionType;
 
   /** A callback function that is called when an action list item is selected. */
   onAction?: onActionCallbackFunction;

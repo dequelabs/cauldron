@@ -10,6 +10,8 @@ import {
   ActionList, 
   ActionListItem, 
   ActionListGroup, 
+  ActionListSeparator,
+  ActionListLinkItem,
   Button, 
   IconButton, 
   Icon,
@@ -304,6 +306,28 @@ function MixedSelectionExample() {
     </ActionMenu>
   )
 }
+```
+
+### Links
+
+`ActionMenu` can also display links within its action list to navigate to the specified url when that action is activated:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Actions
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListLinkItem href="#account">My Account</ActionListLinkItem>
+    <ActionListLinkItem href="#settings">Settings</ActionListLinkItem>
+    <ActionListSeparator />
+    <ActionListItem>Logout</ActionListItem>
+  </ActionList>
+</ActionMenu>
 ```
 
 ## Props

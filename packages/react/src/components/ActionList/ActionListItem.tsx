@@ -9,12 +9,17 @@ import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ListboxOption } from '../Listbox';
 import Icon, { type IconType } from '../Icon';
+import useSharedRef from '../../utils/useSharedRef';
+import type {
+  PolymorphicProps,
+  PolymorphicComponent
+} from '../../utils/polymorphicComponent';
 import useIntersectionRef from '../../utils/useIntersectionRef';
 import { useListboxContext } from '../Listbox';
 import { useActionListContext, type onActionEvent } from './ActionListContext';
-import useSharedRef from '../../utils/useSharedRef';
 
-interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
+interface ActionListItemProps
+  extends PolymorphicProps<React.HTMLAttributes<HTMLLIElement>> {
   /**
    * A unique key to identify the action when triggered, when not provided
    * will use the child text content as the key.
@@ -43,6 +48,7 @@ interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
 const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
   (
     {
+      as: Component = 'li',
       key,
       className,
       description,
@@ -57,7 +63,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
   ) => {
     const [id] = useId(1, 'action-list-item');
     const actionListItemRef = useSharedRef(ref);
-    const labelRef = useRef<HTMLSpanElement>(null);
+    const labelRef = useRef<HTMLDivElement>(null);
     const { active } = useListboxContext();
     const {
       role: contextRole,
@@ -142,6 +148,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
 
     return (
       <ListboxOption
+        as={Component}
         ref={actionListItemRef}
         key={key}
         id={id}
@@ -163,11 +170,11 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
             <Icon type={leadingIcon} />
           </span>
         )}
-        <span className="ActionListItem__label" ref={labelRef}>
+        <div className="ActionListItem__label" ref={labelRef}>
           {children}
-        </span>
+        </div>
         {description && (
-          <span className="ActionListItem__description">{description}</span>
+          <div className="ActionListItem__description">{description}</div>
         )}
         {trailingIcon && (
           <span className="ActionListItem__trailingIcon">
@@ -177,7 +184,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       </ListboxOption>
     );
   }
-);
+) as PolymorphicComponent<ActionListItemProps>;
 
 ActionListItem.displayName = 'ActionListItem';
 
