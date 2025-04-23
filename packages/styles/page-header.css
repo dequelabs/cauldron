@@ -1,0 +1,14 @@
+:root {
+  --page-header-overline-color: var(--gray-60);
+}
+
+.cauldron--theme-dark {
+  --page-header-overline-color: var(--accent-light);
+}
+
+.PageHeader__overline {
+  margin: 0 0 var(--space-smallest) 0;
+  padding: 0;
+  color: var(--page-header-overline-color);
+  font-size: var(--text-size-base);
+}
