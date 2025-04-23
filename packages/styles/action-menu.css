@@ -24,6 +24,16 @@
   overflow-y: auto;
 }
 
+.ActionList,
+.ActionList:hover,
+.ActionList:focus,
+.ActionList:focus:hover {
+  border: none;
+  box-shadow: none;
+  background: none;
+  margin: 0;
+}
+
 .ActionList li {
   list-style-type: none;
 }

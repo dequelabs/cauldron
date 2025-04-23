@@ -136,11 +136,11 @@ export { default as AnchoredOverlay } from './components/AnchoredOverlay';
 export { default as PageHeader } from './components/PageHeader';
 export { default as SectionHeader } from './components/SectionHeader';
 export {
-  default as ActionMenu,
   ActionList,
   ActionListItem,
   ActionListGroup
-} from './components/ActionMenu';
+} from './components/ActionList';
+export { ActionMenu } from './components/ActionMenu';
 
 /**
  * Helpers / Utils

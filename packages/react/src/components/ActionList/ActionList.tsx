@@ -13,6 +13,7 @@ import {
   type onActionEvent,
   ActionListProvider
 } from './ActionListContext';
+import { useActionListContext } from './ActionListContext';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     { selectionType = null, onAction, className, children, onKeyUp, ...props },
     ref
   ) => {
+    const actionListContext = useActionListContext();
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
@@ -72,7 +74,9 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
         // aria-multiselectable is valid for listbox roles, but not list or menu roles
-        aria-multiselectable={undefined}
+        aria-multiselectable={
+          actionListContext.role === 'menu' ? null : undefined
+        }
         className={classnames('ActionList', className)}
         {...props}
         onKeyDown={handleKeyDown}

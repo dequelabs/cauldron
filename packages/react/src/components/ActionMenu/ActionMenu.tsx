@@ -6,10 +6,10 @@ import React, {
   useEffect
 } from 'react';
 import { useId } from 'react-id-generator';
+import useSharedRef from '../../utils/useSharedRef';
+import type { onActionEvent } from '../ActionList/ActionListContext';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
-import useSharedRef from '../../utils/useSharedRef';
-import type { onActionEvent } from './ActionListContext';
 
 const [ArrowDown] = ['ArrowDown'];
 
