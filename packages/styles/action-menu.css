@@ -68,7 +68,8 @@
   --icon-size: 1rem;
   --icon-spacing: 1.2rem;
   display: grid;
-  align-items: flex-start;
+  align-items: center;
+  justify-items: flex-start;
   gap: var(--space-half);
   cursor: pointer;
   border-radius: 4px;
