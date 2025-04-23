@@ -14,7 +14,7 @@ export type ActionListSelectionType = 'single' | 'multiple';
 type ActionListContext = {
   role: 'list' | 'menu' | 'listbox';
   selectionType: ActionListSelectionType | null;
-  onAction: onActionCallbackFunction;
+  onAction?: onActionCallbackFunction;
 };
 
 type ActionListProviderProps = {
