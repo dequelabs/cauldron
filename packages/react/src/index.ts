@@ -138,7 +138,9 @@ export { default as SectionHeader } from './components/SectionHeader';
 export {
   ActionList,
   ActionListItem,
-  ActionListGroup
+  ActionListGroup,
+  ActionListSeparator,
+  ActionListLinkItem
 } from './components/ActionList';
 export { ActionMenu } from './components/ActionMenu';
 

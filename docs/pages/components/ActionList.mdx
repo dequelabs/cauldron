@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { 
   ActionList, 
   ActionListItem, 
+  ActionListSeparator,
   ActionListGroup, 
   ActionMenu,
   Button, 
@@ -92,6 +93,19 @@ Items can be optionally grouped with a group label:
     <ActionListItem>Two</ActionListItem>
     <ActionListItem>Three</ActionListItem>
   </ActionListGroup>
+</ActionList>
+```
+
+### Separators
+
+As an alternative to creating logical groups for collections of items, manual separators can also be added:
+
+```jsx example
+<ActionList>
+  <ActionListItem>My Account</ActionListItem>
+  <ActionListItem>Settings</ActionListItem>
+  <ActionListSeparator />
+  <ActionListItem>Logout</ActionListItem>
 </ActionList>
 ```
 
