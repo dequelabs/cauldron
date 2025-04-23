@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback, useMemo } from 'react';
 import { useId } from 'react-id-generator';
 import {
   type ActionListSelectionType,
@@ -39,8 +39,14 @@ const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
       [onAction, actionListContext.onAction]
     );
 
+    const listItemRole = useMemo(() => {
+      return ['menu', 'listbox'].includes(actionListContext.role)
+        ? 'none'
+        : undefined;
+    }, [actionListContext.role]);
+
     return (
-      <li ref={ref} role="none" {...props}>
+      <li ref={ref} role={listItemRole} {...props}>
         <ListboxGroup id={id} className="ActionListGroup" label={label} as="ul">
           <ActionListProvider
             {...actionListContext}
