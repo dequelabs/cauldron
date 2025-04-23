@@ -1,13 +1,16 @@
 :root {
   --action-menu-border-color: var(--gray-30);
   --action-menu-background-color: #fff;
-  --action-list-item-active-background-color: var(--gray-20);
+  --action-list-item-hover-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
   --action-list-item-disabled-text-color: var(--gray-40);
 }
 
 .cauldron--theme-dark {
   --action-menu-background-color: var(--accent-medium);
+  --action-list-item-description-color: var(--accent-light);
+  --action-list-item-hover-background-color: var(--accent-medium);
+  --action-list-item-disabled-text-color: rgba(255, 255, 255, 0.25);
 }
 
 .ActionMenu {
@@ -86,7 +89,7 @@
 }
 
 .ActionListItem:hover:not([aria-disabled='true']) {
-  background-color: var(--action-list-item-active-background-color);
+  background-color: var(--action-list-item-hover-background-color);
 }
 
 .ActionListItem__selection,

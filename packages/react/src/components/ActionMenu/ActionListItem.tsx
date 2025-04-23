@@ -79,7 +79,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       [onAction, onActionListAction]
     );
 
-    const role = useMemo(() => {
+    const listItemRole = useMemo(() => {
       if (contextRole === 'menu') {
         switch (selectionType) {
           case 'single':
@@ -105,7 +105,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
         ref={ref}
         key={key}
         id={id}
-        role={role}
+        role={listItemRole}
         className={classnames('ActionListItem', className)}
         activeClass="ActionListItem--active"
         aria-selected={undefined}

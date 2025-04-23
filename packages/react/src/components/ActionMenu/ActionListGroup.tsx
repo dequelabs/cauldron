@@ -45,9 +45,21 @@ const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
         : undefined;
     }, [actionListContext.role]);
 
+    const groupRole = useMemo(() => {
+      return ['menu', 'listbox'].includes(actionListContext.role)
+        ? 'group'
+        : 'list';
+    }, [actionListContext.role]);
+
     return (
       <li ref={ref} role={listItemRole} {...props}>
-        <ListboxGroup id={id} className="ActionListGroup" label={label} as="ul">
+        <ListboxGroup
+          id={id}
+          role={groupRole}
+          className="ActionListGroup"
+          label={label}
+          as="ul"
+        >
           <ActionListProvider
             {...actionListContext}
             onAction={handleAction}
