@@ -1,9 +1,18 @@
-import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useLayoutEffect
+} from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ListboxOption } from '../Listbox';
-import { useActionListContext, type onActionEvent } from './ActionListContext';
 import Icon, { type IconType } from '../Icon';
+import useIntersectionRef from '../../utils/useIntersectionRef';
+import { useListboxContext } from '../Listbox';
+import { useActionListContext, type onActionEvent } from './ActionListContext';
+import useSharedRef from '../../utils/useSharedRef';
 
 interface ActionListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
@@ -47,12 +56,20 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
     ref
   ) => {
     const [id] = useId(1, 'action-list-item');
+    const actionListItemRef = useSharedRef(ref);
     const labelRef = useRef<HTMLSpanElement>(null);
+    const { active } = useListboxContext();
     const {
       role: contextRole,
       onAction: onActionListAction,
       selectionType
     } = useActionListContext();
+    const intersectionRef = useIntersectionRef<HTMLElement>(actionListItemRef, {
+      root: null,
+      threshold: 1.0
+    });
+    const isActive =
+      !!active?.element && active.element === actionListItemRef.current;
 
     const handleAction = useCallback(
       (event: onActionEvent) => {
@@ -61,7 +78,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
         }
 
         if (selectionType === 'multiple') {
-          // If action list is part of an action menu, prevent the menu from closing
+          // If action list is part of a multiselect menu, prevent the menu from closing
           event.preventDefault();
         }
 
@@ -97,12 +114,35 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       return undefined;
     }, [contextRole]);
 
+    // Keep the currently active item on screen when navigate via up/down arrow key navigation
+    // istanbul ignore next
+    useLayoutEffect(() => {
+      const intersectionEntry = intersectionRef.current;
+      if (!intersectionEntry || !isActive) {
+        return;
+      }
+
+      const rect = actionListItemRef.current.getBoundingClientRect();
+      const isInViewport =
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth;
+
+      if (!isInViewport || !intersectionEntry.isIntersecting) {
+        actionListItemRef.current.scrollIntoView({
+          inline: 'nearest',
+          block: rect.top <= 0 ? 'end' : 'nearest'
+        });
+      }
+    }, [isActive]);
+
     const allowsSelection = !!selectionType;
     const isSelected = allowsSelection ? (selected ? true : false) : undefined;
 
     return (
       <ListboxOption
-        ref={ref}
+        ref={actionListItemRef}
         key={key}
         id={id}
         role={listItemRole}

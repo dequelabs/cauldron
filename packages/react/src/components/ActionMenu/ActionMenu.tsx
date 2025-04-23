@@ -5,10 +5,11 @@ import React, {
   useMemo,
   useEffect
 } from 'react';
+import { useId } from 'react-id-generator';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
+import useSharedRef from '../../utils/useSharedRef';
 import type { onActionEvent } from './ActionListContext';
-import { useId } from 'react-id-generator';
 
 const [ArrowDown] = ['ArrowDown'];
 
@@ -38,7 +39,7 @@ function ActionMenu({
   const [open, setOpen] = useState(!!openProp);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const actionMenuRef = useRef<HTMLElement>(null);
-  const actionMenuListRef = useRef<HTMLElement>(null);
+  const actionMenuListRef = useSharedRef<HTMLElement>(actionMenuList.props.ref);
   const triggerId = useId(1, 'menu-trigger');
   const isControlled = typeof openProp === 'boolean';
 
@@ -93,11 +94,20 @@ function ActionMenu({
 
   const handleAction = useCallback(
     (key: string, event: onActionEvent) => {
-      if (!isControlled && !event.defaultPrevented) {
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      if (!isControlled) {
         setOpen(false);
       }
+
+      const { onAction } = actionMenuList.props;
+      if (typeof onAction === 'function') {
+        onAction(key, event);
+      }
     },
-    [isControlled]
+    [isControlled, actionMenuList.props.onAction]
   );
 
   useEffect(() => {
