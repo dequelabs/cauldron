@@ -34,7 +34,7 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
         ref={ref}
         {...props}
         aria-labelledby={`${id}-label`}
-        aria-describedby={ariaDescribedbyId ? ariaDescribedbyId : undefined}
+        aria-describedby={ariaDescribedbyId || undefined}
       >
         <label id={`${id}-label`} className="Field__label">
           {label}
