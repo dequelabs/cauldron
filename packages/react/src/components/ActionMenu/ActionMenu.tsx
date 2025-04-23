@@ -94,11 +94,7 @@ function ActionMenu({
 
   const handleAction = useCallback(
     (key: string, event: onActionEvent) => {
-      if (event.defaultPrevented) {
-        return;
-      }
-
-      if (!isControlled) {
+      if (!isControlled && !event.defaultPrevented) {
         setOpen(false);
       }
 
