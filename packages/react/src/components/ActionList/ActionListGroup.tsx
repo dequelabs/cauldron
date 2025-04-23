@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { useId } from 'react-id-generator';
 import {
   type ActionListSelectionType,
@@ -15,7 +15,7 @@ interface ActionListGroupProps extends React.HTMLAttributes<HTMLLIElement> {
   label: ContentNode;
 
   /** Limits the amount of selections that can be made within an action group */
-  selectionType?: ActionListSelectionType;
+  selectionType?: ActionListSelectionType | null;
 
   /** A callback function that is called when an action list item is selected. */
   onAction?: onActionCallbackFunction;
@@ -39,17 +39,18 @@ const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
       [onAction, actionListContext.onAction]
     );
 
-    const listItemRole = useMemo(() => {
-      return ['menu', 'listbox'].includes(actionListContext.role)
-        ? 'none'
-        : undefined;
-    }, [actionListContext.role]);
+    const listItemRole: React.AriaRole | undefined = [
+      'menu',
+      'listbox'
+    ].includes(actionListContext.role)
+      ? 'none'
+      : undefined;
 
-    const groupRole = useMemo(() => {
-      return ['menu', 'listbox'].includes(actionListContext.role)
-        ? 'group'
-        : 'list';
-    }, [actionListContext.role]);
+    const groupRole: React.AriaRole | undefined = ['menu', 'listbox'].includes(
+      actionListContext.role
+    )
+      ? 'group'
+      : 'list';
 
     return (
       <li ref={ref} role={listItemRole} {...props}>

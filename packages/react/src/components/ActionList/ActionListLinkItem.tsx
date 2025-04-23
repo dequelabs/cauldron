@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react';
 import ActionListItem from './ActionListItem';
 import { useActionListContext } from './ActionListContext';
 
-type ActionListLinkItemProps = React.HTMLAttributes<HTMLAnchorElement> &
+type ActionListLinkItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   Omit<
     React.ComponentProps<typeof ActionListItem>,
     keyof React.HTMLAttributes<HTMLLIElement | 'selected'>

@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useLayoutEffect
-} from 'react';
+import React, { forwardRef, useCallback, useRef, useLayoutEffect } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import { ListboxOption } from '../Listbox';
@@ -102,23 +96,19 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       [onAction, onActionListAction]
     );
 
-    const listItemRole = useMemo(() => {
-      if (contextRole === 'menu') {
-        switch (selectionType) {
-          case 'single':
-            return 'menuitemradio';
-          case 'multiple':
-            return 'menuitemcheckbox';
-          default:
-            return 'menuitem';
-        }
-      } else if (contextRole === 'listbox') {
-        return 'option';
+    let listItemRole: React.AriaRole | undefined = undefined;
+    if (contextRole === 'menu') {
+      switch (selectionType) {
+        case 'single':
+          listItemRole = 'menuitemradio';
+        case 'multiple':
+          listItemRole = 'menuitemcheckbox';
+        default:
+          listItemRole = 'menuitem';
       }
-
-      // if no other appropriate role, just default to using the intrinsic role of "listitem"
-      return undefined;
-    }, [contextRole]);
+    } else if (contextRole === 'listbox') {
+      return 'option';
+    }
 
     // Keep the currently active item on screen when navigate via up/down arrow key navigation
     // istanbul ignore next
