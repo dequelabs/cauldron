@@ -4,7 +4,7 @@
 * @dequelabs/cauldron-codeowners
 
 # Request a review from either design team or codeowner for screenshots
-/e2e/screenshots/*.png @dequelabs/cauldron-codeowners @dequelabs/cauldron-design
+/e2e/screenshots/*.png @dequelabs/cauldron-codeowners @dequelabs/design-team
 
 # Request a review from cauldron team on docs PRs
 /docs/ @dequelabs/cauldron
