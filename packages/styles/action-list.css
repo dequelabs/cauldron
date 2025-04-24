@@ -1,6 +1,7 @@
 :root {
   --action-list-background-color: #fff;
   --action-list-text-color: var(--gray-90);
+  --action-list-group-label-font-size: var(--text-size-base);
   --action-list-item-hover-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
   --action-list-item-icon-color: var(--gray-60);
@@ -50,6 +51,7 @@
 
 .ActionListGroup > li:first-child {
   font-weight: var(--font-weight-medium);
+  font-size: var(--action-list-group-label-font-size);
 }
 
 .ActionList:focus {

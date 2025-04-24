@@ -309,6 +309,10 @@ describe('ActionMenu', () => {
 
   test.todo('placement');
 
+  test.todo('should support className prop');
+
+  test.todo('should support ref prop');
+
   test('should have no axe violations', async () => {
     const { container } = render(<ActionMenu {...defaultProps} />);
     const results = await axe(container);
