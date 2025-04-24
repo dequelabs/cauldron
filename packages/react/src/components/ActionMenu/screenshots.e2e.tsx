@@ -51,7 +51,6 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
 
   await component.getByText('Action Menu Trigger').click();
   await component.getByText('Hover').hover();
-  // await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('actionmenu');
   await setTheme(page, 'dark');
@@ -104,7 +103,6 @@ test('should have screenshot for ActionMenu selections', async ({
 
   await component.getByText('Action Menu Trigger').click();
   await component.getByText('Hover').hover();
-  // await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('actionmenu-selections');
   await setTheme(page, 'dark');
@@ -152,7 +150,6 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
 
   await component.getByText('Action Menu Trigger').click();
   await component.getByText('Hover').hover();
-  // await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('actionmenu-mixed');
   await setTheme(page, 'dark');
