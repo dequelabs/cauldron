@@ -10,7 +10,7 @@
 .ActionMenu {
   border: 1px solid var(--action-menu-border-color);
   background-color: var(--action-menu-background-color);
-  padding: var(--space-smallest) 0;
+  padding: var(--space-half) 0;
   border-radius: 8px;
   max-width: var(--action-menu-width);
   max-height: var(--action-menu-height);

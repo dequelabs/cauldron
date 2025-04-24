@@ -1,13 +1,17 @@
 :root {
+  --action-list-background-color: #fff;
   --action-list-text-color: var(--gray-90);
   --action-list-item-hover-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
+  --action-list-item-icon-color: var(--gray-60);
   --action-list-item-disabled-text-color: var(--gray-40);
 }
 
 .cauldron--theme-dark {
+  --action-list-background-color: var(--accent-medium);
   --action-list-text-color: #fff;
   --action-list-item-description-color: var(--accent-light);
+  --action-list-item-icon-color: var(--accent-light);
   --action-list-item-hover-background-color: var(--accent-dark);
   --action-list-item-disabled-text-color: rgba(255, 255, 255, 0.25);
 }
@@ -52,10 +56,16 @@
   outline: none;
 }
 
-.ActionList:focus-within .ActionListItem--active {
+:where(.ActionList:focus-within) .ActionListItem--active {
   position: relative;
   box-shadow: 0 0 0 2px var(--focus);
   z-index: 1;
+}
+
+:where(.ActionList:focus-within) .ActionListItem--active:hover {
+  box-shadow:
+    0 0 0 2px var(--focus),
+    inset 0 0 0 2px var(--action-list-background-color);
 }
 
 .ActionListGroup > li:first-child,
@@ -91,6 +101,15 @@
 .ActionListItem__leadingIcon,
 .ActionListItem__trailingIcon {
   width: var(--icon-spacing);
+}
+
+:where(.ActionListItem:not([aria-disabled='true']))
+  :is(
+    .ActionListItem__selection,
+    .ActionListItem__leadingIcon,
+    .ActionListItem__trailingIcon
+  ) {
+  color: var(--action-list-item-icon-color);
 }
 
 .ActionListItem:has(> .ActionListItem__selection) {
@@ -170,7 +189,7 @@
     );
 }
 
-.ActionListItem:not([aria-checked='true']) .ActionListItem__selection {
+:where(.ActionListItem:not([aria-checked='true'])) .ActionListItem__selection {
   visibility: hidden;
 }
 
@@ -178,6 +197,7 @@
   color: var(--action-list-item-description-color);
 }
 
-.ActionListItem:is([aria-disabled='true']) .ActionListItem__description {
+:where(.ActionListItem:is([aria-disabled='true']))
+  .ActionListItem__description {
   color: var(--action-list-item-disabled-text-color);
 }

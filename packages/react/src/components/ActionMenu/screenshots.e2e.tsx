@@ -131,7 +131,6 @@ test('should have screenshot for ActionMenu selections', async ({
           <ActionListItem description="This is a description" selected disabled>
             Selected disabled description
           </ActionListItem>
-          <ActionListLinkItem href="#">Link</ActionListLinkItem>
           <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
           <ActionListItem trailingIcon="new">Trailing icon</ActionListItem>
           <ActionListItem leadingIcon="copy" selected>
