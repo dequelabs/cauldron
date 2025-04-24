@@ -101,13 +101,16 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       switch (selectionType) {
         case 'single':
           listItemRole = 'menuitemradio';
+          break;
         case 'multiple':
           listItemRole = 'menuitemcheckbox';
+          break;
         default:
           listItemRole = 'menuitem';
+          break;
       }
     } else if (contextRole === 'listbox') {
-      return 'option';
+      listItemRole = 'option';
     }
 
     // Keep the currently active item on screen when navigate via up/down arrow key navigation
