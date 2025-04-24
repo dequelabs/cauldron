@@ -218,6 +218,7 @@ textarea.Field--has-error:focus:hover,
 
 .Error,
 .Field__error {
+  --icon-size: var(--text-size-base);
   color: var(--field-error-text-color);
   text-align: left;
   font-size: var(--text-size-smallest);
