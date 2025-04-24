@@ -39,9 +39,40 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
           <ActionListItem>Item</ActionListItem>
           <ActionListItem disabled>Disabled</ActionListItem>
           <ActionListItem>Hover</ActionListItem>
+          <ActionListItem description="This is a description">
+            Description
+          </ActionListItem>
+          <ActionListItem description="This is a description" disabled>
+            Disabled description
+          </ActionListItem>
           <ActionListLinkItem href="#">Link</ActionListLinkItem>
-          <ActionListItem leadingIcon="copy">Leading Icon</ActionListItem>
-          <ActionListItem trailingIcon="new">Trailing Icon</ActionListItem>
+          <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+          <ActionListItem trailingIcon="new">Trailing icon</ActionListItem>
+          <ActionListItem leadingIcon="copy" trailingIcon="new">
+            Both icons
+          </ActionListItem>
+          <ActionListItem leadingIcon="copy" disabled>
+            Disabled icon
+          </ActionListItem>
+          <ActionListItem
+            leadingIcon="copy"
+            description="This is a description"
+          >
+            Leading icon description
+          </ActionListItem>
+          <ActionListItem
+            trailingIcon="new"
+            description="This is a description"
+          >
+            Trailing icon description
+          </ActionListItem>
+          <ActionListItem
+            leadingIcon="copy"
+            trailingIcon="new"
+            description="This is a description"
+          >
+            Both icons description
+          </ActionListItem>
           <ActionListSeparator />
           <ActionListItem>Separated</ActionListItem>
         </ActionList>
@@ -54,7 +85,7 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
 
   await expect(component).toHaveScreenshot('actionmenu');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark-actionmenu');
+  await expect(component).toHaveScreenshot('dark--actionmenu');
 });
 
 test('should have screenshot for ActionMenu selections', async ({
@@ -88,12 +119,46 @@ test('should have screenshot for ActionMenu selections', async ({
           <ActionListItem selected>Selected</ActionListItem>
           <ActionListItem disabled>Disabled</ActionListItem>
           <ActionListItem selected disabled>
-            Selected Disabled
+            Selected disabled
           </ActionListItem>
           <ActionListItem>Hover</ActionListItem>
+          <ActionListItem description="This is a description" selected>
+            Selected description
+          </ActionListItem>
+          <ActionListItem description="This is a description" disabled>
+            Disabled description
+          </ActionListItem>
+          <ActionListItem description="This is a description" selected disabled>
+            Selected disabled description
+          </ActionListItem>
           <ActionListLinkItem href="#">Link</ActionListLinkItem>
-          <ActionListItem leadingIcon="copy">Leading Icon</ActionListItem>
-          <ActionListItem trailingIcon="new">Trailing Icon</ActionListItem>
+          <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+          <ActionListItem trailingIcon="new">Trailing icon</ActionListItem>
+          <ActionListItem leadingIcon="copy" selected>
+            Leading icon selected
+          </ActionListItem>
+          <ActionListItem trailingIcon="new" selected>
+            Trailing icon selected
+          </ActionListItem>
+          <ActionListItem leadingIcon="copy" trailingIcon="new" selected>
+            Both icons selected
+          </ActionListItem>
+          <ActionListItem
+            leadingIcon="copy"
+            trailingIcon="new"
+            selected
+            disabled
+          >
+            Icons selected disabled
+          </ActionListItem>
+          <ActionListItem
+            leadingIcon="copy"
+            trailingIcon="new"
+            description="This is a description"
+            selected
+          >
+            Icons selected description
+          </ActionListItem>
           <ActionListSeparator />
           <ActionListItem>Separated</ActionListItem>
         </ActionList>
@@ -106,7 +171,7 @@ test('should have screenshot for ActionMenu selections', async ({
 
   await expect(component).toHaveScreenshot('actionmenu-selections');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark-actionmenu-selections');
+  await expect(component).toHaveScreenshot('dark--actionmenu-selections');
 });
 
 test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
@@ -134,13 +199,15 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
             <ActionListItem selected disabled>
               Selected Disabled
             </ActionListItem>
+            <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+            <ActionListItem trailingIcon="new">Trailing icon</ActionListItem>
           </ActionListGroup>
           <ActionListItem>Item</ActionListItem>
           <ActionListItem disabled>Disabled</ActionListItem>
           <ActionListItem>Hover</ActionListItem>
           <ActionListLinkItem href="#">Link</ActionListLinkItem>
-          <ActionListItem leadingIcon="copy">Leading Icon</ActionListItem>
-          <ActionListItem trailingIcon="new">Trailing Icon</ActionListItem>
+          <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+          <ActionListItem trailingIcon="new">Trailing icon</ActionListItem>
           <ActionListSeparator />
           <ActionListItem>Separated</ActionListItem>
         </ActionList>
@@ -153,5 +220,5 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
 
   await expect(component).toHaveScreenshot('actionmenu-mixed');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark-actionmenu-mixed');
+  await expect(component).toHaveScreenshot('dark--actionmenu-mixed');
 });

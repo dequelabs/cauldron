@@ -1,5 +1,5 @@
 :root {
-  --action-list-text-color: var(--text-color-base);
+  --action-list-text-color: var(--gray-90);
   --action-list-item-hover-background-color: var(--gray-20);
   --action-list-item-description-color: var(--gray-60);
   --action-list-item-disabled-text-color: var(--gray-40);
@@ -83,10 +83,6 @@
   cursor: not-allowed;
 }
 
-.ActionListItem:has(> .ActionListItem__selection) .ActionListItem__description {
-  grid-column: 2;
-}
-
 .ActionListItem:hover:not([aria-disabled='true']) {
   background-color: var(--action-list-item-hover-background-color);
 }
@@ -101,13 +97,43 @@
   grid-template-columns: var(--icon-spacing) auto;
 }
 
-:where(.ActionList:has(.ActionListItem__description))
+:where(.ActionListItem:has(.ActionListItem__description))
   :is(
     .ActionListItem__selection,
     .ActionListItem__leadingIcon,
     .ActionListItem__trailingIcon
   ) {
-  grid-row: 1 / -1;
+  grid-row: span 2;
+  align-self: start;
+}
+
+:where(.ActionListItem:has(> .ActionListItem__selection))
+  .ActionListItem__description,
+:where(
+    .ActionListItem:has(> .ActionListItem__leadingIcon):has(
+        > .ActionListItem__description
+      )
+  )
+  .ActionListItem__description {
+  grid-column: 2;
+}
+
+:where(
+    .ActionListItem:has(> .ActionListItem__selection):has(
+        > .ActionListItem__leadingIcon
+      )
+  )
+  .ActionListItem__description {
+  grid-column: 3;
+}
+
+:where(
+    .ActionListItem:has(> .ActionListItem__trailingIcon):has(
+        > .ActionListItem__description
+      )
+  )
+  .ActionListItem__description {
+  grid-row: 2;
 }
 
 .ActionListItem:has(> .ActionListItem__leadingIcon) {
@@ -150,4 +176,8 @@
 
 .ActionListItem__description {
   color: var(--action-list-item-description-color);
+}
+
+.ActionListItem:is([aria-disabled='true']) .ActionListItem__description {
+  color: var(--action-list-item-disabled-text-color);
 }
