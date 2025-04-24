@@ -18,7 +18,7 @@ interface ActionListItemProps
    * A unique key to identify the action when triggered, when not provided
    * will use the child text content as the key.
    */
-  key?: string;
+  itemKey?: string;
 
   /** Displays a leading for the action item. */
   leadingIcon?: IconType;
@@ -43,7 +43,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
   (
     {
       as: Component = 'li',
-      key,
+      itemKey,
       className,
       description,
       selected,
@@ -88,7 +88,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
 
         if (typeof onActionListAction === 'function') {
           onActionListAction(
-            key || labelRef?.current?.innerText.trim() || '',
+            itemKey || labelRef?.current?.innerText.trim() || '',
             event
           );
         }
@@ -143,7 +143,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       <ListboxOption
         as={Component}
         ref={actionListItemRef}
-        key={key}
+        itemKey={itemKey}
         id={id}
         role={listItemRole}
         className={classnames('ActionListItem', className)}

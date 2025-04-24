@@ -135,8 +135,7 @@ describe('ActionMenu', () => {
     });
   });
 
-  // TODO: fix this test
-  test.failing('should open menu on arrow down key press', async () => {
+  test('should open menu on arrow down key press', async () => {
     const user = userEvent.setup();
     render(<ActionMenu {...defaultProps} />);
 

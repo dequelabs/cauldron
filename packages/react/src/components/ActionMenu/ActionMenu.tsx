@@ -62,6 +62,10 @@ function ActionMenu({
         // prevent page from scrolling if the user triggers the action menu
         // via an "ArrowDown" key press
         event.preventDefault();
+        // allow other functions that may consume the event after
+        // default is prevented to perform as normal
+        event.defaultPrevented = false;
+        setOpen(true);
       }
     },
     [open, isControlled]
