@@ -17,14 +17,16 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
     ref
   ) => {
     const [id] = propId ? [propId] : useId(1, 'fieldgroup');
+    const descriptionId = `${id}-description`;
+    const errorId = `${id}-error`;
 
     let ariaDescribedbyId = '';
     if (description) {
-      ariaDescribedbyId = addIdRef(ariaDescribedbyId, `${id}-description`);
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, descriptionId);
     }
 
     if (error) {
-      ariaDescribedbyId = addIdRef(ariaDescribedbyId, `${id}-error`);
+      ariaDescribedbyId = addIdRef(ariaDescribedbyId, errorId);
     }
 
     return (
@@ -40,12 +42,12 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
           {label}
         </label>
         {description && (
-          <div id={`${id}-description`} className="Field__description">
+          <div id={descriptionId} className="Field__description">
             {description}
           </div>
         )}
         {error && (
-          <div className="Field__error" id={`${id}-error`}>
+          <div className="Field__error" id={errorId}>
             <Icon type="caution" />
             {error}
           </div>
