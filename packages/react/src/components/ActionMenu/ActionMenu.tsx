@@ -15,7 +15,7 @@ const [ArrowDown] = ['ArrowDown'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyPress' | 'aria-expanded'
+  'onClick' | 'onKeyUpCapture' | 'onKeyDown' | 'aria-expanded'
 >;
 
 type ActionMenuTriggerFunction = (
@@ -40,7 +40,7 @@ function ActionMenu({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const actionMenuRef = useRef<HTMLElement>(null);
   const actionMenuListRef = useSharedRef<HTMLElement>(actionMenuList.props.ref);
-  const triggerId = useId(1, 'menu-trigger');
+  const [triggerId] = useId(1, 'menu-trigger');
   const isControlled = typeof openProp === 'boolean';
 
   const handleTriggerClick = useCallback(
@@ -67,7 +67,6 @@ function ActionMenu({
     [open, isControlled]
   );
 
-  // @ts-expect-error for now...
   const triggerProps: React.HTMLAttributes<HTMLButtonElement> = useMemo(() => {
     return {
       ref: triggerRef,
