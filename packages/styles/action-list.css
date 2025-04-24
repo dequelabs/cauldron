@@ -8,7 +8,7 @@
 .cauldron--theme-dark {
   --action-list-text-color: #fff;
   --action-list-item-description-color: var(--accent-light);
-  --action-list-item-hover-background-color: var(--accent-medium);
+  --action-list-item-hover-background-color: var(--accent-dark);
   --action-list-item-disabled-text-color: rgba(255, 255, 255, 0.25);
 }
 
