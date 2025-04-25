@@ -5,20 +5,20 @@ import { useActionListContext } from './ActionListContext';
 type ActionListSeparatorProps = React.HTMLAttributes<HTMLLIElement>;
 
 const ActionListSeparator = forwardRef<HTMLLIElement, ActionListSeparatorProps>(
-  (props, ref) => {
+  ({ className, ...props }, ref) => {
     const { role: contextRole } = useActionListContext();
     // list and listbox roles only support listitem or option roles respectively
     // see https://github.com/w3c/aria/issues/1889
-    const listItemRole = ['list', 'listbox'].includes(contextRole)
+    const separatorRole = ['list', 'listbox'].includes(contextRole)
       ? 'presentation'
       : 'separator';
 
     return (
       <li
         ref={ref}
-        className={classnames('ActionListSeparator')}
-        role={listItemRole}
-        aria-hidden={listItemRole === 'presentation' || undefined}
+        className={classnames('ActionListSeparator', className)}
+        role={separatorRole}
+        aria-hidden={separatorRole === 'presentation' || undefined}
         {...props}
       />
     );

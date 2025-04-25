@@ -143,7 +143,6 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       <ListboxOption
         as={Component}
         ref={actionListItemRef}
-        itemKey={itemKey}
         id={id}
         role={listItemRole}
         className={classnames('ActionListItem', className)}
