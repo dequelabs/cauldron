@@ -38,8 +38,8 @@
 
 .ActionListGroup,
 .ActionListSeparator {
-  padding-bottom: var(--space-small);
-  margin-bottom: var(--space-small);
+  padding-bottom: var(--space-smallest);
+  margin-bottom: var(--space-smallest);
   border-bottom: 1px solid var(--action-menu-border-color);
 }
 
