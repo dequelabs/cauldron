@@ -12,7 +12,8 @@
   background-color: var(--action-menu-background-color);
   padding: var(--space-small) 0;
   border-radius: 8px;
-  max-width: var(--action-menu-width, 10rem);
+  width: var(--action-menu-width);
+  min-width: var(--action-menu-min-width, 10rem);
   max-height: var(--action-menu-height);
   box-shadow: var(--drop-shadow-overlay);
   overflow-y: auto;
