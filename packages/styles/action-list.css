@@ -52,6 +52,7 @@
 .ActionListGroup > li:first-child {
   font-weight: var(--font-weight-medium);
   font-size: var(--action-list-group-label-font-size);
+  padding: var(--space-smallest) var(--space-small);
 }
 
 .ActionList:focus {
@@ -64,7 +65,6 @@
   z-index: 1;
 }
 
-.ActionListGroup > li:first-child,
 .ActionListItem {
   padding: var(--space-smallest);
 }
