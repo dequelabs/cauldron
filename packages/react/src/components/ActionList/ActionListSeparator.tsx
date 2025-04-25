@@ -9,7 +9,7 @@ const ActionListSeparator = forwardRef<HTMLLIElement, ActionListSeparatorProps>(
     const { role: contextRole } = useActionListContext();
     // list and listbox roles only support listitem or option roles respectively
     // see https://github.com/w3c/aria/issues/1889
-    const separatorRole = ['list', 'listbox'].includes(contextRole)
+    const separatorRole = ['list', 'listbox'].includes(contextRole as string)
       ? 'presentation'
       : 'separator';
 
