@@ -42,12 +42,12 @@ const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
     const listItemRole: React.AriaRole | undefined = [
       'menu',
       'listbox'
-    ].includes(actionListContext.role)
+    ].includes(actionListContext.role as string)
       ? 'none'
       : undefined;
 
     const groupRole: React.AriaRole | undefined = ['menu', 'listbox'].includes(
-      actionListContext.role
+      actionListContext.role as string
     )
       ? 'group'
       : 'list';
