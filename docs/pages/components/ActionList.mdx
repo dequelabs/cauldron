@@ -243,6 +243,11 @@ function MultipleSelectionExample() {
       name: 'selectionType',
       type: ['single', 'multiple', 'null'],
       description: 'Overrides the parent ActionList selectionType for this group.'
+    },
+    {
+      name: 'onAction',
+      type: '(event: React.MouseEvent | React.KeyboardEvent) => void',
+      description: 'Callback when this specific action item is selected.'
     }
   ]}
 />

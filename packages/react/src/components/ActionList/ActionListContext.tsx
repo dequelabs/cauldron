@@ -12,7 +12,7 @@ export type onActionCallbackFunction = (
 export type ActionListSelectionType = 'single' | 'multiple';
 
 type ActionListContext = {
-  role: 'list' | 'menu' | 'listbox';
+  role: 'list' | 'menu' | 'listbox' | null;
   selectionType: ActionListSelectionType | null;
   onAction?: onActionCallbackFunction;
 };
@@ -23,7 +23,7 @@ type ActionListProviderProps = {
 
 /* istanbul ignore next */
 const ActionListContext = createContext<ActionListContext>({
-  role: 'list',
+  role: null,
   selectionType: null,
   onAction: () => null
 });
