@@ -66,7 +66,7 @@
 
 .ActionListGroup > li:first-child,
 .ActionListItem {
-  padding: var(--space-smallest) var(--space-small);
+  padding: var(--space-smallest);
 }
 
 .ActionListItem {
@@ -75,6 +75,8 @@
   display: grid;
   align-items: center;
   gap: var(--space-half);
+  margin: 0 var(--space-smallest);
+  border-radius: 4px;
   cursor: pointer;
 }
 
