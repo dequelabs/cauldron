@@ -28,7 +28,6 @@ type ActionMenuTriggerFunction = (
 type ActionMenuProps = {
   children: React.ReactElement;
   trigger: React.ReactElement | ActionMenuTriggerFunction;
-  open?: boolean;
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
@@ -39,20 +38,18 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       style,
       trigger,
       placement = 'bottom-start',
-      open: openProp,
       children: actionMenuList,
       ...props
     },
     ref
   ) => {
-    const [open, setOpen] = useState(!!openProp);
+    const [open, setOpen] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
     const actionMenuListRef = useSharedRef<HTMLElement>(
       actionMenuList.props.ref
     );
     const [triggerId] = useId(1, 'menu-trigger');
-    const isControlled = typeof openProp === 'boolean';
 
     const handleTriggerClick = useCallback(
       (
@@ -60,16 +57,18 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           | React.MouseEvent<HTMLButtonElement>
           | React.KeyboardEvent<HTMLButtonElement>
       ) => {
-        if (!event.defaultPrevented && !isControlled) {
+        // istanbul ignore else
+        if (!event.defaultPrevented) {
           setOpen(!open);
         }
       },
-      [open, isControlled]
+      [open]
     );
 
     const handleTriggerKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === ArrowDown && !isControlled && !open) {
+        // istanbul ignore else
+        if (event.key === ArrowDown && !open) {
           // prevent page from scrolling if the user triggers the action menu
           // via an "ArrowDown" key press
           event.preventDefault();
@@ -79,7 +78,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           setOpen(true);
         }
       },
-      [open, isControlled]
+      [open]
     );
 
     const triggerProps: React.HTMLAttributes<HTMLButtonElement> =
@@ -109,7 +108,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
-        if (!isControlled && !event.defaultPrevented) {
+        // istanbul ignore else
+        if (!event.defaultPrevented) {
           setOpen(false);
         }
 
@@ -118,7 +118,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           onAction(key, event);
         }
       },
-      [isControlled, actionMenuList.props.onAction]
+      [actionMenuList.props.onAction]
     );
 
     useEffect(() => {

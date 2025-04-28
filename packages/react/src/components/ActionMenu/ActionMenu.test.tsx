@@ -1,5 +1,11 @@
 import React, { createRef } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  createEvent
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import ActionMenu from './ActionMenu';
@@ -354,7 +360,19 @@ test('should trigger item onAction when an action list item is clicked with keyp
   });
 });
 
-test.todo('controlled open state');
+test('should stop menu from opening if event is default prevented', () => {
+  render(<ActionMenu {...defaultProps} />);
+
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+  const menu = screen.queryByRole('menu', { hidden: true });
+
+  trigger.focus();
+  const event = createEvent.click(trigger);
+  event.preventDefault();
+  fireEvent(trigger, event);
+
+  expect(menu).not.toBeVisible();
+});
 
 test('should support className prop', () => {
   render(

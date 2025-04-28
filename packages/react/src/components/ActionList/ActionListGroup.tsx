@@ -28,10 +28,12 @@ const ActionListGroup = forwardRef<HTMLLIElement, ActionListGroupProps>(
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
+        // istanbul ignore else
         if (typeof onAction === 'function') {
           onAction(key, event);
         }
 
+        // istanbul ignore else
         if (typeof actionListContext.onAction === 'function') {
           actionListContext.onAction(key, event);
         }

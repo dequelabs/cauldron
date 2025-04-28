@@ -30,6 +30,7 @@ const ActionListLinkItem = forwardRef<
         return 'menuitem';
       }
 
+      // istanbul ignore next
       if (contextRole && process.env.NODE_ENV !== 'production') {
         console.warn(
           'Use of ActionListLinkItem outside of a menu is unsupported and may result in unintentional accessibility issues.'

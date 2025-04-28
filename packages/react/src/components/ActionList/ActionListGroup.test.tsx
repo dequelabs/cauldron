@@ -75,6 +75,12 @@ test('should trigger onAction when a action list item is clicked within the grou
   });
 });
 
+test('should set group id from props', () => {
+  render(<ActionListGroup id="bananas" {...defaultProps} />);
+
+  expect(screen.getByRole('presentation')).toHaveAttribute('id', 'bananas');
+});
+
 test('should support className prop', () => {
   render(
     <ActionListGroup
