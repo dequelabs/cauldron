@@ -92,9 +92,9 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           ref: triggerRef,
           id: triggerId,
           onClick: handleTriggerClick,
-          onKeyUpCapture: (event) => event.preventDefault,
           onKeyDown: handleTriggerKeyDown,
-          'aria-expanded': open
+          'aria-expanded': open,
+          'aria-haspopup': 'menu'
         };
       }, [handleTriggerClick, open]);
 
@@ -160,7 +160,6 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
             role: 'menu',
             onAction: handleAction,
             'aria-labelledby': triggerId,
-            'aria-haspopup': 'menu',
             focusStrategy,
             focusDisabled: true
           })}
