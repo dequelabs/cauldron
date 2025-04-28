@@ -86,6 +86,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
           onAction(event);
         }
 
+        // istanbul ignore else
         if (typeof onActionListAction === 'function') {
           onActionListAction(
             actionKey || labelRef?.current?.innerText.trim() || '',

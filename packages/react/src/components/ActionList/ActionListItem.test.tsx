@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import ActionListItem from './ActionListItem';
 import { ActionListProvider } from './ActionListContext';
@@ -72,62 +73,153 @@ test('should support ref prop', () => {
   expect(ref.current).toEqual(item);
 });
 
-// test('should prevent menu closing when selectionType is multiple', () => {
-//   const preventDefault = spy();
+test('should call onAction when clicked', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(<ActionListItem onAction={onAction}>Label Text</ActionListItem>);
 
-//   render(
-//     <ActionListItem>Label Text</ActionListItem>,
-//     { selectionType: 'multiple' }
-//   );
+  await user.click(screen.getByRole('listitem'));
+  expect(onAction).toHaveBeenCalled();
+});
 
-//   const event = { preventDefault };
-//   const item = screen.getByRole('listitemcheckbox');
+test('should have menuitem role when in menu context', () => {
+  render(<ActionListItem>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ role: 'menu' })
+  });
 
-//   // Manually trigger the handler since we need to pass our mock event
-//   const onClick = item.onclick;
-//   onClick(event);
+  expect(screen.getByRole('menuitem')).toBeInTheDocument();
+});
 
-//   expect(preventDefault.calledOnce).toBeTruthy();
-// });
+test('should have menuitemradio role when in menu context with single selection', () => {
+  render(<ActionListItem>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ role: 'menu', selectionType: 'single' })
+  });
 
-// test('should return no axe violations', async () => {
-//   render(<ActionListItem>Label Text</ActionListItem>);
+  expect(screen.getByRole('menuitemradio')).toBeInTheDocument();
+});
 
-//   const item = screen.getByRole('listitem');
-//   const results = await axe(item);
+test('should have menuitemcheckbox role when in menu context with multiple selection', () => {
+  render(<ActionListItem>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ role: 'menu', selectionType: 'multiple' })
+  });
 
-//   expect(results).toHaveNoViolations();
-// });
+  expect(screen.getByRole('menuitemcheckbox')).toBeInTheDocument();
+});
 
-// test('should return no axe violations when disabled', async () => {
-//   render(<ActionListItem disabled>Label Text</ActionListItem>);
+test('should have option role when in listbox context', () => {
+  render(<ActionListItem>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ role: 'listbox' })
+  });
 
-//   const item = screen.getByRole('listitem');
-//   const results = await axe(item);
+  expect(screen.getByRole('option')).toBeInTheDocument();
+});
 
-//   expect(results).toHaveNoViolations();
-// });
+test('should show selection mark when selectionType is set and item is selected', () => {
+  render(<ActionListItem selected>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ role: 'menu', selectionType: 'single' })
+  });
 
-// test('should return no axe violations when selected with single selection type', async () => {
-//   render(
-//     <ActionListItem selected>Label Text</ActionListItem>,
-//     { wrapper: withActionListContext({ role: 'menu', selectionType: 'single' }) }
-//   );
+  const item = screen.getByRole('menuitemradio');
+  expect(item.querySelector('.ActionListItem__selection')).toBeInTheDocument();
+  expect(item).toHaveAttribute('aria-checked', 'true');
+});
 
-//   const item = screen.getByRole('menuitemradio');
-//   const results = await axe(item);
+test('should use actionKey for onAction if provided', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(<ActionListItem actionKey="custom-key">Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ onAction })
+  });
 
-//   expect(results).toHaveNoViolations();
-// });
+  const item = screen.getByRole('listitem');
+  await user.click(item);
+  expect(onAction).toHaveBeenCalledWith('custom-key', expect.anything());
+});
 
-// test('should return no axe violations when selected with multiple selection type', async () => {
-//   render(
-//     <ActionListItem selected>Label Text</ActionListItem>,
-//     { wrapper: withActionListContext({ role: 'menu', selectionType: 'multiple' }) }
-//   );
+test('should use text content for onAction if actionKey is not provided', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(<ActionListItem>Label Text</ActionListItem>, {
+    wrapper: withActionListContext({ onAction })
+  });
 
-//   const item = screen.getByRole('menuitemcheckbox');
-//   const results = await axe(item);
+  const item = screen.getByRole('listitem');
+  await user.click(item);
+  expect(onAction).toHaveBeenCalledWith('Label Text', expect.anything());
+});
 
-//   expect(results).toHaveNoViolations();
-// });
+test('should be disabled when disabled prop is true', () => {
+  render(<ActionListItem disabled>Label Text</ActionListItem>);
+
+  const item = screen.getByRole('listitem');
+  expect(item).toHaveAttribute('aria-disabled', 'true');
+});
+
+test('should not call onAction when disabled', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionListItem disabled onAction={onAction}>
+      Label Text
+    </ActionListItem>
+  );
+
+  const item = screen.getByRole('listitem');
+  await user.click(item);
+  expect(onAction).not.toHaveBeenCalled();
+});
+
+test('should have no axe violations', async () => {
+  // Note: the default semantics for the action list group is as a listitem,
+  // so we're just wrapping it inside of a ul to have the correct ancestry
+  const { container } = render(
+    <ul>
+      <ActionListItem>Label Text</ActionListItem>
+    </ul>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when disabled', async () => {
+  const { container } = render(
+    <ul>
+      <ActionListItem disabled>Label Text</ActionListItem>
+    </ul>
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when selected with single selection type', async () => {
+  // Note: the default semantics for the action list group is as a listitem,
+  // so we're just wrapping it inside of a ul menu to have the correct ancestry
+  const { container } = render(
+    <ul role="menu">
+      <ActionListItem selected>Label Text</ActionListItem>
+    </ul>,
+    {
+      wrapper: withActionListContext({ role: 'menu', selectionType: 'single' })
+    }
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when selected with multiple selection type', async () => {
+  // Note: the default semantics for the action list group is as a listitem,
+  // so we're just wrapping it inside of a ul menu to have the correct ancestry
+  const { container } = render(
+    <ul role="menu">
+      <ActionListItem selected>Label Text</ActionListItem>
+    </ul>,
+    {
+      wrapper: withActionListContext({
+        role: 'menu',
+        selectionType: 'multiple'
+      })
+    }
+  );
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
