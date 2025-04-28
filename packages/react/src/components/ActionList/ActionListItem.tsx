@@ -94,7 +94,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
           );
         }
       },
-      [onAction, onActionListAction]
+      [onAction, onActionListAction, selectionType, actionKey]
     );
 
     let listItemRole: React.AriaRole | undefined = undefined;
