@@ -18,7 +18,7 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyUpCapture' | 'onKeyDown' | 'aria-expanded'
+  'onClick' | 'onKeyUpCapture' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
 >;
 
 type ActionMenuTriggerFunction = (
@@ -160,6 +160,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
             role: 'menu',
             onAction: handleAction,
             'aria-labelledby': triggerId,
+            'aria-haspopup': 'menu',
             focusStrategy
           })}
         </AnchoredOverlay>
