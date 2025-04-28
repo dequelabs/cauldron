@@ -22,6 +22,7 @@ interface BaseListboxProps
   > {
   navigation?: 'cycle' | 'bound';
   focusStrategy?: 'lastSelected' | 'first' | 'last';
+  focusDisabled?: boolean;
   onActiveChange?: (option: ListboxOption) => void;
   disabled?: boolean;
 }
@@ -73,6 +74,7 @@ const Listbox = forwardRef<
       value,
       navigation = 'bound',
       focusStrategy = 'lastSelected',
+      focusDisabled = false,
       multiselect = false,
       onKeyDown,
       onFocus,
@@ -196,9 +198,9 @@ const Listbox = forwardRef<
         }
 
         event.preventDefault();
-        const enabledOptions = options.filter(
-          (option) => !isDisabledOption(option)
-        );
+        const enabledOptions = !focusDisabled
+          ? options.filter((option) => !isDisabledOption(option))
+          : options;
 
         // istanbul ignore next
         if (!enabledOptions.length) {
@@ -256,9 +258,9 @@ const Listbox = forwardRef<
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
         if (focusStrategy === 'first') {
-          const firstOption = options.find(
-            (option) => !isDisabledOption(option)
-          );
+          const firstOption = !focusDisabled
+            ? options.find((option) => !isDisabledOption(option))
+            : options[0];
 
           if (firstOption) {
             setActiveOption(firstOption);
@@ -268,9 +270,9 @@ const Listbox = forwardRef<
         }
 
         if (focusStrategy === 'last') {
-          const lastOption = [...options]
-            .reverse()
-            .find((option) => !isDisabledOption(option));
+          const lastOption = !focusDisabled
+            ? [...options].reverse().find((option) => !isDisabledOption(option))
+            : options[options.length - 1];
 
           if (lastOption) {
             setActiveOption(lastOption);
@@ -283,9 +285,9 @@ const Listbox = forwardRef<
           !activeOption ||
           !options.some((option) => option.element === activeOption.element)
         ) {
-          const firstOption = options.find(
-            (option) => !isDisabledOption(option)
-          );
+          const firstOption = !focusDisabled
+            ? options.find((option) => !isDisabledOption(option))
+            : options[0];
           // istanbul ignore else
           if (firstOption) {
             setActiveOption(firstOption);

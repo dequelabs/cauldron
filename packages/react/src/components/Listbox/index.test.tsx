@@ -212,6 +212,25 @@ test('should set the first non-disabled option as active on focus', () => {
   );
 });
 
+test('should set the first option as active on focus with focusDisabled set to true', () => {
+  render(
+    <Listbox focusDisabled>
+      <ListboxOption disabled>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveClass(
+    'ListboxOption--active'
+  );
+  expect(screen.getByRole('listbox')).toHaveAttribute(
+    'aria-activedescendant',
+    screen.getByRole('option', { name: 'Apple' }).getAttribute('id')
+  );
+});
+
 test('should set the first non-disabled option as active on focus when the options have changed', () => {
   const { rerender } = render(
     <Listbox>

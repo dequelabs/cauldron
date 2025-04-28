@@ -161,7 +161,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
             onAction: handleAction,
             'aria-labelledby': triggerId,
             'aria-haspopup': 'menu',
-            focusStrategy
+            focusStrategy,
+            focusDisabled: true
           })}
         </AnchoredOverlay>
       </>
