@@ -66,7 +66,10 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     );
 
     return (
-      // @ts-expect-error for now...
+      // Note: we should be able to use listbox without passing a prop
+      // value for "multiselect"
+      // see: https://github.com/dequelabs/cauldron/issues/1890
+      // @ts-expect-error this should be allowed
       <Listbox
         ref={ref}
         /* Listbox comes with an explicit role of "listbox", but we want to either
