@@ -164,7 +164,6 @@ test('should set first item active on arrow down key press', async () => {
   await user.keyboard('{ArrowDown}');
 
   await waitFor(() => {
-    // Note: the active class should
     expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
       'ActionListItem--active'
     );
