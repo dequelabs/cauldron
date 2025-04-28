@@ -48,10 +48,6 @@ test('should support className prop', () => {
 });
 
 test('should support ref prop', () => {
-  render(<ActionListLinkItem href="#">Link</ActionListLinkItem>);
-});
-
-test('should support ref prop', () => {
   const ref = createRef<HTMLAnchorElement>();
   render(<ActionListLinkItem ref={ref} data-testid="link" />);
 

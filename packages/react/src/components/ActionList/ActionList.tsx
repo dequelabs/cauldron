@@ -26,10 +26,7 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
-  (
-    { selectionType = null, onAction, className, children, onKeyUp, ...props },
-    ref
-  ) => {
+  ({ selectionType = null, onAction, className, children, ...props }, ref) => {
     const actionListContext = useActionListContext();
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
@@ -62,7 +59,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
           activeElement.current?.click();
         }
       },
-      [onKeyUp]
+      []
     );
 
     return (

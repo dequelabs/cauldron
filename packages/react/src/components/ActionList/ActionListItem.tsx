@@ -149,7 +149,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
         className={classnames('ActionListItem', className)}
         activeClass="ActionListItem--active"
         aria-selected={undefined}
-        aria-checked={isSelected}
+        aria-checked={listItemRole !== 'option' ? isSelected : undefined}
         onClick={handleAction}
         {...props}
       >

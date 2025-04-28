@@ -6,7 +6,7 @@ import { useActionListContext } from './ActionListContext';
 type ActionListLinkItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   Omit<
     React.ComponentProps<typeof ActionListItem>,
-    keyof React.HTMLAttributes<HTMLLIElement | 'selected'>
+    keyof React.HTMLAttributes<HTMLLIElement> | 'selected'
   > & { href: string };
 
 const ActionListLinkItem = forwardRef<
