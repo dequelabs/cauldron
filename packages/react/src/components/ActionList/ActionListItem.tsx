@@ -20,10 +20,10 @@ interface ActionListItemProps
    */
   actionKey?: string;
 
-  /** Displays a leading for the action item. */
+  /** Displays a leading icon for the action item. */
   leadingIcon?: IconType;
 
-  /** Displays a leading for the action item.. */
+  /** Displays a trailing icon for the action item.. */
   trailingIcon?: IconType;
 
   /** Provides an additional description for the action item. */
@@ -138,7 +138,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
     }, [isActive]);
 
     const allowsSelection = !!selectionType;
-    const isSelected = allowsSelection ? (selected ? true : false) : undefined;
+    const isSelected = allowsSelection ? selected : undefined;
 
     return (
       <ListboxOption
