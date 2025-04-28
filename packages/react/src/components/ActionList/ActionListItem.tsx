@@ -138,7 +138,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
     }, [isActive]);
 
     const allowsSelection = !!selectionType;
-    const isSelected = allowsSelection ? selected : undefined;
+    const isSelected = allowsSelection ? !!selected : undefined;
 
     return (
       <ListboxOption
