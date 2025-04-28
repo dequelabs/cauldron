@@ -94,7 +94,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           onClick: handleTriggerClick,
           onKeyUpCapture: (event) => event.preventDefault,
           onKeyDown: handleTriggerKeyDown,
-          'aria-expanded': open ? true : undefined
+          'aria-expanded': open
         };
       }, [handleTriggerClick, open]);
 
