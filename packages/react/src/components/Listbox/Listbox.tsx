@@ -21,6 +21,7 @@ interface BaseListboxProps
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
   > {
   navigation?: 'cycle' | 'bound';
+  focusStrategy?: 'lastSelected' | 'first' | 'last';
   onActiveChange?: (option: ListboxOption) => void;
   disabled?: boolean;
 }
@@ -71,6 +72,7 @@ const Listbox = forwardRef<
       defaultValue,
       value,
       navigation = 'bound',
+      focusStrategy = 'lastSelected',
       multiselect = false,
       onKeyDown,
       onFocus,
@@ -253,6 +255,30 @@ const Listbox = forwardRef<
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
+        if (focusStrategy === 'first') {
+          const firstOption = options.find(
+            (option) => !isDisabledOption(option)
+          );
+
+          if (firstOption) {
+            setActiveOption(firstOption);
+          }
+
+          return;
+        }
+
+        if (focusStrategy === 'last') {
+          const lastOption = [...options]
+            .reverse()
+            .find((option) => !isDisabledOption(option));
+
+          if (lastOption) {
+            setActiveOption(lastOption);
+          }
+
+          return;
+        }
+
         if (
           !activeOption ||
           !options.some((option) => option.element === activeOption.element)
@@ -274,7 +300,7 @@ const Listbox = forwardRef<
 
         onFocus?.(event);
       },
-      [options, activeOption, selectedOptions]
+      [options, activeOption, selectedOptions, focusStrategy]
     );
 
     return (

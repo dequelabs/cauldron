@@ -248,6 +248,38 @@ test('should set the first non-disabled option as active on focus when the optio
   );
 });
 
+test('should focus the first enabled option when focusStrategy is "first"', () => {
+  render(
+    <Listbox focusStrategy="first">
+      <ListboxOption disabled>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveClass(
+    'ListboxOption--active'
+  );
+});
+
+test('should focus the last enabled option when focusStrategy is "last"', () => {
+  render(
+    <Listbox focusStrategy="last">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption disabled>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Cantaloupe' })).toHaveClass(
+    'ListboxOption--active'
+  );
+});
+
 test('should set selected value with "value" prop when listbox option only has text label', () => {
   render(
     <Listbox value="Banana">

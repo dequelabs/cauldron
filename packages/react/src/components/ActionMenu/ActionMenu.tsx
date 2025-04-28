@@ -10,10 +10,11 @@ import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import useSharedRef from '../../utils/useSharedRef';
 import type { onActionEvent } from '../ActionList/ActionListContext';
+import type Listbox from '../Listbox';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 
-const [ArrowDown] = ['ArrowDown'];
+const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -44,6 +45,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     ref
   ) => {
     const [open, setOpen] = useState(false);
+    const [focusStrategy, setFocusStrategy] =
+      useState<React.ComponentProps<typeof Listbox>['focusStrategy']>('first');
     const triggerRef = useRef<HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
     const actionMenuListRef = useSharedRef<HTMLElement>(
@@ -60,6 +63,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         // istanbul ignore else
         if (!event.defaultPrevented) {
           setOpen(!open);
+          setFocusStrategy('first');
         }
       },
       [open]
@@ -68,13 +72,14 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const handleTriggerKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLButtonElement>) => {
         // istanbul ignore else
-        if (event.key === ArrowDown && !open) {
+        if ([ArrowDown, ArrowUp].includes(event.key) && !open) {
           // prevent page from scrolling if the user triggers the action menu
           // via an "ArrowDown" key press
           event.preventDefault();
           // allow other functions that may consume the event after
           // default is prevented to perform as normal
           event.defaultPrevented = false;
+          setFocusStrategy(event.key === ArrowUp ? 'last' : 'first');
           setOpen(true);
         }
       },
@@ -154,7 +159,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
             ref: actionMenuListRef,
             role: 'menu',
             onAction: handleAction,
-            'aria-labelledby': triggerId
+            'aria-labelledby': triggerId,
+            focusStrategy
           })}
         </AnchoredOverlay>
       </>

@@ -91,7 +91,7 @@ test('should focus menu when opened', async () => {
   });
 });
 
-test('should return focus focus to trigger when closed', async () => {
+test('should return focus to trigger when closed', async () => {
   const user = userEvent.setup();
   render(<ActionMenu {...defaultProps} />);
 
@@ -151,6 +151,39 @@ test('should open menu on arrow down key press', async () => {
 
   await waitFor(() => {
     expect(screen.queryByRole('menu')).toBeVisible();
+  });
+});
+
+test('should set first item active on arrow down key press', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+
+  const triggerButton = screen.getByRole('button', { name: 'Trigger' });
+
+  triggerButton.focus();
+  await user.keyboard('{ArrowDown}');
+
+  await waitFor(() => {
+    // Note: the active class should
+    expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+});
+
+test('should set last item active on arrow up key press', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+
+  const triggerButton = screen.getByRole('button', { name: 'Trigger' });
+
+  triggerButton.focus();
+  await user.keyboard('{ArrowUp}');
+
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[2]).toHaveClass(
+      'ActionListItem--active'
+    );
   });
 });
 
