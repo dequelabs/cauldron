@@ -148,7 +148,7 @@ test('should open menu on arrow down key press', async () => {
   });
 });
 
-test('should trigger onAction when a action list item is clicked', async () => {
+test('should trigger onAction when an action list item is clicked', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   render(
@@ -170,7 +170,29 @@ test('should trigger onAction when a action list item is clicked', async () => {
   });
 });
 
-test('should trigger onAction when a action list item is clicked with keypress', async () => {
+test('should trigger onAction when an action list item has actionKey and is clicked', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList onAction={onAction}>
+        <ActionListItem actionKey="apple">🍎</ActionListItem>
+        <ActionListItem actionKey="banana">🍌</ActionListItem>
+        <ActionListItem actionKey="cantaloupe">🍈</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(onAction).not.toHaveBeenCalled();
+  await user.click(screen.getByRole('menuitem', { name: '🍎' }));
+
+  await waitFor(() => {
+    expect(onAction).toHaveBeenCalledWith('apple', expect.anything());
+  });
+});
+
+test('should trigger onAction when an action list item is clicked with keypress', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   render(
@@ -192,7 +214,7 @@ test('should trigger onAction when a action list item is clicked with keypress',
   });
 });
 
-test('should trigger group onAction when a action list item is clicked', async () => {
+test('should trigger group onAction when an action list item is clicked', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   const notCalledOnAction = jest.fn();
@@ -223,7 +245,36 @@ test('should trigger group onAction when a action list item is clicked', async (
   });
 });
 
-test('should trigger group onAction when a action list item is clicked with keypress', async () => {
+test('should trigger onAction when an action list item has actionKey and is clicked', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList>
+        <ActionListGroup label="Group One" onAction={onAction}>
+          <ActionListItem actionKey="apple">🍎</ActionListItem>
+          <ActionListItem actionKey="banana">🍌</ActionListItem>
+          <ActionListItem actionKey="cantaloupe">🍈</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup label="Group Two">
+          <ActionListItem actionKey="dragonfruit">🐉</ActionListItem>
+          <ActionListItem actionKey="elderberry">🫐</ActionListItem>
+          <ActionListItem actionKey="kiwi">🥝</ActionListItem>
+        </ActionListGroup>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(onAction).not.toHaveBeenCalled();
+  await user.click(screen.getByRole('menuitem', { name: '🍎' }));
+
+  await waitFor(() => {
+    expect(onAction).toHaveBeenCalledWith('apple', expect.anything());
+  });
+});
+
+test('should trigger group onAction when an action list item is clicked with keypress', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   const notCalledOnAction = jest.fn();
@@ -254,7 +305,7 @@ test('should trigger group onAction when a action list item is clicked with keyp
   });
 });
 
-test('should trigger item onAction when a action list item is clicked', async () => {
+test('should trigger item onAction when an action list item is clicked', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   render(
@@ -278,7 +329,7 @@ test('should trigger item onAction when a action list item is clicked', async ()
   });
 });
 
-test('should trigger item onAction when a action list item is clicked with keypress', async () => {
+test('should trigger item onAction when an action list item is clicked with keypress', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   render(
