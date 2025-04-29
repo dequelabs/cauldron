@@ -22,7 +22,7 @@ interface BaseListboxProps
   > {
   navigation?: 'cycle' | 'bound';
   focusStrategy?: 'lastSelected' | 'first' | 'last';
-  focusDisabled?: boolean;
+  focusDisabledOptions?: boolean;
   onActiveChange?: (option: ListboxOption) => void;
   disabled?: boolean;
 }
@@ -74,7 +74,7 @@ const Listbox = forwardRef<
       value,
       navigation = 'bound',
       focusStrategy = 'lastSelected',
-      focusDisabled = false,
+      focusDisabledOptions = false,
       multiselect = false,
       onKeyDown,
       onFocus,
@@ -198,7 +198,7 @@ const Listbox = forwardRef<
         }
 
         event.preventDefault();
-        const enabledOptions = !focusDisabled
+        const enabledOptions = !focusDisabledOptions
           ? options.filter((option) => !isDisabledOption(option))
           : options;
 
@@ -258,7 +258,7 @@ const Listbox = forwardRef<
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLElement>) => {
         if (focusStrategy === 'first') {
-          const firstOption = !focusDisabled
+          const firstOption = !focusDisabledOptions
             ? options.find((option) => !isDisabledOption(option))
             : options[0];
 
@@ -270,7 +270,7 @@ const Listbox = forwardRef<
         }
 
         if (focusStrategy === 'last') {
-          const lastOption = !focusDisabled
+          const lastOption = !focusDisabledOptions
             ? [...options].reverse().find((option) => !isDisabledOption(option))
             : options[options.length - 1];
 
@@ -285,7 +285,7 @@ const Listbox = forwardRef<
           !activeOption ||
           !options.some((option) => option.element === activeOption.element)
         ) {
-          const firstOption = !focusDisabled
+          const firstOption = !focusDisabledOptions
             ? options.find((option) => !isDisabledOption(option))
             : options[0];
           // istanbul ignore else

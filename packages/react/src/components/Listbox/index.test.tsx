@@ -212,9 +212,9 @@ test('should set the first non-disabled option as active on focus', () => {
   );
 });
 
-test('should set the first option as active on focus with focusDisabled set to true', () => {
+test('should set the first option as active on focus with focusDisabledOptions set to true', () => {
   render(
-    <Listbox focusDisabled>
+    <Listbox focusDisabledOptions>
       <ListboxOption disabled>Apple</ListboxOption>
       <ListboxOption>Banana</ListboxOption>
       <ListboxOption>Cantaloupe</ListboxOption>
