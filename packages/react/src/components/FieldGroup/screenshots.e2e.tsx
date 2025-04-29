@@ -37,12 +37,12 @@ test('should have screenshot for FieldGroup with radios', async ({
               value: 'A'
             },
             {
-              id: 'radio-a',
+              id: 'radio-b',
               label: 'Radio A',
               value: 'B'
             },
             {
-              id: 'radio-a',
+              id: 'radio-c',
               label: 'Radio A',
               value: 'C'
             }
