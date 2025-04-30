@@ -1,10 +1,11 @@
-import { autoUpdate, type Placement } from '@floating-ui/dom';
+import { autoUpdate, type Placement, type Coords } from '@floating-ui/dom';
 import React, { forwardRef, useEffect } from 'react';
 import {
   useFloating,
   offset as offsetMiddleware,
   flip as flipMiddleware,
-  autoPlacement as autoPlacementMiddleware
+  autoPlacement as autoPlacementMiddleware,
+  shift as shiftMiddleware
 } from '@floating-ui/react-dom';
 import { type PolymorphicProps } from '../../utils/polymorphicComponent';
 import resolveElement from '../../utils/resolveElement';
@@ -26,6 +27,8 @@ type AnchoredOverlayProps<
   onOpenChange?: (open: boolean) => void;
   /** A callback function that is called when the placement of the overlay changes. */
   onPlacementChange?: (placement: Placement) => void;
+  /** A callback function that is called when the shift of the overlay changes. */
+  onShiftChange?: (coords: Coords) => void;
   /** An optional offset number to position the anchor element from its anchored target. */
   offset?: number;
   /** When set, traps focus within the AnchoredOverlay. */
@@ -65,13 +68,14 @@ const AnchoredOverlay = forwardRef(
       focusTrapOptions,
       onOpenChange,
       onPlacementChange,
+      onShiftChange,
       ...props
     }: AnchoredOverlayProps<Overlay, Target>,
     refProp: React.Ref<Overlay>
   ) => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
-    const { floatingStyles, placement } = useFloating({
+    const { floatingStyles, placement, middlewareData } = useFloating({
       open,
       // default to initial placement on top when placement is auto
       // @ts-expect-error auto placement is not a valid placement for floating-ui
@@ -82,7 +86,8 @@ const AnchoredOverlay = forwardRef(
           ? autoPlacementMiddleware({
               alignment: getAutoAlignment(initialPlacement as 'auto')
             })
-          : flipMiddleware()
+          : flipMiddleware(),
+          shiftMiddleware({ crossAxis: false })
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target),
@@ -112,7 +117,16 @@ const AnchoredOverlay = forwardRef(
       if (typeof onPlacementChange === 'function') {
         onPlacementChange(placement);
       }
-    }, [placement]);
+    }, [onPlacementChange, placement]);
+
+    useEffect(() => {
+      if (typeof onShiftChange === 'function') {
+        onShiftChange({
+          x: middlewareData.shift?.x || 0,
+          y: middlewareData.shift?.y || 0
+        });
+      }
+    }, [onShiftChange, middlewareData.shift?.x, middlewareData.shift?.y]);
 
     return (
       <Component ref={ref} {...props} style={{ ...floatingStyles, ...style }}>

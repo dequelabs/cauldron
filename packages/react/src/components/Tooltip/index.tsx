@@ -60,6 +60,7 @@ export default function Tooltip({
     null
   );
   const [placement, setPlacement] = useState(initialPlacement);
+  const [arrowShift, setArrowShift] = useState<number | null>();
   const hasAriaAssociation = association !== 'none';
 
   // Show the tooltip
@@ -145,6 +146,17 @@ export default function Tooltip({
     };
   }, [target, id, association]);
 
+  const updateArrowShiftPosition = useCallback(({ x }: { x: number }) => {
+    if (variant === 'big' || x === 0) {
+      setArrowShift(null)
+      return
+    }
+
+    // The tooltip shift position is inversely related to the direction
+    // that the arrow needs to shift
+    setArrowShift(x * -1)
+  }, [variant])
+
   return (
     <>
       {(showTooltip || hideElementOnHidden) && isBrowser()
@@ -156,6 +168,7 @@ export default function Tooltip({
               onPlacementChange={setPlacement}
               open={showTooltip && typeof showProp !== 'boolean'}
               onOpenChange={setShowTooltip}
+              onShiftChange={updateArrowShiftPosition}
               className={classnames(
                 'Tooltip',
                 `Tooltip--${placement}`,
@@ -171,7 +184,7 @@ export default function Tooltip({
               offset={8}
               {...props}
             >
-              {variant !== 'big' && <div className="TooltipArrow" />}
+              {variant !== 'big' && <div className="TooltipArrow" style={arrowShift ? { transform: `translateX(${arrowShift}px)` } : undefined} />}
               {children}
             </AnchoredOverlay>,
             (portal && 'current' in portal ? portal.current : portal) ||

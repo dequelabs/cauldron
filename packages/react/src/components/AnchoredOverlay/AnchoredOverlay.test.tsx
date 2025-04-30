@@ -123,6 +123,25 @@ test('should call onPlacementChange with initial placement', () => {
   expect(onPlacementChange).toHaveBeenCalledWith('top');
 });
 
+test('should call onShiftChange with initial shift position', () => {
+  const targetRef = { current: document.createElement('button') };
+  const onShiftChange = jest.fn();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="top"
+      open
+      onShiftChange={onShiftChange}
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(onShiftChange).toHaveBeenCalledWith({ x: 0, y: 0 });
+});
+
 test('should not trap focus when focusTrap is false', async () => {
   const targetRef = { current: document.createElement('button') };
   const user = userEvent.setup();
