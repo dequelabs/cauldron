@@ -26,7 +26,7 @@ reviews:
         - Use well-structured semantic markup over aria-* attributes
         - Use the right semantic markup for the right thing (e.g. a `<p>` element should only be used for actual paragraphs)
         - Follow consistent patterns in their props API compared to other components
-        - Are consistent within the file (e.g. use `ReactNode` consistently instead of a mixture of `ReactNode` and `React.ReactNode`)
+        - Use consistent naming and reference patterns. For example, instead of using `ReactNode` in one place and `React.ReactNode` in another place, the code should just use one or the other.
         - Support customizing text labels or content in order to support translations
         - Primitive ("building block" components like `Button` and `Link`) and Pattern Components (components that compose other components like `Accordion` and `Alert`) should always use `React.forwardRef` to provide direct access to the component's primary element
         - Include a `displayName`
