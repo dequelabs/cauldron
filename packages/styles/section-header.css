@@ -1,0 +1,55 @@
+:root {
+  --section-header-description-color: var(--gray-60);
+}
+
+.cauldron--theme-dark {
+  --section-header-description-color: var(--accent-light);
+}
+
+.SectionHeader {
+  container-type: inline-size;
+}
+
+.SectionHeader__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'heading'
+    'description'
+    'children';
+}
+
+.SectionHeader__actions {
+  margin-top: var(--space-small);
+  grid-area: children;
+}
+
+.SectionHeader .SectionHeader__content .SectionHeader__description {
+  margin: var(--space-smallest) 0 0 0;
+  padding: 0;
+  color: var(--section-header-description-color);
+  font-size: var(--text-size-base);
+  grid-area: description;
+}
+
+.SectionHeader :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  padding: 0;
+}
+
+@container (min-width: 48rem) {
+  .SectionHeader__content {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'heading children'
+      'description children';
+    align-items: start;
+  }
+
+  .SectionHeader__actions {
+    margin: 0;
+    align-self: center;
+    justify-self: end;
+  }
+}
