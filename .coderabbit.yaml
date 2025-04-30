@@ -24,6 +24,7 @@ reviews:
       instructions: |
         Review the React components to ensure they:
         - Use well-structured semantic markup over aria-* attributes
+        - Use the right semantic markup for the right thing (e.g. a `<p>` element should only be used for actual paragraphs)
         - Follow consistent patterns in their props API compared to other components
         - Are consistent within the file (e.g. use `ReactNode` consistently instead of a mixture of `ReactNode` and `React.ReactNode`)
         - Support customizing text labels or content in order to support translations
@@ -35,6 +36,8 @@ reviews:
         - Polymorphic components support using `as` property, providing the capability for components to render as a different component under the hood
         - Require a value or provide a default value when accepting an accessible name prop
         - Require or generate an id automatically when the component needs an id for aria relationships
+        - Prefer accepting a `ReactNode` instead of just a `string` for props passed in that are rendered as descendants of the component
+        - Avoid using `React.cloneElement` when there's a better way
     - path: "packages/styles/**/*.css"
       instructions: |
         Review the CSS files to ensure they:
@@ -45,10 +48,12 @@ reviews:
           - Blocks within a component, such as a date within a calendar, should be delimited by two underscores (e.g. `.Calendar__date`)
           - Modifiers, such as variants or states, are delimited by two dashes (e.g. `.Calendar--variant-large`)
           - Multiple words in element names should be separated by hyphens, not underscores (e.g., `SectionHeader__text-section` not `SectionHeader__textSection`)
+          - Avoid "container" classes like `.pageHeaderContainer` and instead just use the component name (e.g. `.PageHeader`)
         - Define component-specific variables in component-specific CSS files (e.g. `calendar.css`) and NOT in the global variables file (i.e. `variables.css`)
         - Use descriptive variable names to make sure the intended usage is clear (e.g. `--button-background-color-primary`)
-        - Use CSS variables instead of a hard-coded value when reasonable to do. A fallback value can be provided. (e.g. `min-width: var(--button-min-width, 100px)`)
-        - Include light variable values in the `:root` scope and place dark variable values in a `.cauldron-theme-dark` scope
+        - Use CSS variables instead of a hard-coded value for values that a user might reasonably want to configure.
+        - Only specify a default value for `var()` when the CSS variable doesn't already have a default value set.
+        - Include light variable values in the `:root` scope and place dark variable values in a `.cauldron--theme-dark` scope
         - Use `#fff` instead of `--white`
     - path: "packages/styles/variables.css"
       instructions: |
@@ -65,12 +70,13 @@ reviews:
         - Test for all variants (e.g. default, primary, secondary) that are supported by the component
         - Test relevant interactive states (e.g. focus, expanded, disabled)
         - Test different behaviors for functionality related to different layouts (e.g. responsiveness, media queries, overflow)
-        - Test all the props, including even handlers that can be passed in to the component
+        - Test all the props, including event handlers and `ref` (when applicable) that can be passed in to the component
         - Run axe against various variants and states
         - Follow best practices of React Testing Library, in particular:
           - Use `screen` instead of `render`
           - Use the proper query for the situation
           - Query by role when possible
+            - Be as specific as possible (e.g. include the `name` or the `level` for headers)
           - Query by text only when a role is not available
           - Only use query* variants when checking non-existence
           - Use userEvent to simulate events
@@ -80,9 +86,10 @@ reviews:
       instructions: |
         Review the component documentation to ensure:
         - When applicable, a "Related Components" section is present and related components are listed.
-        - Single types should be represented as strings without being wrapped in arrays (e.g., use `type: 'ReactNode'` instead of `type: ['ReactNode']`)
+        - Single types should be represented as strings without being wrapped in arrays (e.g. instead of doing `['ReactNode']`, do `'ReactNode`, but `['string', 'ReactNode'] is okay`)
         - Every component prop is documented
           - Each documented prop has a name, type, and description
+          - When documenting types, avoid redundancies (e.g. `ReactNode` instead of `['string', `ReactNode`]`)
         - Consistency in type declarations across all component properties
         - Documentation examples match the actual component implementation
 
