@@ -54,7 +54,7 @@ reviews:
         - Use CSS variables instead of a hard-coded value for values that a user might reasonably want to configure.
         - Only specify a default value for `var()` when the CSS variable doesn't already have a default value set.
         - Include light variable values in the `:root` scope and place dark variable values in a `.cauldron--theme-dark` scope
-        - Use `#fff` instead of `--white`
+        - Do NOT use the `--white` CSS variable (e.g. `var(--white)`). Instead, they should use `#fff`.
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables file to ensure:
