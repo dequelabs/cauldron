@@ -24,6 +24,8 @@ reviews:
       instructions: |
         Review the React components to ensure they:
         - Use well-structured semantic markup over aria-* attributes
+        - Follow consistent patterns in their props API compared to other components
+        - Are consistent within the file (e.g. use `ReactNode` consistently instead of a mixture of `ReactNode` and `React.ReactNode`)
         - Support customizing text labels or content in order to support translations
         - Primitive ("building block" components like `Button` and `Link`) and Pattern Components (components that compose other components like `Accordion` and `Alert`) should always use `React.forwardRef` to provide direct access to the component's primary element
         - Include a `displayName`
@@ -42,10 +44,16 @@ reviews:
           - Styles always start with the component name, upper-cased (e.g. `.Calendar`)
           - Blocks within a component, such as a date within a calendar, should be delimited by two underscores (e.g. `.Calendar__date`)
           - Modifiers, such as variants or states, are delimited by two dashes (e.g. `.Calendar--variant-large`)
+          - Multiple words in element names should be separated by hyphens, not underscores (e.g., `SectionHeader__text-section` not `SectionHeader__textSection`)
         - Define component-specific variables in component-specific CSS files (e.g. `calendar.css`) and NOT in the global variables file (i.e. `variables.css`)
         - Use descriptive variable names to make sure the intended usage is clear (e.g. `--button-background-color-primary`)
         - Use CSS variables instead of a hard-coded value when reasonable to do. A fallback value can be provided. (e.g. `min-width: var(--button-min-width, 100px)`)
         - Include light variable values in the `:root` scope and place dark variable values in a `.cauldron-theme-dark` scope
+        - Use `#fff` instead of `--white`
+    - path: "packages/styles/variables.css"
+      instructions: |
+        Review this global CSS variables file to ensure:
+        - No new text size variables are added--these are now all defined in typography.css
     - path: "packages/react/src/components/Icon/icons/**/*.svg"
       instructions: |
         Review the SVG files to ensure they:
@@ -68,6 +76,14 @@ reviews:
           - Use userEvent to simulate events
           - Use find* when possible, rather than waitFor
           - Use explicit assertions with get* variants
+    - path: "docs/pages/components/**/*.mdx"
+      instructions: |
+        Review the component documentation to ensure:
+        - When applicable, a "Related Components" section is present and related components are listed.
+        - Single types should be represented as strings without being wrapped in arrays (e.g., use `type: 'ReactNode'` instead of `type: ['ReactNode']`)
+        - Every property is documented
+        - Consistency in type declarations across all component properties
+        - Documentation examples match the actual component implementation
 
   abort_on_close: true
   disable_cache: false
@@ -92,7 +108,7 @@ reviews:
       enabled: true
       timeout_ms: 90000
     languagetool:
-      enabled: false
+      enabled: true
       enabled_rules: []
       disabled_rules: []
       enabled_categories: []
