@@ -75,7 +75,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         role={undefined}
         // aria-multiselectable is valid for listbox roles, but not list or menu roles
         aria-multiselectable={
-          actionListContext.role === 'menu' ? null : undefined
+          actionListContext.role === 'listbox' ? undefined : null
         }
         className={classnames('ActionList', className)}
         {...props}
