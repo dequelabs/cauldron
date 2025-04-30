@@ -92,6 +92,7 @@ reviews:
           - When documenting types, avoid redundancies (e.g. `ReactNode` instead of `['string', `ReactNode`]`)
         - Consistency in type declarations across all component properties
         - Documentation examples match the actual component implementation
+        - Text that is passed in as props is spelled correctly
 
   abort_on_close: true
   disable_cache: false
