@@ -81,7 +81,8 @@ reviews:
         Review the component documentation to ensure:
         - When applicable, a "Related Components" section is present and related components are listed.
         - Single types should be represented as strings without being wrapped in arrays (e.g., use `type: 'ReactNode'` instead of `type: ['ReactNode']`)
-        - Every property is documented
+        - Every component prop is documented
+          - Each documented prop has a name, type, and description
         - Consistency in type declarations across all component properties
         - Documentation examples match the actual component implementation
 
