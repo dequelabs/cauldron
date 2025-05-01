@@ -65,7 +65,7 @@ reviews:
         Review the SVG files to ensure they:
         - Use the `currentColor` attribute for `fill`, `stroke`, or any other color related attributes
         - Do not have any namespace attributes like `xlmns:*`
-    - path: "packages/react/src/components/*.test.tsx"
+    - path: "packages/react/src/components/**/*.test.tsx"
       instructions: |
         Review the component tests to ensure they:
         - Test for all variants (e.g. default, primary, secondary) that are supported by the component
