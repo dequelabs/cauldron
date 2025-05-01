@@ -30,7 +30,7 @@ reviews:
         - Support customizing text labels or content in order to support translations
         - Primitive ("building block" components like `Button` and `Link`) and Pattern Components (components that compose other components like `Accordion` and `Alert`) should always use `React.forwardRef` to provide direct access to the component's primary element
         - Include a `displayName`
-        - Do not use container CSS class names. Prefer using just the component name (e.g., `PageHeader`) rather than container-specific names like `pageHeaderContainerContext` or even `PageHeader__container`.
+        - Do NOT use container CSS class names. Prefer using just the component name (e.g., `PageHeader`). DO NOT use names like `pageHeaderContainerContext` or `PageHeader__container`.
         - Are function-based (i.e. do not use class components)
         - Are named using Pascal case
         - Include Typescript types for component props
@@ -56,7 +56,7 @@ reviews:
           - Blocks within a component, such as a date within a calendar, should be delimited by two underscores (e.g. `.Calendar__date`)
           - Modifiers, such as variants or states, are delimited by two dashes (e.g. `.Calendar--variant-large`)
           - Multiple words in element names should be separated by hyphens, not underscores (e.g., `SectionHeader__text-section` not `SectionHeader__textSection`)
-        - Do not use container CSS class names. Prefer using just the component name (e.g., `.PageHeader`) rather than container-specific names like `.pageHeaderContainerContext` or even `.PageHeader__container`.
+        - Do NOT use container CSS class names. Prefer using just the component name (e.g., `.PageHeader`). DO NOT use names like `.pageHeaderContainerContext` or `.PageHeader__container`.
         - Define component-specific variables in component-specific CSS files (e.g. `calendar.css`) and NOT in the global variables file (i.e. `variables.css`)
         - Use descriptive variable names to make sure the intended usage is clear (e.g. `--button-background-color-primary`)
         - Use CSS variables instead of a hard-coded value for values that a user might reasonably want to configure.
@@ -68,7 +68,7 @@ reviews:
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables file to ensure:
-        - No new text size variables are added--these are now all defined in typography.css
+        - No new text size variables are added--these are now all defined in typography.css.
     - path: "packages/react/src/components/Icon/icons/**/*.svg"
       instructions: |
         Review the SVG files to ensure they:
@@ -77,7 +77,7 @@ reviews:
     - path: "packages/react/src/components/**/*.test.tsx"
       instructions: |
         Review the component tests to ensure they:
-        - Test for all variants (e.g. default, primary, secondary) that are supported by the component
+        - Test each value for the `variant` prop that can be provided (e.g. `primary`, `secondary`, `default`)
         - Test relevant interactive states (e.g. focus, expanded, disabled)
         - Test different behaviors for functionality related to different layouts (e.g. responsiveness, media queries, overflow)
         - Test all the props, including event handlers and `ref` (when applicable) that can be passed in to the component
