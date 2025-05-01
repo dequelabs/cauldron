@@ -30,7 +30,6 @@ reviews:
         - Support customizing text labels or content in order to support translations
         - Primitive ("building block" components like `Button` and `Link`) and Pattern Components (components that compose other components like `Accordion` and `Alert`) should always use `React.forwardRef` to provide direct access to the component's primary element
         - Include a `displayName`
-        - Do NOT use container CSS class names. Prefer using just the component name (e.g., `PageHeader`). DO NOT use names like `pageHeaderContainerContext` or `PageHeader__container`.
         - Are function-based (i.e. do not use class components)
         - Are named using Pascal case
         - Include Typescript types for component props
@@ -56,7 +55,6 @@ reviews:
           - Blocks within a component, such as a date within a calendar, should be delimited by two underscores (e.g. `.Calendar__date`)
           - Modifiers, such as variants or states, are delimited by two dashes (e.g. `.Calendar--variant-large`)
           - Multiple words in element names should be separated by hyphens, not underscores (e.g., `SectionHeader__text-section` not `SectionHeader__textSection`)
-        - Do NOT use container CSS class names. Prefer using just the component name (e.g., `.PageHeader`). DO NOT use names like `.pageHeaderContainerContext` or `.PageHeader__container`.
         - Define component-specific variables in component-specific CSS files (e.g. `calendar.css`) and NOT in the global variables file (i.e. `variables.css`)
         - Use descriptive variable names to make sure the intended usage is clear (e.g. `--button-background-color-primary`)
         - Use CSS variables instead of a hard-coded value for values that a user might reasonably want to configure.
@@ -65,6 +63,7 @@ reviews:
         - Do NOT use the `--white` CSS variable (e.g. `var(--white)`). Instead, they should use `#fff`.
         - Avoid using abbreviations when naming things like variables and classes
         - Prefer `width: auto` over `width: unset`
+        - If a container CSS class is used (e.g. `.container`, `.pageHeaderContainer`, `.wrapper`, `.pageHeaderWrapper`), suggest that the component name should be used instead (e.g. `PageHeader`)
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables file to ensure:
