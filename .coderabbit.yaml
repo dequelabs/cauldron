@@ -20,7 +20,7 @@ reviews:
   labeling_instructions: []
   path_filters: []
   path_instructions:
-    - path: "packages/react/src/components/!(*.*).tsx"
+    - path: "packages/react/src/components/**/!(*.*).tsx"
       instructions: |
         Review the React components to ensure they:
         - Use well-structured semantic markup over aria-* attributes
@@ -30,6 +30,7 @@ reviews:
         - Support customizing text labels or content in order to support translations
         - Primitive ("building block" components like `Button` and `Link`) and Pattern Components (components that compose other components like `Accordion` and `Alert`) should always use `React.forwardRef` to provide direct access to the component's primary element
         - Include a `displayName`
+        - Avoid "container" CSS classes like `pageHeaderContainer` and instead just use the component name (e.g. `PageHeader`)
         - Are function-based (i.e. do not use class components)
         - Are named using Pascal case
         - Include Typescript types for component props
