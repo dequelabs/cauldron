@@ -45,6 +45,7 @@ reviews:
         - Avoid one line `if` statements
         - Prefer verbs for function names and nouns for variable names
         - Avoid changes that break prop API contracts
+        - Do NOT use a CSS class names like `container` or `pageHeaderContainer` for the root HTML element. Instead, use the component name (e.g. `PageHeader`) without `container`.
     - path: "packages/styles/**/*.css"
       instructions: |
         Review the CSS files to ensure they:
@@ -54,7 +55,8 @@ reviews:
           - Styles always start with the component name, upper-cased (e.g. `.Calendar`)
           - Blocks within a component, such as a date within a calendar, should be delimited by two underscores (e.g. `.Calendar__date`)
           - Modifiers, such as variants or states, are delimited by two dashes (e.g. `.Calendar--variant-large`)
-          - Multiple words in element names should be separated by hyphens, not underscores (e.g., `SectionHeader__text-section` not `SectionHeader__textSection`)
+          - Multiple words in element names should be separated by hyphens, not underscores (e.g. `.SectionHeader__text-section` not `.SectionHeader__textSection`)
+          - If the class is used on the root HTML element of a component, it should use the component name (e.g. `.PageHeader`). It should NOT have a `container` suffix.
         - Define component-specific variables in component-specific CSS files (e.g. `calendar.css`) and NOT in the global variables file (i.e. `variables.css`)
         - Use descriptive variable names to make sure the intended usage is clear (e.g. `--button-background-color-primary`)
         - Use CSS variables instead of a hard-coded value for values that a user might reasonably want to configure.
@@ -63,7 +65,6 @@ reviews:
         - Do NOT use the `--white` CSS variable (e.g. `var(--white)`). Instead, they should use `#fff`.
         - Avoid using abbreviations when naming things like variables and classes
         - Prefer `width: auto` over `width: unset`
-        - If a container CSS class is used (e.g. `.container`, `.pageHeaderContainer`, `.wrapper`, `.pageHeaderWrapper`), suggest that the component name should be used instead (e.g. `PageHeader`)
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables file to ensure:
