@@ -33,8 +33,8 @@
 
   --step-current-indicator-background: #fff;
   --step-current-indicator-color: var(--accent-dark);
-  --step-current-indicator-shadow: 0 0 0 2px var(--accent-dark),
-    0 0 0 4px var(--accent-info);
+  --step-current-indicator-shadow:
+    0 0 0 2px var(--accent-dark), 0 0 0 4px var(--accent-info);
   --step-current-complete-line-border-color: var(--accent-info);
 
   --step-complete-indicator-background: var(--accent-info);
@@ -139,7 +139,9 @@
 }
 
 .Stepper__step--complete-indicator:before {
-  content: '';
+  content: counter(stepper);
+  color: transparent;
+  position: absolute;
 }
 
 .Stepper__step--complete-indicator svg {
