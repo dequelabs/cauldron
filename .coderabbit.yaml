@@ -39,6 +39,13 @@ reviews:
         - Require or generate an id automatically when the component needs an id for aria relationships
         - Prefer accepting a `ReactNode` instead of just a `string` for props passed in that are rendered as descendants of the component
         - Avoid using `React.cloneElement` when there's a better way
+        - Avoid using abbreviations when naming things like variables and functions
+        - Prefer @ts-expect-error over @ts-ignore
+        - Conform to WCAG 2.2aa accessibility requirements, such as ensuring all interactive elements have a name and the correct role
+        - Use descriptive variable and function names, especially when it might be ambiguous (e.g. prefer `handleRemovePill` over just `handleRemove`)
+        - Avoid one line `if` statements
+        - Prefer verbs for function names and nouns for variable names
+        - Avoid changes that break prop API contracts
     - path: "packages/styles/**/*.css"
       instructions: |
         Review the CSS files to ensure they:
@@ -56,6 +63,8 @@ reviews:
         - Only specify a default value for `var()` when the CSS variable doesn't already have a default value set.
         - Include light variable values in the `:root` scope and place dark variable values in a `.cauldron--theme-dark` scope
         - Do NOT use the `--white` CSS variable (e.g. `var(--white)`). Instead, they should use `#fff`.
+        - Avoid using abbreviations when naming things like variables and classes
+        - Prefer `width: auto` over `width: unset`
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables file to ensure:
@@ -83,6 +92,7 @@ reviews:
           - Use userEvent to simulate events
           - Use find* when possible, rather than waitFor
           - Use explicit assertions with get* variants
+        - Avoid using abbreviations when naming things like variables and functions
     - path: "docs/pages/components/**/*.mdx"
       instructions: |
         Review the component documentation to ensure:
@@ -94,6 +104,7 @@ reviews:
         - Consistency in type declarations across all component properties
         - Documentation examples match the actual component implementation
         - Text that is passed in as props is spelled correctly
+        - Headings are cased consistently (e.g. "Multiselect Disabled" instead of "Multiselect disabled")
 
   abort_on_close: true
   disable_cache: false
