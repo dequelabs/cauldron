@@ -2,7 +2,7 @@ language: en-US
 tone_instructions: You must communicate respectfully, succinctly, and with a helpful attitude.
 early_access: false
 reviews:
-  profile: chill
+  profile: assertive
   high_level_summary: false
   high_level_summary_placeholder: '@coderabbitai summary'
   high_level_summary_in_walkthrough: true
