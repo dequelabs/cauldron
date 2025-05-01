@@ -64,6 +64,7 @@ reviews:
         - Do NOT use the `--white` CSS variable (e.g. `var(--white)`). Instead, they should use `#fff`.
         - Avoid using abbreviations when naming things like variables and classes
         - Prefer `width: auto` over `width: unset`
+        - Try and use existing classes and descendent selectors when reasonable to do so, instead of introducing additional classes that library users will not use.
     - path: "packages/styles/variables.css"
       instructions: |
         Review this global CSS variables against the following rules:
