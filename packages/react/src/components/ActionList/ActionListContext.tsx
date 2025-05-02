@@ -34,7 +34,7 @@ function ActionListProvider({
   onAction,
   children
 }: ActionListProviderProps): React.JSX.Element {
-  const { Provider } = ActionListContext as React.Context<ActionListContext>;
+  const { Provider } = ActionListContext;
   const contextValue: ActionListContext = useMemo(
     () => ({
       role,
