@@ -8,7 +8,7 @@ interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Description for the empty state. */
   description: React.ReactNode;
 
-  /** Slot for primary action. */
+  /** Slot for primary actions. */
   primaryActions?: React.ReactNode;
 
   /** Slot for secondary actions. */

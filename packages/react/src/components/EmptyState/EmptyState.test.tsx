@@ -14,11 +14,6 @@ test('should render empty state with string heading', () => {
   expect(
     screen.getByRole('heading', { name: 'No items found', level: 2 })
   ).toBeInTheDocument();
-  expect(
-    screen.getByText(
-      "Try adjusting your filters to find what you're looking for."
-    )
-  ).toBeInTheDocument();
 });
 
 test('should render empty state with description', () => {
@@ -26,7 +21,7 @@ test('should render empty state with description', () => {
 
   expect(
     screen.getByText(
-      "Try adjusting your filters to find what you're looking for."
+      `Try adjusting your filters to find what you're looking for.`
     )
   ).toBeInTheDocument();
 });
