@@ -1,15 +1,18 @@
 import React from 'react';
 import { test, expect } from '../../../../../e2e/screenshots';
-import { setActive, setTheme } from '../../../../../e2e/helpers/playwright';
-import { Combobox, ComboboxOption, FieldWrap } from '../../../';
+import { setTheme } from '../../../../../e2e/helpers/playwright';
+import { Combobox, ComboboxOption } from '../../../';
 
 test('should have screenshot for Combobox', async ({ mount, page }) => {
   await page.addStyleTag({
     // ensure screenshots are able to capture the boundaries of an expanded combobox
-    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+    content: `
+      .Combobox__listbox--open.Combobox__listbox { position: relative !important; }
+      body.cauldron--theme-dark { background-color: var(--accent-medium); }
+    `
   });
   const component = await mount(
-    <FieldWrap>
+    <div>
       <Combobox label="Combobox">
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
@@ -25,7 +28,7 @@ test('should have screenshot for Combobox', async ({ mount, page }) => {
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-    </FieldWrap>
+    </div>
   );
 
   await component.getByRole('combobox', { name: 'Focus' }).focus();
@@ -42,10 +45,13 @@ test('should have screenshot for Combobox[multiselect]', async ({
 }) => {
   await page.addStyleTag({
     // ensure screenshots are able to capture the boundaries of an expanded combobox
-    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+    content: `
+      .Combobox__listbox--open.Combobox__listbox { position: relative !important; }
+      body.cauldron--theme-dark { background-color: var(--accent-medium); }
+    `
   });
   const component = await mount(
-    <FieldWrap>
+    <div>
       <Combobox label="Combobox" multiselect>
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
@@ -71,7 +77,7 @@ test('should have screenshot for Combobox[multiselect]', async ({
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-    </FieldWrap>
+    </div>
   );
 
   await component.getByRole('combobox', { name: 'Focus' }).focus();
@@ -85,10 +91,13 @@ test('should have screenshot for Combobox[multiselect]', async ({
 test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
   await page.addStyleTag({
     // ensure screenshots are able to capture the boundaries of an expanded combobox
-    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+    content: `
+      .Combobox__listbox--open.Combobox__listbox { position: relative !important; }
+      body.cauldron--theme-dark { background-color: var(--accent-medium); }
+    `
   });
   const component = await mount(
-    <FieldWrap>
+    <div>
       <Combobox label="Combobox" error="This field has an error.">
         <ComboboxOption>Apple</ComboboxOption>
         <ComboboxOption>Banana</ComboboxOption>
@@ -104,7 +113,7 @@ test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
         <ComboboxOption>Banana</ComboboxOption>
         <ComboboxOption>Cucumber</ComboboxOption>
       </Combobox>
-    </FieldWrap>
+    </div>
   );
 
   await component.getByRole('combobox', { name: 'Focus' }).focus();
