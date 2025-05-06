@@ -1,0 +1,205 @@
+language: en-US
+tone_instructions: You must communicate respectfully, succinctly, and with a helpful attitude.
+early_access: false
+reviews:
+  profile: assertive
+  high_level_summary: false
+  high_level_summary_placeholder: '@coderabbitai summary'
+  high_level_summary_in_walkthrough: true
+  auto_title_placeholder: '@coderabbitai'
+  changed_files_summary: false
+  sequence_diagrams: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: false
+  auto_apply_labels: false
+  suggested_reviewers: true
+  auto_assign_reviewers: false
+  poem: true
+  labeling_instructions: []
+  path_filters: []
+  path_instructions:
+    - path: "packages/react/src/components/**/!(*.*).tsx"
+      instructions: |
+        Review the React components against the following rules:
+        - Use well-structured semantic markup over aria-* attributes
+        - Use the right semantic markup for the right thing (e.g. a `<p>` element should only be used for actual paragraphs)
+        - Maintain consistent prop naming, ordering, and structure across similar components
+        - Use consistent variable naming and reference patterns (e.g. use either `ReactNode` or `React.ReactNode` consistently)
+        - Accept text content as props to support translations instead of hardcoding text
+        - Use `React.forwardRef` for primitive and pattern components to expose the primary element
+        - Include a `displayName` for each component
+        - Write components as functions, not classes
+        - Name components using Pascal case
+        - Define TypeScript types for all component props
+        - Implement the `as` property for polymorphic components
+        - Provide a value or default for accessible name props
+        - Generate or require an id for aria relationships
+        - Accept `ReactNode` instead of `string` for rendered content props
+        - Avoid using `React.cloneElement` when better alternatives exist
+        - Use full words instead of abbreviations in names
+        - Use @ts-expect-error instead of @ts-ignore
+        - Ensure all interactive elements have a name and correct role for WCAG 2.2aa compliance
+        - Use specific, action-oriented names for functions and clear, purpose-indicating names for variables (e.g. use `handleRemovePill` instead of `handleRemove`)
+        - Write multi-line `if` statements, even if the body has a single operation
+        - Use verbs for function names and nouns for variable names
+        - Maintain backward compatibility in prop APIs (e.g. preserve existing prop names, types, and default values when modifying components)
+        - Use the component name as the root element's class name (e.g. `PageHeader` not `wrapper`)
+    - path: "packages/styles/**/*.css"
+      instructions: |
+        Review the CSS files against the following rules:
+        - Omit units for zero values (e.g. use `padding: 0` not `padding: 0px`)
+        - Avoid CSS prefixes (e.g. -webkit or -moz) unless necessary
+        - Follow BEM naming conventions:
+          - Start styles with the component name in upper case (e.g. `.Calendar`)
+          - Use double underscores for blocks (e.g. `.Calendar__date`)
+          - Use double dashes for modifiers (e.g. `.Calendar--variant-large`)
+          - Use hyphens for multi-word elements (e.g. `.SectionHeader__text-section`)
+        - Define component variables in component-specific CSS files
+        - Use descriptive variable names (e.g. `--button-background-color-primary`)
+        - Use CSS variables for values that might need theme customization (colors, spacing, etc.)
+        - Set default values for `var()` only when no default exists
+        - Place light variables in `:root` and dark variables in `.cauldron--theme-dark`
+        - Use `#fff` instead of `var(--white)`
+        - Avoid abbreviations in variable and class names
+        - Use `width: auto` instead of `width: unset`
+    - path: "packages/styles/variables.css"
+      instructions: |
+        Review this global CSS variables against the following rules:
+        - Define text size variables in typography.css only
+    - path: "packages/react/src/components/Icon/icons/**/*.svg"
+      instructions: |
+        Review the SVG files against the following rules:
+        - Use `currentColor` for fill, stroke, and color attributes
+        - Remove all namespace attributes (e.g. `xmlns:*`)
+    - path: "packages/react/src/components/**/*.test.tsx"
+      instructions: |
+        Review the component tests against the following rules:
+        - Test all variant prop values (e.g. `primary`, `secondary`, `default`)
+        - Test all interactive states (e.g. focus, expanded, disabled)
+        - Test layout-related behaviors (e.g. responsiveness, media queries, overflow)
+        - Test all props, including event handlers and refs
+        - Run axe tests for all variants and states
+        - Follow React Testing Library best practices:
+          - Use `screen` instead of `render`
+          - Use role-based queries first, then text-based queries, and finally test-id queries as a last resort
+          - Use query* only for checking non-existence
+          - Use userEvent for event simulation
+          - Use find* instead of waitFor
+          - Use explicit assertions with get* variants
+        - Avoid abbreviations in variable and function names
+    - path: "docs/pages/components/**/*.mdx"
+      instructions: |
+        Review the component documentation against the following rules:
+        - Include a "Related Components" section when applicable
+        - Represent single types as strings without arrays (e.g. use `'ReactNode'` not `['ReactNode']`)
+        - Document all component props with name, type, and description
+        - Avoid redundant type declarations
+        - Maintain consistent type declarations across properties
+        - Ensure documentation examples match implementation
+        - Verify correct spelling in prop text
+        - Use consistent heading case (e.g. "Multiselect Disabled" not "Multiselect disabled")
+
+  abort_on_close: true
+  disable_cache: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    ignore_title_keywords: []
+    labels: []
+    drafts: true
+    base_branches: []
+  finishing_touches:
+    docstrings:
+      enabled: true
+  tools:
+    shellcheck:
+      enabled: true
+    ruff:
+      enabled: false
+    markdownlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+    languagetool:
+      enabled: true
+      enabled_rules: []
+      disabled_rules: []
+      enabled_categories: []
+      disabled_categories: []
+      enabled_only: false
+      level: default
+    biome:
+      enabled: false
+    hadolint:
+      enabled: false
+    swiftlint:
+      enabled: false
+    phpstan:
+      enabled: false
+      level: default
+    golangci-lint:
+      enabled: false
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: false
+    checkov:
+      enabled: true
+    detekt:
+      enabled: false
+    eslint:
+      enabled: false
+    rubocop:
+      enabled: false
+    buf:
+      enabled: false
+    regal:
+      enabled: false
+    actionlint:
+      enabled: true
+    pmd:
+      enabled: false
+    cppcheck:
+      enabled: false
+    semgrep:
+      enabled: false
+    circleci:
+      enabled: false
+    sqlfluff:
+      enabled: false
+    prismaLint:
+      enabled: false
+    oxc:
+      enabled: false
+    shopifyThemeCheck:
+      enabled: false
+chat:
+  auto_reply: true
+  integrations:
+    jira:
+      usage: auto
+    linear:
+      usage: auto
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  jira:
+    usage: auto
+    project_keys: []
+  linear:
+    usage: auto
+    team_keys: []
+  pull_requests:
+    scope: auto
+code_generation:
+  docstrings:
+    language: en-US
+    path_instructions: []
