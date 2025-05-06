@@ -16,7 +16,7 @@ reviews:
   auto_apply_labels: false
   suggested_reviewers: true
   auto_assign_reviewers: false
-  poem: true
+  poem: false
   labeling_instructions: []
   path_filters: []
   path_instructions:
