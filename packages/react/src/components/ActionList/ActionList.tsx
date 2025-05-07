@@ -74,6 +74,8 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
         // aria-multiselectable is valid for listbox roles, but not list or menu roles
+        // and we need to prevent aria-multiselectable from being set on Listbox when
+        // we're not in a listbox context
         aria-multiselectable={
           actionListContext.role === 'listbox' ? undefined : null
         }
