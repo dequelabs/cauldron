@@ -88,10 +88,6 @@ ul.Component__list li a {
   top: 0;
 }
 
-.Component > .Panel {
-  padding: var(--space-small);
-}
-
 .Panel.Component__hero {
   background-color: var(--docs-hero-background-color);
   margin: var(--space-small) 0;
