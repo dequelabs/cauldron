@@ -40,7 +40,7 @@
 .ActionListSeparator {
   padding-bottom: var(--space-smallest);
   margin-bottom: var(--space-smallest);
-  border-bottom: 1px solid var(--action-menu-border-color);
+  border-bottom: 1px solid var(--actionmenu-border-color);
 }
 
 .ActionList > li:last-child .ActionListGroup {
