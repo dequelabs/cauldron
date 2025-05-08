@@ -53,7 +53,6 @@
   align-items: flex-start;
   color: var(--stepper-color);
   background-color: var(--stepper-background-color);
-  counter-reset: stepper;
   list-style-type: none;
   margin: 0 auto;
 }
@@ -97,8 +96,7 @@
 
 .Stepper__step-indicator:before {
   font-size: var(--text-size-small);
-  counter-increment: stepper;
-  content: counter(stepper);
+  content: counter(list-item);
 }
 
 .Stepper__step-label {
@@ -139,12 +137,7 @@
 }
 
 .Stepper__step--complete-indicator:before {
-  content: counter(stepper);
-  color: transparent;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  content: '';
 }
 .Stepper__step--complete-indicator svg {
   height: var(--step-indicator-content-size);

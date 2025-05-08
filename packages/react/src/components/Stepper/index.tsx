@@ -103,12 +103,11 @@ export const Step = (props: StepProps) => {
 
 Step.displayName = 'Step';
 
-interface StepperProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const Stepper = ({ children, className, ...other }: StepperProps) => (
+const Stepper = ({
+  children,
+  className,
+  ...other
+}: React.HTMLAttributes<HTMLOListElement>) => (
   <ol className={classNames('Stepper', className)} {...other}>
     {children}
   </ol>
