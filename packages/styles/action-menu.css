@@ -1,20 +1,20 @@
 :root {
-  --action-menu-border-color: var(--gray-30);
-  --action-menu-background-color: #fff;
+  --actionmenu-border-color: var(--gray-30);
+  --actionmenu-background-color: #fff;
 }
 
 .cauldron--theme-dark {
-  --action-menu-background-color: var(--accent-medium);
+  --actionmenu-background-color: var(--accent-medium);
 }
 
 .ActionMenu {
-  border: 1px solid var(--action-menu-border-color);
-  background-color: var(--action-menu-background-color);
+  border: 1px solid var(--actionmenu-border-color);
+  background-color: var(--actionmenu-background-color);
   padding: var(--space-smallest) 0;
   border-radius: 8px;
-  width: var(--action-menu-width);
-  min-width: var(--action-menu-min-width, 10rem);
-  max-height: var(--action-menu-height);
+  width: var(--actionmenu-width);
+  min-width: var(--actionmenu-min-width, 10rem);
+  max-height: var(--actionmenu-height);
   box-shadow: var(--drop-shadow-overlay);
   overflow-y: auto;
 }
