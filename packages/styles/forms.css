@@ -199,11 +199,20 @@ textarea.Field--has-error:focus:hover,
   color: var(--field-listbox-selected-text-color);
 }
 
-.Error {
+.Error,
+.Field__error {
+  --icon-size: var(--text-size-base);
   color: var(--field-error-text-color);
+  display: flex;
+  gap: var(--space-half);
   text-align: left;
   font-size: var(--text-size-smallest);
   font-weight: var(--font-weight-normal);
+}
+
+.Field__error {
+  font-size: var(--text-size-small);
+  margin-bottom: var(--space-smallest);
 }
 
 .Checkbox__wrap .Error {
@@ -274,10 +283,19 @@ textarea.Field--has-error:focus:hover,
   align-items: center;
   text-align: left;
   color: var(--field-label-text-color);
-  margin-bottom: var(--space-half);
+  margin-bottom: var(--space-smallest);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   cursor: default;
+}
+
+.Field__description {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: var(--text-size-small);
+  color: var(--field-label-description-text-color);
+  margin-bottom: var(--space-smallest);
 }
 
 .Field__label + .Checkbox__wrap {

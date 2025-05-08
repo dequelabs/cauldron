@@ -33,8 +33,8 @@
 
   --step-current-indicator-background: #fff;
   --step-current-indicator-color: var(--accent-dark);
-  --step-current-indicator-shadow: 0 0 0 2px var(--accent-dark),
-    0 0 0 4px var(--accent-info);
+  --step-current-indicator-shadow:
+    0 0 0 2px var(--accent-dark), 0 0 0 4px var(--accent-info);
   --step-current-complete-line-border-color: var(--accent-info);
 
   --step-complete-indicator-background: var(--accent-info);
@@ -53,7 +53,6 @@
   align-items: flex-start;
   color: var(--stepper-color);
   background-color: var(--stepper-background-color);
-  counter-reset: stepper;
   list-style-type: none;
   margin: 0 auto;
 }
@@ -97,8 +96,7 @@
 
 .Stepper__step-indicator:before {
   font-size: var(--text-size-small);
-  counter-increment: stepper;
-  content: counter(stepper);
+  content: counter(list-item);
 }
 
 .Stepper__step-label {
@@ -141,7 +139,6 @@
 .Stepper__step--complete-indicator:before {
   content: '';
 }
-
 .Stepper__step--complete-indicator svg {
   height: var(--step-indicator-content-size);
   width: var(--step-indicator-content-size);
