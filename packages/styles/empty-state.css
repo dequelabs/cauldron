@@ -8,12 +8,13 @@
 
 .EmptyState > :where(h1, h2, h3, h4, h5, h6) {
   font-size: var(--text-size-heading-3);
+  line-height: var(--line-height-heading-3);
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .EmptyState > :where(h1, h2, h3, h4, h5, h6) + :where(p) {
-  margin-top: var(--space-smallest);
+  margin-top: 0.25rem;
   margin-bottom: 0;
 }
 
