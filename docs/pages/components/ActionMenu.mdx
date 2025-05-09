@@ -129,9 +129,11 @@ An action item can optionally include a trailing or leading icon for an addition
   }
 >
   <ActionList>
-    <ActionListItem leadingIcon="copy">Copy</ActionListItem>
-    <ActionListItem leadingIcon="pencil">Edit</ActionListItem>
-    <ActionListItem leadingIcon="share">Share</ActionListItem>
+    <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+    <ActionListItem trailingIcon="pencil">Trailing icon</ActionListItem>
+    <ActionListItem leadingIcon="share" trailingIcon="pencil">
+      Leading and trailing icon
+    </ActionListItem>
   </ActionList>
 </ActionMenu>
 ```
