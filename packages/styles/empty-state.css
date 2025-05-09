@@ -1,9 +1,9 @@
 :root {
-  --emptystate-border-color: var(--gray-30);
+  --empty-state-border-color: var(--gray-30);
 }
 
 .cauldron--theme-dark {
-  --emptystate-border-color: var(--accent-light);
+  --empty-state-border-color: var(--accent-light);
 }
 
 .EmptyState > :where(h1, h2, h3, h4, h5, h6) {
@@ -25,5 +25,5 @@
 .EmptyState__secondary {
   margin-top: var(--space-small);
   padding-top: var(--space-small);
-  border-top: 1px solid var(--emptystate-border-color);
+  border-top: 1px solid var(--empty-state-border-color);
 }
