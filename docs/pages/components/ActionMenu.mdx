@@ -1,6 +1,6 @@
 ---
 title: ActionMenu
-description: A dropdown menu component that displays an ActionList when with actions.
+description: A dropdown menu component that displays an ActionList with actions.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ActionMenu/ActionMenu.tsx
 ---
 
@@ -53,7 +53,7 @@ A simple action menu with a button trigger:
 </ActionMenu>
 ```
 
-The `trigger` property is a render function that can render any type of interactive control and can be fully customized for different purposes, for example an `IconButton` for more compact user interfaces:
+The `trigger` property is a render function that can render any type of interactive control and can be fully customized for different purposes, for example, an `IconButton` for more compact user interfaces:
 
 ```jsx example
 <ActionMenu
@@ -138,7 +138,7 @@ An action item can optionally include a trailing or leading icon for an addition
 
 ### Handling Actions
 
-The `ActionMenu` component can handle actions in multiple different ways. When an action is triggered, there are few different ways to handle the action:
+The `ActionMenu` component can handle actions in multiple ways. When an action is triggered, there are a few different ways to handle the action:
 
 #### Action Handlers
 
@@ -311,7 +311,7 @@ function MultiSelectionExample() {
 
 ### Mixed Selections
 
-An `ActionMenu` can also contain groupings that have different sets of selections.
+An `ActionMenu` can also contain groupings that have different sets of selections:
 
 ```jsx example
 function MixedSelectionExample() {
@@ -366,7 +366,7 @@ function MixedSelectionExample() {
 
 ### Links
 
-`ActionMenu` can also display links within its action list to navigate to the specified url when that action is activated:
+`ActionMenu` can also display links within its action list to navigate to the specified URL when that action is activated:
 
 ```jsx example
 <ActionMenu

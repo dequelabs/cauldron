@@ -61,7 +61,7 @@ test('should render as a group when in listbox context', () => {
   expect(group).toHaveAccessibleName('Group Name');
 });
 
-test('should trigger onAction when a action list item is clicked within the group', async () => {
+test('should trigger onAction when an action list item is clicked within the group', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
   render(<ActionListGroup onAction={onAction} {...defaultProps} />, {
