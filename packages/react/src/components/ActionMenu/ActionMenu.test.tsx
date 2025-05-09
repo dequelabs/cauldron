@@ -111,9 +111,7 @@ test('should close menu when an action list item is selected', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   await user.click(screen.getByText('Item 2'));
 
-  await waitFor(() => {
-    expect(screen.queryByRole('menu', { hidden: true })).not.toBeVisible();
-  });
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
 });
 
 test('should close menu when clicked outside', async () => {
@@ -123,9 +121,7 @@ test('should close menu when clicked outside', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   await user.click(document.body);
 
-  await waitFor(() => {
-    expect(screen.queryByRole('menu', { hidden: true })).not.toBeVisible();
-  });
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
 });
 
 test('should close menu on escape keypress', async () => {
@@ -135,9 +131,7 @@ test('should close menu on escape keypress', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   await user.keyboard('{Escape}');
 
-  await waitFor(() => {
-    expect(screen.queryByRole('menu', { hidden: true })).not.toBeVisible();
-  });
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
 });
 
 test('should open menu on arrow down key press', async () => {
@@ -149,9 +143,7 @@ test('should open menu on arrow down key press', async () => {
   triggerButton.focus();
   await user.keyboard('{ArrowDown}');
 
-  await waitFor(() => {
-    expect(screen.queryByRole('menu')).toBeVisible();
-  });
+  expect(await screen.findByRole('menu')).toBeVisible();
 });
 
 test('should set first item active on arrow down key press', async () => {
@@ -436,9 +428,7 @@ test('should have no axe violations when open', async () => {
   const { container } = render(<ActionMenu {...defaultProps} />);
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
-  await waitFor(() => {
-    expect(screen.queryByRole('menu')).toBeVisible();
-  });
+  expect(await screen.findByRole('menu')).toBeVisible();
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -462,9 +452,7 @@ test('should have no axe violations when open with groups', async () => {
   );
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
-  await waitFor(() => {
-    expect(screen.queryByRole('menu')).toBeVisible();
-  });
+  expect(await screen.findByRole('menu')).toBeVisible();
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -493,9 +481,7 @@ test('should have no axe violations when open with selections', async () => {
   );
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
-  await waitFor(() => {
-    expect(screen.queryByRole('menu')).toBeVisible();
-  });
+  expect(await screen.findByRole('menu')).toBeVisible();
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -540,9 +526,7 @@ test('should have no axe violations when open with descriptions', async () => {
   );
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
-  await waitFor(() => {
-    expect(screen.queryByRole('menu')).toBeVisible();
-  });
+  expect(await screen.findByRole('menu')).toBeVisible();
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
