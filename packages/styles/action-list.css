@@ -1,27 +1,27 @@
 :root {
-  --actionlist-background-color: #fff;
-  --actionlist-text-color: var(--gray-90);
-  --actionlist-group-label-font-size: var(--text-size-base);
-  --actionlist-item-hover-background-color: var(--gray-20);
-  --actionlist-item-description-color: var(--gray-60);
-  --actionlist-item-icon-color: var(--gray-60);
-  --actionlist-item-disabled-text-color: var(--gray-40);
+  --action-list-background-color: #fff;
+  --action-list-text-color: var(--gray-90);
+  --action-list-group-label-font-size: var(--text-size-base);
+  --action-list-item-hover-background-color: var(--gray-20);
+  --action-list-item-description-color: var(--gray-60);
+  --action-list-item-icon-color: var(--gray-60);
+  --action-list-item-disabled-text-color: var(--gray-40);
 }
 
 .cauldron--theme-dark {
-  --actionlist-background-color: var(--accent-medium);
-  --actionlist-text-color: #fff;
-  --actionlist-item-description-color: var(--accent-light);
-  --actionlist-item-icon-color: var(--accent-light);
-  --actionlist-item-hover-background-color: var(--accent-dark);
-  --actionlist-item-disabled-text-color: rgba(255, 255, 255, 0.25);
+  --action-list-background-color: var(--accent-medium);
+  --action-list-text-color: #fff;
+  --action-list-item-description-color: var(--accent-light);
+  --action-list-item-icon-color: var(--accent-light);
+  --action-list-item-hover-background-color: var(--accent-dark);
+  --action-list-item-disabled-text-color: rgba(255, 255, 255, 0.25);
 }
 
 .ActionList,
 .ActionList:hover,
 .ActionList:focus,
 .ActionList:focus:hover {
-  color: var(--actionlist-text-color);
+  color: var(--action-list-text-color);
   border: none;
   box-shadow: none;
   background: none;
@@ -40,7 +40,7 @@
 .ActionListSeparator {
   padding-bottom: var(--space-smallest);
   margin-bottom: var(--space-smallest);
-  border-bottom: 1px solid var(--actionmenu-border-color);
+  border-bottom: 1px solid var(--action-menu-border-color);
 }
 
 .ActionList > li:last-child .ActionListGroup {
@@ -51,7 +51,7 @@
 
 .ActionListGroup > li:first-child {
   font-weight: var(--font-weight-medium);
-  font-size: var(--actionlist-group-label-font-size);
+  font-size: var(--action-list-group-label-font-size);
   padding: var(--space-smallest) var(--space-small);
 }
 
@@ -81,12 +81,12 @@
 }
 
 .ActionListItem:is([aria-disabled='true']) {
-  color: var(--actionlist-item-disabled-text-color);
+  color: var(--action-list-item-disabled-text-color);
   cursor: not-allowed;
 }
 
 .ActionListItem:hover:not([aria-disabled='true']) {
-  background-color: var(--actionlist-item-hover-background-color);
+  background-color: var(--action-list-item-hover-background-color);
 }
 
 .ActionListItem__selection,
@@ -101,7 +101,7 @@
     .ActionListItem__leadingIcon,
     .ActionListItem__trailingIcon
   ) {
-  color: var(--actionlist-item-icon-color);
+  color: var(--action-list-item-icon-color);
 }
 
 .ActionListItem:has(> .ActionListItem__selection) {
@@ -186,10 +186,10 @@
 }
 
 .ActionListItem__description {
-  color: var(--actionlist-item-description-color);
+  color: var(--action-list-item-description-color);
 }
 
 :where(.ActionListItem:is([aria-disabled='true']))
   .ActionListItem__description {
-  color: var(--actionlist-item-disabled-text-color);
+  color: var(--action-list-item-disabled-text-color);
 }
