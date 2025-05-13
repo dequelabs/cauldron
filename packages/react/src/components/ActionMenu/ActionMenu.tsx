@@ -18,7 +18,7 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyUpCapture' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
+  'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
 >;
 
 type ActionMenuTriggerFunction = (
