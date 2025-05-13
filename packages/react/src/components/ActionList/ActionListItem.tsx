@@ -23,7 +23,7 @@ interface ActionListItemProps
   /** Displays a leading icon for the action item. */
   leadingIcon?: IconType;
 
-  /** Displays a trailing icon for the action item.. */
+  /** Displays a trailing icon for the action item. */
   trailingIcon?: IconType;
 
   /** Provides an additional description for the action item. */
