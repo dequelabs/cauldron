@@ -114,7 +114,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       listItemRole = 'option';
     }
 
-    // Keep the currently active item on screen when navigate via up/down arrow key navigation
+    // Keep the currently active item on screen when navigating via up/down arrow key navigation
     // istanbul ignore next
     useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
