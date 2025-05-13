@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.17.0](https://github.com/dequelabs/cauldron/compare/v6.15.0...v6.17.0) (2025-05-13)
+
+
+### Features
+
+* **AnchoredOverlay:** add shift middleware to handle overflowing overlays ([#1897](https://github.com/dequelabs/cauldron/issues/1897)) ([d7ad033](https://github.com/dequelabs/cauldron/commit/d7ad0332d547e7f910ff3cc993958068a530f813))
+* **react, styles:** add `PageHeader` and `SectionHeader` components with styles and tests ([#1880](https://github.com/dequelabs/cauldron/issues/1880)) ([678bd47](https://github.com/dequelabs/cauldron/commit/678bd477b1bfeb4a4b7098f484aa9c934b4ed0d5))
+* **react, styles:** combobox component multiselect ([#1816](https://github.com/dequelabs/cauldron/issues/1816)) ([22d45de](https://github.com/dequelabs/cauldron/commit/22d45de41ed3643a2ba5e6aef256312e06e0fd27))
+* **react,styles:** add ActionMenu, ActionList components ([#1883](https://github.com/dequelabs/cauldron/issues/1883)) ([dce6ee5](https://github.com/dequelabs/cauldron/commit/dce6ee582ab8dc1db34ca48f78b9be8d922a62e4))
+* **react,styles:** add EmptyState component ([#1913](https://github.com/dequelabs/cauldron/issues/1913)) ([b6278d3](https://github.com/dequelabs/cauldron/commit/b6278d32e114a49ad578a6249bcf35f8f97cee48))
+* **react,styles:** add FieldGroup component ([#1873](https://github.com/dequelabs/cauldron/issues/1873)) ([95899ed](https://github.com/dequelabs/cauldron/commit/95899edbe208d58502ddecf8e008c9fe9b971892))
+* **react:** allow tooltip to be hidden for text ellipsis ([#1845](https://github.com/dequelabs/cauldron/issues/1845)) ([7b5a8cb](https://github.com/dequelabs/cauldron/commit/7b5a8cbd4b8ebb33b2b033dc4dfd55eced03bb67))
+* **styles:** drawer uses variables for transition and timing function ([3705a69](https://github.com/dequelabs/cauldron/commit/3705a69cebd1d7e604d82c46c9641d82750b6d48)), closes [#1834](https://github.com/dequelabs/cauldron/issues/1834)
+* **styles:** provide consistent drop shadow styles across all components ([#1832](https://github.com/dequelabs/cauldron/issues/1832)) ([a4cf47f](https://github.com/dequelabs/cauldron/commit/a4cf47f708dbb166a76655ada845f4acdff00576))
+* **style:** update panel radius and padding ([#1905](https://github.com/dequelabs/cauldron/issues/1905)) ([b541dd6](https://github.com/dequelabs/cauldron/commit/b541dd62baa298e381e45d9924b79084099c751b))
+
+
+### Bug Fixes
+
+* **react:** fix incorrect tooltipProps for TextEllipsis ([#1846](https://github.com/dequelabs/cauldron/issues/1846)) ([db12983](https://github.com/dequelabs/cauldron/commit/db12983af4e23cae12c3d874ae2e85c3d5db1b88))
+* **styles:** secondary disabled button background color ([#1808](https://github.com/dequelabs/cauldron/issues/1808)) ([bd8f773](https://github.com/dequelabs/cauldron/commit/bd8f7737db7e73420dc1ea923029774e191b2445)), closes [#1807](https://github.com/dequelabs/cauldron/issues/1807)
+* **styles:** update complete indicator to display step count for safari ([#1900](https://github.com/dequelabs/cauldron/issues/1900)) ([edbb1fd](https://github.com/dequelabs/cauldron/commit/edbb1fd9a17d55a9db9ab08db73e9a98479ffe94))
+* **styles:** use consistent variable naming for empty state ([#1921](https://github.com/dequelabs/cauldron/issues/1921)) ([210d5d0](https://github.com/dequelabs/cauldron/commit/210d5d0c4d32f2d87862d7a2e0ffd7e7d887a29f))
+
 ## [6.16.0](https://github.com/dequelabs/cauldron/compare/v6.15.0...v6.16.0) (2025-03-20)
 
 
