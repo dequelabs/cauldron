@@ -1,0 +1,426 @@
+---
+title: ActionMenu
+description: A dropdown menu component that displays an ActionList with actions.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ActionMenu/ActionMenu.tsx
+---
+
+import { useState, useRef } from 'react'
+import { 
+  ActionMenu, 
+  ActionList, 
+  ActionListItem, 
+  ActionListGroup, 
+  ActionListSeparator,
+  ActionListLinkItem,
+  Button, 
+  IconButton, 
+  Icon,
+  AnchoredOverlay 
+} from '@deque/cauldron-react'
+
+```jsx
+import { 
+  ActionMenu, 
+  ActionList, 
+  ActionListItem 
+} from '@deque/cauldron-react'
+```
+
+## Overview
+
+The `ActionMenu` component is a dropdown menu that displays an `ActionList` when triggered. It displays a list of items that are typically contextual actions to perform operations or select single or multiple contextual states.
+
+## Examples
+
+### Basic Usage
+
+A simple action menu with a button trigger:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Actions
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListItem>Copy</ActionListItem>
+    <ActionListItem>Edit</ActionListItem>
+    <ActionListItem>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+The `trigger` property is a render function that can render any type of interactive control and can be fully customized for different purposes, for example, an `IconButton` for more compact user interfaces:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <IconButton variant="secondary" icon="kabob" label="More Options" />
+  }
+>
+  <ActionList>
+    <ActionListItem>Copy</ActionListItem>
+    <ActionListItem>Edit</ActionListItem>
+    <ActionListItem>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### Disabled Items
+
+Items can also individually be disabled to prevent that action from occurring:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <IconButton variant="secondary" icon="kabob" label="Disabled Menu Options" />
+  }
+>
+  <ActionList>
+    <ActionListItem>Copy</ActionListItem>
+    <ActionListItem>Edit</ActionListItem>
+    <ActionListItem disabled>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### With Descriptions
+
+If the label of the action needs additional information, optional descriptive text can also be included:
+
+```jsx example
+<ActionMenu
+  trigger={<Button variant="secondary">Choose a Dessert</Button>}
+>
+  <ActionList>
+    <ActionListItem 
+      description="Warm chocolate cake with a gooey center that oozes when you dig in"
+    >
+      Molten Lava Cake
+    </ActionListItem>
+    <ActionListItem 
+      description="Crispy on the outside, chewy in the middle, with melted chocolate chips"
+    >
+      Cookie Sundae
+    </ActionListItem>
+    <ActionListItem 
+      description="Tangy, creamy cheesecake swirled with tart raspberry sauce"
+    >
+      Raspberry Cheesecake
+    </ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### With Icons
+
+An action item can optionally include a trailing or leading icon for an additional visual hint:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Actions with Icons
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListItem leadingIcon="copy">Leading icon</ActionListItem>
+    <ActionListItem trailingIcon="pencil">Trailing icon</ActionListItem>
+    <ActionListItem leadingIcon="share" trailingIcon="pencil">
+      Leading and trailing icon
+    </ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+### Handling Actions
+
+The `ActionMenu` component can handle actions in multiple ways. When an action is triggered, there are a few different ways to handle the action:
+
+#### Action Handlers
+
+Callback functions can be set for each action list item:
+
+```jsx example
+<ActionMenu trigger={<Button variant="secondary">Action handlers</Button>}>
+  <ActionList>
+    <ActionListItem onAction={() => alert('Copied!')}>Copy</ActionListItem>
+    <ActionListItem onAction={() => alert('Edit!')}>Edit</ActionListItem>
+    <ActionListItem onAction={() => alert('Shared!')}>Share</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+#### Text Content
+
+Alternatively, callback functions can also be set on `ActionList` or `ActionListGroup` that will include the value of the text content of the action as the first callback value:
+
+```jsx example
+function ActionMenuListCallbackExample() {
+  const handleAction = (value) => alert(`${value} action item clicked!`)
+  return (
+    <ActionMenu trigger={<Button variant="secondary">Action list handler</Button>}>
+      <ActionList onAction={handleAction}>
+        <ActionListItem>Copy</ActionListItem>
+        <ActionListItem>Edit</ActionListItem>
+        <ActionListItem>Share</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
+
+#### Action Key
+
+If the text content of the action list item is complex, an `actionKey` can also be specified that will be the first value of the callback handler:
+
+```jsx example
+function ActionMenuListActionKeyCallbackExample() {
+  const handleAction = (value) => alert(`${value} action item clicked!`)
+  return (
+    <ActionMenu trigger={<Button variant="secondary">Action key handler</Button>}>
+      <ActionList onAction={handleAction}>
+        <ActionListItem actionKey="copy">Copy</ActionListItem>
+        <ActionListItem actionKey="edit">Edit</ActionListItem>
+        <ActionListItem actionKey="share">Share</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
+
+### Grouping Items
+
+Items can be optionally grouped with a group label:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Recipes
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListGroup label="Breakfast">
+      <ActionListItem>Pancakes</ActionListItem>
+      <ActionListItem>Avocado Toast</ActionListItem>
+      <ActionListItem>Scrambled Eggs</ActionListItem>
+    </ActionListGroup>
+    
+    <ActionListGroup label="Lunch">
+      <ActionListItem>Kale Salad</ActionListItem>
+      <ActionListItem>Grilled Cheese</ActionListItem>
+    </ActionListGroup>
+    
+    <ActionListGroup label="Dinner">
+      <ActionListItem>Filet Mignon</ActionListItem>
+      <ActionListItem>Mega Burger</ActionListItem>
+      <ActionListItem>Mom's Spaghetti</ActionListItem>
+    </ActionListGroup>
+  </ActionList>
+</ActionMenu>
+```
+
+### Single Selection
+
+`ActionMenu` can support the selection of action items, with the `selectionType="single"` prop:
+
+```jsx example
+function SingleSelectionExample() {
+  const [selected, setSelected] = useState('Small');
+  
+  const handleAction = (key) => {
+    setSelected(key);
+  };
+  
+  return (
+    <ActionMenu
+      trigger={
+        <Button variant="secondary">
+          {`Size: ${selected}`}
+          <Icon type="chevron-down" />
+        </Button>
+      }
+    >
+      <ActionList selectionType="single" onAction={handleAction}>
+        <ActionListItem selected={selected === 'Really Small'}>Really Small</ActionListItem>
+        <ActionListItem selected={selected === 'Small'}>Small</ActionListItem>
+        <ActionListItem selected={selected === 'Medium'}>Medium</ActionListItem>
+        <ActionListItem selected={selected === 'Large'}>Large</ActionListItem>
+        <ActionListItem selected={selected === 'Super Large'}>Super Large</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+}
+```
+
+### Multiple Selection
+
+`ActionMenu` can also support the selection of multiple action items, with the `selectionType="multiple"` prop:
+
+```jsx example
+function MultiSelectionExample() {
+  const [selected, setSelected] = useState(['Lettuce', 'Tomato']);
+  
+  const handleAction = (key) => {
+    if (selected.includes(key)) {
+      setSelected(selected.filter(value => value !== key))
+    } else {
+      setSelected([...selected, key])
+    }
+  };
+  
+  return (
+    <ActionMenu
+      trigger={
+        <Button variant="secondary">
+          {selected.length && selected.length <= 3 
+            ? `Sandwich Ingredients: ${selected.join(', ')}` 
+            : `Sandwich Ingredients: ${selected.length} selected...`
+          }
+          <Icon type="chevron-down" />
+        </Button>
+      }
+    >
+      <ActionList selectionType="multiple" onAction={handleAction}>
+        <ActionListGroup label="Protein">
+          <ActionListItem selected={selected.includes('Bacon')}>Bacon</ActionListItem>
+          <ActionListItem selected={selected.includes('Ham')}>Ham</ActionListItem>
+          <ActionListItem selected={selected.includes('Turkey')}>Turkey</ActionListItem>
+          <ActionListItem selected={selected.includes('Tofurky')}>Tofurky</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup label="Cheese">
+          <ActionListItem selected={selected.includes('Gruyere')}>Gruyere</ActionListItem>
+          <ActionListItem selected={selected.includes('Gouda')}>Gouda</ActionListItem>
+          <ActionListItem selected={selected.includes('Pepperjack')}>Pepperjack</ActionListItem>
+          <ActionListItem selected={selected.includes('Swiss')}>Swiss</ActionListItem>
+        </ActionListGroup>
+        <ActionListItem selected={selected.includes('Lettuce')}>Lettuce</ActionListItem>
+        <ActionListItem selected={selected.includes('Tomato')}>Tomato</ActionListItem>
+        <ActionListItem selected={selected.includes('Onions')}>Onions</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+}
+```
+
+### Mixed Selections
+
+An `ActionMenu` can also contain groupings that have different sets of selections:
+
+```jsx example
+function MixedSelectionExample() {
+  const [difficulty, setDifficulty] = useState('Standard');
+  const [colors, setColors] = useState(['Orange']);
+
+  const handleDifficultyAction = (key) => {
+    setDifficulty(key);
+  }
+
+  const handleColorsAction = (key) => {
+    if (colors.includes(key)) {
+      setColors(colors.filter(value => value !== key))
+    } else {
+      setColors([...colors, key])
+    }
+  }
+
+  return (
+    <ActionMenu
+      trigger={
+        <Button variant="secondary">
+          Setup
+          <Icon type="chevron-down" />
+        </Button>
+      }
+    >
+      <ActionList selectionType="multiple">
+        <ActionListGroup 
+          selectionType="single" 
+          label="Difficulty Level"
+          onAction={handleDifficultyAction}
+        >
+          <ActionListItem selected={difficulty === 'Standard'}>Standard</ActionListItem>
+          <ActionListItem selected={difficulty === 'Normal'}>Normal</ActionListItem>
+          <ActionListItem selected={difficulty === 'Expert'}>Expert</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup 
+          label="Allowed Fruit"
+          onAction={handleColorsAction}
+        >
+          <ActionListItem selected={colors.includes('Apple')}>Apple</ActionListItem>
+          <ActionListItem selected={colors.includes('Banana')}>Banana</ActionListItem>
+          <ActionListItem selected={colors.includes('Orange')}>Orange</ActionListItem>
+          <ActionListItem selected={colors.includes('Pineapple')}>Pineapple</ActionListItem>
+        </ActionListGroup>
+      </ActionList>
+    </ActionMenu>
+  )
+}
+```
+
+### Links
+
+`ActionMenu` can also display links within its action list to navigate to the specified URL when that action is activated:
+
+```jsx example
+<ActionMenu
+  trigger={
+    <Button variant="secondary">
+      Actions with Links
+      <Icon type="chevron-down" />
+    </Button>
+  }
+>
+  <ActionList>
+    <ActionListLinkItem href="#account">My Account</ActionListLinkItem>
+    <ActionListLinkItem href="#settings">Settings</ActionListLinkItem>
+    <ActionListSeparator />
+    <ActionListItem>Logout</ActionListItem>
+  </ActionList>
+</ActionMenu>
+```
+
+## Props
+
+### ActionMenu
+
+<ComponentProps
+  props={[
+    {
+      name: 'children',
+      type: 'React.ReactElement',
+      required: true,
+      description: 'The ActionList component to be shown when the menu is opened.'
+    },
+    {
+      name: 'trigger',
+      type: ['React.ReactElement', '(props: ActionMenuTriggerProps, open: boolean) => React.ReactElement'],
+      required: true,
+      description: 'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state.'
+    },
+    {
+      name: 'placement',
+      type: 'string',
+      defaultValue: 'bottom-start',
+      description: 'Positional placement value to anchor the overlay element relative to its anchored target.'
+    },
+    {
+      name: 'open',
+      type: 'boolean',
+      description: 'Controls whether the action menu is open. Only necessary for controlling action menu state.'
+    }
+  ]}
+/>
+
+## Related Components
+
+- [ActionList](./ActionList)
+- [AnchoredOverlay](./AnchoredOverlay)

@@ -4,7 +4,7 @@ description: An interactive component that lets users select a single option fro
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioGroup/index.tsx
 ---
 
-import { RadioGroup, FieldWrap, Code } from '@deque/cauldron-react'
+import { RadioGroup, FieldWrap, FieldGroup, Code } from '@deque/cauldron-react'
 
 ```js
 import { RadioGroup } from '@deque/cauldron-react'
@@ -19,10 +19,11 @@ import { RadioGroup } from '@deque/cauldron-react'
 ### Default
 
 ```jsx example
-<FieldWrap>
-  <div className="Field__label" id="gyros-label">Do you like gyros?</div>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Do you like gyros?"
+>
   <RadioGroup
-    aria-labelledby="gyros-label"
     name="gyros"
     radios={[
       {
@@ -49,10 +50,11 @@ import { RadioGroup } from '@deque/cauldron-react'
 ### With Descriptions
 
 ```jsx example
-<FieldWrap>
-  <div className="Field__label" id="pizza-label">Do you like pizza?</div>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Do you like pizza?"
+>
   <RadioGroup
-    aria-labelledby="pizza-label"
     defaultValue="tuesday"
     name="pizza"
     radios={[
@@ -85,10 +87,11 @@ import { RadioGroup } from '@deque/cauldron-react'
 If your list of options is short, `RadioGroup` can optionally accept an `inline` prop to display the radio items in a horizontal orientation instead of vertically.
 
 ```jsx example
-<FieldWrap>
-  <div className="Field__label" id="robot-label">Are you a robot?</div>
+<FieldWrap 
+  as={FieldGroup} 
+  label="Are you a robot?"
+>
   <RadioGroup
-    aria-labelledby="robot-label"
     defaultValue="no"
     name="robot"
     inline

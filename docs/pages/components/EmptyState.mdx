@@ -1,0 +1,103 @@
+---
+title: EmptyState
+description: An area to display informational messages and optional call to actions when there is no other data or content to display.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/EmptyState/index.tsx
+---
+
+import { EmptyState, Button } from '@deque/cauldron-react'
+
+```js
+import { EmptyState } from '@deque/cauldron-react'
+```
+
+Empty states are screens or components that appear when there is no data or content to display. They are critical moments in the user experience that, when designed thoughtfully, provide users with context, guidance, and clear paths to action. Rather than leaving users confused with blank spaces, well-designed empty states communicate system status and help users understand what steps to take next.
+
+## Examples
+
+### Empty State
+
+Minimally, empty states require a heading and a short contextual description:
+
+```jsx example
+<EmptyState
+  heading="Empty State"
+  description="Description of empty state..."
+/>
+```
+
+### With Primary Actions
+
+Optionally, empty states can have a primary call to action.
+
+```jsx example
+<EmptyState
+  heading="Empty State"
+  description="Description of empty state..."
+  primaryActions={
+    <>
+      <Button variant="primary">Primary Action</Button>
+      <Button variant="secondary">Secondary Action</Button>
+      <Button variant="tertiary">Tertiary Action</Button>
+    </>
+  }
+/>
+```
+
+### With Secondary Actions
+
+Empty states can also have secondary actions.
+
+```jsx example
+<EmptyState
+  heading="Empty State"
+  description="Description of empty state..."
+  secondaryActions={
+    <>
+      Need help? Contact us!
+    </>
+  }
+/>
+```
+
+### Heading Levels
+
+The empty state defaults to using `h2` for the heading, but this may need to be customized to fit within the correct heading structure of the page:
+
+```jsx example
+<EmptyState
+  heading={<h3>Custom Heading Level</h3>}
+  description="Description of empty state..."
+/>
+```
+
+## Props
+
+<ComponentProps
+  children={false}
+  className={true}
+  refType="HTMLDivElement"
+  props={[
+    {
+      name: 'heading',
+      type: 'React.ReactNode',
+      description: 'Heading text to be displayed for the empty state.',
+      required: true
+    },
+    {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Description for the empty state.',
+      required: true
+    },
+    {
+      name: 'primaryActions',
+      type: 'React.ReactNode',
+      description: 'Slot for primary actions.'
+    },
+    {
+      name: 'secondaryActions',
+      type: 'React.ReactNode',
+      description: 'Slot for secondary actions.'
+    }
+  ]}
+/>

@@ -21,7 +21,7 @@ test('should have screenshot for Button[variant="primary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component
     .getByText('Active')
     .press('Space', { delay: 1000, noWaitAfter: true });
@@ -58,7 +58,7 @@ test('should have screenshot for Button[thin][variant="primary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin][variant=primary]');
@@ -86,7 +86,7 @@ test('should have screenshot for Button[variant="secondary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=secondary]');
@@ -120,7 +120,7 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin][secondary]');
@@ -146,7 +146,7 @@ test('should have screenshot for Button[variant="tertiary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=tertiary]');
@@ -180,7 +180,7 @@ test('should have screenshot for Button[thin][variant="tertiary"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin][tertiary]');
@@ -214,7 +214,7 @@ test('should have screenshot for Button with leading icon', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button-leading-icon');
@@ -249,7 +249,7 @@ test('should have screenshot for Button with trailing icon', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button-trailing-icon');
@@ -283,7 +283,7 @@ test('should have screenshot for Button[thin] with leading icon', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin]-leading-icon');
@@ -318,7 +318,7 @@ test('should have screenshot for Button[thin] with trailing icon', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin]-trailing-icon');
@@ -344,7 +344,7 @@ test('should have screenshot for Button[variant="error"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=error]');
@@ -378,7 +378,7 @@ test('should have screenshot for Button[thin][variant="error"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[thin][variant=error]');
@@ -404,7 +404,7 @@ test('should have screenshot for Button[variant="link"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=link]');
@@ -430,7 +430,7 @@ test('should have screenshot for Button[variant="tag"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=tag]');
@@ -456,7 +456,7 @@ test('should have screenshot for Button[variant="badge"]', async ({
   );
 
   await component.getByText('Hover').hover();
-  setActive(await component.getByText('Active'));
+  setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
   await expect(component).toHaveScreenshot('button[variant=badge]');
