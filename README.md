@@ -1,6 +1,6 @@
 # cauldron
 
-> The deque pattern library
+> The Deque pattern library.
 
 This monorepo contains the following packages:
 
