@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+.TextEllipsis:after {
+  content: '';
+  display: block;
+}
+
 .TextEllipsis:where([role='button']) {
   text-align: inherit;
   user-select: inherit;
