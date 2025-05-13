@@ -5,6 +5,9 @@
   overflow: hidden;
 }
 
+/* Try and prevent Safari from showing a platform
+ * tooltip when visible text is truncated
+ * see: https://github.com/dequelabs/cauldron/issues/1926
 .TextEllipsis:after {
   content: '';
   display: block;
