@@ -105,6 +105,28 @@ test('should not call onClickOutside when clicked inside', async () => {
   expect(onClickOutside).not.toBeCalled();
 });
 
+test('should not call onClickOutside when clicked inside target element', async () => {
+  const onClickOutside = jest.fn();
+  const user = userEvent.setup();
+  const target = document.getElementById('target') as HTMLElement;
+
+  render(
+    <ClickOutsideListener
+      onClickOutside={onClickOutside}
+      mouseEvent="click"
+      target={target}
+    >
+      <div>Inside!</div>
+    </ClickOutsideListener>,
+    {
+      container: mountNode as HTMLElement
+    }
+  );
+
+  await user.click(target);
+  expect(onClickOutside).not.toHaveBeenCalled();
+});
+
 test('should not call onClickOutside when touched inside', () => {
   const onClickOutside = jest.fn();
 
