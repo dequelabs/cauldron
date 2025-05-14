@@ -103,7 +103,7 @@ export const Step = (props: StepProps) => {
 
 Step.displayName = 'Step';
 
-interface StepperProps {
+interface StepperProps extends React.OlHTMLAttributes<HTMLOListElement> {
   children: React.ReactNode;
   className?: string;
 }

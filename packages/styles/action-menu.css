@@ -1,0 +1,20 @@
+:root {
+  --action-menu-border-color: var(--gray-30);
+  --action-menu-background-color: #fff;
+}
+
+.cauldron--theme-dark {
+  --action-menu-background-color: var(--accent-medium);
+}
+
+.ActionMenu {
+  border: 1px solid var(--action-menu-border-color);
+  background-color: var(--action-menu-background-color);
+  padding: var(--space-smallest) 0;
+  border-radius: 8px;
+  width: var(--action-menu-width);
+  min-width: var(--action-menu-min-width, 10rem);
+  max-height: var(--action-menu-height);
+  box-shadow: var(--drop-shadow-overlay);
+  overflow-y: auto;
+}
