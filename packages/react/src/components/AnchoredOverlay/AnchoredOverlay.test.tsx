@@ -241,8 +241,8 @@ test('should support portal prop', async () => {
     </AnchoredOverlay>
   );
 
-  const tooltipInPortal = await findByTestId(portal, 'overlay');
-  expect(tooltipInPortal).toBeTruthy();
+  const anchoredOverlayInPortal = await findByTestId(portal, 'overlay');
+  expect(anchoredOverlayInPortal).toBeTruthy();
 });
 
 test('should return no axe violations when opened', async () => {
