@@ -77,7 +77,7 @@ const AnchoredOverlay = forwardRef(
       ...props
     }: AnchoredOverlayProps<Overlay, Target>,
     refProp: React.Ref<Overlay>
-  ): React.ReactPortal | React.ReactNode => {
+  ) => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
     const { floatingStyles, placement, middlewareData } = useFloating({
