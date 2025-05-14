@@ -179,6 +179,17 @@ Listboxes can also support multiple selection of listbox options.
     description: 'How keyboard navigation is handled when reaching the start/end of the list.'
   },
   {
+    name: 'focusStrategy',
+    type: ['lastSelected', 'first', 'last'],
+    defaultValue: 'lastSelected',
+    description: 'How focus is handled when the listbox becomes focused and which listbox option is active.'
+  },
+  {
+    name: 'focusDisabledOptions',
+    type: 'boolean',
+    description: 'Whether or not to allow for focusing of disabled listbox options.'
+  },
+  {
     name: 'as',
     type: ['React.ElementType', 'string'],
     description: 'A component to render the Listbox as.',
