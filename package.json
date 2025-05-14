@@ -25,7 +25,7 @@
     "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(npm list --depth=0 playwright | grep playwright | cut -f2 -d '@')",
     "release": "./scripts/release.sh",
     "precommit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "prettier": {
     "singleQuote": true,
