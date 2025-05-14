@@ -1,5 +1,6 @@
 import { autoUpdate, type Placement, type Coords } from '@floating-ui/dom';
 import React, { forwardRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   useFloating,
   offset as offsetMiddleware,
@@ -12,6 +13,7 @@ import resolveElement from '../../utils/resolveElement';
 import useSharedRef from '../../utils/useSharedRef';
 import useEscapeKey from '../../utils/useEscapeKey';
 import useFocusTrap from '../../utils/useFocusTrap';
+import { isBrowser } from '../../utils/is-browser';
 
 type AnchoredOverlayProps<
   Overlay extends HTMLElement,
@@ -35,6 +37,8 @@ type AnchoredOverlayProps<
   focusTrap?: boolean;
   /** When `focusTrap` is true, optional arguments to configure the focus trap. */
   focusTrapOptions?: Parameters<typeof useFocusTrap>[1];
+  /** Render the anchored overlay in a different location in the dom. */
+  portal?: React.RefObject<HTMLElement> | HTMLElement;
   children?: React.ReactNode;
 } & PolymorphicProps<React.HTMLAttributes<Overlay>>;
 
@@ -69,10 +73,11 @@ const AnchoredOverlay = forwardRef(
       onOpenChange,
       onPlacementChange,
       onShiftChange,
+      portal,
       ...props
     }: AnchoredOverlayProps<Overlay, Target>,
     refProp: React.Ref<Overlay>
-  ) => {
+  ): React.ReactPortal | React.ReactNode => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
     const { floatingStyles, placement, middlewareData } = useFloating({
@@ -87,7 +92,7 @@ const AnchoredOverlay = forwardRef(
               alignment: getAutoAlignment(initialPlacement as 'auto')
             })
           : flipMiddleware(),
-          shiftMiddleware({ crossAxis: false })
+        shiftMiddleware({ crossAxis: false })
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target),
@@ -128,11 +133,24 @@ const AnchoredOverlay = forwardRef(
       }
     }, [onShiftChange, middlewareData.shift?.x, middlewareData.shift?.y]);
 
-    return (
+    const AnchoredOverlayComponent = (
       <Component ref={ref} {...props} style={{ ...floatingStyles, ...style }}>
         {children}
       </Component>
     );
+
+    if (portal && !isBrowser()) {
+      return null;
+    }
+
+    return portal && typeof portal !== 'undefined'
+      ? (createPortal(
+          AnchoredOverlayComponent,
+          (portal && 'current' in portal ? portal.current : portal) ||
+            // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+            document?.body
+        ) as React.ReactPortal)
+      : AnchoredOverlayComponent;
   }
 );
 

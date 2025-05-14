@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { findByTestId, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
@@ -224,6 +224,25 @@ test('should support ref prop', () => {
 
   expect(ref.current).toBeInstanceOf(HTMLDivElement);
   expect(ref.current).toEqual(screen.getByTestId('overlay'));
+});
+
+test('should support portal prop', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const portal = document.createElement('div');
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      portal={portal}
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  const tooltipInPortal = await findByTestId(portal, 'overlay');
+  expect(tooltipInPortal).toBeTruthy();
 });
 
 test('should return no axe violations when opened', async () => {
