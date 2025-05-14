@@ -80,14 +80,15 @@ export default class TopBar extends React.Component<
     return cloneElement(child, {
       key: index,
       onKeyDown: (...args: any) => {
-        // @ts-ignore we're just spreading the original args
+        // @ts-expect-error we're just spreading the original args
         this.onKeyDown(...args);
 
         if (child.props.onKeyDown) {
           child.props.onKeyDown(...args);
         }
       },
-      tabIndex: 0,
+      tabIndex:
+        typeof child.props.tabIndex === 'undefined' ? 0 : child.props.tabIndex,
       menuItemRef: (menuItem: HTMLLIElement) => {
         if (menuItem) {
           this.menuItems.push(menuItem);
