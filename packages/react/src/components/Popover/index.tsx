@@ -1,7 +1,5 @@
 import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
-import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
-import { isBrowser } from '../../utils/is-browser';
 import { Cauldron } from '../../types';
 import classnames from 'classnames';
 import AnchoredOverlay from '../AnchoredOverlay';
@@ -11,6 +9,7 @@ import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
 import useEscapeKey from '../../utils/useEscapeKey';
 import useFocusTrap from '../../utils/useFocusTrap';
+import { isBrowser } from '../../utils/is-browser';
 
 export type PopoverVariant = 'prompt' | 'custom';
 
@@ -20,6 +19,7 @@ type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
   show: boolean;
   onClose: () => void;
   placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
+  /** Render the popover in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
 };
 
@@ -185,21 +185,18 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
 
-    if (!show || !isBrowser()) return null;
+    if (!show || !isBrowser()) {
+      return null;
+    }
 
-    return createPortal(
+    return (
       <ClickOutsideListener onClickOutside={handleClickOutside}>
         <AnchoredOverlay
           id={id}
-          className={classnames(
-            'Popover',
-            `Popover--${placement}`,
-            className,
-            {
-              'Popover--hidden': !show,
-              'Popover--prompt': variant === 'prompt'
-            }
-          )}
+          className={classnames('Popover', `Popover--${placement}`, className, {
+            'Popover--hidden': !show,
+            'Popover--prompt': variant === 'prompt'
+          })}
           ref={popoverRef}
           role="dialog"
           target={target}
@@ -207,6 +204,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           placement={initialPlacement}
           onPlacementChange={setPlacement}
           offset={8}
+          // guarded by isBrowser() check
+          // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+          portal={portal || document?.body}
           {...additionalProps}
           {...props}
         >
@@ -225,12 +225,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             children
           )}
         </AnchoredOverlay>
-      </ClickOutsideListener>,
-      (portal && 'current' in portal ? portal.current : portal) ||
-        // Dependent on "isBrowser" check above:
-        // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-        document.body
-    ) as React.JSX.Element;
+      </ClickOutsideListener>
+    );
   }
 );
 

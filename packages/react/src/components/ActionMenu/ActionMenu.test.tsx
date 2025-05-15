@@ -4,7 +4,8 @@ import {
   screen,
   waitFor,
   fireEvent,
-  createEvent
+  createEvent,
+  findByTestId
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
@@ -415,6 +416,17 @@ test('should support ref prop', () => {
 
   expect(ref.current).toBeInstanceOf(HTMLDivElement);
   expect(ref.current).toEqual(screen.getByTestId('actionmenu'));
+});
+
+test('should support portal prop', async () => {
+  const portal = document.createElement('div');
+
+  render(
+    <ActionMenu portal={portal} data-testid="actionmenu" {...defaultProps} />
+  );
+
+  const actionMenuInPortal = await findByTestId(portal, 'actionmenu');
+  expect(actionMenuInPortal).toBeTruthy();
 });
 
 test('should have no axe violations', async () => {

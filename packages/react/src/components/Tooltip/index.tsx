@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
-import { createPortal } from 'react-dom';
 import { useId } from 'react-id-generator';
 import AnchoredOverlay from '../AnchoredOverlay';
-import { isBrowser } from '../../utils/is-browser';
 import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
 import resolveElement from '../../utils/resolveElement';
+import { isBrowser } from '../../utils/is-browser';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -18,6 +17,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   show?: boolean | undefined;
   defaultShow?: boolean;
   placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
+  /** Render the tooltip in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   hideElementOnHidden?: boolean;
 }
@@ -146,52 +146,57 @@ export default function Tooltip({
     };
   }, [target, id, association]);
 
-  const updateArrowShiftPosition = useCallback(({ x }: { x: number }) => {
-    if (variant === 'big' || x === 0) {
-      setArrowShift(null)
-      return
-    }
+  const updateArrowShiftPosition = useCallback(
+    ({ x }: { x: number }) => {
+      if (variant === 'big' || x === 0) {
+        setArrowShift(null);
+        return;
+      }
 
-    // The tooltip shift position is inversely related to the direction
-    // that the arrow needs to shift
-    setArrowShift(x * -1)
-  }, [variant])
+      // The tooltip shift position is inversely related to the direction
+      // that the arrow needs to shift
+      setArrowShift(x * -1);
+    },
+    [variant]
+  );
 
   return (
     <>
-      {(showTooltip || hideElementOnHidden) && isBrowser()
-        ? createPortal(
-            <AnchoredOverlay
-              id={id}
-              target={target}
-              placement={initialPlacement}
-              onPlacementChange={setPlacement}
-              open={showTooltip && typeof showProp !== 'boolean'}
-              onOpenChange={setShowTooltip}
-              onShiftChange={updateArrowShiftPosition}
-              className={classnames(
-                'Tooltip',
-                `Tooltip--${placement}`,
-                className,
-                {
-                  TooltipInfo: variant === 'info',
-                  'Tooltip--hidden': !showTooltip && hideElementOnHidden,
-                  'Tooltip--big': variant === 'big'
-                }
-              )}
-              ref={setTooltipElement}
-              role="tooltip"
-              offset={8}
-              {...props}
-            >
-              {variant !== 'big' && <div className="TooltipArrow" style={arrowShift ? { transform: `translateX(${arrowShift}px)` } : undefined} />}
-              {children}
-            </AnchoredOverlay>,
-            (portal && 'current' in portal ? portal.current : portal) ||
-              // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-              document?.body
-          )
-        : null}
+      {(showTooltip || hideElementOnHidden) && isBrowser() ? (
+        <AnchoredOverlay
+          id={id}
+          target={target}
+          placement={initialPlacement}
+          onPlacementChange={setPlacement}
+          open={showTooltip && typeof showProp !== 'boolean'}
+          onOpenChange={setShowTooltip}
+          onShiftChange={updateArrowShiftPosition}
+          className={classnames('Tooltip', `Tooltip--${placement}`, className, {
+            TooltipInfo: variant === 'info',
+            'Tooltip--hidden': !showTooltip && hideElementOnHidden,
+            'Tooltip--big': variant === 'big'
+          })}
+          ref={setTooltipElement}
+          role="tooltip"
+          offset={8}
+          // guarded by isBrowser() check
+          // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+          portal={portal || document?.body}
+          {...props}
+        >
+          {variant !== 'big' && (
+            <div
+              className="TooltipArrow"
+              style={
+                arrowShift
+                  ? { transform: `translateX(${arrowShift}px)` }
+                  : undefined
+              }
+            />
+          )}
+          {children}
+        </AnchoredOverlay>
+      ) : null}
     </>
   );
 }

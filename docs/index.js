@@ -14,7 +14,10 @@ import {
   TopBarItem,
   Workspace,
   SkipLink,
-  OptionsMenuList,
+  ActionMenu,
+  ActionList,
+  ActionListGroup,
+  ActionListItem,
   TopBarMenu,
   Icon,
   ThemeProvider
@@ -46,6 +49,8 @@ const App = () => {
   const workspaceRef = useRef(null);
   const focusReturnRef = useRef(null);
   const navigationRef = useRef(null);
+  const actionMenuItemRef = useRef(null);
+  const actionMenuRef = useRef(null);
   const topBarTrigger = useRef();
   const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
   const { theme, toggleTheme } = useThemeContext();
@@ -60,18 +65,16 @@ const App = () => {
     setState({ show: !show });
   };
 
-  const onSettingsSelect = (e) => {
-    if (e.target.id === 'theme') {
-      localStorage.setItem(
-        CAULDRON_THEME_STORAGE_KEY,
-        theme === 'light' ? 'dark' : 'light'
-      );
-      toggleTheme();
-    } else {
-      setState({
-        thin: e.target.innerText === 'Thin top bar'
-      });
+  const handleThemeChange = (_theme) => () => {
+    if (theme === _theme) {
+      return;
     }
+
+    localStorage.setItem(
+      CAULDRON_THEME_STORAGE_KEY,
+      theme === 'light' ? 'dark' : 'light'
+    );
+    toggleTheme();
   };
 
   const handleTitleChange = (location) => {
@@ -155,31 +158,43 @@ const App = () => {
               <span aria-hidden="true">Cauldron</span>
             </Link>
           </TopBarItem>
-
-          {/* The below line demonstrates the ability to conditionally include menu item children. */}
-          {false && <TopBarItem>Potato</TopBarItem>}
-
-          <TopBarMenu
-            id="topbar-menu"
-            className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
-            menuItemRef={(el) => setTopBarMenuItem}
+          <ActionMenu
+            trigger={({ ref, ...props }) => {
+              return (
+                <TopBarItem
+                  menuItemRef={ref}
+                  className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
+                  tabIndex={0}
+                  {...props}
+                >
+                  <span className="TopBar__item--icon">
+                    <Icon type="gears" />
+                    <div>Settings</div>
+                  </span>
+                  <div ref={actionMenuRef} />
+                </TopBarItem>
+              );
+            }}
+            placement="bottom-end"
+            portal={actionMenuRef}
           >
-            <div className="TopBar__item--icon">
-              {thin ? (
-                <Icon type="gears" label="Settings" />
-              ) : (
-                <Fragment>
-                  <Icon type="gears" />
-                  <div>Settings</div>
-                </Fragment>
-              )}
-            </div>
-            <OptionsMenuList onSelect={onSettingsSelect}>
-              <li>Default top bar</li>
-              <li>Thin top bar</li>
-              <li id="theme">{theme === 'dark' ? 'Light' : 'Dark'} Theme</li>
-            </OptionsMenuList>
-          </TopBarMenu>
+            <ActionList>
+              <ActionListGroup label="Theme" selectionType="single">
+                <ActionListItem
+                  onAction={handleThemeChange('light')}
+                  selected={theme === 'light'}
+                >
+                  Light
+                </ActionListItem>
+                <ActionListItem
+                  onAction={handleThemeChange('dark')}
+                  selected={theme === 'dark'}
+                >
+                  Dark
+                </ActionListItem>
+              </ActionListGroup>
+            </ActionList>
+          </ActionMenu>
           <TopBarItem className="MenuItem--separator">
             <a
               href="https://github.com/dequelabs/cauldron"
