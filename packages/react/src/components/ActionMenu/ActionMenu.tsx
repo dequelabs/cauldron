@@ -50,7 +50,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const [open, setOpen] = useState(false);
     const [focusStrategy, setFocusStrategy] =
       useState<React.ComponentProps<typeof Listbox>['focusStrategy']>('first');
-    const triggerRef = useRef<HTMLElement | HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
     const actionMenuListRef = useSharedRef<HTMLElement>(
       actionMenuList.props.ref
