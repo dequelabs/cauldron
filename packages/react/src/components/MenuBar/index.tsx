@@ -1,4 +1,5 @@
 import React, { Children, cloneElement } from 'react';
+import { findDOMNode } from 'react-dom';
 import keyname from 'keyname';
 import { isWide } from '../../utils/viewport';
 
@@ -20,8 +21,6 @@ export default class TopBar extends React.Component<
     thin: false,
     hasTrigger: false
   };
-
-  private menuItems: HTMLLIElement[] = [];
 
   constructor(props: MenuBarProps) {
     super(props);
@@ -79,31 +78,18 @@ export default class TopBar extends React.Component<
 
     return cloneElement(child, {
       key: index,
-      onKeyDown: (...args: any) => {
-        // @ts-expect-error we're just spreading the original args
-        this.onKeyDown(...args);
-
-        if (child.props.onKeyDown) {
-          child.props.onKeyDown(...args);
-        }
-      },
       tabIndex:
-        typeof child.props.tabIndex === 'undefined' ? 0 : child.props.tabIndex,
-      menuItemRef: (menuItem: HTMLLIElement) => {
-        if (menuItem) {
-          this.menuItems.push(menuItem);
-        }
-
-        if (child.props.menuItemRef) {
-          child.props.menuItemRef(menuItem);
-        }
-      }
+        typeof child.props.tabIndex === 'undefined' ? 0 : child.props.tabIndex
     });
   };
 
   onKeyDown(e: React.KeyboardEvent<HTMLElement>) {
     const key = keyname(e.which);
-    const menuItems = [...this.menuItems];
+    // This is a temporary workaround until have an opportunity to refactor or replace menubar
+    // see: https://github.com/dequelabs/cauldron/issues/1934
+    // eslint-disable-next-line react/no-find-dom-node
+    const menuBarElement = findDOMNode(this) as Element;
+    const menuItems = Array.from(menuBarElement.children) as HTMLElement[];
 
     // account for hidden side bar trigger (hamburger)
     if (this.state.wide && this.props.hasTrigger) {
@@ -113,6 +99,7 @@ export default class TopBar extends React.Component<
     const currentIndex = menuItems.findIndex(
       (menuitem) => menuitem === e.target
     );
+
     if (currentIndex === -1 || (key !== 'left' && key !== 'right')) {
       return;
     }
@@ -132,13 +119,12 @@ export default class TopBar extends React.Component<
   }
 
   render() {
-    this.menuItems = [];
     // disabling no-unused-vars to prevent thin/hasTrigger from being passed through to div
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, className, thin, hasTrigger, ...other } = this.props;
 
     return (
-      <ul role="menubar" className={className}>
+      <ul role="menubar" onKeyDown={this.onKeyDown} className={className}>
         {Children.map(
           children as React.ReactElement<HTMLLIElement>,
           this.renderChild
