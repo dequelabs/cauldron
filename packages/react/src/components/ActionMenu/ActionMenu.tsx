@@ -19,7 +19,7 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
   'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
-> & { ref: React.RefObject<HTMLElement> };
+> & { ref: React.RefObject<HTMLButtonElement> };
 
 type ActionMenuTriggerFunction = (
   props: ActionMenuTriggerProps,
@@ -50,7 +50,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const [open, setOpen] = useState(false);
     const [focusStrategy, setFocusStrategy] =
       useState<React.ComponentProps<typeof Listbox>['focusStrategy']>('first');
-    const triggerRef = useRef<HTMLElement>(null);
+    const triggerRef = useRef<HTMLElement | HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
     const actionMenuListRef = useSharedRef<HTMLElement>(
       actionMenuList.props.ref
