@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.17.0",
+  "version": "6.17.1",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -23,16 +23,13 @@
     "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "screenshots": "docker run --rm --ipc=host -v $(pwd)/playwright-ct.config.ts:/app/playwright-ct.config.ts -v $(pwd)/packages:/app/packages -v $(pwd)/e2e:/app/e2e cauldron-playwright-e2e-screenshots",
     "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(npm list --depth=0 playwright | grep playwright | cut -f2 -d '@')",
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "precommit": "lint-staged",
+    "prepare": "husky"
   },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "none"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
@@ -86,7 +83,7 @@
     "express": "^5.1.0",
     "focusable": "^2.3.0",
     "html-webpack-plugin": "^5.6.3",
-    "husky": "^1.0.0-rc.14",
+    "husky": "^9.1.7",
     "lint-staged": "^7.2.2",
     "log-symbols": "4",
     "mdast-util-from-markdown": "^2.0.2",
