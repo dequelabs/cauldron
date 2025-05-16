@@ -29,6 +29,8 @@ type ActionMenuTriggerFunction = (
 type ActionMenuProps = {
   children: React.ReactElement;
   trigger: React.ReactElement | ActionMenuTriggerFunction;
+  /** Render the action menu in a different location in the dom. */
+  portal?: React.RefObject<HTMLElement> | HTMLElement;
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
@@ -40,6 +42,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       trigger,
       placement = 'bottom-start',
       children: actionMenuList,
+      portal,
       ...props
     },
     ref
@@ -152,6 +155,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           target={triggerRef}
           placement={placement}
           offset={4}
+          portal={portal}
           style={{ display: !open ? 'none' : undefined, ...style }}
           {...props}
         >
