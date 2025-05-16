@@ -42,6 +42,7 @@ jobs:
           NODE_ENV=production yarn --cwd packages/styles build
       - name: Screenshot testing
         run: |
+          set NODE_OPTIONS=--experimental-require-module
           yarn screenshots:docker
           yarn screenshots
       - name: Screenshot test results
