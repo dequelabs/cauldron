@@ -1,6 +1,7 @@
 name: Label a11y SLA status
 
 on:
+  push:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight UTC
   workflow_dispatch:
