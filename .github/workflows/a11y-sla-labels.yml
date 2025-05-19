@@ -1,0 +1,22 @@
+name: Label a11y SLA status
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+concurrency:
+  group: a11y-sla-labels
+  cancel-in-progress: true
+
+jobs:
+  sla-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run SLA Label Script
+        uses: dequelabs/internal-actions-public/.github/actions/a11y-sla-breach-labels@e31eb7700733536cb77c718063c80683cc52bb90
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
