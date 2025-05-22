@@ -19,7 +19,7 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
   'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
->;
+> & { ref: React.RefObject<HTMLButtonElement> };
 
 type ActionMenuTriggerFunction = (
   props: ActionMenuTriggerProps,
@@ -59,9 +59,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     const handleTriggerClick = useCallback(
       (
-        event:
-          | React.MouseEvent<HTMLButtonElement>
-          | React.KeyboardEvent<HTMLButtonElement>
+        event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
       ) => {
         // istanbul ignore else
         if (!event.defaultPrevented) {
@@ -73,7 +71,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     );
 
     const handleTriggerKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      (event: React.KeyboardEvent<HTMLElement>) => {
         // istanbul ignore else
         if ([ArrowDown, ArrowUp].includes(event.key) && !open) {
           // prevent page from scrolling if the user triggers the action menu
@@ -89,17 +87,16 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       [open]
     );
 
-    const triggerProps: React.HTMLAttributes<HTMLButtonElement> =
-      useMemo(() => {
-        return {
-          ref: triggerRef,
-          id: triggerId,
-          onClick: handleTriggerClick,
-          onKeyDown: handleTriggerKeyDown,
-          'aria-expanded': open,
-          'aria-haspopup': 'menu'
-        };
-      }, [handleTriggerClick, open]);
+    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
+      return {
+        ref: triggerRef,
+        id: triggerId,
+        onClick: handleTriggerClick,
+        onKeyDown: handleTriggerKeyDown,
+        'aria-expanded': open,
+        'aria-haspopup': 'menu'
+      };
+    }, [handleTriggerClick, open]);
 
     const actionMenuTrigger = React.isValidElement(trigger)
       ? React.cloneElement(trigger, triggerProps)
@@ -143,6 +140,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           onClickOutside={handleClickOutside}
           mouseEvent={open ? undefined : false}
           touchEvent={open ? undefined : false}
+          target={triggerProps.ref}
         >
           {actionMenuTrigger}
         </ClickOutsideListener>
