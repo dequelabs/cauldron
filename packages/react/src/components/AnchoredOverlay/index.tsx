@@ -143,14 +143,16 @@ const AnchoredOverlay = forwardRef(
       return null;
     }
 
-    return portal && typeof portal !== 'undefined'
-      ? (createPortal(
-          AnchoredOverlayComponent,
-          (portal && 'current' in portal ? portal.current : portal) ||
-            // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-            document?.body
-        ) as React.ReactPortal)
-      : AnchoredOverlayComponent;
+    if (portal && typeof portal !== 'undefined') {
+      return createPortal(
+        AnchoredOverlayComponent,
+        (portal && 'current' in portal ? portal.current : portal) ||
+          // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+          document?.body
+      );
+    }
+
+    return AnchoredOverlayComponent;
   }
 );
 
