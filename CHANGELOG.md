@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.17.1](https://github.com/dequelabs/cauldron/compare/v6.17.0...v6.17.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **Stepper:** fixed types for Stepper component ([#1933](https://github.com/dequelabs/cauldron/issues/1933)) ([ef7bc54](https://github.com/dequelabs/cauldron/commit/ef7bc54e8069e18f7ce84ce1feb5218aa96039af))
+
 ## [6.17.0](https://github.com/dequelabs/cauldron/compare/v6.16.0...v6.17.0) (2025-05-13)
 
 
