@@ -144,11 +144,13 @@ const AnchoredOverlay = forwardRef(
     }
 
     if (portal && typeof portal !== 'undefined') {
+      const portalElement =
+        (portal && 'current' in portal ? portal.current : portal) ||
+        // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+        document?.body;
       return createPortal(
         AnchoredOverlayComponent,
-        (portal && 'current' in portal ? portal.current : portal) ||
-          // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-          document?.body
+        portalElement
       ) as React.ReactPortal;
     }
 
