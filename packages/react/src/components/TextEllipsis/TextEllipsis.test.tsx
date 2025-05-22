@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import axe from '../../axe';
 import { createSandbox } from 'sinon';
 import TextEllipsis from './';
@@ -148,6 +148,32 @@ test('should support as prop', () => {
   );
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
   expect(screen.queryByRole('link')).toBeInTheDocument();
+});
+
+test('should call onOverFlowChange with true when overflowing', () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientWidth').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollWidth').value(100);
+  const onOverflowChange = jest.fn();
+  render(
+    <TextEllipsis onOverflowChange={onOverflowChange}>Hello World</TextEllipsis>
+  );
+
+  waitFor(() => {
+    expect(onOverflowChange).toBeCalledWith(true);
+  });
+});
+
+test('should call onOverFlowChange with false when not overflowing', () => {
+  sandbox.stub(global.HTMLDivElement.prototype, 'clientWidth').value(100);
+  sandbox.stub(global.HTMLDivElement.prototype, 'scrollWidth').value(200);
+  const onOverflowChange = jest.fn();
+  render(
+    <TextEllipsis onOverflowChange={onOverflowChange}>Hello World</TextEllipsis>
+  );
+
+  waitFor(() => {
+    expect(onOverflowChange).toBeCalledWith(false);
+  });
 });
 
 test('should return no axe violations', async () => {
