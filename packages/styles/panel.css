@@ -2,7 +2,7 @@
   --panel-border-color: var(--gray-40);
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
-  --panel-padding: var(--space-large);
+  --panel-padding: var(--space-small);
   --panel-divider-border-color: var(--gray-40);
   --panel-content-color: var(--gray-80);
 }
@@ -11,7 +11,7 @@
   padding: var(--panel-padding);
   margin: 0;
   border: 1px solid var(--panel-border-color);
-  border-radius: 16px;
+  border-radius: 3px;
   box-shadow: var(--drop-shadow-raised);
   background-color: var(--panel-background-color);
   word-break: break-word;
