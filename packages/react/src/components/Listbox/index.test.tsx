@@ -212,6 +212,25 @@ test('should set the first non-disabled option as active on focus', () => {
   );
 });
 
+test('should set the first option as active on focus with focusDisabledOptions set to true', () => {
+  render(
+    <Listbox focusDisabledOptions>
+      <ListboxOption disabled>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveClass(
+    'ListboxOption--active'
+  );
+  expect(screen.getByRole('listbox')).toHaveAttribute(
+    'aria-activedescendant',
+    screen.getByRole('option', { name: 'Apple' }).getAttribute('id')
+  );
+});
+
 test('should set the first non-disabled option as active on focus when the options have changed', () => {
   const { rerender } = render(
     <Listbox>
@@ -245,6 +264,38 @@ test('should set the first non-disabled option as active on focus when the optio
   expect(screen.getByRole('listbox')).toHaveAttribute(
     'aria-activedescendant',
     screen.getByRole('option', { name: 'Elderberry' }).getAttribute('id')
+  );
+});
+
+test('should focus the first enabled option when focusStrategy is "first"', () => {
+  render(
+    <Listbox focusStrategy="first">
+      <ListboxOption disabled>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Banana' })).toHaveClass(
+    'ListboxOption--active'
+  );
+});
+
+test('should focus the last enabled option when focusStrategy is "last"', () => {
+  render(
+    <Listbox focusStrategy="last">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption disabled>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(screen.getByRole('option', { name: 'Cantaloupe' })).toHaveClass(
+    'ListboxOption--active'
   );
 });
 

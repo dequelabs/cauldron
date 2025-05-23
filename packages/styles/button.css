@@ -5,7 +5,7 @@
   --button-background-color-primary-active: var(--accent-primary-active);
 
   --button-background-color-secondary: var(--gray-20);
-  --button-background-color-secondary-disabled: var(--gray-30);
+  --button-background-color-secondary-disabled: var(--gray-20);
   --button-outline-color-secondary: var(--gray-90);
   --button-background-color-secondary-active: var(--gray-30);
   --button-border-color-secondary: var(--gray-40);

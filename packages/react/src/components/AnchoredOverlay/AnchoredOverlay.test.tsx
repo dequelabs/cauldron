@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { findByTestId, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
@@ -123,6 +123,25 @@ test('should call onPlacementChange with initial placement', () => {
   expect(onPlacementChange).toHaveBeenCalledWith('top');
 });
 
+test('should call onShiftChange with initial shift position', () => {
+  const targetRef = { current: document.createElement('button') };
+  const onShiftChange = jest.fn();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="top"
+      open
+      onShiftChange={onShiftChange}
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(onShiftChange).toHaveBeenCalledWith({ x: 0, y: 0 });
+});
+
 test('should not trap focus when focusTrap is false', async () => {
   const targetRef = { current: document.createElement('button') };
   const user = userEvent.setup();
@@ -205,6 +224,25 @@ test('should support ref prop', () => {
 
   expect(ref.current).toBeInstanceOf(HTMLDivElement);
   expect(ref.current).toEqual(screen.getByTestId('overlay'));
+});
+
+test('should support portal prop', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const portal = document.createElement('div');
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      portal={portal}
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  const anchoredOverlayInPortal = await findByTestId(portal, 'overlay');
+  expect(anchoredOverlayInPortal).toBeTruthy();
 });
 
 test('should return no axe violations when opened', async () => {

@@ -20,6 +20,9 @@ To update existing snapshots run:
 yarn screenshots --update-snapshots
 ```
 
+> [!NOTE]
+> Screenshot comparisons use a color threshhold of [0.2](https://playwright.dev/docs/api/class-pageassertions#page-assertions-to-have-screenshot-1-option-threshold) to help avoid unnecessary diffs from pixel anti-aliasing. If you need to generate a change to a component that has color changes only, you may want to first delete the previous snapshot before running the above command to get a clean component snapshot.
+
 Finally, to run screenshot comparison tests run:
 
 ```sh
