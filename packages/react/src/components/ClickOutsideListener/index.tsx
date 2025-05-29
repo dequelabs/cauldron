@@ -41,6 +41,7 @@ function ClickOutsideListener(
     }
 
     if (
+      !target &&
       childElementRef.current &&
       !childElementRef.current.contains(eventTarget)
     ) {
