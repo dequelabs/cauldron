@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.1](https://github.com/dequelabs/cauldron/compare/v6.18.0...v6.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **react:** fix overflow callback not being called for TextEllipsis when tooltip is hidden ([#1954](https://github.com/dequelabs/cauldron/issues/1954)) ([b31fcc8](https://github.com/dequelabs/cauldron/commit/b31fcc8ed5f6e8950fbc486ba6a4abd981ca4d12))
+
 ## [6.18.0](https://github.com/dequelabs/cauldron/compare/v6.17.1...v6.18.0) (2025-05-29)
 
 
