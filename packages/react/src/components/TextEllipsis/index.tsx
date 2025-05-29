@@ -71,10 +71,6 @@ const TextEllipsis = React.forwardRef(
     }
 
     useEffect(() => {
-      if (hideTooltip) {
-        return;
-      }
-
       const listener: ResizeObserverCallback = () => {
         requestAnimationFrame(() => {
           const { current: overflowElement } = sharedRef;
@@ -96,13 +92,13 @@ const TextEllipsis = React.forwardRef(
       return () => {
         observer?.disconnect();
       };
-    }, [hideTooltip]);
+    }, []);
 
     useEffect(() => {
       if (typeof onOverflowChange === 'function') {
         onOverflowChange(hasOverflow);
       }
-    }, [hasOverflow]);
+    }, [onOverflowChange, hasOverflow]);
 
     return (
       <>
