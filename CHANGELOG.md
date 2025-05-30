@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.1](https://github.com/dequelabs/cauldron/compare/v6.18.0...v6.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **react:** fix overflow callback not being called for TextEllipsis when tooltip is hidden ([#1954](https://github.com/dequelabs/cauldron/issues/1954)) ([b31fcc8](https://github.com/dequelabs/cauldron/commit/b31fcc8ed5f6e8950fbc486ba6a4abd981ca4d12))
+
+## [6.18.0](https://github.com/dequelabs/cauldron/compare/v6.17.1...v6.18.0) (2025-05-29)
+
+
+### Features
+
+* **react:** add onOverflowChange callback to TextEllipsis ([#1946](https://github.com/dequelabs/cauldron/issues/1946)) ([c11936e](https://github.com/dequelabs/cauldron/commit/c11936e5c885f62af789c5021e23fea274ce0230))
+* **react:** add support to render AnchoredOverlay with a portal ([#1935](https://github.com/dequelabs/cauldron/issues/1935)) ([82f455c](https://github.com/dequelabs/cauldron/commit/82f455cdd57dcf86689ac3ee740c9ab3b7d4fee5))
+
+
+### Bug Fixes
+
+* **react:** prevent onClickOutside from being called incorrectly when using target ([#1924](https://github.com/dequelabs/cauldron/issues/1924)) ([0d77c45](https://github.com/dequelabs/cauldron/commit/0d77c457a39d0fa5e263f3f860a4472eb9661d5d))
+* **style:** prevent platform tooltip from appearing on ellipsized text in Safari ([#1927](https://github.com/dequelabs/cauldron/issues/1927)) ([0421855](https://github.com/dequelabs/cauldron/commit/042185508bdfd0b3ecde4feec3ad4fb32985f66b))
+
 ### [6.17.1](https://github.com/dequelabs/cauldron/compare/v6.17.0...v6.17.1) (2025-05-16)
 
 
