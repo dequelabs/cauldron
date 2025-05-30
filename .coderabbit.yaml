@@ -5,16 +5,16 @@ reviews:
   profile: assertive
   high_level_summary: false
   high_level_summary_placeholder: '@coderabbitai summary'
-  high_level_summary_in_walkthrough: true
+  high_level_summary_in_walkthrough: false
   auto_title_placeholder: '@coderabbitai'
   changed_files_summary: false
   sequence_diagrams: true
   assess_linked_issues: true
-  related_issues: true
-  related_prs: true
+  related_issues: false
+  related_prs: false
   suggested_labels: false
   auto_apply_labels: false
-  suggested_reviewers: true
+  suggested_reviewers: false
   auto_assign_reviewers: false
   poem: false
   labeling_instructions: []
@@ -112,7 +112,7 @@ reviews:
     base_branches: []
   finishing_touches:
     docstrings:
-      enabled: true
+      enabled: false
   tools:
     shellcheck:
       enabled: true
@@ -143,7 +143,7 @@ reviews:
     golangci-lint:
       enabled: false
     yamllint:
-      enabled: true
+      enabled: false
     gitleaks:
       enabled: false
     checkov:
@@ -159,7 +159,7 @@ reviews:
     regal:
       enabled: false
     actionlint:
-      enabled: true
+      enabled: false
     pmd:
       enabled: false
     cppcheck:
