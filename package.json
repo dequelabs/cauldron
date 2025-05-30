@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.17.1",
+  "version": "6.18.1",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -97,7 +97,7 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^3",
-    "puppeteer": "^24.8.2",
+    "puppeteer": "^24.9.0",
     "react": "^18",
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
@@ -113,7 +113,7 @@
     "terser-webpack-plugin": "^5.3.10",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
-    "webpack": "^5.99.8",
+    "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
   }
