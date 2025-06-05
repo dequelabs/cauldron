@@ -1,0 +1,29 @@
+:root {
+  --empty-state-border-color: var(--gray-30);
+}
+
+.cauldron--theme-dark {
+  --empty-state-border-color: var(--accent-light);
+}
+
+.EmptyState > :where(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--text-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.EmptyState > :where(h1, h2, h3, h4, h5, h6) + :where(p) {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.EmptyState__primary {
+  padding-top: var(--space-small);
+}
+
+.EmptyState__secondary {
+  margin-top: var(--space-small);
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--empty-state-border-color);
+}

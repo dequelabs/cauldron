@@ -12,6 +12,7 @@ interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 export default class MenuItem extends Component<MenuItemProps> {
+  static displayName = 'MenuItem';
   static defaultProps = {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     menuItemRef: () => {},

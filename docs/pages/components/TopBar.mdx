@@ -4,6 +4,7 @@ description: A container component that typically contains information about the
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TopBar/TopBar.tsx
 ---
 
+import { useRef } from 'react'
 import {
   TopBar,
   MenuBar,
@@ -11,7 +12,10 @@ import {
   TopBarItem,
   OptionsMenuList,
   OptionsMenuItem,
-  Icon
+  Icon,
+  ActionMenu,
+  ActionList,
+  ActionListItem
 } from '@deque/cauldron-react'
 
 ```jsx
@@ -57,38 +61,48 @@ import {
 
 ### With Menu
 
-In addition to navigational items, the `MenuBar` can also contain a dropdown menu with items when composed with `TopBarMenu` and `OptionsMenuList`:
+In addition to navigational items, the `MenuBar` can also contain an action menu with items when composed with `ActionMenu` and `ActionList`:
 
 ```jsx example
-<TopBar>
-  <MenuBar>
-    <TopBarItem>
-      <a className="MenuItem__logo" href="#" tabIndex={-1}>
-        <img src="/public/fonts/logo.svg" alt="" />
-        Cauldron
-      </a>
-    </TopBarItem>
-    <TopBarItem>
-      <a href="#" tabIndex={-1}>
-        Item 1
-      </a>
-    </TopBarItem>
-    <TopBarMenu>
-      Menu <Icon type="chevron-down" />
-      <OptionsMenuList>
-        <OptionsMenuItem>
-          Menu Item 1
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 2
-        </OptionsMenuItem>
-        <OptionsMenuItem>
-          Menu Item 3
-        </OptionsMenuItem>
-      </OptionsMenuList>
-    </TopBarMenu>
-  </MenuBar>
-</TopBar>
+function TopBarWithMenuExample() {
+  const actionMenuRef = useRef()
+  return (
+    <TopBar>
+      <MenuBar>
+        <TopBarItem>
+          <a className="MenuItem__logo" href="#" tabIndex={-1}>
+            <img src="/public/fonts/logo.svg" alt="" />
+            Cauldron
+          </a>
+        </TopBarItem>
+        <TopBarItem>
+          <a href="#" tabIndex={-1}>
+            Item 1
+          </a>
+        </TopBarItem>
+        <ActionMenu
+          trigger={
+            ({ ref, ...props }) => {
+              return (
+                <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
+                  Menu <Icon type="chevron-down" />
+                  <div ref={actionMenuRef} />
+                </TopBarItem>
+              )
+            }
+          }
+          portal={actionMenuRef}
+        >
+          <ActionList>
+            <ActionListItem>Menu Item 1</ActionListItem>
+            <ActionListItem>Menu Item 2</ActionListItem>
+            <ActionListItem>Menu Item 3</ActionListItem>
+          </ActionList>
+        </ActionMenu>
+      </MenuBar>
+    </TopBar>
+  )
+}
 ```
 
 

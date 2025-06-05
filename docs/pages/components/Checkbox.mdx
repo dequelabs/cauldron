@@ -4,7 +4,7 @@ description: An interactive component that toggles between checked and unchecked
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Checkbox/index.tsx
 ---
 
-import { Checkbox, FieldWrap } from '@deque/cauldron-react'
+import { Checkbox, FieldWrap, FieldGroup } from '@deque/cauldron-react'
 
 ```js
 import { Checkbox } from '@deque/cauldron-react'
@@ -115,11 +115,16 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
-### Checkbox List
+### Checkbox Group
+
+If a set of checkboxes is logically grouped, those checkboxes should be wrapped with a [FieldGroup](./FieldGroup) component to provide a label and optional description to help communicate that relationship. 
 
 ```jsx example
-<FieldWrap role="group" aria-labelledby="checkbox-list-label">
-  <div className="Field__label" id="checkbox-list-label">Checkbox List Label</div>
+<FieldWrap 
+  as={FieldGroup}
+  label="Checkbox Group Label" 
+  description="You must select at least one of the following:"
+>
   <Checkbox
     id="checkbox-list-unchecked"
     label="Unchecked Checkbox"
@@ -187,11 +192,14 @@ import { Checkbox } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
-### Checkbox with Description List
+### Checkbox Group with Descriptions
 
 ```jsx example
-<FieldWrap role="group" aria-labelledby="checkbox-list-with-description-label">
-  <div className="Field__label" id="checkbox-list-with-description-label">Checkbox with Description List Label</div>
+<FieldWrap 
+  as={FieldGroup}
+  label="Checkbox Group with Descriptions Label" 
+  description="You must select at least one of the following:"
+>
   <Checkbox
     id="description-checkbox-list-unchecked"
     label="Description Checkbox Unchecked"
