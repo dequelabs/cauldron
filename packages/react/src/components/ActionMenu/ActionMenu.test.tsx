@@ -10,7 +10,12 @@ import {
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import ActionMenu from './ActionMenu';
-import { ActionList, ActionListGroup, ActionListItem } from '../ActionList';
+import {
+  ActionList,
+  ActionListGroup,
+  ActionListItem,
+  ActionListLinkItem
+} from '../ActionList';
 
 const defaultProps: React.ComponentProps<typeof ActionMenu> = {
   trigger: <button>Trigger</button>,
@@ -102,6 +107,106 @@ test('should return focus to trigger when closed', async () => {
 
   await waitFor(() => {
     expect(button).toHaveFocus();
+  });
+});
+
+test('should tab to next element when using action list items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultProps}>
+        <ActionList>
+          <ActionListItem>Item 1</ActionListItem>
+          <ActionListItem>Item 2</ActionListItem>
+          <ActionListItem>Item 3</ActionListItem>
+        </ActionList>
+      </ActionMenu>
+      <button>Tab to me</button>
+    </>
+  );
+
+  const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
+  const tabButton = screen.getByRole('button', { name: 'Tab to me' });
+  await user.click(menuTriggerButton);
+  await user.keyboard('{Tab}');
+
+  await waitFor(() => {
+    expect(tabButton).toHaveFocus();
+  });
+});
+
+test('should tab to next element when using single select action list items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultProps}>
+        <ActionList selectionType="single">
+          <ActionListItem selected>Item 1</ActionListItem>
+          <ActionListItem>Item 2</ActionListItem>
+          <ActionListItem>Item 3</ActionListItem>
+        </ActionList>
+      </ActionMenu>
+      <button>Tab to me</button>
+    </>
+  );
+
+  const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
+  const tabButton = screen.getByRole('button', { name: 'Tab to me' });
+  await user.click(menuTriggerButton);
+  await user.keyboard('{Tab}');
+
+  await waitFor(() => {
+    expect(tabButton).toHaveFocus();
+  });
+});
+
+test('should tab to next element when using multi select action list items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultProps}>
+        <ActionList selectionType="multiple">
+          <ActionListItem selected>Item 1</ActionListItem>
+          <ActionListItem selected>Item 2</ActionListItem>
+          <ActionListItem>Item 3</ActionListItem>
+        </ActionList>
+      </ActionMenu>
+      <button>Tab to me</button>
+    </>
+  );
+
+  const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
+  const tabButton = screen.getByRole('button', { name: 'Tab to me' });
+  await user.click(menuTriggerButton);
+  await user.keyboard('{Tab}');
+
+  await waitFor(() => {
+    expect(tabButton).toHaveFocus();
+  });
+});
+
+test('should tab to next element when using action link items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultProps}>
+        <ActionList>
+          <ActionListLinkItem href="#">Item 1</ActionListLinkItem>
+          <ActionListLinkItem href="#">Item 2</ActionListLinkItem>
+          <ActionListLinkItem href="#">Item 3</ActionListLinkItem>
+        </ActionList>
+      </ActionMenu>
+      <button>Tab to me</button>
+    </>
+  );
+
+  const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
+  const tabButton = screen.getByRole('button', { name: 'Tab to me' });
+  await user.click(menuTriggerButton);
+  await user.keyboard('{Tab}');
+
+  await waitFor(() => {
+    expect(tabButton).toHaveFocus();
   });
 });
 

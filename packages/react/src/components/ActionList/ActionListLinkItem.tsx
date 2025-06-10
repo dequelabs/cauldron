@@ -47,6 +47,7 @@ const ActionListLinkItem = forwardRef<
         className={classnames('Link ActionListLinkItem', className)}
         as="a"
         role={listItemRole}
+        tabIndex={listItemRole === 'menuitem' ? -1 : undefined}
         {...props}
       />
     );
