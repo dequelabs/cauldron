@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.2](https://github.com/dequelabs/cauldron/compare/v6.18.1...v6.18.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **react:** support ActionMenu within TopBar ([#1916](https://github.com/dequelabs/cauldron/issues/1916)) ([cad74a2](https://github.com/dequelabs/cauldron/commit/cad74a2e30e162767a0afcdb21639e5a76bfa74e))
+
 ### [6.18.1](https://github.com/dequelabs/cauldron/compare/v6.18.0...v6.18.1) (2025-05-29)
 
 
