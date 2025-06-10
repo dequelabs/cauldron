@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.3](https://github.com/dequelabs/cauldron/compare/v6.18.2...v6.18.3) (2025-06-10)
+
+
+### Bug Fixes
+
+* **react:** fix incorrect tabstop when using ActionLinkItem inside of ActionMenu ([#1969](https://github.com/dequelabs/cauldron/issues/1969)) ([fe38517](https://github.com/dequelabs/cauldron/commit/fe3851736709db1dda854dcfd70e0d5a533f9812))
+
 ### [6.18.2](https://github.com/dequelabs/cauldron/compare/v6.18.1...v6.18.2) (2025-06-05)
 
 
