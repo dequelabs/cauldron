@@ -11,7 +11,7 @@ import useSharedRef from '../../utils/useSharedRef';
 type SortDirection = 'ascending' | 'descending' | 'none';
 
 interface TableHeaderProps
-  extends Omit<React.ThHTMLAttributes<HTMLTableHeaderCellElement>, 'align'> {
+  extends Omit<React.TdHTMLAttributes<HTMLTableDataCellElement>, 'align'> {
   sortDirection?: SortDirection;
   onSort?: () => void;
   sortAscendingAnnouncement?: string;
@@ -19,7 +19,7 @@ interface TableHeaderProps
   align?: ColumnAlignment;
 }
 
-const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
+const TableHeader = forwardRef<HTMLTableDataCellElement, TableHeaderProps>(
   (
     {
       children,
@@ -34,7 +34,7 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
     },
     ref
   ) => {
-    const tableHeaderRef = useSharedRef<HTMLTableHeaderCellElement>(ref);
+    const tableHeaderRef = useSharedRef<HTMLTableDataCellElement>(ref);
     const { layout, columns } = useTable();
     const tableGridStyles = useTableGridStyles({
       elementRef: tableHeaderRef,
@@ -42,6 +42,10 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       columns,
       layout
     });
+
+    // Filter out scope attribute since it's not valid on td elements
+    const filteredProps = { ...other };
+    delete filteredProps.scope;
 
     // When the sort direction changes, we want to announce the change in a live region
     // because changes to the sort value is not widely supported yet
@@ -54,14 +58,14 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
         : '';
 
     return (
-      <th
+      <td
         ref={tableHeaderRef}
         className={classNames('TableHeader', className, {
           'TableHeader--sort-ascending': sortDirection === 'ascending',
           'TableHeader--sort-descending': sortDirection === 'descending'
         })}
         style={{ ...tableGridStyles, ...style }}
-        {...other}
+        {...filteredProps}
       >
         {!!onSort && !!sortDirection ? (
           <button
@@ -88,7 +92,7 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
         ) : (
           children
         )}
-      </th>
+      </td>
     );
   }
 );
