@@ -56,7 +56,6 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
     return (
       <th
         ref={tableHeaderRef}
-        aria-sort={sortDirection}
         className={classNames('TableHeader', className, {
           'TableHeader--sort-ascending': sortDirection === 'ascending',
           'TableHeader--sort-descending': sortDirection === 'descending'
