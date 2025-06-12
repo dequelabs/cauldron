@@ -13,7 +13,6 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
     const [id] = propId ? [propId] : useId(1, 'tabpanel');
     return (
       <div
-        role="tabpanel"
         className={classNames('TabPanel', className)}
         id={id}
         ref={ref}

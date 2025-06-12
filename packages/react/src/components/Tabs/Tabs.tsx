@@ -149,7 +149,6 @@ const Tabs = ({
       ref={tabsRef}
     >
       <ul
-        role="tablist"
         className="Tablist"
         {...labelProp}
         onKeyDown={handleKeyDown}

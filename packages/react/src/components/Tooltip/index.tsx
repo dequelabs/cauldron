@@ -76,8 +76,16 @@ export default function Tooltip({
   }, [target]);
 
   // Hide the tooltip
-  const hide: EventListener = useCallback(() => {
+  const hide: EventListener = useCallback((event: Event) => {
     const targetElement = resolveElement(target);
+    // For tooltip element mouseleave, close immediately without delay
+    if (event.currentTarget === tooltipElement) {
+      setShowTooltip(false);
+      fireCustomEvent(false, targetElement);
+      return;
+    }
+    
+    // For other elements, use the hide delay
     if (!hideTimeoutRef.current) {
       hideTimeoutRef.current = setTimeout(() => {
         hideTimeoutRef.current = null;
@@ -89,7 +97,7 @@ export default function Tooltip({
     return () => {
       clearTimeout(hideTimeoutRef.current as unknown as number);
     };
-  }, [target]);
+  }, [target, tooltipElement]);
 
   useEffect(() => {
     if (typeof showProp === 'boolean') {
@@ -115,23 +123,22 @@ export default function Tooltip({
     };
   }, [target, show, hide, showProp]);
 
-  // Handle hover events for the tooltipElement
+  // Handle only mouseleave events for the tooltipElement
   useEffect(() => {
     if (typeof showProp !== 'boolean') {
-      tooltipElement?.addEventListener('mouseenter', show);
       tooltipElement?.addEventListener('mouseleave', hide);
     }
 
     return () => {
-      tooltipElement?.removeEventListener('mouseenter', show);
       tooltipElement?.removeEventListener('mouseleave', hide);
     };
-  }, [tooltipElement, show, hide, showProp]);
+  }, [tooltipElement, hide, showProp]);
 
   // Keep the target's id in sync
   useEffect(() => {
     const targetElement = resolveElement(target);
-    if (hasAriaAssociation) {
+    // Only add aria-describedby if the element is not a button
+    if (hasAriaAssociation && !targetElement?.matches('button')) {
       const idRefs = targetElement?.getAttribute(association);
       if (!hasIdRef(idRefs, id)) {
         targetElement?.setAttribute(association, addIdRef(idRefs, id));
@@ -139,7 +146,7 @@ export default function Tooltip({
     }
 
     return () => {
-      if (targetElement && hasAriaAssociation) {
+      if (targetElement && hasAriaAssociation && !targetElement.matches('button')) {
         const idRefs = targetElement.getAttribute(association);
         targetElement.setAttribute(association, removeIdRef(idRefs, id));
       }

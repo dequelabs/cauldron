@@ -31,11 +31,9 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
 
     return (
       <div
-        role="group"
         className={classnames('FieldGroup', className)}
         ref={ref}
         {...props}
-        aria-labelledby={`${id}-label`}
         aria-describedby={ariaDescribedbyId || undefined}
       >
         <label id={`${id}-label`} className="Field__label">
