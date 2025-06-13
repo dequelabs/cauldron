@@ -713,15 +713,8 @@ const Combobox = forwardRef<
             id={`${id}-input`}
             ref={inputRef}
             value={inputValue}
-            role="combobox"
             disabled={disabled}
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
-            aria-controls={`${id}-listbox`}
-            aria-expanded={open}
-            aria-haspopup="listbox"
-            aria-activedescendant={
-              open && activeDescendant ? activeDescendant.element.id : undefined
-            }
             {...inputProps}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
