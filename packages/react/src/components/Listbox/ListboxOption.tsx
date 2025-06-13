@@ -116,7 +116,6 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
         role="option"
         ref={listboxOptionRef}
         aria-disabled={typeof disabled === 'boolean' ? disabled : undefined}
-        aria-selected={isSelected}
         onClick={handleClick}
         {...props}
       >
