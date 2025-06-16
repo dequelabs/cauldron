@@ -1088,20 +1088,20 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
-"@fontsource/lato@^5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.2.5.tgz#cf552f13a569aff28625d9d37db35ca26be7d594"
-  integrity sha512-d8aogKOul7a3eYG3UzTG8PB6A0D+6tlkFQCACmKQ7qTwB3XS6QmkSW1L0vYbVE9CfCRq/Zpb5sG3gNA6yJea/A==
+"@fontsource/lato@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.2.6.tgz#d7af1bc81f2fe41072d2870f63d7bc3dbe7d6f45"
+  integrity sha512-ykbyuHKHdFsV8QNWPgo2kkCV0veY8/w1HzPlTd7f08LRGGYijPoN7QHkVKPq5QLpgeNauPPe+0a6oRhd8b6MpQ==
 
 "@fontsource/pt-mono@^5.2.5":
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.5.tgz#bf2180b625ab483e988cdb2935fca8d9c970ae20"
   integrity sha512-FM/vqh/W0I3v2WygNm5pZeS+5bbgUcnbjmwOwem7sBsEpJ/BkYiB/VFHIMD36XsTGkQ7vMApAhEXrZMID9I10A==
 
-"@fontsource/roboto@^5.0.14":
-  version "5.0.14"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.0.14.tgz#a3f67e47116309233ff3bba2c3613d2cf0302529"
-  integrity sha512-zHAxlTTm9RuRn9/StwclFJChf3z9+fBrOxC3fw71htjHP1BgXNISwRjdJtAKAmMe5S2BzgpnjkQR93P9EZYI/Q==
+"@fontsource/roboto@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.6.tgz#93a2a5ef98cc79880355de0aac71def215b873e7"
+  integrity sha512-hzarG7yAhMoP418smNgfY4fO7UmuUEm5JUtbxCoCcFHT0hOJB+d/qAEyoNjz7YkPU5OjM2LM8rJnW8hfm0JLaA==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"
