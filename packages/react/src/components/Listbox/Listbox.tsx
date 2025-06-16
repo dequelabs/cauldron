@@ -307,15 +307,11 @@ const Listbox = forwardRef<
 
     return (
       <Component
-        role="listbox"
         ref={listboxRef}
         tabIndex="0"
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         aria-multiselectable={multiselect ? true : undefined}
-        aria-activedescendant={
-          activeOption ? getOptionId(activeOption) : undefined
-        }
         {...props}
       >
         <ListboxProvider

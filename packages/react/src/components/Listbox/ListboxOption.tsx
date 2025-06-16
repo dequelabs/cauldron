@@ -113,7 +113,6 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
         className={classnames(className, {
           [activeClass]: isActive
         })}
-        role="option"
         ref={listboxOptionRef}
         aria-disabled={typeof disabled === 'boolean' ? disabled : undefined}
         onClick={handleClick}
