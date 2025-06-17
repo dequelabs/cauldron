@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.18.2",
+  "version": "6.18.3",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -49,9 +49,9 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
-    "@fontsource/lato": "^5.2.5",
+    "@fontsource/lato": "^5.2.6",
     "@fontsource/pt-mono": "^5.2.5",
-    "@fontsource/roboto": "^5.0.14",
+    "@fontsource/roboto": "^5.2.6",
     "@mdx-js/loader": "^3.1.0",
     "@playwright/experimental-ct-react17": "^1.50.1",
     "@playwright/test": "^1.50.1",
