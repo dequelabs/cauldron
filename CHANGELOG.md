@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.4](https://github.com/dequelabs/cauldron/compare/v6.18.3...v6.18.4) (2025-06-17)
+
+
+### Bug Fixes
+
+* **styles:** apply overflow hidden for DescriptionList to contain overflow items ([#1976](https://github.com/dequelabs/cauldron/issues/1976)) ([5121592](https://github.com/dequelabs/cauldron/commit/5121592b03135029990824b4e81bce0863378a67))
+
 ### [6.18.3](https://github.com/dequelabs/cauldron/compare/v6.18.2...v6.18.3) (2025-06-10)
 
 
