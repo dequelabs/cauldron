@@ -6,7 +6,6 @@ import useIntersectionRef from './useIntersectionRef';
 
 const sandbox = createSandbox();
 const refElement = document.createElement('div');
-const rawElement = document.createElement('div');
 
 const noop = () => {
   // not empty
@@ -39,18 +38,6 @@ const ComponentUsingElementRef = ({
 } = {}) => {
   const ref = useRef(refElement);
   result(useIntersectionRef(ref, args));
-  return <span></span>;
-};
-
-// eslint-disable-next-line react/display-name,react/prop-types
-const ComponentUsingElement = ({
-  result = noop,
-  args
-}: {
-  result?: (m: MutableRefObject<IntersectionObserverEntry | null>) => void;
-  args?: any;
-} = {}) => {
-  result(useIntersectionRef(rawElement, args));
   return <span></span>;
 };
 
@@ -87,36 +74,10 @@ test('should handle element refs', async () => {
   expect(disconnect.calledOnce).toBeTruthy();
 });
 
-test('should handle element', async () => {
-  expect(observe.notCalled).toBeTruthy();
-  expect(disconnect.notCalled).toBeTruthy();
-
-  const wrapper = render(<ComponentUsingElement />);
-  await setImmediate();
-
-  expect(observe.calledOnce).toBeTruthy();
-  expect(disconnect.notCalled).toBeTruthy();
-  expect(observe.firstCall.firstArg).toEqual(refElement);
-
-  wrapper.unmount();
-  await setImmediate();
-
-  expect(observe.calledOnce).toBeTruthy();
-  expect(disconnect.calledOnce).toBeTruthy();
-});
-
 test('should not error with non element ref', () => {
   const Component = () => {
     const ref = useRef(null);
     useIntersectionRef(ref as unknown as MutableRefObject<HTMLElement>);
-    return <span></span>;
-  };
-  expect(() => render(<Component />)).not.toThrow();
-});
-
-test('should not error with non element', () => {
-  const Component = () => {
-    useIntersectionRef(null as unknown as HTMLElement);
     return <span></span>;
   };
   expect(() => render(<Component />)).not.toThrow();
@@ -134,32 +95,4 @@ test('should return observer entry for element ref', async () => {
   rerender(<ComponentUsingElementRef result={result} />);
 
   expect(result.secondCall.firstArg.current).toEqual({ bananas: true });
-});
-
-test('should return observer entry for element', async () => {
-  const result = spy();
-  const { rerender } = render(<ComponentUsingElement result={result} />);
-  await setImmediate();
-
-  expect(result.firstCall.firstArg.current).toEqual(null);
-  mockIntersectionObserver.firstCall.firstArg([{ bananas: true }]);
-
-  // Force a rerender
-  rerender(<ComponentUsingElement result={result} />);
-
-  expect(result.secondCall.firstArg.current).toEqual({ bananas: true });
-});
-
-test('should pass intersection observer options', () => {
-  render(
-    <ComponentUsingElement
-      args={{ root: document.body, threshold: [0.0, 1.0] }}
-    />
-  );
-  expect(mockIntersectionObserver.firstCall.lastArg.root).toEqual(
-    document.body
-  );
-  expect(mockIntersectionObserver.firstCall.lastArg.threshold).toEqual([
-    0.0, 1.0
-  ]);
 });

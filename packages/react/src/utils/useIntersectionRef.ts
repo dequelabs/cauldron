@@ -12,7 +12,7 @@ import { useRef, useEffect } from 'react';
  * return <span ref={elementRef}>...</span>
  */
 export default function useIntersectionRef<T extends HTMLElement>(
-  element: T | MutableRefObject<T>,
+  element: MutableRefObject<T> | null,
   intersectionObserverOptions: IntersectionObserverInit = {
     root: null,
     threshold: 1.0
@@ -30,12 +30,9 @@ export default function useIntersectionRef<T extends HTMLElement>(
         return;
       }
 
-      if (
-        !(element instanceof HTMLElement) &&
-        !(element.current instanceof HTMLElement)
-      ) {
+      if (!(element.current instanceof HTMLElement)) {
         console.warn(
-          'An element or ref was provided to useIntersectionRef that was not an HTMLElement.'
+          'A ref was provided to useIntersectionRef that was not an HTMLElement.'
         );
         return;
       }
@@ -48,15 +45,14 @@ export default function useIntersectionRef<T extends HTMLElement>(
         handleIntersection,
         intersectionObserverOptions
       );
-      observer.observe(
-        element instanceof HTMLElement ? element : element.current
-      );
+
+      observer.observe(element.current);
 
       return () => {
         observer.disconnect();
       };
     }
-  }, [element]);
+  }, [element?.current]);
 
   return intersectionRef;
 }
