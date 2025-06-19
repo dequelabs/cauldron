@@ -20,6 +20,7 @@ export interface SelectProps
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
   value?: any;
   defaultValue?: any;
+  description?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -37,6 +38,7 @@ const Select = React.forwardRef(
       value,
       'aria-describedby': ariaDescribedby,
       defaultValue,
+      description,
       onChange,
       ...rest
     }: SelectProps,
@@ -76,6 +78,7 @@ const Select = React.forwardRef(
 
     const selectId = id || uid();
     const errorId = uid();
+    const descriptionId = uid();
 
     const dynamicProps: {
       value?: any;
@@ -89,8 +92,20 @@ const Select = React.forwardRef(
       dynamicProps.defaultValue = defaultValue;
     }
 
+    if (description) {
+      dynamicProps['aria-describedby'] = addIdRef(
+        ariaDescribedby,
+        descriptionId
+      );
+    }
+
     if (error) {
-      dynamicProps['aria-describedby'] = addIdRef(ariaDescribedby, errorId);
+      const previousAriaDescribedby = dynamicProps['aria-describedby'];
+
+      dynamicProps['aria-describedby'] = addIdRef(
+        previousAriaDescribedby || ariaDescribedby,
+        errorId
+      );
     }
 
     // In order to support controlled selects, we
@@ -112,6 +127,11 @@ const Select = React.forwardRef(
             </span>
           )}
         </label>
+        {description && (
+          <div id={descriptionId} className="Field__select-description">
+            {description}
+          </div>
+        )}
         <div
           className={classNames('Field__select--wrapper', {
             'Field__select--disabled': disabled,
