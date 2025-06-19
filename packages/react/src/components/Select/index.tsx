@@ -3,6 +3,7 @@ import uid from '../../utils/rndid';
 import classNames from 'classnames';
 import { addIdRef } from '../../utils/idRefs';
 import { ContentNode } from '../../types';
+import { Icon } from '@deque/cauldron-react';
 
 export interface SelectOption {
   key: string;
@@ -132,6 +133,12 @@ const Select = React.forwardRef(
             {description}
           </div>
         )}
+        {error && (
+          <div id={errorId} className="Error">
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         <div
           className={classNames('Field__select--wrapper', {
             'Field__select--disabled': disabled,
@@ -168,11 +175,6 @@ const Select = React.forwardRef(
           </select>
           <div className="arrow-down" />
         </div>
-        {error && (
-          <div id={errorId} className="Error">
-            {error}
-          </div>
-        )}
       </div>
     );
     /* eslint-disable jsx-a11y/no-onchange */

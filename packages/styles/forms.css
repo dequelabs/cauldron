@@ -341,6 +341,12 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: var(--space-smallest);
 }
 
+.Field__select .Error {
+  align-items: center;
+  font-size: var(--text-size-base);
+  margin-bottom: var(--space-smallest);
+}
+
 .Field__label--inline {
   display: inline-block;
   text-align: left;
