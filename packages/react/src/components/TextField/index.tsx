@@ -7,6 +7,7 @@ import { addIdRef } from '../../utils/idRefs';
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: React.ReactNode;
+  description?: React.ReactNode;
   error?: React.ReactNode;
   defaultValue?: string;
   onChange?: (
@@ -41,12 +42,14 @@ export default class TextField extends React.Component<
 
   private inputId: string;
   private errorId: string;
+  private descriptionId: string;
   private input: HTMLInputElement | HTMLTextAreaElement | null;
 
   constructor(props: TextFieldProps) {
     super(props);
     this.inputId = this.props.id || rndid();
     this.errorId = rndid();
+    this.descriptionId = rndid();
     this.state = {
       value:
         typeof this.props.value !== 'undefined'
@@ -64,6 +67,7 @@ export default class TextField extends React.Component<
       label,
       fieldRef,
       value,
+      description,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,10 +84,14 @@ export default class TextField extends React.Component<
     // textarea and input props being incompatible
     // we should probably fix this
     const Field: any = multiline ? 'textarea' : 'input';
+    const ariaDescribedbyWithDescription = description
+      ? addIdRef(ariaDescribedby, this.descriptionId)
+      : ariaDescribedby;
+
     const inputProps = {
       'aria-describedby': error
-        ? addIdRef(ariaDescribedby, this.errorId)
-        : ariaDescribedby
+        ? addIdRef(ariaDescribedbyWithDescription, this.errorId)
+        : ariaDescribedbyWithDescription
     };
 
     return (
@@ -102,6 +110,11 @@ export default class TextField extends React.Component<
             </span>
           )}
         </label>
+        {description && (
+          <div className="Field__description" id={this.descriptionId}>
+            {description}
+          </div>
+        )}
         <Field
           className={classNames(className, {
             'Field__text-input': !multiline,
