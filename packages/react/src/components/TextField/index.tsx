@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import rndid from '../../utils/rndid';
 import setRef from '../../utils/setRef';
 import { addIdRef } from '../../utils/idRefs';
+import Icon from '../Icon';
 
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
@@ -115,6 +116,12 @@ export default class TextField extends React.Component<
             {description}
           </div>
         )}
+        {error && (
+          <div className="Error Field__error" id={this.errorId}>
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         <Field
           className={classNames(className, {
             'Field__text-input': !multiline,
@@ -132,11 +139,6 @@ export default class TextField extends React.Component<
           {...other}
           {...inputProps}
         />
-        {error && (
-          <div className="Error" id={this.errorId}>
-            {error}
-          </div>
-        )}
       </div>
     );
   }

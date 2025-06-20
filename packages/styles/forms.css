@@ -213,6 +213,7 @@ textarea.Field--has-error:focus:hover,
 .Field__error {
   font-size: var(--text-size-small);
   margin-bottom: var(--space-smallest);
+  align-items: center;
 }
 
 .Checkbox__wrap .Error {
