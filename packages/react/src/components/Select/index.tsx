@@ -3,7 +3,7 @@ import uid from '../../utils/rndid';
 import classNames from 'classnames';
 import { addIdRef } from '../../utils/idRefs';
 import { ContentNode } from '../../types';
-import { Icon } from '@deque/cauldron-react';
+import Icon from '../Icon';
 
 export interface SelectOption {
   key: string;

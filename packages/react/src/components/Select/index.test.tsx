@@ -186,6 +186,13 @@ test('Should render a ReactNode as a label', () => {
   expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
+test('Should render a ReactNode as a description', () => {
+  const description = 'Test description';
+  withCustomOptions({ description: <span>{description}</span> });
+  expect(screen.getByText(description)).toBeInTheDocument();
+  expect(screen.getByRole('combobox')).toHaveAccessibleDescription(description);
+});
+
 test('Should return no axe violations', async () => {
   const opts = [
     { key: '1', value: 'Bar' },
