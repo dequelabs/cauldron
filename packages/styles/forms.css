@@ -334,16 +334,9 @@ textarea.Field--has-error:focus:hover,
   color: var(--field-label-error-text-color);
 }
 
-.Field__select-description {
-  font-weight: var(--font-weight-normal);
-  font-size: var(--text-size-base);
-  color: var(--field-label-description-text-color);
-  margin-bottom: var(--space-smallest);
-}
-
 .Field__select .Error {
   align-items: center;
-  font-size: var(--text-size-base);
+  font-size: var(--text-size-small);
   margin-bottom: var(--space-smallest);
 }
 

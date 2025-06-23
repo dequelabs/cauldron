@@ -129,7 +129,7 @@ const Select = React.forwardRef(
           )}
         </label>
         {description && (
-          <div id={descriptionId} className="Field__select-description">
+          <div id={descriptionId} className="Field__description">
             {description}
           </div>
         )}
