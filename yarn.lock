@@ -9509,10 +9509,10 @@ remark-gfm@^4.0.1:
     remark-stringify "^11.0.0"
     unified "^11.0.0"
 
-remark-mdx-frontmatter@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/remark-mdx-frontmatter/-/remark-mdx-frontmatter-5.1.0.tgz#203c63f7772c3d80bf5f25ad4a01a5a1ecef9f4c"
-  integrity sha512-F2l+FydK/QVwYMC4niMYl4Kh83TIfoR4qV9ekh/riWRakTTyjcLLyKTBo9fVgEtOmTEfIrqWwiYIm42+I5PMfQ==
+remark-mdx-frontmatter@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/remark-mdx-frontmatter/-/remark-mdx-frontmatter-5.2.0.tgz#fd3738b289248ef9afe84d45767acab8b9e00fcb"
+  integrity sha512-U/hjUYTkQqNjjMRYyilJgLXSPF65qbLPdoESOkXyrwz2tVyhAnm4GUKhfXqOOS9W34M3545xEMq+aMpHgVjEeQ==
   dependencies:
     "@types/mdast" "^4.0.0"
     estree-util-value-to-estree "^3.0.0"
