@@ -85,14 +85,14 @@ export default class TextField extends React.Component<
     // textarea and input props being incompatible
     // we should probably fix this
     const Field: any = multiline ? 'textarea' : 'input';
-    const ariaDescribedbyWithDescription = description
+    const describedby = description
       ? addIdRef(ariaDescribedby, this.descriptionId)
       : ariaDescribedby;
 
     const inputProps = {
       'aria-describedby': error
-        ? addIdRef(ariaDescribedbyWithDescription, this.errorId)
-        : ariaDescribedbyWithDescription
+        ? addIdRef(describedby, this.errorId)
+        : describedby
     };
 
     return (
@@ -117,7 +117,7 @@ export default class TextField extends React.Component<
           </div>
         )}
         {error && (
-          <div className="Error Field__error" id={this.errorId}>
+          <div className="Field__error" id={this.errorId}>
             <Icon type="caution" />
             {error}
           </div>
