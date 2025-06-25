@@ -73,17 +73,17 @@ test('should have screenshot for Select[with-description]', async ({
       <Select
         options={options}
         label="Select"
-        description="This field has an description."
+        description="This field has a description."
       />
       <Select
         options={options}
         label="Hover"
-        description="This field has an description."
+        description="This field has a description."
       />
       <Select
         options={options}
         label="Focus"
-        description="This field has an description."
+        description="This field has a description."
       />
     </FieldWrap>
   );
@@ -111,19 +111,19 @@ test('should have screenshot for Select[error-with-description]', async ({
         options={options}
         label="Select"
         error="This field has an error."
-        description="This field has an description."
+        description="This field has a description."
       />
       <Select
         options={options}
         label="Hover"
         error="This field has an error."
-        description="This field has an description."
+        description="This field has a description."
       />
       <Select
         options={options}
         label="Focus"
         error="This field has an error."
-        description="This field has an description."
+        description="This field has a description."
       />
     </FieldWrap>
   );
