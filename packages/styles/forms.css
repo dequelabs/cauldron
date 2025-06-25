@@ -212,6 +212,7 @@ textarea.Field--has-error:focus:hover,
 
 .Field__error {
   font-size: var(--text-size-small);
+  align-items: center;
   margin-bottom: var(--space-smallest);
 }
 
@@ -332,12 +333,6 @@ textarea.Field--has-error:focus:hover,
 
 .Field__label--has-error .Field__required-text {
   color: var(--field-label-error-text-color);
-}
-
-.Field__select .Error {
-  align-items: center;
-  font-size: var(--text-size-small);
-  margin-bottom: var(--space-smallest);
 }
 
 .Field__label--inline {

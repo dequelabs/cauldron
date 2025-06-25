@@ -93,18 +93,18 @@ const Select = React.forwardRef(
       dynamicProps.defaultValue = defaultValue;
     }
 
+    dynamicProps['aria-describedby'] = ariaDescribedby;
+
     if (description) {
       dynamicProps['aria-describedby'] = addIdRef(
-        ariaDescribedby,
+        dynamicProps['aria-describedby'],
         descriptionId
       );
     }
 
     if (error) {
-      const previousAriaDescribedby = dynamicProps['aria-describedby'];
-
       dynamicProps['aria-describedby'] = addIdRef(
-        previousAriaDescribedby || ariaDescribedby,
+        dynamicProps['aria-describedby'],
         errorId
       );
     }
@@ -134,7 +134,7 @@ const Select = React.forwardRef(
           </div>
         )}
         {error && (
-          <div id={errorId} className="Error">
+          <div id={errorId} className="Field__error">
             <Icon type="caution" />
             {error}
           </div>

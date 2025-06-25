@@ -264,3 +264,11 @@ test('Should return no axe violations for an error select', async () => {
   const { container } = render(errorSelect);
   expect(await axe(container)).toHaveNoViolations();
 });
+
+test('Should return no axe violations for select with description', async () => {
+  const { container } = withCustomOptions({
+    description: 'Test description'
+  });
+
+  expect(await axe(container)).toHaveNoViolations();
+});
