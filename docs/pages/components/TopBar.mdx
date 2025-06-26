@@ -80,25 +80,27 @@ function TopBarWithMenuExample() {
             Item 1
           </a>
         </TopBarItem>
-        <ActionMenu
-          trigger={
-            ({ ref, ...props }) => {
-              return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
-                  Menu <Icon type="chevron-down" />
-                  <div ref={actionMenuRef} />
-                </TopBarItem>
-              )
+        <TopBarItem tabIndex={-1}>
+          <ActionMenu
+            trigger={
+              ({ ref, ...props }) => {
+                return (
+                  <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
+                    Menu <Icon type="chevron-down" />
+                    <div ref={actionMenuRef} />
+                  </TopBarItem>
+                )
+              }
             }
-          }
-          portal={actionMenuRef}
-        >
-          <ActionList>
-            <ActionListItem>Menu Item 1</ActionListItem>
-            <ActionListItem>Menu Item 2</ActionListItem>
-            <ActionListItem>Menu Item 3</ActionListItem>
-          </ActionList>
-        </ActionMenu>
+            portal={actionMenuRef}
+          >
+            <ActionList>
+              <ActionListItem>Menu Item 1</ActionListItem>
+              <ActionListItem>Menu Item 2</ActionListItem>
+              <ActionListItem>Menu Item 3</ActionListItem>
+            </ActionList>
+          </ActionMenu>
+        </TopBarItem>
       </MenuBar>
     </TopBar>
   )
