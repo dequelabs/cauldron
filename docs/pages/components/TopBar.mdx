@@ -87,7 +87,7 @@ function TopBarWithMenuExample() {
           trigger={
             ({ ref, children, ...props }) => {
               return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
                   Menu <Icon type="chevron-down" />
                   {children}
                 </TopBarItem>
@@ -133,7 +133,7 @@ function TopBarWithMenuLinksExample() {
           trigger={
             ({ ref, children, ...props }) => {
               return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
                   Menu <Icon type="chevron-down" />
                   {children}
                 </TopBarItem>

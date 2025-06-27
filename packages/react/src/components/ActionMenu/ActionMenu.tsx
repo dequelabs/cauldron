@@ -34,8 +34,10 @@ type ActionMenuProps = {
   /** Render the action menu in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   /**
-   * If true, the menu will will be passed as a children prop to the trigger function.
-   * If false, the menu will render as a sibling of the trigger.
+   * Controls whether the menu should render as a child of the trigger, as opposed to
+   * rendering as a sibling. Intended for use with nested menu patterns, for example
+   * when an `ActionMenu` is nested inside a `TopBar`/`MenuBar`.
+   *
    * Only supported if trigger is a function *and* portal is undefined.
    */
   renderInTrigger?: boolean;
@@ -165,12 +167,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         onClick: handleTriggerClick,
         onKeyDown: handleTriggerKeyDown,
         'aria-expanded': open,
-        'aria-haspopup': 'menu',
-        // This is specifically for the case where the ActionMenu is rendering within
-        // a TopBarItem *and* contains ActionListLinkItems; it prevents the default
-        // TopBarItem auto-click behavior that would otherwise result in menu items
-        // being clicked when the user toggles the menu's trigger. See #1993.
-        autoClickLink: false
+        'aria-haspopup': 'menu'
       };
     }, [handleTriggerClick, open]);
 
