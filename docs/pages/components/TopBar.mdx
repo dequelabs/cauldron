@@ -83,17 +83,17 @@ function TopBarWithMenuExample() {
         </TopBarItem>
         <ActionMenu
           tabIndex={-1}
+          renderInTrigger={true}
           trigger={
-            ({ ref, ...props }) => {
+            ({ ref, children, ...props }) => {
               return (
                 <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
                   Menu <Icon type="chevron-down" />
-                  <div ref={actionMenuRef} />
+                  {children}
                 </TopBarItem>
               )
             }
           }
-          portal={actionMenuRef}
         >
           <ActionList>
             <ActionListItem>Menu Item 1</ActionListItem>
@@ -113,7 +113,6 @@ This can also be combined with the use of `ActionListLinkItem`s:
 
 ```jsx example
 function TopBarWithMenuLinksExample() {
-  const actionMenuRef = useRef()
   return (
     <TopBar>
       <MenuBar>
@@ -130,17 +129,17 @@ function TopBarWithMenuLinksExample() {
         </TopBarItem>
         <ActionMenu
           tabIndex={-1}
+          renderInTrigger={true}
           trigger={
-            ({ ref, ...props }) => {
+            ({ ref, children, ...props }) => {
               return (
                 <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
                   Menu <Icon type="chevron-down" />
-                  <div ref={actionMenuRef} />
+                  {children}
                 </TopBarItem>
               )
             }
           }
-          portal={actionMenuRef}
         >
           <ActionList>
             <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>

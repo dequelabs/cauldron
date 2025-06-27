@@ -18,8 +18,10 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
-> & { ref: React.RefObject<HTMLButtonElement> };
+  'children' | 'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
+> & {
+  ref: React.RefObject<HTMLButtonElement>;
+};
 
 type ActionMenuTriggerFunction = (
   props: ActionMenuTriggerProps,
@@ -31,6 +33,12 @@ type ActionMenuProps = {
   trigger: React.ReactElement | ActionMenuTriggerFunction;
   /** Render the action menu in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  /**
+   * If true, the menu will will be passed as a children prop to the trigger function.
+   * If false, the menu will render as a sibling of the trigger.
+   * Only supported if trigger is a function *and* portal is undefined.
+   */
+  renderInTrigger?: boolean;
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
@@ -43,6 +51,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       placement = 'bottom-start',
       children: actionMenuList,
       portal,
+      renderInTrigger = false,
       ...props
     },
     ref
@@ -92,26 +101,6 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       [open]
     );
 
-    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
-      return {
-        ref: triggerRef,
-        id: triggerId,
-        onClick: handleTriggerClick,
-        onKeyDown: handleTriggerKeyDown,
-        'aria-expanded': open,
-        'aria-haspopup': 'menu',
-        // This is specifically for the case where the ActionMenu is rendering within
-        // a TopBarItem *and* contains ActionListLinkItems; it prevents the default
-        // TopBarItem auto-click behavior that would otherwise result in menu items
-        // being clicked when the user toggles the menu's trigger. See #1993.
-        autoClickLink: false
-      };
-    }, [handleTriggerClick, open]);
-
-    const actionMenuTrigger = React.isValidElement(trigger)
-      ? React.cloneElement(trigger, triggerProps)
-      : (trigger as ActionMenuTriggerFunction)(triggerProps, open);
-
     const handleClickOutside = useCallback((event: MouseEvent | TouchEvent) => {
       if (
         !actionMenuRef.current?.contains(event.target as HTMLElement) &&
@@ -144,6 +133,69 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, [open]);
 
+    const overlay = (
+      <AnchoredOverlay
+        ref={actionMenuRef}
+        role="presentation"
+        className={classnames('ActionMenu', className)}
+        open={open}
+        onOpenChange={setOpen}
+        target={triggerRef}
+        placement={placement}
+        offset={4}
+        portal={portal}
+        style={{ display: !open ? 'none' : undefined, ...style }}
+        {...props}
+      >
+        {React.cloneElement(actionMenuList, {
+          ref: actionMenuListRef,
+          role: 'menu',
+          onAction: handleAction,
+          'aria-labelledby': triggerId,
+          focusStrategy,
+          focusDisabledOptions: true
+        })}
+      </AnchoredOverlay>
+    );
+
+    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
+      return {
+        ref: triggerRef,
+        id: triggerId,
+        onClick: handleTriggerClick,
+        onKeyDown: handleTriggerKeyDown,
+        'aria-expanded': open,
+        'aria-haspopup': 'menu',
+        // This is specifically for the case where the ActionMenu is rendering within
+        // a TopBarItem *and* contains ActionListLinkItems; it prevents the default
+        // TopBarItem auto-click behavior that would otherwise result in menu items
+        // being clicked when the user toggles the menu's trigger. See #1993.
+        autoClickLink: false
+      };
+    }, [handleTriggerClick, open]);
+
+    if (renderInTrigger) {
+      // istanbul ignore next
+      if (portal && process.env.NODE_ENV !== 'production') {
+        console.warn('renderInTrigger is incompatible with portal.');
+      }
+      // istanbul ignore next
+      if (React.isValidElement(trigger)) {
+        console.warn(
+          'renderInTrigger requires the use of a trigger function, rather than a prerendered trigger ReactElement.'
+        );
+      }
+
+      triggerProps.children = overlay;
+    }
+
+    const actionMenuTrigger = React.isValidElement(trigger)
+      ? React.cloneElement(trigger, triggerProps)
+      : (trigger as ActionMenuTriggerFunction)(
+          { ...triggerProps, children: overlay },
+          open
+        );
+
     return (
       <>
         <ClickOutsideListener
@@ -154,28 +206,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         >
           {actionMenuTrigger}
         </ClickOutsideListener>
-        <AnchoredOverlay
-          ref={actionMenuRef}
-          role="presentation"
-          className={classnames('ActionMenu', className)}
-          open={open}
-          onOpenChange={setOpen}
-          target={triggerRef}
-          placement={placement}
-          offset={4}
-          portal={portal}
-          style={{ display: !open ? 'none' : undefined, ...style }}
-          {...props}
-        >
-          {React.cloneElement(actionMenuList, {
-            ref: actionMenuListRef,
-            role: 'menu',
-            onAction: handleAction,
-            'aria-labelledby': triggerId,
-            focusStrategy,
-            focusDisabledOptions: true
-          })}
-        </AnchoredOverlay>
+        {renderInTrigger ? null : overlay}
       </>
     );
   }
