@@ -100,7 +100,10 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         onKeyDown: handleTriggerKeyDown,
         'aria-expanded': open,
         'aria-haspopup': 'menu',
-        // This is for the benefit of the trigger being a TopBarItem
+        // This is specifically for the case where the ActionMenu is rendering within
+        // a TopBarItem *and* contains ActionListLinkItems; it prevents the default
+        // TopBarItem auto-click behavior that would otherwise result in menu items
+        // being clicked when the user toggles the menu's trigger. See #1993.
         autoClickLink: false
       };
     }, [handleTriggerClick, open]);
