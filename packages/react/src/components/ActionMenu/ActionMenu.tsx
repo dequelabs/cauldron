@@ -73,7 +73,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const handleTriggerKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLElement>) => {
         // istanbul ignore else
-        if ([ArrowDown, ArrowUp].includes(event.key) && !open) {
+        if ([ArrowDown, ArrowUp].includes(event.key)) {
           // prevent page from scrolling if the user triggers the action menu
           // via an "ArrowDown" key press
           event.preventDefault();
@@ -81,7 +81,12 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           // default is prevented to perform as normal
           event.defaultPrevented = false;
           setFocusStrategy(event.key === ArrowUp ? 'last' : 'first');
-          setOpen(true);
+
+          if (open) {
+            actionMenuListRef.current?.focus();
+          } else {
+            setOpen(true);
+          }
         }
       },
       [open]
@@ -94,7 +99,9 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         onClick: handleTriggerClick,
         onKeyDown: handleTriggerKeyDown,
         'aria-expanded': open,
-        'aria-haspopup': 'menu'
+        'aria-haspopup': 'menu',
+        // This is for the benefit of the trigger being a TopBarItem
+        autoClickLink: false
       };
     }, [handleTriggerClick, open]);
 
