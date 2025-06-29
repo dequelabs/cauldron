@@ -1,4 +1,11 @@
-import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ReactNode,
+  forwardRef,
+  Ref,
+  useCallback
+} from 'react';
 import { useId } from 'react-id-generator';
 import { Cauldron } from '../../types';
 import classnames from 'classnames';
@@ -153,25 +160,28 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     }, [targetElement, id, show]);
 
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (e.target === targetElement) {
-        return;
-      }
-      if (show) {
-        handleClosePopover();
-      }
-    };
-
-    const attachIsolator = () => {
-      if (popoverRef?.current) {
-        setIsolator(new AriaIsolate(popoverRef?.current));
-      }
-    };
-
     const handleClosePopover = () => {
       isolator?.deactivate();
       if (show) {
         onClose();
+      }
+    };
+
+    const handleClickOutside = useCallback(
+      (e: MouseEvent | TouchEvent) => {
+        if (e.target === targetElement) {
+          return;
+        }
+        if (show) {
+          handleClosePopover();
+        }
+      },
+      [show, targetElement, handleClosePopover]
+    );
+
+    const attachIsolator = () => {
+      if (popoverRef?.current) {
+        setIsolator(new AriaIsolate(popoverRef?.current));
       }
     };
 
@@ -185,12 +195,20 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
 
-    if (!show || !isBrowser()) {
+    if (!isBrowser()) {
       return null;
     }
 
+    // This allows the ClickOutsideListener to only be activated when the popover is
+    // currently open. This prevents an obscure behavior where the show state remains false for handleClickOutside
+    const clickOutsideEventActive = !show ? false : undefined;
+
     return (
-      <ClickOutsideListener onClickOutside={handleClickOutside}>
+      <ClickOutsideListener
+        onClickOutside={handleClickOutside}
+        mouseEvent={clickOutsideEventActive}
+        touchEvent={clickOutsideEventActive}
+      >
         <AnchoredOverlay
           id={id}
           className={classnames('Popover', `Popover--${placement}`, className, {
@@ -210,19 +228,24 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {...additionalProps}
           {...props}
         >
-          <div className="Popover__popoverArrow" />
-          <div className="Popover__borderLeft" />
-          {variant === 'prompt' ? (
-            <PromptPopoverContent
-              applyButtonText={applyButtonText}
-              onApply={onApply}
-              closeButtonText={closeButtonText}
-              infoText={infoText || ''}
-              onClose={handleClosePopover}
-              infoTextId={`${id}-label`}
-            />
-          ) : (
-            children
+          {show && (
+            <>
+              <div className="Popover__popoverArrow" />
+              <div className="Popover__borderLeft" />
+
+              {variant === 'prompt' ? (
+                <PromptPopoverContent
+                  applyButtonText={applyButtonText}
+                  onApply={onApply}
+                  closeButtonText={closeButtonText}
+                  infoText={infoText || ''}
+                  onClose={handleClosePopover}
+                  infoTextId={`${id}-label`}
+                />
+              ) : (
+                children
+              )}
+            </>
           )}
         </AnchoredOverlay>
       </ClickOutsideListener>

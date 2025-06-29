@@ -183,8 +183,10 @@ test('close popover when clicking on the popover trigger button', async () => {
   render(<Wrapper />);
   const popoverTriggerButton = screen.getByText('Popover button');
   const popoverContent = screen.getByText('Popover content');
+  const popover = screen.getByRole('dialog', { name: 'Popover title' });
   expect(popoverContent).toBeInTheDocument();
   fireEvent.click(popoverTriggerButton);
+  expect(popover).toBeInTheDocument();
   expect(popoverContent).not.toBeInTheDocument();
 });
 
