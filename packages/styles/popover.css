@@ -51,24 +51,63 @@
   background-color: var(--popover-border-color);
 }
 
-/* Adjust position to try to center the arrow in the tooltip's border */
-[class*='Popover--top'] .Popover__popoverArrow {
+/* Adjust position to try to set the arrow in the tooltip's border */
+.Popover--top .Popover__popoverArrow {
   left: 50%;
   bottom: -1px;
 }
 
-[class*='Popover--bottom'] .Popover__popoverArrow {
+.Popover--top-start .Popover__popoverArrow {
+  bottom: -1px;
+}
+
+.Popover--top-end .Popover__popoverArrow {
+  right: 1rem;
+  bottom: -1px;
+}
+
+.Popover--bottom .Popover__popoverArrow {
   left: 50%;
   top: -1px;
 }
 
-[class*='Popover--left'] .Popover__popoverArrow {
+.Popover--bottom-start .Popover__popoverArrow {
+  left: 1rem;
+  top: -1px;
+}
+
+.Popover--bottom-end .Popover__popoverArrow {
+  right: 1rem;
+  top: -1px;
+}
+
+.Popover--left .Popover__popoverArrow {
   top: 50%;
   right: -1px;
 }
 
-[class*='Popover--right'] .Popover__popoverArrow {
+.Popover--left-start .Popover__popoverArrow {
+  top: 1rem;
+  right: -1px;
+}
+
+.Popover--left-end .Popover__popoverArrow {
+  bottom: 1rem;
+  right: -1px;
+}
+
+.Popover--right .Popover__popoverArrow {
   top: 50%;
+  left: 0;
+}
+
+.Popover--right-start .Popover__popoverArrow {
+  top: 1rem;
+  left: 0;
+}
+
+.Popover--right-end .Popover__popoverArrow {
+  bottom: 1rem;
   left: 0;
 }
 
