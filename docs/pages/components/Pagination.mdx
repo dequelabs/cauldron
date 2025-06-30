@@ -115,6 +115,12 @@ The pagination hook returns an object containing the properties `pagination`, a 
       description: 'The (1-based) number of the current page.'
     },
     {
+      name: 'statusLabel',
+      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      defaultValue: 'Showing x to y of total',
+      description: 'The label text to display between the pagination controls.'
+    },
+    {
       name: 'firstPageLabel',
       type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
       defaultValue: 'First page',
