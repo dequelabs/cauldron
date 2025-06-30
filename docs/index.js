@@ -159,6 +159,7 @@ const App = () => {
           </TopBarItem>
           <ActionMenu
             tabIndex={-1}
+            renderInTrigger={true}
             trigger={({ ref, children, ...props }) => {
               return (
                 <TopBarItem
