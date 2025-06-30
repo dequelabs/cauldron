@@ -16,6 +16,8 @@ import {
   ActionListItem,
   ActionListLinkItem
 } from '../ActionList';
+import TopBar, { TopBarItem } from '../TopBar';
+import MenuBar from '../MenuBar';
 
 const defaultProps: React.ComponentProps<typeof ActionMenu> = {
   trigger: <button>Trigger</button>,
@@ -24,6 +26,27 @@ const defaultProps: React.ComponentProps<typeof ActionMenu> = {
       <ActionListItem>Item 1</ActionListItem>
       <ActionListItem>Item 2</ActionListItem>
       <ActionListItem>Item 3</ActionListItem>
+    </ActionList>
+  )
+};
+
+// From the pattern documented in docs/pages/components/TopBar.mdx
+const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
+  ...defaultProps,
+  tabIndex: -1,
+  renderInTrigger: true,
+  trigger: ({ ref, children, ...props }) => (
+    // @ts-expect-error - TopBarItem expects menuitems to be <li>, ActionMenu expects triggers to be <button>
+    <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+      Trigger
+      {children}
+    </TopBarItem>
+  ),
+  children: (
+    <ActionList>
+      <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
+      <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
+      <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
     </ActionList>
   )
 };
@@ -284,6 +307,26 @@ test('should set last item active on arrow up key press', async () => {
   });
 });
 
+// Regression test for cauldron#1993
+test('should set first item active on open in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+
+  await waitFor(() => {
+    expect(screen.queryByRole('menuitem', { name: 'Menu Link 1' })).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+});
+
 test('should trigger onAction when an action list item is clicked', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
@@ -504,6 +547,23 @@ test('should stop menu from opening if event is default prevented', () => {
   expect(menu).not.toBeVisible();
 });
 
+// Regression test for cauldron#1993
+test('should not trigger action link items when toggling the open state in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+
+  expect(window.location.hash).toBe('');
+});
+
 test('should support className prop', () => {
   render(
     <ActionMenu
@@ -532,6 +592,36 @@ test('should support portal prop', async () => {
 
   const actionMenuInPortal = await findByTestId(portal, 'actionmenu');
   expect(actionMenuInPortal).toBeTruthy();
+});
+
+test('should support renderInTrigger prop', async () => {
+  render(
+    <ActionMenu
+      {...defaultProps}
+      data-testid="actionmenu"
+      renderInTrigger={true}
+      trigger={({ children }) => <button>Trigger{children}</button>}
+    />
+  );
+
+  const actionMenu = screen.getByTestId('actionmenu');
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+  expect(trigger).toContainElement(actionMenu);
+});
+
+test('should not render menu inside trigger by default', async () => {
+  render(
+    <ActionMenu
+      {...defaultProps}
+      data-testid="actionmenu"
+      /* omitting renderInTrigger */
+      trigger={() => <button>Trigger</button>}
+    />
+  );
+
+  const actionMenu = screen.getByTestId('actionmenu');
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+  expect(trigger).not.toContainElement(actionMenu);
 });
 
 test('should have no axe violations', async () => {
@@ -643,6 +733,36 @@ test('should have no axe violations when open with descriptions', async () => {
   );
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations in TopBar+ActionMenu pattern', async () => {
+  const { container } = render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations in TopBar+ActionMenu pattern when open', async () => {
+  const user = userEvent.setup();
+  const { container } = render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
   const results = await axe(container);
