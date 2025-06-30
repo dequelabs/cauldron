@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.5](https://github.com/dequelabs/cauldron/compare/v6.18.4...v6.18.5) (2025-06-30)
+
+
+### Bug Fixes
+
+* improve keyboard focus behavior of ActionListLinkItems in TopBar ([#1995](https://github.com/dequelabs/cauldron/issues/1995)) ([611629a](https://github.com/dequelabs/cauldron/commit/611629aee0feccacffce01d9e5d3cf327bb5518b)), closes [#1993](https://github.com/dequelabs/cauldron/issues/1993)
+
 ### [6.18.4](https://github.com/dequelabs/cauldron/compare/v6.18.3...v6.18.4) (2025-06-17)
 
 

@@ -50,7 +50,6 @@ const App = () => {
   const focusReturnRef = useRef(null);
   const navigationRef = useRef(null);
   const actionMenuItemRef = useRef(null);
-  const actionMenuRef = useRef(null);
   const topBarTrigger = useRef();
   const [workspaceTabIndex, setWorkspaceTabIndex] = useState(-1);
   const { theme, toggleTheme } = useThemeContext();
@@ -159,24 +158,26 @@ const App = () => {
             </Link>
           </TopBarItem>
           <ActionMenu
-            trigger={({ ref, ...props }) => {
+            tabIndex={-1}
+            renderInTrigger={true}
+            trigger={({ ref, children, ...props }) => {
               return (
                 <TopBarItem
                   menuItemRef={ref}
                   className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
                   tabIndex={0}
+                  autoClickLink={false}
                   {...props}
                 >
                   <span className="TopBar__item--icon">
                     <Icon type="gears" />
                     <div>Settings</div>
                   </span>
-                  <div ref={actionMenuRef} />
+                  {children}
                 </TopBarItem>
               );
             }}
             placement="bottom-end"
-            portal={actionMenuRef}
           >
             <ActionList>
               <ActionListGroup label="Theme" selectionType="single">

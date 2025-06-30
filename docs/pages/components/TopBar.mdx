@@ -15,7 +15,8 @@ import {
   Icon,
   ActionMenu,
   ActionList,
-  ActionListItem
+  ActionListItem,
+  ActionListLinkItem
 } from '@deque/cauldron-react'
 
 ```jsx
@@ -81,22 +82,69 @@ function TopBarWithMenuExample() {
           </a>
         </TopBarItem>
         <ActionMenu
+          tabIndex={-1}
+          renderInTrigger={true}
           trigger={
-            ({ ref, ...props }) => {
+            ({ ref, children, ...props }) => {
               return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} {...props}>
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
                   Menu <Icon type="chevron-down" />
-                  <div ref={actionMenuRef} />
+                  {children}
                 </TopBarItem>
               )
             }
           }
-          portal={actionMenuRef}
         >
           <ActionList>
             <ActionListItem>Menu Item 1</ActionListItem>
             <ActionListItem>Menu Item 2</ActionListItem>
             <ActionListItem>Menu Item 3</ActionListItem>
+          </ActionList>
+        </ActionMenu>
+      </MenuBar>
+    </TopBar>
+  )
+}
+```
+
+### With Menu of Links
+
+This can also be combined with the use of `ActionListLinkItem`s:
+
+```jsx example
+function TopBarWithMenuLinksExample() {
+  return (
+    <TopBar>
+      <MenuBar>
+        <TopBarItem>
+          <a className="MenuItem__logo" href="#" tabIndex={-1}>
+            <img src="/public/fonts/logo.svg" alt="" />
+            Cauldron
+          </a>
+        </TopBarItem>
+        <TopBarItem>
+          <a href="#" tabIndex={-1}>
+            Item 1
+          </a>
+        </TopBarItem>
+        <ActionMenu
+          tabIndex={-1}
+          renderInTrigger={true}
+          trigger={
+            ({ ref, children, ...props }) => {
+              return (
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+                  Menu <Icon type="chevron-down" />
+                  {children}
+                </TopBarItem>
+              )
+            }
+          }
+        >
+          <ActionList>
+            <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
+            <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
+            <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
           </ActionList>
         </ActionMenu>
       </MenuBar>
