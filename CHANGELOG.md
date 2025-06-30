@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.18.4](https://github.com/dequelabs/cauldron/compare/v6.18.3...v6.18.4) (2025-06-17)
+
+
+### Bug Fixes
+
+* **styles:** apply overflow hidden for DescriptionList to contain overflow items ([#1976](https://github.com/dequelabs/cauldron/issues/1976)) ([5121592](https://github.com/dequelabs/cauldron/commit/5121592b03135029990824b4e81bce0863378a67))
+
+### [6.18.3](https://github.com/dequelabs/cauldron/compare/v6.18.2...v6.18.3) (2025-06-10)
+
+
+### Bug Fixes
+
+* **react:** fix incorrect tabstop when using ActionLinkItem inside of ActionMenu ([#1969](https://github.com/dequelabs/cauldron/issues/1969)) ([fe38517](https://github.com/dequelabs/cauldron/commit/fe3851736709db1dda854dcfd70e0d5a533f9812))
+
+### [6.18.2](https://github.com/dequelabs/cauldron/compare/v6.18.1...v6.18.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **react:** support ActionMenu within TopBar ([#1916](https://github.com/dequelabs/cauldron/issues/1916)) ([cad74a2](https://github.com/dequelabs/cauldron/commit/cad74a2e30e162767a0afcdb21639e5a76bfa74e))
+
 ### [6.18.1](https://github.com/dequelabs/cauldron/compare/v6.18.0...v6.18.1) (2025-05-29)
 
 

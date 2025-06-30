@@ -159,6 +159,7 @@ const App = () => {
             </Link>
           </TopBarItem>
           <ActionMenu
+            tabIndex={-1}
             trigger={({ ref, ...props }) => {
               return (
                 <TopBarItem
