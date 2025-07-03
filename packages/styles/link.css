@@ -27,7 +27,7 @@
   outline-offset: 0;
 }
 
-.Link:has(.Icon) {
+.Link:where(:has(.Icon)) {
   display: inline-flex;
   align-items: center;
   gap: var(--space-half);

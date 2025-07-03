@@ -18,8 +18,10 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
-> & { ref: React.RefObject<HTMLButtonElement> };
+  'children' | 'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
+> & {
+  ref: React.RefObject<HTMLButtonElement>;
+};
 
 type ActionMenuTriggerFunction = (
   props: ActionMenuTriggerProps,
@@ -31,6 +33,14 @@ type ActionMenuProps = {
   trigger: React.ReactElement | ActionMenuTriggerFunction;
   /** Render the action menu in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  /**
+   * Controls whether the menu should render as a child of the trigger, as opposed to
+   * rendering as a sibling. Intended for use with nested menu patterns, for example
+   * when an `ActionMenu` is nested inside a `TopBar`/`MenuBar`.
+   *
+   * Only supported if trigger is a function *and* portal is undefined.
+   */
+  renderInTrigger?: boolean;
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
@@ -43,6 +53,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       placement = 'bottom-start',
       children: actionMenuList,
       portal,
+      renderInTrigger = false,
       ...props
     },
     ref
@@ -73,7 +84,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const handleTriggerKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLElement>) => {
         // istanbul ignore else
-        if ([ArrowDown, ArrowUp].includes(event.key) && !open) {
+        if ([ArrowDown, ArrowUp].includes(event.key)) {
           // prevent page from scrolling if the user triggers the action menu
           // via an "ArrowDown" key press
           event.preventDefault();
@@ -81,26 +92,16 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           // default is prevented to perform as normal
           event.defaultPrevented = false;
           setFocusStrategy(event.key === ArrowUp ? 'last' : 'first');
-          setOpen(true);
+
+          if (open) {
+            actionMenuListRef.current?.focus();
+          } else {
+            setOpen(true);
+          }
         }
       },
       [open]
     );
-
-    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
-      return {
-        ref: triggerRef,
-        id: triggerId,
-        onClick: handleTriggerClick,
-        onKeyDown: handleTriggerKeyDown,
-        'aria-expanded': open,
-        'aria-haspopup': 'menu'
-      };
-    }, [handleTriggerClick, open]);
-
-    const actionMenuTrigger = React.isValidElement(trigger)
-      ? React.cloneElement(trigger, triggerProps)
-      : (trigger as ActionMenuTriggerFunction)(triggerProps, open);
 
     const handleClickOutside = useCallback((event: MouseEvent | TouchEvent) => {
       if (
@@ -134,6 +135,64 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, [open]);
 
+    const overlay = (
+      <AnchoredOverlay
+        ref={actionMenuRef}
+        role="presentation"
+        className={classnames('ActionMenu', className)}
+        open={open}
+        onOpenChange={setOpen}
+        target={triggerRef}
+        placement={placement}
+        offset={4}
+        portal={portal}
+        style={{ display: !open ? 'none' : undefined, ...style }}
+        {...props}
+      >
+        {React.cloneElement(actionMenuList, {
+          ref: actionMenuListRef,
+          role: 'menu',
+          onAction: handleAction,
+          'aria-labelledby': triggerId,
+          focusStrategy,
+          focusDisabledOptions: true
+        })}
+      </AnchoredOverlay>
+    );
+
+    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
+      return {
+        ref: triggerRef,
+        id: triggerId,
+        onClick: handleTriggerClick,
+        onKeyDown: handleTriggerKeyDown,
+        'aria-expanded': open,
+        'aria-haspopup': 'menu'
+      };
+    }, [handleTriggerClick, open]);
+
+    if (renderInTrigger) {
+      // istanbul ignore next
+      if (portal && process.env.NODE_ENV !== 'production') {
+        console.warn('renderInTrigger is incompatible with portal.');
+      }
+      // istanbul ignore next
+      if (React.isValidElement(trigger)) {
+        console.warn(
+          'renderInTrigger requires the use of a trigger function, rather than a prerendered trigger ReactElement.'
+        );
+      }
+
+      triggerProps.children = overlay;
+    }
+
+    const actionMenuTrigger = React.isValidElement(trigger)
+      ? React.cloneElement(trigger, triggerProps)
+      : (trigger as ActionMenuTriggerFunction)(
+          { ...triggerProps, children: overlay },
+          open
+        );
+
     return (
       <>
         <ClickOutsideListener
@@ -144,28 +203,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         >
           {actionMenuTrigger}
         </ClickOutsideListener>
-        <AnchoredOverlay
-          ref={actionMenuRef}
-          role="presentation"
-          className={classnames('ActionMenu', className)}
-          open={open}
-          onOpenChange={setOpen}
-          target={triggerRef}
-          placement={placement}
-          offset={4}
-          portal={portal}
-          style={{ display: !open ? 'none' : undefined, ...style }}
-          {...props}
-        >
-          {React.cloneElement(actionMenuList, {
-            ref: actionMenuListRef,
-            role: 'menu',
-            onAction: handleAction,
-            'aria-labelledby': triggerId,
-            focusStrategy,
-            focusDisabledOptions: true
-          })}
-        </AnchoredOverlay>
+        {renderInTrigger ? null : overlay}
       </>
     );
   }

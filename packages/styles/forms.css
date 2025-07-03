@@ -212,8 +212,8 @@ textarea.Field--has-error:focus:hover,
 
 .Field__error {
   font-size: var(--text-size-small);
-  margin-bottom: var(--space-smallest);
   align-items: center;
+  margin-bottom: var(--space-smallest);
   line-height: var(--line-height-body);
 }
 
@@ -323,7 +323,6 @@ textarea.Field--has-error:focus:hover,
   flex: 1;
   text-align: right;
   margin-left: var(--space-large);
-  font-style: italic;
   font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
   font-size: var(--text-size-smaller);
