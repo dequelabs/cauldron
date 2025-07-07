@@ -3,10 +3,12 @@ import classNames from 'classnames';
 import rndid from '../../utils/rndid';
 import setRef from '../../utils/setRef';
 import { addIdRef } from '../../utils/idRefs';
+import Icon from '../Icon';
 
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: React.ReactNode;
+  description?: React.ReactNode;
   error?: React.ReactNode;
   defaultValue?: string;
   onChange?: (
@@ -41,12 +43,14 @@ export default class TextField extends React.Component<
 
   private inputId: string;
   private errorId: string;
+  private descriptionId: string;
   private input: HTMLInputElement | HTMLTextAreaElement | null;
 
   constructor(props: TextFieldProps) {
     super(props);
     this.inputId = this.props.id || rndid();
     this.errorId = rndid();
+    this.descriptionId = rndid();
     this.state = {
       value:
         typeof this.props.value !== 'undefined'
@@ -64,6 +68,7 @@ export default class TextField extends React.Component<
       label,
       fieldRef,
       value,
+      description,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,10 +85,14 @@ export default class TextField extends React.Component<
     // textarea and input props being incompatible
     // we should probably fix this
     const Field: any = multiline ? 'textarea' : 'input';
+    const describedby = description
+      ? addIdRef(ariaDescribedby, this.descriptionId)
+      : ariaDescribedby;
+
     const inputProps = {
       'aria-describedby': error
-        ? addIdRef(ariaDescribedby, this.errorId)
-        : ariaDescribedby
+        ? addIdRef(describedby, this.errorId)
+        : describedby
     };
 
     return (
@@ -102,6 +111,17 @@ export default class TextField extends React.Component<
             </span>
           )}
         </label>
+        {description && (
+          <div className="Field__description" id={this.descriptionId}>
+            {description}
+          </div>
+        )}
+        {error && (
+          <div className="Field__error" id={this.errorId}>
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         <Field
           className={classNames(className, {
             'Field__text-input': !multiline,
@@ -119,11 +139,6 @@ export default class TextField extends React.Component<
           {...other}
           {...inputProps}
         />
-        {error && (
-          <div className="Error" id={this.errorId}>
-            {error}
-          </div>
-        )}
       </div>
     );
   }

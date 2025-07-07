@@ -4,14 +4,17 @@ description: A form element that allows users to type in text. Single and multi-
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TextField/index.tsx
 ---
 
-import { TextField, FieldWrap } from '@deque/cauldron-react'
+import { TextField, FieldWrap } from '@deque/cauldron-react';
 
 ```js
-import { TextField } from '@deque/cauldron-react'
+import { TextField } from '@deque/cauldron-react';
 ```
 
 <Note>
-  Use [FieldWrap](./FieldWrap) to wrap all input components. The `TextField` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `TextField`
+  component has been designed specifically to only be used when rendered as a
+  child of this component, and may not be completely accessible if rendered
+  outside of `FieldWrap`.
 </Note>
 
 ## Examples
@@ -28,10 +31,7 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Disabled"
-    disabled
-  />
+  <TextField label="Disabled" disabled />
 </FieldWrap>
 ```
 
@@ -39,10 +39,7 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Required"
-    required
-  />
+  <TextField label="Required" required />
 </FieldWrap>
 ```
 
@@ -50,11 +47,15 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Error"
-    error="This field has an error!"
-    required
-  />
+  <TextField label="Error" error="This field has an error!" required />
+</FieldWrap>
+```
+
+### With Description
+
+```jsx example
+<FieldWrap>
+  <TextField label="Description" description="This field has a description" />
 </FieldWrap>
 ```
 
@@ -62,10 +63,7 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Multiline"
-    multiline
-  />
+  <TextField label="Multiline" multiline />
 </FieldWrap>
 ```
 
@@ -73,11 +71,7 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Multiline Disabled"
-    multiline
-    disabled
-  />
+  <TextField label="Multiline Disabled" multiline disabled />
 </FieldWrap>
 ```
 
@@ -85,11 +79,7 @@ import { TextField } from '@deque/cauldron-react'
 
 ```jsx example
 <FieldWrap>
-  <TextField
-    label="Multiline Required"
-    multiline
-    required
-  />
+  <TextField label="Multiline Required" multiline required />
 </FieldWrap>
 ```
 
@@ -127,19 +117,26 @@ import { TextField } from '@deque/cauldron-react'
       description: 'Whether the field is required or not.'
     },
     {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Description for the field.'
+    },
+    {
       name: 'defaultValue',
       type: 'string',
-      description: 'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
+      description:
+        'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
     },
     {
       name: 'value',
       type: 'string',
-      description: 'The value to be applied to the field. Used for "controlled" fields.'
+      description:
+        'The value to be applied to the field. Used for "controlled" fields.'
     },
     {
       name: 'onChange',
       type: 'function',
-      description: 'Callback function when the field\'s value changes.'
+      description: "Callback function when the field's value changes."
     },
     {
       name: 'fieldRef',
@@ -155,7 +152,8 @@ import { TextField } from '@deque/cauldron-react'
     {
       name: 'multiline',
       type: 'boolean',
-      description: 'If true, a textarea element will be rendered. Otherwise, an input[type="text"] will be rendered.'
+      description:
+        'If true, a textarea element will be rendered. Otherwise, an input[type="text"] will be rendered.'
     }
   ]}
 />

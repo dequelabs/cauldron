@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.19.0](https://github.com/dequelabs/cauldron/compare/v6.18.5...v6.19.0) (2025-07-07)
+
+
+### Features
+
+* **react, styles:** added optional description property for Select ([#1987](https://github.com/dequelabs/cauldron/issues/1987)) ([d6a6e97](https://github.com/dequelabs/cauldron/commit/d6a6e97dbf8ff107034669d4cbba236833a3db56))
+* **react, styles:** added optional description property for TextField ([#1988](https://github.com/dequelabs/cauldron/issues/1988)) ([8ef34e8](https://github.com/dequelabs/cauldron/commit/8ef34e810db3770ba5671cb77ceac7b1bf544ebf))
+
+
+### Bug Fixes
+
+* **styles:** fix specificity with icon behaviors inside of links ([#1971](https://github.com/dequelabs/cauldron/issues/1971)) ([1457368](https://github.com/dequelabs/cauldron/commit/1457368bffb37bfc703a56bde0e0506c5e34d899))
+
 ### [6.18.5](https://github.com/dequelabs/cauldron/compare/v6.18.4...v6.18.5) (2025-06-30)
 
 
