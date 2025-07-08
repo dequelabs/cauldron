@@ -1,14 +1,15 @@
 name: Tests
 
 on:
-  push:
+  pull_request:
     branches:
-      - test-a11y-job
+      - develop
+      - master
   workflow_call:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   react:
