@@ -1,18 +1,16 @@
 name: Tests
 
 on:
-  pull_request:
+  push:
     branches:
-      - develop
-      - master
+      - test-a11y-job
   workflow_call:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
-
   react:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +49,7 @@ jobs:
           name: screenshot-test-results
           path: ./e2e/test-results
           retention-days: 14
-          
+
   a11y:
     runs-on: ubuntu-latest
     steps:
