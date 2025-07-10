@@ -79,5 +79,8 @@
   "peerDependencies": {
     "react": ">=16.6 <= 18",
     "react-dom": ">=16.6 <= 18"
+  },
+  "resolutions": {
+    "**/refractor/prismjs": "^1.30.0"
   }
 }
