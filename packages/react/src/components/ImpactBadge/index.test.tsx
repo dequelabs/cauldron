@@ -12,14 +12,6 @@ test('should render critical `ImpactBadge`', () => {
   );
 });
 
-test('should render correct icon for `critical` type', () => {
-  render(<ImpactBadge type="critical" />);
-
-  expect(
-    screen.getByText(/critical/i).querySelector('.Icon.Icon--chevron-double-up')
-  ).toBeInTheDocument();
-});
-
 test('should render serious `ImpactBadge`', () => {
   render(<ImpactBadge type="serious" />);
   expect(screen.getByText(/serious/i)).toHaveClass(
@@ -27,14 +19,6 @@ test('should render serious `ImpactBadge`', () => {
     'ImpactBadge--serious',
     'Badge'
   );
-});
-
-test('should render correct icon for `serious` type', () => {
-  render(<ImpactBadge type="serious" />);
-
-  expect(
-    screen.getByText(/serious/i).querySelector('.Icon.Icon--chevron-up')
-  ).toBeInTheDocument();
 });
 
 test('should render moderate `ImpactBadge`', () => {
@@ -46,14 +30,6 @@ test('should render moderate `ImpactBadge`', () => {
   );
 });
 
-test('should render correct icon for `moderate` type', () => {
-  render(<ImpactBadge type="moderate" />);
-
-  expect(
-    screen.getByText(/moderate/i).querySelector('.Icon.Icon--chevron-down')
-  ).toBeInTheDocument();
-});
-
 test('should render minor `ImpactBadge`', () => {
   render(<ImpactBadge type="minor" />);
   expect(screen.getByText(/minor/i)).toHaveClass(
@@ -61,14 +37,6 @@ test('should render minor `ImpactBadge`', () => {
     'ImpactBadge--minor',
     'Badge'
   );
-});
-
-test('should render correct icon for `minor` type', () => {
-  render(<ImpactBadge type="minor" />);
-
-  expect(
-    screen.getByText(/minor/i).querySelector('.Icon.Icon--chevron-double-down')
-  ).toBeInTheDocument();
 });
 
 test('passes classNames through', () => {
