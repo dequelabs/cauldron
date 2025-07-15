@@ -457,7 +457,7 @@ test('returns 0 axe violations with descending sorting', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
-test('aligns the table headers for sortable columns', () => {
+test('aligns the table headers for sortable columns when it is end', () => {
   render(
     <Table
       layout="grid"
@@ -485,4 +485,56 @@ test('aligns the table headers for sortable columns', () => {
 
   const tableHeader = screen.getByRole('button');
   expect(tableHeader).toHaveStyle('justify-content: flex-end');
+});
+
+test('aligns the table headers for sortable columns when it is center', () => {
+  render(
+    <Table
+      layout="grid"
+      columns={[
+        {
+          width: '1fr',
+          align: 'center'
+        }
+      ]}
+    >
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'none'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Cell</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('button');
+  expect(tableHeader).toHaveStyle('justify-content: center');
+});
+
+test('aligns the table headers for sortable columns when it is not set', () => {
+  render(
+    <Table layout="grid">
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'none'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Cell</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('button');
+  expect(tableHeader).toHaveStyle('justify-content: flex-start');
 });
