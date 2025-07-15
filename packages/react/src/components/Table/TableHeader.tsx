@@ -71,7 +71,9 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
             type="button"
             style={{
               display: 'flex',
-              justifyContent: `flex-${tableGridStyles.textAlign || 'start'}`
+              justifyContent: tableGridStyles.textAlign === 'center'
+                ? 'center'
+                : `flex-${tableGridStyles.textAlign || 'start'}`
             }}
           >
             {children}
