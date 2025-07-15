@@ -212,7 +212,9 @@ textarea.Field--has-error:focus:hover,
 
 .Field__error {
   font-size: var(--text-size-small);
+  align-items: center;
   margin-bottom: var(--space-smallest);
+  line-height: var(--line-height-body);
 }
 
 .Checkbox__wrap .Error {
@@ -296,6 +298,7 @@ textarea.Field--has-error:focus:hover,
   font-size: var(--text-size-small);
   color: var(--field-label-description-text-color);
   margin-bottom: var(--space-smallest);
+  line-height: var(--line-height-body);
 }
 
 .Field__label + .Checkbox__wrap {
@@ -320,7 +323,6 @@ textarea.Field--has-error:focus:hover,
   flex: 1;
   text-align: right;
   margin-left: var(--space-large);
-  font-style: italic;
   font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
   font-size: var(--text-size-smaller);
