@@ -230,7 +230,10 @@ function SortableTableExample() {
   return (
     <Table>
       <TableHead>
-        <TableRow>
+        <TableRow>style={{
+              display: 'flex',
+              justifyContent: `flex-${tableGridStyles.textAlign || 'start'}`
+            }}
           <TableHeader scope="col">First Name</TableHeader>
           <TableHeader
             scope="col"

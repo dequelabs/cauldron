@@ -457,3 +457,33 @@ test('returns 0 axe violations with descending sorting', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
+
+test('aligns the table headers for sortable columns', () => {
+  render(
+    <Table
+      layout="grid"
+      columns={[
+        {
+          width: '1fr',
+          align: 'end'
+        }
+      ]}
+    >
+      <TableHead>
+        <TableRow>
+          <TableHeader sortDirection={'none'} onSort={() => null}>
+            Sortable Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Cell</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('button');
+  expect(tableHeader).toHaveStyle('justify-content: flex-end');
+});
