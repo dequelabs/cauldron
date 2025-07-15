@@ -483,7 +483,7 @@ test('aligns the table headers for sortable columns when it is end', () => {
     </Table>
   );
 
-  const tableHeader = screen.getByRole('button');
+  const tableHeader = screen.getByRole('button', { name: /Sortable Header/i });
   expect(tableHeader).toHaveStyle('justify-content: flex-end');
 });
 
@@ -513,7 +513,7 @@ test('aligns the table headers for sortable columns when it is center', () => {
     </Table>
   );
 
-  const tableHeader = screen.getByRole('button');
+  const tableHeader = screen.getByRole('button', { name: /Sortable Header/i });
   expect(tableHeader).toHaveStyle('justify-content: center');
 });
 
@@ -535,6 +535,6 @@ test('aligns the table headers for sortable columns when it is not set', () => {
     </Table>
   );
 
-  const tableHeader = screen.getByRole('button');
+  const tableHeader = screen.getByRole('button', { name: /Sortable Header/i });
   expect(tableHeader).toHaveStyle('justify-content: flex-start');
 });
