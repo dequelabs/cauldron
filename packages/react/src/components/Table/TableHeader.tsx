@@ -50,8 +50,8 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       sortDirection === 'ascending'
         ? sortAscendingAnnouncement
         : sortDirection === 'descending'
-        ? sortDescendingAnnouncement
-        : '';
+          ? sortDescendingAnnouncement
+          : '';
 
     return (
       <th
@@ -69,6 +69,10 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
             onClick={onSort}
             className="TableHeader__sort-button"
             type="button"
+            style={{
+              display: 'flex',
+              justifyContent: `flex-${tableGridStyles.textAlign || 'start'}`
+            }}
           >
             {children}
             <span aria-hidden="true">
