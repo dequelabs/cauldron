@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.20.0](https://github.com/dequelabs/cauldron/compare/v6.19.0...v6.20.0) (2025-07-15)
+
+
+### Features
+
+* **react:** remove icon from ImpactBadge ([#2019](https://github.com/dequelabs/cauldron/issues/2019)) ([abc96db](https://github.com/dequelabs/cauldron/commit/abc96db6f05e266457ccca23a2b0f83fd879f1ee))
+
 ## [6.19.0](https://github.com/dequelabs/cauldron/compare/v6.18.5...v6.19.0) (2025-07-07)
 
 
