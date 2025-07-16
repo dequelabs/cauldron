@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.20.0",
+  "version": "6.20.1",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -69,7 +69,7 @@
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "chalk": "^4.1.2",
     "classnames": "^2.5.1",
-    "concurrently": "^9.1.2",
+    "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
