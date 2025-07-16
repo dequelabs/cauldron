@@ -69,12 +69,6 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
             onClick={onSort}
             className="TableHeader__sort-button"
             type="button"
-            style={{
-              display: 'flex',
-              justifyContent: tableGridStyles.textAlign === 'center'
-                ? 'center'
-                : `flex-${tableGridStyles.textAlign || 'start'}`
-            }}
           >
             {children}
             <span aria-hidden="true">
