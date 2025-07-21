@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.20.1](https://github.com/dequelabs/cauldron/compare/v6.20.0...v6.20.1) (2025-07-16)
+
+
+### Bug Fixes
+
+* **a11y:** fix focus issue when focusable item is contained within a collapsed description list ([#2025](https://github.com/dequelabs/cauldron/issues/2025)) ([c58902b](https://github.com/dequelabs/cauldron/commit/c58902be8a94149fa1f1b28051e6a78f439b3627))
+* correct table header alignment for sortable columns ([#2021](https://github.com/dequelabs/cauldron/issues/2021)) ([c197d1e](https://github.com/dequelabs/cauldron/commit/c197d1e331519d86c05d2e5359f9043ebbb17971)), closes [#1991](https://github.com/dequelabs/cauldron/issues/1991)
+
+## [6.20.0](https://github.com/dequelabs/cauldron/compare/v6.19.0...v6.20.0) (2025-07-15)
+
+
+### Features
+
+* **react:** remove icon from ImpactBadge ([#2019](https://github.com/dequelabs/cauldron/issues/2019)) ([abc96db](https://github.com/dequelabs/cauldron/commit/abc96db6f05e266457ccca23a2b0f83fd879f1ee))
+
 ## [6.19.0](https://github.com/dequelabs/cauldron/compare/v6.18.5...v6.19.0) (2025-07-07)
 
 
