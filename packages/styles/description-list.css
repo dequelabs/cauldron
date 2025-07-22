@@ -90,7 +90,7 @@
 }
 
 .DescriptionList--collapsed .DescriptionList__details {
-  overflow: auto;
+  overflow: visible;
 }
 
 .DescriptionList__term,
