@@ -42,9 +42,9 @@
   },
   "devDependencies": {
     "@axe-core/puppeteer": "^4.10.1",
-    "@babel/core": "^7.27.7",
+    "@babel/core": "^7.28.0",
     "@babel/plugin-proposal-export-default-from": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@fontsource/lato": "^5.2.6",
