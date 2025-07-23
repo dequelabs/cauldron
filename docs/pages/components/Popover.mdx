@@ -5,7 +5,8 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useRef, useState } from 'react'
-import { Popover, Button } from '@deque/cauldron-react'
+import { Select, Popover, Button } from '@deque/cauldron-react'
+import { placements } from './AnchoredOverlay.mdx'
 
 ```js
 import { Popover, Button } from '@deque/cauldron-react'
@@ -55,12 +56,19 @@ For custom purposes, you can use the "custom" variant, which is the default.
 
 ```jsx example
 function CustomPopoverExample() {
+  const [placement, setPlacement] = useState('top');
   const [show, setShow] = useState(false);
   const onTogglePopover = () => setShow(!show);
   const buttonRef = useRef();
+  const handlePlacementChange = ({ target }) => setPlacement(target.value);
 
   return (
     <>
+      <Select
+        label="Placement"
+        options={placements.map(placement => ({ value: placement }))}
+        onChange={handlePlacementChange}
+      />
       <Button 
         onClick={onTogglePopover} 
         variant="secondary" 
@@ -70,14 +78,14 @@ function CustomPopoverExample() {
       </Button>
       <Popover
         target={buttonRef} 
-        placement="auto" 
+        placement={placement} 
         show={show} 
         onClose={onTogglePopover}
         aria-labelledby={"popover-title"}
       >
         <div>
           <h2 id="popover-title">Popover Title</h2>
-          <p>Popover content</p>
+          <p>Popover with placement {placement}</p>
           <Button>Custom button</Button>
           <Button>Custom button</Button>
           <p>Popover content</p>
