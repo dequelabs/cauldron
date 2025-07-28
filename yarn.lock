@@ -1105,10 +1105,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.2.6.tgz#d7af1bc81f2fe41072d2870f63d7bc3dbe7d6f45"
   integrity sha512-ykbyuHKHdFsV8QNWPgo2kkCV0veY8/w1HzPlTd7f08LRGGYijPoN7QHkVKPq5QLpgeNauPPe+0a6oRhd8b6MpQ==
 
-"@fontsource/pt-mono@^5.2.5":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.5.tgz#bf2180b625ab483e988cdb2935fca8d9c970ae20"
-  integrity sha512-FM/vqh/W0I3v2WygNm5pZeS+5bbgUcnbjmwOwem7sBsEpJ/BkYiB/VFHIMD36XsTGkQ7vMApAhEXrZMID9I10A==
+"@fontsource/pt-mono@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.6.tgz#c68390597525838703aaa2e5bebb3e5d66b3eb70"
+  integrity sha512-GvbqJLD3UQTjTXOCt5nFDj96hNY14OmgjJpMdtxZwvtwLmKAgxET+/2SNUC2lw+SrSyTF6mUM9owmNv0E/s0+Q==
 
 "@fontsource/roboto@^5.2.6":
   version "5.2.6"
