@@ -80,7 +80,7 @@ const AnchoredOverlay = forwardRef(
   ) => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
-    const { floatingStyles, placement, middlewareData } = useFloating({
+    const { refs, floatingStyles, placement, middlewareData } = useFloating({
       open,
       // default to initial placement on top when placement is auto
       // @ts-expect-error auto placement is not a valid placement for floating-ui
@@ -95,8 +95,7 @@ const AnchoredOverlay = forwardRef(
         shiftMiddleware({ crossAxis: false })
       ].filter(Boolean),
       elements: {
-        reference: resolveElement(target),
-        floating: ref.current
+        reference: resolveElement(target)
       },
       whileElementsMounted: autoUpdate
     });
@@ -134,7 +133,14 @@ const AnchoredOverlay = forwardRef(
     }, [onShiftChange, middlewareData.shift?.x, middlewareData.shift?.y]);
 
     const AnchoredOverlayComponent = (
-      <Component ref={ref} {...props} style={{ ...floatingStyles, ...style }}>
+      <Component
+        ref={(element: HTMLElement) => {
+          refs.setFloating(element);
+          ref.current = element;
+        }}
+        {...props}
+        style={{ ...floatingStyles, ...style }}
+      >
         {children}
       </Component>
     );
