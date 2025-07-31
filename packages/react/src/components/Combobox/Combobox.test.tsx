@@ -1675,7 +1675,7 @@ test('should render combobox with description', () => {
   expect(screen.getByText('description')).toBeInTheDocument();
 });
 
-test('should render combobox with error and descriptionand aria-describedby', () => {
+test('should render combobox with error and description and aria-describedby', () => {
   const errorId = 'combo-error';
   const descriptionId = 'combo-description';
   render(
