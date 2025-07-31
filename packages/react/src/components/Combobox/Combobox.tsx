@@ -680,17 +680,25 @@ const Combobox = forwardRef<
           htmlFor={`${id}-input`}
         >
           <span>{label}</span>
-          {description && (
-            <span className="Field__description-label" id={descriptionId}>
-              {description}
-            </span>
-          )}
           {isRequired && (
             <span className="Field__required-text" aria-hidden="true">
               {requiredText}
             </span>
           )}
         </label>
+        <div className="Field is--flex-column">
+          <div></div>
+          {description && (
+            <span className="Field__description-label" id={descriptionId}>
+              {description}
+            </span>
+          )}
+          {hasError && (
+            <div className="Error" id={errorId}>
+              {error}
+            </div>
+          )}
+        </div>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
           className={classnames({ 'TextFieldWrapper--error': hasError })}
@@ -769,11 +777,6 @@ const Combobox = forwardRef<
               ) as React.ReactNode)
             : comboboxListbox}
         </ComboboxProvider>
-        {hasError && (
-          <div className="Error" id={errorId}>
-            {error}
-          </div>
-        )}
       </div>
     );
   }

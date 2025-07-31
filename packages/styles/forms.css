@@ -239,6 +239,15 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
 }
 
+.Field.is--flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.Field.is--flex-column .Field__label {
+  margin-bottom: 0;
+}
+
 .Checkbox__wrap,
 .Radio__wrap {
   margin-bottom: var(--space-smallest);
@@ -303,8 +312,8 @@ textarea.Field--has-error:focus:hover,
 
 .Field__description-label {
   flex: 1;
-  text-align: right;
-  margin-left: var(--space-large);
+  text-align: left;
+  margin-left: 0;
   font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
   font-size: var(--text-size-smaller);
