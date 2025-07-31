@@ -268,6 +268,31 @@ test('should render combobox with error', () => {
   );
 });
 
+test('should render combobox with both description and error', () => {
+  const errorId = 'combo-error';
+  const descriptionId = 'combo-description';
+  render(
+    <Combobox
+      label="label"
+      id="combo"
+      aria-describedby="other-id"
+      required
+      description="This is a description"
+      error="You forgot to choose a value."
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.queryByText('This is a description')).toBeTruthy();
+  expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
+  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+    `other-id ${descriptionId} ${errorId}`
+  );
+});
+
 test('should open combobox listbox on click', async () => {
   render(
     <Combobox label="label">
@@ -1648,5 +1673,32 @@ test('should render combobox with description', () => {
     </Combobox>
   );
   expect(screen.getByText('description')).toBeInTheDocument();
-  expect(screen.getByText('description')).toHaveClass('Field__description');
+  expect(screen.getByText('description')).toHaveClass(
+    'Field__description-label'
+  );
+});
+
+test('should render combobox with error and descriptionand aria-describedby', () => {
+  const errorId = 'combo-error';
+  const descriptionId = 'combo-description';
+  render(
+    <Combobox
+      label="label"
+      id="combo"
+      aria-describedby="other-id"
+      required
+      error="You forgot to choose a value."
+      description="This is a description"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
+  expect(screen.queryByText('This is a description')).toBeTruthy();
+  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+    `other-id ${descriptionId} ${errorId}`
+  );
 });

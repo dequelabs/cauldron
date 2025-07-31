@@ -642,11 +642,19 @@ const Combobox = forwardRef<
     );
 
     const errorId = `${id}-error`;
+    const descriptionId = `${id}-description`;
     const inputProps = {
       ...props,
-      'aria-describedby': error
-        ? addIdRef(ariaDescribedby, errorId)
-        : ariaDescribedby
+      'aria-describedby': (() => {
+        let describedby = ariaDescribedby;
+        if (description) {
+          describedby = addIdRef(describedby, descriptionId);
+        }
+        if (error) {
+          describedby = addIdRef(describedby, errorId);
+        }
+        return describedby;
+      })()
     };
 
     return (
@@ -673,7 +681,9 @@ const Combobox = forwardRef<
         >
           <span>{label}</span>
           {description && (
-            <span className="Field__description-label">{description}</span>
+            <span className="Field__description-label" id={descriptionId}>
+              {description}
+            </span>
           )}
           {isRequired && (
             <span className="Field__required-text" aria-hidden="true">
