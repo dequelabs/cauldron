@@ -1,5 +1,7 @@
 import type { MutableRefObject } from 'react';
 import { useRef, useEffect } from 'react';
+import type { ElementOrRef } from '../types';
+import resolveElement from './resolveElement';
 
 /**
  * When a component needs to track intersection via a ref, useIntersectionRef
@@ -12,13 +14,15 @@ import { useRef, useEffect } from 'react';
  * return <span ref={elementRef}>...</span>
  */
 export default function useIntersectionRef<T extends HTMLElement>(
-  element: T | MutableRefObject<T>,
+  elementOrRef: ElementOrRef<T>,
   intersectionObserverOptions: IntersectionObserverInit = {
     root: null,
     threshold: 1.0
   }
 ): MutableRefObject<IntersectionObserverEntry | null> {
   const intersectionRef = useRef<IntersectionObserverEntry | null>(null);
+
+  const element = resolveElement(elementOrRef);
 
   useEffect(() => {
     // istanbul ignore else
@@ -30,10 +34,7 @@ export default function useIntersectionRef<T extends HTMLElement>(
         return;
       }
 
-      if (
-        !(element instanceof HTMLElement) &&
-        !(element.current instanceof HTMLElement)
-      ) {
+      if (!(element instanceof HTMLElement)) {
         console.warn(
           'An element or ref was provided to useIntersectionRef that was not an HTMLElement.'
         );
@@ -48,9 +49,8 @@ export default function useIntersectionRef<T extends HTMLElement>(
         handleIntersection,
         intersectionObserverOptions
       );
-      observer.observe(
-        element instanceof HTMLElement ? element : element.current
-      );
+
+      observer.observe(element);
 
       return () => {
         observer.disconnect();
