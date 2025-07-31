@@ -673,7 +673,7 @@ const Combobox = forwardRef<
         >
           <span>{label}</span>
           {description && (
-            <span className="Field__description">{description}</span>
+            <span className="Field__description-label">{description}</span>
           )}
           {isRequired && (
             <span className="Field__required-text" aria-hidden="true">
