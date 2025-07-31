@@ -64,6 +64,7 @@ interface BaseComboboxProps
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
+  description?: React.ReactNode;
 }
 
 interface SingleSelectComboboxProps extends BaseComboboxProps {
@@ -151,6 +152,7 @@ const Combobox = forwardRef<
       renderNoResults,
       portal,
       inputRef: propInputRef = null,
+      description,
       'aria-describedby': ariaDescribedby,
       disabled = false,
       ...props
@@ -602,8 +604,8 @@ const Combobox = forwardRef<
         React.isValidElement(renderNoResults)
           ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
           : typeof renderNoResults === 'function'
-          ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
-          : ComboboxNoResults,
+            ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
+            : ComboboxNoResults,
       [renderNoResults]
     );
 
@@ -670,6 +672,9 @@ const Combobox = forwardRef<
           htmlFor={`${id}-input`}
         >
           <span>{label}</span>
+          {description && (
+            <span className="Field__description">{description}</span>
+          )}
           {isRequired && (
             <span className="Field__required-text" aria-hidden="true">
               {requiredText}
