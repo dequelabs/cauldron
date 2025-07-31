@@ -21,6 +21,7 @@ import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
+import Icon from '../Icon';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -694,6 +695,7 @@ const Combobox = forwardRef<
           )}
           {hasError && (
             <div className="Error" id={errorId}>
+              <Icon type="caution" />
               {error}
             </div>
           )}
