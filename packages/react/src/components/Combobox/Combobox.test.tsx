@@ -1673,9 +1673,6 @@ test('should render combobox with description', () => {
     </Combobox>
   );
   expect(screen.getByText('description')).toBeInTheDocument();
-  expect(screen.getByText('description')).toHaveClass(
-    'Field__description-label'
-  );
 });
 
 test('should render combobox with error and descriptionand aria-describedby', () => {

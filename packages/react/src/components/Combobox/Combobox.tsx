@@ -22,6 +22,7 @@ import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
 import Icon from '../Icon';
+import classNames from 'classnames';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -689,7 +690,12 @@ const Combobox = forwardRef<
         </label>
         <div className="Field is--flex-column">
           {description && (
-            <span className="Field__description-label" id={descriptionId}>
+            <span
+              className={classNames('Field__labelDescription', {
+                'Field__labelDescription--disabled': disabled
+              })}
+              id={descriptionId}
+            >
               {description}
             </span>
           )}
