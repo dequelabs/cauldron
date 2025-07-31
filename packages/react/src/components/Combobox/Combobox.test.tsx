@@ -1638,3 +1638,15 @@ test('should have no axe violations with no matching results', async () => {
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
 });
+
+test('should render combobox with description', () => {
+  render(
+    <Combobox label="label" description="description">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(screen.getByText('description')).toBeInTheDocument();
+  expect(screen.getByText('description')).toHaveClass('Field__description');
+});
