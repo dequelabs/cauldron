@@ -344,6 +344,7 @@ textarea.Field--has-error:focus:hover,
   font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
   font-size: var(--text-size-smaller);
+  font-style: normal;
 }
 
 .Field__required-text::before {
