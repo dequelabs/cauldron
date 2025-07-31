@@ -1,5 +1,11 @@
 import React from 'react';
-import { findByTestId, render, screen, within } from '@testing-library/react';
+import {
+  act,
+  findByTestId,
+  render,
+  screen,
+  within
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
@@ -253,8 +259,10 @@ test('should return no axe violations when opened', async () => {
     </AnchoredOverlay>
   );
 
-  const results = await axe(screen.getByTestId('overlay'));
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(screen.getByTestId('overlay'));
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should return no axe violations when not open', async () => {
@@ -265,6 +273,8 @@ test('should return no axe violations when not open', async () => {
     </AnchoredOverlay>
   );
 
-  const results = await axe(screen.getByTestId('overlay'));
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(screen.getByTestId('overlay'));
+    expect(results).toHaveNoViolations();
+  });
 });
