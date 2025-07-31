@@ -41,7 +41,6 @@
   position: relative;
   text-align: center;
   min-height: var(--button-height);
-  min-width: 6.25rem;
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
@@ -233,7 +232,6 @@ button.Link {
 
 .Button--thin {
   min-height: var(--button-thin-height);
-  min-width: 6.25rem;
   font-size: var(--button-thin-text-size);
   padding: 0 var(--space-small);
 }
@@ -332,7 +330,8 @@ button.Link {
 
 .cauldron--theme-dark
   .Button--primary:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+  box-shadow:
+    0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-info);
 }
 
@@ -340,13 +339,15 @@ button.Link {
   .Button--secondary:not([disabled]):not([aria-disabled='true']):hover:before,
 .cauldron--theme-dark
   .Button--tertiary:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+  box-shadow:
+    0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-light);
 }
 
 .cauldron--theme-dark
   .Button--error:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+  box-shadow:
+    0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-danger);
 }
 
@@ -354,7 +355,8 @@ button.Link {
   .Button--tag:not([disabled]):not([aria-disabled='true']):hover:before,
 .cauldron--theme-dark
   .Button--badge:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--dark-workspace-color),
+  box-shadow:
+    0 0 0 1px var(--dark-workspace-color),
     0 0 0 2px var(--accent-info);
 }
 

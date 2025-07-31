@@ -228,7 +228,14 @@ function SortableTableExample() {
       : 'ascending';
 
   return (
-    <Table>
+    <Table
+    layout="grid" 
+  columns={[
+    { width: 'max-content', align: 'start' }, 
+    { width: 'max-content', align: 'start' }, 
+    { width: 'auto', maxWidth: '250', align: 'end' }
+  ]}
+    >
       <TableHead>
         <TableRow>
           <TableHeader scope="col">First Name</TableHeader>
