@@ -239,15 +239,6 @@ textarea.Field--has-error:focus:hover,
   margin-bottom: 0;
 }
 
-.Field.is--flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.Field.is--flex-column .Field__label {
-  margin-bottom: 0;
-}
-
 .Checkbox__wrap,
 .Radio__wrap {
   margin-bottom: var(--space-smallest);

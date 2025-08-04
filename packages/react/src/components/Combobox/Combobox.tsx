@@ -686,7 +686,7 @@ const Combobox = forwardRef<
             </span>
           )}
         </label>
-        <div className="Field is--flex-column">
+        <div>
           {description && (
             <span
               className={classNames('Field__labelDescription', {
