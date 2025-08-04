@@ -645,18 +645,16 @@ const Combobox = forwardRef<
 
     const errorId = `${id}-error`;
     const descriptionId = `${id}-description`;
+    let describedby = ariaDescribedby;
+    if (description) {
+      describedby = addIdRef(describedby, descriptionId);
+    }
+    if (error) {
+      describedby = addIdRef(describedby, errorId);
+    }
     const inputProps = {
       ...props,
-      'aria-describedby': (() => {
-        let describedby = ariaDescribedby;
-        if (description) {
-          describedby = addIdRef(describedby, descriptionId);
-        }
-        if (error) {
-          describedby = addIdRef(describedby, errorId);
-        }
-        return describedby;
-      })()
+      'aria-describedby': describedby
     };
 
     return (
