@@ -251,7 +251,6 @@ test('should render combobox with error', () => {
   render(
     <Combobox
       label="label"
-      id="combo"
       aria-describedby="other-id"
       required
       error="You forgot to choose a value."
@@ -274,7 +273,6 @@ test('should render combobox with both description and error', () => {
   render(
     <Combobox
       label="label"
-      id="combo"
       aria-describedby="other-id"
       required
       description="This is a description"
@@ -1681,7 +1679,6 @@ test('should render combobox with error and description and aria-describedby', (
   render(
     <Combobox
       label="label"
-      id="combo"
       aria-describedby="other-id"
       required
       error="You forgot to choose a value."
