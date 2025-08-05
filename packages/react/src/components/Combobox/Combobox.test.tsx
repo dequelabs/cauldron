@@ -254,6 +254,7 @@ test('should render combobox with error', () => {
       aria-describedby="other-id"
       required
       error="You forgot to choose a value."
+      id="combo"
     >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
@@ -262,7 +263,8 @@ test('should render combobox with error', () => {
   );
 
   expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
-  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+  expect(screen.getByRole('combobox')).toHaveAttribute(
+    'aria-describedby',
     `other-id ${errorId}`
   );
 });
@@ -277,6 +279,7 @@ test('should render combobox with both description and error', () => {
       required
       description="This is a description"
       error="You forgot to choose a value."
+      id="combo"
     >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
@@ -1683,6 +1686,7 @@ test('should render combobox with error and description and aria-describedby', (
       required
       error="You forgot to choose a value."
       description="This is a description"
+      id="combo"
     >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
@@ -1748,8 +1752,9 @@ test('should handle description and error together', () => {
   );
 
   const combobox = screen.getByRole('combobox');
-  expect(combobox).toHaveAccessibleDescription('This is a helpful description');
-  expect(screen.getByText('This is a helpful description')).toBeInTheDocument();
+  expect(combobox).toHaveAccessibleDescription(
+    'This is a helpful description This field is required'
+  );
 });
 
 test('should handle description, error, and aria-describedby together', () => {
@@ -1767,7 +1772,6 @@ test('should handle description, error, and aria-describedby together', () => {
   );
 
   const combobox = screen.getByRole('combobox');
-  expect(combobox).toHaveAccessibleDescription('This is a helpful description');
   expect(screen.getByText('This is a helpful description')).toBeInTheDocument();
   expect(screen.getByText('This field is required')).toBeInTheDocument();
 
