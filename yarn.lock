@@ -15,12 +15,12 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@axe-core/puppeteer@^4.10.1":
-  version "4.10.1"
-  resolved "https://registry.yarnpkg.com/@axe-core/puppeteer/-/puppeteer-4.10.1.tgz#3772f14e719ee15d8988e6e3fe79c758c67616b6"
-  integrity sha512-cUorWpcflDBdApBKy/NJR1i5YfMdI2vH935LIY2MI7FC3Y9JdG559HIzFaPZIxxvoERCDAY5OJF8usZW32eNGw==
+"@axe-core/puppeteer@^4.10.2":
+  version "4.10.2"
+  resolved "https://registry.yarnpkg.com/@axe-core/puppeteer/-/puppeteer-4.10.2.tgz#8503a4b91cc9f057ef7b668a62830c6a8dccede9"
+  integrity sha512-ye1fpeNr/Fy7hph46DmTCDz/o0RTyCCMZUOSqR5630ZJ1ggq3CtCGpAMe8QS+FILFLtpWbVrMR+NXyTcpe/NZA==
   dependencies:
-    axe-core "~4.10.2"
+    axe-core "~4.10.3"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.27.1":
   version "7.27.1"
@@ -2502,7 +2502,7 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-axe-core@^4.10.0, axe-core@~4.10.2:
+axe-core@^4.10.0, axe-core@~4.10.3:
   version "4.10.3"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.10.3.tgz#04145965ac7894faddbac30861e5d8f11bfd14fc"
   integrity sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==
