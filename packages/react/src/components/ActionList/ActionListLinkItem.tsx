@@ -15,7 +15,6 @@ const ActionListLinkItem = forwardRef<
 >(
   (
     {
-      key,
       className,
       // ActionListLinkItem should not be able to be "selected"
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +41,6 @@ const ActionListLinkItem = forwardRef<
 
     return (
       <ActionListItem
-        key={key}
         ref={ref}
         className={classnames('Link ActionListLinkItem', className)}
         as="a"
