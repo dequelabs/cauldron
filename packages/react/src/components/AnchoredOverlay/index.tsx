@@ -91,7 +91,9 @@ const AnchoredOverlay = forwardRef(
           ? autoPlacementMiddleware({
               alignment: getAutoAlignment(initialPlacement as 'auto')
             })
-          : flipMiddleware(),
+          : flipMiddleware({
+              fallbackAxisSideDirection: 'start'
+            }),
         shiftMiddleware({ crossAxis: false })
       ].filter(Boolean),
       elements: {
