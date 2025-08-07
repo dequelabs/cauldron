@@ -195,20 +195,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
 
-    if (!isBrowser()) {
+    if (!show || !isBrowser()) {
       return null;
     }
 
-    // This allows the ClickOutsideListener to only be activated when the popover is
-    // currently open. This prevents an obscure behavior where the show state remains false for handleClickOutside
-    const clickOutsideEventActive = !show ? false : undefined;
-
     return (
-      <ClickOutsideListener
-        onClickOutside={handleClickOutside}
-        mouseEvent={clickOutsideEventActive}
-        touchEvent={clickOutsideEventActive}
-      >
+      <ClickOutsideListener onClickOutside={handleClickOutside}>
         <AnchoredOverlay
           id={id}
           className={classnames('Popover', `Popover--${placement}`, className, {
@@ -228,24 +220,19 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {...additionalProps}
           {...props}
         >
-          {show && (
-            <>
-              <div className="Popover__popoverArrow" />
-              <div className="Popover__borderLeft" />
-
-              {variant === 'prompt' ? (
-                <PromptPopoverContent
-                  applyButtonText={applyButtonText}
-                  onApply={onApply}
-                  closeButtonText={closeButtonText}
-                  infoText={infoText || ''}
-                  onClose={handleClosePopover}
-                  infoTextId={`${id}-label`}
-                />
-              ) : (
-                children
-              )}
-            </>
+          <div className="Popover__popoverArrow" />
+          <div className="Popover__borderLeft" />
+          {variant === 'prompt' ? (
+            <PromptPopoverContent
+              applyButtonText={applyButtonText}
+              onApply={onApply}
+              closeButtonText={closeButtonText}
+              infoText={infoText || ''}
+              onClose={handleClosePopover}
+              infoTextId={`${id}-label`}
+            />
+          ) : (
+            children
           )}
         </AnchoredOverlay>
       </ClickOutsideListener>
