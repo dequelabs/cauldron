@@ -1674,6 +1674,9 @@ test('should render combobox with description', () => {
     </Combobox>
   );
   expect(screen.getByText('description')).toBeInTheDocument();
+  expect(screen.getByRole('combobox')).toHaveAccessibleDescription(
+    'description'
+  );
 });
 
 test('should render combobox with error and description and aria-describedby', () => {
