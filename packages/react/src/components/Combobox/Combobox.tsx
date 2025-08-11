@@ -686,7 +686,6 @@ const Combobox = forwardRef<
             </span>
           )}
         </label>
-        <div>
           {description && (
             <span
               className="Field__description"
