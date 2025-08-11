@@ -698,7 +698,7 @@ const Combobox = forwardRef<
             </span>
           )}
           {hasError && (
-            <div className="Error" id={errorId}>
+            <div className="Field__error" id={errorId}>
               <Icon type="caution" />
               {error}
             </div>
