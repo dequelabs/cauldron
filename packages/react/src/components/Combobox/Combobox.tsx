@@ -689,9 +689,7 @@ const Combobox = forwardRef<
         <div>
           {description && (
             <span
-              className={classNames('Field__labelDescription', {
-                'Field__labelDescription--disabled': disabled
-              })}
+              className="Field__description"
               id={descriptionId}
             >
               {description}
