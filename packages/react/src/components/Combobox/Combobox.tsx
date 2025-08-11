@@ -686,21 +686,17 @@ const Combobox = forwardRef<
             </span>
           )}
         </label>
-          {description && (
-            <span
-              className="Field__description"
-              id={descriptionId}
-            >
-              {description}
-            </span>
-          )}
-          {hasError && (
-            <div className="Field__error" id={errorId}>
-              <Icon type="caution" />
-              {error}
-            </div>
-          )}
-        </div>
+        {description && (
+          <span className="Field__description" id={descriptionId}>
+            {description}
+          </span>
+        )}
+        {hasError && (
+          <div className="Field__error" id={errorId}>
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
           className={classnames({ 'TextFieldWrapper--error': hasError })}
