@@ -24,7 +24,7 @@ const DIRECTIONS = ['up', 'down', 'left', 'right'];
  * Some icons have duplicate mappings this object should maintain list of icons
  * that do not directly map to an SVG icon.
  */
-const ADDITIONAL_TYPE = ['filter-solid'];
+const ADDITIONAL_TYPES = ['filter-solid'];
 
 assert(
   fs.existsSync(ICON_COMPONENT_DIRECTORY),
