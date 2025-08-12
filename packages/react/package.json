@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "6.18.4",
+  "version": "6.20.2",
   "license": "MPL-2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "homepage": "https://cauldron.dequelabs.com/",
@@ -79,5 +79,8 @@
   "peerDependencies": {
     "react": ">=16.6 <= 18",
     "react-dom": ">=16.6 <= 18"
+  },
+  "resolutions": {
+    "**/refractor/prismjs": "^1.30.0"
   }
 }

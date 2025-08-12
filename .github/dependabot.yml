@@ -13,6 +13,8 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+    cooldown:
+      default-days: 7
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -28,6 +30,8 @@ updates:
         patterns:
           - "babel-*"
           - "@babel/*"
+    cooldown:
+      default-days: 7
     ignore:
       # Prevent updates to ESM-only versions
       - dependency-name: 'log-symbols'

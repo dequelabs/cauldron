@@ -89,6 +89,10 @@
   overflow: hidden;
 }
 
+.DescriptionList--collapsed .DescriptionList__details {
+  overflow: visible;
+}
+
 .DescriptionList__term,
 .DescriptionList__details {
   padding: var(--data-list-space) var(--space-small);

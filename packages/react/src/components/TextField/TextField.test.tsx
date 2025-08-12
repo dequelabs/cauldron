@@ -63,6 +63,15 @@ test('should render error textfield', () => {
   ).toBeInTheDocument();
 });
 
+test('should render textfield with description', () => {
+  const description = 'this is a description for the field';
+  const input = renderTextField({
+    description
+  });
+  expect(input).toHaveAccessibleDescription(description);
+  expect(screen.queryByText(description)).toBeInTheDocument();
+});
+
 test('should render multiline textfield', () => {
   const input = renderTextField({
     label: 'this is a textarea field',
@@ -245,6 +254,14 @@ test('should have no axe violations when multiline textfield has errors', async 
   const input = renderTextField({
     error: 'this field has an error',
     multiline: true
+  });
+  const results = await axe(input);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations when textfield has description', async () => {
+  const input = renderTextField({
+    description: 'this field has a description'
   });
   const results = await axe(input);
   expect(results).toHaveNoViolations();

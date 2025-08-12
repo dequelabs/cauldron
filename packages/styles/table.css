@@ -78,10 +78,10 @@
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   color: var(--table-header-text-color);
-  display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: var(--table-space) var(--space-large);
+  text-align: inherit;
 }
 
 .TableHeader__sort-button:hover {

@@ -4,15 +4,18 @@ description: A form element that lets users select a choice from a dropdown list
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Select/index.tsx
 ---
 
-import { useState } from 'react'
-import { FieldWrap, Select } from '@deque/cauldron-react'
+import { useState } from 'react';
+import { FieldWrap, Select } from '@deque/cauldron-react';
 
 ```js
-import { Select } from '@deque/cauldron-react'
+import { Select } from '@deque/cauldron-react';
 ```
 
 <Note>
-  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Select` component has been designed specifically to only be used when rendered as a child of this component, and may not be completely accessible if rendered outside of `FieldWrap`.
+  Use [FieldWrap](./FieldWrap) to wrap all input components. The `Select`
+  component has been designed specifically to only be used when rendered as a
+  child of this component, and may not be completely accessible if rendered
+  outside of `FieldWrap`.
 </Note>
 
 ## Examples
@@ -56,7 +59,7 @@ import { Select } from '@deque/cauldron-react'
       {
         key: 'no',
         value: 'No'
-      },
+      }
     ]}
     defaultValue="No"
     disabled
@@ -83,7 +86,7 @@ import { Select } from '@deque/cauldron-react'
       {
         key: 'no',
         value: 'No'
-      },
+      }
     ]}
     required
   />
@@ -116,6 +119,31 @@ import { Select } from '@deque/cauldron-react'
     ]}
     error="You choose poorly."
     value="One"
+  />
+</FieldWrap>
+```
+
+### With Description
+
+```jsx example
+<FieldWrap>
+  <Select
+    label="Select"
+    description="Description for select"
+    options={[
+      {
+        key: 'yes',
+        value: 'Yes'
+      },
+      {
+        key: 'no',
+        value: 'No'
+      },
+      {
+        key: 'maybe',
+        value: 'Maybe'
+      }
+    ]}
   />
 </FieldWrap>
 ```
@@ -153,10 +181,10 @@ For a controlled select, use `value` to set the currently selected value of the 
 
 ```jsx example
 function ControlledSelectExample() {
-  const [value, setValue] = useState('Yes')
+  const [value, setValue] = useState('Yes');
   const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+    setValue(event.target.value);
+  };
   return (
     <FieldWrap>
       <Select
@@ -179,7 +207,7 @@ function ControlledSelectExample() {
         onChange={handleChange}
       />
     </FieldWrap>
-  )
+  );
 }
 ```
 
@@ -189,18 +217,22 @@ The options list can be an array of objects with specific properties, or an `HTM
 
 ```jsx example
 function OptionsExample() {
-  const options = ['one', 'two', 'three']
+  const options = ['one', 'two', 'three'];
   return (
     <FieldWrap>
       <Select
         label="Select with array"
-        options={options.map(value => ({ key: value, value }))}
+        options={options.map((value) => ({ key: value, value }))}
       />
       <Select label="Select with HTMLOptions">
-        {options.map(value => <option key={value} value={value}>{value}</option>)}
+        {options.map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
       </Select>
     </FieldWrap>
-  )
+  );
 }
 ```
 
@@ -215,14 +247,32 @@ function OptionsExample() {
   props={[
     {
       name: 'label',
-      type: ['string', 'number', 'ReactElement', 'ReactFragment', 'ReactPortal'],
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
       description: 'Label for the field.',
       required: true
     },
     {
+      name: 'description',
+      type: [
+        'string',
+        'number',
+        'ReactElement',
+        'ReactFragment',
+        'ReactPortal'
+      ],
+      description: 'Description for the field.'
+    },
+    {
       name: 'options',
       type: 'SelectOption[]',
-      description: 'Array of objects containing: key, value, disabled (optional), and label (optional).'
+      description:
+        'Array of objects containing: key, value, disabled (optional), and label (optional).'
     },
     {
       name: 'required',
@@ -243,17 +293,20 @@ function OptionsExample() {
     {
       name: 'value',
       type: 'string',
-      description: 'Use for "controlled" selects. The caller is responsible for managing the value of the select element.'
+      description:
+        'Use for "controlled" selects. The caller is responsible for managing the value of the select element.'
     },
     {
       name: 'defaultValue',
       type: 'string',
-      description: 'The default element value. Use when the component is not controlled.'
+      description:
+        'The default element value. Use when the component is not controlled.'
     },
     {
       name: 'onChange',
       type: 'function',
-      description: 'Callback function that gets invoked when the selected value of Select changes.'
+      description:
+        'Callback function that gets invoked when the selected value of Select changes.'
     }
   ]}
 />

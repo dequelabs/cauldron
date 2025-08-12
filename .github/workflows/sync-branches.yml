@@ -14,5 +14,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pr-title: "chore: merge master into develop"
           pr-body: "Remember to _merge_ (rather than squash) this PR!"
-          pr-reviewers: schne324,scurker
+          pr-reviewers: anastasialanz,scurker
           head: master
