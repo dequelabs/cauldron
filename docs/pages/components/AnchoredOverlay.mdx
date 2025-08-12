@@ -169,6 +169,11 @@ function AnchoredOverlayWithOffsetExample() {
       description: 'A callback function that is called when the placement of the overlay changes.'
     },
     {
+      name: 'onShiftChange',
+      type: '(coords: Coords) => void',
+      description: 'A callback function that is called when the shift position of the overlay changes.'
+    },
+    {
       name: 'offset',
       type: 'number',
       description: 'An optional offset number to position the anchor element from its anchored target.'
@@ -182,6 +187,11 @@ function AnchoredOverlayWithOffsetExample() {
       name: 'focusTrapOptions',
       type: 'object',
       description: 'When `focusTrap` is true, optional arguments to configure the focus trap.'
+    },
+    {
+      name: 'portal',
+      type: ['React.Ref', 'HTMLElement'],
+      description: 'The parent element to place the AnchoredOverlay in.'
     },
     {
       name: 'as',

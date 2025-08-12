@@ -17,6 +17,8 @@ interface TextEllipsisBaseProps
    * Only use this prop if you have an alternative way to make the full text accessible.
    */
   hideTooltip?: boolean;
+  /* Callback function when overflow state has changed. */
+  onOverflowChange?: (hasOverflow: boolean) => void;
 }
 
 interface TextEllipsisWithTooltipProps extends TextEllipsisBaseProps {
@@ -38,6 +40,7 @@ const TextEllipsis = React.forwardRef(
       as,
       tooltipProps,
       hideTooltip,
+      onOverflowChange,
       ...props
     }: TextEllipsisWithTooltipProps | TextEllipsisWithoutTooltipProps,
     ref: Ref<HTMLElement>
@@ -68,10 +71,6 @@ const TextEllipsis = React.forwardRef(
     }
 
     useEffect(() => {
-      if (hideTooltip) {
-        return;
-      }
-
       const listener: ResizeObserverCallback = () => {
         requestAnimationFrame(() => {
           const { current: overflowElement } = sharedRef;
@@ -93,7 +92,13 @@ const TextEllipsis = React.forwardRef(
       return () => {
         observer?.disconnect();
       };
-    }, [hideTooltip]);
+    }, []);
+
+    useEffect(() => {
+      if (typeof onOverflowChange === 'function') {
+        onOverflowChange(hasOverflow);
+      }
+    }, [onOverflowChange, hasOverflow]);
 
     return (
       <>

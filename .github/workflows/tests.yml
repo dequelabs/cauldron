@@ -7,8 +7,11 @@ on:
       - master
   workflow_call:
 
-jobs:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+jobs:
   react:
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +50,7 @@ jobs:
           name: screenshot-test-results
           path: ./e2e/test-results
           retention-days: 14
-          
+
   a11y:
     runs-on: ubuntu-latest
     steps:
@@ -66,5 +69,6 @@ jobs:
       # See: https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
       - run: |
           export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+          sudo chown root /opt/google/chrome/chrome-sandbox
           sudo chmod 4755 /opt/google/chrome/chrome-sandbox
           yarn test:a11y

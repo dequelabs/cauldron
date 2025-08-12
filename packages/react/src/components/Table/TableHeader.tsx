@@ -50,8 +50,8 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       sortDirection === 'ascending'
         ? sortAscendingAnnouncement
         : sortDirection === 'descending'
-        ? sortDescendingAnnouncement
-        : '';
+          ? sortDescendingAnnouncement
+          : '';
 
     return (
       <th

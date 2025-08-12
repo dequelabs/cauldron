@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.20.2](https://github.com/dequelabs/cauldron/compare/v6.20.1...v6.20.2) (2025-07-22)
+
+
+### Bug Fixes
+
+* **styles:** use correct overflow value for description list ([#2031](https://github.com/dequelabs/cauldron/issues/2031)) ([42101ef](https://github.com/dequelabs/cauldron/commit/42101ef7679555bc4fee26db70a34447c28e7a6d))
+
+### [6.20.1](https://github.com/dequelabs/cauldron/compare/v6.20.0...v6.20.1) (2025-07-16)
+
+
+### Bug Fixes
+
+* **a11y:** fix focus issue when focusable item is contained within a collapsed description list ([#2025](https://github.com/dequelabs/cauldron/issues/2025)) ([c58902b](https://github.com/dequelabs/cauldron/commit/c58902be8a94149fa1f1b28051e6a78f439b3627))
+* correct table header alignment for sortable columns ([#2021](https://github.com/dequelabs/cauldron/issues/2021)) ([c197d1e](https://github.com/dequelabs/cauldron/commit/c197d1e331519d86c05d2e5359f9043ebbb17971)), closes [#1991](https://github.com/dequelabs/cauldron/issues/1991)
+
+## [6.20.0](https://github.com/dequelabs/cauldron/compare/v6.19.0...v6.20.0) (2025-07-15)
+
+
+### Features
+
+* **react:** remove icon from ImpactBadge ([#2019](https://github.com/dequelabs/cauldron/issues/2019)) ([abc96db](https://github.com/dequelabs/cauldron/commit/abc96db6f05e266457ccca23a2b0f83fd879f1ee))
+
+## [6.19.0](https://github.com/dequelabs/cauldron/compare/v6.18.5...v6.19.0) (2025-07-07)
+
+
+### Features
+
+* **react, styles:** added optional description property for Select ([#1987](https://github.com/dequelabs/cauldron/issues/1987)) ([d6a6e97](https://github.com/dequelabs/cauldron/commit/d6a6e97dbf8ff107034669d4cbba236833a3db56))
+* **react, styles:** added optional description property for TextField ([#1988](https://github.com/dequelabs/cauldron/issues/1988)) ([8ef34e8](https://github.com/dequelabs/cauldron/commit/8ef34e810db3770ba5671cb77ceac7b1bf544ebf))
+
+
+### Bug Fixes
+
+* **styles:** fix specificity with icon behaviors inside of links ([#1971](https://github.com/dequelabs/cauldron/issues/1971)) ([1457368](https://github.com/dequelabs/cauldron/commit/1457368bffb37bfc703a56bde0e0506c5e34d899))
+
+### [6.18.5](https://github.com/dequelabs/cauldron/compare/v6.18.4...v6.18.5) (2025-06-30)
+
+
+### Bug Fixes
+
+* improve keyboard focus behavior of ActionListLinkItems in TopBar ([#1995](https://github.com/dequelabs/cauldron/issues/1995)) ([611629a](https://github.com/dequelabs/cauldron/commit/611629aee0feccacffce01d9e5d3cf327bb5518b)), closes [#1993](https://github.com/dequelabs/cauldron/issues/1993)
+
+### [6.18.4](https://github.com/dequelabs/cauldron/compare/v6.18.3...v6.18.4) (2025-06-17)
+
+
+### Bug Fixes
+
+* **styles:** apply overflow hidden for DescriptionList to contain overflow items ([#1976](https://github.com/dequelabs/cauldron/issues/1976)) ([5121592](https://github.com/dequelabs/cauldron/commit/5121592b03135029990824b4e81bce0863378a67))
+
+### [6.18.3](https://github.com/dequelabs/cauldron/compare/v6.18.2...v6.18.3) (2025-06-10)
+
+
+### Bug Fixes
+
+* **react:** fix incorrect tabstop when using ActionLinkItem inside of ActionMenu ([#1969](https://github.com/dequelabs/cauldron/issues/1969)) ([fe38517](https://github.com/dequelabs/cauldron/commit/fe3851736709db1dda854dcfd70e0d5a533f9812))
+
+### [6.18.2](https://github.com/dequelabs/cauldron/compare/v6.18.1...v6.18.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **react:** support ActionMenu within TopBar ([#1916](https://github.com/dequelabs/cauldron/issues/1916)) ([cad74a2](https://github.com/dequelabs/cauldron/commit/cad74a2e30e162767a0afcdb21639e5a76bfa74e))
+
+### [6.18.1](https://github.com/dequelabs/cauldron/compare/v6.18.0...v6.18.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **react:** fix overflow callback not being called for TextEllipsis when tooltip is hidden ([#1954](https://github.com/dequelabs/cauldron/issues/1954)) ([b31fcc8](https://github.com/dequelabs/cauldron/commit/b31fcc8ed5f6e8950fbc486ba6a4abd981ca4d12))
+
+## [6.18.0](https://github.com/dequelabs/cauldron/compare/v6.17.1...v6.18.0) (2025-05-29)
+
+
+### Features
+
+* **react:** add onOverflowChange callback to TextEllipsis ([#1946](https://github.com/dequelabs/cauldron/issues/1946)) ([c11936e](https://github.com/dequelabs/cauldron/commit/c11936e5c885f62af789c5021e23fea274ce0230))
+* **react:** add support to render AnchoredOverlay with a portal ([#1935](https://github.com/dequelabs/cauldron/issues/1935)) ([82f455c](https://github.com/dequelabs/cauldron/commit/82f455cdd57dcf86689ac3ee740c9ab3b7d4fee5))
+
+
+### Bug Fixes
+
+* **react:** prevent onClickOutside from being called incorrectly when using target ([#1924](https://github.com/dequelabs/cauldron/issues/1924)) ([0d77c45](https://github.com/dequelabs/cauldron/commit/0d77c457a39d0fa5e263f3f860a4472eb9661d5d))
+* **style:** prevent platform tooltip from appearing on ellipsized text in Safari ([#1927](https://github.com/dequelabs/cauldron/issues/1927)) ([0421855](https://github.com/dequelabs/cauldron/commit/042185508bdfd0b3ecde4feec3ad4fb32985f66b))
+
+### [6.17.1](https://github.com/dequelabs/cauldron/compare/v6.17.0...v6.17.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **Stepper:** fixed types for Stepper component ([#1933](https://github.com/dequelabs/cauldron/issues/1933)) ([ef7bc54](https://github.com/dequelabs/cauldron/commit/ef7bc54e8069e18f7ce84ce1feb5218aa96039af))
+
+## [6.17.0](https://github.com/dequelabs/cauldron/compare/v6.16.0...v6.17.0) (2025-05-13)
+
+
+### Features
+
+* **AnchoredOverlay:** add shift middleware to handle overflowing overlays ([#1897](https://github.com/dequelabs/cauldron/issues/1897)) ([d7ad033](https://github.com/dequelabs/cauldron/commit/d7ad0332d547e7f910ff3cc993958068a530f813))
+* **react, styles:** add `PageHeader` and `SectionHeader` components with styles and tests ([#1880](https://github.com/dequelabs/cauldron/issues/1880)) ([678bd47](https://github.com/dequelabs/cauldron/commit/678bd477b1bfeb4a4b7098f484aa9c934b4ed0d5))
+* **react,styles:** add ActionMenu, ActionList components ([#1883](https://github.com/dequelabs/cauldron/issues/1883)) ([dce6ee5](https://github.com/dequelabs/cauldron/commit/dce6ee582ab8dc1db34ca48f78b9be8d922a62e4))
+* **react,styles:** add EmptyState component ([#1913](https://github.com/dequelabs/cauldron/issues/1913)) ([b6278d3](https://github.com/dequelabs/cauldron/commit/b6278d32e114a49ad578a6249bcf35f8f97cee48))
+* **react,styles:** add FieldGroup component ([#1873](https://github.com/dequelabs/cauldron/issues/1873)) ([95899ed](https://github.com/dequelabs/cauldron/commit/95899edbe208d58502ddecf8e008c9fe9b971892))
+* **style:** update panel radius and padding ([#1905](https://github.com/dequelabs/cauldron/issues/1905)) ([b541dd6](https://github.com/dequelabs/cauldron/commit/b541dd62baa298e381e45d9924b79084099c751b))
+
+
+### Bug Fixes
+
+* **styles:** secondary disabled button background color ([#1808](https://github.com/dequelabs/cauldron/issues/1808)) ([bd8f773](https://github.com/dequelabs/cauldron/commit/bd8f7737db7e73420dc1ea923029774e191b2445)), closes [#1807](https://github.com/dequelabs/cauldron/issues/1807)
+* **styles:** update complete indicator to display step count for safari ([#1900](https://github.com/dequelabs/cauldron/issues/1900)) ([edbb1fd](https://github.com/dequelabs/cauldron/commit/edbb1fd9a17d55a9db9ab08db73e9a98479ffe94))
+* **styles:** use consistent variable naming for empty state ([#1921](https://github.com/dequelabs/cauldron/issues/1921)) ([210d5d0](https://github.com/dequelabs/cauldron/commit/210d5d0c4d32f2d87862d7a2e0ffd7e7d887a29f))
+
 ## [6.16.0](https://github.com/dequelabs/cauldron/compare/v6.15.0...v6.16.0) (2025-03-20)
 
 

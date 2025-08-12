@@ -1,0 +1,63 @@
+---
+heading: SectionHeader
+description: A header component for sections, providing a heading and optional actions.
+source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/SectionHeader/index.tsx
+---
+
+import { SectionHeader, Button } from '@deque/cauldron-react';
+
+```js
+import { SectionHeader } from '@deque/cauldron-react';
+```
+
+The `SectionHeader` component is used to display a header for sections, typically including a heading and optional actions.
+
+## Examples
+
+### Basic Usage
+
+```jsx example
+<SectionHeader heading="Section Title" />
+```
+
+### With Actions
+
+```jsx example
+<SectionHeader heading="Section Title" description="Optional description text">
+  <Button variant="primary">Save</Button>
+  <Button variant="secondary">Cancel</Button>
+</SectionHeader>
+```
+
+### Custom Title
+
+```jsx example
+<SectionHeader
+  heading={<h3>Custom Section Title</h3>}
+  description="Optional description text"
+/>
+```
+
+## Props
+
+<ComponentProps
+  children="true"
+  props={[
+    {
+      name: 'heading',
+      type: 'React.ReactNode',
+      description: 'The heading to display in the header.',
+      required: true
+    },
+    {
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Optional description to display below the heading.'
+    }
+  ]}
+  refType="HTMLDivElement"
+/>
+
+## Related Components
+
+- [PageHeader](./PageHeader)

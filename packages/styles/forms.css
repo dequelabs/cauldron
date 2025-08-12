@@ -67,8 +67,6 @@
 input,
 select,
 textarea,
-[role='menuitemcheckbox'],
-[role='menuitemradio'],
 [role='textbox'],
 [role='listbox'],
 [role='spinbutton'] {
@@ -82,8 +80,6 @@ textarea,
 .cauldron--theme-dark input,
 select,
 textarea,
-[role='menuitemcheckbox'],
-[role='menuitemradio'],
 [role='textbox'],
 [role='listbox'],
 [role='spinbutton'] {
@@ -93,14 +89,13 @@ textarea,
 input:focus,
 select:focus,
 textarea:focus,
-[role='menuitemcheckbox']:focus,
-[role='menuitemradio']:focus,
 [role='textbox']:focus,
 [role='listbox']:focus,
 [role='spinbutton']:focus {
   outline: 0;
   border: 1px solid var(--field-border-color-focus);
-  box-shadow: 0 0 0 1px var(--field-border-color-focus),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-focus),
     0 0 5px var(--field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -108,8 +103,6 @@ textarea:focus,
 input:hover,
 select:hover,
 textarea:hover,
-[role='menuitemcheckbox']:hover,
-[role='menuitemradio']:hover,
 [role='textbox']:hover,
 [role='listbox']:hover,
 [role='spinbutton']:hover {
@@ -119,13 +112,13 @@ textarea:hover,
 input:focus:hover,
 select:focus:hover,
 textarea:focus:hover,
-[role='menuitemcheckbox']:focus:hover,
 [role='menuitemradio']:focus:hover,
 [role='textbox']:focus:hover,
 [role='listbox']:focus:hover,
 [role='spinbutton']:focus:hover {
   border: 1px solid var(--field-border-color-focus-hover);
-  box-shadow: 0 0 0 1px var(--field-border-color-focus-hover),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-focus-hover),
     0 0 5px var(--field-border-color-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -139,8 +132,6 @@ textarea::placeholder {
 input.Field--has-error,
 select.Field--has-error,
 textarea.Field--has-error,
-[role='menuitemcheckbox'].Field--has-error,
-[role='menuitemradio'].Field--has-error,
 [role='textbox'].Field--has-error,
 [role='listbox'].Field--has-error,
 [role='spinbutton'].Field--has-error {
@@ -161,26 +152,24 @@ textarea.Field--has-error,
 input.Field--has-error:hover,
 select.Field--has-error:hover,
 textarea.Field--has-error:hover,
-[role='menuitemcheckbox'].Field--has-error:hover,
-[role='menuitemradio'].Field--has-error:hover,
 [role='textbox'].Field--has-error:hover,
 [role='listbox'].Field--has-error:hover,
 [role='spinbutton'].Field--has-error:hover {
   border-color: var(--field-border-color-error-hover);
-  box-shadow: 0 0 0 1px var(--field-border-color-error),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-error),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 input.Field--has-error:focus,
 select.Field--has-error:focus,
 textarea.Field--has-error:focus,
-[role='menuitemcheckbox'].Field--has-error:focus,
-[role='menuitemradio'].Field--has-error:focus,
 [role='textbox'].Field--has-error:focus,
 [role='listbox'].Field--has-error:focus,
 [role='spinbutton'].Field--has-error:focus {
   border: 1px solid var(--field-border-color-error);
-  box-shadow: 0 0 0 1px var(--field-border-color-error),
+  box-shadow:
+    0 0 0 1px var(--field-border-color-error),
     0 0 5px var(--field-border-color-error-focus-glow),
     inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -188,8 +177,6 @@ textarea.Field--has-error:focus,
 input.Field--has-error:focus:hover,
 select.Field--has-error:focus:hover,
 textarea.Field--has-error:focus:hover,
-[role='menuitemcheckbox'].Field--has-error:focus:hover,
-[role='menuitemradio'].Field--has-error:focus:hover,
 [role='textbox'].Field--has-error:focus:hover,
 [role='listbox'].Field--has-error:focus:hover,
 [role='spinbutton'].Field--has-error:focus:hover {
@@ -212,11 +199,22 @@ textarea.Field--has-error:focus:hover,
   color: var(--field-listbox-selected-text-color);
 }
 
-.Error {
+.Error,
+.Field__error {
+  --icon-size: var(--text-size-base);
   color: var(--field-error-text-color);
+  display: flex;
+  gap: var(--space-half);
   text-align: left;
   font-size: var(--text-size-smallest);
   font-weight: var(--font-weight-normal);
+}
+
+.Field__error {
+  font-size: var(--text-size-small);
+  align-items: center;
+  margin-bottom: var(--space-smallest);
+  line-height: var(--line-height-body);
 }
 
 .Checkbox__wrap .Error {
@@ -287,10 +285,20 @@ textarea.Field--has-error:focus:hover,
   align-items: center;
   text-align: left;
   color: var(--field-label-text-color);
-  margin-bottom: var(--space-half);
+  margin-bottom: var(--space-smallest);
   font-size: var(--text-size-small);
   font-weight: var(--font-weight-medium);
   cursor: default;
+}
+
+.Field__description {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: var(--text-size-small);
+  color: var(--field-label-description-text-color);
+  margin-bottom: var(--space-smallest);
+  line-height: var(--line-height-body);
 }
 
 .Field__label + .Checkbox__wrap {
@@ -315,7 +323,6 @@ textarea.Field--has-error:focus:hover,
   flex: 1;
   text-align: right;
   margin-left: var(--space-large);
-  font-style: italic;
   font-weight: var(--font-weight-thin);
   color: var(--field-required-text-color);
   font-size: var(--text-size-smaller);

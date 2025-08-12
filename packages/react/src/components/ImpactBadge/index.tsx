@@ -1,9 +1,6 @@
 import React, { forwardRef } from 'react';
-
 import Badge, { BadgeLabel } from '../Badge';
-
 import { ContentNode } from '../../types';
-import Icon, { IconType } from '../Icon';
 import classNames from 'classnames';
 
 type ImpactType = 'critical' | 'serious' | 'moderate' | 'minor';
@@ -13,13 +10,6 @@ interface ImpactBadgeProps
   type: ImpactType;
   label?: ContentNode;
 }
-
-const iconByType: { [type in ImpactType]: IconType } = {
-  critical: 'chevron-double-up',
-  serious: 'chevron-up',
-  moderate: 'chevron-down',
-  minor: 'chevron-double-down'
-};
 
 const typeValues: { [key in ImpactType]: string } = {
   critical: 'Critical',
@@ -36,7 +26,6 @@ const ImpactBadge = forwardRef<HTMLDivElement, ImpactBadgeProps>(
         ref={ref}
         {...other}
       >
-        <Icon type={iconByType[type]} />
         {label || (
           <>
             <BadgeLabel>Impact:</BadgeLabel>

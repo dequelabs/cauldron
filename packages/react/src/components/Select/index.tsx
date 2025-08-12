@@ -3,6 +3,7 @@ import uid from '../../utils/rndid';
 import classNames from 'classnames';
 import { addIdRef } from '../../utils/idRefs';
 import { ContentNode } from '../../types';
+import Icon from '../Icon';
 
 export interface SelectOption {
   key: string;
@@ -20,6 +21,7 @@ export interface SelectProps
   children?: React.ReactElement<HTMLOptionElement | HTMLOptGroupElement>[];
   value?: any;
   defaultValue?: any;
+  description?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -37,6 +39,7 @@ const Select = React.forwardRef(
       value,
       'aria-describedby': ariaDescribedby,
       defaultValue,
+      description,
       onChange,
       ...rest
     }: SelectProps,
@@ -76,6 +79,7 @@ const Select = React.forwardRef(
 
     const selectId = id || uid();
     const errorId = uid();
+    const descriptionId = uid();
 
     const dynamicProps: {
       value?: any;
@@ -89,8 +93,20 @@ const Select = React.forwardRef(
       dynamicProps.defaultValue = defaultValue;
     }
 
+    dynamicProps['aria-describedby'] = ariaDescribedby;
+
+    if (description) {
+      dynamicProps['aria-describedby'] = addIdRef(
+        dynamicProps['aria-describedby'],
+        descriptionId
+      );
+    }
+
     if (error) {
-      dynamicProps['aria-describedby'] = addIdRef(ariaDescribedby, errorId);
+      dynamicProps['aria-describedby'] = addIdRef(
+        dynamicProps['aria-describedby'],
+        errorId
+      );
     }
 
     // In order to support controlled selects, we
@@ -112,6 +128,17 @@ const Select = React.forwardRef(
             </span>
           )}
         </label>
+        {description && (
+          <div id={descriptionId} className="Field__description">
+            {description}
+          </div>
+        )}
+        {error && (
+          <div id={errorId} className="Field__error">
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         <div
           className={classNames('Field__select--wrapper', {
             'Field__select--disabled': disabled,
@@ -148,11 +175,6 @@ const Select = React.forwardRef(
           </select>
           <div className="arrow-down" />
         </div>
-        {error && (
-          <div id={errorId} className="Error">
-            {error}
-          </div>
-        )}
       </div>
     );
     /* eslint-disable jsx-a11y/no-onchange */

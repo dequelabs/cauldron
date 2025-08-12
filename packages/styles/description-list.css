@@ -86,6 +86,11 @@
   background-color: var(--data-list-value-background-color);
   font-weight: var(--font-weight-normal);
   word-break: break-word;
+  overflow: hidden;
+}
+
+.DescriptionList--collapsed .DescriptionList__details {
+  overflow: visible;
 }
 
 .DescriptionList__term,
