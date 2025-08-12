@@ -248,6 +248,7 @@ const App = () => {
               return <Route key={name} exact path={path} Component={render} />;
             })}
             <Route
+              path="*"
               component={({ location }) =>
                 location.state && location.state.title ? (
                   <Helmet title={location.state.title}>
