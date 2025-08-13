@@ -20,6 +20,12 @@ const ICONS_WITH_DIRECTIONS = [
 ];
 const DIRECTIONS = ['up', 'down', 'left', 'right'];
 
+/**
+ * Some icons have duplicate mappings this object should maintain list of icons
+ * that do not directly map to an SVG icon.
+ */
+const ADDITIONAL_TYPES = ['filter-solid'];
+
 assert(
   fs.existsSync(ICON_COMPONENT_DIRECTORY),
   'Unable to locate Icon component'
@@ -36,11 +42,13 @@ for (const file of files) {
 
   const name = file.replace('.svg', '');
   if (ICONS_WITH_DIRECTIONS.includes(name)) {
-    iconTypes.push(...DIRECTIONS.map(d => `${name}-${d}`));
+    iconTypes.push(...DIRECTIONS.map((d) => `${name}-${d}`));
   } else {
     iconTypes.push(name);
   }
 }
+
+iconTypes.push(...ADDITIONAL_TYPES);
 
 fs.writeFileSync(
   ICON_TYPES_FILE,
@@ -51,11 +59,11 @@ fs.writeFileSync(
 
 /** IconType represents each valid icon type. */
 export type IconType =
-${iconTypes.map(i => `  | '${i}'`).join('\n')};
+${iconTypes.map((i) => `  | '${i}'`).join('\n')};
 
 /** iconTypes holds each valid icon type. */
 export const iconTypes = [
-${iconTypes.map(i => `  '${i}'`).join(',\n')}
+${iconTypes.map((i) => `  '${i}'`).join(',\n')}
 ];
 `.trim()
 );
