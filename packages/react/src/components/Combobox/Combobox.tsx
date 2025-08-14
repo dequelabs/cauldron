@@ -22,7 +22,6 @@ import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
 import Icon from '../Icon';
-import classNames from 'classnames';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
