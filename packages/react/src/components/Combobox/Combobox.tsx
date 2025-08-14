@@ -21,6 +21,7 @@ import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
+import Icon from '../Icon';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -64,6 +65,7 @@ interface BaseComboboxProps
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
+  description?: React.ReactNode;
 }
 
 interface SingleSelectComboboxProps extends BaseComboboxProps {
@@ -151,6 +153,7 @@ const Combobox = forwardRef<
       renderNoResults,
       portal,
       inputRef: propInputRef = null,
+      description,
       'aria-describedby': ariaDescribedby,
       disabled = false,
       ...props
@@ -602,8 +605,8 @@ const Combobox = forwardRef<
         React.isValidElement(renderNoResults)
           ? () => <ComboboxNoResults>{renderNoResults}</ComboboxNoResults>
           : typeof renderNoResults === 'function'
-          ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
-          : ComboboxNoResults,
+            ? () => <ComboboxNoResults>{renderNoResults()}</ComboboxNoResults>
+            : ComboboxNoResults,
       [renderNoResults]
     );
 
@@ -640,11 +643,17 @@ const Combobox = forwardRef<
     );
 
     const errorId = `${id}-error`;
+    const descriptionId = `${id}-description`;
+    let describedby = ariaDescribedby;
+    if (description) {
+      describedby = addIdRef(describedby, descriptionId);
+    }
+    if (error) {
+      describedby = addIdRef(describedby, errorId);
+    }
     const inputProps = {
       ...props,
-      'aria-describedby': error
-        ? addIdRef(ariaDescribedby, errorId)
-        : ariaDescribedby
+      'aria-describedby': describedby
     };
 
     return (
@@ -676,6 +685,17 @@ const Combobox = forwardRef<
             </span>
           )}
         </label>
+        {description && (
+          <span className="Field__description" id={descriptionId}>
+            {description}
+          </span>
+        )}
+        {hasError && (
+          <div className="Field__error" id={errorId}>
+            <Icon type="caution" />
+            {error}
+          </div>
+        )}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
           className={classnames({ 'TextFieldWrapper--error': hasError })}
@@ -754,11 +774,6 @@ const Combobox = forwardRef<
               ) as React.ReactNode)
             : comboboxListbox}
         </ComboboxProvider>
-        {hasError && (
-          <div className="Error" id={errorId}>
-            {error}
-          </div>
-        )}
       </div>
     );
   }
