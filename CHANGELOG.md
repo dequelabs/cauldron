@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.20.2](https://github.com/dequelabs/cauldron/compare/v6.20.1...v6.20.2) (2025-07-22)
+
+
+### Bug Fixes
+
+* **styles:** use correct overflow value for description list ([#2031](https://github.com/dequelabs/cauldron/issues/2031)) ([42101ef](https://github.com/dequelabs/cauldron/commit/42101ef7679555bc4fee26db70a34447c28e7a6d))
+
 ### [6.20.1](https://github.com/dequelabs/cauldron/compare/v6.20.0...v6.20.1) (2025-07-16)
 
 

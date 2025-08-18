@@ -1,5 +1,6 @@
 import React, { createRef } from 'react';
 import {
+  act,
   render,
   screen,
   waitFor,
@@ -626,8 +627,11 @@ test('should not render menu inside trigger by default', async () => {
 
 test('should have no axe violations', async () => {
   const { container } = render(<ActionMenu {...defaultProps} />);
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations when open', async () => {
@@ -637,8 +641,10 @@ test('should have no axe violations when open', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations when open with groups', async () => {
@@ -661,8 +667,10 @@ test('should have no axe violations when open with groups', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations when open with selections', async () => {
@@ -690,8 +698,10 @@ test('should have no axe violations when open with selections', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations when open with descriptions', async () => {
@@ -735,8 +745,10 @@ test('should have no axe violations when open with descriptions', async () => {
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations in TopBar+ActionMenu pattern', async () => {
@@ -748,8 +760,10 @@ test('should have no axe violations in TopBar+ActionMenu pattern', async () => {
     </TopBar>
   );
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });
 
 test('should have no axe violations in TopBar+ActionMenu pattern when open', async () => {
@@ -765,6 +779,8 @@ test('should have no axe violations in TopBar+ActionMenu pattern when open', asy
   await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+  await act(async () => {
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
 });

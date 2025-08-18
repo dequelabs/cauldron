@@ -68,7 +68,12 @@ const main = async (): Promise<void> => {
 
         const component = (url.split('/').pop() as string) || 'Index';
 
-        await page.goto(url);
+        try {
+          await page.goto(url, { waitUntil: 'networkidle0' });
+        } catch (ex) {
+          console.log(url);
+          throw ex;
+        }
 
         for (const theme of THEMES) {
           await page.evaluate(
