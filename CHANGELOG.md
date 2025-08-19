@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.21.0](https://github.com/dequelabs/cauldron/compare/v6.20.2...v6.21.0) (2025-08-19)
+
+
+### Features
+
+* add optional description to combobox ([#2042](https://github.com/dequelabs/cauldron/issues/2042)) ([fdaa983](https://github.com/dequelabs/cauldron/commit/fdaa98318974b8331f0e6e6fe854c2291dc29b8e))
+* deprecate filter-solid, map new icon using filter ([#2058](https://github.com/dequelabs/cauldron/issues/2058)) ([1fcbfce](https://github.com/dequelabs/cauldron/commit/1fcbfce28fecd38b235b134e62148cb7f53aa58a))
+
+
+### Bug Fixes
+
+* **a11y:** adjust tooltip alignment to change placement in smaller viewports ([#2053](https://github.com/dequelabs/cauldron/issues/2053)) ([82effd8](https://github.com/dequelabs/cauldron/commit/82effd86460d48f604f55236008112c6eeb9f9ad))
+* **react:** use floating-ui ref for anchored overlay to help prevent overlay flicker ([#2041](https://github.com/dequelabs/cauldron/issues/2041)) ([d985ed7](https://github.com/dequelabs/cauldron/commit/d985ed72b148d58a6031ddb52dd5aed5ecbbc426))
+* remove passthrough key property in ActionListLinkItem ([#2052](https://github.com/dequelabs/cauldron/issues/2052)) ([a840027](https://github.com/dequelabs/cauldron/commit/a840027b0ba6db3a5754ca34c3751ccac3fd5ce6))
+* render AnchoredOverlay always to get correct floating ([#1997](https://github.com/dequelabs/cauldron/issues/1997)) ([72846ff](https://github.com/dequelabs/cauldron/commit/72846ff61d0b493e958132fa8fc51349d8483669))
+* update useIntersectionRef to observer refs correctly ([#1986](https://github.com/dequelabs/cauldron/issues/1986)) ([1acc4c9](https://github.com/dequelabs/cauldron/commit/1acc4c90126f17da8142349853b1470996131e9b)), closes [#1977](https://github.com/dequelabs/cauldron/issues/1977)
+
 ### [6.20.2](https://github.com/dequelabs/cauldron/compare/v6.20.1...v6.20.2) (2025-07-22)
 
 
