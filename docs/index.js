@@ -1,6 +1,6 @@
 import React, { useRef, Fragment, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import mdxComponents from './mdx-components';
 import Footer from './components/Footer';
@@ -235,47 +235,50 @@ const App = () => {
           aria-hidden={show}
           aria-labelledby="main-title"
         >
-          {pages.map(({ name, path, Component, ...props }) => {
-            const render = () => (
-              <ComponentLayout {...props}>
-                <Component components={mdxComponents} />
-              </ComponentLayout>
-            );
+          <Routes>
+            {pages.map(({ name, path, Component, ...props }) => {
+              const render = () => (
+                <ComponentLayout {...props}>
+                  <Component components={mdxComponents} />
+                </ComponentLayout>
+              );
 
-            return <Route key={name} exact path={path} component={render} />;
-          })}
-          {components.map(({ name, path, Component, ...props }) => {
-            const render = () => (
-              <ComponentLayout {...props}>
-                <Component components={mdxComponents} />
-              </ComponentLayout>
-            );
+              return <Route key={name} exact path={path} Component={render} />;
+            })}
+            {components.map(({ name, path, Component, ...props }) => {
+              const render = () => (
+                <ComponentLayout {...props}>
+                  <Component components={mdxComponents} />
+                </ComponentLayout>
+              );
 
-            return <Route key={name} exact path={path} component={render} />;
-          })}
-          {foundations.map(({ name, path, Component, ...props }) => {
-            const render = () => (
-              <ComponentLayout {...props}>
-                <Component components={mdxComponents} />
-              </ComponentLayout>
-            );
+              return <Route key={name} exact path={path} Component={render} />;
+            })}
+            {foundations.map(({ name, path, Component, ...props }) => {
+              const render = () => (
+                <ComponentLayout {...props}>
+                  <Component components={mdxComponents} />
+                </ComponentLayout>
+              );
 
-            return <Route key={name} exact path={path} component={render} />;
-          })}
-          <Route
-            component={({ location }) =>
-              location.state && location.state.title ? (
-                <Helmet title={location.state.title}>
-                  <meta
-                    name="description"
-                    content={location.state.description}
-                  />
-                </Helmet>
-              ) : (
-                handleTitleChange(location)
-              )
-            }
-          />
+              return <Route key={name} exact path={path} Component={render} />;
+            })}
+            <Route
+              path="*"
+              component={({ location }) =>
+                location.state && location.state.title ? (
+                  <Helmet title={location.state.title}>
+                    <meta
+                      name="description"
+                      content={location.state.description}
+                    />
+                  </Helmet>
+                ) : (
+                  handleTitleChange(location)
+                )
+              }
+            />
+          </Routes>
         </Workspace>
         <Footer theme={theme} aria-hidden={show} />
       </div>
