@@ -1,4 +1,11 @@
-import React, { useState, useEffect, ReactNode, forwardRef, Ref } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ReactNode,
+  forwardRef,
+  Ref,
+  useCallback
+} from 'react';
 import { useId } from 'react-id-generator';
 import { Cauldron } from '../../types';
 import classnames from 'classnames';
@@ -153,25 +160,28 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     }, [targetElement, id, show]);
 
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (e.target === targetElement) {
-        return;
-      }
-      if (show) {
-        handleClosePopover();
-      }
-    };
-
-    const attachIsolator = () => {
-      if (popoverRef?.current) {
-        setIsolator(new AriaIsolate(popoverRef?.current));
-      }
-    };
-
     const handleClosePopover = () => {
       isolator?.deactivate();
       if (show) {
         onClose();
+      }
+    };
+
+    const handleClickOutside = useCallback(
+      (e: MouseEvent | TouchEvent) => {
+        if (e.target === targetElement) {
+          return;
+        }
+        if (show) {
+          handleClosePopover();
+        }
+      },
+      [show, targetElement, handleClosePopover]
+    );
+
+    const attachIsolator = () => {
+      if (popoverRef?.current) {
+        setIsolator(new AriaIsolate(popoverRef?.current));
       }
     };
 
