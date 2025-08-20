@@ -114,3 +114,94 @@ test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--combobox[error]');
 });
+
+test('should have screenshot for Combobox[description]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+  });
+  const component = await mount(
+    <FieldWrap>
+      <Combobox label="Combobox" description="This field has a description.">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox label="Hover" description="This field has a description.">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox
+        label="Focus"
+        description="This field has a description."
+        value="Apple"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+
+  await component.getByRole('combobox', { name: 'Focus' }).focus();
+  await component.getByRole('combobox', { name: 'Hover' }).hover();
+
+  await expect(component).toHaveScreenshot('combobox[description]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--combobox[description]');
+});
+
+test('should have screenshot for Combobox[error and description]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.Combobox__listbox--open.Combobox__listbox { position: relative !important; }`
+  });
+  const component = await mount(
+    <FieldWrap>
+      <Combobox
+        label="Combobox"
+        error="This field has an error."
+        description="This field has a description."
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox
+        label="Hover"
+        error="This field has an error."
+        description="This field has a description."
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+      <Combobox
+        label="Focus"
+        error="This field has an error."
+        description="This field has a description."
+        value="Apple"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cucumber</ComboboxOption>
+      </Combobox>
+    </FieldWrap>
+  );
+
+  await component.getByRole('combobox', { name: 'Focus' }).focus();
+  await component.getByRole('combobox', { name: 'Hover' }).hover();
+
+  await expect(component).toHaveScreenshot('combobox[error and description]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--combobox[error and description]'
+  );
+});

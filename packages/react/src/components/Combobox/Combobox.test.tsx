@@ -251,10 +251,10 @@ test('should render combobox with error', () => {
   render(
     <Combobox
       label="label"
-      id="combo"
       aria-describedby="other-id"
       required
       error="You forgot to choose a value."
+      id="combo"
     >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
@@ -263,8 +263,34 @@ test('should render combobox with error', () => {
   );
 
   expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
-  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+  expect(screen.getByRole('combobox')).toHaveAttribute(
+    'aria-describedby',
     `other-id ${errorId}`
+  );
+});
+
+test('should render combobox with both description and error', () => {
+  const errorId = 'combo-error';
+  const descriptionId = 'combo-description';
+  render(
+    <Combobox
+      label="label"
+      aria-describedby="other-id"
+      required
+      description="This is a description"
+      error="You forgot to choose a value."
+      id="combo"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.queryByText('This is a description')).toBeTruthy();
+  expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
+  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+    `other-id ${descriptionId} ${errorId}`
   );
 });
 
@@ -1634,6 +1660,229 @@ test('should have no axe violations with no matching results', async () => {
   fireEvent.change(screen.getByRole('combobox'), {
     target: { value: 'orange' }
   });
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should render combobox with description', () => {
+  render(
+    <Combobox label="label" description="description">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  expect(screen.getByText('description')).toBeInTheDocument();
+  expect(screen.getByRole('combobox')).toHaveAccessibleDescription(
+    'description'
+  );
+});
+
+test('should render combobox with error and description and aria-describedby', () => {
+  const errorId = 'combo-error';
+  const descriptionId = 'combo-description';
+  render(
+    <Combobox
+      label="label"
+      aria-describedby="other-id"
+      required
+      error="You forgot to choose a value."
+      description="This is a description"
+      id="combo"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.queryByText('You forgot to choose a value.')).toBeTruthy();
+  expect(screen.queryByText('This is a description')).toBeTruthy();
+  expect(screen.getByRole('combobox').getAttribute('aria-describedby')).toBe(
+    `other-id ${descriptionId} ${errorId}`
+  );
+});
+
+test('should associate field with description when no aria-describedby is set', () => {
+  render(
+    <Combobox label="label" description="This is a helpful description">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  expect(combobox).toHaveAccessibleDescription('This is a helpful description');
+  expect(screen.getByText('This is a helpful description')).toBeInTheDocument();
+});
+
+test('should associate field with description when aria-describedby is set', () => {
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      aria-describedby="existing-id"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  expect(combobox).toHaveAccessibleDescription('This is a helpful description');
+  expect(screen.getByText('This is a helpful description')).toBeInTheDocument();
+
+  // Check that aria-describedby includes both existing and new IDs
+  const ariaDescribedby = combobox.getAttribute('aria-describedby');
+  expect(ariaDescribedby).toContain('existing-id');
+  expect(ariaDescribedby).toContain('description');
+});
+
+test('should handle description and error together', () => {
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  expect(combobox).toHaveAccessibleDescription(
+    'This is a helpful description This field is required'
+  );
+});
+
+test('should handle description, error, and aria-describedby together', () => {
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+      aria-describedby="existing-id"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  expect(screen.getByText('This is a helpful description')).toBeInTheDocument();
+  expect(screen.getByText('This field is required')).toBeInTheDocument();
+
+  // Check that aria-describedby includes all IDs
+  const ariaDescribedby = combobox.getAttribute('aria-describedby');
+  expect(ariaDescribedby).toContain('existing-id');
+  expect(ariaDescribedby).toContain('description');
+  expect(ariaDescribedby).toContain('error');
+});
+
+test('should have no axe violations with description', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      ref={comboboxRef}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with description and error', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+      ref={comboboxRef}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with description, error, and aria-describedby', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+      aria-describedby="existing-id"
+      ref={comboboxRef}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with description when expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      ref={comboboxRef}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
+
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
+
+test('should have no axe violations with description and error when expanded', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+      ref={comboboxRef}
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  fireEvent.focus(screen.getByRole('combobox'));
 
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
