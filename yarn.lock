@@ -1568,11 +1568,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/cookie@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.6.0.tgz#eac397f28bf1d6ae0ae081363eca2f425bedf0d5"
-  integrity sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==
-
 "@types/debug@^4.0.0":
   version "4.1.8"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.8.tgz#cef723a5d0a90990313faec2d1e22aee5eecb317"
@@ -8510,22 +8505,20 @@ react-refresh@^0.14.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react-router-dom@^7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.4.0.tgz#cb97968f4233c0bec57c9662442a7c070b4c31e9"
-  integrity sha512-VlksBPf3n2bijPvnA7nkTsXxMAKOj+bWp4R9c3i+bnwlSOFAGOkJkKhzy/OsRkWaBMICqcAl1JDzh9ZSOze9CA==
+react-router-dom@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.8.1.tgz#9b5fedaf1886362ab02c9e4c51bc6afcd03151a0"
+  integrity sha512-NkgBCF3sVgCiAWIlSt89GR2PLaksMpoo3HDCorpRfnCEfdtRPLiuTf+CNXvqZMI5SJLZCLpVCvcZrTdtGW64xQ==
   dependencies:
-    react-router "7.4.0"
+    react-router "7.8.1"
 
-react-router@7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.4.0.tgz#9787041425bc4bf52e6d472b6ccfd78a43ace133"
-  integrity sha512-Y2g5ObjkvX3VFeVt+0CIPuYd9PpgqCslG7ASSIdN73LwA1nNWzcMLaoMRJfP3prZFI92svxFwbn7XkLJ+UPQ6A==
+react-router@7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.8.1.tgz#62d62bc1a3fcde79c3ced8f7114f7b4f86916ce2"
+  integrity sha512-5cy/M8DHcG51/KUIka1nfZ2QeylS4PJRs6TT8I4PF5axVsI5JUxp0hC0NZ/AEEj8Vw7xsEoD7L/6FY+zoYaOGA==
   dependencies:
-    "@types/cookie" "^0.6.0"
     cookie "^1.0.1"
     set-cookie-parser "^2.6.0"
-    turbo-stream "2.4.0"
 
 react-side-effect@^2.1.0:
   version "2.1.2"
@@ -10079,11 +10072,6 @@ tsutils@^3.21.0:
   integrity sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==
   dependencies:
     tslib "^1.8.1"
-
-turbo-stream@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/turbo-stream/-/turbo-stream-2.4.0.tgz#1e4fca6725e90fa14ac4adb782f2d3759a5695f0"
-  integrity sha512-FHncC10WpBd2eOmGwpmQsWLDoK4cqsA/UT/GqNoaKOQnT8uzhtCbg3EoUDMvqpOSAI0S26mr0rkjzbOO6S3v1g==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
