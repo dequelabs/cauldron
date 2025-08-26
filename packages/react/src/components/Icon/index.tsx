@@ -10,6 +10,16 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   type: IconType;
 }
 
+/**
+ * Some icons have a mapped type different from their filename;
+ * This is only a temporary measure to consolidate similar icons
+ * until we can address Cauldron's iconography.
+ * see: https://github.com/dequelabs/cauldron/issues/869
+ */
+const MAPPED_TYPES: Record<string, IconType> = {
+  'filter-solid': 'filter'
+};
+
 const Icon = forwardRef<HTMLDivElement, IconProps>(
   ({ label, className, type, ...other }: IconProps, ref) => {
     const isMounted = useRef(true);
@@ -17,7 +27,9 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       '',
       type
     ];
-    const [IconSVG, setIcon] = useState<React.ComponentType<any> | null>(null);
+    const [IconSVG, setIcon] = useState<React.ComponentType<unknown> | null>(
+      null
+    );
 
     useEffect(() => {
       isMounted.current = true;
@@ -27,7 +39,8 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
         return;
       }
 
-      import(`./icons/${name}.svg`)
+      const iconName = MAPPED_TYPES[name] || name;
+      import(`./icons/${iconName}.svg`)
         .then((icon) => {
           isMounted.current && setIcon(() => icon.default);
         })
