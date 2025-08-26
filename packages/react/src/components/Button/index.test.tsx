@@ -40,8 +40,8 @@ test('should render error button', () => {
 
 test('should render danger button', () => {
   render(<Button variant="danger">danger</Button>);
-  const ErrorButton = screen.getByRole('button', { name: 'error' });
-  expect(ErrorButton).toHaveClass('Button--error');
+  const ErrorButton = screen.getByRole('button', { name: 'danger' });
+  expect(ErrorButton).toHaveClass('Button--danger');
 });
 
 test('should render danger secondary button', () => {
