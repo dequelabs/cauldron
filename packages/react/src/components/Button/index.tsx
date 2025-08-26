@@ -8,6 +8,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'secondary'
     | 'tertiary'
     | 'error'
+    | 'danger'
+    | 'danger-secondary'
     | 'link'
     | 'tag'
     | 'badge';
@@ -32,6 +34,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'Button--primary': variant === 'primary',
         'Button--secondary': variant === 'secondary',
         'Button--error': variant === 'error',
+        'Button--danger': variant === 'danger',
+        'Button--danger-secondary': variant === 'danger-secondary',
         'Button--tertiary': variant === 'tertiary',
         Link: variant === 'link',
         Tag: variant === 'tag',

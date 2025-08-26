@@ -36,12 +36,18 @@ Tertiary buttons are an alternate style of button with less visual prominence th
 <Button variant="tertiary">Tertiary</Button>
 ```
 
-### Error
+### Danger
 
-Error buttons are used to indicate potentially dangerous actions.
+Danger buttons are used to indicate dangerous actions.
 
 ```jsx example
-<Button variant="error">Error</Button>
+<Button variant="danger">Danger</Button>
+```
+
+Alternatively, dangerous actions can also be secondary actions.
+
+```jsx example
+<Button variant="danger-secondary">Danger Secondary</Button>
 ```
 
 ### Button with Icon
@@ -93,14 +99,12 @@ When you need a semantic button with the visual appearance of a link.
 </Button>
 ```
 
-
-
 ### Additional Button States
 
 ```jsx example
 <Button disabled>Primary Disabled</Button>
 <Button variant="secondary" thin>Secondary Thin Button</Button>
-<Button variant="error">
+<Button variant="danger">
   <Icon type="caution" />
   Danger With Icon
 </Button>

@@ -386,6 +386,134 @@ test('should have screenshot for Button[thin][variant="error"]', async ({
   await expect(component).toHaveScreenshot('dark--button[thin][variant=error]');
 });
 
+test('should have screenshot for Button[variant="danger"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="danger">Danger</Button>
+      <Button variant="danger">Hover</Button>
+      <Button variant="danger">Active</Button>
+      <Button variant="danger">Focus</Button>
+      <Button variant="danger" disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[variant=danger]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--button[variant=danger]');
+});
+
+test('should have screenshot for Button[thin][variant="danger"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="danger" thin>
+        Danger
+      </Button>
+      <Button variant="danger" thin>
+        Hover
+      </Button>
+      <Button variant="danger" thin>
+        Active
+      </Button>
+      <Button variant="danger" thin>
+        Focus
+      </Button>
+      <Button variant="danger" thin disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[thin][variant=danger]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--button[thin][variant=danger]'
+  );
+});
+
+test('should have screenshot for Button[variant="danger-secondary"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="danger-secondary">Danger</Button>
+      <Button variant="danger-secondary">Hover</Button>
+      <Button variant="danger-secondary">Active</Button>
+      <Button variant="danger-secondary">Focus</Button>
+      <Button variant="danger-secondary" disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot('button[variant=danger-secondary]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--button[variant=danger-secondary]'
+  );
+});
+
+test('should have screenshot for Button[thin][variant="danger-secondary"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <div>
+      <Button variant="danger-secondary" thin>
+        Danger
+      </Button>
+      <Button variant="danger-secondary" thin>
+        Hover
+      </Button>
+      <Button variant="danger-secondary" thin>
+        Active
+      </Button>
+      <Button variant="danger-secondary" thin>
+        Focus
+      </Button>
+      <Button variant="danger-secondary" thin disabled>
+        {' '}
+        Disabled
+      </Button>
+    </div>
+  );
+
+  await component.getByText('Hover').hover();
+  setActive(component.getByText('Active'));
+  await component.getByText('Focus').focus();
+
+  await expect(component).toHaveScreenshot(
+    'button[thin][variant=danger-secondary]'
+  );
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--button[thin][variant=danger-secondary]'
+  );
+});
+
 test('should have screenshot for Button[variant="link"]', async ({
   mount,
   page
