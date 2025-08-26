@@ -92,9 +92,7 @@ button.Link {
   .Button--tertiary,
   .Button--error,
   .Button--danger,
-  .Button--danger-secondary,
-  .Button--tag,
-  .Button--badge
+  .Button--danger-secondary
 ):focus {
   outline: none;
 }
