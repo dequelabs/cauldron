@@ -37,6 +37,9 @@ interface ActionListItemProps
 
   /** A callback function that is called when an action item is selected. */
   onAction?: (event: onActionEvent) => void;
+
+  /** Alternative variant for action items */
+  variant?: 'default' | 'danger';
 }
 
 const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
@@ -51,6 +54,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
       trailingIcon,
       onAction,
       children,
+      variant,
       ...props
     },
     ref
@@ -146,7 +150,9 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
         ref={actionListItemRef}
         id={id}
         role={listItemRole}
-        className={classnames('ActionListItem', className)}
+        className={classnames('ActionListItem', className, {
+          'ActionListItem--danger': variant === 'danger'
+        })}
         activeClass="ActionListItem--active"
         aria-selected={undefined}
         aria-checked={listItemRole !== 'option' ? isSelected : undefined}
