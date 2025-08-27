@@ -299,6 +299,8 @@ button.Link {
   --button-background-color-secondary-active: var(--accent-light);
   --button-background-color-error-active: #fea7a6;
 
+  --button-background-color-danger: var(--accent-danger);
+
   --button-background-color-badge-active: var(--badge-background-color);
 
   --button-focus-ring-color: var(--focus-dark);
@@ -318,6 +320,11 @@ button.Link {
 
 .cauldron--theme-dark .Button--tertiary {
   color: var(--accent-light);
+}
+
+.cauldron--theme-dark .Button--danger {
+  color: #fff;
+  --button-outline-color-secondary: var(--button-background-color-danger);
 }
 
 .cauldron--theme-dark .Button--danger-secondary {
