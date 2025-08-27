@@ -323,7 +323,7 @@ button.Link {
 }
 
 .cauldron--theme-dark .Button--danger {
-  color: #fff;
+  color: var(--button-background-color-secondary);
   --button-outline-color-secondary: var(--button-background-color-danger);
 }
 
