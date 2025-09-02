@@ -72,11 +72,12 @@
 .ActionListItem--danger {
   --action-list-text-color: var(--accent-error);
   --action-list-item-icon-color: var(--accent-error);
+  --action-list-item-description-color: var(--action-list-text-color);
 }
 
 :where(.cauldron--theme-dark) .ActionListItem--danger {
-  --action-list-text-color: var(--accent-warning-light);
-  --action-list-item-icon-color: var(--accent-warning-light);
+  --action-list-text-color: #fff;
+  --action-list-item-icon-color: #fff;
 }
 
 .ActionListItem {

@@ -18,3 +18,8 @@
   box-shadow: var(--drop-shadow-overlay);
   overflow-y: auto;
 }
+
+:where(.cauldron--theme-dark) .ActionMenu .ActionListItem--danger {
+  --action-list-text-color: var(--accent-warning-light);
+  --action-list-item-icon-color: var(--accent-warning-light);
+}

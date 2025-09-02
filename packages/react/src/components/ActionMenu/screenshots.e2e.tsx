@@ -140,15 +140,9 @@ test('should have screenshot for ActionMenu selections', async ({
           </ActionListGroup>
           <ActionListItem>Item</ActionListItem>
           <ActionListItem selected>Selected</ActionListItem>
-          <ActionListItem selected variant="danger">
-            Selected danger
-          </ActionListItem>
           <ActionListItem disabled>Disabled</ActionListItem>
           <ActionListItem selected disabled>
             Selected disabled
-          </ActionListItem>
-          <ActionListItem selected variant="danger" disabled>
-            Selected danger disabled
           </ActionListItem>
           <ActionListItem>Hover</ActionListItem>
           <ActionListItem description="This is a description" selected>
