@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.22.0](https://github.com/dequelabs/cauldron/compare/v6.21.0...v6.22.0) (2025-09-02)
+
+
+### Features
+
+* **react,styles:** add danger and danger-secondary Button variants ([#2074](https://github.com/dequelabs/cauldron/issues/2074)) ([d94b37f](https://github.com/dequelabs/cauldron/commit/d94b37f63152799ce3d0594775212620a45d5f95))
+
 ## [6.21.0](https://github.com/dequelabs/cauldron/compare/v6.20.2...v6.21.0) (2025-08-19)
 
 
