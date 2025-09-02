@@ -221,6 +221,12 @@ function MultipleSelectionExample() {
       description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
     },
     {
+      name: 'variant',
+      type: ['default', 'danger'],
+      defaultValue: 'default',
+      description: 'Variant to indicate dangerous action list items.'
+    },
+    {
       name: 'onAction',
       type: '(event: React.MouseEvent | React.KeyboardEvent) => void',
       description: 'Callback when this specific action item is selected.'
