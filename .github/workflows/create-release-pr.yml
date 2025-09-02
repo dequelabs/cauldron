@@ -2,10 +2,6 @@ name: Create Release PR
 
 on:
   workflow_dispatch:
-  # TODO: remove, just for testing
-  push:
-    branches:
-      - fix-actions-machine-user
 
 jobs:
   create_release:
