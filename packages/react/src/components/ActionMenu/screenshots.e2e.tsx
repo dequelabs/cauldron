@@ -18,6 +18,8 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(
@@ -97,6 +99,8 @@ test('should have screenshot for ActionMenu selections', async ({
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(
@@ -179,6 +183,8 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(
