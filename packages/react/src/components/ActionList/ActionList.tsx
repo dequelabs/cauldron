@@ -47,21 +47,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
-    const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLUListElement | HTMLAnchorElement>) => {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        // Since focus is managed in the action list using `aria-activedescendant`
-        // we want to simulate a keypress on the current active list item
-        if (event.key === 'Enter' || event.key === ' ') {
-          activeElement.current?.click();
-        }
-      },
-      []
-    );
-
     return (
       // Note: we should be able to use listbox without passing a prop
       // value for "multiselect"
@@ -81,7 +66,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         }
         className={classnames('ActionList', className)}
         {...props}
-        onKeyDown={handleKeyDown}
         onActiveChange={handleActiveChange}
         navigation="bound"
       >
