@@ -617,10 +617,10 @@ test('should not prevent default event with non-navigational keypress', () => {
   );
 
   fireEvent.focus(screen.getByRole('listbox'));
-  (fireEvent.keyDown(screen.getByRole('listbox')), { key: 'Tab' });
+  fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Tab' });
   expect(preventDefault).not.toHaveBeenCalled();
 
-  (fireEvent.keyDown(screen.getByRole('listbox')), { key: 'Escape' });
+  fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Escape' });
   expect(preventDefault).not.toHaveBeenCalled();
 });
 
