@@ -36,6 +36,7 @@ A simple action list with clickable items:
   <ActionListItem>Red</ActionListItem>
   <ActionListItem>Green</ActionListItem>
   <ActionListItem>Blue</ActionListItem>
+  <ActionListItem variant="danger">Yellow</ActionListItem>
 </ActionList>
 ```
 
@@ -48,6 +49,7 @@ Items can also individually be disabled to prevent that action from occurring:
   <ActionListItem disabled>Red</ActionListItem>
   <ActionListItem>Green</ActionListItem>
   <ActionListItem>Blue</ActionListItem>
+  <ActionListItem variant="danger">Yellow</ActionListItem>
 </ActionList>
 ```
 
@@ -217,6 +219,12 @@ function MultipleSelectionExample() {
       type: 'boolean',
       defaultValue: 'false',
       description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
+    },
+    {
+      name: 'variant',
+      type: ['default', 'danger'],
+      defaultValue: 'default',
+      description: 'Variant to indicate dangerous action list items.'
     },
     {
       name: 'onAction',

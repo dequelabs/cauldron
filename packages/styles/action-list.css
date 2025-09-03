@@ -69,12 +69,24 @@
   padding: var(--space-smallest);
 }
 
+.ActionListItem--danger {
+  --action-list-text-color: var(--accent-error);
+  --action-list-item-icon-color: var(--accent-error);
+  --action-list-item-description-color: var(--action-list-text-color);
+}
+
+:where(.cauldron--theme-dark) .ActionListItem--danger {
+  --action-list-text-color: #fff;
+  --action-list-item-icon-color: #fff;
+}
+
 .ActionListItem {
   --icon-size: 1rem;
   --icon-spacing: 1.2rem;
   display: grid;
   align-items: center;
   gap: var(--space-half);
+  color: var(--action-list-text-color);
   margin: 0 var(--space-smallest);
   border-radius: 4px;
   cursor: pointer;
