@@ -14,7 +14,7 @@
   border-radius: 8px;
   width: var(--action-menu-width);
   min-width: var(--action-menu-min-width, 10rem);
-  max-height: var(--action-menu-height);
+  max-height: var(--action-menu-max-height, 80vh);
   box-shadow: var(--drop-shadow-overlay);
   overflow-y: auto;
 }
