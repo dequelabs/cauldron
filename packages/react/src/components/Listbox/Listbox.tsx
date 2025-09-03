@@ -13,7 +13,6 @@ import type {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 import useSharedRef from '../../utils/useSharedRef';
-import { isDisabled } from '@testing-library/user-event/dist/types/utils';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
