@@ -14,6 +14,7 @@ import {
   ActionListProvider
 } from './ActionListContext';
 import { useActionListContext } from './ActionListContext';
+import useMnemonics from '../../utils/useMnemonics';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -62,13 +63,29 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       []
     );
 
+    const containerRef = useMnemonics<HTMLUListElement>({
+      onMatch: (element) => {
+        console.log(element);
+      },
+      matchingElementsSelector:
+        props.role === 'menu'
+          ? '[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]'
+          : '[role=option]'
+    }) as MutableRefObject<HTMLUListElement>;
+
     return (
       // Note: we should be able to use listbox without passing a prop
       // value for "multiselect"
       // see: https://github.com/dequelabs/cauldron/issues/1890
       // @ts-expect-error this should be allowed
       <Listbox
-        ref={ref}
+        ref={(element: HTMLUListElement) => {
+          if (ref) {
+            // @ts-expect-error fix this!!!
+            ref.current = element;
+          }
+          containerRef.current = element;
+        }}
         /* Listbox comes with an explicit role of "listbox", but we want to either
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
