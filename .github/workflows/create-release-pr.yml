@@ -1,6 +1,7 @@
 name: Create Release PR
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
 
 jobs:
   create_release:
@@ -18,4 +19,4 @@ jobs:
         run: yarn run release
         env:
           COMMIT_BODY_HEADER: ":robot: This PR is created automatically ([see releasing](../blob/develop/RELEASING.md)) \n\n"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}

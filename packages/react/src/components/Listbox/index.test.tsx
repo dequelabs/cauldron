@@ -564,6 +564,46 @@ test('should handle listbox selection with "space" keypress', () => {
   );
 });
 
+test('should handle listboxoption selection with "enter" keypress', () => {
+  const handleClick = jest.fn();
+
+  render(
+    <Listbox>
+      <ListboxOption onClick={handleClick}>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = screen.getByRole('listbox');
+  fireEvent.focus(listbox);
+
+  expect(handleClick).toHaveBeenCalledTimes(0);
+  fireEvent.keyDown(listbox, { key: 'Enter' });
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+
+test('should handle listboxoption selection with "space" keypress', async () => {
+  const handleClick = jest.fn();
+
+  render(
+    <Listbox>
+      <ListboxOption onClick={handleClick}>Apple</ListboxOption>
+      <ListboxOption disabled>Banana</ListboxOption>
+      <ListboxOption>Cantaloupe</ListboxOption>
+      <ListboxOption>Dragon Fruit</ListboxOption>
+    </Listbox>
+  );
+
+  const listbox = screen.getByRole('listbox');
+  fireEvent.focus(listbox);
+
+  expect(handleClick).toHaveBeenCalledTimes(0);
+  fireEvent.keyDown(listbox, { key: ' ' });
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+
 test('should not prevent default event with non-navigational keypress', () => {
   const preventDefault = jest.fn();
 
@@ -577,10 +617,10 @@ test('should not prevent default event with non-navigational keypress', () => {
   );
 
   fireEvent.focus(screen.getByRole('listbox'));
-  fireEvent.keyDown(screen.getByRole('listbox')), { key: 'Tab' };
+  fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Tab' });
   expect(preventDefault).not.toHaveBeenCalled();
 
-  fireEvent.keyDown(screen.getByRole('listbox')), { key: 'Escape' };
+  fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Escape' });
   expect(preventDefault).not.toHaveBeenCalled();
 });
 
