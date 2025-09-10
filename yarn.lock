@@ -1275,10 +1275,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@mdx-js/loader@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-3.1.0.tgz#715fdab11d0c9567e45049c16a7d9c83cec88214"
-  integrity sha512-xU/lwKdOyfXtQGqn3VnJjlDrmKXEvMi1mgYxVmukEUtVycIz1nh7oQ40bKTd4cA7rLStqu0740pnhGYxGoqsCg==
+"@mdx-js/loader@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-3.1.1.tgz#77bdab9c71d965b33cfbdaa80c69911f06c1524a"
+  integrity sha512-0TTacJyZ9mDmY+VefuthVshaNIyCGZHJG2fMnGaDttCt8HmjUF7SizlHJpaCDoGnN635nK1wpzfpx/Xx5S4WnQ==
   dependencies:
     "@mdx-js/mdx" "^3.0.0"
     source-map "^0.7.0"
@@ -1363,10 +1363,10 @@
   dependencies:
     playwright "1.50.1"
 
-"@puppeteer/browsers@2.10.7":
-  version "2.10.7"
-  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.7.tgz#a28f622b2da0ee131c9a576d25d8c4e31fc24135"
-  integrity sha512-wHWLkQWBjHtajZeqCB74nsa/X70KheyOhySYBRmVQDJiNj0zjZR/naPCvdWjMhcG1LmjaMV/9WtTo5mpe8qWLw==
+"@puppeteer/browsers@2.10.8":
+  version "2.10.8"
+  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.8.tgz#80e983ca0365478b39c4c0f559785345393f8fa2"
+  integrity sha512-f02QYEnBDE0p8cteNoPYHHjbDuwyfbe4cCIVlNi8/MRicIxFW4w4CfgU0LNgWEID6s06P+hRJ1qjpBLMhPRCiQ==
   dependencies:
     debug "^4.4.1"
     extract-zip "^2.0.1"
@@ -1741,10 +1741,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^22.17.2":
-  version "22.17.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.17.2.tgz#47a93d6f4b79327da63af727e7c54e8cab8c4d33"
-  integrity sha512-gL6z5N9Jm9mhY+U2KXZpteb+09zyffliRkZyZOHODGATyC5B1Jt/7TzuuiLkFsSUMLbS1OLmlj/E+/3KF4Q/4w==
+"@types/node@*", "@types/node@^22.18.0":
+  version "22.18.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.18.0.tgz#9e4709be4f104e3568f7dd1c71e2949bf147a47b"
+  integrity sha512-m5ObIqwsUp6BZzyiy4RdZpzWGub9bqLJMvZDD0QMXhxjqMHMENlj+SqF5QxoUwaQNFe+8kz8XM8ZQhqkQPTgMQ==
   dependencies:
     undici-types "~6.21.0"
 
@@ -2887,10 +2887,10 @@ chalk@^2.0.1, chalk@^2.4.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^5.5.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.6.0.tgz#a1a8d294ea3526dbb77660f12649a08490e33ab8"
-  integrity sha512-46QrSQFyVSEyYAgQ22hQ+zDa60YHA4fBstHmtSApj1Y5vKtG27fWowW03jCk5KcbXEWPZUIR894aARCA/G1kfQ==
+chalk@^5.6.0:
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.6.2.tgz#b1238b6e23ea337af71c7f8a295db5af0c158aea"
+  integrity sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==
 
 character-entities-html4@^2.0.0:
   version "2.1.0"
@@ -6369,26 +6369,26 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lint-staged@^16.1.5:
-  version "16.1.5"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-16.1.5.tgz#e102066b2c98157bad03afffb491d2329553e86b"
-  integrity sha512-uAeQQwByI6dfV7wpt/gVqg+jAPaSp8WwOA8kKC/dv1qw14oGpnpAisY65ibGHUGDUv0rYaZ8CAJZ/1U8hUvC2A==
+lint-staged@^16.1.6:
+  version "16.1.6"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-16.1.6.tgz#b0830df339a71f4207979a47c7be8ab0f38543ad"
+  integrity sha512-U4kuulU3CKIytlkLlaHcGgKscNfJPNTiDF2avIUGFCv7K95/DCYQ7Ra62ydeRWmgQGg9zJYw2dzdbztwJlqrow==
   dependencies:
-    chalk "^5.5.0"
+    chalk "^5.6.0"
     commander "^14.0.0"
     debug "^4.4.1"
     lilconfig "^3.1.3"
-    listr2 "^9.0.1"
+    listr2 "^9.0.3"
     micromatch "^4.0.8"
     nano-spawn "^1.0.2"
     pidtree "^0.6.0"
     string-argv "^0.3.2"
     yaml "^2.8.1"
 
-listr2@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-9.0.1.tgz#3cad12d81d998f8024621d9b35c969dba5da4103"
-  integrity sha512-SL0JY3DaxylDuo/MecFeiC+7pedM0zia33zl0vcjgwcq1q1FWWF1To9EIauPbl8GbMCU0R2e0uJ8bZunhYKD2g==
+listr2@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-9.0.3.tgz#5181284019e1d577dc2d705ca6d3a148cf15adf3"
+  integrity sha512-0aeh5HHHgmq1KRdMMDHfhMWQmIT/m7nRDTlxlFqni2Sp0had9baqsjJRvDGdlvgd6NmPE0nPloOipiQJGFtTHQ==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
@@ -8381,28 +8381,28 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-puppeteer-core@24.17.0:
-  version "24.17.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.17.0.tgz#66eaa3532d06c22fbbdc36e09f416cb69b8c8637"
-  integrity sha512-RYOBKFiF+3RdwIZTEacqNpD567gaFcBAOKTT7742FdB1icXudrPI7BlZbYTYWK2wgGQUXt9Zi1Yn+D5PmCs4CA==
+puppeteer-core@24.18.0:
+  version "24.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.18.0.tgz#444388d619de422f1d325b313942f46fa2925d96"
+  integrity sha512-As0BvfXxek2MbV0m7iqBmQKFnfSrzSvTM4zGipjd4cL+9f2Ccgut6RvHlc8+qBieKHqCMFy9BSI4QyveoYXTug==
   dependencies:
-    "@puppeteer/browsers" "2.10.7"
+    "@puppeteer/browsers" "2.10.8"
     chromium-bidi "8.0.0"
     debug "^4.4.1"
     devtools-protocol "0.0.1475386"
     typed-query-selector "^2.12.0"
     ws "^8.18.3"
 
-puppeteer@^24.17.0:
-  version "24.17.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.17.0.tgz#2fa286ed7b755846ef6064c1ee42b5491abcd21b"
-  integrity sha512-CGrmJ8WgilK3nyE73k+pbxHggETPpEvL6AQ9H5JSK1RgZRGMQVJ+iO3MocGm9yBQXQJ9U5xijyLvkYXFeb0/+g==
+puppeteer@^24.18.0:
+  version "24.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.18.0.tgz#7bb2668b219fed4f23aa98ac1650766f4306b743"
+  integrity sha512-Ke8oL/87GhzKIM2Ag6Yj49t5xbGc4rspGIuSuFLFCQBtYzWqCSanvqoCu08WkI78rbqcwnHjxiTH6oDlYFrjrw==
   dependencies:
-    "@puppeteer/browsers" "2.10.7"
+    "@puppeteer/browsers" "2.10.8"
     chromium-bidi "8.0.0"
     cosmiconfig "^9.0.0"
     devtools-protocol "0.0.1475386"
-    puppeteer-core "24.17.0"
+    puppeteer-core "24.18.0"
     typed-query-selector "^2.12.0"
 
 q@^1.5.1:

@@ -256,12 +256,17 @@ const Listbox = forwardRef<
             setActiveOption(lastOption);
             break;
           case enter:
-          case space:
-            activeOption && handleSelect(activeOption);
+          case space: {
+            if (activeOption && !isDisabledOption(activeOption)) {
+              // Since focus is managed in the listbox using `aria-activedescendant`
+              // we want to simulate a keypress on the current active list item
+              activeOption.element.click();
+            }
             break;
+          }
         }
       },
-      [options, activeOption, navigation, handleSelect]
+      [options, activeOption, navigation]
     );
 
     const handleFocus = useCallback(

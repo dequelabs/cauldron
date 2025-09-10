@@ -103,7 +103,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
-        onKeyDown={handleKeyDown}
         onActiveChange={handleActiveChange}
         navigation="bound"
       >
