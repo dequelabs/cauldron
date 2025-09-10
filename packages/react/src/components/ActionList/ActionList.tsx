@@ -16,6 +16,7 @@ import {
 } from './ActionListContext';
 import { useActionListContext } from './ActionListContext';
 import useMnemonics from '../../utils/useMnemonics';
+import setRef from '../../utils/setRef';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -86,7 +87,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
-            (ref as MutableRefObject<HTMLUListElement>).current = element;
+            setRef(ref, element);
           }
           containerRef.current = element;
         }}
