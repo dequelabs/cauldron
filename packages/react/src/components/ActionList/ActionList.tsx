@@ -52,21 +52,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
-    const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLUListElement | HTMLAnchorElement>) => {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        // Since focus is managed in the action list using `aria-activedescendant`
-        // we want to simulate a keypress on the current active list item
-        if (event.key === 'Enter' || event.key === ' ') {
-          activeElement.current?.click();
-        }
-      },
-      []
-    );
-
     const containerRef = useMnemonics<HTMLUListElement>({
       onMatch: (element) => {
         setActiveOption({
