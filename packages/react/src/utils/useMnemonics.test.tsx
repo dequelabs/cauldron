@@ -166,7 +166,7 @@ describe('useMnemonics', () => {
     expect(onMatch).toHaveBeenLastCalledWith(screen.getByText('Blueberry'));
   });
 
-  test('should be match when enabled is false', async () => {
+  test('should not match when enabled is false', async () => {
     const user = userEvent.setup();
     const onMatch = jest.fn();
     render(<TestComponent onMatch={onMatch} enabled={false} />);
