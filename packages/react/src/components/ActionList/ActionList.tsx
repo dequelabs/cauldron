@@ -2,10 +2,11 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useCallback,
-  useRef
+  useRef,
+  useState
 } from 'react';
 import classnames from 'classnames';
-import type { ListboxOption } from '../Listbox/ListboxContext';
+import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
 import {
   type ActionListSelectionType,
@@ -32,11 +33,13 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
+    const [activeOption, setActiveOption] = useState<ListboxOption>();
 
     const handleActiveChange = useCallback((value: ListboxOption) => {
       activeElement.current = value?.element as
         | HTMLLIElement
         | HTMLAnchorElement;
+      setActiveOption(value);
     }, []);
 
     const handleAction = useCallback(
@@ -65,7 +68,9 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
 
     const containerRef = useMnemonics<HTMLUListElement>({
       onMatch: (element) => {
-        console.log(element);
+        setActiveOption({
+          element
+        });
       },
       matchingElementsSelector:
         props.role === 'menu'
@@ -97,6 +102,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
           actionListContext.role === 'listbox' ? undefined : null
         }
         className={classnames('ActionList', className)}
+        activeOption={activeOption}
         {...props}
         onKeyDown={handleKeyDown}
         onActiveChange={handleActiveChange}

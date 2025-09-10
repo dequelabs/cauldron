@@ -32,7 +32,9 @@ type useMnemonicsResults<T extends HTMLElement> = RefObject<T>;
  * Get an element's accessible name by its aria-label or text content
  */
 function getAccessibleLabel(element: Element): string {
-  return element.getAttribute('aria-label') || element.textContent.trim() || '';
+  return (
+    element.getAttribute('aria-label') || element.textContent?.trim() || ''
+  );
 }
 
 /**
