@@ -3,6 +3,7 @@
   --tab-shadow-color: var(--accent-primary);
   --tab-inactive-background-color: #fff;
   --tab-inactive-text-color: var(--gray-60);
+  --tab-panel-background-color: #fff;
   --tab-active-background-color: #fff;
   --tab-hover-background-color: var(--gray-20);
   --tab-panel-color: var(--gray-80);
@@ -15,6 +16,7 @@
 .cauldron--theme-dark {
   --tabs-border-color: var(--accent-dark);
   --tab-shadow-color: var(--accent-info);
+  --tab-panel-background-color: var(--accent-medium);
   --tab-inactive-background-color: var(--accent-medium);
   --tab-inactive-text-color: var(--accent-light);
   --tab-active-background-color: var(--accent-medium);
@@ -111,7 +113,7 @@
 .TabPanel {
   overflow-wrap: break-word;
   color: var(--tab-panel-color);
-  background-color: var(--tab-active-background-color);
+  background-color: var(--tab-panel-background-color);
 }
 
 .TabPanel > * {
