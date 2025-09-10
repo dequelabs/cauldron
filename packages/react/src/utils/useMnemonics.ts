@@ -121,7 +121,7 @@ export default function useMnemonics<T extends HTMLElement>({
     container.addEventListener('keydown', keyboardHandler);
 
     return () => container.removeEventListener('keydown', keyboardHandler);
-  }, [enabled, containerRef]);
+  }, [enabled, containerRef, matchingElementsSelector, onMatch]);
 
   return containerRef;
 }
