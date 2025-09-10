@@ -1363,10 +1363,10 @@
   dependencies:
     playwright "1.50.1"
 
-"@puppeteer/browsers@2.10.7":
-  version "2.10.7"
-  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.7.tgz#a28f622b2da0ee131c9a576d25d8c4e31fc24135"
-  integrity sha512-wHWLkQWBjHtajZeqCB74nsa/X70KheyOhySYBRmVQDJiNj0zjZR/naPCvdWjMhcG1LmjaMV/9WtTo5mpe8qWLw==
+"@puppeteer/browsers@2.10.8":
+  version "2.10.8"
+  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.8.tgz#80e983ca0365478b39c4c0f559785345393f8fa2"
+  integrity sha512-f02QYEnBDE0p8cteNoPYHHjbDuwyfbe4cCIVlNi8/MRicIxFW4w4CfgU0LNgWEID6s06P+hRJ1qjpBLMhPRCiQ==
   dependencies:
     debug "^4.4.1"
     extract-zip "^2.0.1"
@@ -8381,28 +8381,28 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-puppeteer-core@24.17.0:
-  version "24.17.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.17.0.tgz#66eaa3532d06c22fbbdc36e09f416cb69b8c8637"
-  integrity sha512-RYOBKFiF+3RdwIZTEacqNpD567gaFcBAOKTT7742FdB1icXudrPI7BlZbYTYWK2wgGQUXt9Zi1Yn+D5PmCs4CA==
+puppeteer-core@24.18.0:
+  version "24.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.18.0.tgz#444388d619de422f1d325b313942f46fa2925d96"
+  integrity sha512-As0BvfXxek2MbV0m7iqBmQKFnfSrzSvTM4zGipjd4cL+9f2Ccgut6RvHlc8+qBieKHqCMFy9BSI4QyveoYXTug==
   dependencies:
-    "@puppeteer/browsers" "2.10.7"
+    "@puppeteer/browsers" "2.10.8"
     chromium-bidi "8.0.0"
     debug "^4.4.1"
     devtools-protocol "0.0.1475386"
     typed-query-selector "^2.12.0"
     ws "^8.18.3"
 
-puppeteer@^24.17.0:
-  version "24.17.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.17.0.tgz#2fa286ed7b755846ef6064c1ee42b5491abcd21b"
-  integrity sha512-CGrmJ8WgilK3nyE73k+pbxHggETPpEvL6AQ9H5JSK1RgZRGMQVJ+iO3MocGm9yBQXQJ9U5xijyLvkYXFeb0/+g==
+puppeteer@^24.18.0:
+  version "24.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.18.0.tgz#7bb2668b219fed4f23aa98ac1650766f4306b743"
+  integrity sha512-Ke8oL/87GhzKIM2Ag6Yj49t5xbGc4rspGIuSuFLFCQBtYzWqCSanvqoCu08WkI78rbqcwnHjxiTH6oDlYFrjrw==
   dependencies:
-    "@puppeteer/browsers" "2.10.7"
+    "@puppeteer/browsers" "2.10.8"
     chromium-bidi "8.0.0"
     cosmiconfig "^9.0.0"
     devtools-protocol "0.0.1475386"
-    puppeteer-core "24.17.0"
+    puppeteer-core "24.18.0"
     typed-query-selector "^2.12.0"
 
 q@^1.5.1:
