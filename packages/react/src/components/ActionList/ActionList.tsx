@@ -86,8 +86,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
-            // @ts-expect-error fix this!!!
-            ref.current = element;
+            (ref as MutableRefObject<HTMLUListElement>).current = element;
           }
           containerRef.current = element;
         }}
