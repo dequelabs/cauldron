@@ -40,13 +40,13 @@ Tertiary buttons are an alternate style of button with less visual prominence th
 ```
 
 
-### Error
+### Danger
 
-Error buttons are used to indicate potentially dangerous actions.
+Danger buttons are used to indicate potentially dangerous actions.
 
 ```jsx example
-<IconButton variant="error" icon="pencil" label="Edit" />
-<IconButton variant="error" icon="pencil" label="Edit" disabled />
+<IconButton variant="danger" icon="pencil" label="Edit" />
+<IconButton variant="danger" icon="pencil" label="Edit" disabled />
 ```
 
 ### Tooltip Customization
@@ -79,8 +79,8 @@ If there are multiple icon buttons with the same label, the visible label text c
 ### Large
 
 ```jsx example
-<IconButton variant="error" icon="pencil" label="Edit" large />
-<IconButton variant="error" icon="pencil" label="Edit" disabled large />
+<IconButton variant="danger" icon="pencil" label="Edit" large />
+<IconButton variant="danger" icon="pencil" label="Edit" disabled large />
 <IconButton variant="secondary" icon="pencil" label="Edit" large />
 <IconButton variant="secondary" icon="pencil" label="Edit" disabled large />
 <IconButton variant="primary" icon="pencil" label="Edit" large />
@@ -108,7 +108,7 @@ If there are multiple icon buttons with the same label, the visible label text c
     },
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'tertiary', 'error'],
+      type: ['primary', 'secondary', 'tertiary', 'error', 'danger'],
       defaultValue: 'secondary',
       description: 'Visual style of the IconButton.'
     },
