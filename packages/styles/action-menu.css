@@ -18,6 +18,7 @@
   max-width: var(--action-menu-max-width, 31rem);
   box-shadow: var(--drop-shadow-overlay);
   overflow-y: auto;
+  z-index: var(--z-index-listbox);
 }
 
 :where(.cauldron--theme-dark) .ActionMenu .ActionListItem--danger {
