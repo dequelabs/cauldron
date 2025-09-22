@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.22.1](https://github.com/dequelabs/cauldron/compare/v6.22.0...v6.22.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* **styles:** limit the default max-width of action menus to 31rem ([#2102](https://github.com/dequelabs/cauldron/issues/2102)) ([bbde2c7](https://github.com/dequelabs/cauldron/commit/bbde2c7eb7da0a51f48fb7f1a730bf5f71396549))
+* **style:** update tab panel background colors for light and dark themes ([#2101](https://github.com/dequelabs/cauldron/issues/2101)) ([a2c25cd](https://github.com/dequelabs/cauldron/commit/a2c25cdbd183f18a3086d7a8b2967c88956d2972))
+
 ## [6.22.0](https://github.com/dequelabs/cauldron/compare/v6.21.0...v6.22.0) (2025-09-03)
 
 

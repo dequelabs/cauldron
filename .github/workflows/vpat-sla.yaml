@@ -9,7 +9,7 @@ jobs:
   vpat-blocker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           only-labels: 'vpat,vpat:blocker'
           stale-issue-message: 'This VPAT issue has been open for 4 weeks without being resolved.'
@@ -23,7 +23,7 @@ jobs:
   vpat-critical:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           only-labels: 'vpat,vpat:critical'
           stale-issue-message: 'This VPAT issue has been open for 10 weeks without being resolved.'
@@ -37,7 +37,7 @@ jobs:
   vpat-serious:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           only-labels: 'vpat,vpat:serious'
           stale-issue-message: 'This VPAT issue has been open for 20 weeks without being resolved.'
@@ -51,7 +51,7 @@ jobs:
   vpat-moderate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           only-labels: 'vpat,vpat:moderate'
           stale-issue-message: 'This VPAT issue has been open for 30 weeks without being resolved.'
