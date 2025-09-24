@@ -135,6 +135,7 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 - Does the component have appropriate documentation?
 - Does the component support customizing text labels or content for translations?
 - Does the component need usability testing?
+- Does the component have documented dos and don'ts?
 
 ### Server-side Rendering Compatibility
 
