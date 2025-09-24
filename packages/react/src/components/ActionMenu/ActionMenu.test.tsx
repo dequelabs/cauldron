@@ -308,6 +308,66 @@ test('should set last item active on arrow up key press', async () => {
   });
 });
 
+test('should set matching active item on mnemonic key press', async () => {
+  const user = userEvent.setup();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList>
+        <ActionListItem>Apple</ActionListItem>
+        <ActionListItem>Banana</ActionListItem>
+        <ActionListItem>Peach</ActionListItem>
+        <ActionListItem disabled>Pear</ActionListItem>
+        <ActionListItem>Apricot</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  const triggerButton = screen.getByRole('button', { name: 'Trigger' });
+
+  triggerButton.focus();
+  await user.keyboard('{ArrowDown}');
+
+  // Apple Active
+  await user.keyboard('a');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Apricot Active
+  await user.keyboard('a');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[4]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Apple Active
+  await user.keyboard('a');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Peach Active
+  await user.keyboard('p');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[2]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Pear Active
+  await user.keyboard('p');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[3]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+});
+
 // Regression test for cauldron#1993
 test('should set first item active on open in TopBar+ActionMenu pattern', async () => {
   const user = userEvent.setup();
