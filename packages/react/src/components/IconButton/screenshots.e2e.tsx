@@ -115,6 +115,33 @@ test('should have screenshot for IconButton[variant="error"]', async ({
   await expect(component).toHaveScreenshot('dark--iconbutton[variant=error]');
 });
 
+test('should have screenshot for IconButton[variant="danger"]', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // we don't want to capture the visibility of tooltips here, just the icon button itself
+    content: `.Tooltip { visibility: hidden !important }`
+  });
+  const component = await mount(
+    <div>
+      <IconButton icon="pencil" label="IconButton" variant="danger" />
+      <IconButton icon="pencil" label="Hover" variant="danger" />
+      <IconButton icon="pencil" label="Focus" variant="danger" />
+      <IconButton icon="pencil" label="Active" variant="danger" />
+      <IconButton icon="pencil" label="Disabled" variant="danger" disabled />
+    </div>
+  );
+
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(await component.getByLabel('Active'));
+  await component.getByRole('button', { name: 'Focus' }).focus();
+
+  await expect(component).toHaveScreenshot('iconbutton[variant=danger]');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--iconbutton[variant=danger]');
+});
+
 test('should have screenshot for IconButton[variant="secondary"][large]', async ({
   mount,
   page
