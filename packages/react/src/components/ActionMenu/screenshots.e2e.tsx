@@ -18,6 +18,8 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(
@@ -39,6 +41,10 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
           <ActionListItem>Item</ActionListItem>
           <ActionListItem disabled>Disabled</ActionListItem>
           <ActionListItem>Hover</ActionListItem>
+          <ActionListItem variant="danger">Danger</ActionListItem>
+          <ActionListItem variant="danger" disabled>
+            Disabled danger
+          </ActionListItem>
           <ActionListItem description="This is a description">
             Description
           </ActionListItem>
@@ -53,6 +59,25 @@ test('should have screenshot for ActionMenu', async ({ mount, page }) => {
           </ActionListItem>
           <ActionListItem leadingIcon="copy" disabled>
             Disabled icon
+          </ActionListItem>
+          <ActionListItem variant="danger" leadingIcon="copy">
+            Danger leading icon
+          </ActionListItem>
+          <ActionListItem variant="danger" trailingIcon="new">
+            Danger trailing icon
+          </ActionListItem>
+          <ActionListItem
+            variant="danger"
+            leadingIcon="copy"
+            trailingIcon="new"
+          >
+            Danger both icons
+          </ActionListItem>
+          <ActionListItem variant="danger" leadingIcon="copy" disabled>
+            Danger disabled icon
+          </ActionListItem>
+          <ActionListItem variant="danger" description="This is a description">
+            Danger description
           </ActionListItem>
           <ActionListItem
             leadingIcon="copy"
@@ -97,6 +122,8 @@ test('should have screenshot for ActionMenu selections', async ({
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(
@@ -179,6 +206,8 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
     content: `.ActionMenu {
       position: relative !important;
       transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
     }`
   });
   const component = await mount(

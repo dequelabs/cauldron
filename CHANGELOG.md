@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.22.1](https://github.com/dequelabs/cauldron/compare/v6.22.0...v6.22.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* **styles:** limit the default max-width of action menus to 31rem ([#2102](https://github.com/dequelabs/cauldron/issues/2102)) ([bbde2c7](https://github.com/dequelabs/cauldron/commit/bbde2c7eb7da0a51f48fb7f1a730bf5f71396549))
+* **style:** update tab panel background colors for light and dark themes ([#2101](https://github.com/dequelabs/cauldron/issues/2101)) ([a2c25cd](https://github.com/dequelabs/cauldron/commit/a2c25cdbd183f18a3086d7a8b2967c88956d2972))
+
+## [6.22.0](https://github.com/dequelabs/cauldron/compare/v6.21.0...v6.22.0) (2025-09-03)
+
+
+### Features
+
+* **react,styles:** add danger and danger-secondary Button variants ([#2074](https://github.com/dequelabs/cauldron/issues/2074)) ([d94b37f](https://github.com/dequelabs/cauldron/commit/d94b37f63152799ce3d0594775212620a45d5f95))
+* **react,styles:** add danger variant to ActionListItem ([#2076](https://github.com/dequelabs/cauldron/issues/2076)) ([d9ea0f2](https://github.com/dequelabs/cauldron/commit/d9ea0f2de8fea695405ce0e821e99e37bcf340ec))
+
+
+### Bug Fixes
+
+* **react:** fix a11y issue where selected listbox options did not fire click handlers ([#2087](https://github.com/dequelabs/cauldron/issues/2087)) ([52118e5](https://github.com/dequelabs/cauldron/commit/52118e5ac93092596678548d4040e2fd6214625e))
+* **styles:** set default max-height of action menus to prevent excessive overflow ([#2081](https://github.com/dequelabs/cauldron/issues/2081)) ([dd771e4](https://github.com/dequelabs/cauldron/commit/dd771e482ae4ea2911f2763d2a14ea3dd60d22e0))
+
 ## [6.21.0](https://github.com/dequelabs/cauldron/compare/v6.20.2...v6.21.0) (2025-08-19)
 
 
