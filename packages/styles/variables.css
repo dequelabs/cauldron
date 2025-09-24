@@ -123,12 +123,12 @@
   --z-index-side-bar: 9;
   --z-index-toast: 8;
   --z-index-toast-action-needed: 24;
-  --z-index-listbox: 6;
   /* ensure this is a higher value than the rest (above)! */
   --z-index-top-bar: 25;
-  /* ensure this is 1 higher than the top bar z-index */
+  /* ensure these are 1 higher than the top bar z-index */
   --z-index-skip-container: calc(var(--z-index-top-bar) + 1);
   --z-index-drawer: calc(var(--z-index-top-bar) + 1);
+  --z-index-listbox: calc(var(--z-index-top-bar) + 1);
 
   /* radio card */
   --radio-card-width: 255px;
