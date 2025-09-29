@@ -58,8 +58,11 @@ function Link({
   // location. This fix means that if /components/Foo.mdx has a link like
   // `[Bar](./Bar)`, it will be resolved as "/components/Bar" rather than
   // "/components/Foo/Bar".
-  const relative = !href.startsWith('/'); // "bar" or "./bar", as opposed to "/bar"
-  const fixedHref = relative ? '../' + href : href;
+  //
+  // Should match "bar", "./bar", and "../bar"
+  // Should not match "/bar", "#bar", "?bar=baz", or "mailto:bar".
+  const shouldBeRelativeToParent = /^[^/#?:][^:]*$/.test(href);
+  const fixedHref = shouldBeRelativeToParent ? '../' + href : href;
 
   return (
     <RouterLink
