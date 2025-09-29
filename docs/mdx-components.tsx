@@ -55,10 +55,10 @@ function Link({
   // This works around an inconsistency between normal <a href> behavior
   // vs react-router's Link behavior. react-router resolves relative paths
   // relative to the *current* location, not the *parent* of the current
-  // location. This fix means that if /components/Foo.mdx has
-  // a link like [Bar](./Bar), it will be resolved as "/components/Bar" rather
-  // than "/components/Foo/Bar".
-  const relative = !href.startsWith('/'); // Could be "bar" or "./bar", as opposed to "/bar"
+  // location. This fix means that if /components/Foo.mdx has a link like
+  // `[Bar](./Bar)`, it will be resolved as "/components/Bar" rather than
+  // "/components/Foo/Bar".
+  const relative = !href.startsWith('/'); // "bar" or "./bar", as opposed to "/bar"
   const fixedHref = relative ? '../' + href : href;
 
   return (
