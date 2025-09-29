@@ -43,11 +43,33 @@ function Link({
   href,
   ...props
 }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  if (!href) {
+    return <CauldronLink {...props} />;
+  }
+
   const external = href.indexOf('://') > 0 || href.indexOf('//') === 0;
-  return external ? (
-    <CauldronLink href={href} {...props} />
-  ) : (
-    <RouterLink to={href} {...props} />
+  if (external) {
+    return <CauldronLink href={href} {...props} />;
+  }
+
+  // This works around an inconsistency between normal <a href> behavior
+  // vs react-router's Link behavior. react-router resolves relative paths
+  // relative to the *current* location, not the *parent* of the current
+  // location. This fix means that if /components/Foo.mdx has
+  // a link like [Bar](./Bar), it will be resolved as "/components/Bar" rather
+  // than "/components/Foo/Bar".
+  const relative = !href.startsWith('/'); // Could be "bar" or "./bar", as opposed to "/bar"
+  const fixedHref = relative ? '../' + href : href;
+
+  return (
+    <RouterLink
+      to={fixedHref}
+      // relative="path" makes react-router resolve ".." in relative paths by skipping
+      // path components, as opposed to its normal behavior of skipping <Route>s (which
+      // might use a multi-segment path like "/components/Foo").
+      relative="path"
+      {...props}
+    />
   );
 }
 
