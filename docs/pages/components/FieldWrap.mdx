@@ -4,11 +4,24 @@ description: A utility component to wrap input fields.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldWrap/index.tsx
 ---
 
-import { FieldWrap, TextField, Button } from '@deque/cauldron-react'
+import { FieldWrap, FieldGroup, TextField, Button, RadioGroup } from '@deque/cauldron-react'
 
 ```js
 import { FieldWrap } from '@deque/cauldron-react'
 ```
+
+The FieldWrap component provides a background `Panel` appearance that is designed to ensure that Cauldron's
+input components meet color contrast requirements (in all input states).
+
+Input components (such as [Checkbox](./Checkbox) and [RadioGroup](./RadioGroup)) _should_ be wrapped in a
+`FieldWrap`. Cauldron's input components have been designed specifically to meet color contrast requirements
+against a `FieldWrap` background.
+
+<Note>
+  If you use a Cauldron input component without a `FieldWrap` (for example, within a `Modal`, where
+  `FieldWrap`'s `Panel` appearance might not be appropriate), you _must_ verify that it meets accessibility
+  requirements in all component states, especially for color contrast.
+</Note>
 
 ## Examples
 
@@ -38,6 +51,36 @@ import { FieldWrap } from '@deque/cauldron-react'
 </FieldWrap>
 ```
 
+### With FieldGroup
+
+`FieldWrap` is often used together with [FieldGroup](./FieldGroup); `FieldWrap` ensures
+an accessible appearance, and `FieldGroup` provides accessible structure and naming.
+
+```jsx example
+<FieldWrap id="size" as={FieldGroup} label="How big is this thing?">
+  <RadioGroup
+    name="size"
+    radios={[
+      {
+        id: '1',
+        label: '1',
+        value: '1'
+      },
+      {
+        id: '2',
+        label: '2',
+        value: '2'
+      },
+      {
+        id: '3',
+        label: '3',
+        value: '3'
+      }
+    ]}
+  />
+</FieldWrap>
+```
+
 ## Props
 
 <ComponentProps
@@ -55,8 +98,10 @@ import { FieldWrap } from '@deque/cauldron-react'
 
 ## Related Components
 
-- [TextField](./TextField)
-- [Select](./Select)
-- [RadioGroup](./RadioGroup)
+- [FieldGroup](./FieldGroup)
 - [Checkbox](./Checkbox)
 - [Combobox](./Combobox)
+- [RadioGroup](./RadioGroup)
+- [SearchField](./SearchField)
+- [Select](./Select)
+- [TextField](./TextField)

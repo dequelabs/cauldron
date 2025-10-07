@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.22.2](https://github.com/dequelabs/cauldron/compare/v6.22.1...v6.22.2) (2025-09-24)
+
+
+### Bug Fixes
+
+* **styles:** move ActionMenu to top most z-index layer ([#2114](https://github.com/dequelabs/cauldron/issues/2114)) ([25823d5](https://github.com/dequelabs/cauldron/commit/25823d52b8130dc0c5cdbdcb78aac2a736104c21))
+
 ### [6.22.1](https://github.com/dequelabs/cauldron/compare/v6.22.0...v6.22.1) (2025-09-22)
 
 
