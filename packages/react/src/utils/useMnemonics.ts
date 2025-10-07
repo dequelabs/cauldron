@@ -51,7 +51,7 @@ export default function useMnemonics<T extends HTMLElement>({
   enabled = true
 }: useMnemonicsOptions): useMnemonicsResults<T> {
   const containerRef = useRef<T>() as MutableRefObject<T>;
-  const activeElement = useRef<HTMLElement | null>();
+  const activeElement = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (elementOrRef instanceof HTMLElement) {

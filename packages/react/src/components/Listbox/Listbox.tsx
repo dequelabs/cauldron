@@ -94,7 +94,7 @@ const Listbox = forwardRef<
     const [selectedOptions, setSelectedOptions] = useState<ListboxOption[]>([]);
     const listboxRef = useSharedRef<HTMLElement>(ref);
     const isControlled = typeof value !== 'undefined';
-    const isActiveControlled = typeof activeOption !== 'undefined';
+    const isActiveControlled = typeof controlledActiveOption !== 'undefined';
 
     useLayoutEffect(() => {
       if (!isControlled && selectedOptions.length > 0) {
