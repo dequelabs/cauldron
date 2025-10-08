@@ -6,6 +6,10 @@
   --page-header-overline-color: var(--accent-light);
 }
 
+.PageHeader :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--text-size-heading-1);
+}
+
 .PageHeader__overline {
   margin: 0 0 var(--space-smallest) 0;
   padding: 0;
