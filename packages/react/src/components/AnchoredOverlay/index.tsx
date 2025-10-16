@@ -72,6 +72,8 @@ const preventTopOverflowMiddleware: Middleware = {
     if (overflow?.top >= 0) {
       return {
         reset: {
+          // Replace the initial placement axis with 'bottom' while preserving alignment (start/end)
+          // Examples: 'top' -> 'bottom', 'top-start' -> 'bottom-start'
           placement: (state.placement.replace(
             /\w+?(-(start|end))?$/i,
             'bottom$1'
