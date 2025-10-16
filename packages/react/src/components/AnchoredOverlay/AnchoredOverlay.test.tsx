@@ -240,7 +240,7 @@ test('should support when overlay overflows top of document', async () => {
 
   render(
     <AnchoredOverlay data-testid="overlay" target={targetRef} open>
-      <button>Inside Button</button>
+      Content
     </AnchoredOverlay>
   );
 
@@ -259,7 +259,7 @@ test('should support when overlay remains below top of document', async () => {
 
   render(
     <AnchoredOverlay data-testid="overlay" target={targetRef} open>
-      <button>Inside Button</button>
+      Content
     </AnchoredOverlay>
   );
 
