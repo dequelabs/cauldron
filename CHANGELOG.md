@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.22.3](https://github.com/dequelabs/cauldron/compare/v6.22.2...v6.22.3) (2025-10-14)
+
+
+### Bug Fixes
+
+* **styles:** use correct heading sizes for page/section headings ([#2135](https://github.com/dequelabs/cauldron/issues/2135)) ([c5d2165](https://github.com/dequelabs/cauldron/commit/c5d21652f729ace292725226bd5affa0b72b86ac))
+
 ### [6.22.2](https://github.com/dequelabs/cauldron/compare/v6.22.1...v6.22.2) (2025-09-24)
 
 
