@@ -10,15 +10,15 @@ import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
 
-jest.mock('@floating-ui/dom', () => {
-  const actual = jest.requireActual('@floating-ui/dom');
+jest.mock('@floating-ui/react-dom', () => {
+  const actual = jest.requireActual('@floating-ui/react-dom');
   return {
     ...actual,
     detectOverflow: jest.fn()
   };
 });
 
-import { detectOverflow } from '@floating-ui/dom';
+import { detectOverflow } from '@floating-ui/react-dom';
 
 test('should render children', () => {
   const targetRef = { current: document.createElement('button') };
