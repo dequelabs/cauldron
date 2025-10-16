@@ -63,16 +63,24 @@ function getAutoAlignment(
  * alternative placement to keep content visible and accessible.
  */
 const preventTopOverflowMiddleware: Middleware = {
-  name: 'preventOverflow',
+  name: 'preventTopOverflow',
   async fn(state) {
     const overflow = await detectOverflow(state, {
       rootBoundary: 'document'
     });
-    return {
-      data: {
-        shouldFlip: overflow?.top >= 0
-      }
-    };
+
+    if (overflow?.top >= 0) {
+      return {
+        reset: {
+          placement: (state.placement.replace(
+            /\w+?(-(start|end))?$/i,
+            'bottom$1'
+          ) || 'bottom') as Placement
+        }
+      };
+    }
+
+    return {};
   }
 };
 
