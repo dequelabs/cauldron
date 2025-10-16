@@ -6,6 +6,10 @@ on:
       - develop
       - master
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
 
   tests:
@@ -15,6 +19,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: [tests]
     runs-on: ubuntu-latest
+    environment: registry.npmjs.org
     steps:
       - uses: actions/checkout@v5
         with:
@@ -32,19 +37,16 @@ jobs:
         run: |
           cd packages/styles
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
   canary:
     if: github.ref == 'refs/heads/develop'
     needs: [tests]
     runs-on: ubuntu-latest
+    environment: registry.npmjs.org
     steps:
       - uses: actions/checkout@v5
         with:
@@ -64,13 +66,9 @@ jobs:
           PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
           PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
