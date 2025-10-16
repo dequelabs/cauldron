@@ -230,17 +230,6 @@ test('should restore focus when focusTrap is unmounted', async () => {
 
 test('should support when overlay overflows top of document', async () => {
   const targetRef = { current: document.createElement('button') };
-  const onShiftChange = jest.fn();
-  render(
-    <AnchoredOverlay
-      data-testid="overlay"
-      target={targetRef}
-      open
-      onShiftChange={onShiftChange}
-    >
-      <button>Inside Button</button>
-    </AnchoredOverlay>
-  );
 
   (detectOverflow as jest.Mock).mockResolvedValue({
     top: 10, // provide positive value to indicate overflow above document,
@@ -249,22 +238,17 @@ test('should support when overlay overflows top of document', async () => {
     left: 0
   });
 
+  render(
+    <AnchoredOverlay data-testid="overlay" target={targetRef} open>
+      <button>Inside Button</button>
+    </AnchoredOverlay>
+  );
+
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
 });
 
 test('should support when overlay remains below top of document', async () => {
   const targetRef = { current: document.createElement('button') };
-  const onShiftChange = jest.fn();
-  render(
-    <AnchoredOverlay
-      data-testid="overlay"
-      target={targetRef}
-      open
-      onShiftChange={onShiftChange}
-    >
-      <button>Inside Button</button>
-    </AnchoredOverlay>
-  );
 
   (detectOverflow as jest.Mock).mockResolvedValue({
     top: -10, // provide negative value to indicate overflow below document
@@ -272,6 +256,12 @@ test('should support when overlay remains below top of document', async () => {
     bottom: 0,
     left: 0
   });
+
+  render(
+    <AnchoredOverlay data-testid="overlay" target={targetRef} open>
+      <button>Inside Button</button>
+    </AnchoredOverlay>
+  );
 
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
 });
