@@ -33,6 +33,10 @@ type useMnemonicsResults<T extends HTMLElement> = RefObject<T>;
  */
 function getAccessibleLabel(element: Element): string {
   return (
+    // We're explicitly ignoring that we _could_ use aria-labelledby here
+    // because of the additional complexity that is needed in order to calculate
+    // the accessible name of an aria-labelled by idref. We're reserving that behavior
+    // for future implementation if it is determined to be needed.
     element.getAttribute('aria-label') || element.textContent?.trim() || ''
   );
 }
