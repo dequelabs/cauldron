@@ -42,6 +42,28 @@ function getAccessibleLabel(element: Element): string {
 }
 
 /**
+ * Gets the active element based on the root element passed in
+ */
+function getActiveElement(root: HTMLElement): HTMLElement | null {
+  let activeElement: HTMLElement | null;
+
+  if (
+    document.activeElement === root &&
+    root.hasAttribute('aria-activedescendant')
+  ) {
+    // Validating attribute above with "hasAttribute"
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    activeElement = document.getElementById(
+      root.getAttribute('aria-activedescendant')!
+    );
+  } else {
+    activeElement = document.activeElement as HTMLElement;
+  }
+
+  return root.contains(activeElement) ? activeElement : null;
+}
+
+/**
  * A hook that provides mnemonic navigation for keyboard users.
  *
  * Mnemonics allow users to quickly navigate to elements by typing the first
@@ -55,7 +77,6 @@ export default function useMnemonics<T extends HTMLElement>({
   enabled = true
 }: useMnemonicsOptions): useMnemonicsResults<T> {
   const containerRef = useRef<T>() as MutableRefObject<T>;
-  const activeElement = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (elementOrRef instanceof HTMLElement) {
@@ -101,23 +122,23 @@ export default function useMnemonics<T extends HTMLElement>({
       );
 
       if (!matchingElements.length) {
-        activeElement.current = null;
         return;
       }
 
-      const activeIndex = activeElement.current
-        ? matchingElements.indexOf(activeElement.current)
+      const currentActiveElement = getActiveElement(containerRef.current);
+      const activeIndex = currentActiveElement
+        ? matchingElements.indexOf(currentActiveElement)
         : -1;
+      let nextActiveElement: HTMLElement;
+
       if (activeIndex === -1 || activeIndex === matchingElements.length - 1) {
-        activeElement.current = matchingElements[0] as HTMLElement;
+        nextActiveElement = matchingElements[0] as HTMLElement;
       } else {
-        activeElement.current = matchingElements[
-          activeIndex + 1
-        ] as HTMLElement;
+        nextActiveElement = matchingElements[activeIndex + 1] as HTMLElement;
       }
 
       if (typeof onMatch === 'function') {
-        onMatch(activeElement.current);
+        onMatch(nextActiveElement);
       }
     };
 

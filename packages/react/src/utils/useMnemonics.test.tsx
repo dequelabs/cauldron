@@ -29,6 +29,41 @@ const TestComponent = ({
   );
 };
 
+const TestActiveDescendantComponent = ({
+  onMatch,
+  enabled,
+  matchingElementsSelector
+}: Parameters<typeof useMnemonics>[0]) => {
+  const containerRef = useMnemonics<HTMLDivElement>({
+    matchingElementsSelector,
+    onMatch,
+    enabled
+  });
+
+  return (
+    <div
+      ref={containerRef}
+      data-activedescendant="apple"
+      data-testid="container"
+      tabIndex={-1}
+    >
+      <button id="apple">Apple</button>
+      <button id="banana">Banana</button>
+      <a id="blueberry" href="/fruit">
+        Blueberry
+      </a>
+      <button id="carrot">Carrot</button>
+      <button id="cantaloupe">Cantaloupe</button>
+      <button id="cherry">Cherry</button>
+      <button id="date" aria-label="Date">
+        📅
+      </button>
+      <button id="1234">1234</button>
+      <div id="not-a-fruit">Not a fruit</div>
+    </div>
+  );
+};
+
 describe('useMnemonics', () => {
   test('should match first element when pressing a matching letter', async () => {
     const user = userEvent.setup();
@@ -44,7 +79,9 @@ describe('useMnemonics', () => {
 
   test('should cycle through matching elements on repeated key press', async () => {
     const user = userEvent.setup();
-    const onMatch = jest.fn();
+    const onMatch = jest.fn((activeElement: HTMLElement) =>
+      activeElement.focus()
+    );
     render(<TestComponent onMatch={onMatch} />);
     const container = screen.getByTestId('container');
 
@@ -196,6 +233,29 @@ describe('useMnemonics', () => {
     expect(async () => {
       await user.keyboard('a');
     }).not.toThrow();
+  });
+
+  test('should handle aria-activedescendant elements', async () => {
+    const user = userEvent.setup();
+    const onMatch = jest.fn((activeElement: HTMLElement) => {
+      screen
+        .getByTestId('container')
+        .setAttribute(
+          'aria-activedescendant',
+          activeElement.getAttribute('id')
+        );
+    });
+    render(<TestActiveDescendantComponent onMatch={onMatch} />);
+    const container = screen.getByTestId('container');
+
+    container.focus();
+
+    await user.keyboard('b');
+    expect(onMatch).toHaveBeenLastCalledWith(screen.getByText('Banana'));
+    await user.keyboard('b');
+    expect(onMatch).toHaveBeenLastCalledWith(screen.getByText('Blueberry'));
+    await user.keyboard('b');
+    expect(onMatch).toHaveBeenLastCalledWith(screen.getByText('Banana'));
   });
 
   test('should handle provided element', () => {

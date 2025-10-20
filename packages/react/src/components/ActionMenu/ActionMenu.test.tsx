@@ -327,14 +327,6 @@ test('should set matching active item on mnemonic key press', async () => {
   triggerButton.focus();
   await user.keyboard('{ArrowDown}');
 
-  // Apple Active
-  await user.keyboard('a');
-  await waitFor(() => {
-    expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
-      'ActionListItem--active'
-    );
-  });
-
   // Apricot Active
   await user.keyboard('a');
   await waitFor(() => {
