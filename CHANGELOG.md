@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.23.0](https://github.com/dequelabs/cauldron/compare/v6.22.3...v6.23.0) (2025-10-20)
+
+
+### Features
+
+* **react:** add mnemonic typeahead for ActionList ([#2088](https://github.com/dequelabs/cauldron/issues/2088)) ([e0adb4a](https://github.com/dequelabs/cauldron/commit/e0adb4ad80b476f9a70b1d6d7bee56546d29863a))
+
+
+### Bug Fixes
+
+* **react:** prevent AnchoredOverlays from overflowing top boundaries ([#2147](https://github.com/dequelabs/cauldron/issues/2147)) ([d80b6b6](https://github.com/dequelabs/cauldron/commit/d80b6b65d8515aafb2e1416af8ca17216d5e8307))
+
 ### [6.22.3](https://github.com/dequelabs/cauldron/compare/v6.22.2...v6.22.3) (2025-10-14)
 
 
