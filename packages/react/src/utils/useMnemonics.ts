@@ -131,7 +131,7 @@ export default function useMnemonics<T extends HTMLElement>({
       if (currentActiveElement) {
         nextActiveElement = matchingElements.find(
           (element) =>
-            // Find the next matching element the is _after_ the current active element
+            // Find the next matching element that is _after_ the current active element
             // within the collection of identified elements
             !!(
               element.compareDocumentPosition(currentActiveElement) &
