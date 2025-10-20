@@ -238,12 +238,11 @@ describe('useMnemonics', () => {
   test('should handle aria-activedescendant elements', async () => {
     const user = userEvent.setup();
     const onMatch = jest.fn((activeElement: HTMLElement) => {
-      screen
-        .getByTestId('container')
-        .setAttribute(
-          'aria-activedescendant',
-          activeElement.getAttribute('id')
-        );
+      screen.getByTestId('container').setAttribute(
+        'aria-activedescendant',
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        activeElement.getAttribute('id')!
+      );
     });
     render(<TestActiveDescendantComponent onMatch={onMatch} />);
     const container = screen.getByTestId('container');
