@@ -89,7 +89,7 @@
     "micromark-extension-mdxjs": "^3.0.0",
     "mini-css-extract-plugin": "^2.9.4",
     "node-fetch": "^3.3.0",
-    "p-queue": "^8",
+    "p-queue": "^9",
     "playwright": "^1.47.0",
     "postcss-cli": "^7.1.2",
     "postcss-import": "^12.0.1",
