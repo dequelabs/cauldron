@@ -51,9 +51,9 @@ function getActiveElement(root: HTMLElement): HTMLElement | null {
     document.activeElement === root &&
     root.hasAttribute('aria-activedescendant')
   ) {
-    // Validating attribute above with "hasAttribute"
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     activeElement = document.getElementById(
+      // Validating attribute above with "hasAttribute"
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       root.getAttribute('aria-activedescendant')!
     );
   } else {
@@ -119,7 +119,7 @@ export default function useMnemonics<T extends HTMLElement>({
         (element) =>
           getAccessibleLabel(element).toLowerCase()[0] ===
           event.key.toLowerCase()
-      );
+      ) as HTMLElement[];
 
       if (!matchingElements.length) {
         return;
@@ -127,18 +127,24 @@ export default function useMnemonics<T extends HTMLElement>({
 
       const currentActiveElement = getActiveElement(containerRef.current);
       const activeIndex = currentActiveElement
-        ? matchingElements.indexOf(currentActiveElement)
+        ? elements.indexOf(currentActiveElement)
         : -1;
-      let nextActiveElement: HTMLElement;
+      let nextActiveElement: HTMLElement | null = null;
 
-      if (activeIndex === -1 || activeIndex === matchingElements.length - 1) {
-        nextActiveElement = matchingElements[0] as HTMLElement;
-      } else {
-        nextActiveElement = matchingElements[activeIndex + 1] as HTMLElement;
+      if (activeIndex !== -1 && currentActiveElement) {
+        nextActiveElement = matchingElements.find(
+          (element) =>
+            // Find the next matching element the is _after_ the current active element
+            // within the collection of identified elements
+            !!(
+              element.compareDocumentPosition(currentActiveElement) &
+              Node.DOCUMENT_POSITION_PRECEDING
+            )
+        ) as HTMLElement;
       }
 
       if (typeof onMatch === 'function') {
-        onMatch(nextActiveElement);
+        onMatch(nextActiveElement ?? matchingElements[0]);
       }
     };
 
