@@ -126,12 +126,9 @@ export default function useMnemonics<T extends HTMLElement>({
       }
 
       const currentActiveElement = getActiveElement(containerRef.current);
-      const activeIndex = currentActiveElement
-        ? elements.indexOf(currentActiveElement)
-        : -1;
       let nextActiveElement: HTMLElement | null = null;
 
-      if (activeIndex !== -1 && currentActiveElement) {
+      if (currentActiveElement) {
         nextActiveElement = matchingElements.find(
           (element) =>
             // Find the next matching element the is _after_ the current active element
