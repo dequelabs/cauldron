@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.23.0](https://github.com/dequelabs/cauldron/compare/v6.22.3...v6.23.0) (2025-10-20)
+
+
+### Features
+
+* **react:** add mnemonic typeahead for ActionList ([#2088](https://github.com/dequelabs/cauldron/issues/2088)) ([e0adb4a](https://github.com/dequelabs/cauldron/commit/e0adb4ad80b476f9a70b1d6d7bee56546d29863a))
+
+
+### Bug Fixes
+
+* **react:** prevent AnchoredOverlays from overflowing top boundaries ([#2147](https://github.com/dequelabs/cauldron/issues/2147)) ([d80b6b6](https://github.com/dequelabs/cauldron/commit/d80b6b65d8515aafb2e1416af8ca17216d5e8307))
+
+### [6.22.3](https://github.com/dequelabs/cauldron/compare/v6.22.2...v6.22.3) (2025-10-14)
+
+
+### Bug Fixes
+
+* **styles:** use correct heading sizes for page/section headings ([#2135](https://github.com/dequelabs/cauldron/issues/2135)) ([c5d2165](https://github.com/dequelabs/cauldron/commit/c5d21652f729ace292725226bd5affa0b72b86ac))
+
+### [6.22.2](https://github.com/dequelabs/cauldron/compare/v6.22.1...v6.22.2) (2025-09-24)
+
+
+### Bug Fixes
+
+* **styles:** move ActionMenu to top most z-index layer ([#2114](https://github.com/dequelabs/cauldron/issues/2114)) ([25823d5](https://github.com/dequelabs/cauldron/commit/25823d52b8130dc0c5cdbdcb78aac2a736104c21))
+
+### [6.22.1](https://github.com/dequelabs/cauldron/compare/v6.22.0...v6.22.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* **styles:** limit the default max-width of action menus to 31rem ([#2102](https://github.com/dequelabs/cauldron/issues/2102)) ([bbde2c7](https://github.com/dequelabs/cauldron/commit/bbde2c7eb7da0a51f48fb7f1a730bf5f71396549))
+* **style:** update tab panel background colors for light and dark themes ([#2101](https://github.com/dequelabs/cauldron/issues/2101)) ([a2c25cd](https://github.com/dequelabs/cauldron/commit/a2c25cdbd183f18a3086d7a8b2967c88956d2972))
+
 ## [6.22.0](https://github.com/dequelabs/cauldron/compare/v6.21.0...v6.22.0) (2025-09-03)
 
 

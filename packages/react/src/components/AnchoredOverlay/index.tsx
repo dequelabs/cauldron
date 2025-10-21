@@ -6,7 +6,9 @@ import {
   offset as offsetMiddleware,
   flip as flipMiddleware,
   autoPlacement as autoPlacementMiddleware,
-  shift as shiftMiddleware
+  shift as shiftMiddleware,
+  detectOverflow,
+  type Middleware
 } from '@floating-ui/react-dom';
 import { type PolymorphicProps } from '../../utils/polymorphicComponent';
 import resolveElement from '../../utils/resolveElement';
@@ -55,6 +57,35 @@ function getAutoAlignment(
   }
 }
 
+/**
+ * Prevents large overlays from shifting off-screen above the viewport. When an overlay
+ * would overflow past the top edge, this middleware signals that it should flip to an
+ * alternative placement to keep content visible and accessible.
+ */
+const preventTopOverflowMiddleware: Middleware = {
+  name: 'preventTopOverflow',
+  async fn(state) {
+    const overflow = await detectOverflow(state, {
+      rootBoundary: 'document'
+    });
+
+    if (overflow?.top >= 0) {
+      return {
+        reset: {
+          // Replace the initial placement axis with 'bottom' while preserving alignment (start/end)
+          // Examples: 'top' -> 'bottom', 'top-start' -> 'bottom-start'
+          placement: (state.placement.replace(
+            /\w+?(-(start|end))?$/i,
+            'bottom$1'
+          ) || 'bottom') as Placement
+        }
+      };
+    }
+
+    return {};
+  }
+};
+
 const AnchoredOverlay = forwardRef(
   <
     Overlay extends HTMLElement = HTMLElement,
@@ -80,6 +111,7 @@ const AnchoredOverlay = forwardRef(
   ) => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
+
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       open,
       // default to initial placement on top when placement is auto
@@ -94,7 +126,11 @@ const AnchoredOverlay = forwardRef(
           : flipMiddleware({
               fallbackAxisSideDirection: 'start'
             }),
-        shiftMiddleware({ crossAxis: false })
+        shiftMiddleware({
+          crossAxis: false,
+          boundary: 'clippingAncestors'
+        }),
+        preventTopOverflowMiddleware
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target)

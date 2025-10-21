@@ -33,6 +33,7 @@
 }
 
 .SectionHeader :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--text-size-heading-2);
   font-weight: var(--font-weight-medium);
   margin: 0;
   padding: 0;

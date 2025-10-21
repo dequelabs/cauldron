@@ -10,6 +10,16 @@ import userEvent from '@testing-library/user-event';
 import AnchoredOverlay from './';
 import axe from '../../axe';
 
+jest.mock('@floating-ui/react-dom', () => {
+  const actual = jest.requireActual('@floating-ui/react-dom');
+  return {
+    ...actual,
+    detectOverflow: jest.fn()
+  };
+});
+
+import { detectOverflow } from '@floating-ui/react-dom';
+
 test('should render children', () => {
   const targetRef = { current: document.createElement('button') };
   render(
@@ -216,6 +226,44 @@ test('should restore focus when focusTrap is unmounted', async () => {
   expect(outsideButton).toHaveFocus();
 
   document.body.removeChild(outsideButton);
+});
+
+test('should support when overlay overflows top of document', async () => {
+  const targetRef = { current: document.createElement('button') };
+
+  (detectOverflow as jest.Mock).mockResolvedValue({
+    top: 10, // provide positive value to indicate overflow above document,
+    right: 0,
+    bottom: 0,
+    left: 0
+  });
+
+  render(
+    <AnchoredOverlay data-testid="overlay" target={targetRef} open>
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+});
+
+test('should support when overlay remains below top of document', async () => {
+  const targetRef = { current: document.createElement('button') };
+
+  (detectOverflow as jest.Mock).mockResolvedValue({
+    top: -10, // provide negative value to indicate overflow below document
+    right: 0,
+    bottom: 0,
+    left: 0
+  });
+
+  render(
+    <AnchoredOverlay data-testid="overlay" target={targetRef} open>
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
 });
 
 test('should support ref prop', () => {
