@@ -23,6 +23,7 @@ interface BaseListboxProps
   navigation?: 'cycle' | 'bound';
   focusStrategy?: 'lastSelected' | 'first' | 'last';
   focusDisabledOptions?: boolean;
+  activeOption?: ListboxOption;
   onActiveChange?: (option: ListboxOption) => void;
   disabled?: boolean;
 }
@@ -79,6 +80,7 @@ const Listbox = forwardRef<
       onKeyDown,
       onFocus,
       onSelectionChange,
+      activeOption: controlledActiveOption,
       onActiveChange,
       disabled = false,
       ...props
@@ -87,11 +89,12 @@ const Listbox = forwardRef<
   ): React.JSX.Element => {
     const [options, setOptions] = useState<ListboxOption[]>([]);
     const [activeOption, setActiveOption] = useState<ListboxOption | null>(
-      null
+      controlledActiveOption || null
     );
     const [selectedOptions, setSelectedOptions] = useState<ListboxOption[]>([]);
     const listboxRef = useSharedRef<HTMLElement>(ref);
     const isControlled = typeof value !== 'undefined';
+    const isActiveControlled = typeof controlledActiveOption !== 'undefined';
 
     useLayoutEffect(() => {
       if (!isControlled && selectedOptions.length > 0) {
@@ -129,6 +132,12 @@ const Listbox = forwardRef<
         onActiveChange?.(activeOption);
       }
     }, [activeOption]);
+
+    useEffect(() => {
+      if (isActiveControlled && controlledActiveOption !== activeOption) {
+        setActiveOption(controlledActiveOption || null);
+      }
+    }, [isActiveControlled, controlledActiveOption]);
 
     const handleSelect = useCallback(
       (option: ListboxOption) => {
