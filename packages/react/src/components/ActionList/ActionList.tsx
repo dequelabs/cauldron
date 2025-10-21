@@ -2,10 +2,11 @@ import React, {
   type MutableRefObject,
   forwardRef,
   useCallback,
-  useRef
+  useRef,
+  useState
 } from 'react';
 import classnames from 'classnames';
-import type { ListboxOption } from '../Listbox/ListboxContext';
+import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
 import {
   type ActionListSelectionType,
@@ -14,6 +15,8 @@ import {
   ActionListProvider
 } from './ActionListContext';
 import { useActionListContext } from './ActionListContext';
+import useMnemonics from '../../utils/useMnemonics';
+import setRef from '../../utils/setRef';
 
 interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -31,11 +34,13 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
+    const [activeOption, setActiveOption] = useState<ListboxOption>();
 
     const handleActiveChange = useCallback((value: ListboxOption) => {
       activeElement.current = value?.element as
         | HTMLLIElement
         | HTMLAnchorElement;
+      setActiveOption(value);
     }, []);
 
     const handleAction = useCallback(
@@ -47,13 +52,30 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
+    const containerRef = useMnemonics<HTMLUListElement>({
+      onMatch: (element) => {
+        setActiveOption({
+          element
+        });
+      },
+      matchingElementsSelector:
+        props.role === 'menu'
+          ? '[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]'
+          : '[role=option]'
+    }) as MutableRefObject<HTMLUListElement>;
+
     return (
       // Note: we should be able to use listbox without passing a prop
       // value for "multiselect"
       // see: https://github.com/dequelabs/cauldron/issues/1890
       // @ts-expect-error this should be allowed
       <Listbox
-        ref={ref}
+        ref={(element: HTMLUListElement) => {
+          if (ref) {
+            setRef(ref, element);
+          }
+          containerRef.current = element;
+        }}
         /* Listbox comes with an explicit role of "listbox", but we want to either
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
@@ -65,6 +87,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
           actionListContext.role === 'listbox' ? undefined : null
         }
         className={classnames('ActionList', className)}
+        activeOption={activeOption}
         {...props}
         onActiveChange={handleActiveChange}
         navigation="bound"
