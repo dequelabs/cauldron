@@ -144,7 +144,7 @@ a.IconButton {
 .IconButton--danger:is([aria-disabled='true'], [disabled]),
 .IconButton--danger:is([aria-disabled='true'], [disabled]):active {
   color: var(--button-text-color-light);
-  background-color: var(--button-background-color-danger-disabled);
+  background-color: var(--button-background-color-error-disabled);
   cursor: default;
 }
 
@@ -249,6 +249,14 @@ a.IconButton {
   --icon-button-background-color-error-active: var(
     --button-background-color-error-active
   );
+
+  /* Danger */
+  --icon-button-background-color-danger: var(--accent-medium);
+  --icon-button-border-color-danger: var(--accent-danger);
+  --icon-button-outline-color-danger: var(--accent-danger);
+  --icon-button-background-color-danger-active: var(
+    --button-background-color-danger-active
+  );
 }
 
 .cauldron--theme-dark .IconButton--primary {
@@ -264,19 +272,25 @@ a.IconButton {
   border: 2px solid var(--icon-button-border-color-error);
 }
 
+.cauldron--theme-dark .IconButton--danger {
+  border: 2px solid var(--icon-button-border-color-danger);
+}
+
 .cauldron--theme-dark
   .IconButton--primary:is([aria-disabled='true'], [disabled]),
 .cauldron--theme-dark
   .IconButton--secondary:is([aria-disabled='true'], [disabled]),
+.cauldron--theme-dark .IconButton--error:is([aria-disabled='true'], [disabled]),
 .cauldron--theme-dark
-  .IconButton--error:is([aria-disabled='true'], [disabled]) {
+  .IconButton--danger:is([aria-disabled='true'], [disabled]) {
   color: var(--icon-button-disabled-color);
 }
 
 .cauldron--theme-dark .IconButton--primary:active,
 .cauldron--theme-dark .IconButton--secondary:active,
 .cauldron--theme-dark .IconButton--tertiary:active,
-.cauldron--theme-dark .IconButton--error:active {
+.cauldron--theme-dark .IconButton--error:active,
+.cauldron--theme-dark .IconButton--danger:active {
   color: var(--icon-button-active-color);
 }
 
@@ -312,6 +326,13 @@ a.IconButton {
   box-shadow:
     0 0 0 1px var(--icon-button-outline-shadow-color),
     0 0 0 2px var(--icon-button-outline-color-error);
+}
+
+.cauldron--theme-dark
+  .IconButton--danger:not([disabled]):not([aria-disabled='true']):hover:before {
+  box-shadow:
+    0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-danger);
 }
 
 .cauldron--theme-dark .IconButton:focus:before {
