@@ -300,6 +300,7 @@ button.Link {
   --button-background-color-error-active: #fea7a6;
 
   --button-background-color-danger: var(--accent-danger);
+  --button-background-color-danger-active: #fea7a6;
 
   --button-background-color-badge-active: var(--badge-background-color);
 
