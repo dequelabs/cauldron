@@ -30,6 +30,7 @@
   color: var(--section-header-description-color);
   font-size: var(--text-size-base);
   grid-area: description;
+  max-width: 30.5rem
 }
 
 .SectionHeader :is(h1, h2, h3, h4, h5, h6) {
