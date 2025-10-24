@@ -17,11 +17,13 @@
     'heading'
     'description'
     'children';
+  column-gap: var(--space-smallest);
 }
 
 .SectionHeader__actions {
   margin-top: var(--space-small);
   grid-area: children;
+  align-self: start;
 }
 
 .SectionHeader .SectionHeader__content .SectionHeader__description {
@@ -51,7 +53,7 @@
 
   .SectionHeader__actions {
     margin: 0;
-    align-self: center;
+    align-self: start;
     justify-self: end;
   }
 }
