@@ -10,7 +10,7 @@ interface NoteProps {
 }
 
 export default function Note({ children, title, variant = 'info' }: NoteProps) {
-  const noteTitle = title ?? variant === 'info' ? 'Note' : 'Warning';
+  const noteTitle = title ?? (variant === 'info' ? 'Note' : 'Warning');
   return (
     <div
       className={classnames('Note', {

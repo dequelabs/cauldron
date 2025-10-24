@@ -162,19 +162,21 @@ const App = () => {
             renderInTrigger={true}
             trigger={({ ref, children, ...props }) => {
               return (
-                <TopBarItem
-                  menuItemRef={ref}
-                  className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
-                  tabIndex={0}
-                  autoClickLink={false}
-                  {...props}
-                >
-                  <span className="TopBar__item--icon">
-                    <Icon type="gears" />
-                    <div>Settings</div>
-                  </span>
+                <>
+                  <TopBarItem
+                    menuItemRef={ref}
+                    className="MenuItem--align-right MenuItem--separator MenuItem--arrow-down"
+                    tabIndex={0}
+                    autoClickLink={false}
+                    {...props}
+                  >
+                    <span className="TopBar__item--icon">
+                      <Icon type="gears" />
+                      <div>Settings</div>
+                    </span>
+                  </TopBarItem>
                   {children}
-                </TopBarItem>
+                </>
               );
             }}
             placement="bottom-end"
