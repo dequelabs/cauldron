@@ -17,7 +17,6 @@
     'heading'
     'description'
     'children';
-  column-gap: var(--space-smallest);
 }
 
 .SectionHeader__actions {
@@ -49,11 +48,11 @@
       'heading children'
       'description children';
     align-items: start;
+    column-gap: var(--space-smallest);
   }
 
   .SectionHeader__actions {
     margin: 0;
-    align-self: start;
     justify-self: end;
   }
 }
