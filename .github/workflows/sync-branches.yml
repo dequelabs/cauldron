@@ -14,5 +14,5 @@ jobs:
           github-token: ${{ secrets.MACHINE_USER_PAT }}
           pr-title: "chore: merge master into develop"
           pr-body: "Remember to _merge_ (rather than squash) this PR!"
-          pr-reviewers: anastasialanz
+          pr-team-reviewers: cauldron-codeowners
           head: master
