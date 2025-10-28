@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.23.1](https://github.com/dequelabs/cauldron/compare/v6.23.0...v6.23.1) (2025-10-28)
+
+
+### Bug Fixes
+
+* apply styling amendments to the `SectionHeader` component ([#2158](https://github.com/dequelabs/cauldron/issues/2158)) ([3fec7de](https://github.com/dequelabs/cauldron/commit/3fec7deeb8b4eeb47f349210c925cf1190de985d))
+* top bar item with action menu screen reader + focus behavior ([#2148](https://github.com/dequelabs/cauldron/issues/2148)) ([bdaeb6d](https://github.com/dequelabs/cauldron/commit/bdaeb6db45bad810edcadb0462a15a107f404f1a))
+
 ## [6.23.0](https://github.com/dequelabs/cauldron/compare/v6.22.3...v6.23.0) (2025-10-20)
 
 
