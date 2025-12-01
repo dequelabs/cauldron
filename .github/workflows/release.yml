@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: 'master'
       - uses: ./.github/actions/dependencies
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: 'develop'
       - uses: ./.github/actions/dependencies
