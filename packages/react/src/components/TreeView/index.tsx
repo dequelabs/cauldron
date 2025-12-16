@@ -12,7 +12,7 @@ interface TreeViewProps {
 
 interface TreeViewFileType {
   id: string;
-  title: string;
+  textValue: string;
   type?: 'directory' | 'file';
   children?: TreeViewFileType[];
 }
@@ -20,10 +20,10 @@ interface TreeViewFileType {
 export const TreeView = ({ onAction, ...props }: TreeViewProps) => {
   return (
     <Tree {...props}>
-      {function renderItem({ title, children }: TreeViewFileType) {
+      {function renderItem({ id, textValue, children }: TreeViewFileType) {
         return (
-          <TreeItem textValue={title} onAction={onAction}>
-            <TreeViewTreeItemContent>{title}</TreeViewTreeItemContent>
+          <TreeItem id={id} textValue={textValue} onAction={onAction}>
+            <TreeViewTreeItemContent>{textValue}</TreeViewTreeItemContent>
             <Collection items={children}>{children && renderItem}</Collection>
           </TreeItem>
         );
