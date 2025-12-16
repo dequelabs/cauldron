@@ -20,9 +20,42 @@ import { TreeView } from '@deque/cauldron-react';
 
 ```jsx example
 function TreeViewExample() {
+  const items = [
+    {
+      id: '1',
+      title: 'Documents',
+      type: 'directory',
+      children: [
+        {
+          id: '2',
+          title: 'Project',
+          type: 'directory',
+          children: [
+            { id: '3', title: 'Weekly Report', type: 'file' },
+            { id: '4', title: 'Budget', type: 'file' }
+          ]
+        }
+      ]
+    },
+    {
+      id: '5',
+      title: 'Photos',
+      type: 'directory',
+      children: [
+        { id: '6', title: 'Image 1', type: 'file' },
+        { id: '7', title: 'Image 2', type: 'file' }
+      ]
+    }
+  ];
   return (
     <>
-      <TreeView>
+      <TreeView
+        aria-label="Files"
+        selectionBehavior="toggle"
+        selectionMode="multiple"
+        defaultExpandedKeys={['documents', 'photos', 'project']}
+        items={items}
+      >
         <li>Item 1</li>
       </TreeView>
     </>
