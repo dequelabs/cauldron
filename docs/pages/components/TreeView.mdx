@@ -20,6 +20,9 @@ import { TreeView } from '@deque/cauldron-react';
 
 ```jsx example
 function TreeViewExample() {
+  const onAction = () => {
+    console.log('Action triggered');
+  };
   const items = [
     {
       id: '1',
@@ -48,17 +51,14 @@ function TreeViewExample() {
     }
   ];
   return (
-    <>
-      <TreeView
-        aria-label="Files"
-        selectionBehavior="toggle"
-        selectionMode="multiple"
-        defaultExpandedKeys={['documents', 'photos', 'project']}
-        items={items}
-      >
-        <li>Item 1</li>
-      </TreeView>
-    </>
+    <TreeView
+      aria-label="Files"
+      onAction={onAction}
+      selectionBehavior="toggle"
+      selectionMode="multiple"
+      defaultExpandedKeys={['documents', 'photos', 'project']}
+      items={items}
+    />
   );
 }
 ```
