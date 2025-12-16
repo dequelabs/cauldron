@@ -2,11 +2,11 @@ import React from 'react';
 import Icon from '../Icon';
 import {
   Button,
+  Checkbox,
   TreeItemContent,
   TreeItemContentProps,
   TreeItemContentRenderProps
 } from 'react-aria-components';
-import Checkbox from '../Checkbox';
 
 function TreeViewTreeItemContent({
   children
@@ -16,7 +16,7 @@ function TreeViewTreeItemContent({
       {({ selectionBehavior, selectionMode }: TreeItemContentRenderProps) => (
         <>
           {selectionBehavior === 'toggle' && selectionMode !== 'none' && (
-            <Checkbox id={''} label={undefined} />
+            <Checkbox slot="selection" />
           )}
           <Button slot="chevron">
             <Icon type="chevron-right" label="expand or collapse" />

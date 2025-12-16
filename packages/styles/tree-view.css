@@ -4,13 +4,7 @@
   gap: 2px;
   overflow: auto;
   padding: 4px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--overlay-background);
-  forced-color-adjust: none;
   outline: none;
-  width: 250px;
-  max-height: 300px;
   box-sizing: border-box;
 
   &[data-focus-visible] {
@@ -25,7 +19,6 @@
     min-height: 28px;
     padding: 0.286rem 0.286rem 0.286rem 0.571rem;
     --padding: 16px;
-    border-radius: 6px;
     outline: none;
     cursor: default;
     color: var(--text-color);
@@ -52,12 +45,6 @@
         stroke: currentColor;
         stroke-width: 3px;
       }
-    }
-
-    .react-aria-Button[slot='drag'] {
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     &[data-has-child-items] .react-aria-Button[slot='chevron'] {
@@ -118,27 +105,77 @@
     }
   }
 
-  /* join selected items if :has selector is supported */
-  /*
-  @supports selector(:has(.foo)) {
-    gap: 0;
-
-    .react-aria-TreeItem[data-selected]:has(+ [data-selected]) {
-      border-end-start-radius: 0;
-      border-end-end-radius: 0;
-    }
-
-    .react-aria-TreeItem[data-selected] + [data-selected] {
-      border-start-start-radius: 0;
-      border-start-end-radius: 0;
-    }
-  }
-*/
-
   :where(.react-aria-TreeItem) .react-aria-Checkbox {
     --selected-color: var(--highlight-foreground);
     --selected-color-pressed: var(--highlight-foreground-pressed);
     --checkmark-color: var(--highlight-background);
     --background-color: var(--highlight-background);
+  }
+}
+
+.react-aria-Checkbox {
+  --selected-color: var(--highlight-background);
+  --selected-color-pressed: var(--highlight-background-pressed);
+  --checkmark-color: var(--highlight-foreground);
+
+  display: flex;
+  /* This is needed so the HiddenInput is positioned correctly */
+  position: relative;
+  align-items: center;
+  gap: 0.571rem;
+  font-size: 1.143rem;
+  color: var(--text-color);
+  forced-color-adjust: none;
+
+  width: 1.143rem;
+  height: 1.143rem;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  transition: all 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: var(--checkmark-color);
+    stroke-width: 3px;
+    stroke-dasharray: 22px;
+    stroke-dashoffset: 66;
+    transition: all 200ms;
+  }
+
+  &[data-pressed] {
+    border-color: var(--border-color-pressed);
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+  }
+
+  &[data-selected],
+  &[data-indeterminate] {
+    border-color: red;
+    background: var(--selected-color);
+
+    &[data-pressed] {
+      border-color: var(--selected-color-pressed);
+      background: var(--selected-color-pressed);
+    }
+
+    svg {
+      stroke-dashoffset: 44;
+    }
+  }
+
+  &[data-indeterminate] {
+    & svg {
+      stroke: none;
+      fill: var(--checkmark-color);
+    }
   }
 }
