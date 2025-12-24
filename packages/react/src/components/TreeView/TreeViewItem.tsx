@@ -4,7 +4,7 @@ import React from 'react';
 import { TreeViewFileType } from '.';
 
 interface TreeViewItemProps extends TreeViewFileType {
-  checked?: boolean;
+  checkedIds: Record<string, boolean>;
   handleChange: (id: string, checked: boolean) => void;
   onAction?: () => void;
 }
@@ -13,7 +13,7 @@ const TreeViewItem = ({
   id,
   textValue,
   children,
-  checked,
+  checkedIds,
   handleChange,
   onAction
 }: TreeViewItemProps) => (
@@ -21,7 +21,7 @@ const TreeViewItem = ({
     <TreeViewItemContent
       id={id}
       textValue={textValue}
-      checked={checked}
+      checkedIds={checkedIds}
       handleChange={(checked) => handleChange(id, checked)}
     />
     {children && children.length > 0 && (
@@ -30,8 +30,7 @@ const TreeViewItem = ({
           <TreeViewItem
             key={child.id}
             handleChange={handleChange}
-            onAction={onAction}
-            checked={checked}
+            checkedIds={checkedIds}
             {...child}
           />
         ))}
