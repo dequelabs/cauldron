@@ -8,7 +8,7 @@ import {
 } from 'react-aria-components';
 import Checkbox from '../Checkbox';
 
-export interface TreeViewTreeItemContentProps
+export interface TreeViewItemContentProps
   extends Omit<TreeItemContentProps, 'children'> {
   children?: React.ReactNode;
   checked?: boolean;
@@ -17,14 +17,14 @@ export interface TreeViewTreeItemContentProps
   textValue?: string;
 }
 
-function TreeViewTreeItemContent({
+function TreeViewItemContent({
   children,
   checked,
   handleChange,
   id,
   textValue,
   ...rest
-}: TreeViewTreeItemContentProps) {
+}: TreeViewItemContentProps) {
   console.log('strudel', checked);
   return (
     <TreeItemContent {...rest}>
@@ -50,4 +50,4 @@ function TreeViewTreeItemContent({
   );
 }
 
-export default TreeViewTreeItemContent;
+export default TreeViewItemContent;

@@ -1,6 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { Collection, Tree, TreeItem } from 'react-aria-components';
-import TreeViewTreeItemContent from './TreeViewTreeItemContent';
+import React, { useState } from 'react';
+import { Tree } from 'react-aria-components';
+import TreeViewItem from './TreeViewItem';
+
+export interface TreeViewFileType {
+  id: string;
+  textValue: string;
+  type?: 'directory' | 'file';
+  children?: TreeViewFileType[];
+}
 
 interface TreeViewProps {
   items: TreeViewFileType[];
@@ -10,39 +17,25 @@ interface TreeViewProps {
   defaultExpandedKeys?: string[];
 }
 
-interface TreeViewFileType {
-  id: string;
-  textValue: string;
-  type?: 'directory' | 'file';
-  children?: TreeViewFileType[];
-}
-
-const TreeView = ({ onAction, ...props }: TreeViewProps) => {
+const TreeView = ({ items, ...props }: TreeViewProps) => {
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({});
 
   const handleChange = (id: string, checked: boolean) => {
     setCheckedIds((prev) => ({ ...prev, [id]: checked }));
-    console.log('strudel', id);
   };
 
-  const renderItem = useCallback(
-    ({ id, textValue, children }: TreeViewFileType) => {
-      return (
-        <TreeItem id={id} textValue={textValue} onAction={onAction}>
-          <TreeViewTreeItemContent
-            id={id}
-            textValue={textValue}
-            checked={!!checkedIds[id]}
-            handleChange={(checked) => handleChange(id, checked)}
-          />
-          <Collection items={children}>{children && renderItem}</Collection>
-        </TreeItem>
-      );
-    },
-    [checkedIds, onAction]
+  return (
+    <Tree {...props}>
+      {items.map((item) => (
+        <TreeViewItem
+          handleChange={handleChange}
+          checked={!!checkedIds[item.id]}
+          key={item.id}
+          {...item}
+        />
+      ))}
+    </Tree>
   );
-
-  return <Tree {...props}>{renderItem}</Tree>;
 };
 
 TreeView.displayName = 'TreeView';
