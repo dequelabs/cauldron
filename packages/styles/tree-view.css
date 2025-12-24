@@ -1,3 +1,17 @@
+:root {
+  --treeview-focus-ring-color: var(--focus-active);
+  --treeview-selected-color: var(--focus-active);
+  --treeview-selected-color-pressed: var(--focus-active);
+  --treeview-checkmark-color: var(--focus-active);
+}
+
+.cauldron--theme-dark {
+  --treeview-focus-ring-color: var(--focus-dark);
+  --treeview-selected-color: var(--focus-dark);
+  --treeview-selected-color-pressed: var(--focus-dark);
+  --treeview-checkmark-color: var(--focus-dark);
+}
+
 .react-aria-Tree {
   display: flex;
   flex-direction: column;
@@ -8,7 +22,7 @@
   box-sizing: border-box;
 
   &[data-focus-visible] {
-    outline: 2px solid var(--focus-ring-color);
+    outline: 2px solid var(--treeview-focus-ring-color);
     outline-offset: -1px;
   }
 
@@ -56,7 +70,7 @@
     }
 
     &[data-focus-visible] {
-      outline: 2px solid var(--focus-ring-color);
+      outline: 2px solid var(--treeview-focus-ring-color);
       outline-offset: -2px;
     }
 
@@ -67,7 +81,7 @@
     &[data-selected] {
       background: var(--highlight-background);
       color: var(--highlight-foreground);
-      --focus-ring-color: var(--highlight-foreground);
+      --treeview-focus-ring-color: var(--highlight-foreground);
 
       &[data-focus-visible] {
         outline-color: var(--highlight-foreground);
@@ -106,17 +120,17 @@
   }
 
   :where(.react-aria-TreeItem) .react-aria-Checkbox {
-    --selected-color: var(--highlight-foreground);
-    --selected-color-pressed: var(--highlight-foreground-pressed);
-    --checkmark-color: var(--highlight-background);
-    --background-color: var(--highlight-background);
+    --treeview-selected-color: var(--highlight-foreground);
+    --treeview-selected-color-pressed: var(--highlight-foreground-pressed);
+    --treeview-checkmark-color: var(--highlight-background);
+    --treeview-background-color: var(--highlight-background);
   }
 }
 
 .react-aria-Checkbox {
-  --selected-color: var(--highlight-background);
-  --selected-color-pressed: var(--highlight-background-pressed);
-  --checkmark-color: var(--highlight-foreground);
+  --treeview-selected-color: var(--highlight-background);
+  --treeview-selected-color-pressed: var(--highlight-background-pressed);
+  --treeview-checkmark-color: var(--highlight-foreground);
 
   display: flex;
   /* This is needed so the HiddenInput is positioned correctly */
@@ -127,8 +141,8 @@
   color: var(--text-color);
   forced-color-adjust: none;
 
-  width: 1.143rem;
-  height: 1.143rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 2px solid var(--border-color);
   border-radius: 4px;
   transition: all 200ms;
@@ -141,7 +155,7 @@
     width: 1rem;
     height: 1rem;
     fill: none;
-    stroke: var(--checkmark-color);
+    stroke: var(--treeview-checkmark-color);
     stroke-width: 3px;
     stroke-dasharray: 22px;
     stroke-dashoffset: 66;
@@ -149,22 +163,22 @@
   }
 
   &[data-pressed] {
-    border-color: var(--border-color-pressed);
+    border-color: var(--treeview-border-color-pressed);
   }
 
   &[data-focus-visible] {
-    outline: 2px solid var(--focus-ring-color);
+    outline: 2px solid var(--treeview-focus-ring-color);
     outline-offset: 2px;
   }
 
   &[data-selected],
   &[data-indeterminate] {
-    border-color: red;
-    background: var(--selected-color);
+    border-color: var(--treeview-selected-color);
+    background: var(--treeview-selected-color);
 
     &[data-pressed] {
-      border-color: var(--selected-color-pressed);
-      background: var(--selected-color-pressed);
+      border-color: var(--treeview-selected-color-pressed);
+      background: var(--treeview-selected-color-pressed);
     }
 
     svg {
@@ -175,7 +189,7 @@
   &[data-indeterminate] {
     & svg {
       stroke: none;
-      fill: var(--checkmark-color);
+      fill: var(--treeview-checkmark-color);
     }
   }
 }
