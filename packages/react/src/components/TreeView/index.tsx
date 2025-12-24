@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Collection, Tree, TreeItem } from 'react-aria-components';
 import TreeViewTreeItemContent from './TreeViewTreeItemContent';
 
@@ -20,8 +20,9 @@ interface TreeViewFileType {
 const TreeView = ({ onAction, ...props }: TreeViewProps) => {
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({});
 
-  const handleCheckChange = (id: string, checked: boolean) => {
+  const handleChange = (id: string, checked: boolean) => {
     setCheckedIds((prev) => ({ ...prev, [id]: checked }));
+    console.log('strudel', id);
   };
 
   const renderItem = useCallback(
@@ -29,21 +30,17 @@ const TreeView = ({ onAction, ...props }: TreeViewProps) => {
       return (
         <TreeItem id={id} textValue={textValue} onAction={onAction}>
           <TreeViewTreeItemContent
-            checkboxId={id}
-            checkboxLabel={textValue}
+            id={id}
+            textValue={textValue}
             checked={!!checkedIds[id]}
-            onCheckChange={(checked) => handleCheckChange(id, checked)}
+            handleChange={(checked) => handleChange(id, checked)}
           />
           <Collection items={children}>{children && renderItem}</Collection>
         </TreeItem>
       );
     },
-    [checkedIds, handleCheckChange, onAction]
+    [checkedIds, onAction]
   );
-
-  useEffect(() => {
-    console.log(checkedIds);
-  }, [checkedIds]);
 
   return <Tree {...props}>{renderItem}</Tree>;
 };

@@ -12,19 +12,20 @@ export interface TreeViewTreeItemContentProps
   extends Omit<TreeItemContentProps, 'children'> {
   children?: React.ReactNode;
   checked?: boolean;
-  onCheckChange?: (checked: boolean) => void;
-  checkboxId?: string;
-  checkboxLabel?: React.ReactNode;
+  handleChange?: (checked: boolean) => void;
+  id: string;
+  textValue?: string;
 }
 
 function TreeViewTreeItemContent({
   children,
   checked,
-  onCheckChange,
-  checkboxId = '',
-  checkboxLabel = undefined,
+  handleChange,
+  id,
+  textValue,
   ...rest
 }: TreeViewTreeItemContentProps) {
+  console.log('strudel', checked);
   return (
     <TreeItemContent {...rest}>
       {({ selectionBehavior, selectionMode }: TreeItemContentRenderProps) => (
@@ -32,13 +33,15 @@ function TreeViewTreeItemContent({
           <Button slot="chevron">
             <Icon type="chevron-right" label="expand or collapse" />
           </Button>
-          {selectionBehavior === 'toggle' && selectionMode !== 'none' && (
+          {selectionBehavior === 'toggle' && selectionMode !== 'none' ? (
             <Checkbox
-              id={checkboxId}
-              label={checkboxLabel}
+              id={id}
+              label={textValue}
               checked={checked}
-              onChange={(e) => onCheckChange?.(e.target.checked)}
+              onChange={(e) => handleChange?.(e.target.checked)}
             />
+          ) : (
+            <>{textValue}</>
           )}
           {children}
         </>
