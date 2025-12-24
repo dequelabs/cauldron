@@ -8,18 +8,37 @@ import {
 } from 'react-aria-components';
 import Checkbox from '../Checkbox';
 
+export interface TreeViewTreeItemContentProps
+  extends Omit<TreeItemContentProps, 'children'> {
+  children?: React.ReactNode;
+  checked?: boolean;
+  onCheckChange?: (checked: boolean) => void;
+  checkboxId?: string;
+  checkboxLabel?: React.ReactNode;
+}
+
 function TreeViewTreeItemContent({
-  children
-}: Omit<TreeItemContentProps, 'children'> & { children?: React.ReactNode }) {
+  children,
+  checked,
+  onCheckChange,
+  checkboxId = '',
+  checkboxLabel = undefined,
+  ...rest
+}: TreeViewTreeItemContentProps) {
   return (
-    <TreeItemContent>
+    <TreeItemContent {...rest}>
       {({ selectionBehavior, selectionMode }: TreeItemContentRenderProps) => (
         <>
           <Button slot="chevron">
             <Icon type="chevron-right" label="expand or collapse" />
           </Button>
           {selectionBehavior === 'toggle' && selectionMode !== 'none' && (
-            <Checkbox id={''} label={undefined} />
+            <Checkbox
+              id={checkboxId}
+              label={checkboxLabel}
+              checked={checked}
+              onChange={(e) => onCheckChange?.(e.target.checked)}
+            />
           )}
           {children}
         </>
