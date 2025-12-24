@@ -11,7 +11,7 @@ import Checkbox from '../Checkbox';
 export interface TreeViewItemContentProps
   extends Omit<TreeItemContentProps, 'children'> {
   children?: React.ReactNode;
-  checked?: boolean;
+  checkedIds?: Record<string, boolean>;
   handleChange?: (checked: boolean) => void;
   id: string;
   textValue?: string;
@@ -19,13 +19,12 @@ export interface TreeViewItemContentProps
 
 function TreeViewItemContent({
   children,
-  checked,
+  checkedIds,
   handleChange,
   id,
   textValue,
   ...rest
 }: TreeViewItemContentProps) {
-  console.log('strudel', checked);
   return (
     <TreeItemContent {...rest}>
       {({ selectionBehavior, selectionMode }: TreeItemContentRenderProps) => (
@@ -37,7 +36,7 @@ function TreeViewItemContent({
             <Checkbox
               id={id}
               label={textValue}
-              checked={checked}
+              checked={checkedIds?.[id] === true}
               onChange={(e) => handleChange?.(e.target.checked)}
             />
           ) : (
