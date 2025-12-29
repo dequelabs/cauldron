@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Tree } from 'react-aria-components';
 import TreeViewItem from './TreeViewItem';
 
@@ -17,23 +17,27 @@ interface TreeViewProps {
   defaultExpandedKeys?: string[];
 }
 
-const TreeView = ({ items, ...rest }: TreeViewProps) => {
+const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({});
 
-  const handleChange = (id: string, checked: boolean) => {
+  const setMultipleChecked = (id: string, checked: boolean) => {
     setCheckedIds((prev) => ({ ...prev, [id]: checked }));
   };
 
-  useEffect(() => {
-    console.log('checkedIds', checkedIds);
-  }, [checkedIds]);
+  const setSingleChecked = (id: string, checked: boolean) => {
+    setCheckedIds({ [id]: checked });
+  };
+
+  console.log('selectionMode', selectionMode);
 
   return (
-    <Tree {...rest}>
+    <Tree selectionMode={selectionMode} {...rest}>
       {items.map((item) => (
         <TreeViewItem
           key={item.id}
-          handleChange={handleChange}
+          handleChange={
+            selectionMode === 'single' ? setSingleChecked : setMultipleChecked
+          }
           checkedIds={checkedIds}
           {...item}
         />
