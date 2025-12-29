@@ -12,8 +12,8 @@ interface TreeViewItemProps extends TreeViewFileType {
 const TreeViewItem = ({
   id,
   textValue,
-  children,
   checkedIds,
+  children,
   handleChange,
   onAction
 }: TreeViewItemProps) => (
@@ -24,7 +24,7 @@ const TreeViewItem = ({
       checkedIds={checkedIds}
       handleChange={(checked) => handleChange(id, checked)}
     />
-    {children && children.length > 0 && (
+    {children && children?.length > 0 && (
       <Collection items={children}>
         {children.map((child) => (
           <TreeViewItem
@@ -39,4 +39,5 @@ const TreeViewItem = ({
   </TreeItem>
 );
 
+TreeViewItem.displayName = 'TreeViewItem';
 export default TreeViewItem;

@@ -8,21 +8,20 @@ import {
 } from 'react-aria-components';
 import Checkbox from '../Checkbox';
 
-export interface TreeViewItemContentProps
-  extends Omit<TreeItemContentProps, 'children'> {
-  children?: React.ReactNode;
+export interface TreeViewItemContentProps extends TreeItemContentProps {
+  id: string;
+  textValue: string;
   checkedIds?: Record<string, boolean>;
   handleChange?: (checked: boolean) => void;
-  id: string;
-  textValue?: string;
+  children?: React.ReactNode;
 }
 
 function TreeViewItemContent({
-  children,
-  checkedIds,
-  handleChange,
   id,
   textValue,
+  checkedIds,
+  handleChange,
+  children,
   ...rest
 }: TreeViewItemContentProps) {
   return (
@@ -30,7 +29,7 @@ function TreeViewItemContent({
       {({ selectionBehavior, selectionMode }: TreeItemContentRenderProps) => (
         <>
           <Button slot="chevron">
-            <Icon type="chevron-right" label="expand or collapse" />
+            <Icon type="chevron-right" />
           </Button>
           {selectionBehavior === 'toggle' && selectionMode !== 'none' ? (
             <Checkbox
@@ -49,4 +48,5 @@ function TreeViewItemContent({
   );
 }
 
+TreeViewItemContent.displayName = 'TreeViewItemContent';
 export default TreeViewItemContent;
