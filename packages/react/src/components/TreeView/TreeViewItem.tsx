@@ -1,6 +1,6 @@
+import React from 'react';
 import { Collection, TreeItem } from 'react-aria-components';
 import TreeViewItemContent from './TreeViewItemContent';
-import React from 'react';
 import { TreeViewFileType } from '.';
 
 interface TreeViewItemProps extends TreeViewFileType {

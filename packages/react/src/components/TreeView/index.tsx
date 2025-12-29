@@ -5,7 +5,6 @@ import TreeViewItem from './TreeViewItem';
 export interface TreeViewFileType {
   id: string;
   textValue: string;
-  type?: 'directory' | 'file';
   children?: TreeViewFileType[];
 }
 
@@ -27,8 +26,6 @@ const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
   const setSingleChecked = (id: string, checked: boolean) => {
     setCheckedIds({ [id]: checked });
   };
-
-  console.log('selectionMode', selectionMode);
 
   return (
     <Tree selectionMode={selectionMode} {...rest}>
