@@ -27,15 +27,13 @@ function TreeViewExample() {
     {
       id: '1',
       textValue: 'Documents',
-      type: 'directory',
       children: [
         {
           id: '2',
           textValue: 'Project',
-          type: 'directory',
           children: [
-            { id: '3', textValue: 'Weekly Report', type: 'file' },
-            { id: '4', textValue: 'Budget', type: 'file' }
+            { id: '3', textValue: 'Weekly Report' },
+            { id: '4', textValue: 'Budget' }
           ]
         }
       ]
@@ -43,10 +41,9 @@ function TreeViewExample() {
     {
       id: '5',
       textValue: 'Photos',
-      type: 'directory',
       children: [
-        { id: '6', textValue: 'Image 1', type: 'file' },
-        { id: '7', textValue: 'Image 2', type: 'file' }
+        { id: '6', textValue: 'Image 1' },
+        { id: '7', textValue: 'Image 2' }
       ]
     }
   ];
@@ -55,7 +52,7 @@ function TreeViewExample() {
       aria-label="Files"
       onAction={onAction}
       selectionBehavior="toggle"
-      selectionMode="single"
+      selectionMode="multiple"
       defaultExpandedKeys={['1', '2']}
       items={items}
     />

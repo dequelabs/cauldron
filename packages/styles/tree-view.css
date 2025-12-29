@@ -36,7 +36,6 @@
     outline: none;
     cursor: default;
     color: var(--text-color);
-    font-size: 1.072rem;
     position: relative;
     transform: translateZ(0);
 
@@ -53,11 +52,6 @@
       svg {
         rotate: 0deg;
         transition: rotate 200ms;
-        width: 12px;
-        height: 12px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 3px;
       }
     }
 
