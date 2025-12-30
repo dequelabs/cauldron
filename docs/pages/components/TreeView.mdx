@@ -20,8 +20,10 @@ import { TreeView } from '@deque/cauldron-react';
 
 ```jsx example
 function TreeViewExample() {
-  const onAction = () => {
-    console.log('Action triggered');
+  const onAction = (key) => {
+    const elm = document.querySelector(`div[data-key="${key}"]`);
+    const selected = elm.getAttribute('aria-selected', 'true');
+    elm.setAttribute('aria-selected', selected === 'true' ? 'false' : 'true');
   };
   const items = [
     {
@@ -49,10 +51,7 @@ function TreeViewExample() {
   ];
   return (
     <TreeView
-      aria-label="Files"
-      onAction={onAction}
-      selectionBehavior="toggle"
-      selectionMode="multiple"
+      selectionMode="none"
       defaultExpandedKeys={['1', '2']}
       items={items}
     />
