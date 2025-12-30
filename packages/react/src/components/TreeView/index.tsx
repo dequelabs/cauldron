@@ -15,12 +15,7 @@ interface TreeViewProps {
   defaultExpandedKeys?: string[];
 }
 
-const TreeView = ({
-  items,
-  onAction,
-  selectionMode,
-  defaultExpandedKeys
-}: TreeViewProps) => {
+const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({});
 
   const setMultipleChecked = (id: string, checked: boolean) => {
@@ -32,11 +27,7 @@ const TreeView = ({
   };
 
   return (
-    <Tree
-      selectionMode={selectionMode}
-      onAction={onAction}
-      defaultExpandedKeys={defaultExpandedKeys}
-    >
+    <Tree selectionMode={selectionMode} {...rest}>
       {items.map((item) => (
         <TreeViewItem
           key={item.id}
