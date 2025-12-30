@@ -11,12 +11,16 @@ export interface TreeViewFileType {
 interface TreeViewProps {
   items: TreeViewFileType[];
   onAction?: () => void;
-  selectionBehavior?: 'replace' | 'toggle';
   selectionMode?: 'none' | 'single' | 'multiple';
   defaultExpandedKeys?: string[];
 }
 
-const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
+const TreeView = ({
+  items,
+  onAction,
+  selectionMode,
+  defaultExpandedKeys
+}: TreeViewProps) => {
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({});
 
   const setMultipleChecked = (id: string, checked: boolean) => {
@@ -28,7 +32,11 @@ const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
   };
 
   return (
-    <Tree selectionMode={selectionMode} {...rest}>
+    <Tree
+      selectionMode={selectionMode}
+      onAction={onAction}
+      defaultExpandedKeys={defaultExpandedKeys}
+    >
       {items.map((item) => (
         <TreeViewItem
           key={item.id}
