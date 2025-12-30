@@ -10,6 +10,14 @@ const items: TreeViewFileType[] = [
       { id: '2', textValue: 'Child 1' },
       { id: '3', textValue: 'Child 2' }
     ]
+  },
+  {
+    id: '4',
+    textValue: 'Sibling',
+    children: [
+      { id: '5', textValue: 'Child 1' },
+      { id: '6', textValue: 'Child 2' }
+    ]
   }
 ];
 

@@ -35,7 +35,7 @@ function TreeViewItemContent({
             <Checkbox
               id={id}
               label={textValue}
-              checked={checkedIds?.[id] === true}
+              checked={checkedIds?.[id]}
               onChange={(e) => handleChange?.(e.target.checked)}
             />
           ) : (
