@@ -9,15 +9,21 @@ export interface TreeViewFileType {
 }
 
 interface TreeViewProps {
+  ariaLabel: string;
   items: TreeViewFileType[];
   onAction?: () => void;
   selectionMode?: 'none' | 'single' | 'multiple';
   defaultExpandedKeys?: string[];
 }
 
-const TreeView = ({ items, selectionMode, ...rest }: TreeViewProps) => {
+const TreeView = ({
+  ariaLabel,
+  items,
+  selectionMode,
+  ...rest
+}: TreeViewProps) => {
   return (
-    <Tree selectionMode={selectionMode} {...rest}>
+    <Tree aria-label={ariaLabel} selectionMode={selectionMode} {...rest}>
       {items.map((item) => (
         <TreeViewItem key={item.id} {...item} />
       ))}

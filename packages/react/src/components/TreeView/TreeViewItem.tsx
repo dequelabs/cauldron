@@ -46,4 +46,5 @@ const TreeViewItem = ({
 );
 
 TreeViewItem.displayName = 'TreeViewItem';
+
 export default TreeViewItem;
