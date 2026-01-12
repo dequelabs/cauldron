@@ -16,16 +16,11 @@ interface TreeViewProps {
   defaultExpandedKeys?: string[];
 }
 
-const TreeView = ({
-  ariaLabel,
-  items,
-  selectionMode,
-  ...rest
-}: TreeViewProps) => {
+const TreeView = ({ ariaLabel, items, onAction, ...rest }: TreeViewProps) => {
   return (
-    <Tree aria-label={ariaLabel} selectionMode={selectionMode} {...rest}>
+    <Tree aria-label={ariaLabel} {...rest}>
       {items.map((item) => (
-        <TreeViewItem key={item.id} {...item} />
+        <TreeViewItem key={item.id} onAction={onAction} {...item} />
       ))}
     </Tree>
   );
