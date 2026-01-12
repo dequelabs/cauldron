@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Button,
   Collection,
@@ -32,10 +32,26 @@ const TreeViewItem = ({
         selected === 'true' ? 'false' : 'true'
       );
       if (onAction) {
-        onAction(id);
+        onAction(key);
       }
     }
   };
+
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const elm = treeItemRef.current;
+    if (!elm) return;
+    const observer = new MutationObserver(() => {
+      const selected = (elm as HTMLDivElement).getAttribute('aria-selected');
+      setChecked(selected === 'true');
+    });
+    observer.observe(elm, {
+      attributes: true,
+      attributeFilter: ['aria-selected']
+    });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <TreeItem
@@ -46,13 +62,13 @@ const TreeViewItem = ({
       ref={treeItemRef}
     >
       <TreeItemContent>
-        {({ selectionMode, isSelected }: TreeItemContentRenderProps) => (
+        {({ selectionMode }: TreeItemContentRenderProps) => (
           <>
             <Button slot="chevron">
               <Icon type="chevron-right" />
             </Button>
             {selectionMode !== 'none' ? (
-              <Checkbox id={id} label={textValue} checked={isSelected} />
+              <Checkbox id={id} label={textValue} checked={checked} />
             ) : (
               <>{textValue}</>
             )}
