@@ -12,51 +12,93 @@ import { TreeView } from '@deque/cauldron-react';
 
 ## Examples
 
-### Default
+### Single Selection
 
-`TreeView` is a ...
-
-<Note>A note</Note>
+Allows only one item to be selected at a time.
 
 ```jsx example
-function TreeViewExample() {
+function SingleSelectionTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return <TreeView selectionMode="single" items={items} />;
+}
+```
+
+### Multiple Selection
+
+Allows multiple items to be selected at once.
+
+```jsx example
+function MultipleSelectionTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return <TreeView selectionMode="multiple" items={items} />;
+}
+```
+
+### Default Expanded
+
+TreeView with some items expanded by default.
+
+```jsx example
+function DefaultExpandedTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return <TreeView defaultExpandedKeys={['1']} items={items} />;
+}
+```
+
+### Custom onAction
+
+TreeView with a custom action handler for item selection.
+
+```jsx example
+function ActionTreeView() {
   const onAction = (key) => {
-    const elm = document.querySelector(`div[data-key="${key}"]`);
-    const selected = elm.getAttribute('aria-selected', 'true');
-    elm.setAttribute('aria-selected', selected === 'true' ? 'false' : 'true');
+    alert(`Selected item: ${key}`);
   };
   const items = [
     {
       id: '1',
       textValue: 'Documents',
-      children: [
-        {
-          id: '2',
-          textValue: 'Project',
-          children: [
-            { id: '3', textValue: 'Weekly Report' },
-            { id: '4', textValue: 'Budget' }
-          ]
-        }
-      ]
+      children: [{ id: '2', textValue: 'Project' }]
     },
     {
-      id: '5',
+      id: '3',
       textValue: 'Photos',
-      children: [
-        { id: '6', textValue: 'Image 1' },
-        { id: '7', textValue: 'Image 2' }
-      ]
+      children: [{ id: '4', textValue: 'Image 1' }]
     }
   ];
-  return (
-    <TreeView
-      selectionMode="multiple"
-      defaultExpandedKeys={['1', '2']}
-      items={items}
-    />
-  );
+  return <TreeView selectionMode="single" onAction={onAction} items={items} />;
 }
 ```
-
-<Note title="Accessibility note"></Note>
