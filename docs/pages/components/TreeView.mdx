@@ -14,7 +14,7 @@ import { TreeView } from '@deque/cauldron-react';
 
 ### Single Selection
 
-Allows only one item to be selected at a time.
+Allows only one tree item to be selected at a time.
 
 ```jsx example
 function SingleSelectionTreeView() {
@@ -36,7 +36,7 @@ function SingleSelectionTreeView() {
 
 ### Multiple Selection
 
-Allows multiple items to be selected at once.
+Allows multiple tree items to be selected at once.
 
 ```jsx example
 function MultipleSelectionTreeView() {
@@ -58,7 +58,7 @@ function MultipleSelectionTreeView() {
 
 ### Default Expanded
 
-TreeView with some items expanded by default.
+Pass keys into the `defaultExpandedKeys` prop array to expand them by default.
 
 ```jsx example
 function DefaultExpandedTreeView() {
@@ -72,9 +72,18 @@ function DefaultExpandedTreeView() {
       id: '3',
       textValue: 'Photos',
       children: [{ id: '4', textValue: 'Image 1' }]
+    },
+    {
+      id: '5',
+      textValue: 'More Photos',
+      children: [
+        { id: '6', textValue: 'Another Image 1' },
+        { id: '7', textValue: 'Another Image 2' },
+        { id: '8', textValue: 'Another Image 3' }
+      ]
     }
   ];
-  return <TreeView defaultExpandedKeys={['1']} items={items} />;
+  return <TreeView defaultExpandedKeys={['1', '5']} items={items} />;
 }
 ```
 
