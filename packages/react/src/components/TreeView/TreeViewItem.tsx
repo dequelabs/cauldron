@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Button,
   Collection,
@@ -21,8 +21,12 @@ const TreeViewItem = ({
   onAction
 }: TreeViewItemProps) => {
   const treeItemRef = useRef(null);
+  const [onActionCheckboxIsSelected, setOnActionCheckboxIsSelected] =
+    useState(false);
 
   //by default, react-aria-components doesn't toggle the selected state if you provide a custom onAction handler.
+  //See: https://react-aria.adobe.com/Tree#selection-and-actions
+  //This functions prevents anyone using the component with onAction from having to manually manage checkbox state.
   const handleOnAction = (key: string, onAction?: (key: string) => void) => {
     const elm = treeItemRef.current;
     if (elm) {
@@ -31,6 +35,7 @@ const TreeViewItem = ({
         'aria-selected',
         selected === 'true' ? 'false' : 'true'
       );
+      setOnActionCheckboxIsSelected((prev) => !prev);
       if (onAction) {
         onAction(key);
       }
@@ -55,7 +60,7 @@ const TreeViewItem = ({
               <Checkbox
                 id={id}
                 label={textValue}
-                checked={isSelected}
+                checked={onAction ? onActionCheckboxIsSelected : isSelected}
                 onChangeToggle={false}
               />
             ) : (
@@ -67,7 +72,7 @@ const TreeViewItem = ({
       {children && children?.length > 0 && (
         <Collection items={children}>
           {children.map((child) => (
-            <TreeViewItem key={child.id} {...child} />
+            <TreeViewItem key={child.id} onAction={onAction} {...child} />
           ))}
         </Collection>
       )}
