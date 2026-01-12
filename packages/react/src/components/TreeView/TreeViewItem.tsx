@@ -42,7 +42,7 @@ const TreeViewItem = ({
       key={id}
       id={id}
       textValue={textValue}
-      onAction={() => handleOnAction(id, onAction)}
+      {...(onAction ? { onAction: () => handleOnAction(id, onAction) } : {})}
       ref={treeItemRef}
     >
       <TreeItemContent>
