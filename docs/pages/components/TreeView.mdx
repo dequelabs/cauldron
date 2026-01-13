@@ -7,7 +7,7 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 import { TreeView } from '@deque/cauldron-react';
 
 ```jsx
-import { TreeView } from '@deque/cauldron-react';
+import { TreeView, type TreeViewFileType } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -79,11 +79,15 @@ function DefaultExpandedTreeView() {
       children: [
         { id: '6', textValue: 'Another Image 1' },
         { id: '7', textValue: 'Another Image 2' },
-        { id: '8', textValue: 'Another Image 3' }
+        {
+          id: '8',
+          textValue: 'Another Image 3',
+          children: [{ id: '9', textValue: 'Another Image 4' }]
+        }
       ]
     }
   ];
-  return <TreeView defaultExpandedKeys={['1', '5']} items={items} />;
+  return <TreeView defaultExpandedKeys={['1', '5', '8']} items={items} />;
 }
 ```
 
@@ -111,3 +115,41 @@ function ActionTreeView() {
   return <TreeView selectionMode="single" onAction={onAction} items={items} />;
 }
 ```
+
+## Props
+
+<ComponentProps
+  props={[
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      required: true,
+      description: 'Accessible label for the tree view component.'
+    },
+    {
+      name: 'items',
+      type: 'TreeViewFileType[]',
+      required: true,
+      description: 'Array of tree items to display.'
+    },
+    {
+      name: 'onAction',
+      type: '() => void',
+      defaultValue: 'undefined',
+      description: 'Callback fired when a tree item is activated.'
+    },
+    {
+      name: 'selectionMode',
+      type: "'none' | 'single' | 'multiple'",
+      defaultValue: 'none',
+      description:
+        'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectioMode is none'
+    },
+    {
+      name: 'defaultExpandedKeys',
+      type: 'string[]',
+      defaultValue: 'undefined',
+      description: 'Keys of tree items that should be expanded by default.'
+    }
+  ]}
+/>
