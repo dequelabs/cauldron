@@ -30,7 +30,13 @@ function SingleSelectionTreeView() {
       children: [{ id: '4', textValue: 'Image 1' }]
     }
   ];
-  return <TreeView selectionMode="single" items={items} />;
+  return (
+    <TreeView
+      ariaLabel="Single Selection Tree View"
+      selectionMode="single"
+      items={items}
+    />
+  );
 }
 ```
 
@@ -52,7 +58,13 @@ function MultipleSelectionTreeView() {
       children: [{ id: '4', textValue: 'Image 1' }]
     }
   ];
-  return <TreeView selectionMode="multiple" items={items} />;
+  return (
+    <TreeView
+      ariaLabel="Multiple Selection Tree View"
+      selectionMode="multiple"
+      items={items}
+    />
+  );
 }
 ```
 
@@ -87,7 +99,13 @@ function DefaultExpandedTreeView() {
       ]
     }
   ];
-  return <TreeView defaultExpandedKeys={['1', '5', '8']} items={items} />;
+  return (
+    <TreeView
+      ariaLabel="None Selection Tree View"
+      defaultExpandedKeys={['1', '5', '8']}
+      items={items}
+    />
+  );
 }
 ```
 
@@ -112,7 +130,14 @@ function ActionTreeView() {
       children: [{ id: '4', textValue: 'Image 1' }]
     }
   ];
-  return <TreeView selectionMode="single" onAction={onAction} items={items} />;
+  return (
+    <TreeView
+      ariaLabel="Tree View with Action Handler"
+      selectionMode="single"
+      onAction={onAction}
+      items={items}
+    />
+  );
 }
 ```
 
@@ -143,7 +168,7 @@ function ActionTreeView() {
       type: "'none' | 'single' | 'multiple'",
       defaultValue: 'none',
       description:
-        'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectioMode is none'
+        'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectionMode is none'
     },
     {
       name: 'defaultExpandedKeys',
