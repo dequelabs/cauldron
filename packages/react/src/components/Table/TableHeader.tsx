@@ -17,6 +17,8 @@ interface TableHeaderProps
   sortAscendingAnnouncement?: string;
   sortDescendingAnnouncement?: string;
   align?: ColumnAlignment;
+  /* Only applies a visual style to the header, does not change semantics */
+  variant?: 'header' | 'cell';
 }
 
 const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
@@ -29,6 +31,7 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       sortAscendingAnnouncement = 'sorted ascending',
       sortDescendingAnnouncement = 'sorted descending',
       align,
+      variant = 'header',
       style,
       ...other
     },
@@ -57,10 +60,14 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       <th
         ref={tableHeaderRef}
         aria-sort={sortDirection}
-        className={classNames('TableHeader', className, {
-          'TableHeader--sort-ascending': sortDirection === 'ascending',
-          'TableHeader--sort-descending': sortDirection === 'descending'
-        })}
+        className={classNames(
+          variant === 'cell' ? 'TableCell' : 'TableHeader',
+          className,
+          {
+            'TableHeader--sort-ascending': sortDirection === 'ascending',
+            'TableHeader--sort-descending': sortDirection === 'descending'
+          }
+        )}
         style={{ ...tableGridStyles, ...style }}
         {...other}
       >
