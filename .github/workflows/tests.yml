@@ -15,7 +15,7 @@ jobs:
   react:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
         with:
           root: false
@@ -29,7 +29,7 @@ jobs:
   screenshots:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
         with:
           root: true
@@ -44,7 +44,7 @@ jobs:
           yarn screenshots:docker
           yarn screenshots
       - name: Screenshot test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: screenshot-test-results
@@ -54,7 +54,7 @@ jobs:
   a11y:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
         with:
           packages-react: true

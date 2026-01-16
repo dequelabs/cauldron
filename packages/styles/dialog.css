@@ -68,6 +68,7 @@
   display: flex;
   align-items: center;
   margin-left: var(--dialog-padding);
+  word-break: break-word;
 }
 
 .Dialog__close {

@@ -4,7 +4,7 @@ To create a new release of `@deque/cauldron-react` and `@deque/cauldron-styles`,
 
 ## Creating a New Release
 
-- Open a new browser tab to https://github.com/dequelabs/cauldron/actions/workflows/create-release.yml
+- Open a new browser tab to https://github.com/dequelabs/cauldron/actions/workflows/create-release-pr.yml
 - Run the `workflow_dispatch` event from the `develop` branch
 
 This will create a release PR after the action has run successfully.
