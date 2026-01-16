@@ -15,4 +15,5 @@
   padding: 0;
   color: var(--page-header-overline-color);
   font-size: var(--text-size-base);
+  word-break: break-word;
 }
