@@ -97,6 +97,10 @@
   outline-offset: unset;
 }
 
+.TableHeader__cell-variant {
+  font-weight: var(--font-weight-normal);
+}
+
 /* These styles are not applying and will be deprecated */
 .TableHeader--sort-ascending .TableHeader__sort-button,
 .TableHeader--sort-decscending .TableHeader__sort-button {
