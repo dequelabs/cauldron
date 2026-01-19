@@ -1139,10 +1139,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.6.tgz#c68390597525838703aaa2e5bebb3e5d66b3eb70"
   integrity sha512-GvbqJLD3UQTjTXOCt5nFDj96hNY14OmgjJpMdtxZwvtwLmKAgxET+/2SNUC2lw+SrSyTF6mUM9owmNv0E/s0+Q==
 
-"@fontsource/roboto@^5.2.8":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.8.tgz#73411c434b9162019b8ca18abd8245489809cca9"
-  integrity sha512-oh9g4Cg3loVMz9MWeKWfDI+ooxxG1aRVetkiKIb2ESS2rrryGecQ/y4pAj4z5A5ebyw450dYRi/c4k/I3UBhHA==
+"@fontsource/roboto@^5.2.9":
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.9.tgz#55092cf992ab8d5082be73b79b42f383a9c0903c"
+  integrity sha512-ZTkyHiPk74B/aj8BZWbsxD5Yu+Lq+nR64eV4wirlrac2qXR7jYk2h6JlLYuOuoruTkGQWNw2fMuKNavw7/rg0w==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"
@@ -1397,10 +1397,10 @@
   dependencies:
     playwright "1.50.1"
 
-"@puppeteer/browsers@2.10.12":
-  version "2.10.12"
-  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.12.tgz#9d9376c205aa38e7344cadb2809e786df2cf3e78"
-  integrity sha512-mP9iLFZwH+FapKJLeA7/fLqOlSUwYpMwjR1P5J23qd4e7qGJwecJccJqHYrjw33jmIZYV4dtiTHPD/J+1e7cEw==
+"@puppeteer/browsers@2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.11.0.tgz#b2dcd7cb02dd2de5909531d00e717a04bd61de73"
+  integrity sha512-n6oQX6mYkG8TRPuPXmbPidkUbsSRalhmaaVAQxvH1IkQy63cwsH+kOjB3e4cpCDHg0aSvsiX9bQ4s2VB6mGWUQ==
   dependencies:
     debug "^4.4.3"
     extract-zip "^2.0.1"
@@ -2906,9 +2906,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001746:
-  version "1.0.30001757"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001757.tgz"
-  integrity sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ==
+  version "1.0.30001762"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001762.tgz"
+  integrity sha512-PxZwGNvH7Ak8WX5iXzoK1KPZttBXNPuaOvI2ZYU7NrlM+d9Ov+TUvlLOBNGzVXAntMSMMlJPd+jY6ovrVjSmUw==
 
 ccount@^2.0.0:
   version "2.0.1"
@@ -2972,10 +2972,10 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromium-bidi@10.5.1:
-  version "10.5.1"
-  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-10.5.1.tgz#2aad9791509442bb39e96c4f3aeef4dfdb424979"
-  integrity sha512-rlj6OyhKhVTnk4aENcUme3Jl9h+cq4oXu4AzBcvr8RMmT6BR4a3zSNT9dbIfXr9/BS6ibzRyDhowuw4n2GgzsQ==
+chromium-bidi@12.0.1:
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-12.0.1.tgz#3edb1420ab5a52004c10c223b928622c128b4f27"
+  integrity sha512-fGg+6jr0xjQhzpy5N4ErZxQ4wF7KLEvhGZXD6EgvZKDhu7iOhZXnZhcDxPJDcwTcrD48NPzOCo84RP2lv3Z+Cg==
   dependencies:
     mitt "^3.0.1"
     zod "^3.24.1"
@@ -3806,10 +3806,10 @@ devlop@^1.0.0, devlop@^1.1.0:
   dependencies:
     dequal "^2.0.0"
 
-devtools-protocol@0.0.1508733:
-  version "0.0.1508733"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1508733.tgz#047deb3531470efda2c7bf43c10b3ae9e4b3d51b"
-  integrity sha512-QJ1R5gtck6nDcdM+nlsaJXcelPEI7ZxSMw1ujHpO1c4+9l+Nue5qlebi9xO1Z2MGr92bFOQTW7/rrheh5hHxDg==
+devtools-protocol@0.0.1534754:
+  version "0.0.1534754"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1534754.tgz#75fb0496ff133d8d7e73d2e49600b37fcb4f46a9"
+  integrity sha512-26T91cV5dbOYnXdJi5qQHoTtUoNEqwkHcAyu/IKtjIAxiEqPMrDiRkDOPWVsGfNZGmlQVHQbZRSjD8sxagWVsQ==
 
 diff@^4.0.1:
   version "4.0.2"
@@ -8430,29 +8430,29 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-puppeteer-core@24.26.0:
-  version "24.26.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.26.0.tgz#aba3eac2f3a54c94581d40d1f2ff6b5fcfb3f179"
-  integrity sha512-l3aMYhTdSzazZ14rfpNAPGhnYHsd8mwduqybhu5aO/OR+d24P/V/eo8XTB3GB2yX2ZWf9GLAVcx8nnVPFZpP/A==
+puppeteer-core@24.34.0:
+  version "24.34.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.34.0.tgz#00c7f63b4a83d4ca2ec5ea3a234588fb2ce7c994"
+  integrity sha512-24evawO+mUGW4mvS2a2ivwLdX3gk8zRLZr9HP+7+VT2vBQnm0oh9jJEZmUE3ePJhRkYlZ93i7OMpdcoi2qNCLg==
   dependencies:
-    "@puppeteer/browsers" "2.10.12"
-    chromium-bidi "10.5.1"
+    "@puppeteer/browsers" "2.11.0"
+    chromium-bidi "12.0.1"
     debug "^4.4.3"
-    devtools-protocol "0.0.1508733"
+    devtools-protocol "0.0.1534754"
     typed-query-selector "^2.12.0"
-    webdriver-bidi-protocol "0.3.8"
+    webdriver-bidi-protocol "0.3.10"
     ws "^8.18.3"
 
-puppeteer@^24.26.0:
-  version "24.26.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.26.0.tgz#f2ac677314d450070610e9ea740c99e207c81ec6"
-  integrity sha512-5F4A3dGeuw0jJOR3hGV969TO8oi+JG2TzqxAFvH+gxzxh0ILZmiFskWPlhcWQh5s9HAtgZyktOBDqs6zOi7IKA==
+puppeteer@^24.34.0:
+  version "24.34.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-24.34.0.tgz#061f6e97ce9511863ec83cd6f17a27253c68b5e9"
+  integrity sha512-Sdpl/zsYOsagZ4ICoZJPGZw8d9gZmK5DcxVal11dXi/1/t2eIXHjCf5NfmhDg5XnG9Nye+yo/LqMzIxie2rHTw==
   dependencies:
-    "@puppeteer/browsers" "2.10.12"
-    chromium-bidi "10.5.1"
+    "@puppeteer/browsers" "2.11.0"
+    chromium-bidi "12.0.1"
     cosmiconfig "^9.0.0"
-    devtools-protocol "0.0.1508733"
-    puppeteer-core "24.26.0"
+    devtools-protocol "0.0.1534754"
+    puppeteer-core "24.34.0"
     typed-query-selector "^2.12.0"
 
 q@^1.5.1:
@@ -10611,10 +10611,10 @@ web-streams-polyfill@^3.0.3:
   resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
   integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
-webdriver-bidi-protocol@0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/webdriver-bidi-protocol/-/webdriver-bidi-protocol-0.3.8.tgz#9c822b2647fd16d22b1b6fd730d4a3b863c93b93"
-  integrity sha512-21Yi2GhGntMc671vNBCjiAeEVknXjVRoyu+k+9xOMShu+ZQfpGQwnBqbNz/Sv4GXZ6JmutlPAi2nIJcrymAWuQ==
+webdriver-bidi-protocol@0.3.10:
+  version "0.3.10"
+  resolved "https://registry.yarnpkg.com/webdriver-bidi-protocol/-/webdriver-bidi-protocol-0.3.10.tgz#437405564ff7e200371468f4f1eba1ff5537e119"
+  integrity sha512-5LAE43jAVLOhB/QqX4bwSiv0Hg1HBfMmOuwBSXHdvg4GMGu9Y0lIq7p4R/yySu6w74WmaR4GM4H9t2IwLW7hgw==
 
 webpack-cli@^6.0.1:
   version "6.0.1"
