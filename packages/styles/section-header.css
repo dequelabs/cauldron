@@ -12,6 +12,7 @@
 
 .SectionHeader__content {
   display: grid;
+  word-break: break-word;
   grid-template-columns: 1fr;
   grid-template-areas:
     'heading'
