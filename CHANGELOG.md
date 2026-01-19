@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.23.3](https://github.com/dequelabs/cauldron/compare/v6.23.2...v6.23.3) (2026-01-19)
+
+
+### Bug Fixes
+
+* **styles:** add word-break for `SectionHeader` ([#2197](https://github.com/dequelabs/cauldron/issues/2197)) ([5ab3d80](https://github.com/dequelabs/cauldron/commit/5ab3d80643fe68db845ba43803e93f331cf025c7))
+
 ### [6.23.2](https://github.com/dequelabs/cauldron/compare/v6.23.1...v6.23.2) (2026-01-16)
 
 
