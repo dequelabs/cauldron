@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.23.2](https://github.com/dequelabs/cauldron/compare/v6.23.1...v6.23.2) (2026-01-16)
+
+
+### Bug Fixes
+
+* **styles:** add word-break for `PageHeader`, `Dialog` overline ([#2192](https://github.com/dequelabs/cauldron/issues/2192)) ([76795b6](https://github.com/dequelabs/cauldron/commit/76795b6c81fb2d2028b9be3086abd14ed3c86124))
+
 ### [6.23.1](https://github.com/dequelabs/cauldron/compare/v6.23.0...v6.23.1) (2025-10-28)
 
 
