@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.23.1",
+  "version": "6.23.2",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
