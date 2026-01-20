@@ -18,7 +18,12 @@ const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
-  'children' | 'onClick' | 'onKeyDown' | 'aria-expanded' | 'aria-haspopup'
+  | 'children'
+  | 'onClick'
+  | 'onKeyDown'
+  | 'aria-expanded'
+  | 'aria-haspopup'
+  | 'aria-controls'
 > & {
   ref: React.RefObject<HTMLButtonElement>;
 };
@@ -67,6 +72,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       actionMenuList.props.ref
     );
     const [triggerId] = useId(1, 'menu-trigger');
+    const [menuId] = useId(1, 'menu');
 
     const handleTriggerClick = useCallback(
       (
@@ -135,6 +141,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, [open]);
 
+    const hidden = renderInTrigger && !open;
+
     const overlay = (
       <AnchoredOverlay
         ref={actionMenuRef}
@@ -147,15 +155,18 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         offset={4}
         portal={portal}
         style={{ display: !open ? 'none' : undefined, ...style }}
+        aria-hidden={hidden}
         {...props}
       >
         {React.cloneElement(actionMenuList, {
           ref: actionMenuListRef,
+          id: menuId,
           role: 'menu',
           onAction: handleAction,
           'aria-labelledby': triggerId,
           focusStrategy,
-          focusDisabledOptions: true
+          focusDisabledOptions: true,
+          hidden
         })}
       </AnchoredOverlay>
     );
@@ -167,9 +178,10 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         onClick: handleTriggerClick,
         onKeyDown: handleTriggerKeyDown,
         'aria-expanded': open,
-        'aria-haspopup': 'menu'
+        'aria-haspopup': 'menu',
+        'aria-controls': menuId
       };
-    }, [handleTriggerClick, open]);
+    }, [handleTriggerClick, open, menuId]);
 
     if (renderInTrigger) {
       // istanbul ignore next
