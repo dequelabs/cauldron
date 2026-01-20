@@ -118,6 +118,10 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, []);
 
+    const handleOverlayBlur = useCallback(() => {
+      setOpen(false);
+    }, []);
+
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
         // istanbul ignore else
@@ -156,6 +160,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         portal={portal}
         style={{ display: !open ? 'none' : undefined, ...style }}
         aria-hidden={hidden}
+        onBlur={handleOverlayBlur}
         {...props}
       >
         {React.cloneElement(actionMenuList, {
