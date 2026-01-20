@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
-import Dialog, { DialogContent, DialogFooter } from './';
+import Dialog, {
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton
+} from './';
+import { useDialogContext } from './DialogContext';
 import TooltipTabstop from '../TooltipTabstop';
 import axe from '../../axe';
 
@@ -172,6 +179,9 @@ test('should render close button', () => {
 });
 
 test('should not render close button when forceAction is true', () => {
+  const consoleWarn = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => null);
   render(
     <Dialog {...defaultProps} forceAction>
       Test Dialog
@@ -180,6 +190,7 @@ test('should not render close button when forceAction is true', () => {
   expect(
     within(screen.getByRole('dialog')).queryByRole('button', { name: 'Close' })
   ).not.toBeInTheDocument();
+  consoleWarn.mockRestore();
 });
 
 test('should render heading from text', () => {
@@ -252,6 +263,9 @@ describe('when "forceAction" is false', () => {
 
 describe('when "forceAction" is true', () => {
   test('it should not call "onClose" when escape is pressed', async () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => null);
     const user = userEvent.setup();
     const onClose = jest.fn();
     render(
@@ -263,6 +277,7 @@ describe('when "forceAction" is true', () => {
     expect(onClose).not.toHaveBeenCalled();
     await user.keyboard('{Escape}');
     expect(onClose).not.toHaveBeenCalled();
+    consoleWarn.mockRestore();
   });
 });
 
@@ -316,4 +331,231 @@ test('should return no axe violations', async () => {
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
+});
+
+describe('custom header', () => {
+  test('should render custom header with DialogHeader, DialogHeading, and DialogCloseButton', async () => {
+    render(
+      <Dialog show>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+        <DialogContent>Content</DialogContent>
+      </Dialog>
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(
+      within(dialog).queryByRole('heading', { name: 'Custom Heading' })
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).queryByRole('button', { name: 'Close' })
+    ).toBeInTheDocument();
+  });
+
+  test('should focus custom heading when rendered', async () => {
+    render(
+      <Dialog show>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      </Dialog>
+    );
+
+    await waitFor(() =>
+      expect(
+        within(screen.getByRole('dialog')).queryByRole('heading', {
+          name: 'Custom Heading'
+        })
+      ).toHaveFocus()
+    );
+  });
+
+  test('should call onClose when custom close button is clicked', async () => {
+    const user = userEvent.setup();
+    const onClose = jest.fn();
+
+    render(
+      <Dialog show onClose={onClose}>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      </Dialog>
+    );
+
+    const closeButton = within(screen.getByRole('dialog')).getByRole('button', {
+      name: 'Close'
+    });
+    await user.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  test('should not render custom close button when forceAction is true', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => null);
+    render(
+      <Dialog show forceAction>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      </Dialog>
+    );
+
+    expect(
+      within(screen.getByRole('dialog')).queryByRole('button', {
+        name: 'Close'
+      })
+    ).not.toBeInTheDocument();
+    consoleWarn.mockRestore();
+  });
+
+  test('should render DialogCloseButton with custom children', () => {
+    render(
+      <Dialog show>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton>Dismiss</DialogCloseButton>
+        </DialogHeader>
+      </Dialog>
+    );
+
+    expect(
+      within(screen.getByRole('dialog')).queryByRole('button', {
+        name: 'Dismiss'
+      })
+    ).toBeInTheDocument();
+  });
+
+  test('should use closeButtonText prop for DialogCloseButton', () => {
+    render(
+      <Dialog show closeButtonText="Dismiss Dialog">
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      </Dialog>
+    );
+
+    expect(
+      within(screen.getByRole('dialog')).queryByRole('button', {
+        name: 'Dismiss Dialog'
+      })
+    ).toBeInTheDocument();
+  });
+
+  test('should support custom heading level via level prop', () => {
+    render(
+      <Dialog show>
+        <DialogHeader>
+          <DialogHeading level={4}>Custom Level Heading</DialogHeading>
+        </DialogHeader>
+      </Dialog>
+    );
+
+    expect(
+      within(screen.getByRole('dialog')).queryByRole('heading', {
+        level: 4,
+        name: 'Custom Level Heading'
+      })
+    ).toBeInTheDocument();
+  });
+
+  test('should inherit heading level from Dialog heading prop', () => {
+    render(
+      <Dialog show heading={{ text: 'Title', level: 3 }}>
+        <DialogContent>Content</DialogContent>
+      </Dialog>
+    );
+
+    expect(
+      within(screen.getByRole('dialog')).queryByRole('heading', {
+        level: 3,
+        name: 'Title'
+      })
+    ).toBeInTheDocument();
+  });
+});
+
+describe('useDialogContext', () => {
+  test('should throw error when used outside of Dialog', () => {
+    const consoleError = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => null);
+
+    const InvalidComponent = () => {
+      useDialogContext();
+      return null;
+    };
+
+    expect(() => render(<InvalidComponent />)).toThrow(
+      'Dialog compound components must be rendered within a Dialog'
+    );
+
+    consoleError.mockRestore();
+  });
+});
+
+describe('development warning', () => {
+  test('should warn when no heading is provided and no DialogHeading is rendered', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => null);
+
+    render(
+      <Dialog show>
+        <DialogContent>Content without heading</DialogContent>
+      </Dialog>
+    );
+
+    expect(consoleWarn).toHaveBeenCalledWith(
+      'Dialog: No heading provided. When using a custom header, include a DialogHeading component for accessibility.'
+    );
+
+    consoleWarn.mockRestore();
+  });
+
+  test('should not warn when DialogHeading is provided in custom header', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => null);
+
+    render(
+      <Dialog show>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+        </DialogHeader>
+        <DialogContent>Content</DialogContent>
+      </Dialog>
+    );
+
+    expect(consoleWarn).not.toHaveBeenCalled();
+
+    consoleWarn.mockRestore();
+  });
+
+  test('should warn when DialogCloseButton is used with forceAction', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => null);
+
+    render(
+      <Dialog show forceAction>
+        <DialogHeader>
+          <DialogHeading>Custom Heading</DialogHeading>
+          <DialogCloseButton />
+        </DialogHeader>
+      </Dialog>
+    );
+
+    expect(consoleWarn).toHaveBeenCalledWith(
+      'DialogCloseButton: Component will not render because forceAction is true. Remove DialogCloseButton from your custom header when using forceAction.'
+    );
+
+    consoleWarn.mockRestore();
+  });
 });
