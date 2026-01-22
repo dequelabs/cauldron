@@ -599,7 +599,7 @@ test('should not wrap text in buttons by default', async ({ mount, page }) => {
   const component = await mount(
     <div>
       <Button variant="primary">{internalText}</Button>
-      <Button variant="primary" style={{ minWidth: '10px' }}>
+      <Button variant="primary" style={{ minWidth: '10px !important' }}>
         {internalText}
       </Button>
     </div>
