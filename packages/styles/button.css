@@ -55,6 +55,7 @@
   justify-items: center;
   justify-content: center;
   gap: var(--space-smallest);
+  min-width: max-content;
 }
 
 .Button--tag,

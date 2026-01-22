@@ -591,3 +591,24 @@ test('should have screenshot for Button[variant="badge"]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[variant=badge]');
 });
+test('should not wrap text in buttons by default', async ({ mount, page }) => {
+  await page.setViewportSize({ height: 600, width: 320 });
+  const internalText =
+    'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem 1 ';
+  const internalTextTwo =
+    'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.';
+  const component = await mount(
+    <div>
+      <Button variant="primary">{internalText}</Button>
+      <Button variant="secondary" style={{ minWidth: '10px' }}>
+        {internalTextTwo}
+      </Button>
+    </div>
+  );
+  const button = component.getByText(internalText);
+  const buttonBoundingBox = await button.boundingBox();
+  expect(buttonBoundingBox?.height).toBe(59);
+  const buttonOverriden = component.getByText(internalTextTwo);
+  const buttonOverridenBoundingBox = await buttonOverriden.boundingBox();
+  expect(buttonOverridenBoundingBox?.height).toBeGreaterThan(59);
+});
