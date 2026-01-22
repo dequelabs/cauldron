@@ -24,9 +24,19 @@ export {
 export { default as NavBar, NavItem } from './components/NavBar';
 export { default as SideBar } from './components/SideBar';
 export { Alert, AlertContent, AlertActions } from './components/Alert';
-export { Dialog, DialogContent, DialogFooter } from './components/Dialog';
+export {
+  Dialog,
+  DialogHeader,
+  DialogHeading,
+  DialogCloseButton,
+  DialogContent,
+  DialogFooter
+} from './components/Dialog';
 export {
   default as Modal,
+  ModalCloseButton,
+  ModalHeader,
+  ModalHeading,
   ModalContent,
   ModalFooter
 } from './components/Modal';
