@@ -594,21 +594,22 @@ test('should have screenshot for Button[variant="badge"]', async ({
 test('should not wrap text in buttons by default', async ({ mount, page }) => {
   await page.setViewportSize({ height: 600, width: 320 });
   const internalText =
-    'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem 1 ';
-  const internalTextTwo =
-    'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.';
+    'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ';
+
+  ('Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.');
   const component = await mount(
     <div>
       <Button variant="primary">{internalText}</Button>
-      <Button variant="secondary" style={{ minWidth: '10px' }}>
-        {internalTextTwo}
+      <Button variant="primary" style={{ minWidth: '10px' }}>
+        {internalText}
       </Button>
     </div>
   );
-  const button = component.getByText(internalText);
-  const buttonBoundingBox = await button.boundingBox();
-  expect(buttonBoundingBox?.height).toBe(59);
-  const buttonOverriden = component.getByText(internalTextTwo);
-  const buttonOverridenBoundingBox = await buttonOverriden.boundingBox();
-  expect(buttonOverridenBoundingBox?.height).toBeGreaterThan(59);
+  const buttons = component.getByRole('button');
+  const firstButton = buttons.first();
+  const firstButtonBoundingBox = await firstButton.boundingBox();
+  expect(firstButtonBoundingBox?.height).toBe(59);
+  const lastButton = buttons.last();
+  const lastButtonBoundingBox = await lastButton.boundingBox();
+  expect(lastButtonBoundingBox?.height).toBeGreaterThan(59);
 });
