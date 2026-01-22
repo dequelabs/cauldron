@@ -1,0 +1,180 @@
+---
+title: TreeView
+description: A component that displays a hierarchical tree structure.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TreeView/TreeView.tsx
+---
+
+import { TreeView } from '@deque/cauldron-react';
+
+```jsx
+import { TreeView, type TreeViewFileType } from '@deque/cauldron-react';
+```
+
+## Examples
+
+### Single Selection
+
+Allows only one tree item to be selected at a time.
+
+```jsx example
+function SingleSelectionTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <TreeView
+      ariaLabel="Single Selection Tree View"
+      selectionMode="single"
+      items={items}
+    />
+  );
+}
+```
+
+### Multiple Selection
+
+Allows multiple tree items to be selected at once.
+
+```jsx example
+function MultipleSelectionTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <TreeView
+      ariaLabel="Multiple Selection Tree View"
+      selectionMode="multiple"
+      items={items}
+    />
+  );
+}
+```
+
+### Default Expanded
+
+Pass keys into the `defaultExpandedKeys` prop array to expand them by default.
+
+```jsx example
+function DefaultExpandedTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    },
+    {
+      id: '5',
+      textValue: 'More Photos',
+      children: [
+        { id: '6', textValue: 'Another Image 1' },
+        { id: '7', textValue: 'Another Image 2' },
+        {
+          id: '8',
+          textValue: 'Another Image 3',
+          children: [{ id: '9', textValue: 'Another Image 4' }]
+        }
+      ]
+    }
+  ];
+  return (
+    <TreeView
+      ariaLabel="None Selection Tree View"
+      defaultExpandedKeys={['1', '5', '8']}
+      items={items}
+    />
+  );
+}
+```
+
+### Custom onAction
+
+TreeView with a custom action handler for item selection.
+
+```jsx example
+function ActionTreeView() {
+  const onAction = (key) => {
+    alert(`Selected item: ${key}`);
+  };
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <TreeView
+      ariaLabel="Tree View with Action Handler"
+      selectionMode="single"
+      onAction={onAction}
+      items={items}
+    />
+  );
+}
+```
+
+## Props
+
+<ComponentProps
+  props={[
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      required: true,
+      description: 'Accessible label for the tree view component.'
+    },
+    {
+      name: 'items',
+      type: 'TreeViewFileType[]',
+      required: true,
+      description: 'Array of tree items to display.'
+    },
+    {
+      name: 'onAction',
+      type: '() => void',
+      defaultValue: 'undefined',
+      description: 'Callback fired when a tree item is activated.'
+    },
+    {
+      name: 'selectionMode',
+      type: "'none' | 'single' | 'multiple'",
+      defaultValue: 'none',
+      description:
+        'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectionMode is none'
+    },
+    {
+      name: 'defaultExpandedKeys',
+      type: 'string[]',
+      defaultValue: 'undefined',
+      description: 'Keys of tree items that should be expanded by default.'
+    }
+  ]}
+/>

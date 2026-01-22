@@ -1,0 +1,74 @@
+:root {
+  --treeview-padding: 16px;
+  --treeview-focus-ring-color: var(--focus-light);
+  --treeview-selected-color: var(--focus-light);
+  --treeview-highlight-background: var(--accent-light);
+}
+
+.cauldron--theme-dark {
+  --treeview-focus-ring-color: var(--focus-dark);
+  --treeview-selected-color: var(--focus-dark);
+  --treeview-highlight-background: var(--accent-dark);
+}
+
+.react-aria-Tree {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  outline: none;
+  box-sizing: border-box;
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--treeview-focus-ring-color);
+    outline-offset: -1px;
+  }
+
+  .react-aria-TreeItem {
+    display: flex;
+    align-items: center;
+    gap: 0.571rem;
+    min-height: 28px;
+    padding: 0.286rem 0.286rem 0.286rem 0.571rem;
+    --padding: var(--treeview-padding);
+    outline: none;
+    position: relative;
+    transform: translateZ(0);
+
+    .react-aria-Button[slot='chevron'] {
+      all: unset;
+      display: flex;
+      visibility: hidden;
+      align-items: center;
+      justify-content: center;
+      width: 1.3rem;
+      height: 100%;
+      padding-left: calc(
+        (var(--tree-item-level) - 1) * var(--treeview-padding)
+      );
+
+      svg {
+        rotate: 0deg;
+        transition: rotate 200ms;
+      }
+    }
+
+    &[data-has-child-items] .react-aria-Button[slot='chevron'] {
+      visibility: visible;
+    }
+
+    &[data-expanded] .react-aria-Button[slot='chevron'] svg {
+      rotate: 90deg;
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--treeview-focus-ring-color);
+      outline-offset: -2px;
+    }
+
+    &[aria-selected='true'] {
+      background: var(--treeview-highlight-background);
+    }
+  }
+}
