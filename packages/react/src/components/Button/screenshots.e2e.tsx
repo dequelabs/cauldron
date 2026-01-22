@@ -597,18 +597,22 @@ test('should not wrap text in buttons by default', async ({ mount, page }) => {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
 
   const component = await mount(
-    <div>
+    <div
+      className="Button-wrap"
+      style={{ display: 'flex', flexDirection: 'column', width: '320px' }}
+    >
       <Button variant="primary">{internalText}</Button>
-      <Button variant="primary" style={{ minWidth: '10px !important' }}>
+      <Button variant="primary" style={{ minWidth: '10px' }}>
         {internalText}
       </Button>
     </div>
   );
+  await expect(component).toHaveScreenshot('button-wrap');
   const buttons = component.getByRole('button');
   const firstButton = buttons.first();
   const firstButtonBoundingBox = await firstButton.boundingBox();
   expect(firstButtonBoundingBox?.height).toBe(36);
   const lastButton = buttons.last();
   const lastButtonBoundingBox = await lastButton.boundingBox();
-  expect(lastButtonBoundingBox?.height).toBeGreaterThan(36);
+  expect(lastButtonBoundingBox?.height).toEqual(36);
 });
