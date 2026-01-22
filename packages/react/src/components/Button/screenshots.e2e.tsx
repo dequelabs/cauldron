@@ -607,7 +607,7 @@ test('should not wrap text in buttons by default', async ({ mount, page }) => {
   const buttons = component.getByRole('button');
   const firstButton = buttons.first();
   const firstButtonBoundingBox = await firstButton.boundingBox();
-  expect(firstButtonBoundingBox?.height).toBe(59);
+  expect(firstButtonBoundingBox?.height).toBe(36);
   const lastButton = buttons.last();
   const lastButtonBoundingBox = await lastButton.boundingBox();
   expect(lastButtonBoundingBox?.height).toBeGreaterThan(59);
