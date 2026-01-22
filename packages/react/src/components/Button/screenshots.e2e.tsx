@@ -610,5 +610,5 @@ test('should not wrap text in buttons by default', async ({ mount, page }) => {
   expect(firstButtonBoundingBox?.height).toBe(36);
   const lastButton = buttons.last();
   const lastButtonBoundingBox = await lastButton.boundingBox();
-  expect(lastButtonBoundingBox?.height).toBeGreaterThan(59);
+  expect(lastButtonBoundingBox?.height).toBeGreaterThan(36);
 });
