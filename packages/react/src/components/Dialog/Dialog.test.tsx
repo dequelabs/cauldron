@@ -179,9 +179,6 @@ test('should render close button', () => {
 });
 
 test('should not render close button when forceAction is true', () => {
-  const consoleWarn = jest
-    .spyOn(console, 'warn')
-    .mockImplementation(() => null);
   render(
     <Dialog {...defaultProps} forceAction>
       Test Dialog
@@ -190,7 +187,6 @@ test('should not render close button when forceAction is true', () => {
   expect(
     within(screen.getByRole('dialog')).queryByRole('button', { name: 'Close' })
   ).not.toBeInTheDocument();
-  consoleWarn.mockRestore();
 });
 
 test('should render heading from text', () => {
@@ -263,9 +259,6 @@ describe('when "forceAction" is false', () => {
 
 describe('when "forceAction" is true', () => {
   test('it should not call "onClose" when escape is pressed', async () => {
-    const consoleWarn = jest
-      .spyOn(console, 'warn')
-      .mockImplementation(() => null);
     const user = userEvent.setup();
     const onClose = jest.fn();
     render(
@@ -277,7 +270,6 @@ describe('when "forceAction" is true', () => {
     expect(onClose).not.toHaveBeenCalled();
     await user.keyboard('{Escape}');
     expect(onClose).not.toHaveBeenCalled();
-    consoleWarn.mockRestore();
   });
 });
 

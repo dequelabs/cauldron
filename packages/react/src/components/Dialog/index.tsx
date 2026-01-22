@@ -159,17 +159,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       closeButtonText
     };
 
-    const defaultHeader = heading ? (
-      <DialogHeader>
-        <DialogHeading>
-          {typeof heading === 'object' && 'text' in heading
-            ? heading.text
-            : heading}
-        </DialogHeading>
-        <DialogCloseButton />
-      </DialogHeader>
-    ) : null;
-
     const dialog = (
       <ClickOutsideListener onClickOutside={handleClickOutside}>
         <div
@@ -183,7 +172,16 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         >
           <DialogContext.Provider value={contextValue}>
             <div className="Dialog__inner">
-              {defaultHeader}
+              {heading ? (
+                <DialogHeader>
+                  <DialogHeading>
+                    {typeof heading === 'object' && 'text' in heading
+                      ? heading.text
+                      : heading}
+                  </DialogHeading>
+                  <DialogCloseButton />
+                </DialogHeader>
+              ) : null}
               {children}
             </div>
           </DialogContext.Provider>
