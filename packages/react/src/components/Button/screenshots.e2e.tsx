@@ -591,7 +591,7 @@ test('should have screenshot for Button[variant="badge"]', async ({
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--button[variant=badge]');
 });
-test('should not wrap text in buttons by default', async ({ mount, page }) => {
+test('should not wrap button contents by default', async ({ mount, page }) => {
   await page.setViewportSize({ height: 600, width: 320 });
   const internalText =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
