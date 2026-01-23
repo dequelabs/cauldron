@@ -62,7 +62,7 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
         aria-sort={sortDirection}
         className={classNames(
           variant === 'cell'
-            ? ['TableCell', 'TableHeader__cell-variant']
+            ? ['TableCell', 'TableHeader--CellVariant']
             : 'TableHeader',
           className,
           {

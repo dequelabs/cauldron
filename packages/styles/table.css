@@ -97,7 +97,8 @@
   outline-offset: unset;
 }
 
-.TableHeader__cell-variant {
+/* Applies TableCell styles to a <TableHeader> with variant="cell". Only results in visual changes, not semantic ones. */
+.TableHeader--CellVariant {
   font-weight: var(--font-weight-normal);
 }
 
