@@ -1663,7 +1663,7 @@ test('should have no axe violations with no matching results', async () => {
   });
 
   const listboxId = combobox.getAttribute('aria-controls');
-  const listbox = document.getElementById(listboxId);
+  const listbox = document.getElementById(listboxId as string);
   expect(listbox?.getAttribute('role')).toEqual('presentation');
   expect(listbox?.getAttribute('tabindex')).toBeNull();
 
