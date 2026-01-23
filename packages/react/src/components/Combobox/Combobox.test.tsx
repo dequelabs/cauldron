@@ -1656,13 +1656,35 @@ test('should have no axe violations with no matching results', async () => {
   );
 
   expect(comboboxRef.current).toBeTruthy();
-  fireEvent.focus(screen.getByRole('combobox'));
-  fireEvent.change(screen.getByRole('combobox'), {
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+  fireEvent.change(combobox, {
     target: { value: 'orange' }
   });
 
+  const listboxId = combobox.getAttribute('aria-controls');
+  const listbox = document.getElementById(listboxId);
+  expect(listbox?.getAttribute('role')).toEqual('presentation');
+  expect(listbox?.getAttribute('tabindex')).toBeNull();
+
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
+});
+
+test('should set tabindex="-1" on listbox when results are available', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  const combobox = screen.getByRole('combobox');
+  fireEvent.focus(combobox);
+
+  const listbox = screen.getByRole('listbox');
+  expect(listbox.getAttribute('tabindex')).toEqual('-1');
 });
 
 test('should render combobox with description', () => {
