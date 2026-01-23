@@ -98,7 +98,7 @@
 }
 
 /* Applies TableCell styles to a <TableHeader> with variant="cell". Only results in visual changes, not semantic ones. */
-.TableHeader--CellVariant {
+.TableHeader--cell-variant {
   font-weight: var(--font-weight-normal);
 }
 
