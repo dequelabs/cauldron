@@ -145,17 +145,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       }
     }, [show, heading]);
 
-    if (!show || !isBrowser()) {
-      return null;
-    }
-
-    const portalElement = portal
-      ? 'current' in portal
-        ? portal.current
-        : portal
-      : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-        document.body;
-
     const contextValue: DialogContextValue = useMemo(
       () => ({
         headingId,
@@ -174,6 +163,17 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         closeButtonText
       ]
     );
+
+    if (!show || !isBrowser()) {
+      return null;
+    }
+
+    const portalElement = portal
+      ? 'current' in portal
+        ? portal.current
+        : portal
+      : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+        document.body;
 
     const dialog = (
       <ClickOutsideListener onClickOutside={handleClickOutside}>
