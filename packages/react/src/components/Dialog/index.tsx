@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useCallback, forwardRef } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  forwardRef
+} from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
@@ -150,14 +156,24 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document.body;
 
-    const contextValue: DialogContextValue = {
-      headingId,
-      headingRef,
-      headingLevel,
-      onClose: handleClose,
-      forceAction,
-      closeButtonText
-    };
+    const contextValue: DialogContextValue = useMemo(
+      () => ({
+        headingId,
+        headingRef,
+        headingLevel,
+        onClose: handleClose,
+        forceAction,
+        closeButtonText
+      }),
+      [
+        headingId,
+        headingRef,
+        headingLevel,
+        handleClose,
+        forceAction,
+        closeButtonText
+      ]
+    );
 
     const dialog = (
       <ClickOutsideListener onClickOutside={handleClickOutside}>
