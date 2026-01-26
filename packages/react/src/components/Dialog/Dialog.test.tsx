@@ -493,22 +493,16 @@ describe('useDialogContext', () => {
 });
 
 describe('development warning', () => {
-  test('should warn when no heading is provided and no DialogHeading is rendered', () => {
-    const consoleWarn = jest
-      .spyOn(console, 'warn')
-      .mockImplementation(() => null);
-
-    render(
-      <Dialog show>
-        <DialogContent>Content without heading</DialogContent>
-      </Dialog>
-    );
-
-    expect(consoleWarn).toHaveBeenCalledWith(
+  test('should throw error when no heading is provided and no DialogHeading is rendered', () => {
+    expect(() =>
+      render(
+        <Dialog show>
+          <DialogContent>Content without heading</DialogContent>
+        </Dialog>
+      )
+    ).toThrow(
       'Dialog: No heading provided. When using a custom header, include a DialogHeading component for accessibility.'
     );
-
-    consoleWarn.mockRestore();
   });
 
   test('should not warn when DialogHeading is provided in custom header', () => {
