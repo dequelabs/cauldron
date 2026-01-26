@@ -4,11 +4,26 @@ description: A dismissable dialog component.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Modal/index.tsx
 ---
 
-import { useState } from 'react'
-import { Button, Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+import { useState } from 'react';
+import {
+  Button,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalHeading
+} from '@deque/cauldron-react';
 
 ```jsx
-import { Modal, ModalContent, ModalFooter } from '@deque/cauldron-react'
+import {
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalHeading
+} from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -19,11 +34,13 @@ By default, modals display with a heading and a dismissable close action:
 
 ```jsx example
 function DefaultModalExample() {
-  const [show, setShow] = useState(false)
-  const toggleModal = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleModal}>Toggle Default Modal</Button>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Default Modal
+      </Button>
       <Modal heading="Default Modal" show={show} onClose={toggleModal}>
         <ModalContent>
           Modal content here, get your modal content here!
@@ -33,7 +50,7 @@ function DefaultModalExample() {
         </ModalFooter>
       </Modal>
     </>
-  )
+  );
 }
 ```
 
@@ -45,12 +62,19 @@ Alternatively, an info variant is available that is less opinionated in its styl
 
 ```jsx example
 function UnstyledModalExample() {
-  const [show, setShow] = useState(false)
-  const toggleModal = () => setShow(!show)
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
   return (
     <>
-      <Button variant="secondary" onClick={toggleModal}>Toggle Info Modal</Button>
-      <Modal heading="Info Modal" variant="info" show={show} onClose={toggleModal}>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Info Modal
+      </Button>
+      <Modal
+        heading="Info Modal"
+        variant="info"
+        show={show}
+        onClose={toggleModal}
+      >
         <ModalContent>
           Modal content here, get your modal content here!
         </ModalContent>
@@ -59,7 +83,44 @@ function UnstyledModalExample() {
         </ModalFooter>
       </Modal>
     </>
-  )
+  );
+}
+```
+
+### Custom Header Markup
+
+`ModalHeader`, `ModalHeading`, and `ModalCloseButton` are included as custom compound components if you have a use case that requires different header markup.
+
+```jsx example
+function CustomHeaderMarkupModalExample() {
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Custom Header Markup Modal
+      </Button>
+      <Modal variant="info" show={show} onClose={toggleModal}>
+        <ModalHeader>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <ModalHeading>
+              This modal does uses custom header markup!
+            </ModalHeading>
+            <p style={{ marginLeft: 'var(--dialog-padding)' }}>
+              A cool introduction sentence about your modal.
+            </p>
+          </div>
+          <ModalCloseButton />
+        </ModalHeader>
+        <ModalContent>
+          Modal content here, get your modal content here!
+        </ModalContent>
+        <ModalFooter>
+          <Button onClick={toggleModal}>Ok</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
 }
 ```
 
@@ -79,8 +140,9 @@ function UnstyledModalExample() {
     {
       name: 'heading',
       type: ['React.ReactElement', 'object'],
-      required: true,
-      description: 'Displayed in the heading at the top of the alert. Optionally include the heading level.'
+      required: false,
+      description:
+        'Displayed in the heading at the top of the alert. Optionally include the heading level. If a heading prop is not included, a ModalHeading compound component must be rendered.'
     },
     {
       name: 'onClose',
@@ -117,11 +179,13 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
-  props={[{
-    name: 'align',
-    type: ['left', 'right', 'center'],
-    description: 'Set the alignment of modal content.'
-  }]}
+  props={[
+    {
+      name: 'align',
+      type: ['left', 'right', 'center'],
+      description: 'Set the alignment of modal content.'
+    }
+  ]}
 />
 
 ### ModalFooter
@@ -129,11 +193,13 @@ function UnstyledModalExample() {
 <ComponentProps
   children={true}
   className={true}
-  props={[{
-    name: 'align',
-    type: ['left', 'right', 'center'],
-    description: 'Set the alignment of modal footer content.'
-  }]}
+  props={[
+    {
+      name: 'align',
+      type: ['left', 'right', 'center'],
+      description: 'Set the alignment of modal footer content.'
+    }
+  ]}
 />
 
 ## Related Components

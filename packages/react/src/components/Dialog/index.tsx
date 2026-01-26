@@ -130,15 +130,10 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     });
 
     useEffect(() => {
-      if (
-        process.env.NODE_ENV !== 'production' &&
-        show &&
-        !heading &&
-        dialogRef.current
-      ) {
+      if (show && !heading && dialogRef.current) {
         const hasHeading = dialogRef.current.querySelector('.Dialog__heading');
         if (!hasHeading) {
-          console.warn(
+          throw Error(
             'Dialog: No heading provided. When using a custom header, include a DialogHeading component for accessibility.'
           );
         }
@@ -318,12 +313,11 @@ const DialogCloseButton = ({
 }: DialogCloseButtonProps) => {
   const { onClose, forceAction, closeButtonText } = useDialogContext();
 
-  if (forceAction) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        'DialogCloseButton: Component will not render because forceAction is true. Remove DialogCloseButton from your custom header when using forceAction.'
-      );
-    }
+  if (forceAction && process.env.NODE_ENV !== 'production') {
+    console.warn(
+      'DialogCloseButton: Component will not render because forceAction is true. Remove DialogCloseButton from your custom header when using forceAction.'
+    );
+
     return null;
   }
 
