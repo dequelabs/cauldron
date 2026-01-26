@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.24.0](https://github.com/dequelabs/cauldron/compare/v6.23.3...v6.24.0) (2026-01-26)
+
+
+### Features
+
+* **react:** add `TableHeader` visual cell variant ([#2196](https://github.com/dequelabs/cauldron/issues/2196)) ([dda8f64](https://github.com/dequelabs/cauldron/commit/dda8f64d355189702f631c568c4211ad05d5bfca))
+
+
+### Bug Fixes
+
+* combobox double tab ([#2208](https://github.com/dequelabs/cauldron/issues/2208)) ([9388747](https://github.com/dequelabs/cauldron/commit/9388747c67ba1adaabd56e45d34150ab95030086))
+
 ### [6.23.3](https://github.com/dequelabs/cauldron/compare/v6.23.2...v6.23.3) (2026-01-19)
 
 
