@@ -4,7 +4,7 @@ description: A container for tabular data (information presented in a two-dimens
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Table/Table.tsx
 ---
 
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
   TableFooter
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 
 ```js
 import {
@@ -24,7 +24,7 @@ import {
   TableHeader,
   TableRow,
   TableFooter
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -66,7 +66,8 @@ import {
 ```
 
 <Note>
-  Table width by default is set to 100%. If a different max-width is desired, you can simply use your own CSS or `--table-width` to apply it.
+  Table width by default is set to 100%. If a different max-width is desired,
+  you can simply use your own CSS or `--table-width` to apply it.
 </Note>
 
 ```jsx example
@@ -212,7 +213,7 @@ function SortableTableExample() {
   const [sort, setSort] = useState([null, 'none']);
   const [sortBy, sortDirection] = sort;
 
-  const comparator = data =>
+  const comparator = (data) =>
     data.sort((a, b) =>
       (sortDirection === 'ascending' ? a[sortBy] : b[sortBy]).localeCompare(
         sortDirection === 'ascending' ? b[sortBy] : a[sortBy]
@@ -221,8 +222,9 @@ function SortableTableExample() {
 
   const sortedData = sortBy ? comparator(tableData) : tableData;
 
-  const getCurrentSortDirection = column => column === sortBy ? sortDirection : 'none';
-  const getNextSortDirection = column =>
+  const getCurrentSortDirection = (column) =>
+    column === sortBy ? sortDirection : 'none';
+  const getNextSortDirection = (column) =>
     column === sortBy && sortDirection === 'ascending'
       ? 'descending'
       : 'ascending';
@@ -253,7 +255,7 @@ function SortableTableExample() {
         </TableRow>
       </TableHead>
       <TableBody>
-        {sortedData.map(contact => (
+        {sortedData.map((contact) => (
           <TableRow>
             <TableCell>{contact.first_name}</TableCell>
             <TableCell>{contact.last_name}</TableCell>
@@ -262,12 +264,14 @@ function SortableTableExample() {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
 ```
 
 <Note>
-  As a best practice, when a table has sorted columns an author should indicate which column is currently sorted by setting the sort direction for the active sorted column.
+  As a best practice, when a table has sorted columns an author should indicate
+  which column is currently sorted by setting the sort direction for the active
+  sorted column.
 </Note>
 
 ### With Row Headings
@@ -334,18 +338,64 @@ function SortableTableExample() {
 </Table>
 ```
 
+### With Row Headings (Cell Variant) and Column Headings
+
+```jsx example
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeader scope="col">Monday</TableHeader>
+      <TableHeader scope="col">Tuesday</TableHeader>
+      <TableHeader scope="col">Wednesday</TableHeader>
+      <TableHeader scope="col">Thursday</TableHeader>
+      <TableHeader scope="col">Friday</TableHeader>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableHeader scope="row" variant="cell">
+        Yes
+      </TableHeader>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row" variant="cell">
+        No
+      </TableHeader>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableHeader scope="row" variant="cell">
+        Yes
+      </TableHeader>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>No</TableCell>
+      <TableCell>Yes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
 ### Grid Layout
 
 The Table component supports an optional css grid layout that can specify column alignment and width and max-width definitions per column.
 
 ```jsx example
-<Table 
-  layout="grid" 
+<Table
+  layout="grid"
   columns={[
-    { width: 'max-content', align: 'start' }, 
-    { width: 'max-content', align: 'start' }, 
+    { width: 'max-content', align: 'start' },
+    { width: 'max-content', align: 'start' },
     { width: 'auto', maxWidth: '250', align: 'end' }
-  ]}>
+  ]}
+>
   <TableHead>
     <TableRow>
       <TableHeader scope="col">First Name</TableHeader>
@@ -378,9 +428,12 @@ The Table component supports an optional css grid layout that can specify column
 </Table>
 ```
 
-For column alignments, all cells will be positioned according to the alignment specified for that column, defaulting to `start`: 
+For column alignments, all cells will be positioned according to the alignment specified for that column, defaulting to `start`:
 
-<Table layout="grid" columns={[{ width: 'max-content', align: 'start' }, { align: 'start' }]}>
+<Table
+  layout="grid"
+  columns={[{ width: 'max-content', align: 'start' }, { align: 'start' }]}
+>
   <TableHead>
     <TableRow>
       <TableHeader scope="col">Alignment Type</TableHeader>
@@ -404,7 +457,7 @@ For column alignments, all cells will be positioned according to the alignment s
 </Table>
 
 For column sizing, the values are roughly equivalent to [track sizing for grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
- and the following values are supported:
+and the following values are supported:
 
 <Table layout="grid" columns={[{ width: 'max-content', align: 'start' }, { align: 'start' }]}>
   <TableHead>
@@ -464,7 +517,8 @@ For more advanced usage, the width value does not need to be specified as part o
     {
       name: 'columns',
       type: ['Array<Column>', 'number'],
-      description: 'Only allowed when the table has a grid layout. Sets the column widths and alignments for each column.'
+      description:
+        'Only allowed when the table has a grid layout. Sets the column widths and alignments for each column.'
     }
   ]}
 />
@@ -478,62 +532,61 @@ For more advanced usage, the width value does not need to be specified as part o
     {
       name: 'sortDirection',
       type: 'string',
-      description: 'The directions of the sorting, including `ascending`, `descending`, and `none`. They match the values of `aria-sort`.',
+      description:
+        'The directions of the sorting, including `ascending`, `descending`, and `none`. They match the values of `aria-sort`.',
       defaultValue: 'none'
     },
     {
       name: 'sortAscendingAnnouncement',
       type: 'string',
-      description: 'The message read to screen readers when the header changes to ascending.',
+      description:
+        'The message read to screen readers when the header changes to ascending.',
       defaultValue: 'sorted ascending'
     },
     {
       name: 'sortDescendingAnnouncement',
       type: 'string',
-      description: 'The message read to screen readers when the header changes to descending.',
+      description:
+        'The message read to screen readers when the header changes to descending.',
       defaultValue: 'sorted ascending'
     },
     {
       name: 'onSort',
       type: 'function',
-      description: 'The function that the implementer passes in to control the change of sort direction.',
+      description:
+        'The function that the implementer passes in to control the change of sort direction.',
       defaultValue: 'sorted ascending'
     },
     {
       name: 'align',
       type: ['start', 'center', 'end'],
-      description: 'Only allowed when the table has a grid layout. Overrides any column alignments for this table header.'
+      description:
+        'Only allowed when the table has a grid layout. Overrides any column alignments for this table header.'
+    },
+    {
+      name: 'variant',
+      type: ['header', 'cell'],
+      description: 'Visually display the header as a table cell',
+      defaultValue: 'header'
     }
   ]}
 />
 
 ### TableHead
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TableBody
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TableFooter
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TableRow
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TableCell
 
@@ -544,7 +597,8 @@ For more advanced usage, the width value does not need to be specified as part o
     {
       name: 'align',
       type: ['start', 'center', 'end'],
-      description: 'Only allowed when the table has a grid layout. Overrides any column alignments for this table cell.'
+      description:
+        'Only allowed when the table has a grid layout. Overrides any column alignments for this table cell.'
     }
   ]}
 />

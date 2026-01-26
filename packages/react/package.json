@@ -1,6 +1,6 @@
 {
   "name": "@deque/cauldron-react",
-  "version": "6.23.3",
+  "version": "6.24.0",
   "license": "MPL-2.0",
   "description": "Fully accessible react components library for Deque Cauldron",
   "homepage": "https://cauldron.dequelabs.com/",
@@ -28,7 +28,7 @@
     "focusable": "^2.3.0",
     "keyname": "^0.1.0",
     "react-id-generator": "^3.0.1",
-    "react-syntax-highlighter": "^15.5.0",
+    "react-syntax-highlighter": "^16.0.1",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "@types/node": "^17.0.42",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
-    "@types/react-syntax-highlighter": "^15.5.2",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@types/sinon": "^10",
     "autoprefixer": "^9.7.6",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -79,8 +79,5 @@
   "peerDependencies": {
     "react": ">=16.6 <= 18",
     "react-dom": ">=16.6 <= 18"
-  },
-  "resolutions": {
-    "**/refractor/prismjs": "^1.30.0"
   }
 }

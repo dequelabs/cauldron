@@ -457,3 +457,103 @@ test('returns 0 axe violations with descending sorting', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
+
+test('should render TableHeader with cell variant', () => {
+  render(
+    <Table>
+      <TableBody>
+        <TableRow>
+          <TableHeader scope="row" variant="cell">
+            Row Header
+          </TableHeader>
+          <TableCell>Cell Content</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('rowheader');
+  expect(tableHeader).toHaveClass('TableCell');
+  expect(tableHeader).not.toHaveClass('TableHeader');
+});
+
+test('should render TableHeader with default header variant', () => {
+  render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col">Column Header</TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('columnheader');
+  expect(tableHeader).toHaveClass('TableHeader');
+  expect(tableHeader).not.toHaveClass('TableCell');
+});
+
+test('should render TableHeader with explicit header variant', () => {
+  render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col" variant="header">
+            Column Header
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('columnheader');
+  expect(tableHeader).toHaveClass('TableHeader');
+  expect(tableHeader).not.toHaveClass('TableCell');
+});
+
+test('should render cell variant with custom className', () => {
+  render(
+    <Table>
+      <TableBody>
+        <TableRow>
+          <TableHeader scope="row" variant="cell" className="custom-class">
+            Row Header
+          </TableHeader>
+          <TableCell>Cell Content</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('rowheader');
+  expect(tableHeader).toHaveClass('TableCell', 'custom-class');
+});
+
+test('should render cell variant with sort functionality', () => {
+  const handleSort = jest.fn();
+  render(
+    <Table>
+      <TableBody>
+        <TableRow>
+          <TableHeader
+            scope="row"
+            variant="cell"
+            sortDirection="none"
+            onSort={handleSort}
+          >
+            Sortable Row Header
+          </TableHeader>
+          <TableCell>Cell Content</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  const tableHeader = screen.getByRole('rowheader');
+  expect(tableHeader).toHaveClass('TableCell');
+
+  const sortButton = screen.getByRole('button', {
+    name: /Sortable Row Header/i
+  });
+  expect(sortButton).toBeInTheDocument();
+});
