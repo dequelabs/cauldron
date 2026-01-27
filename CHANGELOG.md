@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.25.0](https://github.com/dequelabs/cauldron/compare/v6.24.0...v6.25.0) (2026-01-27)
+
+
+### Features
+
+* support fully custom header markup in Dialog/Modal ([#2213](https://github.com/dequelabs/cauldron/issues/2213)) ([65176d9](https://github.com/dequelabs/cauldron/commit/65176d96d8f2ce917868db51bc4d6526d0ac1578))
+
 ## [6.24.0](https://github.com/dequelabs/cauldron/compare/v6.23.3...v6.24.0) (2026-01-26)
 
 
