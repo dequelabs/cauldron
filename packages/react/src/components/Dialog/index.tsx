@@ -132,7 +132,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     useEffect(() => {
       if (show && !heading && dialogRef.current) {
         const hasHeading = dialogRef.current.querySelector('.Dialog__heading');
-        if (!hasHeading) {
+        if (process.env.NODE_ENV !== 'production' && !hasHeading) {
           throw Error(
             'Dialog: No heading provided. When using a custom header, include a DialogHeading component for accessibility.'
           );
