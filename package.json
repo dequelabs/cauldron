@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.24.0",
+  "version": "6.25.0",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -87,7 +87,7 @@
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-mdx": "^3.0.0",
     "micromark-extension-mdxjs": "^3.0.0",
-    "mini-css-extract-plugin": "^2.9.4",
+    "mini-css-extract-plugin": "^2.10.0",
     "node-fetch": "^3.3.0",
     "p-queue": "^9",
     "playwright": "^1.47.0",
