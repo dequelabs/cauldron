@@ -8,8 +8,9 @@
 /* Try and prevent Safari from showing a platform
  * tooltip when visible text is truncated
  * see: https://github.com/dequelabs/cauldron/issues/1926
+ * Only apply to single-line ellipsis to avoid Chrome false ellipsis bug
  */
-.TextEllipsis:after {
+.TextEllipsis:not(.TextEllipsis--multiline):after {
   content: '';
   display: block;
 }
