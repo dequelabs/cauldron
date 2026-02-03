@@ -48,13 +48,13 @@
   position: relative;
   text-align: center;
   min-height: var(--button-height);
-  min-width: 6.25rem;
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
   justify-content: center;
   gap: var(--space-smallest);
+  min-width: max-content;
 }
 
 .Button--tag,
@@ -268,7 +268,7 @@ button.Link {
 
 .Button--thin {
   min-height: var(--button-thin-height);
-  min-width: 6.25rem;
+  min-width: max-content;
   font-size: var(--button-thin-text-size);
   padding: 0 var(--space-small);
 }
