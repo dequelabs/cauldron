@@ -189,6 +189,22 @@ test('should not render close button when forceAction is true', () => {
   ).not.toBeInTheDocument();
 });
 
+test('should not warn when using built-in heading with forceAction', () => {
+  const consoleWarn = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => null);
+
+  render(
+    <Dialog {...defaultProps} forceAction>
+      Test Dialog
+    </Dialog>
+  );
+
+  expect(consoleWarn).not.toHaveBeenCalled();
+
+  consoleWarn.mockRestore();
+});
+
 test('should render heading from text', () => {
   render(
     <Dialog {...defaultProps} heading="title">
