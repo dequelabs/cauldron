@@ -62,12 +62,7 @@ import {
 
 ### With Menu
 
-In addition to navigational items, the `MenuBar` can also contain an action menu with items when composed with `ActionMenu` and `ActionList`.
-
-<Note title="Accessibility note">
-  The menu (children) must be rendered as a sibling of `TopBarItem` (the trigger/button), not as its child.
-  This ensures correct screen reader (VoiceOver) announcements, focus behavior and semantics. Do not move the menu inside the trigger.
-</Note>
+In addition to navigational items, the `MenuBar` can also contain an action menu with items when composed with `ActionMenu` and `ActionList`:
 
 ```jsx example
 function TopBarWithMenuExample() {
@@ -92,12 +87,10 @@ function TopBarWithMenuExample() {
           trigger={
             ({ ref, children, ...props }) => {
               return (
-                <>
-                  <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
-                    Menu <Icon type="chevron-down" />
-                  </TopBarItem>
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+                  Menu <Icon type="chevron-down" />
                   {children}
-                </>
+                </TopBarItem>
               )
             }
           }
@@ -140,12 +133,10 @@ function TopBarWithMenuLinksExample() {
           trigger={
             ({ ref, children, ...props }) => {
               return (
-                <>
-                  <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
-                    Menu <Icon type="chevron-down" />
-                  </TopBarItem>
+                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+                  Menu <Icon type="chevron-down" />
                   {children}
-                </>
+                </TopBarItem>
               )
             }
           }
