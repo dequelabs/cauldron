@@ -72,12 +72,12 @@
   border-bottom: solid 1px var(--top-bar-border-bottom-color);
 }
 
-.TopBar > ul > li:focus-within,
+.TopBar > ul > li:focus,
 .TopBar > ul > li:hover {
   outline: 0;
 }
 
-.TopBar > ul > li:focus-within:before,
+.TopBar > ul > li:focus:before,
 .TopBar > ul > li:hover:before {
   content: '';
   position: absolute;
