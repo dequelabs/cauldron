@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "6.25.0",
+  "version": "6.25.1",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -95,11 +95,11 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^3",
-    "puppeteer": "^24.34.0",
+    "puppeteer": "^24.36.0",
     "react": "^18",
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.9.5",
+    "react-router-dom": "^7.13.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",

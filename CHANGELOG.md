@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.25.1](https://github.com/dequelabs/cauldron/compare/v6.25.0...v6.25.1) (2026-02-05)
+
+
+### Bug Fixes
+
+* prevent button text wrapping using max-content for button min-width ([#2214](https://github.com/dequelabs/cauldron/issues/2214)) ([f92cb92](https://github.com/dequelabs/cauldron/commit/f92cb92b40f72ecde361f3a9ef30e21a63e21f3c))
+* **react:** remove false ellipsis when text fits in Chrome ([#2206](https://github.com/dequelabs/cauldron/issues/2206)) ([fedc13a](https://github.com/dequelabs/cauldron/commit/fedc13a23354c4609da2ced2530d6fcc0855ca18))
+* **styles:** Fixed `Link` component with Icon to stretch inside flex container ([#2205](https://github.com/dequelabs/cauldron/issues/2205)) ([30b64b1](https://github.com/dequelabs/cauldron/commit/30b64b1d2a7faa4249e28784aaaac19805195ddc))
+* top bar with action menu incorrect div[role=presentation] ([#2204](https://github.com/dequelabs/cauldron/issues/2204)) ([bc36343](https://github.com/dequelabs/cauldron/commit/bc36343e5277ec42212d439f4a2d9ace46c3b6b5))
+
 ## [6.25.0](https://github.com/dequelabs/cauldron/compare/v6.24.0...v6.25.0) (2026-01-27)
 
 

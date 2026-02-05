@@ -28,8 +28,10 @@
 }
 
 .Link:where(:has(.Icon)) {
+  width: max-content;
   display: inline-flex;
   align-items: center;
   gap: var(--space-half);
   flex-wrap: wrap;
+  align-self: flex-start;
 }
