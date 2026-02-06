@@ -190,7 +190,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
                       ? heading.text
                       : heading}
                   </DialogHeading>
-                  <DialogCloseButton />
+                  {!forceAction ? <DialogCloseButton /> : null}
                 </DialogHeader>
               ) : null}
               {children}
