@@ -109,10 +109,10 @@ function createFocusTrap(
     // If focus reaches the trap guards, we need to wrap focus around to the leading
     // or trailing focusable element depending on which guard obtained focus
     if (focusableElements.length && eventTarget === startGuard) {
-      focusableElements.reverse()[0]?.focus();
+      focusableElements.reverse()[0]?.focus({ preventScroll: true });
       return;
     } else if (focusableElements.length && eventTarget === endGuard) {
-      focusableElements[0]?.focus();
+      focusableElements[0]?.focus({ preventScroll: true });
       return;
     }
 
@@ -120,12 +120,12 @@ function createFocusTrap(
     // to a suitable focusable element within the focus trap target. Otherwise
     // we'll need to focus on an alternative within the container.
     if (elementContains(targetElement, focusTrapMetadata.lastFocusedElement)) {
-      focusTrapMetadata.lastFocusedElement?.focus();
+      focusTrapMetadata.lastFocusedElement?.focus({ preventScroll: true });
     } else if (focusableElements.length) {
-      focusableElements[0]?.focus();
+      focusableElements[0]?.focus({ preventScroll: true });
     } else {
       // if there are no focusable elements, just focus the container
-      (targetElement as HTMLElement).focus();
+      (targetElement as HTMLElement).focus({ preventScroll: true });
     }
   };
 
@@ -141,14 +141,14 @@ function createFocusTrap(
   focusTrapStack.push(focusTrapMetadata);
 
   if (initialFocusElement) {
-    initialFocusElement.focus();
+    initialFocusElement.focus({ preventScroll: true });
   } else {
     // Try to find a suitable focus element
     const focusableElements = Array.from(
       targetElement?.querySelectorAll(focusable) ||
         /* istanbul ignore else */ []
     ) as HTMLElement[];
-    focusableElements[0]?.focus();
+    focusableElements[0]?.focus({ preventScroll: true });
   }
 
   return {

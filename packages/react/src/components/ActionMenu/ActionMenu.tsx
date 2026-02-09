@@ -100,7 +100,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           setFocusStrategy(event.key === ArrowUp ? 'last' : 'first');
 
           if (open) {
-            actionMenuListRef.current?.focus();
+            actionMenuListRef.current?.focus({ preventScroll: true });
           } else {
             setOpen(true);
           }
@@ -139,7 +139,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     useEffect(() => {
       if (open) {
-        actionMenuListRef.current?.focus();
+        actionMenuListRef.current?.focus({ preventScroll: true });
       } else if (actionMenuListRef.current?.contains(document.activeElement)) {
         triggerRef.current?.focus();
       }

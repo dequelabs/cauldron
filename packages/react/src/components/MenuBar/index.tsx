@@ -1,5 +1,4 @@
-import React, { Children, cloneElement } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { Children, cloneElement, createRef } from 'react';
 import keyname from 'keyname';
 import { isWide } from '../../utils/viewport';
 
@@ -21,6 +20,8 @@ export default class TopBar extends React.Component<
     thin: false,
     hasTrigger: false
   };
+
+  private menuBarRef = createRef<HTMLUListElement>();
 
   constructor(props: MenuBarProps) {
     super(props);
@@ -85,10 +86,8 @@ export default class TopBar extends React.Component<
 
   onKeyDown(e: React.KeyboardEvent<HTMLElement>) {
     const key = keyname(e.which);
-    // This is a temporary workaround until have an opportunity to refactor or replace menubar
-    // see: https://github.com/dequelabs/cauldron/issues/1934
-    // eslint-disable-next-line react/no-find-dom-node
-    const menuBarElement = findDOMNode(this) as Element;
+    const menuBarElement = this.menuBarRef.current;
+    if (!menuBarElement) return;
     const menuItems = Array.from(menuBarElement.children) as HTMLElement[];
 
     // account for hidden side bar trigger (hamburger)
@@ -124,7 +123,12 @@ export default class TopBar extends React.Component<
     const { children, className, thin, hasTrigger, ...other } = this.props;
 
     return (
-      <ul role="menubar" onKeyDown={this.onKeyDown} className={className}>
+      <ul
+        ref={this.menuBarRef}
+        role="menubar"
+        onKeyDown={this.onKeyDown}
+        className={className}
+      >
         {Children.map(
           children as React.ReactElement<HTMLLIElement>,
           this.renderChild

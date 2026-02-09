@@ -204,6 +204,19 @@ describe('useFocusTrap', () => {
     expect(innerButton).toHaveFocus();
   });
 
+  test('should call focus with preventScroll when trap activates so opening overlay does not scroll the page', () => {
+    const focusSpy = jest.spyOn(HTMLElement.prototype, 'focus');
+
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithFocusableElements />
+      </ComponentOutsideFocusTrap>
+    );
+
+    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+    focusSpy.mockRestore();
+  });
+
   test('should return focus to specified returnFocusElement', async () => {
     const { rerender } = render(
       <ComponentWithReturnElement disableFocusTrap />

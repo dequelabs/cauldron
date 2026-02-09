@@ -121,6 +121,21 @@ test('should focus menu when opened', async () => {
   });
 });
 
+test('should not scroll the page when opening the menu (focus uses preventScroll)', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+
+  await user.click(trigger);
+
+  await waitFor(() => {
+    expect(screen.getByRole('menu')).toBeVisible();
+  });
+
+  expect(screen.getByRole('menu')).toHaveFocus();
+  // Scroll position is verified in e2e test "should not scroll the page when opening ActionMenu"
+});
+
 test('should return focus to trigger when closed', async () => {
   const user = userEvent.setup();
   render(<ActionMenu {...defaultProps} />);

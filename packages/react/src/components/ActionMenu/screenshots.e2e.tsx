@@ -250,3 +250,47 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--actionmenu-mixed');
 });
+
+test('should not scroll the page when opening ActionMenu (focus trap preventScroll)', async ({
+  mount,
+  page
+}) => {
+  const scrollOffset = 300;
+  const component = await mount(
+    <div style={{ minHeight: '2000px', paddingTop: `${scrollOffset}px` }}>
+      <ActionMenu
+        trigger={
+          <Button variant="secondary">
+            Action Menu Trigger
+            <Icon type="chevron-down" />
+          </Button>
+        }
+      >
+        <ActionList>
+          <ActionListItem>Item 1</ActionListItem>
+          <ActionListItem>Item 2</ActionListItem>
+          <ActionListItem>Item 3</ActionListItem>
+        </ActionList>
+      </ActionMenu>
+    </div>
+  );
+
+  await page.evaluate((y: number) => window.scrollTo(0, y), scrollOffset);
+  const initialScrollY = await page.evaluate(() => window.scrollY);
+  expect(initialScrollY).toBe(scrollOffset);
+
+  await component.getByText('Action Menu Trigger').click();
+  await expect(component.getByRole('menu')).toBeVisible();
+
+  const scrollYAfterOpen = await page.evaluate(() => window.scrollY);
+  expect(scrollYAfterOpen).toBe(initialScrollY);
+
+  const focusedRole = await page.evaluate(() => {
+    const el = document.activeElement;
+    if (!el) return null;
+    if (el.getAttribute('role') === 'menu') return 'menu';
+    if (el.getAttribute('role') === 'menuitem') return 'menuitem';
+    return el.getAttribute('role') ?? 'other';
+  });
+  expect(['menu', 'menuitem']).toContain(focusedRole);
+});
