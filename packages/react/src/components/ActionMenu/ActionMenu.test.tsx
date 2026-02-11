@@ -152,6 +152,13 @@ test('should tab to next element when using action list items', async () => {
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Tab}');
 
   await waitFor(() => {
@@ -177,6 +184,13 @@ test('should tab to next element when using single select action list items', as
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Tab}');
 
   await waitFor(() => {
@@ -202,6 +216,13 @@ test('should tab to next element when using multi select action list items', asy
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Tab}');
 
   await waitFor(() => {
@@ -227,6 +248,13 @@ test('should tab to next element when using action link items', async () => {
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Tab}');
 
   await waitFor(() => {
@@ -326,6 +354,12 @@ test('should set matching active item on mnemonic key press', async () => {
 
   triggerButton.focus();
   await user.keyboard('{ArrowDown}');
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
 
   // Apricot Active
   await user.keyboard('a');
@@ -439,6 +473,13 @@ test('should trigger onAction when an action list item is clicked with keypress'
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(onAction).not.toHaveBeenCalled();
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Enter}');
 
   await waitFor(() => {
@@ -529,6 +570,13 @@ test('should trigger group onAction when an action list item is clicked with key
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(onAction).not.toHaveBeenCalled();
+
+  // Wait for ActionList to be focused after double requestAnimationFrame
+  const actionList = screen.getByRole('menu');
+  await waitFor(() => {
+    expect(actionList).toHaveFocus();
+  });
+
   await user.keyboard('{Enter}');
 
   await waitFor(() => {
