@@ -145,6 +145,8 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         } else {
           // If not visible yet, wait up to 200ms for actionMenuListRef.current to be visible.
           // Without this sometimes the page will scroll to the top of the page when the menu is opened on first open.
+          // This issue most commonly occurred when a list of action menus
+          // was rendered using map.
           setTimeout(() => {
             if (actionMenuListRef.current?.offsetWidth > 0) {
               actionMenuListRef.current?.focus();
