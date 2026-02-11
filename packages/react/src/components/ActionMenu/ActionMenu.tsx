@@ -139,13 +139,18 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     useEffect(() => {
       if (open) {
-        // Wait up to 200ms for actionMenuListRef.current to be visible.
-        // Without this sometimes the page will scroll to the top of the page when the menu is opened on first open.
-        setTimeout(() => {
-          if (actionMenuListRef.current?.offsetWidth > 0) {
-            actionMenuListRef.current?.focus();
-          }
-        }, 200);
+        // Try to focus immediately if the element is visible
+        if (actionMenuListRef.current?.offsetWidth > 0) {
+          actionMenuListRef.current?.focus();
+        } else {
+          // If not visible yet, wait up to 200ms for actionMenuListRef.current to be visible.
+          // Without this sometimes the page will scroll to the top of the page when the menu is opened on first open.
+          setTimeout(() => {
+            if (actionMenuListRef.current?.offsetWidth > 0) {
+              actionMenuListRef.current?.focus();
+            }
+          }, 200);
+        }
       } else if (actionMenuListRef.current?.contains(document.activeElement)) {
         triggerRef.current?.focus();
       }
