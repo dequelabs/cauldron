@@ -5,17 +5,25 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useState, useRef } from 'react'
-import { 
-  ActionMenu, 
-  ActionList, 
-  ActionListItem, 
-  ActionListGroup, 
+import {
+  ActionMenu,
+  ActionList,
+  ActionListItem,
+  ActionListGroup,
   ActionListSeparator,
   ActionListLinkItem,
-  Button, 
-  IconButton, 
+  Button,
+  IconButton,
   Icon,
-  AnchoredOverlay 
+  AnchoredOverlay,
+  Panel,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
+  Link
 } from '@deque/cauldron-react'
 
 ```jsx
@@ -194,6 +202,265 @@ function ActionMenuListActionKeyCallbackExample() {
       </ActionList>
     </ActionMenu>
   )
+}
+```
+
+### Scroll position preserved when opening (long page)
+
+When the menu is used on a long or scrollable page, opening the menu (by click or Enter) should not scroll the page to the top. This example replicates the Projects page: a **Panel** wrapping a **Table** with Project Name, Last Run, and Actions columns. Each row's Actions cell has an "Open project" link and a **Settings** ActionMenu (no `portal`), matching `RenderActions`. Scroll down to a lower row, open **Settings**, and the page position should stay where you scrolled; in the real app without the fix the page can jump back up.
+
+```jsx example
+function ScrollPreservedExample() {
+  return (
+    <div style={{ padding: '0 1rem', minHeight: '200vh' }}>
+      <div style={{ marginBottom: '2rem' }}>
+        <strong>Scroll down to a row near the bottom, then open Settings.</strong> If the bug is present, the page may jump.
+      </div>
+      <Panel>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader scope="col">Project Name</TableHeader>
+              <TableHeader scope="col">Last Run</TableHeader>
+              <TableHeader scope="col">Actions</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project One</TableHeader>
+              <TableCell>2 hours ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-1">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project One">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-1">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-1">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Two</TableHeader>
+              <TableCell>1 day ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-2">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Two">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-2">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-2">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Three</TableHeader>
+              <TableCell>3 days ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-3">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Three">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-3">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-3">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Four</TableHeader>
+              <TableCell>1 week ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-4">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Four">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-4">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-4">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Five</TableHeader>
+              <TableCell>2 weeks ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-5">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Five">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-5">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-5">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Six</TableHeader>
+              <TableCell>3 weeks ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-6">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Six">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-6">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-6">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Seven</TableHeader>
+              <TableCell>1 month ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-7">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Seven">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-7">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-7">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Eight</TableHeader>
+              <TableCell>2 months ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-8">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Eight">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-8">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-8">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Nine</TableHeader>
+              <TableCell>3 months ago</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-9">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Nine">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-9">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-9">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableHeader scope="row" variant="cell">Project Ten</TableHeader>
+              <TableCell>Never</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link href="#project-10">Open project</Link>
+                  <ActionMenu
+                    trigger={
+                      <Button variant="secondary" aria-label="Settings for Project Ten">
+                        <Icon type="gears" />
+                        Settings
+                        <Icon type="chevron-down" />
+                      </Button>
+                    }
+                  >
+                    <ActionList>
+                      <ActionListLinkItem href="#configure-10">Configure project</ActionListLinkItem>
+                      <ActionListLinkItem href="#members-10">Members</ActionListLinkItem>
+                    </ActionList>
+                  </ActionMenu>
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Panel>
+    </div>
+  );
 }
 ```
 

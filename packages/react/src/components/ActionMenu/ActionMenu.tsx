@@ -139,20 +139,15 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     useEffect(() => {
       if (open) {
-        // Try to focus immediately if the element is visible
-        if (actionMenuListRef.current?.offsetWidth > 0) {
-          actionMenuListRef.current?.focus();
-        } else {
-          // If not visible yet, wait up to 200ms for actionMenuListRef.current to be visible.
-          // Without this sometimes the page will scroll to the top of the page when the menu is opened on first open.
-          // This issue most commonly occurred when a list of action menus
-          // was rendered using map.
-          setTimeout(() => {
-            if (actionMenuListRef.current?.offsetWidth > 0) {
-              actionMenuListRef.current?.focus();
-            }
-          }, 200);
-        }
+        // Use double requestAnimationFrame to ensure layout is complete.
+        // The first RAF schedules work for the next frame, the second ensures
+        // the browser has actually completed the layout pass.
+        // This prevents scroll jumping when opening ActionMenus.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            actionMenuListRef.current?.focus();
+          });
+        });
       } else if (actionMenuListRef.current?.contains(document.activeElement)) {
         triggerRef.current?.focus();
       }
