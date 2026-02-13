@@ -159,6 +159,15 @@
   padding-top: 0;
 }
 
+@media (min-width: 320px) {
+  .Dialog__inner {
+    max-height: calc(100vh - 130px);
+  }
+
+  .Dialog__content {
+    overflow-y: auto;
+  }
+}
 /* Dark Theme */
 
 .cauldron--theme-dark .Dialog__inner {
