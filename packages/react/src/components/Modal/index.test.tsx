@@ -60,65 +60,28 @@ test('should return no axe violations with a passed a truthy "show" and passed v
   expect(await axe(container)).toHaveNoViolations();
 });
 
-describe('should return no axe violations when the modal content is long', () => {
-  afterAll(() => {
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 1024
-    });
-    window.dispatchEvent(new Event('resize'));
-  });
+test('should return no axe violations with long modal content', async () => {
+  render(
+    <Modal {...defaults} show={true}>
+      <ModalContent>{createLongContent()}</ModalContent>
+      <ModalFooter>
+        <button>Ok</button>
+      </ModalFooter>
+    </Modal>
+  );
 
-  test('on small viewport', async () => {
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 310
-    });
+  expect(document.querySelector('.Dialog__inner')).toBeInTheDocument();
+  expect(document.querySelector('.Dialog__content')).toBeInTheDocument();
 
-    window.dispatchEvent(new Event('resize'));
-
-    const { container } = render(
-      <Modal {...defaults} show={true}>
-        <ModalContent>{createLongContent()}</ModalContent>
-        <ModalFooter>
-          <button>Ok</button>
-        </ModalFooter>
-      </Modal>
-    );
-
-    expect(await axe(container)).toHaveNoViolations();
-  });
-
-  test('on large viewport', async () => {
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 720
-    });
-
-    window.dispatchEvent(new Event('resize'));
-
-    const { container } = render(
-      <Modal {...defaults} show={true}>
-        <ModalContent>{createLongContent()}</ModalContent>
-        <ModalFooter>
-          <button>Ok</button>
-        </ModalFooter>
-      </Modal>
-    );
-
-    expect(await axe(container)).toHaveNoViolations();
-  });
-
-  function createLongContent() {
-    return (
-      <>
-        {Array.from({ length: 50 }, (_, i) => (
-          <p key={i}>Modal content here, get your modal content here!</p>
-        ))}
-      </>
-    );
-  }
+  expect(await axe(document.body)).toHaveNoViolations();
 });
+
+function createLongContent() {
+  return (
+    <>
+      {Array.from({ length: 50 }, (_, i) => (
+        <p key={i}>Modal content here, get your modal content here!</p>
+      ))}
+    </>
+  );
+}

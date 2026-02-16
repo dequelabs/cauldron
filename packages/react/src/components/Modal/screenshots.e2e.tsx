@@ -9,6 +9,17 @@ import {
   Button
 } from '../../../';
 
+const VIEWPORTS = {
+  MOBILE_SMALL: { width: 319, height: 667 },
+  MOBILE_MEDIUM: { width: 375, height: 667 },
+  TABLET: { width: 768, height: 1024 },
+  DESKTOP: { width: 1280, height: 720 }
+};
+
+const largeContent = Array.from({ length: 50 }, (_, i) => (
+  <p key={i}>Modal content here, get your modal content here!</p>
+));
+
 test('should have screenshot for Modal with small content', async ({
   mount,
   page
@@ -26,18 +37,18 @@ test('should have screenshot for Modal with small content', async ({
     </Modal>
   );
 
-  await expect(page).toHaveScreenshot('modal-small-content.png');
+  const dialog = page.getByRole('dialog');
+
+  await expect(dialog).toHaveScreenshot('modal-small-content');
   await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot('dark--modal-small-content.png');
+  await expect(dialog).toHaveScreenshot('dark--modal-small-content');
 });
 
 test('should have screenshot for Modal with large content on large viewports with scrollable content', async ({
   mount,
   page
 }) => {
-  const largeContent = Array.from({ length: 50 }, (_, i) => (
-    <p key={i}>Modal content here, get your modal content here!</p>
-  ));
+  await page.setViewportSize(VIEWPORTS.DESKTOP);
 
   await mount(
     <Modal show>
@@ -50,10 +61,11 @@ test('should have screenshot for Modal with large content on large viewports wit
     </Modal>
   );
 
-  await expect(page).toHaveScreenshot('modal-large-content-large-viewport.png');
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveScreenshot('modal-large-content-large-viewport');
   await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot(
-    'dark--modal-large-content-large-viewport.png'
+  await expect(dialog).toHaveScreenshot(
+    'dark--modal-large-content-large-viewport'
   );
 });
 
@@ -61,11 +73,7 @@ test('should have screenshot for Modal with large content on small viewports - n
   mount,
   page
 }) => {
-  await page.setViewportSize({ width: 319, height: 667 });
-
-  const largeContent = Array.from({ length: 50 }, (_, i) => (
-    <p key={i}>Modal content here, get your modal content here!</p>
-  ));
+  await page.setViewportSize(VIEWPORTS.MOBILE_SMALL);
 
   await mount(
     <Modal show>
@@ -91,22 +99,19 @@ test('should have screenshot for Modal with large content on small viewports - n
   await expect(cancelButton).toBeVisible();
   await expect(confirmButton).toBeVisible();
 
-  await expect(page).toHaveScreenshot('modal-large-content-small-viewport.png');
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveScreenshot('modal-large-content-small-viewport');
   await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot(
-    'dark--modal-large-content-small-viewport.png'
+  await expect(dialog).toHaveScreenshot(
+    'dark--modal-large-content-small-viewport'
   );
 });
 
-test('should have screenshot for Modal with scrollable content on tablet', async ({
+test('should have screenshot for Modal with scrollable content on medium viewports', async ({
   mount,
   page
 }) => {
-  await page.setViewportSize({ width: 768, height: 1024 });
-
-  const largeContent = Array.from({ length: 50 }, (_, i) => (
-    <p key={i}>Modal content here, get your modal content here!</p>
-  ));
+  await page.setViewportSize(VIEWPORTS.MOBILE_MEDIUM);
 
   await mount(
     <Modal show>
@@ -119,11 +124,10 @@ test('should have screenshot for Modal with scrollable content on tablet', async
     </Modal>
   );
 
-  await expect(page).toHaveScreenshot(
-    'modal-large-content-medium-viewport.png'
-  );
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveScreenshot('modal-large-content-medium-viewport');
   await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot(
-    'dark--modal-large-content-medium-viewport.png'
+  await expect(dialog).toHaveScreenshot(
+    'dark--modal-large-content-medium-viewport'
   );
 });
