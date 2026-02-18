@@ -6,7 +6,9 @@ import {
   ModalHeader,
   ModalContent,
   ModalFooter,
-  Button
+  Button,
+  ModalCloseButton,
+  ModalHeading
 } from '../../../';
 
 const VIEWPORTS = {
@@ -26,7 +28,10 @@ test('should have screenshot for Modal with small content', async ({
 }) => {
   await mount(
     <Modal show>
-      <ModalHeader>Modal Title</ModalHeader>
+      <ModalHeader>
+        <ModalHeading>Modal Title</ModalHeading>
+        <ModalCloseButton />
+      </ModalHeader>
       <ModalContent>
         <p>This is some modal content.</p>
       </ModalContent>
@@ -52,7 +57,10 @@ test('should have screenshot for Modal with large content on large viewports wit
 
   await mount(
     <Modal show>
-      <ModalHeader>Modal with Large Content</ModalHeader>
+      <ModalHeader>
+        <ModalHeading>Modal With Large Content - Large Viewport</ModalHeading>
+        <ModalCloseButton />
+      </ModalHeader>
       <ModalContent>{largeContent}</ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
@@ -77,7 +85,10 @@ test('should have screenshot for Modal with large content on small viewports - n
 
   await mount(
     <Modal show>
-      <ModalHeader role="heading">Modal with Large Content</ModalHeader>
+      <ModalHeader>
+        <ModalHeading>Modal With Large Content - Small Viewport</ModalHeading>
+        <ModalCloseButton />
+      </ModalHeader>
       <ModalContent>{largeContent}</ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
@@ -115,7 +126,10 @@ test('should have screenshot for Modal with scrollable content on medium viewpor
 
   await mount(
     <Modal show>
-      <ModalHeader>Modal Title</ModalHeader>
+      <ModalHeader>
+        <ModalHeading>Modal With Large Content - Medium Viewport</ModalHeading>
+        <ModalCloseButton />
+      </ModalHeader>
       <ModalContent>{largeContent}</ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
