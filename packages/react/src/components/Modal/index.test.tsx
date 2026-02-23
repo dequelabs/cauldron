@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Modal, { ModalContent, ModalFooter } from './';
 import axe from '../../axe';
+import LongContent from '../../utils/createLongContent';
 
 const defaults = { show: false, heading: <span>Default Modal</span> };
 
@@ -63,7 +64,9 @@ test('should return no axe violations with a passed a truthy "show" and passed v
 test('should return no axe violations with long modal content', async () => {
   render(
     <Modal {...defaults} show={true}>
-      <ModalContent>{createLongContent()}</ModalContent>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
       <ModalFooter>
         <button>Ok</button>
       </ModalFooter>
@@ -75,13 +78,3 @@ test('should return no axe violations with long modal content', async () => {
 
   expect(await axe(document.body)).toHaveNoViolations();
 });
-
-function createLongContent() {
-  return (
-    <>
-      {Array.from({ length: 50 }, (_, i) => (
-        <p key={i}>Modal content here, get your modal content here!</p>
-      ))}
-    </>
-  );
-}

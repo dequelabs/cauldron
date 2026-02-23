@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   ModalHeading
 } from '../../../';
+import LongContent from '../../utils/createLongContent';
 
 const VIEWPORTS = {
   MOBILE_SMALL: { width: 319, height: 667 },
@@ -17,10 +18,6 @@ const VIEWPORTS = {
   TABLET: { width: 768, height: 1024 },
   DESKTOP: { width: 1280, height: 720 }
 };
-
-const largeContent = Array.from({ length: 50 }, (_, i) => (
-  <p key={i}>Modal content here, get your modal content here!</p>
-));
 
 test('should have screenshot for Modal with small content', async ({
   mount,
@@ -61,7 +58,9 @@ test('should have screenshot for Modal with large content on large viewports wit
         <ModalHeading>Modal With Large Content - Large Viewport</ModalHeading>
         <ModalCloseButton />
       </ModalHeader>
-      <ModalContent>{largeContent}</ModalContent>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
         <Button variant="primary">Confirm</Button>
@@ -89,7 +88,9 @@ test('should have screenshot for Modal with large content on small viewports - n
         <ModalHeading>Modal With Large Content - Small Viewport</ModalHeading>
         <ModalCloseButton />
       </ModalHeader>
-      <ModalContent>{largeContent}</ModalContent>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
         <Button variant="primary">Confirm</Button>
@@ -130,7 +131,9 @@ test('should have screenshot for Modal with scrollable content on medium viewpor
         <ModalHeading>Modal With Large Content - Medium Viewport</ModalHeading>
         <ModalCloseButton />
       </ModalHeader>
-      <ModalContent>{largeContent}</ModalContent>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
       <ModalFooter>
         <Button variant="secondary">Cancel</Button>
         <Button variant="primary">Confirm</Button>
