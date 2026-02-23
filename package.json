@@ -48,7 +48,7 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@fontsource/lato": "^5.2.7",
-    "@fontsource/pt-mono": "^5.2.6",
+    "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/roboto": "^5.2.9",
     "@mdx-js/loader": "^3.1.1",
     "@playwright/experimental-ct-react17": "^1.50.1",
