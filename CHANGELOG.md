@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.25.3](https://github.com/dequelabs/cauldron/compare/v6.25.2...v6.25.3) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Link:** remove `align-self` for link with icon ([#2247](https://github.com/dequelabs/cauldron/issues/2247)) ([15ef8b2](https://github.com/dequelabs/cauldron/commit/15ef8b20fc999db61a335a69bc170fc6f8107362))
+
+### [6.25.2](https://github.com/dequelabs/cauldron/compare/v6.25.1...v6.25.2) (2026-02-06)
+
+
+### Bug Fixes
+
+* remove dialog close button warning for prop-based dialogs ([#2228](https://github.com/dequelabs/cauldron/issues/2228)) ([e96faec](https://github.com/dequelabs/cauldron/commit/e96faec4a4194dd156a305b24ce32593aeb21c3d))
+
 ### [6.25.1](https://github.com/dequelabs/cauldron/compare/v6.25.0...v6.25.1) (2026-02-05)
 
 
