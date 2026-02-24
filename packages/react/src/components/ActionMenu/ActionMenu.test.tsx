@@ -52,6 +52,10 @@ const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
   )
 };
 
+afterEach(() => {
+  window.location.hash = '';
+});
+
 test('should render trigger button', () => {
   render(<ActionMenu {...defaultProps} />);
   expect(screen.getByRole('button', { name: 'Trigger' })).toBeInTheDocument();
@@ -614,6 +618,52 @@ test('should not trigger action link items when toggling the open state in TopBa
   await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
   await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
 
+  expect(window.location.hash).toBe('');
+});
+
+test('should navigate to href when an action link item is clicked in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await user.click(screen.getByRole('menuitem', { name: 'Menu Link 1' }));
+
+  expect(window.location.hash).toBe('#target-1');
+});
+
+test('should close menu when focus moves outside in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <TopBar>
+        <MenuBar>
+          <ActionMenu {...defaultTopBarPatternProps} />
+        </MenuBar>
+      </TopBar>
+      <button>Outside</button>
+    </>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await user.tab(); // Menu Link 1
+  await user.tab(); // Menu Link 2
+  await user.tab(); // Menu Link 3
+  await user.tab(); // Outside button
+
+  expect(screen.getByRole('button', { name: 'Outside' })).toHaveFocus();
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
+
+  // Additionally, make sure that any of the links weren't triggered
   expect(window.location.hash).toBe('');
 });
 
