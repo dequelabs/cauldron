@@ -139,7 +139,15 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
 
     useEffect(() => {
       if (open) {
-        actionMenuListRef.current?.focus();
+        // Use double requestAnimationFrame to ensure layout is complete.
+        // The first RAF schedules work for the next frame, the second ensures
+        // the browser has actually completed the layout pass.
+        // This prevents scroll jumping when opening ActionMenus.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            actionMenuListRef.current?.focus();
+          });
+        });
       } else if (actionMenuListRef.current?.contains(document.activeElement)) {
         triggerRef.current?.focus();
       }
