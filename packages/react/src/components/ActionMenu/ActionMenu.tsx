@@ -121,17 +121,12 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
     const handleOverlayBlur = useCallback((event: React.FocusEvent) => {
       const relatedTarget = event.relatedTarget as HTMLElement | null;
 
-      // If focus moves to the trigger, let the trigger handle closing
-      if (triggerRef.current?.contains(relatedTarget)) {
-        return;
+      if (
+        !actionMenuRef.current?.contains(relatedTarget) &&
+        !triggerRef.current?.contains(relatedTarget)
+      ) {
+        setOpen(false);
       }
-
-      // If focus stays inside the overlay (e.g. clicking a link), don't close prematurely
-      if (actionMenuRef.current?.contains(relatedTarget)) {
-        return;
-      }
-
-      setOpen(false);
     }, []);
 
     const handleAction = useCallback(

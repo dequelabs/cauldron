@@ -31,6 +31,17 @@ const defaultProps: React.ComponentProps<typeof ActionMenu> = {
   )
 };
 
+const defaultLinkProps: React.ComponentProps<typeof ActionMenu> = {
+  trigger: <button>Trigger</button>,
+  children: (
+    <ActionList>
+      <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
+      <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
+      <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
+    </ActionList>
+  )
+};
+
 // From the pattern documented in docs/pages/components/TopBar.mdx
 async function waitForMenuFocus() {
   const menu = screen.getByRole('menu');
@@ -684,6 +695,18 @@ test('should navigate to href when an action link item is clicked in TopBar+Acti
   expect(window.location.hash).toBe('#target-1');
 });
 
+test('should navigate to href when an action link item is clicked', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultLinkProps} />);
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await user.click(screen.getByRole('menuitem', { name: 'Menu Link 1' }));
+
+  expect(window.location.hash).toBe('#target-1');
+});
+
 test('should close menu when focus moves outside in TopBar+ActionMenu pattern', async () => {
   const user = userEvent.setup();
   render(
@@ -700,16 +723,38 @@ test('should close menu when focus moves outside in TopBar+ActionMenu pattern', 
   await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
   expect(await screen.findByRole('menu')).toBeVisible();
 
-  await user.tab(); // Menu Link 1
-  await user.tab(); // Menu Link 2
-  await user.tab(); // Menu Link 3
-  await user.tab(); // Outside button
+  await waitForMenuFocus();
+  await user.tab();
 
-  expect(screen.getByRole('button', { name: 'Outside' })).toHaveFocus();
+  expect(await screen.findByRole('button', { name: 'Outside' })).toHaveFocus();
   expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
+  expect(screen.getByRole('menuitem', { name: 'Trigger' })).toHaveAttribute(
+    'aria-expanded',
+    'false'
+  );
+});
 
-  // Additionally, make sure that any of the links weren't triggered
-  expect(window.location.hash).toBe('');
+test('should close menu when focus moves outside in action menu with link items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultLinkProps} />
+      <button>Outside</button>
+    </>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await waitForMenuFocus();
+  await user.tab();
+
+  expect(await screen.findByRole('button', { name: 'Outside' })).toHaveFocus();
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
+  expect(screen.getByRole('button', { name: 'Trigger' })).toHaveAttribute(
+    'aria-expanded',
+    'false'
+  );
 });
 
 test('should support className prop', () => {
