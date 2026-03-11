@@ -31,7 +31,27 @@ const defaultProps: React.ComponentProps<typeof ActionMenu> = {
   )
 };
 
+const defaultLinkProps: React.ComponentProps<typeof ActionMenu> = {
+  trigger: <button>Trigger</button>,
+  children: (
+    <ActionList>
+      <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
+      <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
+      <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
+    </ActionList>
+  )
+};
+
 // From the pattern documented in docs/pages/components/TopBar.mdx
+async function waitForMenuFocus() {
+  const menu = screen.getByRole('menu');
+  await waitFor(() => {
+    if (document.activeElement !== menu) {
+      throw new Error('waiting for menu focus');
+    }
+  });
+}
+
 const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
   ...defaultProps,
   tabIndex: -1,
@@ -51,6 +71,10 @@ const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
     </ActionList>
   )
 };
+
+afterEach(() => {
+  window.location.hash = '';
+});
 
 test('should render trigger button', () => {
   render(<ActionMenu {...defaultProps} />);
@@ -121,6 +145,22 @@ test('should focus menu when opened', async () => {
   });
 });
 
+test('should defer focus when opened to allow layout to complete', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+
+  // Focus should not happen synchronously because of double requestAnimationFrame
+  const menu = screen.getByRole('menu');
+  expect(menu).not.toHaveFocus();
+
+  // But should eventually receive focus
+  await waitFor(() => {
+    expect(menu).toHaveFocus();
+  });
+});
+
 test('should return focus to trigger when closed', async () => {
   const user = userEvent.setup();
   render(<ActionMenu {...defaultProps} />);
@@ -152,7 +192,10 @@ test('should tab to next element when using action list items', async () => {
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
-  await user.keyboard('{Tab}');
+
+  await waitForMenuFocus();
+
+  await user.tab();
 
   await waitFor(() => {
     expect(tabButton).toHaveFocus();
@@ -177,7 +220,10 @@ test('should tab to next element when using single select action list items', as
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
-  await user.keyboard('{Tab}');
+
+  await waitForMenuFocus();
+
+  await user.tab();
 
   await waitFor(() => {
     expect(tabButton).toHaveFocus();
@@ -202,7 +248,10 @@ test('should tab to next element when using multi select action list items', asy
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
-  await user.keyboard('{Tab}');
+
+  await waitForMenuFocus();
+
+  await user.tab();
 
   await waitFor(() => {
     expect(tabButton).toHaveFocus();
@@ -227,7 +276,10 @@ test('should tab to next element when using action link items', async () => {
   const menuTriggerButton = screen.getByRole('button', { name: 'Trigger' });
   const tabButton = screen.getByRole('button', { name: 'Tab to me' });
   await user.click(menuTriggerButton);
-  await user.keyboard('{Tab}');
+
+  await waitForMenuFocus();
+
+  await user.tab();
 
   await waitFor(() => {
     expect(tabButton).toHaveFocus();
@@ -326,6 +378,8 @@ test('should set matching active item on mnemonic key press', async () => {
 
   triggerButton.focus();
   await user.keyboard('{ArrowDown}');
+
+  await waitForMenuFocus();
 
   // Apricot Active
   await user.keyboard('a');
@@ -439,6 +493,9 @@ test('should trigger onAction when an action list item is clicked with keypress'
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(onAction).not.toHaveBeenCalled();
+
+  await waitForMenuFocus();
+
   await user.keyboard('{Enter}');
 
   await waitFor(() => {
@@ -529,6 +586,9 @@ test('should trigger group onAction when an action list item is clicked with key
 
   await user.click(screen.getByRole('button', { name: 'Trigger' }));
   expect(onAction).not.toHaveBeenCalled();
+
+  await waitForMenuFocus();
+
   await user.keyboard('{Enter}');
 
   await waitFor(() => {
@@ -615,6 +675,86 @@ test('should not trigger action link items when toggling the open state in TopBa
   await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
 
   expect(window.location.hash).toBe('');
+});
+
+test('should navigate to href when an action link item is clicked in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <ActionMenu {...defaultTopBarPatternProps} />
+      </MenuBar>
+    </TopBar>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await user.click(screen.getByRole('menuitem', { name: 'Menu Link 1' }));
+
+  expect(window.location.hash).toBe('#target-1');
+});
+
+test('should navigate to href when an action link item is clicked', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultLinkProps} />);
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await user.click(screen.getByRole('menuitem', { name: 'Menu Link 1' }));
+
+  expect(window.location.hash).toBe('#target-1');
+});
+
+test('should close menu when focus moves outside in TopBar+ActionMenu pattern', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <TopBar>
+        <MenuBar>
+          <ActionMenu {...defaultTopBarPatternProps} />
+        </MenuBar>
+      </TopBar>
+      <button>Outside</button>
+    </>
+  );
+
+  await user.click(screen.getByRole('menuitem', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await waitForMenuFocus();
+  await user.tab();
+
+  expect(await screen.findByRole('button', { name: 'Outside' })).toHaveFocus();
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
+  expect(screen.getByRole('menuitem', { name: 'Trigger' })).toHaveAttribute(
+    'aria-expanded',
+    'false'
+  );
+});
+
+test('should close menu when focus moves outside in action menu with link items', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <ActionMenu {...defaultLinkProps} />
+      <button>Outside</button>
+    </>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  expect(await screen.findByRole('menu')).toBeVisible();
+
+  await waitForMenuFocus();
+  await user.tab();
+
+  expect(await screen.findByRole('button', { name: 'Outside' })).toHaveFocus();
+  expect(await screen.findByRole('menu', { hidden: true })).not.toBeVisible();
+  expect(screen.getByRole('button', { name: 'Trigger' })).toHaveAttribute(
+    'aria-expanded',
+    'false'
+  );
 });
 
 test('should support className prop', () => {
