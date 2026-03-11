@@ -118,8 +118,15 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, []);
 
-    const handleOverlayBlur = useCallback(() => {
-      setOpen(false);
+    const handleOverlayBlur = useCallback((event: React.FocusEvent) => {
+      const relatedTarget = event.relatedTarget as HTMLElement | null;
+
+      if (
+        !actionMenuRef.current?.contains(relatedTarget) &&
+        !triggerRef.current?.contains(relatedTarget)
+      ) {
+        setOpen(false);
+      }
     }, []);
 
     const handleAction = useCallback(
