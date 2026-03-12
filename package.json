@@ -108,7 +108,7 @@
     "slugify": "^1.6.5",
     "standard-version": "^9.1.1",
     "style-loader": "^4.0.0",
-    "terser-webpack-plugin": "^5.3.10",
+    "terser-webpack-plugin": "^5.3.17",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
     "webpack": "^5.104.1",
