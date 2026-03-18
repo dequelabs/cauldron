@@ -13,12 +13,13 @@
   --button-background-color-badge-active: var(--gray-20);
 
   --button-background-color-danger: var(--error);
-  --button-background-color-danger-disabled: #db6379;
+  --button-background-color-danger-disabled: var(--accent-error-disabled);
   --button-background-color-danger-active: var(--accent-error-active);
   --button-outline-color-danger: var(--error);
+  --button-outline-color-danger-disabled: var(--gray-40);
 
   --button-background-color-error: var(--error);
-  --button-background-color-error-disabled: #db6379;
+  --button-background-color-error-disabled: var(--accent-error-disabled);
   --button-background-color-error-active: var(--accent-error-active);
   --button-outline-color-error: var(--error);
 
@@ -216,6 +217,18 @@ button.Link {
 .Button--error[disabled] {
   color: var(--button-text-color-light);
   background-color: var(--button-background-color-error-disabled);
+}
+
+.Button--danger[aria-disabled='true'],
+.Button--danger[disabled] {
+  color: var(--button-text-color-light);
+  background-color: var(--button-background-color-danger-disabled);
+}
+
+.Button--danger-secondary[aria-disabled='true'],
+.Button--danger-secondary[disabled] {
+  color: var(--button-text-color-disabled);
+  border: 1px solid var(--button-outline-color-danger-disabled);
 }
 
 .Button--error:not([disabled]):not([aria-disabled='true']):active {
