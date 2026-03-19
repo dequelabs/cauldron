@@ -101,13 +101,10 @@ test('should have screenshot for Modal with large content on small viewports - n
   const header = page.getByRole('heading', {
     name: 'Modal with Large Content'
   });
-  await expect(header).toBeAttached();
   await expect(header).toBeVisible();
 
   const cancelButton = page.getByRole('button', { name: 'Cancel' });
   const confirmButton = page.getByRole('button', { name: 'Confirm' });
-  await expect(cancelButton).toBeAttached();
-  await expect(confirmButton).toBeAttached();
   await expect(cancelButton).toBeVisible();
   await expect(confirmButton).toBeVisible();
 
