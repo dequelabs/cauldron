@@ -7,6 +7,8 @@
   --dialog-padding: var(--space-small);
   --dialog-header-height: 2.625rem;
   --dialog-close-button-size: var(--target-size-minimum);
+  --dialog-vertical-offset: 6.25rem;
+  --dialog-bottom-spacing: 1.875rem;
 }
 
 .cauldron--theme-dark {
@@ -35,7 +37,7 @@
   width: 400px;
   max-width: 90%;
   left: 50%;
-  top: 100px;
+  top: var(--dialog-vertical-offset);
   display: flex;
   flex-direction: column;
   transform: translateX(-50%);
@@ -159,6 +161,17 @@
   padding-top: 0;
 }
 
+@media (min-width: 20rem) {
+  .Dialog__inner {
+    max-height: calc(
+      100vh - var(--dialog-vertical-offset) - var(--dialog-bottom-spacing)
+    );
+  }
+
+  .Dialog__content {
+    overflow-y: auto;
+  }
+}
 /* Dark Theme */
 
 .cauldron--theme-dark .Dialog__inner {
