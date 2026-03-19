@@ -38,3 +38,6 @@ updates:
         versions: ['>=5.0.0']
       - dependency-name: 'chalk'
         versions: ['>=5.0.0']
+      # Ignore new major versions of @types/node until we are ready to upgrade
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
