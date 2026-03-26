@@ -21,6 +21,7 @@
 
 .cauldron--theme-dark {
   --tabs-border-color: var(--accent-dark);
+  --tabs-horizontal-border-bottom: 1px solid var(--tabs-border-color);
   --tab-shadow-color: var(--accent-info);
   --tab-panel-background-color: var(--accent-medium);
   --tab-inactive-background-color: var(--accent-medium);
