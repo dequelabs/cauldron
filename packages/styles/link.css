@@ -12,7 +12,7 @@
 .Link {
   text-decoration: underline;
   color: var(--link-text-color);
-  padding: var(--space-quarter);
+  padding: var(--link-padding, var(--space-quarter));
   background: transparent;
   vertical-align: baseline;
 }
