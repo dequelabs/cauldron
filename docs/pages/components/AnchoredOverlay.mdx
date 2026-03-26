@@ -133,6 +133,47 @@ function AnchoredOverlayWithOffsetExample() {
 }
 ```
 
+### Disable Flip
+
+When `disableFlip` is set, the overlay will remain at its configured `placement` and will not automatically reposition (flip) when space is limited.
+
+```jsx example
+function AnchoredOverlayDisableFlipExample() {
+  const [open, setOpen] = useState(false)
+  const targetRef = useRef()
+  const toggleOpen = () => setOpen(!open)
+  const handleClose = () => setOpen(false)
+
+  return (
+    <>
+      <Button
+        ref={targetRef}
+        onFocus={toggleOpen}
+        onBlur={handleClose}
+        aria-describedby="anchored-overlay-force-below"
+      >
+        Anchor Element
+      </Button>
+      <AnchoredOverlay
+        id="anchored-overlay-force-below"
+        target={targetRef}
+        open={open}
+        placement="bottom-start"
+        disableFlip
+        onOpenChange={openState => setOpen(openState)}
+        style={{
+          padding: 'var(--space-small)',
+          backgroundColor: 'var(--panel-background-color)',
+          display: open ? 'block' : 'none'
+        }}
+      >
+        This overlay always appears below the anchor element.
+      </AnchoredOverlay>
+    </>
+  )
+}
+```
+
 ## Props
 
 <ComponentProps
@@ -177,6 +218,12 @@ function AnchoredOverlayWithOffsetExample() {
       name: 'offset',
       type: 'number',
       description: 'An optional offset number to position the anchor element from its anchored target.'
+    },
+    {
+      name: 'disableFlip',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'When set, disables automatic flip repositioning of the overlay when it overflows its boundary.'
     },
     {
       name: 'focusTrap',

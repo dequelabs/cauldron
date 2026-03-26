@@ -14,11 +14,13 @@ jest.mock('@floating-ui/react-dom', () => {
   const actual = jest.requireActual('@floating-ui/react-dom');
   return {
     ...actual,
-    detectOverflow: jest.fn()
+    detectOverflow: jest.fn(),
+    flip: jest.fn(actual.flip),
+    autoPlacement: jest.fn(actual.autoPlacement)
   };
 });
 
-import { detectOverflow } from '@floating-ui/react-dom';
+import { detectOverflow, flip, autoPlacement } from '@floating-ui/react-dom';
 
 test('should render children', () => {
   const targetRef = { current: document.createElement('button') };
@@ -98,6 +100,46 @@ test('should support auto-end placement', () => {
     </AnchoredOverlay>
   );
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
+});
+
+test('should not use flip or autoPlacement middleware when disableFlip is set', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      disableFlip
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(flip).not.toHaveBeenCalled();
+  expect(autoPlacement).not.toHaveBeenCalled();
+});
+
+test('should use flip middleware when disableFlip is not set', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(flip).toHaveBeenCalled();
 });
 
 test('should call onOpenChange when escape is pressed', async () => {
