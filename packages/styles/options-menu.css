@@ -5,6 +5,8 @@
   --options-menu-hover-background-color: var(--gray-20);
   --options-menu-active-border-color: var(--accent-primary);
   --options-menu-border-color: var(--gray-40);
+  --options-menu-width: auto;
+  --options-menu-item-font-size: var(--text-size-smaller);
 }
 
 .cauldron--theme-dark {
@@ -19,6 +21,7 @@
 .OptionsMenu {
   position: relative;
   color: var(--text-color-base);
+  width: var(--options-menu-width);
 }
 
 .OptionsMenu__trigger {
@@ -43,7 +46,7 @@
   color: var(--options-menu-text-color);
   display: none;
   position: absolute;
-  font-size: var(--text-size-smaller);
+  font-size: var(--options-menu-item-font-size);
   list-style-type: none;
   margin: 0;
   padding: 0;

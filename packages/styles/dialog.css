@@ -9,6 +9,8 @@
   --dialog-close-button-size: var(--target-size-minimum);
   --dialog-vertical-offset: 6.25rem;
   --dialog-bottom-spacing: 1.875rem;
+  --dialog-content-line-height: inherit;
+  --dialog-z-index: auto;
 }
 
 .cauldron--theme-dark {
@@ -26,6 +28,7 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
+  z-index: var(--dialog-z-index);
   background-color: var(--scrim-background-color);
 }
 
@@ -123,6 +126,7 @@
 
 .Dialog__content {
   padding: var(--dialog-padding);
+  line-height: var(--dialog-content-line-height);
 }
 
 .Dialog__content p:first-child {
@@ -131,6 +135,10 @@
 
 .Dialog__content p:last-child {
   margin-bottom: 0;
+}
+
+.Dialog__content .Field {
+  width: 100%;
 }
 
 .Dialog__footer {
@@ -179,6 +187,11 @@
   border-width: 4px;
 }
 
+/* Compensate for the larger dark theme border so Dialog dimensions remain consistent */
+.cauldron--theme-dark .Dialog__content {
+  padding: calc(var(--dialog-padding) - 3px);
+}
+
 .cauldron--theme-dark .Dialog__header {
   border-bottom: 1px solid var(--stroke-dark);
 }
@@ -208,4 +221,23 @@
 
 .cauldron--theme-dark .Modal--info .Dialog__footer {
   border-top: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__inner {
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark .Alert .Dialog__header {
+  background-color: var(--accent-medium);
+  border-bottom: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__footer {
+  background-color: transparent;
+  border-top: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__content .Link,
+.cauldron--theme-dark .Alert .Dialog__content .Link:hover {
+  color: currentColor;
 }
