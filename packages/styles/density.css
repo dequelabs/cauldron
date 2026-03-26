@@ -19,12 +19,10 @@
   --top-bar-button-font-size: var(--text-size-smallest);
   --top-bar-item-padding: 0;
 
-  /* Tabs: tighter sizing, fill width, no extra borders */
+  /* Tabs: fill width, smaller font, no panel border */
   --tabs-width: auto;
-  --tab-height: 2.125rem;
   --tab-font-size: var(--text-size-small);
   --tab-flex: 1;
-  --tabs-horizontal-border-bottom: none;
   --tabpanel-border: none;
 
   /* Tags: use small variant sizing by default */
@@ -50,17 +48,10 @@
   --toast-list-margin-left: 1.5em;
 
   /* Field select: constrained width */
-  --field-select-max-width: clamp(0px, 25rem, 100%);
+  --select-width: clamp(0px, 25rem, 100%);
 
   /* ExpandCollapse: shift trigger icon inward */
   --expandcollapse-trigger-icon-offset: -8px;
-}
-
-/* Headings: inherit color from surrounding context instead of using the
-   fixed heading color. This lets headings adapt to their container's theme
-   (e.g. light text in dark regions, dark text in light regions). */
-.cauldron--density-compact :is(h1, h2, h3, h4, h5, h6, [role='heading']) {
-  color: inherit;
 }
 
 /* TopBar buttons: vertical icon-above-label layout in compact mode */
