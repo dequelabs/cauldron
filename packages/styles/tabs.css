@@ -14,7 +14,7 @@
   --tab-height: 2.875rem;
   --tab-font-size: inherit;
   --tab-flex: initial;
-  --tabpanel-border: none;
+  --tab-panel-border: none;
   --tabs-horizontal-border-bottom: 1px solid var(--tabs-border-color);
   --tabs-width: fit-content;
 }
@@ -122,7 +122,7 @@
   overflow-wrap: break-word;
   color: var(--tab-panel-color);
   background-color: var(--tab-panel-background-color);
-  border: var(--tabpanel-border);
+  border: var(--tab-panel-border);
 }
 
 .TabPanel > * {

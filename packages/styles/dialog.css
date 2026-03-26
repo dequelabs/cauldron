@@ -189,7 +189,10 @@
 
 /* Compensate for the larger dark theme border so Dialog dimensions remain consistent */
 .cauldron--theme-dark .Dialog__content {
-  padding: calc(var(--dialog-padding) - 3px);
+  --dialog-content-padding-compensation: 3px;
+  padding: calc(
+    var(--dialog-padding) - var(--dialog-content-padding-compensation)
+  );
 }
 
 .cauldron--theme-dark .Dialog__header {
