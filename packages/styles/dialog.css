@@ -241,3 +241,10 @@
 .cauldron--theme-dark .Alert .Dialog__content .Link:hover {
   color: currentColor;
 }
+
+/* Dark theme: checked checkbox/radio icons in Dialogs should inherit the
+   dialog's text color rather than using the global checked color */
+.cauldron--theme-dark .Dialog .Checkbox__overlay.Icon--checkbox-checked,
+.cauldron--theme-dark .Dialog .Radio__overlay.Icon--radio-checked {
+  color: currentColor;
+}
