@@ -1,6 +1,6 @@
 .Toast {
   top: var(--top-bar-height);
-  position: fixed;
+  position: var(--toast-position, fixed);
   right: 0;
   left: 0;
   color: #0b0e11;
@@ -85,6 +85,10 @@
 .Toast__message button.Link:hover,
 .Notice a.Link:hover {
   color: var(--accent-medium);
+}
+
+.Toast ul {
+  margin-left: var(--toast-list-margin-left, 0);
 }
 
 .Toast:focus {

@@ -1,0 +1,57 @@
+name: Update Screenshot Baselines
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  update-screenshots:
+    if: github.event.label.name == 'update-screenshots'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/actions/dependencies
+        with:
+          root: true
+          packages-react: true
+          packages-styles: true
+
+      - name: Build packages
+        run: |
+          NODE_ENV=production yarn --cwd packages/react build
+          NODE_ENV=production yarn --cwd packages/styles build
+
+      - name: Update screenshot baselines
+        run: |
+          yarn screenshots:docker
+          yarn screenshots --update-snapshots
+
+      - name: Commit updated baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet e2e/screenshots/; then
+            echo "No screenshot changes detected"
+          else
+            git add e2e/screenshots/
+            git commit -m "chore: update screenshot baselines [automated]"
+            git push
+          fi
+
+      - name: Remove label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: 'update-screenshots'
+            });
