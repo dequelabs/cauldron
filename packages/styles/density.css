@@ -23,7 +23,6 @@
   --tabs-width: auto;
   --tab-font-size: var(--text-size-small);
   --tab-flex: 1;
-  --tabpanel-border: none;
 
   /* Tags: use small variant sizing by default */
   --tag-height: var(--tag-small-height);
