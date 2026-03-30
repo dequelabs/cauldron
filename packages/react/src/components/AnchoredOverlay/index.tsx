@@ -35,7 +35,7 @@ type AnchoredOverlayProps<
   onShiftChange?: (coords: Coords) => void;
   /** An optional offset number to position the anchor element from its anchored target. */
   offset?: number;
-  /** When set, disables automatic flip repositioning of the overlay when it overflows its boundary. */
+  /** When set, disables automatic flip repositioning of the overlay when it overflows its boundary. This also disables auto placement and top-overflow prevention. The overlay may render outside the visible viewport. */
   disableFlip?: boolean;
   /** When set, traps focus within the AnchoredOverlay. */
   focusTrap?: boolean;
@@ -135,7 +135,7 @@ const AnchoredOverlay = forwardRef(
           crossAxis: false,
           boundary: 'clippingAncestors'
         }),
-        preventTopOverflowMiddleware
+        !disableFlip && preventTopOverflowMiddleware
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target)

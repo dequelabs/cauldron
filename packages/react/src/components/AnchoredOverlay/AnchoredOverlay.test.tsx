@@ -124,6 +124,73 @@ test('should not use flip or autoPlacement middleware when disableFlip is set', 
   expect(autoPlacement).not.toHaveBeenCalled();
 });
 
+test('should not use autoPlacement middleware when disableFlip is set with auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="auto"
+      disableFlip
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(autoPlacement).not.toHaveBeenCalled();
+  expect(flip).not.toHaveBeenCalled();
+});
+
+test('should not use autoPlacement middleware when disableFlip is set with default placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay target={targetRef} disableFlip open data-testid="overlay">
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(autoPlacement).not.toHaveBeenCalled();
+  expect(flip).not.toHaveBeenCalled();
+});
+
+test('should not prevent top overflow when disableFlip is set', () => {
+  const targetRef = { current: document.createElement('button') };
+  const onPlacementChange = jest.fn();
+
+  (detectOverflow as jest.Mock).mockResolvedValue({
+    top: 10,
+    right: 0,
+    bottom: 0,
+    left: 0
+  });
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="top"
+      disableFlip
+      open
+      onPlacementChange={onPlacementChange}
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  // Placement should remain "top" and not be reset to "bottom" by preventTopOverflowMiddleware
+  expect(onPlacementChange).toHaveBeenCalledWith('top');
+});
+
 test('should use flip middleware when disableFlip is not set', () => {
   const targetRef = { current: document.createElement('button') };
   (flip as jest.Mock).mockClear();
