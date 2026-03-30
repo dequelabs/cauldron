@@ -19,11 +19,10 @@
   --top-bar-button-font-size: var(--text-size-smallest);
   --top-bar-item-padding: 0;
 
-  /* Tabs: fill width, smaller font, no panel border */
+  /* Tabs: fill width, smaller font */
   --tabs-width: auto;
   --tab-font-size: var(--text-size-small);
   --tab-flex: 1;
-  --tabpanel-border: none;
 
   /* Tags: use small variant sizing by default */
   --tag-height: var(--tag-small-height);
