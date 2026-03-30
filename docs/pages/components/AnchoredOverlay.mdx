@@ -133,12 +133,12 @@ function AnchoredOverlayWithOffsetExample() {
 }
 ```
 
-### Disable Flip
+### Disable Auto Placement
 
-When `disableFlip` is set, the overlay will not flip to an alternative placement when space is limited. The overlay will remain at its configured `placement`, though it may still shift along its axis to stay within clipping boundaries.
+When `disableAutoPlacement` is set, the overlay will not automatically reposition itself when space is limited. The overlay will remain at its configured `placement`, though it may still shift along its axis to stay within clipping boundaries.
 
 <Note>
-  Use `disableFlip` with caution. When flipping is disabled, the overlay may render partially or fully outside the visible viewport if there is not enough space at the configured placement. This can create accessibility issues where content is announced by screen readers but not visible to sighted users. This also disables auto placement and top-overflow prevention.
+  Use `disableAutoPlacement` with caution. When automatic placement is disabled, the overlay may render partially or fully outside the visible viewport if there is not enough space at the configured placement. Consumers of this prop should ensure that the configured placement has sufficient space for the overlay content, or implement their own overflow handling to avoid content being hidden from sighted users while still being announced by screen readers.
 </Note>
 
 ```jsx example
@@ -163,7 +163,7 @@ function AnchoredOverlayDisableFlipExample() {
         target={targetRef}
         open={open}
         placement="bottom-start"
-        disableFlip
+        disableAutoPlacement
         onOpenChange={openState => setOpen(openState)}
         style={{
           padding: 'var(--space-small)',
@@ -224,10 +224,10 @@ function AnchoredOverlayDisableFlipExample() {
       description: 'An optional offset number to position the anchor element from its anchored target.'
     },
     {
-      name: 'disableFlip',
+      name: 'disableAutoPlacement',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'When set, disables automatic flip repositioning of the overlay when it overflows its boundary. This also disables auto placement and top-overflow prevention. The overlay may render outside the visible viewport.'
+      description: 'When set, disables all automatic placement changes including flip, auto placement, and top-overflow prevention. The overlay will remain at its configured placement but may render outside the visible viewport.'
     },
     {
       name: 'focusTrap',

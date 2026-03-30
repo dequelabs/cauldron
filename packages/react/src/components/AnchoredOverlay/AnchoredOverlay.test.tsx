@@ -102,7 +102,7 @@ test('should support auto-end placement', () => {
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
 });
 
-test('should not use flip or autoPlacement middleware when disableFlip is set', () => {
+test('should not use flip or autoPlacement middleware when disableAutoPlacement is set', () => {
   const targetRef = { current: document.createElement('button') };
   (flip as jest.Mock).mockClear();
   (autoPlacement as jest.Mock).mockClear();
@@ -111,7 +111,7 @@ test('should not use flip or autoPlacement middleware when disableFlip is set', 
     <AnchoredOverlay
       target={targetRef}
       placement="bottom-start"
-      disableFlip
+      disableAutoPlacement
       open
       data-testid="overlay"
     >
@@ -124,7 +124,7 @@ test('should not use flip or autoPlacement middleware when disableFlip is set', 
   expect(autoPlacement).not.toHaveBeenCalled();
 });
 
-test('should not use autoPlacement middleware when disableFlip is set with auto placement', () => {
+test('should not use autoPlacement middleware when disableAutoPlacement is set with auto placement', () => {
   const targetRef = { current: document.createElement('button') };
   (flip as jest.Mock).mockClear();
   (autoPlacement as jest.Mock).mockClear();
@@ -133,7 +133,7 @@ test('should not use autoPlacement middleware when disableFlip is set with auto 
     <AnchoredOverlay
       target={targetRef}
       placement="auto"
-      disableFlip
+      disableAutoPlacement
       open
       data-testid="overlay"
     >
@@ -146,13 +146,18 @@ test('should not use autoPlacement middleware when disableFlip is set with auto 
   expect(flip).not.toHaveBeenCalled();
 });
 
-test('should not use autoPlacement middleware when disableFlip is set with default placement', () => {
+test('should not use autoPlacement middleware when disableAutoPlacement is set with default placement', () => {
   const targetRef = { current: document.createElement('button') };
   (flip as jest.Mock).mockClear();
   (autoPlacement as jest.Mock).mockClear();
 
   render(
-    <AnchoredOverlay target={targetRef} disableFlip open data-testid="overlay">
+    <AnchoredOverlay
+      target={targetRef}
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
       Content
     </AnchoredOverlay>
   );
@@ -162,7 +167,7 @@ test('should not use autoPlacement middleware when disableFlip is set with defau
   expect(flip).not.toHaveBeenCalled();
 });
 
-test('should not prevent top overflow when disableFlip is set', () => {
+test('should not prevent top overflow when disableAutoPlacement is set', () => {
   const targetRef = { current: document.createElement('button') };
   const onPlacementChange = jest.fn();
 
@@ -177,7 +182,7 @@ test('should not prevent top overflow when disableFlip is set', () => {
     <AnchoredOverlay
       target={targetRef}
       placement="top"
-      disableFlip
+      disableAutoPlacement
       open
       onPlacementChange={onPlacementChange}
       data-testid="overlay"
@@ -191,7 +196,7 @@ test('should not prevent top overflow when disableFlip is set', () => {
   expect(onPlacementChange).toHaveBeenCalledWith('top');
 });
 
-test('should use flip middleware when disableFlip is not set', () => {
+test('should use flip middleware when disableAutoPlacement is not set', () => {
   const targetRef = { current: document.createElement('button') };
   (flip as jest.Mock).mockClear();
 
