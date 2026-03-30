@@ -190,7 +190,7 @@ test('should render with border variant', () => {
   expect(screen.getByRole('table')).toHaveClass('Table', 'Table--border');
 });
 
-test('should render sort button and icons with sortDirection and onSort in Table', () => {
+test('should render sort button and sort-triangle icon with sortDirection "none" and onSort', () => {
   render(
     <Table>
       <TableHead>
@@ -205,6 +205,9 @@ test('should render sort button and icons with sortDirection and onSort in Table
 
   expect(screen.getByRole('button')).toBeInTheDocument();
   expect(screen.getByRole('status')).toHaveTextContent('');
+  expect(
+    screen.getByRole('button').querySelector('.Icon--sort-triangle')
+  ).toBeInTheDocument();
 });
 
 test('should render className "TableHeader--sorting" when actively sorting', () => {
@@ -230,7 +233,7 @@ test('should render className "TableHeader--sorting" when actively sorting', () 
   );
 });
 
-test('should render triangle up Icon and ascending message when sortDirection is ascending', () => {
+test('should render ascending icon and announcement when sortDirection is ascending', () => {
   render(
     <Table>
       <TableHead>
@@ -248,9 +251,12 @@ test('should render triangle up Icon and ascending message when sortDirection is
   );
 
   expect(screen.getByRole('status')).toHaveTextContent('up and away');
+  expect(
+    screen.getByRole('button').querySelector('.Icon--table-sort-ascending')
+  ).toBeInTheDocument();
 });
 
-test('should render triangle down Icon and descending message when sortDirection is descending', () => {
+test('should render descending icon and announcement when sortDirection is descending', () => {
   render(
     <Table>
       <TableHead>
@@ -268,6 +274,9 @@ test('should render triangle down Icon and descending message when sortDirection
   );
 
   expect(screen.getByRole('status')).toHaveTextContent('down below');
+  expect(
+    screen.getByRole('button').querySelector('.Icon--table-sort-descending')
+  ).toBeInTheDocument();
 });
 
 test('should call onSort when sort button is clicked', async () => {
@@ -487,6 +496,7 @@ test('should not include sort announcement text in the column header accessible 
   // not inside the column header, so it is not part of the header's accessible name
   const columnHeader = screen.getByRole('columnheader');
   expect(columnHeader).toHaveAttribute('aria-sort', 'ascending');
+  expect(columnHeader).toHaveAccessibleName('Name');
 
   const liveRegion = screen.getByRole('status');
   expect(columnHeader.contains(liveRegion)).toBe(false);
@@ -528,6 +538,9 @@ test('should only render a single live region for multiple sortable columns', ()
   // There should be exactly one live region per table, not one per column
   const liveRegions = screen.getAllByRole('status');
   expect(liveRegions).toHaveLength(1);
+
+  // The announcement should contain the actively sorted column's text, not be empty
+  expect(liveRegions[0]).toHaveTextContent('sorted ascending');
 });
 
 test('should remove live region from document.body when table unmounts', () => {
@@ -552,6 +565,163 @@ test('should remove live region from document.body when table unmounts', () => {
   unmount();
 
   expect(screen.queryByRole('status')).not.toBeInTheDocument();
+});
+
+test('should update announcement when switching which column is sorted', () => {
+  const { rerender } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+          <TableHeader scope="col" sortDirection={'none'} onSort={() => null}>
+            Age
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('sorted ascending');
+
+  // Switch sort to Age column (descending), unsort Name
+  rerender(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col" sortDirection={'none'} onSort={() => null}>
+            Name
+          </TableHeader>
+          <TableHeader
+            scope="col"
+            sortDirection={'descending'}
+            onSort={() => null}
+          >
+            Age
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('sorted descending');
+});
+
+test('should update announcement when toggling sort direction on the same column', () => {
+  const { rerender } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('sorted ascending');
+
+  rerender(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'descending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('sorted descending');
+});
+
+test('should clear announcement when sort direction changes to none', () => {
+  const { rerender } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('sorted ascending');
+
+  rerender(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col" sortDirection={'none'} onSort={() => null}>
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toHaveTextContent('');
+});
+
+test('should maintain independent announcements for multiple tables', () => {
+  render(
+    <>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeader
+              scope="col"
+              sortDirection={'ascending'}
+              onSort={() => null}
+            >
+              Name
+            </TableHeader>
+          </TableRow>
+        </TableHead>
+      </Table>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeader
+              scope="col"
+              sortDirection={'descending'}
+              onSort={() => null}
+            >
+              Age
+            </TableHeader>
+          </TableRow>
+        </TableHead>
+      </Table>
+    </>
+  );
+
+  const liveRegions = screen.getAllByRole('status');
+  expect(liveRegions).toHaveLength(2);
+
+  const announcements = liveRegions.map((el) => el.textContent);
+  expect(announcements).toContain('sorted ascending');
+  expect(announcements).toContain('sorted descending');
 });
 
 test('should render TableHeader with cell variant', () => {

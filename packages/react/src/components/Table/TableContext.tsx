@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback
-} from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 import type { Column } from './Table';
 
 type TableContext = {
@@ -35,18 +29,14 @@ function TableProvider({
 }: TableProvider): JSX.Element {
   const { Provider } = TableContext as React.Context<TableContext>;
   const [sortAnnouncement, setSortAnnouncement] = useState('');
-  const stableSetter = useCallback(
-    (announcement: string) => setSortAnnouncement(announcement),
-    []
-  );
   const contextValue: TableContext = useMemo(
     () => ({
       layout,
       columns,
       sortAnnouncement,
-      setSortAnnouncement: stableSetter
+      setSortAnnouncement
     }),
-    [layout, columns, sortAnnouncement, stableSetter]
+    [layout, columns, sortAnnouncement]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;

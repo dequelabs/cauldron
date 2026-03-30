@@ -58,7 +58,14 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
           : '';
 
     useEffect(() => {
-      setSortAnnouncement(announcement);
+      if (announcement) {
+        setSortAnnouncement(announcement);
+      }
+      return () => {
+        if (announcement) {
+          setSortAnnouncement('');
+        }
+      };
     }, [announcement, setSortAnnouncement]);
 
     return (

@@ -47,7 +47,7 @@ function parseColumnWidth(width?: ColumnWidth): string {
   return width;
 }
 
-function SortAnnouncementPortal() {
+function SortAnnouncementPortal(): React.ReactPortal | null {
   const { sortAnnouncement } = useTable();
   if (typeof document === 'undefined') {
     return null;
@@ -58,8 +58,9 @@ function SortAnnouncementPortal() {
         {sortAnnouncement}
       </span>
     </Offscreen>,
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     document.body
-  ) as React.ReactPortal;
+  );
 }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
