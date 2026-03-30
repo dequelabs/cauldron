@@ -59,7 +59,7 @@ function SortAnnouncementPortal() {
       </span>
     </Offscreen>,
     document.body
-  );
+  ) as React.ReactPortal;
 }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
