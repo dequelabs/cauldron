@@ -204,7 +204,6 @@ test('should render sort button and icons with sortDirection and onSort in Table
   );
 
   expect(screen.getByRole('button')).toBeInTheDocument();
-  expect(screen.getByRole('status').closest('.Icon--sort-triangle'));
   expect(screen.getByRole('status')).toHaveTextContent('');
 });
 
@@ -249,7 +248,6 @@ test('should render triangle up Icon and ascending message when sortDirection is
   );
 
   expect(screen.getByRole('status')).toHaveTextContent('up and away');
-  expect(screen.getByRole('status').closest('.Icon--table-sort-ascending'));
 });
 
 test('should render triangle down Icon and descending message when sortDirection is descending', () => {
@@ -270,7 +268,6 @@ test('should render triangle down Icon and descending message when sortDirection
   );
 
   expect(screen.getByRole('status')).toHaveTextContent('down below');
-  expect(screen.getByRole('status').closest('.Icon--table-sort-descending'));
 });
 
 test('should call onSort when sort button is clicked', async () => {
@@ -456,6 +453,50 @@ test('returns 0 axe violations with descending sorting', async () => {
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
+});
+
+test('should not include sort announcement text in the column header accessible name', () => {
+  render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Alice</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Bob</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  // The sort announcement live region should exist and contain the announcement
+  expect(screen.getByRole('status')).toHaveTextContent('sorted ascending');
+
+  // The live region should be rendered outside the table (in document.body),
+  // not inside the column header, so it is not part of the header's accessible name
+  const columnHeader = screen.getByRole('columnheader');
+  expect(columnHeader).toHaveAttribute('aria-sort', 'ascending');
+
+  const liveRegion = screen.getByRole('status');
+  expect(columnHeader.contains(liveRegion)).toBe(false);
+
+  // Body cells should not contain any sort announcement text
+  const cells = screen.getAllByRole('cell');
+  cells.forEach((cell) => {
+    expect(cell.textContent).not.toContain('sorted ascending');
+    expect(cell.textContent).not.toContain('sorted descending');
+  });
 });
 
 test('should render TableHeader with cell variant', () => {

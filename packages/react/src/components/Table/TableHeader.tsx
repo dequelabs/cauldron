@@ -1,7 +1,6 @@
 import type { ColumnAlignment } from './Table';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 import { useTable } from './TableContext';
 import useTableGridStyles from './useTableGridStyles';
@@ -10,8 +9,10 @@ import useSharedRef from '../../utils/useSharedRef';
 // these match aria-sort's values
 type SortDirection = 'ascending' | 'descending' | 'none';
 
-interface TableHeaderProps
-  extends Omit<React.ThHTMLAttributes<HTMLTableHeaderCellElement>, 'align'> {
+interface TableHeaderProps extends Omit<
+  React.ThHTMLAttributes<HTMLTableHeaderCellElement>,
+  'align'
+> {
   sortDirection?: SortDirection;
   onSort?: () => void;
   sortAscendingAnnouncement?: string;
@@ -20,6 +21,36 @@ interface TableHeaderProps
   /* Only applies a visual style to the header, does not change semantics */
   variant?: 'header' | 'cell';
 }
+
+/**
+ * Manages a live region in the document body so the sort announcement is not
+ * part of the column header's accessible name. Without this, screen readers
+ * repeat the sort state text on every data cell in the sorted column.
+ */
+const useSortAnnouncement = (announcement: string) => {
+  const liveRegionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const container = document.createElement('div');
+    container.className = 'Offscreen';
+    const liveRegion = document.createElement('span');
+    liveRegion.setAttribute('role', 'status');
+    liveRegion.setAttribute('aria-live', 'polite');
+    container.appendChild(liveRegion);
+    document.body.appendChild(container);
+    liveRegionRef.current = liveRegion;
+
+    return () => {
+      document.body.removeChild(container);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (liveRegionRef.current) {
+      liveRegionRef.current.textContent = announcement;
+    }
+  }, [announcement]);
+};
 
 const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
   (
@@ -56,6 +87,8 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
           ? sortDescendingAnnouncement
           : '';
 
+    useSortAnnouncement(announcement);
+
     return (
       <th
         ref={tableHeaderRef}
@@ -89,11 +122,6 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
                 <Icon type="table-sort-descending" />
               )}
             </span>
-            <Offscreen>
-              <span role="status" aria-live="polite">
-                {announcement}
-              </span>
-            </Offscreen>
           </button>
         ) : (
           children
