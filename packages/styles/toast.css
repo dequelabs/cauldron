@@ -87,10 +87,6 @@
   color: var(--accent-medium);
 }
 
-.Toast ul {
-  margin-left: var(--toast-list-margin-left, 0);
-}
-
 .Toast:focus {
   outline: 0;
 }
