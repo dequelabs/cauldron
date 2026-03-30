@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import classNames from 'classnames';
-import { TableProvider } from './TableContext';
+import Offscreen from '../Offscreen';
+import { TableProvider, useTable } from './TableContext';
 
 export type Column = {
   align: ColumnAlignment;
@@ -43,6 +45,21 @@ function parseColumnWidth(width?: ColumnWidth): string {
   }
 
   return width;
+}
+
+function SortAnnouncementPortal() {
+  const { sortAnnouncement } = useTable();
+  if (typeof document === 'undefined') {
+    return null;
+  }
+  return createPortal(
+    <Offscreen>
+      <span role="status" aria-live="polite">
+        {sortAnnouncement}
+      </span>
+    </Offscreen>,
+    document.body
+  );
 }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
@@ -115,6 +132,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
           columns={columns}
         >
           {children}
+          <SortAnnouncementPortal />
         </TableProvider>
       </table>
     );

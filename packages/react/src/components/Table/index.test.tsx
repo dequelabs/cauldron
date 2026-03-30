@@ -499,6 +499,61 @@ test('should not include sort announcement text in the column header accessible 
   });
 });
 
+test('should only render a single live region for multiple sortable columns', () => {
+  render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+          <TableHeader scope="col" sortDirection={'none'} onSort={() => null}>
+            Age
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Alice</TableCell>
+          <TableCell>30</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  // There should be exactly one live region per table, not one per column
+  const liveRegions = screen.getAllByRole('status');
+  expect(liveRegions).toHaveLength(1);
+});
+
+test('should remove live region from document.body when table unmounts', () => {
+  const { unmount } = render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader
+            scope="col"
+            sortDirection={'ascending'}
+            onSort={() => null}
+          >
+            Name
+          </TableHeader>
+        </TableRow>
+      </TableHead>
+    </Table>
+  );
+
+  expect(screen.getByRole('status')).toBeInTheDocument();
+
+  unmount();
+
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+});
+
 test('should render TableHeader with cell variant', () => {
   render(
     <Table>
