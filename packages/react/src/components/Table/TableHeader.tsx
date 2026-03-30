@@ -1,8 +1,8 @@
 import type { ColumnAlignment } from './Table';
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
-import { useTable } from './TableContext';
+import { useTable, useSortAnnouncementActions } from './TableContext';
 import useTableGridStyles from './useTableGridStyles';
 import useSharedRef from '../../utils/useSharedRef';
 
@@ -39,7 +39,9 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
     ref
   ) => {
     const tableHeaderRef = useSharedRef<HTMLTableHeaderCellElement>(ref);
-    const { layout, columns, setSortAnnouncement } = useTable();
+    const { layout, columns } = useTable();
+    const { announce, clear } = useSortAnnouncementActions();
+    const ownerToken = useRef({});
     const tableGridStyles = useTableGridStyles({
       elementRef: tableHeaderRef,
       align,
@@ -47,26 +49,29 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       layout
     });
 
+    const isSortable = !!onSort && !!sortDirection;
+
     // When the sort direction changes, we want to announce the change in a live region
     // because changes to the sort value is not widely supported yet
     // see: https://a11ysupport.io/tech/aria/aria-sort_attribute
-    const announcement =
-      sortDirection === 'ascending'
+    const announcement = isSortable
+      ? sortDirection === 'ascending'
         ? sortAscendingAnnouncement
         : sortDirection === 'descending'
           ? sortDescendingAnnouncement
-          : '';
+          : ''
+      : '';
 
     useEffect(() => {
+      if (!isSortable) return;
+
       if (announcement) {
-        setSortAnnouncement(announcement);
+        announce(ownerToken.current, announcement);
       }
       return () => {
-        if (announcement) {
-          setSortAnnouncement('');
-        }
+        clear(ownerToken.current);
       };
-    }, [announcement, setSortAnnouncement]);
+    }, [isSortable, announcement, announce, clear]);
 
     return (
       <th

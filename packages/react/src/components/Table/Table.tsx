@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
-import { TableProvider, useTable } from './TableContext';
+import { TableProvider, useSortAnnouncementState } from './TableContext';
 
 export type Column = {
   align: ColumnAlignment;
@@ -48,15 +48,13 @@ function parseColumnWidth(width?: ColumnWidth): string {
 }
 
 function SortAnnouncementPortal(): React.ReactPortal | null {
-  const { sortAnnouncement } = useTable();
+  const { text } = useSortAnnouncementState();
   if (typeof document === 'undefined') {
     return null;
   }
   return createPortal(
     <Offscreen>
-      <span role="status" aria-live="polite">
-        {sortAnnouncement}
-      </span>
+      <span role="status">{text}</span>
     </Offscreen>,
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     document.body
