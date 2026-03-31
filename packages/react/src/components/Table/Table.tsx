@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import Offscreen from '../Offscreen';
 import { TableProvider, useSortAnnouncementState } from './TableContext';
+import { isBrowser } from '../../utils/is-browser';
 
 export type Column = {
   align: ColumnAlignment;
@@ -47,11 +48,13 @@ function parseColumnWidth(width?: ColumnWidth): string {
   return width;
 }
 
-function SortAnnouncementPortal(): JSX.Element | null {
+function SortAnnouncementPortal(): React.ReactPortal | null {
   const { text } = useSortAnnouncementState();
-  if (typeof document === 'undefined') {
+  if (!isBrowser()) {
     return null;
   }
+  // Cast needed due to @types/react-dom having a separate @types/react copy
+  // (same pattern used by Dialog component)
   return createPortal(
     <Offscreen>
       <span role="status">{text}</span>

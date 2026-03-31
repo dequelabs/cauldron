@@ -509,6 +509,28 @@ test('should not include sort announcement text in the column header accessible 
   });
 });
 
+test('should not set announcement for non-sortable headers', () => {
+  render(
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col">Name</TableHeader>
+          <TableHeader scope="col">Age</TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Alice</TableCell>
+          <TableCell>30</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  // The live region should exist (rendered by the Table portal) but be empty
+  expect(screen.getByRole('status')).toHaveTextContent('');
+});
+
 test('should only render a single live region for multiple sortable columns', () => {
   render(
     <Table>

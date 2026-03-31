@@ -64,13 +64,12 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
 
     useEffect(() => {
       if (!isSortable) return;
-
       if (announcement) {
         announce(ownerToken.current, announcement);
+        return () => {
+          clear(ownerToken.current);
+        };
       }
-      return () => {
-        clear(ownerToken.current);
-      };
     }, [isSortable, announcement, announce, clear]);
 
     return (
