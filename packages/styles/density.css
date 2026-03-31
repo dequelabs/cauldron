@@ -44,7 +44,6 @@
 
   /* Toast: static positioning (no fixed TopBar to anchor to) */
   --toast-position: static;
-  --toast-list-margin-left: 1.5em;
 
   /* Field select: constrained width */
   --select-width: clamp(0px, 25rem, 100%);
