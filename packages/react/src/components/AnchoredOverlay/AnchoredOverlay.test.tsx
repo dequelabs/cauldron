@@ -214,6 +214,50 @@ test('should use flip middleware when disableAutoPlacement is not set', () => {
   expect(flip).toHaveBeenCalled();
 });
 
+test('should warn when disableAutoPlacement is used with auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="auto"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(consoleSpy).toHaveBeenCalledWith(
+    expect.stringContaining('`disableAutoPlacement` has no effect')
+  );
+
+  consoleSpy.mockRestore();
+});
+
+test('should not warn when disableAutoPlacement is used with non-auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(consoleSpy).not.toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
+});
+
 test('should call onOpenChange when escape is pressed', async () => {
   const targetRef = { current: document.createElement('button') };
   const onOpenChange = jest.fn();
