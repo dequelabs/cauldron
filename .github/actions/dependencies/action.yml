@@ -2,26 +2,27 @@ name: 'Dependencies'
 description: 'Installs and builds dependencies for Cauldron'
 inputs:
   root:
-    type: boolean
-    default: true
+    description: 'Install root-level dependencies'
+    default: 'true'
   packages-react:
-    type: boolean
-    default: false
+    description: 'Install packages/react dependencies'
+    default: 'false'
   packages-styles:
-    type: boolean
-    default: false
+    description: 'Install packages/styles dependencies'
+    default: 'false'
 
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version: 22
         cache: yarn
         cache-dependency-path: '**/yarn.lock'
         registry-url: 'https://registry.npmjs.org'
     # We need npm 11.5.1+ for OIDC-based publishing support
-    - run: npm install -g npm@11
+    # Installing npm 11.11.0 as a workaround for https://github.com/npm/cli/issues/9151
+    - run: npm install -g npm@11.11.0
       shell: bash
     - run: npm install -g yarn # Required since we reinstalled npm
       shell: bash
