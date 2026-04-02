@@ -1,9 +1,9 @@
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
-import RadioGroup from './';
+import RadioGroup, { RadioItem } from './';
 
 type SetOptional<T, Keys extends keyof T> = Pick<Partial<T>, Keys> &
   Omit<T, Keys>;
@@ -12,7 +12,7 @@ type RadioGroupProps = SetOptional<
   'aria-label' | 'radios'
 >;
 
-const defaultOptions: RadioGroupProps['radios'] = [
+const defaultOptions: RadioItem[] = [
   { id: '1', label: 'Red', value: 'red' },
   { id: '2', label: 'Blue', value: 'blue' },
   { id: '3', label: 'Green', value: 'green' }
@@ -228,4 +228,178 @@ test('should have no axe violations with radio item and labelDescription', async
   const group = screen.getByRole('radiogroup');
   const results = await axe(group);
   expect(results).toHaveNoViolations();
+});
+
+describe('radio icon overlay click regression', () => {
+  test('should select any radio when clicking its icon overlay', async () => {
+    const user = userEvent.setup();
+    renderRadioGroup();
+    const inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+
+    for (let i = 0; i < inputs.length; i++) {
+      const radioIcon = inputs[i].parentElement!.querySelector(
+        '.Radio__overlay'
+      ) as HTMLElement;
+      await user.click(radioIcon);
+      expect(inputs[i]).toBeChecked();
+    }
+  });
+
+  test('should select radio via icon overlay after re-render', async () => {
+    const user = userEvent.setup();
+
+    function Wrapper() {
+      const [count, setCount] = useState(0);
+      return (
+        <div>
+          <button onClick={() => setCount((c) => c + 1)}>
+            Re-render ({count})
+          </button>
+          <RadioGroup
+            aria-label="radio group"
+            name="radios"
+            radios={defaultOptions}
+          />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    // Force several re-renders
+    const rerenderButton = screen.getByRole('button', {
+      name: /Re-render/
+    });
+    await user.click(rerenderButton);
+    await user.click(rerenderButton);
+    await user.click(rerenderButton);
+
+    // Now click each radio's icon overlay — all should still work
+    const inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    for (let i = 0; i < inputs.length; i++) {
+      const radioIcon = inputs[i].parentElement!.querySelector(
+        '.Radio__overlay'
+      ) as HTMLElement;
+      await user.click(radioIcon);
+      expect(inputs[i]).toBeChecked();
+    }
+  });
+
+  test('should select radio via icon overlay after radios prop changes', async () => {
+    const user = userEvent.setup();
+    const extendedOptions = [
+      ...defaultOptions,
+      { id: '4', label: 'Yellow', value: 'yellow' }
+    ];
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(extendedOptions)}>
+            Add option
+          </button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    // Initially 3 radios
+    expect(screen.getAllByRole('radio')).toHaveLength(3);
+
+    // Add a 4th radio
+    await user.click(screen.getByRole('button', { name: /Add option/ }));
+    const inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputs).toHaveLength(4);
+
+    // Click the newly added radio's icon overlay
+    const newRadioIcon = inputs[3].parentElement!.querySelector(
+      '.Radio__overlay'
+    ) as HTMLElement;
+    await user.click(newRadioIcon);
+    expect(inputs[3]).toBeChecked();
+
+    // Verify previously existing radios still work via icon overlay
+    const firstRadioIcon = inputs[0].parentElement!.querySelector(
+      '.Radio__overlay'
+    ) as HTMLElement;
+    await user.click(firstRadioIcon);
+    expect(inputs[0]).toBeChecked();
+  });
+
+  test('should select the correct radio via icon overlay after radios are reordered', async () => {
+    const user = userEvent.setup();
+    const reversedOptions: RadioItem[] = [...defaultOptions].reverse();
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(reversedOptions)}>
+            Reverse order
+          </button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    // Before reorder: Red, Blue, Green
+    let inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputs[0]).toHaveAttribute('value', 'red');
+    expect(inputs[2]).toHaveAttribute('value', 'green');
+
+    // Reorder to: Green, Blue, Red
+    await user.click(screen.getByRole('button', { name: /Reverse order/ }));
+
+    inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputs[0]).toHaveAttribute('value', 'green');
+    expect(inputs[2]).toHaveAttribute('value', 'red');
+
+    // Click each icon overlay and verify the correct (reordered) radio is selected
+    for (let i = 0; i < inputs.length; i++) {
+      const radioIcon = inputs[i].parentElement!.querySelector(
+        '.Radio__overlay'
+      ) as HTMLElement;
+      await user.click(radioIcon);
+      expect(inputs[i]).toBeChecked();
+    }
+  });
+
+  test('should select radio via icon overlay after radios are removed', async () => {
+    const user = userEvent.setup();
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(defaultOptions.slice(0, 2))}>
+            Remove last
+          </button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    expect(screen.getAllByRole('radio')).toHaveLength(3);
+
+    // Remove the last radio
+    await user.click(screen.getByRole('button', { name: /Remove last/ }));
+    const inputs = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputs).toHaveLength(2);
+
+    // Remaining radios should still be selectable via icon overlay
+    for (let i = 0; i < inputs.length; i++) {
+      const radioIcon = inputs[i].parentElement!.querySelector(
+        '.Radio__overlay'
+      ) as HTMLElement;
+      await user.click(radioIcon);
+      expect(inputs[i]).toBeChecked();
+    }
+  });
 });
