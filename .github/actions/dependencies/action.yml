@@ -21,7 +21,8 @@ runs:
         cache-dependency-path: '**/yarn.lock'
         registry-url: 'https://registry.npmjs.org'
     # We need npm 11.5.1+ for OIDC-based publishing support
-    - run: npm install -g npm@11
+    # Installing npm 11.11.0 as a workaround for https://github.com/npm/cli/issues/9151
+    - run: npm install -g npm@11.11.0
       shell: bash
     - run: npm install -g yarn # Required since we reinstalled npm
       shell: bash
