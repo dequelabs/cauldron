@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import Switch from './';
@@ -38,33 +38,62 @@ describe('Switch', () => {
     expect(container.querySelector('.Switch.custom-class')).toBeInTheDocument();
   });
 
-  test('calls onChange when toggled', () => {
+  test('has role switch', () => {
+    render(<Switch id="test" label="Toggle" />);
+    expect(screen.getByRole('switch')).toBeInTheDocument();
+  });
+
+  test('calls onChange when toggled', async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     render(<Switch id="test" label="Toggle" onChange={onChange} />);
-    fireEvent.click(screen.getByRole('switch'));
+    await user.click(screen.getByRole('switch'));
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   test('does not call onChange when disabled', async () => {
-    const onChange = jest.fn();
     const user = userEvent.setup();
+    const onChange = jest.fn();
     render(<Switch id="test" label="Toggle" disabled onChange={onChange} />);
     await user.click(screen.getByRole('switch'));
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  test('calls onFocus when focused', () => {
+  test('toggles checked state on click', async () => {
+    const user = userEvent.setup();
+    render(<Switch id="test" label="Toggle" />);
+    const switchEl = screen.getByRole('switch');
+    expect(switchEl).not.toBeChecked();
+    await user.click(switchEl);
+    expect(switchEl).toBeChecked();
+    await user.click(switchEl);
+    expect(switchEl).not.toBeChecked();
+  });
+
+  test('calls onFocus when focused', async () => {
+    const user = userEvent.setup();
     const onFocus = jest.fn();
     render(<Switch id="test" label="Toggle" onFocus={onFocus} />);
-    fireEvent.focus(screen.getByRole('switch'));
+    await user.tab();
     expect(onFocus).toHaveBeenCalledTimes(1);
   });
 
-  test('calls onBlur when blurred', () => {
+  test('calls onBlur when blurred', async () => {
+    const user = userEvent.setup();
     const onBlur = jest.fn();
     render(<Switch id="test" label="Toggle" onBlur={onBlur} />);
-    fireEvent.blur(screen.getByRole('switch'));
+    await user.tab();
+    await user.tab();
     expect(onBlur).toHaveBeenCalledTimes(1);
+  });
+
+  test('toggles via Space key', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    render(<Switch id="test" label="Toggle" onChange={onChange} />);
+    await user.tab();
+    await user.keyboard(' ');
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   test('syncs with controlled checked prop', () => {
@@ -112,9 +141,15 @@ describe('Switch', () => {
     expect(ref.current).toBeInstanceOf(HTMLInputElement);
   });
 
-  test('has role switch', () => {
-    render(<Switch id="test" label="Toggle" />);
-    expect(screen.getByRole('switch')).toBeInTheDocument();
+  test('forwards switchRef to input element', () => {
+    const switchRef = React.createRef<HTMLInputElement>();
+    render(<Switch id="test" label="Toggle" switchRef={switchRef} />);
+    expect(switchRef.current).toBeInstanceOf(HTMLInputElement);
+  });
+
+  test('renders without errors when no optional props are provided', () => {
+    const { container } = render(<Switch id="test" label="Toggle" />);
+    expect(container.querySelector('.Switch')).toBeInTheDocument();
   });
 
   test('should have no axe violations when unchecked', async () => {
