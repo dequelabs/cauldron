@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import Switch from './';
 
 describe('Switch', () => {
@@ -114,5 +115,49 @@ describe('Switch', () => {
   test('has role switch', () => {
     render(<Switch id="test" label="Toggle" />);
     expect(screen.getByRole('switch')).toBeInTheDocument();
+  });
+
+  test('should have no axe violations when unchecked', async () => {
+    const { container } = render(<Switch id="test" label="Toggle" />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  test('should have no axe violations when checked', async () => {
+    const { container } = render(
+      <Switch id="test" label="Toggle" checked onChange={jest.fn()} />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  test('should have no axe violations when disabled', async () => {
+    const { container } = render(<Switch id="test" label="Toggle" disabled />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  test('should have no axe violations when disabled and checked', async () => {
+    const { container } = render(
+      <Switch id="test" label="Toggle" disabled checked onChange={jest.fn()} />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  test('should have no axe violations with error', async () => {
+    const { container } = render(
+      <Switch id="test" label="Toggle" error="This field is required" />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  test('should have no axe violations with label description', async () => {
+    const { container } = render(
+      <Switch id="test" label="Toggle" labelDescription="Additional info" />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
