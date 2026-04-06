@@ -10,17 +10,19 @@ interface TagButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   value: ContentNode;
   icon: IconType;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  size?: 'default' | 'small';
 }
 
 const TagButton = React.forwardRef(
   (
-    { label, value, icon, className, ...rest }: TagButtonProps,
+    { label, value, icon, className, size, ...rest }: TagButtonProps,
     ref: Ref<HTMLButtonElement>
   ) => {
     return (
       <Button
         variant="tag"
         className={classNames('TagButton', className)}
+        size={size}
         ref={ref}
         {...rest}
       >

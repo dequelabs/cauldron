@@ -62,6 +62,17 @@ test('should render button as tag', () => {
   expect(TagButton).toHaveClass('Tag');
 });
 
+test('should render button as small tag', () => {
+  render(
+    <Button variant="tag" size="small">
+      small tag
+    </Button>
+  );
+  const TagButton = screen.getByRole('button', { name: 'small tag' });
+  expect(TagButton).toHaveClass('Tag');
+  expect(TagButton).toHaveClass('Tag--small');
+});
+
 test('should render button as badge', () => {
   render(<Button variant="badge">badge</Button>);
   const BadgeButton = screen.getByRole('button', { name: 'badge' });

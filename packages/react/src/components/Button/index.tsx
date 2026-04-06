@@ -14,6 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'tag'
     | 'badge';
   thin?: boolean;
+  size?: 'default' | 'small';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -21,6 +22,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       variant = 'primary',
       thin,
+      size = 'default',
       children,
       className,
       buttonRef,
@@ -40,6 +42,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         Link: variant === 'link',
         Tag: variant === 'tag',
         'Button--tag': variant === 'tag',
+        'Tag--small': variant === 'tag' && size === 'small',
         'Button--thin': thin,
         'Button--badge': variant === 'badge'
       })}
