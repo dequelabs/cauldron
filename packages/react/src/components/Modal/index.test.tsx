@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Modal from './';
+import Modal, { ModalContent, ModalFooter } from './';
 import axe from '../../axe';
+import LongContent from '../../utils/createLongContent';
 
 const defaults = { show: false, heading: <span>Default Modal</span> };
 
@@ -57,6 +58,23 @@ test('should return no axe violations with a passed a truthy "show" and passed v
       Hi
     </Modal>
   );
-
   expect(await axe(container)).toHaveNoViolations();
+});
+
+test('should return no axe violations with long modal content', async () => {
+  render(
+    <Modal {...defaults} show={true}>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
+      <ModalFooter>
+        <button>Ok</button>
+      </ModalFooter>
+    </Modal>
+  );
+
+  expect(document.querySelector('.Dialog__inner')).toBeInTheDocument();
+  expect(document.querySelector('.Dialog__content')).toBeInTheDocument();
+
+  expect(await axe(document.body)).toHaveNoViolations();
 });

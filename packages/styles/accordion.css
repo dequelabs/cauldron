@@ -6,6 +6,9 @@
   --accordion-trigger-box-shadow-hover: var(--accent-primary);
   --accordion-trigger-border-color: var(--gray-40);
   --accordion-trigger-icon-color: var(--gray-90);
+  --accordion-trigger-padding: calc(var(--space-small) - var(--space-half));
+  --accordion-trigger-text-decoration: underline solid
+    var(--accordion-trigger-text-color);
   --accordion-panel-background-color: var(--white);
   --accordion-panel-text-color: var(--gray-90);
   --accordion-panel-border-color: var(--gray-40);
@@ -33,7 +36,7 @@
 .Accordion__trigger,
 button.Accordion__trigger {
   background-color: var(--accordion-trigger-background-color);
-  padding: calc(var(--space-small) - var(--space-half));
+  padding: var(--accordion-trigger-padding);
   width: 100%;
   display: flex;
   align-items: center;
@@ -42,7 +45,7 @@ button.Accordion__trigger {
   font-size: var(--text-size-small);
   margin-top: var(--space-small);
   color: var(--accordion-trigger-text-color);
-  text-decoration: underline solid var(--accordion-trigger-text-color);
+  text-decoration: var(--accordion-trigger-text-decoration);
 }
 
 .Accordion__trigger[aria-expanded='true'] {

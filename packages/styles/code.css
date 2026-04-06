@@ -2,6 +2,10 @@
   --code-text-color: var(--accent-primary-active);
   --code-border-color: var(--stroke-light);
   --code-background-color: var(--background-light);
+  --code-padding: var(--space-smaller);
+  --code-border: 1px solid var(--code-border-color);
+  --code-display: block;
+  --code-margin: 0 0 var(--space-smallest) 0;
 }
 
 .cauldron--theme-dark {
@@ -20,10 +24,11 @@
 }
 
 .Code.hljs {
-  display: block;
-  padding: var(--space-smaller);
+  display: var(--code-display);
+  padding: var(--code-padding);
+  margin: var(--code-margin);
   background: var(--code-background-color);
-  border: 1px solid var(--code-border-color);
+  border: var(--code-border);
   border-radius: 3px;
   color: var(--code-text-color);
   word-break: break-all;

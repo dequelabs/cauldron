@@ -20,6 +20,7 @@
   --combobox-listbox-background-color: var(--accent-medium);
   --combobox-group-label-background-color: var(--accent-dark);
   --combobox-option-selected-icon-color: var(--accent-info);
+  --combobox-arrow-color: var(--text-color-light);
 }
 
 .Combobox :where(.TextFieldWrapper) {
@@ -128,6 +129,7 @@
   position: absolute;
   right: 0;
   pointer-events: none;
+  color: var(--combobox-arrow-color, currentColor);
 }
 
 .Combobox__arrow:before {

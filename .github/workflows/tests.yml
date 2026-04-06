@@ -27,6 +27,7 @@ jobs:
       - run: yarn test
 
   screenshots:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'update-screenshots') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -44,7 +45,7 @@ jobs:
           yarn screenshots:docker
           yarn screenshots
       - name: Screenshot test results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: screenshot-test-results

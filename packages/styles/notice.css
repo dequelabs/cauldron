@@ -33,7 +33,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0 var(--space-small);
-  padding: var(--space-large);
+  padding: var(--notice-padding, var(--space-large));
   align-items: start;
   border-radius: 4px;
   border: 1px solid var(--notice-border-color);

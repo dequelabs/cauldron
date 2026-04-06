@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.26.0](https://github.com/dequelabs/cauldron/compare/v6.25.3...v6.26.0) (2026-03-19)
+
+
+### Features
+
+* add pause icon ([#2270](https://github.com/dequelabs/cauldron/issues/2270)) ([6484df9](https://github.com/dequelabs/cauldron/commit/6484df9dec93955bcf6a446e29b8ba31d71c0be9))
+
+
+### Bug Fixes
+
+* **ActionMenu:** correct action menu scrolling on open ([#2248](https://github.com/dequelabs/cauldron/issues/2248)) ([779e73a](https://github.com/dequelabs/cauldron/commit/779e73ac98ab7e222a77f955566a2d00003276e5))
+* href in ActionListLinkItem not working inside TopBar+ActionMenu ([#2256](https://github.com/dequelabs/cauldron/issues/2256)) ([5fbe41d](https://github.com/dequelabs/cauldron/commit/5fbe41dc3a4533b851e0d49d60b7cace577a2aaf))
+* **styles:** introduce modal max-height ([#2249](https://github.com/dequelabs/cauldron/issues/2249)) ([7391493](https://github.com/dequelabs/cauldron/commit/7391493eb51bfa5a177af6d6505d41c39e0d073b))
+* sync danger & danger-secondary variant disabled state ([#2272](https://github.com/dequelabs/cauldron/issues/2272)) ([15a57da](https://github.com/dequelabs/cauldron/commit/15a57daee39ca17550bd91d01d757653d9842ad1))
+
 ### [6.25.3](https://github.com/dequelabs/cauldron/compare/v6.25.2...v6.25.3) (2026-02-23)
 
 

@@ -11,10 +11,17 @@
     var(--space-largest);
   --tab-panel-horizontal-padding: var(--space-large) var(--space-small);
   --tabs-active-text-color: var(--accent-primary-active);
+  --tab-height: 2.875rem;
+  --tab-font-size: inherit;
+  --tab-flex: initial;
+  --tab-panel-border: none;
+  --tabs-horizontal-border-bottom: 1px solid var(--tabs-border-color);
+  --tabs-width: fit-content;
 }
 
 .cauldron--theme-dark {
   --tabs-border-color: var(--accent-dark);
+  --tabs-horizontal-border-bottom: 1px solid var(--tabs-border-color);
   --tab-shadow-color: var(--accent-info);
   --tab-panel-background-color: var(--accent-medium);
   --tab-inactive-background-color: var(--accent-medium);
@@ -26,7 +33,7 @@
 }
 
 .Tabs {
-  width: fit-content;
+  width: var(--tabs-width);
 }
 
 .Tabs--vertical {
@@ -45,7 +52,7 @@
 
 .Tabs--horizontal {
   width: 100%;
-  border-bottom: 1px solid var(--tabs-border-color);
+  border-bottom: var(--tabs-horizontal-border-bottom);
   background-color: var(--tab-inactive-background-color);
 }
 
@@ -67,12 +74,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2.875rem;
+  height: var(--tab-height);
   white-space: nowrap;
   list-style-type: none;
   background-color: var(--tab-inactive-background-color);
   color: var(--tab-inactive-text-color);
   padding: var(--space-small);
+  font-size: var(--tab-font-size);
+  flex: var(--tab-flex);
 }
 
 .Tabs--vertical .Tab {
@@ -114,6 +123,7 @@
   overflow-wrap: break-word;
   color: var(--tab-panel-color);
   background-color: var(--tab-panel-background-color);
+  border: var(--tab-panel-border);
 }
 
 .TabPanel > * {

@@ -12,8 +12,9 @@ import useIntersectionRef from '../../utils/useIntersectionRef';
 import { useListboxContext } from '../Listbox';
 import { useActionListContext, type onActionEvent } from './ActionListContext';
 
-interface ActionListItemProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLLIElement>> {
+interface ActionListItemProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLLIElement>
+> {
   /**
    * A unique key to identify the action when triggered, when not provided
    * will use the child text content as the key.

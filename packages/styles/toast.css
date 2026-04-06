@@ -1,6 +1,6 @@
 .Toast {
   top: var(--top-bar-height);
-  position: fixed;
+  position: var(--toast-position, fixed);
   right: 0;
   left: 0;
   color: #0b0e11;
