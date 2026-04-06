@@ -3,7 +3,6 @@
   --expandcollapse-trigger-color: var(--gray-90);
   --expandcollapse-panel-background-color: transparent;
   --expandcollapse-panel-color: var(--gray-90);
-  --expandcollapse-trigger-icon-offset: 0;
 }
 
 .ExpandCollapse__trigger {
@@ -21,11 +20,6 @@
 .ExpandCollapse__trigger-title {
   flex-grow: 1;
   text-align: left;
-}
-
-.ExpandCollapse__trigger > .Icon:last-child {
-  position: relative;
-  right: var(--expandcollapse-trigger-icon-offset);
 }
 
 .ExpandCollapse__panel {
