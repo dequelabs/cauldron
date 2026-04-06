@@ -48,9 +48,6 @@
   /* Field select: constrained width */
   --select-width: clamp(0px, 25rem, 100%);
 
-  /* ExpandCollapse: adjust trigger icon position */
-  --expandcollapse-trigger-icon-offset: -8px;
-
   /* Code: inline compact display */
   --code-display: inline;
   --code-padding: var(--space-quarter) var(--space-half);
