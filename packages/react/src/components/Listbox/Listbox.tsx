@@ -52,15 +52,27 @@ interface MultiSelectListboxProps extends BaseListboxProps {
 // Overloaded component type to properly discriminate between
 // single-select and multi-select variants. The multi-select
 // overload is listed first since it is more specific (requires
-// multiselect: true).
-type ListboxComponent = {
+// multiselect: true). The final union overload preserves
+// compatibility with React.ComponentPropsWithRef extraction
+// (which resolves from the last overload).
+type ListboxComponent = Omit<
+  React.ForwardRefExoticComponent<
+    SingleSelectListboxProps | MultiSelectListboxProps
+  >,
+  keyof CallableFunction
+> & {
   <T extends React.ElementType = React.ElementType>(
     props: PolymorphicComponentProps<MultiSelectListboxProps, T>
   ): React.ReactElement | null;
   <T extends React.ElementType = React.ElementType>(
     props: PolymorphicComponentProps<SingleSelectListboxProps, T>
   ): React.ReactElement | null;
-  displayName?: string;
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<
+      SingleSelectListboxProps | MultiSelectListboxProps,
+      T
+    >
+  ): React.ReactElement | null;
 };
 
 // id for listbox options should always be defined since it should

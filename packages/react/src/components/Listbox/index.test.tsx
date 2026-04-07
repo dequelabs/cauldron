@@ -4,6 +4,42 @@ import Listbox from './';
 import { ListboxGroup, ListboxOption } from './';
 import axe from '../../axe';
 
+/*
+ * Note: The below components are statically typed and get validated with tsc
+ * to ensure Listbox type discrimination works correctly between single-select
+ * and multi-select variants. Valid component types should throw no errors,
+ * where @ts-expect-error is used to indicate an invalid or missing property.
+ */
+
+// Single-select without multiselect prop (the bug from #1890)
+() => (
+  <Listbox value="foo">
+    <ListboxOption>A</ListboxOption>
+  </Listbox>
+);
+
+// Single-select with explicit multiselect={false}
+() => (
+  <Listbox multiselect={false} value="foo">
+    <ListboxOption>A</ListboxOption>
+  </Listbox>
+);
+
+// Multi-select with array value
+() => (
+  <Listbox multiselect value={['foo', 'bar']}>
+    <ListboxOption>A</ListboxOption>
+  </Listbox>
+);
+
+// Multi-select should not accept single value
+() => (
+  // @ts-expect-error multi-select value must be an array
+  <Listbox multiselect value="foo">
+    <ListboxOption>A</ListboxOption>
+  </Listbox>
+);
+
 const assertListItemIsActive = (index: number) => {
   const activeOption = screen.getAllByRole('option')[index];
   expect(activeOption).toHaveClass('ListboxOption--active');

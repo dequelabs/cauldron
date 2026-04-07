@@ -65,10 +65,9 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     }) as MutableRefObject<HTMLUListElement>;
 
     return (
-      // Note: we should be able to use listbox without passing a prop
-      // value for "multiselect"
-      // see: https://github.com/dequelabs/cauldron/issues/1890
-      // @ts-expect-error this should be allowed
+      // @ts-expect-error ActionListProps spreads HTML attributes which includes
+      // defaultValue as string | number | readonly string[], conflicting with
+      // Listbox's narrower ListboxValue type
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
