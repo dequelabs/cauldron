@@ -77,9 +77,9 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
-        // aria-multiselectable is valid for listbox roles, but not list or menu roles
-        // and we need to prevent aria-multiselectable from being set on Listbox when
-        // we're not in a listbox context
+        // Listbox internally sets aria-multiselectable from its multiselect prop.
+        // ActionList manages roles independently, so override to undefined to
+        // prevent the attribute from being rendered.
         aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         activeOption={activeOption}

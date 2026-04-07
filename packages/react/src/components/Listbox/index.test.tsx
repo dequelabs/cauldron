@@ -32,6 +32,14 @@ import axe from '../../axe';
   </Listbox>
 );
 
+// Single-select should not accept array value
+() => (
+  // @ts-expect-error single-select value must not be an array
+  <Listbox value={['foo', 'bar']}>
+    <ListboxOption>A</ListboxOption>
+  </Listbox>
+);
+
 // Multi-select should not accept single value
 () => (
   // @ts-expect-error multi-select value must be an array
