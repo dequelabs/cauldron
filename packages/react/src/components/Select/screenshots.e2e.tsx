@@ -28,19 +28,19 @@ test('should have screenshot for Select', async ({ mount, page }) => {
 test('should have screenshot for Select[required]', async ({ mount, page }) => {
   const component = await mount(
     <FieldWrap>
-      <Select label="Select" required>
+      <Select label="Select" required defaultValue="">
         <option value="">Select a fruit</option>
         <option value="apple">Apple</option>
         <option value="banana">Banana</option>
         <option value="cucumber">Cucumber</option>
       </Select>
-      <Select label="Hover" required>
+      <Select label="Hover" required defaultValue="">
         <option value="">Select a fruit</option>
         <option value="apple">Apple</option>
         <option value="banana">Banana</option>
         <option value="cucumber">Cucumber</option>
       </Select>
-      <Select label="Focus" required>
+      <Select label="Focus" required defaultValue="">
         <option value="">Select a fruit</option>
         <option value="apple">Apple</option>
         <option value="banana">Banana</option>
@@ -55,6 +55,53 @@ test('should have screenshot for Select[required]', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('select[required]');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--select[required]');
+});
+
+test('should have screenshot for Select[required] after interaction', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <FieldWrap>
+      <Select label="Select" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Hover" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Focus" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+    </FieldWrap>
+  );
+
+  // Interact with each select then blur to trigger :user-invalid
+  await component.getByLabel('Select').focus();
+  await component.getByLabel('Select').blur();
+  await component.getByLabel('Hover').focus();
+  await component.getByLabel('Hover').blur();
+  await component.getByLabel('Focus').focus();
+  await component.getByLabel('Focus').blur();
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot(
+    'select[required]-after-interaction'
+  );
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--select[required]-after-interaction'
+  );
 });
 
 test('should have screenshot for Select[error]', async ({ mount, page }) => {

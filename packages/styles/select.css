@@ -77,6 +77,7 @@
   border-color: var(--field-border-color-error);
 }
 
+.Field__select--wrapper select:user-invalid:hover,
 .Field__select--wrapper.Field--has-error select:hover {
   border-color: var(--field-border-color-error-hover);
   box-shadow: 0 0 0 1px var(--field-border-color-error-hover);
