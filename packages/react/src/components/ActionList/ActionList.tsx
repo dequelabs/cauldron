@@ -14,11 +14,13 @@ import {
   type onActionEvent,
   ActionListProvider
 } from './ActionListContext';
-import { useActionListContext } from './ActionListContext';
 import useMnemonics from '../../utils/useMnemonics';
 import setRef from '../../utils/setRef';
 
-interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
+interface ActionListProps extends Omit<
+  React.HTMLAttributes<HTMLUListElement>,
+  'defaultValue' | 'onSelect'
+> {
   children: React.ReactNode;
 
   /** Limits the amount of selections that can be made within an action list */
@@ -30,7 +32,6 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const actionListContext = useActionListContext();
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
@@ -65,9 +66,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     }) as MutableRefObject<HTMLUListElement>;
 
     return (
-      // @ts-expect-error ActionListProps spreads HTML attributes which includes
-      // defaultValue as string | number | readonly string[], conflicting with
-      // Listbox's narrower ListboxValue type
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
@@ -82,9 +80,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         // aria-multiselectable is valid for listbox roles, but not list or menu roles
         // and we need to prevent aria-multiselectable from being set on Listbox when
         // we're not in a listbox context
-        aria-multiselectable={
-          actionListContext.role === 'listbox' ? undefined : null
-        }
+        aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
