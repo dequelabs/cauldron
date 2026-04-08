@@ -61,9 +61,23 @@ test('should return no axe violations with a passed a truthy "show" and passed v
   expect(await axe(container)).toHaveNoViolations();
 });
 
+test('should show scrollable class if passed variant "scrollable"', () => {
+  render(
+    <Modal {...defaults} show={true} variant="scrollable">
+      Hi
+    </Modal>
+  );
+
+  expect(screen.queryByRole('dialog')).toHaveClass(
+    'Dialog',
+    'Modal',
+    'Modal--scrollable'
+  );
+});
+
 test('should return no axe violations with long modal content', async () => {
   render(
-    <Modal {...defaults} show={true}>
+    <Modal {...defaults} show={true} variant="scrollable">
       <ModalContent>
         <LongContent />
       </ModalContent>

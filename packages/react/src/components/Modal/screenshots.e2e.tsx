@@ -53,7 +53,7 @@ test('should have screenshot for Modal with large content on large viewports wit
   await page.setViewportSize(VIEWPORTS.DESKTOP);
 
   await mount(
-    <Modal show>
+    <Modal show variant="scrollable">
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Large Viewport</ModalHeading>
         <ModalCloseButton />
@@ -83,7 +83,7 @@ test('should have screenshot for Modal with large content on small viewports - n
   await page.setViewportSize(VIEWPORTS.MOBILE_SMALL);
 
   await mount(
-    <Modal show>
+    <Modal show variant="scrollable">
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Small Viewport</ModalHeading>
         <ModalCloseButton />
@@ -123,7 +123,7 @@ test('should have screenshot for Modal with scrollable content on medium viewpor
   await page.setViewportSize(VIEWPORTS.MOBILE_MEDIUM);
 
   await mount(
-    <Modal show>
+    <Modal show variant="scrollable">
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Medium Viewport</ModalHeading>
         <ModalCloseButton />
