@@ -87,6 +87,39 @@ function UnstyledModalExample() {
 }
 ```
 
+### Scrollable Modal
+
+When a modal contains a large amount of content, the scrollable variant constrains the modal height and makes the content area scrollable while keeping the footer fixed:
+
+```jsx example
+function ScrollableModalExample() {
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Scrollable Modal
+      </Button>
+      <Modal
+        heading="Scrollable Modal"
+        variant="scrollable"
+        show={show}
+        onClose={toggleModal}
+      >
+        <ModalContent>
+          {Array.from({ length: 20 }, (_, i) => (
+            <p key={i}>Modal content here, get your modal content here!</p>
+          ))}
+        </ModalContent>
+        <ModalFooter>
+          <Button onClick={toggleModal}>Ok</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
+}
+```
+
 ### Custom Header Markup
 
 `ModalHeader`, `ModalHeading`, and `ModalCloseButton` are included as custom compound components if you have a use case that requires different header markup.
@@ -133,9 +166,9 @@ function CustomHeaderMarkupModalExample() {
   props={[
     {
       name: 'variant',
-      type: ['info', 'undefined'],
+      type: ['info', 'scrollable', 'undefined'],
       defaultValue: '',
-      description: 'Visual style of the modal.'
+      description: 'Visual style of the modal. The scrollable variant constrains the modal height and makes the content area scrollable while keeping the footer fixed.'
     },
     {
       name: 'heading',
