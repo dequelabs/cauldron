@@ -295,21 +295,9 @@ button.Link {
   min-width: var(--button-thin-height);
 }
 
+/* Custom property for button sibling gap. Will be deprecated in https://github.com/dequelabs/cauldron/issues/1944 */
 [class*='Button--'] + [class*='Button--'] {
-  margin-left: var(--button-adjacent-spacing, var(--space-smallest));
-}
-
-/* Gap-based button grouping — use instead of relying on adjacent-sibling margins.
-   Handles flex-wrap correctly and avoids spacing issues in flex containers.
-   See https://github.com/dequelabs/cauldron/issues/1944 */
-.ButtonGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--button-group-gap, var(--space-smallest));
-}
-
-.ButtonGroup > [class*='Button--'] + [class*='Button--'] {
-  margin-left: 0;
+  margin-left: var(--button-sibling-gap, var(--space-smallest));
 }
 
 /* Dark Theme */

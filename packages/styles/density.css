@@ -32,13 +32,6 @@
   --dialog-vertical-offset: clamp(8px, calc(18vh - 50px), 100px);
   --dialog-content-line-height: 1.4;
 
-  /* ProgressBar: thinner default */
-  --progress-bar-padding: 3px;
-  --progress-bar-border-radius: 3px;
-  --progress-bar-fill-height: var(--space-half);
-  --progress-bar-fill-border-radius: 1px;
-  --progress-bar-fill-min-width: 1px;
-
   /* OptionsMenu: auto-width for narrow viewports */
   --options-menu-width: auto;
 
