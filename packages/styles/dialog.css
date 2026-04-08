@@ -12,7 +12,7 @@
   --dialog-footer-border: 1px solid var(--dialog-border-color);
   --dialog-header-height: 2.625rem;
   --dialog-close-button-size: var(--target-size-minimum);
-  --dialog-vertical-offset: 6.25rem;
+  --dialog-vertical-offset: 4rem;
   --dialog-bottom-spacing: 1.875rem;
   --dialog-content-line-height: inherit;
   --dialog-z-index: auto;
