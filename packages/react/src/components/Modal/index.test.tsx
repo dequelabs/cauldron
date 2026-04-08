@@ -61,9 +61,9 @@ test('should return no axe violations with a passed a truthy "show" and passed v
   expect(await axe(container)).toHaveNoViolations();
 });
 
-test('should show scrollable class if passed variant "scrollable"', () => {
+test('should show scrollable class if passed scrollable prop', () => {
   render(
-    <Modal {...defaults} show={true} variant="scrollable">
+    <Modal {...defaults} show={true} scrollable>
       Hi
     </Modal>
   );
@@ -77,7 +77,25 @@ test('should show scrollable class if passed variant "scrollable"', () => {
 
 test('should return no axe violations with long modal content', async () => {
   render(
-    <Modal {...defaults} show={true} variant="scrollable">
+    <Modal {...defaults} show={true}>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
+      <ModalFooter>
+        <button>Ok</button>
+      </ModalFooter>
+    </Modal>
+  );
+
+  expect(document.querySelector('.Dialog__inner')).toBeInTheDocument();
+  expect(document.querySelector('.Dialog__content')).toBeInTheDocument();
+
+  expect(await axe(document.body)).toHaveNoViolations();
+});
+
+test('should return no axe violations with long scrollable modal content', async () => {
+  render(
+    <Modal {...defaults} show={true} scrollable>
       <ModalContent>
         <LongContent />
       </ModalContent>

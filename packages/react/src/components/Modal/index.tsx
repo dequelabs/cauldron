@@ -11,14 +11,21 @@ import {
 } from '../Dialog';
 
 interface ModalProps extends Omit<DialogProps, 'forceAction'> {
-  variant?: 'info' | 'scrollable';
+  variant?: 'info';
+  scrollable?: boolean;
 }
 
-const Modal = ({ children, className, variant, ...other }: ModalProps) => (
+const Modal = ({
+  children,
+  className,
+  variant,
+  scrollable,
+  ...other
+}: ModalProps) => (
   <Dialog
     className={classnames('Modal', className, {
       'Modal--info': variant === 'info',
-      'Modal--scrollable': variant === 'scrollable'
+      'Modal--scrollable': scrollable
     })}
     {...other}
     forceAction={false}

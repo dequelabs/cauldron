@@ -106,7 +106,7 @@ function ScrollableModalExample() {
       </Button>
       <Modal
         heading="Scrollable Modal"
-        variant="scrollable"
+        scrollable
         show={show}
         onClose={toggleModal}
       >
@@ -170,9 +170,15 @@ function CustomHeaderMarkupModalExample() {
   props={[
     {
       name: 'variant',
-      type: ['info', 'scrollable', 'undefined'],
+      type: ['info', 'undefined'],
       defaultValue: '',
-      description: 'Visual style of the modal. The scrollable variant constrains the modal height and makes the content area scrollable while keeping the footer fixed.'
+      description: 'Visual style of the modal.'
+    },
+    {
+      name: 'scrollable',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Constrains the modal height and makes the content area scrollable while keeping the footer fixed.'
     },
     {
       name: 'heading',

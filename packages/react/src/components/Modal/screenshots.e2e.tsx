@@ -46,14 +46,14 @@ test('should have screenshot for Modal with small content', async ({
   await expect(dialog).toHaveScreenshot('dark--modal-small-content');
 });
 
-test('should have screenshot for Modal with large content on large viewports with scrollable content', async ({
+test('should have screenshot for scrollable Modal with large content on large viewports', async ({
   mount,
   page
 }) => {
   await page.setViewportSize(VIEWPORTS.DESKTOP);
 
   await mount(
-    <Modal show variant="scrollable">
+    <Modal show scrollable>
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Large Viewport</ModalHeading>
         <ModalCloseButton />
@@ -76,14 +76,14 @@ test('should have screenshot for Modal with large content on large viewports wit
   );
 });
 
-test('should have screenshot for Modal with large content on small viewports - no scrollable content', async ({
+test('should have screenshot for scrollable Modal with large content on small viewports - below breakpoint', async ({
   mount,
   page
 }) => {
   await page.setViewportSize(VIEWPORTS.MOBILE_SMALL);
 
   await mount(
-    <Modal show variant="scrollable">
+    <Modal show scrollable>
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Small Viewport</ModalHeading>
         <ModalCloseButton />
@@ -116,14 +116,14 @@ test('should have screenshot for Modal with large content on small viewports - n
   );
 });
 
-test('should have screenshot for Modal with scrollable content on medium viewports', async ({
+test('should have screenshot for scrollable Modal with large content on medium viewports', async ({
   mount,
   page
 }) => {
   await page.setViewportSize(VIEWPORTS.MOBILE_MEDIUM);
 
   await mount(
-    <Modal show variant="scrollable">
+    <Modal show scrollable>
       <ModalHeader>
         <ModalHeading>Modal With Large Content - Medium Viewport</ModalHeading>
         <ModalCloseButton />
@@ -144,4 +144,38 @@ test('should have screenshot for Modal with scrollable content on medium viewpor
   await expect(dialog).toHaveScreenshot(
     'dark--modal-large-content-medium-viewport'
   );
+});
+
+test('should allow keyboard scrolling of scrollable Modal content', async ({
+  mount,
+  page
+}) => {
+  await page.setViewportSize(VIEWPORTS.DESKTOP);
+
+  await mount(
+    <Modal show scrollable>
+      <ModalHeader>
+        <ModalHeading>Scrollable Modal</ModalHeading>
+        <ModalCloseButton />
+      </ModalHeader>
+      <ModalContent>
+        <LongContent />
+      </ModalContent>
+      <ModalFooter>
+        <Button variant="primary">Confirm</Button>
+      </ModalFooter>
+    </Modal>
+  );
+
+  const content = page.locator('.Dialog__content');
+  await expect(content).toBeVisible();
+
+  const scrollTopBefore = await content.evaluate((el) => el.scrollTop);
+  await content.focus();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  const scrollTopAfter = await content.evaluate((el) => el.scrollTop);
+
+  expect(scrollTopAfter).toBeGreaterThan(scrollTopBefore);
 });
