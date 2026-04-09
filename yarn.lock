@@ -7,12 +7,12 @@
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@axe-core/puppeteer@^4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@axe-core/puppeteer/-/puppeteer-4.11.0.tgz#4a83e5b6f932ed4d6d3c3054754b7568bb3c6d57"
-  integrity sha512-KDtKL0kGzm00VA2ZM8ZZwKq1L37iEeF4N+Aweq+eHokQwMCxX3dtie1ts5elfINROUO36DoBnslMmHhdqxve/g==
+"@axe-core/puppeteer@^4.11.1":
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/@axe-core/puppeteer/-/puppeteer-4.11.1.tgz#7f629019c82dd38cca1d721e629b6ae59da2d556"
+  integrity sha512-xXnHGmVtPxGGf9FCtUetY9sptsR/bbQypMODuBenYyufhX2XNgsEbmx8u0WyL75Ft1IGUuBaLB4u2m7CrM63jQ==
   dependencies:
-    axe-core "~4.11.0"
+    axe-core "~4.11.1"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.28.6", "@babel/code-frame@^7.29.0":
   version "7.29.0"
@@ -2723,10 +2723,10 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-axe-core@^4.10.0, axe-core@^4.11.0, axe-core@~4.11.0:
-  version "4.11.1"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.11.1.tgz#052ff9b2cbf543f5595028b583e4763b40c78ea7"
-  integrity sha512-BASOg+YwO2C+346x3LZOeoovTIoTrRqEsqMa6fmfAV0P+U9mFr9NsyOEpiYvFjbc64NMrSswhV50WdXzdb/Z5A==
+axe-core@^4.10.0, axe-core@^4.11.0, axe-core@~4.11.1:
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.11.2.tgz#86d28e085b170a4b43d459aee6d30624fba9be4e"
+  integrity sha512-byD6KPdvo72y/wj2T/4zGEvvlis+PsZsn/yPS3pEO+sFpcrqRpX/TJCxvVaEsNeMrfQbCr7w163YqoD9IYwHXw==
 
 axobject-query@^4.1.0:
   version "4.1.0"

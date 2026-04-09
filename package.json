@@ -41,7 +41,7 @@
     ]
   },
   "devDependencies": {
-    "@axe-core/puppeteer": "^4.11.0",
+    "@axe-core/puppeteer": "^4.11.1",
     "@babel/core": "^7.29.0",
     "@babel/plugin-proposal-export-default-from": "^7.27.1",
     "@babel/preset-env": "^7.29.2",
