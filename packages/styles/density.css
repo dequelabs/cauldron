@@ -32,13 +32,6 @@
   --dialog-vertical-offset: clamp(8px, calc(18vh - 50px), 100px);
   --dialog-content-line-height: 1.4;
 
-  /* ProgressBar: thinner default */
-  --progress-bar-padding: 3px;
-  --progress-bar-border-radius: 3px;
-  --progress-bar-fill-height: var(--space-half);
-  --progress-bar-fill-border-radius: 1px;
-  --progress-bar-fill-min-width: 1px;
-
   /* OptionsMenu: auto-width for narrow viewports */
   --options-menu-width: auto;
 
@@ -47,9 +40,6 @@
 
   /* Field select: constrained width */
   --select-width: clamp(0px, 25rem, 100%);
-
-  /* ExpandCollapse: adjust trigger icon position */
-  --expandcollapse-trigger-icon-offset: -8px;
 
   /* Code: inline compact display */
   --code-display: inline;
