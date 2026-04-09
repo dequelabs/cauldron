@@ -1,14 +1,14 @@
 :root {
-  --treeview-padding: 16px;
-  --treeview-focus-ring-color: var(--focus-light);
-  --treeview-selected-color: var(--focus-light);
-  --treeview-highlight-background: var(--accent-light);
+  --tree-view-padding: 16px;
+  --tree-view-focus-ring-color: var(--focus-light);
+  --tree-view-selected-color: var(--focus-light);
+  --tree-view-highlight-background: var(--accent-light);
 }
 
 .cauldron--theme-dark {
-  --treeview-focus-ring-color: var(--focus-dark);
-  --treeview-selected-color: var(--focus-dark);
-  --treeview-highlight-background: var(--accent-dark);
+  --tree-view-focus-ring-color: var(--focus-dark);
+  --tree-view-selected-color: var(--focus-dark);
+  --tree-view-highlight-background: var(--accent-dark);
 }
 
 .react-aria-Tree {
@@ -21,7 +21,7 @@
   box-sizing: border-box;
 
   &[data-focus-visible] {
-    outline: 2px solid var(--treeview-focus-ring-color);
+    outline: 2px solid var(--tree-view-focus-ring-color);
     outline-offset: -1px;
   }
 
@@ -31,7 +31,7 @@
     gap: 0.571rem;
     min-height: 28px;
     padding: 0.286rem 0.286rem 0.286rem 0.571rem;
-    --padding: var(--treeview-padding);
+    --padding: var(--tree-view-padding);
     outline: none;
     position: relative;
     transform: translateZ(0);
@@ -45,7 +45,7 @@
       width: 1.3rem;
       height: 100%;
       padding-left: calc(
-        (var(--tree-item-level) - 1) * var(--treeview-padding)
+        (var(--tree-item-level) - 1) * var(--tree-view-padding)
       );
 
       svg {
@@ -63,12 +63,12 @@
     }
 
     &[data-focus-visible] {
-      outline: 2px solid var(--treeview-focus-ring-color);
+      outline: 2px solid var(--tree-view-focus-ring-color);
       outline-offset: -2px;
     }
 
     &[aria-selected='true'] {
-      background: var(--treeview-highlight-background);
+      background: var(--tree-view-highlight-background);
     }
   }
 }

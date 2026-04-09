@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import TreeView, { TreeViewFileType } from '../../../src/components/TreeView';
+import TreeView, { TreeViewNode } from '../../../src/components/TreeView';
 
-const items: TreeViewFileType[] = [
+const items: TreeViewNode[] = [
   {
     id: '1',
     textValue: 'TreeView',

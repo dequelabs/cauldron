@@ -1,13 +1,13 @@
 ---
 title: TreeView
 description: A component that displays a hierarchical tree structure.
-source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TreeView/TreeView.tsx
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TreeView/index.tsx
 ---
 
 import { TreeView } from '@deque/cauldron-react';
 
 ```jsx
-import { TreeView, type TreeViewFileType } from '@deque/cauldron-react';
+import { TreeView, type TreeViewNode } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -153,13 +153,13 @@ function ActionTreeView() {
     },
     {
       name: 'items',
-      type: 'TreeViewFileType[]',
+      type: 'TreeViewNode[]',
       required: true,
       description: 'Array of tree items to display.'
     },
     {
       name: 'onAction',
-      type: '() => void',
+      type: '(key: string) => void',
       defaultValue: 'undefined',
       description: 'Callback fired when a tree item is activated.'
     },
