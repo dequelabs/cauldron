@@ -21,8 +21,8 @@ export default defineConfig({
     ctViteConfig: {
       build: {
         commonjsOptions: {
-          // see: https://github.com/rollup/plugins/tree/master/packages/commonjs#include
-          include: undefined
+          include: [/node_modules/, /packages\/react\/lib/],
+          transformMixedEsModules: true
         }
       }
     }
