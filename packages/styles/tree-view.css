@@ -19,56 +19,59 @@
   padding: 4px;
   outline: none;
   box-sizing: border-box;
+}
 
-  &[data-focus-visible] {
-    outline: 2px solid var(--tree-view-focus-ring-color);
-    outline-offset: -1px;
-  }
+.react-aria-Tree[data-focus-visible] {
+  outline: 2px solid var(--tree-view-focus-ring-color);
+  outline-offset: -1px;
+}
 
-  .react-aria-TreeItem {
-    display: flex;
-    align-items: center;
-    gap: 0.571rem;
-    min-height: 28px;
-    padding: 0.286rem 0.286rem 0.286rem 0.571rem;
-    --padding: var(--tree-view-padding);
-    outline: none;
-    position: relative;
-    transform: translateZ(0);
+.react-aria-Tree .react-aria-TreeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.571rem;
+  min-height: 28px;
+  padding: 0.286rem 0.286rem 0.286rem 0.571rem;
+  --padding: var(--tree-view-padding);
+  outline: none;
+  position: relative;
+  transform: translateZ(0);
+}
 
-    .react-aria-Button[slot='chevron'] {
-      all: unset;
-      display: flex;
-      visibility: hidden;
-      align-items: center;
-      justify-content: center;
-      width: 1.3rem;
-      height: 100%;
-      padding-left: calc(
-        (var(--tree-item-level) - 1) * var(--tree-view-padding)
-      );
+.react-aria-Tree .react-aria-TreeItem .react-aria-Button[slot='chevron'] {
+  all: unset;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 100%;
+  padding-left: calc((var(--tree-item-level) - 1) * var(--tree-view-padding));
+}
 
-      svg {
-        rotate: 0deg;
-        transition: rotate 200ms;
-      }
-    }
+.react-aria-Tree .react-aria-TreeItem .react-aria-Button[slot='chevron'] svg {
+  transform: rotate(0deg);
+  transition: transform 200ms;
+}
 
-    &[data-has-child-items] .react-aria-Button[slot='chevron'] {
-      visibility: visible;
-    }
+.react-aria-Tree
+  .react-aria-TreeItem[data-has-child-items]
+  .react-aria-Button[slot='chevron'] {
+  visibility: visible;
+}
 
-    &[data-expanded] .react-aria-Button[slot='chevron'] svg {
-      rotate: 90deg;
-    }
+.react-aria-Tree
+  .react-aria-TreeItem[data-expanded]
+  .react-aria-Button[slot='chevron']
+  svg {
+  transform: rotate(90deg);
+}
 
-    &[data-focus-visible] {
-      outline: 2px solid var(--tree-view-focus-ring-color);
-      outline-offset: -2px;
-    }
+.react-aria-Tree .react-aria-TreeItem[data-focus-visible] {
+  outline: 2px solid var(--tree-view-focus-ring-color);
+  outline-offset: -2px;
+}
 
-    &[aria-selected='true'] {
-      background: var(--tree-view-highlight-background);
-    }
-  }
+.react-aria-Tree .react-aria-TreeItem[aria-selected='true'] {
+  background: var(--tree-view-highlight-background);
 }

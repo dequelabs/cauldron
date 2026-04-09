@@ -32,7 +32,7 @@ function SingleSelectionTreeView() {
   ];
   return (
     <TreeView
-      ariaLabel="Single Selection Tree View"
+      aria-label="Single Selection Tree View"
       selectionMode="single"
       items={items}
     />
@@ -60,7 +60,7 @@ function MultipleSelectionTreeView() {
   ];
   return (
     <TreeView
-      ariaLabel="Multiple Selection Tree View"
+      aria-label="Multiple Selection Tree View"
       selectionMode="multiple"
       items={items}
     />
@@ -101,7 +101,7 @@ function DefaultExpandedTreeView() {
   ];
   return (
     <TreeView
-      ariaLabel="None Selection Tree View"
+      aria-label="None Selection Tree View"
       defaultExpandedKeys={['1', '5', '8']}
       items={items}
     />
@@ -132,7 +132,7 @@ function ActionTreeView() {
   ];
   return (
     <TreeView
-      ariaLabel="Tree View with Action Handler"
+      aria-label="Tree View with Action Handler"
       selectionMode="single"
       onAction={onAction}
       items={items}
@@ -146,10 +146,14 @@ function ActionTreeView() {
 <ComponentProps
   props={[
     {
-      name: 'ariaLabel',
+      name: 'aria-label',
       type: 'string',
-      required: true,
       description: 'Accessible label for the tree view component.'
+    },
+    {
+      name: 'aria-labelledby',
+      type: 'string',
+      description: 'ID of an element whose text content labels the tree view.'
     },
     {
       name: 'items',

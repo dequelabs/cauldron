@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Tree, type Selection, type Key } from 'react-aria-components';
+import { Cauldron } from '../../types';
 import TreeViewItem from './TreeViewItem';
 
 export interface TreeViewNode {
@@ -8,20 +9,19 @@ export interface TreeViewNode {
   children?: TreeViewNode[];
 }
 
-interface TreeViewProps {
-  ariaLabel: string;
+type TreeViewProps = Cauldron.LabelProps & {
   items: TreeViewNode[];
   onAction?: (key: string) => void;
   selectionMode?: 'none' | 'single' | 'multiple';
   defaultExpandedKeys?: string[];
-}
+};
 
 const TreeView = ({
-  ariaLabel,
   items,
   onAction,
   selectionMode = 'none',
-  defaultExpandedKeys
+  defaultExpandedKeys,
+  ...labelProps
 }: TreeViewProps) => {
   // When onAction is provided, react-aria-components doesn't toggle selected state automatically.
   // See: https://react-aria.adobe.com/Tree#selection-and-actions
@@ -47,7 +47,7 @@ const TreeView = ({
 
   return (
     <Tree
-      aria-label={ariaLabel}
+      {...labelProps}
       selectionMode={selectionMode}
       defaultExpandedKeys={defaultExpandedKeys}
       {...(onAction
