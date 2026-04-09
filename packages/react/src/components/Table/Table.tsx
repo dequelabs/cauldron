@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
-import { createPortal } from 'react-dom';
 import classNames from 'classnames';
-import Offscreen from '../Offscreen';
-import { TableProvider, useSortAnnouncementState } from './TableContext';
-import { isBrowser } from '../../utils/is-browser';
+import { TableProvider } from './TableContext';
 
 export type Column = {
   align: ColumnAlignment;
@@ -46,22 +43,6 @@ function parseColumnWidth(width?: ColumnWidth): string {
   }
 
   return width;
-}
-
-function SortAnnouncementPortal(): React.ReactPortal | null {
-  const { text } = useSortAnnouncementState();
-  if (!isBrowser()) {
-    return null;
-  }
-  // Cast needed due to @types/react-dom having a separate @types/react copy
-  // (same pattern used by Dialog component)
-  return createPortal(
-    <Offscreen>
-      <span role="status">{text}</span>
-    </Offscreen>,
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    document.body
-  ) as React.ReactPortal;
 }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(
@@ -134,7 +115,6 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
           columns={columns}
         >
           {children}
-          <SortAnnouncementPortal />
         </TableProvider>
       </table>
     );

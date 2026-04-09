@@ -1,8 +1,8 @@
 import type { ColumnAlignment } from './Table';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
-import { useTable, useSortAnnouncementActions } from './TableContext';
+import { useTable } from './TableContext';
 import useTableGridStyles from './useTableGridStyles';
 import useSharedRef from '../../utils/useSharedRef';
 
@@ -15,7 +15,9 @@ interface TableHeaderProps extends Omit<
 > {
   sortDirection?: SortDirection;
   onSort?: () => void;
+  /** @deprecated No longer used. Sort state is communicated via aria-sort. */
   sortAscendingAnnouncement?: string;
+  /** @deprecated No longer used. Sort state is communicated via aria-sort. */
   sortDescendingAnnouncement?: string;
   align?: ColumnAlignment;
   /* Only applies a visual style to the header, does not change semantics */
@@ -29,8 +31,8 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       sortDirection,
       onSort,
       className,
-      sortAscendingAnnouncement = 'sorted ascending',
-      sortDescendingAnnouncement = 'sorted descending',
+      sortAscendingAnnouncement: _sortAscendingAnnouncement,
+      sortDescendingAnnouncement: _sortDescendingAnnouncement,
       align,
       variant = 'header',
       style,
@@ -40,8 +42,6 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
   ) => {
     const tableHeaderRef = useSharedRef<HTMLTableHeaderCellElement>(ref);
     const { layout, columns } = useTable();
-    const { announce, clear } = useSortAnnouncementActions();
-    const ownerToken = useRef({});
     const tableGridStyles = useTableGridStyles({
       elementRef: tableHeaderRef,
       align,
@@ -49,28 +49,11 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       layout
     });
 
-    const isSortable = !!onSort && !!sortDirection;
-
-    // When the sort direction changes, we want to announce the change in a live region
-    // because changes to the sort value is not widely supported yet
-    // see: https://a11ysupport.io/tech/aria/aria-sort_attribute
-    const announcement = isSortable
-      ? sortDirection === 'ascending'
-        ? sortAscendingAnnouncement
-        : sortDirection === 'descending'
-          ? sortDescendingAnnouncement
-          : ''
-      : '';
-
-    useEffect(() => {
-      if (!isSortable) return;
-      if (announcement) {
-        announce(ownerToken.current, announcement);
-        return () => {
-          clear(ownerToken.current);
-        };
-      }
-    }, [isSortable, announcement, announce, clear]);
+    // Sort state is communicated via the aria-sort attribute on <th>.
+    // A live region (Offscreen) was previously used as a workaround for
+    // limited aria-sort support, but it was removed because screen readers
+    // (e.g. NVDA) included the announcement text in the column header's
+    // accessible name, causing it to be read for every cell in the column.
 
     return (
       <th
