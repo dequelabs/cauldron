@@ -1,5 +1,6 @@
 :root {
   --workspace-background-color: #f0f2f5;
+  --heading-text-color: var(--header-text-color-dark);
 }
 
 .cauldron--theme-dark {
@@ -49,7 +50,6 @@ h4,
 h5,
 h6,
 [role='heading'] {
-  --heading-text-color: var(--header-text-color-dark);
   color: var(--heading-text-color);
 }
 

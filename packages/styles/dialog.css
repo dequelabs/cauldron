@@ -5,10 +5,16 @@
   --dialog-footer-background-color: var(--gray-20);
   --dialog-heading-text-color: var(--header-text-color-dark);
   --dialog-padding: var(--space-small);
+  --dialog-header-padding: var(--space-smallest) 0;
+  --dialog-header-border: 1px solid var(--dialog-border-color);
+  --dialog-content-padding: var(--dialog-padding);
+  --dialog-footer-padding: var(--dialog-padding);
+  --dialog-footer-border: 1px solid var(--dialog-border-color);
   --dialog-header-height: 2.625rem;
   --dialog-close-button-size: var(--target-size-minimum);
   --dialog-vertical-offset: 6.25rem;
   --dialog-bottom-spacing: 1.875rem;
+  --dialog-content-line-height: inherit;
 }
 
 .cauldron--theme-dark {
@@ -51,12 +57,12 @@
 .Dialog__header {
   display: flex;
   background-color: var(--dialog-header-background-color);
-  border-bottom: 1px solid var(--dialog-border-color);
+  border-bottom: var(--dialog-header-border);
   align-items: center;
   justify-content: space-between;
   min-height: var(--dialog-header-height);
   font-weight: var(--font-weight-bold);
-  padding: var(--space-smallest) 0;
+  padding: var(--dialog-header-padding);
   gap: var(--space-smallest);
 }
 
@@ -122,7 +128,8 @@
 }
 
 .Dialog__content {
-  padding: var(--dialog-padding);
+  padding: var(--dialog-content-padding);
+  line-height: var(--dialog-content-line-height);
 }
 
 .Dialog__content p:first-child {
@@ -135,8 +142,8 @@
 
 .Dialog__footer {
   background-color: var(--dialog-footer-background-color);
-  border-top: 1px solid var(--dialog-border-color);
-  padding: var(--dialog-padding);
+  border-top: var(--dialog-footer-border);
+  padding: var(--dialog-footer-padding);
 }
 
 /**
@@ -179,6 +186,14 @@
   border-width: 4px;
 }
 
+/* Compensate for the larger dark theme border so Dialog dimensions remain consistent */
+.cauldron--theme-dark .Dialog__content {
+  --dialog-content-padding-compensation: 3px;
+  padding: calc(
+    var(--dialog-content-padding) - var(--dialog-content-padding-compensation)
+  );
+}
+
 .cauldron--theme-dark .Dialog__header {
   border-bottom: 1px solid var(--stroke-dark);
 }
@@ -208,4 +223,30 @@
 
 .cauldron--theme-dark .Modal--info .Dialog__footer {
   border-top: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__inner {
+  background-color: var(--accent-dark);
+}
+
+.cauldron--theme-dark .Alert .Dialog__header {
+  background-color: var(--accent-medium);
+  border-bottom: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__footer {
+  background-color: transparent;
+  border-top: none;
+}
+
+.cauldron--theme-dark .Alert .Dialog__content .Link,
+.cauldron--theme-dark .Alert .Dialog__content .Link:hover {
+  color: currentColor;
+}
+
+/* Dark theme: checked checkbox/radio icons in Dialogs should inherit the
+   dialog's text color rather than using the global checked color */
+.cauldron--theme-dark .Dialog .Checkbox__overlay.Icon--checkbox-checked,
+.cauldron--theme-dark .Dialog .Radio__overlay.Icon--radio-checked {
+  color: currentColor;
 }
