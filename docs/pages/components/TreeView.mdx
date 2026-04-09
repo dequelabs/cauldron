@@ -109,6 +109,33 @@ function DefaultExpandedTreeView() {
 }
 ```
 
+### Labelled by External Element
+
+Use `aria-labelledby` when a visible heading or label for the tree already exists on the page.
+
+```jsx example
+function LabelledByTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [{ id: '2', textValue: 'Project' }]
+    },
+    {
+      id: '3',
+      textValue: 'Photos',
+      children: [{ id: '4', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <>
+      <h3 id="file-browser-label">File Browser</h3>
+      <TreeView aria-labelledby="file-browser-label" items={items} />
+    </>
+  );
+}
+```
+
 ### Custom onAction
 
 TreeView with a custom action handler for item selection.

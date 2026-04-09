@@ -1,13 +1,11 @@
 :root {
   --tree-view-padding: 16px;
   --tree-view-focus-ring-color: var(--focus-light);
-  --tree-view-selected-color: var(--focus-light);
   --tree-view-highlight-background: var(--accent-light);
 }
 
 .cauldron--theme-dark {
   --tree-view-focus-ring-color: var(--focus-dark);
-  --tree-view-selected-color: var(--focus-dark);
   --tree-view-highlight-background: var(--accent-dark);
 }
 

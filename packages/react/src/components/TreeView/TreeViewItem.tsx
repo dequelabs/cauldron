@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Button,
   Collection,
@@ -6,11 +6,14 @@ import {
   TreeItemContent,
   TreeItemContentRenderProps
 } from 'react-aria-components';
+import nextId from 'react-id-generator';
 import { TreeViewNode } from '.';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 
 const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
+  const checkboxId = useMemo(() => nextId('tree-view-item-'), []);
+
   return (
     <TreeItem id={id} textValue={textValue}>
       <TreeItemContent>
@@ -21,7 +24,7 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
             </Button>
             {selectionMode !== 'none' ? (
               <Checkbox
-                id={id}
+                id={checkboxId}
                 label={textValue}
                 checked={isSelected}
                 onChangeToggle={false}
