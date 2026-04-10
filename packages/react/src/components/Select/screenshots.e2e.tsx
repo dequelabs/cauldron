@@ -84,13 +84,12 @@ test('should have screenshot for Select[required] after interaction', async ({
     </FieldWrap>
   );
 
-  // Interact with each select then blur to trigger :user-invalid
-  await component.getByLabel('Select').focus();
-  await component.getByLabel('Select').blur();
-  await component.getByLabel('Hover').focus();
-  await component.getByLabel('Hover').blur();
-  await component.getByLabel('Focus').focus();
-  await component.getByLabel('Focus').blur();
+  // Change value then revert to invalid to trigger :user-invalid
+  for (const label of ['Select', 'Hover', 'Focus']) {
+    await component.getByLabel(label).selectOption('apple');
+    await component.getByLabel(label).selectOption('');
+    await component.getByLabel(label).blur();
+  }
 
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
