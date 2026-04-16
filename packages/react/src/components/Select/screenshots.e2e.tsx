@@ -50,7 +50,10 @@ test('should have screenshot for Select[required]', async ({ mount, page }) => {
   );
 
   await component.getByLabel('Hover').hover();
-  await component.getByLabel('Focus').focus();
+  // Use evaluate to focus without triggering :user-invalid
+  await component
+    .getByLabel('Focus')
+    .evaluate((el) => (el as HTMLElement).focus());
 
   await expect(component).toHaveScreenshot('select[required]');
   await setTheme(page, 'dark');
