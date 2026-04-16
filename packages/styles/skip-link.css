@@ -97,6 +97,40 @@
   color: var(--text-color-light);
 }
 
+/* Inline variant */
+
+.SkipLink.SkipLink--inline {
+  position: relative;
+  height: 0;
+  width: 0;
+  overflow: visible;
+  padding: 0;
+  top: auto;
+  left: auto;
+  opacity: 1;
+}
+
+.SkipLink.SkipLink--inline .SkipLink__link {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.SkipLink.SkipLink--inline.SkipLink--active .SkipLink__link {
+  clip: auto;
+  clip-path: none;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  white-space: normal;
+  top: 0;
+  left: 0;
+}
+
 /* Dark Theme */
 .cauldron--theme-dark {
   --skip-link-background-color: rgba(11, 14, 17, 0.95);

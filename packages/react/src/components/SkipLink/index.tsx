@@ -3,10 +3,19 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import { isBrowser } from '../../utils/is-browser';
 
+export interface SkipLinkPosition {
+  top?: string | number;
+  right?: string | number;
+  bottom?: string | number;
+  left?: string | number;
+}
+
 export interface SkipLinkProps {
   target: string;
   skipText?: string;
   targetText?: string;
+  variant?: 'default' | 'inline';
+  position?: SkipLinkPosition;
 }
 
 interface SkipLinkState {
@@ -37,10 +46,30 @@ export default class SkipLink extends React.Component<
 
   render() {
     const { currentClass } = this.state;
-    const { target, skipText, targetText, ...other } = this.props;
+    const {
+      target,
+      skipText,
+      targetText,
+      variant = 'default',
+      position,
+      ...other
+    } = this.props;
+
+    const navStyle: React.CSSProperties | undefined = position
+      ? {
+          position: 'absolute',
+          ...position
+        }
+      : undefined;
 
     return (
-      <nav className={classNames('SkipLink', currentClass)} {...other}>
+      <nav
+        className={classNames('SkipLink', currentClass, {
+          'SkipLink--inline': variant === 'inline'
+        })}
+        style={navStyle}
+        {...other}
+      >
         <a
           href={target}
           className="SkipLink__link"
@@ -58,7 +87,8 @@ export default class SkipLink extends React.Component<
     );
   }
 
-  private onClick() {
+  private onClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
     if (!isBrowser()) {
       return;
     }

@@ -4,7 +4,8 @@ description: A navigation component to provide quick access to main content or o
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SkipLink/index.tsx
 ---
 
-import { SkipLink } from '@deque/cauldron-react'
+import { useState } from 'react'
+import { SkipLink, Button } from '@deque/cauldron-react'
 
 ```jsx
 import { SkipLink } from '@deque/cauldron-react'
@@ -16,6 +17,42 @@ The skip link is visually located at the very top of the page, but it’s hidden
 
 ```jsx example
 <SkipLink target="#main-content" skipText="Skip to" targetText="Main page content" />
+```
+
+## Inline Variant
+
+Use `variant="inline"` when placing a SkipLink within page content rather than at the top of the page. The inline variant is visually hidden until focused, then overlays on top of subsequent content without pushing it down.
+
+```jsx example
+<SkipLink target="#main-content" variant="inline" skipText="Skip to" targetText="Main page content" />
+```
+
+When you need to position the inline skip link absolutely relative to a positioned ancestor, use the `position` prop:
+
+```jsx example
+<div style={{ position: 'relative' }}>
+  <SkipLink target="#main-content" variant="inline" position={{ bottom: 0, right: '14rem' }} skipText="Skip to" targetText="Main page content" />
+</div>
+```
+
+## Interactive Target
+
+This example demonstrates that activating the skip link focuses the target button without triggering its click handler. Tab to the skip link and press Enter — the button receives focus, but the message only appears if you activate the button yourself.
+
+```jsx example
+function InteractiveTargetExample() {
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{ position: 'relative' }}>
+      <SkipLink target="#demo-button" variant="inline" skipText="Skip to" targetText="Action Button" />
+      <p>Tab to focus the skip link above, then press Enter.</p>
+      <Button id="demo-button" onClick={() => setCount(c => c + 1)}>
+        Action Button
+      </Button>
+      <p><strong>Button clicked {count} times</strong></p>
+    </div>
+  )
+}
 ```
 
 ## Props
@@ -39,6 +76,17 @@ The skip link is visually located at the very top of the page, but it’s hidden
       type: 'string',
       description: 'Text label for the target',
       default: 'Main Content'
+    },
+    {
+      name: 'variant',
+      type: "'default' | 'inline'",
+      description: 'The visual variant of the skip link. Use "inline" when placing within page content rather than at the top of the page.',
+      default: 'default'
+    },
+    {
+      name: 'position',
+      type: '{ top?: string | number; right?: string | number; bottom?: string | number; left?: string | number }',
+      description: 'Positions the skip link absolutely with the given offsets. Intended for use with the inline variant to anchor the link relative to a positioned ancestor.'
     }
   ]}
 />

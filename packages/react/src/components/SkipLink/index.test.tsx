@@ -3,9 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SkipLink from './';
 import axe from '../../axe';
 
-type SkipLinkProps = {
-  [key: string]: any;
-};
+type SkipLinkProps = Record<string, unknown>;
 
 let target: HTMLDivElement;
 
@@ -84,6 +82,76 @@ test('should pass props through to the nav element', () => {
     'aria-label',
     'Skip to my lou'
   );
+});
+
+test('should call preventDefault on click', () => {
+  renderDefaultSkipLink();
+
+  const defaultPrevented = !fireEvent.click(screen.getByRole('link'));
+
+  expect(defaultPrevented).toBe(true);
+});
+
+test('should not activate the target element when clicked', () => {
+  const handleClick = jest.fn();
+  render(
+    <>
+      <SkipLink target="#interactive-target" />
+      <button id="interactive-target" onClick={handleClick}>
+        Target
+      </button>
+    </>
+  );
+
+  fireEvent.click(screen.getByRole('link'));
+
+  const button = screen.getByRole('button', { name: 'Target' });
+  expect(document.activeElement).toBe(button);
+  expect(handleClick).not.toHaveBeenCalled();
+});
+
+test('should render with SkipLink--inline class when variant is inline', () => {
+  renderDefaultSkipLink({ variant: 'inline' });
+
+  expect(screen.getByRole('navigation')).toHaveClass(
+    'SkipLink',
+    'SkipLink--inline'
+  );
+});
+
+test('should not render SkipLink--inline class by default', () => {
+  renderDefaultSkipLink();
+
+  expect(screen.getByRole('navigation')).toHaveClass('SkipLink');
+  expect(screen.getByRole('navigation')).not.toHaveClass('SkipLink--inline');
+});
+
+test('inline variant should add active class on focus', async () => {
+  renderDefaultSkipLink({ variant: 'inline' });
+
+  fireEvent.focus(screen.getByRole('link'));
+
+  await waitFor(() => {
+    expect(screen.getByRole('navigation')).toHaveClass(
+      'SkipLink',
+      'SkipLink--inline',
+      'SkipLink--active'
+    );
+  });
+});
+
+test('inline variant should apply position styles when position prop is provided', () => {
+  renderDefaultSkipLink({
+    variant: 'inline',
+    position: { top: 10, left: 20 }
+  });
+
+  const nav = screen.getByRole('navigation');
+  expect(nav).toHaveStyle({
+    position: 'absolute',
+    top: '10px',
+    left: '20px'
+  });
 });
 
 test('should return no axe violations', async () => {
