@@ -24,14 +24,30 @@ The skip link is visually located at the very top of the page, but it’s hidden
 Use `variant="inline"` when placing a SkipLink within page content rather than at the top of the page. The inline variant is visually hidden until focused, then overlays on top of subsequent content without pushing it down.
 
 ```jsx example
-<SkipLink target="#main-content" variant="inline" skipText="Skip to" targetText="Main page content" />
+<div>
+  <p>This is content before the skip link. Tab here to reveal it, it will appear below this element on top of the list.</p>
+  <SkipLink target="#main-content" variant="inline" skipText="Skip to" targetText="Main page content" />
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+  </ul>
+</div>
 ```
 
 When you need to position the inline skip link absolutely relative to a positioned ancestor, use the `position` prop:
 
 ```jsx example
 <div style={{ position: 'relative' }}>
+  <p>This is content before the skip link. Tab here to reveal it, it will appear below this element on top of the list.</p>
   <SkipLink target="#main-content" variant="inline" position={{ bottom: 0, right: '14rem' }} skipText="Skip to" targetText="Main page content" />
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+  </ul>
 </div>
 ```
 
@@ -44,8 +60,14 @@ function InteractiveTargetExample() {
   const [count, setCount] = useState(0)
   return (
     <div style={{ position: 'relative' }}>
+      <p>This is content before the skip link. Tab here to reveal it, it will appear below this element on top of the list.</p>
       <SkipLink target="#demo-button" variant="inline" skipText="Skip to" targetText="Action Button" />
-      <p>Tab to focus the skip link above, then press Enter.</p>
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+      </ul>
       <Button id="demo-button" onClick={() => setCount(c => c + 1)}>
         Action Button
       </Button>
