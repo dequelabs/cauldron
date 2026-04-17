@@ -32,7 +32,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       variant = 'primary',
       thin,
-      size = 'default',
+      size,
       children,
       className,
       buttonRef,
