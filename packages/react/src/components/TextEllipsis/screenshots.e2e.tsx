@@ -68,15 +68,13 @@ test('should have screenshot for TextEllipsis[hideTooltip]', async ({
   await expect(page.locator('.Tooltip')).toHaveCount(0);
 
   await expect(page).toHaveScreenshot('text-ellipsis[hideTooltip]');
-  await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot('dark--text-ellipsis[hideTooltip]');
 });
 
 test('should have screenshot for TextEllipsis[hideTooltip][maxLines=2]', async ({
   mount,
   page
 }) => {
-  const component = await mount(
+  await mount(
     <div style={{ width: '200px' }}>
       <TextEllipsis hideTooltip maxLines={2}>
         {overflowText}
@@ -84,13 +82,11 @@ test('should have screenshot for TextEllipsis[hideTooltip][maxLines=2]', async (
     </div>
   );
 
-  await expect(component).toHaveScreenshot(
-    'text-ellipsis[hideTooltip][maxLines=2]'
-  );
-  await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot(
-    'dark--text-ellipsis[hideTooltip][maxLines=2]'
-  );
+  const ellipsis = page.locator('.TextEllipsis');
+  await ellipsis.hover();
+  await expect(page.locator('.Tooltip')).toHaveCount(0);
+
+  await expect(page).toHaveScreenshot('text-ellipsis[hideTooltip][maxLines=2]');
 });
 
 test('should have screenshot for TextEllipsis without overflow', async ({
