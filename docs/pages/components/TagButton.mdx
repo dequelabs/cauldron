@@ -19,6 +19,13 @@ import { TagButton } from '@deque/cauldron-react';
   onClick={() => console.log('test')}
   icon="pencil"
 />
+<TagButton
+  label="Label"
+  value="value"
+  onClick={() => console.log('test')}
+  icon="pencil"
+  size="small"
+/>
 ```
 
 ## Props
@@ -63,6 +70,12 @@ import { TagButton } from '@deque/cauldron-react';
       type: 'string',
       required: true,
       description: 'Icon to use for the TagButton'
+    },
+    {
+      name: 'size',
+      type: ['default', 'small'],
+      defaultValue: 'default',
+      description: 'Size of the tag button.'
     }
   ]}
 />
