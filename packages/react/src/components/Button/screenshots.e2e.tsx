@@ -591,7 +591,7 @@ test('should have screenshot for Button[variant="tag"][size="small"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
+  await component.getByRole('button', { name: 'Hover' }).hover();
   setActive(component.getByText('Active'));
   await component.getByText('Focus').focus();
 
