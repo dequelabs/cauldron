@@ -50,10 +50,7 @@ test('should have screenshot for Select[required]', async ({ mount, page }) => {
   );
 
   await component.getByLabel('Hover').hover();
-  // Use evaluate to focus without triggering :user-invalid
-  await component
-    .getByLabel('Focus')
-    .evaluate((el) => (el as HTMLElement).focus());
+  await component.getByLabel('Focus').focus();
 
   await expect(component).toHaveScreenshot('select[required]');
   await setTheme(page, 'dark');
@@ -87,11 +84,14 @@ test('should have screenshot for Select[required] after interaction', async ({
     </FieldWrap>
   );
 
-  // Change value then revert to invalid to trigger :user-invalid
+  // Type a letter to trigger native typeahead (trusted user interaction),
+  // then revert to empty to trigger :user-invalid
   for (const label of ['Select', 'Hover', 'Focus']) {
-    await component.getByLabel(label).selectOption('apple');
-    await component.getByLabel(label).selectOption('');
-    await component.getByLabel(label).blur();
+    const select = component.getByLabel(label);
+    await select.focus();
+    await page.keyboard.press('a');
+    await select.selectOption('');
+    await select.blur();
   }
 
   await component.getByLabel('Hover').hover();

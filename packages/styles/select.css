@@ -71,6 +71,7 @@
   border-color: var(--field-border-color-focus-hover);
 }
 
+/* autoprefixer: off */
 .Field__select--wrapper select:user-invalid,
 .Field--has-error select {
   border-width: 1px;
@@ -96,3 +97,4 @@
 .Field__select--wrapper.Field--has-error select:focus:hover {
   border-color: var(--field-border-color-error-hover);
 }
+/* autoprefixer: on */
