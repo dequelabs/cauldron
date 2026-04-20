@@ -51,9 +51,9 @@ test('should have screenshot for TagButton[size="small"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: /Hover/ }).hover();
+  setActive(component.getByRole('button', { name: /Active/ }));
+  await component.getByRole('button', { name: /Focus/ }).focus();
 
   await expect(component).toHaveScreenshot('tag-button[size=small]');
   await setTheme(page, 'dark');

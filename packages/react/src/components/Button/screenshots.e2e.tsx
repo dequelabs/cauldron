@@ -20,12 +20,12 @@ test('should have screenshot for Button[variant="primary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
   await component
-    .getByText('Active')
+    .getByRole('button', { name: 'Active' })
     .press('Space', { delay: 1000, noWaitAfter: true });
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=primary]');
   await setTheme(page, 'dark');
@@ -57,9 +57,9 @@ test('should have screenshot for Button[thin][variant="primary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin][variant=primary]');
   await setTheme(page, 'dark');
@@ -85,9 +85,9 @@ test('should have screenshot for Button[variant="secondary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=secondary]');
   await setTheme(page, 'dark');
@@ -119,9 +119,9 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin][secondary]');
   await setTheme(page, 'dark');
@@ -145,9 +145,9 @@ test('should have screenshot for Button[variant="tertiary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=tertiary]');
   await setTheme(page, 'dark');
@@ -179,9 +179,9 @@ test('should have screenshot for Button[thin][variant="tertiary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin][tertiary]');
   await setTheme(page, 'dark');
@@ -213,9 +213,9 @@ test('should have screenshot for Button with leading icon', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button-leading-icon');
   await setTheme(page, 'dark');
@@ -248,9 +248,9 @@ test('should have screenshot for Button with trailing icon', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button-trailing-icon');
   await setTheme(page, 'dark');
@@ -282,9 +282,9 @@ test('should have screenshot for Button[thin] with leading icon', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin]-leading-icon');
   await setTheme(page, 'dark');
@@ -317,9 +317,9 @@ test('should have screenshot for Button[thin] with trailing icon', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin]-trailing-icon');
   await setTheme(page, 'dark');
@@ -343,9 +343,9 @@ test('should have screenshot for Button[variant="error"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=error]');
   await setTheme(page, 'dark');
@@ -377,9 +377,9 @@ test('should have screenshot for Button[thin][variant="error"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin][variant=error]');
   await setTheme(page, 'dark');
@@ -403,9 +403,9 @@ test('should have screenshot for Button[variant="danger"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=danger]');
   await setTheme(page, 'dark');
@@ -437,9 +437,9 @@ test('should have screenshot for Button[thin][variant="danger"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[thin][variant=danger]');
   await setTheme(page, 'dark');
@@ -465,9 +465,9 @@ test('should have screenshot for Button[variant="danger-secondary"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=danger-secondary]');
   await setTheme(page, 'dark');
@@ -501,9 +501,9 @@ test('should have screenshot for Button[thin][variant="danger-secondary"]', asyn
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot(
     'button[thin][variant=danger-secondary]'
@@ -531,9 +531,9 @@ test('should have screenshot for Button[variant="link"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=link]');
   await setTheme(page, 'dark');
@@ -557,9 +557,9 @@ test('should have screenshot for Button[variant="tag"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=tag]');
   await setTheme(page, 'dark');
@@ -592,8 +592,8 @@ test('should have screenshot for Button[variant="tag"][size="small"]', async ({
   );
 
   await component.getByRole('button', { name: 'Hover' }).hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=tag][size=small]');
   await setTheme(page, 'dark');
@@ -619,9 +619,9 @@ test('should have screenshot for Button[variant="badge"]', async ({
     </div>
   );
 
-  await component.getByText('Hover').hover();
-  setActive(component.getByText('Active'));
-  await component.getByText('Focus').focus();
+  await component.getByRole('button', { name: 'Hover' }).hover();
+  setActive(component.getByRole('button', { name: 'Active' }));
+  await component.getByRole('button', { name: 'Focus' }).focus();
 
   await expect(component).toHaveScreenshot('button[variant=badge]');
   await setTheme(page, 'dark');
