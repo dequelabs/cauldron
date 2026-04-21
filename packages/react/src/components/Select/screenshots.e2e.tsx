@@ -25,6 +25,85 @@ test('should have screenshot for Select', async ({ mount, page }) => {
   await expect(component).toHaveScreenshot('dark--select');
 });
 
+test('should have screenshot for Select[required]', async ({ mount, page }) => {
+  const component = await mount(
+    <FieldWrap>
+      <Select label="Select" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Hover" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Focus" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+    </FieldWrap>
+  );
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('select-required');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--select-required');
+});
+
+test('should have screenshot for Select[required] after interaction', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <FieldWrap>
+      <Select label="Select" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Hover" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+      <Select label="Focus" required defaultValue="">
+        <option value="">Select a fruit</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cucumber">Cucumber</option>
+      </Select>
+    </FieldWrap>
+  );
+
+  // Type a letter to trigger native typeahead (trusted user interaction),
+  // then revert to empty to trigger :user-invalid
+  for (const label of ['Select', 'Hover', 'Focus']) {
+    const select = component.getByLabel(label);
+    await select.focus();
+    await page.keyboard.press('a');
+    await select.selectOption('');
+    await select.blur();
+  }
+
+  await component.getByLabel('Hover').hover();
+  await component.getByLabel('Focus').focus();
+
+  await expect(component).toHaveScreenshot('select-required-after-interaction');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot(
+    'dark--select-required-after-interaction'
+  );
+});
+
 test('should have screenshot for Select[error]', async ({ mount, page }) => {
   const options = [
     { key: 'apple', value: 'Apple' },
@@ -54,9 +133,9 @@ test('should have screenshot for Select[error]', async ({ mount, page }) => {
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('select[error]');
+  await expect(component).toHaveScreenshot('select-error');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--select[error]');
+  await expect(component).toHaveScreenshot('dark--select-error');
 });
 
 test('should have screenshot for Select[with-description]', async ({
@@ -91,9 +170,9 @@ test('should have screenshot for Select[with-description]', async ({
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('select[with-description]');
+  await expect(component).toHaveScreenshot('select-with-description');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--select[with-description]');
+  await expect(component).toHaveScreenshot('dark--select-with-description');
 });
 
 test('should have screenshot for Select[error-with-description]', async ({
@@ -131,9 +210,9 @@ test('should have screenshot for Select[error-with-description]', async ({
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('select[error-with-description]');
+  await expect(component).toHaveScreenshot('select-error-with-description');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot(
-    'dark--select[error-with-description]'
+    'dark--select-error-with-description'
   );
 });

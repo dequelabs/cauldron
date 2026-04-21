@@ -1147,10 +1147,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.8.tgz#9624663b8079714dcfa2084e35eae632d112c5e6"
   integrity sha512-rJCYN8NRBQbT6Xvj42JBj7kLuuAV7LXfV2udQc5+2QT8pWXCz9iUb7gHDEvtb6zoljzOLPS+E3IBllSMzwazNg==
 
-"@fontsource/roboto@^5.2.9":
-  version "5.2.9"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.9.tgz#55092cf992ab8d5082be73b79b42f383a9c0903c"
-  integrity sha512-ZTkyHiPk74B/aj8BZWbsxD5Yu+Lq+nR64eV4wirlrac2qXR7jYk2h6JlLYuOuoruTkGQWNw2fMuKNavw7/rg0w==
+"@fontsource/roboto@^5.2.10":
+  version "5.2.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.10.tgz#b985d34de475913b41d0fb57e2dcd0b16ab9ecb5"
+  integrity sha512-8HlA5FtSfz//oFSr2eL7GFXAiE7eIkcGOtx7tjsLKq+as702x9+GU7K95iDeWFapHC4M2hv9RrpXKRTGGBI8Zg==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"
@@ -2843,9 +2843,9 @@ baseline-browser-mapping@^2.9.0:
   integrity sha512-kX8h7K2srmDyYnXRIppo4AH/wYgzWVCs+eKr3RusRSQ5PvRYoEFmR/I0PbdTjKFAoKqp5+kbxnNTFO9jOfSVJg==
 
 basic-ftp@^5.0.2:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/basic-ftp/-/basic-ftp-5.2.1.tgz#818ba176e0e52a9e746e8576331f7e9474b94668"
-  integrity sha512-0yaL8JdxTknKDILitVpfYfV2Ob6yb3udX/hK97M7I3jOeznBNxQPtVvTUtnhUkyHlxFWyr5Lvknmgzoc7jf+1Q==
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/basic-ftp/-/basic-ftp-5.2.2.tgz#4cb2422deddf432896bdb3c9b8f13b944ad4842c"
+  integrity sha512-1tDrzKsdCg70WGvbFss/ulVAxupNauGnOlgpyjKzeQxzyllBLS0CGLV7tjIXTK3ZQA9/FBEm9qyFFN1bciA6pw==
 
 batch@0.6.1:
   version "0.6.1"
@@ -5074,9 +5074,9 @@ focusable@^2.3.0:
   integrity sha512-e63a4CAb5yLbn4Scn0wG9F+rEq4ZcbggRc9pD3hufAWf8y8dpZImdIES8YNUufRpKB+p0JS+BRd8RBU+sLAeIw==
 
 follow-redirects@^1.0.0:
-  version "1.15.6"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
-  integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.16.0.tgz#28474a159d3b9d11ef62050a14ed60e4df6d61bc"
+  integrity sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==
 
 for-each@^0.3.3:
   version "0.3.3"
