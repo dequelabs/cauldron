@@ -62,6 +62,28 @@ test('should render button as tag', () => {
   expect(TagButton).toHaveClass('Tag');
 });
 
+test('should render button as small tag', () => {
+  render(
+    <Button variant="tag" size="small">
+      small tag
+    </Button>
+  );
+  const TagButton = screen.getByRole('button', { name: 'small tag' });
+  expect(TagButton).toHaveClass('Tag');
+  expect(TagButton).toHaveClass('Tag--small');
+});
+
+test('should not apply Tag--small class to non-tag variants', () => {
+  render(
+    // @ts-expect-error size is not valid for non-tag variants
+    <Button variant="primary" size="small">
+      primary
+    </Button>
+  );
+  const button = screen.getByRole('button', { name: 'primary' });
+  expect(button).not.toHaveClass('Tag--small');
+});
+
 test('should render button as badge', () => {
   render(<Button variant="badge">badge</Button>);
   const BadgeButton = screen.getByRole('button', { name: 'badge' });
