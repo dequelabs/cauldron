@@ -7887,9 +7887,9 @@ p-locate@^5.0.0:
     p-limit "^3.0.2"
 
 p-queue@^9:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-9.1.1.tgz#df762cac89c648c83a5e5d53673ab355c542a4ce"
-  integrity sha512-yQS1vV2V7Q14MQrgD8jMNY5owPuGgVHVdSK8NqmKpOVajnjbaeMa6uLOzTALPtvJ7Vo4bw0BGsw7qfUT8z24Ig==
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-9.1.2.tgz#584a48619ac61ff0f9b3661eae9ca60018512f31"
+  integrity sha512-ktsDOALzTYTWWF1PbkNVg2rOt+HaOaMWJMUnt7T3qf5tvZ1L8dBW3tObzprBcXNMKkwj+yFSLqHso0x+UFcJXw==
   dependencies:
     eventemitter3 "^5.0.1"
     p-timeout "^7.0.0"
