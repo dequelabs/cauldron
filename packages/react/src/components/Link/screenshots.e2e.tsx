@@ -52,9 +52,9 @@ test('should have screenshot for Link[variant=button]', async ({
   setActive(await component.getByText('Active'));
   await component.getByText('Focus').focus();
 
-  await expect(component).toHaveScreenshot('link[variant=button]');
+  await expect(component).toHaveScreenshot('link-button');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--link[variant=button]');
+  await expect(component).toHaveScreenshot('dark--link-button');
 });
 
 test('should have screenshot for Link[variant=button-secondary]', async ({
@@ -89,11 +89,9 @@ test('should have screenshot for Link[variant=button-secondary]', async ({
   setActive(await component.getByText('Active'));
   await component.getByText('Focus').focus();
 
-  await expect(component).toHaveScreenshot('link[variant=button-secondary]');
+  await expect(component).toHaveScreenshot('link-button-secondary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot(
-    'dark--link[variant=button-secondary]'
-  );
+  await expect(component).toHaveScreenshot('dark--link-button-secondary');
 });
 
 test('should have screenshot for Link with Icon', async ({ mount, page }) => {

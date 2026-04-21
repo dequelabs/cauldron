@@ -27,9 +27,9 @@ test('should have screenshot for Button[variant="primary"]', async ({
     .press('Space', { delay: 1000, noWaitAfter: true });
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=primary]');
+  await expect(component).toHaveScreenshot('button-primary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=primary]');
+  await expect(component).toHaveScreenshot('dark--button-primary');
 });
 
 test('should have screenshot for Button[thin][variant="primary"]', async ({
@@ -61,11 +61,9 @@ test('should have screenshot for Button[thin][variant="primary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin][variant=primary]');
+  await expect(component).toHaveScreenshot('button-thin-primary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot(
-    'dark--button[thin][variant=primary]'
-  );
+  await expect(component).toHaveScreenshot('dark--button-thin-primary');
 });
 
 test('should have screenshot for Button[variant="secondary"]', async ({
@@ -89,9 +87,9 @@ test('should have screenshot for Button[variant="secondary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=secondary]');
+  await expect(component).toHaveScreenshot('button-secondary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=secondary]');
+  await expect(component).toHaveScreenshot('dark--button-secondary');
 });
 
 test('should have screenshot for Button[thin][variant="secondary"]', async ({
@@ -123,9 +121,9 @@ test('should have screenshot for Button[thin][variant="secondary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin][secondary]');
+  await expect(component).toHaveScreenshot('button-thin-secondary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[thin][secondary]');
+  await expect(component).toHaveScreenshot('dark--button-thin-secondary');
 });
 
 test('should have screenshot for Button[variant="tertiary"]', async ({
@@ -149,9 +147,9 @@ test('should have screenshot for Button[variant="tertiary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=tertiary]');
+  await expect(component).toHaveScreenshot('button-tertiary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=tertiary]');
+  await expect(component).toHaveScreenshot('dark--button-tertiary');
 });
 
 test('should have screenshot for Button[thin][variant="tertiary"]', async ({
@@ -183,9 +181,9 @@ test('should have screenshot for Button[thin][variant="tertiary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin][tertiary]');
+  await expect(component).toHaveScreenshot('button-thin-tertiary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[thin][tertiary]');
+  await expect(component).toHaveScreenshot('dark--button-thin-tertiary');
 });
 
 test('should have screenshot for Button with leading icon', async ({
@@ -286,9 +284,9 @@ test('should have screenshot for Button[thin] with leading icon', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin]-leading-icon');
+  await expect(component).toHaveScreenshot('button-thin-leading-icon');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[thin]-leading-icon');
+  await expect(component).toHaveScreenshot('dark--button-thin-leading-icon');
 });
 
 test('should have screenshot for Button[thin] with trailing icon', async ({
@@ -321,9 +319,9 @@ test('should have screenshot for Button[thin] with trailing icon', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin]-trailing-icon');
+  await expect(component).toHaveScreenshot('button-thin-trailing-icon');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[thin]-trailing-icon');
+  await expect(component).toHaveScreenshot('dark--button-thin-trailing-icon');
 });
 
 test('should have screenshot for Button[variant="error"]', async ({
@@ -347,9 +345,9 @@ test('should have screenshot for Button[variant="error"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=error]');
+  await expect(component).toHaveScreenshot('button-error');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=error]');
+  await expect(component).toHaveScreenshot('dark--button-error');
 });
 
 test('should have screenshot for Button[thin][variant="error"]', async ({
@@ -381,9 +379,9 @@ test('should have screenshot for Button[thin][variant="error"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin][variant=error]');
+  await expect(component).toHaveScreenshot('button-thin-error');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[thin][variant=error]');
+  await expect(component).toHaveScreenshot('dark--button-thin-error');
 });
 
 test('should have screenshot for Button[variant="danger"]', async ({
@@ -407,9 +405,9 @@ test('should have screenshot for Button[variant="danger"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=danger]');
+  await expect(component).toHaveScreenshot('button-danger');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=danger]');
+  await expect(component).toHaveScreenshot('dark--button-danger');
 });
 
 test('should have screenshot for Button[thin][variant="danger"]', async ({
@@ -441,11 +439,9 @@ test('should have screenshot for Button[thin][variant="danger"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[thin][variant=danger]');
+  await expect(component).toHaveScreenshot('button-thin-danger');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot(
-    'dark--button[thin][variant=danger]'
-  );
+  await expect(component).toHaveScreenshot('dark--button-thin-danger');
 });
 
 test('should have screenshot for Button[variant="danger-secondary"]', async ({
@@ -469,11 +465,9 @@ test('should have screenshot for Button[variant="danger-secondary"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=danger-secondary]');
+  await expect(component).toHaveScreenshot('button-danger-secondary');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot(
-    'dark--button[variant=danger-secondary]'
-  );
+  await expect(component).toHaveScreenshot('dark--button-danger-secondary');
 });
 
 test('should have screenshot for Button[thin][variant="danger-secondary"]', async ({
@@ -505,12 +499,10 @@ test('should have screenshot for Button[thin][variant="danger-secondary"]', asyn
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot(
-    'button[thin][variant=danger-secondary]'
-  );
+  await expect(component).toHaveScreenshot('button-thin-danger-secondary');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot(
-    'dark--button[thin][variant=danger-secondary]'
+    'dark--button-thin-danger-secondary'
   );
 });
 
@@ -535,9 +527,9 @@ test('should have screenshot for Button[variant="link"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=link]');
+  await expect(component).toHaveScreenshot('button-link');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=link]');
+  await expect(component).toHaveScreenshot('dark--button-link');
 });
 
 test('should have screenshot for Button[variant="tag"]', async ({
@@ -561,9 +553,9 @@ test('should have screenshot for Button[variant="tag"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=tag]');
+  await expect(component).toHaveScreenshot('button-tag');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=tag]');
+  await expect(component).toHaveScreenshot('dark--button-tag');
 });
 
 test('should have screenshot for Button[variant="tag"][size="small"]', async ({
@@ -623,9 +615,9 @@ test('should have screenshot for Button[variant="badge"]', async ({
   setActive(component.getByRole('button', { name: 'Active' }));
   await component.getByRole('button', { name: 'Focus' }).focus();
 
-  await expect(component).toHaveScreenshot('button[variant=badge]');
+  await expect(component).toHaveScreenshot('button-badge');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--button[variant=badge]');
+  await expect(component).toHaveScreenshot('dark--button-badge');
 });
 test('should not wrap button contents by default', async ({ mount, page }) => {
   await page.setViewportSize({ height: 600, width: 320 });
