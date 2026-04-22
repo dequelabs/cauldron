@@ -1,8 +1,18 @@
 import React, { type ButtonHTMLAttributes, forwardRef, type Ref } from 'react';
 import classNames from 'classnames';
+import type { TagSize } from '../Tag';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonRef?: Ref<HTMLButtonElement>;
+  thin?: boolean;
+}
+
+interface ButtonTagProps extends ButtonBaseProps {
+  variant: 'tag';
+  size?: TagSize;
+}
+
+interface ButtonNonTagProps extends ButtonBaseProps {
   variant?:
     | 'primary'
     | 'secondary'
@@ -11,16 +21,18 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'danger'
     | 'danger-secondary'
     | 'link'
-    | 'tag'
     | 'badge';
-  thin?: boolean;
+  size?: never;
 }
+
+export type ButtonProps = ButtonTagProps | ButtonNonTagProps;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = 'primary',
       thin,
+      size,
       children,
       className,
       buttonRef,
@@ -40,6 +52,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         Link: variant === 'link',
         Tag: variant === 'tag',
         'Button--tag': variant === 'tag',
+        'Tag--small': variant === 'tag' && size === 'small',
         'Button--thin': thin,
         'Button--badge': variant === 'badge'
       })}
