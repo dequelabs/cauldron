@@ -15,7 +15,6 @@
   --dialog-vertical-offset: 4rem;
   --dialog-bottom-spacing: 1.875rem;
   --dialog-content-line-height: inherit;
-  --dialog-z-index: 25;
 }
 
 .cauldron--theme-dark {
@@ -33,7 +32,6 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
-  z-index: var(--dialog-z-index);
   background-color: var(--scrim-background-color);
 }
 
@@ -140,10 +138,6 @@
 
 .Dialog__content p:last-child {
   margin-bottom: 0;
-}
-
-.Dialog__content .Field {
-  width: 100%;
 }
 
 .Dialog__footer {
