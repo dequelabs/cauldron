@@ -71,19 +71,21 @@
   border-color: var(--field-border-color-focus-hover);
 }
 
-/* autoprefixer: off */
+/* autoprefixer: ignore next */
 .Field__select--wrapper select:user-invalid,
 .Field--has-error select {
   border-width: 1px;
   border-color: var(--field-border-color-error);
 }
 
+/* autoprefixer: ignore next */
 .Field__select--wrapper select:user-invalid:hover,
 .Field__select--wrapper.Field--has-error select:hover {
   border-color: var(--field-border-color-error-hover);
   box-shadow: 0 0 0 1px var(--field-border-color-error-hover);
 }
 
+/* autoprefixer: ignore next */
 .Field__select--wrapper select:user-invalid:focus,
 .Field__select--wrapper.Field--has-error select:focus {
   border-color: var(--field-border-color-error);
@@ -93,8 +95,8 @@
     var(--field-border-color-error-focus-glow) 0 0 5px 0;
 }
 
+/* autoprefixer: ignore next */
 .Field__select--wrapper select:user-invalid:focus:hover,
 .Field__select--wrapper.Field--has-error select:focus:hover {
   border-color: var(--field-border-color-error-hover);
 }
-/* autoprefixer: on */
