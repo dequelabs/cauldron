@@ -10,15 +10,24 @@
   box-sizing: border-box;
   display: flex;
   padding: var(--space-smallest) var(--space-small);
+  max-height: calc(100vh - var(--top-bar-height));
 }
 
 .Toast.Toast--non-dismissible {
   position: static;
   margin-bottom: var(--space-small);
+  max-height: none;
 }
 
 .TopBar--thin .Toast {
   top: var(--top-bar-height-thin);
+  max-height: calc(100vh - var(--top-bar-height-thin));
+}
+
+.TopBar--thin .Toast .Toast__message-content {
+  max-height: calc(
+    100vh - var(--top-bar-height-thin) - 2 * var(--space-smallest)
+  );
 }
 
 .Toast.Toast--success {
@@ -43,6 +52,7 @@
   border: 0;
   height: calc(var(--text-size-small) + 9px);
   color: currentColor;
+  flex-shrink: 0;
 }
 
 .Toast__dismiss:focus {
@@ -59,10 +69,13 @@
 .Toast__message .Toast__message-content {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
+  overflow-y: auto;
+  max-height: calc(100vh - var(--top-bar-height) - 2 * var(--space-smallest));
 }
 
 .Toast__message .Icon {
   margin-right: var(--space-smallest);
+  flex-shrink: 0;
 }
 
 .Toast__message .fa {
