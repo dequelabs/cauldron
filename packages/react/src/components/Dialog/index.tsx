@@ -231,6 +231,7 @@ const DialogContent = ({
       'text--align-center': align === 'center',
       'text--align-right': align === 'right'
     })}
+    tabIndex={-1}
     {...other}
   >
     {children}
@@ -271,8 +272,7 @@ const DialogHeader = ({ children, className, ...other }: DialogHeaderProps) => (
 );
 DialogHeader.displayName = 'DialogHeader';
 
-export interface DialogHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface DialogHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   className?: string;
   level?: number;
@@ -300,8 +300,7 @@ const DialogHeading = ({
 };
 DialogHeading.displayName = 'DialogHeading';
 
-export interface DialogCloseButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface DialogCloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   className?: string;
 }
