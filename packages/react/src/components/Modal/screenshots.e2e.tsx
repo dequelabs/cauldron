@@ -169,12 +169,20 @@ test('should allow keyboard scrolling of scrollable Modal content', async ({
 
   const content = page.locator('.Dialog__content');
   await expect(content).toBeVisible();
+  // Dialog focuses its heading asynchronously on mount; wait for that to settle
+  // before moving focus to the content, otherwise it races our focus() call.
+  await expect(page.locator('.Dialog__heading')).toBeFocused();
+  // Wait until layout is stable and the content is actually scrollable.
+  await expect
+    .poll(async () =>
+      content.evaluate((el) => el.scrollHeight - el.clientHeight)
+    )
+    .toBeGreaterThan(0);
 
   const scrollTopBefore = await content.evaluate((el) => el.scrollTop);
-  await content.focus();
-  await page.keyboard.press('ArrowDown');
-  await page.keyboard.press('ArrowDown');
-  await page.keyboard.press('ArrowDown');
+  await content.press('ArrowDown');
+  await content.press('ArrowDown');
+  await content.press('ArrowDown');
   const scrollTopAfter = await content.evaluate((el) => el.scrollTop);
 
   expect(scrollTopAfter).toBeGreaterThan(scrollTopBefore);
