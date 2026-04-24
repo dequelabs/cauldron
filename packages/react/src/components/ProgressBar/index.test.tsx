@@ -34,6 +34,18 @@ test('should set custom progress bar progress', () => {
   expect(progressBarFill).toHaveStyle({ width: '20%' });
 });
 
+test('should apply ProgressBar--thin class when thin prop is set', () => {
+  render(<ProgressBar aria-label="progress" progress={75} thin />);
+  const progressBar = screen.getByRole('progressbar');
+  expect(progressBar).toHaveClass('ProgressBar--thin');
+});
+
+test('should not apply ProgressBar--thin class by default', () => {
+  render(<ProgressBar aria-label="progress" progress={75} />);
+  const progressBar = screen.getByRole('progressbar');
+  expect(progressBar).not.toHaveClass('ProgressBar--thin');
+});
+
 test('should return no axe violations', async () => {
   render(<ProgressBar aria-label="progress" progress={75} />);
   const results = await axe(screen.getByRole('progressbar'));

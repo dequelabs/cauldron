@@ -2,6 +2,7 @@
   --tag-text-color: var(--gray-90);
   --tag-background-color: var(--background-light);
   --tag-border-color: var(--gray-30);
+  --tag-margin: 0;
 
   --tag-height: var(--button-height);
   --tag-small-height: 1.5rem;
@@ -24,6 +25,7 @@
   justify-content: center;
   align-items: center;
   padding: 0 var(--space-smallest);
+  margin: var(--tag-margin);
   min-height: var(--tag-height);
   font-size: var(--tag-font-size);
 }

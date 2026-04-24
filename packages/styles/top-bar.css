@@ -11,22 +11,30 @@
   --top-bar-accent-warning-other: var(--accent-danger-light);
   --top-bar-height: 70px;
   --top-bar-height-thin: 43px;
+  --top-bar-position: fixed;
+  --top-bar-padding-inline-start: 0;
+  --top-bar-menu-flex: auto;
+  --top-bar-button-max-width: none;
+  --top-bar-button-flex-direction: row;
+  --top-bar-button-font-size: var(--text-size-small);
+  --top-bar-item-padding: 0 var(--space-small);
+  --top-bar-border-bottom: solid 1px var(--top-bar-border-bottom-color);
 }
 
 .TopBar {
-  position: fixed;
+  position: var(--top-bar-position);
   width: 100%;
   height: var(--top-bar-height);
   top: 0;
   flex: none;
-  flex-direction: row;
   box-sizing: border-box;
   z-index: var(--z-index-top-bar);
   display: flex;
   align-items: center;
   background-color: var(--top-bar-background-color);
   color: var(--top-bar-text-color);
-  border-bottom: solid 1px var(--top-bar-border-bottom-color);
+  border-bottom: var(--top-bar-border-bottom);
+  padding-inline-start: var(--top-bar-padding-inline-start);
 }
 
 .TopBar--thin .TopBar {
@@ -37,12 +45,15 @@
   list-style-type: none;
   display: flex;
   align-items: center;
-  flex: auto;
+  flex: var(--top-bar-menu-flex);
 }
 
 .TopBar li button {
   background: transparent;
   color: inherit;
+  max-width: var(--top-bar-button-max-width);
+  font-size: var(--top-bar-button-font-size);
+  flex-direction: var(--top-bar-button-flex-direction);
 }
 
 .TopBar > ul > li {
@@ -57,7 +68,7 @@
 }
 
 .TopBar > ul > li:not(.TopBar__menu-trigger) {
-  padding: 0 var(--space-small);
+  padding: var(--top-bar-item-padding);
   font-size: var(--text-size-small);
   height: var(--top-bar-height);
   display: flex;
@@ -153,10 +164,7 @@
   --top-bar-border-bottom-color: var(--gray-70);
   --top-bar-text-color: var(--accent-light);
   --top-bar-background-color-active: #0b0e11;
-}
-
-.cauldron--theme-dark .TopBar {
-  border-bottom: none;
+  --top-bar-border-bottom: none;
 }
 
 .cauldron--theme-dark .TopBar [aria-current='page'] {

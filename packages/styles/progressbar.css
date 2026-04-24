@@ -2,19 +2,32 @@
   --progress-bar-background-color: var(--accent-dark);
   --progress-bar-fill-color: var(--accent-info-light);
   --progress-bar-animation-timing: 150ms;
+  --progress-bar-padding: 2px;
+  --progress-bar-border-radius: calc((var(--space-small) * 0.5) + 2px);
+  --progress-bar-fill-height: var(--space-small);
+  --progress-bar-fill-border-radius: calc(var(--space-small) * 0.5);
+  --progress-bar-fill-min-width: var(--space-small);
 }
 
 .ProgressBar {
   background-color: var(--progress-bar-background-color);
-  padding: 2px;
-  border-radius: calc((var(--space-small) * 0.5) + 2px);
+  padding: var(--progress-bar-padding);
+  border-radius: var(--progress-bar-border-radius);
   margin-bottom: var(--space-smallest);
 }
 
 .ProgressBar--fill {
-  border-radius: calc(var(--space-small) * 0.5);
+  border-radius: var(--progress-bar-fill-border-radius);
   background-color: var(--progress-bar-fill-color);
-  height: var(--space-small);
-  min-width: var(--space-small);
+  height: var(--progress-bar-fill-height);
+  min-width: var(--progress-bar-fill-min-width);
   transition: width linear var(--progress-bar-animation-timing);
+}
+
+.ProgressBar--thin {
+  --progress-bar-padding: 3px;
+  --progress-bar-border-radius: 3px;
+  --progress-bar-fill-height: var(--space-half);
+  --progress-bar-fill-border-radius: 1px;
+  --progress-bar-fill-min-width: 1px;
 }

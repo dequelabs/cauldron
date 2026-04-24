@@ -49,6 +49,12 @@
     --button-background-color-error-disabled
   );
   --icon-button-icon-size: var(--icon-size);
+  --icon-button-hover-shadow-primary: 0 0 0 1px
+    var(--icon-button-outline-color-primary);
+  --icon-button-hover-shadow-secondary: 0 0 0 1px
+    var(--icon-button-outline-color-secondary);
+  --icon-button-hover-shadow-error: 0 0 0 1px
+    var(--icon-button-outline-color-error);
 }
 
 .IconButton {
@@ -144,7 +150,7 @@ a.IconButton {
 }
 
 .IconButton--primary:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-color-primary);
+  box-shadow: var(--icon-button-hover-shadow-primary);
 }
 
 .IconButton--primary:active {
@@ -163,14 +169,14 @@ a.IconButton {
 .IconButton--tertiary:not([disabled]):not([aria-disabled='true']):is(
     :hover
   ):before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-color-secondary);
+  box-shadow: var(--icon-button-hover-shadow-secondary);
 }
 
 .IconButton--tertiary:is(
-    :not(:hover, :focus, :active),
-    [disabled],
-    [aria-disabled='true']
-  ) {
+  :not(:hover, :focus, :active),
+  [disabled],
+  [aria-disabled='true']
+) {
   border-color: transparent;
   background-color: transparent;
 }
@@ -186,7 +192,7 @@ a.IconButton {
 }
 
 .IconButton--error:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-color-error);
+  box-shadow: var(--icon-button-hover-shadow-error);
 }
 
 .IconButton--error:active {
@@ -222,6 +228,17 @@ a.IconButton {
   --icon-button-background-color-error-active: var(
     --button-background-color-error-active
   );
+
+  /* Hover shadows (double ring in dark theme) */
+  --icon-button-hover-shadow-primary:
+    0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-primary);
+  --icon-button-hover-shadow-secondary:
+    0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-secondary);
+  --icon-button-hover-shadow-error:
+    0 0 0 1px var(--icon-button-outline-shadow-color),
+    0 0 0 2px var(--icon-button-outline-color-error);
 }
 
 .cauldron--theme-dark .IconButton--primary {
@@ -258,34 +275,9 @@ a.IconButton {
   color: var(--icon-button-disabled-color);
 }
 
-.cauldron--theme-dark
-  .IconButton--primary:not([disabled]):not(
-    [aria-disabled='true']
-  ):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
-    0 0 0 2px var(--icon-button-outline-color-primary);
-}
-
-.cauldron--theme-dark
-  .IconButton--secondary:not([disabled]):not(
-    [aria-disabled='true']
-  ):hover:before,
-.cauldron--theme-dark
-  .IconButton--tertiary:not([disabled]):not(
-    [aria-disabled='true']
-  ):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
-    0 0 0 2px var(--icon-button-outline-color-secondary);
-}
-
-.cauldron--theme-dark
-  .IconButton--error:not([disabled]):not([aria-disabled='true']):hover:before {
-  box-shadow: 0 0 0 1px var(--icon-button-outline-shadow-color),
-    0 0 0 2px var(--icon-button-outline-color-error);
-}
-
 .cauldron--theme-dark .IconButton:focus:before {
-  box-shadow: 0 0 0 2px var(--icon-button-outline-shadow-color),
+  box-shadow:
+    0 0 0 2px var(--icon-button-outline-shadow-color),
     0 0 0 4px var(--button-focus-ring-color, --focus);
 }
 

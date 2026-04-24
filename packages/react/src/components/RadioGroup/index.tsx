@@ -8,13 +8,15 @@ export interface RadioItem extends React.InputHTMLAttributes<HTMLInputElement> {
   labelDescription?: React.ReactNode;
 }
 
-export interface RadioGroupProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface RadioGroupProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onChange'
+> {
   name?: string;
   className?: string;
   radios: RadioItem[];
   defaultValue?: string;
-  value?: any;
+  value?: string;
   inline?: boolean;
   onChange?: (radio: RadioItem, input: HTMLElement) => void;
 }
@@ -39,7 +41,8 @@ const RadioGroup = forwardRef(
     );
     const [focusIndex, setFocusIndex] = useState<number | null>(null);
     const inputs = useRef<HTMLInputElement[]>([]);
-    const handleChange = (value: any) => setCurrentValue(value);
+    const handleChange = (value: string | undefined) =>
+      setCurrentValue(value ?? null);
     const onRadioFocus = (index: number) => setFocusIndex(index);
     const onRadioBlur = () => setFocusIndex(null);
     const onRadioClick = (index: number) => {
@@ -83,11 +86,9 @@ const RadioGroup = forwardRef(
               value={radioValue}
               id={id}
               ref={(input) => {
-                if (!input) {
-                  return;
+                if (input) {
+                  inputs.current[index] = input;
                 }
-
-                inputs.current.push(input);
               }}
               onFocus={() => onRadioFocus(index)}
               onBlur={() => onRadioBlur()}
@@ -131,11 +132,6 @@ const RadioGroup = forwardRef(
         </div>
       );
     });
-
-    // reset the input refs array
-    // refs get clobbered every re-render anyway and this supports "dynamic" radios
-    // (changing the number of radio buttons for example)
-    inputs.current = [];
 
     return (
       <div
