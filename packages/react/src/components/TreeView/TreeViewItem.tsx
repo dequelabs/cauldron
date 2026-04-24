@@ -7,7 +7,7 @@ import {
   TreeItemContentRenderProps
 } from 'react-aria-components';
 import nextId from 'react-id-generator';
-import { TreeViewNode } from '.';
+import { TreeViewNode } from './types';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 
@@ -15,11 +15,11 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
   const checkboxId = useMemo(() => nextId('tree-view-item-'), []);
 
   return (
-    <TreeItem id={id} textValue={textValue}>
+    <TreeItem id={id} textValue={textValue} className="TreeView__item">
       <TreeItemContent>
         {({ selectionMode, isSelected }: TreeItemContentRenderProps) => (
           <>
-            <Button slot="chevron">
+            <Button slot="chevron" className="TreeView__chevron">
               <Icon type="chevron-right" />
             </Button>
             {selectionMode !== 'none' ? (

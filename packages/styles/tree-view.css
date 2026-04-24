@@ -1,5 +1,5 @@
 :root {
-  --tree-view-padding: 16px;
+  --tree-view-padding: 1rem;
   --tree-view-focus-ring-color: var(--focus-light);
   --tree-view-highlight-background: var(--accent-light);
 }
@@ -9,7 +9,7 @@
   --tree-view-highlight-background: var(--accent-dark);
 }
 
-.react-aria-Tree {
+.TreeView {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -19,24 +19,23 @@
   box-sizing: border-box;
 }
 
-.react-aria-Tree[data-focus-visible] {
+.TreeView[data-focus-visible] {
   outline: 2px solid var(--tree-view-focus-ring-color);
   outline-offset: -1px;
 }
 
-.react-aria-Tree .react-aria-TreeItem {
+.TreeView .TreeView__item {
   display: flex;
   align-items: center;
   gap: 0.571rem;
   min-height: 28px;
   padding: 0.286rem 0.286rem 0.286rem 0.571rem;
-  --padding: var(--tree-view-padding);
   outline: none;
   position: relative;
   transform: translateZ(0);
 }
 
-.react-aria-Tree .react-aria-TreeItem .react-aria-Button[slot='chevron'] {
+.TreeView .TreeView__item .TreeView__chevron {
   all: unset;
   display: flex;
   visibility: hidden;
@@ -47,29 +46,24 @@
   padding-left: calc((var(--tree-item-level) - 1) * var(--tree-view-padding));
 }
 
-.react-aria-Tree .react-aria-TreeItem .react-aria-Button[slot='chevron'] svg {
+.TreeView .TreeView__item .TreeView__chevron svg {
   transform: rotate(0deg);
   transition: transform 200ms;
 }
 
-.react-aria-Tree
-  .react-aria-TreeItem[data-has-child-items]
-  .react-aria-Button[slot='chevron'] {
+.TreeView .TreeView__item[data-has-child-items] .TreeView__chevron {
   visibility: visible;
 }
 
-.react-aria-Tree
-  .react-aria-TreeItem[data-expanded]
-  .react-aria-Button[slot='chevron']
-  svg {
+.TreeView .TreeView__item[data-expanded] .TreeView__chevron svg {
   transform: rotate(90deg);
 }
 
-.react-aria-Tree .react-aria-TreeItem[data-focus-visible] {
+.TreeView .TreeView__item[data-focus-visible] {
   outline: 2px solid var(--tree-view-focus-ring-color);
   outline-offset: -2px;
 }
 
-.react-aria-Tree .react-aria-TreeItem[aria-selected='true'] {
+.TreeView .TreeView__item[aria-selected='true'] {
   background: var(--tree-view-highlight-background);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from '../../axe';
 import TreeView, { TreeViewNode } from '../../../src/components/TreeView';
 
 const items: TreeViewNode[] = [
@@ -24,20 +24,20 @@ const items: TreeViewNode[] = [
 ];
 
 test('renders tree items', () => {
-  const { getByText } = render(
+  const { getByRole } = render(
     <TreeView aria-label="Test TreeView" items={items} />
   );
-  expect(getByText('TreeView')).toBeInTheDocument();
-  expect(getByText('Another One')).toBeInTheDocument();
+  expect(getByRole('row', { name: 'TreeView' })).toBeInTheDocument();
+  expect(getByRole('row', { name: 'Another One' })).toBeInTheDocument();
 });
 
 test('selects a tree item on click', async () => {
-  const { getByText } = render(
+  const { getByRole } = render(
     <TreeView aria-label="Test TreeView" items={items} selectionMode="single" />
   );
-  const child1 = getByText('TreeView');
-  await userEvent.click(child1);
-  expect(child1.closest('[aria-selected="true"]')).toBeTruthy();
+  const item = getByRole('row', { name: 'TreeView' });
+  await userEvent.click(item);
+  expect(item).toHaveAttribute('aria-selected', 'true');
 });
 
 test('selects a checkbox when clicked', async () => {
@@ -55,7 +55,7 @@ test('selects a checkbox when clicked', async () => {
 
 test('calls onAction when a tree item is activated', async () => {
   const onAction = jest.fn();
-  const { getByText } = render(
+  const { getByRole } = render(
     <TreeView
       aria-label="Test TreeView"
       items={items}
@@ -63,21 +63,21 @@ test('calls onAction when a tree item is activated', async () => {
       selectionMode="single"
     />
   );
-  await userEvent.click(getByText('TreeView'));
+  await userEvent.click(getByRole('row', { name: 'TreeView' }));
   expect(onAction).toHaveBeenCalled();
 });
 
 test('only one item can be selected in single selection mode', async () => {
-  const { getByText } = render(
+  const { getByRole } = render(
     <TreeView aria-label="Test TreeView" items={items} selectionMode="single" />
   );
-  const item1 = getByText('TreeView');
-  const item2 = getByText('Another One');
+  const item1 = getByRole('row', { name: 'TreeView' });
+  const item2 = getByRole('row', { name: 'Another One' });
   await userEvent.click(item1);
-  expect(item1.closest('[aria-selected="true"]')).toBeTruthy();
+  expect(item1).toHaveAttribute('aria-selected', 'true');
   await userEvent.click(item2);
-  expect(item2.closest('[aria-selected="true"]')).toBeTruthy();
-  expect(item1.closest('[aria-selected="true"]')).toBeFalsy();
+  expect(item2).toHaveAttribute('aria-selected', 'true');
+  expect(item1).not.toHaveAttribute('aria-selected', 'true');
 });
 
 test('multiple items can be selected in multiple selection mode', async () => {
@@ -97,31 +97,83 @@ test('multiple items can be selected in multiple selection mode', async () => {
 });
 
 test('children are rendered when treeview is open', () => {
-  const { getByText, queryByText } = render(
+  const { getByRole, queryByRole } = render(
     <TreeView
       aria-label="Test TreeView"
       items={items}
       defaultExpandedKeys={['1']}
     />
   );
-  expect(getByText('pizza')).toBeInTheDocument();
-  expect(getByText('pie')).toBeInTheDocument();
-  expect(queryByText('foo')).toBeNull();
-  expect(queryByText('bar')).toBeNull();
+  expect(getByRole('row', { name: 'pizza' })).toBeInTheDocument();
+  expect(getByRole('row', { name: 'pie' })).toBeInTheDocument();
+  expect(queryByRole('row', { name: 'foo' })).toBeNull();
+  expect(queryByRole('row', { name: 'bar' })).toBeNull();
 });
 
 test('multiple treeviews can be open at once', () => {
-  const { getByText } = render(
+  const { getByRole } = render(
     <TreeView
       aria-label="Test TreeView"
       items={items}
       defaultExpandedKeys={['1', '4']}
     />
   );
-  expect(getByText('pizza')).toBeInTheDocument();
-  expect(getByText('pie')).toBeInTheDocument();
-  expect(getByText('foo')).toBeInTheDocument();
-  expect(getByText('bar')).toBeInTheDocument();
+  expect(getByRole('row', { name: 'pizza' })).toBeInTheDocument();
+  expect(getByRole('row', { name: 'pie' })).toBeInTheDocument();
+  expect(getByRole('row', { name: 'foo' })).toBeInTheDocument();
+  expect(getByRole('row', { name: 'bar' })).toBeInTheDocument();
+});
+
+test('ArrowDown moves focus to next tree item', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      defaultExpandedKeys={['1']}
+    />
+  );
+  const first = getByRole('row', { name: 'TreeView' });
+  first.focus();
+  await userEvent.keyboard('{ArrowDown}');
+  expect(getByRole('row', { name: 'pizza' })).toHaveFocus();
+});
+
+test('ArrowUp moves focus to previous tree item', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      defaultExpandedKeys={['1']}
+    />
+  );
+  getByRole('row', { name: 'TreeView' }).focus();
+  await userEvent.keyboard('{ArrowDown}');
+  await userEvent.keyboard('{ArrowUp}');
+  expect(getByRole('row', { name: 'TreeView' })).toHaveFocus();
+});
+
+test('ArrowRight expands a collapsed node', async () => {
+  const { getByRole, queryByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} />
+  );
+  expect(queryByRole('row', { name: 'pizza' })).toBeNull();
+  getByRole('row', { name: 'TreeView' }).focus();
+  await userEvent.keyboard('{ArrowRight}');
+  expect(getByRole('row', { name: 'pizza' })).toBeInTheDocument();
+});
+
+test('ArrowLeft collapses an expanded node', async () => {
+  const { getByRole, queryByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      defaultExpandedKeys={['1']}
+    />
+  );
+  expect(getByRole('row', { name: 'pizza' })).toBeInTheDocument();
+  getByRole('row', { name: 'TreeView' }).focus();
+  await userEvent.keyboard('{ArrowLeft}');
+  expect(queryByRole('row', { name: 'pizza' })).toBeNull();
 });
 
 test('has no axe violations with default render', async () => {

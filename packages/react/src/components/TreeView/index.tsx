@@ -1,69 +1,83 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
+import classNames from 'classnames';
 import { Tree, type Selection, type Key } from 'react-aria-components';
 import { Cauldron } from '../../types';
+import { TreeViewNode } from './types';
 import TreeViewItem from './TreeViewItem';
 
-export interface TreeViewNode {
-  id: string;
-  textValue: string;
-  children?: TreeViewNode[];
-}
+export type { TreeViewNode } from './types';
 
 type TreeViewProps = Cauldron.LabelProps & {
   items: TreeViewNode[];
   onAction?: (key: string) => void;
   selectionMode?: 'none' | 'single' | 'multiple';
   defaultExpandedKeys?: string[];
+  className?: string;
 };
 
-const TreeView = ({
-  items,
-  onAction,
-  selectionMode = 'none',
-  defaultExpandedKeys,
-  ...labelProps
-}: TreeViewProps) => {
-  // When onAction is provided, react-aria-components doesn't toggle selected state automatically.
-  // See: https://react-aria.adobe.com/Tree#selection-and-actions
-  // We manage selectedKeys ourselves so selection state stays in React (not the DOM).
-  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
+function collectAllKeys(nodes: TreeViewNode[]): Key[] {
+  return nodes.flatMap((node) => [
+    node.id,
+    ...(node.children ? collectAllKeys(node.children) : [])
+  ]);
+}
 
-  const handleAction = (key: Key) => {
-    setSelectedKeys((prev) => {
-      const prevSet = prev === 'all' ? new Set<Key>() : new Set(prev);
-      const next = new Set(prevSet);
-      if (next.has(key)) {
-        next.delete(key);
-      } else {
-        if (selectionMode === 'single') {
-          next.clear();
-        }
-        next.add(key);
-      }
-      return next;
-    });
-    onAction?.(key as string);
-  };
+const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
+  (
+    {
+      items,
+      onAction,
+      selectionMode = 'none',
+      defaultExpandedKeys,
+      className,
+      ...other
+    },
+    ref
+  ) => {
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
 
-  return (
-    <Tree
-      {...labelProps}
-      selectionMode={selectionMode}
-      defaultExpandedKeys={defaultExpandedKeys}
-      {...(onAction
-        ? {
-            onAction: handleAction,
-            selectedKeys,
-            onSelectionChange: setSelectedKeys
+    const handleAction = (key: Key) => {
+      setSelectedKeys((prev) => {
+        const prevSet =
+          prev === 'all' ? new Set<Key>(collectAllKeys(items)) : new Set(prev);
+        const next = new Set(prevSet);
+        if (next.has(key)) {
+          next.delete(key);
+        } else {
+          if (selectionMode === 'single') {
+            next.clear();
           }
-        : {})}
-    >
-      {items.map((item) => (
-        <TreeViewItem key={item.id} {...item} />
-      ))}
-    </Tree>
-  );
-};
+          next.add(key);
+        }
+        return next;
+      });
+      onAction?.(key as string);
+    };
+
+    const actionProps = onAction
+      ? {
+          onAction: handleAction,
+          selectedKeys,
+          onSelectionChange: setSelectedKeys
+        }
+      : {};
+
+    return (
+      <Tree
+        ref={ref}
+        className={classNames('TreeView', className)}
+        selectionMode={selectionMode}
+        defaultExpandedKeys={defaultExpandedKeys}
+        {...actionProps}
+        {...other}
+      >
+        {items.map((item) => (
+          <TreeViewItem key={item.id} {...item} />
+        ))}
+      </Tree>
+    );
+  }
+);
 
 TreeView.displayName = 'TreeView';
 

@@ -19,6 +19,7 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   customIcon?: React.ReactNode;
   checkboxRef?: React.ForwardedRef<HTMLInputElement>;
   indeterminate?: boolean;
+  /** When false, clicks won't update internal checked state — use when a parent controls `checked` externally. */
   onChangeToggle?: boolean;
 }
 
