@@ -5,7 +5,6 @@
   --code-padding: var(--space-smaller);
   --code-border: 1px solid var(--code-border-color);
   --code-display: block;
-  --code-margin: 0 0 var(--space-smallest) 0;
 }
 
 .cauldron--theme-dark {
@@ -26,7 +25,6 @@
 .Code.hljs {
   display: var(--code-display);
   padding: var(--code-padding);
-  margin: var(--code-margin);
   background: var(--code-background-color);
   border: var(--code-border);
   border-radius: 3px;
