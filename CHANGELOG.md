@@ -2,6 +2,96 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.27.0](https://github.com/dequelabs/cauldron/compare/v6.26.0...v6.27.0) (2026-04-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* changed headers to adopt font family
+
+## Summary
+
+This PR makes Cauldron components customizable enough that consumers in constrained viewports (e.g. browser DevTools panels) can adapt sizing, positioning, layout, and theming **without targeting internal class names**. It does this via three complementary mechanisms:
+
+1. **Expanded CSS custom property coverage** — hardcoded values in 17 component stylesheets are replaced with CSS custom properties (with identical defaults), enabling override via variable cascading
+2. **A new `cauldron--density-compact` preset class** — bundles compact-appropriate values in a single opt-in class, similar to `cauldron--theme-dark` for theming
+3. **Dark theme fixes** — resolves gaps in Cauldron's dark theme that consumers were patching externally
+
+
+### Backwards compatibility
+
+- All new CSS custom properties have defaults equal to the previously hardcoded values — zero visual change for existing consumers
+- The `cauldron--density-compact` class is opt-in; only takes effect when explicitly added
+- The ProgressBar `thin` prop is additive (new boolean prop, no changes to existing API)
+
+## Changes by category
+
+### New CSS custom properties per component
+
+| Component | New variables |
+|-----------|--------------|
+| **TopBar** | `--top-bar-position`, `--top-bar-padding-inline-start`, `--top-bar-menu-flex`, `--top-bar-button-max-width`, `--top-bar-button-flex-direction`, `--top-bar-button-font-size`, `--top-bar-item-padding`, `--top-bar-border-bottom` |
+| **Tabs** | `--tab-height`, `--tab-font-size`, `--tab-flex`, `--tabpanel-border`, `--tabs-horizontal-border-bottom`, `--tabs-width` |
+| **Dialog** | `--dialog-content-line-height`, `--dialog-z-index`, `--dialog-header-padding`, `--dialog-header-border`, `--dialog-content-padding`, `--dialog-footer-padding`, `--dialog-footer-border` |
+| **ProgressBar** | `--progress-bar-padding`, `--progress-bar-border-radius`, `--progress-bar-fill-height`, `--progress-bar-fill-border-radius`, `--progress-bar-fill-min-width` |
+| **Accordion** | `--accordion-trigger-padding`, `--accordion-trigger-text-decoration` |
+| **Toast** | `--toast-position`, `--toast-list-margin-left` |
+| **OptionsMenu** | `--options-menu-width`, `--options-menu-item-font-size` |
+| **Panel** | `--panel-border`, `--panel-box-shadow` |
+| **Select** | `--select-width`, `--field-select-max-width`, `--field-select-margin-bottom` |
+| **ExpandCollapse** | `--expandcollapse-trigger-icon-offset` |
+| **Combobox** | `--combobox-arrow-color` |
+| **Code** | `--code-display`, `--code-padding`, `--code-border`, `--code-margin` |
+| **Tag** | `--tag-margin` |
+| **IconButton** | `--icon-button-hover-shadow-primary`, `--icon-button-hover-shadow-secondary`, `--icon-button-hover-shadow-error` |
+| **Headings** (base.css) | `--heading-text-color`, `--heading-font-family` |
+| **Layout** | `--layout-dark-color` (via fallback) |
+| **Button** | `--button-adjacent-spacing`, `.ButtonGroup` class |
+| **Notice** | `--notice-padding` (via fallback) |
+| **Link** | `--link-padding` (via fallback) |
+| **Stepper** | Uses existing `--step-*` variables (no new ones needed) |
+
+### New file: `packages/styles/density.css`
+
+A `cauldron--density-compact` class that sets component variables to compact-appropriate values. Usage:
+
+```html
+<body class="cauldron--theme-dark cauldron--density-compact">
+```
+
+Includes compact Code display (inline, no border), TopBar vertical button layout, and text link padding restoration via `:has()`.
+
+### Dark theme fixes
+
+- **Dialog**: dark border compensation padding, dark Alert colors, checkbox/radio checked icon in Dialogs
+- **Tabs**: `--tabs-horizontal-border-bottom` re-resolved in dark theme to pick up dark border color
+- **TopBar**: dark border-bottom moved to variable
+- **Combobox**: arrow color in dark theme
+- **IconButton**: hover shadows extracted to variables, dark theme rule blocks consolidated
+
+### ProgressBar `thin` variant
+
+New `thin?: boolean` prop with tests.
+
+### ButtonGroup gap layout
+
+### Features
+
+* create a density-compact preset ([#2287](https://github.com/dequelabs/cauldron/issues/2287)) ([c30b80b](https://github.com/dequelabs/cauldron/commit/c30b80bc5bc8f86e2148432738a9eb39fff41165)), closes [#1944](https://github.com/dequelabs/cauldron/issues/1944) [dequelabs/axe-extension#7854](https://github.com/dequelabs/axe-extension/issues/7854)
+
+
+### Bug Fixes
+
+* **RadioGroup:** prevent radio buttons from becoming unselectable after re-render ([#2296](https://github.com/dequelabs/cauldron/issues/2296)) ([aae50b7](https://github.com/dequelabs/cauldron/commit/aae50b7a9acef9c22780bb77796c2aee47230d5c))
+* remove default ul style from Toast component ([#2293](https://github.com/dequelabs/cauldron/issues/2293)) ([47be5d8](https://github.com/dequelabs/cauldron/commit/47be5d8972f86988b75031a2148f29d804310987))
+* remove expand collapse trigger icon styles ([#2306](https://github.com/dequelabs/cauldron/issues/2306)) ([8801805](https://github.com/dequelabs/cauldron/commit/880180514d23f79cb2fcaff329dd5f5341b9700e))
+* remove margin added to code component ([#2312](https://github.com/dequelabs/cauldron/issues/2312)) ([a71356d](https://github.com/dequelabs/cauldron/commit/a71356d9a94997c123ef1dcb090b29b0247f9385))
+* remove progress bar thin styles from density.css ([#2307](https://github.com/dequelabs/cauldron/issues/2307)) ([81f8b9a](https://github.com/dequelabs/cauldron/commit/81f8b9a8b13d1d6afb20d2a732639cf1bac59caf))
+* rename button gap var and remove button group css ([#2313](https://github.com/dequelabs/cauldron/issues/2313)) ([99048cb](https://github.com/dequelabs/cauldron/commit/99048cbddcd14c906d211c97e6ccce253c2b117d)), closes [#1944](https://github.com/dequelabs/cauldron/issues/1944)
+* revert dialog Field styles and z-index from density preset ([#2316](https://github.com/dequelabs/cauldron/issues/2316)) ([bd48a98](https://github.com/dequelabs/cauldron/commit/bd48a98588e25a0bd59cb901e362fd42a91f8efd))
+* revert font-family on heading elements ([#2315](https://github.com/dequelabs/cauldron/issues/2315)) ([290ddae](https://github.com/dequelabs/cauldron/commit/290ddaeb3622149a28c2f939e75c69f9c16f0b97))
+* update tab-panel-border variable naming ([#2292](https://github.com/dequelabs/cauldron/issues/2292)) ([57a1d2f](https://github.com/dequelabs/cauldron/commit/57a1d2f74a8abbd261e7db61191bb9cf00e81d7e))
+
 ## [6.26.0](https://github.com/dequelabs/cauldron/compare/v6.25.3...v6.26.0) (2026-03-19)
 
 

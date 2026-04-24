@@ -1,9 +1,9 @@
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
 import { axe } from 'jest-axe';
-import RadioGroup from './';
+import RadioGroup, { RadioItem } from './';
 
 type SetOptional<T, Keys extends keyof T> = Pick<Partial<T>, Keys> &
   Omit<T, Keys>;
@@ -12,7 +12,7 @@ type RadioGroupProps = SetOptional<
   'aria-label' | 'radios'
 >;
 
-const defaultOptions: RadioGroupProps['radios'] = [
+const defaultOptions: RadioItem[] = [
   { id: '1', label: 'Red', value: 'red' },
   { id: '2', label: 'Blue', value: 'blue' },
   { id: '3', label: 'Green', value: 'green' }
@@ -228,4 +228,170 @@ test('should have no axe violations with radio item and labelDescription', async
   const group = screen.getByRole('radiogroup');
   const results = await axe(group);
   expect(results).toHaveNoViolations();
+});
+
+describe('radio selection regression', () => {
+  test('should select any radio when clicking its label', async () => {
+    const user = userEvent.setup();
+    renderRadioGroup();
+
+    for (const option of defaultOptions) {
+      await user.click(
+        screen.getByRole('radio', { name: option.label as string })
+      );
+      expect(
+        screen.getByRole('radio', { name: option.label as string })
+      ).toBeChecked();
+    }
+  });
+
+  test('should select radio after multiple re-renders', async () => {
+    const user = userEvent.setup();
+
+    function Wrapper() {
+      const [count, setCount] = useState(0);
+      return (
+        <div>
+          <button onClick={() => setCount((c) => c + 1)}>
+            Re-render ({count})
+          </button>
+          <RadioGroup
+            aria-label="radio group"
+            name="radios"
+            radios={defaultOptions}
+          />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    // Force several re-renders
+    const rerenderButton = screen.getByRole('button', {
+      name: /Re-render/
+    });
+    await user.click(rerenderButton);
+    await user.click(rerenderButton);
+    await user.click(rerenderButton);
+
+    // All radios should still be selectable
+    for (const option of defaultOptions) {
+      await user.click(
+        screen.getByRole('radio', { name: option.label as string })
+      );
+      expect(
+        screen.getByRole('radio', { name: option.label as string })
+      ).toBeChecked();
+    }
+  });
+
+  test('should select radio after radios are added', async () => {
+    const user = userEvent.setup();
+    const extendedOptions: RadioItem[] = [
+      ...defaultOptions,
+      { id: '4', label: 'Yellow', value: 'yellow' }
+    ];
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(extendedOptions)}>
+            Add option
+          </button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    expect(screen.getAllByRole('radio')).toHaveLength(3);
+
+    // Add a 4th radio
+    await user.click(screen.getByRole('button', { name: /Add option/ }));
+    expect(screen.getAllByRole('radio')).toHaveLength(4);
+
+    // The newly added radio should be selectable
+    await user.click(screen.getByRole('radio', { name: 'Yellow' }));
+    expect(screen.getByRole('radio', { name: 'Yellow' })).toBeChecked();
+
+    // Previously existing radios should still work
+    await user.click(screen.getByRole('radio', { name: 'Red' }));
+    expect(screen.getByRole('radio', { name: 'Red' })).toBeChecked();
+  });
+
+  test('should select the correct radio after radios are reordered', async () => {
+    const user = userEvent.setup();
+    const reversedOptions: RadioItem[] = [...defaultOptions].reverse();
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(reversedOptions)}>
+            Reverse order
+          </button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    // Before reorder: Red, Blue, Green
+    const inputsBefore = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputsBefore[0]).toHaveAttribute('value', 'red');
+    expect(inputsBefore[2]).toHaveAttribute('value', 'green');
+
+    // Reorder to: Green, Blue, Red
+    await user.click(screen.getByRole('button', { name: /Reverse order/ }));
+
+    const inputsAfter = screen.getAllByRole('radio') as HTMLInputElement[];
+    expect(inputsAfter[0]).toHaveAttribute('value', 'green');
+    expect(inputsAfter[2]).toHaveAttribute('value', 'red');
+
+    // Each radio should select correctly by its label after reordering
+    for (const option of reversedOptions) {
+      await user.click(
+        screen.getByRole('radio', { name: option.label as string })
+      );
+      expect(
+        screen.getByRole('radio', { name: option.label as string })
+      ).toBeChecked();
+    }
+  });
+
+  test('should select radio after radios are removed', async () => {
+    const user = userEvent.setup();
+    const fewerOptions = defaultOptions.slice(0, 2);
+
+    function Wrapper() {
+      const [options, setOptions] = useState(defaultOptions);
+      return (
+        <div>
+          <button onClick={() => setOptions(fewerOptions)}>Remove last</button>
+          <RadioGroup aria-label="radio group" name="radios" radios={options} />
+        </div>
+      );
+    }
+
+    render(<Wrapper />);
+
+    expect(screen.getAllByRole('radio')).toHaveLength(3);
+
+    // Remove the last radio
+    await user.click(screen.getByRole('button', { name: /Remove last/ }));
+    expect(screen.getAllByRole('radio')).toHaveLength(2);
+
+    // Remaining radios should still be selectable
+    for (const option of fewerOptions) {
+      await user.click(
+        screen.getByRole('radio', { name: option.label as string })
+      );
+      expect(
+        screen.getByRole('radio', { name: option.label as string })
+      ).toBeChecked();
+    }
+  });
 });
