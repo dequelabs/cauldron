@@ -1,7 +1,6 @@
 import type { ColumnAlignment } from './Table';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import classNames from 'classnames';
-import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 import { useTable } from './TableContext';
 import useTableGridStyles from './useTableGridStyles';
@@ -10,11 +9,15 @@ import useSharedRef from '../../utils/useSharedRef';
 // these match aria-sort's values
 type SortDirection = 'ascending' | 'descending' | 'none';
 
-interface TableHeaderProps
-  extends Omit<React.ThHTMLAttributes<HTMLTableHeaderCellElement>, 'align'> {
+interface TableHeaderProps extends Omit<
+  React.ThHTMLAttributes<HTMLTableHeaderCellElement>,
+  'align'
+> {
   sortDirection?: SortDirection;
   onSort?: () => void;
+  /** @deprecated No longer used. Sort state is communicated via aria-sort. */
   sortAscendingAnnouncement?: string;
+  /** @deprecated No longer used. Sort state is communicated via aria-sort. */
   sortDescendingAnnouncement?: string;
   align?: ColumnAlignment;
   /* Only applies a visual style to the header, does not change semantics */
@@ -28,8 +31,8 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       sortDirection,
       onSort,
       className,
-      sortAscendingAnnouncement = 'sorted ascending',
-      sortDescendingAnnouncement = 'sorted descending',
+      sortAscendingAnnouncement: _sortAscendingAnnouncement,
+      sortDescendingAnnouncement: _sortDescendingAnnouncement,
       align,
       variant = 'header',
       style,
@@ -46,15 +49,19 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       layout
     });
 
-    // When the sort direction changes, we want to announce the change in a live region
-    // because changes to the sort value is not widely supported yet
-    // see: https://a11ysupport.io/tech/aria/aria-sort_attribute
-    const announcement =
-      sortDirection === 'ascending'
-        ? sortAscendingAnnouncement
-        : sortDirection === 'descending'
-          ? sortDescendingAnnouncement
-          : '';
+    useEffect(() => {
+      if (process.env.NODE_ENV === 'production') return;
+      if (
+        _sortAscendingAnnouncement !== undefined ||
+        _sortDescendingAnnouncement !== undefined
+      ) {
+        console.warn(
+          '[TableHeader] The following props are deprecated and no longer used: sortAscendingAnnouncement, sortDescendingAnnouncement. ' +
+            'Sort state is communicated via aria-sort. ' +
+            'See https://cauldron.dequelabs.com/components/Table for more information.'
+        );
+      }
+    }, [_sortAscendingAnnouncement, _sortDescendingAnnouncement]);
 
     return (
       <th
@@ -89,11 +96,6 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
                 <Icon type="table-sort-descending" />
               )}
             </span>
-            <Offscreen>
-              <span role="status" aria-live="polite">
-                {announcement}
-              </span>
-            </Offscreen>
           </button>
         ) : (
           children
