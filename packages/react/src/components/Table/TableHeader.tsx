@@ -1,5 +1,5 @@
 import type { ColumnAlignment } from './Table';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import { useTable } from './TableContext';
@@ -49,11 +49,19 @@ const TableHeader = forwardRef<HTMLTableHeaderCellElement, TableHeaderProps>(
       layout
     });
 
-    // Sort state is communicated via the aria-sort attribute on <th>.
-    // A live region (Offscreen) was previously used as a workaround for
-    // limited aria-sort support, but it was removed because screen readers
-    // (e.g. NVDA) included the announcement text in the column header's
-    // accessible name, causing it to be read for every cell in the column.
+    useEffect(() => {
+      if (process.env.NODE_ENV === 'production') return;
+      if (
+        _sortAscendingAnnouncement !== undefined ||
+        _sortDescendingAnnouncement !== undefined
+      ) {
+        console.warn(
+          '[TableHeader] The following props are deprecated and no longer used: sortAscendingAnnouncement, sortDescendingAnnouncement. ' +
+            'Sort state is communicated via aria-sort. ' +
+            'See https://cauldron.dequelabs.com/components/Table for more information.'
+        );
+      }
+    }, [_sortAscendingAnnouncement, _sortDescendingAnnouncement]);
 
     return (
       <th
