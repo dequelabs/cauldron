@@ -115,15 +115,18 @@ const AnchoredOverlay = forwardRef(
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
 
-    if (
-      disableAutoPlacement &&
-      typeof initialPlacement === 'string' &&
-      initialPlacement.startsWith('auto')
-    ) {
-      console.warn(
-        'AnchoredOverlay: `disableAutoPlacement` has no effect when `placement` starts with "auto". The overlay will use the default "top" placement without auto-placement middleware.'
-      );
-    }
+    useEffect(() => {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        disableAutoPlacement &&
+        typeof initialPlacement === 'string' &&
+        initialPlacement.startsWith('auto')
+      ) {
+        console.warn(
+          'AnchoredOverlay: `disableAutoPlacement` has no effect when `placement` starts with "auto". The overlay will use the default "top" placement without auto-placement middleware.'
+        );
+      }
+    }, [disableAutoPlacement, initialPlacement]);
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       open,
