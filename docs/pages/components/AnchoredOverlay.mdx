@@ -137,7 +137,7 @@ function AnchoredOverlayWithOffsetExample() {
 
 When `disableAutoPlacement` is set, the overlay will not automatically reposition itself when space is limited. The overlay will remain at its configured `placement`, though it may still shift along its axis to stay within clipping boundaries.
 
-<Note>
+<Note variant="warning">
   Use `disableAutoPlacement` with caution. When automatic placement is disabled, the overlay may render partially or fully outside the visible viewport if there is not enough space at the configured placement. Consumers of this prop should ensure that the configured placement has sufficient space for the overlay content, or implement their own overflow handling to avoid content being hidden from sighted users while still being announced by screen readers.
 </Note>
 
