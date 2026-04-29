@@ -59,7 +59,7 @@ test('should have screenshot for TreeView single selection', async ({
       defaultExpandedKeys={['1']}
     />
   );
-  await component.getByRole('treeitem', { name: 'Apple' }).click();
+  await component.getByRole('row', { name: 'Apple' }).click();
   await expect(component).toHaveScreenshot('tree-view-single-selection');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--tree-view-single-selection');
