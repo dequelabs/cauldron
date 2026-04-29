@@ -22,7 +22,7 @@
     "test:a11y": "ts-node e2e/accessibility.ts",
     "postinstall": "if [ -z \"$CI\" ]; then yarn --cwd=packages/styles && yarn --cwd=packages/react; fi",
     "screenshots": "docker run --rm --ipc=host -v $(pwd)/playwright-ct.config.ts:/app/playwright-ct.config.ts -v $(pwd)/packages:/app/packages -v $(pwd)/e2e:/app/e2e cauldron-playwright-e2e-screenshots",
-    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(npm list --depth=0 playwright | grep playwright | cut -f2 -d '@')",
+    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(node -p \"require('playwright/package.json').version\")",
     "release": "./scripts/release.sh",
     "precommit": "lint-staged",
     "prepare": "husky"
@@ -84,7 +84,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "log-symbols": "4",
-    "mdast-util-from-markdown": "^2.0.2",
+    "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-mdx": "^3.0.0",
     "micromark-extension-mdxjs": "^3.0.0",
     "mini-css-extract-plugin": "^2.10.0",
@@ -99,7 +99,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.13.1",
+    "react-router-dom": "^7.14.2",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
@@ -110,8 +110,8 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.17",
     "ts-node": "^10.9.2",
-    "typescript": "~5.9.3",
-    "webpack": "^5.104.1",
+    "typescript": "~6.0.2",
+    "webpack": "^5.106.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
   }
