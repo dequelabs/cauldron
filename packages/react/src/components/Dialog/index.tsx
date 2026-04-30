@@ -2,6 +2,7 @@ import React, {
   useRef,
   useEffect,
   useCallback,
+  useContext,
   useMemo,
   forwardRef
 } from 'react';
@@ -37,6 +38,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
       };
   closeButtonText?: string;
   portal?: React.RefObject<HTMLElement> | HTMLElement;
+  scrollable?: boolean;
 }
 
 const isEscape = (event: KeyboardEvent) =>
@@ -53,6 +55,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       heading,
       show = false,
       portal,
+      scrollable = false,
       onClose = () => null,
       ...other
     },
@@ -147,7 +150,8 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         headingLevel,
         onClose: handleClose,
         forceAction,
-        closeButtonText
+        closeButtonText,
+        scrollable
       }),
       [
         headingId,
@@ -155,7 +159,8 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         headingLevel,
         handleClose,
         forceAction,
-        closeButtonText
+        closeButtonText,
+        scrollable
       ]
     );
 
@@ -224,19 +229,22 @@ const DialogContent = ({
   className,
   align,
   ...other
-}: DialogContentProps) => (
-  <div
-    className={classNames('Dialog__content', className, {
-      'text--align-left': align === 'left',
-      'text--align-center': align === 'center',
-      'text--align-right': align === 'right'
-    })}
-    tabIndex={-1}
-    {...other}
-  >
-    {children}
-  </div>
-);
+}: DialogContentProps) => {
+  const context = useContext(DialogContext);
+  return (
+    <div
+      className={classNames('Dialog__content', className, {
+        'text--align-left': align === 'left',
+        'text--align-center': align === 'center',
+        'text--align-right': align === 'right'
+      })}
+      tabIndex={context?.scrollable ? -1 : undefined}
+      {...other}
+    >
+      {children}
+    </div>
+  );
+};
 DialogContent.displayName = 'DialogContent';
 
 export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement> &

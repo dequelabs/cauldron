@@ -15,7 +15,6 @@
   --dialog-vertical-offset: 4rem;
   --dialog-bottom-spacing: 1.875rem;
   --dialog-content-line-height: inherit;
-  --dialog-z-index: 25;
 }
 
 .cauldron--theme-dark {
@@ -33,7 +32,7 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
-  z-index: var(--dialog-z-index);
+  z-index: var(--z-index-dialog-scrim);
   background-color: var(--scrim-background-color);
 }
 

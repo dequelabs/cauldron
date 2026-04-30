@@ -28,6 +28,7 @@ const Modal = ({
       'Modal--scrollable': scrollable
     })}
     {...other}
+    scrollable={scrollable}
     forceAction={false}
   >
     {children}
