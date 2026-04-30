@@ -61,6 +61,7 @@ export {
 export { default as RadioGroup } from './components/RadioGroup';
 export { default as RadioCardGroup } from './components/RadioCardGroup';
 export { default as Checkbox } from './components/Checkbox';
+export { default as Switch } from './components/Switch';
 export {
   default as Tooltip,
   TooltipHead,

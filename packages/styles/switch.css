@@ -1,0 +1,176 @@
+:root {
+  --switch-track-color: var(--gray-90);
+  --switch-track-color-checked: var(--accent-primary);
+  --switch-track-color-disabled: var(--gray-40);
+  --switch-track-color-checked-disabled: var(
+    --accent-primary-disabled,
+    #78a6d8
+  );
+  --switch-handle-color: var(--gray-90);
+  --switch-handle-color-disabled: var(--gray-40);
+  --switch-focus-color: var(--focus-light);
+  --switch-label-color: var(--gray-90);
+}
+
+.cauldron--theme-dark {
+  --switch-track-color: var(--white);
+  --switch-track-color-checked: var(--accent-light);
+  --switch-track-color-checked-disabled: var(--stroke-dark);
+  --switch-handle-color: var(--white);
+  --switch-handle-color-disabled: var(--stroke-dark);
+  --switch-focus-color: var(--focus-dark);
+  --switch-label-color: var(--white);
+}
+
+.Switch__wrap {
+  margin-bottom: var(--space-smallest);
+}
+
+.Switch__wrap:last-of-type {
+  margin-bottom: 0;
+}
+
+.Switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-smallest);
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.Switch input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  appearance: none;
+}
+
+/* Track */
+
+.Switch__track {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 44px;
+  height: 24px;
+  border: 2px solid var(--switch-track-color);
+  border-radius: 999px;
+  padding: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Hover ring */
+
+.Switch__track::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.Switch:not(.Switch--disabled):hover .Switch__track::before {
+  border-color: var(--switch-track-color);
+}
+
+.Switch--checked:not(.Switch--disabled):hover .Switch__track::before {
+  border-color: var(--switch-track-color-checked);
+}
+
+/* Focus ring */
+
+.Switch__track::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.Switch__track--focused::after {
+  border-color: var(--switch-focus-color);
+}
+
+/* Checked state */
+
+.Switch--checked .Switch__track {
+  border-color: var(--switch-track-color-checked);
+  justify-content: flex-end;
+}
+
+/* Handle */
+
+.Switch__handle {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: var(--switch-handle-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.Switch--checked .Switch__handle {
+  background-color: transparent;
+}
+
+/* Icon */
+
+.Switch__icon {
+  --icon-size: 16px;
+  display: none;
+  color: var(--switch-track-color-checked);
+}
+
+.Switch__icon svg {
+  pointer-events: none;
+  height: 16px;
+  width: 16px;
+}
+
+.Switch--checked .Switch__icon {
+  display: block;
+}
+
+/* Disabled */
+
+.Switch--disabled .Switch__track {
+  border-color: var(--switch-track-color-disabled);
+  cursor: default;
+}
+
+.Switch--disabled .Switch__handle {
+  background-color: var(--switch-handle-color-disabled);
+}
+
+.Switch--checked.Switch--disabled .Switch__track {
+  border-color: var(--switch-track-color-checked-disabled);
+}
+
+.Switch--checked.Switch--disabled .Switch__handle {
+  background-color: transparent;
+}
+
+.Switch--checked.Switch--disabled .Switch__icon {
+  color: var(--switch-track-color-checked-disabled);
+  opacity: 0.5;
+}
+
+/* Label */
+
+.Switch__label {
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--switch-label-color);
+  cursor: default;
+  margin-bottom: 0;
+}

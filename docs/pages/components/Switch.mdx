@@ -1,0 +1,162 @@
+---
+title: Switch
+description: A toggle control that allows users to switch between two states (on/off).
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Switch/Switch.tsx
+---
+
+import { useState } from 'react'
+import { Switch, FieldWrap } from '@deque/cauldron-react'
+
+```js
+import { Switch } from '@deque/cauldron-react'
+```
+
+<Note>
+  Input components _should_ be wrapped in a [FieldWrap](./FieldWrap). The
+  `Switch` component has been designed specifically to meet color contrast
+  requirements against a `FieldWrap` background.
+</Note>
+
+## Examples
+
+### Default (Unchecked)
+
+```jsx example
+function SwitchExample() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <FieldWrap>
+      <Switch
+        id="switch-default"
+        label="Notifications"
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
+    </FieldWrap>
+  );
+}
+```
+
+### Checked
+
+```jsx example
+<FieldWrap>
+  <Switch
+    id="switch-checked"
+    label="Notifications"
+    checked
+    onChange={() => {}}
+  />
+</FieldWrap>
+```
+
+### Disabled
+
+```jsx example
+<FieldWrap>
+  <Switch
+    id="switch-disabled"
+    label="Notifications (disabled)"
+    disabled
+  />
+</FieldWrap>
+```
+
+### Disabled Checked
+
+```jsx example
+<FieldWrap>
+  <Switch
+    id="switch-disabled-checked"
+    label="Notifications (disabled, on)"
+    checked
+    disabled
+    onChange={() => {}}
+  />
+</FieldWrap>
+```
+
+### With Description
+
+```jsx example
+<FieldWrap>
+  <Switch
+    id="switch-description"
+    label="Email Notifications"
+    labelDescription="Receive updates about your account activity."
+  />
+</FieldWrap>
+```
+
+### With Error
+
+```jsx example
+<FieldWrap>
+  <Switch
+    id="switch-error"
+    label="Terms of Service"
+    error="You must accept the terms to continue."
+  />
+</FieldWrap>
+```
+
+## Props
+
+<ComponentProps
+  className={true}
+  refType="HTMLInputElement"
+  props={[
+    {
+      name: 'id',
+      type: 'string',
+      required: true,
+      description: 'The id to be set on the input element.'
+    },
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Label displayed next to the switch.'
+    },
+    {
+      name: 'checked',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Controlled checked state of the switch.'
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'Disables the switch.'
+    },
+    {
+      name: 'labelDescription',
+      type: 'React.ReactNode',
+      description: 'Additional description text below the switch label.'
+    },
+    {
+      name: 'error',
+      type: 'React.ReactNode',
+      description: 'Error message displayed below the switch.'
+    },
+    {
+      name: 'switchRef',
+      type: 'React.RefObject<HTMLInputElement>',
+      description: 'Named ref forwarded to the input element. Using ref is preferred.'
+    }
+  ]}
+/>
+
+## Accessibility
+
+- Renders as `<input type="checkbox" role="switch">` for correct assistive technology semantics.
+- The label is associated via `htmlFor` / `id`.
+- Focus ring meets WCAG 2.1 visibility requirements using the design system focus color.
+- Use the `error` or `labelDescription` props to associate additional context via `aria-describedby`.
+- Use for immediate settings changes that do not require form submission. For settings that require a save action, prefer [Checkbox](./Checkbox).
+
+## Related Components
+
+- [Checkbox](./Checkbox)
+- [FieldWrap](./FieldWrap)
