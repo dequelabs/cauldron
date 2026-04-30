@@ -22,18 +22,6 @@ export interface IconButtonProps
   label: React.ReactNode;
   tooltipProps?: Omit<TooltipProps, 'children' | 'target'>;
   disabled?: boolean;
-  /**
-   * @deprecated use `tooltipProps.placement` instead
-   */
-  tooltipPlacement?: TooltipProps['placement'];
-  /**
-   * @deprecated use `tooltipProps.variant` instead
-   */
-  tooltipVariant?: TooltipProps['variant'];
-  /**
-   * @deprecated use `tooltipProps.portal` instead
-   */
-  tooltipPortal?: TooltipProps['portal'];
   variant?: 'primary' | 'secondary' | 'tertiary' | 'error';
   large?: boolean;
 }
@@ -50,9 +38,6 @@ const IconButton = forwardRef(
       as: Component = 'button',
       icon,
       label,
-      tooltipPlacement,
-      tooltipVariant,
-      tooltipPortal,
       tooltipProps: tooltipPropsProp = {},
       className,
       variant = 'secondary',
@@ -81,21 +66,8 @@ const IconButton = forwardRef(
       }
     }
 
-    if (process.env.NODE_ENV !== 'production') {
-      if (!!tooltipPlacement || !!tooltipVariant || !!tooltipPortal) {
-        React.useEffect(() => {
-          console.warn(
-            '[IconButton] The following props are deprecated: tooltipPlacement, tooltipVariant, tooltipPortal. ' +
-              'See https://cauldron.dequelabs.com/components/IconButton for recommended replacement.'
-          );
-        }, []);
-      }
-    }
-
     const tooltipProps: Omit<TooltipProps, 'children' | 'target'> = {
-      placement: tooltipPlacement || 'auto',
-      variant: tooltipVariant,
-      portal: tooltipPortal,
+      placement: 'auto',
       association: 'aria-labelledby',
       hideElementOnHidden: true,
       ...tooltipPropsProp

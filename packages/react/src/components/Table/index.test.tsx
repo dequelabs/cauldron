@@ -190,7 +190,7 @@ test('should render with border variant', () => {
   expect(screen.getByRole('table')).toHaveClass('Table', 'Table--border');
 });
 
-test('should render sort button and icons with sortDirection and onSort in Table', () => {
+test('should render sort button and sort-triangle icon with sortDirection "none" and onSort', () => {
   render(
     <Table>
       <TableHead>
@@ -204,8 +204,7 @@ test('should render sort button and icons with sortDirection and onSort in Table
   );
 
   expect(screen.getByRole('button')).toBeInTheDocument();
-  expect(screen.getByRole('status').closest('.Icon--sort-triangle'));
-  expect(screen.getByRole('status')).toHaveTextContent('');
+  expect(screen.getByRole('columnheader')).toHaveAttribute('aria-sort', 'none');
 });
 
 test('should render className "TableHeader--sorting" when actively sorting', () => {
@@ -231,16 +230,12 @@ test('should render className "TableHeader--sorting" when actively sorting', () 
   );
 });
 
-test('should render triangle up Icon and ascending message when sortDirection is ascending', () => {
+test('should render triangle up Icon and set aria-sort when sortDirection is ascending', () => {
   render(
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeader
-            sortDirection={'ascending'}
-            sortAscendingAnnouncement={'up and away'}
-            onSort={() => null}
-          >
+          <TableHeader sortDirection={'ascending'} onSort={() => null}>
             Sortable Header
           </TableHeader>
         </TableRow>
@@ -248,20 +243,18 @@ test('should render triangle up Icon and ascending message when sortDirection is
     </Table>
   );
 
-  expect(screen.getByRole('status')).toHaveTextContent('up and away');
-  expect(screen.getByRole('status').closest('.Icon--table-sort-ascending'));
+  expect(screen.getByRole('columnheader')).toHaveAttribute(
+    'aria-sort',
+    'ascending'
+  );
 });
 
-test('should render triangle down Icon and descending message when sortDirection is descending', () => {
+test('should render triangle down Icon and set aria-sort when sortDirection is descending', () => {
   render(
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeader
-            sortDirection={'descending'}
-            sortDescendingAnnouncement={'down below'}
-            onSort={() => null}
-          >
+          <TableHeader sortDirection={'descending'} onSort={() => null}>
             Sortable Header
           </TableHeader>
         </TableRow>
@@ -269,8 +262,10 @@ test('should render triangle down Icon and descending message when sortDirection
     </Table>
   );
 
-  expect(screen.getByRole('status')).toHaveTextContent('down below');
-  expect(screen.getByRole('status').closest('.Icon--table-sort-descending'));
+  expect(screen.getByRole('columnheader')).toHaveAttribute(
+    'aria-sort',
+    'descending'
+  );
 });
 
 test('should call onSort when sort button is clicked', async () => {
