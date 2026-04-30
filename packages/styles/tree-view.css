@@ -1,0 +1,69 @@
+:root {
+  --tree-view-padding: 1rem;
+  --tree-view-focus-ring-color: var(--focus-light);
+  --tree-view-highlight-background: var(--accent-light);
+}
+
+.cauldron--theme-dark {
+  --tree-view-focus-ring-color: var(--focus-dark);
+  --tree-view-highlight-background: var(--accent-dark);
+}
+
+.TreeView {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.TreeView[data-focus-visible] {
+  outline: 2px solid var(--tree-view-focus-ring-color);
+  outline-offset: -1px;
+}
+
+.TreeView .TreeView__item {
+  display: flex;
+  align-items: center;
+  gap: 0.571rem;
+  min-height: 28px;
+  padding: 0.286rem 0.286rem 0.286rem 0.571rem;
+  outline: none;
+  position: relative;
+  transform: translateZ(0);
+}
+
+.TreeView .TreeView__item .TreeView__chevron {
+  all: unset;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 100%;
+  padding-left: calc((var(--tree-item-level) - 1) * var(--tree-view-padding));
+}
+
+.TreeView .TreeView__item .TreeView__chevron svg {
+  transform: rotate(0deg);
+  transition: transform 200ms;
+}
+
+.TreeView .TreeView__item[data-has-child-items] .TreeView__chevron {
+  visibility: visible;
+}
+
+.TreeView .TreeView__item[data-expanded] .TreeView__chevron svg {
+  transform: rotate(90deg);
+}
+
+.TreeView .TreeView__item[data-focus-visible] {
+  outline: 2px solid var(--tree-view-focus-ring-color);
+  outline-offset: -2px;
+}
+
+.TreeView .TreeView__item[aria-selected='true'] {
+  background: var(--tree-view-highlight-background);
+}
