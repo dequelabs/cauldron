@@ -1978,29 +1978,26 @@ test('should update aria-invalid when error prop is dynamically removed', () => 
   expect(screen.getByRole('combobox')).not.toBeInvalid();
 });
 
-test('should set aria-describedby on listbox pointing to error id when error is provided', () => {
+test('should set accessible description on listbox to error message when error is provided', () => {
   render(
-    <Combobox label="label" error="This field is required" id="combo">
+    <Combobox label="label" error="This field is required">
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
       <ComboboxOption>Cantaloupe</ComboboxOption>
     </Combobox>
   );
 
-  const listbox = screen.getByRole('listbox');
-  expect(listbox).toHaveAttribute(
-    'aria-describedby',
-    expect.stringContaining('combo-error')
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'This field is required'
   );
 });
 
-test('should set aria-describedby on listbox pointing to both description and error ids', () => {
+test('should set accessible description on listbox to both description and error when provided', () => {
   render(
     <Combobox
       label="label"
       description="This is a helpful description"
       error="This field is required"
-      id="combo"
     >
       <ComboboxOption>Apple</ComboboxOption>
       <ComboboxOption>Banana</ComboboxOption>
@@ -2008,13 +2005,12 @@ test('should set aria-describedby on listbox pointing to both description and er
     </Combobox>
   );
 
-  const listbox = screen.getByRole('listbox');
-  const ariaDescribedby = listbox.getAttribute('aria-describedby');
-  expect(ariaDescribedby).toContain('combo-description');
-  expect(ariaDescribedby).toContain('combo-error');
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'This is a helpful description This field is required'
+  );
 });
 
-test('should not set aria-describedby on listbox when no error or description is provided', () => {
+test('should not set accessible description on listbox when no error or description is provided', () => {
   render(
     <Combobox label="label">
       <ComboboxOption>Apple</ComboboxOption>
@@ -2023,49 +2019,54 @@ test('should not set aria-describedby on listbox when no error or description is
     </Combobox>
   );
 
-  const listbox = screen.getByRole('listbox');
-  expect(listbox).not.toHaveAttribute('aria-describedby');
+  expect(screen.getByRole('listbox')).not.toHaveAccessibleDescription();
 });
 
-test('should set aria-describedby on listbox including external aria-describedby', () => {
+test('should include external aria-describedby in listbox accessible description', () => {
   render(
-    <Combobox
-      label="label"
-      error="This field is required"
-      aria-describedby="external-id"
-      id="combo"
-    >
-      <ComboboxOption>Apple</ComboboxOption>
-      <ComboboxOption>Banana</ComboboxOption>
-      <ComboboxOption>Cantaloupe</ComboboxOption>
-    </Combobox>
+    <>
+      <span id="external-id">Some external description</span>
+      <Combobox
+        label="label"
+        error="This field is required"
+        aria-describedby="external-id"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cantaloupe</ComboboxOption>
+      </Combobox>
+    </>
   );
 
-  const listbox = screen.getByRole('listbox');
-  const ariaDescribedby = listbox.getAttribute('aria-describedby');
-  expect(ariaDescribedby).toContain('external-id');
-  expect(ariaDescribedby).toContain('combo-error');
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'Some external description This field is required'
+  );
 });
 
-test('should have matching aria-describedby on both combobox input and listbox', () => {
+test('should have matching accessible description on both combobox input and listbox', () => {
   render(
-    <Combobox
-      label="label"
-      description="This is a helpful description"
-      error="This field is required"
-      aria-describedby="external-id"
-      id="combo"
-    >
-      <ComboboxOption>Apple</ComboboxOption>
-      <ComboboxOption>Banana</ComboboxOption>
-      <ComboboxOption>Cantaloupe</ComboboxOption>
-    </Combobox>
+    <>
+      <span id="external-id">Some external description</span>
+      <Combobox
+        label="label"
+        description="This is a helpful description"
+        error="This field is required"
+        aria-describedby="external-id"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cantaloupe</ComboboxOption>
+      </Combobox>
+    </>
   );
 
-  const combobox = screen.getByRole('combobox');
-  const listbox = screen.getByRole('listbox');
-  expect(combobox.getAttribute('aria-describedby')).toBe(
-    listbox.getAttribute('aria-describedby')
+  const expectedDescription =
+    'Some external description This is a helpful description This field is required';
+  expect(screen.getByRole('combobox')).toHaveAccessibleDescription(
+    expectedDescription
+  );
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    expectedDescription
   );
 });
 
