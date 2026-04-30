@@ -34,6 +34,11 @@
   );
 }
 
+.Toast.Toast--non-dismissible .Toast__message-content {
+  max-height: none;
+  overflow-y: visible;
+}
+
 .Toast.Toast--success {
   background-color: var(--success);
 }

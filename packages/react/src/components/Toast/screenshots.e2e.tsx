@@ -119,7 +119,7 @@ test('should have screenshot for Toast with long content on a small viewport', a
    * scrollable while the icon and dismiss button remain visible.
    * The toast is fixed-position so we use page.getByTestId() to locate it.
    */
-  await page.setViewportSize({ width: 375, height: 200 });
+  await page.setViewportSize({ width: 320, height: 200 });
 
   await mount(
     <Toast type="info" show focus={false} style={{ opacity: 1 }}>
@@ -147,19 +147,10 @@ test('should have screenshot for Toast in TopBar--thin context with long content
   mount,
   page
 }) => {
-  /*
-   * Tests that the thin TopBar variant correctly caps the toast height using
-   * --top-bar-height-thin instead of --top-bar-height.
-   * The CSS variable is set inline on the wrapper to guarantee it is defined
-   * regardless of whether variables.css has fully loaded in the test harness.
-   */
-  await page.setViewportSize({ width: 375, height: 200 });
+  await page.setViewportSize({ width: 320, height: 200 });
 
   await mount(
-    <div
-      className="TopBar--thin"
-      style={{ '--top-bar-height-thin': '43px' } as React.CSSProperties}
-    >
+    <div className="TopBar--thin">
       <Toast type="info" show focus={false} style={{ opacity: 1 }}>
         {Array.from({ length: 20 }, (_, i) => (
           <p key={i}>
