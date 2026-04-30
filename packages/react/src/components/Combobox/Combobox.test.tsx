@@ -1909,3 +1909,178 @@ test('should have no axe violations with description and error when expanded', a
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
 });
+
+test('should set aria-invalid on combobox input when error is provided', () => {
+  render(
+    <Combobox label="label" error="This field is required">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).toBeInvalid();
+});
+
+test('should not set aria-invalid on combobox input when no error is provided', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).not.toBeInvalid();
+});
+
+test('should update aria-invalid when error prop is dynamically added', () => {
+  const { rerender } = render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).not.toBeInvalid();
+
+  rerender(
+    <Combobox label="label" error="This field is required">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).toBeInvalid();
+});
+
+test('should update aria-invalid when error prop is dynamically removed', () => {
+  const { rerender } = render(
+    <Combobox label="label" error="This field is required">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).toBeInvalid();
+
+  rerender(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('combobox')).not.toBeInvalid();
+});
+
+test('should set accessible description on listbox to error message when error is provided', () => {
+  render(
+    <Combobox label="label" error="This field is required">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'This field is required'
+  );
+});
+
+test('should set accessible description on listbox to both description and error when provided', () => {
+  render(
+    <Combobox
+      label="label"
+      description="This is a helpful description"
+      error="This field is required"
+    >
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'This is a helpful description This field is required'
+  );
+});
+
+test('should not set accessible description on listbox when no error or description is provided', () => {
+  render(
+    <Combobox label="label">
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(screen.getByRole('listbox')).not.toHaveAccessibleDescription();
+});
+
+test('should include external aria-describedby in listbox accessible description', () => {
+  render(
+    <>
+      <span id="external-id">Some external description</span>
+      <Combobox
+        label="label"
+        error="This field is required"
+        aria-describedby="external-id"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cantaloupe</ComboboxOption>
+      </Combobox>
+    </>
+  );
+
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    'Some external description This field is required'
+  );
+});
+
+test('should have matching accessible description on both combobox input and listbox', () => {
+  render(
+    <>
+      <span id="external-id">Some external description</span>
+      <Combobox
+        label="label"
+        description="This is a helpful description"
+        error="This field is required"
+        aria-describedby="external-id"
+      >
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cantaloupe</ComboboxOption>
+      </Combobox>
+    </>
+  );
+
+  const expectedDescription =
+    'Some external description This is a helpful description This field is required';
+  expect(screen.getByRole('combobox')).toHaveAccessibleDescription(
+    expectedDescription
+  );
+  expect(screen.getByRole('listbox')).toHaveAccessibleDescription(
+    expectedDescription
+  );
+});
+
+test('should have no axe violations with error', async () => {
+  const comboboxRef = createRef<HTMLDivElement>();
+  render(
+    <Combobox label="label" error="This field is required" ref={comboboxRef}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+
+  expect(comboboxRef.current).toBeTruthy();
+  const results = await axe(comboboxRef.current!);
+  expect(results).toHaveNoViolations();
+});
