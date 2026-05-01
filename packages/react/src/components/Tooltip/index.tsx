@@ -85,11 +85,18 @@ export default function Tooltip({
         fireCustomEvent(false, targetElement);
       }, TIP_HIDE_DELAY);
     }
-
-    return () => {
-      clearTimeout(hideTimeoutRef.current as unknown as number);
-    };
   }, [target]);
+
+  // Cancel any pending hide timeout when the Tooltip unmounts so it
+  // does not fire setShowTooltip on an unmounted component.
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+        hideTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof showProp === 'boolean') {
