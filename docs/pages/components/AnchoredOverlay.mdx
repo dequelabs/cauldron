@@ -133,6 +133,51 @@ function AnchoredOverlayWithOffsetExample() {
 }
 ```
 
+### Disable Auto Placement
+
+When `disableAutoPlacement` is set, the overlay will not automatically reposition itself when space is limited. The overlay will remain at its configured `placement`, though it may still shift along its axis to stay within clipping boundaries.
+
+<Note variant="warning">
+  Use `disableAutoPlacement` with caution. When automatic placement is disabled, the overlay may render partially or fully outside the visible viewport if there is not enough space at the configured placement. Consumers of this prop should ensure that the configured placement has sufficient space for the overlay content, or implement their own overflow handling to avoid content being hidden from sighted users while still being announced by screen readers.
+</Note>
+
+```jsx example
+function AnchoredOverlayDisableAutoPlacementExample() {
+  const [open, setOpen] = useState(false)
+  const targetRef = useRef()
+  const toggleOpen = () => setOpen(!open)
+  const handleClose = () => setOpen(false)
+
+  return (
+    <>
+      <Button
+        ref={targetRef}
+        onFocus={toggleOpen}
+        onBlur={handleClose}
+        aria-describedby="anchored-overlay-force-below"
+      >
+        Anchor Element
+      </Button>
+      <AnchoredOverlay
+        id="anchored-overlay-force-below"
+        target={targetRef}
+        open={open}
+        placement="bottom-start"
+        disableAutoPlacement
+        onOpenChange={openState => setOpen(openState)}
+        style={{
+          padding: 'var(--space-small)',
+          backgroundColor: 'var(--panel-background-color)',
+          display: open ? 'block' : 'none'
+        }}
+      >
+        This overlay always appears below the anchor element.
+      </AnchoredOverlay>
+    </>
+  )
+}
+```
+
 ## Props
 
 <ComponentProps
@@ -177,6 +222,12 @@ function AnchoredOverlayWithOffsetExample() {
       name: 'offset',
       type: 'number',
       description: 'An optional offset number to position the anchor element from its anchored target.'
+    },
+    {
+      name: 'disableAutoPlacement',
+      type: 'boolean',
+      defaultValue: 'false',
+      description: 'When set, disables all automatic placement changes including flip, auto placement, and top-overflow prevention. The overlay will remain at its configured placement but may render outside the visible viewport.'
     },
     {
       name: 'focusTrap',

@@ -14,11 +14,13 @@ jest.mock('@floating-ui/react-dom', () => {
   const actual = jest.requireActual('@floating-ui/react-dom');
   return {
     ...actual,
-    detectOverflow: jest.fn()
+    detectOverflow: jest.fn(),
+    flip: jest.fn(actual.flip),
+    autoPlacement: jest.fn(actual.autoPlacement)
   };
 });
 
-import { detectOverflow } from '@floating-ui/react-dom';
+import { detectOverflow, flip, autoPlacement } from '@floating-ui/react-dom';
 
 test('should render children', () => {
   const targetRef = { current: document.createElement('button') };
@@ -98,6 +100,162 @@ test('should support auto-end placement', () => {
     </AnchoredOverlay>
   );
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
+});
+
+test('should not use flip or autoPlacement middleware when disableAutoPlacement is set', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(flip).not.toHaveBeenCalled();
+  expect(autoPlacement).not.toHaveBeenCalled();
+});
+
+test('should not use autoPlacement middleware when disableAutoPlacement is set with auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="auto"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(autoPlacement).not.toHaveBeenCalled();
+  expect(flip).not.toHaveBeenCalled();
+});
+
+test('should not use autoPlacement middleware when disableAutoPlacement is set with default placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+  (autoPlacement as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  expect(autoPlacement).not.toHaveBeenCalled();
+  expect(flip).not.toHaveBeenCalled();
+});
+
+test('should not prevent top overflow when disableAutoPlacement is set', () => {
+  const targetRef = { current: document.createElement('button') };
+  const onPlacementChange = jest.fn();
+
+  (detectOverflow as jest.Mock).mockResolvedValue({
+    top: 10,
+    right: 0,
+    bottom: 0,
+    left: 0
+  });
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="top"
+      disableAutoPlacement
+      open
+      onPlacementChange={onPlacementChange}
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(screen.getByTestId('overlay')).toBeInTheDocument();
+  // Placement should remain "top" and not be reset to "bottom" by preventTopOverflowMiddleware
+  expect(onPlacementChange).toHaveBeenCalledWith('top');
+});
+
+test('should use flip middleware when disableAutoPlacement is not set', () => {
+  const targetRef = { current: document.createElement('button') };
+  (flip as jest.Mock).mockClear();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(flip).toHaveBeenCalled();
+});
+
+test('should warn when disableAutoPlacement is used with auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="auto"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(consoleSpy).toHaveBeenCalledWith(
+    expect.stringContaining('`disableAutoPlacement` has no effect')
+  );
+
+  consoleSpy.mockRestore();
+});
+
+test('should not warn when disableAutoPlacement is used with non-auto placement', () => {
+  const targetRef = { current: document.createElement('button') };
+  const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <AnchoredOverlay
+      target={targetRef}
+      placement="bottom-start"
+      disableAutoPlacement
+      open
+      data-testid="overlay"
+    >
+      Content
+    </AnchoredOverlay>
+  );
+
+  expect(consoleSpy).not.toHaveBeenCalled();
+
+  consoleSpy.mockRestore();
 });
 
 test('should call onOpenChange when escape is pressed', async () => {

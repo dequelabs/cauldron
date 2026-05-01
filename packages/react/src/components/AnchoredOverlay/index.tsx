@@ -35,6 +35,8 @@ type AnchoredOverlayProps<
   onShiftChange?: (coords: Coords) => void;
   /** An optional offset number to position the anchor element from its anchored target. */
   offset?: number;
+  /** When set, disables all automatic placement changes including flip, auto placement, and top-overflow prevention. The overlay will remain at its configured placement but may render outside the visible viewport. */
+  disableAutoPlacement?: boolean;
   /** When set, traps focus within the AnchoredOverlay. */
   focusTrap?: boolean;
   /** When `focusTrap` is true, optional arguments to configure the focus trap. */
@@ -99,6 +101,7 @@ const AnchoredOverlay = forwardRef(
       style,
       open = false,
       offset,
+      disableAutoPlacement,
       focusTrap,
       focusTrapOptions,
       onOpenChange,
@@ -112,6 +115,19 @@ const AnchoredOverlay = forwardRef(
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
 
+    useEffect(() => {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        disableAutoPlacement &&
+        typeof initialPlacement === 'string' &&
+        initialPlacement.startsWith('auto')
+      ) {
+        console.warn(
+          'AnchoredOverlay: `disableAutoPlacement` has no effect when `placement` starts with "auto". The overlay will use the default "top" placement without auto-placement middleware.'
+        );
+      }
+    }, [disableAutoPlacement, initialPlacement]);
+
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       open,
       // default to initial placement on top when placement is auto
@@ -119,18 +135,20 @@ const AnchoredOverlay = forwardRef(
       placement: initialPlacement.startsWith('auto') ? 'top' : initialPlacement,
       middleware: [
         offsetMiddleware(offset ?? 0),
-        initialPlacement.startsWith('auto')
-          ? autoPlacementMiddleware({
-              alignment: getAutoAlignment(initialPlacement as 'auto')
-            })
-          : flipMiddleware({
-              fallbackAxisSideDirection: 'start'
-            }),
+        disableAutoPlacement
+          ? null
+          : initialPlacement.startsWith('auto')
+            ? autoPlacementMiddleware({
+                alignment: getAutoAlignment(initialPlacement as 'auto')
+              })
+            : flipMiddleware({
+                fallbackAxisSideDirection: 'start'
+              }),
         shiftMiddleware({
           crossAxis: false,
           boundary: 'clippingAncestors'
         }),
-        preventTopOverflowMiddleware
+        !disableAutoPlacement && preventTopOverflowMiddleware
       ].filter(Boolean),
       elements: {
         reference: resolveElement(target)
