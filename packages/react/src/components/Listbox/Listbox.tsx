@@ -10,16 +10,15 @@ import type { ListboxOption } from './ListboxContext';
 import type { ListboxValue } from './ListboxOption';
 import type {
   PolymorphicProps,
-  PolymorphicComponent
+  PolymorphicComponentProps
 } from '../../utils/polymorphicComponent';
 import useSharedRef from '../../utils/useSharedRef';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
-interface BaseListboxProps
-  extends PolymorphicProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
-  > {
+interface BaseListboxProps extends PolymorphicProps<
+  Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
+> {
   navigation?: 'cycle' | 'bound';
   focusStrategy?: 'lastSelected' | 'first' | 'last';
   focusDisabledOptions?: boolean;
@@ -49,6 +48,32 @@ interface MultiSelectListboxProps extends BaseListboxProps {
     value: ListboxValue[];
   }) => void;
 }
+
+// Overloaded component type to properly discriminate between
+// single-select and multi-select variants. The multi-select
+// overload is listed first since it is more specific (requires
+// multiselect: true). The final union overload preserves
+// compatibility with React.ComponentPropsWithRef extraction
+// (which resolves from the last overload).
+type ListboxComponent = Omit<
+  React.ForwardRefExoticComponent<
+    SingleSelectListboxProps | MultiSelectListboxProps
+  >,
+  keyof CallableFunction
+> & {
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<MultiSelectListboxProps, T>
+  ): React.ReactElement | null;
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<SingleSelectListboxProps, T>
+  ): React.ReactElement | null;
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<
+      SingleSelectListboxProps | MultiSelectListboxProps,
+      T
+    >
+  ): React.ReactElement | null;
+};
 
 // id for listbox options should always be defined since it should
 // be provide via the author, or auto-generated via the component
@@ -345,7 +370,7 @@ const Listbox = forwardRef<
       </Component>
     );
   }
-) as PolymorphicComponent<SingleSelectListboxProps | MultiSelectListboxProps>;
+) as ListboxComponent;
 
 Listbox.displayName = 'Listbox';
 

@@ -14,11 +14,13 @@ import {
   type onActionEvent,
   ActionListProvider
 } from './ActionListContext';
-import { useActionListContext } from './ActionListContext';
 import useMnemonics from '../../utils/useMnemonics';
 import setRef from '../../utils/setRef';
 
-interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
+interface ActionListProps extends Omit<
+  React.HTMLAttributes<HTMLUListElement>,
+  'defaultValue' | 'onSelect'
+> {
   children: React.ReactNode;
 
   /** Limits the amount of selections that can be made within an action list */
@@ -30,7 +32,6 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const actionListContext = useActionListContext();
     const activeElement = useRef<
       HTMLLIElement | HTMLAnchorElement
     >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
@@ -65,10 +66,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     }) as MutableRefObject<HTMLUListElement>;
 
     return (
-      // Note: we should be able to use listbox without passing a prop
-      // value for "multiselect"
-      // see: https://github.com/dequelabs/cauldron/issues/1890
-      // @ts-expect-error this should be allowed
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
@@ -80,12 +77,10 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
-        // aria-multiselectable is valid for listbox roles, but not list or menu roles
-        // and we need to prevent aria-multiselectable from being set on Listbox when
-        // we're not in a listbox context
-        aria-multiselectable={
-          actionListContext.role === 'listbox' ? undefined : null
-        }
+        // Listbox internally sets aria-multiselectable from its multiselect prop.
+        // ActionList manages roles independently, so override to undefined to
+        // prevent the attribute from being rendered.
+        aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
