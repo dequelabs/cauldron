@@ -222,26 +222,30 @@ test('should cancel the pending hide timeout when unmounted during the hide dela
   const hideEvent = spy();
   button.addEventListener('cauldron:tooltip:hide', hideEvent);
 
-  const ShowTooltip = ({ show = true }: { show?: boolean }) =>
-    show ? (
-      <Tooltip target={button} defaultShow={false}>
-        Hello Tooltip
-      </Tooltip>
-    ) : null;
+  try {
+    const ShowTooltip = ({ show = true }: { show?: boolean }) =>
+      show ? (
+        <Tooltip target={button} defaultShow={false}>
+          Hello Tooltip
+        </Tooltip>
+      ) : null;
 
-  const { rerender } = render(<ShowTooltip />);
-  await fireEvent.focusIn(button);
-  expect(await screen.findByRole('tooltip')).toBeInTheDocument();
+    const { rerender } = render(<ShowTooltip />);
+    await fireEvent.focusIn(button);
+    expect(await screen.findByRole('tooltip')).toBeInTheDocument();
 
-  // Schedule the 100ms hide timeout, then unmount before it fires.
-  await fireEvent.focusOut(button);
-  rerender(<ShowTooltip show={false} />);
+    // Schedule the 100ms hide timeout, then unmount before it fires.
+    await fireEvent.focusOut(button);
+    rerender(<ShowTooltip show={false} />);
 
-  // Wait past TIP_HIDE_DELAY so a leaked timeout would have fired.
-  await new Promise((resolve) => setTimeout(resolve, 150));
+    // Wait past TIP_HIDE_DELAY so a leaked timeout would have fired.
+    await new Promise((resolve) => setTimeout(resolve, 150));
 
-  expect(hideEvent.called).toBe(false);
-  button.remove();
+    expect(hideEvent.called).toBe(false);
+  } finally {
+    button.removeEventListener('cauldron:tooltip:hide', hideEvent);
+    button.remove();
+  }
 });
 
 test('should return no axe violations with default variant', async () => {
