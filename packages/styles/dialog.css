@@ -32,6 +32,7 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
+  z-index: var(--z-index-dialog-scrim);
   background-color: var(--scrim-background-color);
 }
 
@@ -169,13 +170,13 @@
 }
 
 @media (min-width: 20rem) {
-  .Dialog__inner {
+  .Modal--scrollable .Dialog__inner {
     max-height: calc(
       100vh - var(--dialog-vertical-offset) - var(--dialog-bottom-spacing)
     );
   }
 
-  .Dialog__content {
+  .Modal--scrollable .Dialog__content {
     overflow-y: auto;
   }
 }
