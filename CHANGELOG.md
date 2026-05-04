@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/dequelabs/cauldron/compare/v6.27.0...v7.0.0) (2026-05-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **IconButton:** The deprecated `tooltipPlacement`, `tooltipVariant`,
+and `tooltipPortal` props have been removed from `IconButton`. Use
+`tooltipProps.placement`, `tooltipProps.variant`, and
+`tooltipProps.portal` instead.
+
+### Features
+
+* add size option for Tag Buttons ([#2305](https://github.com/dequelabs/cauldron/issues/2305)) ([f060340](https://github.com/dequelabs/cauldron/commit/f0603405afb9eb1adec89020ebba7f1d6c9a8445))
+* **IconButton:** remove deprecated tooltip props ([#2339](https://github.com/dequelabs/cauldron/issues/2339)) ([b5fbb03](https://github.com/dequelabs/cauldron/commit/b5fbb03dd80c48632ca5af9ccde8f739be1ab0bc))
+
+
+### Bug Fixes
+
+* **Combobox:** add aria attributes on error ([#2327](https://github.com/dequelabs/cauldron/issues/2327)) ([0f50070](https://github.com/dequelabs/cauldron/commit/0f500709c86c40a2e05296627dca0a1db5846a48))
+* make scrollable modal a separate prop rather than the default ([#2314](https://github.com/dequelabs/cauldron/issues/2314)) ([a988b4a](https://github.com/dequelabs/cauldron/commit/a988b4aeded69b256b4397e5b0f0ae8109b7c97a))
+* remove unneeded autoprefixer comments ([#2344](https://github.com/dequelabs/cauldron/issues/2344)) ([06fc145](https://github.com/dequelabs/cauldron/commit/06fc1451520c02b831d3c3de1b9e580a20230d93))
+* **select:** update default inital styling of required selects ([#2311](https://github.com/dequelabs/cauldron/issues/2311)) ([d9a1f64](https://github.com/dequelabs/cauldron/commit/d9a1f647d09d71380bb56bedaef3aff5b29ed13d))
+* **skip-link:** align caret icon inside skip link panel ([#2326](https://github.com/dequelabs/cauldron/issues/2326)) ([67deaa1](https://github.com/dequelabs/cauldron/commit/67deaa1178879a76d01f6434867c7d5cc951d339))
+* **styles:** reduce dialog vertical offset ([#2351](https://github.com/dequelabs/cauldron/issues/2351)) ([47b1146](https://github.com/dequelabs/cauldron/commit/47b11469cba24779f7434feaff1c79f496bf14a6))
+* **styles:** replace max-width with width on Link with Icon ([#2303](https://github.com/dequelabs/cauldron/issues/2303)) ([2c4ec65](https://github.com/dequelabs/cauldron/commit/2c4ec65c074faa9687fb8e2737745947b44be133))
+* **TableHeader:** remove sort announcement props as no needed and update aria-sort handling ([#2291](https://github.com/dequelabs/cauldron/issues/2291)) ([d1a317e](https://github.com/dequelabs/cauldron/commit/d1a317ed62fdd8b40faa18181af66a28a36d5299)), closes [#2319](https://github.com/dequelabs/cauldron/issues/2319)
+* **Toast:** add overflow for long text ([#2346](https://github.com/dequelabs/cauldron/issues/2346)) ([7fd2f1e](https://github.com/dequelabs/cauldron/commit/7fd2f1e5074a4993cd139d8530d229754331d4c1))
+
 ## [6.27.0](https://github.com/dequelabs/cauldron/compare/v6.26.0...v6.27.0) (2026-04-09)
 
 
