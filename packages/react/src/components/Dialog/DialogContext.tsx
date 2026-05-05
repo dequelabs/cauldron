@@ -7,6 +7,7 @@ interface DialogContextValue {
   onClose: () => void;
   forceAction: boolean;
   closeButtonText: string;
+  scrollable: boolean;
 }
 
 const DialogContext = createContext<DialogContextValue | null>(null);

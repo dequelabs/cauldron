@@ -45,9 +45,9 @@ test('should have screenshot for Checkbox[checked]', async ({
     await component.locator('.Checkbox__wrap:nth-child(4) .Checkbox__overlay')
   );
 
-  await expect(component).toHaveScreenshot('checkbox[checked]');
+  await expect(component).toHaveScreenshot('checkbox-checked');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--checkbox[checked]');
+  await expect(component).toHaveScreenshot('dark--checkbox-checked');
 });
 
 test('should have screenshot for Checkbox[indeterminate]', async ({
@@ -75,7 +75,7 @@ test('should have screenshot for Checkbox[indeterminate]', async ({
     await component.locator('.Checkbox__wrap:nth-child(4) .Checkbox__overlay')
   );
 
-  await expect(component).toHaveScreenshot('checkbox[indeterminate]');
+  await expect(component).toHaveScreenshot('checkbox-indeterminate');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--checkbox[indeterminate]');
+  await expect(component).toHaveScreenshot('dark--checkbox-indeterminate');
 });

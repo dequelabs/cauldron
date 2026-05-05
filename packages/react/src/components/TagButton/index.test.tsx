@@ -49,6 +49,12 @@ test('should render an icon in the button', () => {
   );
 });
 
+test('should support size prop', () => {
+  renderDefaultTagButton({ size: 'small' });
+
+  expect(screen.getByRole('button')).toHaveClass('Tag--small');
+});
+
 test('returns no axe violations', async () => {
   const { container } = renderDefaultTagButton();
 

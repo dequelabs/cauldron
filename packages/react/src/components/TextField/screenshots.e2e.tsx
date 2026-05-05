@@ -51,9 +51,9 @@ test('should have screenshot for TextField[error]', async ({ mount, page }) => {
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('textfield[error]');
+  await expect(component).toHaveScreenshot('textfield-error');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--textfield[error]');
+  await expect(component).toHaveScreenshot('dark--textfield-error');
 });
 
 test('should have screenshot for TextField[with-description]', async ({
@@ -89,9 +89,9 @@ test('should have screenshot for TextField[with-description]', async ({
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('textfield[with-description]');
+  await expect(component).toHaveScreenshot('textfield-with-description');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--textfield[with-description]');
+  await expect(component).toHaveScreenshot('dark--textfield-with-description');
 });
 
 test('should have screenshot for TextField[error-with-description]', async ({
@@ -131,9 +131,9 @@ test('should have screenshot for TextField[error-with-description]', async ({
   await component.getByLabel('Hover').hover();
   await component.getByLabel('Focus').focus();
 
-  await expect(component).toHaveScreenshot('textfield[error-with-description]');
+  await expect(component).toHaveScreenshot('textfield-error-with-description');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot(
-    'dark--textfield[error-with-description]'
+    'dark--textfield-error-with-description'
   );
 });

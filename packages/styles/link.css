@@ -28,7 +28,7 @@
 }
 
 .Link:where(:has(.Icon)) {
-  max-width: max-content;
+  width: fit-content;
   display: inline-flex;
   align-items: center;
   gap: var(--space-half);

@@ -11,8 +11,10 @@ import copyTextToClipboard from '../../utils/copyTextToClipboard';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
-export interface CopyButtonProps
-  extends Omit<ButtonProps, 'onCopy' | 'onClick'> {
+export interface CopyButtonProps extends Omit<
+  ButtonProps,
+  'onCopy' | 'onClick' | 'size'
+> {
   value: string;
   variant?: Extract<
     ButtonProps['variant'],

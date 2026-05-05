@@ -51,11 +51,10 @@ interface ComboboxOption {
   removeOptionLabel?: string;
 }
 
-interface BaseComboboxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'value' | 'defaultValue'
-  > {
+interface BaseComboboxProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'value' | 'defaultValue'
+> {
   label: ContentNode;
   options?: ComboboxOption[];
   requiredText?: React.ReactNode;
@@ -614,6 +613,20 @@ const Combobox = forwardRef<
       <NoMatchingOptions />
     );
 
+    const errorId = `${id}-error`;
+    const descriptionId = `${id}-description`;
+    let describedby = ariaDescribedby;
+    if (description) {
+      describedby = addIdRef(describedby, descriptionId);
+    }
+    if (error) {
+      describedby = addIdRef(describedby, errorId);
+    }
+    const inputProps = {
+      ...props,
+      'aria-describedby': describedby
+    };
+
     const comboboxListbox = (
       // eslint-disable-next-line
       // @ts-expect-error
@@ -625,6 +638,7 @@ const Combobox = forwardRef<
         })}
         role={noMatchingOptions ? 'presentation' : 'listbox'}
         aria-labelledby={noMatchingOptions ? undefined : `${id}-label`}
+        aria-describedby={describedby}
         id={`${id}-listbox`}
         value={multiselect ? selectedValues : selectedValues[0]}
         onMouseDown={handleComboboxOptionMouseDown}
@@ -641,20 +655,6 @@ const Combobox = forwardRef<
         {noMatchingOptions}
       </Listbox>
     );
-
-    const errorId = `${id}-error`;
-    const descriptionId = `${id}-description`;
-    let describedby = ariaDescribedby;
-    if (description) {
-      describedby = addIdRef(describedby, descriptionId);
-    }
-    if (error) {
-      describedby = addIdRef(describedby, errorId);
-    }
-    const inputProps = {
-      ...props,
-      'aria-describedby': describedby
-    };
 
     return (
       <div
@@ -735,6 +735,7 @@ const Combobox = forwardRef<
             value={inputValue}
             role="combobox"
             disabled={disabled}
+            aria-invalid={error ? true : undefined}
             aria-autocomplete={!isAutoComplete ? 'none' : 'list'}
             aria-controls={`${id}-listbox`}
             aria-expanded={open}

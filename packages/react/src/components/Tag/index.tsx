@@ -1,10 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 
+export type TagSize = 'default' | 'small';
+
 interface TagProps {
   children: React.ReactNode;
   className?: string;
-  size?: 'default' | 'small';
+  size?: TagSize;
 }
 
 export const TagLabel = ({ children, className, ...other }: TagProps) => (

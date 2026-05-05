@@ -34,7 +34,8 @@
   border-radius: 2px;
 }
 
-.SkipLink span {
+.SkipLink .SkipLink__item--first,
+.SkipLink .SkipLink__item--second {
   display: block;
 }
 

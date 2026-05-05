@@ -63,7 +63,7 @@ test('should have screenshot for RadioGroup[checked]', async ({
     await component.locator('.Radio__wrap:nth-child(4) .Radio__overlay')
   );
 
-  await expect(component).toHaveScreenshot('radiogroup[checked]');
+  await expect(component).toHaveScreenshot('radiogroup-checked');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--radiogroup[checked]');
+  await expect(component).toHaveScreenshot('dark--radiogroup-checked');
 });

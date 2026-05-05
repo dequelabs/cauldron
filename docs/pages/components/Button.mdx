@@ -82,6 +82,7 @@ When you need a semantic button with the visual appearance of a link.
 
 ```jsx example
 <Button variant="tag">Tag</Button>
+<Button variant="tag" size="small">Small Tag</Button>
 ```
 
 ### Badge
@@ -132,6 +133,12 @@ When you need a semantic button with the visual appearance of a link.
       name: 'buttonRef',
       type: 'function',
       description: 'Ref function for the button element'
+    },
+    {
+      name: 'size',
+      type: ['default', 'small'],
+      defaultValue: 'default',
+      description: 'Size of the button. Only applicable when variant is "tag".'
     }
   ]}
 />

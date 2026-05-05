@@ -77,9 +77,9 @@ test('should have screenshot for Combobox[multiselect]', async ({
   await component.getByRole('combobox', { name: 'Focus' }).focus();
   await component.getByRole('combobox', { name: 'Hover' }).hover();
 
-  await expect(component).toHaveScreenshot('combobox[multiselect]');
+  await expect(component).toHaveScreenshot('combobox-multiselect');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--combobox[multiselect]');
+  await expect(component).toHaveScreenshot('dark--combobox-multiselect');
 });
 
 test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
@@ -110,9 +110,9 @@ test('should have screenshot for Combobox[error]', async ({ mount, page }) => {
   await component.getByRole('combobox', { name: 'Focus' }).focus();
   await component.getByRole('combobox', { name: 'Hover' }).hover();
 
-  await expect(component).toHaveScreenshot('combobox[error]');
+  await expect(component).toHaveScreenshot('combobox-error');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--combobox[error]');
+  await expect(component).toHaveScreenshot('dark--combobox-error');
 });
 
 test('should have screenshot for Combobox[description]', async ({
@@ -150,9 +150,9 @@ test('should have screenshot for Combobox[description]', async ({
   await component.getByRole('combobox', { name: 'Focus' }).focus();
   await component.getByRole('combobox', { name: 'Hover' }).hover();
 
-  await expect(component).toHaveScreenshot('combobox[description]');
+  await expect(component).toHaveScreenshot('combobox-description');
   await setTheme(page, 'dark');
-  await expect(component).toHaveScreenshot('dark--combobox[description]');
+  await expect(component).toHaveScreenshot('dark--combobox-description');
 });
 
 test('should have screenshot for Combobox[error and description]', async ({
@@ -199,9 +199,9 @@ test('should have screenshot for Combobox[error and description]', async ({
   await component.getByRole('combobox', { name: 'Focus' }).focus();
   await component.getByRole('combobox', { name: 'Hover' }).hover();
 
-  await expect(component).toHaveScreenshot('combobox[error and description]');
+  await expect(component).toHaveScreenshot('combobox-error-and-description');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot(
-    'dark--combobox[error and description]'
+    'dark--combobox-error-and-description'
   );
 });
