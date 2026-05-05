@@ -234,14 +234,19 @@ test('should cancel the pending hide timeout when unmounted during the hide dela
     await fireEvent.focusIn(button);
     expect(await screen.findByRole('tooltip')).toBeInTheDocument();
 
-    // Schedule the 100ms hide timeout, then unmount before it fires.
-    await fireEvent.focusOut(button);
-    rerender(<ShowTooltip show={false} />);
+    jest.useFakeTimers();
+    try {
+      // Schedule the 100ms hide timeout, then unmount before it fires.
+      await fireEvent.focusOut(button);
+      rerender(<ShowTooltip show={false} />);
 
-    // Wait past TIP_HIDE_DELAY so a leaked timeout would have fired.
-    await new Promise((resolve) => setTimeout(resolve, 150));
+      // Advance past TIP_HIDE_DELAY so a leaked timeout would have fired.
+      jest.advanceTimersByTime(150);
 
-    expect(hideEvent.called).toBe(false);
+      expect(hideEvent.called).toBe(false);
+    } finally {
+      jest.useRealTimers();
+    }
   } finally {
     button.removeEventListener('cauldron:tooltip:hide', hideEvent);
     button.remove();
