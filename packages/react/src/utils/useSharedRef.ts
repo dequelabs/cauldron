@@ -19,6 +19,7 @@ export default function useSharedRef<T>(ref: Ref<T>): MutableRefObject<T> {
   const internalRef = useRef<T>();
   useEffect(() => {
     setRef(ref, internalRef.current);
+    return () => setRef(ref, null);
   }, [ref]);
   return internalRef as MutableRefObject<T>;
 }
