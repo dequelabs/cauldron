@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import userEvent from '@testing-library/user-event';
 import axe from '../../axe';
 import TreeView, { TreeViewNode } from '../../../src/components/TreeView';
@@ -241,4 +242,50 @@ test('supports aria-labelledby', () => {
     </>
   );
   expect(getByRole('treegrid', { name: 'My Tree' })).toBeInTheDocument();
+});
+
+const ssrItems: TreeViewNode[] = [
+  {
+    id: '1',
+    textValue: 'Documents',
+    children: [
+      { id: '2', textValue: 'readme.md' },
+      { id: '3', textValue: 'notes.txt' }
+    ]
+  },
+  {
+    id: '4',
+    textValue: 'Photos',
+    children: [{ id: '5', textValue: 'image.png' }]
+  }
+];
+
+test('renders without error in SSR (no selection)', () => {
+  const html = renderToString(<TreeView aria-label="Files" items={ssrItems} />);
+  expect(html).toMatchSnapshot();
+});
+
+test('renders without error in SSR (single selection)', () => {
+  const html = renderToString(
+    <TreeView aria-label="Files" items={ssrItems} selectionMode="single" />
+  );
+  expect(html).toMatchSnapshot();
+});
+
+test('renders without error in SSR (multiple selection)', () => {
+  const html = renderToString(
+    <TreeView aria-label="Files" items={ssrItems} selectionMode="multiple" />
+  );
+  expect(html).toMatchSnapshot();
+});
+
+test('renders without error in SSR (expanded keys)', () => {
+  const html = renderToString(
+    <TreeView
+      aria-label="Files"
+      items={ssrItems}
+      defaultExpandedKeys={['1', '4']}
+    />
+  );
+  expect(html).toMatchSnapshot();
 });
