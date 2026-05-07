@@ -12,7 +12,7 @@
   --dialog-footer-border: 1px solid var(--dialog-border-color);
   --dialog-header-height: 2.625rem;
   --dialog-close-button-size: var(--target-size-minimum);
-  --dialog-vertical-offset: 6.25rem;
+  --dialog-vertical-offset: 4rem;
   --dialog-bottom-spacing: 1.875rem;
   --dialog-content-line-height: inherit;
 }
@@ -32,6 +32,7 @@
   overflow-x: auto;
   position: fixed;
   top: 0;
+  z-index: var(--z-index-dialog-scrim);
   background-color: var(--scrim-background-color);
 }
 
@@ -169,13 +170,13 @@
 }
 
 @media (min-width: 20rem) {
-  .Dialog__inner {
+  .Modal--scrollable .Dialog__inner {
     max-height: calc(
       100vh - var(--dialog-vertical-offset) - var(--dialog-bottom-spacing)
     );
   }
 
-  .Dialog__content {
+  .Modal--scrollable .Dialog__content {
     overflow-y: auto;
   }
 }
