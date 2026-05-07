@@ -2,6 +2,9 @@ import type { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^react-dom/server$': '<rootDir>/node_modules/react-dom/server.node.js'
+  },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testMatch: [
     '**/src/components/**/*.test.tsx',

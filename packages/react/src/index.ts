@@ -155,6 +155,7 @@ export {
   ActionListLinkItem
 } from './components/ActionList';
 export { ActionMenu } from './components/ActionMenu';
+export { default as TreeView, type TreeViewNode } from './components/TreeView';
 
 /**
  * Helpers / Utils
