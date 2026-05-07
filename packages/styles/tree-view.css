@@ -12,9 +12,9 @@
 .TreeView {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-quarter);
   overflow: auto;
-  padding: 4px;
+  padding: var(--space-half);
   outline: none;
   box-sizing: border-box;
 }

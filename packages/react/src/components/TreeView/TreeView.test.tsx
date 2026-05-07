@@ -212,6 +212,27 @@ test('has no axe violations with expanded items', async () => {
   expect(await axe(container)).toHaveNoViolations();
 });
 
+test('deselects only the clicked item when multiple items are selected via onAction', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      onAction={onAction}
+    />
+  );
+  const item1 = getByRole('row', { name: 'TreeView' });
+  const item2 = getByRole('row', { name: 'Another One' });
+  await userEvent.click(item1);
+  await userEvent.click(item2);
+  expect(item1).toHaveAttribute('aria-selected', 'true');
+  expect(item2).toHaveAttribute('aria-selected', 'true');
+  await userEvent.click(item1);
+  expect(item1).not.toHaveAttribute('aria-selected', 'true');
+  expect(item2).toHaveAttribute('aria-selected', 'true');
+});
+
 test('supports aria-labelledby', () => {
   const { getByRole } = render(
     <>

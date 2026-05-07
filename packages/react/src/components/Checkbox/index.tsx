@@ -19,8 +19,8 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   customIcon?: React.ReactNode;
   checkboxRef?: React.ForwardedRef<HTMLInputElement>;
   indeterminate?: boolean;
-  /** When false, clicks won't update internal checked state — use when a parent controls `checked` externally. */
-  onChangeToggle?: boolean;
+  /** When true, the component does not manage its own checked state — it renders what you pass via `checked` and reports interactions through `onChange`. Use when state is managed by a parent component. */
+  controlled?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -33,7 +33,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       checkboxRef,
       className,
       onChange,
-      onChangeToggle = true,
+      controlled = false,
       onFocus,
       onBlur,
       'aria-describedby': ariaDescribedby,
@@ -124,7 +124,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               if (isIndeterminate) {
                 setIsIndeterminate(false);
               }
-              if (onChangeToggle) {
+              if (!controlled) {
                 setIsChecked(e.target.checked);
               }
               if (onChange) {

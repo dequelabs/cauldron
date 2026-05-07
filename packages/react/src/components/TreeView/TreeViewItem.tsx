@@ -27,7 +27,7 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
                 id={checkboxId}
                 label={textValue}
                 checked={isSelected}
-                onChangeToggle={false}
+                controlled
                 tabIndex={-1}
               />
             ) : (

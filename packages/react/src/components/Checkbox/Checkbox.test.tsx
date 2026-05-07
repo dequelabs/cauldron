@@ -213,9 +213,9 @@ test('should have no axe violations when checkbox has errors', async () => {
   expect(results).toHaveNoViolations();
 });
 
-test('should not toggle internal checked state when onChangeToggle is false', async () => {
+test('should not toggle internal checked state when controlled is true', async () => {
   const { getByRole } = render(
-    <Checkbox id="test" label="Test" checked={false} onChangeToggle={false} />
+    <Checkbox id="test" label="Test" checked={false} controlled />
   );
   const checkbox = getByRole('checkbox');
   expect(checkbox).not.toBeChecked();
