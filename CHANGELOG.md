@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/dequelabs/cauldron/compare/v7.0.0...v7.1.0) (2026-05-08)
+
+
+### Features
+
+* tree view component ([#2322](https://github.com/dequelabs/cauldron/issues/2322)) ([41da3cc](https://github.com/dequelabs/cauldron/commit/41da3cc388b7c67558e7c5475bcc41b6eefb7738))
+
+
+### Bug Fixes
+
+* **Tooltip:** cancel hide timeout on unmount ([#2350](https://github.com/dequelabs/cauldron/issues/2350)) ([34834ec](https://github.com/dequelabs/cauldron/commit/34834ec55dd7a14e2daae09c5c894cef314fe7ff))
+* useSharedRef stale reference after unmount ([#2361](https://github.com/dequelabs/cauldron/issues/2361)) ([4aff60c](https://github.com/dequelabs/cauldron/commit/4aff60c823eaad379ab1ddc871abded90a221232))
+
 ## [7.0.0](https://github.com/dequelabs/cauldron/compare/v6.27.0...v7.0.0) (2026-05-04)
 
 

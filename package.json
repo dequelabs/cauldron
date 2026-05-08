@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "7.0.0",
+  "version": "7.1.0",
   "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf dist docs/dist",
@@ -41,7 +41,7 @@
     ]
   },
   "devDependencies": {
-    "@axe-core/puppeteer": "^4.11.1",
+    "@axe-core/puppeteer": "^4.11.2",
     "@babel/core": "^7.29.0",
     "@babel/plugin-proposal-export-default-from": "^7.27.1",
     "@babel/preset-env": "^7.29.2",
@@ -112,7 +112,7 @@
     "ts-node": "^10.9.2",
     "typescript": "~6.0.2",
     "webpack": "^5.106.1",
-    "webpack-cli": "^6.0.1",
+    "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.3"
   }
 }
