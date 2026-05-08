@@ -56,3 +56,34 @@ test('it supports undefined parent ref', () => {
     internalRefCallback.firstCall.args[0].current?.tagName.toLowerCase()
   ).toEqual('span');
 });
+
+test('it nulls the external functional ref on unmount', () => {
+  let refEl: HTMLSpanElement | null = null;
+  const internalRefCallback = spy();
+
+  const { unmount } = render(
+    <ComponentWithSharedRef
+      ref={(el) => (refEl = el)}
+      callback={internalRefCallback}
+    />
+  );
+
+  expect(refEl).not.toBeNull();
+  unmount();
+  expect(refEl).toBeNull();
+});
+
+test('it nulls the external mutable ref on unmount', () => {
+  const fakeRef: React.MutableRefObject<HTMLSpanElement | null> = {
+    current: null
+  };
+  const internalRefCallback = spy();
+
+  const { unmount } = render(
+    <ComponentWithSharedRef ref={fakeRef} callback={internalRefCallback} />
+  );
+
+  expect(fakeRef.current).not.toBeNull();
+  unmount();
+  expect(fakeRef.current).toBeNull();
+});

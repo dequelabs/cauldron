@@ -215,6 +215,44 @@ test('should clean up association when tooltip is no longer rendered', async () 
   ).not.toContain('tooltip');
 });
 
+test('should cancel the pending hide timeout when unmounted during the hide delay', async () => {
+  const button = document.createElement('button');
+  button.textContent = 'button';
+  document.body.appendChild(button);
+  const hideEvent = spy();
+  button.addEventListener('cauldron:tooltip:hide', hideEvent);
+
+  try {
+    const ShowTooltip = ({ show = true }: { show?: boolean }) =>
+      show ? (
+        <Tooltip target={button} defaultShow={false}>
+          Hello Tooltip
+        </Tooltip>
+      ) : null;
+
+    const { rerender } = render(<ShowTooltip />);
+    await fireEvent.focusIn(button);
+    expect(await screen.findByRole('tooltip')).toBeInTheDocument();
+
+    jest.useFakeTimers();
+    try {
+      // Schedule the 100ms hide timeout, then unmount before it fires.
+      await fireEvent.focusOut(button);
+      rerender(<ShowTooltip show={false} />);
+
+      // Advance past TIP_HIDE_DELAY so a leaked timeout would have fired.
+      jest.advanceTimersByTime(150);
+
+      expect(hideEvent.called).toBe(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  } finally {
+    button.removeEventListener('cauldron:tooltip:hide', hideEvent);
+    button.remove();
+  }
+});
+
 test('should return no axe violations with default variant', async () => {
   const { container } = renderTooltip();
   waitFor(() => {
