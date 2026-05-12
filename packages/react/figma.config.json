@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": ["src/**/*.{ts,tsx}"],
+    "exclude": ["src/**/*.test.tsx", "src/**/*.e2e.tsx", "node_modules/**"],
+    "importPaths": {
+      "src/index.ts": "@deque/cauldron-react"
+    }
+  }
+}
