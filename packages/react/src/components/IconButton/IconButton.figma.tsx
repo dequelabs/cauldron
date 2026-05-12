@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { IconButton } from '@deque/cauldron-react';
+import { IconButton } from '../../index';
 
 const FIGMA_URL =
   'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=17-4272&m=dev';
