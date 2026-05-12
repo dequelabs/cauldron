@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { IconButton } from '../../index';
+import { IconButton, type IconType } from '../../index';
 
 const FIGMA_URL =
   'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=17-4272&m=dev';
@@ -25,7 +25,7 @@ figma.connect(IconButton, FIGMA_URL, {
   },
   example: ({ iconProps, variant, large, disabled }) => (
     <IconButton
-      icon={iconProps.name}
+      icon={iconProps.name as IconType}
       variant={variant}
       large={large}
       disabled={disabled}
