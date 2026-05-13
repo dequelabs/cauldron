@@ -7,7 +7,7 @@ const FIGMA_URL =
 
 figma.connect(Code, FIGMA_URL, {
   props: {
-    allowCopy: figma.boolean('Show Copy#938:498', {
+    allowCopy: figma.boolean('Show Copy', {
       true: true,
       false: undefined
     }),

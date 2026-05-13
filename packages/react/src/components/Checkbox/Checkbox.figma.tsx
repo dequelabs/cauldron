@@ -11,7 +11,7 @@ figma.connect(Checkbox, FIGMA_URL, {
     indeterminate: figma.enum('Indeterminate', { True: true }),
     disabled: figma.enum('Disabled', { True: true }),
     error: figma.enum('Error', { True: 'Error message' }),
-    labelDescription: figma.boolean('Label Description#131:7', {
+    labelDescription: figma.boolean('Label Description', {
       true: 'Label description',
       false: undefined
     })
