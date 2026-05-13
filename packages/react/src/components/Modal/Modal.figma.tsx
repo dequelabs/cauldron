@@ -13,7 +13,12 @@ figma.connect(Modal, FIGMA_URL, {
     heading: figma.textContent('Heading')
   },
   example: ({ variant, heading }) => (
-    <Modal show heading={heading} variant={variant} onClose={() => {}}>
+    <Modal
+      show
+      heading={heading}
+      variant={variant}
+      onClose={() => undefined}
+    >
       Modal content
     </Modal>
   )
