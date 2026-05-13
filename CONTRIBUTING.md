@@ -265,13 +265,13 @@ Cauldron publishes [Figma Code Connect](https://www.figma.com/code-connect-docs/
 
 Run from `packages/react/`:
 
-| Command                                          | Purpose                               |
-| ------------------------------------------------ | ------------------------------------- |
-| `npx figma connect publish`                      | Push all `.figma.tsx` to Figma        |
-| `npx figma connect publish --dry-run`            | Validate without pushing              |
-| `npx figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
-| `npx figma connect parse path/to/Foo.figma.tsx`  | Debug what the parser sees            |
-| `npx figma connect unpublish --node <figma-url>` | Remove a connection                   |
+| Command                                           | Purpose                               |
+| :------------------------------------------------ | :------------------------------------ |
+| `yarn figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `yarn figma:publish:dry-run`                      | Validate without pushing              |
+| `yarn figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `yarn figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `yarn figma connect unpublish --node <figma-url>` | Remove a connection                   |
 
 ### Writing a `.figma.tsx`
 
