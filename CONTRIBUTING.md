@@ -18,6 +18,7 @@
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
 1. [Documentation](#documentation)
+1. [Figma Code Connect](#figma-code-connect)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
    - [Styles](#styles)
@@ -249,6 +250,40 @@ test('should return no axe violations', async () => {
 ## Documentation
 
 Component documentation guidelines are outlined in [docs/readme.md](./docs/readme.md).
+
+## Figma Code Connect
+
+Cauldron publishes [Figma Code Connect](https://www.figma.com/code-connect-docs/) mappings so designers see real Cauldron snippets in Figma's Dev Mode. Each connected component lives in a `.figma.tsx` file beside its source.
+
+### Setup
+
+1. Create a [Figma personal access token](https://www.figma.com/settings/me/personal-access-tokens) — required scopes are documented in the [Code Connect setup guide](https://www.figma.com/code-connect-docs/quickstart-guide/) (minimum: `Code Connect` write, `File content` read).
+2. Export as `FIGMA_ACCESS_TOKEN` in your shell.
+3. You'll need edit access to the [Cauldron Library file](https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library).
+
+### Commands
+
+Run from `packages/react/`:
+
+| Command                                           | Purpose                               |
+| :------------------------------------------------ | :------------------------------------ |
+| `yarn figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `yarn figma:publish:dry-run`                      | Validate without pushing              |
+| `yarn figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `yarn figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `yarn figma connect unpublish --node <figma-url>` | Remove a connection                   |
+
+### Writing a `.figma.tsx`
+
+Reference implementation: `packages/react/src/components/IconButton/IconButton.figma.tsx`. See the [Figma Code Connect React docs](https://www.figma.com/code-connect-docs/react/) for the full prop-mapping API.
+
+### Troubleshooting
+
+- **`ParserError: Could not find prop mapping`** — `example` only accepts direct prop references; conditional expressions are not evaluated. Use `figma.enum`/`figma.boolean` value maps to express default-omission instead.
+- **Import not resolving** — check `packages/react/figma.config.json` `importPaths`. Imports use `'../../index'` (the package barrel), not relative component paths.
+- **Connection doesn't appear in Figma after publish** — propagation can take ~30s; reload the Dev Mode panel.
+
+CI/CD: publishing is currently manual.
 
 ## Breaking Changes
 
