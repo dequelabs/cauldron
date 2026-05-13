@@ -290,3 +290,31 @@ test('renders children within the "Toast__message-content" div', async () => {
   const elements = container.querySelectorAll('.Toast__message-content');
   expect(elements).toHaveLength(1);
 });
+
+test('forwarded ref is populated with the toast DOM element', async () => {
+  const ref = React.createRef<HTMLDivElement>();
+  render(
+    <Toast ref={ref} type="info" data-testid="toast">
+      {testString}
+    </Toast>
+  );
+
+  await waitFor(() => {
+    expect(ref.current).not.toBeNull();
+    expect(ref.current).toBe(screen.getByTestId('toast'));
+  });
+});
+
+test('deprecated toastRef prop is still populated with the toast DOM element', async () => {
+  const toastRef = React.createRef<HTMLDivElement>();
+  render(
+    <Toast toastRef={toastRef} type="info" data-testid="toast">
+      {testString}
+    </Toast>
+  );
+
+  await waitFor(() => {
+    expect(toastRef.current).not.toBeNull();
+    expect(toastRef.current).toBe(screen.getByTestId('toast'));
+  });
+});
