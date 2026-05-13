@@ -1,0 +1,29 @@
+{
+  "accent": {
+    "secondary": { "$value": "{gray.20}", "$type": "color" },
+    "secondary-active": { "$value": "{gray.30}", "$type": "color" }
+  },
+  "focus": { "$value": "{focus-light}", "$type": "color" },
+  "error": { "$value": "{accent.error}", "$type": "color" },
+  "error-alt": { "$value": "{accent.warning-light}", "$type": "color" },
+  "warning": { "$value": "{accent.caution}", "$type": "color" },
+  "info": { "$value": "{accent.info-light}", "$type": "color" },
+  "success": { "$value": "{accent.success-light}", "$type": "color" },
+  "disabled": { "$value": "{gray.40}", "$type": "color" },
+  "text-color": {
+    "base": { "$value": "{gray.60}", "$type": "color" },
+    "light": { "$value": "{white}", "$type": "color" },
+    "light-disabled": { "$value": "rgba(255, 255, 255, 0.5)", "$type": "color" }
+  },
+  "header-text-color": { "$value": "{gray.80}", "$type": "color" },
+  "header-text-color-dark": { "$value": "{gray.90}", "$type": "color" },
+  "issue": {
+    "critical": { "$value": "{accent.danger-active}", "$type": "color" },
+    "serious": { "$value": "{accent.caution}", "$type": "color" },
+    "minor": { "$value": "{gray.20}", "$type": "color" }
+  },
+  "metric": {
+    "accent-low": { "$value": "{accent.danger-light}", "$type": "color" },
+    "accent-full": { "$value": "{accent.success}", "$type": "color" }
+  }
+}

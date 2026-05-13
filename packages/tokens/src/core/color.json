@@ -1,0 +1,53 @@
+{
+  "white": { "$value": "#ffffff", "$type": "color" },
+  "dark-workspace-color": { "$value": "#53636e", "$type": "color" },
+  "light-workspace-color": { "$value": "#f7f7f7", "$type": "color" },
+  "stroke-light": { "$value": "#b3bfc6", "$type": "color" },
+  "stroke-dark": { "$value": "#5d676f", "$type": "color" },
+  "background-light": { "$value": "#f0f2f5", "$type": "color" },
+  "focus-light": { "$value": "#b51ad1", "$type": "color" },
+  "focus-dark": { "$value": "#f5a4ff", "$type": "color" },
+  "focus-active": { "$value": "rgba(215, 30, 247, 0.25)", "$type": "color" },
+  "focus-glow": { "$value": "rgba(181, 26, 209, 0.75)", "$type": "color" },
+  "gray": {
+    "10": { "$value": "#fdfdfe", "$type": "color" },
+    "20": { "$value": "#f2f2f2", "$type": "color" },
+    "30": { "$value": "#e0e0e0", "$type": "color" },
+    "40": { "$value": "#cccccc", "$type": "color" },
+    "50": { "$value": "#757575", "$type": "color" },
+    "60": { "$value": "#666666", "$type": "color" },
+    "80": { "$value": "#4d4d4d", "$type": "color" },
+    "90": { "$value": "#333333", "$type": "color" }
+  },
+  "accent": {
+    "dark": { "$value": "#02101a", "$type": "color" },
+    "medium": { "$value": "#283640", "$type": "color" },
+    "light": { "$value": "#d4dde0", "$type": "color" },
+    "primary": { "$value": "#3c7aae", "$type": "color" },
+    "primary-active": { "$value": "#316091", "$type": "color" },
+    "primary-disabled": { "$value": "#78a6d8", "$type": "color" },
+    "success": { "$value": "#a5db75", "$type": "color" },
+    "success-high-contrast": { "$value": "#4fa630", "$type": "color" },
+    "success-light": { "$value": "#d1ffa4", "$type": "color" },
+    "success-dark": { "$value": "#57a711", "$type": "color" },
+    "error": { "$value": "#d93251", "$type": "color" },
+    "error-active": { "$value": "#c92e40", "$type": "color" },
+    "error-disabled": { "$value": "#db6379", "$type": "color" },
+    "danger": { "$value": "#fe6d6b", "$type": "color" },
+    "danger-active": { "$value": "#fea7a6", "$type": "color" },
+    "danger-light": { "$value": "#f7846c", "$type": "color" },
+    "warning": { "$value": "#ffdd75", "$type": "color" },
+    "warning-light": { "$value": "#ffa1a1", "$type": "color" },
+    "warning-dark": { "$value": "#b88a00", "$type": "color" },
+    "caution": { "$value": "#ffe69f", "$type": "color" },
+    "info": { "$value": "#6cdaf2", "$type": "color" },
+    "info-light": { "$value": "#83e4fa", "$type": "color" },
+    "info-active": { "$value": "#a7e9f7", "$type": "color" }
+  },
+  "issue": {
+    "moderate": { "$value": "#f0c4f8", "$type": "color" }
+  },
+  "metric": {
+    "accent-mid": { "$value": "#8ba6c5", "$type": "color" }
+  }
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "default",
+    "name": "Default",
+    "selectedTokenSets": {
+      "core/color": "enabled",
+      "semantic/color": "enabled"
+    }
+  }
+]

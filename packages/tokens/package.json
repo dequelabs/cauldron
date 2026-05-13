@@ -1,0 +1,22 @@
+{
+  "name": "@deque/cauldron-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MPL-2.0",
+  "description": "Design tokens for cauldron, authored as JSON and built via Style Dictionary. Skeleton: colors only.",
+  "repository": "https://github.com/dequelabs/cauldron",
+  "main": "dist/variables.css",
+  "style": "dist/variables.css",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.js",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.0",
+    "style-dictionary": "^4.0.0"
+  }
+}
