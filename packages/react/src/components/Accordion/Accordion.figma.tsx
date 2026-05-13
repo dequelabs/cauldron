@@ -7,7 +7,7 @@ const FIGMA_URL =
 
 figma.connect(Accordion, FIGMA_URL, {
   props: {
-    open: figma.enum('Expanded', { True: true })
+    open: figma.boolean('Expanded', { true: true, false: undefined })
   },
   example: ({ open }) => (
     <Accordion open={open}>
