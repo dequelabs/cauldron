@@ -17,7 +17,8 @@ const config: Config = {
     '<rootDir>/src/utils/**/*.{tsx,ts}',
     '<rootDir>/src/contexts/**/*.{tsx,ts}',
     '!<rootDir>/src/utils/polymorphicComponent.test.tsx',
-    '!<rootDir>/**/*.e2e.tsx'
+    '!<rootDir>/**/*.e2e.tsx',
+    '!<rootDir>/**/*.figma.tsx'
   ],
   coverageThreshold: {
     global: {

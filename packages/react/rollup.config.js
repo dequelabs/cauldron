@@ -27,6 +27,7 @@ export default {
       exclude: [
         '**.test.ts',
         '**.test.tsx',
+        '**.figma.tsx',
         './src/setupTests.ts',
         './src/axe.ts'
       ]
