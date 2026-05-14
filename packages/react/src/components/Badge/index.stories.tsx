@@ -21,23 +21,23 @@ type Story = StoryObj<typeof Badge>;
 export const Default: Story = {
   args: {
     size: 'default',
-    children: <BadgeLabel>New</BadgeLabel>
+    children: 'Value'
   }
 };
 
 export const Small: Story = {
   args: {
     size: 'small',
-    children: <BadgeLabel>New</BadgeLabel>
+    children: 'Value'
   }
 };
 
-export const WithMultipleLabels: Story = {
+export const WithLabel: Story = {
   args: {
     children: (
       <>
-        <BadgeLabel>Status</BadgeLabel>
-        <BadgeLabel>Active</BadgeLabel>
+        <BadgeLabel>Label:</BadgeLabel>
+        value
       </>
     )
   }
