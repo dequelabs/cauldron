@@ -6,5 +6,5 @@ const FIGMA_URL =
   'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=912-2081&m=dev';
 
 figma.connect(Pagination, FIGMA_URL, {
-  example: () => <Pagination totalItems={100} currentPage={3} />
+  example: () => <Pagination totalItems={20} />
 });
