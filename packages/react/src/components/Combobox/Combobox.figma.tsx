@@ -3,7 +3,7 @@ import figma from '@figma/code-connect';
 import { Combobox, ComboboxOption } from '../../index';
 
 const FIGMA_URL =
-  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4614&m=dev';
+  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4620&m=dev';
 
 figma.connect(Combobox, FIGMA_URL, {
   props: {

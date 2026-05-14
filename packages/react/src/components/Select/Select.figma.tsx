@@ -3,7 +3,7 @@ import figma from '@figma/code-connect';
 import { Select } from '../../index';
 
 const FIGMA_URL =
-  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4259&m=dev';
+  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4265&m=dev';
 
 figma.connect(Select, FIGMA_URL, {
   props: {

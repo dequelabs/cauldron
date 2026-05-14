@@ -3,7 +3,7 @@ import figma from '@figma/code-connect';
 import { TextField } from '../../index';
 
 const FIGMA_URL =
-  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4747&m=dev';
+  'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=8534-4753&m=dev';
 
 figma.connect(TextField, FIGMA_URL, {
   props: {
