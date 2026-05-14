@@ -28,6 +28,7 @@ export default {
         '**.test.ts',
         '**.test.tsx',
         '**.figma.tsx',
+        '**.stories.tsx',
         './src/setupTests.ts',
         './src/axe.ts'
       ]

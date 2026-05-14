@@ -2,6 +2,7 @@ dist
 node_modules
 coverage
 packages/react/lib
+storybook-static
 .DS_Store
 yarn-error.log
 .vscode/

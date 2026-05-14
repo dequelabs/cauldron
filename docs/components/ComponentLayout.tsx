@@ -9,6 +9,7 @@ interface ComponentLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string;
   source?: string;
   deprecated?: boolean;
+  storybook?: boolean;
   toc: Heading[];
   children: React.ReactNode;
   filepath: string;
@@ -21,8 +22,15 @@ export default function ComponentLayout({
   source,
   toc = [],
   deprecated = false,
+  storybook = false,
   filepath
 }: ComponentLayoutProps) {
+  const storybookSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  const storybookUrl = `/storybook/?path=/docs/components-${storybookSlug}--docs`;
   const containerRef = useRef<HTMLDivElement>(null);
   return (
     <>
@@ -46,6 +54,19 @@ export default function ComponentLayout({
               <li>
                 <Link href={source} target="_blank" rel="noopener noreferrer">
                   Source <Offscreen>link opens in new window</Offscreen>{' '}
+                  <Icon type="external-link" />
+                </Link>
+              </li>
+            )}
+            {storybook && (
+              <li>
+                <Link
+                  href={storybookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open in Storybook{' '}
+                  <Offscreen>link opens in new window</Offscreen>{' '}
                   <Icon type="external-link" />
                 </Link>
               </li>

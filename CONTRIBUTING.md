@@ -18,6 +18,7 @@
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
 1. [Documentation](#documentation)
+1. [Storybook](#storybook)
 1. [Figma Code Connect](#figma-code-connect)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
@@ -250,6 +251,58 @@ test('should return no axe violations', async () => {
 ## Documentation
 
 Component documentation guidelines are outlined in [docs/readme.md](./docs/readme.md).
+
+## Storybook
+
+Cauldron ships a Storybook served at [cauldron.dequelabs.com/storybook](https://cauldron.dequelabs.com/storybook). Each component should have a co-located story file that exercises its props via [Controls](https://storybook.js.org/docs/essentials/controls).
+
+### File location
+
+Story files are co-located with the component they document, alongside `index.tsx` and `index.test.tsx`:
+
+```
+packages/react/src/components/Button/
+├─ index.tsx
+├─ index.test.tsx
+└─ index.stories.tsx
+```
+
+### Authoring a story
+
+Use Component Story Format 3 (CSF3) with `Meta` and `StoryObj` types. Enable autodocs via `tags: ['autodocs']` and group stories under `Components/<ComponentName>`:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './index';
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary'] }
+  }
+};
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+export const Primary: Story = {
+  args: { variant: 'primary', children: 'Primary' }
+};
+```
+
+### Linking from MDX docs
+
+Once a story exists, set `storybook: true` in the component MDX file's frontmatter to render an "Open in Storybook" link in the component page metadata strip.
+
+### Commands
+
+| Command                | Description                                        |
+| :--------------------- | :------------------------------------------------- |
+| `yarn dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
+| `yarn build:storybook` | Build static Storybook into `docs/dist/storybook/` |
+
+Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `yarn build:react` once before `yarn dev:storybook` (or run `yarn dev` in another tab to keep the lib output fresh).
 
 ## Figma Code Connect
 

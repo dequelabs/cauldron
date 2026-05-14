@@ -1,7 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/**/*.e2e.tsx", "src/**/*.figma.tsx"],
+  "exclude": [
+    "node_modules",
+    "src/**/*.e2e.tsx",
+    "src/**/*.figma.tsx",
+    "src/**/*.stories.tsx"
+  ],
   "compilerOptions": {
     "skipLibCheck": true,
     "declarationDir": "lib",
