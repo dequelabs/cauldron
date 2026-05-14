@@ -25,7 +25,7 @@ const meta: Meta<typeof Button> = {
     thin: { control: 'boolean' },
     disabled: { control: 'boolean' },
     children: { control: 'text' },
-    onClick: { action: 'clicked' },
+    onClick: { action: 'clicked', table: { disable: true } },
     buttonRef: { table: { disable: true } }
   }
 };
