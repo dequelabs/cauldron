@@ -1,6 +1,7 @@
 ---
 name: connect-component-to-figma
 description: Add a Figma Code Connect (.figma.tsx) file for a Cauldron React component, following the conventions and gotchas from the batch 1-5 rollout (issue dequelabs/cauldron#2373). Use when the user says "connect <Component> to Figma", "add a code connect for <Component>", "add a .figma.tsx", or works on Figma Code Connect tasks in the cauldron repo.
+model: sonnet
 ---
 
 # Connect a Cauldron component to Figma
