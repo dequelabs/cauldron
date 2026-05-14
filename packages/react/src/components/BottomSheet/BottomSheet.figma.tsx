@@ -7,7 +7,7 @@ const FIGMA_URL =
 
 figma.connect(BottomSheet, FIGMA_URL, {
   example: () => (
-    <BottomSheet open label="Title">
+    <BottomSheet open label="Title" onClose={() => undefined}>
       Content
     </BottomSheet>
   )

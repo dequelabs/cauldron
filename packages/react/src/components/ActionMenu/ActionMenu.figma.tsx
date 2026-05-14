@@ -18,10 +18,19 @@ figma.connect(ActionMenu, FIGMA_URL, {
     placement: figma.enum('Alignment', {
       Left: 'bottom-start',
       Right: 'bottom-end'
+    }),
+    // Scope the `Label` text lookup to the `Button` frame so it picks up the
+    // trigger label (e.g. "Trigger") and not any `Label` layers inside the
+    // menu's action items.
+    triggerProps: figma.nestedProps('Button', {
+      label: figma.textContent('Label')
     })
   },
-  example: ({ placement }) => (
-    <ActionMenu trigger={<Button>Menu</Button>} placement={placement}>
+  example: ({ placement, triggerProps }) => (
+    <ActionMenu
+      trigger={<Button>{triggerProps.label}</Button>}
+      placement={placement}
+    >
       <ActionList>
         <ActionListItem>Action one</ActionListItem>
         <ActionListItem>Action two</ActionListItem>
