@@ -25,8 +25,12 @@ export default function ComponentLayout({
   storybook = false,
   filepath
 }: ComponentLayoutProps) {
-  const storybookId = title.toLowerCase().replace(/\s+/g, '-');
-  const storybookUrl = `/storybook/?path=/docs/components-${storybookId}--docs`;
+  const storybookSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  const storybookUrl = `/storybook/?path=/docs/components-${storybookSlug}--docs`;
   const containerRef = useRef<HTMLDivElement>(null);
   return (
     <>

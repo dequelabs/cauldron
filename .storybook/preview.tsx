@@ -3,7 +3,7 @@ import type { Preview } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import { ThemeProvider } from '@deque/cauldron-react';
 import '@deque/cauldron-react/cauldron.css';
-import '../packages/styles';
+import '../packages/styles/index.css';
 
 const preview: Preview = {
   parameters: {
