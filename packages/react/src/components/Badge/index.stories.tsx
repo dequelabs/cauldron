@@ -10,7 +10,8 @@ const meta: Meta<typeof Badge> = {
     size: {
       control: 'radio',
       options: ['default', 'small']
-    }
+    },
+    children: { control: 'text' }
   }
 };
 
@@ -33,6 +34,9 @@ export const Small: Story = {
 };
 
 export const WithLabel: Story = {
+  argTypes: {
+    children: { table: { disable: true } }
+  },
   args: {
     children: (
       <>

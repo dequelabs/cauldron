@@ -12,7 +12,8 @@ const meta: Meta<typeof Alert> = {
       control: 'radio',
       options: ['default', 'warning']
     },
-    heading: { control: 'text' }
+    heading: { control: 'text' },
+    children: { table: { disable: true } }
   }
 };
 
