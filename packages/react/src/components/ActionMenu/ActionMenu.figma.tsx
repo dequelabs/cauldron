@@ -15,8 +15,9 @@ const FIGMA_URL =
 figma.connect(ActionMenu, FIGMA_URL, {
   variant: { Type: 'Button' },
   props: {
+    // `bottom-start` is the React default; omit the `Left` mapping so the prop
+    // is dropped from the snippet for the default alignment.
     placement: figma.enum('Alignment', {
-      Left: 'bottom-start',
       Right: 'bottom-end'
     }),
     // Scope the `Label` text lookup to the `Button` frame so it picks up the
@@ -44,8 +45,9 @@ figma.connect(ActionMenu, FIGMA_URL, {
 figma.connect(ActionMenu, FIGMA_URL, {
   variant: { Type: 'Icon Button' },
   props: {
+    // `bottom-start` is the React default; omit the `Left` mapping so the prop
+    // is dropped from the snippet for the default alignment.
     placement: figma.enum('Alignment', {
-      Left: 'bottom-start',
       Right: 'bottom-end'
     })
   },
