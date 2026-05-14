@@ -9,16 +9,10 @@ figma.connect(Modal, FIGMA_URL, {
   props: {
     variant: figma.enum('Variant', {
       'Info Modal': 'info'
-    }),
-    heading: figma.textContent('Heading')
+    })
   },
-  example: ({ variant, heading }) => (
-    <Modal
-      show
-      heading={heading}
-      variant={variant}
-      onClose={() => undefined}
-    >
+  example: ({ variant }) => (
+    <Modal show heading="Heading" variant={variant} onClose={() => undefined}>
       Modal content
     </Modal>
   )
