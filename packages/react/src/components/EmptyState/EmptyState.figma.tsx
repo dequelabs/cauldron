@@ -7,10 +7,9 @@ const FIGMA_URL =
 
 figma.connect(EmptyState, FIGMA_URL, {
   props: {
-    heading: figma.textContent('Heading'),
-    description: figma.textContent('Description text')
+    heading: figma.textContent('Heading')
   },
-  example: ({ heading, description }) => (
-    <EmptyState heading={heading} description={description} />
+  example: ({ heading }) => (
+    <EmptyState heading={heading} description="Description" />
   )
 });

@@ -11,8 +11,7 @@ figma.connect(Toast, FIGMA_URL, {
       Error: 'error',
       Warning: 'caution',
       Info: 'info'
-    }),
-    children: figma.textContent('Message')
+    })
   },
-  example: ({ type, children }) => <Toast type={type}>{children}</Toast>
+  example: ({ type }) => <Toast type={type}>Message</Toast>
 });
