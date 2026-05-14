@@ -3,7 +3,11 @@ import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../packages/react/src/components/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-themes',
+    '@storybook/addon-docs'
+  ],
   framework: {
     name: '@storybook/react-webpack5',
     options: {}
