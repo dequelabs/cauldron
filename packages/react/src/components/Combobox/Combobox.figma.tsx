@@ -9,25 +9,22 @@ figma.connect(Combobox, FIGMA_URL, {
   props: {
     label: figma.textContent('Label'),
     description: figma.boolean('Description', {
-      true: 'Description text',
+      true: figma.textContent('Label Description'),
       false: undefined
     }),
-    error: figma.boolean('Error', {
-      true: 'Error message',
-      false: undefined
+    error: figma.enum('State', {
+      Error: figma.textContent('errorMessage')
     }),
     required: figma.boolean('Required', { true: true, false: undefined }),
-    disabled: figma.boolean('Disabled', { true: true, false: undefined }),
-    multiselect: figma.boolean('Multiselect', { true: true, false: undefined })
+    disabled: figma.enum('State', { Disabled: true })
   },
-  example: ({ label, description, error, required, disabled, multiselect }) => (
+  example: ({ label, description, error, required, disabled }) => (
     <Combobox
       label={label}
       description={description}
       error={error}
       required={required}
       disabled={disabled}
-      multiselect={multiselect}
     >
       <ComboboxOption>Option 1</ComboboxOption>
       <ComboboxOption>Option 2</ComboboxOption>

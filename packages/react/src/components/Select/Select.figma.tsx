@@ -9,15 +9,14 @@ figma.connect(Select, FIGMA_URL, {
   props: {
     label: figma.textContent('Label'),
     description: figma.boolean('Description', {
-      true: 'Description text',
+      true: figma.textContent('Label Description'),
       false: undefined
     }),
-    error: figma.boolean('Error', {
-      true: 'Error message',
-      false: undefined
+    error: figma.enum('State', {
+      Error: figma.textContent('errorMessage')
     }),
     required: figma.boolean('Required', { true: true, false: undefined }),
-    disabled: figma.boolean('Disabled', { true: true, false: undefined })
+    disabled: figma.enum('State', { Disabled: true })
   },
   example: ({ label, description, error, required, disabled }) => (
     <Select
