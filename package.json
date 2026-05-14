@@ -123,5 +123,9 @@
     "webpack": "^5.106.1",
     "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.3"
+  },
+  "resolutions": {
+    "react": "^18",
+    "react-dom": "^18"
   }
 }
