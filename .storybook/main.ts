@@ -3,11 +3,7 @@ import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../packages/react/src/components/**/*.stories.@(ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-a11y',
-    '@storybook/addon-themes'
-  ],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-webpack5',
     options: {}
@@ -24,7 +20,12 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      '@deque/cauldron-react': path.resolve(process.cwd(), 'packages/react/lib')
+      '@deque/cauldron-react': path.resolve(
+        process.cwd(),
+        'packages/react/lib'
+      ),
+      react: path.resolve(process.cwd(), 'node_modules/react'),
+      'react-dom': path.resolve(process.cwd(), 'node_modules/react-dom')
     };
 
     config.module = config.module || {};
