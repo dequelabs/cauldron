@@ -7,7 +7,7 @@ const FIGMA_URL =
 
 figma.connect(Combobox, FIGMA_URL, {
   props: {
-    label: figma.textContent('Label'),
+    label: figma.textContent('Combo Box Label'),
     description: figma.boolean('Description', {
       true: figma.textContent('Label Description'),
       false: undefined
