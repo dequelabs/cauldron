@@ -13,5 +13,9 @@ figma.connect(Toast, FIGMA_URL, {
       Info: 'info'
     })
   },
-  example: ({ type }) => <Toast type={type}>Message</Toast>
+  example: ({ type }) => (
+    <Toast type={type} show>
+      Message
+    </Toast>
+  )
 });
