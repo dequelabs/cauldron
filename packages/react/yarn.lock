@@ -1386,10 +1386,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/css-tokenizer/-/css-tokenizer-3.0.4.tgz#333fedabc3fd1a8e5d0100013731cf19e6a8c5d3"
   integrity sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==
 
-"@figma/code-connect@^1.4.4":
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/@figma/code-connect/-/code-connect-1.4.4.tgz#e1d839394b4fdc9fef1a69e9c8679821d14ddc87"
-  integrity sha512-XgEel2frygcDxU6KhJKG1+qVGOKC9Ifz0iiWclfMkFU8aLvHN2VtewoeqKqchtwW4MNPcNcxYJl2FHQ4quYvQQ==
+"@figma/code-connect@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@figma/code-connect/-/code-connect-1.4.5.tgz#8f06a8dd34524b3403e056ce8831e46dace8f65b"
+  integrity sha512-ZnVtuFP0nNZtGsWV24zalaIFGL1r7wqdffYci6sTf6+JBOZSnNMZL2994+ro+KS4X4A2eDhOVskYGJoEVa3S3A==
   dependencies:
     boxen "5.1.1"
     chalk "^4.1.2"
@@ -1409,7 +1409,7 @@
     prompts "^2.4.2"
     strip-ansi "^6.0.0"
     ts-morph "^27.0.0"
-    typescript "5.9.3"
+    typescript "6.0.3"
     undici "^7.19.1"
     zod "3.25.58"
     zod-validation-error "^3.2.0"
@@ -7650,10 +7650,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@5.9.3:
-  version "5.9.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.3.tgz#5b4f59e15310ab17a216f5d6cf53ee476ede670f"
-  integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
+typescript@6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.3.tgz#90251dc007916e972786cb94d74d15b185577d21"
+  integrity sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==
 
 typescript@~5.0.0:
   version "5.0.4"
