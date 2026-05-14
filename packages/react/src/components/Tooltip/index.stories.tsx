@@ -74,6 +74,9 @@ export const Info: Story = {
 
 export const Big: Story = {
   render: (args) => <Template {...args} />,
+  argTypes: {
+    children: { table: { disable: true } }
+  },
   args: {
     variant: 'big',
     placement: 'bottom',

@@ -5,11 +5,6 @@ const meta: Meta<typeof Notice> = {
   title: 'Components/Notice',
   component: Notice,
   tags: ['autodocs'],
-  args: {
-    title: 'Heads up',
-    children:
-      'Use Notice to communicate persistent, contextual information to the user.'
-  },
   argTypes: {
     type: {
       control: 'radio',
