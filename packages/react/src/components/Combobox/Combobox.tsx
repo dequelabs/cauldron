@@ -253,6 +253,19 @@ const Combobox = forwardRef<
           ([, { value }]) => value === lastSelectedValue
         ) || [];
       if (autocomplete === 'manual') {
+        // In multiselect, the listbox manages its own active option via
+        // keyboard navigation. When the last-selected value no longer
+        // matches any option (e.g. after deselecting the only selected
+        // option), preserve the existing active descendant so the next
+        // Enter keypress can re-toggle the highlighted option.
+        if (
+          multiselect &&
+          !element &&
+          activeDescendant &&
+          matchingOptions.has(activeDescendant.element)
+        ) {
+          return;
+        }
         setActiveDescendant(!element ? null : { element, ...option });
       } else if (
         autocomplete === 'automatic' &&

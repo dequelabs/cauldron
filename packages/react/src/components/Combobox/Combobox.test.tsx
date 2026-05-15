@@ -1100,6 +1100,41 @@ test('should handle multiple selections with "enter" keydown event', () => {
   fireEnterKeyPress();
 });
 
+test('should allow reselecting a deselected option in multiselect via keyboard', () => {
+  const onSelectionChange = spy();
+  render(
+    <Combobox label="label" multiselect onSelectionChange={onSelectionChange}>
+      <ComboboxOption>Apple</ComboboxOption>
+      <ComboboxOption>Banana</ComboboxOption>
+      <ComboboxOption>Cantaloupe</ComboboxOption>
+    </Combobox>
+  );
+  const combobox = screen.getByRole('combobox');
+
+  // Note: Combobox forwards events to Listbox via dispatchEvent, but this doesn't
+  // work correctly within jsdom so we fire the events directly on listbox
+  const fireArrowDownKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'ArrowDown' });
+  const fireEnterKeyPress = () =>
+    fireEvent.keyDown(screen.getByRole('listbox'), { key: 'Enter' });
+
+  fireEvent.focus(combobox);
+  fireArrowDownKeyPress();
+  fireEnterKeyPress();
+  expect(onSelectionChange.lastCall.firstArg.value).toEqual(['Apple']);
+  assertOptionIsActive(0);
+
+  fireEnterKeyPress();
+  expect(onSelectionChange.lastCall.firstArg.value).toEqual([]);
+  // After deselecting, the active descendant must stay on the just-deselected
+  // option so the next Enter keypress can re-toggle it.
+  assertOptionIsActive(0);
+
+  fireEnterKeyPress();
+  expect(onSelectionChange.lastCall.firstArg.value).toEqual(['Apple']);
+  assertOptionIsActive(0);
+});
+
 test('should handle selection when autocomplete="automatic" and combobox input is blurred', () => {
   const onSelectionChange = spy();
   render(
