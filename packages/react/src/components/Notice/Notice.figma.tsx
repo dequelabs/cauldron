@@ -14,11 +14,12 @@ figma.connect(Notice, FIGMA_URL, {
     variant: figma.enum('Size', {
       Small: 'condensed'
     }),
-    title: figma.textContent('Title')
+    title: figma.textContent('Title'),
+    children: figma.textContent('Text')
   },
-  example: ({ type, variant, title }) => (
+  example: ({ type, variant, title, children }) => (
     <Notice type={type} variant={variant} title={title}>
-      Body
+      {children}
     </Notice>
   )
 });
