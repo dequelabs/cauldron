@@ -4,50 +4,6 @@ import Listbox from './';
 import { ListboxGroup, ListboxOption } from './';
 import axe from '../../axe';
 
-/*
- * Note: The below components are statically typed and get validated with tsc
- * to ensure Listbox type discrimination works correctly between single-select
- * and multi-select variants. Valid component types should throw no errors,
- * where @ts-expect-error is used to indicate an invalid or missing property.
- */
-
-// Single-select without multiselect prop (the bug from #1890)
-() => (
-  <Listbox value="foo">
-    <ListboxOption>A</ListboxOption>
-  </Listbox>
-);
-
-// Single-select with explicit multiselect={false}
-() => (
-  <Listbox multiselect={false} value="foo">
-    <ListboxOption>A</ListboxOption>
-  </Listbox>
-);
-
-// Multi-select with array value
-() => (
-  <Listbox multiselect value={['foo', 'bar']}>
-    <ListboxOption>A</ListboxOption>
-  </Listbox>
-);
-
-// Single-select should not accept array value
-() => (
-  // @ts-expect-error single-select value must not be an array
-  <Listbox value={['foo', 'bar']}>
-    <ListboxOption>A</ListboxOption>
-  </Listbox>
-);
-
-// Multi-select should not accept single value
-() => (
-  // @ts-expect-error multi-select value must be an array
-  <Listbox multiselect value="foo">
-    <ListboxOption>A</ListboxOption>
-  </Listbox>
-);
-
 const assertListItemIsActive = (index: number) => {
   const activeOption = screen.getAllByRole('option')[index];
   expect(activeOption).toHaveClass('ListboxOption--active');
@@ -737,6 +693,68 @@ test('should retain selected value when options changes with defaultValue', () =
   );
 
   assertListItemIsSelected(2);
+});
+
+test('should accept single-select usage without multiselect prop', () => {
+  render(
+    <Listbox value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('listbox')).not.toHaveAttribute(
+    'aria-multiselectable'
+  );
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+});
+
+test('should accept single-select usage with explicit multiselect={false}', () => {
+  render(
+    <Listbox multiselect={false} value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('listbox')).not.toHaveAttribute(
+    'aria-multiselectable'
+  );
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+});
+
+test('should reject array value when single-select (type-only)', () => {
+  // Verifies type discrimination at compile time. The @ts-expect-error will
+  // fail compilation if the type system stops catching this invalid combo.
+  const element = (
+    // @ts-expect-error single-select value must not be an array
+    <Listbox value={['Apple', 'Banana']}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(element).toBeDefined();
+});
+
+test('should reject non-array value when multiselect (type-only)', () => {
+  // Verifies type discrimination at compile time. The @ts-expect-error will
+  // fail compilation if the type system stops catching this invalid combo.
+  const element = (
+    // @ts-expect-error multi-select value must be an array
+    <Listbox multiselect value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(element).toBeDefined();
 });
 
 test('should render multiselect listbox', () => {
