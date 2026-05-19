@@ -15,11 +15,13 @@ import setRef from './setRef';
  *   return (<div ref={internalRef}>...</div>)
  * })
  */
-export default function useSharedRef<T>(ref: Ref<T>): MutableRefObject<T> {
-  const internalRef = useRef<T>();
+export default function useSharedRef<T>(
+  ref: Ref<T>
+): MutableRefObject<T | null> {
+  const internalRef = useRef<T | null>(null);
   useEffect(() => {
     setRef(ref, internalRef.current);
     return () => setRef(ref, null);
   }, [ref]);
-  return internalRef as MutableRefObject<T>;
+  return internalRef;
 }
