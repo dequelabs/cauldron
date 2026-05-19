@@ -32,6 +32,15 @@ const collections: Collections = (require as any)
       const foundationMatch = minimatch(key, './pages/foundations/*.mdx');
       const filepath = `docs${key.substring(1)}`;
 
+      const assertTitle = (title: unknown) => {
+        if (typeof title !== 'string' || !title) {
+          throw new Error(
+            `${filepath}: missing required "title" frontmatter. ` +
+              `Add \`title: <PageName>\` to the MDX frontmatter.`
+          );
+        }
+      };
+
       if (pagesMatch) {
         const name = key.match(/(\w+)\.mdx$/)?.[1] || '';
         const {
@@ -41,6 +50,7 @@ const collections: Collections = (require as any)
           frontmatter,
           ...props
         } = require(`./pages/${name}.mdx`);
+        assertTitle(title);
         const component = {
           name,
           title,
@@ -60,6 +70,7 @@ const collections: Collections = (require as any)
           frontmatter,
           ...props
         } = require(`./pages/components/${name}.mdx`);
+        assertTitle(title);
         const component = {
           name,
           title,
@@ -79,6 +90,7 @@ const collections: Collections = (require as any)
           frontmatter,
           ...props
         } = require(`./pages/foundations/${name}.mdx`);
+        assertTitle(title);
         const component = {
           name,
           title,
