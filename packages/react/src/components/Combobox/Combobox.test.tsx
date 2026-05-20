@@ -75,9 +75,9 @@ test('should render combobox with options', () => {
   ];
   render(<Combobox label="label" options={options} />);
   expect(screen.queryByRole('combobox')).toBeTruthy();
-  expect(screen.queryAllByRole('option').at(0)?.innerText).toEqual('Apple');
-  expect(screen.queryAllByRole('option').at(1)?.innerText).toEqual('Banana');
-  expect(screen.queryAllByRole('option').at(2)?.innerText).toEqual(
+  expect(screen.queryAllByRole('option').at(0)?.textContent).toEqual('Apple');
+  expect(screen.queryAllByRole('option').at(1)?.textContent).toEqual('Banana');
+  expect(screen.queryAllByRole('option').at(2)?.textContent).toEqual(
     'Cantaloupe'
   );
 });
@@ -91,9 +91,9 @@ test('should render combobox with children', () => {
     </Combobox>
   );
   expect(screen.queryByRole('combobox')).toBeTruthy();
-  expect(screen.queryAllByRole('option').at(0)?.innerText).toEqual('Apple');
-  expect(screen.queryAllByRole('option').at(1)?.innerText).toEqual('Banana');
-  expect(screen.queryAllByRole('option').at(2)?.innerText).toEqual(
+  expect(screen.queryAllByRole('option').at(0)?.textContent).toEqual('Apple');
+  expect(screen.queryAllByRole('option').at(1)?.textContent).toEqual('Banana');
+  expect(screen.queryAllByRole('option').at(2)?.textContent).toEqual(
     'Cantaloupe'
   );
 });
@@ -213,22 +213,22 @@ test('should render combobox with groups', () => {
   expect(group2.tagName).toEqual('UL');
   expect(group1.getAttribute('aria-labelledby')).toBeTruthy();
   expect(group2.getAttribute('aria-labelledby')).toBeTruthy();
-  expect(within(group1).queryAllByRole('option').at(0)?.innerText).toEqual(
+  expect(within(group1).queryAllByRole('option').at(0)?.textContent).toEqual(
     'Apple'
   );
-  expect(within(group1).queryAllByRole('option').at(1)?.innerText).toEqual(
+  expect(within(group1).queryAllByRole('option').at(1)?.textContent).toEqual(
     'Banana'
   );
-  expect(within(group1).queryAllByRole('option').at(2)?.innerText).toEqual(
+  expect(within(group1).queryAllByRole('option').at(2)?.textContent).toEqual(
     'Cantaloupe'
   );
-  expect(within(group2).queryAllByRole('option').at(0)?.innerText).toEqual(
+  expect(within(group2).queryAllByRole('option').at(0)?.textContent).toEqual(
     'Artichoke'
   );
-  expect(within(group2).queryAllByRole('option').at(1)?.innerText).toEqual(
+  expect(within(group2).queryAllByRole('option').at(1)?.textContent).toEqual(
     'Broccoli'
   );
-  expect(within(group2).queryAllByRole('option').at(2)?.innerText).toEqual(
+  expect(within(group2).queryAllByRole('option').at(2)?.textContent).toEqual(
     'Carrots'
   );
 });
@@ -1238,7 +1238,7 @@ test('should render matching options when autocomplete="manual"', () => {
   expect(screen.getAllByRole('option').length).toEqual(3);
   fireEvent.change(combobox, { target: { value: 'ap' } });
   expect(screen.getAllByRole('option').length).toEqual(1);
-  expect(screen.getByRole('option').innerText).toEqual('Apple');
+  expect(screen.getByRole('option').textContent).toEqual('Apple');
 });
 
 test('should render results not found when no options match when autocomplete="manual"', () => {
@@ -1321,7 +1321,7 @@ test('should render matching options when autocomplete="automatic"', () => {
   expect(screen.getAllByRole('option').length).toEqual(3);
   fireEvent.change(combobox, { target: { value: 'ap' } });
   expect(screen.getAllByRole('option').length).toEqual(1);
-  expect(screen.getByRole('option').innerText).toEqual('Apple');
+  expect(screen.getByRole('option').textContent).toEqual('Apple');
 });
 
 test('should render results not found when no options match when autocomplete="automatic"', () => {

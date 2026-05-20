@@ -10,8 +10,9 @@ import type {
 
 export type ListboxValue = Readonly<string | number | undefined>;
 
-interface ListboxOptionProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface ListboxOptionProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   value?: ListboxValue;
   disabled?: boolean;
   selected?: boolean;
@@ -52,7 +53,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const optionValue =
       typeof value !== 'undefined'
         ? value
-        : listboxOptionRef.current?.innerText;
+        : (listboxOptionRef.current?.textContent ?? undefined);
 
     useEffect(() => {
       const element = listboxOptionRef.current;

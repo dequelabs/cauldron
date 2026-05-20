@@ -148,6 +148,31 @@ test('should use text content for onAction if actionKey is not provided', async 
   expect(onAction).toHaveBeenCalledWith('Label Text', expect.anything());
 });
 
+test('should derive action key from nested children when actionKey is not provided', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionListItem>
+      <span>Label</span> <span>Text</span>
+    </ActionListItem>,
+    { wrapper: withActionListContext({ onAction }) }
+  );
+
+  await user.click(screen.getByRole('listitem'));
+  expect(onAction).toHaveBeenCalledWith('Label Text', expect.anything());
+});
+
+test('should call onAction with empty string when actionKey and text content are absent', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(<ActionListItem>{null}</ActionListItem>, {
+    wrapper: withActionListContext({ onAction })
+  });
+
+  await user.click(screen.getByRole('listitem'));
+  expect(onAction).toHaveBeenCalledWith('', expect.anything());
+});
+
 test('should be disabled when disabled prop is true', () => {
   render(<ActionListItem disabled>Label Text</ActionListItem>);
 
