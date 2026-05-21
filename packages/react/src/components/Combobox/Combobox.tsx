@@ -530,7 +530,7 @@ const Combobox = forwardRef<
           const nextIndex = focusedIndex + 1;
 
           if (nextIndex == pillsLength) {
-            inputRef.current.focus();
+            inputRef.current?.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }
@@ -538,7 +538,7 @@ const Combobox = forwardRef<
           const nextIndex = Math.max(focusedIndex + (isArrowLeft ? -1 : 1), 0);
 
           if (isArrowRight && nextIndex === pillsLength) {
-            inputRef.current.focus();
+            inputRef.current?.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }

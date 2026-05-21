@@ -22,7 +22,7 @@ function ClickOutsideListener(
   }: ClickOutsideListenerProps,
   ref: React.ForwardedRef<HTMLElement>
 ): React.JSX.Element | null {
-  const childElementRef = useRef<HTMLElement>();
+  const childElementRef = useRef<HTMLElement | null>(null);
 
   const handleEvent = (event: MouseEvent | TouchEvent) => {
     if (event.defaultPrevented) {
