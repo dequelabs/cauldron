@@ -123,7 +123,7 @@ const ActionListItem = forwardRef<HTMLLIElement, ActionListItemProps>(
     // istanbul ignore next
     useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
-      if (!intersectionEntry || !isActive) {
+      if (!intersectionEntry || !isActive || !actionListItemRef.current) {
         return;
       }
 

@@ -1,10 +1,4 @@
-import React, {
-  type MutableRefObject,
-  forwardRef,
-  useCallback,
-  useRef,
-  useState
-} from 'react';
+import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import classnames from 'classnames';
 import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
@@ -32,9 +26,9 @@ interface ActionListProps extends Omit<
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const activeElement = useRef<
-      HTMLLIElement | HTMLAnchorElement
-    >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
+    const activeElement = useRef<HTMLLIElement | HTMLAnchorElement | null>(
+      null
+    );
     const [activeOption, setActiveOption] = useState<ListboxOption>();
 
     const handleActiveChange = useCallback((value: ListboxOption) => {
@@ -63,7 +57,7 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         props.role === 'menu'
           ? '[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]'
           : '[role=option]'
-    }) as MutableRefObject<HTMLUListElement>;
+    });
 
     return (
       <Listbox

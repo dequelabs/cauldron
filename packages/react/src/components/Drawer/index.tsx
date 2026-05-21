@@ -17,8 +17,9 @@ import resolveElement from '../../utils/resolveElement';
 import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
 
-export interface DrawerProps<T extends HTMLElement = HTMLElement>
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps<
+  T extends HTMLElement = HTMLElement
+> extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   position: 'top' | 'bottom' | 'left' | 'right';
   open?: boolean;
@@ -81,7 +82,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }, [open, setIsTransitioning]);
 
     useEffect(() => {
-      if (!isModal) {
+      if (!isModal || !drawerRef.current) {
         return;
       }
 
