@@ -54,8 +54,12 @@ function ClickOutsideListener(
     // Ref for this component should pass-through to the child node
     setRef(ref, node);
     // If child has its own ref, we want to update
-    // its ref with the newly cloned node
-    const { ref: childRef } = children as any;
+    // its ref with the newly cloned node.
+    // React 19 moved ref into element.props; React 16-18 stores it on the element object.
+    const childRef =
+      parseInt(React.version, 10) >= 19
+        ? (children as React.ReactElement).props.ref
+        : (children as any).ref;
     setRef(childRef, node);
   };
 
