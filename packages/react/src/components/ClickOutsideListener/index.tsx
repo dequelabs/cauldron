@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import setRef from '../../utils/setRef';
 import resolveElement from '../../utils/resolveElement';
 
+const isReact19Plus = parseInt(React.version, 10) >= 19;
+
 export interface ClickOutsideListenerProps<
   T extends HTMLElement = HTMLElement
 > {
@@ -53,14 +55,14 @@ function ClickOutsideListener(
     childElementRef.current = node;
     // Ref for this component should pass-through to the child node
     setRef(ref, node);
-    // If child has its own ref, we want to update
-    // its ref with the newly cloned node.
-    // Feature-detect where ref lives to avoid deprecated element.ref access
-    // on React 19-compatible canary/experimental builds.
+    // Forward the child's own ref to the cloned node.
+    // React 19 exposes ref via props for function components; host elements (string type)
+    // still use element.ref — accessing props.ref on host elements triggers a React warning.
     const child = children as React.ReactElement;
-    const childRef = Object.prototype.hasOwnProperty.call(child.props, 'ref')
-      ? child.props.ref
-      : (child as any).ref;
+    const childRef =
+      isReact19Plus && typeof child.type !== 'string'
+        ? child.props.ref
+        : (child as any).ref;
     setRef(childRef, node);
   };
 
