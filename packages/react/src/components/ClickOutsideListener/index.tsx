@@ -55,11 +55,12 @@ function ClickOutsideListener(
     setRef(ref, node);
     // If child has its own ref, we want to update
     // its ref with the newly cloned node.
-    // React 19 moved ref into element.props; React 16-18 stores it on the element object.
-    const childRef =
-      parseInt(React.version, 10) >= 19
-        ? (children as React.ReactElement).props.ref
-        : (children as any).ref;
+    // Feature-detect where ref lives to avoid deprecated element.ref access
+    // on React 19-compatible canary/experimental builds.
+    const child = children as React.ReactElement;
+    const childRef = Object.prototype.hasOwnProperty.call(child.props, 'ref')
+      ? child.props.ref
+      : (child as any).ref;
     setRef(childRef, node);
   };
 
