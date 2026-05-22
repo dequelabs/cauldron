@@ -78,7 +78,12 @@ export default class Scrim extends React.Component<ScrimProps, ScrimState> {
     }
 
     return (
-      <div ref={(el) => (this.el = el)} className={`Scrim ${animationClass}`} />
+      <div
+        ref={(el) => {
+          this.el = el;
+        }}
+        className={`Scrim ${animationClass}`}
+      />
     );
   }
 }

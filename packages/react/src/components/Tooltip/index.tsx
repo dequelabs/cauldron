@@ -11,7 +11,7 @@ const TIP_HIDE_DELAY = 100;
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  target: React.RefObject<HTMLElement> | HTMLElement;
+  target: React.RefObject<HTMLElement | null> | HTMLElement;
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby' | 'none';
   show?: boolean | undefined;

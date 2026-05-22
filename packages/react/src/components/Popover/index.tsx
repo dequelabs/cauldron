@@ -21,7 +21,7 @@ import { isBrowser } from '../../utils/is-browser';
 export type PopoverVariant = 'prompt' | 'custom';
 
 type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
-  target: React.RefObject<HTMLElement> | HTMLElement;
+  target: React.RefObject<HTMLElement | null> | HTMLElement;
   variant?: PopoverVariant;
   show: boolean;
   onClose: () => void;

@@ -1,4 +1,4 @@
-import { MutableRefObject, Ref, useRef, useEffect } from 'react';
+import { RefObject, Ref, useRef, useEffect } from 'react';
 import setRef from './setRef';
 
 /**
@@ -15,9 +15,7 @@ import setRef from './setRef';
  *   return (<div ref={internalRef}>...</div>)
  * })
  */
-export default function useSharedRef<T>(
-  ref: Ref<T>
-): MutableRefObject<T | null> {
+export default function useSharedRef<T>(ref: Ref<T>): RefObject<T | null> {
   const internalRef = useRef<T | null>(null);
   useEffect(() => {
     setRef(ref, internalRef.current);

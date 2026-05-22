@@ -48,7 +48,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const columnRightRef = useRef<HTMLDivElement>(null);
 
     const columnLeft = React.Children.toArray(children).find(
-      (child) => (child as React.ReactElement<any>).type === ColumnLeft
+      (child) => React.isValidElement(child) && child.type === ColumnLeft
     );
 
     const togglePanel = () => {
@@ -83,10 +83,11 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     // they will not be present in the dom
     let ColumnLeftComponent;
     let columnLeftId;
-    if (isValidElement(columnLeft)) {
-      const ref = columnLeft.props.ref || columnLeftRef;
+    if (isValidElement<React.ComponentProps<typeof ColumnLeft>>(columnLeft)) {
+      const columnLeftProps = columnLeft.props;
+      const ref = columnLeftProps.ref || columnLeftRef;
       const id = (columnLeftId =
-        columnLeft.props.id || useId(undefined, 'sidebar-')[0]);
+        columnLeftProps.id || useId(undefined, 'sidebar-')[0]);
       const CloseButton = (
         <div className="TwoColumnPanel__Close">
           <button
@@ -108,7 +109,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       );
       const children = [
         CloseButton,
-        ...React.Children.toArray(columnLeft.props.children)
+        ...React.Children.toArray(columnLeftProps.children)
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
@@ -124,12 +125,13 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     }
 
     const columnRight = React.Children.toArray(children).find(
-      (child) => (child as React.ReactElement<any>).type === ColumnRight
+      (child) => React.isValidElement(child) && child.type === ColumnRight
     );
 
     let ColumnRightComponent;
-    if (isValidElement(columnRight)) {
-      const ref = columnRight.props.ref || columnRightRef;
+    if (isValidElement<React.ComponentProps<typeof ColumnRight>>(columnRight)) {
+      const columnRightProps = columnRight.props;
+      const ref = columnRightProps.ref || columnRightRef;
       const ToggleButton = (
         <div className="TwoColumnPanel__ButtonToggle">
           <button
@@ -159,7 +161,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       );
       const children = [
         ToggleButton,
-        ...React.Children.toArray(columnRight.props.children)
+        ...React.Children.toArray(columnRightProps.children)
       ];
       ColumnRightComponent = cloneElement(
         columnRight,

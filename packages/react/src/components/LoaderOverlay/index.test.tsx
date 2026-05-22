@@ -41,7 +41,7 @@ test('Should not have focus on LoaderOverlay after initial render without focusO
 });
 
 test('Should set LoaderOverlay ref and have expected class and role', () => {
-  const loaderRef: RefObject<HTMLDivElement> = React.createRef();
+  const loaderRef = React.createRef<HTMLDivElement>();
 
   render(
     <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>

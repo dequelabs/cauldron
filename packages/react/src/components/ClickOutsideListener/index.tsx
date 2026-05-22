@@ -10,7 +10,7 @@ export interface ClickOutsideListenerProps<
   onClickOutside: (e: MouseEvent | TouchEvent) => void;
   mouseEvent?: 'mousedown' | 'click' | 'mouseup' | false;
   touchEvent?: 'touchstart' | 'touchend' | false;
-  target?: T | React.RefObject<T> | React.MutableRefObject<T>;
+  target?: T | React.RefObject<T | null> | React.MutableRefObject<T | null>;
 }
 
 function ClickOutsideListener(
@@ -75,7 +75,10 @@ function ClickOutsideListener(
 
   return !children
     ? null
-    : React.cloneElement(children as React.ReactElement, { ref: resolveRef });
+    : React.cloneElement(
+        children as React.ReactElement<{ ref?: React.Ref<HTMLElement | null> }>,
+        { ref: resolveRef }
+      );
 }
 
 ClickOutsideListener.displayName = 'ClickOutsideListener';

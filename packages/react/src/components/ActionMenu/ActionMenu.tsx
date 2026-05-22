@@ -9,12 +9,21 @@ import React, {
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import useSharedRef from '../../utils/useSharedRef';
-import type { onActionEvent } from '../ActionList/ActionListContext';
+import type {
+  onActionEvent,
+  onActionCallbackFunction
+} from '../ActionList/ActionListContext';
 import type Listbox from '../Listbox';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 
 const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
+
+interface ActionMenuListProps {
+  ref?: React.Ref<HTMLElement>;
+  onAction?: onActionCallbackFunction;
+  [key: string]: unknown;
+}
 
 type ActionMenuTriggerProps = Pick<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -25,7 +34,7 @@ type ActionMenuTriggerProps = Pick<
   | 'aria-haspopup'
   | 'aria-controls'
 > & {
-  ref: React.RefObject<HTMLButtonElement>;
+  ref: React.RefObject<HTMLButtonElement | null>;
 };
 
 type ActionMenuTriggerFunction = (
@@ -34,7 +43,7 @@ type ActionMenuTriggerFunction = (
 ) => React.ReactElement;
 
 type ActionMenuProps = {
-  children: React.ReactElement;
+  children: React.ReactElement<ActionMenuListProps>;
   trigger: React.ReactElement | ActionMenuTriggerFunction;
   /** Render the action menu in a different location in the dom. */
   portal?: React.RefObject<HTMLElement> | HTMLElement;
@@ -68,9 +77,9 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       useState<React.ComponentProps<typeof Listbox>['focusStrategy']>('first');
     const triggerRef = useRef<HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
-    const actionMenuListRef = useSharedRef<HTMLElement>(
-      actionMenuList.props.ref
-    );
+    const { ref: actionListRef, onAction: actionListOnAction } =
+      actionMenuList.props;
+    const actionMenuListRef = useSharedRef<HTMLElement>(actionListRef ?? null);
     const [triggerId] = useId(1, 'menu-trigger');
     const [menuId] = useId(1, 'menu');
 
@@ -136,12 +145,11 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           setOpen(false);
         }
 
-        const { onAction } = actionMenuList.props;
-        if (typeof onAction === 'function') {
-          onAction(key, event);
+        if (typeof actionListOnAction === 'function') {
+          actionListOnAction(key, event);
         }
       },
-      [actionMenuList.props.onAction]
+      [actionListOnAction]
     );
 
     useEffect(() => {

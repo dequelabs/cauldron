@@ -22,7 +22,10 @@ type AnchoredOverlayProps<
   Target extends HTMLElement
 > = {
   /** A target element or ref to attach the overlay anchor element. */
-  target: Target | React.MutableRefObject<Target> | React.RefObject<Target>;
+  target:
+    | Target
+    | React.MutableRefObject<Target | null>
+    | React.RefObject<Target | null>;
   /** Positional placement value to anchor the overlay element relative to its anchored target. */
   placement?: Placement | 'auto' | 'auto-start' | 'auto-end';
   /** Determines if the overlay anchor is currently visible. */
