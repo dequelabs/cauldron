@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import setRef from '../../utils/setRef';
 import resolveElement from '../../utils/resolveElement';
+import { getChildRef } from '../../utils/getChildRef';
 
 export interface ClickOutsideListenerProps<
   T extends HTMLElement = HTMLElement
@@ -53,9 +54,8 @@ function ClickOutsideListener(
     childElementRef.current = node;
     // Ref for this component should pass-through to the child node
     setRef(ref, node);
-    // If child has its own ref, we want to update
-    // its ref with the newly cloned node
-    const { ref: childRef } = children as any;
+    // Forward the child's own ref. In React 19 ref lives in props; in 16–18 it's element.ref.
+    const childRef = getChildRef(children as React.ReactElement);
     setRef(childRef, node);
   };
 
