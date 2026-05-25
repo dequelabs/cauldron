@@ -3,7 +3,7 @@ import setRef from './setRef';
 
 /**
  * When a component needs to track an internal ref on a component that has a
- * forwarded ref, useSharedRef will return a MutableRefObject<T | null> that will
+ * forwarded ref, useSharedRef will return a RefObject<T | null> that will
  * correctly invoke the parent ref as well providing an internal ref.
  *
  * @example
