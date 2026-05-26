@@ -7,8 +7,10 @@ import {
   removeStyleTag
 } from '../../utils/stylesheets';
 
-export interface ExpandCollapsePanelProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExpandCollapsePanelProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onToggle'
+> {
   open?: boolean;
   children: React.ReactNode;
   animationTiming?: number | boolean;

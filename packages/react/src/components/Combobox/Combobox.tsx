@@ -62,7 +62,7 @@ interface BaseComboboxProps extends Omit<
   autocomplete?: 'none' | 'manual' | 'automatic';
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
   description?: React.ReactNode;
 }
