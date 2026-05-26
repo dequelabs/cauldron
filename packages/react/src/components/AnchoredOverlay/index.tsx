@@ -43,7 +43,7 @@ type AnchoredOverlayProps<
   /** When `focusTrap` is true, optional arguments to configure the focus trap. */
   focusTrapOptions?: Parameters<typeof useFocusTrap>[1];
   /** Render the anchored overlay in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   children?: React.ReactNode;
 } & PolymorphicProps<React.HTMLAttributes<Overlay>>;
 

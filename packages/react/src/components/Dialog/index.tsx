@@ -37,7 +37,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
         level: number | undefined;
       };
   closeButtonText?: string;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   scrollable?: boolean;
 }
 

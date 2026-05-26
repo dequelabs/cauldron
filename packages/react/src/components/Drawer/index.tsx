@@ -29,7 +29,7 @@ export interface DrawerProps<
     returnFocus?: ElementOrRef<T>;
   };
   onClose?: () => void;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
 }
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(

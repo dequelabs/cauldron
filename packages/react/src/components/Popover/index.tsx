@@ -27,7 +27,7 @@ type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
   onClose: () => void;
   placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   /** Render the popover in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
 };
 
 type CustomProps = BaseProps & {

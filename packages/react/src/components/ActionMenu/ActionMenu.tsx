@@ -46,7 +46,7 @@ type ActionMenuProps = {
   children: React.ReactElement<ActionMenuListProps>;
   trigger: React.ReactElement | ActionMenuTriggerFunction;
   /** Render the action menu in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   /**
    * Controls whether the menu should render as a child of the trigger, as opposed to
    * rendering as a sibling. Intended for use with nested menu patterns, for example
