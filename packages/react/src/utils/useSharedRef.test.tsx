@@ -6,7 +6,7 @@ import useSharedRef from './useSharedRef';
 // eslint-disable-next-line react/display-name,react/prop-types
 const ComponentWithSharedRef = React.forwardRef<
   HTMLSpanElement,
-  { callback: (ref: React.MutableRefObject<HTMLSpanElement | null>) => void }
+  { callback: (ref: React.RefObject<HTMLSpanElement | null>) => void }
 >(({ callback }, ref) => {
   const sharedRef = useSharedRef(ref);
   callback(sharedRef);
@@ -78,7 +78,7 @@ test('it nulls the external functional ref on unmount', () => {
 });
 
 test('it nulls the external mutable ref on unmount', () => {
-  const fakeRef: React.MutableRefObject<HTMLSpanElement | null> = {
+  const fakeRef: React.RefObject<HTMLSpanElement | null> = {
     current: null
   };
   const internalRefCallback = spy();

@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import LoaderOverlay from './';
 import axe from '../../axe';
