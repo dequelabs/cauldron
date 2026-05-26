@@ -53,7 +53,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const optionValue =
       typeof value !== 'undefined'
         ? value
-        : listboxOptionRef.current?.innerText;
+        : (listboxOptionRef.current?.textContent ?? undefined);
 
     useEffect(() => {
       const element = listboxOptionRef.current;
