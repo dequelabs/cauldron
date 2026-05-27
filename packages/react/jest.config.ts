@@ -1,9 +1,14 @@
 import type { Config } from 'jest';
+import { dirname } from 'path';
+
+// Resolve react-dom from wherever it installs (hoisted to the workspace root
+// or nested here) so the server mapping survives the yarn-workspaces layout.
+const reactDomDir = dirname(require.resolve('react-dom/package.json'));
 
 const config: Config = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    '^react-dom/server$': '<rootDir>/node_modules/react-dom/server.node.js'
+    '^react-dom/server$': `${reactDomDir}/server.node.js`
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testMatch: [

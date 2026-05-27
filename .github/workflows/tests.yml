@@ -17,10 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
@@ -32,10 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
-        with:
-          root: true
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
@@ -57,9 +49,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
-        with:
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build

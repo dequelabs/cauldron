@@ -15,9 +15,7 @@ jobs:
           ref: 'master'
       - uses: ./.github/actions/dependencies
         with:
-          root: false
-          packages-react: false
-          packages-styles: false
+          install: false
       - name: Generate VPAT file
         uses: dequelabs/action-vpat-report@main
         with:

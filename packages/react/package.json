@@ -18,6 +18,7 @@
     "prebuild:lib": "node scripts/buildIconTypes.js",
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production yarn build",
     "test": "jest --maxWorkers=1 --coverage",
