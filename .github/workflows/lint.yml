@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/dependencies
-      - run: yarn lint
+      - run: pnpm lint
       - name: typecheck
         run: |
-          yarn --cwd packages/react build
-          yarn typecheck
+          pnpm build:react
+          pnpm typecheck

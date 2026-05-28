@@ -27,16 +27,14 @@ jobs:
       - uses: ./.github/actions/dependencies
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
       - name: Publish @deque/cauldron-styles
-        run: |
-          cd packages/styles
-          npm publish
+        working-directory: packages/styles
+        run: pnpm publish
       - name: Publish @deque/cauldron-react
-        run: |
-          cd packages/react
-          npm publish
+        working-directory: packages/react
+        run: pnpm publish
 
   canary:
     if: github.ref == 'refs/heads/develop'
@@ -50,21 +48,22 @@ jobs:
       - uses: ./.github/actions/dependencies
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
+      # The canary jobs mutate package.json's version before publishing, so
+      # pass --no-git-checks; pnpm publish otherwise refuses on a dirty tree.
       - name: Publish @deque/cauldron-styles
+        working-directory: packages/styles
         run: |
-          cd packages/styles
-          # Read the package version directly from package.json. `npm pkg get`
+          # Read the package version directly from package.json. `pnpm pkg get`
           # walks up to the workspace root and returns a JSON object keyed by
-          # package name once `workspaces` is declared there, which breaks the
-          # string concatenation below.
+          # package name, which breaks the string concatenation below.
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
-          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          pnpm publish --tag=next --no-git-checks
       - name: Publish @deque/cauldron-react
+        working-directory: packages/react
         run: |
-          cd packages/react
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
-          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          pnpm publish --tag=next --no-git-checks
