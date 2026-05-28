@@ -1,15 +1,9 @@
 name: 'Dependencies'
-description: 'Installs and builds dependencies for Cauldron'
+description: 'Sets up Node and installs dependencies for Cauldron'
 inputs:
-  root:
-    description: 'Install root-level dependencies'
+  install:
+    description: 'Run yarn install'
     default: 'true'
-  packages-react:
-    description: 'Install packages/react dependencies'
-    default: 'false'
-  packages-styles:
-    description: 'Install packages/styles dependencies'
-    default: 'false'
 
 runs:
   using: 'composite'
@@ -18,7 +12,7 @@ runs:
       with:
         node-version: 22
         cache: yarn
-        cache-dependency-path: '**/yarn.lock'
+        cache-dependency-path: 'yarn.lock'
         registry-url: 'https://registry.npmjs.org'
     # We need npm 11.5.1+ for OIDC-based publishing support
     # Installing npm 11.11.0 as a workaround for https://github.com/npm/cli/issues/9151
@@ -26,21 +20,9 @@ runs:
       shell: bash
     - run: npm install -g yarn # Required since we reinstalled npm
       shell: bash
-    - name: Install root dependencies
+    - name: Install dependencies
       run: yarn install --frozen-lockfile
       shell: bash
       # Note: Checking for both boolean and string true values due to referenced bug:
       # https://github.com/actions/runner/issues/2238
-      if: ${{ inputs.root == true || inputs.root == 'true' }}
-    - name: Install packages/react dependencies
-      run: yarn install --cwd packages/react
-      shell: bash
-      # Note: Checking for both boolean and string true values due to referenced bug:
-      # https://github.com/actions/runner/issues/2238
-      if: ${{ inputs.packages-react == true || inputs.packages-react == 'true' }}
-    - name: Install packages/styles dependencies
-      run: yarn install --cwd packages/styles
-      shell: bash
-      # Note: Checking for both boolean and string true values due to referenced bug:
-      # https://github.com/actions/runner/issues/2238
-      if: ${{ inputs.packages-styles == true || inputs.packages-styles == 'true' }}
+      if: ${{ inputs.install == true || inputs.install == 'true' }}

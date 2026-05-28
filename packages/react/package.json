@@ -18,6 +18,7 @@
     "prebuild:lib": "node scripts/buildIconTypes.js",
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production yarn build",
     "test": "jest --maxWorkers=1 --coverage",
@@ -26,6 +27,7 @@
     "figma:publish:dry-run": "figma connect publish --dry-run"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.0.0",
     "@floating-ui/react-dom": "^2.1.2",
     "classnames": "^2.2.6",
     "focusable": "^2.3.0",

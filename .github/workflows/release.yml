@@ -25,10 +25,6 @@ jobs:
         with:
           ref: 'master'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
@@ -52,10 +48,6 @@ jobs:
         with:
           ref: 'develop'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
@@ -63,12 +55,16 @@ jobs:
       - name: Publish @deque/cauldron-styles
         run: |
           cd packages/styles
-          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
+          # Read the package version directly from package.json. `npm pkg get`
+          # walks up to the workspace root and returns a JSON object keyed by
+          # package name once `workspaces` is declared there, which breaks the
+          # string concatenation below.
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
       - name: Publish @deque/cauldron-react
         run: |
           cd packages/react
-          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
           npm publish --tag=next
