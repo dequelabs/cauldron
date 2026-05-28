@@ -7,6 +7,9 @@ storybook-static
 yarn-error.log
 .vscode/
 .idea/
+package-lock.json
+yarn.lock
+.pnpm-store
 
 playwright/.cache
 e2e/test-results

@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import { AxePuppeteer } from '@axe-core/puppeteer';
+import { determineBrowserPath } from './determineBrowserPath';
 import express from 'express';
 import { AxeResults } from 'axe-core';
 import logSymbols from 'log-symbols';
@@ -23,7 +24,9 @@ let foundViolations = false;
 
 const getComponentUrls = async (port: number): Promise<Set<string>> => {
   const urls = new Set<string>([`http://localhost:${port}/`]);
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    executablePath: determineBrowserPath()
+  });
   const page = await browser.newPage();
   await page.goto(`http://localhost:${port}/`);
 
@@ -62,7 +65,9 @@ const main = async (): Promise<void> => {
   await Promise.all(
     Array.from(urls).map((url: string) => {
       return queue.add(async () => {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+          executablePath: determineBrowserPath()
+        });
         const page = await browser.newPage();
         await page.goto(`http://localhost:${port}/`);
 

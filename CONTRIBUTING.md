@@ -163,8 +163,8 @@ The files in this project are formatted by Prettier and linted with ESLint. Both
 
 | Command           | Description                             |
 | :---------------- | :-------------------------------------- |
-| `yarn lint`       | Runs eslint against everything          |
-| `yarn lint --fix` | Automatically fixes some linting errors |
+| `pnpm lint`       | Runs eslint against everything          |
+| `pnpm lint --fix` | Automatically fixes some linting errors |
 
 ### Icons
 
@@ -244,9 +244,9 @@ test('should return no axe violations', async () => {
 
 | Command                   | Description                                        |
 | :------------------------ | :------------------------------------------------- |
-| `yarn test`               | Runs all unit tests                                |
-| `yarn test ComponentName` | Runs tests matching component name                 |
-| `yarn test:a11y`          | Runs e2e accessibility tests against documentation |
+| `pnpm test`               | Runs all unit tests                                |
+| `pnpm test ComponentName` | Runs tests matching component name                 |
+| `pnpm test:a11y`          | Runs e2e accessibility tests against documentation |
 
 ## Documentation
 
@@ -299,10 +299,10 @@ Once a story exists, set `storybook: true` in the component MDX file's frontmatt
 
 | Command                | Description                                        |
 | :--------------------- | :------------------------------------------------- |
-| `yarn dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
-| `yarn build:storybook` | Build static Storybook into `docs/dist/storybook/` |
+| `pnpm dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
+| `pnpm build:storybook` | Build static Storybook into `docs/dist/storybook/` |
 
-Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `yarn build:react` once before `yarn dev:storybook` (or run `yarn dev` in another tab to keep the lib output fresh).
+Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
 
 ## Figma Code Connect
 
@@ -320,11 +320,11 @@ Run from `packages/react/`:
 
 | Command                                           | Purpose                               |
 | :------------------------------------------------ | :------------------------------------ |
-| `yarn figma:publish`                              | Push all `.figma.tsx` to Figma        |
-| `yarn figma:publish:dry-run`                      | Validate without pushing              |
-| `yarn figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
-| `yarn figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
-| `yarn figma connect unpublish --node <figma-url>` | Remove a connection                   |
+| `pnpm figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `pnpm figma:publish:dry-run`                      | Validate without pushing              |
+| `pnpm figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `pnpm figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `pnpm figma connect unpublish --node <figma-url>` | Remove a connection                   |
 
 ### Writing a `.figma.tsx`
 
