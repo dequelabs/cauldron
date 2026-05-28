@@ -25,10 +25,6 @@ jobs:
         with:
           ref: 'master'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build
@@ -52,10 +48,6 @@ jobs:
         with:
           ref: 'develop'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
           NODE_ENV=production yarn --cwd packages/react build

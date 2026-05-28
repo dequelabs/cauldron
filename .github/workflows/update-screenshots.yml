@@ -18,10 +18,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/dependencies
-        with:
-          root: true
-          packages-react: true
-          packages-styles: true
 
       - name: Build packages
         run: |
