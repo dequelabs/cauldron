@@ -12,13 +12,13 @@ export type PolymorphicComponentProps<
   Props = {},
   ElementType extends React.ElementType = React.ElementType
 > = Merge<
-  ElementType extends keyof JSX.IntrinsicElements
+  ElementType extends keyof React.JSX.IntrinsicElements
     ? // Support intrinsic elements, e.g. as="a", as="button", as="div"...
-      React.PropsWithRef<JSX.IntrinsicElements[ElementType]>
+      React.PropsWithRef<React.JSX.IntrinsicElements[ElementType]>
     : ElementType extends React.ElementType
-    ? // Support components, e.g. as={MyComponent}
-      React.ComponentPropsWithRef<ElementType>
-    : never,
+      ? // Support components, e.g. as={MyComponent}
+        React.ComponentPropsWithRef<ElementType>
+      : never,
   PolymorphicProps<Props, ElementType>
 >;
 
