@@ -27,6 +27,7 @@
     "figma:publish:dry-run": "figma connect publish --dry-run"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.0.0",
     "@floating-ui/react-dom": "^2.1.2",
     "classnames": "^2.2.6",
     "focusable": "^2.3.0",
