@@ -2,7 +2,7 @@ name: 'Dependencies'
 description: 'Sets up Node and installs dependencies for Cauldron'
 inputs:
   install:
-    description: 'Run yarn install (a single workspace install covers every package)'
+    description: 'Run yarn install'
     default: 'true'
 
 runs:

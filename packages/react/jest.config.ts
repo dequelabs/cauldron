@@ -1,8 +1,7 @@
 import type { Config } from 'jest';
 import { dirname } from 'path';
 
-// Resolve react-dom from wherever it installs (hoisted to the workspace root
-// or nested here) so the server mapping survives the yarn-workspaces layout.
+// Resolve react-dom's install location so the server mapping survives hoisting.
 const reactDomDir = dirname(require.resolve('react-dom/package.json'));
 
 const config: Config = {
