@@ -20,7 +20,13 @@ minimumReleaseAgeExclude:
   - '@deque/*'
   - '@axe-core/*'
 
-# Translated from the yarn-classic "resolutions" field.
+# Translated from the yarn-classic "resolutions" field. The playwright pins
+# match what yarn resolved (the screenshot harness picks the host's playwright
+# version via build-arg, and @playwright/experimental-ct-react 1.60.x has a
+# regression that emits "exports is not defined" in the Vite-bundled output).
 overrides:
   react: ^19
   react-dom: ^19
+  playwright: 1.50.1
+  '@playwright/test': 1.50.1
+  '@playwright/experimental-ct-react': 1.50.1
