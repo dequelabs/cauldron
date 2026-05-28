@@ -159,7 +159,10 @@ const Listbox = forwardRef<
     }, [activeOption]);
 
     useEffect(() => {
-      if (isActiveControlled && controlledActiveOption !== activeOption) {
+      if (
+        isActiveControlled &&
+        controlledActiveOption?.element !== activeOption?.element
+      ) {
         setActiveOption(controlledActiveOption || null);
       }
     }, [isActiveControlled, controlledActiveOption]);
