@@ -96,8 +96,10 @@
     "log-symbols": "4",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-mdx": "^3.0.0",
+    "mdast-util-mdx-expression": "^2.0.1",
     "micromark-extension-mdxjs": "^3.0.0",
     "mini-css-extract-plugin": "^2.10.2",
+    "minimatch": "^10.2.5",
     "node-fetch": "^3.3.0",
     "p-queue": "^9",
     "playwright": "^1.47.0",
@@ -122,6 +124,7 @@
     "terser-webpack-plugin": "^5.6.0",
     "ts-node": "^10.9.2",
     "typescript": "~6.0.2",
+    "unist-util-visit": "^5.0.0",
     "webpack": "^5.106.1",
     "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.4"
