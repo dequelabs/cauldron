@@ -44,24 +44,101 @@ function SingleSelectionTreeView() {
 
 Allows multiple tree items to be selected at once.
 
+Allows multiple tree items to be selected independently of one another.
+
 ```jsx example
 function MultipleSelectionTreeView() {
   const items = [
     {
       id: '1',
       textValue: 'Documents',
-      children: [{ id: '2', textValue: 'Project' }]
+      children: [
+        { id: '2', textValue: 'Project' },
+        { id: '3', textValue: 'Notes' }
+      ]
     },
     {
-      id: '3',
+      id: '4',
       textValue: 'Photos',
-      children: [{ id: '4', textValue: 'Image 1' }]
+      children: [{ id: '5', textValue: 'Image 1' }]
     }
   ];
   return (
     <TreeView
       aria-label="Multiple Selection Tree View"
       selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+}
+```
+
+### Cascading Selection
+
+Set `selectionStrategy="cascade"` (multiple selection only) to link parents and
+their children: selecting or deselecting a parent applies to all of its
+descendants, and a parent's checkbox reflects its descendants' state — checked
+when all are selected, unchecked when none are, and **indeterminate** (a dash)
+when only some are selected.
+
+```jsx example
+function CascadingTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [
+        { id: '2', textValue: 'Project' },
+        { id: '3', textValue: 'Notes' }
+      ]
+    },
+    {
+      id: '4',
+      textValue: 'Photos',
+      children: [{ id: '5', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <TreeView
+      aria-label="Cascading Tree View"
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+}
+```
+
+### Exclusive Selection
+
+Set `selectionStrategy="exclusive"` (multiple selection only) when a parent and
+its children are mutually exclusive — for example when a parent represents the
+aggregate of its children, so selecting both would double-count. Selecting a
+node clears its ancestors and descendants, and a parent shows the
+**indeterminate** (dash) state while any descendant is selected. Nodes marked
+`locked` are rendered disabled and cannot be selected.
+
+```jsx example
+function ExclusiveTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'North America',
+      children: [
+        { id: '2', textValue: 'United States' },
+        { id: '3', textValue: 'Canada' },
+        { id: '4', textValue: 'Mexico', locked: true }
+      ]
+    }
+  ];
+  return (
+    <TreeView
+      aria-label="Exclusive Tree View"
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['1']}
       items={items}
     />
   );
@@ -186,7 +263,8 @@ function ActionTreeView() {
       name: 'items',
       type: 'TreeViewNode[]',
       required: true,
-      description: 'Array of tree items to display.'
+      description:
+        'Array of tree items to display. Each node accepts { id, textValue, children?, locked? }; a locked node is rendered disabled and cannot be selected.'
     },
     {
       name: 'onAction',
@@ -200,6 +278,13 @@ function ActionTreeView() {
       defaultValue: 'none',
       description:
         'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectionMode is none'
+    },
+    {
+      name: 'selectionStrategy',
+      type: "'independent' | 'cascade' | 'exclusive'",
+      defaultValue: 'independent',
+      description:
+        "How a node's selection relates to its parent/children (multiple selection only). 'independent': nodes are selected on their own. 'cascade': selecting a parent selects all descendants; a parent shows checked/indeterminate/unchecked reflecting its descendants. 'exclusive': a parent and its children are mutually exclusive — selecting a node clears its ancestors and descendants, and a parent shows the indeterminate state while a descendant is selected."
     },
     {
       name: 'defaultExpandedKeys',

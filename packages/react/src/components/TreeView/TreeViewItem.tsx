@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import {
   Button,
   Collection,
@@ -8,16 +8,22 @@ import {
 } from 'react-aria-components';
 import nextId from 'react-id-generator';
 import { TreeViewNode } from './types';
+import TreeViewContext from './TreeViewContext';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
 
 const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
   const checkboxId = useMemo(() => nextId('tree-view-item-'), []);
+  const { indeterminateKeys } = useContext(TreeViewContext);
 
   return (
     <TreeItem id={id} textValue={textValue} className="TreeView__item">
       <TreeItemContent>
-        {({ selectionMode, isSelected }: TreeItemContentRenderProps) => (
+        {({
+          selectionMode,
+          isSelected,
+          isDisabled
+        }: TreeItemContentRenderProps) => (
           <>
             <Button slot="chevron" className="TreeView__chevron">
               <Icon type="chevron-right" />
@@ -27,6 +33,8 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
                 id={checkboxId}
                 label={textValue}
                 checked={isSelected}
+                indeterminate={indeterminateKeys.has(id)}
+                disabled={isDisabled}
                 controlled
                 tabIndex={-1}
               />

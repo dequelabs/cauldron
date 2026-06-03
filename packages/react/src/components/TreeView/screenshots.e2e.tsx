@@ -74,14 +74,36 @@ test('should have screenshot for TreeView multiple selection', async ({
       aria-label="Food categories"
       items={items}
       selectionMode="multiple"
+      selectionStrategy="cascade"
       defaultExpandedKeys={['1']}
     />
   );
+  // Selecting a parent cascades to its children — all of Fruits is checked.
   await component.getByRole('checkbox', { name: 'Fruits' }).click();
-  await component.getByRole('checkbox', { name: 'Apple' }).click();
   await expect(component).toHaveScreenshot('tree-view-multiple-selection');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot(
     'dark--tree-view-multiple-selection'
   );
+});
+
+test('should have screenshot for TreeView indeterminate parent', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <TreeView
+      aria-label="Food categories"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // Only one of Fruits' children is selected, so Fruits shows the
+  // indeterminate (dash) state.
+  await component.getByRole('checkbox', { name: 'Apple' }).click();
+  await expect(component).toHaveScreenshot('tree-view-indeterminate');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--tree-view-indeterminate');
 });

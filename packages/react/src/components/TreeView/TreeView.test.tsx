@@ -289,3 +289,320 @@ test('renders without error in SSR (expanded keys)', () => {
   );
   expect(html).toMatchSnapshot();
 });
+
+// Indeterminate / cascade behavior (multiple selection mode).
+// Placed after the SSR snapshot tests so they don't shift the shared
+// `react-id-generator` counter those snapshots depend on.
+
+test('parent is indeterminate when only some children are selected', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+
+  const parent = getByRole('checkbox', { name: 'TreeView' });
+  expect(parent).toBePartiallyChecked();
+  expect(parent).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});
+
+test('parent becomes checked (not indeterminate) when all children are selected', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  await userEvent.click(getByRole('checkbox', { name: 'pie' }));
+
+  const parent = getByRole('checkbox', { name: 'TreeView' });
+  expect(parent).toBeChecked();
+  expect(parent).not.toBePartiallyChecked();
+});
+
+test('selecting a parent cascades selection to all of its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+});
+
+test('clicking an indeterminate parent selects all of its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBePartiallyChecked();
+
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+});
+
+test('deselecting a child reverts the parent from checked to indeterminate', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBePartiallyChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+});
+
+test('cascade is inert in single selection mode', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="single"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(
+    getByRole('checkbox', { name: 'TreeView' })
+  ).not.toBePartiallyChecked();
+});
+
+test('without cascade, multiple selection is independent and never indeterminate', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // Selecting one child does not select its sibling and does not mark the parent.
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+  expect(
+    getByRole('checkbox', { name: 'TreeView' })
+  ).not.toBePartiallyChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+
+  // Selecting the parent does not cascade to its children.
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});
+
+test('Ctrl+A select-all is preserved when toggling a single item (no lost selections)', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1', '4']}
+    />
+  );
+  // Select everything via react-aria's built-in Ctrl+A.
+  getByRole('row', { name: 'TreeView' }).focus();
+  await userEvent.keyboard('{Control>}a{/Control}');
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'foo' })).toBeChecked();
+
+  // Toggling one item off must not drop the rest (the 'all' -> empty-set bug).
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'foo' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'bar' })).toBeChecked();
+});
+
+test('Space toggles cascading selection on the focused parent', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  getByRole('row', { name: 'TreeView' }).focus();
+  await userEvent.keyboard('{ }');
+
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+});
+
+test('has no axe violations in the cascading indeterminate state', async () => {
+  const { container, getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // Put a parent into the indeterminate (mixed) state.
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBePartiallyChecked();
+
+  expect(await axe(container)).toHaveNoViolations();
+});
+
+// --- Exclusive strategy (parent/child mutually exclusive) ---
+
+test('exclusive: selecting a parent deselects its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+});
+
+test('exclusive: selecting a child deselects the parent and marks it indeterminate', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBePartiallyChecked();
+});
+
+test('exclusive: a parent with all children selected is still not checked', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  await userEvent.click(getByRole('checkbox', { name: 'pie' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+  // Independent of its children: the parent never auto-checks.
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBePartiallyChecked();
+});
+
+test('exclusive: selecting a deep node clears both ancestors and descendants', async () => {
+  const deepItems: TreeViewNode[] = [
+    {
+      id: 'a',
+      textValue: 'Region',
+      children: [
+        {
+          id: 'b',
+          textValue: 'Country',
+          children: [{ id: 'c', textValue: 'State' }]
+        }
+      ]
+    }
+  ];
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={deepItems}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['a', 'b']}
+    />
+  );
+  // Select the top ancestor.
+  await userEvent.click(getByRole('checkbox', { name: 'Region' }));
+  expect(getByRole('checkbox', { name: 'Region' })).toBeChecked();
+
+  // Selecting the deep descendant clears the ancestor chain.
+  await userEvent.click(getByRole('checkbox', { name: 'State' }));
+  expect(getByRole('checkbox', { name: 'State' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'Region' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'Country' })).not.toBeChecked();
+});
+
+// --- Locked nodes ---
+
+test('locked nodes cannot be selected', async () => {
+  const lockedItems: TreeViewNode[] = [
+    {
+      id: '1',
+      textValue: 'Parent',
+      children: [
+        { id: '2', textValue: 'Open' },
+        { id: '3', textValue: 'Locked', locked: true }
+      ]
+    }
+  ];
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={lockedItems}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  const locked = getByRole('checkbox', { name: 'Locked' });
+  expect(locked).toBeDisabled();
+
+  await userEvent.click(locked);
+  expect(locked).not.toBeChecked();
+
+  // A non-locked sibling still selects normally.
+  await userEvent.click(getByRole('checkbox', { name: 'Open' }));
+  expect(getByRole('checkbox', { name: 'Open' })).toBeChecked();
+});
