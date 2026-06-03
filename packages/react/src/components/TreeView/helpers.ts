@@ -14,9 +14,12 @@ export function toKeySet(
   selection: Selection,
   nodes: TreeViewNode[]
 ): Set<Key> {
-  return selection === 'all'
-    ? new Set<Key>(collectAllKeys(nodes))
-    : new Set<Key>(selection);
+  if (selection !== 'all') {
+    return new Set<Key>(selection);
+  }
+  // "Select all" only includes selectable (non-locked) nodes.
+  const locked = new Set<Key>(collectLockedKeys(nodes));
+  return new Set<Key>(collectAllKeys(nodes).filter((key) => !locked.has(key)));
 }
 
 /** Locate a node anywhere in the tree by its id. */
@@ -77,24 +80,50 @@ export function collectLockedKeys(nodes: TreeViewNode[]): Key[] {
 }
 
 /**
- * Reconcile parent membership bottom-up: a parent is selected if and only if
- * all of its children are selected. Mutates `selected` in place.
+ * Reconcile parent membership bottom-up: a parent is selected iff all of its
+ * selectable (non-locked) descendants are selected. Locked nodes are never
+ * selected and don't count toward (or block) a parent's checked state. A parent
+ * whose subtree has no selectable nodes is left untouched. Mutates `selected`.
  */
 function normalizeParentSelection(
   nodes: TreeViewNode[],
-  selected: Set<Key>
+  selected: Set<Key>,
+  locked: Set<Key>
 ): void {
-  const visit = (node: TreeViewNode): boolean => {
+  // Returns whether the subtree is fully selected (for an ancestor's check) and
+  // whether it contains any selectable node at all.
+  const visit = (
+    node: TreeViewNode
+  ): { full: boolean; selectable: boolean } => {
+    if (locked.has(node.id)) {
+      let selectable = false;
+      node.children?.forEach((child) => {
+        if (visit(child).selectable) {
+          selectable = true;
+        }
+      });
+      // Locked nodes never block an ancestor and are never added themselves.
+      return { full: true, selectable };
+    }
     if (!node.children || node.children.length === 0) {
-      return selected.has(node.id);
+      return { full: selected.has(node.id), selectable: true };
     }
-    const allChildrenSelected = node.children.map(visit).every(Boolean);
-    if (allChildrenSelected) {
-      selected.add(node.id);
-    } else {
-      selected.delete(node.id);
+    let full = true;
+    let selectable = false;
+    node.children.forEach((child) => {
+      const result = visit(child);
+      full = full && result.full;
+      selectable = selectable || result.selectable;
+    });
+    // Only reconcile this parent when its subtree has something selectable.
+    if (selectable) {
+      if (full) {
+        selected.add(node.id);
+      } else {
+        selected.delete(node.id);
+      }
     }
-    return allChildrenSelected;
+    return { full, selectable };
   };
   nodes.forEach(visit);
 }
@@ -153,10 +182,19 @@ export function toggleSelection(
   }
 
   // cascade
+  const locked = new Set<Key>(collectLockedKeys(nodes));
   const node = findNode(nodes, key);
   const subtree = node ? [key, ...collectDescendantKeys(node)] : [key];
-  subtree.forEach((k) => (selecting ? result.add(k) : result.delete(k)));
-  normalizeParentSelection(nodes, result);
+  subtree.forEach((k) => {
+    if (selecting) {
+      if (!locked.has(k)) {
+        result.add(k);
+      }
+    } else {
+      result.delete(k);
+    }
+  });
+  normalizeParentSelection(nodes, result, locked);
   return result;
 }
 
@@ -197,21 +235,31 @@ export function applySelectionChange(
   }
 
   // cascade
+  const locked = new Set<Key>(collectLockedKeys(nodes));
   const apply = (key: Key, selecting: boolean) => {
     const node = findNode(nodes, key);
     const keys = node ? [key, ...collectDescendantKeys(node)] : [key];
-    keys.forEach((k) => (selecting ? result.add(k) : result.delete(k)));
+    keys.forEach((k) => {
+      if (selecting) {
+        if (!locked.has(k)) {
+          result.add(k);
+        }
+      } else {
+        result.delete(k);
+      }
+    });
   };
   added.forEach((key) => apply(key, true));
   removed.forEach((key) => apply(key, false));
-  normalizeParentSelection(nodes, result);
+  normalizeParentSelection(nodes, result, locked);
   return result;
 }
 
 /**
- * Parents that are partially selected. Given the cascade invariant (a parent is
- * in `selected` iff all its descendants are), a node is indeterminate when it
- * has at least one selected descendant but is not itself selected.
+ * Parents that are partially selected. A node is indeterminate when it has at
+ * least one selected descendant but is not itself selected — which holds for
+ * both the `cascade` and `exclusive` strategies. (Locked descendants are never
+ * selected, so they never make a parent indeterminate.)
  */
 export function computeIndeterminateKeys(
   nodes: TreeViewNode[],

@@ -606,3 +606,90 @@ test('locked nodes cannot be selected', async () => {
   await userEvent.click(getByRole('checkbox', { name: 'Open' }));
   expect(getByRole('checkbox', { name: 'Open' })).toBeChecked();
 });
+
+// --- Locked nodes x linked strategies ---
+
+const lockedTreeItems: TreeViewNode[] = [
+  {
+    id: '1',
+    textValue: 'Group',
+    children: [
+      { id: '2', textValue: 'Open' },
+      { id: '3', textValue: 'Locked', locked: true }
+    ]
+  }
+];
+
+test('cascade: selecting a parent never selects a locked child', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={lockedTreeItems}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'Group' }));
+
+  expect(getByRole('checkbox', { name: 'Open' })).toBeChecked();
+  const locked = getByRole('checkbox', { name: 'Locked' });
+  expect(locked).toBeDisabled();
+  expect(locked).not.toBeChecked();
+});
+
+test('cascade: a parent checks when all unlocked children are selected (locked child ignored)', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={lockedTreeItems}
+      selectionMode="multiple"
+      selectionStrategy="cascade"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // 'Open' is the only unlocked child — selecting it should fully check the parent.
+  await userEvent.click(getByRole('checkbox', { name: 'Open' }));
+  expect(getByRole('checkbox', { name: 'Group' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'Group' })).not.toBePartiallyChecked();
+  expect(getByRole('checkbox', { name: 'Locked' })).not.toBeChecked();
+});
+
+test('exclusive: selecting a parent leaves a locked child untouched', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={lockedTreeItems}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'Group' }));
+  expect(getByRole('checkbox', { name: 'Group' })).toBeChecked();
+  const locked = getByRole('checkbox', { name: 'Locked' });
+  expect(locked).toBeDisabled();
+  expect(locked).not.toBeChecked();
+});
+
+// --- onAction combined with a linked strategy (dual handler paths) ---
+
+test('onAction with an exclusive strategy applies linked selection without double-toggling', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      selectionStrategy="exclusive"
+      onAction={onAction}
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('row', { name: 'pizza' }));
+
+  expect(onAction).toHaveBeenCalled();
+  // Selection applied exactly once — pizza ends up checked, not toggled back off
+  // by a second handler firing.
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+});
