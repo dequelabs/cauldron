@@ -47,12 +47,14 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
+    const handleMnemonicMatch = useCallback((element: HTMLElement) => {
+      setActiveOption((prev) =>
+        prev?.element === element ? prev : { element }
+      );
+    }, []);
+
     const containerRef = useMnemonics<HTMLUListElement>({
-      onMatch: (element) => {
-        setActiveOption({
-          element
-        });
-      },
+      onMatch: handleMnemonicMatch,
       matchingElementsSelector:
         props.role === 'menu'
           ? '[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]'
