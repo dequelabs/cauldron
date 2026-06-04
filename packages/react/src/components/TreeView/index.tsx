@@ -1,9 +1,15 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { Tree, type Selection, type Key } from 'react-aria-components';
 import { Cauldron } from '../../types';
 import { TreeViewNode } from './types';
 import TreeViewItem from './TreeViewItem';
+import {
+  applyCascade,
+  collectDisabledKeys,
+  toggleSelection,
+  toKeySet
+} from './helpers';
 
 export type { TreeViewNode } from './types';
 
@@ -11,16 +17,15 @@ type TreeViewProps = Cauldron.LabelProps & {
   items: TreeViewNode[];
   onAction?: (key: string) => void;
   selectionMode?: 'none' | 'single' | 'multiple';
+  /** When true (multiple selection only), selecting a parent also selects all
+   *  of its (non-disabled) descendants. */
+  cascadeSelect?: boolean;
+  /** When true (multiple selection only), deselecting a parent also deselects
+   *  all of its descendants. */
+  cascadeDeselect?: boolean;
   defaultExpandedKeys?: string[];
   className?: string;
 };
-
-function collectAllKeys(nodes: TreeViewNode[]): Key[] {
-  return nodes.flatMap((node) => [
-    node.id,
-    ...(node.children ? collectAllKeys(node.children) : [])
-  ]);
-}
 
 const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
   (
@@ -28,6 +33,8 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
       items,
       onAction,
       selectionMode = 'none',
+      cascadeSelect = false,
+      cascadeDeselect = false,
       defaultExpandedKeys,
       className,
       ...other
@@ -35,32 +42,50 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
     ref
   ) => {
     const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
+    const cascade = { cascadeSelect, cascadeDeselect };
+    // Cascade only applies to multiple selection.
+    const isCascade =
+      selectionMode === 'multiple' && (cascadeSelect || cascadeDeselect);
 
+    // Selection driven by react-aria (row/checkbox press, keyboard).
+    const handleSelectionChange = (selection: Selection) => {
+      setSelectedKeys((prev) =>
+        applyCascade(
+          items,
+          toKeySet(prev, items),
+          toKeySet(selection, items),
+          selectionMode,
+          cascade
+        )
+      );
+    };
+
+    // When `onAction` is set, react-aria treats a row press as an action rather
+    // than a selection, so we toggle selection here ourselves.
     const handleAction = (key: Key) => {
-      setSelectedKeys((prev) => {
-        const prevSet =
-          prev === 'all' ? new Set<Key>(collectAllKeys(items)) : new Set(prev);
-        const next = new Set(prevSet);
-        if (next.has(key)) {
-          next.delete(key);
-        } else {
-          if (selectionMode === 'single') {
-            next.clear();
-          }
-          next.add(key);
-        }
-        return next;
-      });
+      if (selectionMode !== 'none') {
+        setSelectedKeys((prev) =>
+          toggleSelection(
+            items,
+            toKeySet(prev, items),
+            key,
+            selectionMode,
+            cascade
+          )
+        );
+      }
       onAction?.(key as string);
     };
 
-    const actionProps = onAction
-      ? {
-          onAction: handleAction,
-          selectedKeys,
-          onSelectionChange: setSelectedKeys
-        }
-      : {};
+    // Disabled nodes are non-selectable; react-aria disables them via disabledKeys.
+    const disabledKeys = useMemo(() => collectDisabledKeys(items), [items]);
+
+    // Cascade requires controlling selection. Without it, preserve the original
+    // behavior: selection is only controlled when an `onAction` handler is set.
+    const selectionProps =
+      selectionMode !== 'none' && (isCascade || onAction)
+        ? { selectedKeys, onSelectionChange: handleSelectionChange }
+        : {};
 
     return (
       <Tree
@@ -68,7 +93,9 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
         className={classNames('TreeView', className)}
         selectionMode={selectionMode}
         defaultExpandedKeys={defaultExpandedKeys}
-        {...actionProps}
+        {...(disabledKeys.length > 0 ? { disabledKeys } : {})}
+        {...(onAction ? { onAction: handleAction } : {})}
+        {...selectionProps}
         {...other}
       >
         {items.map((item) => (
