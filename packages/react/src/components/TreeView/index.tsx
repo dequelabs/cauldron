@@ -47,16 +47,20 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
     const isCascade =
       selectionMode === 'multiple' && (cascadeSelect || cascadeDeselect);
 
-    // Selection driven by react-aria (row/checkbox press, keyboard).
+    // Selection driven by react-aria (row/checkbox press, keyboard). When
+    // cascading, reconcile the proposed change; otherwise store react-aria's
+    // selection as-is so the `'all'` sentinel (Ctrl+A) is preserved.
     const handleSelectionChange = (selection: Selection) => {
       setSelectedKeys((prev) =>
-        applyCascade(
-          items,
-          toKeySet(prev, items),
-          toKeySet(selection, items),
-          selectionMode,
-          cascade
-        )
+        isCascade
+          ? applyCascade(
+              items,
+              toKeySet(prev, items),
+              toKeySet(selection, items),
+              selectionMode,
+              cascade
+            )
+          : selection
       );
     };
 
