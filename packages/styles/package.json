@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "build": "postcss index.css --dir ./dist",
-    "dev": "npm run build -- --watch",
-    "prepublishOnly": "NODE_ENV=production yarn build"
+    "dev": "pnpm run build --watch",
+    "prepublishOnly": "NODE_ENV=production pnpm build"
   },
   "publishConfig": {
     "access": "public"

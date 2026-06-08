@@ -3,30 +3,30 @@
   "private": true,
   "version": "7.1.0",
   "license": "MPL-2.0",
-  "workspaces": [
-    "packages/*"
-  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "clean": "rimraf dist docs/dist",
-    "build": "concurrently \"yarn build:styles\" \"yarn build:react\" && yarn build:docs && yarn build:storybook",
-    "build:react": "cross-env NODE_ENV=production yarn --cwd=packages/react build",
-    "build:styles": "cross-env NODE_ENV=production yarn --cwd=packages/styles build",
+    "build": "concurrently \"pnpm build:styles\" \"pnpm build:react\" && pnpm build:docs && pnpm build:storybook",
+    "build:react": "cross-env NODE_ENV=production pnpm --filter @deque/cauldron-react build",
+    "build:styles": "cross-env NODE_ENV=production pnpm --filter @deque/cauldron-styles build",
     "build:docs": "cross-env NODE_ENV=production webpack --bail",
     "build:storybook": "storybook build -o docs/dist/storybook",
-    "dev": "concurrently \"yarn dev:styles\" \"yarn dev:react\" \"yarn dev:docs\"",
-    "dev:react": "yarn --cwd=packages/react dev",
-    "dev:styles": "yarn --cwd=packages/styles dev",
+    "dev": "concurrently \"pnpm dev:styles\" \"pnpm dev:react\" \"pnpm dev:docs\"",
+    "dev:react": "pnpm --filter @deque/cauldron-react dev",
+    "dev:styles": "pnpm --filter @deque/cauldron-styles dev",
     "dev:docs": "webpack-dev-server",
     "dev:storybook": "storybook dev -p 6006",
     "fmt": "prettier --write \"e2e/*.ts\" \"docs/**/*.{css,js}\" \"packages/react/**/*.{js,ts,tsx}\" \"packages/styles/*.css\" *.{js,json,md,ts}",
     "lint": "eslint . --quiet",
-    "typecheck": "yarn --cwd=packages/react typecheck",
-    "prebuild": "yarn clean",
-    "predev": "yarn clean",
-    "test": "yarn --cwd=packages/react test",
+    "typecheck": "pnpm --filter @deque/cauldron-react typecheck",
+    "prebuild": "pnpm clean",
+    "predev": "pnpm clean",
+    "test": "pnpm --filter @deque/cauldron-react test",
     "test:a11y": "ts-node e2e/accessibility.ts",
     "screenshots": "docker run --rm --ipc=host -v $(pwd)/playwright-ct.config.ts:/app/playwright-ct.config.ts -v $(pwd)/packages:/app/packages -v $(pwd)/e2e:/app/e2e cauldron-playwright-e2e-screenshots",
-    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(node -p \"require('playwright/package.json').version\")",
+    "screenshots:docker": "docker build . -t cauldron-playwright-e2e-screenshots -f e2e/Dockerfile --build-arg playwright_version=$(node -p \"require('playwright/package.json').version\") --build-arg pnpm_version=$(node -p \"require('./package.json').packageManager.split('@')[1]\")",
     "release": "./scripts/release.sh",
     "precommit": "lint-staged",
     "prepare": "husky"
@@ -129,9 +129,5 @@
     "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.4"
   },
-  "resolutions": {
-    "react": "^19",
-    "react-dom": "^19"
-  },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "pnpm@11.4.0"
 }

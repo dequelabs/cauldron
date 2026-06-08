@@ -21,13 +21,13 @@ jobs:
 
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
 
       - name: Update screenshot baselines
         run: |
-          yarn screenshots:docker
-          yarn screenshots --update-snapshots
+          pnpm screenshots:docker
+          pnpm screenshots --update-snapshots
 
       - name: Commit updated baselines
         run: |

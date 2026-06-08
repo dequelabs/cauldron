@@ -1,3 +1,10 @@
-#!/bin/sh
+if [ -f package-lock.json ] || [ -f yarn.lock ]; then
+  echo "ERROR: package-lock.json or yarn.lock detected in repo root."
+  echo "This repo uses pnpm. Recover with:"
+  echo "  rm -f package-lock.json yarn.lock"
+  echo "  find . -name node_modules -type d -prune -exec rm -rf {} +"
+  echo "  pnpm install"
+  exit 1
+fi
 
-yarn run precommit
+pnpm run precommit

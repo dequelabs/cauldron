@@ -14,13 +14,13 @@
     "lib/"
   ],
   "scripts": {
-    "build": "yarn build:lib && yarn build:css",
+    "build": "pnpm build:lib && pnpm build:css",
     "prebuild:lib": "node scripts/buildIconTypes.js",
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "typecheck": "tsc --noEmit --skipLibCheck",
-    "dev": "concurrently 'yarn build:css --watch' 'rollup -c --watch'",
-    "prepublishOnly": "NODE_ENV=production yarn build",
+    "dev": "concurrently 'pnpm build:css --watch' 'rollup -c --watch'",
+    "prepublishOnly": "NODE_ENV=production pnpm build",
     "test": "jest --maxWorkers=1 --coverage",
     "figma:parse": "figma connect parse",
     "figma:publish": "figma connect publish",

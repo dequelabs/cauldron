@@ -1,27 +1,23 @@
 name: 'Dependencies'
-description: 'Sets up Node and installs dependencies for Cauldron'
+description: 'Sets up Node and pnpm and installs dependencies for Cauldron'
 inputs:
   install:
-    description: 'Run yarn install'
+    description: 'Run pnpm install'
     default: 'true'
 
 runs:
   using: 'composite'
   steps:
+    - uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
+      # No version: — the action reads it from packageManager in package.json.
     - uses: actions/setup-node@v6
       with:
-        node-version: 22
-        cache: yarn
-        cache-dependency-path: 'yarn.lock'
+        node-version-file: '.nvmrc'
+        cache: pnpm
+        cache-dependency-path: 'pnpm-lock.yaml'
         registry-url: 'https://registry.npmjs.org'
-    # We need npm 11.5.1+ for OIDC-based publishing support
-    # Installing npm 11.11.0 as a workaround for https://github.com/npm/cli/issues/9151
-    - run: npm install -g npm@11.11.0
-      shell: bash
-    - run: npm install -g yarn # Required since we reinstalled npm
-      shell: bash
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: pnpm install --frozen-lockfile
       shell: bash
       # Note: Checking for both boolean and string true values due to referenced bug:
       # https://github.com/actions/runner/issues/2238

@@ -26,13 +26,13 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 ### install dependencies
 
 ```sh
-$ yarn
+$ pnpm install
 ```
 
-### build (if first time building dev environment, must be run before yarn dev)
+### build (if first time building dev environment, must be run before pnpm dev)
 
 ```sh
-$ yarn build
+$ pnpm build
 ```
 
 ### dev
@@ -40,7 +40,7 @@ $ yarn build
 (watches/rebuilds react, styles, and docs)
 
 ```sh
-$ yarn dev
+$ pnpm dev
 ```
 
 navigate the browser to http://localhost:8003/
@@ -50,5 +50,5 @@ navigate the browser to http://localhost:8003/
 (runs all tests)
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
