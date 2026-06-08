@@ -51,7 +51,9 @@ jobs:
           pnpm build:react
           pnpm build:styles
       # The canary jobs mutate package.json's version before publishing, so
-      # pass --no-git-checks; pnpm publish otherwise refuses on a dirty tree.
+      # pass --no-git-checks to both pnpm version and pnpm publish — each
+      # refuses on a dirty tree by default, and the first package's version
+      # bump leaves the tree dirty for the second.
       - name: Publish @deque/cauldron-styles
         working-directory: packages/styles
         run: |
@@ -59,11 +61,11 @@ jobs:
           # walks up to the workspace root and returns a JSON object keyed by
           # package name, which breaks the string concatenation below.
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
-          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
           pnpm publish --tag=next --no-git-checks
       - name: Publish @deque/cauldron-react
         working-directory: packages/react
         run: |
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
-          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
           pnpm publish --tag=next --no-git-checks
