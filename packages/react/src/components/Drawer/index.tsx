@@ -4,10 +4,12 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   useRef
 } from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
+import { useId } from 'react-id-generator';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import useEscapeKey from '../../utils/useEscapeKey';
@@ -16,6 +18,11 @@ import useFocusTrap from '../../utils/useFocusTrap';
 import resolveElement from '../../utils/resolveElement';
 import AriaIsolate from '../../utils/aria-isolate';
 import { isBrowser } from '../../utils/is-browser';
+import {
+  DrawerContext,
+  useDrawerContext,
+  type DrawerContextValue
+} from './DrawerContext';
 
 export interface DrawerProps<
   T extends HTMLElement = HTMLElement
@@ -50,6 +57,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   ) => {
     const drawerRef = useSharedRef(ref);
     const openRef = useRef(!!open);
+    const [headingId] = useId(1, 'drawer-title-');
     const { initialFocus: focusInitial, returnFocus: focusReturn } =
       focusOptions;
     const [isTransitioning, setIsTransitioning] = useState(!!open);
@@ -115,6 +123,24 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       returnFocusElement: focusReturn
     });
 
+    useEffect(() => {
+      if (open && drawerRef.current) {
+        const hasHeading = drawerRef.current.querySelector('.Drawer__heading');
+        if (process.env.NODE_ENV !== 'production' && !hasHeading) {
+          throw Error(
+            'Drawer: No heading provided. Include a DrawerHeading component for accessibility.'
+          );
+        }
+      }
+    }, [open]);
+
+    const contextValue: DrawerContextValue = useMemo(
+      () => ({
+        headingId
+      }),
+      [headingId]
+    );
+
     const portalElement = resolveElement(portal);
 
     return createPortal(
@@ -127,6 +153,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         >
           <div
             ref={drawerRef}
+            role="dialog"
             className={classnames(className, 'Drawer', {
               'Drawer--open': !!open,
               'Drawer--top': position === 'top',
@@ -135,6 +162,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               'Drawer--right': position === 'right'
             })}
             aria-hidden={!open || undefined}
+            aria-modal={isModal ? true : undefined}
+            aria-labelledby={headingId}
             style={{
               visibility: !open && !isTransitioning ? 'hidden' : undefined,
               ...style
@@ -142,7 +171,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             tabIndex={open ? -1 : undefined}
             {...props}
           >
-            {children}
+            <DrawerContext.Provider value={contextValue}>
+              {children}
+            </DrawerContext.Provider>
           </div>
         </ClickOutsideListener>
         <Scrim show={!!open && !!isModal} />
@@ -156,4 +187,31 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
 Drawer.displayName = 'Drawer';
 
+export interface DrawerHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  children: React.ReactNode;
+  className?: string;
+  level?: number;
+}
+
+const DrawerHeading = ({
+  children,
+  className,
+  level = 2,
+  ...other
+}: DrawerHeadingProps) => {
+  const { headingId } = useDrawerContext();
+  const HeadingLevel = `h${level}` as 'h1';
+  return (
+    <HeadingLevel
+      className={classnames('Drawer__heading', className)}
+      id={headingId}
+      {...other}
+    >
+      {children}
+    </HeadingLevel>
+  );
+};
+DrawerHeading.displayName = 'DrawerHeading';
+
 export default Drawer;
+export { Drawer, DrawerHeading };

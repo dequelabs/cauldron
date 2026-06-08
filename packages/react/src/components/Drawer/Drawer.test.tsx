@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Drawer from './';
+import Drawer, { DrawerHeading } from './';
 import axe from '../../axe';
 
 afterEach(() => {
@@ -9,18 +9,55 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+const renderHeading = () => <DrawerHeading>Drawer title</DrawerHeading>;
+
 test('should render children', () => {
   render(
     <Drawer position="left" open data-testid="drawer">
+      {renderHeading()}
       Hello World
     </Drawer>
   );
   expect(screen.getByText('Hello World')).toBeInTheDocument();
 });
 
+test('should render as a dialog', () => {
+  render(
+    <Drawer position="left" open>
+      {renderHeading()}
+      Children
+    </Drawer>
+  );
+
+  expect(screen.getByRole('dialog', { name: 'Drawer title' })).toBeVisible();
+});
+
+test('should set aria-modal when modal', () => {
+  render(
+    <Drawer position="left" open>
+      {renderHeading()}
+      Children
+    </Drawer>
+  );
+
+  expect(screen.getByRole('dialog')).toHaveAttribute('aria-modal', 'true');
+});
+
+test('should not set aria-modal when non-modal', () => {
+  render(
+    <Drawer position="left" behavior="non-modal" open>
+      {renderHeading()}
+      Children
+    </Drawer>
+  );
+
+  expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-modal');
+});
+
 test('should support className prop', () => {
   render(
     <Drawer position="left" className="bananas" open data-testid="drawer">
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -39,6 +76,7 @@ test('should support open prop', () => {
   expect(drawer).not.toBeVisible();
   rerender(
     <Drawer position="left" data-testid="drawer" open>
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -58,6 +96,7 @@ test('should support position prop', () => {
   };
   const { rerender } = render(
     <Drawer position="top" open data-testid="drawer">
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -87,6 +126,7 @@ test('should call onClose prop on esc keypress', async () => {
   const user = userEvent.setup();
   render(
     <Drawer position="left" data-testid="drawer" open onClose={onClose}>
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -101,6 +141,7 @@ test('should call onClose prop on click outside', async () => {
   const user = userEvent.setup();
   render(
     <Drawer position="left" data-testid="drawer" open onClose={onClose}>
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -120,6 +161,7 @@ test('should set focus to drawer by default when opened', () => {
   expect(screen.getByTestId('drawer')).not.toHaveFocus();
   rerender(
     <Drawer position="left" data-testid="drawer" open>
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -144,6 +186,7 @@ test('should set focus to focusable element when opened', () => {
         initialFocus: button
       }}
     >
+      {renderHeading()}
       <button>focus me</button>
     </Drawer>
   );
@@ -171,6 +214,7 @@ test('should set focus to custom element when opened', () => {
       focusOptions={{ initialFocus: ref.current as HTMLElement }}
       open
     >
+      {renderHeading()}
       <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
@@ -199,6 +243,7 @@ test('should set focus to custom ref element', () => {
       focusOptions={{ initialFocus: ref }}
       open
     >
+      {renderHeading()}
       <button>no focus me</button>
       <button ref={ref}>focus me</button>
     </Drawer>
@@ -224,6 +269,7 @@ test('should return focus to triggering element when closed', () => {
     <>
       <button>trigger</button>
       <Drawer position="left" data-testid="drawer" open>
+        {renderHeading()}
         Children
       </Drawer>
     </>
@@ -260,6 +306,7 @@ test('should return focus to custom element when closed', () => {
       open
       focusOptions={{ returnFocus: button }}
     >
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -280,6 +327,7 @@ test('should support ref prop', () => {
   const ref = React.createRef<HTMLDivElement>();
   render(
     <Drawer position="left" open ref={ref} data-testid="drawer">
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -294,6 +342,7 @@ test('should not trap focus when behavior is non-modal', async () => {
     <>
       <button>outside</button>
       <Drawer position="left" behavior="non-modal" open>
+        {renderHeading()}
         <div>
           <button>inside</button>
         </div>
@@ -315,6 +364,7 @@ test('should not trap focus when behavior is non-modal', async () => {
 test('should return no axe violations when open', async () => {
   render(
     <Drawer position="left" open data-testid="drawer">
+      {renderHeading()}
       Children
     </Drawer>
   );
@@ -332,4 +382,16 @@ test('should return no axe violations when closed', async () => {
 
   const results = await axe(await screen.findByTestId('drawer'));
   expect(results).toHaveNoViolations();
+});
+
+test('should throw when opened without a DrawerHeading', () => {
+  expect(() =>
+    render(
+      <Drawer position="left" open>
+        Children
+      </Drawer>
+    )
+  ).toThrow(
+    'Drawer: No heading provided. Include a DrawerHeading component for accessibility.'
+  );
 });
