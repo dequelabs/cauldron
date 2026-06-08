@@ -11,13 +11,13 @@ Snapshot testing uses [playwright](https://playwright.dev/) and [component testi
 In order to generate consistent testing across platforms, Docker is used to run playwright and run the screenshot comparison tests. To update or generate the docker image, run:
 
 ```sh
-yarn screenshots:docker
+pnpm screenshots:docker
 ```
 
 To update existing snapshots run:
 
 ```sh
-yarn screenshots --update-snapshots
+pnpm screenshots --update-snapshots
 ```
 
 > [!NOTE]
@@ -26,7 +26,7 @@ yarn screenshots --update-snapshots
 Finally, to run screenshot comparison tests run:
 
 ```sh
-yarn screenshots
+pnpm screenshots
 ```
 
 ### Testing Components
