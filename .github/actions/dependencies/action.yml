@@ -16,11 +16,6 @@ runs:
         cache: pnpm
         cache-dependency-path: 'pnpm-lock.yaml'
         registry-url: 'https://registry.npmjs.org'
-    # OIDC trusted publishing in release.yml delegates to npm, which needs
-    # 11.5.1+ for that. Pin to 11.11.0 to work around
-    # https://github.com/npm/cli/issues/9151 in the bundled Node 22 npm.
-    - run: npm install -g npm@11.11.0
-      shell: bash
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
       shell: bash
