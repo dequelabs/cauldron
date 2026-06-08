@@ -4,6 +4,11 @@ frontend:
     preBuild:
       commands:
         - npm install -g pnpm@11.4.0
+        # Point pnpm's content-addressed store inside the repo so Amplify's
+        # cache (repo-relative paths only) can actually persist it. Caching
+        # node_modules/** is ineffective under pnpm — it's a symlink farm into
+        # the store, not the package contents.
+        - pnpm config set store-dir .pnpm-store
         - pnpm install --frozen-lockfile
     build:
       commands:
@@ -14,4 +19,4 @@ frontend:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
+      - .pnpm-store/**/*
