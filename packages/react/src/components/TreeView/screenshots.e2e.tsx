@@ -85,3 +85,23 @@ test('should have screenshot for TreeView multiple selection', async ({
     'dark--tree-view-multiple-selection'
   );
 });
+
+test('should have screenshot for TreeView cascade selection', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <TreeView
+      aria-label="Food categories"
+      items={items}
+      selectionMode="multiple"
+      cascadeSelect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // Cascade: checking the parent checks all of its children.
+  await component.getByRole('checkbox', { name: 'Fruits' }).click();
+  await expect(component).toHaveScreenshot('tree-view-cascade-selection');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--tree-view-cascade-selection');
+});

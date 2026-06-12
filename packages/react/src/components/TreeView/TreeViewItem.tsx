@@ -17,7 +17,11 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
   return (
     <TreeItem id={id} textValue={textValue} className="TreeView__item">
       <TreeItemContent>
-        {({ selectionMode, isSelected }: TreeItemContentRenderProps) => (
+        {({
+          selectionMode,
+          isSelected,
+          isDisabled
+        }: TreeItemContentRenderProps) => (
           <>
             <Button slot="chevron" className="TreeView__chevron">
               <Icon type="chevron-right" />
@@ -27,6 +31,7 @@ const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
                 id={checkboxId}
                 label={textValue}
                 checked={isSelected}
+                disabled={isDisabled}
                 controlled
                 tabIndex={-1}
               />
