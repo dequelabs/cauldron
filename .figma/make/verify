@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+URL="${FIGMA_MAKE_URL:-http://localhost:8003}"
+MAX_WAIT=60
+INTERVAL=2
+ELAPSED=0
+
+echo "Waiting for dev server at $URL ..."
+
+while [ "$ELAPSED" -lt "$MAX_WAIT" ]; do
+  if curl -sf -o /dev/null "$URL"; then
+    echo "Dev server is up ✓"
+    exit 0
+  fi
+  sleep "$INTERVAL"
+  ELAPSED=$((ELAPSED + INTERVAL))
+done
+
+echo "Error: Dev server did not respond at $URL within ${MAX_WAIT}s"
+exit 1

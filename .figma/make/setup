@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+if ! command -v node &> /dev/null; then
+  echo "Error: Node.js is not installed."
+  exit 1
+fi
+
+NODE_MAJOR=$(node -e "console.log(process.versions.node.split('.')[0])")
+if [ "$NODE_MAJOR" -lt 22 ]; then
+  echo "Error: Node.js 22+ is required (found v$(node -v))."
+  exit 1
+fi
+
+echo "Node.js $(node -v) ✓"
+
+if ! command -v pnpm &> /dev/null; then
+  echo "Installing pnpm via corepack..."
+  corepack enable
+  corepack prepare pnpm@latest --activate
+fi
+
+echo "pnpm $(pnpm -v) ✓"

@@ -130,5 +130,10 @@
     "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.4"
   },
-  "packageManager": "pnpm@11.4.0"
+  "packageManager": "pnpm@11.4.0",
+  "pnpm": {
+    "overrides": {
+      "iconv-lite@0.6.3": "0.6.2"
+    }
+  }
 }

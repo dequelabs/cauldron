@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
+pnpm install
+pnpm build:styles
+pnpm build:react
