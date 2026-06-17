@@ -28,7 +28,23 @@ const getComponentUrls = async (port: number): Promise<Set<string>> => {
     executablePath: determineBrowserPath()
   });
   const page = await browser.newPage();
-  await page.goto(`http://localhost:${port}/`);
+
+  // Fail loudly if the app throws while booting. A runtime crash (e.g. a doc
+  // page with missing frontmatter) leaves a blank page that otherwise sails
+  // through the axe pass with zero violations.
+  const pageErrors: Error[] = [];
+  page.on('pageerror', (error) => pageErrors.push(error as Error));
+
+  await page.goto(`http://localhost:${port}/`, { waitUntil: 'networkidle0' });
+
+  if (pageErrors.length) {
+    await browser.close();
+    throw new Error(
+      `The docs site threw while loading "/":\n${pageErrors
+        .map((error) => `  ${error.message}`)
+        .join('\n')}`
+    );
+  }
 
   // Build a list of all URLs.
   const links = await page.$$('nav.Navigation a[href]');
@@ -39,6 +55,15 @@ const getComponentUrls = async (port: number): Promise<Set<string>> => {
   }
 
   await browser.close();
+
+  // If the navigation never rendered, the app booted into a broken/blank
+  // state. Bail rather than "passing" by testing only the index URL.
+  if (urls.size <= 1) {
+    throw new Error(
+      'No navigation links were found on the docs index — the site likely ' +
+        'failed to render. Refusing to run the a11y pass against a blank page.'
+    );
+  }
 
   return urls;
 };
@@ -69,6 +94,10 @@ const main = async (): Promise<void> => {
           executablePath: determineBrowserPath()
         });
         const page = await browser.newPage();
+
+        const pageErrors: Error[] = [];
+        page.on('pageerror', (error) => pageErrors.push(error as Error));
+
         await page.goto(`http://localhost:${port}/`);
 
         const component = (url.split('/').pop() as string) || 'Index';
@@ -78,6 +107,15 @@ const main = async (): Promise<void> => {
         } catch (ex) {
           console.log(url);
           throw ex;
+        }
+
+        if (pageErrors.length) {
+          await browser.close();
+          throw new Error(
+            `${url} threw while loading:\n${pageErrors
+              .map((error) => `  ${error.message}`)
+              .join('\n')}`
+          );
         }
 
         for (const theme of THEMES) {
