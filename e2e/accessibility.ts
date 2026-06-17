@@ -98,86 +98,88 @@ const main = async (): Promise<void> => {
         const pageErrors: Error[] = [];
         page.on('pageerror', (error) => pageErrors.push(error as Error));
 
-        await page.goto(`http://localhost:${port}/`);
-
         const component = (url.split('/').pop() as string) || 'Index';
 
         try {
-          await page.goto(url, { waitUntil: 'networkidle0' });
-        } catch (ex) {
-          console.log(url);
-          throw ex;
-        }
+          await page.goto(`http://localhost:${port}/`);
 
-        if (pageErrors.length) {
-          await browser.close();
-          throw new Error(
-            `${url} threw while loading:\n${pageErrors
-              .map((error) => `  ${error.message}`)
-              .join('\n')}`
-          );
-        }
+          try {
+            await page.goto(url, { waitUntil: 'networkidle0' });
+          } catch (ex) {
+            console.log(url);
+            throw ex;
+          }
 
-        for (const theme of THEMES) {
-          await page.evaluate(
-            (theme) => {
-              document.body.className = '';
-              document.body.classList.add(`cauldron--theme-${theme}`);
-            },
-            [theme]
-          );
+          if (pageErrors.length) {
+            throw new Error(
+              `${url} threw while loading:\n${pageErrors
+                .map((error) => `  ${error.message}`)
+                .join('\n')}`
+            );
+          }
 
-          // Try to wait until there is an idle period up to a max of 5s
-          await Promise.race([
+          for (const theme of THEMES) {
             await page.evaluate(
-              () =>
-                new Promise((resolve) =>
-                  // Typescript does not implement experimental apis but this should exist within puppeteer
-                  // see: https://github.com/microsoft/TypeScript/issues/21309
-                  (window as any).requestIdleCallback(resolve)
-                )
-            ),
-            await new Promise((resolve) => setTimeout(resolve, 5000))
-          ]);
+              (theme) => {
+                document.body.className = '';
+                document.body.classList.add(`cauldron--theme-${theme}`);
+              },
+              [theme]
+            );
 
-          const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
-            'wcag2a',
-            'wcag2aa',
-            'wcag21a',
-            'wcag21aa',
-            'wcag22a',
-            'wcag22aa'
-          ]);
-          const { violations } = (await axe.analyze()) as AxeResults;
+            // Try to wait until there is an idle period up to a max of 5s
+            await Promise.race([
+              await page.evaluate(
+                () =>
+                  new Promise((resolve) =>
+                    // Typescript does not implement experimental apis but this should exist within puppeteer
+                    // see: https://github.com/microsoft/TypeScript/issues/21309
+                    (window as any).requestIdleCallback(resolve)
+                  )
+              ),
+              await new Promise((resolve) => setTimeout(resolve, 5000))
+            ]);
 
-          let symbol = logSymbols.success;
-          if (violations.length) {
-            symbol = logSymbols.warning;
-            foundViolations = true;
+            const axe = new AxePuppeteer(page, AXE_SOURCE).withTags([
+              'wcag2a',
+              'wcag2aa',
+              'wcag21a',
+              'wcag21aa',
+              'wcag22a',
+              'wcag22aa'
+            ]);
+            const { violations } = (await axe.analyze()) as AxeResults;
+
+            let symbol = logSymbols.success;
+            if (violations.length) {
+              symbol = logSymbols.warning;
+              foundViolations = true;
+            }
+
+            const title =
+              chalk.cyan(chalk.bold(component)) +
+              ' (' +
+              chalk.italic(theme) +
+              ')';
+            const dots = '.'.repeat(
+              MAX_WIDTH - component.length - symbol.length
+            );
+            console.log(title, dots, symbol);
+
+            for (const { id, help, nodes } of violations) {
+              console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
+              nodes.map((node) => {
+                console.log(
+                  '  ↳',
+                  chalk.bgGreen(chalk.black(`${node.target}`)),
+                  chalk.yellowBright(node.html)
+                );
+              });
+            }
           }
-
-          const title =
-            chalk.cyan(chalk.bold(component)) +
-            ' (' +
-            chalk.italic(theme) +
-            ')';
-          const dots = '.'.repeat(MAX_WIDTH - component.length - symbol.length);
-          console.log(title, dots, symbol);
-
-          for (const { id, help, nodes } of violations) {
-            console.log('↳', chalk.underline(chalk.magenta(id)), '━', help);
-            nodes.map((node) => {
-              console.log(
-                '  ↳',
-                chalk.bgGreen(chalk.black(`${node.target}`)),
-                chalk.yellowBright(node.html)
-              );
-            });
-          }
+        } finally {
+          await browser.close();
         }
-
-        await page.close();
-        await browser.close();
       });
     })
   );
