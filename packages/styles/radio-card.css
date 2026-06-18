@@ -12,7 +12,9 @@
 
 .RadioCard__overlay.RadioCard__overlay--focused {
   border: 1px solid var(--focus);
-  box-shadow: inset 0 0 0 1px var(--focus), 0 0 4px 2px var(--focus-glow);
+  box-shadow:
+    inset 0 0 0 1px var(--focus),
+    0 0 4px 2px var(--focus-glow);
 }
 
 .RadioCard__overlay--checked.RadioCard__overlay--checked {

@@ -6,8 +6,10 @@ import setRef from '../../utils/setRef';
 
 const [up, down, tab, enter, space, esc] = [38, 40, 9, 13, 32, 27];
 
-export interface OptionsMenuListProps
-  extends Omit<OptionsMenuProps, 'trigger'> {
+export interface OptionsMenuListProps extends Omit<
+  OptionsMenuProps,
+  'trigger'
+> {
   className?: string;
 }
 

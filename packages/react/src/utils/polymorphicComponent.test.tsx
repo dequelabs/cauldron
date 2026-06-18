@@ -6,8 +6,9 @@ import type {
 
 /* prop types */
 
-interface BaseComponentProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface BaseComponentProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   value: number;
 }
 

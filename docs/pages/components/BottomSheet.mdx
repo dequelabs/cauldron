@@ -4,11 +4,11 @@ description: A primitive component with an initially hidden off-screen overlay a
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/BottomSheet/index.tsx
 ---
 
-import { useState } from 'react'
-import { BottomSheet, IconButton, Icon, Button } from '@deque/cauldron-react'
+import { useState } from 'react';
+import { BottomSheet, IconButton, Icon, Button } from '@deque/cauldron-react';
 
 ```js
-import { BottomSheet } from '@deque/cauldron-react'
+import { BottomSheet } from '@deque/cauldron-react';
 ```
 
 `BottomSheet` is an extension of the [`Drawer`](./Drawer) component to display additional information, typically on smaller devices.
@@ -21,12 +21,16 @@ function BottomSheetExample() {
   const toggleOpen = () => setOpen(!open);
   return (
     <>
-      <IconButton label="Toggle Bottom Sheet" icon="hamburger-menu" onClick={toggleOpen} />
+      <IconButton
+        label="Toggle Bottom Sheet"
+        icon="hamburger-menu"
+        onClick={toggleOpen}
+      />
       <BottomSheet label="Bottom Sheet Title" open={open} onClose={toggleOpen}>
         Contents
       </BottomSheet>
     </>
-  )
+  );
 }
 ```
 
@@ -47,7 +51,8 @@ function BottomSheetExample() {
     {
       name: 'focusOptions',
       type: 'object',
-      description: 'Advanced customization of focus state when the bottom sheet open state changes.'
+      description:
+        'Advanced customization of focus state when the bottom sheet open state changes.'
     },
     {
       name: 'onClose',

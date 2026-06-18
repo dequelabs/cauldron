@@ -5,10 +5,10 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 storybook: true
 ---
 
-import { Icon, Button, Code, BadgeLabel } from '@deque/cauldron-react'
+import { Icon, Button, Code, BadgeLabel } from '@deque/cauldron-react';
 
 ```js
-import { Button } from '@deque/cauldron-react'
+import { Button } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -121,7 +121,17 @@ When you need a semantic button with the visual appearance of a link.
   props={[
     {
       name: 'variant',
-      type: ['primary', 'secondary', 'tertiary', 'error', 'link', 'tag', 'badge', 'danger', 'danger-secondary'],
+      type: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'error',
+        'link',
+        'tag',
+        'badge',
+        'danger',
+        'danger-secondary'
+      ],
       defaultValue: 'primary',
       description: 'Visual style of the button.'
     },
