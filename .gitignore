@@ -13,3 +13,6 @@ yarn.lock
 
 playwright/.cache
 e2e/test-results
+
+**/.claude/settings.local.json
+**/.claude/worktrees/
