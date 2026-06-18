@@ -14,6 +14,5 @@ yarn.lock
 playwright/.cache
 e2e/test-results
 
-# Claude Code local files (machine-specific settings, agent worktrees)
 **/.claude/settings.local.json
 **/.claude/worktrees/
