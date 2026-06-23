@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import sinon from 'sinon';
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -6,6 +6,15 @@ import MenuItem from '../MenuItem';
 import { axe } from 'jest-axe';
 
 const user = userEvent.setup();
+
+test('exposes defaulted props as optional via ComponentProps', () => {
+  // Props backed by defaultProps (menuItemRef, onClick, onKeyDown) should be
+  // optional when derived with ComponentProps, so wrappers can forward props
+  // without resorting to Partial. This is a compile-time assertion.
+  const props: ComponentProps<typeof MenuItem> = { children: 'x' };
+  render(<MenuItem {...props} />);
+  expect(screen.getByText('x')).toBeInTheDocument();
+});
 
 test('clicks first direct child link given a click', async () => {
   const onClick = sinon.spy();

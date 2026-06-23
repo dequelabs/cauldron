@@ -5,9 +5,9 @@ import setRef from '../../utils/setRef';
 
 interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
-  menuItemRef: React.Ref<HTMLLIElement>;
-  onClick: (e: React.MouseEvent<HTMLLIElement>) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLLIElement>) => void;
+  menuItemRef?: React.Ref<HTMLLIElement>;
+  onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLLIElement>) => void;
   autoClickLink?: boolean;
 }
 
@@ -36,7 +36,7 @@ export default class MenuItem extends Component<MenuItemProps> {
     if (autoClickLink) {
       clickLink(e.target as HTMLElement, this.item as HTMLElement);
     }
-    onClick(e);
+    onClick?.(e);
   }
 
   onKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
@@ -47,7 +47,7 @@ export default class MenuItem extends Component<MenuItemProps> {
       this.item?.click();
     }
 
-    this.props.onKeyDown(e);
+    this.props.onKeyDown?.(e);
   }
 
   render() {
