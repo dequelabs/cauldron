@@ -43,7 +43,7 @@ const htmlAnchorRef = React.createRef<HTMLAnchorElement>();
 
 /*
  * Note: The below components are statically typed and get validated with tsc
- * to ensure we don't arbitrarily break polymoprhic components. Valid component
+ * to ensure we don't arbitrarily break polymorphic components. Valid component
  * types should throw no errors, where @ts-expect-error is used to indicate
  * an invalid or missing property.
  */
