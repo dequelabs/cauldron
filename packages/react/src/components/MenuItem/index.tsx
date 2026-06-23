@@ -6,8 +6,6 @@ import setRef from '../../utils/setRef';
 interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
   menuItemRef?: React.Ref<HTMLLIElement>;
-  onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLLIElement>) => void;
   autoClickLink?: boolean;
 }
 
