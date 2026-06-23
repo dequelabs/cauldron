@@ -5,8 +5,10 @@ import { useTable } from './TableContext';
 import useTableGridStyles from './useTableGridStyles';
 import useSharedRef from '../../utils/useSharedRef';
 
-interface TableCellProps
-  extends Omit<React.TdHTMLAttributes<HTMLTableDataCellElement>, 'align'> {
+interface TableCellProps extends Omit<
+  React.TdHTMLAttributes<HTMLTableDataCellElement>,
+  'align'
+> {
   align?: ColumnAlignment;
 }
 

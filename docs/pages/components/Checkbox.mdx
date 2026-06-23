@@ -5,10 +5,10 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 storybook: true
 ---
 
-import { Checkbox, FieldWrap, FieldGroup } from '@deque/cauldron-react'
+import { Checkbox, FieldWrap, FieldGroup } from '@deque/cauldron-react';
 
 ```js
-import { Checkbox } from '@deque/cauldron-react'
+import { Checkbox } from '@deque/cauldron-react';
 ```
 
 <Note>
@@ -16,10 +16,11 @@ import { Checkbox } from '@deque/cauldron-react'
   `Checkbox` component has been designed specifically to meet color contrast
   requirements against a `FieldWrap` background.
 
-  If you use a `Checkbox` without a `FieldWrap` (for example, within a `Modal`,
-  where `FieldWrap`'s `Panel` appearance might not be appropriate), you _must_
-  verify that it meets accessibility requirements in all component states,
-  especially for color contrast.
+If you use a `Checkbox` without a `FieldWrap` (for example, within a `Modal`,
+where `FieldWrap`'s `Panel` appearance might not be appropriate), you _must_
+verify that it meets accessibility requirements in all component states,
+especially for color contrast.
+
 </Note>
 
 ## Examples
@@ -125,12 +126,12 @@ import { Checkbox } from '@deque/cauldron-react'
 
 ### Checkbox Group
 
-If a set of checkboxes is logically grouped, those checkboxes should be wrapped with a [FieldGroup](./FieldGroup) component to provide a label and optional description to help communicate that relationship. 
+If a set of checkboxes is logically grouped, those checkboxes should be wrapped with a [FieldGroup](./FieldGroup) component to provide a label and optional description to help communicate that relationship.
 
 ```jsx example
-<FieldWrap 
+<FieldWrap
   as={FieldGroup}
-  label="Checkbox Group Label" 
+  label="Checkbox Group Label"
   description="You must select at least one of the following:"
 >
   <Checkbox
@@ -203,9 +204,9 @@ If a set of checkboxes is logically grouped, those checkboxes should be wrapped 
 ### Checkbox Group with Descriptions
 
 ```jsx example
-<FieldWrap 
+<FieldWrap
   as={FieldGroup}
-  label="Checkbox Group with Descriptions Label" 
+  label="Checkbox Group with Descriptions Label"
   description="You must select at least one of the following:"
 >
   <Checkbox
@@ -216,7 +217,7 @@ If a set of checkboxes is logically grouped, those checkboxes should be wrapped 
     value="1"
   />
   <Checkbox
-  checked
+    checked
     id="description-checkbox-list-checked"
     label="Description Checkbox Checked"
     labelDescription="Additional text to describe the checkbox"
@@ -289,7 +290,8 @@ If a set of checkboxes is logically grouped, those checkboxes should be wrapped 
     {
       name: 'checked',
       type: 'boolean',
-      description: 'If the checkbox should be checked, which allows it to be controlled.',
+      description:
+        'If the checkbox should be checked, which allows it to be controlled.',
       defaultValue: 'false'
     },
     {
@@ -307,7 +309,7 @@ If a set of checkboxes is logically grouped, those checkboxes should be wrapped 
     {
       name: 'error',
       type: 'string',
-      description: 'Descriptive text of error.',
+      description: 'Descriptive text of error.'
     },
     {
       name: 'checkboxRef',

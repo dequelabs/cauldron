@@ -196,7 +196,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       };
     }, [columnLeftRef.current, isCollapsed]);
 
-    // When the collapsable panel starts to overlay content, it needs to become a focus trap and collapsed by default
+    // When the collapsible panel starts to overlay content, it needs to become a focus trap and collapsed by default
     useLayoutEffect(() => {
       const mediaQueryList = matchMedia(collapsedMediaQuery);
       const handleMatch = (matches: boolean) => {

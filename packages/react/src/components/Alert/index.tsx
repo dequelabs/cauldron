@@ -3,8 +3,10 @@ import classnames from 'classnames';
 import Icon from '../Icon';
 import { Dialog, DialogContent, DialogFooter, DialogProps } from '../Dialog';
 
-interface AlertProps
-  extends Omit<DialogProps, 'forceAction' | 'closeButtonText'> {
+interface AlertProps extends Omit<
+  DialogProps,
+  'forceAction' | 'closeButtonText'
+> {
   variant?: 'default' | 'warning';
 }
 
