@@ -1,12 +1,12 @@
 version: 2
 
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     commit-message:
-      prefix: "chore"
+      prefix: 'chore'
     groups:
       # Any updates not caught by the group config will get individual PRs
       gha-low-risk:
@@ -15,21 +15,21 @@ updates:
           - 'patch'
     cooldown:
       default-days: 7
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     commit-message:
-      prefix: "chore"
+      prefix: 'chore'
     groups:
       update-playwright:
         patterns:
-          - "playwright"
-          - "@playwright/*"
+          - 'playwright'
+          - '@playwright/*'
       update-babel:
         patterns:
-          - "babel-*"
-          - "@babel/*"
+          - 'babel-*'
+          - '@babel/*'
     cooldown:
       default-days: 7
     ignore:
