@@ -34,8 +34,6 @@ export default class MenuItem extends Component<MenuItemProps> {
     if (autoClickLink) {
       clickLink(e.target as HTMLElement, this.item as HTMLElement);
     }
-    // Optional since defaultProps supplies a no-op; migrating to a function
-    // component with default params would drop the need for `?.`.
     onClick?.(e);
   }
 
@@ -47,7 +45,6 @@ export default class MenuItem extends Component<MenuItemProps> {
       this.item?.click();
     }
 
-    // Optional since defaultProps supplies a no-op (see onClick above).
     this.props.onKeyDown?.(e);
   }
 
