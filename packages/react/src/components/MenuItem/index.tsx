@@ -36,6 +36,9 @@ export default class MenuItem extends Component<MenuItemProps> {
     if (autoClickLink) {
       clickLink(e.target as HTMLElement, this.item as HTMLElement);
     }
+    // Optional chaining keeps TypeScript happy: these handlers are typed as
+    // optional so consumers don't have to pass them, even though defaultProps
+    // always supplies a no-op at runtime.
     onClick?.(e);
   }
 
@@ -47,6 +50,8 @@ export default class MenuItem extends Component<MenuItemProps> {
       this.item?.click();
     }
 
+    // See onClick above: optional chaining satisfies the optional prop type;
+    // defaultProps guarantees a handler at runtime.
     this.props.onKeyDown?.(e);
   }
 
