@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.2.0](https://github.com/dequelabs/cauldron/compare/v7.1.0...v7.2.0) (2026-06-25)
+
+
+### Features
+
+* add figma connect, IconButton figma file ([#2370](https://github.com/dequelabs/cauldron/issues/2370)) ([0a8faa9](https://github.com/dequelabs/cauldron/commit/0a8faa90322236a7c83f898b1f202025d5ffe70f))
+* add Storybook served at /storybook on the docs site ([#2384](https://github.com/dequelabs/cauldron/issues/2384)) ([383b892](https://github.com/dequelabs/cauldron/commit/383b8920c2fe3fd1cc7beda2e402849c324c342a))
+* connect components to Figma (batch 1/5) ([#2375](https://github.com/dequelabs/cauldron/issues/2375)) ([ab18b9c](https://github.com/dequelabs/cauldron/commit/ab18b9c59eff130cf4af9d16172ecbc6104a02a2)), closes [#2373](https://github.com/dequelabs/cauldron/issues/2373)
+* **Icon:** update star icon and add star-outline icon ([#2454](https://github.com/dequelabs/cauldron/issues/2454)) ([062b090](https://github.com/dequelabs/cauldron/commit/062b0906a03d18b4c9dffaee22b98c34dcbab78a))
+* **TreeView:** cascading selection (cascadeSelect / cascadeDeselect) and disabled nodes ([#2427](https://github.com/dequelabs/cauldron/issues/2427)) ([d6d4478](https://github.com/dequelabs/cauldron/commit/d6d447890123f45adb8ce882ba1fd8c802242404)), closes [#2419](https://github.com/dequelabs/cauldron/issues/2419)
+
+
+### Bug Fixes
+
+* **ci:** pass --no-git-checks to pnpm version in canary publishes ([#2431](https://github.com/dequelabs/cauldron/issues/2431)) ([79522fc](https://github.com/dequelabs/cauldron/commit/79522fc15aa1c04b68454db6f8b81e5d3aea080c))
+* **ci:** read canary version from package.json directly ([#2416](https://github.com/dequelabs/cauldron/issues/2416)) ([7bc2199](https://github.com/dequelabs/cauldron/commit/7bc21991095a24416fde5c78cef0c4dbaa006f78))
+* **ClickOutsideListener:** avoid React 19 element.ref deprecation warning ([#2403](https://github.com/dequelabs/cauldron/issues/2403)) ([4271d96](https://github.com/dequelabs/cauldron/commit/4271d962f20cfd2871c1909507bc8b56b1ad70fe))
+* **Combobox:** preserve active descendant after deselecting in multiselect ([#2382](https://github.com/dequelabs/cauldron/issues/2382)) ([63bb41a](https://github.com/dequelabs/cauldron/commit/63bb41ac6f1c7bbd3e7afa87d4ed51624064083e)), closes [#2367](https://github.com/dequelabs/cauldron/issues/2367)
+* **docs:** use `title` frontmatter on PageHeader and SectionHeader docs pages ([#2394](https://github.com/dequelabs/cauldron/issues/2394)) ([d650efc](https://github.com/dequelabs/cauldron/commit/d650efcca68183f022c556198951163e3665197f))
+* **docs:** use named minimatch import ([#2433](https://github.com/dequelabs/cauldron/issues/2433)) ([8284d94](https://github.com/dequelabs/cauldron/commit/8284d9464ff89aa7a509c3d9c06e19733ba5eb6d)), closes [#2417](https://github.com/dequelabs/cauldron/issues/2417)
+* **figma:** make Notice body dynamic in Code Connect ([#2391](https://github.com/dequelabs/cauldron/issues/2391)) ([c367e9d](https://github.com/dequelabs/cauldron/commit/c367e9d4b3134aa41a6289d6bdee5cee68362a24))
+* **Listbox:** improve typing for ListBox ([#2310](https://github.com/dequelabs/cauldron/issues/2310)) ([df3401c](https://github.com/dequelabs/cauldron/commit/df3401c2dc15419eb52378edaa19e8070982b28e))
+* **MenuBar:** replace soon-to-be-removed findDOMNode with ref ([#2368](https://github.com/dequelabs/cauldron/issues/2368)) ([07abf03](https://github.com/dequelabs/cauldron/commit/07abf03d7e9603471fe77835d632cef2ad57f017))
+* **MenuItem:** make defaulted props optional in MenuItemProps ([#2450](https://github.com/dequelabs/cauldron/issues/2450)) ([038917f](https://github.com/dequelabs/cauldron/commit/038917f61d2ff77ac2416a79c6d835b136db4f78)), closes [#2448](https://github.com/dequelabs/cauldron/issues/2448)
+* replace innerText usage with textContent ([#2397](https://github.com/dequelabs/cauldron/issues/2397)) ([ee30df1](https://github.com/dequelabs/cauldron/commit/ee30df1725beb1f1bcb93fbf54934b5be4ac0ecd))
+* resolve infinite update loop in ActionMenu after React 19 upgrade ([#2414](https://github.com/dequelabs/cauldron/issues/2414)) ([b914451](https://github.com/dequelabs/cauldron/commit/b914451f2bc6ebea20f21fe49ef93c0580d7e66c))
+* **styles:** correct misspelled --accent-primary-disabled var ([#2387](https://github.com/dequelabs/cauldron/issues/2387)) ([1107761](https://github.com/dequelabs/cauldron/commit/1107761fe9e8e02fef8c5cd5dd5d59e60937372b)), closes [#78a6d8](https://github.com/dequelabs/cauldron/issues/78a6d8)
+* typescript useref type errors for react 19 ([#2396](https://github.com/dequelabs/cauldron/issues/2396)) ([2ada12a](https://github.com/dequelabs/cauldron/commit/2ada12a9f642fc854d3714130db6ee2a3f695be0))
+
 ## [7.1.0](https://github.com/dequelabs/cauldron/compare/v7.0.0...v7.1.0) (2026-05-08)
 
 
