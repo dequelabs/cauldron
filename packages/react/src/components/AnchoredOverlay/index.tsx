@@ -22,7 +22,10 @@ type AnchoredOverlayProps<
   Target extends HTMLElement
 > = {
   /** A target element or ref to attach the overlay anchor element. */
-  target: Target | React.MutableRefObject<Target> | React.RefObject<Target>;
+  target:
+    | Target
+    | React.MutableRefObject<Target | null>
+    | React.RefObject<Target | null>;
   /** Positional placement value to anchor the overlay element relative to its anchored target. */
   placement?: Placement | 'auto' | 'auto-start' | 'auto-end';
   /** Determines if the overlay anchor is currently visible. */
@@ -40,7 +43,7 @@ type AnchoredOverlayProps<
   /** When `focusTrap` is true, optional arguments to configure the focus trap. */
   focusTrapOptions?: Parameters<typeof useFocusTrap>[1];
   /** Render the anchored overlay in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   children?: React.ReactNode;
 } & PolymorphicProps<React.HTMLAttributes<Overlay>>;
 

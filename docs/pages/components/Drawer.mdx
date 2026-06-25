@@ -4,11 +4,17 @@ description: A primitive component with an initially hidden off-screen container
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Drawer/index.tsx
 ---
 
-import { useState } from 'react'
-import { Drawer, IconButton, Select, Panel, Button } from '@deque/cauldron-react'
+import { useState } from 'react';
+import {
+  Drawer,
+  IconButton,
+  Select,
+  Panel,
+  Button
+} from '@deque/cauldron-react';
 
 ```js
-import { Drawer } from '@deque/cauldron-react'
+import { Drawer } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -19,12 +25,16 @@ function DrawerExample() {
   const toggleOpen = () => setOpen(!open);
   return (
     <>
-      <IconButton label="Toggle Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <IconButton
+        label="Toggle Drawer"
+        icon="hamburger-menu"
+        onClick={toggleOpen}
+      />
       <Drawer open={open} onClose={toggleOpen} position="left">
         <Panel style={{ height: '100vh' }}>You opened me!</Panel>
       </Drawer>
     </>
-  )
+  );
 }
 ```
 
@@ -47,12 +57,23 @@ function DrawerPositionExample() {
         <option value="left">Left</option>
         <option value="right">Right</option>
       </Select>
-      <IconButton label="Toggle Position Drawer" icon="hamburger-menu" onClick={toggleOpen} />
+      <IconButton
+        label="Toggle Position Drawer"
+        icon="hamburger-menu"
+        onClick={toggleOpen}
+      />
       <Drawer open={open} onClose={toggleOpen} position={position}>
-        <Panel style={{ height: ['left', 'right'].includes(position) && '100vh', width: ['top', 'bottom'].includes(position) && '100vw' }}>You opened me!</Panel>
+        <Panel
+          style={{
+            height: ['left', 'right'].includes(position) && '100vh',
+            width: ['top', 'bottom'].includes(position) && '100vw'
+          }}
+        >
+          You opened me!
+        </Panel>
       </Drawer>
     </>
-  )
+  );
 }
 ```
 
@@ -66,17 +87,23 @@ function DrawerNonModalExample() {
   const toggleOpen = () => setOpen(!open);
   return (
     <>
-      <IconButton label="Toggle Non-Modal Drawer" icon="hamburger-menu" onClick={toggleOpen} />
-      <Drawer open={open} onClose={toggleOpen} position="left" behavior="non-modal">
-
+      <IconButton
+        label="Toggle Non-Modal Drawer"
+        icon="hamburger-menu"
+        onClick={toggleOpen}
+      />
+      <Drawer
+        open={open}
+        onClose={toggleOpen}
+        position="left"
+        behavior="non-modal"
+      >
         <Panel style={{ height: '100vh' }}>
-          <p>
-            You opened me!
-          </p>
+          <p>You opened me!</p>
         </Panel>
       </Drawer>
     </>
-  )
+  );
 }
 ```
 
@@ -93,7 +120,8 @@ Advanced focus configuration can also be set via `focusOptions` and `focusOption
     {
       name: 'position',
       type: ['top', 'bottom', 'left', 'right'],
-      description: 'The anchor position of the Drawer. Sets where the Drawer will appear when opened.',
+      description:
+        'The anchor position of the Drawer. Sets where the Drawer will appear when opened.',
       required: true
     },
     {
@@ -106,12 +134,14 @@ Advanced focus configuration can also be set via `focusOptions` and `focusOption
       name: 'behavior',
       type: ['modal', 'non-modal'],
       defaultValue: 'modal',
-      description: 'When set to "modal", the drawer will act as a modal dialog displaying a backdrop behind the drawer and trapping focus within the drawer. Otherwise, "non-modal" behavior will not trap focus and will allow the user to interact with content outside of the drawer.'
+      description:
+        'When set to "modal", the drawer will act as a modal dialog displaying a backdrop behind the drawer and trapping focus within the drawer. Otherwise, "non-modal" behavior will not trap focus and will allow the user to interact with content outside of the drawer.'
     },
     {
       name: 'focusOptions',
       type: 'object',
-      description: 'Advanced customization of focus state when the Drawer open state changes.'
+      description:
+        'Advanced customization of focus state when the Drawer open state changes.'
     },
     {
       name: 'onClose',

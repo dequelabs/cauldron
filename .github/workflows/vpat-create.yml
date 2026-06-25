@@ -10,14 +10,12 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.3
         with:
           ref: 'master'
       - uses: ./.github/actions/dependencies
         with:
-          root: false
-          packages-react: false
-          packages-styles: false
+          install: false
       - name: Generate VPAT file
         uses: dequelabs/action-vpat-report@main
         with:

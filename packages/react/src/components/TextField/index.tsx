@@ -5,8 +5,10 @@ import setRef from '../../utils/setRef';
 import { addIdRef } from '../../utils/idRefs';
 import Icon from '../Icon';
 
-export interface TextFieldProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface TextFieldProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'onChange'
+> {
   label: React.ReactNode;
   description?: React.ReactNode;
   error?: React.ReactNode;

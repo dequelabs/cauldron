@@ -621,6 +621,31 @@ test('should trigger item onAction when an action list item is clicked', async (
   });
 });
 
+test('should not cause infinite update loop when clicking different items across multiple opens', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList>
+        <ActionListItem onAction={onAction}>One</ActionListItem>
+        <ActionListItem onAction={onAction}>Two</ActionListItem>
+        <ActionListItem onAction={onAction}>Three</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'One' }));
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Two' }));
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Three' }));
+
+  await waitFor(() => {
+    expect(onAction).toHaveBeenCalledTimes(3);
+  });
+});
+
 test('should trigger item onAction when an action list item is clicked with keypress', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();

@@ -5,14 +5,19 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 storybook: true
 ---
 
-import { Icon, Breadcrumb, BreadcrumbLink, BreadcrumbItem } from '@deque/cauldron-react'
+import {
+  Icon,
+  Breadcrumb,
+  BreadcrumbLink,
+  BreadcrumbItem
+} from '@deque/cauldron-react';
 
 ```js
 import {
   Breadcrumb,
   BreadcrumbLink,
   BreadcrumbItem
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -31,7 +36,10 @@ import {
 ### Custom Separators
 
 ```jsx example
-<Breadcrumb aria-label="Breadcrumb" separator={<Icon type="chevron-double-right" />}>
+<Breadcrumb
+  aria-label="Breadcrumb"
+  separator={<Icon type="chevron-double-right" />}
+>
   <BreadcrumbLink href="#">One</BreadcrumbLink>
   <BreadcrumbLink href="#">Two</BreadcrumbLink>
   <BreadcrumbLink href="#">Three</BreadcrumbLink>
@@ -57,14 +65,8 @@ import {
 
 ### BreadcrumbLink
 
-<ComponentProps
-  children={true}
-  refType="HTMLAnchorElement"
-/>
+<ComponentProps children={true} refType="HTMLAnchorElement" />
 
 ### BreadcrumbItem
 
-<ComponentProps
-  children={true}
-  refType="HTMLSpanElement"
-/>
+<ComponentProps children={true} refType="HTMLSpanElement" />

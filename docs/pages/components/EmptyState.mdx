@@ -5,10 +5,10 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 storybook: true
 ---
 
-import { EmptyState, Button } from '@deque/cauldron-react'
+import { EmptyState, Button } from '@deque/cauldron-react';
 
 ```js
-import { EmptyState } from '@deque/cauldron-react'
+import { EmptyState } from '@deque/cauldron-react';
 ```
 
 Empty states are screens or components that appear when there is no data or content to display. They are critical moments in the user experience that, when designed thoughtfully, provide users with context, guidance, and clear paths to action. Rather than leaving users confused with blank spaces, well-designed empty states communicate system status and help users understand what steps to take next.
@@ -20,10 +20,7 @@ Empty states are screens or components that appear when there is no data or cont
 Minimally, empty states require a heading and a short contextual description:
 
 ```jsx example
-<EmptyState
-  heading="Empty State"
-  description="Description of empty state..."
-/>
+<EmptyState heading="Empty State" description="Description of empty state..." />
 ```
 
 ### With Primary Actions
@@ -52,11 +49,7 @@ Empty states can also have secondary actions.
 <EmptyState
   heading="Empty State"
   description="Description of empty state..."
-  secondaryActions={
-    <>
-      Need help? Contact us!
-    </>
-  }
+  secondaryActions={<>Need help? Contact us!</>}
 />
 ```
 

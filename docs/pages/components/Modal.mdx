@@ -92,7 +92,11 @@ function UnstyledModalExample() {
 When a modal contains a large amount of content, the scrollable variant constrains the modal height and makes the content area scrollable while keeping the footer fixed:
 
 <Note>
-  The scrollable variant is not recommended when the modal contains interactive elements with popups such as [Combobox](./Combobox), as the constrained scroll area can clip or obscure their dropdown content. It is also not recommended when the expected viewport height is small, as the limited available space may result in a poor scrolling experience.
+  The scrollable variant is not recommended when the modal contains interactive
+  elements with popups such as [Combobox](./Combobox), as the constrained scroll
+  area can clip or obscure their dropdown content. It is also not recommended
+  when the expected viewport height is small, as the limited available space may
+  result in a poor scrolling experience.
 </Note>
 
 ```jsx example
@@ -178,7 +182,8 @@ function CustomHeaderMarkupModalExample() {
       name: 'scrollable',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Constrains the modal height and makes the content area scrollable while keeping the footer fixed.'
+      description:
+        'Constrains the modal height and makes the content area scrollable while keeping the footer fixed.'
     },
     {
       name: 'heading',
