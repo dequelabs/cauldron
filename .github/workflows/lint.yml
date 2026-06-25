@@ -12,6 +12,9 @@ jobs:
       - uses: actions/checkout@v6.0.3
       - uses: ./.github/actions/dependencies
       - run: pnpm lint
+      - name: format check
+        if: always()
+        run: pnpm format:check
       - name: typecheck
         run: |
           pnpm build:react
