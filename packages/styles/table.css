@@ -17,7 +17,7 @@
 
 .cauldron--theme-dark {
   --table-header-text-color: var(--white);
-  --table-header-background-color: var(--accent-medium);
+  --table-header-background-color: var(--accent-dark);
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--white);
   --table-header-sorting-background-color: #53636e;
