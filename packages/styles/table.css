@@ -1,6 +1,6 @@
 :root {
   --table-header-text-color: var(--gray-90);
-  --table-header-background-color: var(--gray-20);
+  --table-header-background-color: var(--white);
   --table-header-sorting-background-color: #caddec;
   --table-header-background-color-hover: #dddddd;
   /* --table-header-sorting-text-color will be deprecated */
