@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   linkRef?: React.Ref<HTMLAnchorElement>;
   variant?: 'button' | 'button-secondary';
   thin?: boolean;

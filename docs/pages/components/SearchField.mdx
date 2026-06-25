@@ -16,10 +16,11 @@ import { SearchField } from '@deque/cauldron-react';
   `SearchField` component has been designed specifically to meet color contrast
   requirements against a `FieldWrap` background.
 
-  If you use a `SearchField` without a `FieldWrap` (for example, within a
-  `Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
-  you _must_ verify that it meets accessibility requirements in all component
-  states, especially for color contrast.
+If you use a `SearchField` without a `FieldWrap` (for example, within a
+`Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
+you _must_ verify that it meets accessibility requirements in all component
+states, especially for color contrast.
+
 </Note>
 
 ## Examples
@@ -66,8 +67,8 @@ We include trailing children to allow for additional input context to be provide
 
 ```jsx example
 <FieldWrap>
-  <SearchField 
-    label="Search Field with trailing children" 
+  <SearchField
+    label="Search Field with trailing children"
     trailingChildren={
       <span style={{ marginRight: '8px' }}>
         <strong>1</strong> of <strong>1</strong>
@@ -78,6 +79,7 @@ We include trailing children to allow for additional input context to be provide
 ```
 
 ### Controlled
+
 `SearchField` can also be controlled, by setting the `value` prop and updating the value from event callbacks.
 
 ```jsx example
@@ -89,11 +91,7 @@ function ControlledSearchFieldExample() {
 
   return (
     <FieldWrap>
-      <SearchField
-        label="Controlled"
-        value={value}
-        onChange={handleChange}
-      />
+      <SearchField label="Controlled" value={value} onChange={handleChange} />
     </FieldWrap>
   );
 }

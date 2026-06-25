@@ -12,26 +12,22 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.3
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/dependencies
-        with:
-          root: true
-          packages-react: true
-          packages-styles: true
 
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
 
       - name: Update screenshot baselines
         run: |
-          yarn screenshots:docker
-          yarn screenshots --update-snapshots
+          pnpm screenshots:docker
+          pnpm screenshots --update-snapshots
 
       - name: Commit updated baselines
         run: |

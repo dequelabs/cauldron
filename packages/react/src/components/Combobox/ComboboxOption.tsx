@@ -99,7 +99,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     // istanbul ignore next
     useLayoutEffect(() => {
       const intersectionEntry = intersectionRef.current;
-      if (!intersectionEntry || !isActive) {
+      if (!intersectionEntry || !isActive || !comboboxOptionRef.current) {
         return;
       }
 
@@ -122,7 +122,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       const comboboxValue =
         typeof propValue !== 'undefined'
           ? propValue
-          : comboboxOptionRef.current?.innerText;
+          : (comboboxOptionRef.current?.textContent ?? undefined);
       const value =
         typeof formValue === 'undefined' ? comboboxValue : formValue;
 
@@ -149,8 +149,9 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
         const comboboxValue =
           typeof propValue !== 'undefined'
             ? propValue
-            : comboboxOptionRef.current?.innerText;
+            : (comboboxOptionRef.current?.textContent ?? undefined);
         setMatchingOptions((options) => {
+          if (!comboboxOptionRef.current) return options;
           return new Map(
             options.set(comboboxOptionRef.current, {
               value: comboboxValue,

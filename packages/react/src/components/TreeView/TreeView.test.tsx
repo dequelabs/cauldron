@@ -289,3 +289,168 @@ test('renders without error in SSR (expanded keys)', () => {
   );
   expect(html).toMatchSnapshot();
 });
+
+// --- Cascade selection (cascadeSelect / cascadeDeselect) ---
+
+test('cascadeSelect: selecting a parent selects all of its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeSelect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+});
+
+test('cascadeSelect without cascadeDeselect: unchecking a parent leaves children selected', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeSelect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  // Children stay selected — deselection does not cascade.
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+});
+
+test('cascadeDeselect: unchecking a parent deselects all of its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeDeselect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  // No cascadeSelect: select children individually, then the parent.
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  await userEvent.click(getByRole('checkbox', { name: 'pie' }));
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+
+  // Unchecking the parent cascades the deselection to its children.
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});
+
+test('cascadeDeselect without cascadeSelect: selecting a parent does not select children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeDeselect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});
+
+test('no cascade by default: parent and children select independently', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+});
+
+test('no indeterminate state: selecting one child never marks the parent', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeSelect
+      cascadeDeselect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  const parent = getByRole('checkbox', { name: 'TreeView' });
+  expect(parent).not.toBeChecked();
+  expect(parent).not.toBePartiallyChecked();
+});
+
+// --- Disabled nodes ---
+
+const disabledItems: TreeViewNode[] = [
+  {
+    id: '1',
+    textValue: 'Group',
+    children: [
+      { id: '2', textValue: 'Open' },
+      { id: '3', textValue: 'Locked', disabled: true }
+    ]
+  }
+];
+
+test('disabled nodes cannot be selected', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={disabledItems}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  const disabled = getByRole('checkbox', { name: 'Locked' });
+  expect(disabled).toBeDisabled();
+  await userEvent.click(disabled);
+  expect(disabled).not.toBeChecked();
+});
+
+test('cascadeSelect skips disabled descendants', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={disabledItems}
+      selectionMode="multiple"
+      cascadeSelect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'Group' }));
+  expect(getByRole('checkbox', { name: 'Open' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'Locked' })).not.toBeChecked();
+});
+
+test('cascade is inert in single selection mode', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="single"
+      cascadeSelect
+      cascadeDeselect
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+});

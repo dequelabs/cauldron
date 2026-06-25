@@ -68,6 +68,47 @@ function MultipleSelectionTreeView() {
 }
 ```
 
+### Cascading Selection
+
+In `multiple` selection mode, `cascadeSelect` and `cascadeDeselect` link a
+parent's checkbox to its children. They are independent: enable
+`cascadeSelect` so checking a parent checks all of its (non-disabled) children,
+and/or `cascadeDeselect` so unchecking a parent unchecks all of its children.
+A parent's own checked state is never derived from its children (there is no
+indeterminate state). Nodes with `disabled: true` are rendered disabled and are
+skipped by cascading selection.
+
+```jsx example
+function CascadingTreeView() {
+  const items = [
+    {
+      id: '1',
+      textValue: 'Documents',
+      children: [
+        { id: '2', textValue: 'Project' },
+        { id: '3', textValue: 'Notes' },
+        { id: '4', textValue: 'Archive (locked)', disabled: true }
+      ]
+    },
+    {
+      id: '5',
+      textValue: 'Photos',
+      children: [{ id: '6', textValue: 'Image 1' }]
+    }
+  ];
+  return (
+    <TreeView
+      aria-label="Cascading Tree View"
+      selectionMode="multiple"
+      cascadeSelect
+      cascadeDeselect
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+}
+```
+
 ### Default Expanded
 
 Pass keys into the `defaultExpandedKeys` prop array to expand them by default.
@@ -186,7 +227,8 @@ function ActionTreeView() {
       name: 'items',
       type: 'TreeViewNode[]',
       required: true,
-      description: 'Array of tree items to display.'
+      description:
+        'Array of tree items to display. Each node accepts { id, textValue, children?, disabled? }; a node with disabled: true is rendered disabled and cannot be selected.'
     },
     {
       name: 'onAction',
@@ -200,6 +242,20 @@ function ActionTreeView() {
       defaultValue: 'none',
       description:
         'Selection mode: none, single, or multiple selection allowed. Checkboxes will not show if selectionMode is none'
+    },
+    {
+      name: 'cascadeSelect',
+      type: 'boolean',
+      defaultValue: 'false',
+      description:
+        'When true (multiple selection only), selecting a parent also selects all of its non-disabled descendants.'
+    },
+    {
+      name: 'cascadeDeselect',
+      type: 'boolean',
+      defaultValue: 'false',
+      description:
+        'When true (multiple selection only), deselecting a parent also deselects all of its descendants.'
     },
     {
       name: 'defaultExpandedKeys',

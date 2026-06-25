@@ -695,6 +695,68 @@ test('should retain selected value when options changes with defaultValue', () =
   assertListItemIsSelected(2);
 });
 
+test('should accept single-select usage without multiselect prop', () => {
+  render(
+    <Listbox value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('listbox')).not.toHaveAttribute(
+    'aria-multiselectable'
+  );
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+});
+
+test('should accept single-select usage with explicit multiselect={false}', () => {
+  render(
+    <Listbox multiselect={false} value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(screen.getByRole('listbox')).not.toHaveAttribute(
+    'aria-multiselectable'
+  );
+  expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+});
+
+test('should reject array value when single-select (type-only)', () => {
+  // Verifies type discrimination at compile time. The @ts-expect-error will
+  // fail compilation if the type system stops catching this invalid combo.
+  const element = (
+    // @ts-expect-error single-select value must not be an array
+    <Listbox value={['Apple', 'Banana']}>
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(element).toBeDefined();
+});
+
+test('should reject non-array value when multiselect (type-only)', () => {
+  // Verifies type discrimination at compile time. The @ts-expect-error will
+  // fail compilation if the type system stops catching this invalid combo.
+  const element = (
+    // @ts-expect-error multi-select value must be an array
+    <Listbox multiselect value="Apple">
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  expect(element).toBeDefined();
+});
+
 test('should render multiselect listbox', () => {
   render(
     <Listbox multiselect>

@@ -129,3 +129,62 @@ test('handles wide state', () => {
   expect(document.body).not.toHaveClass('TopBar--thin');
   jest.restoreAllMocks();
 });
+
+test('wraps focus to last item when pressing left on the first item', async () => {
+  render(
+    <MenuBar>
+      <TopBarItem>test-1</TopBarItem>
+      <TopBarItem>test-2</TopBarItem>
+      <TopBarItem>test-3</TopBarItem>
+    </MenuBar>
+  );
+
+  const menuItems = screen.getAllByRole('menuitem');
+
+  fireEvent.keyDown(menuItems[0], { key: 'ArrowLeft', keyCode: left });
+  await waitFor(() => {
+    expect(menuItems[menuItems.length - 1]).toHaveFocus();
+  });
+});
+
+test('wraps focus to first item when pressing right on the last item', async () => {
+  render(
+    <MenuBar>
+      <TopBarItem>test-1</TopBarItem>
+      <TopBarItem>test-2</TopBarItem>
+      <TopBarItem>test-3</TopBarItem>
+    </MenuBar>
+  );
+
+  const menuItems = screen.getAllByRole('menuitem');
+
+  fireEvent.keyDown(menuItems[menuItems.length - 1], {
+    key: 'ArrowRight',
+    keyCode: right
+  });
+  await waitFor(() => {
+    expect(menuItems[0]).toHaveFocus();
+  });
+});
+
+test('skips trigger item during navigation when hasTrigger is set in wide viewport', async () => {
+  jest.spyOn(viewportUtils, 'isWide').mockReturnValue(true);
+
+  render(
+    <MenuBar hasTrigger>
+      <TopBarItem>trigger</TopBarItem>
+      <TopBarItem>test-1</TopBarItem>
+      <TopBarItem>test-2</TopBarItem>
+    </MenuBar>
+  );
+
+  const menuItems = screen.getAllByRole('menuitem');
+
+  // index 1 is the first navigable item after the trigger; left should wrap to last
+  fireEvent.keyDown(menuItems[1], { key: 'ArrowLeft', keyCode: left });
+  await waitFor(() => {
+    expect(menuItems[menuItems.length - 1]).toHaveFocus();
+  });
+
+  jest.restoreAllMocks();
+});

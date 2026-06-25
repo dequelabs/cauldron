@@ -9,8 +9,10 @@ const iconTypeMap = {
   info: 'info-circle'
 };
 
-export interface NoticeProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface NoticeProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'title'
+> {
   type?: keyof typeof iconTypeMap;
   title: ContentNode;
   icon?: IconType;

@@ -6,8 +6,7 @@ import ExpandCollapsePanel, {
 } from '../ExpandCollapsePanel';
 import { useId } from 'react-id-generator';
 
-export interface AccordionTriggerProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+export interface AccordionTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   heading?:
     | React.ReactElement
@@ -23,7 +22,10 @@ const AccordionTrigger = ({
   return <>{children}</>;
 };
 
-interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionContentProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onToggle'
+> {
   children: React.ReactNode | React.ReactNode[];
   className?: string;
 }
@@ -58,50 +60,48 @@ const Accordion = ({
   const trigger = childrenArray.find(
     (child) =>
       typeof child === 'string' ||
-      (child as React.ReactElement<any>).type === AccordionTrigger
-  ) as unknown as typeof AccordionTrigger;
+      (React.isValidElement(child) && child.type === AccordionTrigger)
+  );
 
   const panelElement = childrenArray.find(
     (child) =>
       typeof child === 'string' ||
-      (child as React.ReactElement<any>).type === AccordionContent
+      (React.isValidElement(child) && child.type === AccordionContent)
   );
 
-  const isValid = !!(
-    React.isValidElement(trigger) && React.isValidElement(panelElement)
-  );
-
-  if (!isValid) {
+  if (
+    !React.isValidElement<AccordionTriggerProps>(trigger) ||
+    !React.isValidElement<AccordionContentProps>(panelElement)
+  ) {
     console.warn(
       'Must provide <AccordionTrigger /> and <AccordionContent /> element(s). You provided:',
       {
         trigger: trigger,
         panelElement: panelElement,
-        isValid: isValid
+        isValid: false
       }
     );
     return null;
   }
 
+  const panelProps = panelElement.props;
+
   return (
     <div className="Accordion" {...props}>
       <ExpandCollapsePanel
-        id={panelElement.props.id || `${elementId}-panel`}
+        id={panelProps.id || `${elementId}-panel`}
         open={open}
         onToggle={onToggle}
         animationTiming={animationTiming}
-        {...panelElement.props}
+        {...panelProps}
       >
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
-          className={classnames(
-            'Accordion__trigger',
-            (trigger.props as AccordionTriggerProps).className
-          )}
-          aria-controls={panelElement.props.id || `${elementId}-panel`}
-          heading={(trigger.props as AccordionTriggerProps).heading}
-          {...(trigger.props as AccordionTriggerProps)}
+          className={classnames('Accordion__trigger', trigger.props.className)}
+          aria-controls={panelProps.id || `${elementId}-panel`}
+          heading={trigger.props.heading}
+          {...trigger.props}
         >
           {trigger}
         </PanelTrigger>

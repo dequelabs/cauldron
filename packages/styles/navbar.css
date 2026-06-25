@@ -115,12 +115,14 @@
 }
 
 .NavBar.NavBar--collapsed > ul > .NavItem--active {
-  box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color),
+  box-shadow:
+    inset 0px -1px 0px var(--top-nav-box-shadow-color),
     inset 6px 0px 0px var(--top-nav-active-shadow-color);
 }
 
 .NavBar.NavBar--collapsed > .NavBar__trigger--active {
-  box-shadow: inset 0px -1px 0px var(--top-nav-box-shadow-color),
+  box-shadow:
+    inset 0px -1px 0px var(--top-nav-box-shadow-color),
     inset 0px 4px 0px var(--top-nav-active-shadow-color);
   z-index: calc(var(--z-index-top-nav) + 1);
 }

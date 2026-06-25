@@ -21,13 +21,13 @@ import { isBrowser } from '../../utils/is-browser';
 export type PopoverVariant = 'prompt' | 'custom';
 
 type BaseProps = React.HTMLAttributes<HTMLDivElement> & {
-  target: React.RefObject<HTMLElement> | HTMLElement;
+  target: React.RefObject<HTMLElement | null> | HTMLElement;
   variant?: PopoverVariant;
   show: boolean;
   onClose: () => void;
   placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   /** Render the popover in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
 };
 
 type CustomProps = BaseProps & {

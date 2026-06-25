@@ -2,6 +2,7 @@
 title: Notice
 description: A notification banner - similar to a Toast, but allows for more flexible positioning and control.
 source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Notice/Notice.tsx
+storybook: true
 ---
 
 import { useState } from 'react';
@@ -20,7 +21,7 @@ or anywhere else in the DOM without needing to be absolutely/statically position
 ## Examples
 
 The Notice component supports three types: info, caution, and danger. The info type is used to display general
-information, while the caution type is used to display a warning, and the danger type is used to display critical warnings. 
+information, while the caution type is used to display a warning, and the danger type is used to display critical warnings.
 Depending on the type, the background color and icon will change (can be overwritten).
 
 ### Info
@@ -114,8 +115,8 @@ function DismissableNotice() {
 
 ## Variants
 
-The Notice component includes a variant prop that allows for two display styles: default and condensed. 
-The default variant displays the notice with a larger padding and a two-column layout, 
+The Notice component includes a variant prop that allows for two display styles: default and condensed.
+The default variant displays the notice with a larger padding and a two-column layout,
 while the condensed variant uses smaller padding and a single-column layout.
 
 ### Default

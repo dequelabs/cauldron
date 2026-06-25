@@ -37,7 +37,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
         level: number | undefined;
       };
   closeButtonText?: string;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   scrollable?: boolean;
 }
 
@@ -64,7 +64,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogRef = useSharedRef(dialogRefProp || ref);
     const [headingId] = useId(1, 'dialog-title-');
     const headingRef = useRef<HTMLHeadingElement>(null);
-    const isolatorRef = useRef<AriaIsolate>();
+    const isolatorRef = useRef<AriaIsolate | null>(null);
 
     const headingLevel =
       typeof heading === 'object' && 'level' in heading && heading.level

@@ -15,5 +15,5 @@ export type ContentNode = string | number | ReactPortal | ReactElement;
 
 export type ElementOrRef<E extends Element> =
   | E
-  | React.RefObject<E>
-  | React.MutableRefObject<E>;
+  | React.RefObject<E | null>
+  | React.MutableRefObject<E | null>;

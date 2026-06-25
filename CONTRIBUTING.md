@@ -18,6 +18,8 @@
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
 1. [Documentation](#documentation)
+1. [Storybook](#storybook)
+1. [Figma Code Connect](#figma-code-connect)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
    - [Styles](#styles)
@@ -161,8 +163,8 @@ The files in this project are formatted by Prettier and linted with ESLint. Both
 
 | Command           | Description                             |
 | :---------------- | :-------------------------------------- |
-| `yarn lint`       | Runs eslint against everything          |
-| `yarn lint --fix` | Automatically fixes some linting errors |
+| `pnpm lint`       | Runs eslint against everything          |
+| `pnpm lint --fix` | Automatically fixes some linting errors |
 
 ### Icons
 
@@ -242,13 +244,99 @@ test('should return no axe violations', async () => {
 
 | Command                   | Description                                        |
 | :------------------------ | :------------------------------------------------- |
-| `yarn test`               | Runs all unit tests                                |
-| `yarn test ComponentName` | Runs tests matching component name                 |
-| `yarn test:a11y`          | Runs e2e accessibility tests against documentation |
+| `pnpm test`               | Runs all unit tests                                |
+| `pnpm test ComponentName` | Runs tests matching component name                 |
+| `pnpm test:a11y`          | Runs e2e accessibility tests against documentation |
 
 ## Documentation
 
 Component documentation guidelines are outlined in [docs/readme.md](./docs/readme.md).
+
+## Storybook
+
+Cauldron ships a Storybook served at [cauldron.dequelabs.com/storybook](https://cauldron.dequelabs.com/storybook). Each component should have a co-located story file that exercises its props via [Controls](https://storybook.js.org/docs/essentials/controls).
+
+### File location
+
+Story files are co-located with the component they document, alongside `index.tsx` and `index.test.tsx`:
+
+```
+packages/react/src/components/Button/
+├─ index.tsx
+├─ index.test.tsx
+└─ index.stories.tsx
+```
+
+### Authoring a story
+
+Use Component Story Format 3 (CSF3) with `Meta` and `StoryObj` types. Enable autodocs via `tags: ['autodocs']` and group stories under `Components/<ComponentName>`:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './index';
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary'] }
+  }
+};
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+export const Primary: Story = {
+  args: { variant: 'primary', children: 'Primary' }
+};
+```
+
+### Linking from MDX docs
+
+Once a story exists, set `storybook: true` in the component MDX file's frontmatter to render an "Open in Storybook" link in the component page metadata strip.
+
+### Commands
+
+| Command                | Description                                        |
+| :--------------------- | :------------------------------------------------- |
+| `pnpm dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
+| `pnpm build:storybook` | Build static Storybook into `docs/dist/storybook/` |
+
+Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
+
+## Figma Code Connect
+
+Cauldron publishes [Figma Code Connect](https://www.figma.com/code-connect-docs/) mappings so designers see real Cauldron snippets in Figma's Dev Mode. Each connected component lives in a `.figma.tsx` file beside its source.
+
+### Setup
+
+1. Create a [Figma personal access token](https://www.figma.com/settings/me/personal-access-tokens) — required scopes are documented in the [Code Connect setup guide](https://www.figma.com/code-connect-docs/quickstart-guide/) (minimum: `Code Connect` write, `File content` read).
+2. Export as `FIGMA_ACCESS_TOKEN` in your shell.
+3. You'll need edit access to the [Cauldron Library file](https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library).
+
+### Commands
+
+Run from `packages/react/`:
+
+| Command                                           | Purpose                               |
+| :------------------------------------------------ | :------------------------------------ |
+| `pnpm figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `pnpm figma:publish:dry-run`                      | Validate without pushing              |
+| `pnpm figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `pnpm figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `pnpm figma connect unpublish --node <figma-url>` | Remove a connection                   |
+
+### Writing a `.figma.tsx`
+
+Reference implementation: `packages/react/src/components/IconButton/IconButton.figma.tsx`. See the [Figma Code Connect React docs](https://www.figma.com/code-connect-docs/react/) for the full prop-mapping API.
+
+### Troubleshooting
+
+- **`ParserError: Could not find prop mapping`** — `example` only accepts direct prop references; conditional expressions are not evaluated. Use `figma.enum`/`figma.boolean` value maps to express default-omission instead.
+- **Import not resolving** — check `packages/react/figma.config.json` `importPaths`. Imports use `'../../index'` (the package barrel), not relative component paths.
+- **Connection doesn't appear in Figma after publish** — propagation can take ~30s; reload the Dev Mode panel.
+
+CI/CD: publishing is currently manual.
 
 ## Breaking Changes
 
