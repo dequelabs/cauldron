@@ -24,7 +24,7 @@
   --table-header-sorting-background-color: #53636e;
   --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
-  --table-cell-background-color: var(--accent-medium);
+  --table-cell-background-color: var(--accent-dark);
   --table-row-border-color: #5d676f;
   --table-header-sorting-border-color: var(--accent-info);
   /* --table-odd-row-background will be deprecated */
