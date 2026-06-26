@@ -10,7 +10,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import ActionMenu from './ActionMenu';
+import ActionMenu, { type ActionMenuTriggerProps } from './ActionMenu';
 import {
   ActionList,
   ActionListGroup,
@@ -52,25 +52,37 @@ async function waitForMenuFocus() {
   });
 }
 
-const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
-  ...defaultProps,
-  tabIndex: -1,
-  renderInTrigger: true,
-  trigger: ({ ref, children, ...props }) => (
-    // @ts-expect-error - TopBarItem expects menuitems to be <li>, ActionMenu expects triggers to be <button>
-    <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
-      Trigger
-      {children}
-    </TopBarItem>
-  ),
-  children: (
+// The documented TopBar/MenuBar nesting: the trigger is a TopBarItem (<li>),
+// not a button. Annotating the trigger param as ActionMenuTriggerProps<HTMLLIElement>
+// infers the element type, so the trigger's `ref` and spread handlers type
+// against the actual element without casts and without a JSX type argument.
+const TopBarPatternActionMenu = () => (
+  <ActionMenu
+    tabIndex={-1}
+    renderInTrigger
+    trigger={({
+      ref,
+      children,
+      ...props
+    }: ActionMenuTriggerProps<HTMLLIElement>) => (
+      <TopBarItem
+        menuItemRef={ref}
+        tabIndex={0}
+        autoClickLink={false}
+        {...props}
+      >
+        Trigger
+        {children}
+      </TopBarItem>
+    )}
+  >
     <ActionList>
       <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
       <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
       <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
     </ActionList>
-  )
-};
+  </ActionMenu>
+);
 
 afterEach(() => {
   window.location.hash = '';
@@ -420,7 +432,7 @@ test('should set first item active on open in TopBar+ActionMenu pattern', async 
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -691,7 +703,7 @@ test('should not trigger action link items when toggling the open state in TopBa
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -707,7 +719,7 @@ test('should navigate to href when an action link item is clicked in TopBar+Acti
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -738,7 +750,7 @@ test('should close menu when focus moves outside in TopBar+ActionMenu pattern', 
     <>
       <TopBar>
         <MenuBar>
-          <ActionMenu {...defaultTopBarPatternProps} />
+          <TopBarPatternActionMenu />
         </MenuBar>
       </TopBar>
       <button>Outside</button>
@@ -972,7 +984,7 @@ test('should have no axe violations in TopBar+ActionMenu pattern', async () => {
   const { container } = render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -988,7 +1000,7 @@ test('should have no axe violations in TopBar+ActionMenu pattern when open', asy
   const { container } = render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );

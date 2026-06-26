@@ -440,11 +440,11 @@ function MixedSelectionExample() {
       name: 'trigger',
       type: [
         'React.ReactElement',
-        '(props: ActionMenuTriggerProps, open: boolean) => React.ReactElement'
+        '<E extends HTMLElement = HTMLButtonElement>(props: ActionMenuTriggerProps<E>, open: boolean) => React.ReactElement'
       ],
       required: true,
       description:
-        'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state.'
+        'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state. The trigger element type defaults to HTMLButtonElement; when nesting inside a TopBar/MenuBar, annotate the trigger param (e.g. (props: ActionMenuTriggerProps<HTMLLIElement>) => …) so the trigger ref and handlers type against the actual element without casts.'
     },
     {
       name: 'placement',
