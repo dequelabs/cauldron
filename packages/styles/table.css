@@ -11,6 +11,7 @@
   --table-space: var(--space-small);
   --table-header-sorting-border-color: var(--gray-90);
   --table-box-shadow: var(--drop-shadow-raised);
+  /* --table-odd-row-background will be deprecated */
   --table-odd-row-background: var(--gray-10);
   --table-sort-hover-focus-ring-color: var(--gray-90);
 }
@@ -26,6 +27,7 @@
   --table-cell-background-color: var(--accent-medium);
   --table-row-border-color: #5d676f;
   --table-header-sorting-border-color: var(--accent-info);
+  /* --table-odd-row-background will be deprecated */
   --table-odd-row-background: var(--gray-90);
   --table-sort-hover-focus-ring-color: var(--accent-light);
 }
@@ -65,10 +67,6 @@
 
 .TableBody .TableRow:last-child .TableHeader {
   border-bottom: none;
-}
-
-.TableBody .TableRow:nth-child(odd) .TableCell {
-  background: var(--table-odd-row-background);
 }
 
 .TableHeader[aria-sort] {
