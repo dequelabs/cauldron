@@ -1,7 +1,6 @@
 :root {
   --table-header-text-color: var(--gray-90);
   --table-header-background-color: var(--white);
-  --table-header-sorting-background-color: #caddec;
   --table-header-background-color-hover: #dddddd;
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--gray-90);
@@ -21,7 +20,6 @@
   --table-header-background-color: var(--accent-dark);
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--white);
-  --table-header-sorting-background-color: #53636e;
   --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
   --table-cell-background-color: var(--accent-dark);
