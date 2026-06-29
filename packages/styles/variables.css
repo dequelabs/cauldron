@@ -51,6 +51,9 @@
   --issue-moderate: #f0c4f8;
   --issue-minor: var(--gray-20);
 
+  /* radius */
+  --radius-16: 16px;
+
   /* text colours */
   --text-color-base: var(--gray-60);
   --text-color-light: var(--white);
