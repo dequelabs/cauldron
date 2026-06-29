@@ -50,10 +50,10 @@
 .Panel__Header {
   margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1) 0
     calc(var(--panel-padding) * -1);
-  border-top-left-radius: calc(
+  border-start-start-radius: calc(
     var(--panel-border-radius) - var(--panel-border-width)
   );
-  border-top-right-radius: calc(
+  border-start-end-radius: calc(
     var(--panel-border-radius) - var(--panel-border-width)
   );
 }
