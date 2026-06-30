@@ -9,7 +9,7 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
       - uses: ./.github/actions/dependencies
       - run: pnpm lint
       - name: format check
