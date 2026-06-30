@@ -80,7 +80,7 @@
 
 .Panel
   :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
-  border-top: 1px solid var(--panel-divider-border-color);
+  border-top: var(--panel-border-width) solid var(--panel-divider-border-color);
 }
 
 .Panel__Content:last-child {
@@ -92,7 +92,8 @@
 }
 
 .Panel > .Panel__Heading {
-  border-bottom: 1px solid var(--panel-divider-border-color);
+  border-bottom: var(--panel-border-width) solid
+    var(--panel-divider-border-color);
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
