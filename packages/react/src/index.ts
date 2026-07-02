@@ -98,6 +98,12 @@ export {
   DescriptionTerm,
   DescriptionDetails
 } from './components/DescriptionList';
+export {
+  MetadataList,
+  MetadataListItem,
+  MetadataListLabel,
+  MetadataListValue
+} from './components/MetadataList';
 export { default as Stepper, Step } from './components/Stepper';
 export {
   default as Panel,
