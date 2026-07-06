@@ -36,6 +36,7 @@ export type ActionMenuTriggerProps<E extends HTMLElement = HTMLButtonElement> =
   Pick<
     React.HTMLAttributes<E>,
     | 'children'
+    | 'id'
     | 'onClick'
     | 'onKeyDown'
     | 'aria-expanded'
