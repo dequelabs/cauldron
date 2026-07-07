@@ -22,6 +22,29 @@ yarn add @deque/cauldron-react @deque/cauldron-styles
 
 To get started, follow our [usage guide](https://cauldron.dequelabs.com/#usage) that includes setup instructions and necessary dependencies. Further documentation is also available at [cauldron.dequelabs.com](https://cauldron.dequelabs.com) that includes documentation for every available Cauldron component.
 
+## Reducing bundle size
+
+Cauldron React ships each component as its own module in addition to the top-level barrel. Importing from the barrel pulls the whole library into your bundle:
+
+```js
+// Pulls in every component (and their dependencies, e.g. react-aria-components).
+import { Modal, Button } from '@deque/cauldron-react';
+```
+
+To only bundle the components you use, deep-import them via their subpath:
+
+```js
+// Only bundles Modal and Button (and what they actually depend on).
+import Modal from '@deque/cauldron-react/Modal';
+import Button from '@deque/cauldron-react/Button';
+```
+
+Named subcomponents remain available as named exports of the same subpath:
+
+```js
+import Modal, { ModalHeader, ModalContent } from '@deque/cauldron-react/Modal';
+```
+
 ## Attribution
 
 Some Cauldron icons use Font Awesome Free and Font Awesome Pro. Their licenses can be found here: [Font Awesome Free License](https://fontawesome.com/license/free) and [Font Awesome Pro License](https://fontawesome.com/license).

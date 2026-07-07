@@ -18,7 +18,19 @@ export default {
   output: {
     dir: 'lib',
     format: 'cjs',
-    exports: 'auto',
+    // Use `named` (rather than `auto`) so every preserved module exposes its
+    // exports the same way — components with a default export are reached via
+    // `.default`, matching the emitted `.d.ts` and esModuleInterop. `auto`
+    // would make default-only modules `module.exports = X` while mixed modules
+    // stay `.default`, giving inconsistent deep-import ergonomics.
+    exports: 'named',
+    // Emit one file per source module (mirroring the src/ tree) instead of a
+    // single bundled barrel. This lets consumers deep-import a single
+    // component (e.g. `@deque/cauldron-react/Modal`) and have their
+    // bundler prune every other component — and its transitive dependencies —
+    // they don't use. See dequelabs/cauldron#2465.
+    preserveModules: true,
+    preserveModulesRoot: 'src',
     chunkFileNames: '[name].js'
   },
   plugins: [
