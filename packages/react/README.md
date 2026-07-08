@@ -45,6 +45,8 @@ Named subcomponents remain available as named exports of the same subpath:
 import Modal, { ModalHeader, ModalContent } from '@deque/cauldron-react/Modal';
 ```
 
+Each component's deep-import subpath (`@deque/cauldron-react/<ComponentName>`) maps to its directory under `src/components/`. These subpaths are a **stable, public part of the package contract**: renaming, moving, or removing a component directory changes a documented import path and is therefore a breaking change that must go through a major version bump.
+
 ## Attribution
 
 Some Cauldron icons use Font Awesome Free and Font Awesome Pro. Their licenses can be found here: [Font Awesome Free License](https://fontawesome.com/license/free) and [Font Awesome Pro License](https://fontawesome.com/license).

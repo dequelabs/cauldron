@@ -47,9 +47,12 @@ for (const name of componentNames) {
     // ERR_PACKAGE_PATH_NOT_EXPORTED or MODULE_NOT_FOUND if the facade is absent.
     require.resolve(subpath);
     const mod = require(subpath);
+    // The README documents the default import (`import X from '.../X'`) as the
+    // deep-import pattern for every component, so a present-but-default-less
+    // module (a future named-only addition) is a broken contract, not a pass.
     assert(
-      Object.keys(mod).length > 0,
-      `${subpath} resolved but exports nothing`
+      Object.prototype.hasOwnProperty.call(mod, 'default'),
+      `${subpath} has no default export — the documented \`import X from '${subpath}'\` pattern would resolve to undefined`
     );
 
     // The `types` condition advertises `./lib/components/<Name>/index.d.ts`.
