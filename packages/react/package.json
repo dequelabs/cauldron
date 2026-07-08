@@ -18,6 +18,7 @@
     "./cauldron.css": "./lib/cauldron.css",
     "./package.json": "./package.json",
     "./lib/*": "./lib/*",
+    "./internal/*": null,
     "./*": {
       "types": "./lib/components/*/index.d.ts",
       "default": "./lib/components/*/index.js"

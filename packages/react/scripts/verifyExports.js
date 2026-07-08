@@ -67,6 +67,36 @@ try {
   failures.push(`${pkgName} (barrel): ${err.message}`);
 }
 
+// Components under internal/ must NOT be reachable via the `./*` subpath — the
+// `./internal/*: null` exports entry keeps that boundary private. Assert every
+// built internal component is blocked so the boundary can't silently reopen.
+const INTERNAL_ROOT = path.join(COMPONENTS_ROOT, 'internal');
+if (fs.existsSync(INTERNAL_ROOT)) {
+  const internalNames = fs
+    .readdirSync(INTERNAL_ROOT, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) =>
+      ['index.tsx', 'index.ts'].some((file) =>
+        fs.existsSync(path.join(INTERNAL_ROOT, entry.name, file))
+      )
+    )
+    .map((entry) => entry.name);
+
+  for (const name of internalNames) {
+    const subpath = `${pkgName}/internal/${name}`;
+    try {
+      require.resolve(subpath);
+      failures.push(`${subpath}: internal component is publicly resolvable`);
+    } catch (err) {
+      if (err.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+        failures.push(
+          `${subpath}: unexpected error ${err.code}: ${err.message}`
+        );
+      }
+    }
+  }
+}
+
 if (failures.length > 0) {
   console.error(
     `verifyExports: ${failures.length} deep-import subpath(s) are broken:\n` +
