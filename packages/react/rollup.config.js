@@ -1,11 +1,31 @@
+import fs from 'fs';
+import path from 'path';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 import svgr from '@svgr/rollup';
 import dynamicImportVar from '@rollup/plugin-dynamic-import-vars';
 
+// Treat every `src/components/<Name>/index.{ts,tsx}` as its own entry point.
+// Under `preserveModules`, Rollup hoists and elides pure re-export barrels
+// (e.g. `export { default } from './Table'`), so those components would emit
+// no `lib/components/<Name>/index.js` — leaving the `./*` exports subpath in
+// package.json resolving types but 404ing at runtime. Entry points are never
+// elided, so this guarantees a facade module for every component the exports
+// map advertises. See dequelabs/cauldron#2465.
+const componentsRoot = 'src/components';
+const componentEntries = fs
+  .readdirSync(componentsRoot, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) =>
+    ['index.tsx', 'index.ts']
+      .map((file) => path.join(componentsRoot, entry.name, file))
+      .find((file) => fs.existsSync(file))
+  )
+  .filter(Boolean);
+
 export default {
-  input: 'src/index.ts',
+  input: ['src/index.ts', ...componentEntries],
   external: [
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.peerDependencies),
