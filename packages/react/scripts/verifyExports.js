@@ -19,6 +19,8 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 
+const { componentDirEntries } = require('./componentDirs');
+
 const { name: pkgName } = require('../package.json');
 const COMPONENTS_ROOT = path.join(__dirname, '..', 'src', 'components');
 const LIB_COMPONENTS = path.join(__dirname, '..', 'lib', 'components');
@@ -28,15 +30,9 @@ assert(
   `Expected built output at ${LIB_COMPONENTS} — run \`pnpm build:lib\` first.`
 );
 
-const componentNames = fs
-  .readdirSync(COMPONENTS_ROOT, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory())
-  .filter((entry) =>
-    ['index.tsx', 'index.ts'].some((file) =>
-      fs.existsSync(path.join(COMPONENTS_ROOT, entry.name, file))
-    )
-  )
-  .map((entry) => entry.name);
+const componentNames = componentDirEntries(COMPONENTS_ROOT).map(
+  (entry) => entry.name
+);
 
 const failures = [];
 
@@ -71,32 +67,31 @@ try {
 }
 
 // Components under internal/ must NOT be reachable via the `./*` subpath — the
-// `./internal/*: null` exports entry keeps that boundary private. Assert every
-// built internal component is blocked so the boundary can't silently reopen.
+// `./internal` and `./internal/*` exports entries keep that boundary private.
+// Assert the bare specifier and every built internal component are blocked so
+// the boundary can't silently reopen (e.g. if someone adds an internal barrel).
 const INTERNAL_ROOT = path.join(COMPONENTS_ROOT, 'internal');
-if (fs.existsSync(INTERNAL_ROOT)) {
-  const internalNames = fs
-    .readdirSync(INTERNAL_ROOT, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .filter((entry) =>
-      ['index.tsx', 'index.ts'].some((file) =>
-        fs.existsSync(path.join(INTERNAL_ROOT, entry.name, file))
-      )
-    )
-    .map((entry) => entry.name);
-
-  for (const name of internalNames) {
-    const subpath = `${pkgName}/internal/${name}`;
-    try {
-      require.resolve(subpath);
-      failures.push(`${subpath}: internal component is publicly resolvable`);
-    } catch (err) {
-      if (err.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
-        failures.push(
-          `${subpath}: unexpected error ${err.code}: ${err.message}`
-        );
-      }
+const assertBlocked = (subpath, reason) => {
+  try {
+    require.resolve(subpath);
+    failures.push(`${subpath}: ${reason}`);
+  } catch (err) {
+    if (err.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+      failures.push(`${subpath}: unexpected error ${err.code}: ${err.message}`);
     }
+  }
+};
+
+assertBlocked(
+  `${pkgName}/internal`,
+  'bare internal specifier is publicly resolvable'
+);
+if (fs.existsSync(INTERNAL_ROOT)) {
+  for (const { name } of componentDirEntries(INTERNAL_ROOT)) {
+    assertBlocked(
+      `${pkgName}/internal/${name}`,
+      'internal component is publicly resolvable'
+    );
   }
 }
 

@@ -18,6 +18,7 @@
     "./cauldron.css": "./lib/cauldron.css",
     "./package.json": "./package.json",
     "./lib/*": "./lib/*",
+    "./internal": null,
     "./internal/*": null,
     "./*": {
       "types": "./lib/components/*/index.d.ts",
@@ -33,7 +34,7 @@
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "verify:exports": "node scripts/verifyExports.js",
-    "verify:types": "tsc -p type-tests/tsconfig.json",
+    "verify:types": "node scripts/genTypeTest.js && tsc -p type-tests/tsconfig.json && tsc -p type-tests/tsconfig.node16.json",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "dev": "concurrently 'pnpm build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production pnpm build",

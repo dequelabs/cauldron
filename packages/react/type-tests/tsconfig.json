@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["deep-imports.ts"]
+  "include": ["deep-imports.ts", "all-components.generated.ts"]
 }

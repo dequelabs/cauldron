@@ -1,10 +1,16 @@
-import fs from 'fs';
-import path from 'path';
+import { createRequire } from 'module';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 import svgr from '@svgr/rollup';
 import dynamicImportVar from '@rollup/plugin-dynamic-import-vars';
+
+// componentDirs is CommonJS (shared with the CJS verifyExports guard); pull it
+// into this ESM-parsed config via createRequire rather than an ESM import,
+// which the Rollup config loader does not CJS-interop.
+const { componentDirEntries } = createRequire(import.meta.url)(
+  './scripts/componentDirs.js'
+);
 
 // Treat every `src/components/<Name>/index.{ts,tsx}` as its own entry point.
 // Under `preserveModules`, Rollup hoists and elides pure re-export barrels
@@ -12,17 +18,12 @@ import dynamicImportVar from '@rollup/plugin-dynamic-import-vars';
 // no `lib/components/<Name>/index.js` — leaving the `./*` exports subpath in
 // package.json resolving types but 404ing at runtime. Entry points are never
 // elided, so this guarantees a facade module for every component the exports
-// map advertises. See dequelabs/cauldron#2465.
-const componentsRoot = 'src/components';
-const componentEntries = fs
-  .readdirSync(componentsRoot, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory())
-  .map((entry) =>
-    ['index.tsx', 'index.ts']
-      .map((file) => path.join(componentsRoot, entry.name, file))
-      .find((file) => fs.existsSync(file))
-  )
-  .filter(Boolean);
+// map advertises. The component set is shared with the verifyExports guard via
+// scripts/componentDirs.js so the emitter and its checks can't diverge. See
+// dequelabs/cauldron#2465.
+const componentEntries = componentDirEntries('src/components').map(
+  (entry) => entry.indexFile
+);
 
 export default {
   input: ['src/index.ts', ...componentEntries],

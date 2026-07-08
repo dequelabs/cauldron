@@ -47,6 +47,8 @@ import Modal, { ModalHeader, ModalContent } from '@deque/cauldron-react/Modal';
 
 Each component's deep-import subpath (`@deque/cauldron-react/<ComponentName>`) maps to its directory under `src/components/`. These subpaths are a **stable, public part of the package contract**: renaming, moving, or removing a component directory changes a documented import path and is therefore a breaking change that must go through a major version bump.
 
+> **TypeScript:** subpath types are resolved via the package `exports` map, which requires `moduleResolution` set to `"bundler"`, `"node16"`, or `"nodenext"`. Projects on the legacy `"node"` (`node10`) resolution will not find the deep-import type declarations (the imports still work at runtime) — use the barrel import for typed access on that setting.
+
 ## Attribution
 
 Some Cauldron icons use Font Awesome Free and Font Awesome Pro. Their licenses can be found here: [Font Awesome Free License](https://fontawesome.com/license/free) and [Font Awesome Pro License](https://fontawesome.com/license).

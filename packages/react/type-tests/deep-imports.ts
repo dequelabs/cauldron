@@ -5,10 +5,13 @@
  * `types` condition the way a real consumer's bundler does — which the
  * package's own `node`-resolution typecheck does not exercise.
  *
- * If a component's `types` subpath stops resolving (a dropped `.d.ts`, an
- * exports-map drift, or a missing default export), `tsc` fails here with
- * "Cannot find module … or its corresponding type declarations", so the
- * contract breaks in CI instead of in a consumer's editor.
+ * This file is a hand-written spot-check of the distinct resolution shapes:
+ * an inline default+named component (Modal), a re-export barrel (Table), a
+ * component that gained a default (Address), and the top-level named barrel.
+ * Exhaustive per-component coverage is generated into `all-components.generated.ts`
+ * by scripts/genTypeTest.js; both are compiled by `verify:types` under bundler
+ * and node16 resolution, so a dropped `.d.ts` or exports-map drift for any
+ * component breaks CI instead of a consumer's editor.
  */
 
 // Inline component: default + named subcomponents.
