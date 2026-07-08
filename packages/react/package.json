@@ -33,6 +33,7 @@
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "verify:exports": "node scripts/verifyExports.js",
+    "verify:types": "tsc -p type-tests/tsconfig.json",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "dev": "concurrently 'pnpm build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production pnpm build",

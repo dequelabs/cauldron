@@ -21,6 +21,8 @@ jobs:
         run: pnpm build:react
       - name: Verify per-component export subpaths
         run: pnpm --filter @deque/cauldron-react verify:exports
+      - name: Verify deep-import type resolution
+        run: pnpm --filter @deque/cauldron-react verify:types
       - run: pnpm test
 
   screenshots:
