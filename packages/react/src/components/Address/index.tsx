@@ -55,3 +55,5 @@ export const AddressCityStateZip = ({
   ) : null;
 
 AddressCityStateZip.displayName = 'AddressCityStateZip';
+
+export default Address;

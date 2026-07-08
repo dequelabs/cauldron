@@ -63,3 +63,5 @@ export const DescriptionDetails = ({
 );
 
 DescriptionDetails.displayName = 'DescriptionDetails';
+
+export default DescriptionList;
