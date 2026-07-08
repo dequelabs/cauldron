@@ -31,6 +31,7 @@
     "prebuild:lib": "node scripts/buildIconTypes.js",
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
+    "verify:exports": "node scripts/verifyExports.js",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "dev": "concurrently 'pnpm build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production pnpm build",

@@ -19,6 +19,8 @@ jobs:
       - uses: ./.github/actions/dependencies
       - name: Build packages
         run: pnpm build:react
+      - name: Verify per-component export subpaths
+        run: pnpm --filter @deque/cauldron-react verify:exports
       - run: pnpm test
 
   screenshots:
