@@ -42,35 +42,33 @@ describe('MetadataList components', () => {
     );
   });
 
-  test('passes classNames through', () => {
-    render(<MetadataList className="a">a</MetadataList>);
-    expect(screen.getByText(/a/i)).toHaveClass('a');
+  test.each([
+    ['MetadataList', MetadataList, 'DL'],
+    ['MetadataListItem', MetadataListItem, 'DIV'],
+    ['MetadataListLabel', MetadataListLabel, 'DT'],
+    ['MetadataListValue', MetadataListValue, 'DD']
+  ] as const)(
+    '%s passes className, props, and ref through',
+    (_, Component, tagName) => {
+      const ref = React.createRef<HTMLElement>();
+      render(
+        <Component
+          data-testid="element"
+          className="a"
+          data-foo="bar"
+          ref={ref as never}
+        >
+          a
+        </Component>
+      );
 
-    render(<MetadataListItem className="b">b</MetadataListItem>);
-    expect(screen.getByText(/b/i)).toHaveClass('b');
-
-    render(<MetadataListLabel className="c">c</MetadataListLabel>);
-    expect(screen.getByText(/c/i)).toHaveClass('c');
-
-    render(<MetadataListValue className="d">d</MetadataListValue>);
-    expect(screen.getByText(/d/i)).toHaveClass('d');
-  });
-
-  test('passes props through', () => {
-    render(
-      <MetadataList data-testid="dl" data-foo="list">
-        a
-      </MetadataList>
-    );
-    render(<MetadataListItem data-testid="item" data-foo="item" />);
-    render(<MetadataListLabel data-foo="label">a</MetadataListLabel>);
-    render(<MetadataListValue data-foo="value">a</MetadataListValue>);
-
-    expect(screen.getByTestId('dl')).toHaveAttribute('data-foo', 'list');
-    expect(screen.getByTestId('item')).toHaveAttribute('data-foo', 'item');
-    expect(screen.getByRole('term')).toHaveAttribute('data-foo', 'label');
-    expect(screen.getByRole('definition')).toHaveAttribute('data-foo', 'value');
-  });
+      const element = screen.getByTestId('element');
+      expect(element.tagName).toBe(tagName);
+      expect(element).toHaveClass('a');
+      expect(element).toHaveAttribute('data-foo', 'bar');
+      expect(ref.current).toBe(element);
+    }
+  );
 
   test('returns no axe violations', async () => {
     const { container } = render(

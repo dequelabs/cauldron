@@ -1,76 +1,83 @@
-import React from 'react';
+import React, { forwardRef, type ComponentPropsWithRef } from 'react';
 import classNames from 'classnames';
 
 export type MetadataListProps = {
   orientation?: 'vertical' | 'horizontal';
-} & React.ComponentPropsWithoutRef<'dl'>;
+} & ComponentPropsWithRef<'dl'>;
 
-export function MetadataList({
-  orientation = 'horizontal',
-  className,
-  children,
-  ...rest
-}: MetadataListProps) {
-  return (
-    <dl
-      className={classNames(
-        'MetadataList',
-        `MetadataList--${orientation}`,
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </dl>
-  );
-}
+export const MetadataList = forwardRef<HTMLDListElement, MetadataListProps>(
+  ({ orientation = 'horizontal', className, children, ...rest }, ref) => {
+    return (
+      <dl
+        className={classNames(
+          'MetadataList',
+          `MetadataList--${orientation}`,
+          className
+        )}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </dl>
+    );
+  }
+);
 
 MetadataList.displayName = 'MetadataList';
 
-export type MetadataListItemProps = React.ComponentPropsWithoutRef<'div'>;
+export type MetadataListItemProps = ComponentPropsWithRef<'div'>;
 
-export function MetadataListItem({
-  className,
-  children,
-  ...rest
-}: MetadataListItemProps) {
+export const MetadataListItem = forwardRef<
+  HTMLDivElement,
+  MetadataListItemProps
+>(({ className, children, ...rest }, ref) => {
   return (
-    <div className={classNames('MetadataList__item', className)} {...rest}>
+    <div
+      className={classNames('MetadataList__item', className)}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </div>
   );
-}
+});
 
 MetadataListItem.displayName = 'MetadataListItem';
 
-export type MetadataListLabelProps = React.ComponentPropsWithoutRef<'dt'>;
+export type MetadataListLabelProps = ComponentPropsWithRef<'dt'>;
 
-export function MetadataListLabel({
-  className,
-  children,
-  ...rest
-}: MetadataListLabelProps) {
+export const MetadataListLabel = forwardRef<
+  HTMLElement,
+  MetadataListLabelProps
+>(({ className, children, ...rest }, ref) => {
   return (
-    <dt className={classNames('MetadataList__label', className)} {...rest}>
+    <dt
+      className={classNames('MetadataList__label', className)}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </dt>
   );
-}
+});
 
 MetadataListLabel.displayName = 'MetadataListLabel';
 
-export type MetadataListValueProps = React.ComponentPropsWithoutRef<'dd'>;
+export type MetadataListValueProps = ComponentPropsWithRef<'dd'>;
 
-export function MetadataListValue({
-  className,
-  children,
-  ...rest
-}: MetadataListValueProps) {
+export const MetadataListValue = forwardRef<
+  HTMLElement,
+  MetadataListValueProps
+>(({ className, children, ...rest }, ref) => {
   return (
-    <dd className={classNames('MetadataList__value', className)} {...rest}>
+    <dd
+      className={classNames('MetadataList__value', className)}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </dd>
   );
-}
+});
 
 MetadataListValue.displayName = 'MetadataListValue';

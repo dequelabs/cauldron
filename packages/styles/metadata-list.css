@@ -1,12 +1,13 @@
 :root {
   --metadata-list-column-gap: var(--space-largest);
-  --metadata-list-row-gap: var(--space-largest);
+  --metadata-list-horizontal-row-gap: var(--space-largest);
+  --metadata-list-vertical-row-gap: var(--space-large);
   --metadata-list-item-gap: var(--space-half);
   --metadata-list-padding: var(--space-small) 0;
   --metadata-list-label-text-color: var(--gray-90);
   --metadata-list-label-font-size: var(--text-size-small);
   --metadata-list-label-font-weight: var(--font-weight-medium);
-  --metadata-list-label-line-height: 20px;
+  --metadata-list-label-line-height: 1.5;
   --metadata-list-value-text-color: var(--gray-60);
   --metadata-list-value-font-size: var(--text-size-small);
   --metadata-list-value-font-weight: var(--font-weight-normal);
@@ -21,7 +22,6 @@
 .MetadataList {
   display: flex;
   column-gap: var(--metadata-list-column-gap);
-  row-gap: var(--metadata-list-row-gap);
   padding: var(--metadata-list-padding);
   margin-top: 0;
   margin-bottom: 0;
@@ -29,10 +29,12 @@
 
 .MetadataList.MetadataList--horizontal {
   flex-wrap: wrap;
+  row-gap: var(--metadata-list-horizontal-row-gap);
 }
 
 .MetadataList.MetadataList--vertical {
   flex-direction: column;
+  row-gap: var(--metadata-list-vertical-row-gap);
 }
 
 .MetadataList__item {

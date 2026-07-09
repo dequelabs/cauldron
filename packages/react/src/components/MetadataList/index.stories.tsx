@@ -27,7 +27,9 @@ export default meta;
 
 type Story = StoryObj<typeof MetadataList>;
 
-const Template = (args: React.ComponentProps<typeof MetadataList>) => (
+type Args = React.ComponentProps<typeof MetadataList>;
+
+const Template = (args: Args) => (
   <MetadataList {...args}>
     <MetadataListItem>
       <MetadataListLabel>Status</MetadataListLabel>
@@ -45,14 +47,14 @@ const Template = (args: React.ComponentProps<typeof MetadataList>) => (
 );
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: (args: Args) => <Template {...args} />,
   args: {
     orientation: 'horizontal'
   }
 };
 
 export const Vertical: Story = {
-  render: (args) => <Template {...args} />,
+  render: (args: Args) => <Template {...args} />,
   args: {
     orientation: 'vertical'
   }
