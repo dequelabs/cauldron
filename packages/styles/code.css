@@ -11,6 +11,7 @@
   --code-text-color: var(--accent-light);
   --code-background-color: var(--accent-dark);
   --code-border-color: var(--stroke-dark);
+  --code-border: 1px solid var(--code-border-color);
 }
 
 .Code__Header {
