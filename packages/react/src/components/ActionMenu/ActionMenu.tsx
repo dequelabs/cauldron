@@ -266,11 +266,15 @@ ActionMenuComponent.displayName = 'ActionMenu';
  * This only widens the public types of the `trigger` function; the internal
  * implementation is unaffected. See the ActionMenu docs for a usage example.
  */
-const ActionMenu = ActionMenuComponent as (<
-  E extends HTMLElement = HTMLButtonElement
->(
-  props: ActionMenuProps<E> & React.RefAttributes<HTMLElement>
-) => React.ReactElement) &
-  Pick<typeof ActionMenuComponent, 'displayName'>;
+type ActionMenuType = Omit<
+  React.ForwardRefExoticComponent<ActionMenuProps>,
+  keyof CallableFunction
+> & {
+  <E extends HTMLElement = HTMLButtonElement>(
+    props: ActionMenuProps<E> & React.RefAttributes<HTMLElement>
+  ): React.ReactElement;
+};
+
+const ActionMenu = ActionMenuComponent as ActionMenuType;
 
 export default ActionMenu;
