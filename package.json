@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "7.2.0",
+  "version": "7.3.0",
   "license": "MPL-2.0",
   "engines": {
     "node": ">=22"
@@ -41,7 +41,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,css,md}": [
+    "*.{json,css,md,mdx,yml,yaml}": [
       "prettier --write"
     ]
   },

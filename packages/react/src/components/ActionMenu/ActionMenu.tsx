@@ -25,26 +25,34 @@ interface ActionMenuListProps {
   [key: string]: unknown;
 }
 
-type ActionMenuTriggerProps = Pick<
-  React.HTMLAttributes<HTMLButtonElement>,
-  | 'children'
-  | 'onClick'
-  | 'onKeyDown'
-  | 'aria-expanded'
-  | 'aria-haspopup'
-  | 'aria-controls'
-> & {
-  ref: React.RefObject<HTMLButtonElement | null>;
-};
+/**
+ * Props passed to an `ActionMenu` trigger render function. The element type
+ * defaults to `HTMLButtonElement`; annotate it (e.g. `ActionMenuTriggerProps<HTMLLIElement>`)
+ * when the trigger is not a button — for example a `MenuItem`/`TopBarItem`
+ * (`<li>`) in the documented `TopBar`/`MenuBar` nesting — so the `ref` and
+ * spread handlers type against the actual element without casts.
+ */
+export type ActionMenuTriggerProps<E extends HTMLElement = HTMLButtonElement> =
+  Pick<
+    React.HTMLAttributes<E>,
+    | 'children'
+    | 'id'
+    | 'onClick'
+    | 'onKeyDown'
+    | 'aria-expanded'
+    | 'aria-haspopup'
+    | 'aria-controls'
+  > & {
+    ref: React.RefObject<E | null>;
+  };
 
-type ActionMenuTriggerFunction = (
-  props: ActionMenuTriggerProps,
-  open: boolean
-) => React.ReactElement;
+export type ActionMenuTriggerFunction<
+  E extends HTMLElement = HTMLButtonElement
+> = (props: ActionMenuTriggerProps<E>, open: boolean) => React.ReactElement;
 
-type ActionMenuProps = {
+type ActionMenuProps<E extends HTMLElement = HTMLButtonElement> = {
   children: React.ReactElement<ActionMenuListProps>;
-  trigger: React.ReactElement | ActionMenuTriggerFunction;
+  trigger: React.ReactElement | ActionMenuTriggerFunction<E>;
   /** Render the action menu in a different location in the dom. */
   portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   /**
@@ -58,7 +66,7 @@ type ActionMenuProps = {
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
-const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
+const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
   (
     {
       className,
@@ -249,6 +257,24 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
   }
 );
 
-ActionMenu.displayName = 'ActionMenu';
+ActionMenuComponent.displayName = 'ActionMenu';
+
+/**
+ * The trigger element type is parameterized (defaulting to `HTMLButtonElement`)
+ * so it can be widened for nested menu patterns where the trigger is not a
+ * button — e.g. a `MenuItem`/`TopBarItem` (`<li>`) inside a `TopBar`/`MenuBar`.
+ * This only widens the public types of the `trigger` function; the internal
+ * implementation is unaffected. See the ActionMenu docs for a usage example.
+ */
+type ActionMenuType = Omit<
+  React.ForwardRefExoticComponent<ActionMenuProps>,
+  keyof CallableFunction
+> & {
+  <E extends HTMLElement = HTMLButtonElement>(
+    props: ActionMenuProps<E> & React.RefAttributes<HTMLElement>
+  ): React.ReactElement;
+};
+
+const ActionMenu = ActionMenuComponent as ActionMenuType;
 
 export default ActionMenu;

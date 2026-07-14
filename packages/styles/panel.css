@@ -1,11 +1,13 @@
 :root {
   --panel-border-color: var(--gray-40);
+  --panel-border-radius: var(--radius-16);
+  --panel-border-width: 1px;
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
   --panel-padding: var(--space-small);
   --panel-divider-border-color: var(--gray-40);
   --panel-content-color: var(--gray-80);
-  --panel-border: 1px solid var(--panel-border-color);
+  --panel-border: var(--panel-border-width) solid var(--panel-border-color);
   --panel-box-shadow: var(--drop-shadow-raised);
 }
 
@@ -13,7 +15,7 @@
   padding: var(--panel-padding);
   margin: 0;
   border: var(--panel-border);
-  border-radius: 3px;
+  border-radius: var(--panel-border-radius);
   box-shadow: var(--panel-box-shadow);
   background-color: var(--panel-background-color);
   word-break: break-word;
@@ -48,6 +50,14 @@
 .Panel__Header {
   margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1) 0
     calc(var(--panel-padding) * -1);
+  border-start-start-radius: max(
+    0px,
+    calc(var(--panel-border-radius) - var(--panel-border-width))
+  );
+  border-start-end-radius: max(
+    0px,
+    calc(var(--panel-border-radius) - var(--panel-border-width))
+  );
 }
 
 .Panel--no-padding > :is(.Panel__Heading, .Panel__Header, .Panel__Content) {
@@ -72,7 +82,7 @@
 
 .Panel
   :is(.Panel__Header + .Panel__Content, .Panel__Content + .Panel__Content) {
-  border-top: 1px solid var(--panel-divider-border-color);
+  border-top: var(--panel-border-width) solid var(--panel-divider-border-color);
 }
 
 .Panel__Content:last-child {
@@ -84,7 +94,8 @@
 }
 
 .Panel > .Panel__Heading {
-  border-bottom: 1px solid var(--panel-divider-border-color);
+  border-bottom: var(--panel-border-width) solid
+    var(--panel-divider-border-color);
 }
 
 .Panel > .Panel__Heading:is(h1, h2, h3, h4, h5, h6),
@@ -122,6 +133,7 @@ fieldset.Panel {
 /* Dark Theme */
 .cauldron--theme-dark {
   --panel-border-color: var(--stroke-dark);
+  --panel-border: var(--panel-border-width) solid var(--panel-border-color);
   --panel-background-color: var(--accent-medium);
   --panel-heading-color: #fff;
   --panel-divider-border-color: var(--stroke-dark);
