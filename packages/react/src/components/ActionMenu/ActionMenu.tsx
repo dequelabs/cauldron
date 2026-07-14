@@ -260,26 +260,11 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
 ActionMenuComponent.displayName = 'ActionMenu';
 
 /**
- * The trigger element defaults to an `HTMLButtonElement`, but the element type
- * is parameterized for nested menu patterns where the trigger is not a button —
- * for example a `MenuItem`/`TopBarItem` (`<li>`) when an `ActionMenu` is nested
- * inside a `TopBar`/`MenuBar`. The internal implementation is unaffected; this
- * only widens the public types of the `trigger` function so consumers can type
- * the trigger's `ref` and event handlers against the actual element without
- * casts. Annotating the trigger param infers the element type, so no JSX type
- * argument is required:
- *
- * ```tsx
- * <ActionMenu
- *   renderInTrigger
- *   trigger={({ ref, children, ...props }: ActionMenuTriggerProps<HTMLLIElement>) => (
- *     <TopBarItem menuItemRef={ref} {...props}>
- *       …
- *       {children}
- *     </TopBarItem>
- *   )}
- * >
- * ```
+ * The trigger element type is parameterized (defaulting to `HTMLButtonElement`)
+ * so it can be widened for nested menu patterns where the trigger is not a
+ * button — e.g. a `MenuItem`/`TopBarItem` (`<li>`) inside a `TopBar`/`MenuBar`.
+ * This only widens the public types of the `trigger` function; the internal
+ * implementation is unaffected. See the ActionMenu docs for a usage example.
  */
 const ActionMenu = ActionMenuComponent as (<
   E extends HTMLElement = HTMLButtonElement

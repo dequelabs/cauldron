@@ -423,6 +423,24 @@ function MixedSelectionExample() {
 </ActionMenu>
 ```
 
+### Nested triggers
+
+The trigger element type defaults to `HTMLButtonElement`, but it is parameterized for nested menu patterns where the trigger is not a button — for example a `MenuItem`/`TopBarItem` (`<li>`) when an `ActionMenu` is nested inside a `TopBar`/`MenuBar`. Annotating the trigger param infers the element type, so the trigger's `ref` and event handlers type against the actual element without casts and no JSX type argument is required:
+
+```tsx
+<ActionMenu
+  renderInTrigger
+  trigger={({ ref, children, ...props }: ActionMenuTriggerProps<HTMLLIElement>) => (
+    <TopBarItem menuItemRef={ref} {...props}>
+      …
+      {children}
+    </TopBarItem>
+  )}
+>
+  {/* ... */}
+</ActionMenu>
+```
+
 ## Props
 
 ### ActionMenu
