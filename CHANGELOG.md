@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.3.0](https://github.com/dequelabs/cauldron/compare/v7.2.0...v7.3.0) (2026-07-14)
+
+
+### Features
+
+* **MetadataList:** add MetadataList component ([#2464](https://github.com/dequelabs/cauldron/issues/2464)) ([ef3abd5](https://github.com/dequelabs/cauldron/commit/ef3abd529410b7916f06e62d4f92a0bac6eef87b))
+* update panel radius ([#2461](https://github.com/dequelabs/cauldron/issues/2461)) ([3037354](https://github.com/dequelabs/cauldron/commit/30373540698c5e46ea18a689f679ef243794909f)), closes [#1814](https://github.com/dequelabs/cauldron/issues/1814)
+* update table styles ([#2459](https://github.com/dequelabs/cauldron/issues/2459)) ([daef3e1](https://github.com/dequelabs/cauldron/commit/daef3e17a5939fb2ac88598d828c65b5bcce2bf5)), closes [#2458](https://github.com/dequelabs/cauldron/issues/2458)
+
+
+### Bug Fixes
+
+* **ActionMenu:** parameterize trigger element type ([#2460](https://github.com/dequelabs/cauldron/issues/2460)) ([34f477f](https://github.com/dequelabs/cauldron/commit/34f477ff4cfd0234243802ed8eda980c9ab83e99)), closes [#2449](https://github.com/dequelabs/cauldron/issues/2449) [#2449](https://github.com/dequelabs/cauldron/issues/2449)
+* **styles:** restore dark-theme border for Panel and Code ([#2470](https://github.com/dequelabs/cauldron/issues/2470)) ([22ddc1b](https://github.com/dequelabs/cauldron/commit/22ddc1b02b9637980b3e315757441619f6eeae46)), closes [#2287](https://github.com/dequelabs/cauldron/issues/2287) [#2469](https://github.com/dequelabs/cauldron/issues/2469)
+
 ## [7.2.0](https://github.com/dequelabs/cauldron/compare/v7.1.0...v7.2.0) (2026-06-25)
 
 
