@@ -430,10 +430,13 @@ The trigger element type defaults to `HTMLButtonElement`, but it is parameterize
 ```tsx
 <ActionMenu
   renderInTrigger
-  trigger={({ ref, children, ...props }: ActionMenuTriggerProps<HTMLLIElement>) => (
+  trigger={({
+    ref,
+    children,
+    ...props
+  }: ActionMenuTriggerProps<HTMLLIElement>) => (
     <TopBarItem menuItemRef={ref} {...props}>
-      …
-      {children}
+      …{children}
     </TopBarItem>
   )}
 >
