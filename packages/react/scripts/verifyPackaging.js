@@ -33,9 +33,9 @@ function run(command, args, options = {}) {
   execFileSync(command, args, { stdio: 'inherit', ...options });
 }
 
-if (!fs.existsSync(path.join(libDir, 'index.js'))) {
+if (!fs.existsSync(path.join(libDir, 'cjs', 'index.js'))) {
   console.error(
-    'Missing build output at lib/index.js. Run `pnpm build` before verifying packaging.'
+    'Missing build output at lib/cjs/index.js. Run `pnpm build` before verifying packaging.'
   );
   process.exit(1);
 }
