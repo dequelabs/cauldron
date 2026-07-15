@@ -72,8 +72,17 @@ function build({ format, dir, type }) {
     output: {
       dir,
       format,
-      exports: 'auto',
-      chunkFileNames: '[name].js'
+      // The public entry is the named-export barrel; per-module files expose
+      // their component as the `default` export (with `__esModule`) for interop.
+      exports: 'named',
+      // Preserve the source module graph (one output file per source module,
+      // mirroring src/) instead of bundling everything into index.js. Combined
+      // with "sideEffects": false, this is what lets a consumer's bundler drop
+      // unused components — e.g. a Button-only import excludes Code and its
+      // react-syntax-highlighter dependency.
+      preserveModules: true,
+      preserveModulesRoot: 'src',
+      entryFileNames: '[name].js'
     },
     plugins: [
       typescript({
