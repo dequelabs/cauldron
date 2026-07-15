@@ -86,6 +86,27 @@ test('should have screenshot for TreeView multiple selection', async ({
   );
 });
 
+test('should have screenshot for TreeView virtualized', async ({
+  mount,
+  page
+}) => {
+  const longItems = Array.from({ length: 200 }, (_, i) => ({
+    id: String(i + 1),
+    textValue: `Item ${i + 1}`
+  }));
+  const component = await mount(
+    <TreeView
+      aria-label="Long list"
+      items={longItems}
+      selectionMode="multiple"
+      height={240}
+    />
+  );
+  await expect(component).toHaveScreenshot('tree-view-virtualized');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--tree-view-virtualized');
+});
+
 test('should have screenshot for TreeView cascade selection', async ({
   mount,
   page

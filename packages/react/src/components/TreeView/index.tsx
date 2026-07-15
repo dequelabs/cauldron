@@ -1,6 +1,12 @@
 import React, { forwardRef, useMemo, useState } from 'react';
 import classNames from 'classnames';
-import { Tree, type Selection, type Key } from 'react-aria-components';
+import {
+  Tree,
+  Virtualizer,
+  ListLayout,
+  type Selection,
+  type Key
+} from 'react-aria-components';
 import { Cauldron } from '../../types';
 import { TreeViewNode } from './types';
 import TreeViewItem from './TreeViewItem';
@@ -13,6 +19,17 @@ import {
 
 export type { TreeViewNode } from './types';
 
+/** Estimated row height (px) handed to the virtualizer. react-aria measures the
+ *  real height of each row after mount, so this only needs to be close enough
+ *  to seed the initial scroll math — wrapped multi-line rows are handled. */
+const ESTIMATED_ROW_HEIGHT = 32;
+/** Matches `.TreeView` `gap: var(--space-quarter)` (2px) so virtualized and
+ *  non-virtualized rows sit the same distance apart. */
+const ROW_GAP = 2;
+/** Matches `.TreeView` `padding: var(--space-half)` (4px) so the virtualized
+ *  scroll content has the same outer padding as the non-virtualized tree. */
+const LIST_PADDING = 4;
+
 type TreeViewProps = Cauldron.LabelProps & {
   items: TreeViewNode[];
   onAction?: (key: string) => void;
@@ -24,6 +41,14 @@ type TreeViewProps = Cauldron.LabelProps & {
    *  all of its descendants. */
   cascadeDeselect?: boolean;
   defaultExpandedKeys?: string[];
+  /** When set to a non-zero value, the tree becomes a fixed-height scroll
+   *  region and only the rows in view are rendered (virtualized). Use for long
+   *  lists where rendering every row makes selection changes janky. Omit (or
+   *  pass `0`) for the default behavior where the tree grows to fit all rows.
+   *  Accepts any CSS height value. Treat this as a *stable* prop: toggling it
+   *  between set and unset at runtime remounts the underlying tree, which resets
+   *  uncontrolled expansion and scroll/focus position. */
+  height?: number | string;
   className?: string;
 };
 
@@ -36,11 +61,16 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
       cascadeSelect = false,
       cascadeDeselect = false,
       defaultExpandedKeys,
+      height,
       className,
       ...other
     },
     ref
   ) => {
+    // A zero height would produce an empty, collapsed scroll region that renders
+    // no rows, so treat `0` (a common "not measured yet" value from layout code)
+    // the same as unset and fall back to the grow-to-fit tree.
+    const isVirtualized = height !== undefined && height !== 0;
     const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
     const cascade = { cascadeSelect, cascadeDeselect };
     // Cascade only applies to multiple selection.
@@ -91,22 +121,54 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
         ? { selectedKeys, onSelectionChange: handleSelectionChange }
         : {};
 
-    return (
+    // Merge the virtualization height into any caller-supplied `style` (which
+    // arrives via the `...other` passthrough) rather than letting it clobber, or
+    // be clobbered by, the height. Applied after `{...other}` so height wins.
+    const virtualizedStyle = isVirtualized
+      ? { ...(other as { style?: React.CSSProperties }).style, height }
+      : undefined;
+
+    const tree = (
       <Tree
         ref={ref}
-        className={classNames('TreeView', className)}
+        className={classNames('TreeView', className, {
+          'TreeView--virtualized': isVirtualized
+        })}
         selectionMode={selectionMode}
         defaultExpandedKeys={defaultExpandedKeys}
         {...(disabledKeys.length > 0 ? { disabledKeys } : {})}
         {...(onAction ? { onAction: handleAction } : {})}
         {...selectionProps}
         {...other}
+        {...(virtualizedStyle ? { style: virtualizedStyle } : {})}
       >
         {items.map((item) => (
           <TreeViewItem key={item.id} {...item} />
         ))}
       </Tree>
     );
+
+    // When a height is provided, virtualize: only the rows in view are rendered
+    // to the DOM, so selection changes no longer reconcile the whole list. The
+    // list layout owns row spacing/padding here (see `.TreeView--virtualized`
+    // in the styles), because virtualized rows are absolutely positioned and
+    // the container's flex `gap`/`padding` no longer apply.
+    if (isVirtualized) {
+      return (
+        <Virtualizer
+          layout={ListLayout}
+          layoutOptions={{
+            estimatedRowHeight: ESTIMATED_ROW_HEIGHT,
+            gap: ROW_GAP,
+            padding: LIST_PADDING
+          }}
+        >
+          {tree}
+        </Virtualizer>
+      );
+    }
+
+    return tree;
   }
 );
 

@@ -454,3 +454,103 @@ test('cascade is inert in single selection mode', async () => {
   expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
   expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
 });
+
+// --- Virtualized (height) mode ---
+
+test('applies a fixed height and the virtualized class when height is set', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} height={200} />
+  );
+  const tree = getByRole('treegrid');
+  expect(tree).toHaveClass('TreeView--virtualized');
+  expect(tree).toHaveStyle({ height: '200px' });
+});
+
+test('does not virtualize when height is omitted', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} />
+  );
+  expect(getByRole('treegrid')).not.toHaveClass('TreeView--virtualized');
+});
+
+test('does not virtualize when height is 0 (treated as unset)', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} height={0} />
+  );
+  const tree = getByRole('treegrid');
+  expect(tree).not.toHaveClass('TreeView--virtualized');
+  expect(tree).not.toHaveStyle({ height: '0px' });
+});
+
+test('merges a caller-supplied style with the virtualization height', () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      height={200}
+      // style arrives via the react-aria passthrough; height must survive it.
+      {...({ style: { border: '1px solid red' } } as object)}
+    />
+  );
+  const tree = getByRole('treegrid');
+  expect(tree).toHaveStyle({ height: '200px' });
+  expect(tree).toHaveStyle({ border: '1px solid red' });
+});
+
+test('accepts a string height', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} height="20rem" />
+  );
+  expect(getByRole('treegrid')).toHaveStyle({ height: '20rem' });
+});
+
+test('renders and selects items when virtualized', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      height={200}
+    />
+  );
+  const checkbox = getByRole('checkbox', { name: 'TreeView' });
+  await userEvent.click(checkbox);
+  expect(checkbox).toBeChecked();
+});
+
+test('has no axe violations when virtualized', async () => {
+  const { container } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      height={200}
+      defaultExpandedKeys={['1', '4']}
+    />
+  );
+  expect(await axe(container)).toHaveNoViolations();
+});
+
+test('cascadeSelect works when virtualized: selecting the parent selects its children', async () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      cascadeSelect
+      cascadeDeselect
+      height={200}
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).toBeChecked();
+
+  // cascadeDeselect: unchecking the parent clears its children too.
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
+  expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});

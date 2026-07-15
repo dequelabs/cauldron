@@ -150,6 +150,63 @@ function DefaultExpandedTreeView() {
 }
 ```
 
+### Virtualized (Long Lists)
+
+Set the `height` prop to turn the tree into a fixed-height scroll region that
+only renders the rows currently in view. This keeps selection changes fast on
+long lists, where rendering every row would otherwise make each click janky.
+Omit `height` for the default behavior, where the tree grows to fit all rows.
+
+```jsx example
+function VirtualizedTreeView() {
+  const items = Array.from({ length: 500 }, (_, i) => ({
+    id: String(i + 1),
+    textValue: `Item ${i + 1}`
+  }));
+  return (
+    <TreeView
+      aria-label="Virtualized Tree View"
+      selectionMode="multiple"
+      height={320}
+      items={items}
+    />
+  );
+}
+```
+
+### Virtualized with Cascade Selection
+
+`height` (virtualization) composes with `cascadeSelect` / `cascadeDeselect`.
+Here a single parent has a long list of children: checking the parent selects
+every child, and unchecking it deselects them — while only the rows in view are
+rendered, so the cascade stays fast no matter how many children there are.
+
+```jsx example
+function VirtualizedCascadeTreeView() {
+  const items = [
+    {
+      id: 'parent',
+      textValue: 'All Subdimensions',
+      children: Array.from({ length: 300 }, (_, i) => ({
+        id: String(i + 1),
+        textValue: `Subdimension ${i + 1}`
+      }))
+    }
+  ];
+  return (
+    <TreeView
+      aria-label="Virtualized Cascade Tree View"
+      selectionMode="multiple"
+      cascadeSelect
+      cascadeDeselect
+      height={320}
+      defaultExpandedKeys={['parent']}
+      items={items}
+    />
+  );
+}
+```
+
 ### Labelled by External Element
 
 Use `aria-labelledby` when a visible heading or label for the tree already exists on the page.
@@ -262,6 +319,13 @@ function ActionTreeView() {
       type: 'string[]',
       defaultValue: 'undefined',
       description: 'Keys of tree items that should be expanded by default.'
+    },
+    {
+      name: 'height',
+      type: 'number | string',
+      defaultValue: 'undefined',
+      description:
+        'When set, the tree becomes a fixed-height scroll region and only the rows in view are rendered (virtualized). Use for long lists where rendering every row makes selection changes janky. Omit for the default behavior where the tree grows to fit all rows.'
     }
   ]}
 />
