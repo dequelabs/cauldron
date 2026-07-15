@@ -95,12 +95,20 @@ test('should have screenshot for TreeView virtualized', async ({
     textValue: `Item ${i + 1}`
   }));
   const component = await mount(
-    <TreeView
-      aria-label="Long list"
-      items={longItems}
-      selectionMode="multiple"
-      height={240}
-    />
+    // The screenshot harness sizes the mounted root to its content
+    // (`min-height`/`max-width: max-content` on `#root > div`), which would
+    // override the fixed height and collapse the width of virtualized (absolutely
+    // positioned) rows. Wrapping in a div and giving the tree an explicit width
+    // lets the fixed-height scroll region render as it does in a real app.
+    <div>
+      <TreeView
+        aria-label="Long list"
+        items={longItems}
+        selectionMode="multiple"
+        height={240}
+        style={{ width: 420 }}
+      />
+    </div>
   );
   await expect(component).toHaveScreenshot('tree-view-virtualized');
   await setTheme(page, 'dark');

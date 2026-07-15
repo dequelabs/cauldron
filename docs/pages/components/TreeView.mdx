@@ -325,7 +325,7 @@ function ActionTreeView() {
       type: 'number | string',
       defaultValue: 'undefined',
       description:
-        'When set, the tree becomes a fixed-height scroll region and only the rows in view are rendered (virtualized). Use for long lists where rendering every row makes selection changes janky. Omit for the default behavior where the tree grows to fit all rows.'
+        'When set to a non-zero value, the tree becomes a fixed-height scroll region and only the rows in view are rendered (virtualized). Use for long lists where rendering every row makes selection changes janky. Omit (or pass 0) for the default behavior where the tree grows to fit all rows.'
     }
   ]}
 />

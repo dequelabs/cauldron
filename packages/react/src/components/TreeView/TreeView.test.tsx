@@ -488,8 +488,8 @@ test('merges a caller-supplied style with the virtualization height', () => {
       aria-label="Test TreeView"
       items={items}
       height={200}
-      // style arrives via the react-aria passthrough; height must survive it.
-      {...({ style: { border: '1px solid red' } } as object)}
+      // a caller-supplied style must not drop the virtualization height
+      style={{ border: '1px solid red' }}
     />
   );
   const tree = getByRole('treegrid');

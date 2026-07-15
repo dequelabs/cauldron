@@ -30,27 +30,27 @@ const ROW_GAP = 2;
  *  scroll content has the same outer padding as the non-virtualized tree. */
 const LIST_PADDING = 4;
 
-type TreeViewProps = Cauldron.LabelProps & {
-  items: TreeViewNode[];
-  onAction?: (key: string) => void;
-  selectionMode?: 'none' | 'single' | 'multiple';
-  /** When true (multiple selection only), selecting a parent also selects all
-   *  of its (non-disabled) descendants. */
-  cascadeSelect?: boolean;
-  /** When true (multiple selection only), deselecting a parent also deselects
-   *  all of its descendants. */
-  cascadeDeselect?: boolean;
-  defaultExpandedKeys?: string[];
-  /** When set to a non-zero value, the tree becomes a fixed-height scroll
-   *  region and only the rows in view are rendered (virtualized). Use for long
-   *  lists where rendering every row makes selection changes janky. Omit (or
-   *  pass `0`) for the default behavior where the tree grows to fit all rows.
-   *  Accepts any CSS height value. Treat this as a *stable* prop: toggling it
-   *  between set and unset at runtime remounts the underlying tree, which resets
-   *  uncontrolled expansion and scroll/focus position. */
-  height?: number | string;
-  className?: string;
-};
+type TreeViewProps = Cauldron.LabelProps &
+  React.HTMLAttributes<HTMLDivElement> & {
+    items: TreeViewNode[];
+    onAction?: (key: string) => void;
+    selectionMode?: 'none' | 'single' | 'multiple';
+    /** When true (multiple selection only), selecting a parent also selects all
+     *  of its (non-disabled) descendants. */
+    cascadeSelect?: boolean;
+    /** When true (multiple selection only), deselecting a parent also deselects
+     *  all of its descendants. */
+    cascadeDeselect?: boolean;
+    defaultExpandedKeys?: string[];
+    /** When set to a non-zero value, the tree becomes a fixed-height scroll
+     *  region and only the rows in view are rendered (virtualized). Use for long
+     *  lists where rendering every row makes selection changes janky. Omit (or
+     *  pass `0`) for the default behavior where the tree grows to fit all rows.
+     *  Accepts any CSS height value. Treat this as a *stable* prop: toggling it
+     *  between set and unset at runtime remounts the underlying tree, which resets
+     *  uncontrolled expansion and scroll/focus position. */
+    height?: number | string;
+  };
 
 const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
   (
@@ -125,7 +125,7 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
     // arrives via the `...other` passthrough) rather than letting it clobber, or
     // be clobbered by, the height. Applied after `{...other}` so height wins.
     const virtualizedStyle = isVirtualized
-      ? { ...(other as { style?: React.CSSProperties }).style, height }
+      ? { ...other.style, height }
       : undefined;
 
     const tree = (
