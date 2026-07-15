@@ -1,11 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/light';
+// Fully-specified (`.js`) cjs subpaths: react-syntax-highlighter has no
+// `exports` map, so the ESM build's `{"type":"module"}` marker makes strict
+// bundlers (webpack 5) resolve these fully-specified — an extensionless
+// specifier fails there. The cjs paths (not esm) are kept deliberately: they
+// resolve under Node `require`, Node ESM interop, and bundlers alike, whereas
+// the esm subpaths are bare ESM in a non-module package and break under Node.
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/light.js';
 import classNames from 'classnames';
-import js from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
-import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
-import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
-import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
+import js from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript.js';
+import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css.js';
+import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml.js';
+import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml.js';
 import type { ContentNode } from '../../types';
 import { useId } from 'react-id-generator';
 import CopyButton, { CopyButtonProps } from '../CopyButton';
