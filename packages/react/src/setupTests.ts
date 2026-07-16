@@ -9,7 +9,13 @@ configureAxe({
   }
 });
 
-if (!('clipboard' in global.navigator)) {
+// Guard the DOM-dependent shims so this setup can also run under the `node`
+// test environment (used by SSR test suites), where `navigator`/`document` are
+// not declared globals.
+if (
+  typeof global.navigator !== 'undefined' &&
+  !('clipboard' in global.navigator)
+) {
   Object.defineProperty(global.navigator, 'clipboard', {
     value: {
       writeText: async () => null
@@ -19,7 +25,10 @@ if (!('clipboard' in global.navigator)) {
   });
 }
 
-if (!('execCommand' in global.document)) {
+if (
+  typeof global.document !== 'undefined' &&
+  !('execCommand' in global.document)
+) {
   Object.defineProperty(global.document, 'execCommand', {
     value: () => null,
     configurable: true,
