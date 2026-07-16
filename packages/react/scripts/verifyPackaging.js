@@ -8,8 +8,11 @@
  *   3. `attw`     — check that types resolve for every module condition.
  *   4. Smoke test — install the tarball into a throwaway consumer and confirm
  *      it resolves under both `require(...)` and native `import`.
+ *   5. Tree-shaking — bundle a Button-only consumer with Vite (Rollup) and
+ *      assert the unused component graph (Code, react-syntax-highlighter,
+ *      react-aria-components) is dropped.
  *
- * The smoke consumer installs from the tarball (not a workspace symlink), so
+ * The consumers install from the tarball (not a workspace symlink), so
  * resolution matches what a real consumer would get from npm.
  *
  * Prerequisite: `lib/` must already be built (`pnpm build`). Run via the
@@ -123,6 +126,72 @@ try {
       `Published stylesheet missing or empty: ${installedStylesheet}`
     );
   }
+  step('Verifying tree-shaking (Button-only import drops unused components)');
+  const treeshakeDir = path.join(workDir, 'treeshake');
+  fs.mkdirSync(treeshakeDir);
+  fs.writeFileSync(
+    path.join(treeshakeDir, 'package.json'),
+    JSON.stringify(
+      {
+        name: 'cauldron-treeshake',
+        version: '0.0.0',
+        private: true,
+        type: 'module'
+      },
+      null,
+      2
+    )
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'treeshake.entry.js'),
+    path.join(treeshakeDir, 'treeshake.entry.js')
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'treeshake.vite.config.js'),
+    path.join(treeshakeDir, 'vite.config.js')
+  );
+  run(
+    'npm',
+    [
+      'install',
+      tarball,
+      'react@^19',
+      'react-dom@^19',
+      'vite@^7',
+      '--no-audit',
+      '--no-fund',
+      '--no-package-lock'
+    ],
+    { cwd: treeshakeDir }
+  );
+  run('npx', ['vite', 'build'], { cwd: treeshakeDir });
+
+  // A Button-only bundle must not contain any of these — their presence means
+  // an unused component (and its heavy deps) failed to tree-shake.
+  const forbidden = [
+    'react-syntax-highlighter',
+    'react-aria',
+    'registerLanguage',
+    'hljs',
+    'lowlight'
+  ];
+  const outDir = path.join(treeshakeDir, 'dist');
+  const bundle = fs
+    .readdirSync(outDir)
+    .filter((file) => file.endsWith('.js'))
+    .map((file) => fs.readFileSync(path.join(outDir, file), 'utf8'))
+    .join('\n');
+  const leaked = forbidden.filter((marker) => bundle.includes(marker));
+  if (leaked.length > 0) {
+    throw new Error(
+      `Tree-shaking regressed: a Button-only bundle still contains ${leaked.join(
+        ', '
+      )}.`
+    );
+  }
+  console.log(
+    `Tree-shaking OK: Button-only bundle excludes ${forbidden.join(', ')}`
+  );
 
   console.log('\n✓ Packaging validation passed');
 } finally {
