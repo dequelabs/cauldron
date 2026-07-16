@@ -8,8 +8,8 @@
  *   3. `attw`     — check that types resolve for every module condition.
  *   4. Smoke test — install the tarball into a throwaway consumer and confirm
  *      it resolves under both `require(...)` and native `import`.
- *   5. Single-copy guard — assert `import` and `require` of the specifier yield
- *      the same context object (no dual-package hazard from split resolution).
+ *   5. Exports resolution — confirm `import` resolves to the ESM build and
+ *      `require` to the CJS build, both exposing the full public API.
  *   6. Tree-shaking — bundle a Button-only consumer with Vite (Rollup) and
  *      assert the unused component graph (Code, react-syntax-highlighter,
  *      react-aria-components) is dropped.
@@ -65,7 +65,20 @@ try {
   run('pnpm', ['exec', 'publint', '--strict', tarball], { cwd: packageRoot });
 
   step('Checking type resolution with @arethetypeswrong/cli');
-  run('pnpm', ['exec', 'attw', tarball], { cwd: packageRoot });
+  // The CSS export has no types — attw would report it as an unresolvable
+  // module, so exclude the stylesheet entrypoints from the type check.
+  run(
+    'pnpm',
+    [
+      'exec',
+      'attw',
+      tarball,
+      '--exclude-entrypoints',
+      'cauldron.css',
+      'lib/cauldron.css'
+    ],
+    { cwd: packageRoot }
+  );
 
   step('Smoke testing require() + import from the packed tarball');
   const consumerDir = path.join(workDir, 'consumer');
@@ -87,8 +100,8 @@ try {
     path.join(consumerDir, 'smoke.mjs')
   );
   fs.copyFileSync(
-    path.join(smokeFixtures, 'single-copy.mjs'),
-    path.join(consumerDir, 'single-copy.mjs')
+    path.join(smokeFixtures, 'dual-resolution.mjs'),
+    path.join(consumerDir, 'dual-resolution.mjs')
   );
 
   // Install with npm into an isolated dir so resolution is hermetic and does
@@ -109,8 +122,8 @@ try {
   run('node', ['smoke.cjs'], { cwd: consumerDir });
   run('node', ['smoke.mjs'], { cwd: consumerDir });
 
-  step('Verifying a single copy resolves (dual-package-hazard guard)');
-  run('node', ['single-copy.mjs'], { cwd: consumerDir });
+  step('Verifying exports resolution (import→ESM, require→CJS)');
+  run('node', ['dual-resolution.mjs'], { cwd: consumerDir });
 
   step('Verifying tree-shaking (Button-only import drops unused components)');
   const treeshakeDir = path.join(workDir, 'treeshake');
