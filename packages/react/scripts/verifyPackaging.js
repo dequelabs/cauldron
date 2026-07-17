@@ -93,7 +93,8 @@ try {
       'react-dom@^19',
       '--no-audit',
       '--no-fund',
-      '--no-package-lock'
+      '--no-package-lock',
+      '--no-save'
     ],
     { cwd: consumerDir }
   );
