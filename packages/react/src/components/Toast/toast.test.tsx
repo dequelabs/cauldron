@@ -236,6 +236,40 @@ test('should dismiss toast when dismiss button is clicked', async () => {
   });
 });
 
+test('should restore focus to the previously focused element on dismiss', async () => {
+  const user = userEvent.setup();
+  const trigger = document.createElement('button');
+  trigger.textContent = 'open toast';
+  document.body.appendChild(trigger);
+  trigger.focus();
+  expect(trigger).toHaveFocus();
+
+  render(
+    <Toast
+      show={true}
+      type="info"
+      dismissible={true}
+      dismissText="dismiss"
+      data-testid="toast"
+    >
+      {testString}
+    </Toast>
+  );
+
+  const toast = screen.getByTestId('toast');
+  await waitFor(() => {
+    expect(toast).toHaveFocus();
+  });
+
+  await user.click(screen.getByRole('button', { name: 'dismiss' }));
+
+  await waitFor(() => {
+    expect(trigger).toHaveFocus();
+  });
+
+  trigger.remove();
+});
+
 test('non-dismissible toast has no accessibility issues', async () => {
   const { container } = render(
     <Toast show type="info" dismissible={false}>

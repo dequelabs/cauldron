@@ -51,6 +51,7 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>(
     const elRef = useSharedRef<HTMLDivElement>(ref);
     const isolatorRef = useRef<AriaIsolate | null>(null);
     const timeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+    const previouslyFocusedRef = useRef<HTMLElement | null>(null);
     const [animationClass, setAnimationClass] = useState<string>(
       show ? 'FadeIn--flex' : 'is--hidden'
     );
@@ -84,9 +85,29 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>(
       }
 
       if (elRef.current && !!focus) {
+        const active = document.activeElement;
+        if (active instanceof HTMLElement && active !== elRef.current) {
+          previouslyFocusedRef.current = active;
+        }
         elRef.current.focus();
       }
     }, [type, focus]);
+
+    const restoreFocus = useCallback(() => {
+      const toRestore = previouslyFocusedRef.current;
+      previouslyFocusedRef.current = null;
+      if (
+        toRestore &&
+        document.contains(toRestore) &&
+        typeof toRestore.focus === 'function'
+      ) {
+        try {
+          toRestore.focus();
+        } catch {
+          // Element may no longer be focusable.
+        }
+      }
+    }, []);
 
     const dismissToast = useCallback(() => {
       if (!elRef.current) {
@@ -101,10 +122,12 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>(
           isolatorRef.current?.deactivate();
         }
 
+        // Restore before display:none so focus isn't dropped to <body>.
+        restoreFocus();
         setAnimationClass('is--hidden');
         onDismiss();
       });
-    }, [type, onDismiss]);
+    }, [type, onDismiss, restoreFocus]);
 
     useEffect(() => {
       if (show) {
@@ -115,6 +138,8 @@ const Toast = forwardRef<HTMLDivElement, ToastProps>(
         timeoutsRef.current.forEach(clearTimeout);
         timeoutsRef.current.clear();
         isolatorRef.current?.deactivate();
+        // If unmounted while shown/focused, return focus to the trigger.
+        restoreFocus();
       };
     }, []);
 
