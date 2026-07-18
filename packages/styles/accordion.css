@@ -79,6 +79,15 @@ button.Accordion__trigger {
   border-radius: 0 0 3px 3px;
 }
 
+/* Prevent child margins from stacking on top of panel padding. */
+.Accordion__panel > :first-child {
+  margin-top: 0;
+}
+
+.Accordion__panel > :last-child {
+  margin-bottom: 0;
+}
+
 .Accordion:has(> button[aria-expanded='true']) {
   box-shadow: var(--drop-shadow-raised);
 }
