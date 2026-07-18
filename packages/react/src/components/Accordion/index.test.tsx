@@ -111,15 +111,18 @@ test('should set aria-expanded to true when open via the open prop', () => {
   expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
 });
 
-test('should set the className when passed a value in the className prop', () => {
+test('should append className to Accordion__trigger instead of replacing it', () => {
   render(
     <Accordion>
-      <AccordionTrigger className="test">Trigger</AccordionTrigger>
+      <AccordionTrigger className="extraTriggerClass">Trigger</AccordionTrigger>
       <AccordionContent>Content</AccordionContent>
     </Accordion>
   );
 
-  expect(screen.getByRole('button')).toHaveClass('test');
+  const trigger = screen.getByRole('button');
+  expect(trigger).toHaveClass('Accordion__trigger');
+  expect(trigger).toHaveClass('ExpandCollapse__trigger');
+  expect(trigger).toHaveClass('extraTriggerClass');
 });
 
 test('should set the heading level when passed a value in the heading prop', () => {
