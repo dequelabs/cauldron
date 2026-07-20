@@ -18,11 +18,13 @@ const ThemeTester = () => {
 // values, not undeclared globals.
 test('ThemeProvider renders without error when document is undefined (SSR)', () => {
   expect(typeof document).toBe('undefined');
-  expect(() =>
-    renderToString(
+  let html = '';
+  expect(() => {
+    html = renderToString(
       <ThemeProvider initialTheme="dark">
         <ThemeTester />
       </ThemeProvider>
-    )
-  ).not.toThrow();
+    );
+  }).not.toThrow();
+  expect(html).toBe('<div></div>');
 });
