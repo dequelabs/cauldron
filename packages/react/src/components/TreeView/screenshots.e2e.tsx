@@ -110,9 +110,56 @@ test('should have screenshot for TreeView virtualized', async ({
       />
     </div>
   );
+  // Windowing check: a screenshot alone can't catch a virtualization regression
+  // because 8 rows and 200 rows look identical in the visible region. Assert the
+  // DOM holds only a small subset of the 200 mounted rows.
+  const renderedRows = await component.getByRole('row').count();
+  expect(renderedRows).toBeGreaterThan(0);
+  expect(renderedRows).toBeLessThan(50);
   await expect(component).toHaveScreenshot('tree-view-virtualized');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--tree-view-virtualized');
+});
+
+test('virtualized TreeView keeps keyboard focus when the focused row scrolls out of view', async ({
+  mount,
+  page
+}) => {
+  const longItems = Array.from({ length: 200 }, (_, i) => ({
+    id: String(i + 1),
+    textValue: `Item ${i + 1}`
+  }));
+  const component = await mount(
+    <div>
+      <TreeView
+        aria-label="Long list"
+        items={longItems}
+        selectionMode="multiple"
+        height={240}
+        style={{ width: 420 }}
+      />
+    </div>
+  );
+
+  // Move focus into the tree and arrow down to a row well past the initial
+  // ~8-row window (height 240 / ~32px per row).
+  await component.getByRole('row', { name: 'Item 1' }).click();
+  for (let i = 0; i < 40; i++) {
+    await page.keyboard.press('ArrowDown');
+  }
+
+  // The row far down the list is both rendered and focused: keyboard users can
+  // navigate the full list even though most rows are windowed out.
+  const focusedRow = component.getByRole('row', { name: 'Item 41' });
+  await expect(focusedRow).toBeVisible();
+  await expect(focusedRow).toBeFocused();
+
+  // Scroll to the end without moving focus; react-aria must not drop focus even
+  // as the focused row is scrolled out of view.
+  await component
+    .getByRole('treegrid')
+    .evaluate((el) => el.scrollTo(0, el.scrollHeight));
+  await expect(focusedRow).toBeFocused();
 });
 
 test('should have screenshot for TreeView cascade selection', async ({

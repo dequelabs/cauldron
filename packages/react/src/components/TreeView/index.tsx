@@ -44,8 +44,9 @@ type TreeViewProps = Cauldron.LabelProps &
     defaultExpandedKeys?: string[];
     /** When set to a non-zero value, the tree becomes a fixed-height scroll
      *  region and only the rows in view are rendered (virtualized). Use for long
-     *  lists where rendering every row makes selection changes janky. Omit (or
-     *  pass `0`) for the default behavior where the tree grows to fit all rows.
+     *  lists where rendering every row makes selection changes take a long time
+     *  while appearing to freeze. Omit (or pass `0`) for the default behavior
+     *  where the tree grows to fit all rows.
      *  Accepts any CSS height value. Treat this as a *stable* prop: toggling it
      *  between set and unset at runtime remounts the underlying tree, which resets
      *  uncontrolled expansion and scroll/focus position. */
@@ -69,8 +70,12 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
   ) => {
     // A zero height would produce an empty, collapsed scroll region that renders
     // no rows, so treat `0` (a common "not measured yet" value from layout code)
-    // the same as unset and fall back to the grow-to-fit tree.
-    const isVirtualized = height !== undefined && height !== 0;
+    // the same as unset and fall back to the grow-to-fit tree. Layout code that
+    // interpolates a measurement into a template string yields a value like
+    // `"0px"` before the element is measured, so normalize string zeros too.
+    const isZeroHeight =
+      height === 0 || (typeof height === 'string' && parseFloat(height) === 0);
+    const isVirtualized = height !== undefined && !isZeroHeight;
     const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
     const cascade = { cascadeSelect, cascadeDeselect };
     // Cascade only applies to multiple selection.

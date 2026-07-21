@@ -497,6 +497,28 @@ test('merges a caller-supplied style with the virtualization height', () => {
   expect(tree).toHaveStyle({ border: '1px solid red' });
 });
 
+test('the virtualization height wins over a conflicting height in style', () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      height={200}
+      // a caller's own style.height must not override the virtualization height
+      style={{ height: 500 }}
+    />
+  );
+  expect(getByRole('treegrid')).toHaveStyle({ height: '200px' });
+});
+
+test('does not virtualize when height is a zero-valued string like "0px"', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} height="0px" />
+  );
+  const tree = getByRole('treegrid');
+  expect(tree).not.toHaveClass('TreeView--virtualized');
+  expect(tree).not.toHaveStyle({ height: '0px' });
+});
+
 test('accepts a string height', () => {
   const { getByRole } = render(
     <TreeView aria-label="Test TreeView" items={items} height="20rem" />

@@ -154,8 +154,25 @@ function DefaultExpandedTreeView() {
 
 Set the `height` prop to turn the tree into a fixed-height scroll region that
 only renders the rows currently in view. This keeps selection changes fast on
-long lists, where rendering every row would otherwise make each click janky.
-Omit `height` for the default behavior, where the tree grows to fit all rows.
+long lists, where rendering every row would otherwise make each click take a
+long time while appearing to freeze. Omit `height` for the default behavior,
+where the tree grows to fit all rows.
+
+Because virtualization removes off-screen rows from the DOM, be aware of these
+current limitations when you enable it:
+
+- **Browser find-in-page (Cmd/Ctrl+F) only matches rendered rows.** Rows that
+  are scrolled out of view are not in the DOM, so the browser cannot find text
+  in them. `TreeView` does not yet expose a search/filter prop as a replacement.
+- **No programmatic scroll-to / reveal-node API yet**, so a consumer cannot
+  currently scroll a specific off-screen node into view.
+- **`aria-rowindex` is not set on rows.** In virtualized mode the treegrid
+  reports `aria-rowcount` for the full list, and each row keeps a correct
+  `aria-level` / `aria-posinset` / `aria-setsize`, but the matching
+  `aria-rowindex` is missing. This is a
+  [react-aria-components limitation](https://github.com/adobe/react-spectrum/issues)
+  (`useTree` sets the virtualized flag but `TreeItem` never forwards it), not
+  something the Cauldron wrapper can fix without patching react-aria.
 
 ```jsx example
 function VirtualizedTreeView() {
@@ -325,7 +342,7 @@ function ActionTreeView() {
       type: 'number | string',
       defaultValue: 'undefined',
       description:
-        'When set to a non-zero value, the tree becomes a fixed-height scroll region and only the rows in view are rendered (virtualized). Use for long lists where rendering every row makes selection changes janky. Omit (or pass 0) for the default behavior where the tree grows to fit all rows.'
+        'When set to a non-zero value, the tree becomes a fixed-height scroll region and only the rows in view are rendered (virtualized). Use for long lists where rendering every row makes selection changes take a long time while appearing to freeze. Omit (or pass 0) for the default behavior where the tree grows to fit all rows.'
     }
   ]}
 />
