@@ -143,14 +143,18 @@ test('virtualized TreeView keeps keyboard focus when the focused row scrolls out
 
   // Move focus into the tree and arrow down to a row well past the initial
   // ~8-row window (height 240 / ~32px per row).
-  await component.getByRole('row', { name: 'Item 1' }).click();
+  // `exact` avoids matching "Item 10"/"Item 11"/… when we want "Item 1".
+  await component.getByRole('row', { name: 'Item 1', exact: true }).click();
   for (let i = 0; i < 40; i++) {
     await page.keyboard.press('ArrowDown');
   }
 
   // The row far down the list is both rendered and focused: keyboard users can
   // navigate the full list even though most rows are windowed out.
-  const focusedRow = component.getByRole('row', { name: 'Item 41' });
+  const focusedRow = component.getByRole('row', {
+    name: 'Item 41',
+    exact: true
+  });
   await expect(focusedRow).toBeVisible();
   await expect(focusedRow).toBeFocused();
 
