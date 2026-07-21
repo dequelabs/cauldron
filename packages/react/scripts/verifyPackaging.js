@@ -94,12 +94,35 @@ try {
       '--no-audit',
       '--no-fund',
       '--no-package-lock',
-      '--no-save'
+      '--no-save',
+      '--ignore-scripts'
     ],
     { cwd: consumerDir }
   );
   run('node', ['smoke.cjs'], { cwd: consumerDir });
   run('node', ['smoke.mjs'], { cwd: consumerDir });
+
+  // `package.json` publishes `style: lib/cauldron.css`, but neither publint
+  // nor attw validates that field — they only cover JS entries and types. A
+  // stylesheet dropped from the tarball (e.g. via a `files` change) would slip
+  // through, so assert it survived the install and is non-empty.
+  step('Verifying published stylesheet is present');
+  const installedStylesheet = path.join(
+    consumerDir,
+    'node_modules',
+    '@deque',
+    'cauldron-react',
+    'lib',
+    'cauldron.css'
+  );
+  const stylesheetStats = fs.statSync(installedStylesheet, {
+    throwIfNoEntry: false
+  });
+  if (!stylesheetStats || stylesheetStats.size === 0) {
+    throw new Error(
+      `Published stylesheet missing or empty: ${installedStylesheet}`
+    );
+  }
 
   console.log('\n✓ Packaging validation passed');
 } finally {

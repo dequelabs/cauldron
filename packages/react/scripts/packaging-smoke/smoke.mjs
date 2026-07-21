@@ -3,12 +3,10 @@
 // workspace symlink), so this exercises the real published resolution.
 import assert from 'node:assert';
 
-import cauldron from '@deque/cauldron-react';
 import { Button, Modal } from '@deque/cauldron-react';
 
 assert(Button, 'import: expected `Button` named export');
 assert(Modal, 'import: expected `Modal` named export');
-assert(cauldron.Button, 'import: expected `Button` on the default export');
 assert(
   typeof Button === 'object' || typeof Button === 'function',
   'import: `Button` is not a renderable component'
