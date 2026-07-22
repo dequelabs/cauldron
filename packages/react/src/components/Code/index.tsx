@@ -15,19 +15,10 @@ import yamlImport from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml.js
 import type { ContentNode } from '../../types';
 import { useId } from 'react-id-generator';
 import CopyButton, { CopyButtonProps } from '../CopyButton';
+import interopDefault from '../../utils/interopDefault';
 
-// Normalize a CommonJS default export. Under strict ESM (Next.js SSR, webpack,
-// Node-native) a CJS module that sets `__esModule` is delivered double-wrapped
-// (`{ __esModule, default }`), so the default import is the wrapper rather than
-// the value — without this, `SyntaxHighlighter.registerLanguage` is undefined
-// and module evaluation throws. Bundlers like Vite already unwrap, so this is a
-// no-op there.
-function interopDefault<T>(mod: T): T {
-  return (mod as { __esModule?: boolean; default?: T })?.__esModule
-    ? (mod as { default: T }).default
-    : mod;
-}
-
+// react-syntax-highlighter ships `__esModule`, so its default imports come back
+// double-wrapped under strict ESM; unwrap them (see interopDefault).
 const SyntaxHighlighter = interopDefault(SyntaxHighlighterImport);
 const js = interopDefault(jsImport);
 const css = interopDefault(cssImport);
