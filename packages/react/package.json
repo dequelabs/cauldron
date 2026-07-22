@@ -19,6 +19,7 @@
     "build:lib": "rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "typecheck": "tsc --noEmit --skipLibCheck",
+    "verify:packaging": "pnpm build && node scripts/verifyPackaging.js",
     "dev": "concurrently 'pnpm build:css --watch' 'rollup -c --watch'",
     "prepublishOnly": "NODE_ENV=production pnpm build",
     "test": "jest --maxWorkers=1 --coverage",
@@ -38,6 +39,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.4",
     "@babel/core": "^7.29.7",
     "@babel/plugin-proposal-export-default-from": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
@@ -73,6 +75,7 @@
     "postcss-import": "^16.1.1",
     "postcss-loader": "^8.2.1",
     "prop-types": "^15.8.1",
+    "publint": "^0.3.21",
     "react": "^19",
     "react-dom": "^19",
     "rollup": "^2.23.0",
