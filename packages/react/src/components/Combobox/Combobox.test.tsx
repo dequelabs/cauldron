@@ -267,6 +267,13 @@ test('should render combobox with error', () => {
     'aria-describedby',
     `other-id ${errorId}`
   );
+
+  // The listbox is closed, so this is the field error rather than the
+  // "no results found" empty state, which is also an alert.
+  const error = screen.getByRole('alert');
+  expect(error).toHaveAttribute('id', errorId);
+  expect(error).toHaveTextContent('You forgot to choose a value.');
+  expect(error).toHaveAttribute('aria-live', 'polite');
 });
 
 test('should render combobox with both description and error', () => {

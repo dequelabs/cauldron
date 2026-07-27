@@ -63,6 +63,22 @@ test('should render with error message', () => {
   expect(error).toHaveClass('Field__error');
 });
 
+test('should announce the error via a live region', () => {
+  render(
+    <FieldGroup
+      label="Group Label"
+      error="You must include both first and last name"
+    >
+      <input type="text" placeholder="First Name" />
+      <input type="text" placeholder="Last Name" />
+    </FieldGroup>
+  );
+
+  const error = screen.getByRole('alert');
+  expect(error).toHaveTextContent('You must include both first and last name');
+  expect(error).toHaveAttribute('aria-live', 'polite');
+});
+
 test('should use provided id', () => {
   render(
     <FieldGroup

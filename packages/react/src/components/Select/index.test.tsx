@@ -123,6 +123,8 @@ test('Should handle errors', () => {
     'Field__select--wrapper',
     'Field--has-error'
   );
+  expect(screen.getByRole('alert')).toHaveTextContent(errorText);
+  expect(screen.getByRole('alert')).toHaveAttribute('aria-live', 'polite');
 });
 
 test('Should support "controlled" select', () => {

@@ -63,6 +63,13 @@ test('should render error textfield', () => {
   ).toBeInTheDocument();
 });
 
+test('should announce the error via a live region', () => {
+  renderTextField({ error: 'there is an error with this field' });
+  const error = screen.getByRole('alert');
+  expect(error).toHaveTextContent('there is an error with this field');
+  expect(error).toHaveAttribute('aria-live', 'polite');
+});
+
 test('should render textfield with description', () => {
   const description = 'this is a description for the field';
   const input = renderTextField({
