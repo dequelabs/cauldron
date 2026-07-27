@@ -19,14 +19,22 @@ test('should render with defaults when no props are passed in', () => {
   expect(screen.getByTestId('notice')).toHaveTextContent('child');
 });
 
-test('should render the correct default icon for a given type', () => {
-  render(<Notice data-testid="notice" type="caution" title="Boom!" />);
+test.each([
+  ['info', 'info-circle'],
+  ['caution', 'caution'],
+  ['danger', 'report'],
+  ['success', 'check-circle']
+] as const)(
+  'should render the type="%s" default icon (%s)',
+  (noticeType, noticeIcon) => {
+    render(<Notice data-testid="notice" type={noticeType} title="Boom!" />);
 
-  expect(screen.getByTestId('notice')).toHaveClass('Notice--caution');
-  expect(
-    screen.getByTestId('notice').querySelector('.Icon.Icon--caution')
-  ).toBeInTheDocument();
-});
+    expect(screen.getByTestId('notice')).toHaveClass(`Notice--${noticeType}`);
+    expect(
+      screen.getByTestId('notice').querySelector(`.Icon.Icon--${noticeIcon}`)
+    ).toBeInTheDocument();
+  }
+);
 
 test('should return correctly with props passed in', () => {
   render(
