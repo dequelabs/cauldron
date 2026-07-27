@@ -80,38 +80,19 @@ test('should support className prop', () => {
   expect(screen.getByTestId('notice')).toHaveClass('bananas', 'Notice');
 });
 
-test('should return no axe violations with type="info"', async () => {
-  const { container } = render(
-    <Notice type="info" title="foo">
-      bar
-    </Notice>
-  );
+test.each(['info', 'caution', 'danger', 'success'] as const)(
+  'should return no axe violations with type="%s"',
+  async (noticeType) => {
+    const { container } = render(
+      <Notice type={noticeType} title="foo">
+        bar
+      </Notice>
+    );
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-
-test('should return no axe violations with type="caution"', async () => {
-  const { container } = render(
-    <Notice type="caution" title="foo">
-      bar
-    </Notice>
-  );
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-
-test('should return no axe violations with type="danger"', async () => {
-  const { container } = render(
-    <Notice type="danger" title="foo">
-      bar
-    </Notice>
-  );
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  }
+);
 
 test('should return no axe violations with the default variant', async () => {
   const { container } = render(

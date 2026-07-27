@@ -54,6 +54,16 @@ Depending on the type, the background color and icon will change (can be overwri
 </Notice>
 ```
 
+### Success
+
+```jsx example
+<Notice type="success" title="Success">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
 ### Thin
 
 Rendering a `Notice` that appears as a thin bar can be accomplished by only passing a `title` prop, or only passing a child.
@@ -164,7 +174,7 @@ The condensed variant of the Notice component uses smaller padding and a single-
   props={[
     {
       name: 'type',
-      type: ['info', 'caution', 'danger'],
+      type: ['info', 'caution', 'danger', 'success'],
       defaultValue: 'info',
       description:
         'Notice preset variant that sets both the background color and Icon type (optionally overwritable)'

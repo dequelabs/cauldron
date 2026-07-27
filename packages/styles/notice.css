@@ -1,7 +1,8 @@
 :root {
-  --notice-info-color: #e9f5fb;
-  --notice-caution-color: #fbf3de;
-  --notice-danger-color: #faedeb;
+  --notice-info-color: #f5f7f8;
+  --notice-caution-color: #fff8ef;
+  --notice-danger-color: #fdf2f2;
+  --notice-success-color: #f3fcf7;
   --notice-text-color: var(--accent-dark);
   --notice-title-text-color: var(--accent-dark);
   --notice-title-font-weight: var(--font-weight-medium);
@@ -9,12 +10,14 @@
   --notice-border-color: var(--accent-dark);
   --notice-link-hover-color: var(--accent-medium);
   --notice-icon-size: 1rem;
-  --notice-info-border-color: var(--accent-primary);
-  --notice-caution-border-color: #8c6b00;
-  --notice-danger-border-color: var(--accent-error);
-  --notice-info-icon-color: var(--accent-primary);
-  --notice-caution-icon-color: #8c6b00;
-  --notice-danger-icon-color: var(--accent-error);
+  --notice-info-border-color: #547d93;
+  --notice-caution-border-color: #a16200;
+  --notice-danger-border-color: #df5252;
+  --notice-success-border-color: #4d8c6e;
+  --notice-info-icon-color: #547d93;
+  --notice-caution-icon-color: #a16200;
+  --notice-danger-icon-color: #df5252;
+  --notice-success-icon-color: #4d8c6e;
 }
 
 .Notice--info {
@@ -33,6 +36,12 @@
   --notice-background-color: var(--notice-danger-color);
   --notice-border-color: var(--notice-danger-border-color);
   --notice-icon-color: var(--notice-danger-icon-color);
+}
+
+.Notice--success {
+  --notice-background-color: var(--notice-success-color);
+  --notice-border-color: var(--notice-success-border-color);
+  --notice-icon-color: var(--notice-success-icon-color);
 }
 
 .Notice {

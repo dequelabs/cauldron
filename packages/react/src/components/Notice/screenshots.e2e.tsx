@@ -54,6 +54,23 @@ test('should have screenshot for Notice[type="danger"]', async ({
   await expect(component).toHaveScreenshot('dark--notice-danger');
 });
 
+test('should have screenshot for Notice[type="success"]', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <Notice type="success" title="Success">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+      porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et
+      faucibus arcu condimentum sed.
+    </Notice>
+  );
+
+  await expect(component).toHaveScreenshot('notice-success');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--notice-success');
+});
+
 test('should have screenshot for thin Notice (title only)', async ({
   mount,
   page
