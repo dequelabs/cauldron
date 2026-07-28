@@ -8,7 +8,7 @@ const meta: Meta<typeof Notice> = {
   argTypes: {
     type: {
       control: 'radio',
-      options: ['info', 'caution', 'danger']
+      options: ['info', 'caution', 'danger', 'success']
     },
     variant: {
       control: 'radio',
@@ -45,6 +45,14 @@ export const Danger: Story = {
     type: 'danger',
     title: 'Something went wrong',
     children: 'Please try again, or contact support if the problem persists.'
+  }
+};
+
+export const Success: Story = {
+  args: {
+    type: 'success',
+    title: 'Some action completed successfully',
+    children: 'Example of the successfull description :)'
   }
 };
 
