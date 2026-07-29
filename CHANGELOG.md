@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.4.0](https://github.com/dequelabs/cauldron/compare/v7.3.0...v7.4.0) (2026-07-29)
+
+
+### Features
+
+* **Notice:** notice colors redesign ([#2489](https://github.com/dequelabs/cauldron/issues/2489)) ([588f140](https://github.com/dequelabs/cauldron/commit/588f1404a053e2c60b6ca916f23a98d292d20852))
+
+
+### Bug Fixes
+
+* **react:** guard ThemeProvider default context against undefined document ([#2478](https://github.com/dequelabs/cauldron/issues/2478)) ([ae70b3c](https://github.com/dequelabs/cauldron/commit/ae70b3cac8ff882fccf484d74323e0189b249132)), closes [#1328](https://github.com/dequelabs/cauldron/issues/1328)
+
 ## [7.3.0](https://github.com/dequelabs/cauldron/compare/v7.2.0...v7.3.0) (2026-07-14)
 
 
