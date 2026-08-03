@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 // Fully-specified (`.js`) cjs subpaths: react-syntax-highlighter has no
 // `exports` map, so the ESM build's `{"type":"module"}` marker makes strict
 // bundlers (webpack 5) resolve these fully-specified — an extensionless
