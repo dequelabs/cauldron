@@ -63,6 +63,7 @@ jobs:
     permissions:
       id-token: write
       pull-requests: write
+      issues: write
     steps:
       - name: Download preview site
         uses: actions/download-artifact@v7
