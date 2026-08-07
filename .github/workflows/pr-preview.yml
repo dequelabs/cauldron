@@ -1,0 +1,58 @@
+name: PR Preview
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    permissions: {}
+    outputs:
+      pr_number: ${{ steps.route.outputs.pr_number }}
+      environment: ${{ steps.route.outputs.environment }}
+    steps:
+      - id: route
+        env:
+          ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          case "$ASSOCIATION" in
+            OWNER|MEMBER|COLLABORATOR) environment=pr-preview-auto ;;
+            *) environment=pr-preview-gated ;;
+          esac
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "environment=$environment" >> "$GITHUB_OUTPUT"
+          echo "PR #$PR_NUMBER association $ASSOCIATION routes to $environment"
+
+  build:
+    needs: resolve
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.resolve.outputs.environment }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: ./.github/actions/dependencies
+      - name: Build docs site
+        run: pnpm build
+      - name: Upload preview site
+        uses: actions/upload-artifact@v7
+        with:
+          name: pr-preview-site
+          path: docs/dist
+          retention-days: 7
