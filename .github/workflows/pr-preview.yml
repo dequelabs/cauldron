@@ -56,3 +56,67 @@ jobs:
           name: pr-preview-site
           path: docs/dist
           retention-days: 7
+
+  deploy:
+    needs: [resolve, build]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Download preview site
+        uses: actions/download-artifact@v7
+        with:
+          name: pr-preview-site
+          path: docs/dist
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        with:
+          role-to-assume: ${{ vars.AMPLIFY_PREVIEW_ROLE_ARN }}
+          aws-region: us-east-1
+      - name: Deploy to Amplify
+        env:
+          APP_ID: d15792l1n26ww3
+          PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
+        run: |
+          set -euo pipefail
+          BRANCH="pr-${PR_NUMBER}"
+          aws amplify get-branch --app-id "$APP_ID" --branch-name "$BRANCH" >/dev/null 2>&1 || aws amplify create-branch --app-id "$APP_ID" --branch-name "$BRANCH" >/dev/null
+          ( cd docs/dist && zip -r -q "$GITHUB_WORKSPACE/site.zip" . )
+          DEPLOYMENT="$(aws amplify create-deployment --app-id "$APP_ID" --branch-name "$BRANCH")"
+          JOB_ID="$(echo "$DEPLOYMENT" | jq -r '.jobId')"
+          ZIP_URL="$(echo "$DEPLOYMENT" | jq -r '.zipUploadUrl')"
+          curl -fsS -H "Content-Type: application/zip" --upload-file site.zip "$ZIP_URL"
+          aws amplify start-deployment --app-id "$APP_ID" --branch-name "$BRANCH" --job-id "$JOB_ID" >/dev/null
+      - name: Comment preview URL
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
+        with:
+          script: |
+            const prNumber = Number(process.env.PR_NUMBER);
+            const marker = '<!-- pr-preview -->';
+            const url = `https://pr-${prNumber}.d15792l1n26ww3.amplifyapp.com`;
+            const body = `${marker}\nDocs preview: ${url}`;
+            const { owner, repo } = context.repo;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: prNumber
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body
+              });
+            }
