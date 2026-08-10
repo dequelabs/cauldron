@@ -37,6 +37,7 @@ jobs:
   build:
     needs: resolve
     runs-on: ubuntu-latest
+    # Never attach secrets to pr-preview-auto or pr-preview-gated; this job runs untrusted fork code.
     environment:
       name: ${{ needs.resolve.outputs.environment }}
     permissions:

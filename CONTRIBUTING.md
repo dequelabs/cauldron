@@ -216,6 +216,8 @@ A pull request from an outside contributor waits for a Cauldron maintainer to ap
 
 A maintainer reviews the full pull request before approving the preview. That review includes reading the code and confirming the change is safe to build and to publish to a URL under Deque's Amplify app.
 
+Maintainers: never add a secret to the `pr-preview-auto` or `pr-preview-gated` GitHub Environments. The build job runs contributor code inside the routed environment, so a secret placed there could be read by that code. These environments hold only reviewer and branch rules.
+
 ### Testing Strategies
 
 The testing methodology should account for both testing the interface of a component as input/output testing and how an end-user would interact with the component. Ideally, implementation details are avoided unless necessary. Examples below of things to consider when writing tests for a component:
