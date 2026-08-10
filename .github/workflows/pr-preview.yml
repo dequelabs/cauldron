@@ -51,7 +51,7 @@ jobs:
       - name: Build docs site
         run: pnpm build
       - name: Upload preview site
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: pr-preview-site
           path: docs/dist
@@ -66,7 +66,7 @@ jobs:
       issues: write
     steps:
       - name: Download preview site
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: pr-preview-site
           path: docs/dist
@@ -77,7 +77,7 @@ jobs:
           aws-region: us-east-1
       - name: Deploy to Amplify
         env:
-          APP_ID: d15792l1n26ww3
+          APP_ID: ${{ vars.AMPLIFY_APP_ID }}
           PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
         run: |
           set -euo pipefail
@@ -90,14 +90,16 @@ jobs:
           curl -fsS -H "Content-Type: application/zip" --upload-file site.zip "$ZIP_URL"
           aws amplify start-deployment --app-id "$APP_ID" --branch-name "$BRANCH" --job-id "$JOB_ID" >/dev/null
       - name: Comment preview URL
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
+          APP_ID: ${{ vars.AMPLIFY_APP_ID }}
         with:
           script: |
             const prNumber = Number(process.env.PR_NUMBER);
+            const appId = process.env.APP_ID;
             const marker = '<!-- pr-preview -->';
-            const url = `https://pr-${prNumber}.d15792l1n26ww3.amplifyapp.com`;
+            const url = `https://pr-${prNumber}.${appId}.amplifyapp.com`;
             const body = `${marker}\nDocs preview: ${url}`;
             const { owner, repo } = context.repo;
             const { data: comments } = await github.rest.issues.listComments({

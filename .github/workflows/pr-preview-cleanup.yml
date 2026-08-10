@@ -20,7 +20,7 @@ jobs:
           aws-region: us-east-1
       - name: Delete Amplify preview branch
         env:
-          APP_ID: d15792l1n26ww3
+          APP_ID: ${{ vars.AMPLIFY_APP_ID }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set -euo pipefail
