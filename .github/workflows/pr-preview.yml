@@ -52,7 +52,7 @@ jobs:
       - name: Build docs site
         run: pnpm build
       - name: Upload preview site
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: pr-preview-site
           path: docs/dist
@@ -67,12 +67,12 @@ jobs:
       issues: write
     steps:
       - name: Download preview site
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: pr-preview-site
           path: docs/dist
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c # v6.2.3
         with:
           role-to-assume: ${{ vars.AMPLIFY_PREVIEW_ROLE_ARN }}
           aws-region: us-east-1
@@ -91,7 +91,7 @@ jobs:
           curl -fsS -H "Content-Type: application/zip" --upload-file site.zip "$ZIP_URL"
           aws amplify start-deployment --app-id "$APP_ID" --branch-name "$BRANCH" --job-id "$JOB_ID" >/dev/null
       - name: Comment preview URL
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr_number }}
           APP_ID: ${{ vars.AMPLIFY_APP_ID }}
