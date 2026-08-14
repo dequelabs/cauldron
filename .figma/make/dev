@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+# The docs site resolves `@deque/cauldron-react` to packages/react/lib, which is
+# the library's *built* output. On a fresh start that JS build (lib/index.js)
+# doesn't exist yet, so the docs webpack compile fails with "Module not found"
+# before the rollup watcher has a chance to emit it. Build the library once up
+# front so the output exists when the docs server first compiles.
+if [ ! -f packages/react/lib/index.js ]; then
+  echo "Building cauldron-react library (first run)"
+  pnpm --filter @deque/cauldron-react build
+fi
+
 # `pnpm dev` runs three watchers concurrently: the styles build, the react
 # library build, and the docs site (webpack-dev-server on port 8003). The docs
 # server is what renders in the browser preview.
