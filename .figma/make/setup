@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+echo "Checking system dependencies..."
+
+# Node — this repo requires Node >=22 (see package.json engines / .nvmrc)
+NODE_VERSION="$(node --version 2>/dev/null || echo "none")"
+if [[ "$NODE_VERSION" == "none" ]]; then
+  echo "Installing node"
+  brew install node@22
+else
+  echo "Node $NODE_VERSION found"
+fi
+
+# pnpm — the project is a pnpm workspace (packageManager: pnpm@11.4.0).
+# Prefer corepack so the pinned version is used; fall back to a global install.
+PNPM_VERSION="$(pnpm --version 2>/dev/null || echo "none")"
+if [[ "$PNPM_VERSION" == "none" ]]; then
+  echo "Enabling pnpm via corepack"
+  corepack enable 2>/dev/null || npm install -g pnpm
+else
+  echo "pnpm $PNPM_VERSION found"
+fi
+
+echo "System dependencies verified."

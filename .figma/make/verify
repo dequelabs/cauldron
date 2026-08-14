@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+
+HEALTHCHECK_URL='http://localhost:8003/'
+MAX_WAIT=180 # 3 minutes — first build compiles react + styles + docs
+INTERVAL=2
+ELAPSED=0
+
+echo "Waiting for development server to be ready"
+
+while [ $ELAPSED -lt $MAX_WAIT ]; do
+  if curl -sf "$HEALTHCHECK_URL" >/dev/null 2>&1; then
+    echo "Dev server is up"
+    exit 0
+  fi
+  sleep $INTERVAL
+  ELAPSED=$((ELAPSED + INTERVAL))
+done
+
+echo "Error: Dev server did not start within ${MAX_WAIT}s"
+exit 1

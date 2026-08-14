@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# `pnpm dev` runs three watchers concurrently: the styles build, the react
+# library build, and the docs site (webpack-dev-server on port 8003). The docs
+# server is what renders in the browser preview.
+echo "Starting development server"
+pnpm dev
