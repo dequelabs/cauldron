@@ -27,7 +27,7 @@ jobs:
       - name: Update screenshot baselines
         run: |
           pnpm screenshots:docker
-          pnpm screenshots --update-snapshots
+          pnpm screenshots --update-snapshots=all packages/react/src/components/TextEllipsis/screenshots.e2e.tsx
 
       - name: Commit updated baselines
         run: |
