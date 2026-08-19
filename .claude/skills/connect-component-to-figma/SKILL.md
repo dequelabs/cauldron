@@ -1,6 +1,6 @@
 ---
 name: connect-component-to-figma
-description: Add a Figma Code Connect (.figma.tsx) file for a Cauldron React component, following the conventions and gotchas from the batch 1-5 rollout (issue dequelabs/cauldron#2373). Use when the user says "connect <Component> to Figma", "add a code connect for <Component>", "add a .figma.tsx", or works on Figma Code Connect tasks in the cauldron repo.
+description: Add a Figma Code Connect (.figma.tsx) file for a Cauldron React component. Use when connecting a component to Figma, adding a code connect, or working on Figma Code Connect tasks in the cauldron repo.
 model: sonnet
 ---
 
@@ -53,7 +53,7 @@ Replace `NODE-ID` with the Figma node id in the form `123-456` (dash, not colon)
 5. **Commit** with `chore: connect <Component> to Figma via Code Connect` (or `chore: connect Batch N components...` for multi-file work).
 6. **Open a draft PR** against `develop`. If the work tracks a parent issue, include `Related to #<issue>` in the body.
 
-## Conventions (must follow)
+## Conventions
 
 - **Import the component from `'../../index'`** (the barrel). Not from the component file, not from `@deque/cauldron-react`. This matches `packages/react/figma.config.json`.
 - **Use bare display names**: `'Show Copy'`, not `'Show Copy#938:498'`. The trailing `#NNN:NNN` is Figma's internal property id and breaks the mapping.
@@ -90,8 +90,8 @@ Replace `NODE-ID` with the Figma node id in the form `123-456` (dash, not colon)
     );
   };
   ```
-- **Inverted booleans matter.** ExpandCollapsePanel maps `Collapsed=False` to `open=true` (the React prop is the opposite of the Figma variant). Read the React prop semantics before mapping.
-- **Tooltip's `placement` defaults to `'auto'`, which matches no design direction** — so every Figma `Direction` value must map to an explicit placement, `Right` included. Omit one and the snippet renders without `placement`, letting the floating engine pick.
+- **Some booleans are inverted.** ExpandCollapsePanel maps `Collapsed=False` to `open=true` (the React prop is the opposite of the Figma variant). Read the React prop semantics before mapping.
+- **Tooltip's `placement` defaults to `'auto'`, which matches no design direction.** Map every Figma `Direction` value explicitly, `Right` included — omit one and the snippet drops `placement` and lets the floating engine choose.
 - **`'Combo Box'` (with space) is a known string-with-space key** if you connect to the shared `Forms` set. Quote it exactly.
 - **Compound components**: verify each child name in `packages/react/src/index.ts` before importing. `Tabs` exports `Tab` + `TabPanel`; `Stepper` exports `Step`; `NavBar` exports `NavItem`; etc.
 
