@@ -5,12 +5,15 @@ import { ContentNode } from '../../types';
 
 const iconTypeMap = {
   caution: 'caution',
-  danger: 'caution',
-  info: 'info-circle'
+  danger: 'report',
+  info: 'info-circle',
+  success: 'check-circle'
 };
 
-export interface NoticeProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface NoticeProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'title'
+> {
   type?: keyof typeof iconTypeMap;
   title: ContentNode;
   icon?: IconType;

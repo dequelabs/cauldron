@@ -19,14 +19,22 @@ test('should render with defaults when no props are passed in', () => {
   expect(screen.getByTestId('notice')).toHaveTextContent('child');
 });
 
-test('should render the correct default icon for a given type', () => {
-  render(<Notice data-testid="notice" type="caution" title="Boom!" />);
+test.each([
+  ['info', 'info-circle'],
+  ['caution', 'caution'],
+  ['danger', 'report'],
+  ['success', 'check-circle']
+] as const)(
+  'should render the type="%s" default icon (%s)',
+  (noticeType, noticeIcon) => {
+    render(<Notice data-testid="notice" type={noticeType} title="Boom!" />);
 
-  expect(screen.getByTestId('notice')).toHaveClass('Notice--caution');
-  expect(
-    screen.getByTestId('notice').querySelector('.Icon.Icon--caution')
-  ).toBeInTheDocument();
-});
+    expect(screen.getByTestId('notice')).toHaveClass(`Notice--${noticeType}`);
+    expect(
+      screen.getByTestId('notice').querySelector(`.Icon.Icon--${noticeIcon}`)
+    ).toBeInTheDocument();
+  }
+);
 
 test('should return correctly with props passed in', () => {
   render(
@@ -80,38 +88,19 @@ test('should support className prop', () => {
   expect(screen.getByTestId('notice')).toHaveClass('bananas', 'Notice');
 });
 
-test('should return no axe violations with type="info"', async () => {
-  const { container } = render(
-    <Notice type="info" title="foo">
-      bar
-    </Notice>
-  );
+test.each(['info', 'caution', 'danger', 'success'] as const)(
+  'should return no axe violations with type="%s"',
+  async (noticeType) => {
+    const { container } = render(
+      <Notice type={noticeType} title="foo">
+        bar
+      </Notice>
+    );
 
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-
-test('should return no axe violations with type="caution"', async () => {
-  const { container } = render(
-    <Notice type="caution" title="foo">
-      bar
-    </Notice>
-  );
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-
-test('should return no axe violations with type="danger"', async () => {
-  const { container } = render(
-    <Notice type="danger" title="foo">
-      bar
-    </Notice>
-  );
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  }
+);
 
 test('should return no axe violations with the default variant', async () => {
   const { container } = render(

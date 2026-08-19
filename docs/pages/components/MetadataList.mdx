@@ -1,0 +1,95 @@
+---
+title: MetadataList
+description: A component that renders a list of terms and descriptions, stacked and displayed either horizontally in a row or vertically in a column.
+source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/MetadataList/index.tsx
+storybook: true
+---
+
+import {
+  MetadataList,
+  MetadataListItem,
+  MetadataListLabel,
+  MetadataListValue
+} from '@deque/cauldron-react';
+
+```js
+import {
+  MetadataList,
+  MetadataListItem,
+  MetadataListLabel,
+  MetadataListValue
+} from '@deque/cauldron-react';
+```
+
+## Examples
+
+### Horizontal (default)
+
+```jsx example
+<MetadataList>
+  <MetadataListItem>
+    <MetadataListLabel>Status</MetadataListLabel>
+    <MetadataListValue>Active</MetadataListValue>
+  </MetadataListItem>
+  <MetadataListItem>
+    <MetadataListLabel>Created</MetadataListLabel>
+    <MetadataListValue>January 1, 2026</MetadataListValue>
+  </MetadataListItem>
+  <MetadataListItem>
+    <MetadataListLabel>Owner</MetadataListLabel>
+    <MetadataListValue>Jane Doe</MetadataListValue>
+  </MetadataListItem>
+</MetadataList>
+```
+
+### Vertical
+
+```jsx example
+<MetadataList orientation="vertical">
+  <MetadataListItem>
+    <MetadataListLabel>Status</MetadataListLabel>
+    <MetadataListValue>Active</MetadataListValue>
+  </MetadataListItem>
+  <MetadataListItem>
+    <MetadataListLabel>Created</MetadataListLabel>
+    <MetadataListValue>January 1, 2026</MetadataListValue>
+  </MetadataListItem>
+  <MetadataListItem>
+    <MetadataListLabel>Owner</MetadataListLabel>
+    <MetadataListValue>Jane Doe</MetadataListValue>
+  </MetadataListItem>
+</MetadataList>
+```
+
+## Props
+
+### MetadataList
+
+<ComponentProps
+  children={true}
+  className={true}
+  props={[
+    {
+      name: 'orientation',
+      type: ['horizontal', 'vertical'],
+      defaultValue: 'horizontal',
+      description: 'The direction in which metadata list items are laid out.'
+    }
+  ]}
+/>
+
+### MetadataListItem
+
+<ComponentProps children={true} className={true} />
+
+### MetadataListLabel
+
+<ComponentProps children={true} className={true} />
+
+### MetadataListValue
+
+<ComponentProps children={true} className={true} />
+
+## Related Components
+
+- [DescriptionList](./DescriptionList)

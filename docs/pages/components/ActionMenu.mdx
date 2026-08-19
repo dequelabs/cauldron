@@ -4,26 +4,22 @@ description: A dropdown menu component that displays an ActionList with actions.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ActionMenu/ActionMenu.tsx
 ---
 
-import { useState, useRef } from 'react'
-import { 
-  ActionMenu, 
-  ActionList, 
-  ActionListItem, 
-  ActionListGroup, 
+import { useState, useRef } from 'react';
+import {
+  ActionMenu,
+  ActionList,
+  ActionListItem,
+  ActionListGroup,
   ActionListSeparator,
   ActionListLinkItem,
-  Button, 
-  IconButton, 
+  Button,
+  IconButton,
   Icon,
-  AnchoredOverlay 
-} from '@deque/cauldron-react'
+  AnchoredOverlay
+} from '@deque/cauldron-react';
 
 ```jsx
-import { 
-  ActionMenu, 
-  ActionList, 
-  ActionListItem 
-} from '@deque/cauldron-react'
+import { ActionMenu, ActionList, ActionListItem } from '@deque/cauldron-react';
 ```
 
 ## Overview
@@ -58,9 +54,7 @@ The `trigger` property is a render function that can render any type of interact
 
 ```jsx example
 <ActionMenu
-  trigger={
-    <IconButton variant="secondary" icon="kabob" label="More Options" />
-  }
+  trigger={<IconButton variant="secondary" icon="kabob" label="More Options" />}
 >
   <ActionList>
     <ActionListItem>Copy</ActionListItem>
@@ -78,7 +72,11 @@ Items can also individually be disabled to prevent that action from occurring:
 ```jsx example
 <ActionMenu
   trigger={
-    <IconButton variant="secondary" icon="kabob" label="Disabled Menu Options" />
+    <IconButton
+      variant="secondary"
+      icon="kabob"
+      label="Disabled Menu Options"
+    />
   }
 >
   <ActionList>
@@ -94,23 +92,15 @@ Items can also individually be disabled to prevent that action from occurring:
 If the label of the action needs additional information, optional descriptive text can also be included:
 
 ```jsx example
-<ActionMenu
-  trigger={<Button variant="secondary">Choose a Dessert</Button>}
->
+<ActionMenu trigger={<Button variant="secondary">Choose a Dessert</Button>}>
   <ActionList>
-    <ActionListItem 
-      description="Warm chocolate cake with a gooey center that oozes when you dig in"
-    >
+    <ActionListItem description="Warm chocolate cake with a gooey center that oozes when you dig in">
       Molten Lava Cake
     </ActionListItem>
-    <ActionListItem 
-      description="Crispy on the outside, chewy in the middle, with melted chocolate chips"
-    >
+    <ActionListItem description="Crispy on the outside, chewy in the middle, with melted chocolate chips">
       Cookie Sundae
     </ActionListItem>
-    <ActionListItem 
-      description="Tangy, creamy cheesecake swirled with tart raspberry sauce"
-    >
+    <ActionListItem description="Tangy, creamy cheesecake swirled with tart raspberry sauce">
       Raspberry Cheesecake
     </ActionListItem>
   </ActionList>
@@ -136,7 +126,9 @@ An action item can optionally include a trailing or leading icon for an addition
     <ActionListItem leadingIcon="share" trailingIcon="pencil">
       Leading and trailing icon
     </ActionListItem>
-    <ActionListItem leadingIcon="trash" variant="danger">Delete</ActionListItem>
+    <ActionListItem leadingIcon="trash" variant="danger">
+      Delete
+    </ActionListItem>
   </ActionList>
 </ActionMenu>
 ```
@@ -165,16 +157,18 @@ Alternatively, callback functions can also be set on `ActionList` or `ActionList
 
 ```jsx example
 function ActionMenuListCallbackExample() {
-  const handleAction = (value) => alert(`${value} action item clicked!`)
+  const handleAction = (value) => alert(`${value} action item clicked!`);
   return (
-    <ActionMenu trigger={<Button variant="secondary">Action list handler</Button>}>
+    <ActionMenu
+      trigger={<Button variant="secondary">Action list handler</Button>}
+    >
       <ActionList onAction={handleAction}>
         <ActionListItem>Copy</ActionListItem>
         <ActionListItem>Edit</ActionListItem>
         <ActionListItem>Share</ActionListItem>
       </ActionList>
     </ActionMenu>
-  )
+  );
 }
 ```
 
@@ -184,16 +178,18 @@ If the text content of the action list item is complex, an `actionKey` can also 
 
 ```jsx example
 function ActionMenuListActionKeyCallbackExample() {
-  const handleAction = (value) => alert(`${value} action item clicked!`)
+  const handleAction = (value) => alert(`${value} action item clicked!`);
   return (
-    <ActionMenu trigger={<Button variant="secondary">Action key handler</Button>}>
+    <ActionMenu
+      trigger={<Button variant="secondary">Action key handler</Button>}
+    >
       <ActionList onAction={handleAction}>
         <ActionListItem actionKey="copy">Copy</ActionListItem>
         <ActionListItem actionKey="edit">Edit</ActionListItem>
         <ActionListItem actionKey="share">Share</ActionListItem>
       </ActionList>
     </ActionMenu>
-  )
+  );
 }
 ```
 
@@ -216,12 +212,12 @@ Items can be optionally grouped with a group label:
       <ActionListItem>Avocado Toast</ActionListItem>
       <ActionListItem>Scrambled Eggs</ActionListItem>
     </ActionListGroup>
-    
+
     <ActionListGroup label="Lunch">
       <ActionListItem>Kale Salad</ActionListItem>
       <ActionListItem>Grilled Cheese</ActionListItem>
     </ActionListGroup>
-    
+
     <ActionListGroup label="Dinner">
       <ActionListItem>Filet Mignon</ActionListItem>
       <ActionListItem>Mega Burger</ActionListItem>
@@ -238,11 +234,11 @@ Items can be optionally grouped with a group label:
 ```jsx example
 function SingleSelectionExample() {
   const [selected, setSelected] = useState('Small');
-  
+
   const handleAction = (key) => {
     setSelected(key);
   };
-  
+
   return (
     <ActionMenu
       trigger={
@@ -253,11 +249,15 @@ function SingleSelectionExample() {
       }
     >
       <ActionList selectionType="single" onAction={handleAction}>
-        <ActionListItem selected={selected === 'Really Small'}>Really Small</ActionListItem>
+        <ActionListItem selected={selected === 'Really Small'}>
+          Really Small
+        </ActionListItem>
         <ActionListItem selected={selected === 'Small'}>Small</ActionListItem>
         <ActionListItem selected={selected === 'Medium'}>Medium</ActionListItem>
         <ActionListItem selected={selected === 'Large'}>Large</ActionListItem>
-        <ActionListItem selected={selected === 'Super Large'}>Super Large</ActionListItem>
+        <ActionListItem selected={selected === 'Super Large'}>
+          Super Large
+        </ActionListItem>
       </ActionList>
     </ActionMenu>
   );
@@ -271,43 +271,64 @@ function SingleSelectionExample() {
 ```jsx example
 function MultiSelectionExample() {
   const [selected, setSelected] = useState(['Lettuce', 'Tomato']);
-  
+
   const handleAction = (key) => {
     if (selected.includes(key)) {
-      setSelected(selected.filter(value => value !== key))
+      setSelected(selected.filter((value) => value !== key));
     } else {
-      setSelected([...selected, key])
+      setSelected([...selected, key]);
     }
   };
-  
+
   return (
     <ActionMenu
       trigger={
         <Button variant="secondary">
-          {selected.length && selected.length <= 3 
-            ? `Sandwich Ingredients: ${selected.join(', ')}` 
-            : `Sandwich Ingredients: ${selected.length} selected...`
-          }
+          {selected.length && selected.length <= 3
+            ? `Sandwich Ingredients: ${selected.join(', ')}`
+            : `Sandwich Ingredients: ${selected.length} selected...`}
           <Icon type="chevron-down" />
         </Button>
       }
     >
       <ActionList selectionType="multiple" onAction={handleAction}>
         <ActionListGroup label="Protein">
-          <ActionListItem selected={selected.includes('Bacon')}>Bacon</ActionListItem>
-          <ActionListItem selected={selected.includes('Ham')}>Ham</ActionListItem>
-          <ActionListItem selected={selected.includes('Turkey')}>Turkey</ActionListItem>
-          <ActionListItem selected={selected.includes('Tofurky')}>Tofurky</ActionListItem>
+          <ActionListItem selected={selected.includes('Bacon')}>
+            Bacon
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Ham')}>
+            Ham
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Turkey')}>
+            Turkey
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Tofurky')}>
+            Tofurky
+          </ActionListItem>
         </ActionListGroup>
         <ActionListGroup label="Cheese">
-          <ActionListItem selected={selected.includes('Gruyere')}>Gruyere</ActionListItem>
-          <ActionListItem selected={selected.includes('Gouda')}>Gouda</ActionListItem>
-          <ActionListItem selected={selected.includes('Pepperjack')}>Pepperjack</ActionListItem>
-          <ActionListItem selected={selected.includes('Swiss')}>Swiss</ActionListItem>
+          <ActionListItem selected={selected.includes('Gruyere')}>
+            Gruyere
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Gouda')}>
+            Gouda
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Pepperjack')}>
+            Pepperjack
+          </ActionListItem>
+          <ActionListItem selected={selected.includes('Swiss')}>
+            Swiss
+          </ActionListItem>
         </ActionListGroup>
-        <ActionListItem selected={selected.includes('Lettuce')}>Lettuce</ActionListItem>
-        <ActionListItem selected={selected.includes('Tomato')}>Tomato</ActionListItem>
-        <ActionListItem selected={selected.includes('Onions')}>Onions</ActionListItem>
+        <ActionListItem selected={selected.includes('Lettuce')}>
+          Lettuce
+        </ActionListItem>
+        <ActionListItem selected={selected.includes('Tomato')}>
+          Tomato
+        </ActionListItem>
+        <ActionListItem selected={selected.includes('Onions')}>
+          Onions
+        </ActionListItem>
       </ActionList>
     </ActionMenu>
   );
@@ -325,15 +346,15 @@ function MixedSelectionExample() {
 
   const handleDifficultyAction = (key) => {
     setDifficulty(key);
-  }
+  };
 
   const handleColorsAction = (key) => {
     if (colors.includes(key)) {
-      setColors(colors.filter(value => value !== key))
+      setColors(colors.filter((value) => value !== key));
     } else {
-      setColors([...colors, key])
+      setColors([...colors, key]);
     }
-  }
+  };
 
   return (
     <ActionMenu
@@ -345,27 +366,38 @@ function MixedSelectionExample() {
       }
     >
       <ActionList selectionType="multiple">
-        <ActionListGroup 
-          selectionType="single" 
+        <ActionListGroup
+          selectionType="single"
           label="Difficulty Level"
           onAction={handleDifficultyAction}
         >
-          <ActionListItem selected={difficulty === 'Standard'}>Standard</ActionListItem>
-          <ActionListItem selected={difficulty === 'Normal'}>Normal</ActionListItem>
-          <ActionListItem selected={difficulty === 'Expert'}>Expert</ActionListItem>
+          <ActionListItem selected={difficulty === 'Standard'}>
+            Standard
+          </ActionListItem>
+          <ActionListItem selected={difficulty === 'Normal'}>
+            Normal
+          </ActionListItem>
+          <ActionListItem selected={difficulty === 'Expert'}>
+            Expert
+          </ActionListItem>
         </ActionListGroup>
-        <ActionListGroup 
-          label="Allowed Fruit"
-          onAction={handleColorsAction}
-        >
-          <ActionListItem selected={colors.includes('Apple')}>Apple</ActionListItem>
-          <ActionListItem selected={colors.includes('Banana')}>Banana</ActionListItem>
-          <ActionListItem selected={colors.includes('Orange')}>Orange</ActionListItem>
-          <ActionListItem selected={colors.includes('Pineapple')}>Pineapple</ActionListItem>
+        <ActionListGroup label="Allowed Fruit" onAction={handleColorsAction}>
+          <ActionListItem selected={colors.includes('Apple')}>
+            Apple
+          </ActionListItem>
+          <ActionListItem selected={colors.includes('Banana')}>
+            Banana
+          </ActionListItem>
+          <ActionListItem selected={colors.includes('Orange')}>
+            Orange
+          </ActionListItem>
+          <ActionListItem selected={colors.includes('Pineapple')}>
+            Pineapple
+          </ActionListItem>
         </ActionListGroup>
       </ActionList>
     </ActionMenu>
-  )
+  );
 }
 ```
 
@@ -391,6 +423,31 @@ function MixedSelectionExample() {
 </ActionMenu>
 ```
 
+### Nested triggers
+
+The trigger element type defaults to `HTMLButtonElement`, but it is parameterized for nested menu patterns where the trigger is not a button — for example a `MenuItem`/`TopBarItem` (`<li>`) when an `ActionMenu` is nested inside a `TopBar`/`MenuBar`. Annotating the trigger param infers the element type, so the trigger's `ref` and event handlers type against the actual element without casts and no JSX type argument is required:
+
+With `renderInTrigger`, the menu is rendered _inside_ the trigger. Roles like `menuitem` take their accessible name from their content, so the trigger would otherwise be named after every item in the menu it contains. Wrap the trigger's visible label in an element carrying the `labelId` passed to the trigger function — `ActionMenu` points both the trigger and the menu at it. Destructure `labelId` out of the props so it is not spread onto a DOM element:
+
+```tsx
+<ActionMenu
+  renderInTrigger
+  trigger={({
+    ref,
+    children,
+    labelId,
+    ...props
+  }: ActionMenuTriggerProps<HTMLLIElement>) => (
+    <TopBarItem menuItemRef={ref} {...props}>
+      <span id={labelId}>Menu</span>
+      {children}
+    </TopBarItem>
+  )}
+>
+  {/* ... */}
+</ActionMenu>
+```
+
 ## Props
 
 ### ActionMenu
@@ -401,24 +458,38 @@ function MixedSelectionExample() {
       name: 'children',
       type: 'React.ReactElement',
       required: true,
-      description: 'The ActionList component to be shown when the menu is opened.'
+      description:
+        'The ActionList component to be shown when the menu is opened.'
     },
     {
       name: 'trigger',
-      type: ['React.ReactElement', '(props: ActionMenuTriggerProps, open: boolean) => React.ReactElement'],
+      type: [
+        'React.ReactElement',
+        '<E extends HTMLElement = HTMLButtonElement>(props: ActionMenuTriggerProps<E>, open: boolean) => React.ReactElement'
+      ],
       required: true,
-      description: 'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state.'
+      description:
+        'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state. The trigger element type defaults to HTMLButtonElement; when nesting inside a TopBar/MenuBar, annotate the trigger param (e.g. (props: ActionMenuTriggerProps<HTMLLIElement>) => …) so the trigger ref and handlers type against the actual element without casts. Render functions also receive a labelId, which must be placed on the element wrapping the trigger’s visible label when renderInTrigger is set.'
+    },
+    {
+      name: 'renderInTrigger',
+      type: 'boolean',
+      defaultValue: 'false',
+      description:
+        'Renders the menu as a child of the trigger rather than as a sibling. Intended for nested menu patterns, for example an ActionMenu inside a TopBar/MenuBar. Requires a trigger render function that places labelId on the trigger’s label element, and is incompatible with portal.'
     },
     {
       name: 'placement',
       type: 'string',
       defaultValue: 'bottom-start',
-      description: 'Positional placement value to anchor the overlay element relative to its anchored target.'
+      description:
+        'Positional placement value to anchor the overlay element relative to its anchored target.'
     },
     {
       name: 'open',
       type: 'boolean',
-      description: 'Controls whether the action menu is open. Only necessary for controlling action menu state.'
+      description:
+        'Controls whether the action menu is open. Only necessary for controlling action menu state.'
     },
     {
       name: 'portal',

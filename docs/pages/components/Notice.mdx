@@ -2,6 +2,7 @@
 title: Notice
 description: A notification banner - similar to a Toast, but allows for more flexible positioning and control.
 source: https://github.com/dequelabs/cauldron/blob/develop/packages/react/src/components/Notice/Notice.tsx
+storybook: true
 ---
 
 import { useState } from 'react';
@@ -20,7 +21,7 @@ or anywhere else in the DOM without needing to be absolutely/statically position
 ## Examples
 
 The Notice component supports three types: info, caution, and danger. The info type is used to display general
-information, while the caution type is used to display a warning, and the danger type is used to display critical warnings. 
+information, while the caution type is used to display a warning, and the danger type is used to display critical warnings.
 Depending on the type, the background color and icon will change (can be overwritten).
 
 ### Info
@@ -47,6 +48,16 @@ Depending on the type, the background color and icon will change (can be overwri
 
 ```jsx example
 <Notice type="danger" title="Danger!">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+  sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
+  condimentum sed.
+</Notice>
+```
+
+### Success
+
+```jsx example
+<Notice type="success" title="Success">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
   sem. Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu
   condimentum sed.
@@ -114,8 +125,8 @@ function DismissableNotice() {
 
 ## Variants
 
-The Notice component includes a variant prop that allows for two display styles: default and condensed. 
-The default variant displays the notice with a larger padding and a two-column layout, 
+The Notice component includes a variant prop that allows for two display styles: default and condensed.
+The default variant displays the notice with a larger padding and a two-column layout,
 while the condensed variant uses smaller padding and a single-column layout.
 
 ### Default
@@ -163,7 +174,7 @@ The condensed variant of the Notice component uses smaller padding and a single-
   props={[
     {
       name: 'type',
-      type: ['info', 'caution', 'danger'],
+      type: ['info', 'caution', 'danger', 'success'],
       defaultValue: 'info',
       description:
         'Notice preset variant that sets both the background color and Icon type (optionally overwritable)'
@@ -185,7 +196,7 @@ The condensed variant of the Notice component uses smaller padding and a single-
       name: 'icon',
       type: ['IconType', 'string'],
       description:
-        'Icon name - by default automatically set to either "info-circle" or "caution" Cauldron icons'
+        'Icon name - by default automatically set to either "info-circle", "caution", "report", "check-circle" Cauldron icons'
     },
     {
       name: 'variant',

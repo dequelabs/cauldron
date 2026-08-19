@@ -12,8 +12,10 @@ export interface SelectOption {
   label?: React.ReactNode;
 }
 
-export interface SelectProps
-  extends Omit<React.HTMLProps<HTMLSelectElement>, 'children' | 'label'> {
+export interface SelectProps extends Omit<
+  React.HTMLProps<HTMLSelectElement>,
+  'children' | 'label'
+> {
   label: ContentNode;
   requiredText?: string;
   error?: string;

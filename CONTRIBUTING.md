@@ -18,6 +18,7 @@
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
 1. [Documentation](#documentation)
+1. [Storybook](#storybook)
 1. [Figma Code Connect](#figma-code-connect)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
@@ -162,8 +163,8 @@ The files in this project are formatted by Prettier and linted with ESLint. Both
 
 | Command           | Description                             |
 | :---------------- | :-------------------------------------- |
-| `yarn lint`       | Runs eslint against everything          |
-| `yarn lint --fix` | Automatically fixes some linting errors |
+| `pnpm lint`       | Runs eslint against everything          |
+| `pnpm lint --fix` | Automatically fixes some linting errors |
 
 ### Icons
 
@@ -243,13 +244,65 @@ test('should return no axe violations', async () => {
 
 | Command                   | Description                                        |
 | :------------------------ | :------------------------------------------------- |
-| `yarn test`               | Runs all unit tests                                |
-| `yarn test ComponentName` | Runs tests matching component name                 |
-| `yarn test:a11y`          | Runs e2e accessibility tests against documentation |
+| `pnpm test`               | Runs all unit tests                                |
+| `pnpm test ComponentName` | Runs tests matching component name                 |
+| `pnpm test:a11y`          | Runs e2e accessibility tests against documentation |
 
 ## Documentation
 
 Component documentation guidelines are outlined in [docs/readme.md](./docs/readme.md).
+
+## Storybook
+
+Cauldron ships a Storybook served at [cauldron.dequelabs.com/storybook](https://cauldron.dequelabs.com/storybook). Each component should have a co-located story file that exercises its props via [Controls](https://storybook.js.org/docs/essentials/controls).
+
+### File location
+
+Story files are co-located with the component they document, alongside `index.tsx` and `index.test.tsx`:
+
+```
+packages/react/src/components/Button/
+├─ index.tsx
+├─ index.test.tsx
+└─ index.stories.tsx
+```
+
+### Authoring a story
+
+Use Component Story Format 3 (CSF3) with `Meta` and `StoryObj` types. Enable autodocs via `tags: ['autodocs']` and group stories under `Components/<ComponentName>`:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './index';
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary'] }
+  }
+};
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+export const Primary: Story = {
+  args: { variant: 'primary', children: 'Primary' }
+};
+```
+
+### Linking from MDX docs
+
+Once a story exists, set `storybook: true` in the component MDX file's frontmatter to render an "Open in Storybook" link in the component page metadata strip.
+
+### Commands
+
+| Command                | Description                                        |
+| :--------------------- | :------------------------------------------------- |
+| `pnpm dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
+| `pnpm build:storybook` | Build static Storybook into `docs/dist/storybook/` |
+
+Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
 
 ## Figma Code Connect
 
@@ -267,11 +320,11 @@ Run from `packages/react/`:
 
 | Command                                           | Purpose                               |
 | :------------------------------------------------ | :------------------------------------ |
-| `yarn figma:publish`                              | Push all `.figma.tsx` to Figma        |
-| `yarn figma:publish:dry-run`                      | Validate without pushing              |
-| `yarn figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
-| `yarn figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
-| `yarn figma connect unpublish --node <figma-url>` | Remove a connection                   |
+| `pnpm figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `pnpm figma:publish:dry-run`                      | Validate without pushing              |
+| `pnpm figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `pnpm figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `pnpm figma connect unpublish --node <figma-url>` | Remove a connection                   |
 
 ### Writing a `.figma.tsx`
 

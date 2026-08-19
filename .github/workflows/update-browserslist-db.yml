@@ -8,24 +8,21 @@ on:
   workflow_dispatch:
 
 jobs:
-
   update-browserlist-db:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Update Browserlist Database
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          npx update-browserslist-db@latest
-          cd packages/react && npx update-browserslist-db@latest
-          cd ../styles && npx update-browserslist-db@latest
+          pnpm dlx update-browserslist-db@latest
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
           add-paths: |
-            yarn.lock
-            packages/*/yarn.lock
+            pnpm-lock.yaml
           commit-message: 'chore: update browserlist database'
           branch: update-browserlist-database
           base: develop

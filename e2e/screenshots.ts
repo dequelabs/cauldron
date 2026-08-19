@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/experimental-ct-react17';
+import { test, expect } from '@playwright/experimental-ct-react';
 import { setTheme } from './helpers/playwright';
 
 test.beforeEach(async ({ page }) => {

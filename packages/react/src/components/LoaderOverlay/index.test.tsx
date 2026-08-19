@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import LoaderOverlay from './';
 import axe from '../../axe';
@@ -41,7 +41,7 @@ test('Should not have focus on LoaderOverlay after initial render without focusO
 });
 
 test('Should set LoaderOverlay ref and have expected class and role', () => {
-  const loaderRef: RefObject<HTMLDivElement> = React.createRef();
+  const loaderRef = React.createRef<HTMLDivElement>();
 
   render(
     <LoaderOverlay className="baz" role="alert" label="loading" ref={loaderRef}>

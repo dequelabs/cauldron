@@ -4,10 +4,10 @@ description: A navigation bar that contains links to other sections of the websi
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/NavBar/NavBar.tsx
 ---
 
-import { NavBar, NavItem } from '@deque/cauldron-react'
+import { NavBar, NavItem } from '@deque/cauldron-react';
 
 ```js
-import { NavBar, NavItem } from '@deque/cauldron-react'
+import { NavBar, NavItem } from '@deque/cauldron-react';
 ```
 
 The `NavBar` component is intended to be placed directly below the `TopBar` component to display an additional section of navigational links for the current area.
@@ -76,7 +76,8 @@ Under the hood, `NavBar` renders inside of a `nav` element. If there are multipl
       name: 'collapsed',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Collapses NavBar into a toggleable hamburger menu with a flyout list of nav items.',
+      description:
+        'Collapses NavBar into a toggleable hamburger menu with a flyout list of nav items.'
     },
     {
       name: 'navTriggerLabel',
@@ -87,7 +88,8 @@ Under the hood, `NavBar` renders inside of a `nav` element. If there are multipl
     {
       name: 'propId',
       type: 'string',
-      description: 'ID passed to aria-controls, so assistive technology knows the trigger controls the menu.',
+      description:
+        'ID passed to aria-controls, so assistive technology knows the trigger controls the menu.',
       defaultValue: 'randomly generated with react-id-generator'
     }
   ]}
@@ -103,12 +105,13 @@ Under the hood, `NavBar` renders inside of a `nav` element. If there are multipl
       name: 'active',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Indicates that the current NavItem is active.',
+      description: 'Indicates that the current NavItem is active.'
     },
     {
       name: 'aria-current',
       type: ['page', 'step', 'location', 'boolean'],
-      description: 'When active, the aria-current value to mark the NavItem as.',
+      description:
+        'When active, the aria-current value to mark the NavItem as.',
       defaultValue: 'true'
     }
   ]}

@@ -62,7 +62,7 @@ interface BaseComboboxProps extends Omit<
   autocomplete?: 'none' | 'manual' | 'automatic';
   onActiveChange?: (option: ListboxOption) => void;
   renderNoResults?: (() => React.JSX.Element) | React.ReactElement;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   inputRef?: React.Ref<HTMLInputElement>;
   description?: React.ReactNode;
 }
@@ -253,6 +253,19 @@ const Combobox = forwardRef<
           ([, { value }]) => value === lastSelectedValue
         ) || [];
       if (autocomplete === 'manual') {
+        // In multiselect, the listbox manages its own active option via
+        // keyboard navigation. When the last-selected value no longer
+        // matches any option (e.g. after deselecting the only selected
+        // option), preserve the existing active descendant so the next
+        // Enter keypress can re-toggle the highlighted option.
+        if (
+          multiselect &&
+          !element &&
+          activeDescendant &&
+          matchingOptions.has(activeDescendant.element)
+        ) {
+          return;
+        }
         setActiveDescendant(!element ? null : { element, ...option });
       } else if (
         autocomplete === 'automatic' &&
@@ -517,7 +530,7 @@ const Combobox = forwardRef<
           const nextIndex = focusedIndex + 1;
 
           if (nextIndex == pillsLength) {
-            inputRef.current.focus();
+            inputRef.current?.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }
@@ -525,7 +538,7 @@ const Combobox = forwardRef<
           const nextIndex = Math.max(focusedIndex + (isArrowLeft ? -1 : 1), 0);
 
           if (isArrowRight && nextIndex === pillsLength) {
-            inputRef.current.focus();
+            inputRef.current?.focus();
           } else {
             pillsRef.current[nextIndex].focus();
           }

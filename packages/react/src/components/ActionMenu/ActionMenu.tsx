@@ -9,35 +9,60 @@ import React, {
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import useSharedRef from '../../utils/useSharedRef';
-import type { onActionEvent } from '../ActionList/ActionListContext';
+import type {
+  onActionEvent,
+  onActionCallbackFunction
+} from '../ActionList/ActionListContext';
 import type Listbox from '../Listbox';
 import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 
 const [ArrowDown, ArrowUp] = ['ArrowDown', 'ArrowUp'];
 
-type ActionMenuTriggerProps = Pick<
-  React.HTMLAttributes<HTMLButtonElement>,
-  | 'children'
-  | 'onClick'
-  | 'onKeyDown'
-  | 'aria-expanded'
-  | 'aria-haspopup'
-  | 'aria-controls'
-> & {
-  ref: React.RefObject<HTMLButtonElement>;
-};
+interface ActionMenuListProps {
+  ref?: React.Ref<HTMLElement>;
+  onAction?: onActionCallbackFunction;
+  [key: string]: unknown;
+}
 
-type ActionMenuTriggerFunction = (
-  props: ActionMenuTriggerProps,
-  open: boolean
-) => React.ReactElement;
+/**
+ * Props passed to an `ActionMenu` trigger render function. The element type
+ * defaults to `HTMLButtonElement`; annotate it (e.g. `ActionMenuTriggerProps<HTMLLIElement>`)
+ * when the trigger is not a button — for example a `MenuItem`/`TopBarItem`
+ * (`<li>`) in the documented `TopBar`/`MenuBar` nesting — so the `ref` and
+ * spread handlers type against the actual element without casts.
+ */
+export type ActionMenuTriggerProps<E extends HTMLElement = HTMLButtonElement> =
+  Pick<
+    React.HTMLAttributes<E>,
+    | 'children'
+    | 'id'
+    | 'onClick'
+    | 'onKeyDown'
+    | 'aria-labelledby'
+    | 'aria-expanded'
+    | 'aria-haspopup'
+    | 'aria-controls'
+  > & {
+    /**
+     * Id for the element wrapping the trigger's visible label, e.g.
+     * `<span id={labelId}>Menu</span>`. Only provided with `renderInTrigger`,
+     * where the trigger contains the menu and would otherwise be named after
+     * every item in it. Not a DOM attribute — destructure it out of the props.
+     */
+    labelId?: string;
+    ref: React.RefObject<E | null>;
+  };
 
-type ActionMenuProps = {
-  children: React.ReactElement;
-  trigger: React.ReactElement | ActionMenuTriggerFunction;
+export type ActionMenuTriggerFunction<
+  E extends HTMLElement = HTMLButtonElement
+> = (props: ActionMenuTriggerProps<E>, open: boolean) => React.ReactElement;
+
+type ActionMenuProps<E extends HTMLElement = HTMLButtonElement> = {
+  children: React.ReactElement<ActionMenuListProps>;
+  trigger: React.ReactElement | ActionMenuTriggerFunction<E>;
   /** Render the action menu in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   /**
    * Controls whether the menu should render as a child of the trigger, as opposed to
    * rendering as a sibling. Intended for use with nested menu patterns, for example
@@ -49,7 +74,7 @@ type ActionMenuProps = {
 } & Pick<React.ComponentProps<typeof AnchoredOverlay>, 'placement'> &
   React.HTMLAttributes<HTMLElement>;
 
-const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
+const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
   (
     {
       className,
@@ -68,9 +93,10 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       useState<React.ComponentProps<typeof Listbox>['focusStrategy']>('first');
     const triggerRef = useRef<HTMLButtonElement>(null);
     const actionMenuRef = useSharedRef<HTMLElement>(ref);
-    const actionMenuListRef = useSharedRef<HTMLElement>(
-      actionMenuList.props.ref
-    );
+    const { ref: actionListRef, onAction: actionListOnAction } =
+      actionMenuList.props;
+    const actionMenuListRef = useSharedRef<HTMLElement>(actionListRef ?? null);
+    const [labelId] = useId(1, 'menu-label');
     const [triggerId] = useId(1, 'menu-trigger');
     const [menuId] = useId(1, 'menu');
 
@@ -136,12 +162,11 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           setOpen(false);
         }
 
-        const { onAction } = actionMenuList.props;
-        if (typeof onAction === 'function') {
-          onAction(key, event);
+        if (typeof actionListOnAction === 'function') {
+          actionListOnAction(key, event);
         }
       },
-      [actionMenuList.props.onAction]
+      [actionListOnAction]
     );
 
     useEffect(() => {
@@ -160,6 +185,34 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, [open]);
 
+    // Triggers predating `labelId` render no label element. Since
+    // `aria-labelledby` is not chained, naming the menu with such a trigger
+    // would resolve back to the menu's own items, so it is left unnamed.
+    const [hasLabelElement, setHasLabelElement] = useState(false);
+
+    useEffect(() => {
+      setHasLabelElement(
+        renderInTrigger ? !!document.getElementById(labelId) : false
+      );
+    }, [renderInTrigger, labelId]);
+
+    useEffect(() => {
+      // istanbul ignore next
+      if (
+        renderInTrigger &&
+        !document.getElementById(labelId) &&
+        process.env.NODE_ENV !== 'production'
+      ) {
+        console.warn(
+          `renderInTrigger should render id="${labelId}" on the element wrapping the trigger's visible label, otherwise the trigger and the menu are named after the entire submenu.`
+        );
+      }
+    }, [renderInTrigger, labelId]);
+
+    let labelledBy: string | undefined = triggerId;
+    if (renderInTrigger) {
+      labelledBy = hasLabelElement ? labelId : undefined;
+    }
     const hidden = renderInTrigger && !open;
 
     const overlay = (
@@ -183,7 +236,9 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           id: menuId,
           role: 'menu',
           onAction: handleAction,
-          'aria-labelledby': triggerId,
+          // aria-labelledby is not chained, so pointing at a trigger that
+          // contains this menu would resolve to the menu's own items.
+          'aria-labelledby': labelledBy,
           focusStrategy,
           focusDisabledOptions: true,
           hidden
@@ -191,7 +246,9 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
       </AnchoredOverlay>
     );
 
-    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
+    // Spread onto a prerendered trigger element below, so this must stay
+    // DOM-safe: no labelId.
+    const baseTriggerProps: ActionMenuTriggerProps = useMemo(() => {
       return {
         ref: triggerRef,
         id: triggerId,
@@ -201,7 +258,7 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
         'aria-haspopup': 'menu',
         'aria-controls': menuId
       };
-    }, [handleTriggerClick, open, menuId]);
+    }, [handleTriggerClick, handleTriggerKeyDown, open, triggerId, menuId]);
 
     if (renderInTrigger) {
       // istanbul ignore next
@@ -214,14 +271,26 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
           'renderInTrigger requires the use of a trigger function, rather than a prerendered trigger ReactElement.'
         );
       }
-
-      triggerProps.children = overlay;
     }
+
+    // Derived rather than mutated onto the memoized object, so that toggling
+    // `renderInTrigger` off cannot leave a stale `children` behind.
+    const triggerProps: ActionMenuTriggerProps = renderInTrigger
+      ? {
+          ...baseTriggerProps,
+          children: overlay,
+          'aria-labelledby': labelledBy
+        }
+      : baseTriggerProps;
 
     const actionMenuTrigger = React.isValidElement(trigger)
       ? React.cloneElement(trigger, triggerProps)
       : (trigger as ActionMenuTriggerFunction)(
-          { ...triggerProps, children: overlay },
+          {
+            ...triggerProps,
+            children: overlay,
+            ...(renderInTrigger && { labelId })
+          },
           open
         );
 
@@ -241,6 +310,24 @@ const ActionMenu = forwardRef<HTMLElement, ActionMenuProps>(
   }
 );
 
-ActionMenu.displayName = 'ActionMenu';
+ActionMenuComponent.displayName = 'ActionMenu';
+
+/**
+ * The trigger element type is parameterized (defaulting to `HTMLButtonElement`)
+ * so it can be widened for nested menu patterns where the trigger is not a
+ * button — e.g. a `MenuItem`/`TopBarItem` (`<li>`) inside a `TopBar`/`MenuBar`.
+ * This only widens the public types of the `trigger` function; the internal
+ * implementation is unaffected. See the ActionMenu docs for a usage example.
+ */
+type ActionMenuType = Omit<
+  React.ForwardRefExoticComponent<ActionMenuProps>,
+  keyof CallableFunction
+> & {
+  <E extends HTMLElement = HTMLButtonElement>(
+    props: ActionMenuProps<E> & React.RefAttributes<HTMLElement>
+  ): React.ReactElement;
+};
+
+const ActionMenu = ActionMenuComponent as ActionMenuType;
 
 export default ActionMenu;

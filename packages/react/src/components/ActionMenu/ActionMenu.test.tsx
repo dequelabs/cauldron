@@ -10,7 +10,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import ActionMenu from './ActionMenu';
+import ActionMenu, { type ActionMenuTriggerProps } from './ActionMenu';
 import {
   ActionList,
   ActionListGroup,
@@ -52,25 +52,38 @@ async function waitForMenuFocus() {
   });
 }
 
-const defaultTopBarPatternProps: React.ComponentProps<typeof ActionMenu> = {
-  ...defaultProps,
-  tabIndex: -1,
-  renderInTrigger: true,
-  trigger: ({ ref, children, ...props }) => (
-    // @ts-expect-error - TopBarItem expects menuitems to be <li>, ActionMenu expects triggers to be <button>
-    <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
-      Trigger
-      {children}
-    </TopBarItem>
-  ),
-  children: (
+// The documented TopBar/MenuBar nesting: the trigger is a TopBarItem (<li>),
+// not a button. Annotating the trigger param as ActionMenuTriggerProps<HTMLLIElement>
+// infers the element type, so the trigger's `ref` and spread handlers type
+// against the actual element without casts and without a JSX type argument.
+const TopBarPatternActionMenu = () => (
+  <ActionMenu
+    tabIndex={-1}
+    renderInTrigger
+    trigger={({
+      ref,
+      children,
+      labelId,
+      ...props
+    }: ActionMenuTriggerProps<HTMLLIElement>) => (
+      <TopBarItem
+        menuItemRef={ref}
+        tabIndex={0}
+        autoClickLink={false}
+        {...props}
+      >
+        <span id={labelId}>Trigger</span>
+        {children}
+      </TopBarItem>
+    )}
+  >
     <ActionList>
       <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
       <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
       <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
     </ActionList>
-  )
-};
+  </ActionMenu>
+);
 
 afterEach(() => {
   window.location.hash = '';
@@ -79,6 +92,70 @@ afterEach(() => {
 test('should render trigger button', () => {
   render(<ActionMenu {...defaultProps} />);
   expect(screen.getByRole('button', { name: 'Trigger' })).toBeInTheDocument();
+});
+
+// These assert attribute wiring rather than accessible names: jsdom's
+// dom-accessibility-api does not walk into a role="menu" child when naming from
+// content, so accname assertions pass even for markup browsers name incorrectly.
+test('should label the menu with the trigger and leave the trigger element untouched', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+  expect(trigger).not.toHaveAttribute('labelid');
+  expect(trigger).not.toHaveAttribute('aria-labelledby');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).toHaveAttribute(
+    'aria-labelledby',
+    trigger.getAttribute('id')
+  );
+});
+
+test('should leave the menu unnamed when renderInTrigger omits a label element', async () => {
+  const user = userEvent.setup();
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+  render(
+    <ActionMenu
+      {...defaultProps}
+      renderInTrigger
+      trigger={({ children, ...props }) => (
+        <button {...props}>Trigger{children}</button>
+      )}
+    />
+  );
+
+  const trigger = screen.getByRole('button', { name: /Trigger/ });
+  expect(trigger).not.toHaveAttribute('aria-labelledby');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).not.toHaveAttribute('aria-labelledby');
+  expect(warn).toHaveBeenCalled();
+
+  warn.mockRestore();
+});
+
+test('should label the trigger and menu with the same element when rendering in trigger', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <TopBarPatternActionMenu />
+      </MenuBar>
+    </TopBar>
+  );
+
+  const trigger = screen.getByRole('menuitem', { name: 'Trigger' });
+  const labelId = trigger.getAttribute('aria-labelledby') as string;
+
+  expect(document.getElementById(labelId)).toHaveTextContent('Trigger');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', labelId);
 });
 
 test('should render trigger function', async () => {
@@ -420,7 +497,7 @@ test('should set first item active on open in TopBar+ActionMenu pattern', async 
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -621,6 +698,31 @@ test('should trigger item onAction when an action list item is clicked', async (
   });
 });
 
+test('should not cause infinite update loop when clicking different items across multiple opens', async () => {
+  const user = userEvent.setup();
+  const onAction = jest.fn();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList>
+        <ActionListItem onAction={onAction}>One</ActionListItem>
+        <ActionListItem onAction={onAction}>Two</ActionListItem>
+        <ActionListItem onAction={onAction}>Three</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'One' }));
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Two' }));
+  await user.click(screen.getByRole('button', { name: 'Trigger' }));
+  await user.click(screen.getByRole('menuitem', { name: 'Three' }));
+
+  await waitFor(() => {
+    expect(onAction).toHaveBeenCalledTimes(3);
+  });
+});
+
 test('should trigger item onAction when an action list item is clicked with keypress', async () => {
   const user = userEvent.setup();
   const onAction = jest.fn();
@@ -666,7 +768,7 @@ test('should not trigger action link items when toggling the open state in TopBa
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -682,7 +784,7 @@ test('should navigate to href when an action link item is clicked in TopBar+Acti
   render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -713,7 +815,7 @@ test('should close menu when focus moves outside in TopBar+ActionMenu pattern', 
     <>
       <TopBar>
         <MenuBar>
-          <ActionMenu {...defaultTopBarPatternProps} />
+          <TopBarPatternActionMenu />
         </MenuBar>
       </TopBar>
       <button>Outside</button>
@@ -793,7 +895,12 @@ test('should support renderInTrigger prop', async () => {
       {...defaultProps}
       data-testid="actionmenu"
       renderInTrigger={true}
-      trigger={({ children }) => <button>Trigger{children}</button>}
+      trigger={({ children, labelId }) => (
+        <button>
+          <span id={labelId}>Trigger</span>
+          {children}
+        </button>
+      )}
     />
   );
 
@@ -947,7 +1054,7 @@ test('should have no axe violations in TopBar+ActionMenu pattern', async () => {
   const { container } = render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );
@@ -963,7 +1070,7 @@ test('should have no axe violations in TopBar+ActionMenu pattern when open', asy
   const { container } = render(
     <TopBar>
       <MenuBar>
-        <ActionMenu {...defaultTopBarPatternProps} />
+        <TopBarPatternActionMenu />
       </MenuBar>
     </TopBar>
   );

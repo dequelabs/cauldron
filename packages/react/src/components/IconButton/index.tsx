@@ -2,7 +2,6 @@ import React, {
   useRef,
   forwardRef,
   useImperativeHandle,
-  MutableRefObject,
   HTMLProps
 } from 'react';
 import classnames from 'classnames';
@@ -14,10 +13,9 @@ import {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 
-export interface IconButtonProps
-  extends PolymorphicProps<
-    React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>
-  > {
+export interface IconButtonProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>
+> {
   icon: IconType;
   label: React.ReactNode;
   tooltipProps?: Omit<TooltipProps, 'children' | 'target'>;
@@ -48,7 +46,7 @@ const IconButton = forwardRef(
     }: IconButtonProps,
     ref
   ): React.JSX.Element => {
-    const internalRef = useRef() as MutableRefObject<HTMLElement>;
+    const internalRef = useRef<HTMLElement>(null);
     useImperativeHandle(ref, () => internalRef.current);
 
     // Configure additional properties based on the type of the Component

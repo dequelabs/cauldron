@@ -4,10 +4,16 @@ description: A utility component to wrap input fields.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldWrap/index.tsx
 ---
 
-import { FieldWrap, FieldGroup, TextField, Button, RadioGroup } from '@deque/cauldron-react'
+import {
+  FieldWrap,
+  FieldGroup,
+  TextField,
+  Button,
+  RadioGroup
+} from '@deque/cauldron-react';
 
 ```js
-import { FieldWrap } from '@deque/cauldron-react'
+import { FieldWrap } from '@deque/cauldron-react';
 ```
 
 The FieldWrap component provides a background `Panel` appearance that is designed to ensure that Cauldron's
@@ -18,9 +24,10 @@ Input components (such as [Checkbox](./Checkbox) and [RadioGroup](./RadioGroup))
 against a `FieldWrap` background.
 
 <Note>
-  If you use a Cauldron input component without a `FieldWrap` (for example, within a `Modal`, where
-  `FieldWrap`'s `Panel` appearance might not be appropriate), you _must_ verify that it meets accessibility
-  requirements in all component states, especially for color contrast.
+  If you use a Cauldron input component without a `FieldWrap` (for example,
+  within a `Modal`, where `FieldWrap`'s `Panel` appearance might not be
+  appropriate), you _must_ verify that it meets accessibility requirements in
+  all component states, especially for color contrast.
 </Note>
 
 ## Examples
@@ -37,17 +44,10 @@ against a `FieldWrap` background.
 
 ```jsx example
 <FieldWrap as="fieldset">
-  <legend>
-    Send us a message
-  </legend>
+  <legend>Send us a message</legend>
   <TextField label="Email" />
-  <TextField
-    label="Message"
-    multiline
-  />
-  <Button>
-    Send Message
-  </Button>
+  <TextField label="Message" multiline />
+  <Button>Send Message</Button>
 </FieldWrap>
 ```
 

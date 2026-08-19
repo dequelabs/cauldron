@@ -285,6 +285,69 @@ test('should allow for HTMLElement target', async () => {
   expect(onClickOutside).toHaveBeenCalledTimes(1);
 });
 
+test('should forward node to child element ref', () => {
+  const childRef = React.createRef<HTMLDivElement>();
+  render(
+    <ClickOutsideListener onClickOutside={jest.fn()}>
+      <div ref={childRef}>content</div>
+    </ClickOutsideListener>
+  );
+  expect(childRef.current).toBeInstanceOf(HTMLDivElement);
+});
+
+test('should call child callback ref with the DOM node', () => {
+  const callbackRef = jest.fn();
+  render(
+    <ClickOutsideListener onClickOutside={jest.fn()}>
+      <div ref={callbackRef}>content</div>
+    </ClickOutsideListener>
+  );
+  expect(callbackRef).toHaveBeenCalledWith(expect.any(HTMLDivElement));
+});
+
+test('should populate the forwarded ref with the child DOM node', () => {
+  const containerRef = React.createRef<HTMLElement>();
+  render(
+    <ClickOutsideListener ref={containerRef} onClickOutside={jest.fn()}>
+      <div>content</div>
+    </ClickOutsideListener>
+  );
+  expect(containerRef.current).toBeInstanceOf(HTMLDivElement);
+});
+
+test('should populate both the forwarded ref and child ref with the same node', () => {
+  const containerRef = React.createRef<HTMLElement>();
+  const childRef = React.createRef<HTMLDivElement>();
+  render(
+    <ClickOutsideListener ref={containerRef} onClickOutside={jest.fn()}>
+      <div ref={childRef}>content</div>
+    </ClickOutsideListener>
+  );
+  expect(containerRef.current).not.toBeNull();
+  expect(containerRef.current).toBe(childRef.current);
+});
+
+test('should not call onClickOutside when event.defaultPrevented is true', () => {
+  const onClickOutside = jest.fn();
+  render(
+    <ClickOutsideListener onClickOutside={onClickOutside}>
+      <div>bar</div>
+    </ClickOutsideListener>,
+    { container: mountNode as HTMLElement }
+  );
+  const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+  event.preventDefault();
+  fireEvent(screen.getByTestId('link'), event);
+  expect(onClickOutside).not.toBeCalled();
+});
+
+test('should render null when no children provided', () => {
+  const { container } = render(
+    <ClickOutsideListener onClickOutside={jest.fn()} />
+  );
+  expect(container).toBeEmptyDOMElement();
+});
+
 test('should allow for ref target', async () => {
   const user = userEvent.setup();
   const onClickOutside = jest.fn();

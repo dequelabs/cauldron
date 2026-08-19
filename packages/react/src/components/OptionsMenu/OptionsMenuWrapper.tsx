@@ -12,8 +12,7 @@ const menuAlignment = (type: OptionsMenuWrapperProps['align']) => {
 };
 
 export interface OptionsMenuWrapperProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    OptionsMenuAlignmentProps {}
+  extends React.HTMLAttributes<HTMLDivElement>, OptionsMenuAlignmentProps {}
 
 /**
  * Wrapper / parent component for the <OptionsMenuTrigger /> and <OptionsMenu /> components

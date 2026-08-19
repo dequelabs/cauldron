@@ -11,7 +11,6 @@ permissions:
   contents: read
 
 jobs:
-
   tests:
     uses: ./.github/workflows/tests.yml
 
@@ -21,26 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: 'master'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
       - name: Publish @deque/cauldron-styles
-        run: |
-          cd packages/styles
-          npm publish
+        working-directory: packages/styles
+        run: pnpm publish
       - name: Publish @deque/cauldron-react
-        run: |
-          cd packages/react
-          npm publish
+        working-directory: packages/react
+        run: pnpm publish
 
   canary:
     if: github.ref == 'refs/heads/develop'
@@ -48,27 +41,30 @@ jobs:
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: 'develop'
       - uses: ./.github/actions/dependencies
-        with:
-          root: false
-          packages-react: true
-          packages-styles: true
       - name: Build packages
         run: |
-          NODE_ENV=production yarn --cwd packages/react build
-          NODE_ENV=production yarn --cwd packages/styles build
+          pnpm build:react
+          pnpm build:styles
+      # The canary jobs mutate package.json's version before publishing, so
+      # pass --no-git-checks to both pnpm version and pnpm publish — each
+      # refuses on a dirty tree by default, and the first package's version
+      # bump leaves the tree dirty for the second.
       - name: Publish @deque/cauldron-styles
+        working-directory: packages/styles
         run: |
-          cd packages/styles
-          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
-          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next
+          # Read the package version directly from package.json. `pnpm pkg get`
+          # walks up to the workspace root and returns a JSON object keyed by
+          # package name, which breaks the string concatenation below.
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
+          pnpm publish --tag=next --no-git-checks
       - name: Publish @deque/cauldron-react
+        working-directory: packages/react
         run: |
-          cd packages/react
-          PACKAGE_VERSION="$(npm pkg get version | tr -d \")"
-          npm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version
-          npm publish --tag=next
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
+          pnpm publish --tag=next --no-git-checks
