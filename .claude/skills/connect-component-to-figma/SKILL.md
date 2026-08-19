@@ -91,7 +91,7 @@ Replace `NODE-ID` with the Figma node id in the form `123-456` (dash, not colon)
   };
   ```
 - **Inverted booleans matter.** ExpandCollapsePanel maps `Collapsed=False` to `open=true` (the React prop is the opposite of the Figma variant). Read the React prop semantics before mapping.
-- **Tooltip placement has no React default** — every Figma `Direction` value must map, even `Right`, otherwise the snippet renders without `placement` and floating-ui picks.
+- **Tooltip's `placement` defaults to `'auto'`, which matches no design direction** — so every Figma `Direction` value must map to an explicit placement, `Right` included. Omit one and the snippet renders without `placement`, letting the floating engine pick.
 - **`'Combo Box'` (with space) is a known string-with-space key** if you connect to the shared `Forms` set. Quote it exactly.
 - **Compound components**: verify each child name in `packages/react/src/index.ts` before importing. `Tabs` exports `Tab` + `TabPanel`; `Stepper` exports `Step`; `NavBar` exports `NavItem`; etc.
 
