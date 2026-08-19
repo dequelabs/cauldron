@@ -44,12 +44,12 @@ Replace `NODE-ID` with the Figma node id in the form `123-456` (dash, not colon)
    - Read `packages/react/src/index.ts` to confirm the named export(s). Many components have compound children (e.g. `AccordionTrigger`, `BreadcrumbLink`, `PanelTrigger`) — import them from the barrel.
    - Read the component's `index.tsx` / main `.tsx` to find required props and the real shape of any child components.
 3. **Write the file** at `packages/react/src/components/<Component>/<Component>.figma.tsx`. Use the Quick start template.
-4. **Lint + parse**:
+4. **Lint + validate**:
    ```bash
    npx eslint packages/react/src/components/<Component>/<Component>.figma.tsx
-   cd packages/react && npm run figma:parse
+   pnpm --filter @deque/cauldron-react figma:publish:dry-run
    ```
-   `.figma.tsx` is excluded from `tsconfig.json`, so `tsc` won't see it — `figma connect parse` is the real validator.
+   `.figma.tsx` is excluded from `tsconfig.json`, so `tsc` won't see it — the dry-run publish is the real validator. To debug what the parser sees for one file, run `pnpm figma:parse <path>` from `packages/react/`.
 5. **Commit** with `chore: connect <Component> to Figma via Code Connect` (or `chore: connect Batch N components...` for multi-file work).
 6. **Open a draft PR** against `develop`. If the work tracks a parent issue, include `Related to #<issue>` in the body.
 
