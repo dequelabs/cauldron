@@ -63,13 +63,13 @@ Replace `NODE-ID` with the Figma node id in the form `123-456` (dash, not colon)
 
 ## Mapping cheatsheet
 
-| Figma type                               | Code Connect call                                                       | Notes                                                |
-| ---------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------- |
-| VARIANT (enum, incl. `"True"/"False"`)   | `figma.enum('Name', { True: true })`                                    | Pseudo-booleans are VARIANTs, not BOOLEANs.          |
-| BOOLEAN (real toggle)                    | `figma.boolean('Name', { true: X, false: undefined })`                  | Use `undefined` for "off" so the prop drops.         |
-| Text layer                               | `figma.textContent('Label')`                                            | Layer name, not property name.                       |
-| Nested instance prop (e.g. `_Icon Type`) | `figma.nestedProps('_Icon Type', { name: figma.string('Icon') })`       | See IconButton/Icon for the pattern.                 |
-| Multiple Figma variants → one component  | Multiple `figma.connect(C, URL, { variant: { Type: 'X' }, ... })` calls | E.g. ActionMenu with Button vs Icon Button triggers. |
+| Figma type                               | Code Connect call                                                       | Notes                                                               |
+| ---------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| VARIANT (enum, incl. `"True"/"False"`)   | `figma.enum('Name', { True: true })`                                    | `"True"/"False"` can be either type — check the icon (see gotchas). |
+| BOOLEAN (real toggle)                    | `figma.boolean('Name', { true: X, false: undefined })`                  | Use `undefined` for "off" so the prop drops.                        |
+| Text layer                               | `figma.textContent('Label')`                                            | Layer name, not property name.                                      |
+| Nested instance prop (e.g. `_Icon Type`) | `figma.nestedProps('_Icon Type', { name: figma.string('Icon') })`       | See IconButton/Icon for the pattern.                                |
+| Multiple Figma variants → one component  | Multiple `figma.connect(C, URL, { variant: { Type: 'X' }, ... })` calls | E.g. ActionMenu with Button vs Icon Button triggers.                |
 
 ## Common gotchas
 
