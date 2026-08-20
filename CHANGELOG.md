@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.5.0](https://github.com/dequelabs/cauldron/compare/v7.4.0...v7.5.0) (2026-08-20)
+
+
+### Features
+
+* add radius primitive tokens ([#2508](https://github.com/dequelabs/cauldron/issues/2508)) ([87bfe3d](https://github.com/dequelabs/cauldron/commit/87bfe3d6b8e55d78beaa6bd0b2397698d9bb52a6))
+* **Panel:** use radius-12 for panel border radius ([#2510](https://github.com/dequelabs/cauldron/issues/2510)) ([34f4b96](https://github.com/dequelabs/cauldron/commit/34f4b96c34554b964fe76dd16edba4bbf20279b4))
+
+
+### Bug Fixes
+
+* screen reader announcing submenu items as part of the menu name ([#2506](https://github.com/dequelabs/cauldron/issues/2506)) ([f0c9b61](https://github.com/dequelabs/cauldron/commit/f0c9b61ce05dd7e45f4f06c9203e915631857275))
+
 ## [7.4.0](https://github.com/dequelabs/cauldron/compare/v7.3.0...v7.4.0) (2026-07-29)
 
 
