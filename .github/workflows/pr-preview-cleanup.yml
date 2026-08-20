@@ -1,0 +1,33 @@
+name: PR Preview Cleanup
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches:
+      - develop
+
+permissions:
+  id-token: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c # v6.2.3
+        with:
+          role-to-assume: ${{ vars.AMPLIFY_PREVIEW_ROLE_ARN }}
+          aws-region: us-east-1
+      - name: Delete Amplify preview branch
+        env:
+          APP_ID: ${{ vars.AMPLIFY_APP_ID }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          BRANCH="pr-${PR_NUMBER}"
+          if aws amplify get-branch --app-id "$APP_ID" --branch-name "$BRANCH" >/dev/null 2>&1; then
+            aws amplify delete-branch --app-id "$APP_ID" --branch-name "$BRANCH" >/dev/null
+            echo "Deleted $BRANCH"
+          else
+            echo "No preview branch $BRANCH to delete"
+          fi
