@@ -129,7 +129,7 @@
     "unist-util-visit": "^5.0.0",
     "webpack": "^5.106.1",
     "webpack-cli": "^7.0.2",
-    "webpack-dev-server": "^5.2.6"
+    "webpack-dev-server": "^6.0.0"
   },
   "packageManager": "pnpm@11.4.0"
 }
