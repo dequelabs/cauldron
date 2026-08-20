@@ -1,7 +1,7 @@
 {
   "name": "cauldron",
   "private": true,
-  "version": "7.4.0",
+  "version": "7.5.0",
   "license": "MPL-2.0",
   "engines": {
     "node": ">=22"
@@ -56,8 +56,8 @@
     "@fontsource/pt-mono": "^5.2.8",
     "@fontsource/roboto": "^5.2.10",
     "@mdx-js/loader": "^3.1.1",
-    "@playwright/experimental-ct-react": "^1.60.0",
-    "@playwright/test": "^1.60.0",
+    "@playwright/experimental-ct-react": "^1.61.1",
+    "@playwright/test": "^1.61.1",
     "@storybook/addon-a11y": "^10.4.0",
     "@storybook/addon-docs": "^10.4.0",
     "@storybook/addon-themes": "^10.4.0",
@@ -103,7 +103,7 @@
     "minimatch": "^10.2.5",
     "node-fetch": "^3.3.0",
     "p-queue": "^9",
-    "playwright": "^1.60.0",
+    "playwright": "^1.61.1",
     "postcss": "^8.5.15",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
@@ -129,7 +129,7 @@
     "unist-util-visit": "^5.0.0",
     "webpack": "^5.106.1",
     "webpack-cli": "^7.0.2",
-    "webpack-dev-server": "^5.2.4"
+    "webpack-dev-server": "^5.2.6"
   },
   "packageManager": "pnpm@11.4.0"
 }
