@@ -8,8 +8,21 @@
  *   3. `attw`     — check that types resolve for every module condition.
  *   4. Smoke test — install the tarball into a throwaway consumer and confirm
  *      it resolves under both `require(...)` and native `import`.
+ *   5. Stylesheet — assert the published `lib/cauldron.css` survived the install.
+ *   6. Single-copy guard — assert `import` and `require` of the specifier yield
+ *      the same context object (no dual-package hazard from split resolution).
+ *   7. ESM build — import `lib/esm` by path (Node resolves the bare specifier
+ *      through `main` to the CJS tree at `lib/`, so no other step covers it) and
+ *      render the components whose CJS-default interop only breaks under ESM.
+ *   8. webpack consumer — bundle with webpack and assert the three properties
+ *      only it can falsify: the published stylesheet survives a production
+ *      build, tree-shaking holds under its nearest-package.json `sideEffects`
+ *      lookup, and a mixed `import`/`require` graph loads a single copy.
+ *   9. Tree-shaking — bundle a Button-only consumer with Vite (Rollup) and
+ *      assert the unused component graph (Code, react-syntax-highlighter,
+ *      react-aria-components) is dropped.
  *
- * The smoke consumer installs from the tarball (not a workspace symlink), so
+ * The consumers install from the tarball (not a workspace symlink), so
  * resolution matches what a real consumer would get from npm.
  *
  * Prerequisite: `lib/` must already be built (`pnpm build`). Run via the
@@ -23,6 +36,20 @@ const path = require('node:path');
 const packageRoot = path.join(__dirname, '..');
 const smokeFixtures = path.join(__dirname, 'packaging-smoke');
 const libDir = path.join(packageRoot, 'lib');
+const workspaceModules = path.join(packageRoot, '..', '..', 'node_modules');
+
+// A Button-only bundle must not contain any of these — their presence means an
+// unused component (and its heavy deps) failed to tree-shake. Asserted against
+// both bundlers: Vite/Rollup below, and webpack via webpack-checks.cjs, which
+// resolves `sideEffects` differently and is the only one that sees a nested
+// marker file shadow the root manifest.
+const forbidden = [
+  'react-syntax-highlighter',
+  'react-aria',
+  'registerLanguage',
+  'hljs',
+  'lowlight'
+];
 
 function step(message) {
   console.log(`\n› ${message}`);
@@ -81,6 +108,14 @@ try {
     path.join(smokeFixtures, 'smoke.mjs'),
     path.join(consumerDir, 'smoke.mjs')
   );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'single-copy.mjs'),
+    path.join(consumerDir, 'single-copy.mjs')
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'esm-output.mjs'),
+    path.join(consumerDir, 'esm-output.mjs')
+  );
 
   // Install with npm into an isolated dir so resolution is hermetic and does
   // not touch the pnpm workspace. react/react-dom satisfy the peer range.
@@ -123,6 +158,86 @@ try {
       `Published stylesheet missing or empty: ${installedStylesheet}`
     );
   }
+  step('Verifying a single copy resolves (dual-package-hazard guard)');
+  run('node', ['single-copy.mjs'], { cwd: consumerDir });
+
+  // Node resolves the bare specifier through `main` to the CJS tree at `lib/`,
+  // so the steps above never load lib/esm. Import it by path and render the
+  // components whose CJS-default interop only breaks under strict ESM.
+  step('Verifying the ESM build imports and renders (lib/esm)');
+  run('node', ['esm-output.mjs'], { cwd: consumerDir });
+
+  // Everything above is Node-only, and the Vite step below cannot observe
+  // webpack's nearest-package.json `sideEffects` lookup or its entry selection.
+  // These three assertions cover the properties only webpack can falsify.
+  step('Verifying webpack consumer (stylesheet, tree-shaking, single copy)');
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'webpack-checks.cjs'),
+    path.join(consumerDir, 'webpack-checks.cjs')
+  );
+  run(
+    'node',
+    ['webpack-checks.cjs', workspaceModules, JSON.stringify(forbidden)],
+    { cwd: consumerDir }
+  );
+
+  step('Verifying tree-shaking (Button-only import drops unused components)');
+  const treeshakeDir = path.join(workDir, 'treeshake');
+  fs.mkdirSync(treeshakeDir);
+  fs.writeFileSync(
+    path.join(treeshakeDir, 'package.json'),
+    JSON.stringify(
+      {
+        name: 'cauldron-treeshake',
+        version: '0.0.0',
+        private: true,
+        type: 'module'
+      },
+      null,
+      2
+    )
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'treeshake.entry.js'),
+    path.join(treeshakeDir, 'treeshake.entry.js')
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'treeshake.vite.config.js'),
+    path.join(treeshakeDir, 'vite.config.js')
+  );
+  run(
+    'npm',
+    [
+      'install',
+      tarball,
+      'react@^19',
+      'react-dom@^19',
+      'vite@^7',
+      '--no-audit',
+      '--no-fund',
+      '--no-package-lock'
+    ],
+    { cwd: treeshakeDir }
+  );
+  run('npx', ['vite', 'build'], { cwd: treeshakeDir });
+
+  const outDir = path.join(treeshakeDir, 'dist');
+  const bundle = fs
+    .readdirSync(outDir)
+    .filter((file) => file.endsWith('.js'))
+    .map((file) => fs.readFileSync(path.join(outDir, file), 'utf8'))
+    .join('\n');
+  const leaked = forbidden.filter((marker) => bundle.includes(marker));
+  if (leaked.length > 0) {
+    throw new Error(
+      `Tree-shaking regressed: a Button-only bundle still contains ${leaked.join(
+        ', '
+      )}.`
+    );
+  }
+  console.log(
+    `Tree-shaking OK: Button-only bundle excludes ${forbidden.join(', ')}`
+  );
 
   console.log('\n✓ Packaging validation passed');
 } finally {
