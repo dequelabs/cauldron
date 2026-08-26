@@ -9,6 +9,7 @@ import React, {
 import classNames from 'classnames';
 import nextId from 'react-id-generator';
 import Icon, { type IconType } from '../Icon';
+import FieldError from '../internal/FieldError';
 import { addIdRef } from '../../utils/idRefs';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -164,9 +165,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </span>
         )}
         {error && (
-          <div id={errorId} className="Error">
+          <FieldError id={errorId} className="Error" icon={false}>
             {error}
-          </div>
+          </FieldError>
         )}
       </div>
     );

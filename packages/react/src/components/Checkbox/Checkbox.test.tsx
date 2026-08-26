@@ -65,6 +65,13 @@ test('should render error checkbox', () => {
   ).toBeInTheDocument();
 });
 
+test('should announce the error via a live region', () => {
+  renderCheckbox({ error: 'you should check this checkbox' });
+  const error = screen.getByRole('alert');
+  expect(error).toHaveTextContent('you should check this checkbox');
+  expect(error).toHaveAttribute('aria-live', 'polite');
+});
+
 test('should toggle checkbox correctly', async () => {
   const user = userEvent.setup();
   const input = renderCheckbox();

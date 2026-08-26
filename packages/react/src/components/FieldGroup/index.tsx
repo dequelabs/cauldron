@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
-import Icon from '../Icon';
+import FieldError from '../internal/FieldError';
 import { addIdRef } from '../../utils/idRefs';
 
 interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -46,12 +46,7 @@ const FieldGroup = forwardRef<HTMLDivElement, FieldGroupProps>(
             {description}
           </div>
         )}
-        {error && (
-          <div className="Field__error" id={errorId}>
-            <Icon type="caution" />
-            {error}
-          </div>
-        )}
+        {error && <FieldError id={errorId}>{error}</FieldError>}
         {children}
       </div>
     );
