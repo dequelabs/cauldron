@@ -304,7 +304,7 @@ const Listbox = forwardRef<
             ? options.find((option) => !isDisabledOption(option))
             : options[0];
 
-          if (firstOption) {
+          if (firstOption && firstOption.element !== activeOption?.element) {
             setActiveOption(firstOption);
           }
 
@@ -316,7 +316,7 @@ const Listbox = forwardRef<
             ? [...options].reverse().find((option) => !isDisabledOption(option))
             : options[options.length - 1];
 
-          if (lastOption) {
+          if (lastOption && lastOption.element !== activeOption?.element) {
             setActiveOption(lastOption);
           }
 

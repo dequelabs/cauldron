@@ -982,3 +982,59 @@ test('should return no axe violations with multiselect', async () => {
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
+
+test('should not update the active option on focus when it is already active', () => {
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      focusStrategy="first"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const apple = screen.getByRole('option', { name: 'Apple' });
+
+  // The parent's copy of the active option is a different object than the
+  // listbox's own, which is how ActionList/ActionMenu mirror active state.
+  rerender(<Fixture activeOption={{ element: apple }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
+
+test('should not update the active option on focus when it is already active with focusStrategy "last"', () => {
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      focusStrategy="last"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const banana = screen.getByRole('option', { name: 'Banana' });
+
+  rerender(<Fixture activeOption={{ element: banana }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
