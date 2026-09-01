@@ -4,6 +4,7 @@ description: A component that displays a hierarchical tree structure.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TreeView/index.tsx
 ---
 
+import { useState } from 'react';
 import { TreeView } from '@deque/cauldron-react';
 
 ```jsx
@@ -179,13 +180,12 @@ function LabelledByTreeView() {
 
 ### Custom onAction
 
-TreeView with a custom action handler for item selection.
+`onAction` runs your own handler when an item is activated, in addition to the
+item's selection change.
 
 ```jsx example
 function ActionTreeView() {
-  const onAction = (key) => {
-    alert(`Selected item: ${key}`);
-  };
+  const [lastAction, setLastAction] = useState(null);
   const items = [
     {
       id: '1',
@@ -199,12 +199,17 @@ function ActionTreeView() {
     }
   ];
   return (
-    <TreeView
-      aria-label="Tree View with Action Handler"
-      selectionMode="single"
-      onAction={onAction}
-      items={items}
-    />
+    <>
+      <TreeView
+        aria-label="Tree View with Action Handler"
+        selectionMode="multiple"
+        onAction={setLastAction}
+        items={items}
+      />
+      <p role="status">
+        {lastAction ? `Last action: item ${lastAction}` : 'No action yet.'}
+      </p>
+    </>
   );
 }
 ```
