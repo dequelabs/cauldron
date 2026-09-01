@@ -3,7 +3,13 @@ import { render } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import userEvent from '@testing-library/user-event';
 import axe from '../../axe';
-import TreeView, { TreeViewNode } from '../../../src/components/TreeView';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import TreeView, {
+  TreeViewNode,
+  ROW_GAP,
+  LIST_PADDING
+} from '../../../src/components/TreeView';
 
 const items: TreeViewNode[] = [
   {
@@ -455,31 +461,67 @@ test('cascade is inert in single selection mode', async () => {
   expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
 });
 
-// --- Virtualized (height) mode ---
+// --- Virtualized mode ---
 
-test('applies a fixed height and the virtualized class when height is set', () => {
+/** The virtualizer wraps every row in an absolutely-positioned
+ *  `[role="presentation"]` and moves rows off the treegrid itself. Asserting on
+ *  that structure is what makes these tests fail if the `<Virtualizer>` is
+ *  removed — jsdom reports zero dimensions, so row *counts* alone cannot. */
+const virtualizerMounted = (tree: HTMLElement) => {
+  const allRows = tree.querySelectorAll('[role="row"]').length;
+  const directRows = tree.querySelectorAll(':scope > [role="row"]').length;
+  return {
+    presentationWrappers: tree.querySelectorAll(
+      ':scope > [role="presentation"]'
+    ).length,
+    // Every row is a direct child until the virtualizer re-parents them.
+    allRowsAreDirectChildren: allRows > 0 && directRows === allRows,
+    rowCount: tree.getAttribute('aria-rowcount')
+  };
+};
+
+test('mounts the virtualizer when virtualized', () => {
   const { getByRole } = render(
-    <TreeView aria-label="Test TreeView" items={items} height={200} />
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      virtualized
+      height={200}
+      defaultExpandedKeys={['1']}
+    />
   );
   const tree = getByRole('treegrid');
   expect(tree).toHaveClass('TreeView--virtualized');
   expect(tree).toHaveStyle({ height: '200px' });
+  expect(virtualizerMounted(tree)).toEqual({
+    presentationWrappers: 1,
+    allRowsAreDirectChildren: false,
+    rowCount: expect.any(String)
+  });
 });
 
-test('does not virtualize when height is omitted', () => {
+test('does not mount the virtualizer by default', () => {
   const { getByRole } = render(
-    <TreeView aria-label="Test TreeView" items={items} />
-  );
-  expect(getByRole('treegrid')).not.toHaveClass('TreeView--virtualized');
-});
-
-test('does not virtualize when height is 0 (treated as unset)', () => {
-  const { getByRole } = render(
-    <TreeView aria-label="Test TreeView" items={items} height={0} />
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      defaultExpandedKeys={['1']}
+    />
   );
   const tree = getByRole('treegrid');
   expect(tree).not.toHaveClass('TreeView--virtualized');
-  expect(tree).not.toHaveStyle({ height: '0px' });
+  expect(virtualizerMounted(tree)).toEqual({
+    presentationWrappers: 0,
+    allRowsAreDirectChildren: true,
+    rowCount: null
+  });
+});
+
+test('does not apply a height when not virtualized', () => {
+  const { getByRole } = render(
+    <TreeView aria-label="Test TreeView" items={items} height={200} />
+  );
+  expect(getByRole('treegrid')).not.toHaveStyle({ height: '200px' });
 });
 
 test('merges a caller-supplied style with the virtualization height', () => {
@@ -487,8 +529,8 @@ test('merges a caller-supplied style with the virtualization height', () => {
     <TreeView
       aria-label="Test TreeView"
       items={items}
+      virtualized
       height={200}
-      // a caller-supplied style must not drop the virtualization height
       style={{ border: '1px solid red' }}
     />
   );
@@ -497,31 +539,38 @@ test('merges a caller-supplied style with the virtualization height', () => {
   expect(tree).toHaveStyle({ border: '1px solid red' });
 });
 
-test('the virtualization height wins over a conflicting height in style', () => {
+test('the height prop wins over a conflicting height in style', () => {
   const { getByRole } = render(
     <TreeView
       aria-label="Test TreeView"
       items={items}
+      virtualized
       height={200}
-      // a caller's own style.height must not override the virtualization height
       style={{ height: 500 }}
     />
   );
   expect(getByRole('treegrid')).toHaveStyle({ height: '200px' });
 });
 
-test('does not virtualize when height is a zero-valued string like "0px"', () => {
+test('passes a caller style through when not virtualized', () => {
   const { getByRole } = render(
-    <TreeView aria-label="Test TreeView" items={items} height="0px" />
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      style={{ height: 500 }}
+    />
   );
-  const tree = getByRole('treegrid');
-  expect(tree).not.toHaveClass('TreeView--virtualized');
-  expect(tree).not.toHaveStyle({ height: '0px' });
+  expect(getByRole('treegrid')).toHaveStyle({ height: '500px' });
 });
 
 test('accepts a string height', () => {
   const { getByRole } = render(
-    <TreeView aria-label="Test TreeView" items={items} height="20rem" />
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      virtualized
+      height="20rem"
+    />
   );
   expect(getByRole('treegrid')).toHaveStyle({ height: '20rem' });
 });
@@ -532,6 +581,7 @@ test('renders and selects items when virtualized', async () => {
       aria-label="Test TreeView"
       items={items}
       selectionMode="multiple"
+      virtualized
       height={200}
     />
   );
@@ -546,6 +596,7 @@ test('has no axe violations when virtualized', async () => {
       aria-label="Test TreeView"
       items={items}
       selectionMode="multiple"
+      virtualized
       height={200}
       defaultExpandedKeys={['1', '4']}
     />
@@ -561,6 +612,7 @@ test('cascadeSelect works when virtualized: selecting the parent selects its chi
       selectionMode="multiple"
       cascadeSelect
       cascadeDeselect
+      virtualized
       height={200}
       defaultExpandedKeys={['1']}
     />
@@ -575,4 +627,101 @@ test('cascadeSelect works when virtualized: selecting the parent selects its chi
   expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
   expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
   expect(getByRole('checkbox', { name: 'pie' })).not.toBeChecked();
+});
+
+// Toggling `virtualized` swaps `<Tree>` for `<Virtualizer><Tree>`, remounting
+// the tree. Selection is held here rather than inside react-aria so it survives.
+test('keeps the selection when virtualized is turned on', async () => {
+  const { getByRole, rerender } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+
+  rerender(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+      virtualized
+      height={200}
+    />
+  );
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+});
+
+test('keeps the selection when virtualized is turned off', async () => {
+  const { getByRole, rerender } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+      virtualized
+      height={200}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+
+  rerender(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+    />
+  );
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+});
+
+test('changing the height does not remount the tree or drop the selection', async () => {
+  const { getByRole, rerender } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+      virtualized
+      height={200}
+    />
+  );
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  const before = getByRole('treegrid');
+
+  rerender(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      selectionMode="multiple"
+      defaultExpandedKeys={['1']}
+      virtualized
+      height={400}
+    />
+  );
+  expect(getByRole('treegrid')).toBe(before);
+  expect(getByRole('treegrid')).toHaveStyle({ height: '400px' });
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+});
+
+// The virtualizer takes spacing as numbers, so it cannot read the CSS tokens
+// `.TreeView` uses. Assert the two stay equal instead.
+test('virtualized row spacing matches the .TreeView spacing tokens', () => {
+  const variables = readFileSync(
+    resolve(__dirname, '../../../../styles/variables.css'),
+    'utf8'
+  );
+  const token = (name: string) => {
+    const match = variables.match(new RegExp(`--${name}:\\s*(\\d+)px`));
+    if (!match) throw new Error(`token --${name} not found in variables.css`);
+    return Number(match[1]);
+  };
+  expect(token('space-quarter')).toBe(ROW_GAP);
+  expect(token('space-half')).toBe(LIST_PADDING);
 });

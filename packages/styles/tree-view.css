@@ -24,10 +24,10 @@
   outline-offset: -1px;
 }
 
-/* Virtualized mode: react-aria positions each visible row absolutely inside a
-   sized, scrollable viewport and derives row spacing/padding from the list
-   layout options. Flex flow, `gap`, and container padding no longer apply, so
-   they are cleared to avoid double spacing and layout offsets. */
+/* Virtualized rows are absolutely positioned and the list layout owns their
+   spacing, so the flex container's flow, gap and padding are cleared. The tree
+   needs a definite width from an ancestor — absolutely positioned rows give it
+   no intrinsic one. */
 .TreeView--virtualized {
   display: block;
   gap: 0;

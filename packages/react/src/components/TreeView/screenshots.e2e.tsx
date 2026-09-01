@@ -95,27 +95,28 @@ test('should have screenshot for TreeView virtualized', async ({
     textValue: `Item ${i + 1}`
   }));
   const component = await mount(
-    // The screenshot harness sizes the mounted root to its content
-    // (`min-height`/`max-width: max-content` on `#root > div`), which would
-    // override the fixed height and collapse the width of virtualized (absolutely
-    // positioned) rows. Wrapping in a div and giving the tree an explicit width
-    // lets the fixed-height scroll region render as it does in a real app.
+    // Virtualized rows are absolutely positioned, so the tree has no intrinsic
+    // width and needs a definite one (a documented limitation). It must sit on
+    // the tree, not the wrapper: the harness's `max-width: max-content` on
+    // `#root > div` would collapse a width set there.
     <div>
       <TreeView
         aria-label="Long list"
         items={longItems}
         selectionMode="multiple"
+        virtualized
         height={240}
         style={{ width: 420 }}
       />
     </div>
   );
-  // Windowing check: a screenshot alone can't catch a virtualization regression
-  // because 8 rows and 200 rows look identical in the visible region. Assert the
-  // DOM holds only a small subset of the 200 mounted rows.
-  const renderedRows = await component.getByRole('row').count();
-  expect(renderedRows).toBeGreaterThan(0);
-  expect(renderedRows).toBeLessThan(50);
+  // A screenshot can't catch a windowing regression: 8 rows and 200 rows look
+  // identical in the visible region. A 240px viewport at ~32px/row shows ~8.
+  await expect(
+    component.getByRole('row', { name: 'Item 1', exact: true })
+  ).toBeVisible();
+  await expect.poll(() => component.getByRole('row').count()).toBeLessThan(20);
+  expect(await component.getByRole('row').count()).toBeGreaterThan(0);
   await expect(component).toHaveScreenshot('tree-view-virtualized');
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--tree-view-virtualized');
@@ -135,6 +136,7 @@ test('virtualized TreeView keeps keyboard focus when the focused row scrolls out
         aria-label="Long list"
         items={longItems}
         selectionMode="multiple"
+        virtualized
         height={240}
         style={{ width: 420 }}
       />
