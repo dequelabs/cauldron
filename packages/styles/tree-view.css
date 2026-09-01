@@ -24,6 +24,17 @@
   outline-offset: -1px;
 }
 
+/* Virtualized rows are absolutely positioned and the list layout owns their
+   spacing, so the flex container's flow, gap and padding are cleared. The tree
+   needs a definite width from an ancestor — absolutely positioned rows give it
+   no intrinsic one. */
+.TreeView--virtualized {
+  display: block;
+  gap: 0;
+  padding: 0;
+  position: relative;
+}
+
 .TreeView .TreeView__item {
   display: flex;
   align-items: center;
