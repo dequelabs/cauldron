@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import classnames from 'classnames';
 import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
@@ -26,21 +26,12 @@ interface ActionListProps extends Omit<
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const activeElement = useRef<HTMLLIElement | HTMLAnchorElement | null>(
-      null
-    );
+    // Listbox owns the active option. ActionList must not mirror it back down
+    // as a controlled prop: the two copies then race, and a downward sync
+    // carrying an already-stale value can revert a newer one and oscillate.
+    // `activeOption` below is only a one-shot mnemonic request, never a
+    // mirror. See cauldron#2512.
     const [activeOption, setActiveOption] = useState<ListboxOption>();
-
-    // Deliberately does not mirror the reported option back into
-    // `activeOption`. Listbox owns the active option; feeding its own value
-    // back down as a controlled prop makes the two copies race, and a
-    // downward sync carrying an already-stale value can revert a newer one
-    // and oscillate. See cauldron#2512.
-    const handleActiveChange = useCallback((value: ListboxOption) => {
-      activeElement.current = value?.element as
-        | HTMLLIElement
-        | HTMLAnchorElement;
-    }, []);
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
@@ -86,7 +77,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
-        onActiveChange={handleActiveChange}
         navigation="bound"
       >
         <ActionListProvider
