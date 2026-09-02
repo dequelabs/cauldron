@@ -31,11 +31,15 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     );
     const [activeOption, setActiveOption] = useState<ListboxOption>();
 
+    // Deliberately does not mirror the reported option back into
+    // `activeOption`. Listbox owns the active option; feeding its own value
+    // back down as a controlled prop makes the two copies race, and a
+    // downward sync carrying an already-stale value can revert a newer one
+    // and oscillate. See cauldron#2512.
     const handleActiveChange = useCallback((value: ListboxOption) => {
       activeElement.current = value?.element as
         | HTMLLIElement
         | HTMLAnchorElement;
-      setActiveOption(value);
     }, []);
 
     const handleAction = useCallback(
@@ -47,10 +51,12 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
+    // A new object every match, even for the same element: this is a one-shot
+    // request to Listbox rather than a mirror of its state, so re-using the
+    // previous object would leave the controlled prop unchanged and the
+    // request would never reach Listbox.
     const handleMnemonicMatch = useCallback((element: HTMLElement) => {
-      setActiveOption((prev) =>
-        prev?.element === element ? prev : { element }
-      );
+      setActiveOption({ element });
     }, []);
 
     const containerRef = useMnemonics<HTMLUListElement>({
