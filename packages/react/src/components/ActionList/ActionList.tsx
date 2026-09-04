@@ -30,7 +30,8 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
     // as a controlled prop: the two copies then race, and a downward sync
     // carrying an already-stale value can revert a newer one and oscillate.
     // `activeOption` below is only a one-shot mnemonic request, never a
-    // mirror. See cauldron#2512.
+    // mirror. See cauldron#2512; cauldron#2522 tracks making `activeOption`
+    // properly controlled so this constraint lives in the interface instead.
     const [activeOption, setActiveOption] = useState<ListboxOption>();
 
     const handleAction = useCallback(
