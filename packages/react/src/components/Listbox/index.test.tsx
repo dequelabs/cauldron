@@ -1003,8 +1003,8 @@ test('should not update the active option on focus when it is already active', (
   const { rerender } = render(<Fixture />);
   const apple = screen.getByRole('option', { name: 'Apple' });
 
-  // The parent's copy of the active option is a different object than the
-  // listbox's own, which is how ActionList/ActionMenu mirror active state.
+  // The parent passes its own object wrapping the same element the listbox
+  // already holds, so the guard cannot rely on object identity.
   rerender(<Fixture activeOption={{ element: apple }} />);
   handleActiveChange.mockClear();
 
@@ -1021,6 +1021,33 @@ test('should not update the active option on focus when it is already active wit
   }) => (
     <Listbox
       focusStrategy="last"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const banana = screen.getByRole('option', { name: 'Banana' });
+
+  rerender(<Fixture activeOption={{ element: banana }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
+
+test('should not update the active option on focus when it is already active with the default focus strategy', () => {
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      defaultValue="Banana"
       activeOption={activeOption}
       onActiveChange={handleActiveChange}
     >
