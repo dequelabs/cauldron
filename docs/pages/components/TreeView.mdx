@@ -165,6 +165,10 @@ This mode depends on styles shipped in `@deque/cauldron-styles`, so upgrade it
 alongside `@deque/cauldron-react` — an older stylesheet lays the rows out
 incorrectly.
 
+The examples below use short lists so this page stays scrollable — a tall
+scroll region traps the page scroll until you reach its end. The component
+itself is intended for lists of many hundreds of rows.
+
 Because virtualization removes off-screen rows from the DOM, be aware of these
 current limitations when you enable it:
 
@@ -190,7 +194,7 @@ current limitations when you enable it:
 
 ```jsx example
 function VirtualizedTreeView() {
-  const items = Array.from({ length: 500 }, (_, i) => ({
+  const items = Array.from({ length: 100 }, (_, i) => ({
     id: String(i + 1),
     textValue: `Item ${i + 1}`
   }));
@@ -219,7 +223,7 @@ function VirtualizedCascadeTreeView() {
     {
       id: 'parent',
       textValue: 'All Categories',
-      children: Array.from({ length: 300 }, (_, i) => ({
+      children: Array.from({ length: 80 }, (_, i) => ({
         id: String(i + 1),
         textValue: `Category ${i + 1}`
       }))
@@ -231,7 +235,8 @@ function VirtualizedCascadeTreeView() {
       selectionMode="multiple"
       cascadeSelect
       cascadeDeselect
-      height={320}
+      virtualized
+      height="20rem"
       defaultExpandedKeys={['parent']}
       items={items}
     />
