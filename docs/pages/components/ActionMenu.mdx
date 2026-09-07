@@ -427,16 +427,20 @@ function MixedSelectionExample() {
 
 The trigger element type defaults to `HTMLButtonElement`, but it is parameterized for nested menu patterns where the trigger is not a button — for example a `MenuItem`/`TopBarItem` (`<li>`) when an `ActionMenu` is nested inside a `TopBar`/`MenuBar`. Annotating the trigger param infers the element type, so the trigger's `ref` and event handlers type against the actual element without casts and no JSX type argument is required:
 
+With `renderInTrigger`, the menu is rendered _inside_ the trigger. Roles like `menuitem` take their accessible name from their content, so the trigger would otherwise be named after every item in the menu it contains. Wrap the trigger's visible label in an element carrying the `labelId` passed to the trigger function — `ActionMenu` points both the trigger and the menu at it. Destructure `labelId` out of the props so it is not spread onto a DOM element:
+
 ```tsx
 <ActionMenu
   renderInTrigger
   trigger={({
     ref,
     children,
+    labelId,
     ...props
   }: ActionMenuTriggerProps<HTMLLIElement>) => (
     <TopBarItem menuItemRef={ref} {...props}>
-      …{children}
+      <span id={labelId}>Menu</span>
+      {children}
     </TopBarItem>
   )}
 >
@@ -465,7 +469,14 @@ The trigger element type defaults to `HTMLButtonElement`, but it is parameterize
       ],
       required: true,
       description:
-        'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state. The trigger element type defaults to HTMLButtonElement; when nesting inside a TopBar/MenuBar, annotate the trigger param (e.g. (props: ActionMenuTriggerProps<HTMLLIElement>) => …) so the trigger ref and handlers type against the actual element without casts.'
+        'Element that triggers the menu to open. Can be a React element or a render function that receives props and the current open state. The trigger element type defaults to HTMLButtonElement; when nesting inside a TopBar/MenuBar, annotate the trigger param (e.g. (props: ActionMenuTriggerProps<HTMLLIElement>) => …) so the trigger ref and handlers type against the actual element without casts. Render functions also receive a labelId, which must be placed on the element wrapping the trigger’s visible label when renderInTrigger is set.'
+    },
+    {
+      name: 'renderInTrigger',
+      type: 'boolean',
+      defaultValue: 'false',
+      description:
+        'Renders the menu as a child of the trigger rather than as a sibling. Intended for nested menu patterns, for example an ActionMenu inside a TopBar/MenuBar. Requires a trigger render function that places labelId on the trigger’s label element, and is incompatible with portal.'
     },
     {
       name: 'placement',

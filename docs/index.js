@@ -160,7 +160,7 @@ const App = () => {
           <ActionMenu
             tabIndex={-1}
             renderInTrigger={true}
-            trigger={({ ref, children, ...props }) => {
+            trigger={({ ref, children, labelId, ...props }) => {
               return (
                 <TopBarItem
                   menuItemRef={ref}
@@ -169,10 +169,10 @@ const App = () => {
                   autoClickLink={false}
                   {...props}
                 >
-                  <span className="TopBar__item--icon">
+                  <div className="TopBar__item--icon">
                     <Icon type="gears" />
-                    <div>Settings</div>
-                  </span>
+                    <div id={labelId}>Settings</div>
+                  </div>
                   {children}
                 </TopBarItem>
               );

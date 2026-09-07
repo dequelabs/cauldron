@@ -63,6 +63,7 @@ const TopBarPatternActionMenu = () => (
     trigger={({
       ref,
       children,
+      labelId,
       ...props
     }: ActionMenuTriggerProps<HTMLLIElement>) => (
       <TopBarItem
@@ -71,7 +72,7 @@ const TopBarPatternActionMenu = () => (
         autoClickLink={false}
         {...props}
       >
-        Trigger
+        <span id={labelId}>Trigger</span>
         {children}
       </TopBarItem>
     )}
@@ -91,6 +92,70 @@ afterEach(() => {
 test('should render trigger button', () => {
   render(<ActionMenu {...defaultProps} />);
   expect(screen.getByRole('button', { name: 'Trigger' })).toBeInTheDocument();
+});
+
+// These assert attribute wiring rather than accessible names: jsdom's
+// dom-accessibility-api does not walk into a role="menu" child when naming from
+// content, so accname assertions pass even for markup browsers name incorrectly.
+test('should label the menu with the trigger and leave the trigger element untouched', async () => {
+  const user = userEvent.setup();
+  render(<ActionMenu {...defaultProps} />);
+
+  const trigger = screen.getByRole('button', { name: 'Trigger' });
+  expect(trigger).not.toHaveAttribute('labelid');
+  expect(trigger).not.toHaveAttribute('aria-labelledby');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).toHaveAttribute(
+    'aria-labelledby',
+    trigger.getAttribute('id')
+  );
+});
+
+test('should leave the menu unnamed when renderInTrigger omits a label element', async () => {
+  const user = userEvent.setup();
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+  render(
+    <ActionMenu
+      {...defaultProps}
+      renderInTrigger
+      trigger={({ children, ...props }) => (
+        <button {...props}>Trigger{children}</button>
+      )}
+    />
+  );
+
+  const trigger = screen.getByRole('button', { name: /Trigger/ });
+  expect(trigger).not.toHaveAttribute('aria-labelledby');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).not.toHaveAttribute('aria-labelledby');
+  expect(warn).toHaveBeenCalled();
+
+  warn.mockRestore();
+});
+
+test('should label the trigger and menu with the same element when rendering in trigger', async () => {
+  const user = userEvent.setup();
+  render(
+    <TopBar>
+      <MenuBar>
+        <TopBarPatternActionMenu />
+      </MenuBar>
+    </TopBar>
+  );
+
+  const trigger = screen.getByRole('menuitem', { name: 'Trigger' });
+  const labelId = trigger.getAttribute('aria-labelledby') as string;
+
+  expect(document.getElementById(labelId)).toHaveTextContent('Trigger');
+
+  await user.click(trigger);
+
+  expect(screen.getByRole('menu')).toHaveAttribute('aria-labelledby', labelId);
 });
 
 test('should render trigger function', async () => {
@@ -830,7 +895,12 @@ test('should support renderInTrigger prop', async () => {
       {...defaultProps}
       data-testid="actionmenu"
       renderInTrigger={true}
-      trigger={({ children }) => <button>Trigger{children}</button>}
+      trigger={({ children, labelId }) => (
+        <button>
+          <span id={labelId}>Trigger</span>
+          {children}
+        </button>
+      )}
     />
   );
 

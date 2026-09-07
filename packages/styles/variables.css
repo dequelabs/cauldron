@@ -52,7 +52,15 @@
   --issue-minor: var(--gray-20);
 
   /* radius */
+  --radius-0: 0;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
   --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-9999: 9999px;
 
   /* text colours */
   --text-color-base: var(--gray-60);
