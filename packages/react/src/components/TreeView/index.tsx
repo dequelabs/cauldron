@@ -42,12 +42,13 @@ type TreeViewProps = Cauldron.LabelProps &
     cascadeDeselect?: boolean;
     defaultExpandedKeys?: string[];
     /** Render only the rows in view. Use for long lists, where rendering every
-     *  row makes selection changes slow enough to look frozen. Requires a
-     *  `height`. Toggling this at runtime remounts the tree, which resets
-     *  expansion and scroll position. */
+     *  row makes selection changes slow enough to look frozen. Needs a height —
+     *  from `height`, `style`, or CSS — or no rows render. Toggling this at
+     *  runtime remounts the tree, which resets expansion and scroll position. */
     virtualized?: boolean;
-    /** Height of the scroll region. Only applies when `virtualized` is set.
-     *  A relative unit (`"20rem"`) keeps the visible row count stable at zoom. */
+    /** Height of the scroll region, taking precedence over `style.height`. Only
+     *  applies when `virtualized` is set. A relative unit (`"20rem"`) keeps the
+     *  visible row count stable at zoom. */
     height?: number | string;
   };
 
@@ -119,9 +120,10 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
         ? { selectedKeys, onSelectionChange: handleSelectionChange }
         : {};
 
-    // The `height` prop outranks `style.height`: it is the more specific API and
-    // the virtualizer sizes the scroll region from it.
-    const mergedStyle = virtualized ? { ...style, height } : style;
+    // The `height` prop outranks `style.height`, but only when it is actually
+    // set — spreading an undefined `height` would wipe the caller's own.
+    const mergedStyle =
+      virtualized && height !== undefined ? { ...style, height } : style;
 
     const tree = (
       <Tree

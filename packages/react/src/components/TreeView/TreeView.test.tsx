@@ -563,6 +563,18 @@ test('passes a caller style through when not virtualized', () => {
   expect(getByRole('treegrid')).toHaveStyle({ height: '500px' });
 });
 
+test('an unset height prop does not wipe a caller-supplied style.height', () => {
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      items={items}
+      virtualized
+      style={{ height: 240 }}
+    />
+  );
+  expect(getByRole('treegrid')).toHaveStyle({ height: '240px' });
+});
+
 test('accepts a string height', () => {
   const { getByRole } = render(
     <TreeView
