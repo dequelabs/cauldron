@@ -180,8 +180,15 @@ function LabelledByTreeView() {
 
 ### Custom onAction
 
-`onAction` runs your own handler when an item is activated, in addition to the
-item's selection change.
+`onAction` runs your own handler when an item is activated. Activation and
+selection are separate interactions, and each key does one thing only:
+
+- **Space** toggles the item's checkbox, exactly as a standalone checkbox would.
+- **Enter** runs `onAction`, and leaves the selection alone.
+
+Tell users what activation does before they trigger it, particularly if it opens
+a dialog or otherwise moves them somewhere — describe it in nearby instructions
+and point the tree at them with `aria-describedby`.
 
 ```jsx example
 function ActionTreeView() {
@@ -200,8 +207,12 @@ function ActionTreeView() {
   ];
   return (
     <>
+      <p id="action-tree-help">
+        Press Space to select an item, or Enter to run the action for it.
+      </p>
       <TreeView
         aria-label="Tree View with Action Handler"
+        aria-describedby="action-tree-help"
         selectionMode="multiple"
         onAction={setLastAction}
         items={items}

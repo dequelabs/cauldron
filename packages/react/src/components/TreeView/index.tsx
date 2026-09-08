@@ -1,9 +1,10 @@
-import React, { forwardRef, useMemo, useState } from 'react';
+import React, { forwardRef, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { Tree, type Selection, type Key } from 'react-aria-components';
 import { Cauldron } from '../../types';
 import { TreeViewNode } from './types';
 import TreeViewItem from './TreeViewItem';
+import useSharedRef from '../../utils/useSharedRef';
 import {
   applyCascade,
   collectDisabledKeys,
@@ -15,6 +16,8 @@ export type { TreeViewNode } from './types';
 
 type TreeViewProps = Cauldron.LabelProps & {
   items: TreeViewNode[];
+  /** Runs when an item is activated: Enter, or a row press. Selection is a
+   *  separate interaction — Space toggles it. */
   onAction?: (key: string) => void;
   selectionMode?: 'none' | 'single' | 'multiple';
   /** When true (multiple selection only), selecting a parent also selects all
@@ -41,6 +44,7 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
     },
     ref
   ) => {
+    const treeRef = useSharedRef<HTMLDivElement>(ref);
     const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set());
     const cascade = { cascadeSelect, cascadeDeselect };
     // Cascade only applies to multiple selection.
@@ -81,6 +85,30 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
       onAction?.(key as string);
     };
 
+    // Space selects and Enter runs the action, consistently. react-aria only
+    // treats a press as an action while nothing is selected, so once a row is
+    // checked its Enter handling goes inert. Capture phase, so react-aria never
+    // sees the key and cannot vary the outcome.
+    useEffect(() => {
+      const node = treeRef.current;
+      if (!node || !onAction) return;
+
+      const handleEnter = (event: KeyboardEvent) => {
+        if (event.key !== 'Enter' || event.defaultPrevented) return;
+        const row = (event.target as HTMLElement | null)?.closest?.(
+          '[role="row"][data-key]'
+        );
+        const key = row?.getAttribute('data-key');
+        if (!key || row?.getAttribute('aria-disabled') === 'true') return;
+        event.preventDefault();
+        event.stopPropagation();
+        onAction(key);
+      };
+
+      node.addEventListener('keydown', handleEnter, true);
+      return () => node.removeEventListener('keydown', handleEnter, true);
+    }, [onAction]);
+
     // Disabled nodes are non-selectable; react-aria disables them via disabledKeys.
     const disabledKeys = useMemo(() => collectDisabledKeys(items), [items]);
 
@@ -93,7 +121,7 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
 
     return (
       <Tree
-        ref={ref}
+        ref={treeRef}
         className={classNames('TreeView', className)}
         selectionMode={selectionMode}
         defaultExpandedKeys={defaultExpandedKeys}
