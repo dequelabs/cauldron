@@ -238,8 +238,10 @@ const DialogContent = ({
         'text--align-center': align === 'center',
         'text--align-right': align === 'right'
       })}
-      // A scrollable region has to be reachable by keyboard (WCAG 2.1.1), which
-      // the rule does not account for on scroll containers.
+      // A scrollable region whose content has no focusable children can only be
+      // scrolled by keyboard if the region itself is tabbable (WCAG 2.1.1). The
+      // rule exempts role="tabpanel" only, so it flags this; #680 (role="region"
+      // plus an accessible name) would remove the need for this disable.
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={context?.scrollable ? 0 : undefined}
       {...other}
