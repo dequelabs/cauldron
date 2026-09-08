@@ -238,7 +238,10 @@ const DialogContent = ({
         'text--align-center': align === 'center',
         'text--align-right': align === 'right'
       })}
-      tabIndex={context?.scrollable ? -1 : undefined}
+      // A scrollable region has to be reachable by keyboard (WCAG 2.1.1), which
+      // the rule does not account for on scroll containers.
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={context?.scrollable ? 0 : undefined}
       {...other}
     >
       {children}
