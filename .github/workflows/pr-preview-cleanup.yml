@@ -6,6 +6,11 @@ on:
     branches:
       - develop
 
+# Group must match pr-preview.yml so closing a PR cancels an in-flight deploy before this job deletes the branch.
+concurrency:
+  group: PR Preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   id-token: write
 
