@@ -1,6 +1,6 @@
 :root {
   --panel-border-color: var(--gray-40);
-  --panel-border-radius: var(--radius-16);
+  --panel-border-radius: var(--radius-12);
   --panel-border-width: 1px;
   --panel-background-color: var(--white);
   --panel-heading-color: var(--gray-90);
