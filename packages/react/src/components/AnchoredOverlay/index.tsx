@@ -89,6 +89,17 @@ const preventTopOverflowMiddleware: Middleware = {
   }
 };
 
+// Element-resize tracking is split out of `whileElementsMounted` so it can be
+// scoped to the open state. This function's identity must stay stable:
+// floating-ui keys its positioning effect on whether one was passed, and a
+// re-run calls `update()` again, which on close pulls focus back out of the
+// trigger.
+const autoUpdateWithoutElementResize: typeof autoUpdate = (
+  reference,
+  floating,
+  update
+) => autoUpdate(reference, floating, update, { elementResize: false });
+
 const AnchoredOverlay = forwardRef(
   <
     Overlay extends HTMLElement = HTMLElement,
@@ -115,7 +126,14 @@ const AnchoredOverlay = forwardRef(
     const ref = useSharedRef<HTMLElement | null>(refProp);
     const Component = as || 'div';
 
-    const { refs, floatingStyles, placement, middlewareData } = useFloating({
+    const {
+      refs,
+      floatingStyles,
+      placement,
+      middlewareData,
+      update,
+      elements
+    } = useFloating({
       open,
       // default to initial placement on top when placement is auto
       // @ts-expect-error auto placement is not a valid placement for floating-ui
@@ -138,8 +156,40 @@ const AnchoredOverlay = forwardRef(
       elements: {
         reference: resolveElement(target)
       },
-      whileElementsMounted: autoUpdate
+      whileElementsMounted: autoUpdateWithoutElementResize
     });
+
+    // Observing the target while the overlay is closed measures it for the
+    // first time mid-layout, which leaves a ResizeObserver notification
+    // undelivered and has the browser report an uncaught error.
+    useEffect(() => {
+      const { reference, floating } = elements;
+
+      if (
+        !open ||
+        !reference ||
+        !floating ||
+        typeof ResizeObserver !== 'function'
+      ) {
+        return;
+      }
+
+      // Deferred a task: starting it re-positions, and a render in the middle
+      // of the open sequence loses the overlay's initial focus target.
+      let stopObserving: (() => void) | undefined;
+      const timeout = setTimeout(() => {
+        stopObserving = autoUpdate(reference, floating, update, {
+          ancestorScroll: false,
+          ancestorResize: false,
+          layoutShift: false
+        });
+      });
+
+      return () => {
+        clearTimeout(timeout);
+        stopObserving?.();
+      };
+    }, [open, elements, update]);
 
     useEscapeKey({
       active: open,
