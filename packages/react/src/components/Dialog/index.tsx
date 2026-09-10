@@ -238,7 +238,10 @@ const DialogContent = ({
         'text--align-center': align === 'center',
         'text--align-right': align === 'right'
       })}
-      tabIndex={context?.scrollable ? -1 : undefined}
+      // A keyboard user can only scroll this region if it is tabbable (WCAG
+      // 2.1.1). The rule allows that on role="tabpanel" only. See #680.
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={context?.scrollable ? 0 : undefined}
       {...other}
     >
       {children}
