@@ -75,7 +75,16 @@ const config = {
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
       'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-      '@deque/cauldron-react': path.resolve(__dirname, './packages/react/lib')
+      // Consume the built ESM output. `$` matches the bare barrel import only,
+      // so the `/cauldron.css` short-form falls through to its own alias below.
+      '@deque/cauldron-react$': path.resolve(
+        __dirname,
+        './packages/react/lib/esm/index.js'
+      ),
+      '@deque/cauldron-react/cauldron.css': path.resolve(
+        __dirname,
+        './packages/react/lib/cauldron.css'
+      )
     },
     fallback: {
       path: false
