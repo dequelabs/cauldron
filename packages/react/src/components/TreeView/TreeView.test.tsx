@@ -654,6 +654,7 @@ test('keeps the selection when virtualized is turned on', async () => {
   );
   await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
   expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  const before = getByRole('treegrid');
 
   rerender(
     <TreeView
@@ -665,6 +666,7 @@ test('keeps the selection when virtualized is turned on', async () => {
       height={200}
     />
   );
+  expect(getByRole('treegrid')).not.toBe(before);
   expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
 });
 
@@ -681,6 +683,7 @@ test('keeps the selection when virtualized is turned off', async () => {
   );
   await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
   expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  const before = getByRole('treegrid');
 
   rerender(
     <TreeView
@@ -690,6 +693,7 @@ test('keeps the selection when virtualized is turned off', async () => {
       defaultExpandedKeys={['1']}
     />
   );
+  expect(getByRole('treegrid')).not.toBe(before);
   expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
 });
 
