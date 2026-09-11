@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import classnames from 'classnames';
 import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
@@ -26,17 +26,13 @@ interface ActionListProps extends Omit<
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const activeElement = useRef<HTMLLIElement | HTMLAnchorElement | null>(
-      null
-    );
+    // Listbox owns the active option. ActionList must not mirror it back down
+    // as a controlled prop: the two copies then race, and a downward sync
+    // carrying an already-stale value can revert a newer one and oscillate.
+    // `activeOption` below is only a one-shot mnemonic request, never a
+    // mirror. See cauldron#2512; cauldron#2522 tracks making `activeOption`
+    // properly controlled so this constraint lives in the interface instead.
     const [activeOption, setActiveOption] = useState<ListboxOption>();
-
-    const handleActiveChange = useCallback((value: ListboxOption) => {
-      activeElement.current = value?.element as
-        | HTMLLIElement
-        | HTMLAnchorElement;
-      setActiveOption(value);
-    }, []);
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
@@ -47,10 +43,12 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
+    // A new object every match, even for the same element: this is a one-shot
+    // request to Listbox rather than a mirror of its state, so re-using the
+    // previous object would leave the controlled prop unchanged and the
+    // request would never reach Listbox.
     const handleMnemonicMatch = useCallback((element: HTMLElement) => {
-      setActiveOption((prev) =>
-        prev?.element === element ? prev : { element }
-      );
+      setActiveOption({ element });
     }, []);
 
     const containerRef = useMnemonics<HTMLUListElement>({
@@ -80,7 +78,6 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
-        onActiveChange={handleActiveChange}
         navigation="bound"
       >
         <ActionListProvider

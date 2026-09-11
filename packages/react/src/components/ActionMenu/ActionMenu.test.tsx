@@ -491,6 +491,50 @@ test('should set matching active item on mnemonic key press', async () => {
   });
 });
 
+// Regression test for cauldron#2512. ActionList no longer mirrors Listbox's
+// reported active option, so a mnemonic match must be a fresh request every
+// time -- otherwise re-matching an item that arrow keys have since moved away
+// from is silently dropped.
+test('should set matching active item on mnemonic key press after arrow navigation', async () => {
+  const user = userEvent.setup();
+  render(
+    <ActionMenu {...defaultProps}>
+      <ActionList>
+        <ActionListItem>Apple</ActionListItem>
+        <ActionListItem>Banana</ActionListItem>
+        <ActionListItem>Cherry</ActionListItem>
+      </ActionList>
+    </ActionMenu>
+  );
+
+  screen.getByRole('button', { name: 'Trigger' }).focus();
+  await user.keyboard('{ArrowDown}');
+  await waitForMenuFocus();
+
+  await user.keyboard('c');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[2]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Move the active option off of Cherry with arrow navigation.
+  await user.keyboard('{ArrowUp}{ArrowUp}');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[0]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+
+  // Matching Cherry again must move the active option back to it.
+  await user.keyboard('c');
+  await waitFor(() => {
+    expect(screen.queryAllByRole('menuitem')[2]).toHaveClass(
+      'ActionListItem--active'
+    );
+  });
+});
+
 // Regression test for cauldron#1993
 test('should set first item active on open in TopBar+ActionMenu pattern', async () => {
   const user = userEvent.setup();
