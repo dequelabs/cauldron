@@ -21,7 +21,7 @@ import { addIdRef } from '../../utils/idRefs';
 import TextFieldWrapper from '../internal/TextFieldWrapper';
 import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
-import Icon from '../Icon';
+import FieldError from '../internal/FieldError';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -703,12 +703,7 @@ const Combobox = forwardRef<
             {description}
           </span>
         )}
-        {hasError && (
-          <div className="Field__error" id={errorId}>
-            <Icon type="caution" />
-            {error}
-          </div>
-        )}
+        {hasError && <FieldError id={errorId}>{error}</FieldError>}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <TextFieldWrapper
           className={classnames({ 'TextFieldWrapper--error': hasError })}

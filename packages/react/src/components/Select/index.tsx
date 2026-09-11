@@ -3,7 +3,7 @@ import uid from '../../utils/rndid';
 import classNames from 'classnames';
 import { addIdRef } from '../../utils/idRefs';
 import { ContentNode } from '../../types';
-import Icon from '../Icon';
+import FieldError from '../internal/FieldError';
 
 export interface SelectOption {
   key: string;
@@ -135,12 +135,7 @@ const Select = React.forwardRef(
             {description}
           </div>
         )}
-        {error && (
-          <div id={errorId} className="Field__error">
-            <Icon type="caution" />
-            {error}
-          </div>
-        )}
+        {error && <FieldError id={errorId}>{error}</FieldError>}
         <div
           className={classNames('Field__select--wrapper', {
             'Field__select--disabled': disabled,
