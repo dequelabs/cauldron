@@ -181,7 +181,8 @@ const AnchoredOverlay = forwardRef(
         stopObserving = autoUpdate(reference, floating, update, {
           ancestorScroll: false,
           ancestorResize: false,
-          layoutShift: false
+          layoutShift: false,
+          elementResize: true
         });
       });
 

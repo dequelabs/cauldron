@@ -326,3 +326,48 @@ test('should return no axe violations when not open', async () => {
     expect(results).toHaveNoViolations();
   });
 });
+
+test('should observe the target for resizes only while open', () => {
+  const observed: Element[] = [];
+  const disconnect = jest.fn();
+  const originalResizeObserver = global.ResizeObserver;
+
+  global.ResizeObserver = class implements ResizeObserver {
+    observe = (element: Element) => {
+      observed.push(element);
+    };
+    unobserve = jest.fn();
+    disconnect = disconnect;
+  };
+  jest.useFakeTimers();
+
+  const targetRef = { current: document.createElement('button') };
+  const overlay = (open: boolean) => (
+    <AnchoredOverlay target={targetRef} open={open} data-testid="overlay">
+      Content
+    </AnchoredOverlay>
+  );
+
+  try {
+    const { rerender } = render(overlay(false));
+    act(() => jest.runOnlyPendingTimers());
+
+    // A closed overlay measures nothing: the first measurement of a target
+    // that mounted into an already laid-out page is what leaves a
+    // ResizeObserver notification undelivered.
+    expect(observed).toEqual([]);
+
+    rerender(overlay(true));
+    act(() => jest.runOnlyPendingTimers());
+
+    expect(observed).toContain(targetRef.current);
+    expect(observed).toContain(screen.getByTestId('overlay'));
+
+    rerender(overlay(false));
+
+    expect(disconnect).toHaveBeenCalled();
+  } finally {
+    jest.useRealTimers();
+    global.ResizeObserver = originalResizeObserver;
+  }
+});
