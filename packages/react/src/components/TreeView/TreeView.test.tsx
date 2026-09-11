@@ -8,7 +8,8 @@ import { resolve } from 'path';
 import TreeView, {
   TreeViewNode,
   ROW_GAP,
-  LIST_PADDING
+  LIST_PADDING,
+  ESTIMATED_ROW_HEIGHT
 } from '../../../src/components/TreeView';
 
 const items: TreeViewNode[] = [
@@ -740,4 +741,25 @@ test('virtualized row spacing matches the .TreeView spacing tokens', () => {
   };
   expect(token('space-quarter')).toBe(ROW_GAP);
   expect(token('space-half')).toBe(LIST_PADDING);
+});
+
+// A virtualized row is sized by `--tree-view-row-height` and carries no
+// vertical padding, so the estimate the virtualizer lays rows out with has to
+// equal that token. When it drifts low the rows overlap and hide the row gap.
+test('the row-height estimate matches the token that sizes a virtualized row', () => {
+  const css = readFileSync(
+    resolve(__dirname, '../../../../styles/tree-view.css'),
+    'utf8'
+  );
+  const match = css.match(/--tree-view-row-height:\s*(\d+)px/);
+  if (!match) {
+    throw new Error('--tree-view-row-height not found in tree-view.css');
+  }
+  expect(Number(match[1])).toBe(ESTIMATED_ROW_HEIGHT);
+
+  // The padding is what made the two disagree; it must stay off the row.
+  const rule = css.match(
+    /\.TreeView--virtualized \.TreeView__item \{([^}]*)\}/
+  );
+  expect(rule?.[1]).toContain('padding-block: 0');
 });

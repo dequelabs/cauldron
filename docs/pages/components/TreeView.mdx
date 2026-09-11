@@ -187,6 +187,12 @@ current limitations when you enable it:
   scroll region, so a deeply indented or long-labelled item is clipped rather
   than reachable by scrolling sideways. The non-virtualized tree scrolls
   horizontally; this mode does not.
+- **Rows carry no vertical padding.** A virtualized row takes its height from
+  `--tree-view-row-height` instead, because the virtualizer measures a row's
+  content box on first layout and its border box afterwards — vertical padding
+  there makes every row overlap the next. A row still grows to fit content that
+  wraps, but that content sits flush against the row's top and bottom edges.
+  Override the token to change the row height.
 - **The tree needs a definite width.** Rows are absolutely positioned, so in a
   container that sizes to its contents (a popover, a table cell, an
   inline-block) the scroll region measures zero and renders no rows. Give the

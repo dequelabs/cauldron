@@ -19,8 +19,9 @@ import {
 
 export type { TreeViewNode } from './types';
 
-/** Seeds the initial scroll math only; react-aria measures real row heights. */
-const ESTIMATED_ROW_HEIGHT = 32;
+/** Seeds the initial scroll math. Keep in step with `--tree-view-row-height`,
+ *  which sizes a virtualized row — see the spacing-parity test. */
+export const ESTIMATED_ROW_HEIGHT = 36;
 /** Keep in step with `--space-quarter` / `--space-half`, which `.TreeView` uses
  *  for its flex spacing — see the spacing-parity test. */
 export const ROW_GAP = 2;
