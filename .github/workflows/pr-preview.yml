@@ -24,15 +24,21 @@ jobs:
       - id: route
         env:
           ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          case "$ASSOCIATION" in
-            OWNER|MEMBER|COLLABORATOR) environment=pr-preview-auto ;;
-            *) environment=pr-preview-gated ;;
-          esac
+          environment=pr-preview-gated
+          if [ "$HEAD_REPO" = "$BASE_REPO" ]; then
+            environment=pr-preview-auto
+          else
+            case "$ASSOCIATION" in
+              OWNER|MEMBER|COLLABORATOR) environment=pr-preview-auto ;;
+            esac
+          fi
           echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
           echo "environment=$environment" >> "$GITHUB_OUTPUT"
-          echo "PR #$PR_NUMBER association $ASSOCIATION routes to $environment"
+          echo "PR #$PR_NUMBER association $ASSOCIATION head $HEAD_REPO routes to $environment"
 
   build:
     needs: resolve
