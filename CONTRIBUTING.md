@@ -143,7 +143,7 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 
 Every Cauldron component needs to be compatible with server-side rendering (SSR). A component should be able to render in an SSR environment such as [Gatsby.js](https://www.gatsbyjs.com/) or [Next.js](https://nextjs.org/) while avoiding DOM globals like `document` or `window` that are not available in these environments.
 
-Cauldron uses [`eslint-plugin-ssr-friendly`](https://github.com/kopiro/eslint-plugin-ssr-friendly) to help prevent the accidental misuse of DOM globals. An additional [utility](./packages/react/src/utils/is-browser.ts) is available to help guard against using DOM globals:
+Cauldron uses [`eslint-plugin-ssr-friendly`](https://github.com/kopiro/eslint-plugin-ssr-friendly) to help prevent the accidental misuse of DOM globals. An additional [utility](./packages/react/src/utils/is-browser/index.ts) is available to help guard against using DOM globals:
 
 ```tsx
 import { isBrowser } from '../../utils/is-browser';
@@ -210,7 +210,13 @@ Once approved by a member of the Cauldron team, your pull request can be merged 
 
 #### Previewing Changes
 
-Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened and will be deleted when closed.
+Cauldron deploys a documentation preview for pull requests through a GitHub Actions workflow. A pull request opened by a Deque organization member builds and deploys a preview automatically.
+
+A pull request from an outside contributor waits for a Cauldron maintainer to approve the preview. Nothing builds or deploys until that approval, and every new push to the pull request waits for a fresh approval. Once a preview deploys, the workflow posts a comment with a link to the preview site. The preview is removed when the pull request is closed.
+
+A maintainer reviews the full pull request before approving the preview. That review includes reading the code and confirming the change is safe to build and to publish to a URL under Deque's Amplify app.
+
+Maintainers: never add a secret to the `pr-preview-auto` or `pr-preview-gated` GitHub Environments. The build job runs contributor code inside the routed environment, so a secret placed there could be read by that code. These environments hold only reviewer and branch rules.
 
 ### Testing Strategies
 
