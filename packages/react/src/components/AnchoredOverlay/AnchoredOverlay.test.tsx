@@ -363,9 +363,14 @@ test('should observe the target for resizes only while open', () => {
     expect(observed).toContain(targetRef.current);
     expect(observed).toContain(screen.getByTestId('overlay'));
 
+    observed.length = 0;
+    disconnect.mockClear();
     rerender(overlay(false));
+    act(() => jest.runOnlyPendingTimers());
 
+    // Closing tears the observer down and starts no replacement.
     expect(disconnect).toHaveBeenCalled();
+    expect(observed).toEqual([]);
   } finally {
     jest.useRealTimers();
     global.ResizeObserver = originalResizeObserver;
