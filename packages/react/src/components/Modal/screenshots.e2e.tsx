@@ -169,15 +169,27 @@ test('scrollable Modal content is keyboard-accessible', async ({
 
   const content = page.locator('.Dialog__content');
   await expect(content).toBeVisible();
-  // A scrollable region is keyboard-accessible per WCAG 2.1.1 when it is
-  // programmatically focusable and actually overflows — the browser then
-  // handles arrow/Page key scrolling natively.
-  await expect(content).toHaveAttribute('tabindex', '-1');
+  // The premise for the rest of this test: the region has to actually
+  // overflow, and it holds no focusable children of its own.
   await expect
     .poll(async () =>
       content.evaluate((el) => el.scrollHeight - el.clientHeight)
     )
     .toBeGreaterThan(0);
-  await content.focus();
+
+  // Dialog moves focus to the heading asynchronously once it opens.
+  await expect(page.locator('.Dialog__heading')).toBeFocused();
+
+  // WCAG 2.1.1 requires the region to be reachable by keyboard, not merely
+  // focusable by script: tabindex="-1" satisfies a .focus() call while
+  // leaving a keyboard user unable to reach the region at all.
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Tab');
   await expect(content).toBeFocused();
+
+  // Once focused, scrolling is the browser's native default action.
+  await content.press('PageDown');
+  await expect
+    .poll(async () => content.evaluate((el) => el.scrollTop))
+    .toBeGreaterThan(0);
 });
