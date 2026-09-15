@@ -210,7 +210,7 @@ Once approved by a member of the Cauldron team, your pull request can be merged 
 
 #### Previewing Changes
 
-Cauldron deploys a documentation preview for pull requests through a GitHub Actions workflow. A pull request opened by a Deque organization member builds and deploys a preview automatically.
+Cauldron deploys a documentation preview for pull requests through a GitHub Actions workflow. A pull request from a branch in this repository builds and deploys a preview automatically, because pushing a branch here requires write access.
 
 A pull request from an outside contributor waits for a Cauldron maintainer to approve the preview. Nothing builds or deploys until that approval, and every new push to the pull request waits for a fresh approval. Once a preview deploys, the workflow posts a comment with a link to the preview site. The preview is removed when the pull request is closed.
 
