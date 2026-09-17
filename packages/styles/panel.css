@@ -12,6 +12,11 @@
 }
 
 .Panel {
+  /* Not on :root, so a per-instance --panel-border-radius recomputes it. */
+  --panel-inner-border-radius: max(
+    0px,
+    calc(var(--panel-border-radius) - var(--panel-border-width))
+  );
   padding: var(--panel-padding);
   margin: 0;
   border: var(--panel-border);
@@ -50,14 +55,23 @@
 .Panel__Header {
   margin: calc(var(--panel-padding) * -1) calc(var(--panel-padding) * -1) 0
     calc(var(--panel-padding) * -1);
-  border-start-start-radius: max(
-    0px,
-    calc(var(--panel-border-radius) - var(--panel-border-width))
-  );
-  border-start-end-radius: max(
-    0px,
-    calc(var(--panel-border-radius) - var(--panel-border-width))
-  );
+  border-start-start-radius: var(--panel-inner-border-radius);
+  border-start-end-radius: var(--panel-inner-border-radius);
+}
+
+/* Without padding these sit on the panel's corners, and a square background
+   there paints over the border's arc. The custom properties publish that corner
+   to descendants that paint it themselves, such as a table's edge cells. */
+.Panel--no-padding > :first-child {
+  --content-start-corner-radius: var(--panel-inner-border-radius);
+  border-start-start-radius: var(--panel-inner-border-radius);
+  border-start-end-radius: var(--panel-inner-border-radius);
+}
+
+.Panel--no-padding > :last-child {
+  --content-end-corner-radius: var(--panel-inner-border-radius);
+  border-end-start-radius: var(--panel-inner-border-radius);
+  border-end-end-radius: var(--panel-inner-border-radius);
 }
 
 .Panel--no-padding > :is(.Panel__Heading, .Panel__Header, .Panel__Content) {
