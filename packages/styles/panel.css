@@ -59,9 +59,6 @@
   border-start-end-radius: var(--panel-inner-border-radius);
 }
 
-/* Without padding these sit on the panel's corners, and a square background
-   there paints over the border's arc. The custom properties publish that corner
-   to descendants that paint it themselves, such as a table's edge cells. */
 .Panel--no-padding > :first-child {
   --content-start-corner-radius: var(--panel-inner-border-radius);
   border-start-start-radius: var(--panel-inner-border-radius);
