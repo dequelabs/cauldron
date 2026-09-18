@@ -7,9 +7,14 @@ import React, {
   useMemo
 } from 'react';
 import classNames from 'classnames';
-import nextId from 'react-id-generator';
+import nextIdImport from 'react-id-generator';
 import Icon, { type IconType } from '../Icon';
 import { addIdRef } from '../../utils/idRefs';
+import interopDefault from '../../utils/interopDefault';
+
+// react-id-generator ships `__esModule`; unwrap its double-wrapped default so
+// `nextId(...)` works under strict ESM (see interopDefault).
+const nextId = interopDefault(nextIdImport);
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
