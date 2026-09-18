@@ -454,3 +454,78 @@ test('cascade is inert in single selection mode', async () => {
   expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
   expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
 });
+
+// --- onAction: Space selects, Enter acts ---
+
+test('Enter runs onAction every time, including once rows are selected', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /TreeView/ }) as HTMLElement).focus();
+
+  await userEvent.keyboard('{Enter}');
+  expect(onAction).toHaveBeenCalledTimes(1);
+
+  // react-aria stops treating a press as an action once anything is selected,
+  // so this is the case that used to go silent.
+  await userEvent.keyboard(' ');
+  await userEvent.keyboard('{Enter}');
+  expect(onAction).toHaveBeenCalledTimes(2);
+
+  await userEvent.keyboard('{Enter}');
+  expect(onAction).toHaveBeenCalledTimes(3);
+});
+
+test('Enter runs onAction without changing the selection', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /TreeView/ }) as HTMLElement).focus();
+  await userEvent.keyboard('{Enter}');
+  expect(onAction).toHaveBeenCalledTimes(1);
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+});
+
+test('Space toggles selection without running onAction', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /TreeView/ }) as HTMLElement).focus();
+  await userEvent.keyboard(' ');
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+  expect(onAction).not.toHaveBeenCalled();
+});
+
+test('Enter reports the focused row key', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /pizza/ }) as HTMLElement).focus();
+  await userEvent.keyboard('{Enter}');
+  expect(onAction).toHaveBeenCalledWith('2');
+});
