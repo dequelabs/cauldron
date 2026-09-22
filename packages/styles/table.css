@@ -39,6 +39,25 @@
   overflow-wrap: break-word;
 }
 
+/* Outer corners, for a table whose container publishes one — see
+   --content-start-corner-radius. A collapsed table ignores border-radius, so
+   the edge cells carry it. */
+.Table:first-child > :first-child > .TableRow:first-child > :first-child {
+  border-start-start-radius: var(--content-start-corner-radius, 0);
+}
+
+.Table:first-child > :first-child > .TableRow:first-child > :last-child {
+  border-start-end-radius: var(--content-start-corner-radius, 0);
+}
+
+.Table:last-child > :last-child > .TableRow:last-child > :first-child {
+  border-end-start-radius: var(--content-end-corner-radius, 0);
+}
+
+.Table:last-child > :last-child > .TableRow:last-child > :last-child {
+  border-end-end-radius: var(--content-end-corner-radius, 0);
+}
+
 .TableGrid {
   display: grid;
   grid-template-columns: var(--table-grid-template-columns, auto);
@@ -72,6 +91,9 @@
 }
 
 .TableHeader .TableHeader__sort-button {
+  /* Fills the cell edge to edge, so its focus ring follows any corner the cell
+     takes. Cells with no corner pass down 0. */
+  border-radius: inherit;
   background-color: transparent;
   font-family: inherit;
   width: 100%;
