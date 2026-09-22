@@ -4,6 +4,10 @@ import Listbox from './';
 import { ListboxGroup, ListboxOption } from './';
 import axe from '../../axe';
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 const assertListItemIsActive = (index: number) => {
   const activeOption = screen.getAllByRole('option')[index];
   expect(activeOption).toHaveClass('ListboxOption--active');
@@ -981,4 +985,139 @@ test('should return no axe violations with multiselect', async () => {
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
+});
+
+test('should not update the active option on focus when it is already active', () => {
+  // Listbox warns when `activeOption` and `onActiveChange` are passed
+  // together, which this test does deliberately.
+  jest.spyOn(console, 'warn').mockImplementation(() => null);
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      focusStrategy="first"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const apple = screen.getByRole('option', { name: 'Apple' });
+
+  // The parent passes its own object wrapping the same element the listbox
+  // already holds, so the guard cannot rely on object identity.
+  rerender(<Fixture activeOption={{ element: apple }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
+
+test('should not update the active option on focus when it is already active with focusStrategy "last"', () => {
+  // Listbox warns when `activeOption` and `onActiveChange` are passed
+  // together, which this test does deliberately.
+  jest.spyOn(console, 'warn').mockImplementation(() => null);
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      focusStrategy="last"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const banana = screen.getByRole('option', { name: 'Banana' });
+
+  rerender(<Fixture activeOption={{ element: banana }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
+
+test('should not update the active option on focus when it is already active with the default focus strategy', () => {
+  // Listbox warns when `activeOption` and `onActiveChange` are passed
+  // together, which this test does deliberately.
+  jest.spyOn(console, 'warn').mockImplementation(() => null);
+  const handleActiveChange = jest.fn();
+  const Fixture = ({
+    activeOption
+  }: {
+    activeOption?: { element: HTMLElement };
+  }) => (
+    <Listbox
+      defaultValue="Banana"
+      activeOption={activeOption}
+      onActiveChange={handleActiveChange}
+    >
+      <ListboxOption>Apple</ListboxOption>
+      <ListboxOption>Banana</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+  const banana = screen.getByRole('option', { name: 'Banana' });
+
+  rerender(<Fixture activeOption={{ element: banana }} />);
+  handleActiveChange.mockClear();
+
+  fireEvent.focus(screen.getByRole('listbox'));
+  expect(handleActiveChange).not.toHaveBeenCalled();
+});
+
+test('should not warn when only one of activeOption / onActiveChange is given', () => {
+  const consoleWarn = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => null);
+
+  render(
+    <Listbox onActiveChange={jest.fn()}>
+      <ListboxOption>Apple</ListboxOption>
+    </Listbox>
+  );
+  render(
+    <Listbox activeOption={{ element: document.createElement('li') }}>
+      <ListboxOption>Apple</ListboxOption>
+    </Listbox>
+  );
+
+  expect(consoleWarn).not.toHaveBeenCalled();
+});
+
+test('should warn once when both activeOption and onActiveChange are given', () => {
+  const consoleWarn = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => null);
+
+  // An inline arrow gives `onActiveChange` a new identity every render.
+  const Fixture = () => (
+    <Listbox
+      activeOption={{ element: document.createElement('li') }}
+      onActiveChange={() => undefined}
+    >
+      <ListboxOption>Apple</ListboxOption>
+    </Listbox>
+  );
+
+  const { rerender } = render(<Fixture />);
+
+  expect(consoleWarn).toHaveBeenCalledTimes(1);
+  expect(consoleWarn.mock.calls[0][0]).toContain('activeOption');
+
+  rerender(<Fixture />);
+  expect(consoleWarn).toHaveBeenCalledTimes(1);
 });
