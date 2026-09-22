@@ -38,7 +38,7 @@ test('should have screenshot for Panel[padding=false] with flush content top and
   await expect(component).toHaveScreenshot('dark--panel-flush-content-only');
 });
 
-test('should have screenshot for Panel with flush content', async ({
+test('should have screenshot for Panel with inset content', async ({
   mount,
   page
 }) => {
