@@ -41,3 +41,8 @@ updates:
       # Ignore new major versions of @types/node until we are ready to upgrade
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
+      # Ignore new major versions of Babel until we are ready to upgrade
+      - dependency-name: '@babel/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'babel-*'
+        update-types: ['version-update:semver-major']
