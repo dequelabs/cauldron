@@ -8,8 +8,6 @@
     "src/**/*.stories.tsx"
   ],
   "compilerOptions": {
-    "skipLibCheck": true,
-    "declarationDir": "lib",
-    "declaration": true
+    "skipLibCheck": true
   }
 }

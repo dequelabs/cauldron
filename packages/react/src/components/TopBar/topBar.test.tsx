@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ThemeProvider } from '../../../lib';
+import { ThemeProvider } from '../../index';
 import TopBar, { TopBarItem } from './';
 import MenuBar from '../MenuBar/';
 import axe from '../../axe';

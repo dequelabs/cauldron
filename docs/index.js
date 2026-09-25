@@ -36,7 +36,7 @@ import '@fontsource/pt-mono';
 import '../packages/styles';
 import '@deque/cauldron-react/cauldron.css';
 import './index.css';
-import { useThemeContext } from '../packages/react/lib';
+import { useThemeContext } from '@deque/cauldron-react';
 
 const CAULDRON_THEME_STORAGE_KEY = 'cauldron_theme';
 
