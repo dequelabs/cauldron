@@ -109,7 +109,7 @@
     "postcss-import": "^16.1.1",
     "postcss-loader": "^8.2.1",
     "prettier": "^3",
-    "puppeteer": "^24.38.0",
+    "puppeteer": "^25.11.0",
     "react": "^19",
     "react-dom": "^19",
     "react-helmet": "^6.1.0",
