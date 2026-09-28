@@ -119,7 +119,7 @@
     "remark-mdx-frontmatter": "^5.2.0",
     "remark-mdx-toc": "^0.3.1",
     "rimraf": "^6.1.3",
-    "slugify": "^1.6.5",
+    "slugify": "^1.6.9",
     "standard-version": "^9.1.1",
     "storybook": "^10.4.0",
     "style-loader": "^4.0.0",
