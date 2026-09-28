@@ -39,10 +39,18 @@ export type ActionMenuTriggerProps<E extends HTMLElement = HTMLButtonElement> =
     | 'id'
     | 'onClick'
     | 'onKeyDown'
+    | 'aria-labelledby'
     | 'aria-expanded'
     | 'aria-haspopup'
     | 'aria-controls'
   > & {
+    /**
+     * Id for the element wrapping the trigger's visible label, e.g.
+     * `<span id={labelId}>Menu</span>`. Only provided with `renderInTrigger`,
+     * where the trigger contains the menu and would otherwise be named after
+     * every item in it. Not a DOM attribute — destructure it out of the props.
+     */
+    labelId?: string;
     ref: React.RefObject<E | null>;
   };
 
@@ -88,6 +96,7 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
     const { ref: actionListRef, onAction: actionListOnAction } =
       actionMenuList.props;
     const actionMenuListRef = useSharedRef<HTMLElement>(actionListRef ?? null);
+    const [labelId] = useId(1, 'menu-label');
     const [triggerId] = useId(1, 'menu-trigger');
     const [menuId] = useId(1, 'menu');
 
@@ -176,6 +185,34 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
       }
     }, [open]);
 
+    // Triggers predating `labelId` render no label element. Since
+    // `aria-labelledby` is not chained, naming the menu with such a trigger
+    // would resolve back to the menu's own items, so it is left unnamed.
+    const [hasLabelElement, setHasLabelElement] = useState(false);
+
+    useEffect(() => {
+      setHasLabelElement(
+        renderInTrigger ? !!document.getElementById(labelId) : false
+      );
+    }, [renderInTrigger, labelId]);
+
+    useEffect(() => {
+      // istanbul ignore next
+      if (
+        renderInTrigger &&
+        !document.getElementById(labelId) &&
+        process.env.NODE_ENV !== 'production'
+      ) {
+        console.warn(
+          `renderInTrigger should render id="${labelId}" on the element wrapping the trigger's visible label, otherwise the trigger and the menu are named after the entire submenu.`
+        );
+      }
+    }, [renderInTrigger, labelId]);
+
+    let labelledBy: string | undefined = triggerId;
+    if (renderInTrigger) {
+      labelledBy = hasLabelElement ? labelId : undefined;
+    }
     const hidden = renderInTrigger && !open;
 
     const overlay = (
@@ -199,7 +236,9 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
           id: menuId,
           role: 'menu',
           onAction: handleAction,
-          'aria-labelledby': triggerId,
+          // aria-labelledby is not chained, so pointing at a trigger that
+          // contains this menu would resolve to the menu's own items.
+          'aria-labelledby': labelledBy,
           focusStrategy,
           focusDisabledOptions: true,
           hidden
@@ -207,7 +246,9 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
       </AnchoredOverlay>
     );
 
-    const triggerProps: ActionMenuTriggerProps = useMemo(() => {
+    // Spread onto a prerendered trigger element below, so this must stay
+    // DOM-safe: no labelId.
+    const baseTriggerProps: ActionMenuTriggerProps = useMemo(() => {
       return {
         ref: triggerRef,
         id: triggerId,
@@ -217,7 +258,7 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
         'aria-haspopup': 'menu',
         'aria-controls': menuId
       };
-    }, [handleTriggerClick, open, menuId]);
+    }, [handleTriggerClick, handleTriggerKeyDown, open, triggerId, menuId]);
 
     if (renderInTrigger) {
       // istanbul ignore next
@@ -230,14 +271,26 @@ const ActionMenuComponent = forwardRef<HTMLElement, ActionMenuProps>(
           'renderInTrigger requires the use of a trigger function, rather than a prerendered trigger ReactElement.'
         );
       }
-
-      triggerProps.children = overlay;
     }
+
+    // Derived rather than mutated onto the memoized object, so that toggling
+    // `renderInTrigger` off cannot leave a stale `children` behind.
+    const triggerProps: ActionMenuTriggerProps = renderInTrigger
+      ? {
+          ...baseTriggerProps,
+          children: overlay,
+          'aria-labelledby': labelledBy
+        }
+      : baseTriggerProps;
 
     const actionMenuTrigger = React.isValidElement(trigger)
       ? React.cloneElement(trigger, triggerProps)
       : (trigger as ActionMenuTriggerFunction)(
-          { ...triggerProps, children: overlay },
+          {
+            ...triggerProps,
+            children: overlay,
+            ...(renderInTrigger && { labelId })
+          },
           open
         );
 

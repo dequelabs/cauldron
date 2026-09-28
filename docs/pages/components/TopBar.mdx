@@ -64,6 +64,14 @@ import { TopBar, TopBarItem, TopBarMenu } from '@deque/cauldron-react';
 
 In addition to navigational items, the `MenuBar` can also contain an action menu with items when composed with `ActionMenu` and `ActionList`:
 
+<Note>
+  With `renderInTrigger`, the menu renders inside the `TopBarItem`. Because
+  `menuitem` takes its accessible name from its content, you _must_ wrap the
+  trigger's visible label in an element with the `labelId` provided to the
+  trigger function. Without it, screen readers announce every menu item as part
+  of the trigger's name.
+</Note>
+
 ```jsx example
 function TopBarWithMenuExample() {
   const actionMenuRef = useRef();
@@ -84,7 +92,7 @@ function TopBarWithMenuExample() {
         <ActionMenu
           tabIndex={-1}
           renderInTrigger={true}
-          trigger={({ ref, children, ...props }) => {
+          trigger={({ ref, children, labelId, ...props }) => {
             return (
               <TopBarItem
                 menuItemRef={ref}
@@ -92,7 +100,9 @@ function TopBarWithMenuExample() {
                 autoClickLink={false}
                 {...props}
               >
-                Menu <Icon type="chevron-down" />
+                <span id={labelId}>
+                  Menu <Icon type="chevron-down" />
+                </span>
                 {children}
               </TopBarItem>
             );
@@ -133,7 +143,7 @@ function TopBarWithMenuLinksExample() {
         <ActionMenu
           tabIndex={-1}
           renderInTrigger={true}
-          trigger={({ ref, children, ...props }) => {
+          trigger={({ ref, children, labelId, ...props }) => {
             return (
               <TopBarItem
                 menuItemRef={ref}
@@ -141,7 +151,9 @@ function TopBarWithMenuLinksExample() {
                 autoClickLink={false}
                 {...props}
               >
-                Menu <Icon type="chevron-down" />
+                <span id={labelId}>
+                  Menu <Icon type="chevron-down" />
+                </span>
                 {children}
               </TopBarItem>
             );

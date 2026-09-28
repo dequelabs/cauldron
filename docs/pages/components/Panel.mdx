@@ -9,7 +9,14 @@ import {
   PanelHeader,
   PanelContent,
   Button,
-  Icon
+  Icon,
+  Pagination,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeader,
+  TableCell
 } from '@deque/cauldron-react';
 
 ```js
@@ -163,6 +170,45 @@ this may be useful is when trying to display a footer for the `Panel`.
   <PanelContent style={{ textAlign: 'center' }}>
     <Button variant="secondary">Previous</Button>
     <Button>Next</Button>
+  </PanelContent>
+</Panel>
+```
+
+### Panel with a Table
+
+A `Panel` is a common container for tabular data. Since the `Table` provides its own cell spacing, setting
+`padding={false}` on both the `Panel` and the `PanelContent` lets the table rows run edge-to-edge instead of being
+inset twice.
+
+The table then meets the corners of the `Panel`. Nothing extra is needed for this: the first row is rounded to
+match, so it follows the `Panel`'s rounded corners, and the last row is rounded too when the table reaches the
+bottom of the `Panel` as well. This applies to a `Table` placed directly in the `Panel`, or inside a single
+wrapping element such as the `PanelContent` below.
+
+```jsx example
+<Panel padding={false}>
+  <PanelContent padding={false}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col">First Name</TableHeader>
+          <TableHeader scope="col">Last Name</TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Frank</TableCell>
+          <TableCell>Zappa</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Duane</TableCell>
+          <TableCell>Allman</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </PanelContent>
+  <PanelContent>
+    <Pagination totalItems={9} itemsPerPage={3} />
   </PanelContent>
 </Panel>
 ```

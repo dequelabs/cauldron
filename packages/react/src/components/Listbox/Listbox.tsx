@@ -120,6 +120,25 @@ const Listbox = forwardRef<
     const listboxRef = useSharedRef<HTMLElement>(ref);
     const isControlled = typeof value !== 'undefined';
     const isActiveControlled = typeof controlledActiveOption !== 'undefined';
+    const hasActiveChangeHandler = typeof onActiveChange === 'function';
+
+    useEffect(() => {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        isActiveControlled &&
+        hasActiveChangeHandler
+      ) {
+        console.warn(
+          'Listbox received both `activeOption` and `onActiveChange`. Do not ' +
+            'write the option reported by `onActiveChange` back into ' +
+            '`activeOption`: the two copies then race, and a stale downward ' +
+            'sync can revert a newer value and re-render without settling. ' +
+            'Let Listbox own the active option, or use `activeOption` only as ' +
+            'a one-shot request. ' +
+            'See https://github.com/dequelabs/cauldron/issues/2512'
+        );
+      }
+    }, [isActiveControlled, hasActiveChangeHandler]);
 
     useLayoutEffect(() => {
       if (!isControlled && selectedOptions.length > 0) {
@@ -304,7 +323,7 @@ const Listbox = forwardRef<
             ? options.find((option) => !isDisabledOption(option))
             : options[0];
 
-          if (firstOption) {
+          if (firstOption && firstOption.element !== activeOption?.element) {
             setActiveOption(firstOption);
           }
 
@@ -316,7 +335,7 @@ const Listbox = forwardRef<
             ? [...options].reverse().find((option) => !isDisabledOption(option))
             : options[options.length - 1];
 
-          if (lastOption) {
+          if (lastOption && lastOption.element !== activeOption?.element) {
             setActiveOption(lastOption);
           }
 

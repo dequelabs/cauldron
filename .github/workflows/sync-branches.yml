@@ -14,5 +14,7 @@ jobs:
           github-token: ${{ secrets.MACHINE_USER_PAT }}
           pr-title: 'chore: merge master into develop'
           pr-body: 'Remember to _merge_ (rather than squash) this PR!'
-          pr-team-reviewers: cauldron-codeowners
+          # action-sync-branches@v1 always reads pr-template; '' avoids a missing-file
+          # warning for this repo, which does not have a pull request template.
+          pr-template: ''
           head: master
