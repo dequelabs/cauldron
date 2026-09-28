@@ -37,6 +37,7 @@ const packageRoot = path.join(__dirname, '..');
 const smokeFixtures = path.join(__dirname, 'packaging-smoke');
 const libDir = path.join(packageRoot, 'lib');
 const workspaceModules = path.join(packageRoot, '..', '..', 'node_modules');
+const viteVersion = '7.3.6';
 
 // A Button-only bundle must not contain any of these — their presence means an
 // unused component (and its heavy deps) failed to tree-shake. Asserted against
@@ -205,6 +206,8 @@ try {
     path.join(smokeFixtures, 'treeshake.vite.config.js'),
     path.join(treeshakeDir, 'vite.config.js')
   );
+  // Vite is pinned exactly because it is the tool doing the measuring, not the
+  // artifact under test; react stays on the peer range like the install above.
   run(
     'npm',
     [
@@ -212,19 +215,31 @@ try {
       tarball,
       'react@^19',
       'react-dom@^19',
-      'vite@^7',
+      `vite@${viteVersion}`,
       '--no-audit',
       '--no-fund',
-      '--no-package-lock'
+      '--no-package-lock',
+      '--no-save',
+      '--ignore-scripts'
     ],
     { cwd: treeshakeDir }
   );
-  run('npx', ['vite', 'build'], { cwd: treeshakeDir });
+  // The local binary, not `npx`, so a failed install can't fall back to
+  // fetching whatever Vite the registry serves.
+  run(path.join(treeshakeDir, 'node_modules', '.bin', 'vite'), ['build'], {
+    cwd: treeshakeDir
+  });
 
   const outDir = path.join(treeshakeDir, 'dist');
-  const bundle = fs
+  const bundleFiles = fs
     .readdirSync(outDir)
-    .filter((file) => file.endsWith('.js'))
+    .filter((file) => file.endsWith('.js'));
+  // An empty bundle contains none of the forbidden markers, so without this
+  // the leak check below would pass on no output at all.
+  if (bundleFiles.length === 0) {
+    throw new Error(`Vite emitted no .js files in ${outDir}`);
+  }
+  const bundle = bundleFiles
     .map((file) => fs.readFileSync(path.join(outDir, file), 'utf8'))
     .join('\n');
   const leaked = forbidden.filter((marker) => bundle.includes(marker));

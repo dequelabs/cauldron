@@ -308,7 +308,7 @@ Once a story exists, set `storybook: true` in the component MDX file's frontmatt
 | `pnpm dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
 | `pnpm build:storybook` | Build static Storybook into `docs/dist/storybook/` |
 
-Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
+Storybook resolves `@deque/cauldron-react` to the built ESM output at `packages/react/lib/esm/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
 
 ## Figma Code Connect
 
