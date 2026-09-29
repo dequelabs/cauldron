@@ -9,22 +9,28 @@
  *   4. Smoke test — install the tarball into a throwaway consumer and confirm
  *      it resolves under both `require(...)` and native `import`.
  *   5. Stylesheet — assert the published `lib/cauldron.css` survived the install.
- *   5b. Layout — assert the CJS build is a single bundle (the barrel and the
- *      stylesheet are the only runtime entries), `lib/esm` carries no
- *      declarations, and deep type imports compile under `bundler` and `node16`.
- *   6. Single-copy guard — assert `import` and `require` of the specifier yield
+ *   6. Layout — assert the CJS build is a single bundle, `lib/esm` carries no
+ *      declarations, every deep type path compiles under `bundler`, `node16`
+ *      and `node10`, and the exports map allows only the package root and the
+ *      stylesheet as runtime entries.
+ *   7. Single-copy guard — assert `import` and `require` of the specifier yield
  *      the same context object (no dual-package hazard from split resolution).
- *   7. ESM build — import `lib/esm` by path (Node resolves the bare specifier
- *      through `main` to the CJS tree at `lib/`, so no other step covers it) and
+ *   8. ESM build — import `lib/esm` by path (Node resolves the bare
+ *      specifier to the CJS build at `lib/`, so no other step covers it) and
  *      render the components whose CJS-default interop only breaks under ESM.
- *   8. webpack consumer — bundle with webpack and assert the three properties
+ *   9. webpack consumer — bundle with webpack and assert the three properties
  *      only it can falsify: the published stylesheet survives a production
  *      build, tree-shaking holds under its nearest-package.json `sideEffects`
  *      lookup, and a mixed `import`/`require` graph loads a single copy.
- *   9. Tree-shaking — bundle a Button-only consumer with Vite (Rollup) and
+ *  10. Tree-shaking — bundle a Button-only consumer with Vite (Rollup) and
  *      assert Button is kept while the heavy dependencies (Code's highlighter
  *      graph, react-aria-components) and a sample of unrelated components are
  *      dropped.
+ *  11. esbuild consumer — assert an import-only graph resolves to `lib/esm` and
+ *      a mixed `import`/`require` graph loads a single copy.
+ *  12. Next.js consumer — build an App Router page with Turbopack and assert
+ *      the prerendered HTML shows a client provider's theme reaching a separate
+ *      client component, so the provider and its readers share one copy.
  *
  * The consumers install from the tarball (not a workspace symlink), so
  * resolution matches what a real consumer would get from npm.
@@ -126,23 +132,51 @@ function verifyLayout(installedPackage) {
 }
 
 /**
- * Consumers across the org import types from `lib/components/<Name>` and
- * `lib/types`. Compile a consumer that does so under each module resolution
- * mode a TypeScript app is likely to use.
+ * Consumers across the org import types from `lib/components/<Name>`, from
+ * files inside a component directory (`lib/components/Combobox/ComboboxOption`)
+ * and from `lib/types`, some with plain `import` syntax for type-only names.
+ * Compile a consumer that does all of that under each module resolution mode a
+ * TypeScript app is likely to use, in both CJS- and ESM-format files for node16.
+ *
+ * The exports map needs a `./lib/components/<Dir>/*` key for every component
+ * directory with files besides `index.d.ts`, so the consumer also re-exports
+ * every emitted component declaration: a directory that gains a file without a
+ * matching key fails here.
  */
-function verifyDeepTypeImports(consumerDir) {
-  fs.writeFileSync(
-    path.join(consumerDir, 'types-consumer.ts'),
+function verifyDeepTypeImports(consumerDir, installedPackage) {
+  const components = path.join(installedPackage, 'lib', 'components');
+  const deepPaths = listFiles(components)
+    .filter((file) => file.endsWith('.d.ts'))
+    .map((file) =>
+      path.basename(file) === 'index.d.ts'
+        ? path.dirname(file)
+        : file.slice(0, -'.d.ts'.length)
+    )
+    .map((file) => `lib/components/${file.split(path.sep).join('/')}`);
+
+  const source =
     "import type { ContentNode } from '@deque/cauldron-react/lib/types';\n" +
-      "import type { ButtonProps } from '@deque/cauldron-react/lib/components/Button';\n" +
-      "import type { ActionMenuTriggerProps } from '@deque/cauldron-react';\n" +
-      'export type Probe = [ContentNode, ButtonProps, ActionMenuTriggerProps];\n'
-  );
+    "import type { ButtonProps } from '@deque/cauldron-react/lib/components/Button';\n" +
+    "import type { RadioItem } from '@deque/cauldron-react/lib/components/RadioGroup';\n" +
+    "import { ComboboxValue } from '@deque/cauldron-react/lib/components/Combobox/ComboboxOption';\n" +
+    "import type { ActionMenuTriggerProps } from '@deque/cauldron-react';\n" +
+    'export type Probe = [ContentNode, ButtonProps, RadioItem, ComboboxValue, ActionMenuTriggerProps];\n' +
+    deepPaths
+      .map(
+        (deepPath, index) =>
+          `export type * as Deep${index} from '@deque/cauldron-react/${deepPath}';\n`
+      )
+      .join('');
+  fs.writeFileSync(path.join(consumerDir, 'types-consumer.ts'), source);
+  fs.writeFileSync(path.join(consumerDir, 'types-consumer.mts'), source);
   const tsc = path.join(workspaceModules, 'typescript', 'bin', 'tsc');
 
-  for (const [module, moduleResolution] of [
-    ['preserve', 'bundler'],
-    ['node16', 'node16']
+  for (const [module, moduleResolution, files, extra] of [
+    ['preserve', 'bundler', ['types-consumer.ts']],
+    ['node16', 'node16', ['types-consumer.ts', 'types-consumer.mts']],
+    // node10 ignores `exports`, and TypeScript 6 deprecates it, but apps on
+    // older configs still use it.
+    ['commonjs', 'node10', ['types-consumer.ts'], { ignoreDeprecations: '6.0' }]
   ]) {
     const project = path.join(consumerDir, `tsconfig.${moduleResolution}.json`);
     fs.writeFileSync(
@@ -154,9 +188,10 @@ function verifyDeepTypeImports(consumerDir) {
           noEmit: true,
           strict: true,
           skipLibCheck: true,
-          types: []
+          types: [],
+          ...extra
         },
-        files: ['types-consumer.ts']
+        files
       })
     );
     run('node', [tsc, '-p', project], { cwd: consumerDir });
@@ -199,7 +234,13 @@ try {
   run('pnpm', ['exec', 'publint', '--strict', tarball], { cwd: packageRoot });
 
   step('Checking type resolution with @arethetypeswrong/cli');
-  run('pnpm', ['exec', 'attw', tarball], { cwd: packageRoot });
+  // attw resolves every subpath as a module with types, which a stylesheet
+  // never has; the stylesheet step below checks it instead.
+  run(
+    'pnpm',
+    ['exec', 'attw', tarball, '--exclude-entrypoints', './lib/cauldron.css'],
+    { cwd: packageRoot }
+  );
 
   step('Smoke testing require() + import from the packed tarball');
   const consumerDir = path.join(workDir, 'consumer');
@@ -227,6 +268,10 @@ try {
   fs.copyFileSync(
     path.join(smokeFixtures, 'esm-output.mjs'),
     path.join(consumerDir, 'esm-output.mjs')
+  );
+  fs.copyFileSync(
+    path.join(smokeFixtures, 'entry-points.cjs'),
+    path.join(consumerDir, 'entry-points.cjs')
   );
 
   // Install with npm into an isolated dir so resolution is hermetic and does
@@ -272,16 +317,21 @@ try {
   }
 
   step('Verifying published layout (runtime entries and deep type paths)');
-  verifyLayout(
-    path.join(consumerDir, 'node_modules', '@deque', 'cauldron-react')
+  const installedPackage = path.join(
+    consumerDir,
+    'node_modules',
+    '@deque',
+    'cauldron-react'
   );
-  verifyDeepTypeImports(consumerDir);
+  verifyLayout(installedPackage);
+  verifyDeepTypeImports(consumerDir, installedPackage);
+  run('node', ['entry-points.cjs'], { cwd: consumerDir });
 
   step('Verifying a single copy resolves (dual-package-hazard guard)');
   run('node', ['single-copy.mjs'], { cwd: consumerDir });
 
-  // Node resolves the bare specifier through `main` to the CJS tree at `lib/`,
-  // so the steps above never load lib/esm. Import it by path and render the
+  // Node resolves the bare specifier to the CJS build at `lib/`, so the steps
+  // above never load lib/esm. Import it by path and render the
   // components whose CJS-default interop only breaks under strict ESM.
   step('Verifying the ESM build imports and renders (lib/esm)');
   run('node', ['esm-output.mjs'], { cwd: consumerDir });
@@ -355,6 +405,15 @@ try {
   console.log(
     `Tree-shaking OK: Button-only bundle excludes ${forbidden.join(', ')}`
   );
+
+  // esbuild picks entries by rules neither webpack nor Rollup share, and it is
+  // what Vite's dev server pre-bundles dependencies with. It comes from the
+  // same locked fixture as Vite.
+  step('Verifying esbuild consumer (ESM for import-only graphs, single copy)');
+  run('node', ['esbuild-checks.mjs'], { cwd: treeshakeDir });
+
+  step('Verifying Next.js App Router consumer (Turbopack SSR, single copy)');
+  run('node', ['next-checks.mjs'], { cwd: treeshakeDir });
 
   console.log('\n✓ Packaging validation passed');
 } finally {

@@ -11,6 +11,90 @@
   "module": "lib/esm/index.js",
   "style": "lib/cauldron.css",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "module": "./lib/esm/index.js",
+      "default": "./lib/index.js"
+    },
+    "./lib/cauldron.css": "./lib/cauldron.css",
+    "./lib/types": {
+      "types": "./lib/types.d.ts"
+    },
+    "./lib/components/Accordion/*": {
+      "types": "./lib/components/Accordion/*.d.ts"
+    },
+    "./lib/components/ActionList/*": {
+      "types": "./lib/components/ActionList/*.d.ts"
+    },
+    "./lib/components/ActionMenu/*": {
+      "types": "./lib/components/ActionMenu/*.d.ts"
+    },
+    "./lib/components/Breadcrumb/*": {
+      "types": "./lib/components/Breadcrumb/*.d.ts"
+    },
+    "./lib/components/Combobox/*": {
+      "types": "./lib/components/Combobox/*.d.ts"
+    },
+    "./lib/components/Dialog/*": {
+      "types": "./lib/components/Dialog/*.d.ts"
+    },
+    "./lib/components/ExpandCollapsePanel/*": {
+      "types": "./lib/components/ExpandCollapsePanel/*.d.ts"
+    },
+    "./lib/components/Icon/*": {
+      "types": "./lib/components/Icon/*.d.ts"
+    },
+    "./lib/components/Listbox/*": {
+      "types": "./lib/components/Listbox/*.d.ts"
+    },
+    "./lib/components/LoaderOverlay/*": {
+      "types": "./lib/components/LoaderOverlay/*.d.ts"
+    },
+    "./lib/components/MenuItem/*": {
+      "types": "./lib/components/MenuItem/*.d.ts"
+    },
+    "./lib/components/NavBar/*": {
+      "types": "./lib/components/NavBar/*.d.ts"
+    },
+    "./lib/components/OptionsMenu/*": {
+      "types": "./lib/components/OptionsMenu/*.d.ts"
+    },
+    "./lib/components/Pagination/*": {
+      "types": "./lib/components/Pagination/*.d.ts"
+    },
+    "./lib/components/Panel/*": {
+      "types": "./lib/components/Panel/*.d.ts"
+    },
+    "./lib/components/SideBar/*": {
+      "types": "./lib/components/SideBar/*.d.ts"
+    },
+    "./lib/components/Table/*": {
+      "types": "./lib/components/Table/*.d.ts"
+    },
+    "./lib/components/Tabs/*": {
+      "types": "./lib/components/Tabs/*.d.ts"
+    },
+    "./lib/components/Timeline/*": {
+      "types": "./lib/components/Timeline/*.d.ts"
+    },
+    "./lib/components/Toast/*": {
+      "types": "./lib/components/Toast/*.d.ts"
+    },
+    "./lib/components/TopBar/*": {
+      "types": "./lib/components/TopBar/*.d.ts"
+    },
+    "./lib/components/TreeView/*": {
+      "types": "./lib/components/TreeView/*.d.ts"
+    },
+    "./lib/components/TwoColumnPanel/*": {
+      "types": "./lib/components/TwoColumnPanel/*.d.ts"
+    },
+    "./lib/components/*": {
+      "types": "./lib/components/*/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -34,7 +118,6 @@
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
     "@floating-ui/react-dom": "^2.1.2",
-    "@types/react-syntax-highlighter": "^15.5.13",
     "classnames": "^2.2.6",
     "focusable": "^2.3.0",
     "keyname": "^0.1.0",
@@ -65,6 +148,7 @@
     "@types/node": "^17.0.42",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@types/sinon": "^10",
     "autoprefixer": "^10.5.0",
     "babel-plugin-module-resolver": "^5.0.3",
@@ -94,6 +178,12 @@
   },
   "peerDependencies": {
     "react": ">=16.6 <20",
-    "react-dom": ">=16.6 <20"
+    "react-dom": ">=16.6 <20",
+    "@types/react-syntax-highlighter": "^15.5.13"
+  },
+  "peerDependenciesMeta": {
+    "@types/react-syntax-highlighter": {
+      "optional": true
+    }
   }
 }

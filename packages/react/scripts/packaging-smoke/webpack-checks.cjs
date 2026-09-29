@@ -12,9 +12,9 @@
  *      therefore Vite) reads it from the resolved package's manifest instead and
  *      stays green either way.
  *   3. Single copy. `single-copy.mjs` compares `import` vs `require` under Node,
- *      where `module` is ignored and both land on `main` — so it cannot fail
- *      today. A bundler picks entries differently, and that is the resolution
- *      path real consumers actually use.
+ *      where only bundlers match the `module` condition and both land on
+ *      lib/index.js — so it cannot fail today. A bundler picks entries
+ *      differently, and that is the resolution path real consumers use.
  *
  * Usage: node webpack-checks.cjs <workspace-node-modules> <forbidden-json> <required-marker>
  *
@@ -144,10 +144,7 @@ async function checkTreeShaking() {
     "import { Button } from '@deque/cauldron-react';\n" +
       'if (!Button) throw new Error("Button missing");\n'
   );
-  // mainFields mirrors a real bundler consumer: prefer the ESM build.
-  const outDir = await compile('treeshake', entry, {
-    resolve: { mainFields: ['module', 'main'] }
-  });
+  const outDir = await compile('treeshake', entry);
 
   const bundle = readAll(outDir, '.js');
   assert(

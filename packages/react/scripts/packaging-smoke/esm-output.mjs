@@ -1,9 +1,8 @@
 // Exercises the ESM build specifically.
 //
-// `smoke.mjs` imports the bare specifier, which Node resolves through `main` to
-// the CJS tree at `lib/` — it never loads lib/esm, because Node does not read
-// the `module` field. So the ESM half of the dual build has no executing
-// coverage unless we import it by path, which is what this fixture does.
+// `smoke.mjs` imports the bare specifier, which Node resolves to the CJS build
+// at `lib/` — only bundlers take the `module` condition to lib/esm. The exports
+// map blocks lib/esm as a specifier, so this fixture imports it by file path.
 //
 // Two failure modes it catches:
 //   * A `default` import of an `__esModule`-shipping CJS dependency left
@@ -15,11 +14,18 @@
 //     barrel is not enough, the components have to actually render.
 import assert from 'node:assert';
 import { createRequire } from 'node:module';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const require = createRequire(import.meta.url);
-const esmEntry = require.resolve('@deque/cauldron-react/lib/esm/index.js');
+const packageRoot = path.dirname(
+  require.resolve('@deque/cauldron-react/package.json')
+);
+const esmEntry = pathToFileURL(
+  path.join(packageRoot, 'lib', 'esm', 'index.js')
+).href;
 
 // Importing the barrel runs Code's module-scope registerLanguage calls.
 const lib = await import(esmEntry);
@@ -30,16 +36,25 @@ for (const name of ['Button', 'Code', 'Checkbox', 'TreeView', 'ThemeContext']) {
 
 const { Code, Checkbox, TreeView } = lib;
 
-// Code: exercises the unwrapped react-syntax-highlighter default at render.
+// Code: exercises the unwrapped react-syntax-highlighter defaults at render.
 // Code sets `useInlineStyles={false}`, so a registered grammar shows up as
-// `hljs-*` token classes; the child text alone would not.
-const codeMarkup = renderToStaticMarkup(
-  React.createElement(Code, { language: 'javascript' }, 'const a = 1;')
-);
-assert(
-  codeMarkup.includes('hljs-keyword'),
-  `esm: Code rendered no highlighted keyword (got: ${codeMarkup.slice(0, 120)})`
-);
+// `hljs-*` token classes; an unregistered language renders plain text. One
+// sample per language Code registers, each with a token only that grammar emits.
+for (const [language, source, token] of [
+  ['javascript', 'const a = 1;', 'hljs-keyword'],
+  ['css', 'a { color: red; }', 'hljs-selector-tag'],
+  ['html', '<a href="x">y</a>', 'hljs-tag'],
+  ['yaml', 'key: value', 'hljs-attr']
+]) {
+  const codeMarkup = renderToStaticMarkup(
+    React.createElement(Code, { language }, source)
+  );
+  assert(
+    codeMarkup.includes(token),
+    `esm: Code rendered no ${token} for ${language}, so the grammar is not ` +
+      `registered (got: ${codeMarkup.slice(0, 120)})`
+  );
+}
 
 // Checkbox: exercises the unwrapped react-id-generator default at render.
 const checkboxMarkup = renderToStaticMarkup(
