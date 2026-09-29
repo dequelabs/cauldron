@@ -2,7 +2,7 @@
  * webpack-side packaging checks, run inside the throwaway consumer.
  *
  * The Vite tree-shake step cannot see three properties that only break under
- * webpack's resolution rules, and each of them regressed in real life:
+ * webpack's resolution rules:
  *
  *   1. Stylesheet retention. webpack's production `sideEffects` pass will drop a
  *      bindingless CSS import from a package whose nearest `package.json` says
@@ -16,25 +16,25 @@
  *      today. A bundler picks entries differently, and that is the resolution
  *      path real consumers actually use.
  *
- * Usage: node webpack-checks.cjs <workspace-node-modules> <forbidden-json>
+ * Usage: node webpack-checks.cjs <workspace-node-modules> <forbidden-json> <required-marker>
  *
  * webpack and its loaders come from the workspace rather than a fresh install:
  * they are tools, not the artifact under test, so borrowing the version the repo
  * already pins keeps this step off the network and in lockstep with the docs and
- * Storybook builds. The package under test still comes from the tarball, which
- * is what this harness exists to validate — consumer `node_modules` is first in
- * `resolve.modules` so the tarball copy always wins over any workspace copy.
+ * Storybook builds. Only loaders resolve from the workspace. Bundled code
+ * resolves from the consumer's `node_modules` alone, so a runtime dependency the
+ * tarball forgot to declare fails here instead of being borrowed.
  */
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 
-const [workspaceModules, forbiddenJson] = process.argv.slice(2);
+const [workspaceModules, forbiddenJson, required] = process.argv.slice(2);
 
 assert(
-  workspaceModules,
-  'usage: webpack-checks.cjs <workspace-node-modules> <forbidden-json>'
+  workspaceModules && forbiddenJson && required,
+  'usage: webpack-checks.cjs <workspace-node-modules> <forbidden-json> <required-marker>'
 );
 const forbidden = JSON.parse(forbiddenJson);
 
@@ -65,15 +65,9 @@ function compile(name, entry, extra = {}) {
         entry,
         output: { path: outDir, filename: 'bundle.js' },
         resolve: {
-          // Consumer first: the tarball copy must win over any workspace copy.
-          // The trailing relative 'node_modules' keeps webpack's default
-          // parent-directory walk-up, without which a dependency nested inside
-          // another package's node_modules (as pnpm lays them out) is unresolvable.
-          modules: [
-            path.join(consumer, 'node_modules'),
-            workspaceModules,
-            'node_modules'
-          ],
+          // The relative 'node_modules' keeps webpack's default walk-up for
+          // dependencies nested inside another package's node_modules.
+          modules: [path.join(consumer, 'node_modules'), 'node_modules'],
           ...resolveExtra
         },
         resolveLoader: { modules: [workspaceModules] },
@@ -156,7 +150,11 @@ async function checkTreeShaking() {
   });
 
   const bundle = readAll(outDir, '.js');
-  assert(bundle.length > 0, 'webpack emitted no JS for the tree-shake fixture');
+  assert(
+    bundle.includes(required),
+    `webpack's Button-only bundle does not contain ${required}: Button itself ` +
+      'was dropped, so the leak check below would pass on nothing.'
+  );
 
   const leaked = forbidden.filter((marker) => bundle.includes(marker));
   assert.deepStrictEqual(

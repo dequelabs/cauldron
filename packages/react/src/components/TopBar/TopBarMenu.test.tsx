@@ -2,8 +2,7 @@ import React from 'react';
 import { OptionsMenuList } from '../OptionsMenu';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TopBarMenu from './TopBarMenu';
-import { MenuBar, TopBar } from '../..';
-import { MenuItem } from '../../index';
+import { MenuBar, TopBar, MenuItem } from '../../index';
 import axe from '../../axe';
 
 const [rightCode, leftCode, downCode] = [39, 37, 40];

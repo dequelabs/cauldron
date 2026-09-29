@@ -5,7 +5,8 @@ import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 // bundlers (webpack 5) resolve these fully-specified — an extensionless
 // specifier fails there. The cjs paths (not esm) are kept deliberately: they
 // resolve under Node `require`, Node ESM interop, and bundlers alike, whereas
-// the esm subpaths are bare ESM in a non-module package and break under Node.
+// the esm subpaths import extensionless specifiers (e.g. `lowlight/lib/core`)
+// that Node's ESM resolver rejects.
 import SyntaxHighlighterImport from 'react-syntax-highlighter/dist/cjs/light.js';
 import classNames from 'classnames';
 import jsImport from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript.js';
@@ -17,8 +18,6 @@ import { useId } from 'react-id-generator';
 import CopyButton, { CopyButtonProps } from '../CopyButton';
 import interopDefault from '../../utils/interopDefault';
 
-// react-syntax-highlighter ships `__esModule`, so its default imports come back
-// double-wrapped under strict ESM; unwrap them (see interopDefault).
 const SyntaxHighlighter = interopDefault(SyntaxHighlighterImport);
 const js = interopDefault(jsImport);
 const css = interopDefault(cssImport);

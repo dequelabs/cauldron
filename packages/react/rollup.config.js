@@ -46,10 +46,11 @@ const svgrOptions = {
  * plain `.js` files as ESM. Only the ESM build needs this: the package declares
  * no top-level `type`, so `.js` already means CommonJS everywhere else.
  *
- * It also re-declares `sideEffects: false`. Bundlers read that flag from the
- * `package.json` *nearest* the module, so this marker would otherwise shadow the
+ * It also re-declares `sideEffects: false`. webpack reads that flag from the
+ * `package.json` *nearest* the module (Rollup and Vite use the resolved
+ * package's manifest), so under webpack this marker would otherwise shadow the
  * root manifest and every emitted ESM module would fall back to "assumed to have
- * side effects" — defeating the tree-shaking configured below.
+ * side effects", defeating the tree-shaking configured below.
  */
 function emitEsmTypeMarker() {
   return {
@@ -82,18 +83,24 @@ function build({ format, dir }) {
     output: {
       dir,
       format,
-      // The public entry is the named-export barrel; per-module files expose
-      // their component as the `default` export (with `__esModule`) for interop.
       exports: 'named',
-      // Preserve the source module graph (one output file per source module,
-      // mirroring src/) instead of bundling everything into index.js. Combined
-      // with `sideEffects` (the root manifest for the CJS tree, the emitted
-      // marker for the ESM tree), this is what lets a consumer's bundler drop
-      // unused components — e.g. a Button-only import excludes Code and its
+      // The ESM build preserves the source module graph (one output file per
+      // source module, mirroring src/). Combined with the marker's
+      // `sideEffects: false`, this is what lets a consumer's bundler drop unused
+      // components, e.g. a Button-only import excludes Code and its
       // react-syntax-highlighter dependency.
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      entryFileNames: '[name].js'
+      //
+      // The CJS build stays a single bundle. Bundlers take the ESM build via
+      // `module`, so per-module CJS would buy no tree-shaking, and it would give
+      // every internal file a runtime path that loads a second copy of the
+      // library next to the barrel.
+      ...(isEsm
+        ? {
+            preserveModules: true,
+            preserveModulesRoot: 'src',
+            entryFileNames: '[name].js'
+          }
+        : { chunkFileNames: '[name].js' })
     },
     plugins: [
       typescript({
@@ -125,10 +132,14 @@ function build({ format, dir }) {
   };
 }
 
-// The CJS build keeps the historical `lib/` layout so published deep paths
+// The CJS build writes to `lib/` so deep type paths
 // (`@deque/cauldron-react/lib/components/<Name>` and `/lib/types`, which
-// consumers import types from) keep resolving; the ESM build nests under it.
-export default [
-  build({ format: 'cjs', dir: 'lib' }),
-  build({ format: 'es', dir: 'lib/esm' })
-];
+// consumers import types from) resolve; the ESM build nests under it.
+//
+// Watch mode builds only ESM: the docs site and Storybook read `lib/esm`, and
+// Jest runs from source, so nothing in the dev loop reads the CJS output.
+const esm = build({ format: 'es', dir: 'lib/esm' });
+
+export default process.env.ROLLUP_WATCH
+  ? [esm]
+  : [build({ format: 'cjs', dir: 'lib' }), esm];

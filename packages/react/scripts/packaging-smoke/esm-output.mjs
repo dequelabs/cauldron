@@ -5,8 +5,7 @@
 // the `module` field. So the ESM half of the dual build has no executing
 // coverage unless we import it by path, which is what this fixture does.
 //
-// Two failure modes it catches, both of which shipped on this branch before
-// being fixed:
+// Two failure modes it catches:
 //   * A `default` import of an `__esModule`-shipping CJS dependency left
 //     un-unwrapped. Under strict ESM the value is the wrapper, so Code's
 //     module-scope `SyntaxHighlighter.registerLanguage(...)` throws at import
@@ -32,12 +31,14 @@ for (const name of ['Button', 'Code', 'Checkbox', 'TreeView', 'ThemeContext']) {
 const { Code, Checkbox, TreeView } = lib;
 
 // Code: exercises the unwrapped react-syntax-highlighter default at render.
+// Code sets `useInlineStyles={false}`, so a registered grammar shows up as
+// `hljs-*` token classes; the child text alone would not.
 const codeMarkup = renderToStaticMarkup(
   React.createElement(Code, { language: 'javascript' }, 'const a = 1;')
 );
 assert(
-  codeMarkup.includes('const') && codeMarkup.includes('<pre'),
-  `esm: Code rendered no highlighted <pre> (got: ${codeMarkup.slice(0, 120)})`
+  codeMarkup.includes('hljs-keyword'),
+  `esm: Code rendered no highlighted keyword (got: ${codeMarkup.slice(0, 120)})`
 );
 
 // Checkbox: exercises the unwrapped react-id-generator default at render.
@@ -59,8 +60,8 @@ const treeMarkup = renderToStaticMarkup(
   })
 );
 assert(
-  treeMarkup.includes('Root'),
-  'esm: TreeView did not render its item text'
+  treeMarkup.includes('tree-view-item-'),
+  'esm: TreeViewItem did not render the checkbox id minted by nextId'
 );
 
 console.log(

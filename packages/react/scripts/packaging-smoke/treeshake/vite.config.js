@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     minify: false,
     lib: {
-      entry: 'treeshake.entry.js',
+      entry: 'entry.js',
       formats: ['es'],
       fileName: 'treeshake.out'
     },

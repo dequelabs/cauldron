@@ -6,15 +6,10 @@ import {
   TreeItemContent,
   TreeItemContentRenderProps
 } from 'react-aria-components';
-import nextIdImport from 'react-id-generator';
 import { TreeViewNode } from './types';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
-import interopDefault from '../../utils/interopDefault';
-
-// react-id-generator ships `__esModule`; unwrap its double-wrapped default so
-// `nextId(...)` works under strict ESM (see interopDefault).
-const nextId = interopDefault(nextIdImport);
+import nextId from '../../utils/nextId';
 
 const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
   const checkboxId = useMemo(() => nextId('tree-view-item-'), []);
