@@ -1,8 +1,8 @@
 // Exercises the ESM build specifically.
 //
-// `smoke.mjs` imports the bare specifier, which Node resolves to the CJS build
-// at `lib/` — only bundlers take the `module` condition to lib/esm. The exports
-// map blocks lib/esm as a specifier, so this fixture imports it by file path.
+// `smoke.mjs` imports the bare specifier, which Node resolves through `main` to
+// the CJS build at `lib/` — only bundlers read the `module` field. So the ESM
+// build has no executing coverage unless this fixture imports it by path.
 //
 // Two failure modes it catches:
 //   * A `default` import of an `__esModule`-shipping CJS dependency left

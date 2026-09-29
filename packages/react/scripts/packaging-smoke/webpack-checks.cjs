@@ -12,8 +12,8 @@
  *      therefore Vite) reads it from the resolved package's manifest instead and
  *      stays green either way.
  *   3. Single copy. `single-copy.mjs` compares `import` vs `require` under Node,
- *      where only bundlers match the `module` condition and both land on
- *      lib/index.js — so it cannot fail today. A bundler picks entries
+ *      where `module` is ignored and both land on `main` — so it cannot fail
+ *      today. A bundler picks entries
  *      differently, and that is the resolution path real consumers use.
  *
  * Usage: node webpack-checks.cjs <workspace-node-modules> <forbidden-json> <required-marker>

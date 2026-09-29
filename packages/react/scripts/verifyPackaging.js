@@ -10,9 +10,8 @@
  *      it resolves under both `require(...)` and native `import`.
  *   5. Stylesheet — assert the published `lib/cauldron.css` survived the install.
  *   6. Layout — assert the CJS build is a single bundle, `lib/esm` carries no
- *      declarations, every deep type path compiles under `bundler`, `node16`
- *      and `node10`, and the exports map allows only the package root and the
- *      stylesheet as runtime entries.
+ *      declarations, and deep type imports compile under `bundler`, `node16`
+ *      and `node10`.
  *   7. Single-copy guard — assert `import` and `require` of the specifier yield
  *      the same context object (no dual-package hazard from split resolution).
  *   8. ESM build — import `lib/esm` by path (Node resolves the bare
@@ -79,10 +78,9 @@ const listFiles = (dir) =>
     );
 
 /**
- * The only supported runtime entries are the barrel and the stylesheet. The CJS
- * tree must therefore stay a single bundle: per-module CJS files under
+ * The CJS tree must stay a single bundle: per-module CJS files under
  * `lib/components/` would let a deep import load a second copy of the library
- * next to the barrel's ESM copy. Deep paths stay resolvable for types only.
+ * next to the barrel's ESM copy. `lib/components/` carries declarations only.
  */
 function verifyLayout(installedPackage) {
   const lib = path.join(installedPackage, 'lib');
@@ -136,46 +134,24 @@ function verifyLayout(installedPackage) {
  * files inside a component directory (`lib/components/Combobox/ComboboxOption`)
  * and from `lib/types`, some with plain `import` syntax for type-only names.
  * Compile a consumer that does all of that under each module resolution mode a
- * TypeScript app is likely to use, in both CJS- and ESM-format files for node16.
- *
- * The exports map needs a `./lib/components/<Dir>/*` key for every component
- * directory with files besides `index.d.ts`, so the consumer also re-exports
- * every emitted component declaration: a directory that gains a file without a
- * matching key fails here.
+ * TypeScript app is likely to use. Under node16, only CJS-format files can use
+ * extensionless deep paths; ESM-format files need an `exports` map for that.
  */
-function verifyDeepTypeImports(consumerDir, installedPackage) {
-  const components = path.join(installedPackage, 'lib', 'components');
-  const deepPaths = listFiles(components)
-    .filter((file) => file.endsWith('.d.ts'))
-    .map((file) =>
-      path.basename(file) === 'index.d.ts'
-        ? path.dirname(file)
-        : file.slice(0, -'.d.ts'.length)
-    )
-    .map((file) => `lib/components/${file.split(path.sep).join('/')}`);
-
+function verifyDeepTypeImports(consumerDir) {
   const source =
     "import type { ContentNode } from '@deque/cauldron-react/lib/types';\n" +
     "import type { ButtonProps } from '@deque/cauldron-react/lib/components/Button';\n" +
     "import type { RadioItem } from '@deque/cauldron-react/lib/components/RadioGroup';\n" +
     "import { ComboboxValue } from '@deque/cauldron-react/lib/components/Combobox/ComboboxOption';\n" +
     "import type { ActionMenuTriggerProps } from '@deque/cauldron-react';\n" +
-    'export type Probe = [ContentNode, ButtonProps, RadioItem, ComboboxValue, ActionMenuTriggerProps];\n' +
-    deepPaths
-      .map(
-        (deepPath, index) =>
-          `export type * as Deep${index} from '@deque/cauldron-react/${deepPath}';\n`
-      )
-      .join('');
+    'export type Probe = [ContentNode, ButtonProps, RadioItem, ComboboxValue, ActionMenuTriggerProps];\n';
   fs.writeFileSync(path.join(consumerDir, 'types-consumer.ts'), source);
-  fs.writeFileSync(path.join(consumerDir, 'types-consumer.mts'), source);
   const tsc = path.join(workspaceModules, 'typescript', 'bin', 'tsc');
 
   for (const [module, moduleResolution, files, extra] of [
     ['preserve', 'bundler', ['types-consumer.ts']],
-    ['node16', 'node16', ['types-consumer.ts', 'types-consumer.mts']],
-    // node10 ignores `exports`, and TypeScript 6 deprecates it, but apps on
-    // older configs still use it.
+    ['node16', 'node16', ['types-consumer.ts']],
+    // TypeScript 6 deprecates node10, but apps on older configs still use it.
     ['commonjs', 'node10', ['types-consumer.ts'], { ignoreDeprecations: '6.0' }]
   ]) {
     const project = path.join(consumerDir, `tsconfig.${moduleResolution}.json`);
@@ -234,13 +210,7 @@ try {
   run('pnpm', ['exec', 'publint', '--strict', tarball], { cwd: packageRoot });
 
   step('Checking type resolution with @arethetypeswrong/cli');
-  // attw resolves every subpath as a module with types, which a stylesheet
-  // never has; the stylesheet step below checks it instead.
-  run(
-    'pnpm',
-    ['exec', 'attw', tarball, '--exclude-entrypoints', './lib/cauldron.css'],
-    { cwd: packageRoot }
-  );
+  run('pnpm', ['exec', 'attw', tarball], { cwd: packageRoot });
 
   step('Smoke testing require() + import from the packed tarball');
   const consumerDir = path.join(workDir, 'consumer');
@@ -268,10 +238,6 @@ try {
   fs.copyFileSync(
     path.join(smokeFixtures, 'esm-output.mjs'),
     path.join(consumerDir, 'esm-output.mjs')
-  );
-  fs.copyFileSync(
-    path.join(smokeFixtures, 'entry-points.cjs'),
-    path.join(consumerDir, 'entry-points.cjs')
   );
 
   // Install with npm into an isolated dir so resolution is hermetic and does
@@ -316,16 +282,11 @@ try {
     );
   }
 
-  step('Verifying published layout (runtime entries and deep type paths)');
-  const installedPackage = path.join(
-    consumerDir,
-    'node_modules',
-    '@deque',
-    'cauldron-react'
+  step('Verifying published layout and deep type imports');
+  verifyLayout(
+    path.join(consumerDir, 'node_modules', '@deque', 'cauldron-react')
   );
-  verifyLayout(installedPackage);
-  verifyDeepTypeImports(consumerDir, installedPackage);
-  run('node', ['entry-points.cjs'], { cwd: consumerDir });
+  verifyDeepTypeImports(consumerDir);
 
   step('Verifying a single copy resolves (dual-package-hazard guard)');
   run('node', ['single-copy.mjs'], { cwd: consumerDir });

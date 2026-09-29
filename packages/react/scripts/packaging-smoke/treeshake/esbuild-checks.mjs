@@ -2,10 +2,9 @@
 // is installed.
 //
 // esbuild bundles for Vite's dev-server dependency pre-bundling, tsup and
-// others. It matches the `module` condition in the exports map for `import`
-// and `require` alike, so both reach lib/esm. A map that split the two with
-// `import` and `require` conditions would load two copies. So assert both
-// halves:
+// others. For the browser platform it reads the `module` field for `import`
+// and `require` alike, so both reach lib/esm. Resolution that split the two
+// would load two copies. So assert both halves:
 //
 //   1. An import-only graph gets the ESM build, so esbuild users tree-shake.
 //   2. A graph mixing `import` and `require` loads a single copy, so a
