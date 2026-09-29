@@ -4,19 +4,13 @@ import {
   Tree,
   Virtualizer,
   ListLayout,
-  type Selection,
-  type Key
+  type Selection
 } from 'react-aria-components';
 import { Cauldron } from '../../types';
 import { TreeViewNode } from './types';
 import TreeViewItem from './TreeViewItem';
 import useSharedRef from '../../utils/useSharedRef';
-import {
-  applyCascade,
-  collectDisabledKeys,
-  toggleSelection,
-  toKeySet
-} from './helpers';
+import { applyCascade, collectDisabledKeys, toKeySet } from './helpers';
 
 export type { TreeViewNode } from './types';
 
@@ -34,8 +28,8 @@ type TreeViewProps = Cauldron.LabelProps &
     'children' | 'role' | 'dangerouslySetInnerHTML'
   > & {
     items: TreeViewNode[];
-    /** Runs when an item is activated: Enter, or a row press. Selection is a
-     *  separate interaction — Space toggles it. */
+    /** Runs when an item is activated by a click, Space or Enter. Each of these
+     *  also toggles the item's selection. */
     onAction?: (key: string) => void;
     selectionMode?: 'none' | 'single' | 'multiple';
     /** When true (multiple selection only), selecting a parent also selects all
@@ -97,45 +91,43 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
       );
     };
 
-    // When `onAction` is set, react-aria treats a row press as an action rather
-    // than a selection, so we toggle selection here ourselves.
-    const handleAction = (key: Key) => {
-      if (selectionMode !== 'none') {
-        setSelectedKeys((prev) =>
-          toggleSelection(
-            items,
-            toKeySet(prev, items),
-            key,
-            selectionMode,
-            cascade
-          )
-        );
-      }
-      onAction?.(key as string);
-    };
-
-    // Space selects and Enter runs the action, consistently. react-aria only
-    // treats a press as an action while nothing is selected, so once a row is
-    // checked its Enter handling goes inert. Capture phase, so react-aria never
-    // sees the key and cannot vary the outcome.
+    // react-aria only reports a press as an action while nothing is selected, so
+    // activation is driven here and react-aria is left to own selection. Click,
+    // Space and Enter all do the same thing: toggle the checkbox and run the action.
     useEffect(() => {
       const node = treeRef.current;
       if (!node || !onAction) return;
 
-      const handleEnter = (event: KeyboardEvent) => {
-        if (event.key !== 'Enter' || event.defaultPrevented) return;
-        const row = (event.target as HTMLElement | null)?.closest?.(
+      const rowKey = (target: EventTarget | null) => {
+        const row = (target as HTMLElement | null)?.closest?.(
           '[role="row"][data-key]'
         );
-        const key = row?.getAttribute('data-key');
-        if (!key || row?.getAttribute('aria-disabled') === 'true') return;
-        event.preventDefault();
-        event.stopPropagation();
-        onAction(key);
+        if (!row || row.getAttribute('aria-disabled') === 'true') return null;
+        return row.getAttribute('data-key');
       };
 
-      node.addEventListener('keydown', handleEnter, true);
-      return () => node.removeEventListener('keydown', handleEnter, true);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        if (event.repeat || event.defaultPrevented) return;
+        const key = rowKey(event.target);
+        if (key) onAction(key);
+      };
+
+      const handleClick = (event: MouseEvent) => {
+        const target = event.target as HTMLElement | null;
+        // The chevron expands rather than activates, and a click on the
+        // checkbox label is re-dispatched on the checkbox itself.
+        if (target?.closest?.('.TreeView__chevron, label[for]')) return;
+        const key = rowKey(target);
+        if (key) onAction(key);
+      };
+
+      node.addEventListener('keydown', handleKeyDown);
+      node.addEventListener('click', handleClick);
+      return () => {
+        node.removeEventListener('keydown', handleKeyDown);
+        node.removeEventListener('click', handleClick);
+      };
     }, [onAction]);
 
     // Disabled nodes are non-selectable; react-aria disables them via disabledKeys.
@@ -163,7 +155,6 @@ const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
         selectionMode={selectionMode}
         defaultExpandedKeys={defaultExpandedKeys}
         {...(disabledKeys.length > 0 ? { disabledKeys } : {})}
-        {...(onAction ? { onAction: handleAction } : {})}
         {...selectionProps}
         {...other}
         style={mergedStyle}
