@@ -13,8 +13,10 @@ import TextFieldWrapper from '../internal/TextFieldWrapper';
 import Offscreen from '../Offscreen';
 import Icon from '../Icon';
 
-interface SearchFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface SearchFieldProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onChange'
+> {
   label: ContentNode;
   value?: string;
   defaultValue?: string;

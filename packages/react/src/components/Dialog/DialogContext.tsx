@@ -2,7 +2,7 @@ import React, { createContext, useContext } from 'react';
 
 interface DialogContextValue {
   headingId: string;
-  headingRef: React.RefObject<HTMLHeadingElement>;
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
   headingLevel: number;
   onClose: () => void;
   forceAction: boolean;

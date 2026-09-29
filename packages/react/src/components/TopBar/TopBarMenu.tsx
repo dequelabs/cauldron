@@ -5,11 +5,10 @@ import classnames from 'classnames';
 import keyname from 'keyname';
 import setRef from '../../utils/setRef';
 
-export interface TopBarMenuProps
-  extends Pick<
-    React.HTMLAttributes<HTMLLIElement>,
-    Exclude<keyof React.HTMLAttributes<HTMLLIElement>, 'onKeyDown'>
-  > {
+export interface TopBarMenuProps extends Pick<
+  React.HTMLAttributes<HTMLLIElement>,
+  Exclude<keyof React.HTMLAttributes<HTMLLIElement>, 'onKeyDown'>
+> {
   onKeyDown: (e: React.KeyboardEvent<HTMLLIElement>) => void;
   menuItemRef: React.Ref<HTMLLIElement>;
 }

@@ -1,8 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 
-export interface SectionHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   heading: ReactNode;
   description?: ReactNode;
 }

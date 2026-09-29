@@ -4,10 +4,10 @@ description: A navigation component to provide quick access to main content or o
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/SkipLink/index.tsx
 ---
 
-import { SkipLink } from '@deque/cauldron-react'
+import { SkipLink } from '@deque/cauldron-react';
 
 ```jsx
-import { SkipLink } from '@deque/cauldron-react'
+import { SkipLink } from '@deque/cauldron-react';
 ```
 
 The skip link is visually located at the very top of the page, but it’s hidden. The link will be activated by navigating through the page with the Tab key based on its document location.
@@ -15,7 +15,11 @@ The skip link is visually located at the very top of the page, but it’s hidden
 ## Example
 
 ```jsx example
-<SkipLink target="#main-content" skipText="Skip to" targetText="Main page content" />
+<SkipLink
+  target="#main-content"
+  skipText="Skip to"
+  targetText="Main page content"
+/>
 ```
 
 ## Props

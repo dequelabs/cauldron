@@ -4,11 +4,16 @@ description: A grouping component to group a set of related form controls with a
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/FieldGroup/index.tsx
 ---
 
-
-import { FieldGroup, TextField, RadioGroup, Checkbox, FieldWrap } from '@deque/cauldron-react'
+import {
+  FieldGroup,
+  TextField,
+  RadioGroup,
+  Checkbox,
+  FieldWrap
+} from '@deque/cauldron-react';
 
 ```js
-import { FieldGroup } from '@deque/cauldron-react'
+import { FieldGroup } from '@deque/cauldron-react';
 ```
 
 The FieldGroup component is designed to create accessible groupings of related form controls with proper labeling and semantic structure. You should use `FieldGroup` when:
@@ -19,9 +24,12 @@ The FieldGroup component is designed to create accessible groupings of related f
 - You need to display validation errors that apply to the entire group rather than individual inputs
 
 <Note>
-  `FieldGroup` automatically appends `-label` to any id specified for the `FieldGroup` to the displayed label. If you need to reference the label id for any reason, you can reference `${id}-label`. If you prefer to have your own custom label, you can specify your own id by passing in a wrapping element to the `label` prop, e.g. `label={<span id="my-id">label</span>}`
+  `FieldGroup` automatically appends `-label` to any id specified for the
+  `FieldGroup` to the displayed label. If you need to reference the label id for
+  any reason, you can reference `${id}-label`. If you prefer to have your own
+  custom label, you can specify your own id by passing in a wrapping element to
+  the `label` prop, e.g. `label={<span id="my-id">label</span>}`
 </Note>
-
 
 ## Examples
 
@@ -31,29 +39,29 @@ The `FieldGroup` component is typically used in conjunction with [`FieldWrap`](.
 
 ```jsx example
 <FieldWrap as={FieldGroup} label="Favorite way to prepare water">
-  <Checkbox 
+  <Checkbox
     id="grilled-water"
-    label="Grilled" 
-    name="prepare-water" 
+    label="Grilled"
+    name="prepare-water"
     value="grilled-water"
     checked
   />
-  <Checkbox 
+  <Checkbox
     id="toasted-water"
-    label="Toasted" 
-    name="prepare-water" 
+    label="Toasted"
+    name="prepare-water"
     value="toasted-water"
   />
-  <Checkbox 
+  <Checkbox
     id="steamed-water"
-    label="Steamed" 
-    name="prepare-water" 
+    label="Steamed"
+    name="prepare-water"
     value="steamed-water"
   />
-  <Checkbox 
+  <Checkbox
     id="fried-water"
-    label="Fried" 
-    name="prepare-water" 
+    label="Fried"
+    name="prepare-water"
     value="fried-water"
   />
 </FieldWrap>
@@ -94,25 +102,13 @@ Descriptions provide additional context or instructions for the entire group of 
 
 ```jsx example
 <FieldWrap
-  as={FieldGroup} 
-  label="Checkboxes" 
+  as={FieldGroup}
+  label="Checkboxes"
   description="Please check at least one checkbox"
 >
-  <Checkbox 
-    id="yes"
-    label="Yes" 
-    name="checkboxes" 
-  />
-  <Checkbox 
-    id="no"
-    label="No" 
-    name="checkboxes" 
-  />
-  <Checkbox 
-    id="why"
-    label="Why?" 
-    name="checkboxes" 
-  />
+  <Checkbox id="yes" label="Yes" name="checkboxes" />
+  <Checkbox id="no" label="No" name="checkboxes" />
+  <Checkbox id="why" label="Why?" name="checkboxes" />
 </FieldWrap>
 ```
 
@@ -122,26 +118,13 @@ When validation fails for a group of form controls, you can display an error mes
 
 ```jsx example
 <FieldWrap
-  as={FieldGroup} 
-  label="Please choose your favorite colors" 
+  as={FieldGroup}
+  label="Please choose your favorite colors"
   error="You cannot choose blue as one of your favorite colors"
 >
-  <Checkbox 
-    id="red"
-    label="Red" 
-    name="colors" 
-  />
-  <Checkbox 
-    id="blue"
-    label="Blue" 
-    name="colors"
-    checked
-  />
-  <Checkbox 
-    id="green"
-    label="Green" 
-    name="colors"
-  />
+  <Checkbox id="red" label="Red" name="colors" />
+  <Checkbox id="blue" label="Blue" name="colors" checked />
+  <Checkbox id="green" label="Green" name="colors" />
 </FieldWrap>
 ```
 
@@ -151,22 +134,25 @@ When validation fails for a group of form controls, you can display an error mes
   children={true}
   className={true}
   refType="HTMLDivElement"
-  props={[{
-    name: 'label',
-    type: 'React.ReactNode',
-    required: true,
-    description: 'Label text for the group of form elements.'
+  props={[
+    {
+      name: 'label',
+      type: 'React.ReactNode',
+      required: true,
+      description: 'Label text for the group of form elements.'
     },
     {
-    name: 'description',
-    type: 'React.ReactNode',
-    description: 'Optional descriptive text.'
+      name: 'description',
+      type: 'React.ReactNode',
+      description: 'Optional descriptive text.'
     },
     {
-    name: 'error',
-    type: 'React.ReactNode',
-    description: 'Error message to display when validation fails for any of the form elements in the group.'
-  }]}
+      name: 'error',
+      type: 'React.ReactNode',
+      description:
+        'Error message to display when validation fails for any of the form elements in the group.'
+    }
+  ]}
 />
 
 ## Related Components

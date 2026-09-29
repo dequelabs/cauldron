@@ -1,7 +1,6 @@
 :root {
   --table-header-text-color: var(--gray-90);
-  --table-header-background-color: var(--gray-20);
-  --table-header-sorting-background-color: #caddec;
+  --table-header-background-color: var(--white);
   --table-header-background-color-hover: #dddddd;
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--gray-90);
@@ -11,21 +10,22 @@
   --table-space: var(--space-small);
   --table-header-sorting-border-color: var(--gray-90);
   --table-box-shadow: var(--drop-shadow-raised);
+  /* --table-odd-row-background will be deprecated */
   --table-odd-row-background: var(--gray-10);
   --table-sort-hover-focus-ring-color: var(--gray-90);
 }
 
 .cauldron--theme-dark {
   --table-header-text-color: var(--white);
-  --table-header-background-color: var(--accent-medium);
+  --table-header-background-color: var(--accent-dark);
   /* --table-header-sorting-text-color will be deprecated */
   --table-header-sorting-text-color: var(--white);
-  --table-header-sorting-background-color: #53636e;
   --table-header-background-color-hover: #53636e;
   --table-cell-text-color: var(--accent-light);
-  --table-cell-background-color: var(--accent-medium);
+  --table-cell-background-color: var(--accent-dark);
   --table-row-border-color: #5d676f;
   --table-header-sorting-border-color: var(--accent-info);
+  /* --table-odd-row-background will be deprecated */
   --table-odd-row-background: var(--gray-90);
   --table-sort-hover-focus-ring-color: var(--accent-light);
 }
@@ -37,6 +37,25 @@
   text-align: left;
   width: var(--table-width, 100%);
   overflow-wrap: break-word;
+}
+
+/* Outer corners, for a table whose container publishes one — see
+   --content-start-corner-radius. A collapsed table ignores border-radius, so
+   the edge cells carry it. */
+.Table:first-child > :first-child > .TableRow:first-child > :first-child {
+  border-start-start-radius: var(--content-start-corner-radius, 0);
+}
+
+.Table:first-child > :first-child > .TableRow:first-child > :last-child {
+  border-start-end-radius: var(--content-start-corner-radius, 0);
+}
+
+.Table:last-child > :last-child > .TableRow:last-child > :first-child {
+  border-end-start-radius: var(--content-end-corner-radius, 0);
+}
+
+.Table:last-child > :last-child > .TableRow:last-child > :last-child {
+  border-end-end-radius: var(--content-end-corner-radius, 0);
 }
 
 .TableGrid {
@@ -67,15 +86,14 @@
   border-bottom: none;
 }
 
-.TableBody .TableRow:nth-child(odd) .TableCell {
-  background: var(--table-odd-row-background);
-}
-
 .TableHeader[aria-sort] {
   padding: 0;
 }
 
 .TableHeader .TableHeader__sort-button {
+  /* Fills the cell edge to edge, so its focus ring follows any corner the cell
+     takes. Cells with no corner pass down 0. */
+  border-radius: inherit;
   background-color: transparent;
   font-family: inherit;
   width: 100%;

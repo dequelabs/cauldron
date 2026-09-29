@@ -7,8 +7,9 @@ import type {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 
-interface TextEllipsisBaseProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface TextEllipsisBaseProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   children: string;
   maxLines?: number;
   refProp?: string;
@@ -86,11 +87,12 @@ const TextEllipsis = React.forwardRef(
         });
       };
 
+      if (!sharedRef.current) return;
       const observer = new ResizeObserver(listener);
       observer.observe(sharedRef.current);
 
       return () => {
-        observer?.disconnect();
+        observer.disconnect();
       };
     }, []);
 

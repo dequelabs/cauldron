@@ -1,10 +1,4 @@
-import React, {
-  type MutableRefObject,
-  forwardRef,
-  useCallback,
-  useRef,
-  useState
-} from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import classnames from 'classnames';
 import { type ListboxOption } from '../Listbox/ListboxContext';
 import Listbox from '../Listbox';
@@ -14,11 +8,13 @@ import {
   type onActionEvent,
   ActionListProvider
 } from './ActionListContext';
-import { useActionListContext } from './ActionListContext';
 import useMnemonics from '../../utils/useMnemonics';
 import setRef from '../../utils/setRef';
 
-interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
+interface ActionListProps extends Omit<
+  React.HTMLAttributes<HTMLUListElement>,
+  'defaultValue' | 'onSelect'
+> {
   children: React.ReactNode;
 
   /** Limits the amount of selections that can be made within an action list */
@@ -30,18 +26,13 @@ interface ActionListProps extends React.HTMLAttributes<HTMLUListElement> {
 
 const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
   ({ selectionType = null, onAction, className, children, ...props }, ref) => {
-    const actionListContext = useActionListContext();
-    const activeElement = useRef<
-      HTMLLIElement | HTMLAnchorElement
-    >() as MutableRefObject<HTMLLIElement | HTMLAnchorElement>;
+    // Listbox owns the active option. ActionList must not mirror it back down
+    // as a controlled prop: the two copies then race, and a downward sync
+    // carrying an already-stale value can revert a newer one and oscillate.
+    // `activeOption` below is only a one-shot mnemonic request, never a
+    // mirror. See cauldron#2512; cauldron#2522 tracks making `activeOption`
+    // properly controlled so this constraint lives in the interface instead.
     const [activeOption, setActiveOption] = useState<ListboxOption>();
-
-    const handleActiveChange = useCallback((value: ListboxOption) => {
-      activeElement.current = value?.element as
-        | HTMLLIElement
-        | HTMLAnchorElement;
-      setActiveOption(value);
-    }, []);
 
     const handleAction = useCallback(
       (key: string, event: onActionEvent) => {
@@ -52,23 +43,23 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
       [onAction]
     );
 
+    // A new object every match, even for the same element: this is a one-shot
+    // request to Listbox rather than a mirror of its state, so re-using the
+    // previous object would leave the controlled prop unchanged and the
+    // request would never reach Listbox.
+    const handleMnemonicMatch = useCallback((element: HTMLElement) => {
+      setActiveOption({ element });
+    }, []);
+
     const containerRef = useMnemonics<HTMLUListElement>({
-      onMatch: (element) => {
-        setActiveOption({
-          element
-        });
-      },
+      onMatch: handleMnemonicMatch,
       matchingElementsSelector:
         props.role === 'menu'
           ? '[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]'
           : '[role=option]'
-    }) as MutableRefObject<HTMLUListElement>;
+    });
 
     return (
-      // Note: we should be able to use listbox without passing a prop
-      // value for "multiselect"
-      // see: https://github.com/dequelabs/cauldron/issues/1890
-      // @ts-expect-error this should be allowed
       <Listbox
         ref={(element: HTMLUListElement) => {
           if (ref) {
@@ -80,16 +71,13 @@ const ActionList = forwardRef<HTMLUListElement, ActionListProps>(
          * use the role from props, or default to the intrinsic role */
         // eslint-disable-next-line jsx-a11y/aria-role
         role={undefined}
-        // aria-multiselectable is valid for listbox roles, but not list or menu roles
-        // and we need to prevent aria-multiselectable from being set on Listbox when
-        // we're not in a listbox context
-        aria-multiselectable={
-          actionListContext.role === 'listbox' ? undefined : null
-        }
+        // Listbox internally sets aria-multiselectable from its multiselect prop.
+        // ActionList manages roles independently, so override to undefined to
+        // prevent the attribute from being rendered.
+        aria-multiselectable={undefined}
         className={classnames('ActionList', className)}
         activeOption={activeOption}
         {...props}
-        onActiveChange={handleActiveChange}
         navigation="bound"
       >
         <ActionListProvider

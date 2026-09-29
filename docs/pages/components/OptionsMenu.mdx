@@ -5,14 +5,20 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 deprecated: true
 ---
 
-import { OptionsMenu, OptionsMenuItem, OptionsMenuTrigger, Icon, Button } from '@deque/cauldron-react'
+import {
+  OptionsMenu,
+  OptionsMenuItem,
+  OptionsMenuTrigger,
+  Icon,
+  Button
+} from '@deque/cauldron-react';
 
 ```jsx
-import { 
-  OptionsMenu, 
-  OptionsMenuItem, 
+import {
+  OptionsMenu,
+  OptionsMenuItem,
   OptionsMenuTrigger
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -22,7 +28,7 @@ import {
 ```jsx example
 <OptionsMenu
   align="left"
-  trigger={triggerProps => (
+  trigger={(triggerProps) => (
     <OptionsMenuTrigger {...triggerProps}>
       <Icon type="kabob" label="Options" />
     </OptionsMenuTrigger>
@@ -42,7 +48,7 @@ The trigger can be any type of component that acts as a button, allowing for adv
 ```jsx example
 <OptionsMenu
   align="left"
-  trigger={triggerProps => (
+  trigger={(triggerProps) => (
     <Button variant="secondary" {...triggerProps}>
       Options
       <Icon type="arrow-circle-down" />
@@ -57,45 +63,51 @@ The trigger can be any type of component that acts as a button, allowing for adv
 ```
 
 ## Props
-<ComponentProps className={true} props={[
-  {
-    name: 'onClose',
-    type: 'function',
-    description: 'Function called when the OptionMenu component is closed.'
-  },
-  {
-    name: 'onSelect',
-    type: 'function',
-    description: 'Function called when a child of the OptionMenu component is selected.'
-  },
-  {
-    name: 'trigger',
-    type: 'function',
-    description: 'Pass an element that will display when the OptionsMenu component is closed and open it when activated.'
-  },
-  {
-    name: 'closeOnSelect',
-    type: 'boolean'
-  },
-  {
-    name: 'align',
-    type: ['left', 'right'],
-    defaultValue: 'right',
-    description: 'Style your OptionsMenu to align left or right'
-  },
-  {
-    name: 'show',
-    type: 'boolean',
-    description: 'Whether or not to show the opened OptionsMenu'
-  },
-  {
-    name: 'menuRef',
-    type: 'RefObject',
-    description: 'Ref for the options menu element'
-  },
-  {
-    name: 'id',
-    type: 'string',
-    description: 'id string'
-  }
-]} />
+
+<ComponentProps
+  className={true}
+  props={[
+    {
+      name: 'onClose',
+      type: 'function',
+      description: 'Function called when the OptionMenu component is closed.'
+    },
+    {
+      name: 'onSelect',
+      type: 'function',
+      description:
+        'Function called when a child of the OptionMenu component is selected.'
+    },
+    {
+      name: 'trigger',
+      type: 'function',
+      description:
+        'Pass an element that will display when the OptionsMenu component is closed and open it when activated.'
+    },
+    {
+      name: 'closeOnSelect',
+      type: 'boolean'
+    },
+    {
+      name: 'align',
+      type: ['left', 'right'],
+      defaultValue: 'right',
+      description: 'Style your OptionsMenu to align left or right'
+    },
+    {
+      name: 'show',
+      type: 'boolean',
+      description: 'Whether or not to show the opened OptionsMenu'
+    },
+    {
+      name: 'menuRef',
+      type: 'RefObject',
+      description: 'Ref for the options menu element'
+    },
+    {
+      name: 'id',
+      type: 'string',
+      description: 'id string'
+    }
+  ]}
+/>

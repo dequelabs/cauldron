@@ -1,9 +1,9 @@
-import { MutableRefObject, Ref, useRef, useEffect } from 'react';
+import { RefObject, Ref, useRef, useEffect } from 'react';
 import setRef from './setRef';
 
 /**
  * When a component needs to track an internal ref on a component that has a
- * forwarded ref, useSharedRef will return a MutableRefObject<T> that will
+ * forwarded ref, useSharedRef will return a RefObject<T | null> that will
  * correctly invoke the parent ref as well providing an internal ref.
  *
  * @example
@@ -15,11 +15,11 @@ import setRef from './setRef';
  *   return (<div ref={internalRef}>...</div>)
  * })
  */
-export default function useSharedRef<T>(ref: Ref<T>): MutableRefObject<T> {
-  const internalRef = useRef<T>();
+export default function useSharedRef<T>(ref: Ref<T>): RefObject<T | null> {
+  const internalRef = useRef<T | null>(null);
   useEffect(() => {
     setRef(ref, internalRef.current);
     return () => setRef(ref, null);
   }, [ref]);
-  return internalRef as MutableRefObject<T>;
+  return internalRef;
 }

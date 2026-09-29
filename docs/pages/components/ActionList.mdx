@@ -4,21 +4,21 @@ description: A component for displaying a list of actions that can be performed 
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/ActionList/ActionList.tsx
 ---
 
-import { useState } from 'react'
-import { 
-  ActionList, 
-  ActionListItem, 
+import { useState } from 'react';
+import {
+  ActionList,
+  ActionListItem,
   ActionListSeparator,
   ActionListGroup,
-  Icon 
-} from '@deque/cauldron-react'
+  Icon
+} from '@deque/cauldron-react';
 
 ```jsx
-import { 
-  ActionList, 
-  ActionListItem, 
-  ActionListGroup 
-} from '@deque/cauldron-react'
+import {
+  ActionList,
+  ActionListItem,
+  ActionListGroup
+} from '@deque/cauldron-react';
 ```
 
 ## Overview
@@ -59,9 +59,15 @@ If the label of the action needs additional information, optional descriptive te
 
 ```jsx example
 <ActionList>
-  <ActionListItem description="First item description">First item</ActionListItem>
-  <ActionListItem description="Second item description">Second item</ActionListItem>
-  <ActionListItem description="Third item description">Third item</ActionListItem>
+  <ActionListItem description="First item description">
+    First item
+  </ActionListItem>
+  <ActionListItem description="Second item description">
+    Second item
+  </ActionListItem>
+  <ActionListItem description="Third item description">
+    Third item
+  </ActionListItem>
 </ActionList>
 ```
 
@@ -73,7 +79,9 @@ An action item can optionally include a trailing or leading icon for an addition
 <ActionList>
   <ActionListItem leadingIcon="copy">Copy</ActionListItem>
   <ActionListItem leadingIcon="pencil">Edit</ActionListItem>
-  <ActionListItem leadingIcon="trash" trailingIcon="caution">Delete</ActionListItem>
+  <ActionListItem leadingIcon="trash" trailingIcon="caution">
+    Delete
+  </ActionListItem>
 </ActionList>
 ```
 
@@ -116,16 +124,22 @@ An `ActionList` can function as a selectable list with selected states:
 ```jsx example
 function SingleSelectionExample() {
   const [selected, setSelected] = useState('First item');
-  
+
   const handleAction = (key) => {
     setSelected(key);
   };
-  
+
   return (
     <ActionList role="menu" selectionType="single" onAction={handleAction}>
-      <ActionListItem selected={selected === 'First item'}>First item</ActionListItem>
-      <ActionListItem selected={selected === 'Second item'}>Second item</ActionListItem>
-      <ActionListItem selected={selected === 'Third item'}>Third item</ActionListItem>
+      <ActionListItem selected={selected === 'First item'}>
+        First item
+      </ActionListItem>
+      <ActionListItem selected={selected === 'Second item'}>
+        Second item
+      </ActionListItem>
+      <ActionListItem selected={selected === 'Third item'}>
+        Third item
+      </ActionListItem>
     </ActionList>
   );
 }
@@ -138,27 +152,35 @@ An `ActionList` can also support multiple selections:
 ```jsx example
 function MultipleSelectionExample() {
   const [selected, setSelected] = useState(['First item']);
-  
+
   const handleAction = (key) => {
     if (selected.includes(key)) {
-      setSelected(selected.filter(value => value !== key))
+      setSelected(selected.filter((value) => value !== key));
     } else {
-      setSelected([...selected, key])
+      setSelected([...selected, key]);
     }
   };
-  
+
   return (
     <ActionList role="menu" selectionType="multiple" onAction={handleAction}>
-      <ActionListItem selected={selected.includes('First item')}>First item</ActionListItem>
-      <ActionListItem selected={selected.includes('Second item')}>Second item</ActionListItem>
-      <ActionListItem selected={selected.includes('Third item')}>Third item</ActionListItem>
+      <ActionListItem selected={selected.includes('First item')}>
+        First item
+      </ActionListItem>
+      <ActionListItem selected={selected.includes('Second item')}>
+        Second item
+      </ActionListItem>
+      <ActionListItem selected={selected.includes('Third item')}>
+        Third item
+      </ActionListItem>
     </ActionList>
   );
 }
 ```
 
 <Note>
-  The `selectionType` prop in combination with the `role` prop is important depending on what selection states are needed, as this controls the underlying aria properties that is communicated for users who use assistive technology.
+  The `selectionType` prop in combination with the `role` prop is important
+  depending on what selection states are needed, as this controls the underlying
+  aria properties that is communicated for users who use assistive technology.
 </Note>
 
 ## Props
@@ -172,7 +194,8 @@ function MultipleSelectionExample() {
     {
       name: 'selectionType',
       type: ['single', 'multiple', 'null'],
-      description: 'Determines whether items can be selected, and if so, whether multiple selections are allowed.'
+      description:
+        'Determines whether items can be selected, and if so, whether multiple selections are allowed.'
     },
     {
       name: 'onAction',
@@ -191,7 +214,8 @@ function MultipleSelectionExample() {
     {
       name: 'actionKey',
       type: 'string',
-      description: 'Unique identifier for the action item. If not provided, the trimmed text content will be used.'
+      description:
+        'Unique identifier for the action item. If not provided, the trimmed text content will be used.'
     },
     {
       name: 'description',
@@ -218,7 +242,8 @@ function MultipleSelectionExample() {
       name: 'selected',
       type: 'boolean',
       defaultValue: 'false',
-      description: 'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
+      description:
+        'Whether the item is currently selected. Only applicable when an ancestor ActionList or ActionListGroup has a selectionType.'
     },
     {
       name: 'variant',
@@ -249,7 +274,8 @@ function MultipleSelectionExample() {
     {
       name: 'selectionType',
       type: ['single', 'multiple', 'null'],
-      description: 'Overrides the parent ActionList selectionType for this group.'
+      description:
+        'Overrides the parent ActionList selectionType for this group.'
     },
     {
       name: 'onAction',

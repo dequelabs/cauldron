@@ -23,7 +23,7 @@ if [[ ! -z "$CI" ]] && [[ ! -z "$GITHUB_ACTION" ]]; then
 fi
 
 # Run release stuff (update package.json#version, changelog, etc.)
-npx standard-version \
+pnpm exec standard-version \
   --releaseCommitMessageFormat="$message" \
   --infile="$changelog" \
   --commit-all \

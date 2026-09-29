@@ -31,8 +31,8 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
     const headingId = !heading
       ? undefined
       : typeof heading === 'object' && 'id' in heading
-      ? heading.id
-      : rndid();
+        ? heading.id
+        : rndid();
 
     const Heading = () => {
       if (!headingId) {

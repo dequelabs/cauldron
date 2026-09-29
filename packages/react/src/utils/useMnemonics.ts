@@ -1,4 +1,4 @@
-import type { MutableRefObject, RefObject } from 'react';
+import type { MutableRefObject } from 'react';
 import type { ElementOrRef } from '../types';
 import { useRef, useEffect } from 'react';
 import focusable from 'focusable';
@@ -26,7 +26,7 @@ type useMnemonicsOptions = {
   enabled?: boolean;
 };
 
-type useMnemonicsResults<T extends HTMLElement> = RefObject<T>;
+type useMnemonicsResults<T extends HTMLElement> = MutableRefObject<T | null>;
 
 /**
  * Get an element's accessible name by its aria-label or text content
@@ -76,7 +76,7 @@ export default function useMnemonics<T extends HTMLElement>({
   onMatch,
   enabled = true
 }: useMnemonicsOptions): useMnemonicsResults<T> {
-  const containerRef = useRef<T>() as MutableRefObject<T>;
+  const containerRef = useRef<T | null>(null);
 
   useEffect(() => {
     if (elementOrRef instanceof HTMLElement) {
@@ -87,7 +87,8 @@ export default function useMnemonics<T extends HTMLElement>({
   }, [elementOrRef]);
 
   useEffect(() => {
-    if (!enabled || !containerRef.current) {
+    const listenerTarget = containerRef.current;
+    if (!enabled || !listenerTarget) {
       return;
     }
 
@@ -103,8 +104,8 @@ export default function useMnemonics<T extends HTMLElement>({
         return;
       }
 
-      const container = containerRef.current;
-      if (!container) {
+      const currentContainer = containerRef.current;
+      if (!currentContainer) {
         return;
       }
 
@@ -113,7 +114,7 @@ export default function useMnemonics<T extends HTMLElement>({
       event.stopPropagation();
 
       const elements = Array.from(
-        container.querySelectorAll(matchingElementsSelector ?? focusable)
+        currentContainer.querySelectorAll(matchingElementsSelector ?? focusable)
       );
       const matchingElements = elements.filter(
         (element) =>
@@ -125,7 +126,7 @@ export default function useMnemonics<T extends HTMLElement>({
         return;
       }
 
-      const currentActiveElement = getActiveElement(containerRef.current);
+      const currentActiveElement = getActiveElement(currentContainer);
       let nextActiveElement: HTMLElement | null = null;
 
       if (currentActiveElement) {
@@ -145,10 +146,9 @@ export default function useMnemonics<T extends HTMLElement>({
       }
     };
 
-    const container = containerRef.current;
-    container.addEventListener('keydown', keyboardHandler);
+    listenerTarget.addEventListener('keydown', keyboardHandler);
 
-    return () => container.removeEventListener('keydown', keyboardHandler);
+    return () => listenerTarget.removeEventListener('keydown', keyboardHandler);
   }, [enabled, containerRef, matchingElementsSelector, onMatch]);
 
   return containerRef;

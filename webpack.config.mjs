@@ -1,15 +1,15 @@
-import webpack from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
-import TerserPlugin from 'terser-webpack-plugin'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import remarkPlugins from './docs/remark-plugins.mjs'
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import remarkPlugins from './docs/remark-plugins.mjs';
 
 const { NODE_ENV = 'development' } = process.env;
 const isProd = NODE_ENV === 'production';
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const config = {
   context: __dirname,
@@ -19,7 +19,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'docs', 'dist'),
     filename: isProd ? '[name].[hash].js' : '[name].js',
-    publicPath: '/',
+    publicPath: '/'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -99,4 +99,4 @@ if (isProd) {
   };
 }
 
-export default config
+export default config;

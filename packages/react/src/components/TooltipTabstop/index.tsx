@@ -1,4 +1,4 @@
-import React, { useRef, MutableRefObject } from 'react';
+import React, { useRef } from 'react';
 import Tooltip, { TooltipProps } from '../Tooltip';
 import classnames from 'classnames';
 
@@ -25,7 +25,7 @@ function TooltipTabstop({
   hideElementOnHidden,
   ...buttonProps
 }: TooltipTabstopProps) {
-  const buttonRef = useRef() as MutableRefObject<HTMLButtonElement>;
+  const buttonRef = useRef<HTMLButtonElement>(null);
   return (
     <React.Fragment>
       <button

@@ -11,14 +11,14 @@ const TIP_HIDE_DELAY = 100;
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  target: React.RefObject<HTMLElement> | HTMLElement;
+  target: React.RefObject<HTMLElement | null> | HTMLElement;
   variant?: 'text' | 'info' | 'big';
   association?: 'aria-labelledby' | 'aria-describedby' | 'none';
   show?: boolean | undefined;
   defaultShow?: boolean;
   placement?: React.ComponentProps<typeof AnchoredOverlay>['placement'];
   /** Render the tooltip in a different location in the dom. */
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   hideElementOnHidden?: boolean;
 }
 

@@ -1,6 +1,6 @@
 /*
  * variable naming convention:
- * --{component name (if applicable)}-{style property}-{...modifiers (if applicable, hypen separated)}
+ * --{component name (if applicable)}-{style property}-{...modifiers (if applicable, hyphen separated)}
  * example: --foo-background-color-light
  */
 
@@ -50,6 +50,17 @@
   --issue-serious: var(--accent-caution);
   --issue-moderate: #f0c4f8;
   --issue-minor: var(--gray-20);
+
+  /* radius */
+  --radius-0: 0;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-9999: 9999px;
 
   /* text colours */
   --text-color-base: var(--gray-60);

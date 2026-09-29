@@ -18,6 +18,7 @@
    - [Unit Tests](#unit-tests)
    - [Accessibility Testing](#accessibility-testing)
 1. [Documentation](#documentation)
+1. [Storybook](#storybook)
 1. [Figma Code Connect](#figma-code-connect)
 1. [Breaking Changes](#breaking-changes)
    - [Components](#components)
@@ -142,7 +143,7 @@ Cauldron does not have a dedicated quality assurance (QA) individual. Having a f
 
 Every Cauldron component needs to be compatible with server-side rendering (SSR). A component should be able to render in an SSR environment such as [Gatsby.js](https://www.gatsbyjs.com/) or [Next.js](https://nextjs.org/) while avoiding DOM globals like `document` or `window` that are not available in these environments.
 
-Cauldron uses [`eslint-plugin-ssr-friendly`](https://github.com/kopiro/eslint-plugin-ssr-friendly) to help prevent the accidental misuse of DOM globals. An additional [utility](./packages/react/src/utils/is-browser.ts) is available to help guard against using DOM globals:
+Cauldron uses [`eslint-plugin-ssr-friendly`](https://github.com/kopiro/eslint-plugin-ssr-friendly) to help prevent the accidental misuse of DOM globals. An additional [utility](./packages/react/src/utils/is-browser/index.ts) is available to help guard against using DOM globals:
 
 ```tsx
 import { isBrowser } from '../../utils/is-browser';
@@ -162,8 +163,8 @@ The files in this project are formatted by Prettier and linted with ESLint. Both
 
 | Command           | Description                             |
 | :---------------- | :-------------------------------------- |
-| `yarn lint`       | Runs eslint against everything          |
-| `yarn lint --fix` | Automatically fixes some linting errors |
+| `pnpm lint`       | Runs eslint against everything          |
+| `pnpm lint --fix` | Automatically fixes some linting errors |
 
 ### Icons
 
@@ -209,7 +210,13 @@ Once approved by a member of the Cauldron team, your pull request can be merged 
 
 #### Previewing Changes
 
-Cauldron documentation is deployed automatically via [amplify web previews for pull requests](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) with each commit to a PR. To view the preview of your changes, navigate to your PR and find the comment from the `aws-amplify` bot, which will include a link to the preview site for that PR. The preview site will only persist for as long as the PR remains opened and will be deleted when closed.
+Cauldron deploys a documentation preview for pull requests through a GitHub Actions workflow. A pull request from a branch in this repository builds and deploys a preview automatically, because pushing a branch here requires write access.
+
+A pull request from an outside contributor waits for a Cauldron maintainer to approve the preview. Nothing builds or deploys until that approval, and every new push to the pull request waits for a fresh approval. Once a preview deploys, the workflow posts a comment with a link to the preview site. The preview is removed when the pull request is closed.
+
+A maintainer reviews the full pull request before approving the preview. That review includes reading the code and confirming the change is safe to build and to publish to a URL under Deque's Amplify app.
+
+Maintainers: never add a secret to the `pr-preview-auto` or `pr-preview-gated` GitHub Environments. The build job runs contributor code inside the routed environment, so a secret placed there could be read by that code. These environments hold only reviewer and branch rules.
 
 ### Testing Strategies
 
@@ -243,13 +250,65 @@ test('should return no axe violations', async () => {
 
 | Command                   | Description                                        |
 | :------------------------ | :------------------------------------------------- |
-| `yarn test`               | Runs all unit tests                                |
-| `yarn test ComponentName` | Runs tests matching component name                 |
-| `yarn test:a11y`          | Runs e2e accessibility tests against documentation |
+| `pnpm test`               | Runs all unit tests                                |
+| `pnpm test ComponentName` | Runs tests matching component name                 |
+| `pnpm test:a11y`          | Runs e2e accessibility tests against documentation |
 
 ## Documentation
 
 Component documentation guidelines are outlined in [docs/readme.md](./docs/readme.md).
+
+## Storybook
+
+Cauldron ships a Storybook served at [cauldron.dequelabs.com/storybook](https://cauldron.dequelabs.com/storybook). Each component should have a co-located story file that exercises its props via [Controls](https://storybook.js.org/docs/essentials/controls).
+
+### File location
+
+Story files are co-located with the component they document, alongside `index.tsx` and `index.test.tsx`:
+
+```
+packages/react/src/components/Button/
+├─ index.tsx
+├─ index.test.tsx
+└─ index.stories.tsx
+```
+
+### Authoring a story
+
+Use Component Story Format 3 (CSF3) with `Meta` and `StoryObj` types. Enable autodocs via `tags: ['autodocs']` and group stories under `Components/<ComponentName>`:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './index';
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary'] }
+  }
+};
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+export const Primary: Story = {
+  args: { variant: 'primary', children: 'Primary' }
+};
+```
+
+### Linking from MDX docs
+
+Once a story exists, set `storybook: true` in the component MDX file's frontmatter to render an "Open in Storybook" link in the component page metadata strip.
+
+### Commands
+
+| Command                | Description                                        |
+| :--------------------- | :------------------------------------------------- |
+| `pnpm dev:storybook`   | Run Storybook locally on `http://localhost:6006`   |
+| `pnpm build:storybook` | Build static Storybook into `docs/dist/storybook/` |
+
+Storybook resolves `@deque/cauldron-react` from `packages/react/lib/`, so run `pnpm build:react` once before `pnpm dev:storybook` (or run `pnpm dev` in another tab to keep the lib output fresh).
 
 ## Figma Code Connect
 
@@ -267,11 +326,11 @@ Run from `packages/react/`:
 
 | Command                                           | Purpose                               |
 | :------------------------------------------------ | :------------------------------------ |
-| `yarn figma:publish`                              | Push all `.figma.tsx` to Figma        |
-| `yarn figma:publish:dry-run`                      | Validate without pushing              |
-| `yarn figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
-| `yarn figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
-| `yarn figma connect unpublish --node <figma-url>` | Remove a connection                   |
+| `pnpm figma:publish`                              | Push all `.figma.tsx` to Figma        |
+| `pnpm figma:publish:dry-run`                      | Validate without pushing              |
+| `pnpm figma connect create <figma-url>`           | Scaffold a new file from a Figma node |
+| `pnpm figma:parse path/to/Foo.figma.tsx`          | Debug what the parser sees            |
+| `pnpm figma connect unpublish --node <figma-url>` | Remove a connection                   |
 
 ### Writing a `.figma.tsx`
 

@@ -4,10 +4,10 @@ description: A component to display markup with syntax highlighting.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/Code/index.tsx
 ---
 
-import { Code } from '@deque/cauldron-react'
+import { Code } from '@deque/cauldron-react';
 
 ```js
-import { Code } from '@deque/cauldron-react'
+import { Code } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -29,16 +29,14 @@ const regex = /^anything$/i;`}
 ### HTML
 
 ```jsx example
-<Code language="html">
-  {`<span class="foo">Hello world!</span>`}
-</Code>
+<Code language="html">{`<span class="foo">Hello world!</span>`}</Code>
 ```
 
 ### CSS
 
 ```jsx example
 <Code language="css">
-{`.foo,
+  {`.foo,
 #foo,
 div[class="foo"] {
   color: green;
@@ -49,9 +47,7 @@ div[class="foo"] {
 ### No Language Prop
 
 ```jsx example
-<Code>
-  $ npm install --save @deque/cauldron-react
-</Code>
+<Code>$ npm install --save @deque/cauldron-react</Code>
 ```
 
 ### Scrollable
@@ -60,7 +56,7 @@ By default, Code components will wrap code forcing breaks where it can. If the o
 
 ```jsx example
 <Code scrollable>
- {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
+  {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
   Hello World
 </div>`}
 </Code>
@@ -72,7 +68,7 @@ Adds block with label and copy button that allows to copy code to clipboard.
 
 ```jsx example
 <Code allowCopy label="Example Code Heading">
- {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
+  {`<div className="this element has a lot of classnames to ensure it will wrap at longer lengths">
   Hello World
 </div>`}
 </Code>
@@ -93,7 +89,8 @@ Adds block with label and copy button that allows to copy code to clipboard.
       name: 'scrollable',
       type: 'boolean',
       default: 'false',
-      description: 'Preserve the original markup, forcing the component to scroll when it overflows.'
+      description:
+        'Preserve the original markup, forcing the component to scroll when it overflows.'
     },
     {
       name: 'label',

@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface OptionsMenuTriggerProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+export interface OptionsMenuTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
   triggerRef?: React.Ref<HTMLButtonElement>;
 }
 

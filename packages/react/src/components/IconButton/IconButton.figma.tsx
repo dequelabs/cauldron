@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { IconButton, type IconType } from '../../index';
+import { IconButton } from '../../index';
 
 const FIGMA_URL =
   'https://www.figma.com/design/CEFVdiecqDjLSjhorjHUzI/Product-Foundations--Cauldron--Library?node-id=17-4272&m=dev';
@@ -23,9 +23,14 @@ figma.connect(IconButton, FIGMA_URL, {
     large: figma.boolean('large', { true: true, false: undefined }),
     disabled: figma.boolean('disabled', { true: true, false: undefined })
   },
+  // No `as IconType` cast on `iconProps.name` — Code Connect's parser bakes
+  // the entire JSX expression text into the prop placeholder, so a cast here
+  // produces `__PROP__("iconProps.name as IconType")` which Figma's renderer
+  // can't resolve. The .figma.tsx file is excluded from typecheck, so a plain
+  // `iconProps.name` is fine.
   example: ({ iconProps, variant, large, disabled }) => (
     <IconButton
-      icon={iconProps.name as IconType}
+      icon={iconProps.name}
       variant={variant}
       large={large}
       disabled={disabled}

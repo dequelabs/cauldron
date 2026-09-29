@@ -27,7 +27,7 @@ function TableProvider({
   children,
   layout,
   columns
-}: TableProvider): JSX.Element {
+}: TableProvider): React.JSX.Element {
   const { Provider } = TableContext as React.Context<TableContext>;
   const contextValue: TableContext = useMemo(
     () => ({

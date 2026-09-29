@@ -18,7 +18,7 @@ Once the release has been reviewed, merge the release branch into the `master` b
 git checkout develop
 git pull origin develop
 git fetch --tags
-yarn run release
+pnpm run release
 ```
 
 This will automagically create the release PR in a new browser window.
@@ -35,7 +35,7 @@ $ git pull origin develop
 $ git checkout -b <name of branch>
 $ git cherry-pick <git hashes>
 $ git fetch --tags
-$ yarn run release
+$ pnpm run release
 ```
 
 This will automagically create the release PR in a new browser window.

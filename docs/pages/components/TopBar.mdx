@@ -4,7 +4,7 @@ description: A container component that typically contains information about the
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TopBar/TopBar.tsx
 ---
 
-import { useRef } from 'react'
+import { useRef } from 'react';
 import {
   TopBar,
   MenuBar,
@@ -17,14 +17,10 @@ import {
   ActionList,
   ActionListItem,
   ActionListLinkItem
-} from '@deque/cauldron-react'
+} from '@deque/cauldron-react';
 
 ```jsx
-import {
-  TopBar,
-  TopBarItem,
-  TopBarMenu
-} from '@deque/cauldron-react'
+import { TopBar, TopBarItem, TopBarMenu } from '@deque/cauldron-react';
 ```
 
 ## Examples
@@ -34,7 +30,11 @@ import {
 `TopBar` is a container component intended to wrap navigational items, actions, or other site-wide information. By default, it is position `fixed` to the top of your page and works in parallel with [Layout](./Layout) and [Workspace](./Workspace).
 
 <Note>
-  When using `MenuBar` within `TopBar`, `MenuBar` automatically sets `tabIndex="0"` on direct children. You _must_ set `tabindex="-1"` on any descendant components to prevent extra tabstops from occurring as `MenuBar` manages keyboard navigation automatically with <kbd>tab</kbd> and arrow key navigation.
+  When using `MenuBar` within `TopBar`, `MenuBar` automatically sets
+  `tabIndex="0"` on direct children. You _must_ set `tabindex="-1"` on any
+  descendant components to prevent extra tabstops from occurring as `MenuBar`
+  manages keyboard navigation automatically with <kbd>tab</kbd> and arrow key
+  navigation.
 </Note>
 
 ```jsx example
@@ -64,9 +64,17 @@ import {
 
 In addition to navigational items, the `MenuBar` can also contain an action menu with items when composed with `ActionMenu` and `ActionList`:
 
+<Note>
+  With `renderInTrigger`, the menu renders inside the `TopBarItem`. Because
+  `menuitem` takes its accessible name from its content, you _must_ wrap the
+  trigger's visible label in an element with the `labelId` provided to the
+  trigger function. Without it, screen readers announce every menu item as part
+  of the trigger's name.
+</Note>
+
 ```jsx example
 function TopBarWithMenuExample() {
-  const actionMenuRef = useRef()
+  const actionMenuRef = useRef();
   return (
     <TopBar>
       <MenuBar>
@@ -84,16 +92,21 @@ function TopBarWithMenuExample() {
         <ActionMenu
           tabIndex={-1}
           renderInTrigger={true}
-          trigger={
-            ({ ref, children, ...props }) => {
-              return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+          trigger={({ ref, children, labelId, ...props }) => {
+            return (
+              <TopBarItem
+                menuItemRef={ref}
+                tabIndex={0}
+                autoClickLink={false}
+                {...props}
+              >
+                <span id={labelId}>
                   Menu <Icon type="chevron-down" />
-                  {children}
-                </TopBarItem>
-              )
-            }
-          }
+                </span>
+                {children}
+              </TopBarItem>
+            );
+          }}
         >
           <ActionList>
             <ActionListItem>Menu Item 1</ActionListItem>
@@ -103,7 +116,7 @@ function TopBarWithMenuExample() {
         </ActionMenu>
       </MenuBar>
     </TopBar>
-  )
+  );
 }
 ```
 
@@ -130,38 +143,45 @@ function TopBarWithMenuLinksExample() {
         <ActionMenu
           tabIndex={-1}
           renderInTrigger={true}
-          trigger={
-            ({ ref, children, ...props }) => {
-              return (
-                <TopBarItem menuItemRef={ref} tabIndex={0} autoClickLink={false} {...props}>
+          trigger={({ ref, children, labelId, ...props }) => {
+            return (
+              <TopBarItem
+                menuItemRef={ref}
+                tabIndex={0}
+                autoClickLink={false}
+                {...props}
+              >
+                <span id={labelId}>
                   Menu <Icon type="chevron-down" />
-                  {children}
-                </TopBarItem>
-              )
-            }
-          }
+                </span>
+                {children}
+              </TopBarItem>
+            );
+          }}
         >
           <ActionList>
-            <ActionListLinkItem href="#target-1">Menu Link 1</ActionListLinkItem>
-            <ActionListLinkItem href="#target-2">Menu Link 2</ActionListLinkItem>
-            <ActionListLinkItem href="#target-3">Menu Link 3</ActionListLinkItem>
+            <ActionListLinkItem href="#target-1">
+              Menu Link 1
+            </ActionListLinkItem>
+            <ActionListLinkItem href="#target-2">
+              Menu Link 2
+            </ActionListLinkItem>
+            <ActionListLinkItem href="#target-3">
+              Menu Link 3
+            </ActionListLinkItem>
           </ActionList>
         </ActionMenu>
       </MenuBar>
     </TopBar>
-  )
+  );
 }
 ```
-
 
 ## Props
 
 ### TopBar
 
-<ComponentProps
-  children={true}
-  className={true}
-/>
+<ComponentProps children={true} className={true} />
 
 ### TopBarItem
 
@@ -183,7 +203,8 @@ function TopBarWithMenuLinksExample() {
       name: 'autoClickLink',
       type: 'boolean',
       defaultValue: 'true',
-      description: 'Automatically clicks links when a click occurs on TopBarItem.'
+      description:
+        'Automatically clicks links when a click occurs on TopBarItem.'
     },
     {
       name: 'menuItemRef',

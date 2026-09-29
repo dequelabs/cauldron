@@ -196,7 +196,7 @@ export default function useFocusTrap<
      */
     returnFocusElement?: ElementOrRef<FocusElement>;
   } = {}
-): React.RefObject<Readonly<FocusTrap>> {
+): React.RefObject<Readonly<FocusTrap> | null> {
   const {
     disabled = false,
     returnFocus = true,
@@ -204,8 +204,7 @@ export default function useFocusTrap<
     returnFocusElement
   } = options;
   const focusTrap = useRef<FocusTrap | null>(null);
-  const returnFocusElementRef =
-    useRef<HTMLElement>() as React.MutableRefObject<HTMLElement | null>;
+  const returnFocusElementRef = useRef<HTMLElement | null>(null);
 
   function restoreFocusToReturnFocusElement() {
     const resolvedReturnFocusElement = resolveElement(returnFocusElement);

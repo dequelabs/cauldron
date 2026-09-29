@@ -1,0 +1,32 @@
+packages:
+  - 'packages/*'
+
+# pnpm blocks all dependency lifecycle scripts by default as supply-chain
+# hardening. Explicit per-package decisions:
+#   - puppeteer: downloads bundled Chromium for the test:a11y suite
+#   - esbuild:   sets up its platform-specific binary; required by Vite when
+#                @playwright/experimental-ct-react bundles components in the
+#                screenshot harness
+#   - core-js:   postinstall is just a sponsor message; not needed
+allowBuilds:
+  core-js: false
+  esbuild: true
+  puppeteer: true
+
+# Supply-chain protection: refuse packages newer than ~6d23h (just under
+# Dependabot's 7-day cooldown). Integer in MINUTES, not a duration string.
+minimumReleaseAge: 10020
+minimumReleaseAgeExclude:
+  - '@deque/*'
+  - '@axe-core/*'
+
+# Translated from the yarn-classic "resolutions" field. The playwright pins
+# match what yarn resolved (the screenshot harness picks the host's playwright
+# version via build-arg, and @playwright/experimental-ct-react 1.60.x has a
+# regression that emits "exports is not defined" in the Vite-bundled output).
+overrides:
+  react: ^19
+  react-dom: ^19
+  playwright: 1.50.1
+  '@playwright/test': 1.50.1
+  '@playwright/experimental-ct-react': 1.50.1

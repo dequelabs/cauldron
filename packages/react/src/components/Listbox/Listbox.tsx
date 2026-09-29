@@ -10,16 +10,15 @@ import type { ListboxOption } from './ListboxContext';
 import type { ListboxValue } from './ListboxOption';
 import type {
   PolymorphicProps,
-  PolymorphicComponent
+  PolymorphicComponentProps
 } from '../../utils/polymorphicComponent';
 import useSharedRef from '../../utils/useSharedRef';
 
 const keys = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
 
-interface BaseListboxProps
-  extends PolymorphicProps<
-    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
-  > {
+interface BaseListboxProps extends PolymorphicProps<
+  Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'defaultValue'>
+> {
   navigation?: 'cycle' | 'bound';
   focusStrategy?: 'lastSelected' | 'first' | 'last';
   focusDisabledOptions?: boolean;
@@ -49,6 +48,32 @@ interface MultiSelectListboxProps extends BaseListboxProps {
     value: ListboxValue[];
   }) => void;
 }
+
+// Overloaded component type to properly discriminate between
+// single-select and multi-select variants. The multi-select
+// overload is listed first since it is more specific (requires
+// multiselect: true). The final union overload preserves
+// compatibility with React.ComponentPropsWithRef extraction
+// (which resolves from the last overload).
+type ListboxComponent = Omit<
+  React.ForwardRefExoticComponent<
+    SingleSelectListboxProps | MultiSelectListboxProps
+  >,
+  keyof CallableFunction
+> & {
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<MultiSelectListboxProps, T>
+  ): React.ReactElement | null;
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<SingleSelectListboxProps, T>
+  ): React.ReactElement | null;
+  <T extends React.ElementType = React.ElementType>(
+    props: PolymorphicComponentProps<
+      SingleSelectListboxProps | MultiSelectListboxProps,
+      T
+    >
+  ): React.ReactElement | null;
+};
 
 // id for listbox options should always be defined since it should
 // be provide via the author, or auto-generated via the component
@@ -95,6 +120,25 @@ const Listbox = forwardRef<
     const listboxRef = useSharedRef<HTMLElement>(ref);
     const isControlled = typeof value !== 'undefined';
     const isActiveControlled = typeof controlledActiveOption !== 'undefined';
+    const hasActiveChangeHandler = typeof onActiveChange === 'function';
+
+    useEffect(() => {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        isActiveControlled &&
+        hasActiveChangeHandler
+      ) {
+        console.warn(
+          'Listbox received both `activeOption` and `onActiveChange`. Do not ' +
+            'write the option reported by `onActiveChange` back into ' +
+            '`activeOption`: the two copies then race, and a stale downward ' +
+            'sync can revert a newer value and re-render without settling. ' +
+            'Let Listbox own the active option, or use `activeOption` only as ' +
+            'a one-shot request. ' +
+            'See https://github.com/dequelabs/cauldron/issues/2512'
+        );
+      }
+    }, [isActiveControlled, hasActiveChangeHandler]);
 
     useLayoutEffect(() => {
       if (!isControlled && selectedOptions.length > 0) {
@@ -134,7 +178,10 @@ const Listbox = forwardRef<
     }, [activeOption]);
 
     useEffect(() => {
-      if (isActiveControlled && controlledActiveOption !== activeOption) {
+      if (
+        isActiveControlled &&
+        controlledActiveOption?.element !== activeOption?.element
+      ) {
         setActiveOption(controlledActiveOption || null);
       }
     }, [isActiveControlled, controlledActiveOption]);
@@ -276,7 +323,7 @@ const Listbox = forwardRef<
             ? options.find((option) => !isDisabledOption(option))
             : options[0];
 
-          if (firstOption) {
+          if (firstOption && firstOption.element !== activeOption?.element) {
             setActiveOption(firstOption);
           }
 
@@ -288,7 +335,7 @@ const Listbox = forwardRef<
             ? [...options].reverse().find((option) => !isDisabledOption(option))
             : options[options.length - 1];
 
-          if (lastOption) {
+          if (lastOption && lastOption.element !== activeOption?.element) {
             setActiveOption(lastOption);
           }
 
@@ -345,7 +392,7 @@ const Listbox = forwardRef<
       </Component>
     );
   }
-) as PolymorphicComponent<SingleSelectListboxProps | MultiSelectListboxProps>;
+) as ListboxComponent;
 
 Listbox.displayName = 'Listbox';
 

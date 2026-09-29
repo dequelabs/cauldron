@@ -5,8 +5,9 @@ import type {
   PolymorphicProps
 } from '../../utils/polymorphicComponent';
 
-interface FieldWrapProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface FieldWrapProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   children: React.ReactNode;
 }
 

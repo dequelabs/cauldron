@@ -5,10 +5,10 @@ deprecated: true
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioCardGroup/index.tsx
 ---
 
-import { RadioCardGroup, FieldWrap } from '@deque/cauldron-react'
+import { RadioCardGroup, FieldWrap } from '@deque/cauldron-react';
 
 ```jsx
-import { RadioCardGroup } from '@deque/cauldron-react'
+import { RadioCardGroup } from '@deque/cauldron-react';
 ```
 
 <Note>
@@ -16,18 +16,20 @@ import { RadioCardGroup } from '@deque/cauldron-react'
   `RadioCardGroup` component has been designed specifically to meet color
   contrast requirements against a `FieldWrap` background.
 
-  If you use a `RadioCardGroup` without a `FieldWrap` (for example, within a
-  `Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
-  you _must_ verify that it meets accessibility requirements in all component
-  states, especially for color contrast.
-</Note>
+If you use a `RadioCardGroup` without a `FieldWrap` (for example, within a
+`Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
+you _must_ verify that it meets accessibility requirements in all component
+states, especially for color contrast.
 
+</Note>
 
 ## Examples
 
 ```jsx example
 <FieldWrap>
-  <div className="Field__label" id="radio-card-group-label">Do you like coffee?</div>
+  <div className="Field__label" id="radio-card-group-label">
+    Do you like coffee?
+  </div>
   <RadioCardGroup
     defaultValue="yes"
     aria-labelledby="radio-card-group-label"
@@ -95,17 +97,20 @@ import { RadioCardGroup } from '@deque/cauldron-react'
       name: 'radios',
       type: 'Array',
       required: true,
-      description: 'Array of objects containing: label, cardImg, cardIcon (see IconTypes), value (optional), and any supported HTMLInputElement properties.'
+      description:
+        'Array of objects containing: label, cardImg, cardIcon (see IconTypes), value (optional), and any supported HTMLInputElement properties.'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for the radio card group is required. This means you must provide either an aria-label or aria-labelledby prop.',
+      description:
+        'A label for the radio card group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for the radio card group is required. This means you must provide either an aria-label or aria-labelledby prop.',
+      description:
+        'A label for the radio card group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'name',
@@ -115,21 +120,22 @@ import { RadioCardGroup } from '@deque/cauldron-react'
     {
       name: 'defaultValue',
       type: 'string',
-      description: 'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
+      description:
+        'The default value to be applied to the field. Optionally used for "uncontrolled" fields.'
     },
     {
       name: 'value',
       type: 'string',
-      description: 'The default value to be applied to the field. Optionally used for "controlled" fields.'
+      description:
+        'The default value to be applied to the field. Optionally used for "controlled" fields.'
     },
     {
       name: 'onChange',
       type: 'function',
-      description: 'Callback function when the field\'s value changes.'
+      description: "Callback function when the field's value changes."
     }
   ]}
 />
-
 
 ## Related Components
 

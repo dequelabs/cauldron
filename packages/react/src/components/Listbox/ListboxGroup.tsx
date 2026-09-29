@@ -6,8 +6,9 @@ import type {
   PolymorphicComponent
 } from '../../utils/polymorphicComponent';
 
-interface ListboxGroupProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface ListboxGroupProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   groupLabelProps?: React.HTMLAttributes<HTMLLIElement>;
   label: ContentNode;
 }

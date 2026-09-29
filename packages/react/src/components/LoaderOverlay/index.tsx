@@ -6,8 +6,7 @@ import AriaIsolate from '../../utils/aria-isolate';
 import useFocusTrap from '../../utils/useFocusTrap';
 import useSharedRef from '../../utils/useSharedRef';
 
-export interface LoaderOverlayProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoaderOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
   focusOnInitialRender?: boolean;
   children?: React.ReactNode;

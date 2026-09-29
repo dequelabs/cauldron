@@ -1,10 +1,9 @@
 import React, { forwardRef } from 'react';
 
-export interface OptionsMenuItemProps
-  extends Pick<
-    React.HTMLAttributes<HTMLLIElement>,
-    Exclude<keyof React.HTMLAttributes<HTMLLIElement>, 'onSelect'>
-  > {
+export interface OptionsMenuItemProps extends Pick<
+  React.HTMLAttributes<HTMLLIElement>,
+  Exclude<keyof React.HTMLAttributes<HTMLLIElement>, 'onSelect'>
+> {
   disabled?: boolean;
   className?: string;
   menuItemRef?: React.Ref<HTMLLIElement>;

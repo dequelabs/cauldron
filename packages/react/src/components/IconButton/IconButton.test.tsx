@@ -59,12 +59,11 @@ test('should use aria-disabled for non-buttons when disabled', async () => {
 });
 
 test('should add button role for custom components', async () => {
-  const CustomButton = React.forwardRef<HTMLDivElement>(function Component(
-    props,
-    ref
-  ) {
-    return <div data-testid="custom" ref={ref} {...props}></div>;
-  });
+  const CustomButton = React.forwardRef<HTMLDivElement>(
+    function Component(props, ref) {
+      return <div data-testid="custom" ref={ref} {...props}></div>;
+    }
+  );
   render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
   const custom = await screen.findByTestId('custom');
   expect(custom).toBeInTheDocument();
@@ -73,12 +72,11 @@ test('should add button role for custom components', async () => {
 });
 
 test('should add link role when component behaves like a link', async () => {
-  const CustomLink = React.forwardRef<HTMLDivElement>(function Component(
-    props,
-    ref
-  ) {
-    return <div data-testid="custom" ref={ref} {...props}></div>;
-  });
+  const CustomLink = React.forwardRef<HTMLDivElement>(
+    function Component(props, ref) {
+      return <div data-testid="custom" ref={ref} {...props}></div>;
+    }
+  );
   render(
     // @ts-expect-error this technically should be allowed
     <IconButton icon="pencil" label="Edit" as={CustomLink} to="/testing" />
@@ -146,12 +144,11 @@ test('should return no axe violations when rendered as anchor', async () => {
 });
 
 test('should return no axe violations when rendered as CustomElement', async () => {
-  const CustomButton = React.forwardRef<HTMLDivElement>(function Component(
-    props,
-    ref
-  ) {
-    return <div data-testid="custom" ref={ref} {...props}></div>;
-  });
+  const CustomButton = React.forwardRef<HTMLDivElement>(
+    function Component(props, ref) {
+      return <div data-testid="custom" ref={ref} {...props}></div>;
+    }
+  );
 
   render(<IconButton icon="pencil" label="Edit" as={CustomButton} />);
   const button = await screen.findByTestId('custom');

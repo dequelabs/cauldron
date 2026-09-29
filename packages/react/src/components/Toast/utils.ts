@@ -37,7 +37,7 @@ export const typeMap: TypeMap = {
 
 export const tabIndexHandler = (reset: boolean, toast: HTMLElement | null) => {
   if (reset) {
-    // restore tab indicies that we clobbered
+    // restore tab indices that we clobbered
     return queryAll('[data-cached-tabindex]').forEach((el: HTMLElement) => {
       el.tabIndex = Number(el.getAttribute('data-cached-tabindex'));
     });

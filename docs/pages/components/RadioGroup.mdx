@@ -4,10 +4,10 @@ description: An interactive component that lets users select a single option fro
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/RadioGroup/index.tsx
 ---
 
-import { RadioGroup, FieldWrap, FieldGroup, Code } from '@deque/cauldron-react'
+import { RadioGroup, FieldWrap, FieldGroup, Code } from '@deque/cauldron-react';
 
 ```js
-import { RadioGroup } from '@deque/cauldron-react'
+import { RadioGroup } from '@deque/cauldron-react';
 ```
 
 <Note>
@@ -15,10 +15,11 @@ import { RadioGroup } from '@deque/cauldron-react'
   `RadioGroup` component has been designed specifically to meet color contrast
   requirements against a `FieldWrap` background.
 
-  If you use a `RadioGroup` without a `FieldWrap` (for example, within a
-  `Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
-  you _must_ verify that it meets accessibility requirements in all component
-  states, especially for color contrast.
+If you use a `RadioGroup` without a `FieldWrap` (for example, within a
+`Modal`, where `FieldWrap`'s `Panel` appearance might not be appropriate),
+you _must_ verify that it meets accessibility requirements in all component
+states, especially for color contrast.
+
 </Note>
 
 ## Examples
@@ -26,10 +27,7 @@ import { RadioGroup } from '@deque/cauldron-react'
 ### Default
 
 ```jsx example
-<FieldWrap 
-  as={FieldGroup} 
-  label="Do you like gyros?"
->
+<FieldWrap as={FieldGroup} label="Do you like gyros?">
   <RadioGroup
     name="gyros"
     radios={[
@@ -57,10 +55,7 @@ import { RadioGroup } from '@deque/cauldron-react'
 ### With Descriptions
 
 ```jsx example
-<FieldWrap 
-  as={FieldGroup} 
-  label="Do you like pizza?"
->
+<FieldWrap as={FieldGroup} label="Do you like pizza?">
   <RadioGroup
     defaultValue="tuesday"
     name="pizza"
@@ -94,10 +89,7 @@ import { RadioGroup } from '@deque/cauldron-react'
 If your list of options is short, `RadioGroup` can optionally accept an `inline` prop to display the radio items in a horizontal orientation instead of vertically.
 
 ```jsx example
-<FieldWrap 
-  as={FieldGroup} 
-  label="Are you a robot?"
->
+<FieldWrap as={FieldGroup} label="Are you a robot?">
   <RadioGroup
     defaultValue="no"
     name="robot"
@@ -127,17 +119,20 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
       name: 'radios',
       type: 'array',
       required: true,
-      description: 'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
+      description:
+        'Array of objects containing: label, value (optional), labelDescription (optional) and any supported HTMLInputElement properties'
     },
     {
       name: 'aria-label',
       type: 'string',
-      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'aria-labelledby',
       type: 'string',
-      description: 'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
+      description:
+        'A label for the radio group is required. This means you must provide either an aria-label or aria-labelledby prop.'
     },
     {
       name: 'name',
@@ -147,17 +142,20 @@ If your list of options is short, `RadioGroup` can optionally accept an `inline`
     {
       name: 'defaultValue',
       type: 'any',
-      description: 'The initial value of the radio group. Used when the RadioGroup is uncontrolled'
+      description:
+        'The initial value of the radio group. Used when the RadioGroup is uncontrolled'
     },
     {
       name: 'value',
       type: 'any',
-      description: 'The value of the radio group. Used when the RadioGroup is controlled.'
+      description:
+        'The value of the radio group. Used when the RadioGroup is controlled.'
     },
     {
       name: 'onChange',
       type: 'function',
-      description: 'This is required if using "controlled" input; otherwise it is optional'
+      description:
+        'This is required if using "controlled" input; otherwise it is optional'
     }
   ]}
 />

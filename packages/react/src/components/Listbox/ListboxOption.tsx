@@ -10,8 +10,9 @@ import type {
 
 export type ListboxValue = Readonly<string | number | undefined>;
 
-interface ListboxOptionProps
-  extends PolymorphicProps<React.HTMLAttributes<HTMLElement>> {
+interface ListboxOptionProps extends PolymorphicProps<
+  React.HTMLAttributes<HTMLElement>
+> {
   value?: ListboxValue;
   disabled?: boolean;
   selected?: boolean;
@@ -52,15 +53,15 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
     const optionValue =
       typeof value !== 'undefined'
         ? value
-        : listboxOptionRef.current?.innerText;
+        : (listboxOptionRef.current?.textContent ?? undefined);
 
     useEffect(() => {
       const element = listboxOptionRef.current;
 
       setOptions((options) => {
-        const option = { element, value: optionValue };
         // istanbul ignore next
         if (!element) return options;
+        const option = { element, value: optionValue };
 
         // Elements are frequently appended, so check to see if the newly rendered
         // element follows the last element first before any other checks
@@ -101,7 +102,7 @@ const ListboxOption = forwardRef<HTMLElement, ListboxOptionProps>(
           return;
         }
 
-        onSelect({ element: listboxOptionRef.current, value: optionValue });
+        onSelect({ element: listboxOptionRef.current!, value: optionValue });
         onClick?.(event);
       },
       [optionValue, onSelect, onClick, disabled]

@@ -33,7 +33,7 @@ assignees: '@deque/cauldron-team,@deque/cauldron-codeowners'
 
 ### Accessibility
 
-<!-- 
+<!--
   Identify any key accessibility aspects, considering:
   - What aria properties (if any) will this component need to implement?
   - What semantic elements will this component need to use?

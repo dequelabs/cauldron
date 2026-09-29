@@ -5,8 +5,10 @@ import classNames from 'classnames';
 
 type ImpactType = 'critical' | 'serious' | 'moderate' | 'minor';
 
-interface ImpactBadgeProps
-  extends Omit<React.ComponentProps<typeof Badge>, 'children'> {
+interface ImpactBadgeProps extends Omit<
+  React.ComponentProps<typeof Badge>,
+  'children'
+> {
   type: ImpactType;
   label?: ContentNode;
 }

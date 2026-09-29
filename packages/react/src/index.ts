@@ -98,6 +98,12 @@ export {
   DescriptionTerm,
   DescriptionDetails
 } from './components/DescriptionList';
+export {
+  MetadataList,
+  MetadataListItem,
+  MetadataListLabel,
+  MetadataListValue
+} from './components/MetadataList';
 export { default as Stepper, Step } from './components/Stepper';
 export {
   default as Panel,
@@ -154,7 +160,11 @@ export {
   ActionListSeparator,
   ActionListLinkItem
 } from './components/ActionList';
-export { ActionMenu } from './components/ActionMenu';
+export {
+  ActionMenu,
+  type ActionMenuTriggerProps,
+  type ActionMenuTriggerFunction
+} from './components/ActionMenu';
 export { default as TreeView, type TreeViewNode } from './components/TreeView';
 
 /**

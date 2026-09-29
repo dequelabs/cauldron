@@ -37,7 +37,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
         level: number | undefined;
       };
   closeButtonText?: string;
-  portal?: React.RefObject<HTMLElement> | HTMLElement;
+  portal?: React.RefObject<HTMLElement | null> | HTMLElement;
   scrollable?: boolean;
 }
 
@@ -64,7 +64,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogRef = useSharedRef(dialogRefProp || ref);
     const [headingId] = useId(1, 'dialog-title-');
     const headingRef = useRef<HTMLHeadingElement>(null);
-    const isolatorRef = useRef<AriaIsolate>();
+    const isolatorRef = useRef<AriaIsolate | null>(null);
 
     const headingLevel =
       typeof heading === 'object' && 'level' in heading && heading.level
@@ -238,7 +238,10 @@ const DialogContent = ({
         'text--align-center': align === 'center',
         'text--align-right': align === 'right'
       })}
-      tabIndex={context?.scrollable ? -1 : undefined}
+      // A keyboard user can only scroll this region if it is tabbable (WCAG
+      // 2.1.1). The rule allows that on role="tabpanel" only. See #680.
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={context?.scrollable ? 0 : undefined}
       {...other}
     >
       {children}
