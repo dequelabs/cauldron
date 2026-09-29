@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.6.0](https://github.com/dequelabs/cauldron/compare/v7.4.0...v7.6.0) (2026-09-22)
+
+
+### Features
+
+* add radius primitive tokens ([#2508](https://github.com/dequelabs/cauldron/issues/2508)) ([87bfe3d](https://github.com/dequelabs/cauldron/commit/87bfe3d6b8e55d78beaa6bd0b2397698d9bb52a6))
+* **Panel:** use radius-12 for panel border radius ([#2510](https://github.com/dequelabs/cauldron/issues/2510)) ([34f4b96](https://github.com/dequelabs/cauldron/commit/34f4b96c34554b964fe76dd16edba4bbf20279b4))
+
+
+### Bug Fixes
+
+* **ActionList:** stop mirroring Listbox's active option ([#2515](https://github.com/dequelabs/cauldron/issues/2515)) ([792c4b8](https://github.com/dequelabs/cauldron/commit/792c4b8301a44c6466dd5426e8e3afc539b27d81)), closes [#2512](https://github.com/dequelabs/cauldron/issues/2512) [#2512](https://github.com/dequelabs/cauldron/issues/2512) [cauldron#2522](https://github.com/dequelabs/cauldron/issues/2522) [#2512](https://github.com/dequelabs/cauldron/issues/2512) [#2522](https://github.com/dequelabs/cauldron/issues/2522)
+* allow gated docs preview to check out approved fork code ([#2530](https://github.com/dequelabs/cauldron/issues/2530)) ([2ded826](https://github.com/dequelabs/cauldron/commit/2ded826e0711a2553faa9ed3c99020656f3544d0))
+* **AnchoredOverlay:** only track element resizes while open ([#2525](https://github.com/dequelabs/cauldron/issues/2525)) ([cacd23d](https://github.com/dequelabs/cauldron/commit/cacd23dd967aa03d06fce5d40669947c7f953c16))
+* **Dialog:** make scrollable content keyboard accessible ([#2524](https://github.com/dequelabs/cauldron/issues/2524)) ([b12b751](https://github.com/dequelabs/cauldron/commit/b12b75182ef2f11106457e330c3e297286d1f80d))
+* **Panel:** round content that sits on a panel's corners ([#2531](https://github.com/dequelabs/cauldron/issues/2531)) ([37db380](https://github.com/dequelabs/cauldron/commit/37db38015518d2fbb942b83f9bd9646f8dd9baad))
+* screen reader announcing submenu items as part of the menu name ([#2506](https://github.com/dequelabs/cauldron/issues/2506)) ([f0c9b61](https://github.com/dequelabs/cauldron/commit/f0c9b61ce05dd7e45f4f06c9203e915631857275))
+* **Table:** round edge cells when the container publishes a corner ([#2532](https://github.com/dequelabs/cauldron/issues/2532)) ([1f6a344](https://github.com/dequelabs/cauldron/commit/1f6a34455b4ceb6309f2100b725b68dba26cf235))
+
 ## [7.5.0](https://github.com/dequelabs/cauldron/compare/v7.4.0...v7.5.0) (2026-08-20)
 
 
