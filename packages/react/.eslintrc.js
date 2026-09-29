@@ -38,7 +38,15 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           {
-            paths: [reactIdGeneratorDefault],
+            paths: [
+              reactIdGeneratorDefault,
+              {
+                name: 'react-syntax-highlighter',
+                importNames: ['default'],
+                message:
+                  'Its default export needs interopDefault; keep these imports in Code/index.tsx.'
+              }
+            ],
             patterns: [
               {
                 group: ['react-syntax-highlighter/**'],
