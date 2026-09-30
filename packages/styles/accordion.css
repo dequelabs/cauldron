@@ -79,6 +79,16 @@ button.Accordion__trigger {
   border-radius: 0 0 3px 3px;
 }
 
+.Accordion__panel > :first-child,
+.Accordion__content > :first-child {
+  margin-top: 0;
+}
+
+.Accordion__panel > :last-child,
+.Accordion__content > :last-child {
+  margin-bottom: 0;
+}
+
 .Accordion:has(> button[aria-expanded='true']) {
   box-shadow: var(--drop-shadow-raised);
 }
