@@ -25,7 +25,7 @@ let foundViolations = false;
 const getComponentUrls = async (port: number): Promise<Set<string>> => {
   const urls = new Set<string>([`http://localhost:${port}/`]);
   const browser = await puppeteer.launch({
-    executablePath: determineBrowserPath()
+    executablePath: await determineBrowserPath()
   });
   const page = await browser.newPage();
 
@@ -91,7 +91,7 @@ const main = async (): Promise<void> => {
     Array.from(urls).map((url: string) => {
       return queue.add(async () => {
         const browser = await puppeteer.launch({
-          executablePath: determineBrowserPath()
+          executablePath: await determineBrowserPath()
         });
         const page = await browser.newPage();
 
