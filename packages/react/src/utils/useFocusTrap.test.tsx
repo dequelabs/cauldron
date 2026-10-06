@@ -70,6 +70,23 @@ const ComponentWithTrailingContentEditable = () => {
   );
 };
 
+const ComponentWithOnlyUntabbable = () => {
+  const containerRef = React.useRef(null);
+
+  useFocusTrap(containerRef);
+
+  return (
+    <div ref={containerRef}>
+      <a href="#one" tabIndex={-1}>
+        one
+      </a>
+      <a href="#two" tabIndex={-1}>
+        two
+      </a>
+    </div>
+  );
+};
+
 const ComponentWithInitialFocus = () => {
   const containerRef = React.useRef(null);
   const initialFocusRef = React.useRef(null);
@@ -176,6 +193,21 @@ describe('useFocusTrap', () => {
     screen.getByRole('button', { name: 'first' }).focus();
     await userEvent.tab({ shift: true });
     expect(screen.getByRole('textbox', { name: 'editor' })).toHaveFocus();
+  });
+
+  test('should keep focus in place when nothing in the trap is tabbable', async () => {
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithOnlyUntabbable />
+      </ComponentOutsideFocusTrap>
+    );
+
+    const two = screen.getByRole('link', { name: 'two' });
+    two.focus();
+    await userEvent.tab();
+    expect(two).toHaveFocus();
+    await userEvent.tab({ shift: true });
+    expect(two).toHaveFocus();
   });
 
   test('should focus initial element with element ref', () => {
