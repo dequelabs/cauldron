@@ -2,12 +2,12 @@
 // is installed.
 //
 // esbuild bundles for Vite's dev-server dependency pre-bundling, tsup and
-// others. For the browser platform it reads the `module` field for `import`
-// and `require` alike, so both reach lib/esm. Resolution that split the two
-// would load two copies. So assert both halves:
+// others. For the browser platform it resolves an import-only graph through
+// `module`, but once the package is also `require()`d it resolves both to
+// `main`. Resolution that split the two would load two copies. So assert:
 //
 //   1. An import-only graph gets the ESM build, so esbuild users tree-shake.
-//   2. A graph mixing `import` and `require` loads a single copy, so a
+//   2. A graph mixing `import` and `require` loads the CJS build alone, so a
 //      ThemeProvider reaches every consumer.
 import assert from 'node:assert';
 import { execFileSync } from 'node:child_process';
@@ -81,6 +81,12 @@ const mixedEntry = write(
 const mixedOut = path.join(work, 'mixed.cjs');
 const mixed = await bundle(mixedEntry, mixedOut);
 const mixedTrees = trees(mixed.metafile);
+assert(
+  mixedTrees.cjs && !mixedTrees.esm,
+  'esbuild: a mixed graph was expected to resolve to the CJS build alone ' +
+    `(esm=${mixedTrees.esm} cjs=${mixedTrees.cjs}). If esbuild now picks ` +
+    'lib/esm here, update this check and the comment at the top of the file.'
+);
 
 // The bundle is CJS with React external, so Node resolves react from the
 // fixture's node_modules when it runs.
@@ -95,5 +101,5 @@ assert.strictEqual(
 
 console.log(
   'esbuild-checks OK: import-only graph uses lib/esm; mixed graph loads one ' +
-    `copy (esm=${mixedTrees.esm} cjs=${mixedTrees.cjs})`
+    'copy, from the CJS build'
 );

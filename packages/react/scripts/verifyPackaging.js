@@ -29,7 +29,8 @@
  *      a mixed `import`/`require` graph loads a single copy.
  *  12. Next.js consumer — build an App Router page with Turbopack and assert
  *      the prerendered HTML shows a client provider's theme reaching a separate
- *      client component, so the provider and its readers share one copy.
+ *      client component, and the client chunks come from `lib/esm` with
+ *      unused components dropped.
  *
  * The consumers install from the tarball (not a workspace symlink), so
  * resolution matches what a real consumer would get from npm.
@@ -146,6 +147,8 @@ function verifyDeepTypeImports(consumerDir) {
     "import type { ActionMenuTriggerProps } from '@deque/cauldron-react';\n" +
     'export type Probe = [ContentNode, ButtonProps, RadioItem, ComboboxValue, ActionMenuTriggerProps];\n';
   fs.writeFileSync(path.join(consumerDir, 'types-consumer.ts'), source);
+  // The root's TypeScript 6: the package pins 5.0, which rejects the node10
+  // run's `ignoreDeprecations: '6.0'`.
   const tsc = path.join(workspaceModules, 'typescript', 'bin', 'tsc');
 
   for (const [module, moduleResolution, files, extra] of [
@@ -373,7 +376,7 @@ try {
   step('Verifying esbuild consumer (ESM for import-only graphs, single copy)');
   run('node', ['esbuild-checks.mjs'], { cwd: treeshakeDir });
 
-  step('Verifying Next.js App Router consumer (Turbopack SSR, single copy)');
+  step('Verifying Next.js App Router consumer (Turbopack SSR, tree-shaking)');
   run('node', ['next-checks.mjs'], { cwd: treeshakeDir });
 
   console.log('\n✓ Packaging validation passed');

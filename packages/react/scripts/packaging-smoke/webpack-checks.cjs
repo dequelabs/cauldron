@@ -13,8 +13,8 @@
  *      stays green either way.
  *   3. Single copy. `single-copy.mjs` compares `import` vs `require` under Node,
  *      where `module` is ignored and both land on `main` — so it cannot fail
- *      today. A bundler picks entries
- *      differently, and that is the resolution path real consumers use.
+ *      today. A bundler picks entries differently, and that is the resolution
+ *      path real consumers use.
  *
  * Usage: node webpack-checks.cjs <workspace-node-modules> <forbidden-json> <required-marker>
  *
