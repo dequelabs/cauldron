@@ -106,13 +106,19 @@ function createFocusTrap(
       targetElement?.querySelectorAll(focusable) || []
     ) as HTMLElement[];
 
+    // An explicit tabindex="-1" (e.g. an aria-activedescendant item) is never a
+    // Tab stop, so wrapping onto one puts focus where Tab can't go.
+    const wrapTargets = focusableElements.filter(
+      (element) => !element.matches('[tabindex^="-"]')
+    );
+
     // If focus reaches the trap guards, we need to wrap focus around to the leading
     // or trailing focusable element depending on which guard obtained focus
-    if (focusableElements.length && eventTarget === startGuard) {
-      focusableElements.reverse()[0]?.focus();
+    if (wrapTargets.length && eventTarget === startGuard) {
+      wrapTargets[wrapTargets.length - 1].focus();
       return;
-    } else if (focusableElements.length && eventTarget === endGuard) {
-      focusableElements[0]?.focus();
+    } else if (wrapTargets.length && eventTarget === endGuard) {
+      wrapTargets[0].focus();
       return;
     }
 
