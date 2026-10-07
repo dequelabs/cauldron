@@ -9,8 +9,6 @@ yarn-error.log
 .vscode/
 .idea/
 package-lock.json
-# The packaging harness installs this fixture with `npm ci`, which needs it.
-!packages/react/scripts/packaging-smoke/treeshake/package-lock.json
 yarn.lock
 .pnpm-store
 

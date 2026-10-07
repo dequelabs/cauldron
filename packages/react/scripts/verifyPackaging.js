@@ -33,7 +33,7 @@
  *      unused components dropped.
  *
  * The consumers install from the tarball (not a workspace symlink), so
- * resolution matches what a real consumer would get from npm.
+ * resolution matches what a real consumer would get from the registry.
  *
  * Prerequisite: `lib/` must already be built (`pnpm build`). Run via the
  * `verify:packaging` package script, which builds first.
@@ -69,6 +69,10 @@ const forbidden = [
 // ...and must contain this, so an empty or over-pruned bundle can't pass the
 // leak check by containing nothing.
 const required = 'Button--primary';
+
+// Consumers live in a temp dir outside the workspace; `--ignore-workspace`
+// keeps pnpm from looking for one anyway.
+const consumerInstallFlags = ['--ignore-workspace', '--ignore-scripts'];
 
 const listFiles = (dir) =>
   fs
@@ -243,21 +247,11 @@ try {
     path.join(consumerDir, 'esm-output.mjs')
   );
 
-  // Install with npm into an isolated dir so resolution is hermetic and does
-  // not touch the pnpm workspace. react/react-dom satisfy the peer range.
+  // Install outside the workspace so resolution is hermetic. react/react-dom
+  // satisfy the peer range.
   run(
-    'npm',
-    [
-      'install',
-      tarball,
-      'react@^19',
-      'react-dom@^19',
-      '--no-audit',
-      '--no-fund',
-      '--no-package-lock',
-      '--no-save',
-      '--ignore-scripts'
-    ],
+    'pnpm',
+    ['add', tarball, 'react@^19', 'react-dom@^19', ...consumerInstallFlags],
     { cwd: consumerDir }
   );
   run('node', ['smoke.cjs'], { cwd: consumerDir });
@@ -320,9 +314,10 @@ try {
   );
 
   step('Verifying tree-shaking (Button-only import drops unused components)');
-  // The Vite consumer is a committed fixture with its own package-lock.json, so
-  // `npm ci` installs Vite and everything it runs at build time from locked,
-  // integrity-checked versions. Only the tarball under test is added on top.
+  // The Vite consumer is a committed fixture with its own pnpm-lock.yaml, so a
+  // frozen install gets Vite and everything it runs at build time from locked,
+  // integrity-checked versions. Adding the tarball on top only appends to the
+  // copied lockfile; it does not re-resolve what is already locked.
   // Vite 7 builds with Rollup; the step's "Vite (Rollup)" wording and the
   // unminified-output assumption need revisiting if the lock moves to Vite 8,
   // which builds with Rolldown.
@@ -330,9 +325,10 @@ try {
   fs.cpSync(path.join(smokeFixtures, 'treeshake'), treeshakeDir, {
     recursive: true
   });
-  const npmFlags = ['--no-audit', '--no-fund', '--ignore-scripts'];
-  run('npm', ['ci', ...npmFlags], { cwd: treeshakeDir });
-  run('npm', ['install', tarball, '--no-save', ...npmFlags], {
+  run('pnpm', ['install', '--frozen-lockfile', ...consumerInstallFlags], {
+    cwd: treeshakeDir
+  });
+  run('pnpm', ['add', tarball, ...consumerInstallFlags], {
     cwd: treeshakeDir
   });
   // The local binary, not `npx`, so a failed install can't fall back to
