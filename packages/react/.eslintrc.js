@@ -6,6 +6,21 @@ const reactIdGeneratorDefault = {
   importNames: ['default'],
   message: "Import nextId from 'utils/nextId', which unwraps it for strict ESM."
 };
+const syntaxHighlighterPaths = [
+  {
+    name: 'react-syntax-highlighter',
+    importNames: ['default'],
+    message:
+      'Its default export needs interopDefault; keep these imports in Code/index.tsx.'
+  }
+];
+const syntaxHighlighterPatterns = [
+  {
+    group: ['react-syntax-highlighter/**'],
+    message:
+      'Its default exports need interopDefault; keep these imports in Code/index.tsx.'
+  }
+];
 
 module.exports = {
   extends: ['../../.eslintrc.js', 'plugin:ssr-friendly/recommended'],
@@ -38,22 +53,20 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           {
-            paths: [
-              reactIdGeneratorDefault,
-              {
-                name: 'react-syntax-highlighter',
-                importNames: ['default'],
-                message:
-                  'Its default export needs interopDefault; keep these imports in Code/index.tsx.'
-              }
-            ],
-            patterns: [
-              {
-                group: ['react-syntax-highlighter/**'],
-                message:
-                  'Its default exports need interopDefault; keep these imports in Code/index.tsx.'
-              }
-            ]
+            paths: [reactIdGeneratorDefault, ...syntaxHighlighterPaths],
+            patterns: syntaxHighlighterPatterns
+          }
+        ]
+      }
+    },
+    {
+      files: ['src/utils/nextId.ts'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: syntaxHighlighterPaths,
+            patterns: syntaxHighlighterPatterns
           }
         ]
       }
