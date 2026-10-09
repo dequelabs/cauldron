@@ -88,6 +88,44 @@ test('should have screenshot for Table[variant=border]', async ({
   await expect(component).toHaveScreenshot('dark--table-border');
 });
 
+test('should have screenshot for Table[variant=border] with row headers', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <Table variant="border">
+      <TableHead>
+        <TableRow>
+          <TableHeader scope="col">Name</TableHeader>
+          <TableHeader scope="col">Role</TableHeader>
+          <TableHeader scope="col">Location</TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableHeader scope="row">Ada Lovelace</TableHeader>
+          <TableCell>Engineer</TableCell>
+          <TableCell>London</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableHeader scope="row">Alan Turing</TableHeader>
+          <TableCell>Mathematician</TableCell>
+          <TableCell>Manchester</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+
+  // The default threshold (0.2) does not see a light gray border change.
+  await expect(component).toHaveScreenshot('table-border-row-headers', {
+    threshold: 0.1
+  });
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--table-border-row-headers', {
+    threshold: 0.1
+  });
+});
+
 test('should have screenshot for Table with sortable headers', async ({
   mount,
   page
