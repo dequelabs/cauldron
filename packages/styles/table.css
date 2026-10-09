@@ -179,7 +179,7 @@
 
 .Table--border .TableBody .TableHeader {
   border-bottom-width: 1px;
-  border-right: 1px solid var(--table-row-border-color);
+  border-right: 1px solid var(--gray-40);
 }
 
 .cauldron--theme-dark .Table--border,
