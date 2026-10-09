@@ -24,9 +24,15 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      '@deque/cauldron-react': path.resolve(
+      // Consume the built ESM output. `$` matches the bare barrel import only,
+      // so the `/cauldron.css` short-form falls through to its own alias.
+      '@deque/cauldron-react$': path.resolve(
         process.cwd(),
-        'packages/react/lib'
+        'packages/react/lib/esm/index.js'
+      ),
+      '@deque/cauldron-react/cauldron.css': path.resolve(
+        process.cwd(),
+        'packages/react/lib/cauldron.css'
       ),
       react: path.resolve(process.cwd(), 'node_modules/react'),
       'react-dom': path.resolve(process.cwd(), 'node_modules/react-dom')
