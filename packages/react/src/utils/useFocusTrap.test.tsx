@@ -38,6 +38,55 @@ const ComponentWithFocusableElements = ({
   );
 };
 
+const ComponentWithUntabbableEdges = () => {
+  const containerRef = React.useRef(null);
+
+  useFocusTrap(containerRef);
+
+  return (
+    <div ref={containerRef}>
+      <a href="#first" tabIndex={-1}>
+        untabbable first
+      </a>
+      <button>first</button>
+      <button>last</button>
+      <a href="#last" tabIndex={-1}>
+        untabbable last
+      </a>
+    </div>
+  );
+};
+
+const ComponentWithTrailingContentEditable = () => {
+  const containerRef = React.useRef(null);
+
+  useFocusTrap(containerRef);
+
+  return (
+    <div ref={containerRef}>
+      <button>first</button>
+      <div contentEditable aria-label="editor" role="textbox" />
+    </div>
+  );
+};
+
+const ComponentWithOnlyUntabbable = () => {
+  const containerRef = React.useRef(null);
+
+  useFocusTrap(containerRef);
+
+  return (
+    <div ref={containerRef}>
+      <a href="#one" tabIndex={-1}>
+        one
+      </a>
+      <a href="#two" tabIndex={-1}>
+        two
+      </a>
+    </div>
+  );
+};
+
 const ComponentWithInitialFocus = () => {
   const containerRef = React.useRef(null);
   const initialFocusRef = React.useRef(null);
@@ -108,6 +157,57 @@ describe('useFocusTrap', () => {
     // Tab backward should wrap to last element
     await userEvent.tab({ shift: true });
     expect(buttons[3]).toHaveFocus();
+  });
+
+  test('should wrap backward to the last tabbable element, skipping tabindex="-1"', async () => {
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithUntabbableEdges />
+      </ComponentOutsideFocusTrap>
+    );
+
+    screen.getByRole('button', { name: 'first' }).focus();
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('button', { name: 'last' })).toHaveFocus();
+  });
+
+  test('should wrap forward to the first tabbable element, skipping tabindex="-1"', async () => {
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithUntabbableEdges />
+      </ComponentOutsideFocusTrap>
+    );
+
+    screen.getByRole('button', { name: 'last' }).focus();
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'first' })).toHaveFocus();
+  });
+
+  test('should still wrap to a contenteditable that has no tabindex', async () => {
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithTrailingContentEditable />
+      </ComponentOutsideFocusTrap>
+    );
+
+    screen.getByRole('button', { name: 'first' }).focus();
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('textbox', { name: 'editor' })).toHaveFocus();
+  });
+
+  test('should keep focus in place when nothing in the trap is tabbable', async () => {
+    render(
+      <ComponentOutsideFocusTrap>
+        <ComponentWithOnlyUntabbable />
+      </ComponentOutsideFocusTrap>
+    );
+
+    const two = screen.getByRole('link', { name: 'two' });
+    two.focus();
+    await userEvent.tab();
+    expect(two).toHaveFocus();
+    await userEvent.tab({ shift: true });
+    expect(two).toHaveFocus();
   });
 
   test('should focus initial element with element ref', () => {
