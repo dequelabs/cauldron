@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.7.0](https://github.com/dequelabs/cauldron/compare/v7.6.0...v7.7.0) (2026-10-09)
+
+
+### Features
+
+* **TreeView:** add opt-in virtualization via a virtualized prop ([#2523](https://github.com/dequelabs/cauldron/issues/2523)) ([0419668](https://github.com/dequelabs/cauldron/commit/0419668f7bf086aa9f020ce546f9df6bce103388)), closes [#1290](https://github.com/dequelabs/cauldron/issues/1290) [dequelabs/axe-reports#3277](https://github.com/dequelabs/axe-reports/issues/3277)
+
+
+### Bug Fixes
+
+* **Accordion:** reset first and last child margins in accordion panel ([#2555](https://github.com/dequelabs/cauldron/issues/2555)) ([3fed54d](https://github.com/dequelabs/cauldron/commit/3fed54df53e7aa7a7a58d21acc6d35b8466e5598))
+* **Accordion:** stop AccordionTrigger className replacing Accordion__trigger ([#2553](https://github.com/dequelabs/cauldron/issues/2553)) ([d064923](https://github.com/dequelabs/cauldron/commit/d064923e9e745b7e2123f7c24d9f3fbeb7283c48)), closes [#2480](https://github.com/dequelabs/cauldron/issues/2480)
+* **Drawer:** scroll content taller than the viewport ([#2547](https://github.com/dequelabs/cauldron/issues/2547)) ([74b85fb](https://github.com/dequelabs/cauldron/commit/74b85fb13c90b5c65b015b4305ea2cb8f8ead107)), closes [#2546](https://github.com/dequelabs/cauldron/issues/2546)
+
 ## [7.6.0](https://github.com/dequelabs/cauldron/compare/v7.4.0...v7.6.0) (2026-09-22)
 
 

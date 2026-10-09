@@ -46,3 +46,6 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: 'babel-*'
         update-types: ['version-update:semver-major']
+      # Ignore all Playwright updates while pnpm-workspace.yaml pins it to 1.50.1
+      - dependency-name: 'playwright'
+      - dependency-name: '@playwright/*'

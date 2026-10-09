@@ -1,5 +1,6 @@
 :root {
   --tree-view-padding: 1rem;
+  --tree-view-row-height: 36px;
   --tree-view-focus-ring-color: var(--focus-light);
   --tree-view-highlight-background: var(--accent-light);
 }
@@ -24,6 +25,17 @@
   outline-offset: -1px;
 }
 
+/* Virtualized rows are absolutely positioned and the list layout owns their
+   spacing, so the flex container's flow, gap and padding are cleared. The tree
+   needs a definite width from an ancestor — absolutely positioned rows give it
+   no intrinsic one. */
+.TreeView--virtualized {
+  display: block;
+  gap: 0;
+  padding: 0;
+  position: relative;
+}
+
 .TreeView .TreeView__item {
   display: flex;
   align-items: center;
@@ -33,6 +45,13 @@
   outline: none;
   position: relative;
   transform: translateZ(0);
+}
+
+/* Vertical padding makes virtualized rows overlap and swallow the gap: the
+   virtualizer measures a row's content box first, its border box after. */
+.TreeView--virtualized .TreeView__item {
+  padding-block: 0;
+  min-height: var(--tree-view-row-height);
 }
 
 .TreeView .TreeView__item .TreeView__chevron {
