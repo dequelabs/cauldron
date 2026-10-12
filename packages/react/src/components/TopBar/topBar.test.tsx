@@ -94,8 +94,7 @@ test('dark theme top-bar-border-bottom-color references valid palette token', ()
   );
   expect(darkThemeMatch).not.toBeNull();
   const token = darkThemeMatch![1];
-  expect(token).toBe('--gray-80');
+  expect(token).toBe('--stroke-dark');
   expect(variablesCss).toContain(`${token}:`);
   expect(topBarCss).not.toContain('--gray-70');
 });
-
