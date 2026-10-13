@@ -106,8 +106,7 @@ function createFocusTrap(
       targetElement?.querySelectorAll(focusable) || []
     ) as HTMLElement[];
 
-    // An explicit tabindex="-1" (e.g. an aria-activedescendant item) is never a
-    // Tab stop, so wrapping onto one puts focus where Tab can't go.
+    // Tab stops such as contenteditable and video[controls] can report tabIndex -1 without a tabindex attribute.
     const wrapTargets = focusableElements.filter(
       (element) => !(element.hasAttribute('tabindex') && element.tabIndex < 0)
     );
