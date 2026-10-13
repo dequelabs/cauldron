@@ -570,6 +570,69 @@ test('clicking the chevron expands without running onAction', async () => {
   expect(onAction).not.toHaveBeenCalled();
 });
 
+test('clicking the checkbox box runs onAction once', async () => {
+  const onAction = jest.fn();
+  const { container, getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+
+  const overlay = container.querySelector('.Checkbox__overlay') as HTMLElement;
+  await userEvent.click(overlay);
+
+  expect(onAction).toHaveBeenCalledTimes(1);
+  expect(onAction).toHaveBeenLastCalledWith('1');
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+});
+
+test.each([
+  ['Enter', '{Enter}'],
+  ['click', null]
+])(
+  'without selection, %s on a parent row runs onAction without expanding it',
+  async (_, key) => {
+    const onAction = jest.fn();
+    const { getByRole } = render(
+      <TreeView aria-label="Test TreeView" onAction={onAction} items={items} />
+    );
+    const row = getByRole('row', { name: 'TreeView' });
+
+    if (key) {
+      row.focus();
+      await userEvent.keyboard(key);
+    } else {
+      await userEvent.click(row);
+    }
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onAction).toHaveBeenLastCalledWith('1');
+    expect(row).toHaveAttribute('aria-expanded', 'false');
+  }
+);
+
+test('onAction still runs after virtualized is toggled', async () => {
+  const onAction = jest.fn();
+  const props = {
+    'aria-label': 'Test TreeView',
+    selectionMode: 'multiple' as const,
+    onAction,
+    items
+  };
+  const { getByRole, rerender } = render(<TreeView {...props} />);
+
+  rerender(<TreeView {...props} virtualized height={200} />);
+  await userEvent.click(getByRole('row', { name: 'TreeView' }));
+  expect(onAction).toHaveBeenCalledTimes(1);
+
+  rerender(<TreeView {...props} />);
+  await userEvent.click(getByRole('row', { name: 'Another One' }));
+  expect(onAction).toHaveBeenCalledTimes(2);
+});
+
 // --- Virtualized mode ---
 
 /** The virtualizer wraps every row in an absolutely-positioned
