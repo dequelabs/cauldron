@@ -21,7 +21,6 @@ body.TopBar--thin .NavigationDrawer {
 .NavigationDrawer {
   --drawer-top: var(--top-bar-height);
   --drawer-height: calc(100vh - var(--top-bar-height));
-  overflow-y: auto;
 }
 
 .Navigation {
