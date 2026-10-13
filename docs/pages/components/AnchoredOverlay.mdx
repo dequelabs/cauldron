@@ -5,7 +5,15 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useRef, useState } from 'react';
-import { Select, Button, AnchoredOverlay } from '@deque/cauldron-react';
+import {
+  Select,
+  Button,
+  AnchoredOverlay,
+  Combobox,
+  ComboboxOption,
+  ActionList,
+  ActionListLinkItem
+} from '@deque/cauldron-react';
 export const placements = [
   'top',
   'top-start',
@@ -132,6 +140,73 @@ function AnchoredOverlayWithOffsetExample() {
       >
         Anchored Overlay Element with offset placement {placement}
       </AnchoredOverlay>
+    </>
+  );
+}
+```
+
+### Focus Trap
+
+When `focusTrap` is set, focus stays inside the overlay. When focus wraps, it skips controls with `tabindex="-1"`, such as the pill buttons at the start of this overlay's multiselect [Combobox](./Combobox) and the items at the end of its `aria-activedescendant` [ActionList](./ActionList) menu.
+
+```jsx example
+function AnchoredOverlayFocusTrapExample() {
+  const [open, setOpen] = useState(false);
+  const targetRef = useRef();
+  const headingRef = useRef();
+  const toggleOpen = () => setOpen(!open);
+
+  return (
+    <>
+      <Button
+        ref={targetRef}
+        variant="secondary"
+        onClick={toggleOpen}
+        aria-expanded={open}
+      >
+        Filters
+      </Button>
+      {open && (
+        <AnchoredOverlay
+          target={targetRef}
+          open={open}
+          placement="bottom-start"
+          onOpenChange={(openState) => setOpen(openState)}
+          focusTrap
+          focusTrapOptions={{
+            initialFocusElement: headingRef,
+            returnFocus: true
+          }}
+          role="dialog"
+          aria-labelledby="anchored-overlay-filters"
+          style={{
+            padding: 'var(--space-small)',
+            backgroundColor: 'var(--panel-background-color)'
+          }}
+        >
+          <h2 id="anchored-overlay-filters" ref={headingRef} tabIndex={-1}>
+            Filters
+          </h2>
+          <Combobox
+            label="Status"
+            multiselect
+            defaultValue={['Open', 'In progress']}
+          >
+            <ComboboxOption value="Open">Open</ComboboxOption>
+            <ComboboxOption value="In progress">In progress</ComboboxOption>
+            <ComboboxOption value="Closed">Closed</ComboboxOption>
+          </Combobox>
+          <Button onClick={toggleOpen}>Apply</Button>
+          <ActionList role="menu" aria-label="Saved filters">
+            <ActionListLinkItem href="#assigned-to-me">
+              Assigned to me
+            </ActionListLinkItem>
+            <ActionListLinkItem href="#due-this-week">
+              Due this week
+            </ActionListLinkItem>
+          </ActionList>
+        </AnchoredOverlay>
+      )}
     </>
   );
 }
