@@ -462,6 +462,177 @@ test('cascade is inert in single selection mode', async () => {
   expect(getByRole('checkbox', { name: 'pizza' })).not.toBeChecked();
 });
 
+// --- onAction: click, Space and Enter each toggle and act ---
+
+test.each([
+  ['Space', ' '],
+  ['Enter', '{Enter}']
+])('%s toggles the checkbox and runs onAction, every time', async (_, key) => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /TreeView/ }) as HTMLElement).focus();
+  await userEvent.keyboard(key);
+  expect(onAction).toHaveBeenCalledTimes(1);
+  expect(onAction).toHaveBeenLastCalledWith('1');
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+
+  // react-aria stops treating a press as an action once anything is
+  // selected, so this is the press that used to go silent.
+  (getByRole('row', { name: /pizza/ }) as HTMLElement).focus();
+  await userEvent.keyboard(key);
+  expect(onAction).toHaveBeenCalledTimes(2);
+  expect(onAction).toHaveBeenLastCalledWith('2');
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+});
+
+test('pressing a key on a checked row unchecks it and runs onAction', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+  (getByRole('row', { name: /TreeView/ }) as HTMLElement).focus();
+  await userEvent.keyboard(' ');
+  await userEvent.keyboard('{Enter}');
+  expect(getByRole('checkbox', { name: 'TreeView' })).not.toBeChecked();
+  expect(onAction).toHaveBeenCalledTimes(2);
+});
+
+test('a click selects the row and runs onAction, every time', async () => {
+  const onAction = jest.fn();
+  const { getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      defaultExpandedKeys={['1']}
+      items={items}
+    />
+  );
+
+  await userEvent.click(getByRole('checkbox', { name: 'TreeView' }));
+  expect(onAction).toHaveBeenCalledTimes(1);
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+
+  // react-aria stops reporting a press as an action once anything is selected,
+  // so this is the click that used to select without activating.
+  await userEvent.click(getByRole('checkbox', { name: 'pizza' }));
+  expect(onAction).toHaveBeenCalledTimes(2);
+  expect(onAction).toHaveBeenLastCalledWith('2');
+  expect(getByRole('checkbox', { name: 'pizza' })).toBeChecked();
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+});
+
+test('clicking a row label runs onAction once', async () => {
+  const onAction = jest.fn();
+  const { getByText } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+
+  await userEvent.click(getByText('TreeView'));
+  expect(onAction).toHaveBeenCalledTimes(1);
+});
+
+test('clicking the chevron expands without running onAction', async () => {
+  const onAction = jest.fn();
+  const { container, queryByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+
+  expect(queryByRole('checkbox', { name: 'pizza' })).not.toBeInTheDocument();
+  const chevron = container.querySelector('.TreeView__chevron') as HTMLElement;
+  await userEvent.click(chevron);
+
+  expect(queryByRole('checkbox', { name: 'pizza' })).toBeInTheDocument();
+  expect(onAction).not.toHaveBeenCalled();
+});
+
+test('clicking the checkbox box runs onAction once', async () => {
+  const onAction = jest.fn();
+  const { container, getByRole } = render(
+    <TreeView
+      aria-label="Test TreeView"
+      selectionMode="multiple"
+      onAction={onAction}
+      items={items}
+    />
+  );
+
+  const overlay = container.querySelector('.Checkbox__overlay') as HTMLElement;
+  await userEvent.click(overlay);
+
+  expect(onAction).toHaveBeenCalledTimes(1);
+  expect(onAction).toHaveBeenLastCalledWith('1');
+  expect(getByRole('checkbox', { name: 'TreeView' })).toBeChecked();
+});
+
+test.each([
+  ['Enter', '{Enter}'],
+  ['click', null]
+])(
+  'without selection, %s on a parent row runs onAction without expanding it',
+  async (_, key) => {
+    const onAction = jest.fn();
+    const { getByRole } = render(
+      <TreeView aria-label="Test TreeView" onAction={onAction} items={items} />
+    );
+    const row = getByRole('row', { name: 'TreeView' });
+
+    if (key) {
+      row.focus();
+      await userEvent.keyboard(key);
+    } else {
+      await userEvent.click(row);
+    }
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onAction).toHaveBeenLastCalledWith('1');
+    expect(row).toHaveAttribute('aria-expanded', 'false');
+  }
+);
+
+test('onAction still runs after virtualized is toggled', async () => {
+  const onAction = jest.fn();
+  const props = {
+    'aria-label': 'Test TreeView',
+    selectionMode: 'multiple' as const,
+    onAction,
+    items
+  };
+  const { getByRole, rerender } = render(<TreeView {...props} />);
+
+  rerender(<TreeView {...props} virtualized height={200} />);
+  await userEvent.click(getByRole('row', { name: 'TreeView' }));
+  expect(onAction).toHaveBeenCalledTimes(1);
+
+  rerender(<TreeView {...props} />);
+  await userEvent.click(getByRole('row', { name: 'Another One' }));
+  expect(onAction).toHaveBeenCalledTimes(2);
+});
+
 // --- Virtualized mode ---
 
 /** The virtualizer wraps every row in an absolutely-positioned
