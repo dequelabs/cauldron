@@ -1,4 +1,5 @@
 dist
+.next
 node_modules
 coverage
 packages/react/lib
