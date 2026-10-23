@@ -116,7 +116,7 @@
     "react-router-dom": "^7.15.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-mdx-frontmatter": "^5.2.0",
+    "remark-mdx-frontmatter": "^6.0.0",
     "remark-mdx-toc": "^0.3.1",
     "rimraf": "^6.1.3",
     "slugify": "^1.6.9",
