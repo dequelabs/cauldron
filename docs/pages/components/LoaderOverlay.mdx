@@ -5,7 +5,13 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useState, useRef } from 'react';
-import { LoaderOverlay, Button, Scrim } from '@deque/cauldron-react';
+import {
+  LoaderOverlay,
+  Button,
+  Scrim,
+  ActionList,
+  ActionListLinkItem
+} from '@deque/cauldron-react';
 
 ```js
 import { LoaderOverlay } from '@deque/cauldron-react';
@@ -44,6 +50,48 @@ function LoaderOverlayExample() {
               Explanatory secondary text goes here. Let them know what's
               happening, alright?
             </p>
+          </LoaderOverlay>
+        </>
+      )}
+    </>
+  );
+}
+```
+
+### Focus Wrapping
+
+When focus wraps inside a `focusTrap` loader, it skips controls with `tabindex="-1"`, such as the items at the end of this loader's `aria-activedescendant` [ActionList](./ActionList) menu, so Shift+Tab from the cancel button moves to the menu rather than its last item.
+
+```jsx example
+function LoaderOverlayFocusWrappingExample() {
+  const buttonRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const cancel = () => {
+    setLoading(false);
+    buttonRef.current?.focus();
+  };
+  return (
+    <>
+      <Button ref={buttonRef} onClick={() => setLoading(true)}>
+        Generate Report
+      </Button>
+      {loading && (
+        <>
+          <Scrim show />
+          <LoaderOverlay focusTrap focusOnInitialRender>
+            <p>
+              Generating your report. You can leave this page, and we'll email
+              the report when it's ready.
+            </p>
+            <Button variant="secondary" onClick={cancel}>
+              Cancel
+            </Button>
+            <ActionList role="menu" aria-label="Go to">
+              <ActionListLinkItem href="#dashboard">
+                Dashboard
+              </ActionListLinkItem>
+              <ActionListLinkItem href="#issues">Issues</ActionListLinkItem>
+            </ActionList>
           </LoaderOverlay>
         </>
       )}
