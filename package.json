@@ -113,7 +113,7 @@
     "react": "^19",
     "react-dom": "^19",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.15.0",
+    "react-router-dom": "^7.18.4",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
