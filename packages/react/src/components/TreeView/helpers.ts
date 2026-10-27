@@ -68,52 +68,6 @@ interface CascadeOptions {
 }
 
 /**
- * Toggle a single node, applying cascade per the options (multiple mode only):
- * - selecting + `cascadeSelect`: also selects all (non-disabled) descendants.
- * - deselecting + `cascadeDeselect`: also deselects all descendants.
- *
- * In `single` mode only the clicked node is selected (clicking it again clears
- * it); cascade does not apply.
- */
-export function toggleSelection(
-  nodes: TreeViewNode[],
-  previous: Set<Key>,
-  key: Key,
-  selectionMode: 'single' | 'multiple',
-  { cascadeSelect, cascadeDeselect }: CascadeOptions
-): Set<Key> {
-  if (selectionMode === 'single') {
-    const result = new Set<Key>();
-    if (!previous.has(key)) {
-      result.add(key);
-    }
-    return result;
-  }
-
-  const result = new Set<Key>(previous);
-  const node = findNode(nodes, key);
-  const descendants = node ? collectDescendantKeys(node) : [];
-  const disabled = new Set<Key>(collectDisabledKeys(nodes));
-
-  if (!previous.has(key)) {
-    result.add(key);
-    if (cascadeSelect) {
-      descendants.forEach((k) => {
-        if (!disabled.has(k)) {
-          result.add(k);
-        }
-      });
-    }
-  } else {
-    result.delete(key);
-    if (cascadeDeselect) {
-      descendants.forEach((k) => result.delete(k));
-    }
-  }
-  return result;
-}
-
-/**
  * Apply react-aria's proposed selection while enforcing cascade. Each key
  * react-aria added cascades to its descendants when `cascadeSelect` is set; each
  * key it removed cascades when `cascadeDeselect` is set. In non-multiple modes
