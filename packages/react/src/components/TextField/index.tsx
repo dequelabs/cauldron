@@ -50,8 +50,10 @@ const TextField = forwardRef<
     }: TextFieldProps,
     ref
   ) => {
-    const [generatedInputId, errorId, descriptionId] = useId(3, 'textfield');
+    const [generatedInputId] = useId(1, 'textfield');
     const inputId = id || generatedInputId;
+    const errorId = `${inputId}-error`;
+    const descriptionId = `${inputId}-description`;
     const isControlled = typeof value !== 'undefined';
     const [uncontrolledValue, setUncontrolledValue] = useState<
       string | number | readonly string[] | undefined
