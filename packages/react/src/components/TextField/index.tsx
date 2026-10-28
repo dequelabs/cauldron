@@ -1,6 +1,6 @@
-import React, { ChangeEvent } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import classNames from 'classnames';
-import rndid from '../../utils/rndid';
+import { useId } from 'react-id-generator';
 import setRef from '../../utils/setRef';
 import { addIdRef } from '../../utils/idRefs';
 import Icon from '../Icon';
@@ -17,109 +17,102 @@ export interface TextFieldProps extends Omit<
     value: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  /**
+   * @deprecated Use the forwarded `ref` instead. Will be removed in the next major version.
+   */
   fieldRef?: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
   requiredText?: string;
   multiline?: boolean;
 }
 
-interface TextFieldState {
-  value: string | number | string[] | undefined;
-}
-
-export default class TextField extends React.Component<
-  TextFieldProps,
-  TextFieldState
-> {
-  static displayName = 'TextField';
-  static defaultProps = {
-    error: null,
-    required: false,
-    defaultValue: null,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onChange: () => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    fieldRef: () => {},
-    requiredText: 'Required',
-    multiline: false
-  };
-
-  private inputId: string;
-  private errorId: string;
-  private descriptionId: string;
-  private input: HTMLInputElement | HTMLTextAreaElement | null;
-
-  constructor(props: TextFieldProps) {
-    super(props);
-    this.inputId = this.props.id || rndid();
-    this.errorId = rndid();
-    this.descriptionId = rndid();
-    this.state = {
-      value:
-        typeof this.props.value !== 'undefined'
-          ? (this.props.value as string)
-          : this.props.defaultValue || ''
-    };
-    this.onChange = this.onChange.bind(this);
-  }
-
-  render() {
-    const isRequired = !!this.props.required;
-    // disabling `no-unused-vars` to prevent specific
-    // props from being passed through to the input
-    const {
+const TextField = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  TextFieldProps
+>(
+  (
+    {
+      id,
       label,
       fieldRef,
       value,
       description,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       defaultValue,
       error = null,
-      requiredText,
-      multiline,
+      required = false,
+      requiredText = 'Required',
+      multiline = false,
       'aria-describedby': ariaDescribedby,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       children,
       className,
       ...other
-    } = this.props;
+    }: TextFieldProps,
+    ref
+  ) => {
+    const [generatedInputId, errorId, descriptionId] = useId(3, 'textfield');
+    const inputId = id || generatedInputId;
+    const isControlled = typeof value !== 'undefined';
+    const [uncontrolledValue, setUncontrolledValue] = useState<
+      string | number | readonly string[] | undefined
+    >(isControlled ? value : defaultValue || '');
+
+    const setFieldRef = useCallback(
+      (field: HTMLInputElement | HTMLTextAreaElement | null) => {
+        setRef(ref, field);
+        setRef(fieldRef, field);
+      },
+      [ref, fieldRef]
+    );
+
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        onChange?.(e.target.value, e);
+
+        if (isControlled) {
+          return;
+        }
+
+        setUncontrolledValue(e.target.value);
+      },
+      [onChange, isControlled]
+    );
+
     // typescript can't infer the type so it's complaining about
     // textarea and input props being incompatible
     // we should probably fix this
     const Field: any = multiline ? 'textarea' : 'input';
     const describedby = description
-      ? addIdRef(ariaDescribedby, this.descriptionId)
+      ? addIdRef(ariaDescribedby, descriptionId)
       : ariaDescribedby;
 
     const inputProps = {
-      'aria-describedby': error
-        ? addIdRef(describedby, this.errorId)
-        : describedby
+      'aria-describedby': error ? addIdRef(describedby, errorId) : describedby
     };
 
     return (
       <div className="Field">
         <label
           className={classNames('Field__label', {
-            'Field__label--is-required': isRequired,
+            'Field__label--is-required': required,
             'Field__label--has-error': error
           })}
-          htmlFor={this.inputId}
+          htmlFor={inputId}
         >
           <span>{label}</span>
-          {isRequired && (
+          {required && (
             <span className="Field__required-text" aria-hidden="true">
               {requiredText}
             </span>
           )}
         </label>
         {description && (
-          <div className="Field__description" id={this.descriptionId}>
+          <div className="Field__description" id={descriptionId}>
             {description}
           </div>
         )}
         {error && (
-          <div className="Field__error" id={this.errorId}>
+          <div className="Field__error" id={errorId}>
             <Icon type="caution" />
             {error}
           </div>
@@ -130,35 +123,20 @@ export default class TextField extends React.Component<
             Field__textarea: multiline,
             'Field--has-error': error
           })}
-          id={this.inputId}
-          value={typeof value !== 'undefined' ? value : this.state.value}
-          onChange={this.onChange}
+          id={inputId}
+          value={isControlled ? value : uncontrolledValue}
+          onChange={handleChange}
           aria-invalid={!!error}
-          ref={(input: HTMLInputElement | HTMLTextAreaElement | null) => {
-            this.input = input;
-            setRef(fieldRef, input);
-          }}
+          required={required}
+          ref={setFieldRef}
           {...other}
           {...inputProps}
         />
       </div>
     );
   }
+);
 
-  onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    if (this.props.onChange) {
-      this.props.onChange(
-        this.input?.value || /* istanbul ignore next: default value */ '',
-        e
-      );
-    }
+TextField.displayName = 'TextField';
 
-    if (typeof this.props.value !== 'undefined') {
-      return;
-    }
-
-    this.setState({
-      value: this.input?.value
-    });
-  }
-}
+export default TextField;
