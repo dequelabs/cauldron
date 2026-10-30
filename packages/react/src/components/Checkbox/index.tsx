@@ -7,9 +7,9 @@ import React, {
   useMemo
 } from 'react';
 import classNames from 'classnames';
-import nextId from 'react-id-generator';
 import Icon, { type IconType } from '../Icon';
 import { addIdRef } from '../../utils/idRefs';
+import nextId from '../../utils/nextId';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
