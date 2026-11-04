@@ -40,21 +40,32 @@ jobs:
           echo "environment=$environment" >> "$GITHUB_OUTPUT"
           echo "PR #$PR_NUMBER association $ASSOCIATION head $HEAD_REPO routes to $environment"
 
-  build:
+  gate:
+    name: Approve preview build and deploy
     needs: resolve
     runs-on: ubuntu-latest
-    # Never attach secrets to pr-preview-auto or pr-preview-gated; this job runs untrusted fork code.
+    permissions: {}
     environment:
       name: ${{ needs.resolve.outputs.environment }}
+    steps:
+      - env:
+          ENVIRONMENT: ${{ needs.resolve.outputs.environment }}
+        run: echo "Passed $ENVIRONMENT"
+
+  build:
+    needs: gate
+    runs-on: ubuntu-latest
+    # Runs untrusted fork code: never give this job an environment, a secret, write permissions, or a write cache mode.
     permissions:
       contents: read
+    cache-mode: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-          # This job attaches no secrets and uses contents: read; outside-contributor fork code builds only after a maintainer approves pr-preview-gated. The privileged deploy is a separate job that never runs fork code.
+          # This job attaches no secrets and uses contents: read; outside-contributor fork code builds only after a maintainer approves the gate job. The privileged deploy is a separate job that never runs fork code.
           allow-unsafe-pr-checkout: true
       - uses: ./.github/actions/dependencies
       - name: Build docs site
