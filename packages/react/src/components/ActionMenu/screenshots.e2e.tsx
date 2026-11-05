@@ -250,3 +250,76 @@ test('should have screenshot for ActionMenu mixed', async ({ mount, page }) => {
   await setTheme(page, 'dark');
   await expect(component).toHaveScreenshot('dark--actionmenu-mixed');
 });
+
+test('should have screenshot for ActionMenu hovered danger item', async ({
+  mount,
+  page
+}) => {
+  await page.addStyleTag({
+    // ensure screenshots are able to capture the boundaries of an expanded combobox
+    content: `.ActionMenu {
+      position: relative !important;
+      transform: translateY(2px) !important;
+      /* view full height of menu */
+      --action-menu-max-height: none;
+    }`
+  });
+  const component = await mount(
+    <div>
+      <ActionMenu
+        trigger={
+          <Button variant="secondary">
+            Action Menu Trigger
+            <Icon type="chevron-down" />
+          </Button>
+        }
+      >
+        <ActionList>
+          <ActionListItem>Item</ActionListItem>
+          <ActionListItem
+            variant="danger"
+            leadingIcon="copy"
+            trailingIcon="new"
+            description="This is a description"
+          >
+            Hover danger
+          </ActionListItem>
+          <ActionListItem variant="danger">Danger</ActionListItem>
+        </ActionList>
+      </ActionMenu>
+    </div>
+  );
+
+  await component.getByText('Action Menu Trigger').click();
+  await component.getByText('Hover danger').hover();
+
+  await expect(component).toHaveScreenshot('actionmenu-danger-hover');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--actionmenu-danger-hover');
+});
+
+test('should have screenshot for ActionList hovered danger item', async ({
+  mount,
+  page
+}) => {
+  const component = await mount(
+    <ActionList>
+      <ActionListItem>Item</ActionListItem>
+      <ActionListItem
+        variant="danger"
+        leadingIcon="copy"
+        trailingIcon="new"
+        description="This is a description"
+      >
+        Hover danger
+      </ActionListItem>
+      <ActionListItem variant="danger">Danger</ActionListItem>
+    </ActionList>
+  );
+
+  await component.getByText('Hover danger').hover();
+
+  await expect(component).toHaveScreenshot('actionlist-danger-hover');
+  await setTheme(page, 'dark');
+  await expect(component).toHaveScreenshot('dark--actionlist-danger-hover');
+});
