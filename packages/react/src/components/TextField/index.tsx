@@ -65,18 +65,17 @@ const TextField = forwardRef<
       [ref, fieldRef]
     );
 
-    const handleChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        onChange?.(e.target.value, e);
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      onChange?.(e.target.value, e);
 
-        if (isControlled) {
-          return;
-        }
+      if (isControlled) {
+        return;
+      }
 
-        setUncontrolledValue(e.target.value);
-      },
-      [onChange, isControlled]
-    );
+      setUncontrolledValue(e.target.value);
+    };
 
     // typescript can't infer the type so it's complaining about
     // textarea and input props being incompatible

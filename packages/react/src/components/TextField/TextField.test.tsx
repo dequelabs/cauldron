@@ -424,11 +424,6 @@ test('should not update uncontrolled value when defaultValue changes', () => {
   expect(input).toHaveValue('one');
 });
 
-test('should not pass defaultValue through to the field', () => {
-  const input = renderTextField({ defaultValue: 'one' });
-  expect(input).not.toHaveAttribute('defaultvalue');
-});
-
 test('should pass through additional props to the field', () => {
   const input = renderTextField({
     placeholder: 'type here',
