@@ -70,6 +70,10 @@ jobs:
       - uses: ./.github/actions/dependencies
       - name: Build docs site
         run: pnpm build
+      # A manual Amplify deployment only applies custom headers when
+      # customHttp.yml is inside the uploaded artifact.
+      - name: Add custom headers to preview site
+        run: cp customHttp.yml docs/dist/customHttp.yml
       - name: Upload preview site
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
