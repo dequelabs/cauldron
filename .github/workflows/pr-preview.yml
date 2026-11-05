@@ -65,7 +65,7 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-          # This job attaches no secrets and uses contents: read; outside-contributor fork code builds only after a maintainer approves the gate job. The privileged deploy is a separate job that never runs fork code.
+          # Outside-contributor fork code builds only after a maintainer approves the gate job. The deploy job, which holds AWS access, never runs fork code.
           allow-unsafe-pr-checkout: true
       - uses: ./.github/actions/dependencies
       - name: Build docs site

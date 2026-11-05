@@ -216,7 +216,7 @@ A pull request from an outside contributor waits for a Cauldron maintainer to ap
 
 A maintainer reviews the full pull request before approving the preview. That review includes reading the code and confirming the change is safe to build and to publish to a URL under Deque's Amplify app.
 
-Maintainers: never add a secret to the `pr-preview-auto` or `pr-preview-gated` GitHub Environments. The build job runs contributor code, so it must never be given an environment, because that code could read any secret the environment holds. These environments hold only reviewer and branch rules.
+Maintainers: never add a secret to the `pr-preview-auto` or `pr-preview-gated` GitHub Environments. These environments hold only reviewer and branch rules. The build job runs contributor code, so never give it an environment and never pass it a secret.
 
 ### Testing Strategies
 
