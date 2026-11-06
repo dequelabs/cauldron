@@ -128,7 +128,7 @@
     "typescript": "~6.0.2",
     "unist-util-visit": "^5.1.0",
     "webpack": "^5.106.1",
-    "webpack-cli": "^7.0.2",
+    "webpack-cli": "^7.2.3",
     "webpack-dev-server": "^6.0.0"
   },
   "packageManager": "pnpm@11.4.0"
