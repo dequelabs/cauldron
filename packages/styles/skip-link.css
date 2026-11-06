@@ -10,6 +10,12 @@
   padding: var(--space-smallest);
   top: -999px;
   left: 11px;
+  /* Never wider than the containing block, also with enlarged text. */
+  min-width: min(
+    calc(13rem + 2 * var(--space-smallest)),
+    calc(100% - 2 * 11px)
+  );
+  max-width: calc(100% - 2 * 11px);
   opacity: 0;
   transition: 250ms opacity;
   z-index: var(--z-index-skip-container);
@@ -25,7 +31,6 @@
 }
 
 .SkipLink a {
-  min-width: 13rem;
   background-color: var(--skip-link-background-color);
   display: block;
   color: var(--skip-link-text-color);
