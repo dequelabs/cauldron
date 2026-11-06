@@ -38,8 +38,10 @@ test('should have screenshot for SkipLink with custom target text', async ({
 });
 
 test.describe('on a 320px mobile viewport with enlarged text', () => {
+  const viewportWidth = 320;
+  const skipLinkOffset = 11;
   // A mobile browser widens the page to fit content, also off-screen content.
-  test.use({ viewport: { width: 320, height: 640 }, isMobile: true });
+  test.use({ viewport: { width: viewportWidth, height: 640 }, isMobile: true });
 
   const getPageWidth = (page: Page) =>
     page.evaluate(() =>
@@ -51,14 +53,24 @@ test.describe('on a 320px mobile viewport with enlarged text', () => {
   });
 
   test('should fit the viewport when focused', async ({ mount, page }) => {
-    await mount(<SkipLink target="#main-content" />);
+    await mount(
+      <SkipLink
+        target="#main-content"
+        targetText="The main content of this page with a very long heading"
+      />
+    );
 
     const navigation = page.getByRole('navigation');
     await navigation.getByRole('link').focus();
     await expect(navigation).toHaveClass(/SkipLink--fade/);
 
-    expect(await getPageWidth(page)).toBeLessThanOrEqual(320);
+    expect(await getPageWidth(page)).toBeLessThanOrEqual(viewportWidth);
     const box = await navigation.boundingBox();
-    expect((box?.x ?? Infinity) + (box?.width ?? 0)).toBeLessThanOrEqual(320);
+    if (!box) {
+      throw new Error('Could not get bounding box for the skip link');
+    }
+    expect(box.x + box.width).toBeLessThanOrEqual(
+      viewportWidth - skipLinkOffset
+    );
   });
 });
