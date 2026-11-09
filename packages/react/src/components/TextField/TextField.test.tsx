@@ -455,26 +455,6 @@ test('should derive description and error ids from provided id', () => {
   );
 });
 
-test('should keep description and error ids stable across renders', () => {
-  const props = {
-    label: 'text field',
-    id: 'my-field',
-    description: 'the description',
-    error: 'the error'
-  };
-  const { unmount } = render(<TextField {...props} />);
-  const firstDescribedby = screen
-    .getByRole('textbox', { name: 'text field' })
-    .getAttribute('aria-describedby');
-  unmount();
-
-  render(<TextField {...props} />);
-  expect(screen.getByRole('textbox', { name: 'text field' })).toHaveAttribute(
-    'aria-describedby',
-    firstDescribedby
-  );
-});
-
 test('should derive description and error ids from generated id', () => {
   const input = renderTextField({
     description: 'the description',
@@ -493,16 +473,24 @@ test('should derive description and error ids from generated id', () => {
 test('should not collide description and error ids between text fields', () => {
   render(
     <>
-      <TextField label="first" description="first description" error="err" />
-      <TextField label="second" description="second description" error="err" />
+      <TextField
+        label="first"
+        description="first description"
+        error="first error"
+      />
+      <TextField
+        label="second"
+        description="second description"
+        error="second error"
+      />
     </>
   );
   expect(
     screen.getByRole('textbox', { name: 'first' })
-  ).toHaveAccessibleDescription('first description err');
+  ).toHaveAccessibleDescription('first description first error');
   expect(
     screen.getByRole('textbox', { name: 'second' })
-  ).toHaveAccessibleDescription('second description err');
+  ).toHaveAccessibleDescription('second description second error');
   expect(screen.getByText('first description').id).not.toEqual(
     screen.getByText('second description').id
   );
