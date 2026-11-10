@@ -67,7 +67,8 @@ function createTrapGuard(): HTMLSpanElement {
 
 function createFocusTrap(
   targetElement: Element,
-  initialFocusElement: HTMLElement | null
+  initialFocusElement: HTMLElement | null,
+  contains?: (node: Node | null) => boolean
 ): FocusTrap {
   const startGuard = createTrapGuard();
   const endGuard = createTrapGuard();
@@ -82,10 +83,9 @@ function createFocusTrap(
 
   const focusListener = (event: FocusEvent) => {
     const eventTarget = event.target;
-    const elementContainsTarget = elementContains(
-      targetElement,
-      eventTarget as Element
-    );
+    const elementContainsTarget =
+      elementContains(targetElement, eventTarget as Element) ||
+      !!contains?.(eventTarget as Node);
 
     if (focusTrapMetadata.suspended) {
       return;
@@ -200,13 +200,19 @@ export default function useFocusTrap<
      * can be provided to override the default active element behavior.
      */
     returnFocusElement?: ElementOrRef<FocusElement>;
+    /**
+     * Also counts a node as inside the trap when this returns true, e.g. an
+     * overlay portaled out of the target that still belongs to it.
+     */
+    contains?: (node: Node | null) => boolean;
   } = {}
 ): React.RefObject<Readonly<FocusTrap> | null> {
   const {
     disabled = false,
     returnFocus = true,
     initialFocusElement: initialFocusElementOrRef,
-    returnFocusElement
+    returnFocusElement,
+    contains
   } = options;
   const focusTrap = useRef<FocusTrap | null>(null);
   const returnFocusElementRef = useRef<HTMLElement | null>(null);
@@ -215,10 +221,25 @@ export default function useFocusTrap<
     const resolvedReturnFocusElement = resolveElement(returnFocusElement);
     if (resolvedReturnFocusElement instanceof HTMLElement) {
       resolvedReturnFocusElement.focus();
-    } else {
-      returnFocusElementRef.current?.focus();
-      returnFocusElementRef.current = null;
+      return;
     }
+
+    const element = returnFocusElementRef.current;
+    returnFocusElementRef.current = null;
+    if (element?.isConnected && element !== element.ownerDocument.body) {
+      element.focus();
+      return;
+    }
+
+    // Focus was on <body> when the trap opened (Safari does not focus a
+    // button on click). Return it to the trap below instead, so focus stays
+    // in the container the user is working in.
+    const outerTrap = focusTrapStack[focusTrapStack.length - 1];
+    (
+      (outerTrap?.lastFocusedElement ?? outerTrap?.targetElement) as
+        | HTMLElement
+        | undefined
+    )?.focus();
   }
 
   useEffect(() => {
@@ -233,7 +254,11 @@ export default function useFocusTrap<
 
     returnFocusElementRef.current = getActiveElement(targetElement);
 
-    focusTrap.current = createFocusTrap(targetElement, initialFocusElement);
+    focusTrap.current = createFocusTrap(
+      targetElement,
+      initialFocusElement,
+      contains
+    );
 
     return () => {
       focusTrap.current?.destroy();

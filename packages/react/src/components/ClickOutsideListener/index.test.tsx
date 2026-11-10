@@ -373,3 +373,22 @@ test('should allow for ref target', async () => {
   await user.click(getByTestId('link'));
   expect(onClickOutside).toHaveBeenCalledTimes(1);
 });
+
+test('should not call onClickOutside when contains reports the node as inside', async () => {
+  const onClickOutside = jest.fn();
+  const user = userEvent.setup();
+  const link = screen.getByTestId('link');
+
+  render(
+    <ClickOutsideListener
+      onClickOutside={onClickOutside}
+      contains={(node) => node === link}
+    >
+      <div>Inside!</div>
+    </ClickOutsideListener>,
+    { container: mountNode as HTMLElement }
+  );
+
+  await user.click(link);
+  expect(onClickOutside).not.toBeCalled();
+});

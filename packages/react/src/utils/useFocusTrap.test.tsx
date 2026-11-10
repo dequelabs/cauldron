@@ -322,4 +322,56 @@ describe('useFocusTrap', () => {
 
     expect(buttonAfter).toHaveFocus();
   });
+  test('should let focus move to a node that contains reports as inside', async () => {
+    const PortaledInside = () => {
+      const containerRef = React.useRef<HTMLDivElement>(null);
+      const portaledRef = React.useRef<HTMLButtonElement>(null);
+      useFocusTrap(containerRef, {
+        contains: (node) => !!node && !!portaledRef.current?.contains(node)
+      });
+      return (
+        <>
+          <button ref={portaledRef}>portaled</button>
+          <div ref={containerRef}>
+            <button>inside</button>
+          </div>
+        </>
+      );
+    };
+    render(<PortaledInside />);
+
+    const portaled = screen.getByRole('button', { name: 'portaled' });
+    portaled.focus();
+    expect(portaled).toHaveFocus();
+  });
+
+  test('should return focus to the trap below when focus was on <body>', () => {
+    const Traps = ({ inner }: { inner: boolean }) => {
+      const outerRef = React.useRef<HTMLDivElement>(null);
+      const innerRef = React.useRef<HTMLDivElement>(null);
+      useFocusTrap(outerRef);
+      useFocusTrap(innerRef, { disabled: !inner });
+      return (
+        <>
+          <div ref={outerRef}>
+            <button>outer</button>
+          </div>
+          <div ref={innerRef}>
+            <button>inner</button>
+          </div>
+        </>
+      );
+    };
+    const { rerender } = render(<Traps inner={false} />);
+    const outer = screen.getByRole('button', { name: 'outer' });
+    expect(outer).toHaveFocus();
+
+    // Safari leaves focus on <body> after a click on a button
+    outer.blur();
+    rerender(<Traps inner />);
+    expect(screen.getByRole('button', { name: 'inner' })).toHaveFocus();
+
+    rerender(<Traps inner={false} />);
+    expect(outer).toHaveFocus();
+  });
 });

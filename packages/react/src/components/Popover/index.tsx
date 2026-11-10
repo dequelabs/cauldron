@@ -13,6 +13,7 @@ import AnchoredOverlay from '../AnchoredOverlay';
 import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
 import AriaIsolate from '../../utils/aria-isolate';
+import { useLayer, LayerProvider } from '../../utils/layer';
 import useSharedRef from '../../utils/useSharedRef';
 import useFocusTrap from '../../utils/useFocusTrap';
 import { isBrowser } from '../../utils/is-browser';
@@ -104,6 +105,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
     const [isolator, setIsolator] = useState<AriaIsolate | null>(null);
     const popoverRef = useSharedRef<HTMLDivElement>(ref);
+    const layer = useLayer(popoverRef);
     const [placement, setPlacement] = useState(initialPlacement);
 
     const additionalProps =
@@ -180,13 +182,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const attachIsolator = () => {
       if (popoverRef?.current) {
-        setIsolator(new AriaIsolate(popoverRef?.current));
+        setIsolator(new AriaIsolate(popoverRef.current, layer.elements));
       }
     };
 
     // Return focus to the target: Safari does not focus a button on click,
     // so the element focused before opening can be <body>.
     useFocusTrap(popoverRef, {
+      contains: layer.contains,
       disabled: !show,
       returnFocus: true,
       returnFocusElement: target
@@ -197,46 +200,56 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }
 
     return (
-      <ClickOutsideListener onClickOutside={handleClickOutside}>
-        <AnchoredOverlay
-          id={id}
-          className={classnames('Popover', `Popover--${placement}`, className, {
-            'Popover--hidden': !show,
-            'Popover--prompt': variant === 'prompt'
-          })}
-          ref={popoverRef}
-          role="dialog"
-          // a click on content that cannot take focus focuses the popover,
-          // so focus stays inside and Escape still reaches it
-          tabIndex={-1}
-          target={target}
-          open={show}
-          onOpenChange={handleClosePopover}
-          placement={initialPlacement}
-          onPlacementChange={setPlacement}
-          offset={8}
-          // guarded by isBrowser() check
-          // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-          portal={portal || document?.body}
-          {...additionalProps}
-          {...props}
+      <LayerProvider layer={layer}>
+        <ClickOutsideListener
+          onClickOutside={handleClickOutside}
+          contains={layer.contains}
         >
-          <div className="Popover__popoverArrow" />
-          <div className="Popover__borderLeft" />
-          {variant === 'prompt' ? (
-            <PromptPopoverContent
-              applyButtonText={applyButtonText}
-              onApply={onApply}
-              closeButtonText={closeButtonText}
-              infoText={infoText || ''}
-              onClose={handleClosePopover}
-              infoTextId={`${id}-label`}
-            />
-          ) : (
-            children
-          )}
-        </AnchoredOverlay>
-      </ClickOutsideListener>
+          <AnchoredOverlay
+            id={id}
+            className={classnames(
+              'Popover',
+              `Popover--${placement}`,
+              className,
+              {
+                'Popover--hidden': !show,
+                'Popover--prompt': variant === 'prompt'
+              }
+            )}
+            ref={popoverRef}
+            role="dialog"
+            // a click on content that cannot take focus focuses the popover,
+            // so focus stays inside and Escape still reaches it
+            tabIndex={-1}
+            target={target}
+            open={show}
+            onOpenChange={handleClosePopover}
+            placement={initialPlacement}
+            onPlacementChange={setPlacement}
+            offset={8}
+            // guarded by isBrowser() check
+            // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+            portal={portal || document?.body}
+            {...additionalProps}
+            {...props}
+          >
+            <div className="Popover__popoverArrow" />
+            <div className="Popover__borderLeft" />
+            {variant === 'prompt' ? (
+              <PromptPopoverContent
+                applyButtonText={applyButtonText}
+                onApply={onApply}
+                closeButtonText={closeButtonText}
+                infoText={infoText || ''}
+                onClose={handleClosePopover}
+                infoTextId={`${id}-label`}
+              />
+            ) : (
+              children
+            )}
+          </AnchoredOverlay>
+        </ClickOutsideListener>
+      </LayerProvider>
     );
   }
 );
