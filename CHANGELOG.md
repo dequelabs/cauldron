@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.7.0](https://github.com/dequelabs/cauldron/compare/v7.6.0...v7.7.0) (2026-11-10)
+
+
+### Features
+
+* **TextField:** forward ref to the field, deprecate fieldRef ([#2575](https://github.com/dequelabs/cauldron/issues/2575)) ([608f71b](https://github.com/dequelabs/cauldron/commit/608f71b8b604e328315e666ea2f5630cb75cc48c))
+* **TreeView:** add opt-in virtualization via a virtualized prop ([#2523](https://github.com/dequelabs/cauldron/issues/2523)) ([0419668](https://github.com/dequelabs/cauldron/commit/0419668f7bf086aa9f020ce546f9df6bce103388)), closes [#1290](https://github.com/dequelabs/cauldron/issues/1290) [dequelabs/axe-reports#3277](https://github.com/dequelabs/axe-reports/issues/3277)
+
+
+### Bug Fixes
+
+* **Accordion:** reset first and last child margins in accordion panel ([#2555](https://github.com/dequelabs/cauldron/issues/2555)) ([3fed54d](https://github.com/dequelabs/cauldron/commit/3fed54df53e7aa7a7a58d21acc6d35b8466e5598))
+* **Accordion:** stop AccordionTrigger className replacing Accordion__trigger ([#2553](https://github.com/dequelabs/cauldron/issues/2553)) ([d064923](https://github.com/dequelabs/cauldron/commit/d064923e9e745b7e2123f7c24d9f3fbeb7283c48)), closes [#2480](https://github.com/dequelabs/cauldron/issues/2480)
+* **ActionList:** meet 4.5:1 contrast for hovered danger items ([#2582](https://github.com/dequelabs/cauldron/issues/2582)) ([fef8f6a](https://github.com/dequelabs/cauldron/commit/fef8f6a8cc29bbd905956783e032a534e1f996c7))
+* add a Content Security Policy and security headers to the docs site ([#2585](https://github.com/dequelabs/cauldron/issues/2585)) ([f4013a2](https://github.com/dequelabs/cauldron/commit/f4013a2ab2284862b66f9d66f1627807847137db))
+* **Drawer:** scroll content taller than the viewport ([#2547](https://github.com/dequelabs/cauldron/issues/2547)) ([74b85fb](https://github.com/dequelabs/cauldron/commit/74b85fb13c90b5c65b015b4305ea2cb8f8ead107)), closes [#2546](https://github.com/dequelabs/cauldron/issues/2546)
+* **Notice:** only style the notice's own icon, not icons in children ([#2571](https://github.com/dequelabs/cauldron/issues/2571)) ([eb2a17d](https://github.com/dequelabs/cauldron/commit/eb2a17d1f202cb8758db575fc7029f6efcc7490e))
+* **SkipLink:** keep the skip link inside narrow viewports with large text ([#2589](https://github.com/dequelabs/cauldron/issues/2589)) ([c59590b](https://github.com/dequelabs/cauldron/commit/c59590bfc3327db0493bf05ea1c2506d69a2d2fb))
+* **Table:** use gray-40 for the row header border in bordered tables ([#2563](https://github.com/dequelabs/cauldron/issues/2563)) ([7cb56d7](https://github.com/dequelabs/cauldron/commit/7cb56d7f9c5d14e31ffa00f23348b693e5b180ed))
+* **TextField:** derive error and description ids from id ([#2576](https://github.com/dequelabs/cauldron/issues/2576)) ([0955032](https://github.com/dequelabs/cauldron/commit/0955032f757aa49680bef9d321d4ec5c2a021aef))
+* **TreeView:** make click, Space and Enter each select and run onAction ([#2520](https://github.com/dequelabs/cauldron/issues/2520)) ([17caea3](https://github.com/dequelabs/cauldron/commit/17caea31966877ed8ef2a7a09d2072a83ee3cdd8)), closes [#2519](https://github.com/dequelabs/cauldron/issues/2519) [#2519](https://github.com/dequelabs/cauldron/issues/2519)
+* **useFocusTrap:** never wrap focus onto a tabindex="-1" element ([#2560](https://github.com/dequelabs/cauldron/issues/2560)) ([02bddc7](https://github.com/dequelabs/cauldron/commit/02bddc7064b24a2eb45ab490eb8681027c624892))
+
 ## [7.6.0](https://github.com/dequelabs/cauldron/compare/v7.4.0...v7.6.0) (2026-09-22)
 
 
