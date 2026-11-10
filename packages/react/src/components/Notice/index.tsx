@@ -43,7 +43,10 @@ const Notice = forwardRef<HTMLDivElement, NoticeProps>(
         ref={ref}
         {...otherProps}
       >
-        <Icon type={icon || (iconTypeMap[type] as IconType)} />
+        <Icon
+          className="Notice__icon"
+          type={icon || (iconTypeMap[type] as IconType)}
+        />
         <div className="Notice__title">{title}</div>
         {children && <div className="Notice__content">{children}</div>}
       </div>

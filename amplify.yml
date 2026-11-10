@@ -3,6 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
+        # Use the Node version from .nvmrc instead of the build image's default.
+        - nvm install
         - npm install -g pnpm@11.4.0
         # Point pnpm's content-addressed store inside the repo so Amplify's
         # cache (repo-relative paths only) can actually persist it. Caching
