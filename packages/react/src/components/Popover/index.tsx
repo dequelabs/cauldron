@@ -14,7 +14,6 @@ import ClickOutsideListener from '../ClickOutsideListener';
 import Button from '../Button';
 import AriaIsolate from '../../utils/aria-isolate';
 import useSharedRef from '../../utils/useSharedRef';
-import useEscapeKey from '../../utils/useEscapeKey';
 import useFocusTrap from '../../utils/useFocusTrap';
 import { isBrowser } from '../../utils/is-browser';
 
@@ -185,15 +184,13 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     };
 
-    useEscapeKey(
-      {
-        callback: handleClosePopover,
-        active: show
-      },
-      [show]
-    );
-
-    useFocusTrap(popoverRef, { disabled: !show, returnFocus: true });
+    // Return focus to the target: Safari does not focus a button on click,
+    // so the element focused before opening can be <body>.
+    useFocusTrap(popoverRef, {
+      disabled: !show,
+      returnFocus: true,
+      returnFocusElement: target
+    });
 
     if (!show || !isBrowser()) {
       return null;
@@ -211,6 +208,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           role="dialog"
           target={target}
           open={show}
+          onOpenChange={handleClosePopover}
           placement={initialPlacement}
           onPlacementChange={setPlacement}
           offset={8}

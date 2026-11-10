@@ -3,8 +3,9 @@ import { OptionsMenuProps } from './OptionsMenu';
 import ClickOutsideListener from '../ClickOutsideListener';
 import classnames from 'classnames';
 import setRef from '../../utils/setRef';
+import handleEscapeKeyDown from '../../utils/handleEscapeKeyDown';
 
-const [up, down, tab, enter, space, esc] = [38, 40, 9, 13, 32, 27];
+const [up, down, tab, enter, space] = [38, 40, 9, 13, 32];
 
 export interface OptionsMenuListProps extends Omit<
   OptionsMenuProps,
@@ -45,6 +46,10 @@ const OptionsMenuList = ({
   }, [itemIndex]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    if (handleEscapeKeyDown(e, onClose)) {
+      return;
+    }
+
     const { which, target } = e;
     switch (which) {
       case up:
@@ -63,9 +68,6 @@ const OptionsMenuList = ({
         setItemIndex(newIndex);
         break;
       }
-      case esc:
-        onClose();
-        break;
       case enter:
       case space:
         e.preventDefault();

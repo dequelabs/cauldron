@@ -100,7 +100,7 @@ test('should support auto-end placement', () => {
   expect(screen.getByTestId('overlay')).toBeInTheDocument();
 });
 
-test('should call onOpenChange when escape is pressed', async () => {
+test('should call onOpenChange when escape is pressed inside the overlay', async () => {
   const targetRef = { current: document.createElement('button') };
   const onOpenChange = jest.fn();
   const user = userEvent.setup();
@@ -112,12 +112,66 @@ test('should call onOpenChange when escape is pressed', async () => {
       onOpenChange={onOpenChange}
       data-testid="overlay"
     >
+      <button>Content</button>
+    </AnchoredOverlay>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Content' }));
+  await user.keyboard('{Escape}');
+  expect(onOpenChange).toHaveBeenCalledWith(false);
+});
+
+test('should call onOpenChange when escape is pressed on the target', async () => {
+  const target = document.createElement('button');
+  document.body.appendChild(target);
+  const onOpenChange = jest.fn();
+  const user = userEvent.setup();
+
+  render(
+    <AnchoredOverlay target={target} open onOpenChange={onOpenChange}>
       Content
     </AnchoredOverlay>
   );
 
+  target.focus();
   await user.keyboard('{Escape}');
   expect(onOpenChange).toHaveBeenCalledWith(false);
+  target.remove();
+});
+
+test('should not call onOpenChange when escape is pressed elsewhere', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const onOpenChange = jest.fn();
+  const user = userEvent.setup();
+
+  render(
+    <>
+      <button>Elsewhere</button>
+      <AnchoredOverlay target={targetRef} open onOpenChange={onOpenChange}>
+        Content
+      </AnchoredOverlay>
+    </>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Elsewhere' }));
+  await user.keyboard('{Escape}');
+  expect(onOpenChange).not.toHaveBeenCalled();
+});
+
+test('should not handle escape that something inside already handled', async () => {
+  const targetRef = { current: document.createElement('button') };
+  const onOpenChange = jest.fn();
+  const user = userEvent.setup();
+
+  render(
+    <AnchoredOverlay target={targetRef} open onOpenChange={onOpenChange}>
+      <button onKeyDown={(event) => event.preventDefault()}>Content</button>
+    </AnchoredOverlay>
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Content' }));
+  await user.keyboard('{Escape}');
+  expect(onOpenChange).not.toHaveBeenCalled();
 });
 
 test('should call onPlacementChange with initial placement', () => {

@@ -10,7 +10,7 @@ import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
-import useEscapeKey from '../../utils/useEscapeKey';
+import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
 import useSharedRef from '../../utils/useSharedRef';
 import useFocusTrap from '../../utils/useFocusTrap';
 import resolveElement from '../../utils/resolveElement';
@@ -43,6 +43,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       focusOptions = {},
       portal,
       onClose,
+      onKeyDown,
       style,
       ...props
     },
@@ -98,11 +99,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       };
     }, [isModal, open]);
 
-    useEscapeKey(
-      { callback: handleClose, active: open, defaultPrevented: true },
-      [onClose]
-    );
-
     // istanbul ignore next
     if (!isBrowser()) {
       return null;
@@ -125,6 +121,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           touchEvent={open ? undefined : false}
           target={drawerRef}
         >
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
             ref={drawerRef}
             className={classnames(className, 'Drawer', {
@@ -141,6 +138,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             }}
             tabIndex={open ? -1 : undefined}
             {...props}
+            onKeyDown={withEscapeKeyDown(
+              onKeyDown,
+              open ? handleClose : undefined
+            )}
           >
             {children}
           </div>

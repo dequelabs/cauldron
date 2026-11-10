@@ -1,5 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import {
+  act,
+  render,
+  screen,
+  fireEvent,
+  waitFor
+} from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import axe from '../../axe';
 import Popover from '../Popover';
@@ -144,9 +150,46 @@ test('should not overwrite user provided id and aria-describedby', async () => {
 
 test('should call onClose on escape keypress', async () => {
   const onClose = jest.fn();
+  const user = userEvent.setup();
   render(<Wrapper tooltipProps={{ onClose }} />);
-  fireEvent.keyUp(document.body, { key: 'Escape' });
-  await waitFor(() => expect(onClose).toBeCalled());
+  // Escape is handled where focus is: here, the button that opened it
+  act(() =>
+    screen.getByRole('button', { name: 'Popover button', hidden: true }).focus()
+  );
+  await user.keyboard('{Escape}');
+  expect(onClose).toHaveBeenCalledTimes(1);
+});
+
+test('should return focus to the target when it closes', async () => {
+  const user = userEvent.setup();
+  const PopoverOpenedWithoutFocus = () => {
+    const ref = useRef<HTMLButtonElement>(null);
+    const [show, setShow] = useState(true);
+    return (
+      <>
+        <button ref={ref}>target</button>
+        <Popover
+          variant="custom"
+          aria-label="Popover"
+          target={ref}
+          show={show}
+          onClose={() => setShow(false)}
+        >
+          <button>inside</button>
+        </Popover>
+      </>
+    );
+  };
+  // Opened while focus is on <body>, as after a click in Safari, which does
+  // not focus buttons on click
+  render(<PopoverOpenedWithoutFocus />);
+  const inside = screen.getByRole('button', { name: 'inside' });
+  act(() => inside.focus());
+
+  await user.keyboard('{Escape}');
+  expect(
+    screen.getByRole('button', { name: 'target', hidden: true })
+  ).toHaveFocus();
 });
 
 test('should call onClose on clicking outside', async () => {

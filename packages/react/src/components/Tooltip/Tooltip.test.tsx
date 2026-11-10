@@ -117,6 +117,44 @@ test('should hide tooltip on escape keypress', async () => {
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
 
+test('should mark escape as handled when it hides the tooltip', async () => {
+  const user = userEvent.setup();
+  renderTooltip({ tooltipProps: { defaultShow: false } });
+  const button = screen.getByRole('button');
+  const prevented: boolean[] = [];
+  button.addEventListener('keydown', (event) =>
+    prevented.push(event.defaultPrevented)
+  );
+
+  await user.click(button);
+  expect(screen.getByRole('tooltip')).toBeInTheDocument();
+  await user.keyboard('{Escape}');
+  expect(prevented).toEqual([true]);
+});
+
+test('should leave escape to other layers while the tooltip is already hiding', async () => {
+  const user = userEvent.setup();
+  const ref = createRef<HTMLButtonElement>();
+  const prevented: boolean[] = [];
+  render(
+    <>
+      <button ref={ref}>button</button>
+      <Tooltip target={ref}>Hello Tooltip</Tooltip>
+      <input
+        aria-label="other"
+        onKeyDown={(event) => prevented.push(event.defaultPrevented)}
+      />
+    </>
+  );
+
+  await user.click(screen.getByRole('button'));
+  expect(screen.getByRole('tooltip')).toBeInTheDocument();
+  // moving focus away starts the tooltip's hide delay
+  await user.click(screen.getByRole('textbox', { name: 'other' }));
+  await user.keyboard('{Escape}');
+  expect(prevented).toEqual([false]);
+});
+
 test('should fire the "cauldron:tooltip:show" custom event when tooltip is shown', async () => {
   const show = spy();
   renderTooltip();
