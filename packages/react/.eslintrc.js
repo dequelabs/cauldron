@@ -1,3 +1,27 @@
+// These CJS dependencies ship `__esModule`, so their default imports come back
+// double-wrapped under strict ESM. Each is allowed only in the one module that
+// unwraps it with `interopDefault`.
+const reactIdGeneratorDefault = {
+  name: 'react-id-generator',
+  importNames: ['default'],
+  message: "Import nextId from 'utils/nextId', which unwraps it for strict ESM."
+};
+const syntaxHighlighterPaths = [
+  {
+    name: 'react-syntax-highlighter',
+    importNames: ['default'],
+    message:
+      'Its default export needs interopDefault; keep these imports in Code/index.tsx.'
+  }
+];
+const syntaxHighlighterPatterns = [
+  {
+    group: ['react-syntax-highlighter/**'],
+    message:
+      'Its default exports need interopDefault; keep these imports in Code/index.tsx.'
+  }
+];
+
 module.exports = {
   extends: ['../../.eslintrc.js', 'plugin:ssr-friendly/recommended'],
   plugins: ['ssr-friendly'],
@@ -16,6 +40,41 @@ module.exports = {
       files: ['*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off'
+      }
+    },
+    {
+      files: ['src/**/*.{ts,tsx}'],
+      excludedFiles: [
+        'src/utils/nextId.ts',
+        'src/components/Code/index.tsx',
+        'src/react-syntax-highlighter.d.ts'
+      ],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [reactIdGeneratorDefault, ...syntaxHighlighterPaths],
+            patterns: syntaxHighlighterPatterns
+          }
+        ]
+      }
+    },
+    {
+      files: ['src/utils/nextId.ts'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: syntaxHighlighterPaths,
+            patterns: syntaxHighlighterPatterns
+          }
+        ]
+      }
+    },
+    {
+      files: ['src/components/Code/index.tsx'],
+      rules: {
+        'no-restricted-imports': ['error', { paths: [reactIdGeneratorDefault] }]
       }
     }
   ]

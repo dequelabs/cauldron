@@ -6,10 +6,10 @@ import {
   TreeItemContent,
   TreeItemContentRenderProps
 } from 'react-aria-components';
-import nextId from 'react-id-generator';
 import { TreeViewNode } from './types';
 import Icon from '../Icon';
 import Checkbox from '../Checkbox';
+import nextId from '../../utils/nextId';
 
 const TreeViewItem = ({ id, textValue, children }: TreeViewNode) => {
   const checkboxId = useMemo(() => nextId('tree-view-item-'), []);

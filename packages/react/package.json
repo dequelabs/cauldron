@@ -8,15 +8,19 @@
     "access": "public"
   },
   "main": "lib/index.js",
+  "module": "lib/esm/index.js",
   "style": "lib/cauldron.css",
   "types": "lib/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "lib/"
   ],
   "scripts": {
     "build": "pnpm build:lib && pnpm build:css",
     "prebuild:lib": "node scripts/buildIconTypes.js",
-    "build:lib": "rollup -c",
+    "build:lib": "rimraf lib && rollup -c",
     "build:css": "postcss --output=lib/cauldron.css src/index.css",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "verify:packaging": "pnpm build && node scripts/verifyPackaging.js",
@@ -78,6 +82,7 @@
     "publint": "^0.3.21",
     "react": "^19",
     "react-dom": "^19",
+    "rimraf": "^6.1.3",
     "rollup": "^2.23.0",
     "sinon": "^10.0.0",
     "ts-node": "^10.9.2",
@@ -89,6 +94,12 @@
   },
   "peerDependencies": {
     "react": ">=16.6 <20",
-    "react-dom": ">=16.6 <20"
+    "react-dom": ">=16.6 <20",
+    "@types/react-syntax-highlighter": "^15.5.13"
+  },
+  "peerDependenciesMeta": {
+    "@types/react-syntax-highlighter": {
+      "optional": true
+    }
   }
 }

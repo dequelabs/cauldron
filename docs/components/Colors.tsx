@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import './Colors.css';
 import classNames from 'classnames';
-import { useThemeContext } from '../../packages/react/lib';
 
 interface ColorsProps extends React.HTMLAttributes<HTMLDivElement> {
   colorGroup: string;
