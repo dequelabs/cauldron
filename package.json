@@ -100,7 +100,7 @@
     "mdast-util-mdx-expression": "^2.0.1",
     "micromark-extension-mdxjs": "^3.0.0",
     "mini-css-extract-plugin": "^2.10.2",
-    "minimatch": "^10.2.5",
+    "minimatch": "^11.0.1",
     "node-fetch": "^3.3.0",
     "p-queue": "^9",
     "playwright": "^1.61.1",
