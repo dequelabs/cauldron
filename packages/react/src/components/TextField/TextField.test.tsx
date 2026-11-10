@@ -435,3 +435,63 @@ test('should pass through additional props to the field', () => {
   expect(input).toHaveAttribute('maxlength', '10');
   expect(input).toHaveAttribute('data-testid', 'the-field');
 });
+
+test('should derive description and error ids from provided id', () => {
+  const input = renderTextField({
+    id: 'my-field',
+    description: 'the description',
+    error: 'the error'
+  });
+  expect(screen.getByText('the description')).toHaveAttribute(
+    'id',
+    'my-field-description'
+  );
+  expect(
+    screen.getByText('the error').closest('.Field__error')
+  ).toHaveAttribute('id', 'my-field-error');
+  expect(input).toHaveAttribute(
+    'aria-describedby',
+    'my-field-description my-field-error'
+  );
+});
+
+test('should derive description and error ids from generated id', () => {
+  const input = renderTextField({
+    description: 'the description',
+    error: 'the error'
+  });
+  expect(input.id).toBeTruthy();
+  expect(screen.getByText('the description')).toHaveAttribute(
+    'id',
+    `${input.id}-description`
+  );
+  expect(
+    screen.getByText('the error').closest('.Field__error')
+  ).toHaveAttribute('id', `${input.id}-error`);
+});
+
+test('should not collide description and error ids between text fields', () => {
+  render(
+    <>
+      <TextField
+        label="first"
+        description="first description"
+        error="first error"
+      />
+      <TextField
+        label="second"
+        description="second description"
+        error="second error"
+      />
+    </>
+  );
+  expect(
+    screen.getByRole('textbox', { name: 'first' })
+  ).toHaveAccessibleDescription('first description first error');
+  expect(
+    screen.getByRole('textbox', { name: 'second' })
+  ).toHaveAccessibleDescription('second description second error');
+  expect(screen.getByText('first description').id).not.toEqual(
+    screen.getByText('second description').id
+  );
+});
