@@ -157,6 +157,12 @@ function DrawerFocusWrappingExample() {
 }
 ```
 
+### Escape Key
+
+Pressing Escape while focus is inside the drawer closes it. Escape closes one layer at a time: when a control inside the drawer handles Escape first, such as an open [Combobox](./Combobox) list or a [Tooltip](./Tooltip), the drawer stays open, and the next Escape closes it.
+
+To keep the drawer open when your own control handles Escape, call `event.preventDefault()` on the Escape `keydown` event.
+
 ## Props
 
 <ComponentProps

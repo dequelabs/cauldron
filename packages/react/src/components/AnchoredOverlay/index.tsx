@@ -13,7 +13,10 @@ import {
 import { type PolymorphicProps } from '../../utils/polymorphicComponent';
 import resolveElement from '../../utils/resolveElement';
 import useSharedRef from '../../utils/useSharedRef';
-import useEscapeKey from '../../utils/useEscapeKey';
+import {
+  withEscapeKeyDown,
+  useEscapeKeyDown
+} from '../../utils/handleEscapeKeyDown';
 import useFocusTrap from '../../utils/useFocusTrap';
 import { isBrowser } from '../../utils/is-browser';
 
@@ -119,6 +122,7 @@ const AnchoredOverlay = forwardRef(
       onPlacementChange,
       onShiftChange,
       portal,
+      onKeyDown,
       ...props
     }: AnchoredOverlayProps<Overlay, Target>,
     refProp: React.Ref<Overlay>
@@ -192,19 +196,16 @@ const AnchoredOverlay = forwardRef(
       };
     }, [open, elements, update]);
 
-    useEscapeKey({
-      active: open,
-      capture: true,
-      defaultPrevented: true,
-      callback: (event: KeyboardEvent) => {
-        // when an anchored overlay is open, we want to prevent other potential "escape"
-        // keypress events, like the closing of modals from occurring
-        event.preventDefault();
-        // istanbul ignore else
-        if (typeof onOpenChange === 'function') {
-          onOpenChange(!open);
-        }
-      }
+    const close = open && onOpenChange ? () => onOpenChange(false) : undefined;
+
+    // Focus can stay on the target while the overlay is open: an ActionMenu
+    // trigger keeps it until focus moves into the list. A native listener on
+    // the target runs before React's root-delegated handlers, so the overlay
+    // still closes before a surrounding container.
+    useEscapeKeyDown({
+      target,
+      active: !!close,
+      onEscape: () => close?.()
     });
 
     useFocusTrap(ref, !focusTrap ? { disabled: true } : focusTrapOptions);
@@ -231,6 +232,7 @@ const AnchoredOverlay = forwardRef(
           ref.current = element;
         }}
         {...props}
+        onKeyDown={withEscapeKeyDown(onKeyDown, close)}
         style={{ ...floatingStyles, ...style }}
       >
         {children}

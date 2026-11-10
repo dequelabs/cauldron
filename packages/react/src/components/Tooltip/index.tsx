@@ -5,6 +5,7 @@ import AnchoredOverlay from '../AnchoredOverlay';
 import { addIdRef, hasIdRef, removeIdRef } from '../../utils/idRefs';
 import resolveElement from '../../utils/resolveElement';
 import { isBrowser } from '../../utils/is-browser';
+import { useEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
 
 const TIP_HIDE_DELAY = 100;
 
@@ -56,6 +57,8 @@ export default function Tooltip({
   const [id] = propId ? [propId] : useId(1, 'tooltip');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showTooltip, setShowTooltip] = useState(!!showProp || defaultShow);
+  // true between focus or pointer leaving and the delayed hide
+  const [hiding, setHiding] = useState(false);
   const [tooltipElement, setTooltipElement] = useState<HTMLElement | null>(
     null
   );
@@ -71,6 +74,7 @@ export default function Tooltip({
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
+    setHiding(false);
     setShowTooltip(true);
     fireCustomEvent(true, targetElement);
   }, [target]);
@@ -79,8 +83,10 @@ export default function Tooltip({
   const hide: EventListener = useCallback(() => {
     const targetElement = resolveElement(target);
     if (!hideTimeoutRef.current) {
+      setHiding(true);
       hideTimeoutRef.current = setTimeout(() => {
         hideTimeoutRef.current = null;
+        setHiding(false);
         setShowTooltip(false);
         fireCustomEvent(false, targetElement);
       }, TIP_HIDE_DELAY);
@@ -153,6 +159,18 @@ export default function Tooltip({
     };
   }, [target, id, association]);
 
+  // A hovered tooltip is not in the focus path, so it is the one exception
+  // to Escape bubbling: it listens in the capture phase and closes first
+  // (WCAG 1.4.13). One already hiding leaves Escape to what has focus now.
+  useEscapeKeyDown({
+    // guarded by isBrowser() check
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+    target: isBrowser() ? document : null,
+    active: showTooltip && !hiding && typeof showProp !== 'boolean',
+    capture: true,
+    onEscape: () => setShowTooltip(false)
+  });
+
   const updateArrowShiftPosition = useCallback(
     ({ x }: { x: number }) => {
       if (variant === 'big' || x === 0) {
@@ -176,7 +194,6 @@ export default function Tooltip({
           placement={initialPlacement}
           onPlacementChange={setPlacement}
           open={showTooltip && typeof showProp !== 'boolean'}
-          onOpenChange={setShowTooltip}
           onShiftChange={updateArrowShiftPosition}
           className={classnames('Tooltip', `Tooltip--${placement}`, className, {
             TooltipInfo: variant === 'info',
