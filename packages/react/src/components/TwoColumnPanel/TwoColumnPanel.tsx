@@ -15,6 +15,7 @@ import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
 import SkipLink from '../SkipLink';
 import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
+import { useLayer, LayerProvider } from '../../utils/layer';
 import useFocusTrap from '../../utils/useFocusTrap';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -45,6 +46,7 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const columnLeftRef = useRef<HTMLDivElement>(null);
+    const columnLeftLayer = useLayer(columnLeftRef);
     const columnRightRef = useRef<HTMLDivElement>(null);
 
     const columnLeft = React.Children.toArray(children).find(
@@ -232,7 +234,8 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
     };
 
     useFocusTrap(columnLeftRef, {
-      disabled: !showPanel || !isFocusTrap
+      disabled: !showPanel || !isFocusTrap,
+      contains: columnLeftLayer.contains
     });
 
     return (
@@ -248,9 +251,14 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
           <ClickOutsideListener
             onClickOutside={handleClickOutside}
             target={columnLeftRef.current as HTMLElement}
+            contains={columnLeftLayer.contains}
           />
           {isCollapsed ? null : skipLink}
-          {showPanel ? ColumnLeftComponent : null}
+          {showPanel ? (
+            <LayerProvider layer={columnLeftLayer}>
+              {ColumnLeftComponent}
+            </LayerProvider>
+          ) : null}
           {ColumnRightComponent}
         </>
       </div>

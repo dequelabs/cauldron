@@ -38,6 +38,22 @@ describe('AriaIsolate', () => {
     isolator.deactivate();
   });
 
+  test('activate: keeps excluded elements and their ancestors visible', () => {
+    const target = screen.getByTestId(/isolate-me/i);
+    const portaled = document.getElementById('two') as HTMLElement;
+    const isolator = new AriaIsolate(target, () => [portaled]);
+
+    isolator.activate();
+    expect(portaled).not.toHaveAttribute('aria-hidden');
+    expect(container).not.toHaveAttribute('aria-hidden');
+    expect(document.getElementById('one')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+    isolator.deactivate();
+  });
+
   test('deactivate: properly removes aria-hidden from each of the affectedElements', () => {
     const target = screen.getByTestId(/isolate-me/i);
     const isolator = new AriaIsolate(target);

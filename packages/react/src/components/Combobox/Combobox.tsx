@@ -23,6 +23,7 @@ import { ListboxValue } from '../Listbox/ListboxOption';
 import ComboboxPill from './ComboboxPill';
 import Icon from '../Icon';
 import handleEscapeKeyDown from '../../utils/handleEscapeKeyDown';
+import { useLayer } from '../../utils/layer';
 
 // Event Keys
 const [Enter, Escape, Home, End, Backspace, Delete] = [
@@ -184,6 +185,8 @@ const Combobox = forwardRef<
     const comboboxRef = useSharedRef<HTMLDivElement>(ref);
     const inputRef = useSharedRef<HTMLInputElement>(propInputRef);
     const listboxRef = useRef<HTMLUListElement>(null);
+    // the list can be portaled out of a container it still belongs to
+    useLayer(listboxRef);
     const pillsRef = useRef<HTMLButtonElement[]>([]);
     const isControlled =
       typeof propValue !== 'undefined' &&
