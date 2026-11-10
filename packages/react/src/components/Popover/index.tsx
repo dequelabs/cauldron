@@ -206,6 +206,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           })}
           ref={popoverRef}
           role="dialog"
+          // a click on content that cannot take focus focuses the popover,
+          // so focus stays inside and Escape still reaches it
+          tabIndex={-1}
           target={target}
           open={show}
           onOpenChange={handleClosePopover}

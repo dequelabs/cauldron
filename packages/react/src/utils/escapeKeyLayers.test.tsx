@@ -178,6 +178,28 @@ describe.each(containers)('%s', (_name, Container) => {
   });
 });
 
+// A click on content that cannot take focus moves focus to the nearest
+// focusable ancestor, or to <body>. Containers are focusable, so focus stays
+// inside them and Escape still reaches them.
+describe.each(containers.filter(([name]) => name !== 'AnchoredOverlay'))(
+  '%s',
+  (_name, Container) => {
+    test('Escape closes the container after a click on its plain content', async () => {
+      const user = userEvent.setup();
+      const onClose = jest.fn();
+      render(
+        <Container onClose={onClose}>
+          <p>plain text</p>
+        </Container>
+      );
+
+      await user.click(screen.getByText('plain text'));
+      await user.keyboard('{Escape}');
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+  }
+);
+
 describe('TwoColumnPanel (narrow screen)', () => {
   // every media query matches, so the panel uses its narrow-screen layout
   const originalMatchMedia = window.matchMedia;

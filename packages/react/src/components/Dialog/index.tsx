@@ -157,6 +157,9 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           })}
           ref={dialogRef}
           aria-labelledby={headingId}
+          // a click on content that cannot take focus focuses the dialog,
+          // so focus stays inside and Escape still reaches it
+          tabIndex={-1}
           {...other}
           onKeyDown={withEscapeKeyDown(
             onKeyDown,
