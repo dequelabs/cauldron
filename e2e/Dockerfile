@@ -1,7 +1,14 @@
 ARG playwright_version=latest
+ARG node_version
+FROM node:${node_version}-bookworm-slim AS node
+
 FROM mcr.microsoft.com/playwright:v$playwright_version-jammy
 ARG playwright_version
 ARG pnpm_version
+
+# The Playwright base image bundles its own Node; use the .nvmrc version instead
+# (passed in by screenshots:docker) so CI doesn't run an unpatched Node here.
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
 
 # Install pnpm at the version pinned in package.json's packageManager (passed
 # in by screenshots:docker). The published pnpm package has no runtime deps,

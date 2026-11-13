@@ -10,7 +10,9 @@ import {
   Button,
   Alert,
   AlertActions,
-  AlertContent
+  AlertContent,
+  Combobox,
+  ComboboxOption
 } from '@deque/cauldron-react';
 
 ```jsx
@@ -69,6 +71,45 @@ function WarningAlertExample() {
           </Button>
           <Button variant="secondary" onClick={toggleAlert}>
             Nevermind
+          </Button>
+        </AlertActions>
+      </Alert>
+    </>
+  );
+}
+```
+
+### Focus Wrapping
+
+When focus wraps, it skips controls with `tabindex="-1"`, such as the pill buttons at the start of this alert's multiselect [Combobox](./Combobox), so Tab from the last action moves to the combobox input rather than the first pill.
+
+```jsx example
+function FocusWrappingAlertExample() {
+  const [show, setShow] = useState(false);
+  const toggleAlert = () => setShow(!show);
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleAlert}>
+        Toggle Remove Labels Alert
+      </Button>
+      <Alert variant="warning" heading="Remove labels" show={show}>
+        <AlertContent>
+          <Combobox
+            label="Labels to remove"
+            multiselect
+            defaultValue={['Duplicate', 'Outdated']}
+          >
+            <ComboboxOption value="Duplicate">Duplicate</ComboboxOption>
+            <ComboboxOption value="Outdated">Outdated</ComboboxOption>
+            <ComboboxOption value="Needs triage">Needs triage</ComboboxOption>
+          </Combobox>
+        </AlertContent>
+        <AlertActions>
+          <Button variant="danger" onClick={toggleAlert}>
+            Remove
+          </Button>
+          <Button variant="secondary" onClick={toggleAlert}>
+            Cancel
           </Button>
         </AlertActions>
       </Alert>
