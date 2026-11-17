@@ -11,6 +11,7 @@ import classnames from 'classnames';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
+import { useLayer, LayerProvider } from '../../utils/layer';
 import useSharedRef from '../../utils/useSharedRef';
 import useFocusTrap from '../../utils/useFocusTrap';
 import resolveElement from '../../utils/resolveElement';
@@ -55,6 +56,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       focusOptions;
     const [isTransitioning, setIsTransitioning] = useState(!!open);
     const isModal = behavior === 'modal';
+    const layer = useLayer(drawerRef);
 
     const handleClose = useCallback(() => {
       // istanbul ignore next
@@ -87,7 +89,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         return;
       }
 
-      const isolator = new AriaIsolate(drawerRef.current);
+      const isolator = new AriaIsolate(drawerRef.current, layer.elements);
       if (open) {
         isolator.activate();
       } else {
@@ -105,6 +107,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }
 
     useFocusTrap(drawerRef, {
+      contains: layer.contains,
       disabled: !isModal || !open,
       initialFocusElement: focusInitial || drawerRef,
       returnFocus: true,
@@ -114,12 +117,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const portalElement = resolveElement(portal);
 
     return createPortal(
-      <>
+      <LayerProvider layer={layer}>
         <ClickOutsideListener
           onClickOutside={handleClose}
           mouseEvent={open ? undefined : false}
           touchEvent={open ? undefined : false}
           target={drawerRef}
+          contains={layer.contains}
         >
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
@@ -147,7 +151,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           </div>
         </ClickOutsideListener>
         <Scrim show={!!open && !!isModal} />
-      </>,
+      </LayerProvider>,
       portalElement ||
         // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
         document?.body
