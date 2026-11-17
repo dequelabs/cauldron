@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
-import keyname from 'keyname';
 import Scrim from '../Scrim';
 import ClickOutsideListener from '../ClickOutsideListener';
 import { isWide } from '../../utils/viewport';
 import focusableSelector from '../../utils/focusable-selector';
+import handleEscapeKeyDown from '../../utils/handleEscapeKeyDown';
 
 export interface SideBarProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -68,11 +68,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   private onKeyDown(e: React.KeyboardEvent<HTMLElement>) {
     const { onDismiss } = this.props;
 
-    if (keyname(e.which) !== 'esc') {
-      return;
-    }
-
-    onDismiss();
+    handleEscapeKeyDown(e, onDismiss);
   }
 
   private handleClickOutside() {

@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+import handleEscapeKeyDown from '../../utils/handleEscapeKeyDown';
 import { useId } from 'react-id-generator';
 
 interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -40,12 +41,10 @@ const NavBar = ({
   const handleKeyDown: KeyboardEventHandler<HTMLUListElement> = (
     e: React.KeyboardEvent<HTMLUListElement>
   ) => {
-    if (e.key !== 'Escape') {
-      return;
-    }
-
-    setShowDropdown(false);
-    triggerRef.current?.focus();
+    handleEscapeKeyDown(e, () => {
+      setShowDropdown(false);
+      triggerRef.current?.focus();
+    });
   };
 
   useEffect(() => {

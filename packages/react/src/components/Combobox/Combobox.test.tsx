@@ -769,8 +769,41 @@ test('should not prevent default with enter keypress and closed listbox', () => 
   assertListboxIsOpen(true);
   fireSyntheticEvent('keyDown', { preventDefault, key: 'Escape' });
   assertListboxIsOpen(false);
+  // Escape that closes the list is marked handled so containers stay open
+  expect(preventDefault.calledOnce).toBeTruthy();
+  preventDefault.resetHistory();
   fireSyntheticEvent('keyDown', { preventDefault, key: 'Enter' });
   expect(preventDefault.notCalled).toBeTruthy();
+});
+
+test('should only mark Escape as handled while the listbox is open', async () => {
+  const user = userEvent.setup();
+  const escapePrevented: boolean[] = [];
+  render(
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          escapePrevented.push(event.defaultPrevented);
+        }
+      }}
+    >
+      <Combobox label="label">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+      </Combobox>
+    </div>
+  );
+
+  await user.click(screen.getByRole('combobox'));
+  await user.keyboard('{ArrowDown}');
+  assertListboxIsOpen(true);
+
+  await user.keyboard('{Escape}');
+  assertListboxIsOpen(false);
+  await user.keyboard('{Escape}');
+
+  expect(escapePrevented).toEqual([true, false]);
 });
 
 test('should set aria-activedescendent for active combobox options', () => {
