@@ -19,6 +19,7 @@ jobs:
     needs: [tests]
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,17 +30,20 @@ jobs:
           pnpm build:react
           pnpm build:styles
       - name: Publish @deque/cauldron-styles
-        working-directory: packages/styles
-        run: pnpm publish
+        env:
+          AGORA_TOKEN: ${{ secrets.AGORA_PUBLISH_IDENTITY_TOKEN }}
+        run: .github/scripts/publish.sh packages/styles latest
       - name: Publish @deque/cauldron-react
-        working-directory: packages/react
-        run: pnpm publish
+        env:
+          AGORA_TOKEN: ${{ secrets.AGORA_PUBLISH_IDENTITY_TOKEN }}
+        run: .github/scripts/publish.sh packages/react latest
 
   canary:
     if: github.ref == 'refs/heads/develop'
     needs: [tests]
     runs-on: ubuntu-latest
     environment: registry.npmjs.org
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -50,21 +54,25 @@ jobs:
           pnpm build:react
           pnpm build:styles
       # The canary jobs mutate package.json's version before publishing, so
-      # pass --no-git-checks to both pnpm version and pnpm publish — each
-      # refuses on a dirty tree by default, and the first package's version
-      # bump leaves the tree dirty for the second.
+      # pass --no-git-checks to pnpm version (and publish.sh passes it to
+      # pnpm publish) — each refuses on a dirty tree by default, and the first
+      # package's version bump leaves the tree dirty for the second.
       - name: Publish @deque/cauldron-styles
         working-directory: packages/styles
+        env:
+          AGORA_TOKEN: ${{ secrets.AGORA_PUBLISH_IDENTITY_TOKEN }}
         run: |
           # Read the package version directly from package.json. `pnpm pkg get`
           # walks up to the workspace root and returns a JSON object keyed by
           # package name, which breaks the string concatenation below.
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
-          pnpm publish --tag=next --no-git-checks
+          ../../.github/scripts/publish.sh . next
       - name: Publish @deque/cauldron-react
         working-directory: packages/react
+        env:
+          AGORA_TOKEN: ${{ secrets.AGORA_PUBLISH_IDENTITY_TOKEN }}
         run: |
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           pnpm version "$PACKAGE_VERSION-canary.${GITHUB_SHA:0:8}" --allow-same-version --no-git-tag-version --no-git-checks
-          pnpm publish --tag=next --no-git-checks
+          ../../.github/scripts/publish.sh . next
