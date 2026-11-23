@@ -4,6 +4,7 @@ description: A component that displays a hierarchical tree structure.
 source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/components/TreeView/index.tsx
 ---
 
+import { useState } from 'react';
 import { TreeView } from '@deque/cauldron-react';
 
 ```jsx
@@ -279,13 +280,17 @@ function LabelledByTreeView() {
 
 ### Custom onAction
 
-TreeView with a custom action handler for item selection.
+`onAction` runs your own handler when an item is activated. A click, **Space**
+and **Enter** all do the same thing: they toggle the item's checkbox and run
+`onAction`.
+
+Tell users what activation does before they trigger it, particularly if it opens
+a dialog or otherwise moves them somewhere — describe it in nearby instructions
+and point the tree at them with `aria-describedby`.
 
 ```jsx example
 function ActionTreeView() {
-  const onAction = (key) => {
-    alert(`Selected item: ${key}`);
-  };
+  const [lastAction, setLastAction] = useState(null);
   const items = [
     {
       id: '1',
@@ -299,12 +304,21 @@ function ActionTreeView() {
     }
   ];
   return (
-    <TreeView
-      aria-label="Tree View with Action Handler"
-      selectionMode="single"
-      onAction={onAction}
-      items={items}
-    />
+    <>
+      <p id="action-tree-help">
+        Click an item, or press Space or Enter, to select it and run its action.
+      </p>
+      <TreeView
+        aria-label="Tree View with Action Handler"
+        aria-describedby="action-tree-help"
+        selectionMode="multiple"
+        onAction={setLastAction}
+        items={items}
+      />
+      <p role="status">
+        {lastAction ? `Last action: item ${lastAction}` : 'No action yet.'}
+      </p>
+    </>
   );
 }
 ```

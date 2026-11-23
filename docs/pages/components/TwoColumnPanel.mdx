@@ -14,7 +14,9 @@ import {
   ColumnGroupHeader,
   Breadcrumb,
   BreadcrumbLink,
-  BreadcrumbItem
+  BreadcrumbItem,
+  ActionList,
+  ActionListLinkItem
 } from '@deque/cauldron-react';
 
 ```jsx
@@ -213,6 +215,62 @@ function TwoColumnPanelGroupedItemsExample() {
           </Breadcrumb>
         </ColumnHeader>
         <div>{selectedGroupItem?.contents}</div>
+      </ColumnRight>
+    </TwoColumnPanel>
+  );
+}
+```
+
+### Focus Wrapping
+
+On narrow screens, the left column opens as an overlay that traps focus. When focus wraps, it skips controls with `tabindex="-1"`, such as the items at the end of this column's `aria-activedescendant` [ActionList](./ActionList) menu, so Shift+Tab from the close button moves to the menu rather than its last item.
+
+```jsx example
+function TwoColumnPanelFocusWrappingExample() {
+  const [selected, setSelected] = useState(1);
+
+  const items = [
+    { id: 1, name: 'One', contents: 'Content for One' },
+    { id: 2, name: 'Two', contents: 'Content for Two' }
+  ];
+
+  const selectedItem = items.find((item) => item.id === selected);
+  const selectItem = (id) => (event) => {
+    event.preventDefault();
+    setSelected(id);
+  };
+
+  return (
+    <TwoColumnPanel>
+      <ColumnLeft aria-labelledby="focus-wrapping-sidebar">
+        <ColumnHeader id="focus-wrapping-sidebar">
+          <h2>Items</h2>
+        </ColumnHeader>
+        <nav aria-labelledby="focus-wrapping-sidebar">
+          <ul>
+            {items.map((item) => (
+              <li key={item.id}>
+                <a
+                  href="#"
+                  onClick={selectItem(item.id)}
+                  aria-current={item.id === selectedItem.id}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <ActionList role="menu" aria-label="Saved views">
+          <ActionListLinkItem href="#recent">Recent</ActionListLinkItem>
+          <ActionListLinkItem href="#starred">Starred</ActionListLinkItem>
+        </ActionList>
+      </ColumnLeft>
+      <ColumnRight aria-labelledby="focus-wrapping-item-header">
+        <ColumnHeader id="focus-wrapping-item-header">
+          {selectedItem?.name}
+        </ColumnHeader>
+        <div>{selectedItem?.contents}</div>
       </ColumnRight>
     </TwoColumnPanel>
   );

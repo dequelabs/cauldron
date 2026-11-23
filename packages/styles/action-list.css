@@ -75,6 +75,13 @@
   --action-list-item-description-color: var(--action-list-text-color);
 }
 
+/* accent-error on the gray-20 hover background is only 4.15:1. :where() keeps
+   this at the base rule's specificity so the dark theme overrides still win. */
+.ActionListItem--danger:where(:hover:not([aria-disabled='true'])) {
+  --action-list-text-color: var(--accent-error-active);
+  --action-list-item-icon-color: var(--accent-error-active);
+}
+
 :where(.cauldron--theme-dark) .ActionListItem--danger {
   --action-list-text-color: #fff;
   --action-list-item-icon-color: #fff;

@@ -98,10 +98,10 @@ const Accordion = ({
         <PanelTrigger
           iconCollapsed="triangle-right"
           iconExpanded="triangle-down"
-          className={classnames('Accordion__trigger', trigger.props.className)}
           aria-controls={panelProps.id || `${elementId}-panel`}
           heading={trigger.props.heading}
           {...trigger.props}
+          className={classnames('Accordion__trigger', trigger.props.className)}
         >
           {trigger}
         </PanelTrigger>

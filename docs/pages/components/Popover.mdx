@@ -5,7 +5,13 @@ source: https://github.com/dequelabs/cauldron/tree/develop/packages/react/src/co
 ---
 
 import { useRef, useState } from 'react';
-import { Select, Popover, Button } from '@deque/cauldron-react';
+import {
+  Select,
+  Popover,
+  Button,
+  ActionList,
+  ActionListLinkItem
+} from '@deque/cauldron-react';
 import { placements } from './AnchoredOverlay.mdx';
 
 ```js
@@ -89,6 +95,48 @@ function CustomPopoverExample() {
           <Button>Custom button</Button>
           <Button>Custom button</Button>
           <p>Popover content</p>
+        </div>
+      </Popover>
+    </>
+  );
+}
+```
+
+### Focus Wrapping
+
+When focus wraps, it skips controls with `tabindex="-1"`, such as the items at the end of this popover's `aria-activedescendant` [ActionList](./ActionList) menu, so Shift+Tab from the first button moves to the menu rather than its last item.
+
+```jsx example
+function FocusWrappingPopoverExample() {
+  const [show, setShow] = useState(false);
+  const onTogglePopover = () => setShow(!show);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        onClick={onTogglePopover}
+        variant="secondary"
+        buttonRef={buttonRef}
+      >
+        Share
+      </Button>
+      <Popover
+        target={buttonRef}
+        placement="bottom"
+        show={show}
+        onClose={onTogglePopover}
+        aria-labelledby="share-popover-title"
+      >
+        <div>
+          <h2 id="share-popover-title">Share report</h2>
+          <Button variant="secondary" onClick={onTogglePopover}>
+            Copy link
+          </Button>
+          <ActionList role="menu" aria-label="Share to">
+            <ActionListLinkItem href="#email">Email</ActionListLinkItem>
+            <ActionListLinkItem href="#slack">Slack</ActionListLinkItem>
+          </ActionList>
         </div>
       </Popover>
     </>

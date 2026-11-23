@@ -105,6 +105,7 @@ states, especially for color contrast.
 
 <ComponentProps
   className={true}
+  refType="HTMLInputElement | HTMLTextAreaElement"
   props={[
     {
       name: 'label',
@@ -147,7 +148,8 @@ states, especially for color contrast.
     {
       name: 'fieldRef',
       type: ['React.Ref<HTMLInputElement>', 'HTMLInputElement'],
-      description: 'Ref for the field.'
+      description: 'Ref for the field. Use the forwarded `ref` instead.',
+      deprecated: true
     },
     {
       name: 'requiredText',

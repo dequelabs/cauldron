@@ -161,7 +161,7 @@
 .cauldron--theme-dark {
   --top-bar-background-color: var(--accent-dark);
   --top-bar-menuitem-separator: #5d676f;
-  --top-bar-border-bottom-color: var(--gray-70);
+  --top-bar-border-bottom-color: var(--stroke-dark);
   --top-bar-text-color: var(--accent-light);
   --top-bar-background-color-active: #0b0e11;
   --top-bar-border-bottom: none;

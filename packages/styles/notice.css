@@ -85,7 +85,7 @@
   margin-top: var(--space-smallest);
 }
 
-.Notice .Icon > svg {
+.Notice .Notice__icon > svg {
   height: var(--notice-icon-size);
   width: var(--notice-icon-size);
   color: var(--notice-icon-color);

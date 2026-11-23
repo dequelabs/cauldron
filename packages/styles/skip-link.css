@@ -2,6 +2,7 @@
   --skip-link-background-color: rgba(255, 255, 255, 0.95);
   --skip-link-focus-color: var(--focus-light);
   --skip-link-text-color: var(--text-color-base);
+  --skip-link-offset: 11px;
 }
 
 .SkipLink {
@@ -9,14 +10,20 @@
   box-sizing: border-box;
   padding: var(--space-smallest);
   top: -999px;
-  left: 11px;
+  left: var(--skip-link-offset);
+  /* Never wider than the containing block, even with enlarged text. */
+  min-width: min(
+    calc(13rem + 2 * var(--space-smallest)),
+    calc(100% - 2 * var(--skip-link-offset))
+  );
+  max-width: calc(100% - 2 * var(--skip-link-offset));
   opacity: 0;
   transition: 250ms opacity;
   z-index: var(--z-index-skip-container);
 }
 
 .SkipLink.SkipLink--active {
-  top: 11px;
+  top: var(--skip-link-offset);
 }
 
 .SkipLink.SkipLink--fade {
@@ -25,7 +32,6 @@
 }
 
 .SkipLink a {
-  min-width: 13rem;
   background-color: var(--skip-link-background-color);
   display: block;
   color: var(--skip-link-text-color);

@@ -9,7 +9,7 @@ jobs:
   create_sync_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - uses: dequelabs/action-sync-branches@v1
+      - uses: dequelabs/action-sync-branches@d82bde30e91c129b574e671b3779b5d5d0590cc2 # v1.0.3
         with:
           github-token: ${{ secrets.MACHINE_USER_PAT }}
           pr-title: 'chore: merge master into develop'

@@ -10,7 +10,11 @@ import {
   IconButton,
   Select,
   Panel,
-  Button
+  Button,
+  Combobox,
+  ComboboxOption,
+  ActionList,
+  ActionListLinkItem
 } from '@deque/cauldron-react';
 
 ```js
@@ -108,6 +112,50 @@ function DrawerNonModalExample() {
 ```
 
 Advanced focus configuration can also be set via `focusOptions` and `focusOptions.initialFocus` and `focusOptions.focusReturn`. By default, focus will return to the triggering element when no `focusReturn` element is set.
+
+### Focus Wrapping
+
+When focus wraps inside a modal drawer, it skips controls with `tabindex="-1"`, such as the pill buttons at the start of this drawer's multiselect [Combobox](./Combobox) and the items at the end of its `aria-activedescendant` [ActionList](./ActionList) menu.
+
+```jsx example
+function DrawerFocusWrappingExample() {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  return (
+    <>
+      <IconButton
+        label="Toggle Filters Drawer"
+        icon="hamburger-menu"
+        onClick={toggleOpen}
+      />
+      <Drawer open={open} onClose={toggleOpen} position="left">
+        <Panel style={{ height: '100vh' }}>
+          <Combobox
+            label="Impact"
+            multiselect
+            defaultValue={['Critical', 'Serious']}
+          >
+            <ComboboxOption value="Critical">Critical</ComboboxOption>
+            <ComboboxOption value="Serious">Serious</ComboboxOption>
+            <ComboboxOption value="Moderate">Moderate</ComboboxOption>
+            <ComboboxOption value="Minor">Minor</ComboboxOption>
+          </Combobox>
+          <Button onClick={toggleOpen}>Apply filters</Button>
+          <h2 id="drawer-saved-filters">Saved filters</h2>
+          <ActionList role="menu" aria-labelledby="drawer-saved-filters">
+            <ActionListLinkItem href="#new-issues">
+              New issues
+            </ActionListLinkItem>
+            <ActionListLinkItem href="#needs-review">
+              Needs review
+            </ActionListLinkItem>
+          </ActionList>
+        </Panel>
+      </Drawer>
+    </>
+  );
+}
+```
 
 ## Props
 

@@ -6,12 +6,12 @@ import puppeteer from 'puppeteer';
  * node_modules and can miss the bundled browser under node_modules/.pnpm/...,
  * so CI sets CHROME_BIN to point at the preinstalled system Chrome and we
  * honor that first. Otherwise we ask puppeteer where its bundled browser is
- * — note that `executablePath()` returns the expected path string even when
- * the binary hasn't been downloaded, so the final throw is defensive only.
+ * — note that `executablePath()` resolves to the expected path string even
+ * when the binary hasn't been downloaded, so the final throw is defensive only.
  */
-export function determineBrowserPath(): string {
+export async function determineBrowserPath(): Promise<string> {
   if (process.env.CHROME_BIN) return process.env.CHROME_BIN;
-  const configured = puppeteer.executablePath();
+  const configured = await puppeteer.executablePath();
   if (configured) return configured;
   throw new Error(
     "No Chromium binary found — set CHROME_BIN or install puppeteer's browser."

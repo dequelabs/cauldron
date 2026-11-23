@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Notice from './';
+import Icon from '../Icon';
 import axe from '../../axe';
 
 test('should handle rendering without errors', () => {
@@ -150,4 +151,16 @@ test('should render with the condensed variant', () => {
 
   expect(element).toHaveClass('Notice--condensed');
   expect(element).toHaveTextContent('Condensed Variant');
+});
+
+test('should only mark its own icon with the Notice__icon class', () => {
+  render(
+    <Notice data-testid="notice" title="Notice">
+      <Icon type="star" data-testid="child-icon" />
+    </Notice>
+  );
+
+  const notice = screen.getByTestId('notice');
+  expect(notice.querySelectorAll('.Notice__icon')).toHaveLength(1);
+  expect(screen.getByTestId('child-icon')).not.toHaveClass('Notice__icon');
 });

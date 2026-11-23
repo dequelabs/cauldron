@@ -12,7 +12,9 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalHeading
+  ModalHeading,
+  ActionList,
+  ActionListLinkItem
 } from '@deque/cauldron-react';
 
 ```jsx
@@ -159,6 +161,37 @@ function CustomHeaderMarkupModalExample() {
         <ModalFooter>
           <Button onClick={toggleModal}>Ok</Button>
         </ModalFooter>
+      </Modal>
+    </>
+  );
+}
+```
+
+### Focus Wrapping
+
+When focus wraps, it skips controls with `tabindex="-1"`, such as the items at the end of this modal's `aria-activedescendant` [ActionList](./ActionList) menu, so Shift+Tab from the close button moves to the menu rather than its last item.
+
+```jsx example
+function FocusWrappingModalExample() {
+  const [show, setShow] = useState(false);
+  const toggleModal = () => setShow(!show);
+  return (
+    <>
+      <Button variant="secondary" onClick={toggleModal}>
+        Toggle Switch Project Modal
+      </Button>
+      <Modal heading="Switch project" show={show} onClose={toggleModal}>
+        <ModalContent>
+          <ActionList role="menu" aria-label="Projects">
+            <ActionListLinkItem href="#marketing-site">
+              Marketing site
+            </ActionListLinkItem>
+            <ActionListLinkItem href="#checkout">Checkout</ActionListLinkItem>
+            <ActionListLinkItem href="#help-center">
+              Help center
+            </ActionListLinkItem>
+          </ActionList>
+        </ModalContent>
       </Modal>
     </>
   );
