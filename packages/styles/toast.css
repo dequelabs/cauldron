@@ -73,11 +73,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 0;
 }
 
 .Toast__message .Toast__message-content {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
+  overflow-wrap: anywhere;
   overflow-y: auto;
   max-height: calc(100vh - var(--top-bar-height) - 2 * var(--space-smallest));
 }
