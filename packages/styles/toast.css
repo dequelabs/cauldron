@@ -73,7 +73,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 0;
 }
 
 .Toast__message .Toast__message-content {
