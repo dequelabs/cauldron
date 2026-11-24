@@ -163,10 +163,13 @@ test('should have screenshot for Toast with a long unbroken word on a small view
     : Infinity;
   expect(dismissRightEdge).toBeLessThanOrEqual(320);
 
-  const scrollWidth = await page.evaluate(
-    () => document.documentElement.scrollWidth
-  );
-  expect(scrollWidth).toBeLessThanOrEqual(320);
+  const { scrollWidth, clientWidth } = await page
+    .locator('.Toast__message-content')
+    .evaluate((el) => ({
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth
+    }));
+  expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
 
   await expect(page).toHaveScreenshot('toast-long-word-small-viewport');
   await setTheme(page, 'dark');
