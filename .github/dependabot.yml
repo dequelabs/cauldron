@@ -49,3 +49,17 @@ updates:
       # Ignore all Playwright updates while pnpm-workspace.yaml pins it to 1.50.1
       - dependency-name: 'playwright'
       - dependency-name: '@playwright/*'
+  # The verify:packaging consumer fixture installs outside the workspace, so it
+  # keeps its own lockfile that the root entry above doesn't cover.
+  - package-ecosystem: 'npm'
+    directory: '/packages/react/scripts/packaging-smoke/treeshake'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: 'chore'
+    groups:
+      packaging-smoke:
+        patterns:
+          - '*'
+    cooldown:
+      default-days: 7
