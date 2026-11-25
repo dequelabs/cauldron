@@ -143,6 +143,39 @@ test('should have screenshot for Toast with long content on a small viewport', a
   );
 });
 
+test('should have screenshot for Toast with a long unbroken word on a small viewport', async ({
+  mount,
+  page
+}) => {
+  await page.setViewportSize({ width: 320, height: 200 });
+
+  await mount(
+    <Toast type="confirmation" show focus={false} style={{ opacity: 1 }}>
+      averyveryverylong.email+address@example.com was successfully removed.
+    </Toast>
+  );
+
+  const dismissBox = await page
+    .getByRole('button', { name: 'Dismiss' })
+    .boundingBox();
+  const dismissRightEdge = dismissBox
+    ? dismissBox.x + dismissBox.width
+    : Infinity;
+  expect(dismissRightEdge).toBeLessThanOrEqual(320);
+
+  const { scrollWidth, clientWidth } = await page
+    .locator('.Toast__message-content')
+    .evaluate((el) => ({
+      scrollWidth: el.scrollWidth,
+      clientWidth: el.clientWidth
+    }));
+  expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+
+  await expect(page).toHaveScreenshot('toast-long-word-small-viewport');
+  await setTheme(page, 'dark');
+  await expect(page).toHaveScreenshot('dark--toast-long-word-small-viewport');
+});
+
 test('should have screenshot for Toast in TopBar--thin context with long content', async ({
   mount,
   page
