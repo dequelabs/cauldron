@@ -2119,3 +2119,77 @@ test('should have no axe violations with error', async () => {
   const results = await axe(comboboxRef.current!);
   expect(results).toHaveNoViolations();
 });
+
+describe('scrolling the active option into view', () => {
+  const originalScrollIntoView = Element.prototype.scrollIntoView;
+  const scrollIntoView = jest.fn();
+  const scrolledOptions = () =>
+    scrollIntoView.mock.contexts.map((element) =>
+      (element as HTMLElement).textContent?.trim()
+    );
+
+  beforeEach(() => {
+    // jsdom does not implement scrollIntoView
+    Element.prototype.scrollIntoView = scrollIntoView;
+    scrollIntoView.mockClear();
+  });
+
+  afterEach(() => {
+    Element.prototype.scrollIntoView = originalScrollIntoView;
+  });
+
+  test('should scroll the active option into view on keyboard navigation', () => {
+    render(
+      <Combobox label="label">
+        <ComboboxOption>Apple</ComboboxOption>
+        <ComboboxOption>Banana</ComboboxOption>
+        <ComboboxOption>Cantaloupe</ComboboxOption>
+      </Combobox>
+    );
+
+    const combobox = screen.getByRole('combobox');
+    fireEvent.focus(combobox);
+    fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+    fireEvent.keyDown(combobox, { key: 'ArrowDown' });
+
+    assertOptionIsActive(1);
+    expect(scrolledOptions()).toContain('Banana');
+  });
+
+  test('should scroll the selected option into view when the listbox opens on focus', () => {
+    render(
+      <Combobox label="label" value="cantaloupe">
+        <ComboboxOption value="apple">Apple</ComboboxOption>
+        <ComboboxOption value="banana">Banana</ComboboxOption>
+        <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+      </Combobox>
+    );
+    expect(scrolledOptions()).toEqual([]);
+
+    fireEvent.focus(screen.getByRole('combobox'));
+
+    assertListboxIsOpen(true);
+    assertOptionIsActive(2);
+    expect(scrolledOptions()).toContain('Cantaloupe');
+  });
+
+  test('should scroll the selected option into view when the listbox is reopened', () => {
+    render(
+      <Combobox label="label" value="cantaloupe">
+        <ComboboxOption value="apple">Apple</ComboboxOption>
+        <ComboboxOption value="banana">Banana</ComboboxOption>
+        <ComboboxOption value="cantaloupe">Cantaloupe</ComboboxOption>
+      </Combobox>
+    );
+    const combobox = screen.getByRole('combobox');
+    fireEvent.focus(combobox);
+    fireEvent.blur(combobox);
+    assertListboxIsOpen(false);
+    scrollIntoView.mockClear();
+
+    fireEvent.focus(combobox);
+
+    assertOptionIsActive(2);
+    expect(scrolledOptions()).toContain('Cantaloupe');
+  });
+});

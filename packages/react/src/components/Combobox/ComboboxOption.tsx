@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useLayoutEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import classnames from 'classnames';
 import { useId } from 'react-id-generator';
 import Icon from '../Icon';
@@ -7,7 +7,6 @@ import type { ListboxValue } from '../Listbox/ListboxOption';
 import type { ContentNode } from '../../types';
 import { ListboxOption, useListboxContext } from '../Listbox';
 import { useComboboxContext } from './ComboboxContext';
-import useIntersectionRef from '../../utils/useIntersectionRef';
 
 export type ComboboxValue = Exclude<ListboxValue, number>;
 
@@ -71,7 +70,7 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     ref
   ): React.JSX.Element | null => {
     const [id] = propId ? [propId] : useId(1, 'combobox-option');
-    const { selected, active } = useListboxContext();
+    const { selected } = useListboxContext();
     const {
       selectedValues,
       setRemoveOptionLabels,
@@ -80,12 +79,6 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
       setFormValues
     } = useComboboxContext();
     const comboboxOptionRef = useSharedRef<HTMLElement>(ref);
-    const intersectionRef = useIntersectionRef<HTMLElement>(comboboxOptionRef, {
-      root: null,
-      threshold: 1.0
-    });
-    const isActive =
-      !!active?.element && active.element === comboboxOptionRef.current;
     const isSelected = !!(
       selected &&
       selected.findIndex(
@@ -95,28 +88,6 @@ const ComboboxOption = forwardRef<HTMLLIElement, ComboboxOptionProps>(
     const isMatching =
       (typeof matches === 'boolean' && matches) ||
       (typeof matches === 'function' && matches(children));
-
-    // istanbul ignore next
-    useLayoutEffect(() => {
-      const intersectionEntry = intersectionRef.current;
-      if (!intersectionEntry || !isActive || !comboboxOptionRef.current) {
-        return;
-      }
-
-      const rect = comboboxOptionRef.current.getBoundingClientRect();
-      const isInViewport =
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= window.innerHeight &&
-        rect.right <= window.innerWidth;
-
-      if (!isInViewport || !intersectionEntry.isIntersecting) {
-        comboboxOptionRef.current.scrollIntoView({
-          inline: 'nearest',
-          block: rect.top <= 0 ? 'end' : 'nearest'
-        });
-      }
-    }, [isActive]);
 
     useEffect(() => {
       const comboboxValue =
