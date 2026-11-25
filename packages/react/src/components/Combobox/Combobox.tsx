@@ -4,6 +4,7 @@ import React, {
   useRef,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -278,6 +279,16 @@ const Combobox = forwardRef<
         });
       }
     }, [selectedValues, matchingOptions]);
+
+    // Keyed on `open` as well as the active option: the selected option is
+    // already active while the listbox is hidden, so it only becomes
+    // scrollable once the listbox opens.
+    const activeElement = activeDescendant?.element;
+    useLayoutEffect(() => {
+      if (open && activeElement) {
+        activeElement.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+      }
+    }, [open, activeElement]);
 
     const handleFocus = useCallback(
       (event: React.FocusEvent<HTMLInputElement>) => {
