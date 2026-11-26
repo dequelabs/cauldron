@@ -17,6 +17,7 @@ import { isBrowser } from '../../utils/is-browser';
 import useSharedRef from '../../utils/useSharedRef';
 import useFocusTrap from '../../utils/useFocusTrap';
 import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
+import { useLayer, LayerProvider } from '../../utils/layer';
 import {
   DialogContext,
   useDialogContext,
@@ -64,6 +65,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const [headingId] = useId(1, 'dialog-title-');
     const headingRef = useRef<HTMLHeadingElement>(null);
     const isolatorRef = useRef<AriaIsolate | null>(null);
+    const layer = useLayer(dialogRef);
 
     const headingLevel =
       typeof heading === 'object' && 'level' in heading && heading.level
@@ -91,7 +93,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     useEffect(() => {
       if (!show || !dialogRef.current) return;
 
-      isolatorRef.current = new AriaIsolate(dialogRef.current);
+      isolatorRef.current = new AriaIsolate(dialogRef.current, layer.elements);
       setTimeout(focusHeading);
 
       return () => {
@@ -101,7 +103,8 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
     useFocusTrap(dialogRef, {
       disabled: !show,
-      initialFocusElement: headingRef
+      initialFocusElement: headingRef,
+      contains: layer.contains
     });
 
     useEffect(() => {
@@ -148,7 +151,10 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         document.body;
 
     const dialog = (
-      <ClickOutsideListener onClickOutside={handleClickOutside}>
+      <ClickOutsideListener
+        onClickOutside={handleClickOutside}
+        contains={layer.contains}
+      >
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
           role="dialog"
@@ -186,7 +192,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     );
 
     return createPortal(
-      dialog,
+      <LayerProvider layer={layer}>{dialog}</LayerProvider>,
       // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
       portalElement || document.body
     ) as React.ReactPortal;

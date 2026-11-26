@@ -19,6 +19,7 @@ import {
 } from '../../utils/handleEscapeKeyDown';
 import useFocusTrap from '../../utils/useFocusTrap';
 import { isBrowser } from '../../utils/is-browser';
+import { useLayer, LayerProvider } from '../../utils/layer';
 
 type AnchoredOverlayProps<
   Overlay extends HTMLElement,
@@ -128,6 +129,7 @@ const AnchoredOverlay = forwardRef(
     refProp: React.Ref<Overlay>
   ) => {
     const ref = useSharedRef<HTMLElement | null>(refProp);
+    const layer = useLayer(ref);
     const Component = as || 'div';
 
     const {
@@ -208,7 +210,12 @@ const AnchoredOverlay = forwardRef(
       onEscape: () => close?.()
     });
 
-    useFocusTrap(ref, !focusTrap ? { disabled: true } : focusTrapOptions);
+    useFocusTrap(
+      ref,
+      !focusTrap
+        ? { disabled: true }
+        : { contains: layer.contains, ...focusTrapOptions }
+    );
 
     useEffect(() => {
       if (typeof onPlacementChange === 'function') {
@@ -235,7 +242,7 @@ const AnchoredOverlay = forwardRef(
         onKeyDown={withEscapeKeyDown(onKeyDown, close)}
         style={{ ...floatingStyles, ...style }}
       >
-        {children}
+        <LayerProvider layer={layer}>{children}</LayerProvider>
       </Component>
     );
 

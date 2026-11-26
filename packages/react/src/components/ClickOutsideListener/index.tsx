@@ -11,6 +11,11 @@ export interface ClickOutsideListenerProps<
   mouseEvent?: 'mousedown' | 'click' | 'mouseup' | false;
   touchEvent?: 'touchstart' | 'touchend' | false;
   target?: T | React.RefObject<T | null> | React.MutableRefObject<T | null>;
+  /**
+   * Also counts a node as inside when this returns true, e.g. an overlay
+   * portaled out of the target that still belongs to it.
+   */
+  contains?: (node: Node | null) => boolean;
 }
 
 function ClickOutsideListener(
@@ -19,6 +24,7 @@ function ClickOutsideListener(
     mouseEvent = 'click',
     touchEvent = 'touchend',
     target,
+    contains,
     onClickOutside = () => null
   }: ClickOutsideListenerProps,
   ref: React.ForwardedRef<HTMLElement>
@@ -32,6 +38,10 @@ function ClickOutsideListener(
 
     const eventTarget = event.target as HTMLElement;
     const elementTarget = resolveElement(target);
+
+    if (contains?.(eventTarget)) {
+      return;
+    }
 
     if (target && !elementTarget?.contains(eventTarget)) {
       onClickOutside(event);
