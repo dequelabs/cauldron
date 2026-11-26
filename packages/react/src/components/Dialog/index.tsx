@@ -16,6 +16,7 @@ import { useId } from 'react-id-generator';
 import { isBrowser } from '../../utils/is-browser';
 import useSharedRef from '../../utils/useSharedRef';
 import useFocusTrap from '../../utils/useFocusTrap';
+import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
 import {
   DialogContext,
   useDialogContext,
@@ -41,9 +42,6 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   scrollable?: boolean;
 }
 
-const isEscape = (event: KeyboardEvent) =>
-  event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27;
-
 const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   (
     {
@@ -57,6 +55,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       portal,
       scrollable = false,
       onClose = () => null,
+      onKeyDown,
       ...other
     },
     ref
@@ -89,15 +88,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       isolatorRef.current?.activate();
     }, []);
 
-    const handleEscape = useCallback(
-      (keyboardEvent: KeyboardEvent) => {
-        if (!keyboardEvent.defaultPrevented && isEscape(keyboardEvent)) {
-          handleClose();
-        }
-      },
-      [handleClose]
-    );
-
     useEffect(() => {
       if (!show || !dialogRef.current) return;
 
@@ -108,24 +98,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         isolatorRef.current?.deactivate();
       };
     }, [show, focusHeading]);
-
-    useEffect(() => {
-      if (!forceAction) {
-        const portalElement = portal
-          ? 'current' in portal
-            ? portal.current
-            : portal
-          : document.body;
-
-        if (show) {
-          portalElement?.addEventListener('keyup', handleEscape);
-        }
-
-        return () => {
-          portalElement?.removeEventListener('keyup', handleEscape);
-        };
-      }
-    }, [show, forceAction, portal, handleEscape]);
 
     useFocusTrap(dialogRef, {
       disabled: !show,
@@ -177,6 +149,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
     const dialog = (
       <ClickOutsideListener onClickOutside={handleClickOutside}>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
           role="dialog"
           className={classNames('Dialog', className, {
@@ -184,7 +157,14 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           })}
           ref={dialogRef}
           aria-labelledby={headingId}
+          // a click on content that cannot take focus focuses the dialog,
+          // so focus stays inside and Escape still reaches it
+          tabIndex={-1}
           {...other}
+          onKeyDown={withEscapeKeyDown(
+            onKeyDown,
+            forceAction ? undefined : handleClose
+          )}
         >
           <DialogContext.Provider value={contextValue}>
             <div className="Dialog__inner">

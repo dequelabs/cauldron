@@ -14,7 +14,7 @@ import ColumnLeft from './ColumnLeft';
 import ColumnRight from './ColumnRight';
 import classnames from 'classnames';
 import SkipLink from '../SkipLink';
-import useEscapeKey from '../../utils/useEscapeKey';
+import { withEscapeKeyDown } from '../../utils/handleEscapeKeyDown';
 import useFocusTrap from '../../utils/useFocusTrap';
 
 interface TwoColumnPanelProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -113,7 +113,16 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
       ];
       ColumnLeftComponent = cloneElement(
         columnLeft,
-        { id, ref, tabIndex: -1 } as React.ComponentProps<typeof ColumnLeft>,
+        {
+          id,
+          ref,
+          tabIndex: -1,
+          // on narrow screens the column overlays the content like a drawer
+          onKeyDown: withEscapeKeyDown(
+            columnLeftProps.onKeyDown,
+            isFocusTrap && !isCollapsed ? () => setCollapsed(true) : undefined
+          )
+        } as React.ComponentProps<typeof ColumnLeft>,
         children.map((child, index) =>
           cloneElement(child as React.ReactElement, {
             key: (child as React.ReactElement).key
@@ -215,14 +224,6 @@ const TwoColumnPanel = forwardRef<HTMLDivElement, TwoColumnPanelProps>(
         mediaQueryList.removeEventListener('change', listener);
       };
     }, []);
-
-    useEscapeKey(
-      {
-        callback: () => setCollapsed(true),
-        active: isFocusTrap
-      },
-      [setCollapsed]
-    );
 
     const handleClickOutside = () => {
       if (!isCollapsed && isFocusTrap) {

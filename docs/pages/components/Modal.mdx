@@ -198,6 +198,12 @@ function FocusWrappingModalExample() {
 }
 ```
 
+### Escape Key
+
+Pressing Escape while focus is inside the modal closes it. Escape closes one layer at a time: when a control inside the modal handles Escape first, such as an open [Combobox](./Combobox) list or a [Tooltip](./Tooltip), the modal stays open, and the next Escape closes it.
+
+To keep the modal open when your own control handles Escape, call `event.preventDefault()` on the Escape `keydown` event.
+
 ## Props
 
 ### Modal

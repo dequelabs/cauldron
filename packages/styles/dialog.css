@@ -36,6 +36,11 @@
   background-color: var(--scrim-background-color);
 }
 
+/* Focused only to keep focus inside after a click on its plain content */
+.Dialog:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .Dialog.Dialog--show {
   display: block;
 }
